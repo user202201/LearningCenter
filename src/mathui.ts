@@ -20,6 +20,9 @@ export interface MathGameOpts {
   topicName: (id: string) => string;
   /** how the child answers: by choosing (default) or by typing on a keypad (questions whose answer cannot be typed are still chosen) */
   mode?: AnswerMode;
+  /** relaxed (science): no time limit, and after every answer (right or wrong) a short "did you know" text is shown with a Next button */
+  relaxed?: boolean;
+  explain?: (q: Q) => string;
   onSave: (answers: Answer[], score: number, total: number, usedSeconds: number, finished: boolean) => Promise<void>;
   onAgain: () => void;
   onClose: () => void;
@@ -72,7 +75,7 @@ export function openMathGame(o: MathGameOpts): void {
   let typing = false;   // the question on screen is answered on the keypad
   const root = h("div", { class: "game mathgame", id: "game", role: "dialog", "aria-modal": "true", style: `--kid:${o.color}` },
     h("div", { class: "gtop" }, quit, h("div", { class: "gmid" }, progress), scoreEl),
-    h("div", { class: "mtime" }, h("div", { class: "mbar" }, bar), timeText),
+    o.relaxed ? null : h("div", { class: "mtime" }, h("div", { class: "mbar" }, bar), timeText),
     h("div", { class: "mbody" }, topic, qBox, grid));
 
   const used = () => Math.round(o.seconds - leftMs / 1000);
@@ -106,6 +109,7 @@ export function openMathGame(o: MathGameOpts): void {
     typing = o.mode === "keypad" && typable(q.a);
     typed = "";
     grid.classList.toggle("keypad", typing);
+    if (typing) { grid.classList.remove("long", "mid"); }
     if (typing) {
       const input = h("div", { class: "minput user", id: "math-input" }, "?");
       const hint = h("div", { class: "mhint", id: "math-hint" });
@@ -113,6 +117,9 @@ export function openMathGame(o: MathGameOpts): void {
         h("button", { class: "mkey" + (k === "✓" ? " ok" : k === "⌫" ? " del" : ""), "data-k": k, title: k === "✓" ? "确定" : k === "⌫" ? "删除" : k, "aria-label": k === "✓" ? "确定" : k === "⌫" ? "删除" : k, onclick: () => press(k) }, k));
       grid.replaceChildren(input, hint, h("div", { class: "mkeys", id: "math-keys" }, ...keys));
     } else {
+      const longest = Math.max(...q.choices.map((c) => [...c].length));
+      grid.classList.toggle("long", longest > 14);
+      grid.classList.toggle("mid", longest > 7 && longest <= 14);
       grid.replaceChildren(...q.choices.map((c) => h("button", { class: "mchoice user", "data-v": c, onclick: () => answer(c) }, c)));
     }
     root.classList.remove("ok", "bad");
@@ -146,6 +153,13 @@ export function openMathGame(o: MathGameOpts): void {
       });
     }
     root.dataset.last = right ? "right" : "wrong";
+    if (o.relaxed) {
+      const goNext = () => { clearTimeout(next); idx++; ask(); };
+      const text = o.explain?.(q) ?? "";
+      grid.append(h("div", { class: "mexplain", id: "math-explain" }, h("b", { class: right ? "yes" : "no" }, right ? "答对啦！" : "没关系，看看这个小知识～"), !right ? h("p", {}, "正确答案：", h("b", { class: "user" }, q.a)) : null, text ? h("p", { class: "user" }, text) : null,
+        h("button", { class: "primary", id: "math-next", onclick: goNext }, idx + 1 < total ? "下一题" : "完成")));
+      return;
+    }
     next = setTimeout(() => { idx++; ask(); }, right ? 450 : 1400);
   }
 
@@ -164,10 +178,10 @@ export function openMathGame(o: MathGameOpts): void {
     const again = h("button", { class: "primary", id: "game-again", onclick: async () => { await saving; root.remove(); o.onAgain(); } }, "再玩一次");
     const fin = h("button", { id: "game-done", onclick: async () => { await saving; root.remove(); o.onClose(); } }, "完成");
     root.replaceChildren(h("div", { class: "gend", id: "game-end" },
-      h("h2", {}, timeUp ? "时间到！" : score === total ? "全对了！" : "练完了！"),
+      h("h2", {}, timeUp ? "时间到！" : o.relaxed ? "探索完成！" : score === total ? "全对了！" : "练完了！"),
       h("div", { class: "gstars", "data-stars": String(stars) }, ...[1, 2, 3].map((n) => starSvg(n <= stars))),
       h("div", { class: "gresult" }, h("strong", { id: "game-final" }, String(score)), ` / ${total}`),
-      h("p", { class: "muted" }, `用时 ${fmtTime(usedS)}`, answers.length < total ? `，做了 ${answers.length} 题` : ""),
+      o.relaxed ? null : h("p", { class: "muted" }, `用时 ${fmtTime(usedS)}`, answers.length < total ? `，做了 ${answers.length} 题` : ""),
       h("div", { class: "mrows" }, ...rows),
       h("div", { class: "row end" }, fin, again)));
   }
@@ -178,7 +192,7 @@ export function openMathGame(o: MathGameOpts): void {
     stop();
     const yes = await confirmDlg("退出游戏？", answers.length ? "已经做过的题会保存下来。" : "还没有答题，不会保存。", "退出", true);
     if (!yes) {
-      if (phase === "feedback") next = setTimeout(() => { idx++; ask(); }, 500);
+      if (phase === "feedback" && !o.relaxed) next = setTimeout(() => { idx++; ask(); }, 500);
       if (wasRunning) run();
       return;
     }
@@ -206,5 +220,5 @@ export function openMathGame(o: MathGameOpts): void {
   void started;
   setTime();
   ask();
-  run();
+  if (!o.relaxed) run();
 }

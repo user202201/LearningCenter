@@ -5,6 +5,7 @@ import * as M from "./model";
 import * as api from "./api";
 import * as W from "./words";
 import * as MM from "./mathmodel";
+import * as SM from "./sciencemodel";
 import { toast } from "./ui";
 
 export const askGrade = (title: string, current: number | null, note = "", extra?: HTMLElement): Promise<number | null> =>
@@ -31,7 +32,7 @@ export async function pickKidGrade(k: M.Kid): Promise<number | null> {
   P.setKidGrade(k.id, g);
   const thisWeek = M.sundayOf(M.todayLocal());
   // the words (English) and the topics (math) of this week and next week were made for the old grade
-  for (const path of [W.wordsPath(k.id), MM.mathPath(k.id)]) {
+  for (const path of [W.wordsPath(k.id), MM.mathPath(k.id), SM.sciencePath(k.id)]) {
     try {
       const cur = await api.readJson<M.KidData>(path);
       if (!cur?.weeks.some((w) => w.start >= thisWeek)) continue;

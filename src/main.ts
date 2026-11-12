@@ -18,6 +18,7 @@ import * as I from "./importer";
 import { subjectById, hubGrid, hubHero, soonPage, reveal } from "./hub";
 import * as E from "./english";
 import * as MA from "./math";
+import * as SC from "./science";
 import { pickKidGrade } from "./gradeui";
 
 const app = document.getElementById("app")!;
@@ -1466,6 +1467,11 @@ async function route() {
   if (hash === "#/chinese") return renderHome();
   if (hash === "#/subject/english") return void E.renderHome();
   if (hash === "#/subject/math") return void MA.renderHome();
+  if (hash === "#/subject/science") return void SC.renderHome();
+  if (hash === "#/science/periodic") return void SC.renderPeriodic();
+  if (hash === "#/science/formulas") return void SC.renderFormulas();
+  const sci = /^#\/science\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
+  if (sci) return void SC.renderKid(sci[1], sci[2] === "learned" ? "learned" : sci[2] === "game" ? "game" : "week");
   const math = /^#\/math\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
   if (math) return void MA.renderKid(math[1], math[2] === "learned" ? "learned" : math[2] === "game" ? "game" : "week");
   const eng = /^#\/english\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
@@ -1488,10 +1494,14 @@ document.addEventListener("touchend", (e) => {
 const shell = { show, showLoading, showError, loadShared, kids: () => kidsFile, avatarEl, back: backBtn, gear: gearBtn, stagger, epoch: () => epoch, gameSeconds: () => settings.gameSeconds, route: () => void route(), addKid  };
 E.initEnglish(shell);
 MA.initMath(shell);
+SC.initScience(shell);
 // the web version keeps itself in the browser, so it opens without network (sw.js is made by the build; the packaged app and the dev server have none)
 if (!__MOBILE__ && import.meta.env.PROD && "serviceWorker" in navigator) {
   window.addEventListener("load", () => { navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => { /* no service worker here: the app still works online */ }); });
 }
+// without network the app uses the copies kept on this device; what was changed offline is sent when the network is back (and at start)
+window.addEventListener("online", () => { api.networkMayBeBack(); void api.flushAll(); });
+void api.flushAll();
 setLang(settings.lang);
 window.addEventListener("hashchange", () => void route());
 void route();

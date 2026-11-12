@@ -58,13 +58,13 @@ exports.start = async function (store = new Map(), opts = {}) {
   });
   if (opts.init) await page.addInitScript(opts.init, opts.initArg);   // e.g. a pretend camera
   await page.goto(opts.url || exports.URL);
-  if (opts.noLogin) return { browser, page, store, log, ctx };
+  if (opts.noLogin) return { browser, page, store, log, ctx, version, opts };
   if (opts.local) { await page.click('#local-btn'); }
   else { await page.fill('input[type=text]', REPO); await page.fill('input[type=password]', 'good'); await page.click('button.primary'); }
   await page.waitForSelector('.hub-grid');                         // after signing in: the subject picker ...
   await page.click('.subject[data-subject=chinese]');              // ... and "识字" is the original Learning Chinese app
   await page.waitForSelector('.kids, .empty-home');
-  return { browser, page, store, log, ctx };
+  return { browser, page, store, log, ctx, version, opts };
 };
 
 /** the tiny test runner: ok(cond, message) prints PASS / FAIL, done() sets the exit code */

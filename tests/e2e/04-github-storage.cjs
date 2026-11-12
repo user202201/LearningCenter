@@ -39,16 +39,20 @@ const { ok, done } = checks();
   ok(merged.weeks.some((w) => w.chars.join('') === '桌椅') && merged.weeks.some((w) => w.chars.join('') === WEEK2), 'nothing was overwritten');
   ok((await page.textContent('#toasts')).includes('已保存'), 'and the user is told it was saved');
 
-  // lost connection: an error is shown, no "saved" message
+  // lost connection: the change is kept ON THIS DEVICE (offline first) and sent when the network is back
   await page.waitForSelector('.weekbar');                 // (the page has finished reloading after the save)
   opts.offline = true;
   await page.click('button[title=下一周]');           // (the week with its 10 characters has no +: the next week is empty)
   await page.click('#enter'); await page.fill('dialog textarea', '梨桃李'); await page.click('dialog button.primary');
-  await page.waitForSelector('#toasts .toast:has-text("网络请求失败")', { timeout: 15000 });
-  ok(await page.locator('#toasts .toast:has-text("已保存")').count() === 0 || (await page.textContent('#toasts')).indexOf('网络请求失败') >= 0, 'offline: the failure is reported');
-  ok(await page.locator('#toasts .toast.working').count() === 0, 'the "saving…" spinner is closed when it failed');
-  ok(!store.get(`kids/${id}.json`).includes('梨'), 'nothing was written');
+  await page.waitForSelector('#toasts .toast:has-text("已保存在这台设备上")', { timeout: 15000 });
+  ok(true, 'offline: the user is told the change is kept on this device and will sync later');
+  ok(await page.locator('#toasts .toast.working').count() === 0, 'the "saving…" spinner is closed');
+  ok(!store.get(`kids/${id}.json`).includes('梨'), 'nothing has reached the repository yet');
+  ok((await page.locator('.cards .tzg').count()) === 3, 'but the characters are on the screen (the copy on this device is used)');
   opts.offline = false;
+  await page.evaluate(() => window.dispatchEvent(new Event('online')));
+  await page.waitForFunction(() => (document.querySelector('#toasts')?.textContent ?? '').includes('同步到 GitHub'), null, { timeout: 15000 });
+  ok(store.get(`kids/${id}.json`).includes('梨'), 'when the network is back the change is sent to the repository');
 
   // delete a child: its file is removed from the repository
   await openManage(page);

@@ -73,7 +73,7 @@ const layout = (page) => page.evaluate(() => {
     await page.click('button.back'); await page.waitForSelector('.hub-grid'); await page.waitForTimeout(900);
     const b2 = await page.locator('.subject[data-subject=science]').boundingBox();
     await page.mouse.click(b2.x + 50, b2.y + 50); await page.mouse.click(b2.x + 60, b2.y + 60); await page.mouse.click(b2.x + 70, b2.y + 70);
-    await page.waitForSelector('.soon', { timeout: 5000 });
+    await page.waitForSelector('.kids, .empty-home', { timeout: 5000 });
     ok(await page.locator('#curtain').count() <= 1 && await page.evaluate(() => location.hash) === '#/subject/science', 'tapping three times quickly still opens just one subject');
     await page.waitForTimeout(1200);
     await page.screenshot({ path: OUT + 'hub-soon-science.png' });
@@ -84,11 +84,10 @@ const layout = (page) => page.evaluate(() => {
   {
     const { browser, page } = await toHub({ local: true, viewport: { width: 390, height: 844 } });
     ok(await page.locator('.hub-page').count() === 1 && /学习乐园/.test(await page.title()), 'after signing in: the subject picker, the app is called 学习乐园');
-    // a subject that is not built yet
-    for (const [id, nm] of [['science', '科学']]) {
-      await page.click(`.subject[data-subject=${id}]`); await page.waitForSelector('.soon');
-      const t = await page.evaluate(() => ({ h1: document.querySelector('h1').textContent, h2: document.querySelector('.soon h2').textContent, art: document.querySelector('.soon-art svg').dataset.art, hash: location.hash }));
-      ok(t.h1 === nm && t.h2 === '正在建设中' && t.art === id && t.hash === '#/subject/' + id, nm + ': a "coming soon" page with its own colour and picture');
+    // all four subjects are open now: each opens its own list of children
+    for (const [id, nm, h1] of [['math', '数学', '数学'], ['english', '英语', '英语'], ['science', '科学', '科学']]) {
+      await page.click(`.subject[data-subject=${id}]`); await page.waitForSelector('.kids, .empty-home');
+      ok(await page.evaluate(() => document.querySelector('.hero h1').textContent) === h1 && await page.locator('.soon').count() === 0, nm + ': its own screen (not a "coming soon" page)');
       await page.click('button.back'); await page.waitForSelector('.hub-grid');
     }
     ok((await page.evaluate(() => location.hash)) === '#/', 'back from a subject: the picker');

@@ -2,8 +2,11 @@
  * All data access of the app goes through this file (CLAUDE.md rule 4): `readJson` / `update`.
  * Two places can hold the data: a PRIVATE GitHub repository (default; the browser talks to the GitHub REST API directly
  * with a fine-grained token that only has Contents access to that one repo) or this device (localStorage, no account).
- * Another backend (offline cache, on-device database for the iOS app) can be added here without touching the UI.
+ * OFFLINE FIRST (CLAUDE.md rule 35): the newest copy of every file read or written is kept on this device; without network reads come from it and
+ * changes are kept there too, marked "not sent yet", and sent (merged, sync.ts) when the network is back.
  */
+import { toast } from "./ui";
+import { mergeDocs } from "./sync";
 export interface Auth {
   token: string;
   repo: string; // owner/name
@@ -44,10 +47,22 @@ export const lastRepo = (): string => { try { return localStorage.getItem(REPO_K
 /** signed in (GitHub) or using this device */
 export const isSignedIn = (): boolean => isLocal() || getAuth() !== null;
 export function logout() {
+  const repo = getAuth()?.repo;
+  // the copies kept on this device are removed, except the changes that were not sent yet (they are sent after the next sign in to the same repository)
+  if (repo) {
+    try {
+      const prefix = `learn.sync.v1.${repo}.`;
+      for (const k of Object.keys(localStorage)) {
+        if (!k.startsWith(prefix) || k === `${prefix}__dirty`) continue;
+        try { if (!(JSON.parse(localStorage.getItem(k) ?? "{}") as { dirty?: boolean }).dirty) localStorage.removeItem(k); } catch { localStorage.removeItem(k); }
+      }
+    } catch { /* ignore */ }
+  }
   for (const st of [localStorage, sessionStorage]) {
     try { st.removeItem(AUTH_KEY); } catch { /* ignore */ }
   }
   shas.clear();
+  memo.clear();
 }
 
 /** A link that signs another device in: the token travels in the URL #fragment (never sent to any server). */
@@ -74,6 +89,11 @@ export class ApiError extends Error {
   }
 }
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+/** a failure of the NETWORK itself (no connection), not an answer of GitHub */
+export const isNetError = (e: unknown): boolean => e instanceof ApiError && e.status === 0;
+/** after a failed request the network is not tried again for a few seconds (offline = no waiting on every screen) */
+let downUntil = 0;
+const DOWN_MS = 15000;
 
 function headers(a: Auth): HeadersInit {
   return { Authorization: `Bearer ${a.token}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" };
@@ -82,16 +102,18 @@ function headers(a: Auth): HeadersInit {
 async function gh(a: Auth, url: string, init: RequestInit = {}): Promise<Response> {
   let res: Response | undefined;
   let why = "";
+  if ((typeof navigator !== "undefined" && navigator.onLine === false) || Date.now() < downUntil) throw new ApiError("没有网络", 0);   // (known to be offline: no waiting)
   // a dropped connection (phone on cellular / flaky Wi-Fi) is retried before giving up
   for (let i = 0; i < 3 && !res; i++) {
     try {
       res = await fetch(url, init);
     } catch (e) {
       why = e instanceof Error ? e.message : String(e);
-      await sleep(600 * (i + 1));
+      if (i < 2) await sleep(400 * (i + 1));
     }
   }
-  if (!res) throw new ApiError(`网络请求失败（${why || "未知"}）：网络断了或被拦截，数据没有保存。`, 0);
+  if (!res) { downUntil = Date.now() + DOWN_MS; throw new ApiError(`网络请求失败（${why || "未知"}）：网络断了或被拦截。`, 0); }
+  downUntil = 0;
   if (res.status === 401) {
     logout();
     throw new AuthExpired("登录已失效，请重新登录");
@@ -189,8 +211,63 @@ async function ghWrite(path: string, text: string, sha: string | undefined, mess
   if (j.content?.sha) shas.set(path, j.content.sha);
 }
 
+// ---------- offline-first: the newest copy of every file is kept on this device ----------
+/** the copy of a file on this device: what was read / written last, its sha, and whether it holds changes the repository does not have yet (made without network) */
+interface Copy { json: unknown; sha?: string; dirty?: boolean; base?: string }
+const copyKey = (path: string) => `learn.sync.v1.${getAuth()?.repo ?? "-"}.${path}`;
+const dirtyKey = () => `learn.sync.v1.${getAuth()?.repo ?? "-"}.__dirty`;
+const loadCopy = (path: string): Copy | null => { try { const s = localStorage.getItem(copyKey(path)); return s ? (JSON.parse(s) as Copy) : null; } catch { return null; } };
+const saveCopy = (path: string, c: Copy) => { try { localStorage.setItem(copyKey(path), JSON.stringify(c)); } catch { /* storage full: the next read asks the network again */ } };
+const dirtyList = (): string[] => { try { return JSON.parse(localStorage.getItem(dirtyKey()) ?? "[]") as string[]; } catch { return []; } };
+const setDirty = (path: string, on: boolean) => { const l = new Set(dirtyList()); if (on) l.add(path); else l.delete(path); try { localStorage.setItem(dirtyKey(), JSON.stringify([...l])); } catch { /* ignore */ } };
+/** how many files hold changes that are not in the data repository yet */
+export const pendingCount = (): number => dirtyList().length;
+/** the data of this session is not asked for again for a few seconds (moving between screens does not call the network each time) */
+const memo = new Map<string, { json: unknown; at: number }>();
+const MEMO_MS = 8000;
+const clone = <T,>(x: T): T => (x === null || x === undefined ? x : (JSON.parse(JSON.stringify(x)) as T));
+/** a per-child file that may well not exist yet (made on first use): when offline and never read, "nothing there yet" is the right answer */
+const lazyFile = (path: string) => /^(kids|english|math|science)\/[\w-]+(\.review)?\.json$/.test(path);
+let noticed = false;
+/** told once per offline spell that a change was kept on this device */
+function noticeOffline() { if (noticed) return; noticed = true; toast("没有网络：已保存在这台设备上，联网后会自动同步", 5000); }
+/** call when the network may be back (the browser's "online" event) */
+export function networkMayBeBack() { downUntil = 0; noticed = false; }
+
+/** sends the changes kept on this device for one file (merged with what another device may have changed meanwhile); returns the file as it is now */
+async function flush(path: string): Promise<unknown> {
+  const c = loadCopy(path);
+  if (!c?.dirty) return c?.json ?? null;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const f = await ghRead(path);
+    const remote = f ? JSON.parse(f.text) : null;
+    const merged = !f || f.sha === c.base ? c.json : mergeDocs(c.json, remote);
+    try {
+      await ghWrite(path, JSON.stringify(merged, null, 2) + "\n", f?.sha, "sync changes made offline");
+    } catch (e) {
+      if (e instanceof ApiError && e.message === "conflict" && attempt < 3) { await sleep(300 * (attempt + 1)); continue; }
+      throw e;
+    }
+    saveCopy(path, { json: merged, sha: shas.get(path) });
+    setDirty(path, false);
+    memo.set(path, { json: merged, at: Date.now() });
+    return merged;
+  }
+  throw new Error("同步失败");
+}
+/** sends every file with changes made offline; a message says what was done. Quiet when there is nothing to do or there is still no network. */
+export async function flushAll(): Promise<number> {
+  if (isLocal() || !getAuth()) return 0;
+  let n = 0;
+  for (const path of dirtyList()) {
+    try { await flush(path); n++; } catch (e) { if (isNetError(e)) break; if (e instanceof AuthExpired) break; toast(e instanceof Error ? e.message : String(e), 6000); }
+  }
+  if (n) { noticed = false; toast("已把离线时保存的内容同步到 GitHub", 4000); }
+  return n;
+}
+
 // ---------- public API ----------
-/** Read one JSON file; `null` when it does not exist yet. */
+/** Read one JSON file; `null` when it does not exist yet. Without network: the copy kept on this device. */
 export async function readJson<T>(path: string): Promise<T | null> {
   if (isLocal()) {
     try {
@@ -200,14 +277,32 @@ export async function readJson<T>(path: string): Promise<T | null> {
       return null;
     }
   }
-  const f = await ghRead(path);
-  return f ? (JSON.parse(f.text) as T) : null;
+  const m = memo.get(path);
+  if (m && Date.now() - m.at < MEMO_MS) return clone(m.json) as T | null;
+  const c = loadCopy(path);
+  try {
+    if (c?.dirty) {
+      try { const merged = await flush(path); return clone(merged) as T | null; } catch (e) { if (isNetError(e)) return clone(c.json) as T | null; throw e; }
+    }
+    const f = await ghRead(path);
+    const json = f ? (JSON.parse(f.text) as T) : null;
+    saveCopy(path, { json, sha: f?.sha });
+    memo.set(path, { json, at: Date.now() });
+    return clone(json);
+  } catch (e) {
+    if (isNetError(e)) {
+      if (c) return clone(c.json) as T | null;
+      if (lazyFile(path)) return null;
+    }
+    throw e;
+  }
 }
 
 /**
  * Read-modify-write one JSON file: reads the newest version (or `init` when there is none), applies `change`, saves.
  * When another device changed the file in between (GitHub answers 409 / 422) it reads again and re-applies `change`,
- * so edits from two devices are merged instead of overwritten.
+ * so edits from two devices are merged instead of overwritten. WITHOUT network the change is applied to the copy kept on this
+ * device and marked "not sent yet"; it is sent (merged with what other devices did) as soon as there is a network again.
  */
 export async function update<T>(path: string, init: T, change: (cur: T) => T, message = "update"): Promise<T> {
   if (isLocal()) {
@@ -220,23 +315,39 @@ export async function update<T>(path: string, init: T, change: (cur: T) => T, me
     }
     return next;
   }
-  for (let attempt = 0; attempt < 4; attempt++) {
-    const f = await ghRead(path);
-    const cur = f ? (JSON.parse(f.text) as T) : structuredClone(init);
-    const next = change(cur);
-    try {
-      await ghWrite(path, JSON.stringify(next, null, 2) + "\n", f?.sha, message);
-      return next;
-    } catch (e) {
-      if (e instanceof ApiError && e.message === "conflict" && attempt < 3) {
-        await sleep(300 * (attempt + 1));
-        continue;
+  try {
+    if (loadCopy(path)?.dirty) await flush(path);
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const f = await ghRead(path);
+      const cur = f ? (JSON.parse(f.text) as T) : structuredClone(init);
+      saveCopy(path, { json: f ? cur : null, sha: f?.sha });
+      const next = change(cur);
+      try {
+        await ghWrite(path, JSON.stringify(next, null, 2) + "\n", f?.sha, message);
+        saveCopy(path, { json: next, sha: shas.get(path) });
+        memo.set(path, { json: next, at: Date.now() });
+        return next;
+      } catch (e) {
+        if (e instanceof ApiError && e.message === "conflict" && attempt < 3) {
+          await sleep(300 * (attempt + 1));
+          continue;
+        }
+        if (e instanceof ApiError && e.message === "conflict") throw new Error("另一台设备正在同时修改，请稍后再试。");
+        throw e;
       }
-      if (e instanceof ApiError && e.message === "conflict") throw new Error("另一台设备正在同时修改，请稍后再试。");
-      throw e;
     }
+    throw new Error("保存失败");
+  } catch (e) {
+    if (!isNetError(e)) throw e;
+    const c = loadCopy(path);
+    const cur = c?.json !== undefined && c?.json !== null ? (clone(c.json) as T) : structuredClone(init);
+    const next = change(cur);
+    saveCopy(path, { json: next, sha: c?.sha, dirty: true, base: c?.dirty ? c.base : c?.sha });
+    setDirty(path, true);
+    memo.set(path, { json: next, at: Date.now() });
+    noticeOffline();
+    return next;
   }
-  throw new Error("保存失败");
 }
 
 /** Delete one file (nothing happens when it does not exist). */
@@ -255,4 +366,7 @@ export async function remove(path: string, message = "delete"): Promise<void> {
   });
   if (!r.ok && r.status !== 404) throw new ApiError(`删除失败（${r.status}）`, r.status);
   shas.delete(path);
+  memo.delete(path);
+  try { localStorage.removeItem(copyKey(path)); } catch { /* ignore */ }
+  setDirty(path, false);
 }

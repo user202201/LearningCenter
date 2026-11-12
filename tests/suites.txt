@@ -28,3 +28,5 @@
 29-english-words
 30-math
 31-offline-web
+32-offline-sync
+33-science
