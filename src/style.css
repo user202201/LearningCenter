@@ -559,3 +559,32 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .soon h2 { margin-top: 18px; font-size: 28px; color: var(--c2); }
 .soon p { font-size: 18px; }
 @media (prefers-reduced-motion: reduce) { .subject .s-art, .soon-art, .curtain, .enter-zoom { animation: none !important; } .curtain { clip-path: none; } }
+
+/* ===== grade window, grade chip, English words ===== */
+.grade-dlg { max-width: 460px; }
+.grade-sec { margin: 14px 0 6px; font-size: 15px; color: var(--muted); }
+.grade-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.grade-btn { min-height: 56px; padding: 6px 4px; font-size: 18px; border-radius: 18px; }
+.grade-btn.on { color: #fff; border-color: transparent; background: linear-gradient(180deg, var(--accent-2), var(--accent)); box-shadow: 0 3px 0 var(--accent-dark); }
+.grade-chip { display: inline-block; min-height: 0; margin-top: 6px; padding: 3px 12px; border: 0; border-radius: 999px; background: rgba(255,255,255,.28); color: #fff; font-size: 14px; font-weight: 800; box-shadow: none; }
+.grade-chip:active { transform: scale(.95); box-shadow: none; }
+.grade-row { display: flex; justify-content: center; padding: 2px 16px 0; }
+.grade-row button.link { min-height: 32px; font-size: 14px; }
+.subj-hero .subj-ico { width: 60px; height: 60px; flex: none; }
+.subj-hero .subj-ico svg { width: 100%; height: 100%; }
+.wlist { display: flex; flex-direction: column; gap: 10px; margin: 8px 0 16px; }
+.wrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border: 2px solid var(--kid-line); border-radius: 20px; background: #fff; box-shadow: 0 3px 0 var(--kid-line); animation: pop .38s cubic-bezier(.2, .9, .3, 1.2) both; animation-delay: calc(var(--i, 0) * 35ms); cursor: pointer; }
+.wrow:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--kid-line); }
+.wmain { display: flex; flex-direction: column; min-width: 0; }
+.wword { font-size: 24px; line-height: 1.2; color: #2d2230; overflow-wrap: anywhere; }
+.wph { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.wzh { text-align: right; font-size: 18px; font-weight: 700; color: var(--kid); min-width: 0; overflow-wrap: anywhere; }
+.wpos { display: block; font-size: 12px; font-style: normal; font-weight: 600; color: var(--muted); }
+.wweek { margin-top: 12px; }
+.wweek h3.sec { margin: 8px 2px 0; }
+/* the game in words mode: the word is plain text, no 田字格 guide lines */
+.game.words .gbox::before { display: none; }
+.game.words .gbox .ch { font-family: var(--round); font-size: 26cqw; font-weight: 800; letter-spacing: .01em; text-align: center; white-space: nowrap; max-width: none; }   /* (gameui.ts fitWord shrinks it by measuring when the word is wider than the board) */
+.game.words .gpy { font-size: clamp(20px, 5.2vmin, 38px); padding: 0 12px; }
+.gspeak { position: absolute; right: max(10px, 3vw); bottom: 4px; width: 58px; height: 58px; min-height: 0; padding: 0; border-radius: 50%; border: 0; color: #fff; background: var(--kid); box-shadow: 0 3px 0 rgba(0,0,0,.18); }
+.gspeak svg { width: 30px; height: 30px; }

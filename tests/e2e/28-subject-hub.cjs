@@ -85,7 +85,7 @@ const layout = (page) => page.evaluate(() => {
     const { browser, page } = await toHub({ local: true, viewport: { width: 390, height: 844 } });
     ok(await page.locator('.hub-page').count() === 1 && /学习乐园/.test(await page.title()), 'after signing in: the subject picker, the app is called 学习乐园');
     // a subject that is not built yet
-    for (const [id, nm] of [['math', '数学'], ['english', '英语'], ['science', '科学']]) {
+    for (const [id, nm] of [['math', '数学'], ['science', '科学']]) {
       await page.click(`.subject[data-subject=${id}]`); await page.waitForSelector('.soon');
       const t = await page.evaluate(() => ({ h1: document.querySelector('h1').textContent, h2: document.querySelector('.soon h2').textContent, art: document.querySelector('.soon-art svg').dataset.art, hash: location.hash }));
       ok(t.h1 === nm && t.h2 === '正在建设中' && t.art === id && t.hash === '#/subject/' + id, nm + ': a "coming soon" page with its own colour and picture');

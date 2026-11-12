@@ -1,0 +1,370 @@
+{
+ "topics": [
+  {
+   "id": "compare",
+   "name": "比大小",
+   "domain": "数与代数",
+   "desc": "用 >、<、= 填一填"
+  },
+  {
+   "id": "seq",
+   "name": "找规律",
+   "domain": "数与代数",
+   "desc": "接着数下去"
+  },
+  {
+   "id": "add10",
+   "name": "10以内加法",
+   "domain": "数与代数",
+   "desc": "和不超过 10"
+  },
+  {
+   "id": "sub10",
+   "name": "10以内减法",
+   "domain": "数与代数",
+   "desc": "被减数不超过 10"
+  },
+  {
+   "id": "add20",
+   "name": "20以内进位加法",
+   "domain": "数与代数",
+   "desc": "凑十法"
+  },
+  {
+   "id": "sub20",
+   "name": "20以内退位减法",
+   "domain": "数与代数",
+   "desc": "破十法"
+  },
+  {
+   "id": "add100",
+   "name": "100以内加法",
+   "domain": "数与代数",
+   "desc": "两位数加法"
+  },
+  {
+   "id": "sub100",
+   "name": "100以内减法",
+   "domain": "数与代数",
+   "desc": "两位数减法"
+  },
+  {
+   "id": "multable",
+   "name": "表内乘法",
+   "domain": "数与代数",
+   "desc": "乘法口诀"
+  },
+  {
+   "id": "divtable",
+   "name": "表内除法",
+   "domain": "数与代数",
+   "desc": "用口诀求商"
+  },
+  {
+   "id": "units",
+   "name": "单位换算",
+   "domain": "图形与几何",
+   "desc": "长度、质量、时间"
+  },
+  {
+   "id": "add3",
+   "name": "三位数加法",
+   "domain": "数与代数",
+   "desc": "万以内加法"
+  },
+  {
+   "id": "sub3",
+   "name": "三位数减法",
+   "domain": "数与代数",
+   "desc": "万以内减法"
+  },
+  {
+   "id": "mul1",
+   "name": "多位数乘一位数",
+   "domain": "数与代数",
+   "desc": "竖式乘法"
+  },
+  {
+   "id": "div1",
+   "name": "除数是一位数的除法",
+   "domain": "数与代数",
+   "desc": "整除"
+  },
+  {
+   "id": "rect",
+   "name": "长方形面积与周长",
+   "domain": "图形与几何",
+   "desc": "公式应用"
+  },
+  {
+   "id": "mul2",
+   "name": "两位数乘法",
+   "domain": "数与代数",
+   "desc": "三位数乘两位数"
+  },
+  {
+   "id": "div2",
+   "name": "除数是两位数的除法",
+   "domain": "数与代数",
+   "desc": "整除"
+  },
+  {
+   "id": "order",
+   "name": "四则混合运算",
+   "domain": "数与代数",
+   "desc": "先乘除后加减，括号优先"
+  },
+  {
+   "id": "decaddsub",
+   "name": "小数加减法",
+   "domain": "数与代数",
+   "desc": "小数点对齐"
+  },
+  {
+   "id": "angle",
+   "name": "三角形的内角",
+   "domain": "图形与几何",
+   "desc": "内角和 180°"
+  },
+  {
+   "id": "average",
+   "name": "平均数",
+   "domain": "统计与概率",
+   "desc": "总和 ÷ 个数"
+  },
+  {
+   "id": "decmul",
+   "name": "小数乘法",
+   "domain": "数与代数",
+   "desc": "小数乘整数、小数乘小数"
+  },
+  {
+   "id": "decdiv",
+   "name": "小数除法",
+   "domain": "数与代数",
+   "desc": "除以整数"
+  },
+  {
+   "id": "eqsimple",
+   "name": "简易方程",
+   "domain": "数与代数",
+   "desc": "x + a = b 等"
+  },
+  {
+   "id": "fracsame",
+   "name": "同分母分数加法",
+   "domain": "数与代数",
+   "desc": "结果约分"
+  },
+  {
+   "id": "fracdiff",
+   "name": "异分母分数加减",
+   "domain": "数与代数",
+   "desc": "通分后计算"
+  },
+  {
+   "id": "fracsimp",
+   "name": "约分",
+   "domain": "数与代数",
+   "desc": "化成最简分数"
+  },
+  {
+   "id": "gcdlcm",
+   "name": "公因数与公倍数",
+   "domain": "数与代数",
+   "desc": "最大公因数、最小公倍数"
+  },
+  {
+   "id": "triarea",
+   "name": "三角形面积",
+   "domain": "图形与几何",
+   "desc": "底 × 高 ÷ 2"
+  },
+  {
+   "id": "fracmul",
+   "name": "分数乘法",
+   "domain": "数与代数",
+   "desc": "分子乘分子，分母乘分母"
+  },
+  {
+   "id": "fracdiv",
+   "name": "分数除法",
+   "domain": "数与代数",
+   "desc": "除以一个数等于乘它的倒数"
+  },
+  {
+   "id": "percent",
+   "name": "百分数",
+   "domain": "数与代数",
+   "desc": "求百分数 / 求一个数的百分之几"
+  },
+  {
+   "id": "ratio",
+   "name": "化简比",
+   "domain": "数与代数",
+   "desc": "化成最简整数比"
+  },
+  {
+   "id": "circle",
+   "name": "圆的周长与面积",
+   "domain": "图形与几何",
+   "desc": "π 取 3.14"
+  },
+  {
+   "id": "prop",
+   "name": "解比例",
+   "domain": "数与代数",
+   "desc": "内项积等于外项积"
+  },
+  {
+   "id": "ratadd",
+   "name": "有理数加减",
+   "domain": "数与代数",
+   "desc": "正负数运算"
+  },
+  {
+   "id": "ratmul",
+   "name": "有理数乘除",
+   "domain": "数与代数",
+   "desc": "同号得正，异号得负"
+  },
+  {
+   "id": "lineq1",
+   "name": "一元一次方程 ax+b=c",
+   "domain": "数与代数",
+   "desc": "移项、合并"
+  },
+  {
+   "id": "lineq2",
+   "name": "一元一次方程 ax+b=cx+d",
+   "domain": "数与代数",
+   "desc": "未知数在两边"
+  },
+  {
+   "id": "liketerms",
+   "name": "合并同类项",
+   "domain": "数与代数",
+   "desc": "系数相加"
+  },
+  {
+   "id": "polymul",
+   "name": "多项式乘法 (x+p)(x+q)",
+   "domain": "数与代数",
+   "desc": "整式乘法"
+  },
+  {
+   "id": "sqrt",
+   "name": "平方与平方根",
+   "domain": "数与代数",
+   "desc": "算术平方根"
+  },
+  {
+   "id": "pythag",
+   "name": "勾股定理",
+   "domain": "图形与几何",
+   "desc": "a² + b² = c²"
+  },
+  {
+   "id": "linfn",
+   "name": "一次函数求值",
+   "domain": "数与代数",
+   "desc": "y = kx + b"
+  },
+  {
+   "id": "median",
+   "name": "中位数",
+   "domain": "统计与概率",
+   "desc": "从小到大排列"
+  },
+  {
+   "id": "quadeq",
+   "name": "一元二次方程（因式分解）",
+   "domain": "数与代数",
+   "desc": "求两个根"
+  },
+  {
+   "id": "trig",
+   "name": "特殊角的三角函数值",
+   "domain": "图形与几何",
+   "desc": "30°、45°、60°"
+  },
+  {
+   "id": "prob",
+   "name": "简单概率",
+   "domain": "统计与概率",
+   "desc": "所求情况数 ÷ 总情况数"
+  }
+ ],
+ "grades": {
+  "1": [
+   "compare",
+   "seq",
+   "add10",
+   "sub10",
+   "add20",
+   "sub20"
+  ],
+  "2": [
+   "add100",
+   "sub100",
+   "multable",
+   "divtable",
+   "units"
+  ],
+  "3": [
+   "add3",
+   "sub3",
+   "mul1",
+   "div1",
+   "rect",
+   "units"
+  ],
+  "4": [
+   "mul2",
+   "div2",
+   "order",
+   "decaddsub",
+   "angle",
+   "average"
+  ],
+  "5": [
+   "decmul",
+   "decdiv",
+   "eqsimple",
+   "fracsame",
+   "fracdiff",
+   "fracsimp",
+   "gcdlcm",
+   "triarea"
+  ],
+  "6": [
+   "fracmul",
+   "fracdiv",
+   "percent",
+   "ratio",
+   "circle",
+   "prop"
+  ],
+  "7": [
+   "ratadd",
+   "ratmul",
+   "lineq1",
+   "lineq2",
+   "liketerms"
+  ],
+  "8": [
+   "polymul",
+   "sqrt",
+   "pythag",
+   "linfn",
+   "median"
+  ],
+  "9": [
+   "quadeq",
+   "trig",
+   "prob",
+   "sqrt",
+   "pythag"
+  ]
+ }
+}

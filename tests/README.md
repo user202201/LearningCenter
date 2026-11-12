@@ -22,6 +22,7 @@ Browser tests (Playwright + Chromium, touch-sized windows) against the app runni
 | 25-sheet-write-chars | the sheet for a child who reads more than he writes: typed characters to write, this week's / last week's characters to read at both ends in random order, per child, remembered, one A4 PDF page, English / French |
 | 26-settings-sections | Settings headings in order, every control under the right one, the admin block slides open / shut (no redraw) |
 | 28-subject-hub | the subject picker: four big cards on 5 screens (equal margins, no overflow), EN / FR, tap effect (sparkles, ring), the curtain, 识字 = the original app, coming-soon pages, back buttons / Settings return to where they came from, reduce-motion route |
+| 29-english-words | English words: the grade asked once (and its yearly step), children list, 20 new words a week by grade, never a repeat, data in english/<kid>.json only, recorded tab, per-child grade, the game in words mode (meaning on tap, speaker, long words, boxes saved), EN / FR on 3 screens |
 | 27-admin-password | Admin mode password: chosen twice the first time, asked afterwards, wrong / cancel change nothing, only a hash kept, change it, not remembered, EN / FR |
 | 15-app-icon | the app icon: sizes, no transparency (iOS), fills the square, safe area, in sync with assets/icon/icon.svg, links + manifest |
 | 14-picture-and-colour | tap the picture at the top of a child page: picture + colour window, live preview, Done / Cancel, the colour changes the whole look, contrast, fits a small phone |

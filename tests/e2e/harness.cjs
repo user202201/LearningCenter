@@ -55,6 +55,8 @@ exports.start = async function (store = new Map(), opts = {}) {
     }
     return json({}, 404);
   });
+  // the grade is asked once, the first time the subject picker opens: tests start with it already known (grade 3), unless a test is about asking (opts.noGrade)
+  if (!opts.noGrade) await ctx.addInitScript(() => { try { if (!localStorage.getItem('learn.profile.v1')) localStorage.setItem('learn.profile.v1', JSON.stringify({ def: { grade: 3, setOn: '2026-09-02' } })); } catch (e) {} });
   if (opts.init) await page.addInitScript(opts.init, opts.initArg);   // e.g. a pretend camera
   await page.goto(opts.url || exports.URL);
   if (opts.noLogin) return { browser, page, store, log, ctx };

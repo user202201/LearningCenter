@@ -16,6 +16,9 @@ import { scanQr } from "./scan";
 import { readTable, readWorkbook, type SheetData } from "./xlsx";
 import * as I from "./importer";
 import { subjectById, hubGrid, hubHero, soonPage, reveal } from "./hub";
+import * as E from "./english";
+import * as P from "./profile";
+import { askGrade } from "./gradeui";
 
 const app = document.getElementById("app")!;
 
@@ -1415,9 +1418,20 @@ async function showQr() {
 }
 
 // ---------- the subject picker ----------
+/** asks for the grade (the first time the picker opens, and from the grade button): remembered on this device for every subject, goes up by itself every September */
+async function pickGrade() {
+  const g = await askGrade("你读几年级？", P.defaultGrade(), "只需要选一次：以后每年 9 月会自动升一级，所有学科都用同一个年级。想改随时点“年级”。");
+  if (g === null) return;   // cancelled: nothing changes (asked again the next time the picker opens, until a grade is chosen)
+  P.setDefaultGrade(g);
+  toast("年级已记住");
+  renderHubScreen();
+}
 function renderHubScreen() {
   const gear = gearBtn("#/");
-  show(h("div", { class: "page hub-page" }, hubHero(gear),
+  const dg = P.defaultGrade();
+  const chip = h("button", { class: "grade-chip", id: "hub-grade", title: "修改年级", onclick: () => void pickGrade() }, "年级：", dg ? P.gradeName(dg) : "未选择");
+  if (!P.hasGrade()) queueMicrotask(() => void pickGrade());
+  show(h("div", { class: "page hub-page" }, hubHero(gear, chip),
     h("main", { class: "scroll" }, h("div", { class: "hub-wrap" }, hubGrid((route) => (location.hash = route))))));
 }
 
@@ -1460,6 +1474,9 @@ async function route() {
   if (idiom) return void renderIdiom(decodeURIComponent(idiom[1]));
   if (hash === "#/settings") return void renderSettings();
   if (hash === "#/chinese") return renderHome();
+  if (hash === "#/subject/english") return void E.renderHome();
+  const eng = /^#\/english\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
+  if (eng) return void E.renderKid(eng[1], eng[2] === "learned" ? "learned" : eng[2] === "game" ? "game" : "week");
   const subject = /^#\/subject\/(\w+)$/.exec(hash);
   if (subject && subjectById(subject[1])) return renderSubject(subject[1]);
   return renderHubScreen();
@@ -1475,6 +1492,7 @@ document.addEventListener("touchend", (e) => {
   if (quick && e.cancelable && !(e.target as Element).closest("button, input, textarea, select, a, dialog")) e.preventDefault();
 }, { passive: false });
 
+E.initEnglish({ show, showLoading, showError, loadShared, kids: () => kidsFile, avatarEl, back: backBtn, gear: gearBtn, stagger, epoch: () => epoch, gameSeconds: () => settings.gameSeconds, route: () => void route(), addKid });
 setLang(settings.lang);
 window.addEventListener("hashchange", () => void route());
 void route();

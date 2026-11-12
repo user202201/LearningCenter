@@ -17,13 +17,28 @@ export interface GameOpts {
   onAgain: () => void;
   /** the game is closed (Done, or left early) */
   onClose: () => void;
+  /** English words instead of characters: the word is plain text, a tap shows its meaning (not the pinyin), a speaker button says it aloud */
+  words?: { meaning: (w: string) => string; speak?: (w: string) => void };
 }
 
+/**
+ * Makes a word fit: it starts at the normal size (from the style sheet) and, when it is wider than 88 % of the board, the size is reduced by the
+ * measured ratio, so ANY word (a 14-letter one, a phrase) is shown completely whatever the screen is. Exported for the tests.
+ */
+export function fitWord(ch: HTMLElement): void {
+  const box = ch.closest<HTMLElement>(".gbox");
+  if (!box) return;
+  ch.style.fontSize = "";
+  const avail = box.clientWidth * 0.88;
+  const w = ch.getBoundingClientRect().width;
+  if (avail > 0 && w > avail) ch.style.fontSize = `${(parseFloat(getComputedStyle(ch).fontSize) * avail) / w}px`;
+}
 const SVG = "http://www.w3.org/2000/svg";
 const R = 48.5;                                // radius of the ring in a 100 x 100 drawing (a thin ring on the very edge)
 const C = 2 * Math.PI * R;
 const tickSvg = (colour = "#fff") => { const s = document.createElementNS(SVG, "svg"); s.setAttribute("viewBox", "0 0 48 48"); s.setAttribute("aria-hidden", "true"); s.innerHTML = `<path d="M9 25l10 10L39 13" fill="none" stroke="${colour}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`; return s; };
 const crossSvg = (colour = "#fff") => { const s = document.createElementNS(SVG, "svg"); s.setAttribute("viewBox", "0 0 48 48"); s.setAttribute("aria-hidden", "true"); s.innerHTML = `<path d="M12 12l24 24M36 12L12 36" fill="none" stroke="${colour}" stroke-width="7" stroke-linecap="round"/>`; return s; };
+const speakerSvg = () => { const s = document.createElementNS(SVG, "svg"); s.setAttribute("viewBox", "0 0 48 48"); s.setAttribute("aria-hidden", "true"); s.innerHTML = '<path d="M6 18h8l10-8v28l-10-8H6z" fill="currentColor"/><path d="M31 17q6 7 0 14M37 12q11 12 0 24" fill="none" stroke="currentColor" stroke-width="3.500" stroke-linecap="round"/>'; return s; };
 const starSvg = (on: boolean) => { const s = document.createElementNS(SVG, "svg"); s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("aria-hidden", "true"); s.setAttribute("class", "gstar" + (on ? " on" : "")); s.innerHTML = '<path d="M12 1.800l3 6.500 7.100.9-5.200 4.900 1.400 7L12 17.600 5.700 21.100l1.400-7L1.900 9.200l7.100-.9z" stroke-width="1.500" stroke-linejoin="round"/>'; return s; };
 
 export function openGame(o: GameOpts): void {
@@ -59,10 +74,12 @@ export function openGame(o: GameOpts): void {
   const no = h("button", { class: "gbtn no", id: "game-wrong", title: "答错了", "aria-label": "答错了" }, crossSvg());
   const yes = h("button", { class: "gbtn yes", id: "game-right", title: "答对了", "aria-label": "答对了" }, tickSvg());
   const banner = h("div", { class: "gbanner", id: "game-banner" });
-  const hint = h("p", { class: "ghint" }, "点一下屏幕可以看拼音");
-  const stage = h("div", { class: "gstage" }, dial, banner);
+  const hint = h("p", { class: "ghint" }, o.words ? "点一下屏幕可以看中文" : "点一下屏幕可以看拼音");
+  const hintOf = (c: string) => (o.words ? o.words.meaning(c) : pinyinOf(c));
+  const speak = o.words?.speak ? h("button", { class: "gspeak", id: "game-speak", title: "听发音", "aria-label": "听发音", onclick: (e: Event) => { e.stopPropagation(); if (phase === "ask" || phase === "feedback") o.words?.speak?.(queue[idx].ch); } }, speakerSvg()) : null;
+  const stage = h("div", { class: "gstage" }, dial, banner, speak);
   const bar = h("div", { class: "gbar" }, no, yes);
-  const root = h("div", { class: "game", id: "game", role: "dialog", "aria-modal": "true", style: `--kid:${o.color}` },
+  const root = h("div", { class: "game" + (o.words ? " words" : ""), id: "game", role: "dialog", "aria-modal": "true", style: `--kid:${o.color}` },
     h("div", { class: "gtop" }, quit, h("div", { class: "gmid" }, progress, roundTag), scoreEl), stage, hint, bar);
 
   const stop = () => { clearInterval(timer); clearTimeout(next); timer = undefined; };
@@ -84,7 +101,8 @@ export function openGame(o: GameOpts): void {
     phase = "ask";
     const q = queue[idx];
     ch.textContent = q.ch;
-    py.textContent = pinyinOf(q.ch);
+    if (o.words) fitWord(ch);   // (measured: a long word gets a smaller size so that it stays inside the ring)
+    py.textContent = hintOf(q.ch);
     reveal(false);
     dial.classList.remove("ok", "bad");
     flash.className = "gflash";
@@ -123,8 +141,8 @@ export function openGame(o: GameOpts): void {
     fg.style.stroke = correct ? "#2f9e44" : "#e03131";
     flash.className = "gflash show " + (correct ? "yes" : "no");
     flash.replaceChildren(correct ? tickSvg("#2f9e44") : crossSvg("#e03131"));
-    void loadPinyin().then(() => { py.textContent = pinyinOf(q.ch); });
-    if (!correct) reveal(true);                              // a miss shows the right reading
+    if (!o.words) void loadPinyin().then(() => { py.textContent = pinyinOf(q.ch); });
+    if (!correct) reveal(true);                              // a miss shows the right reading (the meaning, for a word)
     dial.dataset.last = correct ? "right" : "wrong";
     later(() => { idx++; ask(); }, correct ? 650 : 1700);
   }
@@ -136,7 +154,7 @@ export function openGame(o: GameOpts): void {
     wrong = [];
     idx = 0;
     phase = "banner";
-    banner.textContent = `再练一遍：${queue.length} 个字`;
+    banner.textContent = o.words ? `再练一遍：${queue.length} 个词` : `再练一遍：${queue.length} 个字`;
     banner.className = "gbanner show";
     dial.classList.remove("ok", "bad");
     flash.className = "gflash";
@@ -164,12 +182,13 @@ export function openGame(o: GameOpts): void {
       h("h2", {}, score === total ? "全对了！" : "练完了！"),
       h("div", { class: "gstars", "data-stars": String(stars) }, ...[1, 2, 3].map((n) => starSvg(n <= stars))),
       h("div", { class: "gresult" }, h("strong", { id: "game-final" }, String(score)), ` / ${total}`),
-      missed.length ? h("p", { class: "muted" }, open.length ? "还没记牢的字（下次接着练）：" : "刚才答错、后来练对了的字：") : h("p", { class: "muted" }, "一个都没错，太棒了！"),
+      missed.length ? h("p", { class: "muted" }, o.words ? (open.length ? "还没记牢的词（下次接着练）：" : "刚才答错、后来练对了的词：") : (open.length ? "还没记牢的字（下次接着练）：" : "刚才答错、后来练对了的字：")) : h("p", { class: "muted" }, "一个都没错，太棒了！"),
       chips,
       h("div", { class: "row end" }, fin, again)));
   }
   /** the pinyin under the missed characters of the end screen */
   function pinyinReady(list: string[], chips: HTMLElement) {
+    if (o.words) return chips.querySelectorAll<HTMLElement>(".gchip").forEach((c, i) => c.append(h("small", {}, o.words!.meaning(list[i]))));
     void loadPinyin().then(() => {
       chips.querySelectorAll<HTMLElement>(".gchip").forEach((c, i) => c.append(h("small", {}, pinyinOf(list[i]))));
     });
@@ -211,7 +230,12 @@ export function openGame(o: GameOpts): void {
   // a tap anywhere on the screen (not on a button) shows / hides the pinyin: the whole screen is the target, not only the small board
   root.addEventListener("click", (e) => { if (phase === "ask" && !(e.target as HTMLElement).closest("button")) reveal(!py.classList.contains("show")); });
   document.addEventListener("keydown", onKey);
+  const onResize = () => {   // (turning the device: the board changes size)
+    if (!root.isConnected) return window.removeEventListener("resize", onResize);
+    if (o.words && phase !== "end" && ch.textContent) fitWord(ch);
+  };
+  window.addEventListener("resize", onResize);
   document.body.append(root);
-  void loadPinyin().then(() => { if (phase === "ask") py.textContent = pinyinOf(queue[idx].ch); });
+  if (!o.words) void loadPinyin().then(() => { if (phase === "ask") py.textContent = pinyinOf(queue[idx].ch); });
   ask();
 }

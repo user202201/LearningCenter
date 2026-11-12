@@ -22,7 +22,7 @@ export interface Subject {
 export const SUBJECTS: Subject[] = [
   { id: "chinese", name: "识字", route: "#/chinese", c1: "#ffa94d", c2: "#f76707", dark: "#c64f00", ready: true },
   { id: "math", name: "数学", route: "#/subject/math", c1: "#4dabf7", c2: "#1c7ed6", dark: "#1864ab", ready: false },
-  { id: "english", name: "英语", route: "#/subject/english", c1: "#69db7c", c2: "#2f9e44", dark: "#237a35", ready: false },
+  { id: "english", name: "英语", route: "#/subject/english", c1: "#69db7c", c2: "#2f9e44", dark: "#237a35", ready: true },
   { id: "science", name: "科学", route: "#/subject/science", c1: "#b197fc", c2: "#7048e8", dark: "#5430b8", ready: false },
 ];
 export const subjectById = (id: string) => SUBJECTS.find((s) => s.id === id);
@@ -163,8 +163,8 @@ export function soonPage(s: Subject, back: HTMLElement, gear: HTMLElement): HTML
       h("p", { class: "muted" }, "很快就和你见面啦，先去试试别的学科吧！"))));
 }
 
-export const hubHero = (gear: HTMLElement) =>
+export const hubHero = (gear: HTMLElement, gradeChip?: HTMLElement) =>
   h("header", { class: "top hero home-hero hub-hero" },
     h("span", { class: "mascot" }, mascot()),
-    h("div", { class: "hero-text" }, h("h1", {}, "学习乐园"), h("p", {}, "今天想学什么？")),
+    h("div", { class: "hero-text" }, h("h1", {}, "学习乐园"), h("p", {}, "今天想学什么？"), gradeChip ?? null),
     gear);
