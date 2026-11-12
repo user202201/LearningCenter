@@ -31,12 +31,13 @@ export async function loadMath(): Promise<MathData> {
  * The topics of a new week for a child of `grade`: the topics of his grade in the list's order that he has not had yet; when fewer than 3 are left the
  * list starts again from its beginning (a new round, new numbers). Only topics that have a generator are used.
  */
-export function pickTopics(data: MathData, kid: KidData, grade: number, known: (id: string) => boolean, n = WEEKLY_TOPICS): string[] {
+export function pickTopics(data: MathData, kid: KidData, grade: number, known: (id: string) => boolean, n = WEEKLY_TOPICS, acc: (id: string) => number | null = () => null): string[] {
   const list = (data.grades[String(grade)] ?? []).filter(known);
   const used = new Set(kid.weeks.flatMap((w) => w.chars));
-  const fresh = list.filter((t) => !used.has(t));
-  const out = fresh.slice(0, n);
-  for (const t of list) { if (out.length >= n) break; if (!out.includes(t)) out.push(t); }
+  const out = list.filter((t) => !used.has(t)).slice(0, n);
+  // a new round: the topics he answered worst come first (never asked = in the middle), ties keep the list's order
+  const rest = list.filter((t) => !out.includes(t)).map((t, i) => ({ t, i, a: acc(t) ?? 50 })).sort((x, y) => x.a - y.a || x.i - y.i);
+  for (const r of rest) { if (out.length >= n) break; out.push(r.t); }
   return out;
 }
 
@@ -55,19 +56,27 @@ export function buildGame(thisWeek: string[], previous: string[]): { questions: 
 }
 
 export interface TopicStat { right: number; wrong: number; last?: string }
-export interface MathReview { topics: Record<string, TopicStat>; last?: { date: string; score: number; total: number; stars: number; seconds: number }; plays?: number }
+export interface MathReview { topics: Record<string, TopicStat>; mistakes?: Q[]; last?: { date: string; score: number; total: number; stars: number; seconds: number }; plays?: number }
 export const EMPTY_MATH_REVIEW: MathReview = { topics: {} };
-export interface Answer { topic: string; right: boolean }
+export interface Answer { topic: string; right: boolean; q?: Q }
+/** the wrong questions kept in the errors book (newest first) */
+export const MAX_MISTAKES = 50;
 
 /** adds the answers of a game; `summary` (a finished game) is kept as "last time" */
 export function applyMath(r: MathReview, answers: Answer[], today: string, summary?: { score: number; total: number; seconds: number }): MathReview {
   const topics = { ...r.topics };
+  let mistakes = [...(r.mistakes ?? [])];
   for (const a of answers) {
     const c = topics[a.topic] ?? { right: 0, wrong: 0 };
     topics[a.topic] = { right: c.right + (a.right ? 1 : 0), wrong: c.wrong + (a.right ? 0 : 1), last: today };
+    if (a.q) {
+      mistakes = mistakes.filter((m) => m.q !== a.q!.q);   // (right now = out of the book; wrong = (again) at the top)
+      if (!a.right) mistakes.unshift(a.q);
+    }
   }
+  mistakes = mistakes.slice(0, MAX_MISTAKES);
   const stars = !summary || !summary.total ? 0 : summary.score / summary.total >= 0.9 ? 3 : summary.score / summary.total >= 0.6 ? 2 : 1;
-  return { topics, plays: (r.plays ?? 0) + 1, last: summary ? { date: today, ...summary, stars } : r.last };
+  return { topics, mistakes, plays: (r.plays ?? 0) + 1, last: summary ? { date: today, ...summary, stars } : r.last };
 }
 /** the share of right answers of a topic (null = never asked) */
 export const accuracy = (s: TopicStat | undefined): number | null => (s && s.right + s.wrong > 0 ? Math.round((100 * s.right) / (s.right + s.wrong)) : null);

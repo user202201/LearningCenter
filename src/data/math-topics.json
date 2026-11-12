@@ -293,6 +293,102 @@
    "name": "简单概率",
    "domain": "统计与概率",
    "desc": "所求情况数 ÷ 总情况数"
+  },
+  {
+   "id": "wp1",
+   "name": "应用题：加减",
+   "domain": "数与代数",
+   "desc": "用加法或减法解决问题"
+  },
+  {
+   "id": "wp2",
+   "name": "应用题：乘除",
+   "domain": "数与代数",
+   "desc": "每份几个、平均分"
+  },
+  {
+   "id": "wp3",
+   "name": "应用题：行程与周长",
+   "domain": "数与代数",
+   "desc": "路程、周长、先减后加"
+  },
+  {
+   "id": "wp4",
+   "name": "应用题：年龄、单价、天数",
+   "domain": "数与代数",
+   "desc": "差、均分、需要几天"
+  },
+  {
+   "id": "wp5",
+   "name": "应用题：折扣、百分数、比",
+   "domain": "数与代数",
+   "desc": "打几折、占百分之几、按比分配"
+  },
+  {
+   "id": "wp6",
+   "name": "应用题：方程",
+   "domain": "数与代数",
+   "desc": "列方程解应用题"
+  },
+  {
+   "id": "wp7",
+   "name": "应用题：勾股与连续数",
+   "domain": "数与代数",
+   "desc": "梯子靠墙、连续整数"
+  },
+  {
+   "id": "absval",
+   "name": "绝对值与相反数",
+   "domain": "数与代数",
+   "desc": "|a| 与 −(−a)"
+  },
+  {
+   "id": "power",
+   "name": "乘方",
+   "domain": "数与代数",
+   "desc": "(−2)³ 等"
+  },
+  {
+   "id": "ineq",
+   "name": "一元一次不等式",
+   "domain": "数与代数",
+   "desc": "解不等式"
+  },
+  {
+   "id": "sqrtsimp",
+   "name": "二次根式化简",
+   "domain": "数与代数",
+   "desc": "√12 = 2√3"
+  },
+  {
+   "id": "sqform",
+   "name": "乘法公式",
+   "domain": "数与代数",
+   "desc": "平方差、完全平方"
+  },
+  {
+   "id": "factor",
+   "name": "因式分解",
+   "domain": "数与代数",
+   "desc": "x²+5x+6 = (x+2)(x+3)"
+  },
+  {
+   "id": "invprop",
+   "name": "反比例函数求值",
+   "domain": "数与代数",
+   "desc": "y = k/x"
+  },
+  {
+   "id": "quadvertex",
+   "name": "二次函数的顶点",
+   "domain": "数与代数",
+   "desc": "顶点式 y=(x−h)²+k"
+  },
+  {
+   "id": "arc",
+   "name": "弧长",
+   "domain": "图形与几何",
+   "desc": "l = nπr/180"
   }
  ],
  "grades": {
@@ -302,14 +398,16 @@
    "add10",
    "sub10",
    "add20",
-   "sub20"
+   "sub20",
+   "wp1"
   ],
   "2": [
    "add100",
    "sub100",
    "multable",
    "divtable",
-   "units"
+   "units",
+   "wp2"
   ],
   "3": [
    "add3",
@@ -317,7 +415,8 @@
    "mul1",
    "div1",
    "rect",
-   "units"
+   "units",
+   "wp3"
   ],
   "4": [
    "mul2",
@@ -325,7 +424,8 @@
    "order",
    "decaddsub",
    "angle",
-   "average"
+   "average",
+   "wp3"
   ],
   "5": [
    "decmul",
@@ -335,7 +435,8 @@
    "fracdiff",
    "fracsimp",
    "gcdlcm",
-   "triarea"
+   "triarea",
+   "wp4"
   ],
   "6": [
    "fracmul",
@@ -343,28 +444,41 @@
    "percent",
    "ratio",
    "circle",
-   "prop"
+   "prop",
+   "wp5"
   ],
   "7": [
    "ratadd",
    "ratmul",
    "lineq1",
    "lineq2",
-   "liketerms"
+   "liketerms",
+   "absval",
+   "power",
+   "ineq",
+   "wp6"
   ],
   "8": [
    "polymul",
    "sqrt",
    "pythag",
    "linfn",
-   "median"
+   "median",
+   "sqrtsimp",
+   "sqform",
+   "factor",
+   "wp7"
   ],
   "9": [
    "quadeq",
    "trig",
    "prob",
    "sqrt",
-   "pythag"
+   "pythag",
+   "invprop",
+   "quadvertex",
+   "arc",
+   "wp7"
   ]
  }
 }

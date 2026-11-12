@@ -37,8 +37,8 @@ const playAll = async (page, n = 20) => {
       const data = (await import('/src/data/math-topics.json')).default;
       const ids = G.topicIds();
       const inGrades = new Set(Object.values(data.grades).flat());
-      const res = { ids: ids.length, missingGen: [...inGrades].filter((x) => !ids.includes(x)), notInList: data.topics.map((x) => x.id).filter((x) => !ids.includes(x)), bad: [], total: 0, ranges: [] };
-      const nonNeg = new Set(['ratadd', 'ratmul', 'lineq1', 'lineq2', 'linfn', 'liketerms', 'polymul', 'quadeq', 'sqrt', 'trig', 'fracsame', 'fracdiff']);
+      const res = { ids: ids.length, topicsInJson: data.topics.length, missingGen: [...inGrades].filter((x) => !ids.includes(x)), notInList: data.topics.map((x) => x.id).filter((x) => !ids.includes(x)), bad: [], total: 0, ranges: [] };
+      const nonNeg = new Set(['ratadd', 'ratmul', 'lineq1', 'lineq2', 'linfn', 'liketerms', 'polymul', 'quadeq', 'sqrt', 'trig', 'fracsame', 'fracdiff', 'absval', 'power', 'invprop', 'sqform', 'factor', 'ineq', 'quadvertex']);
       for (const id of ids) {
         const seen = new Set();
         for (let i = 0; i < 1500; i++) {
@@ -66,7 +66,7 @@ const playAll = async (page, n = 20) => {
       res.setSize = set.length; res.setDistinct = new Set(set.map((x) => x.q)).size;
       return res;
     });
-    ok(r.ids === 49 && r.missingGen.length === 0, 'every topic of math-topics.json (all grades) has a generator: ' + r.ids + ' generators' + (r.missingGen.length ? ' missing ' + r.missingGen : ''));
+    ok(r.ids === r.topicsInJson && r.ids >= 65 && r.missingGen.length === 0, 'every topic of math-topics.json (all grades, word problems included) has a generator: ' + r.ids + ' generators' + (r.missingGen.length ? ' missing ' + r.missingGen : ''));
     ok(r.notInList.length === 0, 'and every generator is a listed topic');
     ok(r.bad.length === 0, r.total + ' questions made: every answer is right, always 4 different choices that contain it, no NaN' + (r.bad.length ? ' -> ' + r.bad.join(' | ') : ''));
     ok(r.range.every((x) => x === ''), 'ranges of the lowest grades hold (sums up to 10 / 20 / 99, tables, 3-digit): ' + r.range.filter(Boolean).join(' | '));
@@ -157,6 +157,86 @@ const playAll = async (page, n = 20) => {
   ok(JSON.stringify(leo6) === JSON.stringify(g6.slice(0, 3)), 'changing Leo to 六年级 picks this week\'s topics again for grade 6 (' + leo6.join(', ') + ')');
   ok(log.external.length === 0, 'OFFLINE: the whole math flow (list, grade, topics, practice, games, results) made no request outside the app: ' + log.external.join(', '));
   await browser.close();
+
+  // ---- settings, the keypad, the errors book, the choice of the next topics ----
+  {
+    /** the right answer of the grade-1 questions (compare, seq, add10), solved from the text the child sees */
+    const solve = (q) => {
+      let m;
+      if ((m = q.match(/^(\d+) ○ (\d+)$/))) return +m[1] > +m[2] ? '>' : +m[1] < +m[2] ? '<' : '=';
+      if ((m = q.match(/^(\d+), (\d+), (\d+), (\d+), \?$/))) return String(+m[4] + (+m[2] - +m[1]));
+      if ((m = q.match(/^(\d+) \+ (\d+) = \?$/))) return String(+m[1] + +m[2]);
+      throw new Error('cannot solve: ' + q);
+    };
+    const t = await start(new Map(), { local: true, today: '2026-11-12', viewport: { width: 390, height: 844 } });
+    const { page: pg, log: lg } = t;
+    await addKid(pg, 'Dory'); await setGrade(pg, 'Dory', 1); await openMath(pg, 'Dory');
+    const g1 = await pg.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
+    ok(g1.join() === 'compare,seq,add10', 'grade 1: compare, seq, add10 (' + g1.join() + ')');
+    await pg.click('#tab-game'); await pg.waitForSelector('#math-settings');
+    ok((await pg.locator('#set-time .mopt').allTextContents()).join('|') === '自动|3 分钟|5 分钟|8 分钟|10 分钟|15 分钟', 'the lobby has the total time to choose: 自动 | 3 | 5 | 8 | 10 | 15 minutes');
+    ok(await pg.locator('#set-time .mopt.on').textContent() === '自动' && await pg.locator('#set-mode .mopt.on').textContent() === '四选一', 'default: automatic time, four choices');
+    await pg.click('#set-time [data-opt="3"]'); await pg.waitForSelector('#set-time .mopt.on[data-opt="3"]');
+    ok(/限时约 3 分钟/.test(await pg.textContent('#math-info')), 'choosing 3 minutes changes the lobby text: ' + await pg.textContent('#math-info'));
+    await pg.click('#set-mode [data-opt="keypad"]');
+    await pg.reload(); await pg.waitForSelector('#math-settings'); await pg.click('#tab-game').catch(() => {});
+    await pg.waitForSelector('#set-mode .mopt.on[data-opt="keypad"]');
+    ok(await pg.locator('#set-time .mopt.on').getAttribute('data-opt') === '3', 'the settings are remembered (also after a reload)');
+    await pg.click('#game-start'); await pg.waitForSelector('#math-q');
+    ok((await pg.textContent('#math-time')) === '3:00' || (await pg.textContent('#math-time')) === '2:59', 'the game runs for the chosen 3 minutes (' + (await pg.textContent('#math-time')) + ')');
+    let typedN = 0, chosenN = 0, wrongShown = false, wrongDeliberately = 0;
+    for (let i = 0; i < 20; i++) {
+      await pg.waitForSelector('#math-q'); const prog = await pg.textContent('#game-progress');
+      const ans = solve(await pg.textContent('#math-q'));
+      const keypad = await pg.locator('#math-keys').count() === 1;
+      const wrong = i < 3;   // the first three are answered wrong on purpose
+      if (keypad) {
+        typedN++;
+        for (const ch of (wrong ? String(+ans + 1) : ans)) await pg.click(`.mkey[data-k="${ch}"]`);
+        ok(i > 0 || (await pg.textContent('#math-input')) !== '?', i === 0 ? 'the typed digits show in the answer box' : 'x');
+        await pg.click('.mkey[data-k="✓"]');
+        if (wrong) { wrongDeliberately++; await pg.waitForSelector('#math-hint b'); wrongShown = (await pg.textContent('#math-hint')).includes(ans); }
+      } else {
+        chosenN++;
+        if (wrong) { wrongDeliberately++; await pg.click(`.mchoice:not([data-v="${ans}"]) >> nth=0`); } else await pg.click(`.mchoice[data-v="${ans}"]`);
+      }
+      if (i < 19) await pg.waitForFunction((p) => document.querySelector('#game-progress')?.textContent !== p, prog, { timeout: 6000 });
+    }
+    await pg.waitForSelector('#game-end', { timeout: 8000 });
+    ok(typedN > 0 && chosenN > 0, 'keypad mode: typed answers for add10 (' + typedN + ') and chosen ones for compare / seq (' + chosenN + '): an answer that cannot be typed is still chosen');
+    ok(wrongShown, 'a wrong typed answer shows the right answer ("正确答案：")');
+    ok(+(await pg.textContent('#game-final')) === 20 - wrongDeliberately, 'score: ' + (20 - wrongDeliberately) + ' right, ' + wrongDeliberately + ' wrong on purpose (' + (await pg.textContent('#game-final')) + ')');
+    await pg.click('#game-done'); await pg.waitForSelector('.tabs');
+    // the errors book
+    await pg.click('[data-tab=learned]'); await pg.waitForSelector('#mistakes-title');
+    const nMis = await pg.locator('.mmis').count();
+    ok((await pg.textContent('#mistakes-title')) === `错题本（${nMis}）` && nMis === 3, 'the errors book holds the 3 wrong questions: ' + (await pg.textContent('#mistakes-title')));
+    ok((await pg.locator('.mmis b').allTextContents()).every((x) => x.length > 0), 'each shows the question and its right answer');
+    await pg.click('#redo-mistakes'); await pg.waitForSelector('#math-q');
+    ok((await pg.textContent('#game-progress')) === '1 / 3', 'redo: a game of exactly those 3 questions');
+    for (let i = 0; i < 3; i++) {
+      const prog = await pg.textContent('#game-progress'), ans = solve(await pg.textContent('#math-q'));
+      if (await pg.locator('#math-keys').count()) { for (const ch of ans) await pg.click(`.mkey[data-k="${ch}"]`); await pg.click('.mkey[data-k="✓"]'); }
+      else await pg.click(`.mchoice[data-v="${ans}"]`);
+      if (i < 2) await pg.waitForFunction((p) => document.querySelector('#game-progress')?.textContent !== p, prog, { timeout: 6000 });
+    }
+    await pg.waitForSelector('#game-end', { timeout: 8000 }); await pg.click('#game-done'); await pg.waitForSelector('.tabs');
+    await pg.click('[data-tab=learned]'); await pg.waitForSelector('#mistakes-title');
+    ok((await pg.textContent('#mistakes-title')) === '错题本（0）' && await pg.locator('#redo-mistakes').count() === 0, 'answered right again: the questions leave the errors book (错题本（0）)');
+    ok(lg.external.length === 0, 'OFFLINE: keypad, settings and errors book made no outside request: ' + lg.external.join(', '));
+    // the next topics: a new round starts with the topics he answered worst
+    const picked = await pg.evaluate(async () => {
+      const MM = await import('/src/mathmodel.ts');
+      const data = { topics: [], grades: { '1': ['a', 'b', 'c', 'd', 'e'] } };
+      const kid = { weeks: [{ start: '2026-11-01', chars: ['a', 'b', 'c'] }] };
+      const acc = { a: 90, b: 20, c: 60 };
+      return [MM.pickTopics(data, kid, 1, () => true, 3, (id) => acc[id] ?? null), MM.pickTopics(data, { weeks: [{ start: 'x', chars: ['a', 'b', 'c', 'd', 'e'] }] }, 1, () => true, 3, (id) => ({ a: 90, b: 20, c: 60, d: 10, e: 100 })[id] ?? null), MM.pickTopics(data, { weeks: [] }, 1, () => true, 3)];
+    });
+    ok(JSON.stringify(picked[0]) === '["d","e","b"]', 'topics not had yet come first, then the worst answered one (' + picked[0] + ')');
+    ok(JSON.stringify(picked[1]) === '["d","b","c"]', 'a whole new round: the worst answered topics first (' + picked[1] + ')');
+    ok(JSON.stringify(picked[2]) === '["a","b","c"]', 'a new child: the list in order (' + picked[2] + ')');
+    await t.browser.close();
+  }
 
   // ---- the total time runs out ----
   {

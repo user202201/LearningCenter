@@ -617,3 +617,25 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .mrows { width: min(100%, 420px); margin: 10px auto; display: flex; flex-direction: column; gap: 6px; }
 .mrow { display: flex; justify-content: space-between; gap: 12px; padding: 8px 14px; border-radius: 14px; background: #fff; border: 2px solid var(--kid-line); text-align: left; }
 @media (min-aspect-ratio: 5/4) and (max-height: 560px) { .mbody { gap: 8px; } .mq { min-height: 70px; padding: 10px; } .mchoice { min-height: 56px; } }
+
+/* the keypad of the math game */
+.mchoices.keypad { display: flex; flex-direction: column; gap: 8px; }
+.minput { min-height: 62px; display: grid; place-items: center; font-size: clamp(28px, 8vw, 40px); font-weight: 800; border-radius: 20px; background: #fff; border: 3px solid var(--kid-line); color: #2d2230; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+.minput.right { background: #d3f9d8; border-color: #2f9e44; color: #1b7a32; } .minput.wrong { background: #ffe3e3; border-color: #e03131; color: #b02525; }
+.mhint { min-height: 1.3em; text-align: center; font-weight: 700; color: var(--muted); }
+.mkeys { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.mkey { min-height: 52px; padding: 4px; font-size: 24px; font-weight: 800; border-radius: 16px; border: 2px solid var(--kid-line); box-shadow: 0 3px 0 var(--kid-line); }
+.mkey.ok { color: #fff; border-color: transparent; background: linear-gradient(180deg, #51cf66, #2f9e44); box-shadow: 0 3px 0 #237a35; }
+.mkey.del { color: var(--danger); }
+.mbody { overflow-y: auto; }
+/* math settings and the errors book */
+.msettings { display: flex; flex-direction: column; gap: 10px; margin: 14px 0 6px; padding: 12px 14px; border-radius: 20px; background: #fff; border: 2px solid var(--kid-line); }
+.mset-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.mset-row > b { flex: none; min-width: 5em; font-size: 14px; color: var(--muted); }
+.mset-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.mopt { min-height: 38px; padding: 4px 12px; font-size: 14px; border-radius: 14px; }
+.mopt.on { color: #fff; border-color: transparent; background: linear-gradient(180deg, var(--accent-2), var(--accent)); box-shadow: 0 3px 0 var(--accent-dark); }
+.mmistakes { margin: 6px 0 16px; padding: 12px 14px; border-radius: 20px; background: #fff; border: 2px solid #ffc9c9; }
+.mmistakes h2 { font-size: 18px; margin-bottom: 8px; }
+.mmis { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-top: 1px dashed #ffc9c9; font-size: 15px; overflow-wrap: anywhere; }
+.mmis b { flex: none; color: #2f9e44; }

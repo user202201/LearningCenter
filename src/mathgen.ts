@@ -264,6 +264,92 @@ export const GEN: Record<string, Gen> = {
     return { q: `${k} = ?`, a, chk: `Math.abs(Math.${f}(${rad})-${vals[a]})<1e-9`, wrong: shuffle(pool).slice(0, 3) };
   } },
   prob: { sec: 20, make: () => { const r = ri(1, 7), b = ri(1, 8 - r || 1), n = r + b; return { q: `袋中有 ${r} 个红球、${b} 个蓝球，任取一个，是红球的概率是？`, a: frac(r, n), chk: `${r}*${n / gcd(r, n)}===${r / gcd(r, n)}*${n}&&${r}<${n}`, wrong: fracWrong(r / gcd(r, n), n / gcd(r, n)) }; } },
+  // ---- word problems (Chinese sentences; the numbers are made on the spot) ----
+  wp1: { sec: 14, make: () => {
+    if (Math.random() < 0.5) { const a = ri(3, 12), b = ri(2, 20 - a); return { q: `小明有 ${a} 个苹果，又买了 ${b} 个，一共有几个？`, a: String(a + b), chk: `${a}+${b}===${a + b}` }; }
+    const a = ri(5, 18), b = ri(1, a - 1); return { q: `树上有 ${a} 只鸟，飞走了 ${b} 只，还剩几只？`, a: String(a - b), chk: `${a}-${b}===${a - b}` };
+  } },
+  wp2: { sec: 16, make: () => {
+    if (Math.random() < 0.5) { const a = ri(2, 9), b = ri(2, 9); return { q: `每盒有 ${a} 支铅笔，${b} 盒一共有多少支？`, a: String(a * b), chk: `${a}*${b}===${a * b}` }; }
+    const a = ri(2, 9), b = ri(2, 9); return { q: `${a * b} 个苹果平均分给 ${a} 个小朋友，每人分几个？`, a: String(b), chk: `${a * b}/${a}===${b}` };
+  } },
+  wp3: { sec: 22, make: () => {
+    const k = ri(0, 2);
+    if (k === 0) { const v = ri(3, 12) * 10, t = ri(2, 9); return { q: `一辆车每小时行 ${v} 千米，${t} 小时行多少千米？`, a: String(v * t), chk: `${v}*${t}===${v * t}` }; }
+    if (k === 1) { const l = ri(5, 30), w = ri(3, l); return { q: `一个长方形花坛，长 ${l} 米，宽 ${w} 米，绕它走一圈是多少米？`, a: String(2 * (l + w)), chk: `2*(${l}+${w})===${2 * (l + w)}`, wrong: [String(l * w), String(l + w), String(2 * l + w)] }; }
+    const a = ri(30, 90), b = ri(5, a - 5), c = ri(5, 40); return { q: `商店有 ${a} 个球，卖出 ${b} 个，又进货 ${c} 个，现在有多少个？`, a: String(a - b + c), chk: `${a}-${b}+${c}===${a - b + c}` };
+  } },
+  wp4: { sec: 26, make: () => {
+    const k = ri(0, 2);
+    if (k === 0) { const d = ri(2, 9), x = ri(d + 3, d + 30); return { q: `小华今年 ${x} 岁，比弟弟大 ${d} 岁，弟弟几岁？`, a: String(x - d), chk: `${x}-${d}===${x - d}` }; }
+    if (k === 1) { const n = ri(2, 9), r = ri(3, 30); return { q: `${n * r} 元买 ${n} 本相同的练习本，每本多少元？`, a: String(r), chk: `${n * r}/${n}===${r}` }; }
+    const d = ri(2, 9), n = ri(3, 20); return { q: `一袋大米 ${d * n} 千克，每天吃 ${d} 千克，能吃几天？`, a: String(n), chk: `${d * n}/${d}===${n}` };
+  } },
+  wp5: { sec: 34, make: () => {
+    const k = ri(0, 2);
+    if (k === 0) { const p = ri(2, 20) * 10, z = ri(5, 9); return { q: `一件衣服原价 ${p} 元，打 ${z} 折，现价多少元？`, a: String((p * z) / 10), chk: `${p}*${z}/10===${(p * z) / 10}`, wrong: [String(p - z), String((p * (10 - z)) / 10), String(p * z)] }; }
+    if (k === 1) { const n = ri(1, 4) * 20, q = ri(1, 15) * 5, v = (n * q) / 100; return { q: `一个班有 ${n} 人，其中女生占 ${q}%，女生有多少人？`, a: String(v), chk: `${n}*${q}/100===${v}` }; }
+    const a = ri(1, 5), b = ri(a + 1, 7), g = ri(2, 9); return { q: `糖和水的质量比是 ${a} : ${b}，糖有 ${a * g} 克，水有多少克？`, a: String(b * g), chk: `${a * g}*${b}===${b * g}*${a}` };
+  } },
+  wp6: { sec: 40, make: () => {
+    const k = ri(0, 2);
+    if (k === 0) { const m = ri(2, 9), x = ri(2, 15), b = ri(1, 20); return { q: `一个数的 ${m} 倍加 ${b} 等于 ${m * x + b}，这个数是多少？`, a: String(x), chk: `${m}*${x}+${b}===${m * x + b}` }; }
+    if (k === 1) { const b = ri(2, 30), d = ri(1, 12) * 2; return { q: `甲乙两数的和是 ${2 * b + d}，甲比乙大 ${d}，甲是多少？`, a: String(b + d), chk: `${b + d}+${b}===${2 * b + d}&&${b + d}-${b}===${d}` }; }
+    const a = ri(2, 9), c = ri(2, 9), n = ri(2, 6), m = ri(2, 6); return { q: `买 ${n} 支笔和 ${m} 本本子共 ${n * a + m * c} 元，笔每支 ${a} 元，本子每本多少元？`, a: String(c), chk: `${n}*${a}+${m}*${c}===${n * a + m * c}` };
+  } },
+  wp7: { sec: 44, make: () => {
+    if (Math.random() < 0.5) {
+      const [a0, b0, c0] = pick([[3, 4, 5], [5, 12, 13], [8, 15, 17]]); const k = ri(1, 3);
+      return { q: `一架 ${c0 * k} 米长的梯子靠在墙上，底端离墙 ${a0 * k} 米，梯子顶端离地面多少米？`, a: String(b0 * k), chk: `${a0 * k}**2+${b0 * k}**2===${c0 * k}**2` };
+    }
+    const n = ri(3, 20); return { q: `两个连续正整数的积是 ${n * (n + 1)}，较小的数是多少？`, a: String(n), chk: `${n}*${n + 1}===${n * (n + 1)}`, wrong: [String(n + 1), String(n - 1), String(n * 2)] };
+  } },
+  // ---- more of junior high ----
+  absval: { sec: 14, make: () => {
+    const a = ri(1, 15), b = ri(1, 15);
+    if (Math.random() < 0.5) return num(`Math.abs(-${a})+Math.abs(${b})`, a + b, { q: `|−${a}| + |${b}| = ?`, neg: true });
+    return num(`-(-${a})`, a, { q: `−(−${a}) = ?`, neg: true, wrong: [M(-a), M(a + 1), M(-a - 1)] });
+  } },
+  power: { sec: 18, make: () => {
+    const a = ri(2, 6), n = pick([2, 3, 4]), sup = n === 2 ? "²" : n === 3 ? "³" : "⁴", neg = Math.random() < 0.5 && a <= 4;
+    const v = (neg ? -a : a) ** n;
+    return { q: `${neg ? `(−${a})` : a}${sup} = ?`, a: M(v), chk: `${neg ? `(-${a})` : a}**${n}===${v}`, neg: true, wrong: [M(a * n), M(-v), M(v + a), M((neg ? -a : a) * a)] };
+  } },
+  ineq: { sec: 30, make: () => {
+    const a = ri(2, 6), x = ri(-4, 8), b = pick([-1, 1]) * ri(1, 9), c = a * x + b;
+    return { q: `解不等式：${a}x ${sign(b)} ${Math.abs(b)} > ${M(c)}`, a: `x > ${M(x)}`, chk: `${a}*${x}+${b}===${c}`, wrong: [`x < ${M(x)}`, `x > ${M(x + 1)}`, `x < ${M(x - 1)}`, `x > ${M(-x)}`].filter((v) => v !== `x > ${M(x)}`) };
+  } },
+  sqrtsimp: { sec: 26, make: () => {
+    const k = ri(2, 6), m = pick([2, 3, 5, 6, 7]);
+    return { q: `√${k * k * m} = ?`, a: `${k}√${m}`, chk: `Math.abs(Math.sqrt(${k * k * m})-${k}*Math.sqrt(${m}))<1e-9`, wrong: [`${k * k}√${m}`, `${m}√${k}`, `${k}√${m + 1}`, `${k + 1}√${m}`] };
+  } },
+  sqform: { sec: 30, make: () => {
+    const a = ri(2, 9);
+    if (Math.random() < 0.5) return { q: `(x + ${a})(x − ${a}) = ?`, a: poly(0, -a * a), chk: `(3+${a})*(3-${a})===9-${a * a}`, wrong: [poly(0, a * a), poly(-2 * a, -a * a), poly(2 * a, -a * a), poly(0, -a)] };
+    const s = pick([-1, 1]);
+    return { q: `(x ${sign(s)} ${a})² = ?`, a: poly(2 * s * a, a * a), chk: `(3+(${s * a}))**2===9+${2 * s * a}*3+${a * a}`, wrong: [poly(0, a * a), poly(2 * s * a, -a * a), poly(s * a, a * a), poly(-2 * s * a, a * a)] };
+  } },
+  factor: { sec: 40, make: () => {
+    for (;;) {
+      const p = pick([-1, 1]) * ri(1, 7), q = pick([-1, 1]) * ri(1, 7);
+      if (p === q) continue;
+      const f = (u: number, v: number) => { const [x, y] = [u, v].sort((m, n) => m - n); return `(x ${sign(x)} ${Math.abs(x)})(x ${sign(y)} ${Math.abs(y)})`; };
+      return { q: `因式分解：${poly(p + q, p * q)}`, a: f(p, q), chk: `(${p})*(${q})===${p * q}&&(${p})+(${q})===${p + q}`, wrong: [f(-p, -q), f(p, -q), f(-p, q), f(p + 1, q - 1)].filter((v) => v !== f(p, q)) };
+    }
+  } },
+  invprop: { sec: 24, make: () => {
+    const x0 = pick([-1, 1]) * ri(1, 6), y0 = pick([-1, 1]) * ri(1, 6), k = x0 * y0;
+    return { q: `y = ${M(k)}/x，x = ${M(x0)}，y = ?`, a: M(y0), chk: `${k}/(${x0})===${y0}`, neg: true, wrong: [M(-y0), M(k * x0), M(k + x0), M(y0 + 1)] };
+  } },
+  quadvertex: { sec: 30, make: () => {
+    const h = pick([-1, 1]) * ri(1, 6), k = pick([-1, 1]) * ri(1, 8);
+    const f = (a: number, b: number) => `(${M(a)}, ${M(b)})`;
+    return { q: `二次函数 y = (x ${sign(-h)} ${Math.abs(h)})² ${sign(k)} ${Math.abs(k)} 的顶点坐标是？`, a: f(h, k), chk: `((${h})-(${h}))**2+(${k})===${k}&&((${h})+1-(${h}))**2+(${k})>${k}`, wrong: [f(-h, k), f(h, -k), f(k, h), f(-h, -k)] };
+  } },
+  arc: { sec: 30, make: () => {
+    const n = pick([30, 45, 60, 90, 120, 180]), r = (180 / gcd(n, 180)) * ri(1, 3), v = (n * r) / 180;
+    return { q: `半径 ${r}，圆心角 ${n}°，弧长 = ?`, a: `${v}π`, chk: `${n}*${r}/180===${v}`, wrong: [`${2 * v}π`, `${v + 1}π`, `${r}π`, `${v * 2 + 1}π`].filter((x) => x !== `${v}π`) };
+  } },
 };
 
 export const topicIds = (): string[] => Object.keys(GEN);

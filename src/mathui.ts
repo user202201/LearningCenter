@@ -6,6 +6,11 @@
 import { h, confirmDlg } from "./ui";
 import type { Q } from "./mathgen";
 import { translateNow } from "./i18n";
+import type { AnswerMode } from "./mathsettings";
+
+export interface Answer { topic: string; right: boolean; q: Q }
+/** answers that can be typed on the keypad: whole numbers, decimals, negatives, percents and plain fractions (the rest is always answered by choosing) */
+export const typable = (a: string): boolean => /^−?\d+(\.\d+)?%?$|^−?\d+\/\d+$/.test(a);
 
 export interface MathGameOpts {
   color: string;
@@ -13,7 +18,9 @@ export interface MathGameOpts {
   /** the total time in seconds */
   seconds: number;
   topicName: (id: string) => string;
-  onSave: (answers: { topic: string; right: boolean }[], score: number, total: number, usedSeconds: number, finished: boolean) => Promise<void>;
+  /** how the child answers: by choosing (default) or by typing on a keypad (questions whose answer cannot be typed are still chosen) */
+  mode?: AnswerMode;
+  onSave: (answers: Answer[], score: number, total: number, usedSeconds: number, finished: boolean) => Promise<void>;
   onAgain: () => void;
   onClose: () => void;
 }
@@ -45,7 +52,7 @@ export function fitQuestion(el: HTMLElement, box: HTMLElement): void {
 
 export function openMathGame(o: MathGameOpts): void {
   const total = o.questions.length;
-  const answers: { topic: string; right: boolean }[] = [];
+  const answers: Answer[] = [];
   let idx = 0, score = 0;
   let phase: "ask" | "feedback" | "end" = "ask";
   let timer: ReturnType<typeof setInterval> | undefined;
@@ -61,6 +68,8 @@ export function openMathGame(o: MathGameOpts): void {
   const qBox = h("div", { class: "mq", id: "math-card" }, qText);
   const topic = h("div", { class: "mtopic", id: "math-topic" });
   const grid = h("div", { class: "mchoices", id: "math-choices" });
+  let typed = "";
+  let typing = false;   // the question on screen is answered on the keypad
   const root = h("div", { class: "game mathgame", id: "game", role: "dialog", "aria-modal": "true", style: `--kid:${o.color}` },
     h("div", { class: "gtop" }, quit, h("div", { class: "gmid" }, progress), scoreEl),
     h("div", { class: "mtime" }, h("div", { class: "mbar" }, bar), timeText),
@@ -94,23 +103,48 @@ export function openMathGame(o: MathGameOpts): void {
     topic.textContent = o.topicName(q.topic);
     qText.textContent = q.q;
     fitQuestion(qText, qBox);
-    grid.replaceChildren(...q.choices.map((c) => h("button", { class: "mchoice user", "data-v": c, onclick: () => answer(c) }, c)));
+    typing = o.mode === "keypad" && typable(q.a);
+    typed = "";
+    grid.classList.toggle("keypad", typing);
+    if (typing) {
+      const input = h("div", { class: "minput user", id: "math-input" }, "?");
+      const hint = h("div", { class: "mhint", id: "math-hint" });
+      const keys = ["7", "8", "9", "⌫", "4", "5", "6", "−", "1", "2", "3", ".", "0", "/", "%", "✓"].map((k) =>
+        h("button", { class: "mkey" + (k === "✓" ? " ok" : k === "⌫" ? " del" : ""), "data-k": k, title: k === "✓" ? "确定" : k === "⌫" ? "删除" : k, "aria-label": k === "✓" ? "确定" : k === "⌫" ? "删除" : k, onclick: () => press(k) }, k));
+      grid.replaceChildren(input, hint, h("div", { class: "mkeys", id: "math-keys" }, ...keys));
+    } else {
+      grid.replaceChildren(...q.choices.map((c) => h("button", { class: "mchoice user", "data-v": c, onclick: () => answer(c) }, c)));
+    }
     root.classList.remove("ok", "bad");
+  }
+  /** a key of the keypad */
+  function press(k: string) {
+    if (phase !== "ask" || !typing) return;
+    if (k === "✓") { if (typed) answer(typed); return; }
+    typed = k === "⌫" ? typed.slice(0, -1) : typed.length < 9 ? typed + k : typed;
+    const el = grid.querySelector<HTMLElement>("#math-input");
+    if (el) el.textContent = typed || "?";
   }
   function answer(c: string) {
     if (phase !== "ask") return;
     phase = "feedback";
     const q = o.questions[idx];
-    const right = c === q.a;
-    answers.push({ topic: q.topic, right });
+    const right = c.replace(/-/g, "−").replace(/\s+/g, "") === q.a;
+    answers.push({ topic: q.topic, right, q });
     if (right) score++;
     scoreEl.textContent = `★ ${score}`;
     root.classList.add(right ? "ok" : "bad");
-    grid.querySelectorAll<HTMLElement>(".mchoice").forEach((b) => {
-      b.setAttribute("disabled", "");
-      if (b.dataset.v === q.a) b.classList.add("right");
-      else if (b.dataset.v === c) b.classList.add("wrong");
-    });
+    if (typing) {
+      grid.querySelectorAll<HTMLButtonElement>(".mkey").forEach((b) => (b.disabled = true));
+      grid.querySelector("#math-input")?.classList.add(right ? "right" : "wrong");
+      if (!right) { const hint = grid.querySelector<HTMLElement>("#math-hint"); if (hint) { hint.textContent = ""; hint.append("正确答案：", h("b", { class: "user" }, q.a)); } }
+    } else {
+      grid.querySelectorAll<HTMLElement>(".mchoice").forEach((b) => {
+        b.setAttribute("disabled", "");
+        if (b.dataset.v === q.a) b.classList.add("right");
+        else if (b.dataset.v === c) b.classList.add("wrong");
+      });
+    }
     root.dataset.last = right ? "right" : "wrong";
     next = setTimeout(() => { idx++; ask(); }, right ? 450 : 1400);
   }
@@ -157,7 +191,12 @@ export function openMathGame(o: MathGameOpts): void {
   function onKey(e: KeyboardEvent) {
     if (document.querySelector("dialog[open]")) return;
     if (e.key === "Escape") void leave();
-    else if (phase === "ask" && /^[1-4]$/.test(e.key)) grid.querySelectorAll<HTMLElement>(".mchoice")[Number(e.key) - 1]?.click();
+    else if (phase === "ask" && typing) {
+      if (e.key === "Enter") press("✓");
+      else if (e.key === "Backspace") press("⌫");
+      else if (/^[0-9./%]$/.test(e.key)) press(e.key);
+      else if (e.key === "-") press("−");
+    } else if (phase === "ask" && /^[1-4]$/.test(e.key)) grid.querySelectorAll<HTMLElement>(".mchoice")[Number(e.key) - 1]?.click();
   }
   const onResize = () => { if (phase !== "end") fitQuestion(qText, qBox); };
   quit.addEventListener("click", () => void leave());

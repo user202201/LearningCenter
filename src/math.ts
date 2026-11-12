@@ -12,6 +12,7 @@ import * as MM from "./mathmodel";
 import * as MG from "./mathgen";
 import { pickKidGrade } from "./gradeui";
 import { openMathGame } from "./mathui";
+import * as MS from "./mathsettings";
 import { mascot } from "./art";
 import { subjectArt } from "./hub";
 import type { Ctx } from "./english";
@@ -79,7 +80,8 @@ async function ensureWeek(k: M.Kid, start: string): Promise<void> {
   const done = toast("正在生成这一周的知识点…", 0, true);
   try {
     let added = 0;
-    const out = await api.update<M.KidData>(MM.mathPath(k.id), M.EMPTY_KID, (cur) => { const r = W.addWeek(cur, start, MM.pickTopics(data, cur, grade, known)); added = r.added; return r.data; }, `math ${k.id} ${start}`);
+    const review = await reviewOf(k.id).catch(() => MM.EMPTY_MATH_REVIEW);   // (a new round of the grade's topics starts with the ones he answered worst)
+    const out = await api.update<M.KidData>(MM.mathPath(k.id), M.EMPTY_KID, (cur) => { const r = W.addWeek(cur, start, MM.pickTopics(data, cur, grade, known, MM.WEEKLY_TOPICS, (id) => MM.accuracy(review.topics[id]))); added = r.added; return r.data; }, `math ${k.id} ${start}`);
     cache.set(k.id, out);
     done();
     if (added) toast(`已生成这一周的 ${added} 个知识点`);
@@ -177,14 +179,27 @@ async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, names:
   try { review = await reviewOf(k.id); } catch (e) { return void body.replaceChildren(h("p", { class: "err" }, errText(e))); }
   if (my !== X.epoch()) return;
   const all = distinctTopics(kid);
-  body.replaceChildren(h("div", { class: "narrow" },
+  const mistakes = review.mistakes ?? [];
+  const book = h("div", { class: "mmistakes", id: "mistakes" },
+    h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "mistakes-title" }, `错题本（${mistakes.length}）`),
+      mistakes.length ? h("button", { class: "sheet-btn", id: "redo-mistakes", onclick: () => playMistakes(k, mistakes, names) }, "重做错题") : null),
+    mistakes.length
+      ? h("div", {}, ...mistakes.slice(0, 20).map((m) => h("div", { class: "mmis", "data-topic": m.topic }, h("span", { class: "user" }, m.q), h("b", { class: "user" }, m.a))))
+      : h("p", { class: "muted small" }, "还没有错题。"));
+  body.replaceChildren(h("div", { class: "narrow" }, book,
     all.length ? h("div", { class: "mtlist" }, ...X.stagger(all.map((id) => topicCard(id, names, review)))) : h("p", { class: "empty" }, "还没有入库的知识点，先去“本周”看看吧。")));
+}
+
+/** the errors book: the wrong questions again (the choices are shuffled anew); a right answer takes a question out of the book */
+function playMistakes(k: M.Kid, mistakes: MG.Q[], names: Map<string, MM.Topic>) {
+  const questions = mistakes.slice(0, 20).map((q) => ({ ...q, choices: q.choices.length === 3 ? q.choices : [...q.choices].sort(() => Math.random() - 0.5) }));
+  playQuestions(k, questions, questions.reduce((s, q) => s + MG.secOf(q.topic), 0), names, () => void reviewOf(k.id).then((r) => playMistakes(k, r.mistakes ?? [], names)));
 }
 
 // ---------- games ----------
 function playQuestions(k: M.Kid, questions: MG.Q[], seconds: number, names: Map<string, MM.Topic>, again: () => void) {
   openMathGame({
-    color: k.color, questions, seconds,
+    color: k.color, questions, seconds, mode: MS.loadMathSettings().mode,
     topicName: (id) => names.get(id)?.name ?? id,
     onSave: async (answers, score, total, used, finished) => {
       const done = toast("正在保存…", 0, true);
@@ -212,7 +227,8 @@ function play(k: M.Kid, kid: M.KidData, names: Map<string, MM.Topic>) {
   if (!week) return X.route();
   const prev = M.weekOf(kid, M.addDays(week, -7))?.chars ?? [];
   const g = MM.buildGame(M.weekOf(kid, week)?.chars ?? [], prev);
-  playQuestions(k, g.questions, g.seconds, names, () => void api.readJson<M.KidData>(MM.mathPath(k.id)).then((d) => play(k, d ?? kid, names)));
+  const minutes = MS.loadMathSettings().minutes;
+  playQuestions(k, g.questions, minutes ? minutes * 60 : g.seconds, names, () => void api.readJson<M.KidData>(MM.mathPath(k.id)).then((d) => play(k, d ?? kid, names)));
 }
 /** the week to play: the newest week that has started and has topics */
 const latestWeek = (kid: M.KidData): string | null => {
@@ -226,9 +242,19 @@ async function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, names: M
   const thisWeek = week ? M.weekOf(kid, week)?.chars ?? [] : [];
   const prev = week ? M.weekOf(kid, M.addDays(week, -7))?.chars ?? [] : [];
   const topics = MM.gameTopics(thisWeek, prev);
-  const minutes = Math.max(1, Math.round(topics.reduce((s, t) => s + MG.secOf(t), 0) / 60));
+  const set = MS.loadMathSettings();
+  const auto = Math.max(1, Math.round(topics.reduce((s, t) => s + MG.secOf(t), 0) / 60));
+  const minutes = set.minutes || auto;
+  const change = (patch: Partial<MS.MathSettings>) => { MS.saveMathSettings({ ...set, ...patch }); void renderLobby(body, k, kid, names); };
+  const opt = (on: boolean, label: string, id: string, onclick: () => void) => h("button", { class: "mopt" + (on ? " on" : ""), "data-opt": id, onclick }, label);
+  const settings = h("div", { class: "msettings", id: "math-settings" },
+    h("div", { class: "mset-row" }, h("b", {}, "总时间"), h("div", { class: "mset-opts", id: "set-time" },
+      ...MS.MINUTES.map((m) => opt(set.minutes === m, m ? `${m} 分钟` : "自动", String(m), () => change({ minutes: m }))))),
+    h("div", { class: "mset-row" }, h("b", {}, "答题方式"), h("div", { class: "mset-opts", id: "set-mode" },
+      opt(set.mode === "choice", "四选一", "choice", () => change({ mode: "choice" })), opt(set.mode === "keypad", "键盘输入", "keypad", () => change({ mode: "keypad" })))));
   body.replaceChildren(h("div", { class: "narrow lobby" },
     h("div", { class: "lobby-hero" }, h("span", { class: "mascot big" }, mascot()), h("h2", {}, "准备好了吗？")),
     topics.length ? h("p", { class: "muted center", id: "math-info" }, `共 ${topics.length} 题，限时约 ${minutes} 分钟`) : h("p", { class: "empty" }, "还没有知识点，先到“本周”看看吧。"),
+    settings,
     h("div", { class: "lobby-go" }, h("button", { class: "primary wide", id: "game-start", disabled: topics.length === 0, onclick: () => play(k, kid, names) }, "开始游戏"))));
 }

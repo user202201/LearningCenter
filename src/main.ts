@@ -1488,6 +1488,10 @@ document.addEventListener("touchend", (e) => {
 const shell = { show, showLoading, showError, loadShared, kids: () => kidsFile, avatarEl, back: backBtn, gear: gearBtn, stagger, epoch: () => epoch, gameSeconds: () => settings.gameSeconds, route: () => void route(), addKid  };
 E.initEnglish(shell);
 MA.initMath(shell);
+// the web version keeps itself in the browser, so it opens without network (sw.js is made by the build; the packaged app and the dev server have none)
+if (!__MOBILE__ && import.meta.env.PROD && "serviceWorker" in navigator) {
+  window.addEventListener("load", () => { navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => { /* no service worker here: the app still works online */ }); });
+}
 setLang(settings.lang);
 window.addEventListener("hashchange", () => void route());
 void route();
