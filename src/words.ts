@@ -8,6 +8,10 @@ import type { KidData } from "./model";
 export interface Word { w: string; zh: string; ph: string; pos: string; g: number; t?: string }
 /** words a week: the week page offers exactly this many new words */
 export const WEEKLY_WORDS = 20;
+/** the game asks all of this week's words plus this many random words of the week before (none if there was no week before: then it is "the first week") */
+export const REVIEW_WORDS = 10;
+/** the Recorded tab shows this many random words out of all the recorded ones */
+export const RECORDED_SAMPLE = 30;
 
 let cache: Word[] | null = null;
 /** the whole library (read once from the app's own files: nothing is fetched from outside) */

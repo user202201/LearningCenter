@@ -17,8 +17,7 @@ import { readTable, readWorkbook, type SheetData } from "./xlsx";
 import * as I from "./importer";
 import { subjectById, hubGrid, hubHero, soonPage, reveal } from "./hub";
 import * as E from "./english";
-import * as P from "./profile";
-import { askGrade } from "./gradeui";
+import { pickKidGrade } from "./gradeui";
 
 const app = document.getElementById("app")!;
 
@@ -1359,6 +1358,7 @@ async function renderSettings() {
       h("div", { class: "kidact" },
         h("button", { class: "mini rename", onclick: () => void renameKid(k) }, "修改名字"),
         h("button", { class: "mini change-avatar", onclick: () => void changeAvatar(k, () => void renderSettings()) }, "头像和颜色"),
+        h("button", { class: "mini kid-grade", onclick: () => void pickKidGrade(k).then((g) => g !== null && (toast("年级已记住"), void renderSettings())) }, "年级"),
         h("button", { class: "mini danger delete", onclick: () => void deleteKid(k) }, "删除"))));
   const kids = h("div", { class: "card" }, h("h3", {}, "孩子"), ...rows,
     h("button", { class: "wide", id: "add-kid", onclick: () => void addKid(() => void renderSettings()) }, "＋ 添加孩子"));
@@ -1418,20 +1418,9 @@ async function showQr() {
 }
 
 // ---------- the subject picker ----------
-/** asks for the grade (the first time the picker opens, and from the grade button): remembered on this device for every subject, goes up by itself every September */
-async function pickGrade() {
-  const g = await askGrade("你读几年级？", P.defaultGrade(), "只需要选一次：以后每年 9 月会自动升一级，所有学科都用同一个年级。想改随时点“年级”。");
-  if (g === null) return;   // cancelled: nothing changes (asked again the next time the picker opens, until a grade is chosen)
-  P.setDefaultGrade(g);
-  toast("年级已记住");
-  renderHubScreen();
-}
 function renderHubScreen() {
   const gear = gearBtn("#/");
-  const dg = P.defaultGrade();
-  const chip = h("button", { class: "grade-chip", id: "hub-grade", title: "修改年级", onclick: () => void pickGrade() }, "年级：", dg ? P.gradeName(dg) : "未选择");
-  if (!P.hasGrade()) queueMicrotask(() => void pickGrade());
-  show(h("div", { class: "page hub-page" }, hubHero(gear, chip),
+  show(h("div", { class: "page hub-page" }, hubHero(gear),
     h("main", { class: "scroll" }, h("div", { class: "hub-wrap" }, hubGrid((route) => (location.hash = route))))));
 }
 

@@ -358,6 +358,12 @@ export const EN: Record<string, string> = {
   "初一": "Junior 1",
   "初二": "Junior 2",
   "初三": "Junior 3",
+  "年级": "Grade",
+  "未选年级": "grade not chosen",
+  "只需要选一次，之后每年 9 月会自动升一级。以后想改，在设置的“孩子”里改。": "You only choose once; it then goes up by itself every September. To change it later: Settings → Children.",
+  "随机 {0} 个": "A random {0}",
+  "共 {0} 个": "{0} in all",
+  "换一批": "Shuffle",
 };
 export const FR: Record<string, string> = {
   "游戏": "Jeu",
@@ -718,4 +724,10 @@ export const FR: Record<string, string> = {
   "初一": "Collège 1",
   "初二": "Collège 2",
   "初三": "Collège 3",
+  "年级": "Niveau",
+  "未选年级": "niveau non choisi",
+  "只需要选一次，之后每年 9 月会自动升一级。以后想改，在设置的“孩子”里改。": "On ne choisit qu'une fois ; le niveau monte ensuite tout seul chaque septembre. Pour le changer : Réglages → Enfants.",
+  "随机 {0} 个": "{0} au hasard",
+  "共 {0} 个": "{0} au total",
+  "换一批": "Mélanger",
 };

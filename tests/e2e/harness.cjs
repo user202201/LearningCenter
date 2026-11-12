@@ -55,8 +55,6 @@ exports.start = async function (store = new Map(), opts = {}) {
     }
     return json({}, 404);
   });
-  // the grade is asked once, the first time the subject picker opens: tests start with it already known (grade 3), unless a test is about asking (opts.noGrade)
-  if (!opts.noGrade) await ctx.addInitScript(() => { try { if (!localStorage.getItem('learn.profile.v1')) localStorage.setItem('learn.profile.v1', JSON.stringify({ def: { grade: 3, setOn: '2026-09-02' } })); } catch (e) {} });
   if (opts.init) await page.addInitScript(opts.init, opts.initArg);   // e.g. a pretend camera
   await page.goto(opts.url || exports.URL);
   if (opts.noLogin) return { browser, page, store, log, ctx };
@@ -108,6 +106,12 @@ exports.addKid = async (page, name) => {
   await page.waitForSelector(`.kname:has-text("${name}")`);
   await exports.manageOff(page);
   await exports.goHome(page);
+};
+/** sets the grade of a child the way a user does: Settings -> manage mode -> Children -> 年级; ends on the subject picker */
+exports.setGrade = async (page, name, g) => {
+  await exports.openManage(page); await page.click(`.kidrow:has-text("${name}") .kid-grade`); await page.waitForSelector('#grade-dlg');
+  await page.click(`.grade-btn[data-grade="${g}"]`); await page.waitForSelector('#grade-dlg', { state: 'detached' });
+  await exports.manageOff(page); await page.evaluate(() => (location.hash = '#/')); await page.waitForSelector('.hub-grid');
 };
 exports.openKid = async (page, name) => { await page.click('.kid:has-text("' + name + '")'); await page.waitForSelector('.weekbar'); };   // (not #enter: a week with its 10 characters has no +)
 /** earlier weeks are reached by tapping the week's name (the arrow only goes forward) */

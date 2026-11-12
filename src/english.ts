@@ -9,7 +9,7 @@ import * as G from "./game";
 import * as api from "./api";
 import * as P from "./profile";
 import * as W from "./words";
-import { askGrade } from "./gradeui";
+import { pickKidGrade } from "./gradeui";
 import { openGame } from "./gameui";
 import { mascot } from "./art";
 import { subjectArt } from "./hub";
@@ -38,8 +38,6 @@ const cache = new Map<string, M.KidData>();
 const loadKid = async (id: string) => { const d = (await api.readJson<M.KidData>(W.wordsPath(id))) ?? M.EMPTY_KID; cache.set(id, d); return d; };
 let curWeek = "";
 let curKid = "";
-const FALLBACK_GRADE = 3;
-const gradeFor = (id: string) => P.gradeOf(id) ?? FALLBACK_GRADE;
 const todayWeek = () => M.sundayOf(M.todayLocal());
 
 // ---------- the list of children ----------
@@ -70,7 +68,7 @@ export async function renderHome() {
     const n = M.allChars(cache.get(k.id) ?? M.EMPTY_KID).length;
     list.append(h("button", { class: "kid", style: `--kid:${k.color}`, "data-kid": k.id, onclick: () => (location.hash = `#/english/${k.id}`) },
       X.avatarEl(k),
-      h("span", { class: "kinfo" }, h("span", { class: "kname user" }, k.name), h("span", { class: "ksub" }, h("span", {}, P.gradeName(gradeFor(k.id))), " · ", h("span", {}, `已入库 ${n} 词`))),
+      h("span", { class: "kinfo" }, h("span", { class: "kname user" }, k.name), h("span", { class: "ksub" }, h("span", {}, P.gradeOf(k.id) ? P.gradeName(P.gradeOf(k.id)!) : "未选年级"), " · ", h("span", {}, `已入库 ${n} 词`))),
       h("span", { class: "chev" }, "›")));
   }
   X.stagger([...list.querySelectorAll<HTMLElement>(".kid")]);
@@ -86,7 +84,7 @@ async function ensureWeek(k: M.Kid, start: string): Promise<void> {
   const t = todayWeek();
   if (M.weekOf(kid, start)?.chars.length || start < t || start > M.addDays(t, 7)) return;
   const all = await W.loadWords();
-  const grade = gradeFor(k.id);
+  const grade = P.gradeOf(k.id) ?? 1;
   const done = toast("正在生成这一周的单词…", 0, true);
   try {
     let added = 0;
@@ -114,6 +112,12 @@ export async function renderKid(id: string, tab: Tab) {
   if (my !== X.epoch()) return;
   const k = X.kids().kids.find((x) => x.id === id);
   if (!k) { toast("找不到这个孩子"); return void (location.hash = "#/subject/english"); }
+  // the grade of this child: asked the first time he is opened (cancelling goes back to the list; nothing is saved)
+  if (P.gradeOf(id) === null) {
+    const g = await pickKidGrade(k);
+    if (my !== X.epoch()) return;
+    if (g === null) return void (location.hash = "#/subject/english");
+  }
   if (curKid !== id || !curWeek) { curKid = id; curWeek = todayWeek(); }
   await ensureWeek(k, curWeek);
   if (my !== X.epoch()) return;
@@ -125,7 +129,7 @@ export async function renderKid(id: string, tab: Tab) {
     h("button", { class: tab === "week" ? "on" : "", "data-tab": "week", onclick: () => (location.hash = `#/english/${id}`) }, "本周"),
     h("button", { class: tab === "learned" ? "on" : "", "data-tab": "learned", onclick: () => (location.hash = `#/english/${id}/learned`) }, `已入库 ${n}`));
   const body = h("div", { class: "scroll" });
-  const gradeBtn = h("button", { class: "link", id: "grade-btn", title: "修改年级", onclick: () => void changeGrade(k) }, "年级：", P.gradeName(gradeFor(id)));
+  const gradeBtn = h("button", { class: "link", id: "grade-btn", title: "修改年级", onclick: () => void changeGrade(k) }, "年级：", P.gradeName(P.gradeOf(id) ?? 1));
   const page = h("div", { class: "page", style: `--kid:${k.color}` },
     h("header", { class: "top hero kid-hero" }, X.back("#/subject/english", "孩子"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), h("span", { class: "slot" })),
     h("div", { class: "tabs-row" }, tabs),
@@ -183,33 +187,35 @@ function renderWeek(body: HTMLElement, k: M.Kid, kid: M.KidData, map: Map<string
 
 function renderLearned(body: HTMLElement, kid: M.KidData, map: Map<string, W.Word>) {
   body.className = "scroll";
-  const anchor = kid.weeks[0]?.start;
-  const weeks = kid.weeks.filter((w) => w.chars.length).slice().reverse();
-  body.replaceChildren(h("div", { class: "narrow" },
-    weeks.length
-      ? h("div", {}, ...weeks.map((w) => h("section", { class: "wweek", "data-week": w.start },
-          h("h3", { class: "sec" }, `第${M.weekNo(w.start, anchor)}周`, h("span", { class: "muted small" }, ` ${w.start}`)),
-          h("div", { class: "wlist" }, ...w.chars.map((c) => wordRow(c, map))))))
-      : h("p", { class: "empty" }, "还没有入库的单词，先去“本周”看看吧。")));
+  const all = M.allChars(kid);
+  const show = () => {
+    const sample = G.shuffle(all).slice(0, W.RECORDED_SAMPLE);
+    body.replaceChildren(h("div", { class: "narrow" },
+      all.length
+        ? h("div", {},
+            h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "sample-title" }, `随机 ${sample.length} 个`), h("span", { class: "muted small" }, `共 ${all.length} 个`),
+              all.length > sample.length ? h("button", { class: "sheet-btn", id: "reshuffle", onclick: show }, "换一批") : null),
+            h("div", { class: "wlist" }, ...X.stagger(sample.map((c) => wordRow(c, map)))))
+        : h("p", { class: "empty" }, "还没有入库的单词，先去“本周”看看吧。")));
+  };
+  show();
 }
 
 async function changeGrade(k: M.Kid) {
-  let cleared = false;
-  const extra = P.hasOwnGrade(k.id) ? h("button", { class: "link", id: "grade-default", onclick: (e: Event) => { cleared = true; (e.target as HTMLElement).closest("dialog")?.close(); } }, "改回和大家一样的年级") : undefined;
-  const g = await askGrade(`${k.name}读几年级？`, gradeFor(k.id), "只改这个孩子；每年 9 月会自动升一级。", extra);
-  if (cleared) { P.clearKidGrade(k.id); toast("年级已改回和大家一样"); return X.route(); }
-  if (g === null) return;   // cancelled: nothing changes, no message
-  P.setKidGrade(k.id, g);
+  if ((await pickKidGrade(k)) === null) return;   // cancelled: nothing changes, no message
   toast("年级已记住");
   X.route();
 }
 
 // ---------- the game ----------
-function gameQueue(kid: M.KidData, review: G.Review): G.Q[] {
+/** all of this week's words + (random) words of the WEEK BEFORE; when there was no week before this one is the first week: only its own words */
+function gameQueue(kid: M.KidData): G.Q[] {
   const week = G.gameWeek(kid, M.todayLocal());
   if (!week) return [];
+  const before = M.addDays(week, -7);
   const thisWeek = M.weekOf(kid, week)?.chars ?? [];
-  return G.buildQueue(thisWeek, week, G.pickReview(kid, review, week, M.todayLocal()));
+  const previous = G.shuffle(M.weekOf(kid, before)?.chars ?? []).slice(0, W.REVIEW_WORDS).map((ch) => ({ ch, week: before, review: true }));
+  return G.buildQueue(thisWeek, week, previous);
 }
 async function saveGame(k: M.Kid, results: G.Result[], score: number, total: number, finished: boolean) {
   const done = toast("正在保存…", 0, true);
@@ -234,8 +240,7 @@ function play(k: M.Kid, queue: G.Q[], map: Map<string, W.Word>) {
 async function startGame(k: M.Kid, map: Map<string, W.Word>) {
   try {
     const kid = await loadKid(k.id);
-    const review = (await api.readJson<G.Review>(W.wordsReviewPath(k.id))) ?? G.EMPTY_REVIEW;
-    const q = gameQueue(kid, review);
+    const q = gameQueue(kid);
     if (q.length) play(k, q, map); else X.route();
   } catch (e) {
     toast(errText(e), 6000);
@@ -245,17 +250,16 @@ async function startGame(k: M.Kid, map: Map<string, W.Word>) {
 async function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, map: Map<string, W.Word>) {
   const my = X.epoch();
   body.replaceChildren(h("div", { class: "center-msg" }, h("div", { class: "spin" })));
-  let review: G.Review;
   try {
-    review = (await api.readJson<G.Review>(W.wordsReviewPath(k.id))) ?? G.EMPTY_REVIEW;
+    await api.readJson<G.Review>(W.wordsReviewPath(k.id));
   } catch (e) {
     if (my !== X.epoch()) return;
     return void body.replaceChildren(h("div", { class: "center-msg" }, h("p", { class: "err" }, errText(e)), h("button", { class: "primary", onclick: () => void renderLobby(body, k, kid, map) }, "重试")));
   }
   if (my !== X.epoch()) return;
-  const q = gameQueue(kid, review);
+  const q = gameQueue(kid);
   body.replaceChildren(h("div", { class: "narrow lobby" },
     h("div", { class: "lobby-hero" }, h("span", { class: "mascot big" }, mascot()), h("h2", {}, "准备好了吗？")),
     q.length ? null : h("p", { class: "empty" }, "还没有单词，先到“本周”看看吧。"),
-    h("div", { class: "lobby-go" }, h("button", { class: "primary wide", id: "game-start", disabled: q.length === 0, onclick: () => play(k, gameQueue(kid, review), map) }, "开始游戏"))));
+    h("div", { class: "lobby-go" }, h("button", { class: "primary wide", id: "game-start", disabled: q.length === 0, onclick: () => play(k, gameQueue(kid), map) }, "开始游戏"))));
 }

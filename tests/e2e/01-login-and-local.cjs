@@ -51,7 +51,6 @@ const { ok, done } = checks();
   ok(/#\/link\//.test(link), 'the token travels in the #fragment of the link (browsers never send it to a server)');
 
   const other = await browser.newContext({ viewport: { width: 500, height: 800 } });
-  await other.addInitScript(() => localStorage.setItem('learn.profile.v1', JSON.stringify({ def: { grade: 3, setOn: '2026-09-02' } })));   // (a new device would be asked for the grade; this test is about the sign-in)
   await other.route('https://api.github.com/**', async (route) => {
     const p = new URL(route.request().url()).pathname; const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers': '*' };
     if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
