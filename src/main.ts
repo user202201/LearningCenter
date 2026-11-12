@@ -1393,6 +1393,7 @@ async function renderSettings() {
           h("p", { class: "muted small center" }, `版本 ${__BUILD__}`)),
         // the stroke data of the practice sheets is under the Arphic Public License, which asks for this notice and the license text to travel with the app
         h("div", { class: "card", id: "credits" }, h("h3", {}, "致谢"), h("p", { class: "muted small" }, "笔顺数据来自 Make Me a Hanzi（Arphic Public License）。"),
+          h("p", { class: "muted small" }, "公式排版使用 KaTeX（MIT 许可证）。"),
           h("a", { class: "link", id: "license-link", href: `${import.meta.env.BASE_URL}strokes/ARPHICPL.TXT`, target: "_blank", rel: "noopener" }, "查看许可证")),
       )),
     ),
