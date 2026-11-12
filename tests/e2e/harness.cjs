@@ -14,7 +14,8 @@ exports.start = async function (store = new Map(), opts = {}) {
   if (opts.today) await page.clock.setFixedTime(new Date(opts.today + 'T10:00:00'));
   if (opts.clock) await page.clock.install({ time: new Date(opts.clock) });   // a clock the test can move forward (page.clock.runFor); it also decides what "today" is
   page.on('pageerror', (e) => console.log('PAGEERROR', e.message));
-  const log = { gets: [], puts: [], deletes: [] };
+  const log = { gets: [], puts: [], deletes: [], external: [] };   // external: every request that is NOT to the app itself (the offline checks)
+  page.on('request', (r) => { if (!/^(http:\/\/localhost|http:\/\/app\.test|data:|blob:|about:)/.test(r.url()) && !/api\.github\.com/.test(r.url())) log.external.push(r.url()); });
   const version = new Map();                      // path -> number (the "sha")
   const sha = (k) => 'v' + (version.get(k) || 0);
   await ctx.route('https://api.github.com/**', async (route) => {

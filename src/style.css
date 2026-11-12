@@ -588,3 +588,32 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .game.words .gpy { font-size: clamp(20px, 5.2vmin, 38px); padding: 0 12px; }
 .gspeak { position: absolute; right: max(10px, 3vw); bottom: 4px; width: 58px; height: 58px; min-height: 0; padding: 0; border-radius: 50%; border: 0; color: #fff; background: var(--kid); box-shadow: 0 3px 0 rgba(0,0,0,.18); }
 .gspeak svg { width: 30px; height: 30px; }
+
+/* ===== math ===== */
+.mtlist { display: flex; flex-direction: column; gap: 12px; margin: 8px 0 16px; }
+.mtcard { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border: 2px solid var(--kid-line); border-radius: 20px; background: #fff; box-shadow: 0 3px 0 var(--kid-line); animation: pop .38s cubic-bezier(.2, .9, .3, 1.2) both; animation-delay: calc(var(--i, 0) * 35ms); }
+.mtinfo { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.mtname { font-size: 20px; line-height: 1.25; color: #2d2230; overflow-wrap: anywhere; }
+.mtdesc { font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.mpractice { flex: none; min-height: 44px; padding: 6px 16px; }
+.macc { align-self: flex-start; padding: 1px 10px; border-radius: 999px; font-size: 12px; font-weight: 800; background: #eee; color: #666; }
+.macc.good { background: #d3f9d8; color: #1b7a32; } .macc.mid { background: #fff3bf; color: #8a6100; } .macc.low { background: #ffe3e3; color: #b02525; } .macc.none { background: #eef0f3; color: #7b8190; }
+/* the math game */
+.mathgame { display: flex; flex-direction: column; }
+.mtime { display: flex; align-items: center; gap: 10px; padding: 4px max(16px, 4vw) 0; }
+.mbar { flex: 1; height: 14px; border-radius: 999px; background: rgba(0,0,0,.1); overflow: hidden; }
+.mbar i { display: block; height: 100%; width: 100%; border-radius: 999px; background: #2f9e44; transition: width .1s linear; }
+.mtime-text { min-width: 3.2em; text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--text); }
+.mbody { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 8px max(14px, 3vw) calc(env(safe-area-inset-bottom) + 18px); width: 100%; max-width: 720px; margin: 0 auto; }
+.mtopic { font-size: 14px; font-weight: 800; color: var(--kid); min-height: 1.3em; text-align: center; }
+.mq { width: 100%; display: grid; place-items: center; padding: 22px 12px; border-radius: 28px; background: #fff; border: 3px solid var(--kid-line); box-shadow: 0 5px 0 var(--kid-line); min-height: 120px; }
+.mq-text { max-width: 100%; font-size: clamp(28px, 8vw, 54px); font-weight: 800; line-height: 1.25; text-align: center; color: #2d2230; text-wrap: balance; font-variant-numeric: tabular-nums; }
+.mchoices { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mchoice { min-height: 76px; padding: 8px; font-size: clamp(22px, 6vw, 34px); font-weight: 800; border-radius: 22px; border: 3px solid var(--kid-line); box-shadow: 0 5px 0 var(--kid-line); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.mchoice.right { background: #d3f9d8; border-color: #2f9e44; box-shadow: 0 5px 0 #2f9e44; color: #1b7a32; opacity: 1; }
+.mchoice.wrong { background: #ffe3e3; border-color: #e03131; box-shadow: 0 5px 0 #e03131; color: #b02525; opacity: 1; }
+.mchoice:disabled { opacity: .55; }
+.mchoice.right:disabled, .mchoice.wrong:disabled { opacity: 1; }
+.mrows { width: min(100%, 420px); margin: 10px auto; display: flex; flex-direction: column; gap: 6px; }
+.mrow { display: flex; justify-content: space-between; gap: 12px; padding: 8px 14px; border-radius: 14px; background: #fff; border: 2px solid var(--kid-line); text-align: left; }
+@media (min-aspect-ratio: 5/4) and (max-height: 560px) { .mbody { gap: 8px; } .mq { min-height: 70px; padding: 10px; } .mchoice { min-height: 56px; } }

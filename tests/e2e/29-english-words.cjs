@@ -85,7 +85,7 @@ const openEnglish = async (page, name) => {
   await page.click('.kid:has-text("Dory")'); await page.waitForSelector('.wrow');
   const week1 = await page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w));
   ok(week1.length === 20 && new Set(week1.map(keyOf)).size === 20, 'this week: exactly 20 different words (' + week1.slice(0, 5).join(' ') + ' …)');
-  const lib = await page.evaluate(async () => (await (await fetch('/data/english-words.json')).json()).words);
+  const lib = await page.evaluate(async () => (await import('/src/data/english-words.json')).default.words);
   const g = Object.fromEntries(lib.map((x) => [keyOf(x.w), x.g]));
   ok(week1.every((w) => g[keyOf(w)] >= 3), 'for a child of grade 3 the words are those of grade 3 on (none of grade 1-2): grades ' + [...new Set(week1.map((w) => g[keyOf(w)]))].join());
   ok(await page.locator('.wrow .wword').first().textContent() === week1[0] && (await page.locator('.wrow .wzh').first().textContent()).length > 0 && await page.locator('.wrow .wph').count() > 10, 'each row shows the word, its phonetics and its meaning');
@@ -124,6 +124,7 @@ const openEnglish = async (page, name) => {
   await page.click('#grade-btn'); await page.waitForSelector('#grade-dlg');
   ok(await page.locator('.grade-btn.on').getAttribute('data-grade') === '3', 'the grade link on the child\'s page opens the window with the current grade marked');
   await page.click('.grade-btn[data-grade="7"]'); await page.waitForSelector('#grade-dlg', { state: 'detached' });
+  await page.waitForFunction(() => document.querySelector('#grade-btn')?.textContent.includes('初一'));
   ok((await page.textContent('#grade-btn')).includes('初一'), 'Leo changed to 初一');
   await page.waitForFunction((w0) => document.querySelector('.wrow')?.dataset.w !== w0, week1[0]);
   const leoNew = await page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w));
@@ -181,7 +182,7 @@ const openEnglish = async (page, name) => {
     const t = await start(store2, { local: true, today: '2026-11-12', viewport: { width: 390, height: 844 } });
     await addKid(t.page, 'Dory'); await setGrade(t.page, 'Dory', 3);
     const kidId = await t.page.evaluate(() => Object.keys(localStorage).map((k) => k).length && JSON.parse(localStorage.getItem('learn.local.kids.json')).kids[0].id);
-    const lib2 = await t.page.evaluate(async () => (await (await fetch('/data/english-words.json')).json()).words.map((x) => x.w));
+    const lib2 = await t.page.evaluate(async () => (await import('/src/data/english-words.json')).default.words.map((x) => x.w));
     const prev = lib2.slice(0, 20);
     await t.page.evaluate(([id, list]) => localStorage.setItem('learn.local.english/' + id + '.json', JSON.stringify({ weeks: [{ start: '2026-11-01', chars: list }] })), [kidId, prev]);
     await openEnglish(t.page, 'Dory');
@@ -214,7 +215,7 @@ const openEnglish = async (page, name) => {
     const t = await start(new Map(), { local: true, today: '2026-11-12', viewport: { width: 390, height: 844 } });
     await addKid(t.page, 'Dory'); await addKid(t.page, 'Leo');
     const ids = await t.page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.kids.json')).kids.map((k) => k.id));
-    const lib3 = await t.page.evaluate(async () => (await (await fetch('/data/english-words.json')).json()).words);
+    const lib3 = await t.page.evaluate(async () => (await import('/src/data/english-words.json')).default.words);
     const old3 = lib3.filter((x) => x.g === 3).slice(0, 20).map((x) => x.w);
     await t.page.evaluate(([list, ids]) => ids.forEach((id) => localStorage.setItem('learn.local.english/' + id + '.json', JSON.stringify({ weeks: [{ start: '2026-11-08', chars: list }] }))), [old3, ids]);
     await setGrade(t.page, 'Dory', 3); await setGrade(t.page, 'Leo', 6);
@@ -225,6 +226,8 @@ const openEnglish = async (page, name) => {
     ok(got.Leo.every((w) => gr[keyOf(w)] >= 6) && JSON.stringify(got.Leo) !== JSON.stringify(got.Dory), 'Leo (六年级) has grade-6 words, NOT the same as Dory\'s: ' + got.Leo.slice(0, 4).join(' ') + ' vs ' + got.Dory.slice(0, 4).join(' '));
     await t.browser.close();
   }
+
+  ok(log.external.length === 0, 'OFFLINE: English (library, weeks, game, speech) made no request outside the app and GitHub storage: ' + log.external.join(', '));
 
   // ---- the Chinese part is unchanged: it still has no word in it ----
   await page.evaluate(() => (location.hash = '#/chinese')); await page.waitForSelector('.kids');

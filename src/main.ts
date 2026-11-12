@@ -17,6 +17,7 @@ import { readTable, readWorkbook, type SheetData } from "./xlsx";
 import * as I from "./importer";
 import { subjectById, hubGrid, hubHero, soonPage, reveal } from "./hub";
 import * as E from "./english";
+import * as MA from "./math";
 import { pickKidGrade } from "./gradeui";
 
 const app = document.getElementById("app")!;
@@ -1464,6 +1465,9 @@ async function route() {
   if (hash === "#/settings") return void renderSettings();
   if (hash === "#/chinese") return renderHome();
   if (hash === "#/subject/english") return void E.renderHome();
+  if (hash === "#/subject/math") return void MA.renderHome();
+  const math = /^#\/math\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
+  if (math) return void MA.renderKid(math[1], math[2] === "learned" ? "learned" : math[2] === "game" ? "game" : "week");
   const eng = /^#\/english\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
   if (eng) return void E.renderKid(eng[1], eng[2] === "learned" ? "learned" : eng[2] === "game" ? "game" : "week");
   const subject = /^#\/subject\/(\w+)$/.exec(hash);
@@ -1481,7 +1485,9 @@ document.addEventListener("touchend", (e) => {
   if (quick && e.cancelable && !(e.target as Element).closest("button, input, textarea, select, a, dialog")) e.preventDefault();
 }, { passive: false });
 
-E.initEnglish({ show, showLoading, showError, loadShared, kids: () => kidsFile, avatarEl, back: backBtn, gear: gearBtn, stagger, epoch: () => epoch, gameSeconds: () => settings.gameSeconds, route: () => void route(), addKid });
+const shell = { show, showLoading, showError, loadShared, kids: () => kidsFile, avatarEl, back: backBtn, gear: gearBtn, stagger, epoch: () => epoch, gameSeconds: () => settings.gameSeconds, route: () => void route(), addKid  };
+E.initEnglish(shell);
+MA.initMath(shell);
 setLang(settings.lang);
 window.addEventListener("hashchange", () => void route());
 void route();

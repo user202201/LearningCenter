@@ -1,5 +1,5 @@
 /**
- * The English word library and the weekly pick (no screens, no storage). `public/data/english-words.json` holds the words in learning order
+ * The English word library and the weekly pick (no screens, no storage). `src/data/english-words.json` holds the words in learning order
  * (grade 1 first), each with its Chinese meaning, phonetics and part of speech. A child's recorded words are kept in `english/<kid>.json` in the SAME
  * shape as the characters of the Chinese part (`weeks[].chars` holds the words), so the game's rules (game.ts) are shared as they are.
  */
@@ -14,12 +14,10 @@ export const REVIEW_WORDS = 10;
 export const RECORDED_SAMPLE = 30;
 
 let cache: Word[] | null = null;
-/** the whole library (read once from the app's own files: nothing is fetched from outside) */
+/** the whole library: part of the app itself (src/data/english-words.json is compiled into the program: no network request, works offline and in a packaged app) */
 export async function loadWords(): Promise<Word[]> {
   if (cache) return cache;
-  const r = await fetch(`${import.meta.env.BASE_URL}data/english-words.json`);
-  if (!r.ok) throw new Error(`english-words.json: ${r.status}`);
-  cache = ((await r.json()) as { words: Word[] }).words;
+  cache = (await import("./data/english-words.json")).default.words as Word[];
   return cache;
 }
 export const wordKey = (w: string): string => w.toLowerCase();

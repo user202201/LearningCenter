@@ -1,7 +1,7 @@
 # 学习乐园 · Learning Center  (EN: Learning Park · FR: Parc du savoir)
 
 The children's learning hub. After signing in you choose a **subject** on big cartoon cards: **识字** (the whole original *识字小助手 / Learning Chinese* app,
-unchanged and complete), **英语 (English, part 1: words)**, 数学 (math), 科学 (science) — math and science show a "coming soon" page for now.
+unchanged and complete), **英语 (English, part 1: words)**, **数学 (math, part 1: mental arithmetic)**, 科学 (science) — science shows a "coming soon" page for now. **Math, part 1: mental arithmetic** — a week has 3 topics of the child's grade (49 topics, grades 1–9); questions are made on the spot, the game has a total time, 20 questions, four choices.
 The grade is asked once and remembered for every subject (it goes up by itself every September). English: the same screens as 识字 — children, then *Game / This week / Recorded*; every week 20 new words picked by the child's grade, shown with phonetics and meaning, and the same memory-curve game (tap = meaning, speaker = pronunciation).
 Tapping a card plays a squash + sparkle effect, a coloured curtain grows over the screen and lifts on the next one (skipped when the device asks to reduce motion).
 Everything below describes **识字**; it lives at `#/chinese` and works exactly as in the standalone app. The two apps are separate sites that can share the same

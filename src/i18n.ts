@@ -129,6 +129,9 @@ function patchDialogs() {
   }
 }
 
+/** translates what is below `root` RIGHT NOW (the observer does it a moment later): for code that measures text, which must be measured as it will be shown */
+export function translateNow(root: Node) { if (current !== "zh") walk(root); }
+
 export const getLang = (): Lang => current;
 
 /** Switch the language of everything on screen and of everything created from now on. */

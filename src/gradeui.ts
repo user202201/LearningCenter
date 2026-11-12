@@ -4,6 +4,7 @@ import * as P from "./profile";
 import * as M from "./model";
 import * as api from "./api";
 import * as W from "./words";
+import * as MM from "./mathmodel";
 import { toast } from "./ui";
 
 export const askGrade = (title: string, current: number | null, note = "", extra?: HTMLElement): Promise<number | null> =>
@@ -29,21 +30,23 @@ export async function pickKidGrade(k: M.Kid): Promise<number | null> {
   if (g === null) return null;
   P.setKidGrade(k.id, g);
   const thisWeek = M.sundayOf(M.todayLocal());
-  try {
-    const cur = await api.readJson<M.KidData>(W.wordsPath(k.id));
-    if (cur?.weeks.some((w) => w.start >= thisWeek)) {
-      const done = toast("正在按新年级重新选单词…", 0, true);
+  // the words (English) and the topics (math) of this week and next week were made for the old grade
+  for (const path of [W.wordsPath(k.id), MM.mathPath(k.id)]) {
+    try {
+      const cur = await api.readJson<M.KidData>(path);
+      if (!cur?.weeks.some((w) => w.start >= thisWeek)) continue;
+      const done = toast("正在按新年级重新选…", 0, true);
       try {
-        await api.update(W.wordsPath(k.id), M.EMPTY_KID, (c: M.KidData) => W.dropFromWeek(c, thisWeek), `english ${k.id} new grade`);
+        await api.update(path, M.EMPTY_KID, (c: M.KidData) => W.dropFromWeek(c, thisWeek), `${path} new grade`);
         done();
-        toast("已按新年级重新选了这周和下周的单词", 5000);
+        toast("已按新年级重新选了这周和下周的内容", 5000);
       } catch (e) {
         done();
         throw e;
       }
+    } catch (e) {
+      toast(e instanceof Error ? e.message : String(e), 6000);
     }
-  } catch (e) {
-    toast(e instanceof Error ? e.message : String(e), 6000);
   }
   return g;
 }

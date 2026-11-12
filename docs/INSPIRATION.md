@@ -28,14 +28,14 @@
 | 英语课标词汇表 | 教育部《义务教育英语课程标准（2022 年版）》附录 | 官方文件；需要整理成 JSON 后校对年级划分（当前分级是样品） |
 | 英语例句 | **Tatoeba**（中英平行句） | CC BY 2.0 FR；可给每个词配 1 句例句 |
 | 英语发音 | 设备自带语音（已用 `speechSynthesis`）；或 CMUdict（BSD 类）做音素；真人发音可考虑 Wikimedia Commons（逐个核对许可） | 现在不依赖网络 |
-| 元素周期表 | 自己整理（已放 `public/data/periodic.json`，118 个元素） | 原子量以 IUPAC 为准，样品请核对 |
+| 元素周期表 | 自己整理（已放 `src/data/periodic.json`，118 个元素） | 原子量以 IUPAC 为准，样品请核对 |
 | 物理/化学互动实验 | **PhET**（科罗拉多大学） | CC BY 4.0，可下载离线 HTML5 |
 | 数学习题与讲解 | **OpenStax**（教材）、Khan Academy（CC BY-NC-SA，非商用） | 注意“非商用”条款；我们的口算题用代码自动生成，无版权问题 |
 | 汉字笔顺 | Make Me a Hanzi（已使用） | Arphic Public License |
 | 图片/科普插图 | Wikimedia Commons、NASA（美国政府作品，多为公有领域） | 逐张核对 |
 | 国家官方资源 | 国家中小学智慧教育平台 | 免费但有版权，只能链接，不能打包进 App |
 
-## 3. 当前样品里已经有什么（`public/data/`）
+## 3. 当前样品里已经有什么（`src/data/`）
 
 - `english-words.json` — 1565 个词，按年级排序（一年级→初三），含音标、词性、中文。**用于英语单词功能。**
 - `curriculum.json` — 数学 / 英语 / 科学各年级的“课程范围”概览（按课标整理，各版本教材顺序略有不同）。
