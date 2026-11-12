@@ -1470,6 +1470,7 @@ async function route() {
   if (hash === "#/subject/science") return void SC.renderHome();
   if (hash === "#/science/periodic") return void SC.renderPeriodic();
   if (hash === "#/science/formulas") return void SC.renderFormulas();
+  if (hash === "#/science/circuits") return void SC.renderCircuits();
   const sci = /^#\/science\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
   if (sci) return void SC.renderKid(sci[1], sci[2] === "learned" ? "learned" : sci[2] === "game" ? "game" : "week");
   const math = /^#\/math\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);

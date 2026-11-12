@@ -87,7 +87,7 @@ const openEnglish = async (page, name) => {
   ok(week1.length === 20 && new Set(week1.map(keyOf)).size === 20, 'this week: exactly 20 different words (' + week1.slice(0, 5).join(' ') + ' …)');
   const lib = await page.evaluate(async () => (await import('/src/data/english-words.json')).default.words);
   const g = Object.fromEntries(lib.map((x) => [keyOf(x.w), x.g]));
-  ok(week1.every((w) => g[keyOf(w)] >= 3), 'for a child of grade 3 the words are those of grade 3 on (none of grade 1-2): grades ' + [...new Set(week1.map((w) => g[keyOf(w)]))].join());
+  ok(week1.filter((w) => g[keyOf(w)] === 3).length === 12 && week1.every((w) => g[keyOf(w)] <= 3), 'the grade is the child\'s HIGHEST level: 12 of the 20 words are of grade 3, the other 8 of the lower grades (consolidation): grades ' + week1.map((w) => g[keyOf(w)]).join(''));
   ok(await page.locator('.wrow .wword').first().textContent() === week1[0] && (await page.locator('.wrow .wzh').first().textContent()).length > 0 && await page.locator('.wrow .wph').count() > 10, 'each row shows the word, its phonetics and its meaning');
   const files = [...store.keys()];
   ok(files.includes('english/' + (await page.evaluate(() => location.hash)).split('/')[2] + '.json') || files.some((f) => /^english\/[\w-]+\.json$/.test(f)), 'saved in english/<child>.json: ' + files.filter((f) => f.startsWith('english')).join(', '));
@@ -128,9 +128,9 @@ const openEnglish = async (page, name) => {
   ok((await page.textContent('#grade-btn')).includes('初一'), 'Leo changed to 初一');
   await page.waitForFunction((w0) => document.querySelector('.wrow')?.dataset.w !== w0, week1[0]);
   const leoNew = await page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w));
-  ok(leoNew.length === 20 && leoNew.every((w) => g[keyOf(w)] >= 7) && leoNew.every((w) => !week1.includes(w)), "changing the grade (三年级 -> 初一) picks THIS week's words again for the new grade: " + leoNew.slice(0, 4).join(' ') + ' …');
+  ok(leoNew.length === 20 && leoNew.filter((w) => g[keyOf(w)] === 7).length === 12 && leoNew.every((w) => g[keyOf(w)] <= 7) && leoNew.every((w) => !week1.includes(w)), "changing the grade (三年级 -> 初一) picks THIS week's words again for the new grade (12 of grade 7, 8 of lower grades): " + leoNew.slice(0, 4).join(' ') + ' …');
   await page.click('button[title=下一周]'); await page.waitForFunction(() => document.querySelector('#week-label strong')?.textContent === '第2周');
-  ok((await page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w))).every((w) => g[keyOf(w)] >= 7), "and next week's words too (grade 7 or higher)");
+  ok((await page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w))).filter((w) => g[keyOf(w)] === 7).length >= 10, "and next week's words too (mostly grade 7)");
   await page.click('button[title=上一周]'); await page.waitForFunction(() => document.querySelector('#week-label strong')?.textContent === '第1周');
   await page.evaluate(() => (location.hash = '#/subject/english')); await page.waitForSelector('.kids');
   const subs = await page.locator('.kid .ksub').allTextContents();
@@ -138,7 +138,7 @@ const openEnglish = async (page, name) => {
   await page.click('.kid:has-text("Leo")'); await page.waitForSelector('.wrow');
   await page.click('button[title=下一周]'); await page.waitForFunction(() => document.querySelector('#week-label strong')?.textContent === '第2周');
   const leo2 = await page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w));
-  ok(leo2.every((w) => g[keyOf(w)] >= 3), 'words are picked for the grade at the moment the week is made (next week: ' + [...new Set(leo2.map((w) => g[keyOf(w)]))].join() + ')');
+  ok(leo2.filter((w) => g[keyOf(w)] === 7).length >= 10 && leo2.every((w) => g[keyOf(w)] <= 7), 'words are picked for the grade at the moment the week is made (next week: ' + [...new Set(leo2.map((w) => g[keyOf(w)]))].join() + ')');
   await page.screenshot({ path: OUT + 'english-week-phone.png' });
 
   // ---- the game ----
@@ -222,8 +222,8 @@ const openEnglish = async (page, name) => {
     const got = {};
     for (const n of ['Dory', 'Leo']) { await openEnglish(t.page, n); got[n] = await t.page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w)); }
     const gr = Object.fromEntries(lib3.map((x) => [keyOf(x.w), x.g]));
-    ok(got.Dory.length === 20 && got.Leo.length === 20 && got.Dory.every((w) => gr[keyOf(w)] >= 3), 'one child 三年级, one 六年级 (old words already stored): Dory has grade-3 words');
-    ok(got.Leo.every((w) => gr[keyOf(w)] >= 6) && JSON.stringify(got.Leo) !== JSON.stringify(got.Dory), 'Leo (六年级) has grade-6 words, NOT the same as Dory\'s: ' + got.Leo.slice(0, 4).join(' ') + ' vs ' + got.Dory.slice(0, 4).join(' '));
+    ok(got.Dory.length === 20 && got.Leo.length === 20 && got.Dory.filter((w) => gr[keyOf(w)] === 3).length >= 10 && got.Dory.every((w) => gr[keyOf(w)] <= 3), 'one child 三年级, one 六年级 (old words already stored): Dory has words of grade 3 and below');
+    ok(got.Leo.filter((w) => gr[keyOf(w)] === 6).length >= 10 && got.Leo.every((w) => gr[keyOf(w)] <= 6) && JSON.stringify(got.Leo) !== JSON.stringify(got.Dory), 'Leo (六年级) has words of grade 6 and below, NOT the same as Dory\'s: ' + got.Leo.slice(0, 4).join(' ') + ' vs ' + got.Dory.slice(0, 4).join(' '));
     await t.browser.close();
   }
 

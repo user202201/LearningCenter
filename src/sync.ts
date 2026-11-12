@@ -36,19 +36,22 @@ export function mergeDocs(local: Doc, remote: Doc): Doc {
     const ids = new Set(local.kids.map((k: Doc) => k.id));
     return { ...remote, ...local, kids: [...local.kids, ...remote.kids.filter((k: Doc) => !ids.has(k.id))], startWeek: local.startWeek && remote.startWeek ? (local.startWeek < remote.startWeek ? local.startWeek : remote.startWeek) : local.startWeek ?? remote.startWeek };
   }
-  // the game boxes of the characters / words (a card per item)
-  if (local.cards && remote.cards && typeof local.cards === "object") {
-    const cards: Doc = { ...remote.cards };
-    for (const [k, c] of Object.entries<Doc>(local.cards)) cards[k] = !cards[k] || (later(c.last, cards[k].last) === c.last) ? c : cards[k];
-    return { ...remote, ...local, cards, plays: Math.max(local.plays ?? 0, remote.plays ?? 0), last: !remote.last || (local.last && local.last.date >= remote.last.date) ? local.last : remote.last };
-  }
-  // math / science results: counts per topic and the errors book
-  if (local.topics && remote.topics && typeof local.topics === "object") {
-    const topics: Doc = { ...remote.topics };
-    for (const [k, s] of Object.entries<Doc>(local.topics)) topics[k] = !topics[k] || s.right + s.wrong >= topics[k].right + topics[k].wrong ? s : topics[k];
-    const seen = new Set<string>();
-    const mistakes = [...(local.mistakes ?? []), ...(remote.mistakes ?? [])].filter((m: Doc) => (seen.has(m.q) ? false : (seen.add(m.q), true))).slice(0, 50);
-    return { ...remote, ...local, topics, mistakes, plays: Math.max(local.plays ?? 0, remote.plays ?? 0), last: !remote.last || (local.last && local.last.date >= remote.last.date) ? local.last : remote.last };
+  // the game boxes of the characters / words / knowledge cards (a card per item) and, in math / science results, the counts per topic and the errors book
+  if ((local.cards && remote.cards && typeof local.cards === "object") || (local.topics && remote.topics && typeof local.topics === "object")) {
+    const out: Doc = { ...remote, ...local, plays: Math.max(local.plays ?? 0, remote.plays ?? 0), last: !remote.last || (local.last && local.last.date >= remote.last.date) ? local.last : remote.last };
+    if (local.cards && remote.cards) {
+      const cards: Doc = { ...remote.cards };
+      for (const [k, c] of Object.entries<Doc>(local.cards)) cards[k] = !cards[k] || (later(c.last, cards[k].last) === c.last) ? c : cards[k];
+      out.cards = cards;
+    }
+    if (local.topics && remote.topics) {
+      const topics: Doc = { ...remote.topics };
+      for (const [k, s] of Object.entries<Doc>(local.topics)) topics[k] = !topics[k] || s.right + s.wrong >= topics[k].right + topics[k].wrong ? s : topics[k];
+      const seen = new Set<string>();
+      out.topics = topics;
+      out.mistakes = [...(local.mistakes ?? []), ...(remote.mistakes ?? [])].filter((m: Doc) => (seen.has(m.q) ? false : (seen.add(m.q), true))).slice(0, 50);
+    }
+    return out;
   }
   return local;
 }

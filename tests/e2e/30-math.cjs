@@ -87,7 +87,8 @@ const playAll = async (page, n = 20) => {
   await page.click('.grade-btn[data-grade="4"]'); await page.waitForSelector('.mtcard');
   const topics = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
   const gradeList = await page.evaluate(async () => (await import('/src/data/math-topics.json')).default.grades['4']);
-  ok(topics.length === 3 && topics.every((x) => gradeList.includes(x)) && JSON.stringify(topics) === JSON.stringify(gradeList.slice(0, 3)), 'this week: 3 topics of grade 4, in the list\'s order (' + topics.join(', ') + ')');
+  const lowerLists = await page.evaluate(async () => { const d = (await import('/src/data/math-topics.json')).default; return [1, 2, 3].flatMap((g) => d.grades[String(g)]); });
+  ok(topics.length === 3 && topics[0] === gradeList[0] && topics[1] === gradeList[1] && lowerLists.includes(topics[2]), 'this week: 2 topics of grade 4 in the list\'s order + 1 of the lower grades (the grade is his highest level) (' + topics.join(', ') + ')');
   ok((await page.locator('.mtcard .mtname').allTextContents()).every((x) => x.length > 1) && await page.locator('.mtcard .macc.none').count() === 3, 'each shows its name, a short description and "not practised yet"');
   const id1 = await kidIdOf(page, 0);
   ok(await page.evaluate((i) => !!localStorage.getItem('learn.local.math/' + i + '.json') && !localStorage.getItem('learn.local.english/' + i + '.json'), id1), 'saved in math/<child>.json only (nothing in the English or Chinese files)');
@@ -125,7 +126,7 @@ const playAll = async (page, n = 20) => {
   ok(await page.locator('.mtcard .macc.none').count() < 3, 'the topic now shows its answer rate');
 
   // the game: 20 questions, this week's topics + last week's
-  const prev = ['add3', 'sub3', 'mul1'];
+  const prev = ['add100', 'sub100', 'multable'];
   await page.evaluate(([i, p]) => { const k = 'learn.local.math/' + i + '.json'; const cur = JSON.parse(localStorage.getItem(k)); cur.weeks.unshift({ start: '2026-11-01', chars: p }); localStorage.setItem(k, JSON.stringify(cur)); }, [id1, prev]);
   await page.reload(); await page.waitForSelector('.mtcard');
   await page.click('#tab-game'); await page.waitForSelector('#game-start');
@@ -154,7 +155,8 @@ const playAll = async (page, n = 20) => {
   await page.waitForFunction(() => !document.querySelector('.mtcard[data-topic=compare]') && document.querySelector('.mtcard'), null, { timeout: 8000 });
   const leo6 = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
   const g6 = await page.evaluate(async () => (await import('/src/data/math-topics.json')).default.grades['6']);
-  ok(JSON.stringify(leo6) === JSON.stringify(g6.slice(0, 3)), 'changing Leo to 六年级 picks this week\'s topics again for grade 6 (' + leo6.join(', ') + ')');
+  const lower5 = await page.evaluate(async () => (await import('/src/data/math-topics.json')).default.grades['5']);
+  ok(leo6[0] === g6[0] && leo6[1] === g6[1] && lower5.includes(leo6[2]), 'changing Leo to 六年级 picks this week\'s topics again: 2 of grade 6 + 1 of grade 5 (' + leo6.join(', ') + ')');
   ok(log.external.length === 0, 'OFFLINE: the whole math flow (list, grade, topics, practice, games, results) made no request outside the app: ' + log.external.join(', '));
   await browser.close();
 
@@ -187,7 +189,7 @@ const playAll = async (page, n = 20) => {
     let typedN = 0, chosenN = 0, wrongShown = false, wrongDeliberately = 0;
     for (let i = 0; i < 20; i++) {
       await pg.waitForSelector('#math-q'); const prog = await pg.textContent('#game-progress');
-      const ans = solve(await pg.textContent('#math-q'));
+      const ans = solve(await pg.getAttribute('#math-q', 'data-plain'));
       const keypad = await pg.locator('#math-keys').count() === 1;
       const wrong = i < 3;   // the first three are answered wrong on purpose
       if (keypad) {
@@ -215,7 +217,7 @@ const playAll = async (page, n = 20) => {
     await pg.click('#redo-mistakes'); await pg.waitForSelector('#math-q');
     ok((await pg.textContent('#game-progress')) === '1 / 3', 'redo: a game of exactly those 3 questions');
     for (let i = 0; i < 3; i++) {
-      const prog = await pg.textContent('#game-progress'), ans = solve(await pg.textContent('#math-q'));
+      const prog = await pg.textContent('#game-progress'), ans = solve(await pg.getAttribute('#math-q', 'data-plain'));
       if (await pg.locator('#math-keys').count()) { for (const ch of ans) await pg.click(`.mkey[data-k="${ch}"]`); await pg.click('.mkey[data-k="✓"]'); }
       else await pg.click(`.mchoice[data-v="${ans}"]`);
       if (i < 2) await pg.waitForFunction((p) => document.querySelector('#game-progress')?.textContent !== p, prog, { timeout: 6000 });
@@ -273,7 +275,7 @@ const playAll = async (page, n = 20) => {
         const all = []; for (const id of G.topicIds()) for (let i = 0; i < 60; i++) all.push(G.make(id));
         const longest = all.sort((a, b) => b.q.length - a.q.length).slice(0, 12).concat(all.filter((x) => /hypotenuse|斜边|probab|概率/.test(x.q)).slice(0, 3));
         const el = document.querySelector('#math-q'), card = document.querySelector('#math-card'), bad = [];
-        for (const q of longest) { el.textContent = q.q; U.fitQuestion(el, card); await new Promise((res) => setTimeout(res, 0)); /* (the translation observer runs now) */ const r = el.getBoundingClientRect(), c = card.getBoundingClientRect(); if (r.left < c.left || r.right > c.right || r.top < c.top || r.bottom > c.bottom || el.scrollWidth > el.clientWidth + 1) bad.push(q.q + ' [' + el.textContent + ']'); }
+        for (const q of longest) { el.dataset.plain = q.q; el.textContent = q.q; U.fitQuestion(el, card); await new Promise((res) => setTimeout(res, 0)); /* (the translation observer runs now) */ const r = el.getBoundingClientRect(), c = card.getBoundingClientRect(); if (r.left < c.left || r.right > c.right || r.top < c.top || r.bottom > c.bottom || el.scrollWidth > el.clientWidth + 1) bad.push(q.q + ' [' + el.textContent + ']'); }
         const vw = document.documentElement.clientWidth, ch = [...document.querySelectorAll('.mchoice')].filter((b) => b.getBoundingClientRect().right > vw || b.scrollWidth > b.clientWidth + 1).length;
         return { bad, ch, sw: document.documentElement.scrollWidth, vw, top: document.querySelector('.mchoices').getBoundingClientRect().bottom <= window.innerHeight + 1 };
       });

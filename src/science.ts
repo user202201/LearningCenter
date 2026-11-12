@@ -12,6 +12,8 @@ import * as MM from "./mathmodel";
 import * as SM from "./sciencemodel";
 import { pickKidGrade } from "./gradeui";
 import { openMathGame } from "./mathui";
+import { renderRich, renderTeX } from "./mathtext";
+import { SYMBOLS, CIRCUITS, RULES } from "./diagrams";
 import { mascot } from "./art";
 import { subjectArt } from "./hub";
 import type { Ctx } from "./english";
@@ -22,7 +24,6 @@ export const initScience = (c: Ctx) => { X = c; };
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 const cache = new Map<string, M.KidData>();
 const loadKid = async (id: string) => { const d = (await api.readJson<M.KidData>(SM.sciencePath(id))) ?? M.EMPTY_KID; cache.set(id, d); return d; };
-let curWeek = "";
 let curKid = "";
 const todayWeek = () => M.sundayOf(M.todayLocal());
 const COLOR = "#7048e8";
@@ -48,7 +49,8 @@ export async function renderHome() {
     X.gear("#/subject/science"));
   const refs = h("div", { class: "sci-refs" },
     h("button", { class: "sci-ref", id: "open-periodic", onclick: () => (location.hash = "#/science/periodic") }, h("b", {}, "元素周期表"), h("span", { class: "muted small" }, "118 个元素")),
-    h("button", { class: "sci-ref", id: "open-formulas", onclick: () => (location.hash = "#/science/formulas") }, h("b", {}, "公式与方程式"), h("span", { class: "muted small" }, "物理 · 化学")));
+    h("button", { class: "sci-ref", id: "open-formulas", onclick: () => (location.hash = "#/science/formulas") }, h("b", {}, "公式与方程式"), h("span", { class: "muted small" }, "数学 · 物理 · 化学")),
+    h("button", { class: "sci-ref", id: "open-circuits", onclick: () => (location.hash = "#/science/circuits") }, h("b", {}, "电路与电磁"), h("span", { class: "muted small" }, "电路图 · 三个定则")));
   const list = h("div", { class: "kids" });
   for (const k of kids) {
     const n = allIds(cache.get(k.id) ?? M.EMPTY_KID).length;
@@ -64,28 +66,31 @@ export async function renderHome() {
     refs))));
 }
 
-// ---------- a child ----------
+// ---------- a child: a NEW set of cards every day, old ones come back by the memory curve ----------
 type Tab = "week" | "learned" | "game";
+const today = () => M.todayLocal();
 
-async function ensureWeek(k: M.Kid, start: string, lib: SM.Library): Promise<void> {
+/** a day gets its new cards once (opening the page on a day that has none makes them); never for another day than today */
+async function ensureDay(k: M.Kid, lib: SM.Library): Promise<void> {
   const kid = cache.get(k.id) ?? M.EMPTY_KID;
-  const t = todayWeek();
-  if (M.weekOf(kid, start)?.chars.length || start < t || start > M.addDays(t, 7)) return;
+  const day = today();
+  if (M.weekOf(kid, day)?.chars.length) return;
   const grade = P.gradeOf(k.id) ?? 1;
-  const done = toast("正在生成这一周的知识卡…", 0, true);
+  const done = toast("正在生成今天的知识卡…", 0, true);
   try {
     let added = 0;
     const review = await reviewOf(k.id).catch(() => MM.EMPTY_MATH_REVIEW);
     const wrong = new Set((review.mistakes ?? []).map((m) => m.q));
-    const out = await api.update<M.KidData>(SM.sciencePath(k.id), M.EMPTY_KID, (cur) => { const r = W.addWeek(cur, start, SM.pickCards(lib, cur, grade, (id) => wrong.has(lib.byId.get(id)?.q ?? ""))); added = r.added; return r.data; }, `science ${k.id} ${start}`);
+    const out = await api.update<M.KidData>(SM.sciencePath(k.id), M.EMPTY_KID, (cur) => { const r = W.addWeek(cur, day, SM.pickDaily(lib, cur, grade, day, (id) => wrong.has(lib.byId.get(id)?.q ?? ""), k.id)); added = r.added; return r.data; }, `science ${k.id} ${day}`);
     cache.set(k.id, out);
     done();
-    if (added) toast(`已生成这一周的 ${added} 张知识卡`);
+    if (added) toast(`已生成今天的 ${added} 张知识卡`);
   } catch (e) {
     done();
     toast(errText(e), 6000);
   }
 }
+const scienceReviewOf = async (id: string) => (await api.readJson<SM.ScienceReview>(SM.scienceReviewPath(id))) ?? MM.EMPTY_MATH_REVIEW as SM.ScienceReview;
 
 export async function renderKid(id: string, tab: Tab) {
   const my = X.epoch();
@@ -108,23 +113,24 @@ export async function renderKid(id: string, tab: Tab) {
     cache.delete(id);
     await loadKid(id);
   }
-  if (curKid !== id || !curWeek) { curKid = id; curWeek = todayWeek(); }
-  await ensureWeek(k, curWeek, lib);
+  if (curKid !== id || !curDay) { curKid = id; curDay = today(); }
+  await ensureDay(k, lib);
   if (my !== X.epoch()) return;
   const kid = cache.get(id) ?? M.EMPTY_KID;
   const tabs = h("div", { class: "seg tabs" },
     h("button", { class: tab === "game" ? "on" : "", "data-tab": "game", id: "tab-game", onclick: () => (location.hash = `#/science/${id}/game`) }, "游戏"),
-    h("button", { class: tab === "week" ? "on" : "", "data-tab": "week", onclick: () => (location.hash = `#/science/${id}`) }, "本周"),
+    h("button", { class: tab === "week" ? "on" : "", "data-tab": "week", onclick: () => (location.hash = `#/science/${id}`) }, "今天"),
     h("button", { class: tab === "learned" ? "on" : "", "data-tab": "learned", onclick: () => (location.hash = `#/science/${id}/learned`) }, `已入库 ${allIds(kid).length}`));
   const body = h("div", { class: "scroll" });
   const gradeBtn = h("button", { class: "link", id: "grade-btn", title: "修改年级", onclick: () => void changeGrade(k) }, "年级：", P.gradeName(P.gradeOf(id) ?? 1));
   X.show(h("div", { class: "page", style: `--kid:${k.color}` },
     h("header", { class: "top hero kid-hero" }, X.back("#/subject/science", "孩子"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), h("span", { class: "slot" })),
     h("div", { class: "tabs-row" }, tabs), h("div", { class: "grade-row" }, gradeBtn), body));
-  if (tab === "week") await renderWeek(body, k, kid, lib);
+  if (tab === "week") await renderDay(body, k, kid, lib);
   else if (tab === "learned") await renderLearned(body, k, kid, lib);
-  else renderLobby(body, k, kid, lib);
+  else await renderLobby(body, k, kid, lib);
 }
+let curDay = "";
 
 async function changeGrade(k: M.Kid) {
   if ((await pickKidGrade(k)) === null) return;
@@ -135,38 +141,46 @@ async function changeGrade(k: M.Kid) {
 
 /** a card: the topic, the question; a tap shows / hides the answer */
 function cardEl(c: SM.Card, lib: SM.Library): HTMLElement {
-  const ans = h("div", { class: "sans user" }, h("b", {}, c.a), h("span", { class: "sfun" }, c.e));
+  const aEl = h("b", {}), eEl = h("span", { class: "sfun" }), qEl = h("b", { class: "sq user" });
+  renderRich(aEl, c.a); renderRich(eEl, c.e); renderRich(qEl, c.q);   // (formulas written as $...$ are typeset)
+  const ans = h("div", { class: "sans user" }, aEl, eEl);
   const el = h("div", { class: "scard tappable", "data-card": c.id, role: "button", tabindex: "0" },
-    h("span", { class: "stopic" }, lib.topics[c.t] ?? c.t), h("b", { class: "sq user" }, c.q), ans);
+    h("span", { class: "stopic" }, lib.topics[c.t] ?? c.t), qEl, ans);
   const flip = () => el.classList.toggle("open");
   el.addEventListener("click", flip);
   el.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), flip()));
   return el;
 }
 
-async function renderWeek(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: SM.Library) {
-  const t = todayWeek();
-  const anchor = kid.weeks[0]?.start ?? curWeek;
-  const lowest = [t, ...kid.weeks.map((x) => x.start)].sort()[0];
-  const highest = [M.addDays(t, 7), ...kid.weeks.map((x) => x.start)].sort().at(-1)!;
-  const go = async (start: string) => { curWeek = start; await ensureWeek(k, start, lib); void renderWeek(body, k, cache.get(k.id) ?? M.EMPTY_KID, lib); };
+async function renderDay(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: SM.Library) {
+  const my = X.epoch();
+  body.replaceChildren(h("div", { class: "center-msg" }, h("div", { class: "spin" })));
+  let review: SM.ScienceReview;
+  try { review = await scienceReviewOf(k.id); } catch (e) { return void body.replaceChildren(h("p", { class: "err" }, errText(e))); }
+  if (my !== X.epoch()) return;
+  const t = today();
+  const days = kid.weeks.filter((w) => w.chars.length).map((w) => w.start).sort();
+  const at = days.indexOf(curDay);
+  const go = (d: string | undefined) => { if (d) { curDay = d; void renderDay(body, k, cache.get(k.id) ?? M.EMPTY_KID, lib); } };
   const bar = h("div", { class: "weekbar" },
-    h("button", { class: "icon", title: "上一周", "aria-label": "上一周", disabled: curWeek <= lowest, onclick: () => void go(M.addDays(curWeek, -7)) }, "‹"),
-    h("div", { class: "wlabel", id: "week-label" }, h("strong", {}, `第${M.weekNo(curWeek, anchor)}周`), h("span", { class: "muted" }, `${curWeek} ~ ${M.addDays(curWeek, 6)}`)),
-    h("button", { class: "icon", title: "下一周", "aria-label": "下一周", disabled: curWeek >= highest, onclick: () => void go(M.addDays(curWeek, 7)) }, "›"));
-  const ids = M.weekOf(kid, curWeek)?.chars ?? [];
-  const cards = ids.map((i) => lib.byId.get(i)).filter((c): c is SM.Card => !!c);
+    h("button", { class: "icon", title: "前一天", "aria-label": "前一天", disabled: at <= 0, onclick: () => go(days[at - 1]) }, "‹"),
+    h("div", { class: "wlabel", id: "week-label" }, h("strong", {}, curDay === t ? "今天" : curDay), h("span", { class: "muted" }, curDay === t ? curDay : "")),
+    h("button", { class: "icon", title: "后一天", "aria-label": "后一天", disabled: at < 0 || at >= days.length - 1, onclick: () => go(days[at + 1]) }, "›"));
+  const cards = (M.weekOf(kid, curDay)?.chars ?? []).map((i) => lib.byId.get(i)).filter((c): c is SM.Card => !!c);
+  const again = curDay === t ? SM.reviewIds(kid, review, t).map((i) => lib.byId.get(i)).filter((c): c is SM.Card => !!c && !cards.includes(c)) : [];
   body.replaceChildren(h("div", { class: "narrow week-narrow" }, bar,
-    curWeek === t ? null : h("button", { class: "link", onclick: () => void go(t) }, "回到本周"),
-    h("div", { class: "sec-row" }, h("h2", { class: "sec" }, `知识卡（${cards.length}）`), cards.length ? h("span", { class: "muted small" }, "点一下看答案") : null),
-    cards.length ? h("div", { class: "slist" }, ...X.stagger(cards.map((c) => cardEl(c, lib)))) : h("p", { class: "empty" }, "这一周没有知识卡。")));
+    curDay === t ? null : h("button", { class: "link", onclick: () => go(t) }, "回到今天"),
+    h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "day-title" }, `新知识（${cards.length}）`), cards.length ? h("span", { class: "muted small" }, "点一下看答案") : null),
+    cards.length ? h("div", { class: "slist" }, ...X.stagger(cards.map((c) => cardEl(c, lib)))) : h("p", { class: "empty" }, "这一天没有知识卡。"),
+    again.length ? h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "again-title" }, `该回顾的旧知识（${again.length}）`), h("span", { class: "muted small" }, "按记忆曲线，隔一段时间再看一遍")) : null,
+    again.length ? h("div", { class: "slist", id: "again-list" }, ...X.stagger(again.map((c) => cardEl(c, lib)))) : null));
 }
 
 async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: SM.Library) {
   const my = X.epoch();
   body.replaceChildren(h("div", { class: "center-msg" }, h("div", { class: "spin" })));
-  let review: MM.MathReview;
-  try { review = await reviewOf(k.id); } catch (e) { return void body.replaceChildren(h("p", { class: "err" }, errText(e))); }
+  let review: SM.ScienceReview;
+  try { review = await scienceReviewOf(k.id); } catch (e) { return void body.replaceChildren(h("p", { class: "err" }, errText(e))); }
   if (my !== X.epoch()) return;
   const mistakes = review.mistakes ?? [];
   const all = allIds(kid);
@@ -175,14 +189,14 @@ async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: S
     const book = h("div", { class: "mmistakes", id: "mistakes" },
       h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "mistakes-title" }, `错题本（${mistakes.length}）`),
         mistakes.length ? h("button", { class: "sheet-btn", id: "redo-mistakes", onclick: () => playQuestions(k, mistakes.slice(0, 20).map((q) => ({ ...q, choices: [...q.choices].sort(() => Math.random() - 0.5) })), lib, () => X.route()) }, "重做错题") : null),
-      mistakes.length ? h("div", {}, ...mistakes.slice(0, 20).map((m) => h("div", { class: "mmis", "data-topic": m.topic }, h("span", { class: "user" }, m.q), h("b", { class: "user" }, m.a)))) : h("p", { class: "muted small" }, "还没有错题。"));
+      mistakes.length ? h("div", {}, ...mistakes.slice(0, 20).map((m) => { const q = h("span", { class: "user" }), a = h("b", { class: "user" }); renderRich(q, m.q); renderRich(a, m.a); return h("div", { class: "mmis", "data-topic": m.topic }, q, a); })) : h("p", { class: "muted small" }, "还没有错题。"));
     body.replaceChildren(h("div", { class: "narrow" }, book,
       all.length
         ? h("div", {},
             h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "sample-title" }, `随机 ${sample.length} 张`), h("span", { class: "muted small" }, `共 ${all.length} 张`),
               all.length > sample.length ? h("button", { class: "sheet-btn", id: "reshuffle", onclick: show }, "换一批") : null),
             h("div", { class: "slist" }, ...X.stagger(sample.map((c) => cardEl(c, lib)))))
-        : h("p", { class: "empty" }, "还没有入库的知识卡，先去“本周”看看吧。")));
+        : h("p", { class: "empty" }, "还没有入库的知识卡，先去“今天”看看吧。")));
   };
   show();
 }
@@ -191,13 +205,13 @@ async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: S
 function playQuestions(k: M.Kid, questions: ReturnType<typeof SM.cardToQ>[], lib: SM.Library, again: () => void) {
   const byQ = new Map(lib.cards.map((c) => [c.q, c]));
   openMathGame({
-    color: k.color, questions, seconds: questions.length * SM.SEC_PER_QUESTION,
+    color: k.color, questions, seconds: questions.length * 20,
     relaxed: true, explain: (q) => byQ.get(q.q)?.e ?? "",
     topicName: (id) => lib.topics[id] ?? id,
     onSave: async (answers, score, total, used, finished) => {
       const done = toast("正在保存…", 0, true);
       try {
-        await api.update<MM.MathReview>(SM.scienceReviewPath(k.id), MM.EMPTY_MATH_REVIEW, (cur) => MM.applyMath(cur, answers, M.todayLocal(), finished ? { score, total, seconds: used } : undefined), `science game ${k.id}`);
+        await api.update<SM.ScienceReview>(SM.scienceReviewPath(k.id), MM.EMPTY_MATH_REVIEW as SM.ScienceReview, (cur) => SM.applyScience(cur, answers, byQ, today(), finished ? { score, total, seconds: used } : undefined), `science game ${k.id}`);
         done();
         toast("已记录这次练习");
       } catch (e) {
@@ -209,23 +223,18 @@ function playQuestions(k: M.Kid, questions: ReturnType<typeof SM.cardToQ>[], lib
     onClose: () => X.route(),
   });
 }
-const latestWeek = (kid: M.KidData): string | null => {
-  const now = todayWeek();
-  const weeks = kid.weeks.filter((w) => w.chars.length && w.start <= now).map((w) => w.start).sort();
-  return weeks.length ? weeks[weeks.length - 1] : null;
-};
-function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: SM.Library) {
-  const week = latestWeek(kid);
-  const thisWeek = week ? M.weekOf(kid, week)?.chars ?? [] : [];
-  const prev = week ? M.weekOf(kid, M.addDays(week, -7))?.chars ?? [] : [];
-  const n = thisWeek.length + (prev.length ? Math.min(SM.GAME_PREVIOUS, prev.length) : 0);
-  const start = () => {
-    const g = SM.buildGame(lib, thisWeek, prev);
-    playQuestions(k, g.questions, lib, () => void api.readJson<M.KidData>(SM.sciencePath(k.id)).then((d) => { const wk = latestWeek(d ?? kid); const gg = SM.buildGame(lib, (wk && M.weekOf(d ?? kid, wk)?.chars) || thisWeek, (wk && M.weekOf(d ?? kid, M.addDays(wk, -7))?.chars) || []); playQuestions(k, gg.questions, lib, () => X.route()); }));
-  };
+async function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: SM.Library) {
+  const my = X.epoch();
+  body.replaceChildren(h("div", { class: "center-msg" }, h("div", { class: "spin" })));
+  let review: SM.ScienceReview;
+  try { review = await scienceReviewOf(k.id); } catch (e) { return void body.replaceChildren(h("p", { class: "err" }, errText(e))); }
+  if (my !== X.epoch()) return;
+  const g = SM.buildGame(lib, kid, review, today());
+  const n = g.questions.length;
+  const start = () => playQuestions(k, SM.buildGame(lib, kid, review, today()).questions, lib, () => X.route());
   body.replaceChildren(h("div", { class: "narrow lobby" },
     h("div", { class: "lobby-hero" }, h("span", { class: "mascot big" }, mascot()), h("h2", {}, "准备好了吗？")),
-    n ? h("p", { class: "muted center", id: "math-info" }, `共 ${n} 题，不限时，慢慢来`) : h("p", { class: "empty" }, "还没有知识卡，先到“本周”看看吧。"),
+    n ? h("p", { class: "muted center", id: "math-info" }, `今天：${g.fresh} 个新知识，${g.again} 个回顾，不限时，慢慢来`) : h("p", { class: "empty" }, "还没有知识卡，先到“今天”看看吧。"),
     h("div", { class: "lobby-go" }, h("button", { class: "primary wide", id: "game-start", disabled: n === 0, onclick: start }, "开始游戏"))));
 }
 
@@ -237,7 +246,7 @@ export async function renderPeriodic() {
   let juniorOnly = false;
   const grid = h("div", { class: "pt-grid", id: "pt-grid" });
   const draw = () => {
-    grid.replaceChildren(...lib.elements.map((e) => h("button", { class: `pt-cell cat-${e.cat}` + (juniorOnly && !e.junior ? " dim" : ""), "data-n": String(e.n), style: `grid-row:${e.row};grid-column:${e.col}`, title: e.zh, "aria-label": e.zh, onclick: () => void details(e) },
+    grid.replaceChildren(...lib.elements.map((e) => h("button", { class: `pt-cell cat-${e.cat}` + (juniorOnly && !e.junior ? " dim" : ""), "data-n": String(e.n), style: `grid-row:${e.row >= 8 ? e.row + 1 : e.row};grid-column:${e.col}`, title: e.zh, "aria-label": e.zh, onclick: () => void details(e) },
       h("small", {}, String(e.n)), h("b", {}, e.sym), h("span", { class: "user" }, e.zh))));
   };
   const chip = (label: string, id: string, on: () => void, active: () => boolean) => { const b = h("button", { class: "mopt" + (active() ? " on" : ""), id, onclick: () => { on(); chips.forEach((c) => c.refresh()); } }, label); return { el: b, refresh: () => b.classList.toggle("on", active()) }; };
@@ -246,9 +255,11 @@ export async function renderPeriodic() {
   const legend = h("div", { class: "pt-legend" }, ...Object.entries(CATS).map(([c, name]) => h("span", { class: "pt-key" }, h("i", { class: `cat-${c}` }), name)));
   X.show(h("div", { class: "page", style: `--kid:${COLOR}` },
     h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, "元素周期表")), X.gear("#/science/periodic")),
-    h("main", { class: "scroll" }, h("div", { class: "narrow" },
+    h("main", { class: "scroll" }, h("div", { class: "wide" },
       h("div", { class: "mset-opts pt-filter" }, ...chips.map((c) => c.el)),
-      h("div", { class: "pt-wrap" }, grid), legend, h("p", { class: "muted small center" }, "点一下元素看详情；横向滑动可以看到全部。")))));
+      h("div", { class: "pt-wrap" }, grid), legend,
+      h("p", { class: "muted small center pt-tip" }, "点一下元素看详情。"),
+      h("p", { class: "muted small center pt-rotate" }, "手机竖着拿时字比较小，横过来会看得更清楚。")))));
 }
 async function details(e: SM.Element) {
   await modal<boolean>((close) => h("div", { class: "dlg pt-dlg", id: "pt-dlg" },
@@ -264,22 +275,45 @@ async function details(e: SM.Element) {
     h("div", { class: "row end" }, h("button", { class: "primary", onclick: () => close(true) }, "完成"))));
 }
 
-// ---------- formulas ----------
-interface Formula { g: number; k: string; n: string; f: string }
+// ---------- formulas (math, physics, chemistry) ----------
+interface Formula { g: number; k: string; s: string; n: string; t: string }
 export async function renderFormulas() {
-  const list = ((await import("./data/science.json")).default.formulas as Formula[]).slice();
-  let kind = "";
-  const body = h("div", {});
+  const list = (await import("./data/formulas.json")).default.formulas as Formula[];
+  let kind = "", level = "";
+  const body = h("div", { id: "fm-body" });
   const draw = () => {
-    const items = list.filter((x) => !kind || x.k === kind);
-    body.replaceChildren(...items.map((x) => h("div", { class: "fm-row", "data-k": x.k },
-      h("div", { class: "fm-head" }, h("span", { class: "stopic" }, x.k), h("span", { class: "muted small" }, P.gradeName(x.g))),
-      h("div", { class: "fm-name user" }, x.n), h("div", { class: "fm-formula user" }, x.f))));
+    const items = list.filter((x) => (!kind || x.k === kind) && (!level || (level === "primary" ? x.g <= 6 : x.g >= 7)));
+    const groups = new Map<string, Formula[]>();
+    for (const x of items) groups.set(`${x.k}|${x.s}`, [...(groups.get(`${x.k}|${x.s}`) ?? []), x]);
+    body.replaceChildren(...[...groups.entries()].map(([key, rows]) => {
+      const [k, s] = key.split("|");
+      return h("section", { class: "fm-group", "data-k": k },
+        h("h3", { class: "fm-title" }, h("span", { class: "stopic" }, k), s),
+        ...rows.map((x) => { const f = h("div", { class: "fm-formula user" }); renderTeX(f, x.t, x.t.replace(/\\[a-z]+|[{}]/g, "")); return h("div", { class: "fm-row", "data-k": x.k, "data-g": String(x.g) }, h("div", { class: "fm-head" }, h("span", { class: "fm-name user" }, x.n), h("span", { class: "muted small" }, P.gradeName(x.g))), f); }));
+    }), ...(items.length ? [] : [h("p", { class: "empty" }, "没有符合条件的公式。")]));
   };
-  const chip = (label: string, v: string, id: string) => { const b = h("button", { class: "mopt" + (kind === v ? " on" : ""), id, onclick: () => { kind = v; chips.forEach((c) => c.classList.toggle("on", c.id === id)); draw(); } }, label); return b; };
-  const chips = [chip("全部", "", "fm-all"), chip("物理", "物理", "fm-phys"), chip("化学", "化学", "fm-chem")];
+  const chips = (opts: [string, string][], pick: (v: string) => void, idp: string) => {
+    const els = opts.map(([label, v]) => h("button", { class: "mopt" + (v === "" ? " on" : ""), id: `${idp}-${v || "all"}`, "data-v": v, onclick: () => { pick(v); els.forEach((e) => e.classList.toggle("on", e.dataset.v === v)); draw(); } }, label));
+    return h("div", { class: "mset-opts pt-filter" }, ...els);
+  };
   draw();
   X.show(h("div", { class: "page", style: `--kid:${COLOR}` },
     h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, "公式与方程式")), X.gear("#/science/formulas")),
-    h("main", { class: "scroll" }, h("div", { class: "narrow" }, h("div", { class: "mset-opts pt-filter" }, ...chips), body))));
+    h("main", { class: "scroll" }, h("div", { class: "narrow" },
+      chips([["全部", ""], ["数学", "数学"], ["物理", "物理"], ["化学", "化学"]], (v) => (kind = v), "fm"),
+      chips([["全部", ""], ["小学", "primary"], ["初中", "junior"]], (v) => (level = v), "fl"), body))));
+}
+
+// ---------- circuits and electromagnetism (drawn in code) ----------
+export function renderCircuits() {
+  const fig = (svg: string) => { const d = h("div", { class: "dg-fig" }); d.innerHTML = svg; return d; };
+  X.show(h("div", { class: "page", style: `--kid:${COLOR}` },
+    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, "电路与电磁")), X.gear("#/science/circuits")),
+    h("main", { class: "scroll" }, h("div", { class: "narrow" },
+      h("h2", { class: "sec" }, "电路元件符号"),
+      h("div", { class: "dg-symbols", id: "dg-symbols" }, ...SYMBOLS.map((s) => h("div", { class: "dg-sym" }, fig(s.svg), h("span", {}, s.name)))),
+      h("h2", { class: "sec" }, "基本电路图"),
+      ...CIRCUITS.map((c) => h("section", { class: "dg-card", "data-circuit": c.title }, h("h3", {}, c.title), fig(c.svg), h("ul", {}, ...c.notes.map((n) => h("li", {}, n))))),
+      h("h2", { class: "sec" }, "电与磁的三个定则"),
+      ...RULES.map((r) => h("section", { class: "dg-card", "data-rule": r.title }, h("h3", {}, r.title), fig(r.svg), h("ol", {}, ...r.steps.map((n) => h("li", {}, n))), h("p", { class: "muted small" }, r.note)))))));
 }

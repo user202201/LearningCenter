@@ -34,7 +34,12 @@ export async function loadMath(): Promise<MathData> {
 export function pickTopics(data: MathData, kid: KidData, grade: number, known: (id: string) => boolean, n = WEEKLY_TOPICS, acc: (id: string) => number | null = () => null): string[] {
   const list = (data.grades[String(grade)] ?? []).filter(known);
   const used = new Set(kid.weeks.flatMap((w) => w.chars));
-  const out = list.filter((t) => !used.has(t)).slice(0, n);
+  // the grade is the child's HIGHEST level: one topic of every week comes from the lower grades (the nearest grade first, the ones he has not had first)
+  const lowerList = Array.from({ length: Math.max(0, grade - 1) }, (_, i) => grade - 1 - i).flatMap((g) => (data.grades[String(g)] ?? []).filter(known));
+  const lowerFresh = lowerList.filter((t) => !used.has(t));
+  const lowerPick = grade > 1 && n >= 2 ? (lowerFresh[0] ?? lowerList.map((t) => ({ t, a: acc(t) ?? 50 })).sort((x, y) => x.a - y.a)[0]?.t) : undefined;
+  const out = list.filter((t) => !used.has(t)).slice(0, lowerPick ? n - 1 : n);
+  if (lowerPick) out.push(lowerPick);
   // a new round: the topics he answered worst come first (never asked = in the middle), ties keep the list's order
   const rest = list.filter((t) => !out.includes(t)).map((t, i) => ({ t, i, a: acc(t) ?? 50 })).sort((x, y) => x.a - y.a || x.i - y.i);
   for (const r of rest) { if (out.length >= n) break; out.push(r.t); }

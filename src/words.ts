@@ -26,15 +26,25 @@ export const wordMap = (all: Word[]): Map<string, Word> => new Map(all.map((x) =
 /** every recorded word of a child, by key */
 export const recordedWords = (kid: KidData): Set<string> => new Set(kid.weeks.flatMap((w) => w.chars.map(wordKey)));
 
+/** of every week's new words this share is of the child's own grade; the rest is of the LOWER grades (the grade is his highest level: what is below it is consolidated) */
+export const OWN_GRADE_SHARE = 0.6;
 /**
- * The next `n` words for a child of `grade`: from the first word of that grade on, in the library's order, skipping the ones already recorded
- * (in any week); when the end of the library is reached, the words of lower grades that are still unrecorded follow (newest grade first).
+ * The next `n` words for a child of `grade` (his highest level): about 60 % of his own grade, in the library's order, and the rest from the lower grades (the nearest
+ * grade first), always skipping the words already recorded (in any week). When one of the two runs out the other fills the week; when both are used up the
+ * words of the grades above follow.
  */
 export function pickWords(all: Word[], kid: KidData, grade: number, n = WEEKLY_WORDS): string[] {
   const used = recordedWords(kid);
-  const from = Math.max(0, all.findIndex((x) => x.g >= grade));
-  const order = [...all.slice(from), ...all.slice(0, from).reverse()];
-  return order.filter((x) => !used.has(wordKey(x.w))).slice(0, n).map((x) => x.w);
+  const fresh = all.filter((x) => !used.has(wordKey(x.w)));
+  const own = fresh.filter((x) => x.g === grade);
+  const lower = fresh.filter((x) => x.g < grade).sort((a, b) => b.g - a.g);   // (stable: the library's order inside a grade)
+  const above = fresh.filter((x) => x.g > grade);
+  const wantOwn = grade <= 1 ? n : Math.round(n * OWN_GRADE_SHARE);
+  const out = own.slice(0, wantOwn);
+  out.push(...lower.slice(0, n - out.length));
+  if (out.length < n) out.push(...own.slice(wantOwn, wantOwn + n - out.length));   // (the lower grades are used up: his own grade fills the week)
+  if (out.length < n) out.push(...above.slice(0, n - out.length));
+  return out.slice(0, n).map((x) => x.w);
 }
 
 /** adds the words to a week (a week that already has words is left alone: a week is generated once) */

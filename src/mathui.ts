@@ -6,6 +6,8 @@
 import { h, confirmDlg } from "./ui";
 import type { Q } from "./mathgen";
 import { translateNow } from "./i18n";
+import { renderRich } from "./mathtext";
+const HAS_CJK = /[　-〿一-鿿＀-￯]/;
 import type { AnswerMode } from "./mathsettings";
 
 export interface Answer { topic: string; right: boolean; q: Q }
@@ -44,10 +46,12 @@ export function fitQuestion(el: HTMLElement, box: HTMLElement): void {
   el.style.whiteSpace = /\p{L}{3,}/u.test(el.textContent ?? "") ? "" : "nowrap";
   // the room the card really has (on a low landscape screen the card is squeezed by the screen, not made taller by its text)
   const cs = getComputedStyle(box);
-  const maxH = Math.max(28, Math.min(window.innerHeight * 0.3, (box.clientHeight || 1e4) - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)));
   let size = parseFloat(getComputedStyle(el).fontSize);
-  for (let i = 0; i < 16; i++) {
-    if (el.scrollWidth <= el.clientWidth + 1 && el.getBoundingClientRect().height <= maxH) break;
+  // (the card's height depends on the text and on the screen: measure again after every change of the size until it is stable)
+  for (let i = 0; i < 24; i++) {
+    const maxH = Math.max(28, Math.min(window.innerHeight * 0.3, (box.clientHeight || 1e4) - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)));
+    const r = el.getBoundingClientRect(), c = box.getBoundingClientRect();
+    if (el.scrollWidth <= el.clientWidth + 1 && r.height <= maxH && r.bottom <= c.bottom + 0.5 && r.top >= c.top - 0.5) break;
     size *= 0.92;
     el.style.fontSize = `${size}px`;
   }
@@ -105,7 +109,8 @@ export function openMathGame(o: MathGameOpts): void {
     progress.textContent = `${idx + 1} / ${total}`;
     topic.textContent = o.topicName(q.topic);
     qText.textContent = q.q;
-    fitQuestion(qText, qBox);
+    fitQuestion(qText, qBox);                                    // (translated and sized as plain text first ...)
+    renderRich(qText, qText.textContent ?? q.q, !HAS_CJK.test(q.q));   // ... then typeset (fractions, roots, exponents) as soon as KaTeX is there
     typing = o.mode === "keypad" && typable(q.a);
     typed = "";
     grid.classList.toggle("keypad", typing);
@@ -120,7 +125,7 @@ export function openMathGame(o: MathGameOpts): void {
       const longest = Math.max(...q.choices.map((c) => [...c].length));
       grid.classList.toggle("long", longest > 14);
       grid.classList.toggle("mid", longest > 7 && longest <= 14);
-      grid.replaceChildren(...q.choices.map((c) => h("button", { class: "mchoice user", "data-v": c, onclick: () => answer(c) }, c)));
+      grid.replaceChildren(...q.choices.map((c) => { const b = h("button", { class: "mchoice user", "data-v": c, onclick: () => answer(c) }); renderRich(b, c, !HAS_CJK.test(c)); return b; }));
     }
     root.classList.remove("ok", "bad");
   }
@@ -156,7 +161,7 @@ export function openMathGame(o: MathGameOpts): void {
     if (o.relaxed) {
       const goNext = () => { clearTimeout(next); idx++; ask(); };
       const text = o.explain?.(q) ?? "";
-      grid.append(h("div", { class: "mexplain", id: "math-explain" }, h("b", { class: right ? "yes" : "no" }, right ? "答对啦！" : "没关系，看看这个小知识～"), !right ? h("p", {}, "正确答案：", h("b", { class: "user" }, q.a)) : null, text ? h("p", { class: "user" }, text) : null,
+      grid.append(h("div", { class: "mexplain", id: "math-explain" }, h("b", { class: right ? "yes" : "no" }, right ? "答对啦！" : "没关系，看看这个小知识～"), !right ? h("p", {}, "正确答案：", ((): HTMLElement => { const b = h("b", { class: "user" }); renderRich(b, q.a, !HAS_CJK.test(q.a)); return b; })()) : null, text ? ((): HTMLElement => { const p = h("p", { class: "user" }); renderRich(p, text); return p; })() : null,
         h("button", { class: "primary", id: "math-next", onclick: goNext }, idx + 1 < total ? "下一题" : "完成")));
       return;
     }
@@ -213,6 +218,8 @@ export function openMathGame(o: MathGameOpts): void {
     } else if (phase === "ask" && /^[1-4]$/.test(e.key)) grid.querySelectorAll<HTMLElement>(".mchoice")[Number(e.key) - 1]?.click();
   }
   const onResize = () => { if (phase !== "end") fitQuestion(qText, qBox); };
+  qText.addEventListener("mx-rendered", () => { if (phase !== "end") fitQuestion(qText, qBox); });
+  grid.addEventListener("mx-rendered", () => { if (phase !== "end") fitQuestion(qText, qBox); });   // (stacked fractions in the choices change the room the card has)   // (a stacked fraction is taller than the plain text)
   quit.addEventListener("click", () => void leave());
   document.addEventListener("keydown", onKey);
   window.addEventListener("resize", onResize);

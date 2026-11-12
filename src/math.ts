@@ -12,6 +12,7 @@ import * as MM from "./mathmodel";
 import * as MG from "./mathgen";
 import { pickKidGrade } from "./gradeui";
 import { openMathGame } from "./mathui";
+import { renderRich } from "./mathtext";
 import * as MS from "./mathsettings";
 import { mascot } from "./art";
 import { subjectArt } from "./hub";
@@ -184,7 +185,7 @@ async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, names:
     h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "mistakes-title" }, `错题本（${mistakes.length}）`),
       mistakes.length ? h("button", { class: "sheet-btn", id: "redo-mistakes", onclick: () => playMistakes(k, mistakes, names) }, "重做错题") : null),
     mistakes.length
-      ? h("div", {}, ...mistakes.slice(0, 20).map((m) => h("div", { class: "mmis", "data-topic": m.topic }, h("span", { class: "user" }, m.q), h("b", { class: "user" }, m.a))))
+      ? h("div", {}, ...mistakes.slice(0, 20).map((m) => { const q = h("span", { class: "user" }), a = h("b", { class: "user" }); renderRich(q, m.q, !/[　-〿一-鿿＀-￯]/.test(m.q)); renderRich(a, m.a, true); return h("div", { class: "mmis", "data-topic": m.topic }, q, a); }))
       : h("p", { class: "muted small" }, "还没有错题。"));
   body.replaceChildren(h("div", { class: "narrow" }, book,
     all.length ? h("div", { class: "mtlist" }, ...X.stagger(all.map((id) => topicCard(id, names, review)))) : h("p", { class: "empty" }, "还没有入库的知识点，先去“本周”看看吧。")));
