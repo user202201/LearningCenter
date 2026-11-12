@@ -203,6 +203,7 @@ function renderLearned(body: HTMLElement, kid: M.KidData, map: Map<string, W.Wor
 
 async function changeGrade(k: M.Kid) {
   if ((await pickKidGrade(k)) === null) return;   // cancelled: nothing changes, no message
+  cache.delete(k.id);   // (the words of this week and next week may have been picked again)
   toast("年级已记住");
   X.route();
 }

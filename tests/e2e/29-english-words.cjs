@@ -125,6 +125,12 @@ const openEnglish = async (page, name) => {
   ok(await page.locator('.grade-btn.on').getAttribute('data-grade') === '3', 'the grade link on the child\'s page opens the window with the current grade marked');
   await page.click('.grade-btn[data-grade="7"]'); await page.waitForSelector('#grade-dlg', { state: 'detached' });
   ok((await page.textContent('#grade-btn')).includes('初一'), 'Leo changed to 初一');
+  await page.waitForFunction((w0) => document.querySelector('.wrow')?.dataset.w !== w0, week1[0]);
+  const leoNew = await page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w));
+  ok(leoNew.length === 20 && leoNew.every((w) => g[keyOf(w)] >= 7) && leoNew.every((w) => !week1.includes(w)), "changing the grade (三年级 -> 初一) picks THIS week's words again for the new grade: " + leoNew.slice(0, 4).join(' ') + ' …');
+  await page.click('button[title=下一周]'); await page.waitForFunction(() => document.querySelector('#week-label strong')?.textContent === '第2周');
+  ok((await page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w))).every((w) => g[keyOf(w)] >= 7), "and next week's words too (grade 7 or higher)");
+  await page.click('button[title=上一周]'); await page.waitForFunction(() => document.querySelector('#week-label strong')?.textContent === '第1周');
   await page.evaluate(() => (location.hash = '#/subject/english')); await page.waitForSelector('.kids');
   const subs = await page.locator('.kid .ksub').allTextContents();
   ok(subs.some((s) => s.includes('初一')) && subs.some((s) => s.includes('三年级')), 'the list shows each child\'s grade: ' + subs.join(' / '));
@@ -201,6 +207,23 @@ const openEnglish = async (page, name) => {
     for (let i = 0; i < 25; i++) { if (await t2.page.locator('#game-end').count()) break; asked2.push(await t2.page.textContent('#game-char')); await t2.page.click('#game-right'); await t2.page.waitForTimeout(700); }
     ok(asked2.length === 20, 'no week before: the first week, only its own 20 words (' + asked2.length + ')');
     await t2.browser.close();
+  }
+
+  // ---- a child whose words were made BEFORE he had a grade (earlier version: everybody was grade 3): choosing a grade picks this week again ----
+  {
+    const t = await start(new Map(), { local: true, today: '2026-11-12', viewport: { width: 390, height: 844 } });
+    await addKid(t.page, 'Dory'); await addKid(t.page, 'Leo');
+    const ids = await t.page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.kids.json')).kids.map((k) => k.id));
+    const lib3 = await t.page.evaluate(async () => (await (await fetch('/data/english-words.json')).json()).words);
+    const old3 = lib3.filter((x) => x.g === 3).slice(0, 20).map((x) => x.w);
+    await t.page.evaluate(([list, ids]) => ids.forEach((id) => localStorage.setItem('learn.local.english/' + id + '.json', JSON.stringify({ weeks: [{ start: '2026-11-08', chars: list }] }))), [old3, ids]);
+    await setGrade(t.page, 'Dory', 3); await setGrade(t.page, 'Leo', 6);
+    const got = {};
+    for (const n of ['Dory', 'Leo']) { await openEnglish(t.page, n); got[n] = await t.page.locator('.wrow').evaluateAll((els) => els.map((e) => e.dataset.w)); }
+    const gr = Object.fromEntries(lib3.map((x) => [keyOf(x.w), x.g]));
+    ok(got.Dory.length === 20 && got.Leo.length === 20 && got.Dory.every((w) => gr[keyOf(w)] >= 3), 'one child 三年级, one 六年级 (old words already stored): Dory has grade-3 words');
+    ok(got.Leo.every((w) => gr[keyOf(w)] >= 6) && JSON.stringify(got.Leo) !== JSON.stringify(got.Dory), 'Leo (六年级) has grade-6 words, NOT the same as Dory\'s: ' + got.Leo.slice(0, 4).join(' ') + ' vs ' + got.Dory.slice(0, 4).join(' '));
+    await t.browser.close();
   }
 
   // ---- the Chinese part is unchanged: it still has no word in it ----

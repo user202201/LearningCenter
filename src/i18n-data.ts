@@ -364,6 +364,8 @@ export const EN: Record<string, string> = {
   "随机 {0} 个": "A random {0}",
   "共 {0} 个": "{0} in all",
   "换一批": "Shuffle",
+  "正在按新年级重新选单词…": "Picking words again for the new grade…",
+  "已按新年级重新选了这周和下周的单词": "This week's and next week's words were picked again for the new grade",
 };
 export const FR: Record<string, string> = {
   "游戏": "Jeu",
@@ -730,4 +732,6 @@ export const FR: Record<string, string> = {
   "随机 {0} 个": "{0} au hasard",
   "共 {0} 个": "{0} au total",
   "换一批": "Mélanger",
+  "正在按新年级重新选单词…": "Nouveau choix de mots pour le nouveau niveau…",
+  "已按新年级重新选了这周和下周的单词": "Les mots de cette semaine et de la suivante ont été rechoisis pour le nouveau niveau",
 };

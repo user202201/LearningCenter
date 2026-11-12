@@ -2,6 +2,9 @@
 import { h, modal } from "./ui";
 import * as P from "./profile";
 import * as M from "./model";
+import * as api from "./api";
+import * as W from "./words";
+import { toast } from "./ui";
 
 export const askGrade = (title: string, current: number | null, note = "", extra?: HTMLElement): Promise<number | null> =>
   modal<number>((close) => {
@@ -15,10 +18,32 @@ export const askGrade = (title: string, current: number | null, note = "", extra
       h("div", { class: "row end" }, h("button", { onclick: () => close(null) }, "取消")));
   });
 
-/** asks for the grade of a child and remembers it; `null` = cancelled (nothing changes, no message) */
+/**
+ * Asks for the grade of a child and remembers it; `null` = cancelled (nothing changes, no message). Whenever a grade is set or changed, the words of this
+ * week and next week that already exist (picked for the old grade, or, in an earlier version, for no grade at all) are picked again for the new grade;
+ * past weeks stay. A child that has no words yet is not touched.
+ */
 export async function pickKidGrade(k: M.Kid): Promise<number | null> {
-  const g = await askGrade(`${k.name}读几年级？`, P.gradeOf(k.id), "只需要选一次，之后每年 9 月会自动升一级。以后想改，在设置的“孩子”里改。");
+  const old = P.gradeOf(k.id);
+  const g = await askGrade(`${k.name}读几年级？`, old, "只需要选一次，之后每年 9 月会自动升一级。以后想改，在设置的“孩子”里改。");
   if (g === null) return null;
   P.setKidGrade(k.id, g);
+  const thisWeek = M.sundayOf(M.todayLocal());
+  try {
+    const cur = await api.readJson<M.KidData>(W.wordsPath(k.id));
+    if (cur?.weeks.some((w) => w.start >= thisWeek)) {
+      const done = toast("正在按新年级重新选单词…", 0, true);
+      try {
+        await api.update(W.wordsPath(k.id), M.EMPTY_KID, (c: M.KidData) => W.dropFromWeek(c, thisWeek), `english ${k.id} new grade`);
+        done();
+        toast("已按新年级重新选了这周和下周的单词", 5000);
+      } catch (e) {
+        done();
+        throw e;
+      }
+    }
+  } catch (e) {
+    toast(e instanceof Error ? e.message : String(e), 6000);
+  }
   return g;
 }

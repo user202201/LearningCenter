@@ -45,6 +45,8 @@ export function addWeek(kid: KidData, start: string, words: string[]): { data: K
   const weeks = [...kid.weeks.filter((w) => w.start !== start), { start, chars: words }].sort((a, b) => (a.start < b.start ? -1 : 1));
   return { data: { weeks }, added: words.length };
 }
+/** the child's grade changed: this week's and next week's words were picked for the OLD grade, so they are dropped (and picked again for the new one when the week is opened); past weeks stay */
+export const dropFromWeek = (kid: KidData, thisWeek: string): KidData => ({ weeks: kid.weeks.filter((w) => w.start < thisWeek) });
 export const wordsPath = (kidId: string): string => `english/${kidId}.json`;
 export const wordsReviewPath = (kidId: string): string => `english/${kidId}.review.json`;
 
