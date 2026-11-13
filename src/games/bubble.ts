@@ -11,8 +11,8 @@ export const ICON = `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/sv
 <path d="M60 104V82" stroke="#868e96" stroke-width="5" stroke-dasharray="2 8" stroke-linecap="round"/><circle cx="60" cy="100" r="13" fill="#b197fc" stroke="#fff" stroke-width="3"/><circle cx="55" cy="98" r="3" fill="#fff"/><circle cx="65" cy="98" r="3" fill="#fff"/><circle cx="55" cy="99" r="1.5" fill="#343a40"/><circle cx="65" cy="99" r="1.5" fill="#343a40"/><path d="M55 104q5 4 10 0" fill="none" stroke="#343a40" stroke-width="2.2" stroke-linecap="round"/></svg>`;
 
 // red, blue, green, yellow, purple, orange: six clearly different hues, and each has its own little face
-const COLORS = ["", "#ff4d4d", "#339af0", "#40c057", "#fcc419", "#9775fa", "#ff922b"];
-const DARK = ["", "#c92a2a", "#1864ab", "#2b8a3e", "#e67700", "#5f3dc4", "#d9480f"];
+const COLORS = ["", "#ff4d4d", "#339af0", "#40c057", "#ffe033", "#9775fa", "#ff7a1a"];
+const DARK = ["", "#c92a2a", "#1864ab", "#2b8a3e", "#f2a900", "#5f3dc4", "#c2410c"];
 const FH = 12.2, SX = L.COLS / 2, SY = 11.2;
 const MIN_A = (10 * Math.PI) / 180, MAX_A = Math.PI - MIN_A;
 const SPEED = 30;
