@@ -69,6 +69,7 @@ export function homeSection(): HTMLElement {
 // ---------- the setup page ----------
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 export async function renderSetup() {
+  store = load();
   const my = X.epoch();
   X.showLoading();
   const lists = new Map<string, string[]>();
@@ -174,6 +175,7 @@ interface PkHook {
 declare global { interface Window { __pk?: PkHook; __pkSeed?: number } }
 
 export async function renderPlay() {
+  store = load();
   const my = X.epoch();
   X.showLoading();
   const toSetup = () => { location.hash = "#/chinese/pk"; };
