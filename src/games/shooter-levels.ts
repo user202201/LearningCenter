@@ -47,9 +47,9 @@ const L: Ev[][] = [
   // 5 belt: bombers and stealth ships
   [...line(1, "bomber", 90, 1, 0, 1), ...rocks(3, [200, 300], 3, 1), ...line(7, "stealth", 70, 3, 110, 1), ...snake(12, 280), ...gifts(17, 3, 100), ...line(24, "shield", 100, 3, 80, 0.9), comet(27), hole(29, 90, 280, 8), ...swLine(31, 70, 6), ...rocks(36, [60, 150, 240, 320], 2, 0.5), ...line(39, "bomber", 270, 1, 0, 1)],
   // 6 belt: swarms; boss Robot
-  [shower(1, 5), ...swV(4), ...line(10, "bomber", 120, 1, 0, 1), ...rocks(12, [60, 300], 3, 1), ...gifts(17, 4, 90), ...swCircle(24, 180), ...line(29, "stealth", 80, 3, 100, 0.9), ...swLine(33, 60, 7), comet(36, false), ...vee(38, "shield", 180, 1, 1.5)],
+  [shower(1, 5), ...swV(4, 180), ...line(10, "bomber", 120, 1, 0, 1), ...rocks(12, [60, 300], 3, 1), ...gifts(17, 4, 90), ...swCircle(24, 180), ...line(29, "stealth", 80, 3, 100, 0.9), ...swLine(33, 60, 7), comet(36, false), ...vee(38, "shield", 180, 1, 1.5)],
   // 7 candy: splitters and swarms
-  [...line(1, "splitter", 80, 3, 100, 1.1), ...swV(6), ...snake(11, 100), ...gifts(17, 3, 120), ...line(24, "splitter", 280, 3, -100, 1), ...swCircle(28, 120), ...mirror(snake(31, 100)), ...swSpiral(35, 240), ...rocks(39, [60, 180, 300], 2, 0.4)],
+  [...line(1, "splitter", 80, 3, 100, 1.1), ...swV(6, 180), ...snake(11, 100), ...gifts(17, 3, 120), ...line(24, "splitter", 280, 3, -100, 1), ...swCircle(28, 120), ...mirror(snake(31, 100)), ...swSpiral(35, 240), ...rocks(39, [60, 180, 300], 2, 0.4)],
   // 8 candy: storm
   [storm(1, 120, 16), ...line(2, "zigzag", 60, 5, 60, 0.5), ...line(7, "shield", 90, 3, 90, 1), ...gifts(15, 3, 120), ...vee(23, "diver", 180, 3, 0.6), storm(27, 240, 14), ...swCircle(28, 180), hole(33, 180, 320, 8), ...line(33, "splitter", 100, 2, 160, 1.2), ...swSpiral(38, 120)],
   // 9 candy: boss Candy

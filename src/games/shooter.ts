@@ -1,6 +1,6 @@
 import type { GameCtx } from "./ctx";
 import "./shooter.css";
-import { W, H, STEP, LEVEL_COUNT, CP_T, MAXBOMBS, UPGRADES, newGame, newRun, step, stars, comboMult, spawnEnemy, offers, buy, canBuy, price, owned, maxed, type State, type Event, type Run, type UpKind, type EKind, type Opts } from "./shooter-logic";
+import { W, H, STEP, botInput, LEVEL_COUNT, CP_T, MAXBOMBS, UPGRADES, newGame, newRun, step, stars, comboMult, spawnEnemy, offers, buy, canBuy, price, owned, maxed, type State, type Event, type Run, type UpKind, type EKind, type Opts } from "./shooter-logic";
 import { worldOf } from "./shooter-levels";
 import { drawBackground, drawShip, drawEnemies, drawBoss, drawPickup, drawCoin, drawEBullet, drawPB, drawBeam, drawHazards, drawStorm, drawHole, banner, weaponIcon } from "./shooter-art";
 
@@ -52,7 +52,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   let run: Run = newRun(easy), runSnap: Run = clone(run), offerList: UpKind[] = [], shopSeed = 1;
   let s!: State, phase: Phase = "ready", lastStars: [boolean, boolean, boolean] = [false, false, false], lastCp = false;
-  let tx = W / 2, ty = H - 110 - OFFY, keyX = 0, keyY = 0, bombReq = false, manual = false, last = 0, acc = 0, raf = 0, now = 0, sc = 0, shake = 0, bannerT = 0, bannerTxt = "", bannerSub = "", flashT = 0, sfxAt = 0, grazeAt = 0;
+  let bot = false, tx = W / 2, ty = H - 110 - OFFY, keyX = 0, keyY = 0, bombReq = false, manual = false, last = 0, acc = 0, raf = 0, now = 0, sc = 0, shake = 0, bannerT = 0, bannerTxt = "", bannerSub = "", flashT = 0, sfxAt = 0, grazeAt = 0;
   let parts: Particle[] = [], floats: Float[] = [], cw = 300, ch = 533, dpr = 1;
 
   const setOvl = (t: string, m: string, b: string, show: boolean) => { title.textContent = t; msg.textContent = m; action.textContent = b; ovl.hidden = !show; if (!show) extra.replaceChildren(); };
@@ -120,8 +120,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const rec = s.score > best(); saveBest(); ctx.sfx("win"); refreshHud();
     const won = s.level >= LEVEL_COUNT; phase = won ? "won" : "clear";
     const goals = h("div", { class: "sh-goals", id: "sh-goals" });
-    const lines: [string, string][] = [["未被击中", ""], ["击落九成以上的敌机", ""], ["收集 50 枚金币", ` ${s.coinsGot}`]];
-    lines.forEach(([t, extraTxt], i) => goals.append(h("div", { class: "sh-goal" + (lastStars[i] ? " got" : ""), "data-got": lastStars[i] ? "1" : "0" }, h("b", {}, lastStars[i] ? "★" : "☆"), h("span", {}, t + extraTxt))));
+    const lines: [string, string][] = [["未被击中", ""], ["击落九成以上的敌机", ""], ["收集 50 枚金币", `${s.coinsGot} / 50`]];
+    lines.forEach(([t, extraTxt], i) => goals.append(h("div", { class: "sh-goal" + (lastStars[i] ? " got" : ""), "data-got": lastStars[i] ? "1" : "0" }, h("b", {}, lastStars[i] ? "★" : "☆"), h("span", {}, t), h("span", {}, extraTxt))));
     const m = rec ? `新纪录：${s.score}` : `得分：${s.score}`;
     setOvl(won ? "全部通关。" : "本关完成。", m, won ? "再玩一次" : "商店", true);
     if (won) { const total = starsOf().reduce((a, b) => a + b, 0); msg.textContent = `总星数：${total} / 36`; }
@@ -135,6 +135,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
 
   const pop = (x: number, y: number, color: string, n = 10, big = false) => {
+    if (parts.length > 360) return;
     for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, v = 40 + Math.random() * (big ? 260 : 140); parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 20, life: 0, max: 0.35 + Math.random() * (big ? 0.7 : 0.35), color, r: 2 + Math.random() * (big ? 5 : 3) }); }
   };
   function handle(evs: Event[], delta: number) {
@@ -174,6 +175,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   function advance(dt: number) {
     if (phase !== "play") return;
     if (keyX || keyY) { tx = Math.max(0, Math.min(W, tx + keyX * 420 * dt)); ty = Math.max(0, Math.min(H, ty + keyY * 420 * dt)); }
+    if (bot) { const i = botInput(s); tx = i.tx; ty = i.ty; if (i.bomb) bombReq = true; }
     const before = s.score;
     const evs = step(s, dt, { tx, ty, bomb: bombReq }); bombReq = false;
     handle(evs, s.score - before);
@@ -283,7 +285,11 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     seed: (n: number) => { s.rs = n >>> 0; },
     setLevel: (l: number, score = 0) => { selLevel = l; run = newRun(easy); setup(l, { score }); },
     bomb: () => { bombReq = true; },
+    /** the logic's simple bot plays (tests and screenshots) */
+    bot: (on: boolean) => { bot = on; },
+    aim: (x: number, y: number) => { tx = x; ty = y; },
     shop: () => offerList,
+    clearFx: () => { parts = []; floats = []; },
   };
   (window as unknown as Record<string, unknown>).__shooter = hook;
   return () => {
