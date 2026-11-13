@@ -86,29 +86,32 @@ export function deal(level: number, rng: () => number = Math.random, fracShare =
 const sameMulti = (a: number[], b: number[]) => a.slice().sort((x, y) => x - y).join() === b.slice().sort((x, y) => x - y).join();
 
 // ---------- the game state ----------
-export interface Card { v: Frac; src: string; rank?: number }
+/** src = the expression written so far with only the brackets it needs; prec 3 = a number, 2 = × ÷, 1 = + − */
+export interface Card { v: Frac; src: string; prec: number; rank?: number }
 export interface Hand { ranks: number[]; cards: Card[]; hist: Card[][] }
 export type Status = "play" | "won" | "failed";
-export const newHand = (ranks: number[]): Hand => ({ ranks: ranks.slice(), cards: ranks.map((r) => ({ v: fr(r), src: String(r), rank: r })), hist: [] });
+export const newHand = (ranks: number[]): Hand => ({ ranks: ranks.slice(), cards: ranks.map((r) => ({ v: fr(r), src: String(r), prec: 3, rank: r })), hist: [] });
 export const resetHand = (h: Hand): Hand => newHand(h.ranks);
 /** merge cards[i] op cards[j] into one card; "div0" = refused (the hand is unchanged), "same" = the same card twice */
 export function combine(h: Hand, i: number, op: Op, j: number): Hand | "div0" | "same" {
   if (i === j || i < 0 || j < 0 || i >= h.cards.length || j >= h.cards.length) return "same";
   const a = h.cards[i], b = h.cards[j], r = apply(a.v, op, b.v);
   if (!r) return "div0";
-  const card: Card = { v: r, src: `(${a.src}${OP_SYMBOL[op]}${b.src})` };
+  const wrap = (c: Card, need: boolean) => (need ? `(${c.src})` : c.src);
+  const mul = op === "*" || op === "/";
+  const left = wrap(a, mul ? a.prec < 2 : false), right = wrap(b, op === "+" ? false : op === "-" ? b.prec <= 1 : op === "*" ? b.prec < 2 : b.prec < 3);
+  const card: Card = { v: r, src: `${left}${OP_SYMBOL[op]}${right}`, prec: mul ? 2 : 1 };
   return { ranks: h.ranks, cards: replaced(h.cards, i, j, card), hist: [...h.hist, h.cards] };
 }
 export const undo = (h: Hand): Hand => (h.hist.length ? { ranks: h.ranks, cards: h.hist[h.hist.length - 1], hist: h.hist.slice(0, -1) } : h);
 export const status = (h: Hand): Status => (h.cards.length > 1 ? "play" : is24(h.cards[0].v) ? "won" : "failed");
 /** the next step towards 24 from where the hand is now (null: this position can not reach 24, undo first) */
 export const hint = (h: Hand): Step | null => { if (h.cards.length < 2) return null; const s = solveFrom(h.cards.map((c) => c.v)); return s && s.length ? s[0] : null; };
-export const stripParens = (s: string) => (s.startsWith("(") && s.endsWith(")") ? s.slice(1, -1) : s);
 /** the whole solution of a hand as text, e.g. "8 ÷ (3 − 8 ÷ 3)" (null when unsolvable) */
 export function solutionText(ranks: number[]): string | null {
   const steps = solve(ranks);
   if (!steps) return null;
   let h = newHand(ranks);
   for (const s of steps) { const n = combine(h, s.i, s.op, s.j); if (typeof n === "string") return null; h = n; }
-  return stripParens(h.cards[0].src).replace(/([+−×÷])/g, " $1 ");
+  return h.cards[0].src.replace(/([+−×÷])/g, " $1 ");
 }

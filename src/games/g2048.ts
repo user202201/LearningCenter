@@ -46,7 +46,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   // ---- tiles ----
   const gap = () => Math.max(4, Math.round(size * GAP_RATIO));
   const cellPx = () => (size - gap() * (n + 1)) / n;
-  const place = (t: Tile) => { const c = cellPx(), g = gap(); t.el.style.transform = `translate(${g + t.c * (c + g)}px, ${g + t.r * (c + g)}px)`; };
+  const place = (t: Tile) => { t.el.dataset.r = String(t.r); t.el.dataset.c = String(t.c); const c = cellPx(), g = gap(); t.el.style.transform = `translate(${g + t.c * (c + g)}px, ${g + t.r * (c + g)}px)`; };
   const paintTile = (t: Tile) => {
     t.el.dataset.v = String(t.v); t.el.dataset.r = String(t.r); t.el.dataset.c = String(t.c);
     t.el.className = `g48-tile v${Math.min(t.v, 4096)}${t.v >= 8 ? " face" : ""}${String(t.v).length >= 4 ? " d4" : String(t.v).length === 3 ? " d3" : ""}`;
@@ -156,7 +156,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   ro?.observe(area);
 
   reset();
-  (window as unknown as Record<string, unknown>).__g2048 = { state: () => s, canMove: () => canMove(s.grid), size: () => size, move, setGrid: (g: Grid) => { s.grid = cloneGrid(g); s.over = !canMove(s.grid); rebuild(); refreshHud(); } };
+  (window as unknown as Record<string, unknown>).__g2048 = { state: () => s, canMove: () => canMove(s.grid), size: () => size, move, setGrid: (g: Grid) => { snap = null; s.grid = cloneGrid(g); s.over = !canMove(s.grid); rebuild(); refreshHud(); } };
   return () => {
     timers.forEach(clearTimeout); ro?.disconnect();
     document.removeEventListener("keydown", onKey); window.removeEventListener("resize", layout);

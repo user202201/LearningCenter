@@ -31,7 +31,6 @@ export async function renderGames() {
   if (my !== X.epoch()) return;
   const page = h("div", { class: "page", style: `--kid:${COLOR}` }, hero("小游戏", "#/", "选择学科", "#/subject/games"),
     h("main", { class: "scroll" }, h("div", { class: "narrow gm-narrow" },
-      h("p", { class: "muted small center mus-lead" }, "不用登录，也不用联网：动动脑，动动手。"),
       h("div", { class: "gm-grid" }, ...GAMES.map((g, i) => {
         const icon = h("span", { class: "gm-art" });
         icon.innerHTML = mods[i]?.ICON ?? "";

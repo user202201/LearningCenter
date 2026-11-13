@@ -119,10 +119,7 @@ const T = JSON.parse(fs.readFileSync('src/games/memory.i18n.json', 'utf8'));
   ok((await st()).pairs === 5 && !(await st()).won, 'five pairs done, not won yet');
   // last pair by keyboard
   const [x, y] = order[order.length - 1];
-  await p.evaluate((x) => { }, x);
   await clickCard(x);
-  await p.evaluate((y) => { const m = window.__memory; }, y);
-  const cur2 = await p.evaluate(() => window.__memory.cur());
   // move the frame to y with the keyboard
   const cc = await p.evaluate(() => window.__memory.cols());
   const target = { x: y % cc, y: Math.floor(y / cc) };
@@ -159,7 +156,7 @@ const T = JSON.parse(fs.readFileSync('src/games/memory.i18n.json', 'utf8'));
   await p.click('#mem-size-4x5');
   ok((await p.textContent('#mem-best')) === '最少：-', 'every size has its own best');
   await p.click('#mem-size-4x5');
-  await p.keyboard.press('Enter');
+  await p.click('#mem-start');
   // win a whole 4x5 by pointer (a random seed: pair every card), then check best for 4x5
   { const s5 = await st(); const seen5 = {}; for (let k = 0; k < s5.n; k++) { const c = s5.cards[k]; if (seen5[c] !== undefined) { await clickCard(seen5[c]); await clickCard(k); } else seen5[c] = k; }
     ok((await st()).won && (await p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).memory['best-4x5'])) === 10, '4x5: a perfect game = 10 moves = the best for that size'); }

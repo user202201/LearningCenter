@@ -1,0 +1,51 @@
+.sk-wrap { flex: 1; width: 100%; min-height: 0; display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: "hud" "board" "pad"; justify-items: center; position: relative; }
+.sk-hud { grid-area: hud; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 8px; }
+.sk-stat { background: #fff; border: 3px solid #96f2d7; border-radius: 16px; padding: 2px 12px; font-weight: 900; color: #087f5b; font-size: 17px; box-shadow: 0 3px 0 #96f2d7; white-space: nowrap; }
+.sk-stat.best { color: #e8590c; border-color: #ffd8a8; box-shadow: 0 3px 0 #ffd8a8; }
+.sk-hud .mopt { background: #fff; border: 3px solid #96f2d7; box-shadow: 0 3px 0 #96f2d7; color: #087f5b; font-weight: 800; }
+.sk-hud .mopt.on { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 3px 0 #087f5b; }
+.sk-hud .mopt:disabled { opacity: .45; }
+.sk-board { grid-area: board; align-self: stretch; height: 100%; min-width: 0; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.sk-field { position: relative; touch-action: none; border-radius: 18px; overflow: hidden; box-shadow: 0 5px 0 #0ca678; border: 4px solid #0ca678; box-sizing: content-box; }
+.sk-field canvas { display: block; touch-action: none; }
+.sk-ovl { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 10px; background: rgba(255, 246, 229, .88); color: #3a2e39; }
+.sk-ovl[hidden] { display: none; }
+.sk-ovl h2 { margin: 0; font-size: 26px; color: #087f5b; }
+.sk-ovl p { margin: 0; font-weight: 700; }
+.sk-ovl button { min-height: 48px; padding: 6px 26px; font-size: 20px; border-radius: 999px; }
+.sk-pad { grid-area: pad; display: grid; grid-template-columns: repeat(3, 58px); grid-template-rows: repeat(2, 58px); gap: 6px; justify-content: center; }
+.sk-pad button { padding: 0; font-size: 26px; font-weight: 900; border-radius: 18px; color: #fff; background: #12b886; border: 3px solid #0ca678; box-shadow: 0 4px 0 #087f5b; touch-action: none; }
+.sk-pad button:active, .sk-pad button.down { transform: translateY(3px); box-shadow: 0 1px 0 #087f5b; }
+.sk-pad [data-d=U] { grid-column: 2; grid-row: 1; }
+.sk-pad [data-d=L] { grid-column: 1; grid-row: 2; }
+.sk-pad [data-d=D] { grid-column: 2; grid-row: 2; }
+.sk-pad [data-d=R] { grid-column: 3; grid-row: 2; }
+/* the level picker: covers the playing area */
+.sk-picker { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 6px; overflow-y: auto; border-radius: 22px; background: rgba(255, 246, 229, .96); color: #3a2e39; }
+.sk-picker[hidden] { display: none; }
+.sk-picker h2 { margin: 0; font-size: 24px; color: #087f5b; }
+.sk-group { width: 100%; max-width: 520px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.sk-group h3 { margin: 2px 0 0; font-size: 16px; font-weight: 900; color: #087f5b; }
+.sk-levels { display: grid; grid-template-columns: repeat(4, 50px); gap: 6px 10px; justify-content: center; }
+.sk-lvl { position: relative; width: 50px; height: 50px; padding: 0; border-radius: 50%; background: #fff; color: #087f5b; border: 3px solid #96f2d7; box-shadow: 0 4px 0 #96f2d7; font-size: 18px; font-weight: 900; display: flex; align-items: center; justify-content: center; touch-action: manipulation; }
+.sk-lvl:active { transform: translateY(3px); box-shadow: 0 1px 0 #96f2d7; }
+.sk-lvl.done { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 4px 0 #087f5b; }
+.sk-lvl.cur { outline: 3px solid #e8590c; outline-offset: 2px; }
+.sk-lvl .st { position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); font-size: 11px; line-height: 1; color: #f59f00; text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff; letter-spacing: -1px; white-space: nowrap; }
+.sk-picker .sk-close { min-height: 44px; padding: 4px 24px; font-size: 18px; border-radius: 999px; flex: none; }
+@media (min-width: 560px) { .sk-levels { grid-template-columns: repeat(8, 50px); } .sk-picker { padding-top: 14px; gap: 10px; } }
+@media (min-aspect-ratio: 5/4) and (max-height: 700px) {
+  .sk-wrap { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: minmax(0, 1fr); grid-template-areas: "hud board pad"; align-items: center; }
+  .sk-hud { flex-direction: row; max-width: 190px; gap: 4px; }
+  .sk-stat { font-size: 14px; padding: 0 8px; }
+  .sk-hud .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
+  .sk-pad { grid-template-columns: repeat(3, 50px); grid-template-rows: repeat(2, 50px); }
+  .sk-picker { gap: 3px; padding: 6px; }
+  .sk-picker h2 { font-size: 18px; }
+  .sk-group { flex-direction: row; max-width: none; gap: 10px; justify-content: center; }
+  .sk-group h3 { writing-mode: horizontal-tb; width: 3.2em; }
+  .sk-lvl { width: 40px; height: 40px; font-size: 15px; }
+  .sk-levels { grid-template-columns: repeat(8, 40px); gap: 4px 8px; }
+  .sk-picker .sk-close { min-height: 36px; }
+}
+@media (max-height: 640px) and (max-aspect-ratio: 5/4) { .sk-pad { grid-template-columns: repeat(3, 48px); grid-template-rows: repeat(2, 48px); } }

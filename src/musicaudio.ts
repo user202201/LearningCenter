@@ -11,9 +11,10 @@ let ctx: AC | null = null;
 let master: GainNode | null = null;
 let noiseBuf: AudioBuffer | null = null;
 
-export interface MusicLog { plays: { kind: string; id: string }[]; started: number }
+export interface MusicLog { plays: { kind: string; id: string; t?: number }[]; started: number }
 const log: MusicLog = ((window as unknown as { __music?: MusicLog }).__music ??= { plays: [], started: 0 });
-const note = (kind: string, id: string) => { log.plays.push({ kind, id }); if (log.plays.length > 500) log.plays.shift(); };
+/** `when` = the audio-clock time a scheduled sound was asked for (the beat maker); nothing for a sound that starts at once */
+const note = (kind: string, id: string, when?: number) => { log.plays.push(when === undefined ? { kind, id } : { kind, id, t: when }); if (log.plays.length > 500) log.plays.shift(); };
 
 /** the audio context (made on the first touch; null where the device has none) */
 export function unlock(): AC | null {
@@ -33,6 +34,8 @@ export function unlock(): AC | null {
   } catch { return null; }
 }
 const out = (): GainNode | null => (unlock() ? master : null);
+/** the audio clock in seconds (the beat maker schedules its notes on it); a device without audio falls back to the page clock so that the play head still runs */
+export const now = (): number => { const c = unlock(); return c ? c.currentTime : performance.now() / 1000; };
 export const midiFreq = (m: number): number => 440 * Math.pow(2, (m - 69) / 12);
 const NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 export const midiName = (m: number): string => `${NAMES[m % 12]}${Math.floor(m / 12) - 1}`;
@@ -41,17 +44,20 @@ export { isBlack };
 
 // ---------- piano ----------
 export interface Voice { release: () => void }
-/** presses a piano key: the sound goes on (and slowly dies away) until `release()` */
-export function pianoDown(m: number, vel = 0.8): Voice {
-  note("piano", midiName(m));
+/**
+ * presses a piano key: the sound goes on (and slowly dies away) until `release()`.
+ * `when` (audio-clock time) starts it later; `hold` (seconds) makes it a short note that ends by itself (the beat maker's notes).
+ */
+export function pianoDown(m: number, vel = 0.8, when?: number, hold?: number): Voice {
+  note("piano", midiName(m), when);
   const c = unlock(), o = out();
   if (!c || !o) return { release() {} };
-  const t = c.currentTime, f = midiFreq(m);
+  const t = Math.max(c.currentTime, when ?? 0), f = midiFreq(m);
   const g = c.createGain();
-  const peak = 0.42 * vel, decay = Math.max(0.9, 3.4 - (m - 36) * 0.035);   // (high notes ring shorter)
+  const peak = 0.42 * vel, decay = hold ? hold + 0.12 : Math.max(0.9, 3.4 - (m - 36) * 0.035);   // (high notes ring shorter)
   g.gain.setValueAtTime(0.0001, t);
   g.gain.exponentialRampToValueAtTime(peak, t + 0.006);
-  g.gain.exponentialRampToValueAtTime(peak * 0.28, t + 0.35);
+  g.gain.exponentialRampToValueAtTime(peak * 0.28, t + Math.min(0.35, decay * 0.6));
   g.gain.exponentialRampToValueAtTime(0.0003, t + decay);
   g.connect(o);
   const oscs: OscillatorNode[] = [];
@@ -85,11 +91,12 @@ const noise = (c: AC): AudioBuffer => {
 };
 export type Drum = "kick" | "snare" | "hihat" | "hihat-open" | "tom1" | "tom2" | "floor" | "crash" | "ride";
 export const DRUMS: Drum[] = ["kick", "snare", "hihat", "hihat-open", "tom1", "tom2", "floor", "crash", "ride"];
-export function drumHit(kind: Drum, vel = 1): void {
-  note("drum", kind);
+/** `when` = audio-clock time to play at (the beat maker); left out = now */
+export function drumHit(kind: Drum, vel = 1, when?: number): void {
+  note("drum", kind, when);
   const c = unlock(), o = out();
   if (!c || !o) return;
-  const t = c.currentTime;
+  const t = Math.max(c.currentTime, when ?? 0);
   const env = (peak: number, dur: number, dest: AudioNode = o) => { const g = c.createGain(); g.gain.setValueAtTime(peak * vel, t); g.gain.exponentialRampToValueAtTime(0.0005, t + dur); g.connect(dest); return g; };
   const tone = (f0: number, f1: number, dur: number, peak: number, type: OscillatorType = "sine") => {
     const os = c.createOscillator(); os.type = type; os.frequency.setValueAtTime(f0, t); os.frequency.exponentialRampToValueAtTime(f1, t + dur * 0.6);
@@ -129,13 +136,34 @@ function stringBuffer(c: AC, m: number): AudioBuffer {
   return buf;
 }
 /** plucks a guitar string tuned to the MIDI note `m` (the open string + the fret) */
-export function pluck(m: number, vel = 0.9): void {
-  note("guitar", midiName(m));
+export function pluck(m: number, vel = 0.9, when?: number): void {
+  note("guitar", midiName(m), when);
   const c = unlock(), o = out();
   if (!c || !o) return;
   const s = c.createBufferSource(); s.buffer = stringBuffer(c, m);
   const g = c.createGain(); g.gain.value = 0.55 * vel;
-  s.connect(g); g.connect(o); s.start();
+  s.connect(g); g.connect(o); s.start(Math.max(c.currentTime, when ?? 0));
+}
+
+// ---------- bass ----------
+/** a low, round bass note (a triangle with a sine an octave below, a quick attack and a short tail), `dur` seconds long, at the audio time `when` */
+export function bassNote(m: number, vel = 0.9, when?: number, dur = 0.4): void {
+  note("bass", midiName(m), when);
+  const c = unlock(), o = out();
+  if (!c || !o) return;
+  const t = Math.max(c.currentTime, when ?? 0), f = midiFreq(m);
+  const g = c.createGain(), peak = 0.7 * vel;
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(peak, t + 0.01);
+  g.gain.exponentialRampToValueAtTime(peak * 0.55, t + dur * 0.6);
+  g.gain.exponentialRampToValueAtTime(0.0003, t + dur + 0.08);
+  const lp = c.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 700;
+  lp.connect(g); g.connect(o);
+  [["triangle", f, 1], ["sine", f / 2, 0.6]].forEach(([type, fr, amp]) => {
+    const os = c.createOscillator(), og = c.createGain();
+    os.type = type as OscillatorType; os.frequency.value = fr as number; og.gain.value = amp as number;
+    os.connect(og); og.connect(lp); os.start(t); os.stop(t + dur + 0.12);
+  });
 }
 export const GUITAR_OPEN = [64, 59, 55, 50, 45, 40];   // e B G D A E (the thin string first)
 export const guitarMidi = (string: number, fret: number): number => GUITAR_OPEN[string] + fret;

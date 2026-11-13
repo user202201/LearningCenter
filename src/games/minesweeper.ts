@@ -243,7 +243,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   reset();
   raf = requestAnimationFrame(frame);
   (window as unknown as Record<string, unknown>).__mines = {
-    state: () => s, phase: () => phase, cell: () => cell, dims: () => ({ cols, rows }), finished: () => doneShown,
+    state: () => s, phase: () => phase, cursor: () => cursor, cell: () => cell, dims: () => ({ cols, rows }), finished: () => doneShown,
     open: (i: number) => doOpen(i), flag: (i: number) => doFlag(i), refresh: () => { refreshHud(); dirty = true; },
   };
   return () => {
