@@ -92,7 +92,7 @@ const art = (page, where) => page.$eval(where + ' .avatar svg', (s) => s.dataset
   await openManage(page);
   await page.click(`${row('Dory')} .change-avatar`); await page.waitForSelector('dialog .animals');
   await page.setInputFiles('#avatar-file', { name: 'x.png', mimeType: 'image/png', buffer: Buffer.from('this is not a picture') });
-  await page.waitForFunction(() => document.querySelector('#avatar-err')?.textContent.includes('打不开'));
+  await page.waitForFunction(() => document.querySelector('#avatar-err')?.textContent.includes('无法打开'));
   ok(await page.locator('dialog').count() === 1, 'a file that is not a picture: says so, the window stays open');
 
   // --- the camera: cancelling, a refused camera, a photo
