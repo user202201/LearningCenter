@@ -906,3 +906,16 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
   .pn-page .pn-kb { height: clamp(120px, calc(100dvh - 210px), 280px); }
   .pn-page .pn-songs, .pn-page .pn-narrow > p { display: none; }
 }
+
+/* piano full screen: the keyboard fills the whole screen (about 55 keys on an iPad sideways) */
+.pn-fullbtn { height: 44px; padding: 0 16px; border-radius: 22px; border: 2px solid #fcc2d7; background: #fff; color: #a61e4d; font: inherit; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #fcc2d7; }
+.pn-page.pn-full { position: fixed; inset: 0; z-index: 60; height: 100dvh; background: #2d2230; }
+.pn-page.pn-full > .top.hero, .pn-page.pn-full .pn-songs, .pn-page.pn-full .pn-takes, .pn-page.pn-full .pn-narrow > p, .pn-page.pn-full .pn-songbar:not(.on), .pn-page.pn-full .pn-rotate { display: none !important; }
+.pn-page.pn-full .pn-main { padding: 0; overflow: hidden; }
+.pn-page.pn-full .pn-narrow { max-width: none; padding: calc(env(safe-area-inset-top) + 6px) calc(env(safe-area-inset-right) + 6px) calc(env(safe-area-inset-bottom) + 6px) calc(env(safe-area-inset-left) + 6px); }
+.pn-page.pn-full .pn-bar { margin: 0 0 6px; color: #fff; gap: 6px; flex-wrap: nowrap; overflow-x: auto; justify-content: center; }
+.pn-page.pn-full .pn-bar .muted { color: #e9ecef; }
+.pn-page.pn-full .pn-bar > * { flex: none; }
+.pn-page.pn-full .pn-shift, .pn-page.pn-full .rec-btn, .pn-page.pn-full .pn-fullbtn, .pn-page.pn-full .mopt { height: 38px; }
+.pn-page.pn-full .pn-kb { height: calc(100dvh - 66px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); border-radius: 10px; }
+.pn-page.pn-full .pn-songbar.on { margin: 0 0 6px; }

@@ -171,7 +171,7 @@ const midiOf = (p: string): number => { const m = /^([A-G])([#b]?)(\d)$/.exec(p)
 const LETTERS = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
 
 export function renderPiano() {
-  let startMidi = 60, whites = 8, names = true;
+  let startMidi = 60, whites = 8, names = true, full = false;
   const kb = h("div", { class: "pn-kb", id: "pn-kb" });
   const count = h("span", { class: "pn-count", id: "pn-count" }, "0");
   const info = h("span", { class: "muted small", id: "pn-range" });
@@ -184,7 +184,8 @@ export function renderPiano() {
   const keyEls = new Map<number, HTMLElement>();
   const build = () => {
     const wpx = Math.max(280, kb.clientWidth || (X ? window.innerWidth - 24 : 360));
-    whites = Math.max(7, Math.min(21, Math.round(wpx / 46)));
+    // full screen: keys about 37 px wide (an iPad sideways: 32 white keys = 55 keys with the black ones); normal: about 46 px
+    whites = full ? Math.max(14, Math.min(36, Math.round(wpx / 37))) : Math.max(7, Math.min(21, Math.round(wpx / 46)));
     if (startMidi + 0 < 24) startMidi = 24;
     // the first white key is always a C
     startMidi = startMidi - ((startMidi % 12) === 0 ? 0 : (startMidi % 12));
@@ -251,6 +252,21 @@ export function renderPiano() {
     markNext();
   };
   songBar.append(h("span", { id: "pn-song-name", class: "small" }), h("button", { class: "sheet-btn", id: "pn-song-stop", onclick: () => { song = null; songBar.classList.remove("on"); markNext(); } }, "不练了"));
+  const setFull = (on: boolean) => {
+    full = on;
+    root.classList.toggle("pn-full", on);
+    fullBtn.textContent = on ? "✕ 退出全屏" : "⛶ 全屏";
+    if (on) {
+      startMidi = 36;   // a wide keyboard starts at C2 (C2 to G6 = 55 keys on an iPad sideways); middle C stays in view
+      try { void (root.requestFullscreen?.() ?? Promise.resolve()).catch(() => { /* the page-wide mode is enough (an iPhone has no element full screen) */ }); } catch { /* same */ }
+    } else {
+      startMidi = 60;
+      try { if (document.fullscreenElement) void document.exitFullscreen(); } catch { /* same */ }
+    }
+    window.requestAnimationFrame(() => { build(); window.setTimeout(build, 120); });
+  };
+  const fullBtn = h("button", { class: "pn-fullbtn", id: "pn-full", onclick: () => setFull(!full) }, "⛶ 全屏");
+  document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement && full && root.isConnected) setFull(false); });
   const names_btn = h("button", { class: "mopt on", id: "pn-names", onclick: (e: Event) => { names = !names; (e.currentTarget as HTMLElement).classList.toggle("on", names); kb.classList.toggle("names", names); } }, "音名");
 
   // ----- recording: a demo of what was played, kept on this device, can be played back and exported as a MIDI file -----
@@ -320,7 +336,7 @@ export function renderPiano() {
       h("div", { class: "pn-bar" },
         h("button", { class: "pn-shift", id: "pn-down", "aria-label": "低一个八度", title: "低一个八度", onclick: () => shift(-1) }, "‹ 低"), info,
         h("button", { class: "pn-shift", id: "pn-up", "aria-label": "高一个八度", title: "高一个八度", onclick: () => shift(1) }, "高 ›"),
-        recBtn, names_btn, h("span", { class: "pn-fingers muted small" }, "同时按着：", count)),
+        recBtn, names_btn, fullBtn, h("span", { class: "pn-fingers muted small" }, "同时按着：", count)),
       kb, songBar,
       h("div", { class: "pn-songs" }, h("span", { class: "muted small" }, "跟着弹："), ...SONGS.map((s, i) => h("button", { class: "mopt", id: `pn-song-${i}`, onclick: () => startSong(s) }, s.name))),
       takesBox,

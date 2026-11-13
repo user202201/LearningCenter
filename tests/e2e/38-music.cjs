@@ -223,6 +223,31 @@ const clearPlays = (page) => page.evaluate(() => { window.__music.plays.length =
     await s.browser.close();
   }
 
+  // ---- full screen: the keyboard fills the screen, 55 keys on an iPad sideways ----
+  for (const [dn, vp, min, max] of [['iPad sideways', { width: 1180, height: 820 }, 52, 58], ['iPad Pro sideways', { width: 1366, height: 1024 }, 56, 66], ['phone sideways', { width: 844, height: 390 }, 36, 44]]) {
+    const s = await start(new Map(), { local: true, viewport: vp, today: '2026-11-12' });
+    await s.page.evaluate(() => (location.hash = '#/music/piano')); await s.page.waitForSelector('.pn-key');
+    const before = await s.page.evaluate(() => document.querySelectorAll('.pn-key').length);
+    await s.page.click('#pn-full'); await s.page.waitForTimeout(400);
+    const m = await s.page.evaluate(() => { const k = document.querySelector('#pn-kb').getBoundingClientRect(), w = document.querySelector('.pn-key.white').getBoundingClientRect(); return { white: document.querySelectorAll('.pn-key.white').length, black: document.querySelectorAll('.pn-key.black').length, kw: k.width, kh: k.height, vw: innerWidth, vh: innerHeight, hero: getComputedStyle(document.querySelector('.pn-page > .top')).display, ww: w.width, mid: !!document.querySelector('.pn-key[data-midi="60"]'), first: document.querySelector('.pn-key').dataset.name, btn: document.querySelector('#pn-full').textContent }; });
+    ok(m.white + m.black >= min && m.white + m.black <= max && m.mid, `${dn}: full screen has ${m.white + m.black} keys (${m.white} white + ${m.black} black, from ${m.first}), middle C is in view (was ${before} keys)`);
+    ok(m.kw >= m.vw * 0.94 && m.kh >= m.vh * 0.7 && m.hero === 'none', `${dn}: the keyboard fills the screen (${Math.round(m.kw)}x${Math.round(m.kh)} of ${m.vw}x${m.vh}), the title band is gone; white keys ${Math.round(m.ww)} px wide`);
+    ok(m.ww >= 30, `${dn}: keys stay big enough for a finger (${Math.round(m.ww)} px)`);
+    if (dn === 'iPad sideways') {
+      await s.page.evaluate(() => window.__music.plays.length = 0);
+      const mids = await s.page.locator('.pn-key.white').evaluateAll((els) => els.slice(0, 12).map((e) => e.dataset.midi));
+      for (let i = 0; i < 12; i++) await ptr(s.page, `.pn-key.white[data-midi="${mids[i]}"]`, 'pointerdown', i + 1, 0.5, 0.85, '#pn-kb');
+      ok((await s.page.textContent('#pn-count')) === '12', 'twelve fingers at once in full screen');
+      for (let i = 0; i < 12; i++) await ptr(s.page, `.pn-key.white[data-midi="${mids[i]}"]`, 'pointerup', i + 1, 0.5, 0.85, '#pn-kb');
+      ok(await s.page.locator('#pn-rec').isVisible() && await s.page.locator('#pn-up').isVisible() && await s.page.locator('#pn-down').isVisible(), 'range buttons and the record button stay on top in full screen');
+      await s.page.screenshot({ path: OUT + 'music-piano-fullscreen-ipad.png' });
+    }
+    await s.page.click('#pn-full'); await s.page.waitForTimeout(400);
+    const back = await s.page.evaluate(() => ({ n: document.querySelectorAll('.pn-key').length, hero: getComputedStyle(document.querySelector('.pn-page > .top')).display, btn: document.querySelector('#pn-full').textContent }));
+    ok(back.n === before && back.hero !== 'none' && back.btn.includes('全屏'), `${dn}: leaving full screen brings back the normal page (${back.n} keys)`);
+    await s.browser.close();
+  }
+
   // ---- screens and languages ----
   for (const [loc, name] of [['zh-CN', 'zh'], ['en-US', 'en'], ['fr-FR', 'fr']]) {
     for (const [dn, vp] of [['phone', { width: 320, height: 568 }], ['ipad', { width: 820, height: 1180 }], ['landscape-small', { width: 844, height: 390 }]]) {
