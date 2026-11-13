@@ -148,7 +148,6 @@ const JSONKEYS = Object.keys(JSON.parse(fs.readFileSync(__dirname + '/../../src/
   // level 30 by taps, the last level
   await p.screenshot({ path: OUT + 'ws-level30-820.png' });
   const s30 = await solution(30); await play(s30);
-  if (!(await api(() => window.__watersort.won()))) console.log('DEBUG', await api(() => JSON.stringify({ lv: window.__watersort.level(), m: window.__watersort.moves(), sel: window.__watersort.selected(), t: window.__watersort.tubes() })), s30.length, p.url());
   ok(await api(() => window.__watersort.won()) && await p.locator('#ws-ovl').isVisible() && (await p.textContent('#ws-ovl h2')) === '全部通关！' && (await p.textContent('#ws-next')) === '选关', 'level 30 solved by tapping: the last-level overlay');
   await p.screenshot({ path: OUT + 'ws-win-last.png' });
   await p.click('#ws-next');
@@ -240,7 +239,6 @@ const JSONKEYS = Object.keys(JSON.parse(fs.readFileSync(__dirname + '/../../src/
     const covered = (v) => JSON.stringify(JSONKEYS).includes(JSON.stringify(v).slice(1, -1)) || JSONKEYS.some((k) => new RegExp('^' + k.replace(/[.*+?^$()|[\]\\]/g, '\\$&').replace(/\{\d\}/g, '.+') + '$').test(v));
     const check = async (what) => { const c = await chinese(); ok(c.every(covered), `${lang} ${what}: every Chinese text still on screen is in watersort.i18n.json (${c.length ? c.length + ' waiting for the merge: ' + c.slice(0, 3).join(' | ') : 'none left'})`); return c; };
     await check('play screen');
-    ok(JSONKEYS.every((k) => /^[^一-鿿]*[一-鿿]/.test(k) ? true : true), `${lang}: json read`);
     await q.click('#ws-pick'); await check('picker');
     await q.screenshot({ path: OUT + `ws-picker-${lang}.png` });
     await q.click('.ws-lv[data-level="1"]');

@@ -93,6 +93,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     skipBtn.disabled = phase !== "play";
     msgEl.textContent = msg;
     field.classList.toggle("is-ready", phase === "ready");
+    layout();
   }
   function setMsg(m: string) { msg = m; msgEl.textContent = m; }
   const clearPick = () => { sel = -1; op = null; };

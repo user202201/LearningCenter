@@ -50,7 +50,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const board = h("div", { class: "ws-board" }, field);
   root.append(h("div", { class: "ws-wrap" }, hud, board));
 
-  let tubes: Tubes = [], start: Tubes = [], history: Tubes[] = [], extraUsed = false, won = false, sel = -1, cur = 0, pickerOpen = false;
+  let tubes: Tubes = [], start: Tubes = [], history: Tubes[] = [], extraUsed = false, won = false, sel = -1, cur = 0, pickerOpen = false, kb = false;
   const best = () => solvedMap()[String(level)];
 
   function refreshHud() {
@@ -73,7 +73,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
         u.style.background = COLORS[c % COLORS.length]; u.innerHTML = mark(c);
         glass.append(u);
       });
-      const el = h("button", { class: "ws-tube" + (i === sel ? " sel" : "") + (i === cur ? " cur" : "") + (full ? " done" : ""), "data-i": String(i), "data-n": String(t.length), "aria-label": `${i + 1}`, onclick: () => choose(i) });
+      const el = h("button", { class: "ws-tube" + (i === sel ? " sel" : "") + (kb && i === cur ? " cur" : "") + (full ? " done" : ""), "data-i": String(i), "data-n": String(t.length), "aria-label": `${i + 1}`, onclick: () => { kb = false; choose(i); } });
       el.insertAdjacentHTML("afterbegin", FACE); el.append(glass);
       tubesEl.append(el);
     });
@@ -89,7 +89,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       const cols = Math.ceil(T / r);
       const w1 = (W - (cols - 1) * 10) / cols;
       const w2 = (H - (r - 1) * 20 - 8 * r) / (r * 3.7);
-      const w = Math.min(88, w1, w2);
+      const w = Math.min(112, w1, w2);
       if (w > bestW) { bestW = w; bestCols = cols; }
     }
     const w = Math.max(18, Math.floor(bestW));
@@ -180,6 +180,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const onKey = (e: KeyboardEvent) => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     const k = e.key;
+    kb = true;
     if (pickerOpen) { if (k === "Escape") { e.preventDefault(); togglePicker(false); } return; }
     if (/^[0-9]$/.test(k)) { e.preventDefault(); choose(k === "0" ? 9 : Number(k) - 1); return; }
     if (k === "ArrowRight" || k === "ArrowDown") { e.preventDefault(); cur = (cur + 1) % tubes.length; render(); }
