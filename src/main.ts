@@ -1496,6 +1496,7 @@ async function route() {
   if (hash === "#/music/piano") return void MU.renderPiano();
   if (hash === "#/music/drums") return void MU.renderDrums();
   if (hash === "#/music/guitar") return void MU.renderGuitar();
+  if (hash === "#/music/beats") return void MU.renderBeats();
   const sci = /^#\/science\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
   if (sci) return void SC.renderKid(sci[1], sci[2] === "learned" ? "learned" : sci[2] === "game" ? "game" : "week");
   const math = /^#\/math\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);

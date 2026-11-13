@@ -9,7 +9,7 @@ const JSONKEYS = Object.keys(JSON.parse(fs.readFileSync(__dirname + '/../../src/
 (async () => {
   const t = await start(new Map(), { local: true, viewport: { width: 820, height: 1180 } });
   const p = t.page;
-  const open = async () => { await p.evaluate(() => (location.hash = '#/subject/games')); await p.evaluate(() => (location.hash = '#/games/watersort')); await p.waitForSelector('#ws-tubes .ws-tube'); await p.waitForTimeout(150); };
+  const open = async () => { await p.evaluate(() => (location.hash = '#/subject/games')); await p.waitForSelector('.gm-grid'); await p.waitForFunction(() => !window.__watersort); await p.evaluate(() => (location.hash = '#/games/watersort')); await p.waitForSelector('#ws-tubes .ws-tube'); await p.waitForTimeout(150); };
   await open();
 
   // ---------- the rules ----------
@@ -148,6 +148,7 @@ const JSONKEYS = Object.keys(JSON.parse(fs.readFileSync(__dirname + '/../../src/
   // level 30 by taps, the last level
   await p.screenshot({ path: OUT + 'ws-level30-820.png' });
   const s30 = await solution(30); await play(s30);
+  if (!(await api(() => window.__watersort.won()))) console.log('DEBUG', await api(() => JSON.stringify({ lv: window.__watersort.level(), m: window.__watersort.moves(), sel: window.__watersort.selected(), t: window.__watersort.tubes() })), s30.length, p.url());
   ok(await api(() => window.__watersort.won()) && await p.locator('#ws-ovl').isVisible() && (await p.textContent('#ws-ovl h2')) === '全部通关！' && (await p.textContent('#ws-next')) === '选关', 'level 30 solved by tapping: the last-level overlay');
   await p.screenshot({ path: OUT + 'ws-win-last.png' });
   await p.click('#ws-next');

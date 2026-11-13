@@ -54,5 +54,5 @@
   .ws-stat { font-size: 14px; padding: 0 8px; }
   .ws-hud .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
   .ws-ovl h2 { font-size: 22px; }
-  .ws-ovl button { min-height: 44px; padding: 4px 22px; font-size: 18px; }
+  .ws-ovl button { min-height: 48px; padding: 4px 22px; font-size: 18px; }
 }

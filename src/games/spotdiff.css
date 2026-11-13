@@ -36,10 +36,11 @@
 @keyframes sd-glow { 0%, 100% { box-shadow: 0 3px 0 #e8590c; } 50% { box-shadow: 0 3px 0 #e8590c, 0 0 0 5px rgba(255, 146, 43, .35); } }
 @media (prefers-reduced-motion: reduce) { .sd-ring, .sd-hint, .sd-pic.sd-shake, .sd-hud .mopt.lit { animation: none; } }
 @media (min-aspect-ratio: 5/4) and (max-height: 700px) {
-  .sd-wrap { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); grid-template-areas: "hud board"; align-items: center; }
-  .sd-hud { flex-direction: row; max-width: 190px; gap: 4px; }
+  .sd-wrap { gap: 6px; }
+  .sd-hud { gap: 4px 6px; }
   .sd-stat { font-size: 14px; padding: 0 8px; }
   .sd-hud .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
   .sd-ovl h2 { font-size: 22px; }
+  .sd-ovl button { min-height: 44px; font-size: 18px; }
   .sd-stars svg { width: 34px; height: 34px; }
 }

@@ -6,7 +6,7 @@
 .g24-hud .mopt.on { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 3px 0 #087f5b; }
 .g24-board { grid-area: board; align-self: stretch; height: 100%; min-width: 0; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
 .g24-field { --cw: 80px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 10px; padding: 14px; border-radius: 18px; overflow: hidden; background: #e6fcf5; box-shadow: 0 5px 0 #0ca678; border: 4px solid #0ca678; box-sizing: content-box; }
-.g24-cards { display: flex; justify-content: center; align-items: center; gap: 10px; height: calc(var(--cw) * 1.34); width: 100%; }
+.g24-cards { display: flex; flex-wrap: wrap; justify-content: center; align-content: center; align-items: center; gap: 10px; width: 100%; }
 .g24-card { position: relative; flex: none; width: var(--cw); height: calc(var(--cw) * 1.34); padding: 0; border-radius: calc(var(--cw) * .18); background: #fff; border: 3px solid #96f2d7; box-shadow: 0 4px 0 #96f2d7; color: #087f5b; display: flex; align-items: center; justify-content: center; touch-action: manipulation; transition: transform .12s, box-shadow .12s; font-family: inherit; }
 .g24-card:active { transform: translateY(3px); box-shadow: 0 1px 0 #96f2d7; }
 .g24-card.sel { transform: translateY(-8px); border-color: #12b886; background: #d3f9d8; box-shadow: 0 6px 0 #0ca678; }
@@ -56,4 +56,4 @@
   .g24-pad { grid-template-columns: repeat(2, auto); }
   .g24-act { min-height: 44px; }
 }
-@media (max-width: 360px) { .g24-act { font-size: 15px; padding: 4px 6px; } .g24-pad { gap: 5px; } }
+@media (max-width: 360px) { .g24-act { font-size: 14px; padding: 4px 5px; } .g24-pad { gap: 4px; } }

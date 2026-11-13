@@ -182,12 +182,19 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   function layout() {
     const W = board.clientWidth, H = board.clientHeight;
     if (!W || !H) return;
-    const gap = 10, pad = 14, border = 8, opsH = 52, msgH = 28, ratio = 1.34;
-    const byW = (W - 2 * pad - border - 3 * gap) / 4, byH = (H - border - 2 * pad - opsH - msgH - 2 * gap) / ratio;
-    const cw = Math.max(40, Math.floor(Math.min(byW, byH, 128)));
+    const gap = 10, pad = 14, border = 8, opsH = 52, msgH = 28, ratio = 1.34, opsW = 4 * 52 + 3 * gap;
+    // four cards in a row, or 2 x 2 on a tall screen: whichever gives the bigger cards
+    const size = (cols: number) => {
+      const rows = 4 / cols;
+      const byW = (W - 2 * pad - border - (cols - 1) * gap) / cols, byH = (H - border - 2 * pad - opsH - msgH - 2 * gap - (rows - 1) * gap) / (rows * ratio);
+      return Math.max(40, Math.floor(Math.min(byW, byH, 150)));
+    };
+    const c4 = size(4), c2 = size(2), cols = c2 > c4 * 1.25 ? 2 : 4, cw = cols === 2 ? c2 : c4, rows = 4 / cols;
     field.style.setProperty("--cw", cw + "px");
-    field.style.width = 4 * cw + 3 * gap + 2 * pad + "px";
-    field.style.height = Math.round(cw * ratio + opsH + msgH + 2 * gap + 2 * pad) + "px";
+    cardsEl.style.height = Math.round(rows * cw * ratio + (rows - 1) * gap) + "px";
+    field.style.width = Math.max(cols * cw + (cols - 1) * gap, opsW) + 2 * pad + "px";
+    field.style.height = Math.round(rows * cw * ratio + (rows - 1) * gap + opsH + msgH + 2 * gap + 2 * pad) + "px";
+    cardsEl.style.maxWidth = cols * cw + (cols - 1) * gap + "px";
   }
 
   document.addEventListener("keydown", onKey);

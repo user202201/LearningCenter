@@ -1,0 +1,19 @@
+{
+  "找不同": ["Spot the Difference", "Trouve les différences"],
+  "两幅画，找出不一样的地方": ["Two pictures: find what is different", "Deux images : trouve ce qui change"],
+  "找到：{0} / {1}": ["Found: {0} / {1}", "Trouvé : {0} / {1}"],
+  "失误：{0}": ["Mistakes: {0}", "Erreurs : {0}"],
+  "用时：{0}": ["Time: {0}", "Temps : {0}"],
+  "最快：{0}": ["Fastest: {0}", "Meilleur : {0}"],
+  "最快：--": ["Fastest: --", "Meilleur : --"],
+  "提示：{0}": ["Hint: {0}", "Indice : {0}"],
+  "难度：简单": ["Level: easy", "Niveau : facile"],
+  "难度：普通": ["Level: normal", "Niveau : normal"],
+  "难度：困难": ["Level: hard", "Niveau : difficile"],
+  "开始": ["Start", "Démarrer"],
+  "两幅画有 {0} 处不一样，点一点找出来。": ["The two pictures differ in {0} places. Tap to find them.", "Les deux images diffèrent en {0} endroits. Touche pour les trouver."],
+  "找到啦！": ["Found them all!", "Tout trouvé !"],
+  "用时 {0}，失误 {1} 次": ["Time {0}, {1} mistakes", "Temps {0}, {1} erreurs"],
+  "新纪录！": ["New record!", "Nouveau record !"],
+  "下一幅": ["Next picture", "Image suivante"]
+}

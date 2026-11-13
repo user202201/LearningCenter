@@ -9,7 +9,7 @@ const errors = [];
 (async () => {
   const t = await start(new Map(), { local: true, viewport: { width: 820, height: 1180 } });
   const p = t.page;
-  p.on('pageerror', (e) => errors.push(e.message)); p.on('framenavigated', (f) => console.log('NAV', f.url()));
+  p.on('pageerror', (e) => errors.push(e.message));
   await p.evaluate(() => (location.hash = '#/games/minesweeper')); await p.waitForSelector('#ms-canvas');
 
   // ---------- the rules ----------
@@ -110,8 +110,10 @@ const errors = [];
   await p.waitForTimeout(1300);
   ok(/^时间：0:0[1-9]$/.test(await p.textContent('#ms-time')), 'the clock runs after the first open: ' + (await p.textContent('#ms-time')));
   // a flag by F and F again
-  const hid = a.st.findIndex((v, i) => v === 0 && i > 30);
-  while ((await S()).cursor < hid) await p.keyboard.press('ArrowRight');
+  const hid = a.st.findIndex((v, i) => v === 0 && i >= 40);
+  for (let k = 0; k < Math.floor(hid / 8) - 1; k++) await p.keyboard.press('ArrowDown');
+  { const dx = (hid % 8) - 1; for (let k = 0; k < Math.abs(dx); k++) await p.keyboard.press(dx > 0 ? 'ArrowRight' : 'ArrowLeft'); }
+  ok((await S()).cursor === hid, 'the cursor reaches the cell by arrows: ' + hid);
   await p.keyboard.press('f'); a = await S();
   ok(a.st[hid] === 2 && (await p.textContent('#ms-mines')) === '雷：9', 'F plants a flag, mines left 9');
   await p.keyboard.press('Space'); ok((await S()).st[hid] === 2, 'a flagged cell is not opened by Space');
