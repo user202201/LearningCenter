@@ -1,0 +1,54 @@
+.hn-wrap { flex: 1; width: 100%; min-height: 0; display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "hud" "board"; justify-items: center; }
+.hn-hud { grid-area: hud; display: flex; flex-direction: column; align-items: center; gap: 6px; max-width: 100%; }
+.hn-stats, .hn-levels, .hn-acts { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 8px; }
+.hn-stat { background: #fff; border: 3px solid #96f2d7; border-radius: 16px; padding: 2px 12px; font-weight: 900; color: #087f5b; font-size: 17px; box-shadow: 0 3px 0 #96f2d7; white-space: nowrap; }
+.hn-stat.best { color: #e8590c; border-color: #ffd8a8; box-shadow: 0 3px 0 #ffd8a8; }
+.hn-lv { width: 40px; height: 40px; min-height: 40px; padding: 0; border-radius: 50%; font-size: 18px; font-weight: 900; color: #087f5b; background: #fff; border: 3px solid #96f2d7; box-shadow: 0 3px 0 #96f2d7; }
+.hn-lv.on { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 3px 0 #087f5b; }
+.hn-lv:active { transform: translateY(3px); box-shadow: 0 0 0 transparent; }
+.hn-acts .mopt { background: #fff; border: 3px solid #96f2d7; box-shadow: 0 3px 0 #96f2d7; color: #087f5b; font-weight: 800; }
+.hn-acts .mopt.on { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 3px 0 #087f5b; }
+.hn-acts .mopt:disabled { opacity: .5; }
+.hn-board { grid-area: board; align-self: stretch; height: 100%; min-width: 0; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.hn-field { position: relative; box-sizing: content-box; border-radius: 20px; overflow: hidden; border: 4px solid #0ca678; box-shadow: 0 5px 0 #0ca678; background: linear-gradient(180deg, #d0ebff, #e3fafc 70%, #d3f9d8); touch-action: none; }
+.hn-stage { position: relative; touch-action: none; user-select: none; -webkit-user-select: none; }
+.hn-base { position: absolute; left: 3%; right: 3%; bottom: 0; height: var(--base); border-radius: 12px 12px 0 0; background: linear-gradient(180deg, #e0a458, #c68642); border: 3px solid #8d5524; border-bottom: 0; box-sizing: border-box; }
+.hn-peg { position: absolute; top: 0; bottom: 0; width: 33.3333%; touch-action: none; border-radius: 14px; }
+.hn-peg[data-p="0"] { left: 0; } .hn-peg[data-p="1"] { left: 33.3333%; } .hn-peg[data-p="2"] { left: 66.6667%; }
+.hn-peg.sel, .hn-peg.over { background: rgba(18, 184, 134, .16); }
+.hn-peg.hint-to { background: rgba(255, 146, 43, .2); outline: 3px dashed #e8590c; outline-offset: -4px; }
+.hn-peg.cur { outline: 3px solid #12b886; outline-offset: -4px; }
+.hn-post { position: absolute; left: 50%; bottom: var(--base); width: 12px; height: var(--post); margin-left: -6px; border-radius: 6px 6px 0 0; background: linear-gradient(90deg, #e0a458, #c68642); border: 2px solid #8d5524; border-bottom: 0; box-sizing: border-box; }
+.hn-no { position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); font-size: 13px; line-height: 16px; font-weight: 900; color: #fff; text-shadow: 0 1px 0 #8d5524; pointer-events: none; }
+.hn-disc { position: absolute; box-sizing: border-box; border-radius: 999px; background: var(--c); border: 3px solid var(--dk); box-shadow: 0 3px 0 var(--dk), inset 0 4px 0 rgba(255, 255, 255, .35); transition: left .18s ease, bottom .18s ease; touch-action: none; cursor: grab; }
+.hn-disc.dragging { transition: none; cursor: grabbing; box-shadow: 0 8px 0 var(--dk), 0 12px 16px rgba(0, 0, 0, .2), inset 0 4px 0 rgba(255, 255, 255, .35); }
+.hn-disc.lift { box-shadow: 0 6px 0 var(--dk), inset 0 4px 0 rgba(255, 255, 255, .35); }
+.hn-disc.hint-from { outline: 3px solid #e8590c; outline-offset: 2px; animation: hn-pulse .8s ease-in-out infinite alternate; }
+.hn-disc.shake { animation: hn-shake .4s; }
+.hn-eye { position: absolute; top: 50%; width: max(3px, calc(var(--dh) * .2)); height: max(3px, calc(var(--dh) * .2)); margin-top: calc(var(--dh) * -.2); border-radius: 50%; background: #222; }
+.hn-eye.l { left: calc(50% - var(--dh) * .5); } .hn-eye.r { left: calc(50% + var(--dh) * .3); }
+.hn-mouth { position: absolute; left: 50%; top: 50%; width: calc(var(--dh) * .3); height: calc(var(--dh) * .15); margin: calc(var(--dh) * -.02) 0 0 calc(var(--dh) * -.15); border: 2px solid #222; border-top: 0; border-radius: 0 0 99px 99px; box-sizing: border-box; }
+.hn-disc.lift .hn-mouth { height: calc(var(--dh) * .22); width: calc(var(--dh) * .22); margin-left: calc(var(--dh) * -.11); border: 0; background: #7a1f1f; border-radius: 50%; }
+.hn-stage.tiny .hn-mouth { display: none; }
+.hn-ovl { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 10px; background: rgba(255, 246, 229, .88); color: #3a2e39; animation: hn-in .35s .25s both; }
+.hn-ovl[hidden], .hn-ovl p[hidden], .hn-stars[hidden], .hn-ovl button[hidden] { display: none; }
+.hn-ovl h2 { margin: 0; font-size: 26px; color: #087f5b; }
+.hn-ovl p { margin: 0; font-weight: 700; }
+.hn-rec { color: #e8590c; }
+.hn-stars { display: flex; gap: 4px; font-size: 38px; line-height: 1; }
+.hn-stars .on { color: #fcc419; text-shadow: 0 2px 0 #e67700; }
+.hn-stars .off { color: #ced4da; }
+.hn-ovl-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.hn-ovl button { min-height: 48px; padding: 6px 26px; font-size: 20px; border-radius: 999px; }
+@keyframes hn-shake { 0%, 100% { translate: 0; } 20%, 60% { translate: -7px; } 40%, 80% { translate: 7px; } }
+@keyframes hn-pulse { to { outline-offset: 5px; } }
+@keyframes hn-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hn-disc { transition: none; } .hn-disc.shake, .hn-disc.hint-from, .hn-ovl { animation: none; } }
+@media (max-width: 420px) { .hn-stat { font-size: 15px; padding: 1px 9px; } }
+@media (min-aspect-ratio: 5/4) and (max-height: 700px) {
+  .hn-wrap { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); grid-template-areas: "hud board"; align-items: center; }
+  .hn-hud { width: 232px; gap: 6px; }
+  .hn-stat { font-size: 14px; padding: 0 8px; }
+  .hn-acts .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
+  .hn-lv { width: 34px; height: 34px; min-height: 34px; font-size: 16px; }
+}
