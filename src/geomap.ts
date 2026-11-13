@@ -256,7 +256,6 @@ export async function renderMap(X: Ctx): Promise<void> {
       lock(right, k, q);
     }
     function tapped(hit0: Hit | null, at: Pt) {
-      console.log('GM tapped', phase, hit0 && hit0.layer + ':' + hit0.id);
       if (phase !== "ask" || !hit0) return;
       let hit: Hit = hit0;
       const q = qs[idx];

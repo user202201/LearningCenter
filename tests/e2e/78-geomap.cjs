@@ -415,6 +415,7 @@ const withExtra = async (t) => {
 
   // ---- the practice: every mode, played to the end (as Dory)
   const play = async (mode, { wrongFirst = false, shots } = {}) => {
+    await page.waitForFunction(() => !document.querySelector('#toasts .toast'));   // (a message in the top band would cover the top of the map)
     await page.click(`#mode-${mode}`); await page.waitForSelector('#game .mq');
     let n = 0, rights = 0;
     while (!(await page.locator('#game-end').count())) {
@@ -469,7 +470,7 @@ const withExtra = async (t) => {
   await page.waitForFunction(() => !document.querySelector('#toasts .toast.working'));
   const after = JSON.parse(store.get(dory)).cards;
   ok(wrongNames.length >= 1 && wrongNames.every((k) => after[k] && after[k].box === 0 && after[k].due === '2026-11-12'), 'a wrong card is in box 0, due at once');
-  await page.click('#game-again'); await page.waitForSelector('#game .mq');
+  await page.click('#game-again'); await page.waitForSelector('#game .mq'); await page.waitForFunction(() => !document.querySelector('#toasts .toast'));
   const keys2 = []; for (let i = 0; i < 10; i++) { keys2.push(await page.getAttribute('#game', 'data-qkey')); const a = await answerOf(); const [x, y] = await toClient('#gmap-qmap .gmap-svg', a.p[0], a.p[1]); await page.mouse.click(x, y); await page.waitForSelector('#math-explain'); const last = (await page.textContent('#math-next')).trim() === '完成'; await page.click('#math-next'); if (last) break; await page.waitForFunction(() => !document.querySelector('#math-explain')); }
   await page.waitForSelector('#game-end');
   ok(wrongNames.every((k) => keys2.includes(k)), 'the next round asks the wrong ones again first');
@@ -595,7 +596,7 @@ const withExtra = async (t) => {
         const lo3 = loc === 'zh-CN' ? [] : await leftover(page); ok(lo3.length === 0, `${tag} flags: no Chinese left ${lo3.slice(0, 3).join('|')}`);
         // the quiz: a map question, a choice question with feedback, the end screen
         for (const [tabId, mode] of [['china', 'cn-name'], ['world', 'w-ktap'], ['china', 'cn-cap'], ['flags', 'f-flag']]) {
-          await page.click(`#gmap-tab-${tabId}`); await page.click(`#mode-${mode}`); await page.waitForSelector('#game .mq');
+          await page.waitForFunction(() => !document.querySelector('#toasts .toast')); await page.click(`#gmap-tab-${tabId}`); await page.click(`#mode-${mode}`); await page.waitForSelector('#game .mq');
           const qg = async (label) => {
             const g = await page.evaluate(() => {
               const iw = innerWidth, ih = innerHeight; const q = (s) => { const e = document.querySelector(s); if (!e) return null; const r = e.getBoundingClientRect(); return { l: r.left, r: r.right, t: r.top, b: r.bottom, w: r.width, h: r.height }; };
