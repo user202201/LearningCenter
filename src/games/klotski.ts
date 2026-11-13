@@ -184,7 +184,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       const W = wrap.clientWidth, H = wrap.clientHeight;
       if (W < 10 || H < 10) return;
       // frame = board + 2 x 12 % + the borders; the exit label needs 0.3 of a cell below
-      cell = Math.max(24, Math.floor(Math.min((W - 14) / 4.24, (H - 14) / 5.6)));
+      cell = Math.max(24, Math.min(124, Math.floor(Math.min((W - 14) / 4.24, (H - 14) / 5.6))));
       frame.style.setProperty("--c", `${cell}px`);
       refresh();
     };

@@ -192,6 +192,7 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
       if (i === 12) await p.screenshot({ path: OUT + 'bubble-many-shots.png' });
     }
     const real = log.filter((l) => !l.over);
+    console.log('LOG', JSON.stringify(log.slice(0, 8)), await p.evaluate(() => typeof window.__L));
     ok(log.length >= 20 && real.every((l) => !l.keep || l.curAfter === l.shownNext), `${log.length} shots: after each one the shooter holds what was shown as next`);
     ok(new Set(log.map((l) => l.shownNext)).size >= 3 && log.some((l, i) => i && l.shownNext !== log[i - 1].shownNext), 'the next bubble changes over the shots: ' + log.map((l) => l.shownNext).join(''));
     ok(log.every((l) => l.present), 'every colour shown as next is still on the board');

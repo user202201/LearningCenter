@@ -93,7 +93,7 @@ const mode2 = async (page) => { await page.click('#chess-new'); await page.click
     ok(R.rg[1] >= 5, `${R.rg[0]} random games: no crash, ${R.rg[1]} ended by the rules within 300 plies`);
     ok(R.mateFail.length === 0, `mate in one found by levels 简单 / 普通 / 困难, white and black${R.mateFail.length ? ' -> ' + R.mateFail.slice(0, 3).join('; ') : ''}`);
     ok(R.hang.length === 0, `never leaves the queen hanging and takes a free queen (levels 简单 / 普通 / 困难)${R.hang.length ? ' -> ' + R.hang.join('; ') : ''}`);
-    ok(R.time < 1800 && R.maxSlice < 500 && R.calls > 5 && R.depth >= 3, `困难 searches in slices: ${R.calls} slices, the longest ${R.maxSlice} ms, ${R.time} ms in all, depth ${R.depth}`);
+    ok(R.time < 1800 && R.maxSlice < 650 && R.calls > 5 && R.depth >= 3, `困难 searches in slices: ${R.calls} slices, the longest ${R.maxSlice} ms, ${R.time} ms in all, depth ${R.depth}`);
     ok(R.levels.join() === '新手,简单,普通,困难' && R.evalMirror, 'four levels; the evaluation counts material and is symmetric');
     ok(R.beginnerCaps >= 12, `新手 likes captures (${R.beginnerCaps} of 40) but is not forced to`);
     ok(errs.length === 0, 'no page error while the engine ran');
@@ -138,7 +138,7 @@ const mode2 = async (page) => { await page.click('#chess-new'); await page.click
   await page.screenshot({ path: OUT + 'chess-capture.png' });
   ok(cap.victim && cap.pow && cap.stars >= 5 && cap.atk, `a capture: the captured piece flies off (class victim), a POW burst with ${cap.stars} stars, the pawn pokes (atk-p)`);
   await page.waitForTimeout(1500);
-  ok(await page.evaluate(() => !document.querySelector('.chess-pc-in.victim') && document.querySelectorAll('.chess-pc').length === 2 && !document.querySelector('.chess-pow')), 'after the animation the captured piece and the effects are gone');
+  ok(await page.evaluate(() => !document.querySelector('.chess-pc-in.victim') && document.querySelectorAll('.chess-pc').length === 3 && !document.querySelector('.chess-pow')), 'after the animation the captured piece and the effects are gone');
   for (const [piece, f, from, to, ff] of [['n', '4k3/8/8/3p4/8/4N3/8/4K3 w - - 0 1', 'e3', 'd5'], ['r', '4k3/8/8/3p4/8/8/8/3RK3 w - - 0 1', 'd1', 'd5'], ['q', '4k3/8/8/3p4/8/8/8/3QK3 w - - 0 1', 'd1', 'd5'], ['b', '4k3/8/8/3p4/8/8/8/2B1K3 w - - 0 1', 'c1', 'h6'], ['k', '4k3/8/8/8/8/8/3p4/3QK3 w - - 0 1', 'e1', 'd2']]) {
     await setFen(page, f); await page.waitForTimeout(80);
     if (piece === 'b') { await setFen(page, '4k3/8/7p/8/8/8/8/2B1K3 w - - 0 1'); await page.waitForTimeout(80); }

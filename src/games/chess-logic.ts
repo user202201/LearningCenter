@@ -162,8 +162,8 @@ export class Searcher {
     }
     this.best = this.publicOf(this.roots[pick]); this.bestScore = this.scores[bi]; this.depthDone = this.depth; this.pv = lanOf(this.roots[bi]);
     this.lastDepthMs = Date.now() - this.depthStart;
-    // another depth is only started when it has a fair chance to finish (a depth costs about 4 times the one before)
-    if (this.depth >= this.maxDepth || this.bestScore > MATE / 2 || Date.now() + this.lastDepthMs * 3 > this.deadline) { this.finished = true; return; }
+    // another depth is only started when it has a fair chance to finish (a depth costs about 4-5 times the one before)
+    if (this.depth >= this.maxDepth || this.bestScore > MATE / 2 || Date.now() + this.lastDepthMs * 4.5 > this.deadline) { this.finished = true; return; }
     this.depth++; this.startDepth();
   }
 
