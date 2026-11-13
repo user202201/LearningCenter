@@ -77,9 +77,11 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const msg = h("div", { class: "freecell-msg", id: "fc-msg", role: "status" });
   const board = h("div", { class: "freecell-board", id: "fc-board" });
   const wrap = h("div", { class: "freecell-wrap" },
-    h("div", { class: "freecell-hud" }, dealChip, movesChip, timeChip, winsChip, bestChip),
-    h("div", { class: "freecell-btns" }, undoBtn, hintBtn, doneBtn, newBtn, pickBtn, autoBtn),
-    msg, board);
+    h("div", { class: "freecell-side" },
+      h("div", { class: "freecell-hud" }, dealChip, movesChip, timeChip, winsChip, bestChip),
+      h("div", { class: "freecell-btns" }, undoBtn, hintBtn, doneBtn, newBtn, pickBtn, autoBtn),
+      msg),
+    board);
   root.append(wrap);
   const autoLabel = () => { autoBtn.textContent = autoOn ? "自动收牌：开" : "自动收牌：关"; };
   autoLabel();
@@ -514,7 +516,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   (window as unknown as Record<string, unknown>).__freecell = {
     get s() { return { deal, moves: userMoves(), all: moves.length, won, started, auto: autoOn, sel, state: JSON.parse(JSON.stringify(state)), stuck: stuckShown, flying: flyers.length, cw: M.cw, ch: M.ch, dy: M.dy }; },
     /** put any position on the table (not saved, deal 0) */
-    load(st: L.State) { reset(JSON.parse(JSON.stringify(st)), 0, [], 0); render(); hud(); },
+    load(st: L.State) { reset(JSON.parse(JSON.stringify(st)), 0, [], 0); render(); hud(); settle(); },
     apply(m: L.Move) { return doMove(m, false); },
     undo() { undo(); },
     newGame(n: number) { newGame(n); },

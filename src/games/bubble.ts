@@ -10,8 +10,9 @@ export const ICON = `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/sv
 <g fill="none" stroke="#343a40" stroke-width="2.4" stroke-linecap="round"><path d="M25 38q5 5 10 0"/><path d="M55 38q5 5 10 0"/><path d="M85 38q5 5 10 0"/><path d="M40 64q5 5 10 0"/><path d="M70 64q5 5 10 0"/></g>
 <path d="M60 104V82" stroke="#868e96" stroke-width="5" stroke-dasharray="2 8" stroke-linecap="round"/><circle cx="60" cy="100" r="13" fill="#b197fc" stroke="#fff" stroke-width="3"/><circle cx="55" cy="98" r="3" fill="#fff"/><circle cx="65" cy="98" r="3" fill="#fff"/><circle cx="55" cy="99" r="1.5" fill="#343a40"/><circle cx="65" cy="99" r="1.5" fill="#343a40"/><path d="M55 104q5 4 10 0" fill="none" stroke="#343a40" stroke-width="2.2" stroke-linecap="round"/></svg>`;
 
-const COLORS = ["", "#ff6b6b", "#ffa94d", "#ffd43b", "#51cf66", "#4dabf7", "#b197fc"];
-const DARK = ["", "#e03131", "#e8590c", "#f08c00", "#2f9e44", "#1c7ed6", "#7048e8"];
+// red, blue, green, yellow, purple, orange: six clearly different hues, and each has its own little face
+const COLORS = ["", "#ff4d4d", "#339af0", "#40c057", "#fcc419", "#9775fa", "#ff922b"];
+const DARK = ["", "#c92a2a", "#1864ab", "#2b8a3e", "#e67700", "#5f3dc4", "#d9480f"];
 const FH = 12.2, SX = L.COLS / 2, SY = 11.2;
 const MIN_A = (10 * Math.PI) / 180, MAX_A = Math.PI - MIN_A;
 const SPEED = 30;
@@ -39,7 +40,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   let over: "" | "won" | "lost" = "";
   let paused = false, angle = Math.PI / 2, dragging = false, swapCand = false, moved = false, aimOn = false;
   let flight: { pts: { x: number; y: number }[]; i: number; x: number; y: number; c: number } | null = null;
-  let rng = L.mulberry32(1), runId = 0;
+  let rng = L.mulberry32(1), runId = 0, firedPrev = 0;
   let yOfs = 0, gt = 0, last = 0;
   let fx: Fx[] = [];
   let D = 20, dpr = 1;
@@ -64,12 +65,17 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     g.beginPath(); g.arc(r, r, r - px * 0.04, 0, 7); g.fillStyle = grad; g.fill();
     g.lineWidth = px * 0.05; g.strokeStyle = "rgba(255,255,255,.9)"; g.stroke();
     g.fillStyle = "rgba(255,255,255,.55)"; g.beginPath(); g.ellipse(r * 0.58, r * 0.45, r * 0.2, r * 0.11, -0.6, 0, 7); g.fill();
-    for (const sx of [-1, 1]) {
-      g.fillStyle = "#fff"; g.beginPath(); g.ellipse(r + sx * r * 0.3, r * 0.92, r * 0.17, r * 0.21, 0, 0, 7); g.fill();
-      g.fillStyle = "#343a40"; g.beginPath(); g.arc(r + sx * r * 0.3 + r * 0.02, r * 0.95, r * 0.09, 0, 7); g.fill();
-      g.fillStyle = "rgba(255,120,150,.55)"; g.beginPath(); g.ellipse(r + sx * r * 0.52, r * 1.2, r * 0.12, r * 0.08, 0, 0, 7); g.fill();
-    }
-    g.strokeStyle = "#343a40"; g.lineWidth = px * 0.045; g.lineCap = "round"; g.beginPath(); g.arc(r, r * 1.12, r * 0.25, 0.25, Math.PI - 0.25); g.stroke();
+    const eye = (sx: number) => { g.fillStyle = "#fff"; g.beginPath(); g.ellipse(r + sx * r * 0.3, r * 0.92, r * 0.17, r * 0.21, 0, 0, 7); g.fill(); g.fillStyle = "#343a40"; g.beginPath(); g.arc(r + sx * r * 0.3 + r * 0.02, r * 0.95, r * 0.09, 0, 7); g.fill(); };
+    const cheeks = () => { for (const sx of [-1, 1]) { g.fillStyle = "rgba(255,120,150,.55)"; g.beginPath(); g.ellipse(r + sx * r * 0.55, r * 1.22, r * 0.12, r * 0.08, 0, 0, 7); g.fill(); } };
+    g.strokeStyle = "#343a40"; g.fillStyle = "#343a40"; g.lineWidth = px * 0.05; g.lineCap = "round";
+    const smile = (w: number, y = 1.12) => { g.beginPath(); g.arc(r, r * y, r * w, 0.25, Math.PI - 0.25); g.stroke(); };
+    if (col === 1) { eye(-1); eye(1); smile(0.25); }                                   // red: round eyes, smile
+    else if (col === 2) { for (const sx of [-1, 1]) { g.beginPath(); g.arc(r + sx * r * 0.3, r * 1.0, r * 0.15, Math.PI * 1.1, Math.PI * 1.9); g.stroke(); } smile(0.32, 1.02); }   // blue: happy closed eyes, wide smile
+    else if (col === 3) { eye(-1); eye(1); g.beginPath(); g.ellipse(r, r * 1.3, r * 0.14, r * 0.19, 0, 0, 7); g.fill(); }   // green: surprised "o"
+    else if (col === 4) { eye(-1); g.beginPath(); g.moveTo(r + r * 0.18, r * 0.95); g.lineTo(r + r * 0.42, r * 0.95); g.stroke(); smile(0.28); g.fillStyle = "#ff6b81"; g.beginPath(); g.ellipse(r + r * 0.12, r * 1.42, r * 0.1, r * 0.12, 0, 0, 7); g.fill(); }   // yellow: wink + tongue
+    else if (col === 5) { g.fillStyle = "#343a40"; g.beginPath(); g.roundRect(r - r * 0.55, r * 0.78, r * 1.1, r * 0.3, r * 0.1); g.fill(); g.fillStyle = "rgba(255,255,255,.5)"; g.fillRect(r - r * 0.45, r * 0.83, r * 0.25, r * 0.06); smile(0.22, 1.1); }   // purple: sunglasses
+    else { for (const sx of [-1, 1]) { g.beginPath(); g.moveTo(r + sx * r * 0.45, r * 0.98); g.lineTo(r + sx * r * 0.15, r * 0.98); g.stroke(); } g.beginPath(); g.arc(r, r * 1.3, r * 0.1, 0, 7); g.stroke(); }   // orange: sleepy eyes, small mouth
+    if (col !== 5) cheeks();
     sprites.set(key, s);
     return s;
   }
@@ -147,7 +153,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     rng = L.mulberry32(seed + 1);
     parShots = L.par(grid);
     misses = 0; score = 0; shots = 0; over = ""; paused = false; flight = null; fx = []; yOfs = 0; angle = Math.PI / 2; aimOn = false;
-    cur = L.nextColor(rng, grid, 1); nxt = L.nextColor(rng, grid, 1);
+    cur = L.nextColor(rng, grid, 1); nxt = L.nextColor(rng, grid, 1); firedPrev = 0;
     buildPlay(); hudUpdate();
   }
 
@@ -177,7 +183,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
 
   function land() {
-    const f = flight as any; flight = null;
+    const f = flight as any; flight = null; firedPrev = f.c;
     const cell: L.Cell | null = f.cell;
     if (!cell) { advance(); return; }
     const res = L.place(grid, cell, f.c);
@@ -213,7 +219,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
 
   function advance() {
-    const q = L.advanceQueue(rng, grid, nxt, cur); cur = q.cur; nxt = q.nxt;
+    const q = L.advanceQueue(rng, grid, nxt, cur, firedPrev); cur = q.cur; nxt = q.nxt;
     hudUpdate();
     if (L.count(grid) === 0) return finish("won");
     if (L.lowestRow(grid) >= L.LOSE_ROW) return finish("lost");

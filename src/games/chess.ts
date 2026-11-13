@@ -147,7 +147,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       el.append(h("b", {}, label), list, h("span", { class: "chess-adv" }, adv > 0 ? `+${adv}` : ""));
     };
     const bottom: Color = flipped ? "b" : "w", topC: Color = bottom === "w" ? "b" : "w";
-    const name = (c: Color) => (mode === "cpu" ? (c === side ? "你" : "电脑") : c === "w" ? "白方" : "黑方");
+    const name = (c: Color) => (mode === "cpu" ? (c === side ? "玩家" : "电脑") : c === "w" ? "白方" : "黑方");
     render(trayBottom, bottom, name(bottom)); render(trayTop, topC, name(topC));
   }
 
@@ -163,12 +163,12 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   function updateStatus() {
     status.className = "chess-status";
     let t: string;
-    if (over) { const r = resultText(over); t = `${r.title}${over.kind === "mate" ? "" : " · " + r.sub}`; }
+    if (over) { const r = resultText(over); t = r.title; }
     else if (thinking) { t = "电脑思考中…"; status.classList.add("think"); }
     else if (hinting) { t = "思考中…"; status.classList.add("think"); }
     else {
       const turn = mode === "cpu" ? "轮到你了" : game.turn() === "w" ? "轮到白方" : "轮到黑方";
-      if (game.inCheck()) { t = `将军！${turn}`; status.classList.add("warn"); }
+      if (game.inCheck()) { t = "将军！"; status.classList.add("warn"); }
       else t = msg || turn;
     }
     status.textContent = t;
@@ -223,7 +223,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (!sq || !k) return;
     checkPiece = k; setMood(k, "scared"); k.inner.classList.add("chess-check");
     const c = center(sq);
-    const bub = h("div", { class: "chess-bubble", id: "chess-bubble", style: `left:${c.x}%;top:${c.y - 6}%` }, "将军！");
+    const low = colRow(sq).row < 2;
+    const bub = h("div", { class: "chess-bubble" + (low ? " below" : ""), id: "chess-bubble", style: `left:${c.x}%;top:${c.y + (low ? 6 : -6)}%` }, "将军！");
     addFx(bub, 2000);
     const sw = h("div", { class: "chess-sweat chess-sweat-1", style: `left:${c.x + 3}%;top:${c.y - 9}%` }); sw.innerHTML = `<svg viewBox="0 0 20 28"><path d="M10 2 Q2 14 3 19 Q4 26 10 26 Q16 26 17 19 Q18 14 10 2Z" fill="#74c0fc" stroke="#1971c2" stroke-width="2.4"/></svg>`;
     fx.append(sw);   // removed by clearCheck
@@ -241,7 +242,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     let i = 0;
     for (const [sq, p] of pieces) {
       if (p.color === over.winner) { setMood(p, "happy"); p.inner.classList.add("chess-cheer"); p.inner.style.setProperty("--d", `${(i++ % 8) * 0.09}s`); }
-      else if (sq === ks) { setMood(p, "dizzy"); p.inner.classList.add("chess-dizzy"); const c = center(sq); const st = h("div", { class: "chess-bubble", style: `left:${c.x}%;top:${c.y - 6}%;border-color:#7048e8;color:#7048e8;box-shadow:0 3px 0 #5f3dc4` }, "★ ✦ ★"); addFx(st, 1900); }
+      else if (sq === ks) { setMood(p, "dizzy"); p.inner.classList.add("chess-dizzy"); const c = center(sq); const lw = colRow(sq).row < 2; const st = h("div", { class: "chess-bubble" + (lw ? " below" : ""), style: `left:${c.x}%;top:${c.y + (lw ? 6 : -6)}%;border-color:#7048e8;color:#7048e8;box-shadow:0 3px 0 #5f3dc4` }, "★ ✦ ★"); addFx(st, 1900); }
     }
     if (animate) {
       const cf = h("div", { class: "chess-confetti", id: "chess-confetti" });

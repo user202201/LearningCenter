@@ -133,6 +133,52 @@ export function vcf(b: Board, p: Stone, depth = 8, budget = { n: 30000 }): numbe
   }
   return -1;
 }
+/**
+ * can p (to move) win by a chain of fours and open threes? An open three is answered by every cell that could stop it (and by the opponent's own fours), so the
+ * chain must win against all of them. Returns the first move or -1. `depth` counts the moves of p.
+ */
+export function vct(b: Board, p: Stone, depth = 4, budget = { n: 600 }): number {
+  if (depth <= 0 || budget.n-- <= 0) return -1;
+  const o = other(p), cells = candidates(b);
+  if (winningCells(b, o, cells).length) return -1;
+  const now = winningCells(b, p, cells);
+  if (now.length) return now[0];
+  const tries: { c: number; t: number }[] = [];
+  for (const c of cells) {
+    const [x, y] = xy(c);
+    let t = 0;
+    for (const [dx, dy] of DIRS) t = Math.max(t, lineTier(b, x, y, dx, dy, p));
+    if (t === T_OPEN4 || t === T_FOUR || t === T_OPEN3) tries.push({ c, t });
+  }
+  tries.sort((a, d) => d.t - a.t);
+  for (const { c, t } of tries.slice(0, 10)) {
+    b[c] = p;
+    const w = newWinCells(b, c, p);
+    let res = -1;
+    if (w.length >= 2) res = c;
+    else if (w.length === 1) {
+      b[w[0]] = o;
+      if (!winLine(b, w[0]) && vct(b, p, depth - 1, budget) >= 0) res = c;
+      b[w[0]] = 0;
+    } else if (t === T_OPEN3 && depth > 1) {
+      // the answers: the empty cells on the lines through c up to three away, and the cells where the opponent makes a four himself
+      const [x, y] = xy(c), reply = new Set<number>();
+      for (const [dx, dy] of DIRS) for (let k = -3; k <= 3; k++) { const nx = x + dx * k, ny = y + dy * k; if (k && inside(nx, ny) && !b[idx(nx, ny)]) reply.add(idx(nx, ny)); }
+      for (const r of candidates(b)) if (!b[r] && !reply.has(r)) { b[r] = o; const f = newWinCells(b, r, o).length; b[r] = 0; if (f) reply.add(r); }
+      let all = reply.size > 0;
+      for (const r of reply) {
+        b[r] = o;
+        const lost = winLine(b, r) !== null || winningCells(b, o).length > 0 || vct(b, p, depth - 1, budget) < 0;
+        b[r] = 0;
+        if (lost) { all = false; break; }
+      }
+      if (all) res = c;
+    }
+    b[c] = 0;
+    if (res >= 0) return res;
+  }
+  return -1;
+}
 /** the cells where p would get two five-threats at once (an open four, a double four) */
 const doubleThreatCells = (b: Board, p: Stone, cells = candidates(b)): number[] => {
   const out: number[] = [];
@@ -169,6 +215,8 @@ export function chooseMove(b: Board, me: Stone, level: Level, rnd: Rnd = Math.ra
   // hard
   const v = vcf(b, me, 8);
   if (v >= 0 && !b[v]) return v;
+  const v3 = vct(b, me, 4);
+  if (v3 >= 0 && !b[v3]) return v3;
   const danger = doubleThreatCells(b, opp, cells).length > 0;
   const top = scored.slice(0, 12);
   let bestC = top[0].c, bestV = -Infinity;

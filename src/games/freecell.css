@@ -1,4 +1,5 @@
 .freecell-wrap { flex: 1; min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px; position: relative; user-select: none; -webkit-user-select: none; }
+.freecell-side { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%; flex: none; }
 .freecell-hud { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; width: 100%; max-width: 760px; }
 .freecell-chip { background: #fff; border: 2px solid #96f2d7; border-radius: 13px; box-shadow: 0 3px 0 #96f2d7; padding: 2px 9px; font-weight: 800; color: #087f5b; font-size: 13px; white-space: nowrap; }
 .freecell-btns { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 760px; }
@@ -46,11 +47,15 @@
 .freecell-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 @keyframes freecell-in { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: none; } }
 @media (orientation: landscape) and (max-height: 520px) {
-  .freecell-wrap { gap: 3px; }
-  .freecell-chip { padding: 0 8px; font-size: 12px; }
-  .freecell-btn { padding: 3px 8px; font-size: 12px; box-shadow: 0 3px 0 #0b7a5a; }
+  .freecell-wrap { flex-direction: row; align-items: stretch; gap: 6px; }
+  .freecell-side { width: 178px; justify-content: center; gap: 4px; }
+  .freecell-hud { display: grid; grid-template-columns: 1fr 1fr; max-width: none; gap: 3px; }
+  .freecell-chip { padding: 0 4px; font-size: 11px; text-align: center; overflow: hidden; text-overflow: ellipsis; box-shadow: 0 2px 0 #96f2d7; }
+  .freecell-btns { display: grid; grid-template-columns: 1fr 1fr; max-width: none; gap: 4px; }
+  .freecell-btn { padding: 3px 4px; font-size: 12px; box-shadow: 0 3px 0 #0b7a5a; }
   .freecell-btn.alt { box-shadow: 0 3px 0 #96f2d7; }
-  .freecell-msg { min-height: 14px; font-size: 12px; }
+  .freecell-msg { min-height: 0; font-size: 11px; }
+  .freecell-board { width: auto; flex: 1 1 0; min-width: 0; }
 }
 @media (max-width: 440px) { .freecell-chip { padding: 1px 7px; font-size: 12px; } .freecell-btn { padding: 4px 8px; } }
 @media (prefers-reduced-motion: reduce) { .freecell-card { transition: none; } .freecell-slot.hint, .freecell-card.hint .freecell-in { animation: none; } }

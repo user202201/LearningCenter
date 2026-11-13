@@ -38,7 +38,7 @@
 .spider-stock { position: absolute; padding: 0; margin: 0; border: 0; background: none; cursor: pointer; font: inherit; -webkit-tap-highlight-color: transparent; }
 .spider-stock::after { content: ""; position: absolute; inset: -6px; }
 .spider-stock .spider-card { position: absolute; }
-.spider-stock.empty { border: 2px dashed rgba(255, 255, 255, .4); border-radius: calc(var(--cw) * .16); cursor: default; }
+.spider-stock.spider-nostock { border: 2px dashed rgba(255, 255, 255, .4); border-radius: calc(var(--cw) * .16); cursor: default; }
 .spider-stock.hint .spider-in { box-shadow: 0 0 0 3px #ffd43b, 0 0 12px 4px rgba(255, 212, 59, .8); }
 .spider-stock.hint { animation: spider-pulse .7s ease-in-out infinite alternate; }
 .spider-badge { position: absolute; right: -4px; bottom: -4px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: #ffd43b; color: #5c3b00; font-weight: 900; font-size: 12px; line-height: 18px; text-align: center; border: 2px solid #4a3426; box-sizing: content-box; z-index: 9; }
@@ -54,7 +54,7 @@
 .spider-dlg button.primary { color: #fff; background: linear-gradient(180deg, #38d9a9, #12b886); border-color: transparent; box-shadow: 0 4px 0 #0b7a5c; }
 .spider-dlg button:active { transform: translateY(3px); box-shadow: 0 1px 0 #96f2d7; }
 .spider-record { color: #e8590c !important; font-size: 18px; }
-.spider-dancer { width: 120px; height: 100px; margin: 0 auto -4px; display: block; }
+.spider-dancer { width: 120px; overflow: visible; height: 100px; margin: 0 auto -4px; display: block; }
 .spider-dancer .sp-all { transform-box: fill-box; transform-origin: 50% 80%; animation: spider-dance .6s ease-in-out infinite alternate; }
 .spider-dancer .lg { transform-box: fill-box; transform-origin: 100% 50%; animation: spider-leg .3s ease-in-out infinite alternate; }
 .spider-dancer .lr { transform-box: fill-box; transform-origin: 0% 50%; animation: spider-leg2 .3s ease-in-out infinite alternate; }

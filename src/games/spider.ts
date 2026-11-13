@@ -85,7 +85,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const pad = W < 420 ? 3 : 8, gap = W < 420 ? 2 : Math.max(4, Math.min(10, Math.round(W * 0.011)));
     let cw = Math.min(96, Math.floor((W - 2 * pad - 9 * gap) / 10));
     let ch = Math.round(cw * 1.42);
-    const ts = H < 330 ? 0.62 : 1;
+    const ts = H < 270 ? 0.62 : 1;
     // the tallest sensible height: three cards of room under the tray at least
     const room = (c: number) => H - Math.round(c * ts) - 14 - c;
     while (ch > 30 && room(ch) < ch * 2.4) { ch--; cw = Math.floor(ch / 1.42); }
@@ -212,7 +212,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     shownFound = st.found.length;
     const sp = stockPos();
     const n = st.stock.length;
-    const stock = h("button", { class: "spider-stock" + (n ? "" : " empty"), id: "spider-stock", "aria-label": "发牌", onclick: () => doDeal() });
+    const stock = h("button", { class: "spider-stock" + (n ? "" : " spider-nostock"), id: "spider-stock", "aria-label": "发牌", onclick: () => doDeal() });
     stock.style.cssText = `left:${sp.x}px;top:${sp.y}px;width:${M.tw}px;height:${M.th}px`;
     for (let i = 0; i < Math.min(n, 5); i++) {
       const c = cardEl(0, 1, true); c.classList.add("spider-static");

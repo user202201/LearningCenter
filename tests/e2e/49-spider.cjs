@@ -7,7 +7,7 @@ const OUT = process.env.D || 'tests/out/work/';
 fs.mkdirSync(OUT, { recursive: true });
 
 (async () => {
-  const t = await start(new Map(), { local: true, viewport: { width: 820, height: 1180 } });
+  const t = await start(new Map(), { local: true, motion: true, viewport: { width: 820, height: 1180 } });
   const p = t.page;
   await p.evaluate(() => (location.hash = '#/games/spider')); await p.waitForSelector('#spider-board'); await p.waitForFunction(() => window.__spider && window.__spider.state);
 
@@ -66,7 +66,7 @@ fs.mkdirSync(OUT, { recursive: true });
       if (!M.undo(s) || json(s) !== before) bad('undo does not restore the move exactly');
       // a run of two moves together, onto a card one rank higher (any suit)
       s.cols[5] = [C(9, 1)];                           // 9 of another suit
-      if (!M.canDrop(s, 2, 1, 5) === false) { /* 7 6 (idx 1) on a 9: illegal */ bad('7 6 on 9 legal?'); }
+      if (M.canDrop(s, 2, 1, 5)) bad('7 6 on 9 must be illegal');
       if (!M.canDrop(s, 2, 0, 5)) bad('8 7 6 on 9 of another suit must be legal (run of one suit)');
       M.move(s, 2, 0, 5);
       if (s.cols[5].map((x) => M.rankOf(s, x)).join() !== '9,8,7,6') bad('run moved whole');
@@ -75,11 +75,11 @@ fs.mkdirSync(OUT, { recursive: true });
       s2.cols[0] = [C(8, 0), C(7, 1)];                 // 8 spade, 7 heart (set 1 = suit 1)
       s2.cols[1] = [C(9, 0)];
       if (M.pickable(s2, 0, 0)) bad('mixed-suit chain picked up together');
-      if (!M.pickable(s2, 0, 1) || !M.canDrop(s2, 0, 1, 1) === true) { /* 7 on 9? illegal */ }
+      if (!M.pickable(s2, 0, 1)) bad('a single card is pickable');
       if (M.canDrop(s2, 0, 1, 1)) bad('7 on 9 legal');
       if (M.canDrop(s2, 0, 0, 1)) bad('mixed chain moved');
       s2.cols[2] = [C(8, 1)];
-      if (!M.canDrop(s2, 0, 1, 2) === false) bad('7 heart on 8 heart should be legal');
+      if (!M.canDrop(s2, 0, 1, 2)) bad('7 heart on 8 heart should be legal');
     }
 
     // completing a run removes it, scores and turns over the card below
@@ -329,7 +329,10 @@ fs.mkdirSync(OUT, { recursive: true });
     const b4 = await state();
     const c1 = await cardInfo(bad.f, bad.i), c2 = await colPoint(bad.to);
     await p.mouse.click(c1.x, c1.y); await p.mouse.click(c2.x, c2.y);
-    ok((await state()) === b4 && (await p.evaluate(() => document.querySelectorAll('.spider-card.sel').length)) === 0, 'tap a card and an illegal column: nothing moves, selection is cleared');
+    ok((await state()) === b4 && (await p.evaluate(() => document.querySelectorAll('.spider-card.sel').length)) >= 1, 'tap a card and then another card that it cannot go on: nothing moves, the new card is selected');
+    const fd = await cardInfo(bad.to === 0 ? 1 : 0, 0);
+    await p.mouse.click(fd.x, fd.y);
+    ok((await state()) === b4 && (await p.evaluate(() => document.querySelectorAll('.spider-card.sel').length)) === 0, 'tap a card and a face-down card: nothing moves, selection is cleared');
   }
 
   // dealing from the stock
@@ -341,7 +344,7 @@ fs.mkdirSync(OUT, { recursive: true });
     ok(r.cols.every((n, i) => n === before[i] + 1) && r.n === '4' && r.cards === 64 && r.moves === 1, `a tap on the stock deals one card to every column (${r.n} deals left)`);
     const geo = await p.evaluate(() => [...document.querySelectorAll('.spider-card[data-id]')].every((e) => { const col = +e.dataset.col, r = e.getBoundingClientRect(), m = window.__spider.metrics(), b = document.querySelector('#spider-board').getBoundingClientRect(); return Math.abs(r.left - b.left - (m.x0 + col * (m.cw + m.gap))) < 2; }));
     ok(geo, 'the dealt cards arrived in their columns');
-    await p.click('#spider-undo'); await p.waitForTimeout(900);
+    await p.click('#spider-undo'); await p.waitForTimeout(1500);
     ok(await p.evaluate(() => window.__spider.state.stock.length === 5 && document.querySelectorAll('.spider-card[data-id]').length === 54), 'undo takes the deal back');
     // no deal while a column is empty
     await p.evaluate(() => { const s = window.__spider.state; s.cols[4] = []; window.__spider.load(s); });
@@ -349,7 +352,7 @@ fs.mkdirSync(OUT, { recursive: true });
     const b4 = await state();
     await p.click('#spider-stock'); await p.waitForTimeout(200);
     ok((await state()) === b4 && /空列|empty|vide/.test(await p.evaluate(() => document.body.innerText)), 'no deal while a column is empty (and a message says why)');
-    const emptySlot = await p.evaluate(() => getComputedStyle(document.querySelectorAll('.spider-slot')[4]).display !== 'none');
+    const emptySlot = await p.evaluate(() => getComputedStyle(document.querySelector('.spider-slot[data-col="4"]')).display !== 'none');
     ok(emptySlot, 'the empty column shows its dashed slot');
   }
 
@@ -466,5 +469,28 @@ fs.mkdirSync(OUT, { recursive: true });
   ok(true, 'leaving the game removes it (the hook is gone)');
   ok(t.log.external.length === 0, 'no request left the app');
   await t.browser.close();
+
+  // reduced motion: everything happens at once, no confetti, the win screen still comes
+  {
+    const r = await start(new Map(), { local: true, viewport: { width: 820, height: 1180 } });
+    const q = r.page;
+    await q.evaluate(() => (location.hash = '#/games/spider')); await q.waitForSelector('#spider-board'); await q.waitForFunction(() => window.__spider && window.__spider.state);
+    await q.evaluate(async () => {
+      const M = await import('/src/games/spider-logic.ts');
+      const s = M.newGame(1, () => 0.5);
+      s.cols = Array.from({ length: 10 }, () => []); s.stock = []; s.found = [0, 0, 0, 0, 0, 0, 0]; s.hist = []; s.moves = 40; s.score = 800;
+      for (let x = 13; x >= 2; x--) s.cols[0].push(M.mk(x - 1, 1));
+      s.cols[1] = [M.mk(0, 1)];
+      window.__spider.load(s);
+    });
+    await q.waitForTimeout(200);
+    const a = await q.evaluate(() => { const e = document.querySelector('.spider-card[data-col="1"][data-idx="0"]').getBoundingClientRect(); return { x: e.left + e.width / 2, y: e.top + 10 }; });
+    const b = await q.evaluate(() => { const e = document.querySelector('.spider-card[data-col="0"][data-idx="11"]').getBoundingClientRect(); return { x: e.left + e.width / 2, y: e.top + 10 }; });
+    await q.mouse.click(a.x, a.y); await q.mouse.click(b.x, b.y);
+    await q.waitForSelector('#spider-win', { timeout: 3000 });
+    ok(await q.evaluate(() => document.querySelectorAll('.spider-conf').length === 0 && !!document.querySelector('#spider-again')), 'reduced motion: the win screen comes at once without confetti');
+    ok(r.log.external.length === 0, 'no request left the app (reduced motion run)');
+    await r.browser.close();
+  }
   await done();
 })();

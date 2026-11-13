@@ -85,12 +85,15 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const setBtn = h("button", { id: "gomoku-setup-btn", onclick: () => { ctx.sfx("tap"); showSetup(); } }, "设置");
     holder.append(h("div", { class: "gomoku-play" }, status, wrap, h("div", { class: "gomoku-btns" }, setBtn, undoBtn, resetBtn)));
 
+    const say = (c: number, text: string) => {
+      const icon = h("span", {}); icon.innerHTML = c ? turnIcon(c) : "";
+      status.replaceChildren(...(icon.firstChild ? [icon.firstChild] : []), h("span", {}, text));
+    };
     const setStatus = () => {
       status.className = "gomoku-status"; status.id = "gomoku-status";
-      const t = turnIcon(turn);
-      if (busy) status.innerHTML = `${t}<span>电脑在想…</span>`;
-      else if (ai) status.innerHTML = `${t}<span>${turn === human ? (turn === 1 ? "轮到你了（黑棋）" : "轮到你了（白棋）") : "电脑在想…"}</span>`;
-      else status.innerHTML = `${t}<span>${turn === 1 ? "轮到黑棋" : "轮到白棋"}</span>`;
+      if (busy) say(turn, "电脑在想…");
+      else if (ai) say(turn, turn !== human ? "电脑在想…" : turn === 1 ? "轮到你了（黑棋）" : "轮到你了（白棋）");
+      else say(turn, turn === 1 ? "轮到黑棋" : "轮到白棋");
       status.dataset.turn = String(turn);
     };
     const redraw = (anim: number | null) => {
@@ -137,7 +140,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       if (!line) { msg = "平局！棋盘下满了。"; kind = "good"; }
       else if (ai) { if (winner === human) msg = "你赢了！太棒了！"; else { msg = "电脑赢了，再来一局吧！"; kind = "lose"; } }
       else msg = winner === 1 ? "黑棋赢了！太棒了！" : "白棋赢了！太棒了！";
-      status.innerHTML = `${line ? turnIcon(winner) : ""}<span>${msg}</span>`;
+      say(line ? winner : 0, msg);
       status.dataset.result = line ? String(winner) : "draw";
       ctx.sfx(kind); ctx.toast(msg, 3500);
       if (ai) {

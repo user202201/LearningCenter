@@ -36,3 +36,12 @@
 @keyframes gomoku-line { to { stroke-dashoffset: 0; } }
 @keyframes gomoku-banner { from { transform: scale(.3); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .gomoku-stone .gs, .gomoku-stone.win .gs, .gomoku-winline, .gomoku-status.won { animation: none; } .gomoku-winline { stroke-dashoffset: 0; } }
+/* sideways: the board in the middle, the status on its left and the buttons on its right (equal columns: the board stays centred) */
+@media (orientation: landscape) and (max-height: 560px) {
+  .gomoku-play { display: grid; grid-template-columns: clamp(110px, 19vw, 190px) minmax(0, 1fr) clamp(110px, 19vw, 190px); grid-template-rows: 1fr; align-items: center; gap: 8px; }
+  .gomoku-wrap { grid-column: 2; grid-row: 1; height: 100%; }
+  .gomoku-status { grid-column: 1; grid-row: 1; flex-direction: column; font-size: 16px; }
+  .gomoku-status.won { font-size: 18px; }
+  .gomoku-btns { grid-column: 3; grid-row: 1; flex-direction: column; align-items: center; }
+}
+@media (max-width: 440px) { .gomoku-btns button { padding: 4px 12px; font-size: 15px; min-height: 42px; } .gomoku-btns { gap: 7px; } }

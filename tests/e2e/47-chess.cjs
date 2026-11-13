@@ -103,7 +103,7 @@ const mode2 = async (page) => { await page.click('#chess-new'); await page.click
   // ---------------- the screen ----------------
   const t = await start(new Map(), { local: true, viewport: { width: 820, height: 1100 } });
   const { page } = t; const errs = [];
-  page.on('pageerror', (e) => errs.push(e.message));
+  page.on('pageerror', (e) => { errs.push(e.message); console.log('PAGEERROR', e.message); });
   await goChess(page);
   await page.screenshot({ path: OUT + 'chess-start.png' });
   const n0 = await page.evaluate(() => ({ sq: document.querySelectorAll('.chess-sq').length, pc: document.querySelectorAll('.chess-pc').length, svg: document.querySelectorAll('.chess-pc svg').length, white: document.querySelectorAll('.chess-pc[data-p^=w]').length, kinds: [...new Set([...document.querySelectorAll('.chess-pc')].map((e) => e.dataset.p))].length, eyes: document.querySelectorAll('.chess-pc .chess-face').length }));
@@ -204,7 +204,6 @@ const mode2 = async (page) => { await page.click('#chess-new'); await page.click
   ok(await page.evaluate(() => window.__chess.fen().includes('4P3')) && !(await fen(page)).includes(' b '), 'the computer (新手) answers and it is the player\'s turn again');
   await page.click('#chess-undo'); await page.waitForTimeout(300);
   ok((await fen(page)) === 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', 'undo against the computer takes back both moves');
-  await page.click('#chess-undo');
   ok(await page.evaluate(() => document.querySelector('#chess-undo').disabled === true), 'undo is off at the start position');
   // black: the computer opens
   await page.click('#chess-new'); await page.click('#chess-s-b'); await page.click('#chess-start');
@@ -243,10 +242,9 @@ const mode2 = async (page) => { await page.click('#chess-new'); await page.click
     ok(m.sw <= m.iw && m.bw <= m.iw, `${name} ${w}x${hh}: no sideways scroll`);
     ok(m.top >= 0 && m.bottom <= m.ih && m.ctlBottom <= m.ih + 1 && m.l >= 0 && m.r >= 0, `${name}: the board and the buttons are fully on the screen (board ${Math.round(m.size)} px)`);
     if (!land) ok(Math.abs(m.l - m.r) <= 3 || (m.l >= 0 && Math.abs(m.l - m.r) <= 12), `${name}: equal space left and right of the board (${Math.round(m.l)} / ${Math.round(m.r)})`);
-    else ok(Math.abs((m.l) - (innerWidth() - m.ctlRight)) < 40 || true, 'sideways: board and panel side by side');
+    else ok(m.ctlLeft > m.l + m.size - 2 && m.stTop < m.bottom, `${name}: the buttons and the status line stand beside the board`);
     ok(m.size >= 150, `${name}: the board is big enough (${Math.round(m.size)} px)`);
   }
-  function innerWidth() { return 844; }
 
   // reduced motion off: the animations really run
   {

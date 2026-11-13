@@ -72,17 +72,21 @@ export const count = (g: Grid): number => g.reduce((n, row) => n + row.filter(Bo
 export const colorsPresent = (g: Grid): number[] => [...new Set(g.flat().filter(Boolean))].sort();
 export const lowestRow = (g: Grid): number => { let m = -1; g.forEach((row, r) => { if (row.some(Boolean)) m = r; }); return m; };
 
-/** a bubble of a colour that is still on the board (so the shooter can never hold a colour nobody can use) */
-export function nextColor(rng: () => number, g: Grid, fallback: number): number {
-  const p = colorsPresent(g);
+/** a random colour among those still on the board (never `avoid` while another colour exists) */
+export function nextColor(rng: () => number, g: Grid, fallback: number, avoid = 0): number {
+  let p = colorsPresent(g);
+  if (p.length > 1 && avoid) p = p.filter((c) => c !== avoid);
   return p.length ? p[Math.floor(rng() * p.length)] : fallback;
 }
 
-/** after a shot: the next bubble moves to the shooter, a new next one is drawn; both are always colours that are still on the board */
-export function advanceQueue(rng: () => number, g: Grid, nxt: number, fallback = 1): { cur: number; nxt: number } {
+/**
+ * After EVERY shot: the next bubble moves to the shooter, a new next one is drawn at random from the colours still on the board.
+ * Never three equal bubbles in a row (previous shooter bubble, this one, the new next) while another colour exists.
+ */
+export function advanceQueue(rng: () => number, g: Grid, nxt: number, fallback = 1, prevCur = 0): { cur: number; nxt: number } {
   const present = colorsPresent(g);
-  const cur = present.length === 0 || present.includes(nxt) ? nxt : nextColor(rng, g, fallback);
-  return { cur, nxt: nextColor(rng, g, fallback) };
+  const cur = present.length === 0 || present.includes(nxt) ? nxt : nextColor(rng, g, fallback, prevCur);
+  return { cur, nxt: nextColor(rng, g, fallback, prevCur === cur ? cur : 0) };
 }
 
 /** the empty cell where a bubble that stopped at (x, y) comes to rest */
@@ -183,11 +187,11 @@ const SHAPES: Record<Shape, (r: number, c: number, n: number, w: number) => bool
   crown: (r, c, n, w) => r < 2 || (c % 2 === 0 && r < n),
 };
 export const LEVELS: LevelSpec[] = [
-  { rows: 4, colors: 3, shape: "full", misses: 7, clump: 0.45 },
-  { rows: 5, colors: 3, shape: "pyramid", misses: 7, clump: 0.4 },
+  { rows: 4, colors: 4, shape: "full", misses: 7, clump: 0.45 },
+  { rows: 5, colors: 4, shape: "pyramid", misses: 7, clump: 0.4 },
   { rows: 6, colors: 4, shape: "stripes", misses: 6, clump: 0.4 },
   { rows: 6, colors: 4, shape: "diamond", misses: 6, clump: 0.35 },
-  { rows: 6, colors: 4, shape: "checker", misses: 6, clump: 0.3 },
+  { rows: 6, colors: 5, shape: "checker", misses: 6, clump: 0.3 },
   { rows: 7, colors: 5, shape: "columns", misses: 5, clump: 0.35 },
   { rows: 7, colors: 5, shape: "zigzag", misses: 5, clump: 0.3 },
   { rows: 7, colors: 5, shape: "hourglass", misses: 5, clump: 0.3 },
@@ -214,6 +218,14 @@ export function buildLevel(spec: LevelSpec, seed: number): Grid {
     }
   }
   for (const [r, c] of floating(g)) g[r][c] = 0;
+  // every colour of the level really appears (small shapes with few bubbles)
+  const cells: Cell[] = [];
+  g.forEach((row, r) => row.forEach((v, c) => { if (v) cells.push([r, c]); }));
+  for (let k = 1; k <= spec.colors; k++) {
+    if (g.some((row) => row.includes(k))) continue;
+    const [r, c] = cells[Math.floor(rng() * cells.length)];
+    g[r][c] = k;
+  }
   return g;
 }
 /** the number of shots a good player needs; 3 stars up to it, 2 up to 1.5 times, otherwise 1 */

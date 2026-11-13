@@ -95,14 +95,14 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
       const lv = [];
       L.LEVELS.forEach((spec, i) => {
         const gg = L.buildLevel(spec, 100 + i), n2 = L.count(gg), cols = L.colorsPresent(gg);
-        lv.push({ n2, cols: cols.length, float: L.floating(gg).length, low: L.lowestRow(gg), par: L.par(gg), same: JSON.stringify(gg) === JSON.stringify(L.buildLevel(spec, 100 + i)), shape: spec.shape });
+        lv.push({ n2, cols: cols.length, float: L.floating(gg).length, low: L.lowestRow(gg), par: L.par(gg), same: JSON.stringify(gg) === JSON.stringify(L.buildLevel(spec, 100 + i)), shape: spec.shape, want: spec.colors, colset: cols.join(''), minc: Math.min(...cols) });
       });
       return { bad: bad.slice(0, 8), interior, clusters, floats, placed, pops, bounceOk, straightOk, dropOk, lv, n: L.LEVELS.length, shapes: new Set(L.LEVELS.map((s) => s.shape)).size, stars: [L.starsFor(5, 5), L.starsFor(7, 5), L.starsFor(9, 5)] };
     });
     ok(r.bad.length === 0, `hex grid + flood fill + floating + shots on 300 random boards (${r.clusters} clusters, ${r.floats} hanging cells, ${r.placed} shots, ${r.pops} pops)${r.bad.length ? ' -> ' + r.bad.join('; ') : ''}`);
     ok(r.bounceOk && r.straightOk, 'a shallow shot bounces off the wall and mirrors its angle; a straight one reaches the ceiling');
     ok(r.dropOk, 'the ceiling coming down: a new full row on top, the old rows move down, row lengths keep alternating');
-    ok(r.n === 12 && r.shapes >= 11 && r.lv.every((l, i) => l.n2 >= 20 && l.float === 0 && l.low < 10 && l.same && l.par > 5 && l.cols >= 2 && l.cols <= [3, 3, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6][i]), '12 data-driven levels with different layouts: filled, hanging from the ceiling, above the line, repeatable: ' + r.lv.map((l) => l.shape + ':' + l.n2).join(' '));
+    ok(r.n === 12 && r.shapes >= 11 && r.lv.every((l, i) => l.n2 >= 20 && l.float === 0 && l.low < 10 && l.same && l.par > 5 && l.cols === l.want && l.want === [4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6][i] && (i < 2 || l.colset.includes('2') && l.colset.includes('3'))), '12 data-driven levels with different layouts: filled, hanging from the ceiling, above the line, repeatable: ' + r.lv.map((l) => l.shape + ':' + l.n2).join(' '));
     ok(r.stars.join() === '3,2,1', 'stars: par = 3, up to 1.5 times par = 2, else 1');
     await t.browser.close();
   }
@@ -119,6 +119,9 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
   ok(s.view === 'play' && s.level === 0 && s.count > 15 && s.shots === 0 && s.over === '' && s.cur >= 1 && s.nxt >= 1, 'level 1 starts: ' + JSON.stringify({ count: s.count, cur: s.cur, nxt: s.nxt }));
   ok((await p.textContent('#bubble-level')) === '第1关' && (await p.textContent('#bubble-score')) === '得分：0', 'status line: level and score');
   await p.screenshot({ path: OUT + 'bubble-play-start.png' });
+  await p.evaluate(async () => { const L = await import('/src/games/bubble-logic.ts'); window.__bubble.load(L.buildLevel(L.LEVELS[7], 5), 1, 2, 7); });
+  await p.waitForTimeout(200); await p.screenshot({ path: OUT + 'bubble-level8.png' });
+  await p.click('#bubble-levels-btn'); await p.click('.bubble-lv[data-level="1"]'); await p.waitForSelector('#bubble-canvas');
 
   // load a position we know: a row of 6 of colour 1 hanging from the ceiling with one bubble under it that hangs only from them
   await p.evaluate(async () => { window.__L = await import('/src/games/bubble-logic.ts'); });
@@ -136,7 +139,7 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
   await aimShoot(p, 2, 6, false);
   s = await S(p); ok(s.angle > 1.0 && s.angle < 2.6 && s.angle !== Math.PI / 2 && s.shots === 0, 'dragging turns the aim and nothing is shot until release (angle ' + s.angle.toFixed(2) + ')');
   await p.screenshot({ path: OUT + 'bubble-aiming.png' });
-  await p.mouse.move(100, 100); await p.mouse.up();   // (released far away from the field: still a shot at that aim? the pointer is captured)
+  await p.mouse.up();
   await waitIdle(p);
   // restore the position and check pause first
   await p.evaluate((g) => window.__bubble.load(eval(g), 1, 2, 0), setup);
@@ -175,11 +178,13 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
   // the shooter queue: every shot fires what was shown as NEXT, a new NEXT is drawn from colours still on the board
   {
     const q = await p.evaluate(async () => { const L = window.__L, rng = L.mulberry32(5), g = L.buildLevel(L.LEVELS[5], 9); let nxt = 1, ok = true; const seen = new Set(); for (let i = 0; i < 300; i++) { const r = L.advanceQueue(rng, g, nxt); if (r.cur !== nxt || !L.colorsPresent(g).includes(r.nxt)) ok = false; seen.add(r.nxt); nxt = r.nxt; } const e = L.advanceQueue(rng, L.emptyGrid(), 3); return { ok, kinds: seen.size, gone: L.advanceQueue(rng, g, 99).cur !== 99, empty: e.cur === 3 }; });
+    const sim = await p.evaluate(() => { const L = window.__L, rng = L.mulberry32(77); const out = {}; for (const n of [4, 6]) { const g = L.buildLevel(L.LEVELS[n === 4 ? 0 : 11], 5); let cur = 1, nxt = 2, prev = 0; const fired = []; for (let i = 0; i < 400; i++) { fired.push(cur); const r = L.advanceQueue(rng, g, nxt, cur, cur); cur = r.cur; nxt = r.nxt; } let run = 1, maxRun = 1; for (let i = 1; i < fired.length; i++) { run = fired[i] === fired[i - 1] ? run + 1 : 1; maxRun = Math.max(maxRun, run); } out[n] = { kinds: new Set(fired).size, maxRun }; } const one = L.emptyGrid(); one[0][0] = 3; one[0][1] = 3; let c = 3, nx = 3, rr = []; for (let i = 0; i < 10; i++) { const r = L.advanceQueue(rng, one, nx, c, c); rr.push(r.cur + '' + r.nxt); c = r.cur; nx = r.nxt; } out.single = rr.every((x) => x === '33'); return out; });
+    ok(sim[4].kinds === 4 && sim[6].kinds === 6 && sim[4].maxRun <= 3 && sim[6].maxRun <= 3 && sim.single, '400 fired bubbles: every colour of the level comes up, never more than 3 equal in a row, a single colour left = that colour: ' + JSON.stringify(sim));
     ok(q.ok && q.kinds >= 3 && q.gone && q.empty, 'advanceQueue: cur = old next, new next is a colour on the board, varied: ' + JSON.stringify(q));
     await p.click('.bubble-lv[data-level="1"]').catch(() => {});
     await p.evaluate(() => { window.__bubble.load(window.__L.buildLevel(window.__L.LEVELS[0], 21), 1, 2, 0); });
     const log = [];
-    for (let i = 0; i < 24; i++) {
+    for (let i = 0; i < 40; i++) {
       if (i && i % 5 === 0) await p.evaluate((i) => { const b = window.__bubble.s; window.__bubble.load(window.__L.buildLevel(window.__L.LEVELS[0], 30 + i), b.cur, b.nxt, 0); }, i);
       const before = await S(p);
       if (before.over) break;
@@ -193,7 +198,9 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
     }
     const real = log.filter((l) => !l.over);
     console.log('LOG', JSON.stringify(log.slice(0, 8)), await p.evaluate(() => typeof window.__L));
-    ok(log.length >= 20 && real.every((l) => !l.keep || l.curAfter === l.shownNext), `${log.length} shots: after each one the shooter holds what was shown as next`);
+    const fired = log.map((l) => l.fired); let run = 1, maxRun = 1; for (let i = 1; i < fired.length; i++) { run = fired[i] === fired[i - 1] ? run + 1 : 1; maxRun = Math.max(maxRun, run); }
+    ok(new Set(fired).size >= 3 && maxRun <= 3, `fired colours over ${log.length} shots on screen: ${fired.join('')} (${new Set(fired).size} different, longest run ${maxRun})`);
+    ok(log.length >= 36 && real.every((l) => !l.keep || l.curAfter === l.shownNext), `${log.length} shots: after each one the shooter holds what was shown as next`);
     ok(new Set(log.map((l) => l.shownNext)).size >= 3 && log.some((l, i) => i && l.shownNext !== log[i - 1].shownNext), 'the next bubble changes over the shots: ' + log.map((l) => l.shownNext).join(''));
     ok(log.every((l) => l.present), 'every colour shown as next is still on the board');
     await p.evaluate(() => { window.__bubble.load(window.__L.buildLevel(window.__L.LEVELS[0], 3), 1, 2, 0); });

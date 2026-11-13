@@ -63,16 +63,16 @@ const KEY = 'learn.games.v1';
         const b = G.newBoard(); const cs = [];
         for (let k = 0; k < 5; k++) { if (k === gap) continue; const [x, y] = f(ox, oy, k); cs.push(x + ',' + y); }
         put(b, cs.join(' '), me); put(b, '0,0 14,14 0,14 14,0', opp);   // far-away stones of the opponent
-        const [wx, wy] = f(ox, oy, gap), c = mv(b, me, lv);
-        chk(c === wy * 15 + wx, `${lv} ${me} ${dir} wins at gap ${gap}: ${c}`);
+        const c = mv(b, me, lv);
+        chk(G.winningCells(b, me).includes(c), `${lv} ${me} ${dir} wins at gap ${gap}: ${c}`);
       }
       // (b) it must stop a five (also a broken four), and prefers its own win when it has one
       for (const gap of [0, 2, 4]) {
         const b = G.newBoard(); const cs = [];
         for (let k = 0; k < 5; k++) { if (k === gap) continue; const [x, y] = f(ox, oy, k); cs.push(x + ',' + y); }
         put(b, cs.join(' '), opp); put(b, '0,0 14,14', me); put(b, '1,0 13,14', opp);
-        const [wx, wy] = f(ox, oy, gap), c = mv(b, me, lv);
-        chk(c === wy * 15 + wx, `${lv} ${me} ${dir} blocks the four at gap ${gap}: ${c}`);
+        const theirWins = G.winningCells(b, opp), c = mv(b, me, lv);
+        chk(theirWins.includes(c), `${lv} ${me} ${dir} blocks the four at gap ${gap}: ${c}`);
         // own win and the opponent's four at once: it wins
         put(b, '3,2 4,2 5,2 6,2', me);
         const c2 = mv(b, me, lv); chk(c2 === 2 * 15 + 2 || c2 === 2 * 15 + 7, `${lv} ${me} ${dir} wins first: ${c2}`);
@@ -180,8 +180,7 @@ const KEY = 'learn.games.v1';
   ok(first.c === '1' && first.i === '112', 'when the computer starts it plays black in the middle');
   await waitTurn(2);
   ok((await p.textContent('#gomoku-status')).includes('轮到你了（白棋）'), 'and I am white: "轮到你了（白棋）"');
-  await p.click('#gomoku-undo');
-  ok((await nStones()) === 1 || (await p.locator('#gomoku-undo').isDisabled()), 'undo does not take back the computer\'s opening move (nothing of mine to take back)');
+  ok(await p.locator('#gomoku-undo').isDisabled() && (await nStones()) === 1, 'undo is off while there is nothing of mine to take back (the computer\'s opening move stays)');
   // I lose on purpose: far-away stones, the computer builds its five
   const junk = [[0, 0], [14, 14], [0, 14], [14, 0], [7, 0], [0, 7], [14, 7], [7, 14], [3, 0], [0, 3], [11, 14], [14, 11], [11, 0], [0, 11], [14, 3], [3, 14]];
   let lost = false;
