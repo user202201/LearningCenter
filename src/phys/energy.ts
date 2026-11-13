@@ -33,7 +33,7 @@ export const def: SimDef = {
     const e = energyOf(s)!;
     const r = [{ label: "动能", value: fmt(e.Ek, 2), unit: "J" }, { label: "重力势能", value: fmt(e.Ep, 2), unit: "J" }, { label: "转化为内能的能量", value: fmt(e.Eloss, 2), unit: "J" },
       { label: "总能量", value: fmt(e.Ek + e.Ep + e.Eloss, 2), unit: "J" }, { label: "速度", value: fmt(e.v, 2), unit: "m/s" }, { label: "高度", value: fmt(e.h, 2), unit: "m" }];
-    if (s.mode === 1 && !(e as { reached: boolean }).reached) r.push({ label: "提示", value: "小车到不了这里", unit: "" });
+    if (s.mode === 1 && !e.reached) r.push({ label: "提示", value: "小车到不了这里", unit: "" });
     return r;
   },
   draw(c, w, hh, s) {
@@ -44,7 +44,7 @@ export const def: SimDef = {
       rect(c, bx, 190, 80, 60, "#ffa94d", COL.ink, 4, 8); arrow(c, bx - 70, 220, bx - 4, 220, COL.red, 6); txt(c, "F", bx - 80, 200, 22, COL.red, "right");
       line(c, 60, 290, bx, 290, COL.grey, 3); arrow(c, bx - 30, 290, bx, 290, COL.grey, 3); txt(c, "s", (60 + bx) / 2, 310, 22, COL.grey);
       const bar = (x: number, v: number, vmax: number, col: string, label: string) => { const hgt = Math.max(2, (v / vmax) * 130); rect(c, x, 150 - hgt, 40, hgt, col, COL.ink, 3, 4); txt(c, label, x + 20, 166, 18, COL.ink); };
-      bar(60, W, 4000, COL.green, "W"); bar(120, Mo.power(W, s.tw), 4000, COL.purple, "P");
+      const top = Math.max(W, Mo.power(W, s.tw), 1); bar(60, W, top, COL.green, "W"); bar(120, Mo.power(W, s.tw), top, COL.purple, "P");
       txt(c, `W = ${fmt(W, 0)} J`, 560, 60, 24, COL.green, "right"); txt(c, `P = ${fmt(Mo.power(W, s.tw), 1)} W`, 560, 96, 24, COL.purple, "right");
       return;
     }
@@ -61,8 +61,8 @@ export const def: SimDef = {
       c.beginPath(); for (let i = 0; i <= 120; i++) { const x = i / 120; (i ? c.lineTo : c.moveTo).call(c, X(x), Y(Mo.trackH(s.H0, x))); }
       c.strokeStyle = COL.ink; c.lineWidth = 5; c.stroke();
       const cx = X(s.x), cy = Y(e.h);
-      circle(c, cx, cy - 14, 14, e.Ek > 0 || (e as { reached: boolean }).reached ? COL.orange : COL.grey);
-      line(c, 20, Y(s.H0), 350, Y(s.H0), COL.red, 2, [6, 6]); txt(c, "H", 10, Y(s.H0) - 12, 18, COL.red, "left");
+      circle(c, cx, cy - 14, 14, e.Ek > 0 || e.reached ? COL.orange : COL.grey);
+      line(c, 20, Y(s.H0), 350, Y(s.H0), COL.red, 2, [6, 6]); txt(c, "H", 362, Y(s.H0), 18, COL.red, "left");
     }
     const bar = (x: number, v: number, col: string, label: string, base = 340, k = 30) => { const hgt = Math.min(240, Math.max(0, (v / Math.max(1, e.E0)) * 240)); rect(c, x, base - hgt, 44, hgt, col, COL.ink, 3, 4); txt(c, label, x + 22, base + 18, 18, COL.ink); };
     bar(400, e.Ek, COL.orange, "Ek"); bar(450, e.Ep, COL.blue, "Ep"); bar(500, e.Eloss, COL.grey, "Q");

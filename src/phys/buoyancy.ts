@@ -1,10 +1,10 @@
-import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
+import { mountSim, type SimDef, type PhysCtx, type St, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-buoyancy";
 import { COL, arrow, line, rect, spring, txt } from "./draw";
 
 export const meta = CATALOG.buoyancy;
-const rhoL = (s: { liq: number }) => Mo.SOLVE_LIQ[s.liq][2];
+const rhoL = (s: St) => Mo.SOLVE_LIQ[s.liq][2];
 export const def: SimDef = {
   meta,
   lesson: [

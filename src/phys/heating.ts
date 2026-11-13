@@ -56,13 +56,13 @@ export const def: SimDef = {
     if (s.mode === 2) { rect(c, 70, 306, 110, 34, "#a5d8ff", COL.ink, 3, 10); txt(c, "−", 125, 323, 22, COL.blue); }
     else for (let i = 0; i < 3; i++) { c.beginPath(); c.moveTo(85 + i * 38, 336); c.quadraticCurveTo(70 + i * 38, 312, 85 + i * 38, 296); c.quadraticCurveTo(100 + i * 38, 312, 85 + i * 38, 336); c.fillStyle = i === 1 ? COL.yellow : COL.orange; c.fill(); }
     // thermometer
-    const ty = (T: number) => 280 - ((T + 30) / 180) * 220;
+    const ty = (T: number) => 280 - ((Math.max(-30, Math.min(150, T)) + 30) / 180) * 220;
     rect(c, 128, 40, 14, 240, "#fff", COL.ink, 3, 7); circle(c, 135, 285, 12, COL.red);
     rect(c, 131, ty(p.T), 8, 280 - ty(p.T), COL.red, null, 0, 3);
     txt(c, `${Math.round(p.T)}`, 168, ty(p.T), 18, COL.red, "left");
     // the graph
-    const ymax = s.mode === 0 ? 150 : 100, ymin = s.mode === 2 ? -20 : s.mode === 0 ? -20 : 0;
-    const P = axes(c, 290, 40, 320, 260, TMAX, ymax, "t/s", "T/°C", ymin, 5);
+    const ymax = s.mode === 0 ? 140 : s.mode === 1 ? 200 : 20, ymin = s.mode === 1 ? 0 : -20;
+    const P = axes(c, 290, 40, 320, 260, TMAX, ymax, "t/s", "T/°C", ymin, 4);
     curve(c, P, (x) => Mo.curve(s.mode, s.P, s.m, x).T, "#ffa8a8", TMAX, 240, 3);
     c.save(); c.beginPath(); c.rect(P.x0, P.y0 - 5, P.X(s.t) - P.x0, P.h + 10); c.clip(); curve(c, P, (x) => Mo.curve(s.mode, s.P, s.m, x).T, COL.red, TMAX, 240, 5); c.restore();
     circle(c, P.X(s.t), P.Y(p.T), 8, COL.yellow);

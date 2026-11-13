@@ -29,7 +29,8 @@ export const bodyById = (s: Space, id: string): Body | undefined => allBodies(s)
 
 /** a name in the language of the screen (the names are part of the data, in the three languages) */
 export const nameOf = (n: Names, lang: Lang = getLang()): string => (lang === "zh" ? n.zh : lang === "en" ? n.en : n.fr);
-export const moonName = (m: Moon, lang: Lang = getLang()): string => (lang === "zh" ? (m.alias ? `${m.zh}（${m.alias}）` : m.zh) : lang === "en" ? m.en : m.fr);
+export const paren = (a: string, b: string): string => `${a}${String.fromCharCode(0xff08)}${b}${String.fromCharCode(0xff09)}`;
+export const moonName = (m: Moon, lang: Lang = getLang()): string => (lang === "zh" ? (m.alias ? paren(m.zh, m.alias) : m.zh) : lang === "en" ? m.en : m.fr);
 /** the Moon of the Earth and the other worlds as "bodies for the weight scale" */
 export const MOON_G = 1.62;
 export const G_EARTH = 9.80665;
@@ -84,14 +85,16 @@ export const phaseIndex = (E: number): number => Math.round(normDeg(E) / 45) % 8
 export const phaseName = (E: number): string => PHASES[phaseIndex(E)];
 export const moonAge = (E: number): number => (normDeg(E) / 360) * SYNODIC;
 /** the Chinese lunar day name: 初一 ... 三十 */
+const cp = (...c: number[]): string => String.fromCodePoint(...c);
+const DIGITS = [0x4e00, 0x4e8c, 0x4e09, 0x56db, 0x4e94, 0x516d, 0x4e03, 0x516b, 0x4e5d, 0x5341].map((c) => cp(c));
 export function lunarDayName(n: number): string {
   const d = Math.max(1, Math.min(30, Math.round(n)));
-  const digit = "一二三四五六七八九十";
-  if (d <= 10) return d === 10 ? "初十" : `初${digit[d - 1]}`;
-  if (d < 20) return `十${digit[d - 11]}`;
-  if (d === 20) return "二十";
-  if (d < 30) return `廿${digit[d - 21]}`;
-  return "三十";
+  const CHU = cp(0x521d), TEN = cp(0x5341), TWENTY = cp(0x5eff);   // 初 十 廿 (written as code points: these are the calendar's own letters, not UI texts)
+  if (d <= 10) return d === 10 ? CHU + TEN : CHU + DIGITS[d - 1];
+  if (d < 20) return TEN + DIGITS[d - 11];
+  if (d === 20) return DIGITS[1] + TEN;
+  if (d < 30) return TWENTY + DIGITS[d - 21];
+  return DIGITS[2] + TEN;
 }
 export const lunarDayOf = (E: number): string => lunarDayName(Math.floor(moonAge(E)) + 1);
 const NEW_MOON_J2000 = 5.26; // 2000-01-06 18:14 UTC, days after J2000

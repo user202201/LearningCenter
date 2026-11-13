@@ -65,8 +65,8 @@ export const def: SimDef = {
     line(c, ox, tip, mx, hy, COL.orange, 3); arrow(c, mx, hy, ex + 20, ey + (hy - ey) * (20 / (mx - ex)), COL.orange, 3);
     line(c, mx, hy, ix, tip, COL.orange, 2.5, [6, 6]);
     circle(c, ex, ey, 14, "#fff"); circle(c, ex + 3, ey, 6, COL.ink);
-    line(c, ox, base + 14, mx, base + 14, COL.grey, 2); txt(c, `u = ${s.d} cm`, (ox + mx) / 2, base + 32, 18, COL.grey);
-    line(c, mx, base + 14, ix, base + 14, COL.grey, 2); txt(c, `v = ${s.d} cm`, (ix + mx) / 2, base + 32, 18, COL.grey);
+    line(c, ox, base + 14, mx, base + 14, COL.grey, 2); txt(c, `u = ${s.d} cm`, mx - 8, base + 34, 18, COL.grey, "right");
+    line(c, mx, base + 14, ix, base + 14, COL.grey, 2); txt(c, `v = ${s.d} cm`, mx + 24, base + 34, 18, COL.grey, "left");
   },
   tasks: [
     { id: "r30", text: "使入射角为 30°，观察反射角也是 30°", check: (s) => s.mode === 0 && Mo.reflection(s.theta0, s.alpha).thetaI === 30 },

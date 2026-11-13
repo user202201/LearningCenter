@@ -8,7 +8,7 @@ import { subjectArt } from "./hub";
 import type { Ctx } from "./english";
 import { fit, Loop, reducedMotion, nearest, big, sig, kmText, durText, hoursText, fmt, user } from "./spaceui";
 import { renderSphereInto, sprite, drawRings, RING_PAD } from "./spaceart";
-import { type Space, type Body, type Moon, loadSpace, allBodies, nameOf, moonName, weightOn, ageOn, surfaceSpeedKmh, sizeVsEarth, MOON_G, G_EARTH } from "./spacemodel";
+import { type Space, type Body, type Moon, loadSpace, allBodies, nameOf, moonName, paren, weightOn, ageOn, surfaceSpeedKmh, sizeVsEarth, MOON_G, G_EARTH } from "./spacemodel";
 
 const COLOR = "#7048e8";
 const KIND: Record<string, string> = { rock: "岩质行星", gas: "气态巨行星", ice: "冰巨星", dwarf: "矮行星" };
@@ -67,7 +67,7 @@ export async function renderPlanet(X: Ctx, id: string): Promise<void> {
   const turnsPerSec = () => (b.rot === 0 ? 0 : (1 / Math.abs(b.rot)) * mult);
   const spinLoop = new Loop(pc, (dt) => { spin = (spin + turnsPerSec() * dt) % 1; drawPlanet(); });
   loops.push(spinLoop);
-  const axis = h("div", { class: "sp-axis", "aria-hidden": "true" }, h("i", {}), h("em", {}, tr("北")));
+  const axis = h("div", { class: "sp-axis", "aria-hidden": "true" }, h("i", {}), h("em", {}, "N"));
   const tiltBox = h("div", { class: "sp-tilt", id: "sp-tilt", "data-tilt": String(tilt), style: `transform:rotate(${tilt}deg)` }, pc, axis);
   const speedChips = [1, 10, 100].map((m) => h("button", { class: "mopt" + (m === 1 ? " on" : ""), id: `sp-rot-${m}`, onclick: () => { mult = m; speedChips.forEach((e, i) => e.classList.toggle("on", [1, 10, 100][i] === m)); spinLoop.start(); drawPlanet(); } }, `${m}×`));
   const retro = b.rot < 0;
@@ -125,7 +125,7 @@ export async function renderPlanet(X: Ctx, id: string): Promise<void> {
             h("span", {}, h("small", {}, tr("直径")), `${big(m.d)} 千米`, h("small", { class: "sp-sub" }, `月球的 ${sig(m.d / 3475, 2)} 倍`)),
             h("span", {}, h("small", {}, tr("轨道周期")), durText(m.P), ...(m.P < 0 ? [h("small", { class: "sp-sub" }, tr("逆行"))] : [])),
             h("span", {}, h("small", {}, tr("离行星的距离")), `${big(m.a)} 千米`),
-            h("span", {}, h("small", {}, tr("发现者")), user(m.yr ? `${m.by}（${m.yr}）` : m.by))),
+            h("span", {}, h("small", {}, tr("发现者")), user(m.yr ? paren(m.by, m.yr) : m.by))),
           user(m.fact, "p", "sp-moon-fact"))));
     }
     const speeds = [1, 4, 16].map((k) => h("button", { class: "mopt" + (k === 1 ? " on" : ""), id: `sp-ms-${k}`, onclick: () => { msp = k; speeds.forEach((e, i) => e.classList.toggle("on", [1, 4, 16][i] === k)); mloop.start(); } }, `${k}×`));

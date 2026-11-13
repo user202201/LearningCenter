@@ -1517,6 +1517,14 @@ async function route() {
   if (hash === "#/science/circuits") return void SC.renderCircuits();
   if (hash === "#/science/notes") return void SC.renderNotes();
   if (hash === "#/science/map") return void SC.renderMap();
+  const chem = /^#\/science\/chem(?:\/([\w-]+))?$/.exec(hash);
+  if (chem) return void SC.renderChem(chem[1] ?? "");
+  if (hash === "#/science/space") return void SC.renderSpace();
+  const spc = /^#\/science\/space\/([\w-]+)$/.exec(hash);
+  if (spc) return void SC.renderPlanet(spc[1]);
+  if (hash === "#/science/physics") return void SC.renderPhysics();
+  const phys = /^#\/science\/physics\/([\w-]+)$/.exec(hash);
+  if (phys) return void SC.renderPhysSim(phys[1]);
   if (hash === "#/subject/music") return void MU.renderMusic();
   if (hash === "#/subject/games") return void GM.renderGames();
   const gmg = /^#\/games\/([\w-]+)$/.exec(hash);

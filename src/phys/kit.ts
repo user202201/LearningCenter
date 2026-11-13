@@ -190,7 +190,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
     const best = loadSaved().quiz[def.meta.id];
     if (!qs.length) {
       quizBox.append(h("button", { class: "primary", id: "quiz-start", onclick: () => { qs = def.quiz(mulberry32(Date.now() & 0xffffff)); qi = 0; score = 0; answered = false; drawQuiz(); } }, "开始小测验"),
-        best !== undefined ? h("span", { class: "muted small pl-best" }, `最好成绩：${best} / 5`) : null);
+        ...(best !== undefined ? [h("span", { class: "muted small pl-best" }, `最好成绩：${best} / 5`)] : []));
       return;
     }
     if (qi >= qs.length) {

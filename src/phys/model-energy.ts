@@ -19,16 +19,16 @@ export function pendulum(theta0Deg: number, L: number, t: number): { theta: numb
   if (rest > 1e-12) { th += om * rest; om += f(th) * rest; }
   return { theta: th, omega: om };
 }
-export interface Energy { Ek: number; Ep: number; Eloss: number; E0: number; v: number; h: number }
+export interface Energy { Ek: number; Ep: number; Eloss: number; E0: number; v: number; h: number; reached: boolean }
 export function pendulumEnergy(m: number, L: number, theta0Deg: number, t: number): Energy {
   const { theta, omega } = pendulum(theta0Deg, L, t);
   const h = L * (1 - Math.cos(theta)), v = L * Math.abs(omega);
-  return { Ek: 0.5 * m * v * v, Ep: m * g * h, Eloss: 0, E0: m * g * L * (1 - Math.cos((theta0Deg * Math.PI) / 180)), v, h };
+  return { Ek: 0.5 * m * v * v, Ep: m * g * h, Eloss: 0, E0: m * g * L * (1 - Math.cos((theta0Deg * Math.PI) / 180)), v, h, reached: true };
 }
 /** the track: height (m) at position x in [0, 1] for a start height H0 */
 export const trackH = (H0: number, x: number) => H0 * (1 - 0.3 * x) * (0.5 + 0.5 * Math.cos(3 * Math.PI * x));
 /** energy at x on the track; `loss` = share of the start energy turned into heat per unit of x (rubbing). Ek is never negative: a car that cannot climb stops. */
-export function trackEnergy(m: number, H0: number, x: number, loss: number): Energy & { reached: boolean } {
+export function trackEnergy(m: number, H0: number, x: number, loss: number): Energy {
   const E0 = m * g * H0, h = trackH(H0, x), Eloss = loss * E0 * x;
   const Ek = E0 - m * g * h - Eloss;
   const reached = Ek >= -1e-9;

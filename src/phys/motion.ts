@@ -45,11 +45,11 @@ export const def: SimDef = {
     // graphs
     const vmax = Math.max(5, Mo.vel(s.v0, s.a, TMAX)), sm = Math.max(10, smax);
     const nice = (v: number) => (v <= 10 ? 10 : v <= 20 ? 20 : v <= 50 ? 50 : v <= 100 ? 100 : v <= 200 ? 200 : 300);
-    const P1 = axes(c, 50, 250, 250, 175, TMAX, nice(sm), "t/s", "s/m");
+    const P1 = axes(c, 50, 238, 250, 140, TMAX, nice(sm), "t/s", "s/m");
     curve(c, P1, (t) => Mo.pos(s.v0, s.a, t), COL.blue, TMAX, 80);
     circle(c, P1.X(s.t), P1.Y(Mo.pos(s.v0, s.a, s.t)), 7, COL.red);
     const vm = vmax <= 10 ? 10 : vmax <= 20 ? 20 : vmax <= 50 ? 50 : 100;
-    const P2 = axes(c, 370, 250, 250, 175, TMAX, vm, "t/s", "v/(m/s)");
+    const P2 = axes(c, 370, 238, 250, 140, TMAX, vm, "t/s", "v/(m/s)");
     curve(c, P2, (t) => Mo.vel(s.v0, s.a, t), COL.green, TMAX, 40);
     circle(c, P2.X(s.t), P2.Y(Mo.vel(s.v0, s.a, s.t)), 7, COL.red);
     line(c, P2.X(s.t), P2.Y(0), P2.X(s.t), P2.Y(Mo.vel(s.v0, s.a, s.t)), COL.red, 2, [5, 4]);

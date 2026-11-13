@@ -17,7 +17,9 @@ import { SYMBOLS, CIRCUITS, RULES } from "./diagrams";
 import { figure } from "./figures";
 import { mascot } from "./art";
 import { subjectArt, shortcuts } from "./hub";
+import { spaceIcon } from "./spaceart";
 import type { Ctx } from "./english";
+import { chemIconEl } from "./chemicon";
 
 let X!: Ctx;
 export const initScience = (c: Ctx) => { X = c; };
@@ -53,7 +55,10 @@ export async function renderHome() {
     h("button", { class: "sci-ref", id: "open-formulas", onclick: () => (location.hash = "#/science/formulas") }, h("b", {}, "公式与方程式"), h("span", { class: "muted small" }, "数学 · 物理 · 化学")),
     h("button", { class: "sci-ref", id: "open-circuits", onclick: () => (location.hash = "#/science/circuits") }, h("b", {}, "电路与电磁"), h("span", { class: "muted small" }, "电路图 · 三个定则")),
     h("button", { class: "sci-ref", id: "open-notes", onclick: () => (location.hash = "#/science/notes") }, h("b", {}, "知识总结"), h("span", { class: "muted small" }, "历史 · 地理 · 生物 · 政治")),
-    h("button", { class: "sci-ref", id: "open-map", onclick: () => (location.hash = "#/science/map") }, h("b", {}, "地图"), h("span", { class: "muted small" }, "中国 · 世界 · 国旗")));
+    h("button", { class: "sci-ref", id: "open-map", onclick: () => (location.hash = "#/science/map") }, h("b", {}, "地图"), h("span", { class: "muted small" }, "中国 · 世界 · 国旗")),
+    h("button", { class: "sci-ref sp-card", id: "open-space", onclick: () => (location.hash = "#/science/space") }, spaceIcon(), h("b", {}, "天文"), h("span", { class: "muted small" }, "太阳系 · 月相 · 星空")),
+    h("button", { class: "sci-ref", id: "open-physics", onclick: () => (location.hash = "#/science/physics") }, h("span", { class: "sci-ref-ico", "aria-hidden": "true", innerHTML: PHYS_ICON }), h("b", {}, "物理实验室"), h("span", { class: "muted small" }, "初中物理 · 动手做实验")),
+    h("button", { class: "sci-ref chem-card", id: "open-chem", onclick: () => (location.hash = "#/science/chem") }, chemIconEl(), h("b", {}, "化学"), h("span", { class: "muted small" }, "配平 · 计算 · 酸碱盐 · 气体")));
   const list = h("div", { class: "kids" });
   for (const k of kids) {
     const n = allIds(cache.get(k.id) ?? M.EMPTY_KID).length;
@@ -247,6 +252,18 @@ async function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: SM.
 
 // ---------- the maps (中国 / 世界 / 国旗), in their own module: loaded only when the page is opened ----------
 export const renderMap = () => import("./geomap").then((m) => m.renderMap(X));
+
+// ---------- 化学: the junior-high chemistry trainer, in its own modules (loaded only when the page is opened) ----------
+export const renderChem = (sub: string) => import("./chemui").then((m) => { m.initChem(X); return m.renderChem(sub); });
+
+// ---------- 天文: the solar system, planets, moons, the Earth-Moon-Sun lab, stars, quiz (own modules, loaded when opened) ----------
+export const renderSpace = () => import("./space").then((m) => m.renderSpace(X));
+export const renderPlanet = (id: string) => import("./space").then((m) => m.renderPlanet(X, id));
+
+// ---------- the physics lab (simulations of the junior-high physics course), in its own module ----------
+export const renderPhysics = () => import("./physlab").then((m) => m.renderLab(X));
+export const renderPhysSim = (id: string) => import("./physlab").then((m) => m.renderSim(X, id));
+const PHYS_ICON = `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="10" fill="#7048e8"/><g fill="none" stroke="#2d2230" stroke-width="5"><ellipse cx="60" cy="60" rx="46" ry="18"/><ellipse cx="60" cy="60" rx="46" ry="18" transform="rotate(60 60 60)"/><ellipse cx="60" cy="60" rx="46" ry="18" transform="rotate(120 60 60)"/></g></svg>`;
 
 // ---------- the periodic table ----------
 const CATS: Record<string, string> = { alkali: "碱金属", alkaline: "碱土金属", transition: "过渡金属", post: "后过渡金属", metalloid: "类金属", nonmetal: "非金属", halogen: "卤素", noble: "稀有气体", lanthanide: "镧系", actinide: "锕系" };

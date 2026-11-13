@@ -45,8 +45,8 @@ export const def: SimDef = {
     arrow(c, cxm, cym - bh / 2 - 2, cxm, cym - bh / 2 - 2 - cap(r.N * 0.5), COL.blue, 5); txt(c, "N", cxm + 16, cym - bh / 2 - cap(r.N * 0.5) / 2, 20, COL.blue, "left");
     c.restore();
     // gravity, vertical in the picture
-    const cxm = 200 + (70 + s.m * 2) / 2, cym = -(46 + s.m) / 2;
-    const gx = px + cxm * Math.cos(rad(s.alpha)) + cym * Math.sin(rad(s.alpha)), gy = py - cxm * Math.sin(rad(s.alpha)) + cym * Math.cos(rad(s.alpha));
+    const gcx = 200 + (70 + s.m * 2) / 2, gcy = -(46 + s.m) / 2;
+    const gx = px + gcx * Math.cos(rad(s.alpha)) + gcy * Math.sin(rad(s.alpha)), gy = py - gcx * Math.sin(rad(s.alpha)) + gcy * Math.cos(rad(s.alpha));
     arrow(c, gx, gy, gx, gy + Math.min(120, s.m * 6 + 40), "#7048e8", 5); txt(c, "G", gx + 16, gy + 60, 20, "#7048e8", "left");
     line(c, px - 30, py + 18, px + len + 30, py + 18, "#ced4da", 2, [6, 6]);
     if (s.alpha > 0) txt(c, `α = ${s.alpha}°`, px + 120, py + 40, 20, COL.grey);

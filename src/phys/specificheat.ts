@@ -34,8 +34,8 @@ export const def: SimDef = {
   draw(c, w, hh, s) {
     const Tw = Mo.tempWater(s.P, s.mw, s.t), To = Mo.tempOther(s.sub, s.P, s.mo, s.t);
     const beaker = (x: number, T: number, col: string, label: string, m: number) => {
-      const lvl = 140 - m * 30;
-      rect(c, x, 40, 110, 190, "#fff", COL.ink, 4, 10); rect(c, x + 3, lvl + 40, 104, 187 - lvl - 40 + 3, col, null, 0, 8);
+      const fillH = 40 + m * 120;
+      rect(c, x, 40, 110, 190, "#fff", COL.ink, 4, 10); rect(c, x + 3, 227 - fillH, 104, fillH, col, null, 0, 8);
       rect(c, x + 80, 30, 12, 170, "#fff", COL.ink, 2, 5); const th = Math.max(4, (T - 10) / 400 * 160); rect(c, x + 82, 196 - th, 8, th, COL.red, null, 0, 3);
       circle(c, x + 86, 205, 8, COL.red); txt(c, `${Math.round(T)}°`, x + 40, 90, 22, COL.red);
       txt(c, label, x + 55, 262, 24, COL.ink);

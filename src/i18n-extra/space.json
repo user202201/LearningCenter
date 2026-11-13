@@ -1,0 +1,906 @@
+{
+  "天文": [
+    "Astronomy",
+    "Astronomie"
+  ],
+  "太阳系 · 月相 · 星空": [
+    "Solar system · Moon phases · Stars",
+    "Système solaire · Phases de la Lune · Étoiles"
+  ],
+  "太阳系": [
+    "Solar system",
+    "Système solaire"
+  ],
+  "实验室": [
+    "Lab",
+    "Laboratoire"
+  ],
+  "星空": [
+    "Night sky",
+    "Ciel étoilé"
+  ],
+  "小测验": [
+    "Quiz",
+    "Quiz"
+  ],
+  "你知道吗？": [
+    "Did you know?",
+    "Le saviez-vous ?"
+  ],
+  "换一条": [
+    "Another one",
+    "Un autre"
+  ],
+  "矮行星": [
+    "Dwarf planet",
+    "Planète naine"
+  ],
+  "行星": [
+    "Planet",
+    "Planète"
+  ],
+  "行星和矮行星": [
+    "Planets and dwarf planets",
+    "Planètes et planètes naines"
+  ],
+  "每次 10 题：认行星、认卫星、认星座、认月相，还有地球和宇宙的知识。没有时间限制，每题答完后有解释。": [
+    "10 questions each time: planets, moons, constellations, Moon phases, and facts about the Earth and the universe. There is no time limit, and every answer comes with an explanation.",
+    "10 questions à chaque fois : planètes, lunes, constellations, phases de la Lune, et connaissances sur la Terre et l'univers. Il n'y a pas de limite de temps, et chaque réponse est expliquée."
+  ],
+  "已掌握的题目": [
+    "Questions mastered",
+    "Questions maîtrisées"
+  ],
+  "上一次得分": [
+    "Last score",
+    "Dernier score"
+  ],
+  "示意图": [
+    "Diagram",
+    "Schéma"
+  ],
+  "月球在轨道上的位置": [
+    "Position of the Moon on its orbit",
+    "Position de la Lune sur son orbite"
+  ],
+  "太阳光": [
+    "Sunlight",
+    "Lumière du Soleil"
+  ],
+  "地球": [
+    "Earth",
+    "Terre"
+  ],
+  "从太空看（北极上方）": [
+    "Seen from space (above the North Pole)",
+    "Vu de l'espace (au-dessus du pôle Nord)"
+  ],
+  "从地球看": [
+    "Seen from the Earth",
+    "Vu de la Terre"
+  ],
+  "农历{0}前后": [
+    "Lunar calendar day: around {0}",
+    "Calendrier lunaire : vers le jour {0}"
+  ],
+  "月龄 {0} 天": [
+    "Moon age: {0} days",
+    "Âge de la Lune : {0} jours"
+  ],
+  "被照亮的部分：{0}%": [
+    "Lit part: {0}%",
+    "Partie éclairée : {0} %"
+  ],
+  "月球在地球和太阳之间，暗面朝向地球。": [
+    "The Moon is between the Earth and the Sun; its dark side faces the Earth.",
+    "La Lune est entre la Terre et le Soleil ; sa face sombre est tournée vers la Terre."
+  ],
+  "月亮正在变圆（盈），亮的一侧在右边。": [
+    "The Moon is waxing; the bright side is on the right.",
+    "La Lune croît ; le côté éclairé est à droite."
+  ],
+  "地球在月球和太阳之间，整个朝向地球的一面都被照亮。": [
+    "The Earth is between the Moon and the Sun; the whole side facing the Earth is lit.",
+    "La Terre est entre la Lune et le Soleil ; toute la face tournée vers la Terre est éclairée."
+  ],
+  "月亮正在变缺（亏），亮的一侧在左边。": [
+    "The Moon is waning; the bright side is on the left.",
+    "La Lune décroît ; le côté éclairé est à gauche."
+  ],
+  "新月": [
+    "New Moon",
+    "Nouvelle Lune"
+  ],
+  "上弦月": [
+    "First quarter",
+    "Premier quartier"
+  ],
+  "满月": [
+    "Full Moon",
+    "Pleine Lune"
+  ],
+  "下弦月": [
+    "Last quarter",
+    "Dernier quartier"
+  ],
+  "播放一个月": [
+    "Play one month",
+    "Lire un mois"
+  ],
+  "暂停": [
+    "Pause",
+    "Pause"
+  ],
+  "月球绕地球一圈约 29.5 天（农历的一个月）。月球自己不发光，总有一半被太阳照亮；我们看到的月相，是这被照亮的一半有多少朝向地球。": [
+    "The Moon goes round the Earth in about 29.5 days (one month of the lunar calendar). The Moon makes no light of its own; half of it is always lit by the Sun. The phase we see depends on how much of that lit half faces the Earth.",
+    "La Lune fait le tour de la Terre en environ 29,5 jours (un mois du calendrier lunaire). La Lune ne produit pas de lumière : la moitié est toujours éclairée par le Soleil. La phase que nous voyons dépend de la part de cette moitié tournée vers la Terre."
+  ],
+  "约{0}": [
+    "about {0}",
+    "vers {0}"
+  ],
+  "八种月相": [
+    "The eight phases",
+    "Les huit phases"
+  ],
+  "沿轨道的偏离（度）": [
+    "Offset along the orbit (degrees)",
+    "Écart le long de l'orbite (degrés)"
+  ],
+  "离开地球轨道面的高度（度）": [
+    "Height above the Earth's orbit plane (degrees)",
+    "Hauteur au-dessus du plan de l'orbite terrestre (degrés)"
+  ],
+  "太阳和月球的位置（从地球看）": [
+    "Sun and Moon (seen from the Earth)",
+    "Soleil et Lune (vus de la Terre)"
+  ],
+  "地球的影子和月球的位置": [
+    "The Earth's shadow and the Moon",
+    "L'ombre de la Terre et la Lune"
+  ],
+  "本影": [
+    "Umbra",
+    "Ombre"
+  ],
+  "半影": [
+    "Penumbra",
+    "Pénombre"
+  ],
+  "太阳": [
+    "Sun",
+    "Soleil"
+  ],
+  "月球": [
+    "Moon",
+    "Lune"
+  ],
+  "侧面示意图（高度已放大）": [
+    "Side view (height exaggerated)",
+    "Vue de côté (hauteur exagérée)"
+  ],
+  "没有日食": [
+    "No solar eclipse",
+    "Pas d'éclipse de Soleil"
+  ],
+  "日偏食": [
+    "Partial solar eclipse",
+    "Éclipse partielle de Soleil"
+  ],
+  "日全食或日环食": [
+    "Total or annular solar eclipse",
+    "Éclipse totale ou annulaire de Soleil"
+  ],
+  "没有月食": [
+    "No lunar eclipse",
+    "Pas d'éclipse de Lune"
+  ],
+  "半影月食": [
+    "Penumbral lunar eclipse",
+    "Éclipse de Lune par la pénombre"
+  ],
+  "月偏食": [
+    "Partial lunar eclipse",
+    "Éclipse partielle de Lune"
+  ],
+  "月全食": [
+    "Total lunar eclipse",
+    "Éclipse totale de Lune"
+  ],
+  "月球与{0}的夹角：{1}°": [
+    "Angle between the Moon and {0}: {1}°",
+    "Angle entre la Lune et {0} : {1}°"
+  ],
+  "地球的影子中心": [
+    "the centre of the Earth's shadow",
+    "le centre de l'ombre de la Terre"
+  ],
+  "日食只发生在新月（农历初一）；月球的影子很小，只扫过地球上的一条窄带。": [
+    "A solar eclipse happens only at New Moon (day 1 of the lunar month); the Moon's shadow is small and sweeps only a narrow band of the Earth.",
+    "Une éclipse de Soleil n'a lieu qu'à la nouvelle Lune (jour 1 du mois lunaire) ; l'ombre de la Lune est petite et ne balaie qu'une bande étroite de la Terre."
+  ],
+  "月食只发生在满月（农历十五、十六）；整个夜晚半球的人都能看到。": [
+    "A lunar eclipse happens only at Full Moon (day 15 or 16 of the lunar month); everyone on the night side can see it.",
+    "Une éclipse de Lune n'a lieu qu'à la pleine Lune (jour 15 ou 16 du mois lunaire) ; tous ceux qui sont du côté nuit peuvent la voir."
+  ],
+  "日食": [
+    "Solar eclipse",
+    "Éclipse de Soleil"
+  ],
+  "月食": [
+    "Lunar eclipse",
+    "Éclipse de Lune"
+  ],
+  "每个月都有一次新月和一次满月，为什么不是每个月都有日食和月食？因为月球的轨道和地球绕太阳的轨道平面相差约 5°，大多数时候月球从太阳（或地球的影子）的上方或下方经过。": [
+    "There is a New Moon and a Full Moon every month. Why is there not an eclipse every month? The Moon's orbit is tilted by about 5° from the plane of the Earth's orbit, so most of the time the Moon passes above or below the Sun (or the Earth's shadow).",
+    "Il y a une nouvelle Lune et une pleine Lune chaque mois. Pourquoi n'y a-t-il pas une éclipse chaque mois ? L'orbite de la Lune est inclinée d'environ 5° par rapport au plan de l'orbite de la Terre : la plupart du temps, la Lune passe au-dessus ou au-dessous du Soleil (ou de l'ombre de la Terre)."
+  ],
+  "春季": [
+    "Spring",
+    "Printemps"
+  ],
+  "夏季": [
+    "Summer",
+    "Été"
+  ],
+  "秋季": [
+    "Autumn",
+    "Automne"
+  ],
+  "冬季": [
+    "Winter",
+    "Hiver"
+  ],
+  "日期（一年中的第几天）": [
+    "Date (day of the year)",
+    "Date (jour de l'année)"
+  ],
+  "太阳直射点": [
+    "Sun overhead",
+    "Soleil au zénith"
+  ],
+  "北极": [
+    "North Pole",
+    "Pôle Nord"
+  ],
+  "地轴倾斜 23.4°，方向不变": [
+    "The axis is tilted 23.4° and keeps its direction",
+    "L'axe est incliné de 23,4° et garde sa direction"
+  ],
+  "地球公转（从北极上方看）": [
+    "The Earth's orbit (seen from above the North Pole)",
+    "L'orbite de la Terre (vue au-dessus du pôle Nord)"
+  ],
+  "正午太阳高度 {0}°": [
+    "Noon Sun height: {0}°",
+    "Hauteur du Soleil à midi : {0}°"
+  ],
+  "白昼 {0} 小时": [
+    "Daylight: {0} hours",
+    "Jour : {0} heures"
+  ],
+  "北半球": [
+    "northern hemisphere",
+    "hémisphère nord"
+  ],
+  "太阳直射纬度：{0}°": [
+    "Latitude of the overhead Sun: {0}°",
+    "Latitude du Soleil au zénith : {0}°"
+  ],
+  "日地距离：{0} 百万千米": [
+    "Earth-Sun distance: {0} million km",
+    "Distance Terre-Soleil : {0} millions de km"
+  ],
+  "北京": [
+    "Beijing",
+    "Pékin"
+  ],
+  "悉尼": [
+    "Sydney",
+    "Sydney"
+  ],
+  "四季的原因是地轴倾斜，不是离太阳的远近：1 月初地球离太阳最近，北半球却是冬天。": [
+    "The seasons are caused by the tilt of the Earth's axis, not by the distance to the Sun: in early January the Earth is closest to the Sun, yet it is winter in the northern hemisphere.",
+    "Les saisons sont dues à l'inclinaison de l'axe de la Terre, pas à la distance au Soleil : début janvier, la Terre est au plus près du Soleil, mais c'est l'hiver dans l'hémisphère nord."
+  ],
+  "地球一边自转，一边绕太阳公转，地轴始终指向同一个方向（北极星附近）。太阳光直射的位置因此在南北回归线之间来回移动。": [
+    "The Earth spins and goes round the Sun at the same time, and its axis always points in the same direction (near the Pole Star). The place where the Sun is overhead therefore moves back and forth between the Tropics.",
+    "La Terre tourne sur elle-même et autour du Soleil, et son axe pointe toujours dans la même direction (près de l'étoile Polaire). L'endroit où le Soleil est au zénith se déplace donc d'un tropique à l'autre."
+  ],
+  "高潮": [
+    "High tide",
+    "Marée haute"
+  ],
+  "海水的隆起（已放大）": [
+    "The bulges of the sea (exaggerated)",
+    "Les renflements de la mer (exagérés)"
+  ],
+  "两天内的潮汐（小时）": [
+    "Tides over two days (hours)",
+    "Marées sur deux jours (heures)"
+  ],
+  "潮汐强度：{0} ×": [
+    "Tide strength: {0} ×",
+    "Force de la marée : {0} ×"
+  ],
+  "月相：{0}": [
+    "Moon phase: {0}",
+    "Phase de la Lune : {0}"
+  ],
+  "月球和太阳的引力把海水拉起来，每天约涨落两次，间隔约 12 小时 25 分。新月和满月时太阳、地球、月球在一条直线上，潮最大（大潮，农历初一、十五前后）；上弦和下弦时最小（小潮）。": [
+    "The pull of the Moon and the Sun raises the sea, which rises and falls about twice a day, every 12 hours 25 minutes. At New Moon and Full Moon the Sun, Earth and Moon are in line and the tide is biggest (spring tide, around day 1 and 15 of the lunar month); at the quarters it is smallest (neap tide).",
+    "L'attraction de la Lune et du Soleil soulève la mer, qui monte et descend environ deux fois par jour, toutes les 12 h 25 min. À la nouvelle et à la pleine Lune, le Soleil, la Terre et la Lune sont alignés et la marée est la plus forte (grande marée, vers les jours 1 et 15 du mois lunaire) ; aux quartiers elle est la plus faible (morte-eau)."
+  ],
+  "海水为什么会涨落？移动月球，看看潮的大小怎样变化。": [
+    "Why does the sea rise and fall? Move the Moon and see how the size of the tide changes.",
+    "Pourquoi la mer monte-t-elle et descend-elle ? Déplacez la Lune et observez comment la marée change."
+  ],
+  "已过的天数": [
+    "Days passed",
+    "Jours écoulés"
+  ],
+  "第 {0} 天": [
+    "Day {0}",
+    "Jour {0}"
+  ],
+  "公转：{0}° （{1} 圈）": [
+    "Orbit: {0}° ({1} turns)",
+    "Révolution : {0}° ({1} tours)"
+  ],
+  "自转：{0} 圈": [
+    "Spin: {0} turns",
+    "Rotation : {0} tours"
+  ],
+  "地球绕太阳转一圈约 365.24 天，这段时间里自转约 366.24 圈，比昼夜的次数多一圈。红点是地面上的一个标记。": [
+    "The Earth goes round the Sun in about 365.24 days and spins about 366.24 times in that time, one more than the number of days and nights. The red dot is a mark on the ground.",
+    "La Terre fait le tour du Soleil en environ 365,24 jours et tourne sur elle-même environ 366,24 fois pendant ce temps, une de plus que le nombre de jours. Le point rouge est un repère au sol."
+  ],
+  "1 天 / 秒": [
+    "1 day / s",
+    "1 jour / s"
+  ],
+  "10 天 / 秒": [
+    "10 days / s",
+    "10 jours / s"
+  ],
+  "30 天 / 秒": [
+    "30 days / s",
+    "30 jours / s"
+  ],
+  "自转产生昼夜交替，公转产生一年。拖动日期，看地面上的标记转了多少圈。": [
+    "Spin makes day and night; the orbit makes the year. Drag the date and see how many times the mark on the ground has turned.",
+    "La rotation fait le jour et la nuit ; la révolution fait l'année. Faites glisser la date pour voir combien de tours le repère a faits."
+  ],
+  "月相": [
+    "Moon phases",
+    "Phases de la Lune"
+  ],
+  "日食和月食": [
+    "Eclipses",
+    "Éclipses"
+  ],
+  "昼夜与四季": [
+    "Day, night and seasons",
+    "Jour, nuit et saisons"
+  ],
+  "潮汐": [
+    "Tides",
+    "Marées"
+  ],
+  "自转和公转": [
+    "Spin and orbit",
+    "Rotation et révolution"
+  ],
+  "{0}（{1}）": [
+    "{0} ({1})",
+    "{0} ({1})"
+  ],
+  "蛾眉月": [
+    "Crescent",
+    "Croissant"
+  ],
+  "盈凸月": [
+    "Waxing gibbous",
+    "Gibbeuse croissante"
+  ],
+  "亏凸月": [
+    "Waning gibbous",
+    "Gibbeuse décroissante"
+  ],
+  "残月": [
+    "Old crescent",
+    "Dernier croissant"
+  ],
+  "春分": [
+    "March equinox",
+    "Équinoxe de mars"
+  ],
+  "夏至": [
+    "June solstice",
+    "Solstice de juin"
+  ],
+  "秋分": [
+    "September equinox",
+    "Équinoxe de septembre"
+  ],
+  "冬至": [
+    "December solstice",
+    "Solstice de décembre"
+  ],
+  "大潮": [
+    "Spring tide",
+    "Grande marée"
+  ],
+  "小潮": [
+    "Neap tide",
+    "Morte-eau"
+  ],
+  "中潮": [
+    "Medium tide",
+    "Marée moyenne"
+  ],
+  "行星图": [
+    "Planet picture",
+    "Image de planète"
+  ],
+  "矮行星图": [
+    "Dwarf planet picture",
+    "Image de planète naine"
+  ],
+  "卫星图": [
+    "Moon picture",
+    "Image de lune"
+  ],
+  "之最": [
+    "Superlatives",
+    "Records"
+  ],
+  "卫星特征": [
+    "Moon features",
+    "Caractéristiques des lunes"
+  ],
+  "卫星归属": [
+    "Which planet",
+    "Quelle planète"
+  ],
+  "星座": [
+    "Constellations",
+    "Constellations"
+  ],
+  "知识": [
+    "Knowledge",
+    "Connaissances"
+  ],
+  "体重": [
+    "Weight",
+    "Poids"
+  ],
+  "这是哪颗行星？": [
+    "Which planet is this?",
+    "Quelle est cette planète ?"
+  ],
+  "这是哪颗矮行星？": [
+    "Which dwarf planet is this?",
+    "Quelle est cette planète naine ?"
+  ],
+  "这是哪颗卫星？": [
+    "Which moon is this?",
+    "Quelle est cette lune ?"
+  ],
+  "从太阳向外数，第 {0} 颗行星是？": [
+    "Counting outward from the Sun, planet number {0} is?",
+    "En comptant à partir du Soleil, la planète numéro {0} est ?"
+  ],
+  "哪颗行星{0}？": [
+    "Which planet: {0}?",
+    "Quelle planète : {0} ?"
+  ],
+  "哪颗卫星{0}？": [
+    "Which moon: {0}?",
+    "Quelle lune : {0} ?"
+  ],
+  "{0}是哪颗行星（或矮行星）的卫星？": [
+    "{0} is a moon of which planet (or dwarf planet)?",
+    "{0} est une lune de quelle planète (ou planète naine) ?"
+  ],
+  "图中是什么月相？": [
+    "Which Moon phase is shown?",
+    "Quelle phase de la Lune est représentée ?"
+  ],
+  "这是{0}，农历约{1}。": [
+    "This is: {0}, about day {1} of the lunar month.",
+    "C'est : {0}, vers le jour {1} du mois lunaire."
+  ],
+  "这是哪个星座？": [
+    "Which constellation is this?",
+    "Quelle est cette constellation ?"
+  ],
+  "体重 {0} 千克的人，在{1}上称出的体重约是多少千克？": [
+    "A person of {0} kg would weigh about how many kg on {1}?",
+    "Une personne de {0} kg pèserait environ combien de kg sur {1} ?"
+  ],
+  "{0} × {1} ÷ 9.81 ≈ {2}（千克）。": [
+    "{0} × {1} ÷ 9.81 ≈ {2} (kg).",
+    "{0} × {1} ÷ 9,81 ≈ {2} (kg)."
+  ],
+  "1 个月 / 秒": [
+    "1 month / s",
+    "1 mois / s"
+  ],
+  "1 个季度 / 秒": [
+    "3 months / s",
+    "3 mois / s"
+  ],
+  "1 年 / 秒": [
+    "1 year / s",
+    "1 an / s"
+  ],
+  "5 年 / 秒": [
+    "5 years / s",
+    "5 ans / s"
+  ],
+  "太阳系模型": [
+    "Solar system model",
+    "Modèle du système solaire"
+  ],
+  "时间流速": [
+    "Time speed",
+    "Vitesse du temps"
+  ],
+  "光从太阳到{0}需要 {1}": [
+    "Light takes {1} to travel from the Sun to {0}",
+    "La lumière met {1} pour aller du Soleil à {0}"
+  ],
+  "示意距离": [
+    "Schematic distances",
+    "Distances schématiques"
+  ],
+  "真实距离": [
+    "True distances",
+    "Vraies distances"
+  ],
+  "显示矮行星": [
+    "Show dwarf planets",
+    "Afficher les planètes naines"
+  ],
+  "‹ 1 个月": [
+    "‹ 1 month",
+    "‹ 1 mois"
+  ],
+  "1 个月 ›": [
+    "1 month ›",
+    "1 mois ›"
+  ],
+  "{0} 个天文单位": [
+    "{0} AU",
+    "{0} UA"
+  ],
+  "光走 {0}": [
+    "light travels {0}",
+    "la lumière met {0}"
+  ],
+  "点击行星，进入它的页面。示意距离只保留行星的顺序和方向；真实距离下太阳系几乎是空的。": [
+    "Tap a planet to open its page. Schematic distances keep only the order and the directions of the planets; at true distances the solar system is almost empty.",
+    "Touchez une planète pour ouvrir sa page. Les distances schématiques ne gardent que l'ordre et les directions des planètes ; aux vraies distances, le système solaire est presque vide."
+  ],
+  "岩质行星": [
+    "Rocky planet",
+    "Planète rocheuse"
+  ],
+  "气态巨行星": [
+    "Gas giant",
+    "Géante gazeuse"
+  ],
+  "冰巨星": [
+    "Ice giant",
+    "Géante de glaces"
+  ],
+  "有，明亮": [
+    "Yes, bright",
+    "Oui, brillants"
+  ],
+  "有，暗淡": [
+    "Yes, faint",
+    "Oui, ténus"
+  ],
+  "直径": [
+    "Diameter",
+    "Diamètre"
+  ],
+  "地球的 {0} 倍": [
+    "{0} × the Earth",
+    "{0} × la Terre"
+  ],
+  "质量": [
+    "Mass",
+    "Masse"
+  ],
+  "与太阳的距离": [
+    "Distance from the Sun",
+    "Distance au Soleil"
+  ],
+  "{0} 天文单位": [
+    "{0} AU",
+    "{0} UA"
+  ],
+  "公转周期（一年）": [
+    "Orbital period (a year)",
+    "Période de révolution (une année)"
+  ],
+  "自转周期": [
+    "Rotation period",
+    "Période de rotation"
+  ],
+  "逆行": [
+    "retrograde",
+    "rétrograde"
+  ],
+  "昼夜交替一次": [
+    "One day and night",
+    "Un jour et une nuit"
+  ],
+  "表面温度": [
+    "Surface temperature",
+    "Température de surface"
+  ],
+  "重力": [
+    "Gravity",
+    "Gravité"
+  ],
+  "{0} 米/秒²": [
+    "{0} m/s²",
+    "{0} m/s²"
+  ],
+  "平均密度": [
+    "Mean density",
+    "Densité moyenne"
+  ],
+  "{0} 克/厘米³": [
+    "{0} g/cm³",
+    "{0} g/cm³"
+  ],
+  "赤道自转速度": [
+    "Speed at the equator",
+    "Vitesse à l'équateur"
+  ],
+  "{0} 千米/小时": [
+    "{0} km/h",
+    "{0} km/h"
+  ],
+  "自转轴倾角": [
+    "Axial tilt",
+    "Inclinaison de l'axe"
+  ],
+  "大气": [
+    "Atmosphere",
+    "Atmosphère"
+  ],
+  "卫星": [
+    "Moons",
+    "Lunes"
+  ],
+  "没有": [
+    "None",
+    "Aucune"
+  ],
+  "已确认约 {0} 颗（截至 2024 年）": [
+    "About {0} confirmed (as of 2024)",
+    "Environ {0} confirmées (en 2024)"
+  ],
+  "{0} 颗": [
+    "{0}",
+    "{0}"
+  ],
+  "光环": [
+    "Rings",
+    "Anneaux"
+  ],
+  "自转方向：": [
+    "Direction of spin: ",
+    "Sens de rotation : "
+  ],
+  "自东向西（逆行）": [
+    "east to west (retrograde)",
+    "d'est en ouest (rétrograde)"
+  ],
+  "自西向东（顺行）": [
+    "west to east (prograde)",
+    "d'ouest en est (progrades)"
+  ],
+  "自转轴倾角：": [
+    "Axial tilt: ",
+    "Inclinaison de l'axe : "
+  ],
+  "1× 表示 1 个地球日 = 24 秒。": [
+    "1× means 1 Earth day = 24 seconds.",
+    "1× signifie 1 jour terrestre = 24 secondes."
+  ],
+  "{0}没有已知的卫星。": [
+    "{0} has no known moons.",
+    "{0} n'a pas de lune connue."
+  ],
+  "卫星系统": [
+    "Moon system",
+    "Système de lunes"
+  ],
+  "月球的 {0} 倍": [
+    "{0} × the Moon",
+    "{0} × la Lune"
+  ],
+  "轨道周期": [
+    "Orbital period",
+    "Période orbitale"
+  ],
+  "离行星的距离": [
+    "Distance from the planet",
+    "Distance à la planète"
+  ],
+  "发现者": [
+    "Discovered by",
+    "Découvreur"
+  ],
+  "轨道间距为示意，公转周期保持真实比例；最快的卫星约 4 秒转一圈。": [
+    "Orbit spacing is schematic; the orbital periods keep their true proportions. The fastest moon goes round in about 4 seconds.",
+    "L'espacement des orbites est schématique ; les périodes gardent leurs vraies proportions. La lune la plus rapide fait un tour en 4 secondes environ."
+  ],
+  "这里只列出著名的卫星；{0} 共有已确认的卫星约 {1} 颗。": [
+    "Only the famous moons are listed here; {0} has about {1} confirmed moons in all.",
+    "Seules les lunes célèbres sont listées ici ; {0} compte environ {1} lunes confirmées au total."
+  ],
+  "体重（千克）": [
+    "Weight (kg)",
+    "Poids (kg)"
+  ],
+  "年龄（岁）": [
+    "Age (years)",
+    "Âge (années)"
+  ],
+  "{0} 岁": [
+    "{0} years old",
+    "{0} ans"
+  ],
+  "与地球的大小比较": [
+    "Size compared with the Earth",
+    "Taille comparée à la Terre"
+  ],
+  "体重计": [
+    "Weight scale",
+    "Pèse-personne"
+  ],
+  "你的体重（千克）": [
+    "Your weight (kg)",
+    "Votre poids (kg)"
+  ],
+  "体重 = 质量 × 当地重力。质量不变，重力不同，称出的数字就不同。气态行星按 1 个大气压处计算。": [
+    "Weight = mass × local gravity. The mass stays the same, but gravity differs, so the number on the scale differs. For gas planets the value at 1 atmosphere is used.",
+    "Poids = masse × gravité locale. La masse reste la même, mais la gravité change, donc le nombre sur la balance aussi. Pour les planètes gazeuses, on prend la valeur à 1 atmosphère."
+  ],
+  "年龄计": [
+    "Age counter",
+    "Compteur d'âge"
+  ],
+  "你的年龄（岁）": [
+    "Your age (years)",
+    "Votre âge (années)"
+  ],
+  "一年就是绕太阳转一圈：离太阳越远，一年越长，同样的时间里年龄的数字就越小。": [
+    "A year is one trip round the Sun: the farther from the Sun, the longer the year, and the smaller the number for the same time.",
+    "Une année est un tour autour du Soleil : plus on est loin du Soleil, plus l'année est longue, et plus le nombre est petit pour la même durée."
+  ],
+  "和地球比大小": [
+    "Size compared with the Earth",
+    "Taille comparée à la Terre"
+  ],
+  "{0}的直径是地球的 {1} 倍。": [
+    "The diameter of {0} is {1} × that of the Earth.",
+    "Le diamètre de {0} est {1} × celui de la Terre."
+  ],
+  "基本数据": [
+    "Basic data",
+    "Données de base"
+  ],
+  "趣味知识": [
+    "Fun facts",
+    "Anecdotes"
+  ],
+  "太阳的结构": [
+    "Structure of the Sun",
+    "Structure du Soleil"
+  ],
+  "太阳在这里": [
+    "The Sun is here",
+    "Le Soleil est ici"
+  ],
+  "恒星的一生": [
+    "The life of a star",
+    "La vie d'une étoile"
+  ],
+  "恒星也有出生、成长和结局，质量不同，结局就不同。": [
+    "Stars are born, grow up and end, and the end depends on the mass.",
+    "Les étoiles naissent, grandissent et finissent, et la fin dépend de la masse."
+  ],
+  "像太阳这样的恒星": [
+    "Stars like the Sun",
+    "Les étoiles comme le Soleil"
+  ],
+  "质量大得多的恒星": [
+    "Much more massive stars",
+    "Les étoiles beaucoup plus massives"
+  ],
+  "最佳观测：": [
+    "Best seen: ",
+    "Meilleure observation : "
+  ],
+  "怎样找到：": [
+    "How to find it: ",
+    "Comment la trouver : "
+  ],
+  "古人把天上的亮星连成图案，编成故事。点开一个星座，看它的名字和故事。图案是示意，不是真实的天空位置。": [
+    "People of old joined bright stars into pictures and made up stories. Open a constellation to see its names and its story. The figures are schematic, not the real positions in the sky.",
+    "Les anciens ont relié les étoiles brillantes en figures et inventé des histoires. Ouvrez une constellation pour voir ses noms et son histoire. Les figures sont schématiques, pas les vraies positions dans le ciel."
+  ],
+  "怎样找到北极星": [
+    "How to find the Pole Star",
+    "Comment trouver l'étoile Polaire"
+  ],
+  "先找到北斗七星，它像一把勺子。": [
+    "First find the Big Dipper, which looks like a ladle.",
+    "Trouvez d'abord la Grande Casserole, qui ressemble à une louche."
+  ],
+  "勺口外侧的两颗星（天璇、天枢）连成一条线，向勺口方向延长约 5 倍的距离。": [
+    "Join the two stars on the outer edge of the bowl and extend the line about 5 times that distance, in the direction of the opening.",
+    "Reliez les deux étoiles du bord extérieur de la casserole et prolongez la ligne d'environ 5 fois cette distance, du côté de l'ouverture."
+  ],
+  "那里孤零零的一颗不太亮的星，就是北极星。": [
+    "The lonely star of moderate brightness there is the Pole Star.",
+    "L'étoile isolée, de brillance moyenne, qui s'y trouve est l'étoile Polaire."
+  ],
+  "仙后座的“W”在北极星的另一侧，也能帮助定位。": [
+    "The \"W\" of Cassiopeia is on the other side of the Pole Star and helps too.",
+    "Le « W » de Cassiopée, de l'autre côté de l'étoile Polaire, aide aussi."
+  ],
+  "面对北极星，你就面向正北。": [
+    "Facing the Pole Star, you face true north.",
+    "Face à l'étoile Polaire, vous faites face au nord."
+  ],
+  "从地球到宇宙": [
+    "From the Earth to the universe",
+    "De la Terre à l'univers"
+  ],
+  "每一级比上一级大得多。横条的长度按对数画，每多一小格，就是 10 倍。": [
+    "Each step is much larger than the one before. The bars are drawn on a logarithmic scale: each small step more means 10 times as much.",
+    "Chaque échelon est bien plus grand que le précédent. Les barres sont tracées en échelle logarithmique : chaque petit cran de plus signifie 10 fois plus."
+  ],
+  "中国航天": [
+    "Chinese space programme",
+    "Programme spatial chinois"
+  ],
+  "宇宙探索": [
+    "Space exploration",
+    "Exploration spatiale"
+  ],
+  "{0} 百万千米": [
+    "{0} million km",
+    "{0} millions de km"
+  ],
+  "{0} 地球年": [
+    "{0} Earth years",
+    "{0} années terrestres"
+  ],
+  "{0} 地球日": [
+    "{0} Earth days",
+    "{0} jours terrestres"
+  ],
+  "{0} 小时": [
+    "{0} hours",
+    "{0} heures"
+  ],
+  "{0} 小时 {1} 分": [
+    "{0} h {1} min",
+    "{0} h {1} min"
+  ],
+  "{0} 分 {1} 秒": [
+    "{0} min {1} s",
+    "{0} min {1} s"
+  ]
+}
