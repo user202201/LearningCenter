@@ -12,6 +12,7 @@
 .sk-ovl[hidden] { display: none; }
 .sk-ovl h2 { margin: 0; font-size: 26px; color: #087f5b; }
 .sk-ovl p { margin: 0; font-weight: 700; }
+.sk-ovl .sk-stars { font-size: 28px; line-height: 1; letter-spacing: 3px; color: #f59f00; }
 .sk-ovl button { min-height: 48px; padding: 6px 26px; font-size: 20px; border-radius: 999px; }
 .sk-pad { grid-area: pad; display: grid; grid-template-columns: repeat(3, 58px); grid-template-rows: repeat(2, 58px); gap: 6px; justify-content: center; }
 .sk-pad button { padding: 0; font-size: 26px; font-weight: 900; border-radius: 18px; color: #fff; background: #12b886; border: 3px solid #0ca678; box-shadow: 0 4px 0 #087f5b; touch-action: none; }
