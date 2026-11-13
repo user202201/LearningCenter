@@ -37,6 +37,10 @@ export function createPad(): Pad {
       c.moveTo(pm[0] * dpr, pm[1] * dpr); c.quadraticCurveTo(a[0] * dpr, a[1] * dpr, m[0] * dpr, m[1] * dpr);
       c.stroke();
     }
+    // the smoothed curve stops at the middle of the last segment: finish it to the last real point, so the ink always reaches the finger (not half a segment behind it)
+    const n = p.length, last = p[n - 1], prev = p[n - 2];
+    c.lineWidth = s.width * (0.45 + (prev[2] + last[2]) / 2) * dpr;
+    c.beginPath(); c.moveTo((prev[0] + last[0]) / 2 * dpr, (prev[1] + last[1]) / 2 * dpr); c.lineTo(last[0] * dpr, last[1] * dpr); c.stroke();
   };
   const redraw = () => {
     const c = ctx2d(), dpr = window.devicePixelRatio || 1;

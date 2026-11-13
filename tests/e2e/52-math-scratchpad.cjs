@@ -7,8 +7,8 @@ const fs = require('fs');
 const OUT = process.env.D || 'tests/out/work/';
 fs.mkdirSync(OUT, { recursive: true });
 
-const open = async (vp, pre) => {
-  const t = await start(new Map(), { local: true, today: '2026-11-12', viewport: vp });
+const open = async (vp, pre, extra = {}) => {
+  const t = await start(new Map(), { local: true, today: '2026-11-12', viewport: vp, ...extra });
   if (pre) await t.page.evaluate(pre);
   const { page } = t;
   await addKid(page, 'Dory');
@@ -72,6 +72,24 @@ const strokes = (page) => page.evaluate(() => +document.querySelector('#pad-canv
     ok(await page.locator('#pad').isVisible() && JSON.parse(await page.evaluate(() => localStorage.getItem('learn.math.v1'))).pad === true, 'shown again and remembered');
     await page.screenshot({ path: OUT + 'scratchpad-landscape.png' });
     ok(log.external.length === 0, 'no outside request: ' + log.external.join(', '));
+    await browser.close();
+  }
+  // ---- a real touch screen (touch events through the browser's protocol, device pixel ratio 2 and 3): the ink is where the finger is, to its very end ----
+  for (const [n, vp, dpr] of [['ipad touch', { width: 820, height: 1180 }, 2], ['phone touch', { width: 390, height: 844 }, 3]]) {
+    const { browser, page } = await open(vp, null, { touch: true, dpr });
+    await page.waitForTimeout(600);
+    const b = await page.locator('#pad-canvas').boundingBox();
+    const cdp = await page.context().newCDPSession(page);
+    const path = [[0.15, 0.25], [0.3, 0.45], [0.5, 0.6], [0.7, 0.45], [0.85, 0.25]].map(([x, y]) => ({ x: b.x + x * b.width, y: b.y + y * b.height }));
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [path[0]] });
+    for (const q of path.slice(1)) await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [q] });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await page.waitForTimeout(150);
+    const bb = await page.evaluate(() => { const c = document.querySelector('#pad-canvas'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1; for (let y = 0; y < c.height; y++) for (let x = 0; x < c.width; x++) if (d[(y * c.width + x) * 4 + 3] > 0) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); } return { x0, y0, x1, y1, k: c.width / c.getBoundingClientRect().width }; });
+    const css = { x0: bb.x0 / bb.k, y0: bb.y0 / bb.k, x1: bb.x1 / bb.k, y1: bb.y1 / bb.k };
+    const want = { x0: 0.15 * b.width, x1: 0.85 * b.width, y0: 0.25 * b.height, y1: 0.6 * b.height };
+    const err = Math.max(Math.abs(css.x0 - want.x0), Math.abs(css.x1 - want.x1));   // (the two ends of the path are its left and right extremes; the curve rounds off the corners in between, so y is not compared)
+    ok(bb.x1 > 0 && err <= 6, n + ': the ink starts and ENDS where the finger did (largest difference ' + err.toFixed(1) + ' px, the canvas is ' + bb.k + 'x the CSS size)');
     await browser.close();
   }
   // ---- tall screens: under the question; small phone; remembered hidden state on a new game ----
