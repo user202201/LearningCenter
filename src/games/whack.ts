@@ -73,7 +73,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (rem !== lastTime) { lastTime = rem; timeEl.textContent = `时间：${rem}`; }
     if (s.score !== lastScore) { lastScore = s.score; scoreEl.textContent = `得分：${s.score}`; }
     const cb = s.combo * 10 + mult(s.combo);
-    if (cb !== lastCombo) { lastCombo = cb; const m = mult(s.combo); comboEl.textContent = `连击：${s.combo}${m > 1 ? ` ×${m}` : ""}`; comboEl.classList.toggle("hot", m > 1); }
+    if (cb !== lastCombo) { lastCombo = cb; const m = mult(s.combo); comboEl.textContent = `连击：${s.combo}` + (m > 1 ? ` ×${m}` : ""); comboEl.classList.toggle("hot", m > 1); }
     bestEl.textContent = `最高：${Math.max(best(), s.score)}`;
     levelBtn.textContent = `难度：${NAMES[level]}`; levelBtn.disabled = phase === "play" || phase === "pause";
     pauseBtn.textContent = phase === "pause" ? "继续" : "暂停"; pauseBtn.disabled = phase !== "play" && phase !== "pause";
