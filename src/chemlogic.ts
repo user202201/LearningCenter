@@ -489,12 +489,13 @@ const REASON_ZH: Record<string, string> = { precipitate: "能反应，生成沉�
 function genDec(r: Rnd, lv: number): Q {
   const all = compounds();
   const gen = lv === 1 ? all.filter((c) => !["Ag", "Fe2", "Fe3", "Al", "Zn", "Mg"].includes(c.cat)) : all;
-  for (let tries = 0; tries < 600; tries++) {
+  const want = r() < 0.5;   // about half of the questions are "yes", half "no"
+  for (let tries = 0; tries < 2000; tries++) {
     const a = pick(r, gen), b = pick(r, gen);
     if (cmpFormula(a) === cmpFormula(b)) continue;
     const m = metathesis(a, b);
     if (m.ambiguous || m.reasons.length > 1) continue;
-    if (tries < 300 && (m.happens ? 1 : 0) !== (r() < 0.5 ? 1 : 0)) continue;   // about half yes, half no
+    if (tries < 1500 && m.happens !== want) continue;
     const fa = cmpFormula(a), fb = cmpFormula(b);
     const right = m.happens ? REASON_ZH[m.reasons[0]] : "不能反应";
     const nm = (c: Cmp) => ionName(catByK(c.cat), AN.find((x) => x.k === c.an)!);
@@ -559,8 +560,7 @@ function genClass(r: Rnd, lv: number): Q {
   const buckets = lv === 0 ? shuf(r, ["elem", "oxide", "acid", "base", "salt", "mix"]).slice(0, 5) : bk.length > 6 ? shuf(r, bk).slice(0, 6) : bk;
   const pool = classPool().filter((x) => buckets.includes(x.cat));
   const items: ReturnType<typeof classPool> = [];
-  const per = Math.ceil(8 / buckets.length);
-  for (const b of shuf(r, buckets)) items.push(...shuf(r, pool.filter((x) => x.cat === b)).slice(0, Math.min(per, 8 - items.length)));
+  for (const b of buckets) items.push(pick(r, pool.filter((x) => x.cat === b)));   // every class shown gets at least one substance
   while (items.length < 8) { const x = pick(r, pool); if (!items.includes(x)) items.push(x); }
   return { t: "class", mode: "cls", kind: "class", lv: lv || 2, key: "cls:" + items.map((x) => x.id).sort().join(","), items: shuf(r, items).slice(0, 8), buckets: buckets.slice().sort((a, b) => Object.keys(BUCKETS).indexOf(a) - Object.keys(BUCKETS).indexOf(b)), stem: ["把下面的物质拖到所属的类别中（也可以先点物质，再点类别）。"], expl: ["纯净物分为单质和化合物；由两种元素组成、其中一种是氧的化合物是氧化物；酸、碱、盐是三类不同的化合物；混合物由多种物质组成。"] };
 }

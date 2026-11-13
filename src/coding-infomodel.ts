@@ -498,6 +498,7 @@ export function makeQuestion(spec: Spec, seed: number): Q {
     case "rleDec": { const k = rint(r, 2, 4), letters = LETTERS.slice(0, 3); let enc = "", prev = ""; for (let i = 0; i < k; i++) { let c = pick([...letters], r); if (c === prev) c = letters[(letters.indexOf(c) + 1) % 3]; enc += `${rint(r, 1, 6)}${c}`; prev = c; } return { args: [enc], answer: rleDecode(enc) }; }
     case "rleSize": { const s = pick(["AAAAAAAABBBB", "AAAABBBBCCCC", "ABABABABAB", "AAAAAAAAAAAA", "ABCABCABC"], r); const enc = rleEncode(s); return { args: [s, enc], answer: enc.length < s.length ? "shorter" : "longer", choices: ["shorter", "longer"] }; }
     case "caesarDec": { const k = rint(r, 1, 25), w = pick(WORDS, r); return { args: [caesar(w, k), k], answer: w }; }
+    case "caesarBreak": { const k = rint(r, 1, 25), w = pick(WORDS, r); return { args: [caesar(w, k)], answer: w }; }
     case "caesarKey": { const k = rint(r, 1, 25), w = pick(WORDS, r); return { args: [w, caesar(w, k)], answer: String(k) }; }
     case "caesarEnc": { const k = rint(r, 1, 6), w = pick(WORDS.filter((x) => x.length <= 4), r); return { args: [w, k], answer: caesar(w, k) }; }
     case "xor": { const a = rint(r, 0, 15), b = rint(r, 0, 15); return { args: [toBin(a, 4), toBin(b, 4)], answer: xorBits(toBin(a, 4), toBin(b, 4)) }; }

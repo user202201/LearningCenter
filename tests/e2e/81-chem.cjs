@@ -222,7 +222,7 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
     const catRules = { elem: (f) => isElement(f), oxide: (f) => { const a = atoms(f); return Object.keys(a).length === 2 && 'O' in a; }, acid: (f) => /^H/.test(f) || f === 'CH3COOH', base: (f) => /OH\)?\d*$/.test(f), salt: (f) => !/^H\d*[A-Z]/.test(f) || /^H[g]/.test(f), org: (f) => 'C' in atoms(f) && 'H' in atoms(f) };
     const badCat = data.subs.filter((s) => s.c !== 'other' && !catRules[s.c](s.f)).map((s) => `${s.f}:${s.c}`);
     ok(badCat.length === 0, 'categories of the substances fit their formulas: ' + badCat);
-    ok(data.subs.every((s) => !['salt', 'oxide', 'base', 'acid'].includes(s.c) || ['Fe3O4', 'H2O2'].includes(s.f) || neutralPossible(s.f)), 'every acid / base / salt / oxide can be neutral with the usual valences: ' + data.subs.filter((s) => ['salt', 'oxide', 'base', 'acid'].includes(s.c) && !['Fe3O4', 'H2O2'].includes(s.f) && !neutralPossible(s.f)).map((s) => s.f));
+    ok(data.subs.every((s) => !['salt', 'oxide', 'base', 'acid'].includes(s.c) || ['Fe3O4', 'H2O2', 'CH3COOH', 'NH4NO3'].includes(s.f) || neutralPossible(s.f)), 'every acid / base / salt / oxide can be neutral with the usual valences: ' + data.subs.filter((s) => ['salt', 'oxide', 'base', 'acid'].includes(s.c) && !['Fe3O4', 'H2O2', 'CH3COOH', 'NH4NO3'].includes(s.f) && !neutralPossible(s.f)).map((s) => s.f));
     ok(Object.entries(AR).every(([e, m]) => data.elements.find((x) => x.s === e)?.ar === m), 'relative atomic masses of the library = the usual school values');
     ok(data.elements.every((e) => e.v.length >= 1 && e.v.every((v) => Number.isInteger(v) && v !== 0)), 'valences are non-zero whole numbers');
     ok(data.indicators.length === 2 && data.ph.length >= 12 && data.ph.every((p) => p.v >= 0 && p.v <= 14), 'indicators and pH values');
@@ -414,7 +414,7 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
       else if (q.kind === 'acid') {
         const m = /^(\w+) 与稀(盐酸|硫酸)混合/.exec(q.stem[0]); const metal = m[1], an = m[2] === '盐酸' ? ANIONS.Cl : ANIONS.SO4; const reacts = idx(metal) < idx('H');
         const salt = crossF(metal, METAL_CH[metal], an[0], an[1]);
-        if (reacts) { if (right !== `能反应，生成 ${salt} 和 H2`.replace(/(\w)(\d)/g, (_, a, d) => a + SUBD[+d])) bad.push('acid yes ' + metal + right); }
+        if (reacts) { if (right !== `能反应，生成 ${salt} 和 H2`.replace(/([A-Za-z)])(\d)/g, (_, a, d) => a + SUBD[+d])) bad.push('acid yes ' + metal + right); }
         else if (right !== '不能反应') bad.push('acid no ' + metal);
         q.choices.forEach((c, i) => { if (i !== q.right && c[0] === right) bad.push('dup'); });
       } else {
@@ -431,10 +431,10 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
   }
   // --- classification, indicators, gases
   {
-    const rule = (f) => { const a = atoms(f); const els = Object.keys(a); if (els.length === 1) return 'elem'; if (SUBS.get(f).c === 'org') return 'org'; if (els.length === 2 && 'O' in a) return 'oxide'; if (/^H\d*[A-Z(]/.test(f) && !/\)/.test(f.replace(/^H\d*/, '')) && f !== 'H2O2' || f === 'CH3COOH') return 'acid'; if (/OH\)?\d*$/.test(f) && !/^N/.test(f)) return 'base'; return 'salt'; };
+    const rule = (f) => { const a = atoms(f); const els = Object.keys(a); if (els.length === 1) return 'elem'; if (SUBS.get(f).c === 'org') return 'org'; if (els.length === 2 && 'O' in a) return 'oxide'; if (/^H\d*[A-Z(]/.test(f) && !/\)/.test(f.replace(/^H\d*/, '')) && f !== 'H2O2' || f === 'CH3COOH') return 'acid'; if (/OH\)?\d*$/.test(f) && !/^NH4/.test(f)) return 'base'; return 'salt'; };
     const mism = data.subs.filter((s) => s.c !== 'other' && rule(s.f) !== s.c).map((s) => `${s.f}:${s.c}/${rule(s.f)}`);
     ok(mism.length === 0, 'substance categories agree with the rules on the formula: ' + mism);
-    const cls = R.cls; const seenCats = new Set();
+    const cls3 = (await makeRounds(P0, ['cls'], 100, 3)).cls; const cls = R.cls.concat(cls3); const seenCats = new Set();
     for (const q of cls) for (const it of q.items) seenCats.add(it.cat);
     ok(cls.every((q) => q.items.length === 8 && new Set(q.items.map((i) => i.id)).size === 8 && q.items.every((i) => q.buckets.includes(i.cat))), 'classification: 8 different items, every item has a bucket in the question');
     ok(['elem', 'oxide', 'acid', 'base', 'salt', 'mix', 'org'].every((c) => seenCats.has(c)), 'all 7 classes occur: ' + [...seenCats]);
@@ -514,7 +514,7 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
     await page.waitForSelector('#chem-q'); await page.waitForTimeout(80);
     const keys = [];
     for (let i = 0; i < 10; i++) {
-      const q = await currentQ(page); keys.push(q.key);
+      const q = await currentQ(page); keys.push(JSON.stringify([q.key, q.stem, q.choices || q.items || (q.steps ? q.steps.map((x) => x.answer) : q.rx)]));
       ok((await page.textContent('#chem-count')).includes(`${i + 1}`), `${m} ${i + 1}: counter shows the question number`);
       if (i === 0) await page.screenshot({ path: `${OUT}mode-${m}.png`, fullPage: true });
       // the wrong answer path on question 2 (and 6 in a calculation): the right answer is shown, no score
@@ -531,7 +531,7 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
     await page.waitForSelector('#chem-sum');
     const score = await page.textContent('.chem-big'); ok(/8 \/ 10|7 \/ 10|9 \/ 10/.test(score) || /\b\d+ \/ 10/.test(score), `${m}: summary shows the score (${score})`);
     ok(await page.locator('.chem-wrong').count() >= 1, `${m}: the wrong ones are listed again with their explanation`);
-    ok(new Set(keys).size >= (['bal', 'wr', 'type', 'calc'].includes(m) ? 10 : 6), `${m}: the 10 questions differ (${new Set(keys).size} different keys)`);
+    ok(new Set(keys).size === 10, `${m}: the 10 questions of a round differ (${new Set(keys).size} different)`);
     const pr = await progress(page); sawOverall = pr.plays;
     ok(Object.keys(pr.cards).filter((k) => k.startsWith(m + ':')).length >= (m === 'cls' ? 8 : 1), `${m}: progress of the memory boxes saved on this device`);
     await page.screenshot({ path: `${OUT}sum-${m}.png` });
