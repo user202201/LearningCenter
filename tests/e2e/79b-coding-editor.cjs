@@ -316,8 +316,6 @@ const slotCenter = async (page, sel) => center(page.locator(sel).first());
   ok((await prog(tp)) === 'repeat 3 { move }', 'REAL touch: dragging a block onto the bin deletes it');
   // the stepper with a finger
   await clearToasts(tp);
-  tp.on('console', (m) => console.log('  console:', m.text()));
-  await tp.evaluate(() => { for (const ev of ['pointerdown', 'pointerup', 'pointercancel', 'click', 'touchstart', 'touchend', 'touchcancel']) document.addEventListener(ev, (e) => console.log(ev, e.target.className, e.pointerType || '', Math.round(e.timeStamp)), true); });
   const plus = await center(tp.locator('.cw-ws .cw-step[data-d="1"]'));
   await touch('touchStart', plus.x, plus.y); await touch('touchEnd', plus.x, plus.y); await tp.waitForTimeout(80);
   ok(await tp.textContent('.cw-ws .cw-val') === '4', 'REAL touch: the + of a stepper works with a finger (not taken for a drag): ' + (await tp.textContent('.cw-ws .cw-val')) + ' ' + JSON.stringify(plus));
