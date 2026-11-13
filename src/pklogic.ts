@@ -1,7 +1,7 @@
 /**
  * PK, the rules of a face-to-face game for two players (pure: no DOM, no clock of its own, no randomness except the seeded one in the item makers).
- * The game is a list of items { prompt, choices, answers }: in every round both players see the same prompt and the same four choices, the first player who taps
- * a RIGHT choice wins the round. The time is passed in (`advance(state, now)` / `tap(state, side, index, at)`, milliseconds on any one clock), so the rules can
+ * The game is two lists of items { prompt, choices, answers }, one per side (each child plays with his OWN characters): in round n side 0 sees item n of the first
+ * list and side 1 item n of the second; the first player who taps a RIGHT choice of his own item wins the round. The time is passed in (`advance(state, now)` / `tap(state, side, index, at)`, milliseconds on any one clock), so the rules can
  * be played in a test without waiting. The first subject that makes items is the Chinese pinyin quiz (`pk-chinese.ts`); other subjects can reuse everything here.
  *
  * Phases: countdown (3, 2, 1, GO) -> intro (both names) -> for every round: prep (the round is announced, nothing can be tapped) -> question -> result -> ... -> final.
@@ -16,8 +16,9 @@ export type Outcome = "win" | "lose" | "tie";
 
 export interface State {
   cfg: Config;
-  items: Item[];
-  /** number of rounds really played: min(cfg.rounds, items.length) */
+  /** the items of side 0 and of side 1 (one per round each) */
+  items: [Item[], Item[]];
+  /** number of rounds really played: min(cfg.rounds, length of the shorter list) */
   total: number;
   phase: Phase;
   phaseStart: number;
@@ -69,10 +70,10 @@ export function shuffled<T>(a: readonly T[], rnd: () => number): T[] {
   return r;
 }
 
-export function create(items: Item[], start = 0, cfg: Partial<Config> = {}): State {
+export function create(items: [Item[], Item[]], start = 0, cfg: Partial<Config> = {}): State {
   const c = { ...DEFAULTS, ...cfg };
   return {
-    cfg: c, items, total: Math.min(c.rounds, items.length), phase: "countdown", phaseStart: start, phaseEnd: start + c.stepMs, count: 3,
+    cfg: c, items, total: Math.min(c.rounds, items[0].length, items[1].length), phase: "countdown", phaseStart: start, phaseEnd: start + c.stepMs, count: 3,
     round: 0, scores: [0, 0], locked: [false, false], wrongPick: [-1, -1], winner: -1, winAt: 0, questionStart: 0, now: start, results: [], outcome: null, again: [false, false],
   };
 }
@@ -110,8 +111,8 @@ export function advance(s: State, now: number): void {
   }
 }
 
-/** the item of the round that is on (the last one in the final) */
-export const current = (s: State): Item => s.items[Math.min(s.round, Math.max(0, s.total - 1))];
+/** the item of `side` in the round that is on (the last one in the final) */
+export const current = (s: State, side: Side): Item => s.items[side][Math.min(s.round, Math.max(0, s.total - 1))];
 
 /**
  * A tap of `side` on choice `index`, made at time `at` (the time of the touch, which may be a little earlier than the newest time the state has seen).
@@ -121,7 +122,7 @@ export const current = (s: State): Item => s.items[Math.min(s.round, Math.max(0,
  */
 export function tap(s: State, side: Side, index: number, at: number): TapEvent {
   if (at > s.now) advance(s, at);
-  const item = current(s);
+  const item = current(s, side);
   if (!item || !Number.isInteger(index) || index < 0 || index >= item.choices.length) return { type: "ignored", why: "index" };
   const right = item.answers.includes(index);
   if (s.phase === "result") {
