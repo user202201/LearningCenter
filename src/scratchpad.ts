@@ -60,8 +60,15 @@ export function createPad(): Pad {
   });
   canvas.addEventListener("pointermove", (e) => {
     if (!cur || e.pointerId !== active) return;
-    const evs = (e as PointerEvent & { getCoalescedEvents?: () => PointerEvent[] }).getCoalescedEvents?.() ?? [e];
-    for (const ev of evs.length ? evs : [e]) cur.pts.push(pos(ev));
+    // the extra points of a fast move (getCoalescedEvents) are used only when they agree with the event itself: some browsers give them in another coordinate system (page / visual viewport),
+    // which put the whole line away from the finger; the real event's own position always wins
+    let evs: PointerEvent[] = [e];
+    try {
+      const co = (e as PointerEvent & { getCoalescedEvents?: () => PointerEvent[] }).getCoalescedEvents?.() ?? [];
+      const lastCo = co[co.length - 1];
+      if (co.length > 1 && lastCo && Math.abs(lastCo.clientX - e.clientX) <= 2 && Math.abs(lastCo.clientY - e.clientY) <= 2) evs = co.every((c) => Math.abs(c.clientX - e.clientX) < 400 && Math.abs(c.clientY - e.clientY) < 400) ? co : [e];
+    } catch { /* no coalesced events here */ }
+    for (const ev of evs) cur.pts.push(pos(ev));
     redraw();
   });
   const end = (e: PointerEvent) => { if (e.pointerId !== active) return; active = null; if (cur) { strokes.push(cur); cur = null; } redraw(); };

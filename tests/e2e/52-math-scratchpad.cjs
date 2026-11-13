@@ -92,6 +92,28 @@ const strokes = (page) => page.evaluate(() => +document.querySelector('#pad-canv
     ok(bb.x1 > 0 && err <= 6, n + ': the ink starts and ENDS where the finger did (largest difference ' + err.toFixed(1) + ' px, the canvas is ' + bb.k + 'x the CSS size)');
     await browser.close();
   }
+  // ---- a browser whose coalesced events carry wrong coordinates must not put the line away from the finger ----
+  {
+    const { browser, page } = await open({ width: 820, height: 1180 });
+    const r = await page.evaluate(() => {
+      const c = document.querySelector('#pad-canvas'), b = c.getBoundingClientRect();
+      const mk = (type, x, y, extra) => new PointerEvent(type, { pointerId: 7, pointerType: 'touch', isPrimary: true, clientX: x, clientY: y, bubbles: true, cancelable: true, buttons: 1, ...extra });
+      const x0 = b.left + 100, y0 = b.top + 100;
+      c.dispatchEvent(mk('pointerdown', x0, y0, {}));
+      for (let i = 1; i <= 6; i++) {
+        const ev = mk('pointermove', x0 + i * 40, y0 + i * 10, {});
+        // the "browser" reports the coalesced points shifted by (+300, +300): wrong coordinate system
+        Object.defineProperty(ev, 'getCoalescedEvents', { value: () => [mk('pointermove', x0 + i * 40 - 20 + 300, y0 + i * 10 - 5 + 300, {}), mk('pointermove', x0 + i * 40 + 300, y0 + i * 10 + 300, {})] });
+        c.dispatchEvent(ev);
+      }
+      c.dispatchEvent(mk('pointerup', x0 + 240, y0 + 60, {}));
+      const k = c.width / b.width, d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+      let x1 = -1, y1 = -1; for (let y = 0; y < c.height; y++) for (let x = 0; x < c.width; x++) if (d[(y * c.width + x) * 4 + 3] > 0) { x1 = Math.max(x1, x / k); y1 = Math.max(y1, y / k); }
+      return { x1, y1, wantX: 340, wantY: 160 };
+    });
+    ok(r.x1 > 0 && r.x1 <= r.wantX + 6 && r.y1 <= r.wantY + 6, 'wrong coalesced coordinates are ignored: the ink stays on the finger path (right end ' + Math.round(r.x1) + ' / ' + r.wantX + ', bottom ' + Math.round(r.y1) + ' / ' + r.wantY + ')');
+    await browser.close();
+  }
   // ---- tall screens: under the question; small phone; remembered hidden state on a new game ----
   for (const [n, vp] of [['phone', { width: 390, height: 844 }], ['small', { width: 320, height: 568 }], ['ipad', { width: 820, height: 1180 }]]) {
     const { browser, page } = await open(vp);
