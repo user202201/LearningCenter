@@ -1571,8 +1571,8 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .gmap-dim .gmap-prov:not(.lit), .gmap-dim .gmap-country:not(.lit), .gmap-dim .gmap-land { fill: #ece8e2; }
 .gmap-m text { font-size: 12px; font-weight: 800; fill: #2d2230; paint-order: stroke; stroke: #fff; stroke-width: 3.2px; stroke-linejoin: round; }
 .gmap-flbl.r text { fill: #1864ab; } .gmap-flbl.m text { fill: #6b4423; } .gmap-flbl.l text { fill: #1971c2; } .gmap-flbl.a text { fill: #5f3dc4; }
-.gmap-sea-lbl text, .gmap-olbl text { fill: #1c7ed6; font-style: italic; font-size: 13px; }
-.gmap-klbl text { font-size: 18px; fill: #5f3dc4; }
+.gmap-sea-lbl text, .gmap-olbl text { fill: #1c7ed6; font-style: italic; font-size: 11px; }
+.gmap-klbl text { font-size: 14px; fill: #5f3dc4; }
 .gmap-clbl { font-size: 11px; }
 .gmap-cdot { fill: #e03131; stroke: #fff; stroke-width: 1px; }
 .gmap-m.lblhide .gmap-clbl { display: none; }
@@ -1843,7 +1843,6 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .cl-gal-open { width: 100%; padding: 4px; border-radius: 14px; }
 .cl-gal-open svg { width: 100%; display: block; }
 .cl-gal-del { min-height: 40px; padding: 2px 12px; font-size: 14px; }
-@media (max-width: 360px) { .sc-name { font-size: 9px; } }
 .dw-bar .gbtn { color: #fff; }
 .dw-switch { color: #2d2230; font-size: 17px; }
 .dw-count { font-size: 17px; }
@@ -2103,3 +2102,4 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .nt-check { margin: 8px 0 0; padding: 6px 10px; border-radius: 10px; background: #f1f3f5; overflow-wrap: anywhere; }
 .nt-tabs { flex-wrap: wrap; }
 .sign-svg { width: 64px; height: 64px; }
+@media (max-width: 360px) { .kid-hero button.icon { width: 40px; min-height: 40px; } .kid-hero { padding-left: 8px; padding-right: 8px; } .shortcuts { gap: 2px; } .sc-name { font-size: 8px; } }   /* five subjects: the four shortcuts and the name of the child must fit a 320 px phone */

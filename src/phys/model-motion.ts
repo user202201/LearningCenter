@@ -1,5 +1,5 @@
 /** 机械运动: uniform and uniformly accelerated motion in a straight line (pure). */
-import { makeQ, numQ, pick, type Q } from "./qtools";
+import { numQ, pick, type Q } from "./qtools";
 export const pos = (v0: number, a: number, t: number) => v0 * t + 0.5 * a * t * t;
 export const vel = (v0: number, a: number, t: number) => v0 + a * t;
 export const avgSpeed = (v0: number, a: number, t: number) => (t > 0 ? pos(v0, a, t) / t : v0);
@@ -21,4 +21,3 @@ export function quiz(rng: () => number): Q[] {
     numQ(rng, "t=s/v", [s4, v4], `以 ${v4} m/s 的速度匀速前进，通过 ${s4} m 需要多少时间？`, s4 / v4, "s", 0, "t = s / v。"),
   ];
 }
-export const _unused = makeQ;

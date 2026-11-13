@@ -7,8 +7,8 @@ const { ok, done } = checks();
 const fs = require('fs');
 const OUT = process.env.D || 'tests/out/work/';
 fs.mkdirSync(OUT, { recursive: true });
-const NAMES = ["识字", "数学", "英语", "科学", "音乐", "小游戏"];
-const IDS = ["chinese", "math", "english", "science", "music", "games"];
+const NAMES = ["识字", "数学", "英语", "科学", "编程", "音乐", "小游戏"];   // (编程 = Coding is the fifth subject)
+const IDS = ["chinese", "math", "english", "science", "coding", "music", "games"];
 
 /** signs in on this device (no GitHub) and stops at the picker */
 const toHub = async (opts) => {
@@ -27,10 +27,10 @@ const layout = (page) => page.evaluate(() => {
 
 (async () => {
   // ---- the picker itself, on phones and tablets ----
-  for (const [name, vp, min] of [['iPhone SE', { width: 320, height: 568 }, 120], ['iPhone', { width: 390, height: 844 }, 150], ['iPad portrait', { width: 820, height: 1180 }, 300], ['iPad landscape', { width: 1180, height: 820 }, 160], ['desktop', { width: 1440, height: 900 }, 190]]) {
+  for (const [name, vp, min] of [['iPhone SE', { width: 320, height: 568 }, 120], ['iPhone', { width: 390, height: 844 }, 150], ['iPad portrait', { width: 820, height: 1180 }, 300], ['iPad landscape', { width: 1180, height: 820 }, 130], ['desktop', { width: 1440, height: 900 }, 170]]) {
     const { browser, page } = await toHub({ local: true, viewport: vp });
     const L = await layout(page);
-    ok(L.order.join() === IDS.join() && L.cards.map((c) => c.txt).join() === NAMES.join(), name + ': six cards in order 识字 / 数学 / 英语 / 科学 / 音乐 / 小游戏');
+    ok(L.order.join() === IDS.join() && L.cards.map((c) => c.txt).join() === NAMES.join(), name + ': seven cards in order 识字 / 数学 / 英语 / 科学 / 编程 / 音乐 / 小游戏 (the last two are the secret ones, shown by the test harness)');
     ok(L.cards.every((c) => c.w >= min && c.h >= min && c.art >= min * 0.6), name + ': the cards are big (' + L.cards.map((c) => Math.round(c.w) + 'x' + Math.round(c.h)).join(', ') + ')');
     ok(L.sw <= L.vw, name + ': no sideways scrolling');
     const left = Math.min(...L.cards.map((c) => c.l)), right = L.vw - Math.max(...L.cards.map((c) => c.r));
@@ -41,7 +41,7 @@ const layout = (page) => page.evaluate(() => {
   }
 
   // ---- English / French: names fit, nothing Chinese left on the cards ----
-  for (const [loc, names] of [['en-US', ['Characters', 'Math', 'French', 'Science', 'Music', 'Games']], ['fr-FR', ['Caractères', 'Maths', 'Anglais', 'Sciences', 'Musique', 'Jeux']]]) {
+  for (const [loc, names] of [['en-US', ['Characters', 'Math', 'French', 'Science', 'Coding', 'Music', 'Games']], ['fr-FR', ['Caractères', 'Maths', 'Anglais', 'Sciences', 'Programmation', 'Musique', 'Jeux']]]) {
     const { browser, page } = await toHub({ local: true, locale: loc, viewport: { width: 320, height: 568 } });
     const L = await layout(page);
     ok(L.cards.map((c) => c.txt).join() === names.join(), loc + ': the subjects are translated (' + L.cards.map((c) => c.txt).join(', ') + ')');
@@ -85,7 +85,7 @@ const layout = (page) => page.evaluate(() => {
     const { browser, page } = await toHub({ local: true, viewport: { width: 390, height: 844 } });
     ok(await page.locator('.hub-page').count() === 1 && /学习乐园/.test(await page.title()), 'after signing in: the subject picker, the app is called 学习乐园');
     // all four subjects are open now: each opens its own list of children
-    for (const [id, nm, h1] of [['math', '数学', '数学'], ['english', '英语', '英语'], ['science', '科学', '科学']]) {
+    for (const [id, nm, h1] of [['math', '数学', '数学'], ['english', '英语', '英语'], ['science', '科学', '科学'], ['coding', '编程', '编程']]) {
       await page.click(`.subject[data-subject=${id}]`); await page.waitForSelector('.kids, .empty-home');
       ok(await page.evaluate(() => document.querySelector('.hero h1').textContent) === h1 && await page.locator('.soon').count() === 0, nm + ': its own screen (not a "coming soon" page)');
       await page.click('button.back'); await page.waitForSelector('.hub-grid');

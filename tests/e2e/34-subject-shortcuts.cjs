@@ -5,8 +5,8 @@ const { ok, done } = checks();
 const fs = require('fs');
 const OUT = process.env.D || 'tests/out/work/';
 fs.mkdirSync(OUT, { recursive: true });
-const ALL = ['chinese', 'math', 'english', 'science'];
-const route = { chinese: (id) => `#/kid/${id}`, math: (id) => `#/math/${id}`, english: (id) => `#/english/${id}`, science: (id) => `#/science/${id}` };
+const ALL = ['chinese', 'math', 'english', 'science', 'coding'];   // (coding = the fifth subject: no grade is asked there)
+const route = { chinese: (id) => `#/kid/${id}`, math: (id) => `#/math/${id}`, english: (id) => `#/english/${id}`, science: (id) => `#/science/${id}`, coding: (id) => `#/coding/${id}` };
 const kidId = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.kids.json')).kids[0].id);
 const bar = async (page) => { for (let i = 0; i < 5; i++) { const r = await bar1(page); if (r) return r; await page.waitForTimeout(200); await page.waitForSelector('header.kid-hero .shortcuts'); } return bar1(page); };   // (a page may redraw once while it loads)
 const bar1 = (page) => page.evaluate(() => {
@@ -24,11 +24,11 @@ const bar1 = (page) => page.evaluate(() => {
   // from 识字: math, english, science
   await page.evaluate((r) => (location.hash = r), route.chinese(id)); await page.waitForSelector('header.kid-hero .shortcuts');
   let b = await bar(page);
-  ok(b && b.ids.join() === 'math,english,science' && b.round && b.art && b.labels.join() === '数学,英语,科学' && b.labelsOk, '识字 child page: three round icons (math, english, science) with their pictures and their NAMES under them');
+  ok(b && b.ids.join() === 'math,english,science,coding' && b.round && b.art && b.labels.join() === '数学,英语,科学,编程' && b.labelsOk, '识字 child page: four round icons (math, english, science, coding) with their pictures and their NAMES under them');
   ok(b.right >= 8 && b.right <= 16 && b.sw <= b.vw && b.h1right <= b.left, 'right-aligned at the edge, no overflow, the title does not run under them');
   await page.screenshot({ path: OUT + 'shortcuts-chinese.png' });
   // each icon leads to the same child in that subject; there the icons are the other three
-  for (const target of ['math', 'english', 'science']) {
+  for (const target of ['math', 'english', 'science', 'coding']) {
     await page.evaluate((r) => (location.hash = r), route.chinese(id)); await page.waitForSelector('header.kid-hero .shortcuts');
     await page.click(`#go-${target}`);
     await page.waitForFunction((r) => location.hash === r, route[target](id));
@@ -59,8 +59,8 @@ const bar1 = (page) => page.evaluate(() => {
       for (const subj of ALL) {
         await s.page.evaluate((r) => (location.hash = r), route[subj](sid)); await s.page.waitForSelector('header.kid-hero .shortcuts');
         const m = await bar(s.page);
-        ok(m && m.round && m.labelsOk && m.sw <= m.vw && m.right >= 6 && m.h1w >= 60 && m.h1right <= m.left + 1, `${name} ${dn} ${subj}: three round icons right-aligned, no overflow, title keeps ${Math.round(m.h1w)} px`);
-        if (name !== 'zh' && subj === 'chinese') ok(m.titles.join() === (name === 'en' ? 'Math,French,Science' : 'Maths,Anglais,Sciences') && m.labels.join() === m.titles.join(), `${name}: the icon names under the icons are translated (${m.labels.join()})`);
+        ok(m && m.round && m.labelsOk && m.sw <= m.vw && m.right >= 6 && m.h1w >= 60 && m.h1right <= m.left + 1, `${name} ${dn} ${subj}: four round icons right-aligned, no overflow, title keeps ${Math.round(m.h1w)} px`);
+        if (name !== 'zh' && subj === 'chinese') ok(m.titles.join() === (name === 'en' ? 'Math,French,Science,Coding' : 'Maths,Anglais,Sciences,Programmation') && m.labels.join() === m.titles.join(), `${name}: the icon names under the icons are translated (${m.labels.join()})`);
       }
       await s.browser.close();
     }

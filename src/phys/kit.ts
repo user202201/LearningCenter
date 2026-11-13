@@ -120,8 +120,8 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   // ----- tasks
   const taskBox = h("ol", { class: "pl-tasks", id: "pl-tasks" }, ...def.tasks.map((t) => h("li", { class: "pl-task", "data-task": t.id }, h("span", { class: "pl-tick", "aria-hidden": "true" }, "○"), h("span", { class: "pl-tt" }, t.text))));
   const taskCount = h("span", { class: "pl-tcount", id: "pl-tcount" });
-  const drawTasks = (announce: boolean) => {
-    for (const t of def.tasks) {
+  const drawTasks = (announce: boolean, register: boolean) => {
+    for (const t of register ? def.tasks : []) {
       let ok = false;
       try { ok = t.check(st); } catch { ok = false; }
       if (ok && !doneSet.has(t.id)) {
@@ -135,7 +135,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   };
 
   // ----- state changes
-  const update = (announce = true) => { drawControls(); drawReadouts(); drawTasks(announce); redraw(); if (soundOn) def.sound?.update(st); };
+  const update = (announce = true, register = true) => { drawControls(); drawReadouts(); drawTasks(announce, register); redraw(); if (soundOn) def.sound?.update(st); };
   function set(id: string, v: number) {
     const p = def.params.find((x) => x.id === id);
     st[id] = p ? clamp(Math.round(v / p.step) * p.step, p.min, p.max) : v;
@@ -216,7 +216,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   // ----- the page
   const lesson = h("div", { class: "pl-lesson user", id: "pl-lesson" }, ...def.lesson.map((t) => { const p = h("p", {}); renderRich(p, t, false); return p; }));
   const formulas = def.formulas?.length ? h("div", { class: "pl-formulas user", id: "pl-formulas" }, ...def.formulas.map((f) => { const d = h("div", { class: "pl-formula" }); renderTeX(d, f, f); return d; })) : null;
-  const resetBtn = h("button", { class: "mopt pl-btn", id: "pl-reset", onclick: () => { stopPlay(); reset(); update(false); toast("已重置", 1500); } }, "重置");
+  const resetBtn = h("button", { class: "mopt pl-btn", id: "pl-reset", onclick: () => { stopPlay(); reset(); update(false, false); toast("已重置", 1500); } }, "重置");
   const stage = h("div", { class: "pl-stage" }, canvas, readBox);
   const side = h("div", { class: "pl-side" },
     h("div", { class: "pl-bar" }, playBtn, soundBtn, resetBtn), ctlBox);
@@ -226,7 +226,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
     h("section", { class: "pl-card" }, h("h3", {}, "小测验"), quizBox));
   const sim = h("div", { class: "pl-sim", "data-sim": def.meta.id }, h("div", { class: "pl-main" }, stage, side), info);
   root.replaceChildren(sim);
-  update(false);
+  update(false, false);
   drawQuiz();
 
   // a handle for the tests (and nothing else): the state, a way to set it by name, to move the clock on, and what was done
@@ -234,7 +234,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
     id: def.meta.id, st, def,
     set: (id: string, v: number) => set(id, v),
     tick: (dt: number) => { if (def.play) advance(dt); },
-    reset: () => { reset(); update(false); },
+    reset: () => { reset(); update(false, false); },
     done: () => [...doneSet],
     redraw: () => redrawNow(),
     soundOn: () => soundOn,

@@ -65,7 +65,7 @@ export const SAFETY_FIGS: Record<string, string> = {
       `<rect x="${x + 12}" y="${y + 18}" width="28" height="14" rx="5" fill="${FILL}"/><path d="M${x + 18} ${y + 8}L${x + 18} ${y + 18}M${x + 26} ${y + 8}L${x + 26} ${y + 18}M${x + 34} ${y + 8}L${x + 34} ${y + 18}" stroke-width="3"/>`,
       `<rect x="${x + 16}" y="${y + 10}" width="18" height="24" rx="4" fill="${FILL}"/><ellipse cx="${x + 25}" cy="${y + 28}" rx="15" ry="5" stroke="${RED}" stroke-width="2.5"/>`][i];
     return `<rect x="${x}" y="${y}" width="52" height="64" rx="10" fill="#fff"/>${glyph}<circle cx="${x + 9}" cy="${y + 10}" r="0"/>${t(x + 26, y + 46, c + " " + (i + 1), 12)}${t(x + 26, y + 58, s, 8)}`;
-  }).join("") + `${t(178, 112, "每步至少搓 15 秒", 10, "start")}${t(178, 126, "全程不少于 20 秒", 10, "start")}`),
+  }).join("") + ["每步至少", "搓 15 秒", "全程不少", "于 20 秒"].map((l, i) => t(207, 92 + i * 14, l, 10)).join("")),
   "sf-2020": wrap(`<ellipse cx="42" cy="40" rx="26" ry="16" fill="#fff"/><circle cx="42" cy="40" r="9" fill="${BLUE}"/><circle cx="42" cy="40" r="3" fill="#111"/>${t(42, 74, "近距离用眼", 11)}`
     + `${arrow(76, 40, 100, 40)}${[[110, "20", "分钟", ORANGE], [166, "6", "米外", BLUE], [214, "20", "秒", GREEN]].map(([x, n, u, c], i) => `<circle cx="${x}" cy="40" r="22" fill="${c}" stroke="none"/>${t(x as number, 41, String(n), 20, "middle", "#fff")}${t(x as number, 54, String(u), 10, "middle", "#fff")}`).join("")}`
     + `${arrow(132, 40, 144, 40)}${arrow(188, 40, 192, 40)}${t(120, 98, "每看 20 分钟，远眺 6 米外至少 20 秒", 12)}${t(120, 120, "每天户外活动 2 小时", 12, "middle", GREEN)}`),
@@ -76,7 +76,7 @@ export const SAFETY_FIGS: Record<string, string> = {
   "sf-warn": wrap([["蓝", BLUE, "一般"], ["黄", YELLOW, "较重"], ["橙", ORANGE, "严重"], ["红", RED, "特别严重"]].map(([n, c, e], i) => {
     const x = 8 + i * 58;
     return `<circle cx="${x + 25}" cy="48" r="24" fill="${c}" stroke="none"/>${t(x + 25, 55, String(n), 20, "middle", i === 1 ? "#333" : "#fff")}${t(x + 25, 94, String(e), 12)}`;
-  }).join("") + t(120, 126, "预警颜色：蓝 < 黄 < 橙 < 红", 12)),
+  }).join("") + t(120, 126, "预警颜色：蓝、黄、橙、红，由轻到重", 12)),
   "sf-cpr": wrap(`<path d="M10 118L150 118" stroke="#adb5bd"/><circle cx="30" cy="104" r="9" fill="${FILL}"/><path d="M40 106L112 106M112 106L132 118M112 106L128 96" stroke-width="5"/>`
     + `<path d="M76 62L76 98M62 62L90 62" stroke="${RED}" stroke-width="5"/>${arrow(76, 34, 76, 56, RED)}<path d="M62 62L58 78M90 62L94 78" stroke="${RED}" stroke-width="4"/>`
     + `${t(190, 36, "30 : 2", 24, "middle", RED)}${t(190, 56, "按压 30 次，吹气 2 次", 10)}${t(190, 78, "100–120 次/分", 14, "middle", BLUE)}${t(190, 96, "深约 5–6 厘米（成人）", 10)}${t(120, 142, "先拨 120，再按压；有 AED 立即取来", 11)}`),
