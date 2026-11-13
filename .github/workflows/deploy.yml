@@ -4,7 +4,7 @@ name: deploy
 # The page contains only the app's code; the children's data is in a separate PRIVATE repository and needs a token.
 on:
   push:
-    branches: [main, claude/tender-faraday-in87fy]
+    branches: [main, claude/tender-faraday-in87fy, release-snapshot]
   workflow_dispatch:
 permissions:
   contents: read
