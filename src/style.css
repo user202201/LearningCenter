@@ -1190,18 +1190,11 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 @keyframes djhit { from { transform: translateY(4px); } to { transform: none; } }
 .dj-help { margin: 10px 0 16px; }
 @container (min-width: 230px) { .dj-knobs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@container (min-width: 340px) {
-  .dj-ctrl { gap: 8px; }
-  .dj-cmain { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; }
-  .dj-pitchrow { grid-column: 1 / -1; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0 10px; }
-  .dj-pitchrow .dj-ctl { grid-column: auto; }
-  .dj-play { flex: none; width: 112px; }
-}
 @media (max-width: 480px) {
   .dj-trans { flex-direction: column; }
   .dj-cue { width: 100%; }
 }
-@media (max-width: 760px) {
+@media (max-width: 760px), (max-width: 900px) and (min-height: 700px) {
   .dj-rig { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .dj-mixer { grid-column: 1 / -1; order: 3; }
   .dj-deck-a { order: 1; } .dj-deck-b { order: 2; }
@@ -1212,33 +1205,71 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
   .dj-page .top.hero { padding-bottom: 8px; border-radius: 0 0 22px 22px; } .dj-page .top.hero .subj-ico { display: none; } .dj-page .top.hero h1 { font-size: 18px; }
 }
 @media (orientation: landscape) and (max-height: 600px) { .dj-narrow > p { display: none; } }
-/* a short landscape screen (a phone on its side): in each deck the record and the knobs on the left, the buttons and the faders on the right */
-@media (orientation: landscape) and (max-height: 520px) and (min-width: 700px) {
-  .dj-rig { grid-template-columns: minmax(0, 1fr) 230px minmax(0, 1fr); gap: 8px; }
-  .dj-deck { display: grid; grid-template-columns: minmax(100px, 124px) minmax(0, 1fr); grid-template-areas: "head head" "plat main" "knobs main"; gap: 6px 8px; align-items: start; padding: 8px; }
-  .dj-head { grid-area: head; min-height: 30px; }
-  .dj-plat-wrap { grid-area: plat; width: 100%; }
-  .dj-ctrl { display: contents; }
-  .dj-cmain { grid-area: main; display: flex; flex-direction: column; gap: 6px; }
-  .dj-knobs { grid-area: knobs; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
-  .dj-trans { flex-direction: column; gap: 6px; }
-  .dj-play, .dj-cue { width: 100%; height: 40px; min-height: 40px; flex: none; }
-  .dj-select { height: 40px; }
-  .dj-pitchrow { grid-template-columns: 1fr auto; }
-  .dj-knob { width: 40px; height: 40px; }
-  .dj-knob .dj-cap::after { height: 11px; top: 3px; }
-  .dj-mixer { gap: 6px; padding: 8px; }
-  .dj-bar .pn-shift, .dj-bar .pn-fullbtn { height: 40px; min-height: 40px; padding: 0 10px; }
-  .dj-vfader { height: 84px; }
-  .dj-sync, .dj-fx { height: 40px; min-height: 40px; }
-  .dj-pads { margin-top: 8px; gap: 6px; }
-  .dj-pad { height: 48px; }
-}
 /* full screen: the bar on top, the turntables fill the middle, the pads at the bottom */
 .inst-page.dj-page.inst-full .scroll { overflow: hidden; }
 .inst-page.dj-page.inst-full .dj-narrow { padding-left: calc(env(safe-area-inset-left) + 6px); padding-right: calc(env(safe-area-inset-right) + 6px); }
 .inst-page.dj-page.inst-full .dj-rig { flex: 1; min-height: 0; max-width: none; width: 100%; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
 .inst-page.dj-page.inst-full .dj-pads { flex: none; width: 100%; max-width: none; margin-top: 8px; }
 .inst-page.dj-page.inst-full .dj-pad { height: clamp(48px, 9dvh, 70px); }
-.inst-page.dj-page.inst-full .dj-plat-wrap { width: max(100px, min(100%, 360px, calc(100dvh - 380px))); }
 .inst-page.dj-page.inst-full .dj-pad { height: clamp(48px, 9dvh, 70px); }
+
+/* DJ part 2: waveforms, overview, hot cues, loops, grid tools, import */
+.dj-waves { display: flex; flex-direction: column; gap: 8px; max-width: 1400px; margin: 8px auto 10px; padding: 0 3px; box-sizing: border-box; }
+.dj-wave { display: block; width: 100%; height: clamp(40px, 6.5dvh, 60px); border-radius: 14px; background: #fff7fa; box-shadow: 0 0 0 3px #fcc2d7, 0 5px 0 3px #fcc2d7; }
+.dj-time { font-size: 13px; font-weight: 800; color: #a61e4d; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dj-tname { max-width: 100%; font-size: 13px; font-weight: 800; color: #5f3dc4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dj-top { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.dj-top .dj-cmain { width: 100%; }
+.dj-ovw { display: block; width: 100%; height: 40px; margin-top: 8px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 2px #fcc2d7; touch-action: none; cursor: pointer; }
+.dj-importrow { display: flex; flex-direction: column; gap: 2px; }
+.dj-import { min-height: 40px; width: 100%; padding: 4px 10px; font-size: 14px; border-radius: 20px; white-space: normal; line-height: 1.1; }
+.dj-hint { font-size: 11px; line-height: 1.2; text-align: center; }
+.dj-deck.drop { outline: 4px dashed #e64980; outline-offset: -4px; }
+.dj-hcrow, .dj-loopc, .dj-gridp { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; align-items: center; }
+.dj-hc { flex: 1 1 44px; min-width: 44px; height: 44px; border-radius: 14px; border: 3px solid var(--c); background: #fff; color: var(--c); font: inherit; font-weight: 900; font-size: 16px; box-shadow: 0 3px 0 var(--c); cursor: pointer; touch-action: none; user-select: none; -webkit-user-select: none; box-sizing: border-box; }
+.dj-hc.set { background: var(--c); color: #fff; text-shadow: 0 1px 0 rgba(0, 0, 0, .3); }
+.dj-hc:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--c); }
+.dj-hcdel, .dj-gridb, .dj-lc, .dj-gb, .dj-tog { flex: 1 1 52px; min-width: 44px; min-height: 40px; padding: 4px 6px; white-space: normal; line-height: 1.1; overflow-wrap: anywhere; font-size: 13px; }
+.dj-looprow { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; width: 100%; }
+.dj-lp { height: 40px; min-width: 0; border-radius: 14px; border: 2px solid #fcc2d7; background: #fff; color: #a61e4d; font: inherit; font-weight: 900; font-size: 14px; box-shadow: 0 3px 0 #fcc2d7; cursor: pointer; touch-action: none; user-select: none; -webkit-user-select: none; padding: 0; }
+.dj-lp.on { color: #fff; border-color: transparent; background: linear-gradient(180deg, #ffd43b, #f08c00); box-shadow: 0 3px 0 #b36b00; }
+.dj-lp:active { transform: translateY(2px); box-shadow: 0 1px 0 #fcc2d7; }
+.dj-gl { flex: 1 1 100%; font-size: 15px; color: #a61e4d; }
+.dj-lock { grid-column: auto; min-height: 46px; }
+.dj-bar2 .dj-zb { min-width: 44px; height: 40px; padding: 0 8px; }
+.dj-zoomval { font-size: 13px; font-weight: 900; color: #a61e4d; min-width: 46px; text-align: center; white-space: nowrap; }
+.dj-phase { display: flex; align-items: center; gap: 8px; }
+.dj-phtrack { position: relative; flex: 1; height: 12px; border-radius: 6px; background: #fff0f6; box-shadow: 0 0 0 2px #fcc2d7; }
+.dj-phtrack::before { content: ""; position: absolute; left: 50%; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; background: #a61e4d; opacity: .5; }
+.dj-phtrack i { position: absolute; top: -4px; left: 50%; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; background: #e64980; border: 2px solid #fff; box-sizing: border-box; box-shadow: 0 2px 0 rgba(0, 0, 0, .2); }
+.dj-phase.ok .dj-phtrack i { background: #12b886; }
+.dj-phasems { font-size: 12px; font-weight: 800; color: #a61e4d; min-width: 58px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dj-fxrow .dj-sync { grid-column: span 2; }
+.dj-vfader { height: clamp(90px, 14dvh, 150px); }
+.dj-page.dj-less .dj-loopc, .dj-page.dj-less .dj-looprow, .dj-page.dj-less .dj-gridp, .dj-page.dj-less .dj-ovw, .dj-page.dj-less .dj-hint { display: none !important; }
+@container (min-width: 200px) {
+  .dj-top { display: grid; grid-template-columns: var(--pw) minmax(0, 1fr); align-items: start; gap: 10px; --pw: min(clamp(100px, calc(100dvh - 600px), 180px), 46cqw); }
+  .dj-plat-wrap { width: var(--pw); }
+  .dj-top .dj-cmain { width: auto; min-width: 0; }
+  .dj-trans { flex-direction: column; }
+  .dj-trans .dj-play, .dj-trans .dj-cue { width: 100%; flex: none; height: 42px; min-height: 42px; }
+}
+@container (min-width: 340px) {
+  .dj-trans { flex-direction: row; }
+  .dj-trans .dj-play { flex: 1 1 0; width: auto; }
+  .dj-trans .dj-cue { width: auto; flex: 0 0 auto; }
+}
+@container (max-width: 339px) { .dj-looprow { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container (max-width: 170px) { .dj-looprow { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (orientation: landscape) and (max-height: 520px) and (min-width: 700px) {
+  .dj-wave { height: 36px; }
+  .dj-mixer { gap: 6px; padding: 8px; }
+  .dj-bar .pn-shift, .dj-bar .pn-fullbtn { height: 40px; min-height: 40px; padding: 0 10px; }
+  .dj-vfader { height: 74px; }
+  .dj-sync, .dj-fx, .dj-lock { height: 40px; min-height: 40px; }
+  .dj-pads { margin-top: 8px; gap: 6px; }
+  .dj-pad { height: 48px; }
+}
+.inst-page.dj-page.inst-full .dj-waves { flex: none; margin: 0 auto 6px; width: 100%; }
+.inst-page.dj-page.inst-full .dj-wave { height: clamp(34px, 6dvh, 56px); }
+.inst-page.dj-page.inst-full .dj-rig { align-content: start; }

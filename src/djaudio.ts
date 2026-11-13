@@ -1,27 +1,42 @@
 /**
- * The audio engine of the DJ turntables (`dj.ts` is the screen). Everything is made in code, nothing is loaded.
+ * The audio engine of the DJ turntables (`dj.ts` is the screen). Everything is made in code, nothing is loaded from outside.
  * Per deck:  looping AudioBufferSourceNode (the playback rate = tempo, scratching, brake) -> low shelf -> mid peak -> high shelf -> low-pass -> high-pass -> channel
  * fader gain -> crossfader gain -> (level meter) -> mixer bus.  Mixer bus -> dry + echo (feedback delay) + flanger (short modulated delay) -> master gain -> a compressor
  * -> the speakers (and, while recording, a MediaStreamDestination). The sample pads go straight to the master.
- * Playing backwards (scratching backwards) uses a reversed copy of the loop. The motion of each deck is a small model (`cur` = the rate that is heard, smoothed;
- * `pos`, `angle`) advanced every 20 ms: the record's turning, the position and the sound all come from the same number.
+ * Playing backwards (scratching backwards) uses a reversed copy of a WINDOW of the track (+-15 s round the position; a whole built-in loop). The motion of each deck is a
+ * small model (`cur` = the rate that is heard, smoothed; `pos`, `angle`) advanced every 20 ms: the record's turning, the position and the sound all come from the same number.
+ * On top of it: the beat grid per deck (bpm + first beat), hot cues, loops (the source's own loop points, wrapped in the model in step), loop roll with a slip position,
+ * true SYNC (tempo AND beat phase) with an optional lock that trims the rate slowly, and imported music (decoded here, never uploaded).
  * The state is also kept in `window.__dj` (the tests read it; harmless otherwise; `probe()` reads the values that are really on the audio nodes).
  */
 import * as A from "./musicaudio";
 import * as L from "./djlogic";
+import * as G from "./djgrid";
 import { renderTrack, reversed } from "./djtracks";
 
 export interface DeckState {
-  track: string; loading: boolean; playing: boolean; cueHold: boolean;
+  track: string;            // a built-in id, or "file" for imported music
+  key: string;              // what the grid and the cues are remembered under
+  name: string;             // the name of the imported file (the user's own text)
+  imported: boolean;
+  dur: number;              // length of the loop / track in seconds
+  loading: boolean; playing: boolean; cueHold: boolean;
   pitch: number;            // tempo fader, percent
-  bpm: number;              // what is heard (track BPM x rate of the fader)
+  bpm: number;              // what is heard (grid BPM x rate of the fader)
+  grid: G.Grid;             // the beat grid: BPM and the time of a beat
+  beat: number;             // the beat position of `pos` (fractional)
+  cues: (number | null)[];  // the hot cues (seconds)
+  loop: G.Loop; roll: boolean; slip: number;
   pos: number; cue: number; // seconds in the loop
   angle: number;            // the turn of the record, degrees
   cur: number;              // the playback rate that is heard now (negative = backwards)
   dir: 1 | -1;              // the direction of the source that plays (-1 = the reversed copy)
-  scratching: boolean; scratchRate: number;
+  scratching: boolean; scratchRate: number; seeking: boolean;
   eq: { low: number; mid: number; high: number }; filter: number; vol: number;
   sounding: boolean;        // a source node is playing
+  peaksN: number;           // the number of waveform bins of the loaded track
+  chans: number;            // channels kept in memory (a long track is mixed to mono)
+  rwin: [number, number] | null;   // the window of the track that is reversed for scratching backwards
 }
 export interface DJState {
   decks: [DeckState, DeckState];
@@ -30,21 +45,38 @@ export interface DJState {
   meters: [number, number];
   pads: { id: string; t: number }[];
   syncs: number; recording: boolean; ticks: number;
+  quant: boolean; zoom: number;
+  lock: boolean;            // SYNC LOCK: deck B keeps its beat phase on deck A's
+  phase: { beats: number; ms: number };   // how far B's beat is ahead of A's
   probe: () => unknown;
 }
-const newDeck = (track: string): DeckState => ({ track, loading: false, playing: false, cueHold: false, pitch: 0, bpm: L.trackById(track)?.bpm ?? 120, pos: 0, cue: 0, angle: 0, cur: 0, dir: 1, scratching: false, scratchRate: 0, eq: { low: 0, mid: 0, high: 0 }, filter: 0, vol: 0.8, sounding: false });
+const newDeck = (track: string): DeckState => ({ track, key: track, name: "", imported: false, dur: L.trackById(track) ? L.loopSeconds(L.trackById(track)!) : 1, loading: false, playing: false, cueHold: false, pitch: 0,
+  bpm: L.trackById(track)?.bpm ?? 120, grid: { bpm: L.trackById(track)?.bpm ?? 120, offset: 0 }, beat: 0, cues: Array(G.HOT_CUES).fill(null), loop: { on: false, start: 0, end: 0 }, roll: false, slip: 0,
+  pos: 0, cue: 0, angle: 0, cur: 0, dir: 1, scratching: false, scratchRate: 0, seeking: false, eq: { low: 0, mid: 0, high: 0 }, filter: 0, vol: 0.8, sounding: false, peaksN: 0, chans: 1, rwin: null });
 
 interface DeckNodes { low: BiquadFilterNode; mid: BiquadFilterNode; high: BiquadFilterNode; lp: BiquadFilterNode; hp: BiquadFilterNode; chan: GainNode; cross: GainNode; an: AnalyserNode; buf: Float32Array<ArrayBuffer> }
 interface Nodes {
   c: AudioContext; decks: [DeckNodes, DeckNodes]; bus: GainNode; master: GainNode; echoSend: GainNode; echoDelay: DelayNode; flWet: GainNode; fxOut: GainNode; noise: AudioBuffer;
   recDest: MediaStreamAudioDestinationNode | null;
 }
+export type LoadError = "decode" | "size" | "long" | "empty";
+const peaksCache = new WeakMap<AudioBuffer, G.Peaks>();
+export const peaksOf = (b: AudioBuffer): G.Peaks => { let p = peaksCache.get(b); if (!p) { p = G.computePeaks(Array.from({ length: b.numberOfChannels }, (_, c) => b.getChannelData(c)), b.sampleRate); peaksCache.set(b, p); } return p; };
+const windowBuffer = (b: AudioBuffer, a: number, z: number): AudioBuffer => {
+  const i0 = Math.floor(a * b.sampleRate), n = Math.max(1, Math.floor(z * b.sampleRate) - i0);
+  const w = new AudioBuffer({ length: n, numberOfChannels: b.numberOfChannels, sampleRate: b.sampleRate });
+  for (let c = 0; c < b.numberOfChannels; c++) { const s = b.getChannelData(c), d = w.getChannelData(c); for (let i = 0; i < n; i++) d[i] = s[i0 + n - 1 - i] ?? 0; }
+  return w;
+};
 
 export class DJ {
   readonly s: DJState;
+  readonly store: G.DjStore = G.loadStore();
+  readonly peaks: [G.Peaks | null, G.Peaks | null] = [null, null];
   private n: Nodes | null = null;
   private bufs: [AudioBuffer | null, AudioBuffer | null] = [null, null];
   private srcs: [AudioBufferSourceNode | null, AudioBufferSourceNode | null] = [null, null];
+  private win: [{ a: number; b: number } | null, { a: number; b: number } | null] = [null, null];
   private lastMove: [number, number] = [0, 0];
   private timer = 0; private last = 0;
   private rec: { mr: MediaRecorder; chunks: BlobPart[]; mime: string } | null = null;
@@ -52,14 +84,14 @@ export class DJ {
   constructor(tracks: [string, string]) {
     const self = this;
     this.s = { decks: [newDeck(tracks[0]), newDeck(tracks[1])], cross: 0, gains: { ...L.crossGains(0) }, master: 0.8, fx: { echo: false, flanger: false, brake: false }, meters: [0, 0], pads: [], syncs: 0, recording: false, ticks: 0,
-      probe() { return self.probe(); } };
+      quant: this.store.quant, zoom: this.store.zoom, lock: false, phase: { beats: 0, ms: 0 }, probe() { return self.probe(); } };
     (window as unknown as { __dj: DJState }).__dj = this.s;
     this.last = performance.now();
     this.timer = window.setInterval(() => this.tick(), 20);
   }
   dispose(): void {
     window.clearInterval(this.timer);
-    for (const i of [0, 1] as const) this.stopSource(i);
+    for (const i of [0, 1] as const) { this.stopSource(i); this.bufs[i] = null; }
     if (this.rec) { try { this.rec.mr.stop(); } catch { /* already stopped */ } this.rec = null; this.s.recording = false; }
     try { this.n?.master.disconnect(); this.n?.fxOut.disconnect(); } catch { /* gone */ }
     this.n = null;
@@ -107,7 +139,7 @@ export class DJ {
   probe() {
     const n = this.n; if (!n) return null;
     return {
-      decks: n.decks.map((d, i) => ({ chan: d.chan.gain.value, cross: d.cross.gain.value, low: d.low.gain.value, mid: d.mid.gain.value, high: d.high.gain.value, lp: d.lp.frequency.value, hp: d.hp.frequency.value, rate: this.srcs[i]?.playbackRate.value ?? null, reversed: this.srcs[i] ? this.s.decks[i].dir < 0 : false })),
+      decks: n.decks.map((d, i) => ({ chan: d.chan.gain.value, cross: d.cross.gain.value, low: d.low.gain.value, mid: d.mid.gain.value, high: d.high.gain.value, lp: d.lp.frequency.value, hp: d.hp.frequency.value, rate: this.srcs[i]?.playbackRate.value ?? null, loop: this.srcs[i] ? [this.srcs[i]!.loop, this.srcs[i]!.loopStart, this.srcs[i]!.loopEnd] : null, reversed: this.srcs[i] ? this.s.decks[i].dir < 0 : false })),
       master: n.master.gain.value, echo: n.echoSend.gain.value, echoTime: n.echoDelay.delayTime.value, flanger: n.flWet.gain.value, state: n.c.state,
     };
   }
@@ -135,18 +167,34 @@ export class DJ {
   setFx(name: "echo" | "flanger" | "brake", on: boolean): void { this.s.fx[name] = on; this.applyFx(); }
 
   // ---------- the decks ----------
-  setPitch(i: 0 | 1, pct: number): void {
+  setPitch(i: 0 | 1, pct: number, user = true): void {
     const d = this.s.decks[i];
     d.pitch = Math.round(L.clamp(pct, -L.PITCH_RANGE, L.PITCH_RANGE) * 10) / 10;
-    d.bpm = L.bpmOf(L.trackById(d.track)?.bpm ?? 120, d.pitch);
+    d.bpm = L.bpmOf(d.grid.bpm, d.pitch);
+    if (i === 1 && user) this.s.lock = false;   // a hand on the tempo fader releases SYNC LOCK
     if (i === 0) this.applyFx();
   }
-  /** SYNC: the right deck follows the left deck's BPM */
-  sync(): { pitch: number; ok: boolean; mult: number; bpm: number } {
-    const a = this.s.decks[0], b = this.s.decks[1];
-    const r = L.syncPitch(a.bpm, L.trackById(b.track)?.bpm ?? 120);
-    this.setPitch(1, r.pitch); this.s.syncs++;
-    return { ...r, bpm: b.bpm * r.mult };   // (a half-time track is reported in the master's beats)
+  private remember(i: 0 | 1): void {
+    const d = this.s.decks[i];
+    this.store.tracks[d.key] = { bpm: d.grid.bpm, offset: d.grid.offset, cues: d.cues.slice() };
+    this.store.quant = this.s.quant; this.store.zoom = this.s.zoom;
+    G.saveStore(this.store);
+  }
+  setQuant(on: boolean): void { this.s.quant = on; this.store.quant = on; G.saveStore(this.store); }
+  setZoom(sec: number): void { this.s.zoom = sec; this.store.zoom = sec; G.saveStore(this.store); }
+  /** puts a loaded buffer on a deck with its grid (remembered or given) and cues */
+  private place(i: 0 | 1, b: AudioBuffer, o: { track: string; key: string; name: string; imported: boolean; grid: G.Grid }): void {
+    const d = this.s.decks[i];
+    this.stopSource(i);
+    this.bufs[i] = b; this.win[i] = null;
+    const mem = this.store.tracks[o.key];
+    d.track = o.track; d.key = o.key; d.name = o.name; d.imported = o.imported; d.dur = b.duration; d.chans = b.numberOfChannels; d.rwin = null;
+    d.grid = mem ? { bpm: mem.bpm, offset: mem.offset } : o.grid;
+    d.cues = mem ? mem.cues.slice() : Array(G.HOT_CUES).fill(null);
+    d.loop = { on: false, start: 0, end: 0 }; d.roll = false; d.pos = 0; d.cue = 0; d.slip = 0; d.cur = 0;
+    d.bpm = L.bpmOf(d.grid.bpm, d.pitch);
+    this.peaks[i] = peaksOf(b); d.peaksN = this.peaks[i]!.n;
+    if (i === 0) this.applyFx();
   }
   async load(i: 0 | 1, id: string): Promise<boolean> {
     const def = L.trackById(id); if (!def) return false;
@@ -155,27 +203,122 @@ export class DJ {
     try {
       const b = await renderTrack(def);
       if (d.track !== id) return false;   // another track was chosen meanwhile
-      this.stopSource(i);
-      this.bufs[i] = b; d.pos = 0; d.cue = 0; d.cur = 0;
+      this.place(i, b, { track: id, key: id, name: "", imported: false, grid: { bpm: def.bpm, offset: 0 } });
       return true;
     } catch { this.bufs[i] = null; return false; }
     finally { if (d.track === id) d.loading = false; }
   }
+  /** imported music: decoded here (nothing is uploaded), at most 25 MB and 10 minutes, a long track is mixed to mono; the tempo and the first beat are detected */
+  async loadFile(i: 0 | 1, file: File): Promise<{ ok: true; bpm: number } | { ok: false; error: LoadError }> {
+    if (file.size > G.wavLimits.maxBytes) return { ok: false, error: "size" };
+    if (file.size === 0) return { ok: false, error: "empty" };
+    const d = this.s.decks[i], prev = d.track;
+    d.loading = true; d.track = "file";
+    try {
+      const OAC: typeof OfflineAudioContext = window.OfflineAudioContext ?? (window as unknown as { webkitOfflineAudioContext: typeof OfflineAudioContext }).webkitOfflineAudioContext;
+      let buf: AudioBuffer;
+      try { buf = await new OAC(2, 1, 44100).decodeAudioData(await file.arrayBuffer()); } catch { d.track = prev; return { ok: false, error: "decode" }; }
+      if (buf.duration > G.wavLimits.maxSeconds) { d.track = prev; return { ok: false, error: "long" }; }
+      if (buf.duration < 0.5) { d.track = prev; return { ok: false, error: "decode" }; }
+      if (buf.numberOfChannels > 1 && buf.duration > G.wavLimits.monoAfter) {   // a long track is mixed to mono: half the memory
+        const m = new AudioBuffer({ length: buf.length, numberOfChannels: 1, sampleRate: buf.sampleRate }), o = m.getChannelData(0), k = 1 / buf.numberOfChannels;
+        for (let c = 0; c < buf.numberOfChannels; c++) { const s = buf.getChannelData(c); for (let x = 0; x < o.length; x++) o[x] += s[x] * k; }
+        buf = m;
+      }
+      const key = G.fileKey(file.name, file.size, buf.duration);
+      const mono = buf.getChannelData(0);
+      const det = this.store.tracks[key] ? null : G.detectBpm(mono, buf.sampleRate);
+      this.place(i, buf, { track: "file", key, name: file.name, imported: true, grid: det ? { bpm: det.bpm, offset: det.offset } : { bpm: 120, offset: 0 } });
+      if (det) this.remember(i);
+      return { ok: true, bpm: d.grid.bpm };
+    } finally { d.loading = false; }
+  }
   play(i: 0 | 1): void { this.ensure(); this.s.decks[i].playing = true; }
   pause(i: 0 | 1): void { this.s.decks[i].playing = false; }
   toggle(i: 0 | 1): boolean { const d = this.s.decks[i]; if (d.playing) this.pause(i); else this.play(i); return d.playing; }
+  /** moves the record to `t` (the sound restarts there) */
+  seek(i: 0 | 1, t: number): void { const d = this.s.decks[i]; d.pos = G.mod(t, d.dur || 1); d.slip = d.pos; this.stopSource(i); }
   /** CUE: while playing it jumps back to the cue point and stops; stopped, it sets the cue point where the record is and plays from it as long as it is held */
   cuePress(i: 0 | 1): void {
     this.ensure(); const d = this.s.decks[i];
     if (d.playing) { d.playing = false; d.pos = d.cue; d.cur = 0; this.stopSource(i); return; }
-    if (!d.cueHold && Math.abs(d.pos - d.cue) > 0.05) d.cue = d.pos;
+    if (!d.cueHold) d.cue = d.pos;
     d.cueHold = true;
   }
   cueRelease(i: 0 | 1): void { const d = this.s.decks[i]; if (!d.cueHold) return; d.cueHold = false; d.pos = d.cue; d.cur = 0; this.stopSource(i); }
 
-  // ---------- scratching ----------
+  // ---------- the beat grid ----------
+  setGrid(i: 0 | 1, g: G.Grid): void { const d = this.s.decks[i]; d.grid = { bpm: Math.round(L.clamp(g.bpm, 30, 300) * 100) / 100, offset: g.offset }; d.bpm = L.bpmOf(d.grid.bpm, d.pitch); if (i === 0) this.applyFx(); this.remember(i); }
+  nudgeGrid(i: 0 | 1, ms: number): void { this.setGrid(i, G.nudged(this.s.decks[i].grid, ms)); }
+  scaleGrid(i: 0 | 1, f: number): void { this.setGrid(i, G.scaledGrid(this.s.decks[i].grid, f)); }
+  private taps: [number[], number[]] = [[], []];
+  /** TAP tempo: the taps set the BPM and the last tap is a beat; returns the BPM or null for the first tap */
+  tap(i: 0 | 1, now = performance.now()): number | null {
+    const t = this.taps[i]; if (t.length && now - t[t.length - 1] > 2000) t.length = 0;
+    t.push(now); if (t.length > 8) t.shift();
+    const bpm = G.tapBpm(t);
+    if (bpm !== null && bpm >= 30 && bpm <= 300) this.setGrid(i, G.gridThrough(bpm, this.s.decks[i].pos));
+    return bpm;
+  }
+
+  // ---------- hot cues ----------
+  /** an empty pad sets the cue at the (quantized) position, a set pad jumps to it */
+  hotCue(i: 0 | 1, k: number): "set" | "jump" {
+    const d = this.s.decks[i], c = d.cues[k];
+    if (c === null) { d.cues[k] = Math.min(d.dur - 0.001, G.snap(d.grid, d.pos, this.s.quant)); this.remember(i); return "set"; }
+    this.seek(i, c); return "jump";
+  }
+  deleteCue(i: 0 | 1, k: number): void { this.s.decks[i].cues[k] = null; this.remember(i); }
+
+  // ---------- loops ----------
+  private applyLoopProps(i: 0 | 1): void {
+    const s = this.srcs[i], d = this.s.decks[i]; if (!s || d.dir < 0) return;
+    s.loop = true; s.loopStart = d.loop.on ? d.loop.start : 0; s.loopEnd = d.loop.on ? d.loop.end : 0;
+  }
+  private setLoop(i: 0 | 1, l: G.Loop): void {
+    const d = this.s.decks[i];
+    d.loop = l;
+    if (l.on && (d.pos < l.start || d.pos >= l.end)) this.seek(i, l.start);
+    else if (d.dir < 0) this.stopSource(i); else this.applyLoopProps(i);
+  }
+  /** an auto loop of `beats` beats from the current beat; with `roll` the position the track would have is followed (slip) and `rollEnd()` goes back to it */
+  autoLoop(i: 0 | 1, beats: number, roll = false): void {
+    const d = this.s.decks[i], l = G.autoLoop(d.grid, d.pos, beats, d.dur, this.s.quant);
+    d.roll = roll; d.slip = d.pos;
+    this.setLoop(i, { on: true, ...l });
+  }
+  rollEnd(i: 0 | 1): void { const d = this.s.decks[i]; if (!d.roll) return; d.roll = false; d.loop = { ...d.loop, on: false }; this.seek(i, d.slip); }
+  loopIn(i: 0 | 1): void { const d = this.s.decks[i], t = G.snap(d.grid, d.pos, this.s.quant); d.loop = { on: false, start: t, end: t }; }
+  loopOut(i: 0 | 1): void {
+    const d = this.s.decks[i], t = G.snap(d.grid, d.pos, this.s.quant);
+    if (t <= d.loop.start + 0.01) return;
+    this.setLoop(i, { on: true, start: d.loop.start, end: t });
+  }
+  /** loop on / off: switching it on again ("reloop") jumps back to the loop */
+  reloop(i: 0 | 1): void {
+    const d = this.s.decks[i]; if (d.loop.end <= d.loop.start) return;
+    d.roll = false;
+    if (d.loop.on) { d.loop = { ...d.loop, on: false }; this.applyLoopProps(i); if (d.dir < 0) this.stopSource(i); } else { this.setLoop(i, { ...d.loop, on: true }); this.seek(i, d.loop.start); }
+  }
+  loopHalf(i: 0 | 1): void { const d = this.s.decks[i]; if (d.loop.end > d.loop.start) this.setLoop(i, G.loopHalf(d.loop)); }
+  loopDouble(i: 0 | 1): void { const d = this.s.decks[i]; if (d.loop.end > d.loop.start) this.setLoop(i, G.loopDouble(d.loop, d.dur)); }
+
+  // ---------- true SYNC ----------
+  /** SYNC: deck B gets deck A's tempo (half / double when that fits) AND its beat phase (B is moved to the nearest place where its beat falls on A's beat) */
+  sync(): { pitch: number; ok: boolean; mult: number; bpm: number; shiftMs: number } {
+    const a = this.s.decks[0], b = this.s.decks[1];
+    const r = L.syncPitch(a.bpm, b.grid.bpm);
+    this.setPitch(1, r.pitch, false);
+    const np = G.alignPosition(a.grid, a.pos, b.grid, b.pos);
+    const shiftMs = ((np - b.pos) / L.rateOf(b.pitch)) * 1000;
+    this.seek(1, np); this.s.syncs++;
+    return { ...r, bpm: b.bpm * r.mult, shiftMs };   // (a half-time track is reported in the master's beats)
+  }
+  setLock(on: boolean): void { this.s.lock = on; }
+
+  // ---------- scratching and seeking ----------
   /** a finger is put on the record: it is held (silent until it moves) */
-  scratchStart(i: 0 | 1): void { this.ensure(); const d = this.s.decks[i]; d.scratching = true; d.scratchRate = 0; this.lastMove[i] = performance.now(); }
+  scratchStart(i: 0 | 1): void { this.ensure(); const d = this.s.decks[i]; d.scratching = true; d.scratchRate = 0; if (i === 1) this.s.lock = false; this.lastMove[i] = performance.now(); }
   /** the finger turned the record by `deg` degrees (+ = clockwise = forward) `seconds` after the last move */
   scratchMove(i: 0 | 1, deg: number, seconds: number): void {
     const d = this.s.decks[i]; if (!d.scratching) return;
@@ -186,6 +329,10 @@ export class DJ {
   }
   /** the finger is lifted: the record returns to normal speed smoothly (or stops when it was not playing) */
   scratchEnd(i: 0 | 1): void { const d = this.s.decks[i]; d.scratching = false; d.scratchRate = 0; }
+  /** needle search on the overview: the record is held (silent) while the finger drags, then goes on from there */
+  seekStart(i: 0 | 1): void { this.ensure(); this.s.decks[i].seeking = true; }
+  seekMove(i: 0 | 1, t: number): void { const d = this.s.decks[i]; if (d.seeking) this.seek(i, L.clamp(t, 0, Math.max(0, d.dur - 0.01))); }
+  seekEnd(i: 0 | 1): void { this.s.decks[i].seeking = false; }
 
   // ---------- the motion model, every 20 ms ----------
   private stopSource(i: 0 | 1): void {
@@ -196,33 +343,54 @@ export class DJ {
   }
   private startSource(i: 0 | 1, dir: 1 | -1): void {
     const n = this.n, b = this.bufs[i], d = this.s.decks[i]; if (!n || !b) return;
-    const buf = dir > 0 ? b : reversed(d.track, b);
-    const s = n.c.createBufferSource(); s.buffer = buf; s.loop = true;
+    const s = n.c.createBufferSource();
+    let off: number;
+    if (dir > 0) {
+      s.buffer = b; s.loop = true; s.loopStart = d.loop.on ? d.loop.start : 0; s.loopEnd = d.loop.on ? d.loop.end : 0;
+      off = d.pos;
+    } else {
+      const w = G.reverseWindow(d.pos, d.dur); this.win[i] = w; d.rwin = [w.a, w.b];
+      const whole = w.b - w.a >= d.dur - 1e-6;
+      s.buffer = whole && !d.imported ? reversed(d.track, b) : windowBuffer(b, w.a, w.b);
+      s.loop = whole;
+      off = w.b - d.pos;
+    }
     s.playbackRate.value = Math.max(0.001, Math.abs(d.cur));
     s.connect(n.decks[i].low);
-    const off = dir > 0 ? d.pos : b.duration - d.pos;
-    s.start(0, L.clamp(off, 0, b.duration - 0.001));
+    s.start(0, L.clamp(off, 0, (s.buffer?.duration ?? 1) - 0.001));
     this.srcs[i] = s; d.dir = dir; d.sounding = true;
   }
   tick(): void {
     const now = performance.now(), dt = Math.min(0.1, (now - this.last) / 1000); this.last = now;
     if (dt <= 0) return;
     this.s.ticks++;
+    const A_ = this.s.decks[0], B_ = this.s.decks[1];
+    this.s.phase.beats = G.phaseError(A_.grid, A_.pos, B_.grid, B_.pos);
+    this.s.phase.ms = G.phaseMs(this.s.phase.beats, Math.max(30, B_.bpm));
     for (const i of [0, 1] as const) {
       const d = this.s.decks[i], buf = this.bufs[i];
       if (d.scratching && now - this.lastMove[i] > 60) d.scratchRate = 0;   // the finger rests: the record is held
-      const target = d.scratching ? d.scratchRate : d.playing || d.cueHold ? L.rateOf(d.pitch) * (this.s.fx.brake ? 0 : 1) : 0;
-      const tc = d.scratching ? 0.03 : this.s.fx.brake ? 0.35 : 0.15;
+      let target = d.scratching ? d.scratchRate : d.seeking ? 0 : d.playing || d.cueHold ? L.rateOf(d.pitch) * (this.s.fx.brake ? 0 : 1) : 0;
+      if (i === 1 && this.s.lock && d.playing && A_.playing && !d.scratching && !d.seeking && !d.cueHold && !this.s.fx.brake) target *= 1 + G.lockTrim(this.s.phase.beats);
+      const tc = d.scratching || d.seeking ? 0.03 : this.s.fx.brake ? 0.35 : 0.15;
       d.cur += (target - d.cur) * (1 - Math.exp(-dt / tc));
       if (Math.abs(target - d.cur) < 0.002 || (target === 0 && Math.abs(d.cur) < 0.02)) d.cur = target;   // (a record that is almost still is still)
       const dur = buf?.duration ?? 1;
+      const before = d.pos;
       d.pos = (((d.pos + d.cur * dt) % dur) + dur) % dur;
+      if (d.loop.on) { const w = G.wrapLoop(d.pos, d.loop); if (w !== d.pos) { d.pos = w; if (d.dir < 0) this.stopSource(i); } }
+      if (d.roll) d.slip = G.mod(d.slip + d.cur * dt, dur);
+      else d.slip = d.pos;
+      void before;
+      d.beat = G.beatPos(d.grid, d.pos);
       if (!d.scratching) d.angle = (((d.angle + L.platterSpeed(d.cur) * dt) % 360) + 360) % 360;
       if (!this.n || !buf) continue;
       const audible = Math.abs(d.cur) > 0.01 || d.scratching;
       if (audible) {
         const want: 1 | -1 = d.cur < -0.01 ? -1 : d.cur > 0.01 ? 1 : d.dir;
-        if (!this.srcs[i] || want !== d.dir) { this.stopSource(i); this.startSource(i, want); }
+        const w = this.win[i];
+        const used = want < 0 && w && d.dur > 30 && (d.pos < w.a + 0.15 && w.a > 0 || d.pos > w.b - 0.15 && w.b < d.dur);   // the reversed window is used up: a new one
+        if (!this.srcs[i] || want !== d.dir || used) { this.stopSource(i); this.startSource(i, want); }
         this.srcs[i]?.playbackRate.setTargetAtTime(Math.max(0.001, Math.abs(d.cur)), this.n.c.currentTime, 0.01);
       } else if (this.srcs[i]) this.stopSource(i);
     }

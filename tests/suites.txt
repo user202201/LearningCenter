@@ -51,3 +51,4 @@
 62-dj
 63-sudoku
 64-breakout
+65-dj-pro

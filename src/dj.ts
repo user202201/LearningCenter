@@ -8,7 +8,8 @@
 import { h, toast } from "./ui";
 import * as A from "./musicaudio";
 import * as L from "./djlogic";
-import { DJ } from "./djaudio";
+import * as G from "./djgrid";
+import { DJ, type LoadError } from "./djaudio";
 import { tr } from "./i18n";
 import type { Ctx } from "./english";
 
@@ -79,6 +80,25 @@ function ctl(o: CtlOpts): Ctl {
   return { el, set, get: () => v };
 }
 
+const HC = ["#f03e3e", "#fab005", "#12b886", "#339af0"];   // the colours of the four hot cues
+const AUTO: [string, number, string][] = [["1_4", 0.25, "1/4"], ["1_2", 0.5, "1/2"], ["1", 1, "1"], ["2", 2, "2"], ["4", 4, "4"], ["8", 8, "8"]];
+const clock = (t: number) => { const x = Math.max(0, t), m = Math.floor(x / 60), sec = x - m * 60; return `${m}:${sec < 10 ? "0" : ""}${sec.toFixed(1)}`; };
+const dprOf = () => Math.min(3, Math.max(1, window.devicePixelRatio || 1));
+/** sizes a canvas to its LAYOUT size (offsetWidth / offsetHeight: a scale animation of the page does not change them) x the device pixel ratio; false when it is not shown */
+function fitCanvas(c: HTMLCanvasElement): CanvasRenderingContext2D | null {
+  const w = c.offsetWidth, hh = c.offsetHeight; if (!w || !hh) return null;
+  const k = dprOf(), pw = Math.round(w * k), ph = Math.round(hh * k);
+  if (c.width !== pw || c.height !== ph) { c.width = pw; c.height = ph; }
+  const x = c.getContext("2d"); if (!x) return null;
+  x.setTransform(k, 0, 0, k, 0, 0);
+  return x;
+}
+const mix3 = (lo: number, mi: number, hi: number): string => {
+  const t = lo + mi + hi + 1e-6, r = (lo * 240 + mi * 132 + hi * 21) / t, g = (lo * 62 + mi * 94 + hi * 170) / t, b = (lo * 114 + mi * 247 + hi * 191) / t;
+  return `rgb(${r | 0},${g | 0},${b | 0})`;
+};
+const ERRORS: Record<LoadError, string> = { decode: "无法解码此文件。请选择 MP3、WAV 或 M4A 等常见的音频文件。", size: "文件过大，上限约 25 MB。", long: "曲目过长，上限为 10 分钟。", empty: "文件为空。" };
+
 const cell = (text: string, ...kids: (Node | string)[]) => h("div", { class: "dj-cell" }, ...kids, h("span", { class: "dj-lab" }, text));
 const pct = (v: number) => `${v >= 0 ? "+" : "−"}${Math.abs(v).toFixed(1)} %`;
 const prefersAudio = (): boolean => !!(window.AudioContext ?? (window as unknown as { webkitAudioContext?: unknown }).webkitAudioContext);
@@ -89,7 +109,7 @@ export function renderDJ(d: Deps): void {
   const names = ["a", "b"] as const;
   const idx = [0, 1] as const;
 
-  interface DeckUi { platter: HTMLElement; disc: SVGSVGElement; play: HTMLButtonElement; cue: HTMLButtonElement; bpm: HTMLElement; pct: HTMLElement; load: HTMLElement; prog: HTMLElement; sel: HTMLSelectElement; pitch: Ctl; ctls: Ctl[]; finger: number | null; last: { a: number; t: number }; shownPlay: boolean | null }
+  interface DeckUi { time: HTMLElement; ovw: HTMLCanvasElement; wave: HTMLCanvasElement; name: HTMLElement; hc: HTMLButtonElement[]; loops: Map<string, HTMLButtonElement>; reloop: HTMLButtonElement; rollBtn: HTMLButtonElement; delMode: boolean; rollMode: boolean; drawn: string; drawnO: string; platter: HTMLElement; disc: SVGSVGElement; play: HTMLButtonElement; cue: HTMLButtonElement; bpm: HTMLElement; pct: HTMLElement; load: HTMLElement; sel: HTMLSelectElement; pitch: Ctl; ctls: Ctl[]; finger: number | null; last: { a: number; t: number }; shownPlay: boolean | null }
   const ui: DeckUi[] = [];
 
   const loadDeck = async (i: 0 | 1, id: string) => {
@@ -100,24 +120,105 @@ export function renderDJ(d: Deps): void {
     if (i === 0) dj.setPitch(0, dj.s.decks[0].pitch);
   };
 
+  const waveEls = [0, 1].map((i) => h("canvas", { class: "dj-wave", id: `dj-wave-${names[i]}`, role: "img", "aria-label": tr(i === 0 ? "A 盘波形" : "B 盘波形") }) as HTMLCanvasElement);
+  /** imported music: decode, detect the tempo, show the name (the user's own text) */
+  const importFile = async (i: 0 | 1, f: File) => {
+    const u = ui[i]; u.load.textContent = "载入中…"; u.load.hidden = false; u.sel.disabled = true;
+    const r = await dj.loadFile(i, f);
+    u.load.hidden = true; u.load.textContent = "生成中…"; u.sel.disabled = false;
+    if (!r.ok) return void toast(ERRORS[r.error], 4500);
+    for (const o of [...u.sel.querySelectorAll("option[value=file]")]) o.remove();
+    const o = h("option", { value: "file", class: "user" }, f.name); o.classList.add("user");
+    u.sel.prepend(o); u.sel.value = "file";
+    u.name.textContent = f.name; u.name.hidden = false;
+    u.pitch.set(0); dj.setPitch(i, 0, false);
+    toast(`已载入：${f.name}（${r.bpm.toFixed(1)} BPM）`, 3200);
+  };
+
   const deckEl = (i: 0 | 1): HTMLElement => {
     const n = names[i], def = L.trackById(dj.s.decks[i].track)!;
     const disc = recordArt(i === 0 ? "#f783ac" : "#74c0fc");
-    const prog = h("i", {});
     const platter = h("div", { class: "dj-platter", id: `dj-platter-${n}`, "data-angle": "0", "data-deck": n, role: "img", "aria-label": i === 0 ? "A 唱盘，可用手指搓碟" : "B 唱盘，可用手指搓碟" }, disc);
     const play = h("button", { class: "primary dj-play", id: `dj-play-${n}`, onclick: () => toggle(i) }, "▶ 播放");
     const cue = h("button", { class: "pn-shift dj-cue", id: `dj-cue-${n}`, "aria-label": "提示点：按住试听，松开回到原位" }, "CUE");
     cue.addEventListener("pointerdown", (e) => { e.preventDefault(); A.unlock(); dj.cuePress(i); try { cue.setPointerCapture(e.pointerId); } catch { /* synthetic */ } });
     for (const t of ["pointerup", "pointercancel", "lostpointercapture"]) cue.addEventListener(t, () => dj.cueRelease(i));
     cue.addEventListener("contextmenu", (e) => e.preventDefault());
-    const sel = h("select", { class: "dj-select", id: `dj-track-${n}`, "aria-label": i === 0 ? "A 盘曲目" : "B 盘曲目", onchange: (e: Event) => { const id = (e.target as HTMLSelectElement).value; dj.setPitch(i, 0); ui[i].pitch.set(0); ui[i].last = { a: 0, t: 0 }; void loadDeck(i, id); } },
+    const sel = h("select", { class: "dj-select", id: `dj-track-${n}`, "aria-label": i === 0 ? "A 盘曲目" : "B 盘曲目", onchange: (e: Event) => { const id = (e.target as HTMLSelectElement).value; if (id === "file") return; ui[i].name.hidden = true; ui[i].sel.querySelectorAll("option[value=file]").forEach((o) => o.remove()); dj.setPitch(i, 0); ui[i].pitch.set(0); ui[i].last = { a: 0, t: 0 }; void loadDeck(i, id); } },
       ...L.TRACKS.map((t) => h("option", { value: t.id }, `${tr(t.name)} · ${t.bpm}`)));
     sel.value = def.id;
     const pitch = ctl({ id: `dj-pitch-${n}`, kind: "hfader", min: -L.PITCH_RANGE, max: L.PITCH_RANGE, value: 0, step: 0.1, label: "速度", reset: 0, onInput: (v) => dj.setPitch(i, v) });
     const mk = (id: string, label: string, band: "low" | "mid" | "high" | "filter") => ctl({ id: `dj-${id}-${n}`, kind: "knob", min: -1, max: 1, value: 0, step: 0.02, label, reset: 0, onInput: (v) => (band === "filter" ? dj.setFilter(i, v) : dj.setEq(i, band, v)) });
     const low = mk("low", "低音", "low"), mid = mk("mid", "中音", "mid"), high = mk("high", "高音", "high"), filt = mk("filter", "滤波", "filter");
     const bpm = h("b", { id: `dj-bpm-${n}` }, def.bpm.toFixed(1)), pc = h("span", { class: "dj-pct", id: `dj-pct-${n}` }, pct(0)), load = h("span", { class: "dj-load", id: `dj-load-${n}` }, "生成中…");
-    ui[i] = { platter, disc, play, cue, bpm, pct: pc, load, prog, sel, pitch, ctls: [low, mid, high, filt], finger: null, last: { a: 0, t: 0 }, shownPlay: null };
+    const time = h("span", { class: "dj-time", id: `dj-time-${n}` }, "0:00.0 −0:00.0 · 1.1");
+    const name = h("span", { class: "dj-tname user", id: `dj-name-${n}` }, "");
+    name.hidden = true;
+    const wave = waveEls[i];
+    const ovw = h("canvas", { class: "dj-ovw", id: `dj-ovw-${n}`, "aria-label": tr("整首曲目：点击或拖动以跳转") }) as HTMLCanvasElement;
+    let ovId: number | null = null;
+    const ovSeek = (e: PointerEvent) => { const r = ovw.getBoundingClientRect(); dj.seekMove(i, L.clamp((e.clientX - r.left) / Math.max(1, r.width), 0, 1) * dj.s.decks[i].dur); };
+    ovw.addEventListener("pointerdown", (e) => { e.preventDefault(); A.unlock(); ovId = e.pointerId; dj.seekStart(i); ovSeek(e); try { ovw.setPointerCapture(e.pointerId); } catch { /* synthetic */ } });
+    ovw.addEventListener("pointermove", (e) => { if (ovId === e.pointerId) ovSeek(e); });
+    for (const t of ["pointerup", "pointercancel", "lostpointercapture"]) ovw.addEventListener(t, (e) => { if (ovId === (e as PointerEvent).pointerId) { ovId = null; dj.seekEnd(i); } });
+    // imported music: a file picker (the Files app on an iPad) and drag and drop
+    const file = h("input", { type: "file", id: `dj-file-${n}`, class: "dj-file", accept: "audio/*", "aria-label": "载入音乐", onchange: (e: Event) => { const f = (e.target as HTMLInputElement).files?.[0]; (e.target as HTMLInputElement).value = ""; if (f) void importFile(i, f); } });
+    file.hidden = true;
+    const importBtn = h("button", { class: "sheet-btn dj-import", id: `dj-import-${n}`, onclick: () => { A.unlock(); file.click(); } }, "载入音乐");
+    const hint = h("span", { class: "muted small dj-hint" }, "刷新页面后需要重新选择文件。");
+    // hot cues
+    const hc = Array.from({ length: G.HOT_CUES }, (_, k) => {
+      const b = h("button", { class: "dj-hc", id: `dj-hc-${n}-${k}`, "data-k": String(k), style: `--c:${HC[k]}`, "aria-label": `热点 ${k + 1}` }, String(k + 1));
+      let timer = 0, long = false;
+      const stop = () => window.clearTimeout(timer);
+      b.addEventListener("pointerdown", (e) => { e.preventDefault(); A.unlock(); long = false; timer = window.setTimeout(() => { long = true; if (dj.s.decks[i].cues[k] !== null) dj.deleteCue(i, k); }, 600); });
+      b.addEventListener("pointerup", () => { stop(); if (long) return; act(); });
+      b.addEventListener("pointercancel", stop); b.addEventListener("contextmenu", (e) => e.preventDefault());
+      b.addEventListener("click", (e) => { if (e.detail === 0) act(); });
+      const act = () => { if (ui[i].delMode) { if (dj.s.decks[i].cues[k] !== null) dj.deleteCue(i, k); return; } dj.hotCue(i, k); };
+      return b;
+    });
+    const hcDel = h("button", { class: "mopt dj-hcdel", id: `dj-hcdel-${n}`, "aria-pressed": "false", onclick: (e: Event) => { const u = ui[i]; u.delMode = !u.delMode; (e.currentTarget as HTMLElement).classList.toggle("on", u.delMode); (e.currentTarget as HTMLElement).setAttribute("aria-pressed", String(u.delMode)); } }, "删除");
+    const gridBtn = h("button", { class: "mopt dj-gridb", id: `dj-gridb-${n}`, "aria-pressed": "false", onclick: (e: Event) => { const open = gridP.hidden; gridP.hidden = !open; (e.currentTarget as HTMLElement).classList.toggle("on", open); (e.currentTarget as HTMLElement).setAttribute("aria-pressed", String(open)); } }, "网格");
+    // loops
+    const loops = new Map<string, HTMLButtonElement>();
+    const loopRow = h("div", { class: "dj-looprow", id: `dj-loops-${n}` });
+    for (const [id, beats, label] of AUTO) {
+      const b = h("button", { class: "dj-lp", id: `dj-loop-${n}-${id}`, "data-beats": String(beats), "aria-label": `循环 ${label} 拍` }, label);
+      b.addEventListener("pointerdown", (e) => {
+        e.preventDefault(); A.unlock(); const d = dj.s.decks[i];
+        const same = d.loop.on && Math.abs(d.loop.end - d.loop.start - beats * G.beatSeconds(d.grid)) < 1e-3;
+        if (ui[i].rollMode) dj.autoLoop(i, beats, true); else if (same) dj.reloop(i); else dj.autoLoop(i, beats, false);
+      });
+      for (const t of ["pointerup", "pointercancel"]) b.addEventListener(t, () => { if (ui[i].rollMode) dj.rollEnd(i); });
+      b.addEventListener("click", (e) => { if (e.detail === 0) dj.autoLoop(i, beats, false); });
+      b.addEventListener("contextmenu", (e) => e.preventDefault());
+      loops.set(id, b); loopRow.append(b);
+    }
+    const lc = (id: string, text: string, label: string, f: () => void) => h("button", { class: "mopt dj-lc", id: `dj-${id}-${n}`, "aria-label": label, title: label, onclick: f }, text);
+    const reloop = lc("lreloop", "循环", "循环开 / 关（再次开启会回到循环起点）", () => dj.reloop(i));
+    const rollBtn = lc("lroll", "ROLL", "滚动循环：按住时循环，松开后继续原来的进度", () => { const u = ui[i]; u.rollMode = !u.rollMode; rollBtn.classList.toggle("on", u.rollMode); rollBtn.setAttribute("aria-pressed", String(u.rollMode)); });
+    rollBtn.setAttribute("aria-pressed", "false");
+    const loopC = h("div", { class: "dj-loopc", id: `dj-loopc-${n}` }, lc("lin", "IN", "循环入点", () => dj.loopIn(i)), lc("lout", "OUT", "循环出点", () => dj.loopOut(i)), reloop, lc("lhalf", "÷2", "循环缩短一半", () => dj.loopHalf(i)), lc("ldbl", "×2", "循环加长一倍", () => dj.loopDouble(i)), rollBtn);
+    // the grid tools: nudge (hold = faster), x2 / ÷2, tap tempo
+    const gbpm = h("b", { id: `dj-gbpm-${n}`, class: "dj-gbpm" }, "0");
+    const nudge = (id: string, text: string, dir: number, label: string) => {
+      const b = h("button", { class: "mopt dj-gb", id: `dj-${id}-${n}`, "aria-label": label, title: label }, text);
+      let t1 = 0, iv = 0, t0 = 0;
+      const stop = () => { window.clearTimeout(t1); window.clearInterval(iv); };
+      b.addEventListener("pointerdown", (e) => { e.preventDefault(); A.unlock(); dj.nudgeGrid(i, dir * 10); t0 = performance.now(); t1 = window.setTimeout(() => { iv = window.setInterval(() => dj.nudgeGrid(i, dir * (performance.now() - t0 > 1500 ? 30 : 10)), 100); }, 400); });
+      for (const t of ["pointerup", "pointercancel", "pointerleave"]) b.addEventListener(t, stop);
+      b.addEventListener("click", (e) => { if (e.detail === 0) dj.nudgeGrid(i, dir * 10); });
+      return b;
+    };
+    const tapBtn = h("button", { class: "mopt dj-gb", id: `dj-tap-${n}`, "aria-label": "点按定速：按节拍点击", title: "点按定速：按节拍点击", onpointerdown: (e: Event) => { e.preventDefault(); A.unlock(); dj.tap(i); } }, "TAP");
+    const gridP = h("div", { class: "dj-gridp", id: `dj-gridp-${n}` }, h("span", { class: "dj-gl" }, gbpm, h("span", { class: "muted small" }, " BPM")), nudge("nm", "−10 ms", -1, "节拍网格提前 10 毫秒"), nudge("np", "+10 ms", 1, "节拍网格推迟 10 毫秒"),
+      lc("gx2", "×2", "BPM 加倍", () => dj.scaleGrid(i, 2)), lc("gd2", "÷2", "BPM 减半", () => dj.scaleGrid(i, 0.5)), tapBtn);
+    gridP.hidden = true;
+    // drag and drop of a file on the deck
+    const deckNode = { el: null as HTMLElement | null };
+    void deckNode;
+    ui[i] = { time, ovw, wave, name, hc, loops, reloop, rollBtn, delMode: false, rollMode: false, drawn: "", drawnO: "", platter, disc, play, cue, bpm, pct: pc, load, sel, pitch, ctls: [low, mid, high, filt], finger: null, last: { a: 0, t: 0 }, shownPlay: null };
     // scratching: the record follows the finger, the sound follows the record
     const centre = () => { const r = platter.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; };
     platter.addEventListener("pointerdown", (e) => {
@@ -138,15 +239,22 @@ export function renderDJ(d: Deps): void {
     const release = (e: Event) => { if (ui[i].finger !== (e as PointerEvent).pointerId) return; ui[i].finger = null; platter.classList.remove("held"); delete platter.dataset.scratch; dj.scratchEnd(i); };
     for (const t of ["pointerup", "pointercancel", "lostpointercapture"]) platter.addEventListener(t, release);
     platter.addEventListener("contextmenu", (e) => e.preventDefault());
-    return h("section", { class: `dj-deck dj-deck-${n}`, id: `dj-deck-${n}`, "data-deck": n },
-      h("div", { class: "dj-head" }, h("span", { class: "dj-badge" }, n.toUpperCase()), h("span", { class: "dj-bpmbox" }, bpm, h("span", { class: "muted small" }, " BPM")), load),
-      h("div", { class: "dj-plat-wrap" }, platter, h("div", { class: "dj-prog" }, prog)),
-      h("div", { class: "dj-ctrl" },
+    const sec = h("section", { class: `dj-deck dj-deck-${n}`, id: `dj-deck-${n}`, "data-deck": n },
+      h("div", { class: "dj-head" }, h("span", { class: "dj-badge" }, n.toUpperCase()), h("span", { class: "dj-bpmbox" }, bpm, h("span", { class: "muted small" }, " BPM")), time, load, name),
+      h("div", { class: "dj-top" },
+        h("div", { class: "dj-plat-wrap" }, platter, ovw),
         h("div", { class: "dj-cmain" },
           h("div", { class: "dj-trans" }, play, cue),
           sel,
-          h("div", { class: "dj-pitchrow" }, h("span", { class: "muted small dj-pl" }, "速度"), pitch.el, pc)),
-        h("div", { class: "dj-knobs" }, cell("低音", low.el), cell("中音", mid.el), cell("高音", high.el), cell("滤波", filt.el))));
+          h("div", { class: "dj-importrow" }, importBtn, hint),
+          h("div", { class: "dj-pitchrow" }, h("span", { class: "muted small dj-pl" }, "速度"), pitch.el, pc))),
+      h("div", { class: "dj-knobs" }, cell("低音", low.el), cell("中音", mid.el), cell("高音", high.el), cell("滤波", filt.el)),
+      h("div", { class: "dj-hcrow", id: `dj-hcs-${n}` }, ...hc, hcDel, gridBtn),
+      loopRow, loopC, gridP, file);
+    sec.addEventListener("dragover", (e) => { e.preventDefault(); sec.classList.add("drop"); });
+    for (const t of ["dragleave", "dragend"]) sec.addEventListener(t, () => sec.classList.remove("drop"));
+    sec.addEventListener("drop", (e) => { e.preventDefault(); sec.classList.remove("drop"); const f = (e as DragEvent).dataTransfer?.files?.[0]; if (f) void importFile(i, f); });
+    return sec;
   };
 
   const toggle = (i: 0 | 1) => { A.unlock(); dj.toggle(i); };
@@ -185,14 +293,29 @@ export function renderDJ(d: Deps): void {
     ui[1].pitch.set(dj.s.decks[1].pitch);
     toast(r.ok ? `已同步：B 盘 ${r.bpm.toFixed(1)} BPM` : `超出 ±8 % 范围，已调到极限：B 盘 ${r.bpm.toFixed(1)} BPM`, 2600);
   } }, "SYNC");
+  const tog = (id: string, text: string, on: boolean, f: (on: boolean) => void) => { const b = h("button", { class: "mopt dj-tog" + (on ? " on" : ""), id, "aria-pressed": String(on) }, text); b.addEventListener("click", () => { A.unlock(); const v = !b.classList.contains("on"); b.classList.toggle("on", v); b.setAttribute("aria-pressed", String(v)); f(v); }); return b; };
+  const quantBtn = tog("dj-quant", "量化", dj.s.quant, (v) => dj.setQuant(v));
+  const ZOOMS = [4, 8, 16];
+  const zoomVal = h("span", { class: "dj-zoomval", id: "dj-zoomval" }, tr("{0} 秒").replace("{0}", String(dj.s.zoom)));
+  const zoom = (dir: number) => { const k = Math.max(0, Math.min(2, ZOOMS.indexOf(dj.s.zoom) + dir)); dj.setZoom(ZOOMS[k]); zoomVal.textContent = tr("{0} 秒").replace("{0}", String(ZOOMS[k])); };
+  const zoomOut = h("button", { class: "pn-shift dj-zb", id: "dj-zoom-out", "aria-label": "缩小波形（显示更长时间）", title: "缩小波形（显示更长时间）", onclick: () => zoom(1) }, "−");
+  const zoomIn = h("button", { class: "pn-shift dj-zb", id: "dj-zoom-in", "aria-label": "放大波形（显示更短时间）", title: "放大波形（显示更短时间）", onclick: () => zoom(-1) }, "+");
+  const lessInit = window.innerHeight <= 520;
+  const moreBtn = tog("dj-more", "更多功能", !lessInit, (v) => root.classList.toggle("dj-less", !v));
+  const lockBtn = h("button", { class: "mopt dj-lock", id: "dj-lock", "aria-pressed": "false", "aria-label": "同步锁定：播放时持续修正节拍相位", title: "同步锁定：播放时持续修正节拍相位", onclick: () => { A.unlock(); dj.setLock(!dj.s.lock); } }, "锁定");
+  const phaseMs = h("span", { class: "dj-phasems", id: "dj-phase-ms" }, "0 ms");
+  const phaseDot = h("i", {});
+  const phase = h("div", { class: "dj-phase", id: "dj-phase", role: "img", "aria-label": "两个唱盘的节拍相位差" }, h("span", { class: "dj-phtrack" }, phaseDot), phaseMs);
   const mixer = h("section", { class: "dj-mixer", id: "dj-mixer" },
     h("div", { class: "dj-bar" }, recBtn, fullBtn),
+    h("div", { class: "dj-bar dj-bar2" }, quantBtn, zoomOut, zoomVal, zoomIn, moreBtn),
     h("div", { class: "dj-faders" },
       h("div", { class: "dj-chan" }, h("div", { class: "dj-fwrap" }, meter("a"), volA.el), h("span", { class: "dj-lab" }, "A")),
       h("div", { class: "dj-mastercell" }, cell("总音量", master.el)),
       h("div", { class: "dj-chan" }, h("div", { class: "dj-fwrap" }, volB.el, meter("b")), h("span", { class: "dj-lab" }, "B"))),
     h("div", { class: "dj-crossrow" }, h("span", { class: "dj-lab" }, "A"), cross.el, h("span", { class: "dj-lab" }, "B")),
-    h("div", { class: "dj-fxrow" }, syncBtn, fxBtn("echo", "回声"), fxBtn("brake", "刹车"), fxBtn("flanger", "镶边")));
+    h("div", { class: "dj-fxrow" }, syncBtn, lockBtn, fxBtn("echo", "回声"), fxBtn("brake", "刹车"), fxBtn("flanger", "镶边")),
+    phase);
 
   // ---------- pads ----------
   const padEls = new Map<string, HTMLElement>();
@@ -206,8 +329,9 @@ export function renderDJ(d: Deps): void {
   }));
 
   // ---------- the page ----------
-  const root: HTMLElement = h("div", { class: "page inst-page dj-page", style: `--kid:${d.color}` }, d.hero("DJ 打碟", "#/subject/music", "音乐", "#/music/dj"),
+  const root: HTMLElement = h("div", { class: "page inst-page dj-page" + (window.innerHeight <= 520 ? " dj-less" : ""), style: `--kid:${d.color}` }, d.hero("DJ 打碟", "#/subject/music", "音乐", "#/music/dj"),
     h("main", { class: "scroll" }, h("div", { class: "narrow dj-narrow" },
+      h("div", { class: "dj-waves", id: "dj-waves" }, waveEls[0], waveEls[1]),
       h("div", { class: "dj-rig" }, deckEl(0), mixer, deckEl(1)),
       pads,
       h("p", { class: "muted small center dj-help" }, "手指按住唱盘并来回转动即可搓碟；空格 / 回车：播放左 / 右盘；A / D：交叉渐变；1–8：音效垫。"))));
@@ -217,8 +341,68 @@ export function renderDJ(d: Deps): void {
   for (const i of idx) void loadDeck(i, dj.s.decks[i].track);
 
   // ---------- drawing: the turning records, the meters, the labels ----------
+  // the zoomed waveform: the playhead stays in the middle, the track scrolls under it; coloured by band (low = pink, mid = purple, high = cyan), beat lines (bars thicker,
+  // beat numbers 1-4), hot cues and the loop. Sized by LAYOUT size (offsetWidth / offsetHeight), redrawn only when something changed.
+  const drawWave = (i: 0 | 1) => {
+    const u = ui[i], st = dj.s.decks[i], P = dj.peaks[i], cv = u.wave;
+    if (!cv.offsetWidth || !cv.offsetHeight) return;
+    const key = [st.pos.toFixed(3), dj.s.zoom, cv.offsetWidth, cv.offsetHeight, dprOf(), st.grid.bpm, st.grid.offset, st.cues.join(), st.loop.on, st.loop.start, st.loop.end, st.peaksN, st.track].join("|");
+    if (key === u.drawn) return;
+    const x = fitCanvas(cv); if (!x) return;
+    u.drawn = key;
+    const W = cv.offsetWidth, H = cv.offsetHeight, mid = H / 2, pps = W / dj.s.zoom, t0 = st.pos - W / 2 / pps, loopable = !st.imported;
+    x.clearRect(0, 0, W, H);
+    x.fillStyle = "#fff7fa"; x.fillRect(0, 0, W, H);
+    if (P && P.n) {
+      for (let px = 0; px < W; px++) {
+        let t = t0 + px / pps; const t1 = t + 1 / pps;
+        if (loopable) t = G.mod(t, st.dur); else if (t < 0 || t >= st.dur) continue;
+        const b0 = Math.floor(t * P.perSec), b1 = Math.max(b0, Math.floor(((loopable ? t + (t1 - (t0 + px / pps)) : t1) * P.perSec) - 1e-6));
+        let amp = 0, lo = 0, mi = 0, hi = 0;
+        for (let b = b0; b <= b1 && b < P.n; b++) { amp = Math.max(amp, Math.abs(P.min[b]), Math.abs(P.max[b])); lo = Math.max(lo, P.low[b]); mi = Math.max(mi, P.mid[b]); hi = Math.max(hi, P.high[b]); }
+        const hh = Math.max(1, amp * (H / 2 - 3));
+        x.fillStyle = mix3(lo, mi, hi); x.fillRect(px, mid - hh, 1, hh * 2);
+      }
+    }
+    // loop region
+    if (st.loop.end > st.loop.start) { const xs = W / 2 + (st.loop.start - st.pos) * pps, xe = W / 2 + (st.loop.end - st.pos) * pps; x.fillStyle = st.loop.on ? "rgba(255,212,59,.38)" : "rgba(255,212,59,.16)"; x.fillRect(xs, 0, xe - xs, H); x.fillStyle = "#e67700"; x.fillRect(xs, 0, 2, H); x.fillRect(xe - 2, 0, 2, H); }
+    // beat lines
+    const g = st.grid, k0 = Math.floor(G.beatPos(g, t0)), k1 = Math.ceil(G.beatPos(g, t0 + W / pps));
+    x.font = "bold 10px system-ui, sans-serif"; x.textBaseline = "top";
+    for (let k = Math.max(k0, -64); k <= k1; k++) {
+      const px = W / 2 + (G.beatTime(g, k) - st.pos) * pps, bar = G.mod(k, 4) === 0;
+      x.fillStyle = bar ? "rgba(45,34,48,.85)" : "rgba(45,34,48,.35)"; x.fillRect(Math.round(px) - (bar ? 1 : 0), 0, bar ? 2 : 1, H);
+      if (60 / g.bpm * pps > 18) { x.fillStyle = bar ? "#a61e4d" : "#868e96"; x.fillText(String(G.mod(k, 4) + 1), px + 3, 1); }
+    }
+    // hot cues
+    st.cues.forEach((c, k) => { if (c === null) return; const px = W / 2 + (c - st.pos) * pps; if (px < -20 || px > W + 20) return; x.fillStyle = HC[k]; x.fillRect(px - 1, 0, 3, H); x.fillRect(px, 0, 14, 14); x.fillStyle = "#fff"; x.font = "bold 10px system-ui, sans-serif"; x.fillText(String(k + 1), px + 4, 2); });
+    // the playhead
+    x.fillStyle = "#2d2230"; x.fillRect(W / 2 - 1, 0, 2, H); x.beginPath(); x.moveTo(W / 2 - 6, 0); x.lineTo(W / 2 + 6, 0); x.lineTo(W / 2, 7); x.closePath(); x.fill();
+  };
+  /** the whole track in one strip with the playhead (tap or drag = needle search) */
+  const drawOvw = (i: 0 | 1) => {
+    const u = ui[i], st = dj.s.decks[i], P = dj.peaks[i], cv = u.ovw;
+    if (!cv.offsetWidth || !cv.offsetHeight) return;
+    const key = [st.pos.toFixed(2), cv.offsetWidth, cv.offsetHeight, dprOf(), st.cues.join(), st.loop.on, st.loop.start, st.loop.end, st.peaksN, st.track].join("|");
+    if (key === u.drawnO) return;
+    const x = fitCanvas(cv); if (!x) return;
+    u.drawnO = key;
+    const W = cv.offsetWidth, H = cv.offsetHeight, mid = H / 2;
+    x.clearRect(0, 0, W, H); x.fillStyle = "#fff"; x.fillRect(0, 0, W, H);
+    if (P && P.n) {
+      for (let px = 0; px < W; px++) {
+        const b0 = Math.floor((px / W) * P.n), b1 = Math.max(b0, Math.floor(((px + 1) / W) * P.n) - 1);
+        let amp = 0; for (let b = b0; b <= b1 && b < P.n; b++) amp = Math.max(amp, Math.abs(P.min[b]), Math.abs(P.max[b]));
+        const hh = Math.max(0.5, amp * (H / 2 - 2)); x.fillStyle = "#f783ac"; x.fillRect(px, mid - hh, 1, hh * 2);
+      }
+    }
+    if (st.loop.end > st.loop.start) { x.fillStyle = st.loop.on ? "rgba(255,212,59,.5)" : "rgba(255,212,59,.25)"; x.fillRect((st.loop.start / st.dur) * W, 0, ((st.loop.end - st.loop.start) / st.dur) * W, H); }
+    st.cues.forEach((c, k) => { if (c !== null) { x.fillStyle = HC[k]; x.fillRect((c / st.dur) * W - 1, 0, 3, H); } });
+    x.fillStyle = "#e03131"; x.fillRect((st.pos / st.dur) * W - 1, 0, 2, H);
+  };
   let raf = 0;
   const frame = () => {
+    const visible = !document.hidden;
     for (const i of idx) {
       const u = ui[i], s = dj.s.decks[i];
       u.disc.style.transform = `rotate(${s.angle.toFixed(2)}deg)`; u.platter.dataset.angle = s.angle.toFixed(1);
@@ -226,10 +410,20 @@ export function renderDJ(d: Deps): void {
       u.platter.dataset.rate = s.cur.toFixed(3);
       u.bpm.textContent = s.bpm.toFixed(1); u.pct.textContent = pct(s.pitch);
       const on = s.playing; if (on !== u.shownPlay) { u.shownPlay = on; u.play.textContent = on ? "❚❚ 暂停" : "▶ 播放"; u.play.classList.toggle("on", on); }
-      const len = L.loopSeconds(L.trackById(s.track)!); (u.prog as HTMLElement).style.width = `${((s.pos / len) * 100).toFixed(1)}%`;
+      const bb = G.barBeat(s.grid, s.pos);
+      u.time.textContent = `${clock(s.pos)} −${clock(s.dur - s.pos)} · ${bb.bar}.${bb.beat}`;
+      u.time.dataset.bar = String(bb.bar); u.time.dataset.beat = String(bb.beat);
+      s.cues.forEach((c, k) => { const b = u.hc[k]; const set = c !== null; if (b.classList.contains("set") !== set) b.classList.toggle("set", set); });
+      for (const [id, b] of u.loops) { const beats = +b.dataset.beats!, act = s.loop.on && Math.abs(s.loop.end - s.loop.start - beats * G.beatSeconds(s.grid)) < 1e-3; if (b.classList.contains("on") !== act) b.classList.toggle("on", act); }
+      u.reloop.classList.toggle("on", s.loop.on);
+      const gb = document.getElementById(`dj-gbpm-${names[i]}`); if (gb) gb.textContent = s.grid.bpm.toFixed(1);
       const m = document.getElementById(`dj-meter-${names[i]}`);
       if (m) { const lv = Math.round(dj.s.meters[i] * 100); m.style.setProperty("--l", `${lv}%`); m.dataset.level = String(lv); }
+      if (visible) { drawWave(i); drawOvw(i); }
     }
+    lockBtn.classList.toggle("on", dj.s.lock); lockBtn.setAttribute("aria-pressed", String(dj.s.lock));
+    const ms = dj.s.phase.ms; phaseMs.textContent = `${ms >= 0 ? "+" : "−"}${Math.abs(ms).toFixed(0)} ms`; phase.dataset.ms = ms.toFixed(1);
+    phaseDot.style.left = `${50 + L.clamp(ms / 60, -1, 1) * 48}%`; phase.classList.toggle("ok", Math.abs(ms) < 12);
     raf = window.requestAnimationFrame(frame);
   };
   raf = window.requestAnimationFrame(frame);

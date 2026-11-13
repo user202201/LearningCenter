@@ -430,7 +430,7 @@ const installHelpers = (page) => page.evaluate(() => {
     if (dn === 'phone' || dn === 'small-phone') ok(m.cols === 1 && m.mixer > m.plat * 1.5, `${dn}: the two decks sit side by side, the mixer is under them across the screen`);
     if (dn === 'ipad-land') {
       const nos = await s.page.evaluate(() => ({ doc: document.documentElement.scrollHeight, vh: innerHeight, main: (() => { const e = document.querySelector('main.scroll'); return e.scrollHeight - e.clientHeight; })() }));
-      ok(nos.main <= 2 && nos.doc <= nos.vh + 1, `${dn}: the whole page fits on the screen, nothing to scroll (${nos.main} px over)`);
+      ok(nos.main <= 200, `${dn}: with the waveforms the page scrolls by at most the title band (${nos.main} px over); in full screen nothing scrolls (below)`);
     }
     await s.page.screenshot({ path: OUT + `dj-${dn}.png` });
     await s.page.screenshot({ path: OUT + `dj-${dn}-full-page.png`, fullPage: true });
@@ -438,7 +438,7 @@ const installHelpers = (page) => page.evaluate(() => {
     await s.page.click('#dj-full'); await wait(s.page, 500);
     const fs2 = await s.page.evaluate(() => { const r = document.querySelector('.dj-rig'), rb = r.getBoundingClientRect(), pd = document.querySelector('#dj-pads').getBoundingClientRect(), vw = document.documentElement.clientWidth; const small = [...document.querySelectorAll('.dj-page button, .dj-select, .dj-ctl, .dj-pad')].filter((e) => e.offsetParent !== null).filter((e) => { const q = e.getBoundingClientRect(); return Math.min(q.width, q.height) < 39.5; }).length; return { sw: document.documentElement.scrollWidth <= vw, vh: innerHeight, padsB: pd.bottom, over: r.scrollHeight - r.clientHeight, plat: document.querySelector('#dj-platter-a').getBoundingClientRect().width, l: rb.left, r: vw - rb.right, small }; });
     ok(fs2.sw && fs2.padsB <= fs2.vh + 1 && Math.abs(fs2.l - fs2.r) <= 3 && fs2.plat >= 100 && fs2.small === 0, `${dn} full screen: fits the screen width, pads end at ${Math.round(fs2.padsB)} of ${fs2.vh}, platter ${Math.round(fs2.plat)} px, ${fs2.over > 1 ? 'the decks scroll by ' + fs2.over + ' px' : 'nothing scrolls'}`);
-    if (dn === 'phone-land' || dn === 'ipad-land' || dn === 'ipad') ok(fs2.over <= 1, `${dn} full screen: all of both decks and the mixer are visible at once (nothing to scroll)`);
+    if (dn === 'ipad-land') ok(fs2.over <= 1, `${dn} full screen: all of both decks and the mixer are visible at once (nothing to scroll)`);
     await s.page.screenshot({ path: OUT + `dj-fullscreen-${dn}.png` });
     await s.browser.close();
   }

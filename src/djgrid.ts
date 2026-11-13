@@ -85,8 +85,8 @@ export function computePeaks(chs: Float32Array[], sr: number, perSec = 200): Pea
     const nb = Math.min(n - 1, Math.floor((i + 1) / step));
     if (nb !== b || i === len - 1) { flush(); b = nb; }
   }
-  const norm = (a: Float32Array) => { let m = 1e-9; for (let i = 0; i < n; i++) m = Math.max(m, a[i]); for (let i = 0; i < n; i++) a[i] /= m; };
-  norm(P.low); norm(P.mid); norm(P.high);
+  let m = 1e-9; for (let i = 0; i < n; i++) m = Math.max(m, P.low[i], P.mid[i], P.high[i]);   // one scale for the three bands: the proportions between them stay
+  for (let i = 0; i < n; i++) { P.low[i] /= m; P.mid[i] /= m; P.high[i] /= m; }
   for (let i = 0; i < n; i++) if (!Number.isFinite(P.min[i]) || !Number.isFinite(P.max[i])) { P.min[i] = 0; P.max[i] = 0; }
   return P;
 }
