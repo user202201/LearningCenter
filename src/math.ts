@@ -198,7 +198,7 @@ function playMistakes(k: M.Kid, mistakes: MG.Q[], names: Map<string, MM.Topic>) 
 // ---------- games ----------
 function playQuestions(k: M.Kid, questions: MG.Q[], seconds: number, names: Map<string, MM.Topic>, again: () => void) {
   openMathGame({
-    color: k.color, questions, seconds, mode: MS.loadMathSettings().mode,
+    color: k.color, questions, seconds, mode: MS.loadMathSettings().mode, pad: true,
     topicName: (id) => names.get(id)?.name ?? id,
     onSave: async (answers, score, total, used, finished) => {
       const done = toast("正在保存…", 0, true);

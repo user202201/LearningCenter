@@ -9,6 +9,8 @@ import { translateNow } from "./i18n";
 import { renderRich } from "./mathtext";
 const HAS_CJK = /[　-〿一-鿿＀-￯]/;
 import type { AnswerMode } from "./mathsettings";
+import { loadMathSettings, saveMathSettings } from "./mathsettings";
+import { createPad } from "./scratchpad";
 
 export interface Answer { topic: string; right: boolean; q: Q }
 /** answers that can be typed on the keypad: whole numbers, decimals, negatives, percents and plain fractions (the rest is always answered by choosing) */
@@ -24,6 +26,8 @@ export interface MathGameOpts {
   mode?: AnswerMode;
   /** relaxed (science): no time limit, and after every answer (right or wrong) a short "did you know" text is shown with a Next button */
   relaxed?: boolean;
+  /** a scratch paper (演草纸) beside the question: the child writes a sum out with a finger or a pencil (the math game; not the science cards) */
+  pad?: boolean;
   explain?: (q: Q) => string;
   onSave: (answers: Answer[], score: number, total: number, usedSeconds: number, finished: boolean) => Promise<void>;
   onAgain: () => void;
@@ -77,10 +81,13 @@ export function openMathGame(o: MathGameOpts): void {
   const grid = h("div", { class: "mchoices", id: "math-choices" });
   let typed = "";
   let typing = false;   // the question on screen is answered on the keypad
-  const root = h("div", { class: "game mathgame", id: "game", role: "dialog", "aria-modal": "true", style: `--kid:${o.color}` },
-    h("div", { class: "gtop" }, quit, h("div", { class: "gmid" }, progress), scoreEl),
+  const pad = o.pad ? createPad() : null;
+  const padBtn = o.pad ? h("button", { class: "gpadbtn", id: "game-pad", onclick: () => { const on = !root.classList.contains("with-pad"); root.classList.toggle("with-pad", on); saveMathSettings({ ...loadMathSettings(), pad: on }); padBtn!.classList.toggle("on", on); } }, "✎ 演草纸") : null;
+  const root = h("div", { class: "game mathgame" + (pad && loadMathSettings().pad ? " with-pad" : ""), id: "game", role: "dialog", "aria-modal": "true", style: `--kid:${o.color}` },
+    h("div", { class: "gtop" }, quit, h("div", { class: "gmid" }, progress), padBtn, scoreEl),
     o.relaxed ? null : h("div", { class: "mtime" }, h("div", { class: "mbar" }, bar), timeText),
-    h("div", { class: "mbody" }, topic, qBox, grid));
+    h("div", { class: "mwrap" }, h("div", { class: "mbody" }, topic, qBox, grid), pad?.el ?? null));
+  padBtn?.classList.toggle("on", root.classList.contains("with-pad"));
 
   const used = () => Math.round(o.seconds - leftMs / 1000);
   const setTime = () => {
@@ -105,6 +112,7 @@ export function openMathGame(o: MathGameOpts): void {
   function ask() {
     if (idx >= total) return finish(false);
     phase = "ask";
+    pad?.clear();                                                // (a fresh sheet for every question)
     const q = o.questions[idx];
     progress.textContent = `${idx + 1} / ${total}`;
     topic.textContent = o.topicName(q.topic);
@@ -203,6 +211,7 @@ export function openMathGame(o: MathGameOpts): void {
     }
     document.removeEventListener("keydown", onKey);
     window.removeEventListener("resize", onResize);
+    pad?.dispose();
     root.remove();
     if (answers.length) void o.onSave(answers, score, total, used(), false);
     o.onClose();
