@@ -1,98 +1,26 @@
 {
- "撤销": [
-  "Undo",
-  "Annuler"
- ],
- "提示": [
-  "Hint",
-  "Indice"
- ],
- "新游戏": [
-  "New game",
-  "Nouvelle partie"
- ],
- "发牌": [
-  "Deal",
-  "Distribuer"
- ],
- "一种花色": [
-  "One suit",
-  "Une couleur"
- ],
- "两种花色": [
-  "Two suits",
-  "Deux couleurs"
- ],
- "四种花色": [
-  "Four suits",
-  "Quatre couleurs"
- ],
- "得分：{0}": [
-  "Score: {0}",
-  "Score : {0}"
- ],
- "步数：{0}": [
-  "Moves: {0}",
-  "Coups : {0}"
- ],
- "最高分：{0}": [
-  "Best: {0}",
-  "Record : {0}"
- ],
- "收齐：{0} / 8": [
-  "Runs: {0} / 8",
-  "Suites : {0} / 8"
- ],
- "没有牌可以发了。": [
-  "No more cards to deal.",
-  "Il n'y a plus de cartes à distribuer."
- ],
- "有空列的时候不能发牌：先把牌放进空列。": [
-  "You cannot deal while a column is empty: put a card in it first.",
-  "Impossible de distribuer avec une colonne vide : mettez-y d'abord une carte."
- ],
- "没有可以撤销的步骤。": [
-  "Nothing to undo.",
-  "Rien à annuler."
- ],
- "没有可走的步了：试试撤销，或者开始新游戏。": [
-  "No moves left: try undo, or start a new game.",
-  "Plus de coups possibles : essayez d'annuler ou commencez une nouvelle partie."
- ],
- "选择难度": [
-  "Choose a level",
-  "Choisir le niveau"
- ],
- "花色越多，越难": [
-  "The more suits, the harder",
-  "Plus il y a de couleurs, plus c'est difficile"
- ],
- "继续当前这局": [
-  "Continue this game",
-  "Continuer cette partie"
- ],
- "返回": [
-  "Back",
-  "Retour"
- ],
- "太棒了，你赢了！": [
-  "Great, you won!",
-  "Bravo, vous avez gagné !"
- ],
- "新纪录！": [
-  "New record!",
-  "Nouveau record !"
- ],
- "再来一局": [
-  "Play again",
-  "Rejouer"
- ],
- "换个难度": [
-  "Change level",
-  "Changer de niveau"
- ],
- "收齐：{0} / {1}": [
-  "Runs: {0} / {1}",
-  "Suites : {0} / {1}"
- ]
+  "撤销": ["Undo", "Annuler"],
+  "提示": ["Hint", "Indice"],
+  "新游戏": ["New game", "Nouvelle partie"],
+  "发牌": ["Deal", "Distribuer"],
+  "一种花色": ["One suit", "Une couleur"],
+  "两种花色": ["Two suits", "Deux couleurs"],
+  "四种花色": ["Four suits", "Quatre couleurs"],
+  "得分：{0}": ["Score: {0}", "Score : {0}"],
+  "步数：{0}": ["Moves: {0}", "Coups : {0}"],
+  "最高分：{0}": ["Best: {0}", "Record : {0}"],
+  "收齐：{0} / 8": ["Runs: {0} / 8", "Suites : {0} / 8"],
+  "已无牌可发。": ["There are no cards left to deal.", "Il ne reste plus de cartes à distribuer."],
+  "存在空列时不能发牌，请先将牌放入空列。": ["Cards cannot be dealt while a column is empty. Please place a card in the empty column first.", "Impossible de distribuer tant qu'une colonne est vide. Veuillez d'abord y placer une carte."],
+  "没有可撤销的步骤。": ["There is no move to undo.", "Aucun coup à annuler."],
+  "已无可走的步：请撤销，或开始新游戏。": ["No moves left. Please undo, or start a new game.", "Plus aucun coup possible. Veuillez annuler, ou commencer une nouvelle partie."],
+  "选择难度": ["Choose a level", "Choisir le niveau"],
+  "花色越多，难度越高": ["More suits mean a higher difficulty", "Plus il y a de couleurs, plus la difficulté est élevée"],
+  "继续当前这局": ["Continue this game", "Continuer cette partie"],
+  "返回": ["Back", "Retour"],
+  "你赢了。": ["You win.", "Vous avez gagné."],
+  "新纪录！": ["New record!", "Nouveau record !"],
+  "再来一局": ["Play again", "Rejouer"],
+  "更换难度": ["Change difficulty", "Changer de difficulté"],
+  "收齐：{0} / {1}": ["Runs: {0} / {1}", "Suites : {0} / {1}"]
 }

@@ -46,7 +46,7 @@ export async function renderGame(id: string) {
   const my = X.epoch();
   X.showLoading();
   let mod: GameModule;
-  try { mod = await info.load(); } catch { toast("这个游戏打不开。"); return void (location.hash = "#/subject/games"); }
+  try { mod = await info.load(); } catch { toast("无法打开该游戏。"); return void (location.hash = "#/subject/games"); }
   if (my !== X.epoch()) return;
   const stage = h("div", { class: "gm-stage", id: "gm-stage" });
   const ctx: GameCtx = { id, h, toast, sfx: (k: SfxKind) => sfx(k), store: storeFor(id), exit: () => (location.hash = "#/subject/games") };
@@ -69,7 +69,7 @@ export async function renderGame(id: string) {
   syncSnd();
   X.show(root);
   let stop: (() => void) | null = null;
-  try { stop = mod.default(stage, ctx); } catch (e) { toast(`这个游戏出错了：${e instanceof Error ? e.message : String(e)}`, 6000); }
+  try { stop = mod.default(stage, ctx); } catch (e) { toast(`该游戏出错：${e instanceof Error ? e.message : String(e)}`, 6000); }
   const watch = new MutationObserver(() => { if (!root.isConnected) { try { stop?.(); } catch { /* ok */ } stop = null; watch.disconnect(); } });
   watch.observe(document.body, { childList: true, subtree: true });
 }

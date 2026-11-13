@@ -146,7 +146,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     rng = L.mulberry32(seed);
     kinds = spec.kinds; target = preset?.target ?? spec.target; moves = preset?.moves ?? spec.moves;
     board = preset ? L.fromRows(preset.rows) : L.randomBoard(rng, kinds);
-    if (!L.hasMoves(board)) { board = L.shuffle(board, rng); ctx.toast("没有可以消除的了，重新洗牌！", 2000); }
+    if (!L.hasMoves(board)) { board = L.shuffle(board, rng); ctx.toast("无可消除项，已重新洗牌。", 2000); }
     score = 0; combo = 0; bestCombo = 0; busy = false; over = false; reached = false; sel = null; drag = null;
     buildPlay(); syncAll(); hudUpdate(); armHint();
   }
@@ -224,7 +224,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       score += rd.score; bestCombo = Math.max(bestCombo, rd.combo);
       ctx.sfx(rd.combo >= 3 ? "line" : "pop"); if (rd.beams.length) ctx.sfx("good");
       hudUpdate();
-      if (!reached && score >= target) { reached = true; ctx.toast("达到目标啦！还可以继续冲更高分！", 2200); }
+      if (!reached && score >= target) { reached = true; ctx.toast("已达到目标分数，可继续挑战更高分。", 2200); }
       await wait(290); if (!alive || run !== runId) return;
       for (const f of rd.fall) { const el = els.get(f.id); if (el) { el.classList.add("fall"); place(el, f.tr, f.tc); } }
       for (const sp of rd.spawn) {
@@ -237,7 +237,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     for (const el of els.values()) el.classList.remove("fall", "born");
     combo = 0; hudUpdate();
     if (moves > 0 && !L.hasMoves(board)) {
-      ctx.toast("没有可以消除的了，重新洗牌！", 2000);
+      ctx.toast("无可消除项，已重新洗牌。", 2000);
       board = L.shuffle(board, rng);
       for (const el of els.values()) el.classList.add("fall");
       syncAll(); for (const el of els.values()) el.classList.add("fall");
@@ -265,7 +265,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
         ? [!isLast && btn("match3-next", "下一关", () => startLevel(level + 1), false), btn("match3-again", "再玩一次", () => startLevel(level), true), btn("match3-back", "选关", showLevels, true)]
         : [btn("match3-again", "再来一次", () => startLevel(level), false), btn("match3-back", "选关", showLevels, true)];
       boardEl.append(h("div", { class: "match3-ov", id: "match3-over", "data-result": won ? "won" : "lost" },
-        h("h2", {}, won ? (isLast ? "全部通关！你是糖果大师！" : "过关啦！") : "步数用完了，再试一次吧！"),
+        h("h2", {}, won ? (isLast ? "已全部通关。" : "过关。") : "步数已用完，可重新挑战。"),
         won ? h("div", { class: "match3-stars", id: "match3-stars" }, ...[0, 1, 2].map((i) => h("span", { class: i < n ? "on" : "off" }, "★"))) : null,
         h("p", {}, `得分：${score}`), ...btns));
     }, 500);

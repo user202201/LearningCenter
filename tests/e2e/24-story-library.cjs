@@ -28,7 +28,7 @@ const store = (page, key) => page.evaluate((k) => JSON.parse(localStorage.getIte
   await addKid(t2.page, 'Leo');
   const six = ['井底之蛙', '刻舟求剑', '守株待兔', '夜郎自大', '大公无私', '见义勇为'];
   await t2.page.evaluate((six) => localStorage.setItem('learn.local.idioms.json', JSON.stringify({ weeks: [{ start: '2026-11-01', items: ['对牛弹琴'] }], pool: ['对牛弹琴', ...six], stories: { } })), six);
-  await t2.page.reload(); await t2.page.waitForSelector('#toasts .toast:has-text("随机选好")');
+  await t2.page.reload(); await t2.page.waitForSelector('#toasts .toast:has-text("随机选取")');
   await t2.page.waitForTimeout(300);
   const ps = await t2.page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.idioms.json')));
   const nxt = ps.weeks.find((w) => w.start === '2026-11-15');

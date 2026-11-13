@@ -8,13 +8,13 @@ import { h, modal } from "./ui";
 
 /** Opens the camera; resolves with what `parse` made of the first QR code it accepts, `null` when the window was cancelled. Throws a readable error when there is no camera. */
 export async function scanQr<T>(parse: (text: string) => T | null): Promise<T | null> {
-  if (!navigator.mediaDevices?.getUserMedia) throw new Error("这个浏览器不能使用相机（需要 https 或 localhost）");
+  if (!navigator.mediaDevices?.getUserMedia) throw new Error("该浏览器无法使用相机（需要 https 或 localhost）");
   let stream: MediaStream;
   try {
     stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false });
   } catch (e) {
     const name = e instanceof DOMException ? e.name : "";
-    throw new Error(name === "NotAllowedError" || name === "SecurityError" ? "没有相机权限，请在浏览器或系统设置里允许使用相机" : "打不开相机，请改用手动输入");
+    throw new Error(name === "NotAllowedError" || name === "SecurityError" ? "没有相机权限，请在浏览器或系统设置中允许使用相机" : "无法打开相机，请改用手动输入");
   }
   let stopped = false;
   const stop = () => {
@@ -25,7 +25,7 @@ export async function scanQr<T>(parse: (text: string) => T | null): Promise<T | 
     return await modal<T>((close) => {
       const video = h("video", { playsInline: true, muted: true, autoplay: true, class: "scan-video" });
       video.srcObject = stream;
-      const hint = h("p", { class: "muted center", id: "scan-hint" }, "对准另一台设备上的登录二维码");
+      const hint = h("p", { class: "muted center", id: "scan-hint" }, "请对准另一台设备上的登录二维码");
       const canvas = document.createElement("canvas");
       const g = canvas.getContext("2d", { willReadFrequently: true })!;
       const tick = () => {
@@ -40,7 +40,7 @@ export async function scanQr<T>(parse: (text: string) => T | null): Promise<T | 
           if (code?.data) {
             const r = parse(code.data);
             if (r) return close(r);
-            hint.textContent = "这不是本应用的登录二维码";
+            hint.textContent = "该二维码不是本应用的登录二维码";
             hint.className = "err center";
           }
         }

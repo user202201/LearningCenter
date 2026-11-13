@@ -10,10 +10,10 @@
   "行数：{0}": ["Lines: {0}", "Lignes : {0}"],
   "等级：{0}": ["Level: {0}", "Niveau : {0}"],
   "最高：{0}": ["Best: {0}", "Record : {0}"],
-  "点“开始”。方向键移动，上或X旋转，空格直落，C暂存。": ["Press Start. Arrow keys move, Up or X rotates, Space drops, C holds.", "Appuyez sur Démarrer. Flèches : déplacer, Haut ou X : tourner, Espace : chute, C : réserve."],
-  "点一下继续。": ["Tap to continue.", "Touchez pour continuer."],
+  "点击“开始”。方向键移动，上方向键或 X 旋转，空格键直接落下，C 暂存。": ["Tap “Start”. Arrow keys move, Up or X rotates, Space drops, C holds.", "Touchez « Démarrer ». Flèches : déplacer, Haut ou X : pivoter, Espace : chute, C : mettre en réserve."],
+  "点击继续。": ["Tap to continue.", "Touchez pour continuer."],
   "游戏结束": ["Game over", "Partie terminée"],
   "新纪录：{0}": ["New record: {0}", "Nouveau record : {0}"],
   "再玩一次": ["Play again", "Rejouer"],
-  "升级了！等级 {0}": ["Level up! Level {0}", "Niveau supérieur ! Niveau {0}"]
+  "升级，等级 {0}": ["Level up: level {0}", "Niveau supérieur : niveau {0}"]
 }

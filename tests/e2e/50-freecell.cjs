@@ -405,7 +405,7 @@ const top = (r) => ({ x: r.x + r.w / 2, y: r.y + Math.min(14, r.h / 4) });
   // ---- the hint
   await p.evaluate(() => window.__freecell.newGame(1)); await p.waitForTimeout(100);
   await p.click('#fc-hint');
-  ok((await p.textContent('#fc-msg')) === '提示：试试这一步！' && (await p.locator('.freecell-card.hint').count()) >= 1, 'the hint button marks a move');
+  ok((await p.textContent('#fc-msg')) === '提示：建议走这一步。' && (await p.locator('.freecell-card.hint').count()) >= 1, 'the hint button marks a move');
   const hm = await p.evaluate(() => { const L = window.__L; const s = window.__freecell.s.state; const h = L.hints(s); return { legal: L.isLegal(s, h.move), solved: h.solved }; });
   ok(hm.legal && hm.solved, 'the hint is a legal move that starts a solution');
 
@@ -425,7 +425,7 @@ const top = (r) => ({ x: r.x + r.w / 2, y: r.y + Math.min(14, r.h / 4) });
   // ---- stuck
   await load(p, st([[N('KC')], [N('KS')], [N('QC')], [N('QS')], [N('JC')], [N('JS')], [N('TC')], [N('TS')]], [N('9C'), N('9S'), N('8C'), N('8S')]));
   await p.waitForSelector('#fc-msg.bad', { timeout: 3000 });
-  ok((await p.textContent('#fc-msg')).startsWith('没有可以走的牌了') && (await S(p)).stuck, 'a position with no move says so in a friendly way');
+  ok((await p.textContent('#fc-msg')).startsWith('无牌可走') && (await S(p)).stuck, 'a position with no move says so in a friendly way');
   await p.screenshot({ path: OUT + 'freecell-stuck.png' });
 
   // ---- saved game
@@ -448,7 +448,7 @@ const top = (r) => ({ x: r.x + r.w / 2, y: r.y + Math.min(14, r.h / 4) });
   for (let i = 0; i < solution.length; i++) { const okm = await p.evaluate((m) => window.__freecell.apply(m), solution[i]); if (!okm) { ok(false, 'solution move ' + i + ' refused'); break; } }
   await p.waitForSelector('#fc-win', { timeout: 6000 });
   s = await S(p);
-  ok(s.won && (await p.textContent('#fc-win h2')) === '太棒了，通关啦！', 'solving deal #2 move by move wins: the friendly result overlay appears');
+  ok(s.won && (await p.textContent('#fc-win h2')) === '已通关。', 'solving deal #2 move by move wins: the friendly result overlay appears');
   const store = await p.evaluate((k) => JSON.parse(localStorage.getItem(k)).freecell, KEY);
   ok(store.wins === wins0 + 1 && store.best['2'] === s.moves && store.save === null, `the win is counted, the fewest moves of deal #2 is kept (${store.best['2']}), the saved game is cleared`);
   ok((await p.textContent('#fc-wins')) === `胜利：${wins0 + 1}` && (await p.textContent('#fc-best')) === `最少步数：${s.moves}` && (await p.locator('#fc-record').count()) === 1, 'the status line shows wins and the best; a new record is announced');

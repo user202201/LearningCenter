@@ -57,12 +57,12 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     s = newSnake(N, N, wrap);
     prev = s.snake.map((p) => ({ ...p })); acc = 0; squish = 0; flash = 0; parts = []; faceHappy = 0; deadShown = 0;
     phase = "ready";
-    setOvl("贪吃蛇", "点一下开始，用手指滑动或按方向键转弯。", "开始", true);
+    setOvl("贪吃蛇", "点击开始，用手指滑动或按方向键转向。", "开始", true);
     layout(); refreshHud();
   }
   function begin() { if (phase !== "ready") return; phase = "play"; setOvl("", "", "", false); last = performance.now(); acc = 0; refreshHud(); }
   function togglePause() {
-    if (phase === "play") { phase = "pause"; setOvl("暂停", "点一下继续。", "继续", true); }
+    if (phase === "play") { phase = "pause"; setOvl("暂停", "点击继续。", "继续", true); }
     else if (phase === "pause") { phase = "play"; setOvl("", "", "", false); last = performance.now(); }
     refreshHud();
   }
@@ -91,7 +91,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (newBest) ctx.store.set(bestKey(), sc);
     ctx.sfx(won ? "win" : "lose"); refreshHud();
     for (let i = 0; i < s.snake.length; i++) burstSoft(s.snake[i].x, s.snake[i].y);
-    const show = () => { if (phase === "dead" || phase === "won") setOvl(won ? "太棒了！" : "游戏结束", newBest && sc > 0 ? `新纪录：${sc}` : `得分：${sc}`, "再玩一次", true); deadShown = 1; };
+    const show = () => { if (phase === "dead" || phase === "won") setOvl(won ? "完成。" : "游戏结束", newBest && sc > 0 ? `新纪录：${sc}` : `得分：${sc}`, "再玩一次", true); deadShown = 1; };
     timers.push(window.setTimeout(show, won ? 400 : 900));
     if (!won) ctx.toast(newBest && sc > 0 ? `新纪录：${sc}` : `得分：${sc}`, 1500);
   }

@@ -99,8 +99,8 @@ const clearPlays = (page) => page.evaluate(() => { window.__music.plays.length =
     const wantWrong = i === 2;
     await p.locator(`.qz-opt[data-right="${wantWrong ? 0 : 1}"]`).first().click();
     if (!wantWrong) right++;
-    if (i === 0) ok(await p.locator('.qz-opt.right').count() === 1 && (await p.locator('#qz-explain').textContent()).startsWith('答对了') && await p.locator('.qz-opt:disabled').count() === 4, 'after an answer: the right choice is green, an explanation is shown, the choices are locked');
-    if (wantWrong) ok(await p.locator('.qz-opt.wrong').count() === 1 && (await p.locator('#qz-explain').textContent()).startsWith('再想想'), 'a wrong answer shows red and the right one green');
+    if (i === 0) ok(await p.locator('.qz-opt.right').count() === 1 && (await p.locator('#qz-explain').textContent()).startsWith('正确') && await p.locator('.qz-opt:disabled').count() === 4, 'after an answer: the right choice is green, an explanation is shown, the choices are locked');
+    if (wantWrong) ok(await p.locator('.qz-opt.wrong').count() === 1 && (await p.locator('#qz-explain').textContent()).startsWith('请再思考'), 'a wrong answer shows red and the right one green');
     await p.click('#qz-next');
   }
   await p.waitForSelector('#qz-end');

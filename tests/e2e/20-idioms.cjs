@@ -38,7 +38,7 @@ const noChinese = (page) => page.evaluate(() => { const bad = []; const w = docu
   ok((await page.textContent('.sec-row .sec')) === '成语（3）', 'with the count in the heading (like the characters page)');
   ok(await page.locator('.sec-row .plus#idiom-add').count() === 1, 'and a small + to add more (a week has six idioms, so there is room)');
   await page.click('#idiom-add'); await page.fill('dialog textarea', '一心一意');
-  ok((await page.textContent('#idiom-check')).includes('已经学过了，不能保存：一心一意') && await page.locator('#idiom-save').isDisabled(), 'typing an idiom that is already there: the window says it is already learned and Save is off');
+  ok((await page.textContent('#idiom-check')).includes('已学过，无法保存：一心一意') && await page.locator('#idiom-save').isDisabled(), 'typing an idiom that is already there: the window says it is already learned and Save is off');
   await page.click('dialog button:has-text("取消")'); await page.waitForSelector('dialog', { state: 'detached' });
   ok(await page.locator('.idiom-card').count() === 3, 'so nothing is added');
 

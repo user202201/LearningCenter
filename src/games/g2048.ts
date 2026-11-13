@@ -122,7 +122,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     refreshHud();
     if (r.reached && !keep) {
       keep = true; ctx.sfx("win");
-      timers.push(window.setTimeout(() => { title.textContent = "太棒了！"; msg.textContent = `你合成了 ${s.target}！`; againBtn.textContent = "新游戏"; keepBtn.hidden = false; setOvl(true, "win"); }, 450));
+      timers.push(window.setTimeout(() => { title.textContent = "完成。"; msg.textContent = `已合成 ${s.target}。`; againBtn.textContent = "新游戏"; keepBtn.hidden = false; setOvl(true, "win"); }, 450));
     } else if (s.over) {
       const newBest = s.score > old && s.score > 0;
       ctx.sfx("lose");

@@ -212,7 +212,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       misses++; ctx.sfx("place");
       if (misses >= L.LEVELS[level].misses) {
         grid = L.dropCeiling(grid, rng, L.colorsPresent(grid).length ? L.colorsPresent(grid) : [1]);
-        misses = 0; yOfs = -L.ROWH; ctx.sfx("bad"); ctx.toast("天花板落下来了！", 1800);
+        misses = 0; yOfs = -L.ROWH; ctx.sfx("bad"); ctx.toast("天花板下降一行。", 1800);
       }
     }
     advance();
@@ -246,7 +246,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
           h("button", { class: "bubble-btn alt", id: "bubble-again", onclick: () => startLevel(level) }, "再玩一次"), h("button", { class: "bubble-btn alt", onclick: showLevels }, "选关")]
         : [h("button", { class: "bubble-btn", id: "bubble-again", onclick: () => { ctx.sfx("tap"); startLevel(level); } }, "再来一次"), h("button", { class: "bubble-btn alt", onclick: showLevels }, "选关")];
       field.append(h("div", { class: "bubble-ov", id: "bubble-over", "data-result": kind },
-        h("h2", {}, kind === "won" ? (isLast ? "全部通关！你是泡泡大师！" : "过关啦！") : "泡泡碰到底线了，再试一次吧！"),
+        h("h2", {}, kind === "won" ? (isLast ? "已全部通关。" : "过关。") : "泡泡触底，本关未完成。可重试。"),
         kind === "won" ? h("div", { class: "bubble-stars", id: "bubble-stars" }, ...[0, 1, 2].map((i) => h("span", { class: i < n ? "on" : "off" }, "★"))) : null,
         h("p", {}, `得分：${score}`), ...btns));
     }, kind === "won" ? 900 : 700);

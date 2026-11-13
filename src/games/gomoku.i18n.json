@@ -1,114 +1,30 @@
 {
- "五子棋": [
-  "Gomoku",
-  "Gomoku"
- ],
- "玩法": [
-  "How to play",
-  "Mode de jeu"
- ],
- "和电脑下": [
-  "Play the computer",
-  "Contre l'ordinateur"
- ],
- "两个人下": [
-  "Two players",
-  "Deux joueurs"
- ],
- "难度": [
-  "Level",
-  "Difficulté"
- ],
- "简单": [
-  "Easy",
-  "Facile"
- ],
- "普通": [
-  "Normal",
-  "Normal"
- ],
- "困难": [
-  "Hard",
-  "Difficile"
- ],
- "谁先下": [
-  "Who starts",
-  "Qui commence"
- ],
- "我先下": [
-  "I start",
-  "Je commence"
- ],
- "电脑先下": [
-  "Computer starts",
-  "L'ordinateur commence"
- ],
- "黑棋先": [
-  "Black starts",
-  "Noir commence"
- ],
- "白棋先": [
-  "White starts",
-  "Blanc commence"
- ],
- "战绩：胜 {0} 负 {1} 平 {2}": [
-  "Record: won {0}, lost {1}, drawn {2}",
-  "Bilan : {0} gagnées, {1} perdues, {2} nulles"
- ],
- "开始游戏": [
-  "Start game",
-  "Commencer"
- ],
- "撤销": [
-  "Undo",
-  "Annuler"
- ],
- "重新开始": [
-  "Restart",
-  "Recommencer"
- ],
- "设置": [
-  "Settings",
-  "Réglages"
- ],
- "电脑在想…": [
-  "The computer is thinking…",
-  "L'ordinateur réfléchit…"
- ],
- "轮到你了（黑棋）": [
-  "Your turn (black)",
-  "À toi (noir)"
- ],
- "轮到你了（白棋）": [
-  "Your turn (white)",
-  "À toi (blanc)"
- ],
- "轮到黑棋": [
-  "Black's turn",
-  "Au tour du noir"
- ],
- "轮到白棋": [
-  "White's turn",
-  "Au tour du blanc"
- ],
- "平局！棋盘下满了。": [
-  "A draw! The board is full.",
-  "Match nul ! Le plateau est plein."
- ],
- "你赢了！太棒了！": [
-  "You won! Great!",
-  "Tu as gagné ! Bravo !"
- ],
- "电脑赢了，再来一局吧！": [
-  "The computer won, play again!",
-  "L'ordinateur a gagné, rejoue !"
- ],
- "黑棋赢了！太棒了！": [
-  "Black wins! Great!",
-  "Le noir gagne ! Bravo !"
- ],
- "白棋赢了！太棒了！": [
-  "White wins! Great!",
-  "Le blanc gagne ! Bravo !"
- ]
+  "五子棋": ["Gomoku", "Gomoku"],
+  "玩法": ["How to play", "Mode de jeu"],
+  "和电脑下": ["Play the computer", "Contre l'ordinateur"],
+  "两个人下": ["Two players", "Deux joueurs"],
+  "难度": ["Level", "Difficulté"],
+  "简单": ["Easy", "Facile"],
+  "普通": ["Normal", "Normal"],
+  "困难": ["Hard", "Difficile"],
+  "谁先下": ["Who starts", "Qui commence"],
+  "我先下": ["I start", "Je commence"],
+  "电脑先下": ["Computer starts", "L'ordinateur commence"],
+  "黑棋先": ["Black starts", "Noir commence"],
+  "白棋先": ["White starts", "Blanc commence"],
+  "战绩：胜 {0} 负 {1} 平 {2}": ["Record: won {0}, lost {1}, drawn {2}", "Bilan : {0} gagnées, {1} perdues, {2} nulles"],
+  "开始游戏": ["Start game", "Commencer"],
+  "撤销": ["Undo", "Annuler"],
+  "重新开始": ["Restart", "Recommencer"],
+  "设置": ["Settings", "Réglages"],
+  "电脑思考中…": ["Computer thinking…", "L'ordinateur réfléchit…"],
+  "轮到你了（黑棋）": ["Your turn (black)", "À vous (noir)"],
+  "轮到你了（白棋）": ["Your turn (white)", "À vous (blanc)"],
+  "轮到黑棋": ["Black's turn", "Au tour du noir"],
+  "轮到白棋": ["White's turn", "Au tour du blanc"],
+  "和棋：棋盘已满。": ["Draw: the board is full.", "Match nul : le plateau est plein."],
+  "你赢了。": ["You win.", "Vous avez gagné."],
+  "电脑获胜。": ["The computer wins.", "L'ordinateur gagne."],
+  "黑棋获胜。": ["Black wins.", "Les noirs gagnent."],
+  "白棋获胜。": ["White wins.", "Les blancs gagnent."]
 }

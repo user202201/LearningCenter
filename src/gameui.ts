@@ -82,7 +82,7 @@ export function openGame(o: GameOpts): void {
   const no = h("button", { class: "gbtn no", id: "game-wrong", title: "答错了", "aria-label": "答错了" }, crossSvg());
   const yes = h("button", { class: "gbtn yes", id: "game-right", title: "答对了", "aria-label": "答对了" }, tickSvg());
   const banner = h("div", { class: "gbanner", id: "game-banner" });
-  const hint = h("p", { class: "ghint" }, o.words ? "点一下屏幕可以看中文" : "点一下屏幕可以看拼音");
+  const hint = h("p", { class: "ghint" }, o.words ? "点击屏幕显示中文" : "点击屏幕显示拼音");
   const hintOf = (c: string) => (o.words ? o.words.meaning(c) : pinyinOf(c));
   const speak = o.words?.speak ? h("button", { class: "gspeak", id: "game-speak", title: "听发音", "aria-label": "听发音", onclick: (e: Event) => { e.stopPropagation(); if (phase === "ask" || phase === "feedback") o.words?.speak?.(queue[idx].ch); } }, speakerSvg()) : null;
   const stage = h("div", { class: "gstage" }, dial, banner, speak);
@@ -187,10 +187,10 @@ export function openGame(o: GameOpts): void {
     const again = h("button", { class: "primary", id: "game-again", onclick: async () => { await saving; root.remove(); o.onAgain(); } }, "再玩一次");
     const fin = h("button", { id: "game-done", onclick: async () => { await saving; root.remove(); o.onClose(); } }, "完成");
     root.replaceChildren(h("div", { class: "gend", id: "game-end" },
-      h("h2", {}, score === total ? "全对了！" : "练完了！"),
+      h("h2", {}, score === total ? "全部正确。" : "练习完成。"),
       h("div", { class: "gstars", "data-stars": String(stars) }, ...[1, 2, 3].map((n) => starSvg(n <= stars))),
       h("div", { class: "gresult" }, h("strong", { id: "game-final" }, String(score)), ` / ${total}`),
-      missed.length ? h("p", { class: "muted" }, o.words ? (open.length ? "还没记牢的词（下次接着练）：" : "刚才答错、后来练对了的词：") : (open.length ? "还没记牢的字（下次接着练）：" : "刚才答错、后来练对了的字：")) : h("p", { class: "muted" }, "一个都没错，太棒了！"),
+      missed.length ? h("p", { class: "muted" }, o.words ? (open.length ? "尚未掌握的词（下次继续练习）：" : "本次先错后对的词：") : (open.length ? "尚未掌握的字（下次继续练习）：" : "本次先错后对的字：")) : h("p", { class: "muted" }, "没有错误。"),
       chips,
       h("div", { class: "row end" }, fin, again)));
   }
@@ -208,7 +208,7 @@ export function openGame(o: GameOpts): void {
     const resume = pending;                                  // the next question that was about to appear
     clearTimeout(next); pending = null;
     if (wasAsking) { clearInterval(timer); timer = undefined; deadline = deadline - Date.now(); }   // the clock stops while the question is open
-    const yes2 = await confirmDlg("退出游戏？", answered ? "已经答过的题会保存下来。" : "还没有答题，不会保存。", "退出", true);
+    const yes2 = await confirmDlg("退出游戏？", answered ? "已答题目将被保存。" : "尚未答题，不会保存。", "退出", true);
     if (!yes2) {
       if (resume) later(resume, 400);
       if (wasAsking && phase === "ask") {

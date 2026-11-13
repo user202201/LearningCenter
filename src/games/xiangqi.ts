@@ -53,7 +53,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const boxEl = h("div", { class: "xq-boardbox" }, board);
   const btnHint = h("button", { class: "xq-btn xq-go", id: "xq-hint", onclick: () => void hint() }, "提示");
   const btnUndo = h("button", { class: "xq-btn", id: "xq-undo", onclick: () => undo() }, "悔棋");
-  const btnNew = h("button", { class: "xq-btn", id: "xq-new", onclick: () => restart("新的一局开始了") }, "重来");
+  const btnNew = h("button", { class: "xq-btn", id: "xq-new", onclick: () => restart("新局开始") }, "重来");
   const levelSel = h("select", { class: "xq-select", id: "xq-level", "aria-label": "难度", onchange: () => setLevel(Number(levelSel.value) as L.LevelId) });
   const sideSel = h("select", { class: "xq-select", id: "xq-sidesel", "aria-label": "执子", onchange: () => setSide(Number(sideSel.value) === -1 ? L.BLACK : L.RED) });
   levelSel.append(...L.LEVELS.map((l) => h("option", { value: String(l.id) }, l.name)));
@@ -148,9 +148,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const refreshStatus = () => {
     if (over) return;
     const chk = L.inCheck(pos, pos.turn);
-    if (thinking) { if (chk) setStatus("电脑被将军了，在想办法", "xq-chk xq-dots"); else setStatus("电脑在想", "xq-think xq-dots"); return; }
-    if (pos.turn === human) setStatus(chk ? "你被将军了，快想办法！" : `轮到你了（${sideName(human)}）`, chk ? "xq-chk" : "");
-    else setStatus(chk ? "电脑被将军了！" : "电脑走棋", chk ? "xq-chk" : "xq-think");
+    if (thinking) { if (chk) setStatus("电脑被将军，正在应对", "xq-chk xq-dots"); else setStatus("电脑思考中", "xq-think xq-dots"); return; }
+    if (pos.turn === human) setStatus(chk ? "你被将军，请应将。" : `轮到你了（${sideName(human)}）`, chk ? "xq-chk" : "");
+    else setStatus(chk ? "电脑被将军。" : "电脑走棋", chk ? "xq-chk" : "xq-think");
   };
   const renderTray = (animateLast = false) => {
     const caps = history.filter((r) => r.cap).map((r) => r.cap);
@@ -354,7 +354,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
         later(() => { g.classList.remove("xq-dizzy"); g.classList.add("xq-fallen"); sp.remove(); }, reduced() ? 0 : 1000);
       }
       for (const [, el] of els) if (el.dataset.side === (loserSide === L.RED ? "b" : "r")) el.classList.add("xq-cheer");
-      setStatus(humanWon ? "你赢了！" : "电脑赢了", humanWon ? "" : "xq-think");
+      setStatus(humanWon ? "你赢了。" : "电脑赢了", humanWon ? "" : "xq-think");
       const conf = h("div", { class: "xq-conf", id: "xq-confetti" });
       const colors = ["#ff6b6b", "#ffd43b", "#51cf66", "#4dabf7", "#da77f2", "#ff922b"];
       for (let i = 0; i < 46; i++) {
@@ -374,11 +374,11 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   function showOverlay(st: ReturnType<typeof L.status>, humanWon: boolean, draw: boolean) {
     board.querySelector(".xq-over")?.remove();
-    const why = draw ? "太久没有吃子了，我们和棋吧。" : st.check ? (humanWon ? "对方的将被将死了！" : "你的帅被将死了。") : (humanWon ? "对方无路可走了！" : "你无路可走了。");
+    const why = draw ? "长时间未吃子，和棋。" : st.check ? (humanWon ? "对方的将被将死。" : "你的帅被将死了。") : (humanWon ? "对方无子可动，判负。" : "你无子可动，判负。");
     const card = h("div", { class: "xq-card" + (humanWon || draw ? "" : " xq-lose"), id: "xq-result", "data-result": draw ? "draw" : humanWon ? "win" : "lose" },
-      h("h2", {}, draw ? "和棋" : humanWon ? "你赢了！" : "电脑赢了！"), h("p", {}, why),
-      h("div", { class: "xq-ctl" }, h("button", { class: "xq-btn xq-go", id: "xq-again", onclick: () => restart("新的一局开始了") }, "再来一局"),
-        h("button", { class: "xq-btn", id: "xq-look", onclick: () => ov.remove() }, "看看棋盘")));
+      h("h2", {}, draw ? "和棋" : humanWon ? "你赢了。" : "电脑获胜。"), h("p", {}, why),
+      h("div", { class: "xq-ctl" }, h("button", { class: "xq-btn xq-go", id: "xq-again", onclick: () => restart("新局开始") }, "再来一局"),
+        h("button", { class: "xq-btn", id: "xq-look", onclick: () => ov.remove() }, "查看棋盘")));
     const ov = h("div", { class: "xq-over", id: "xq-over" }, card);
     board.append(ov);
   }
@@ -414,7 +414,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (busy || thinking || over || pos.turn !== human) { if (thinking) ctx.toast("电脑正在思考，请稍等。"); return; }
     const ep = epoch;
     busy = true; updateButtons();
-    const close = ctx.toast("正在想一步好棋", 8000, true);
+    const close = ctx.toast("正在选择着法", 8000, true);
     const g = L.searchGen(pos, { depth: 4, ms: 450 });
     let res: L.SearchResult;
     for (;;) {
@@ -433,7 +433,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     drawMarks();
     updateButtons();
     ctx.sfx("good");
-    ctx.toast("提示：试试闪着蓝框的这一步。");
+    ctx.toast("提示：蓝框闪烁的是建议的一步。");
   }
 
   function canUndo(): boolean {

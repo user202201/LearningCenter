@@ -1,6 +1,6 @@
 {
   "推箱子": ["Sokoban", "Sokoban"],
-  "把箱子推到目标点": ["Push the crates onto the stars", "Poussez les caisses sur les étoiles"],
+  "将箱子推到目标位置": ["Push the crates onto the target positions", "Poussez les caisses sur les positions cibles"],
   "第 {0} 关": ["Level {0}", "Niveau {0}"],
   "步数：{0}": ["Moves: {0}", "Coups : {0}"],
   "推动：{0}": ["Pushes: {0}", "Poussées : {0}"],
@@ -15,8 +15,8 @@
   "挑战": ["Hard", "Difficile"],
   "关闭": ["Close", "Fermer"],
   "下一关": ["Next level", "Niveau suivant"],
-  "过关！": ["Level clear!", "Niveau réussi !"],
-  "全部通关！": ["All levels done!", "Tous les niveaux terminés !"],
+  "过关。": ["Level cleared.", "Niveau réussi."],
+  "已全部通关。": ["All levels cleared.", "Tous les niveaux sont réussis."],
   "新纪录：{0} 步": ["New record: {0} moves", "Nouveau record : {0} coups"],
   "{0} 步，推了 {1} 次": ["{0} moves, {1} pushes", "{0} coups, {1} poussées"]
 }

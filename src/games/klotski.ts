@@ -107,13 +107,13 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       const min = h("span", { class: "klotski-min" }, "计算中…");
       mins.push(min);
       const card = h("button", { class: "klotski-lv" + (open ? "" : " locked"), "data-level": l.id, "data-open": open ? "1" : "0",
-        onclick: () => { if (!open) { ctx.sfx("bad"); ctx.toast("先通过前一关，这一关才会打开。"); return; } ctx.sfx("tap"); showPlay(i); } },
+        onclick: () => { if (!open) { ctx.sfx("bad"); ctx.toast("通过前一关后，本关才会开放。"); return; } ctx.sfx("tap"); showPlay(i); } },
         h("span", { class: "klotski-no" }, `第${i + 1}关`), mini, h("b", {}, l.name), min, starRow(st[l.id] ?? 0));
       if (!open) { const lk = h("span", {}); lk.innerHTML = LOCK; card.append(lk.firstChild as Node); }
       grid.append(card);
     });
     holder.append(h("div", { class: "klotski-scroll" },
-      h("p", { class: "klotski-lead" }, "帮曹操逃出去！把最大的方块（曹操）移到下面的出口。"),
+      h("p", { class: "klotski-lead" }, "将最大的方块（曹操）移到下方出口。"),
       h("p", { class: "klotski-total", id: "klotski-total" }, `星星：${total} / ${K.LEVELS.length * 3}`), grid));
     // the shortest solutions are searched one level after the other, so the list is there at once
     let k = 0;
@@ -155,7 +155,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const listBtn = h("button", { id: "klotski-list", onclick: () => { ctx.sfx("tap"); showSelect(); } }, "关卡");
     const play = h("div", { class: "klotski-play" },
       h("div", { class: "klotski-top" }, title, movesChip, minChip, bestChip), wrap,
-      h("p", { class: "klotski-help" }, "点一个方块，再点虚线框；也可以直接拖动。"),
+      h("p", { class: "klotski-help" }, "先点击方块，再点击虚线框；也可直接拖动。"),
       h("div", { class: "klotski-btns" }, listBtn, undoBtn, resetBtn, hintBtn));
     holder.append(play);
 
@@ -288,10 +288,10 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       function overlay() {
         const last = index === K.LEVELS.length - 1, all = K.LEVELS.every((l) => (l.id === level.id ? sNow : (stars()[l.id] ?? 0)) > 0);
         const card = h("div", { class: "klotski-card", id: "klotski-win" },
-          h("h2", {}, "曹操逃出来了！"), starRow(n),
+          h("h2", {}, "曹操已到达出口。"), starRow(n),
           h("p", {}, `用了 ${moves} 步`),
-          h("p", {}, moves <= min ? "这就是最少的步数，太厉害了！" : `最少 ${min} 步，你的最好成绩 ${Math.min(moves, b[level.id] ?? moves)} 步`),
-          all && last ? h("p", {}, "全部关卡都通过了，你是华容道大师！") : null,
+          h("p", {}, moves <= min ? "已达到最少步数。" : `最少 ${min} 步，你的最好成绩 ${Math.min(moves, b[level.id] ?? moves)} 步`),
+          all && last ? h("p", {}, "已通过全部关卡。") : null,
           h("div", { class: "klotski-btns" },
             last ? null : h("button", { class: "primary", id: "klotski-next", onclick: () => { ctx.sfx("tap"); showPlay(index + 1); } }, "下一关"),
             h("button", { id: "klotski-again", onclick: () => { ctx.sfx("tap"); showPlay(index); } }, "再玩一次"),

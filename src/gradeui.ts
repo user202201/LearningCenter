@@ -27,7 +27,7 @@ export const askGrade = (title: string, current: number | null, note = "", extra
  */
 export async function pickKidGrade(k: M.Kid): Promise<number | null> {
   const old = P.gradeOf(k.id);
-  const g = await askGrade(`${k.name}读几年级？`, old, "只需要选一次，之后每年 9 月会自动升一级。以后想改，在设置的“孩子”里改。");
+  const g = await askGrade(`请选择${k.name}的年级`, old, "仅需选择一次，此后每年 9 月自动升一级。如需修改，请在设置的“孩子”中修改。");
   if (g === null) return null;
   P.setKidGrade(k.id, g);
   const thisWeek = M.sundayOf(M.todayLocal());
@@ -40,7 +40,7 @@ export async function pickKidGrade(k: M.Kid): Promise<number | null> {
       try {
         await api.update(path, M.EMPTY_KID, (c: M.KidData) => W.dropFromWeek(c, /^(math|science)\//.test(path) ? M.todayLocal() : thisWeek), `${path} new grade`);
         done();
-        toast("已按新年级重新选了这周和下周的内容", 5000);
+        toast("已按新年级重新选取本周和下周的内容", 5000);
       } catch (e) {
         done();
         throw e;

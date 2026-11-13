@@ -1,5 +1,5 @@
 {
-  "糖果消消乐：选择关卡": ["Candy Match: choose a level", "Candy Match : choisis un niveau"],
+  "糖果消消乐：选择关卡": ["Candy Match: choose a level", "Candy Match : choisissez un niveau"],
   "星星：{0} / {1}": ["Stars: {0} / {1}", "Étoiles : {0} / {1}"],
   "最高：{0}": ["Best: {0}", "Meilleur : {0}"],
   "第{0}关": ["Level {0}", "Niveau {0}"],
@@ -10,11 +10,11 @@
   "提示": ["Hint", "Indice"],
   "重来": ["Restart", "Recommencer"],
   "选关": ["Levels", "Niveaux"],
-  "达到目标啦！还可以继续冲更高分！": ["Goal reached! Keep going for a higher score!", "Objectif atteint ! Continue pour un meilleur score !"],
-  "没有可以消除的了，重新洗牌！": ["No moves left, shuffling!", "Plus de coups possibles, on mélange !"],
-  "全部通关！你是糖果大师！": ["All levels done! You are a candy master!", "Tous les niveaux sont finis ! Tu es un maître des bonbons !"],
-  "过关啦！": ["Level cleared!", "Niveau réussi !"],
-  "步数用完了，再试一次吧！": ["Out of moves. Try again!", "Plus de coups. Réessaie !"],
+  "已达到目标分数，可继续挑战更高分。": ["The goal has been reached. You may continue for a higher score.", "L'objectif est atteint. Vous pouvez continuer pour un meilleur score."],
+  "无可消除项，已重新洗牌。": ["No matches left; the candies were reshuffled.", "Plus aucune combinaison possible ; les bonbons ont été mélangés."],
+  "已全部通关。": ["All levels cleared.", "Tous les niveaux sont réussis."],
+  "过关。": ["Level cleared.", "Niveau réussi."],
+  "步数已用完，可重新挑战。": ["No moves left. You may try again.", "Plus de coups. Vous pouvez réessayer."],
   "下一关": ["Next level", "Niveau suivant"],
   "再玩一次": ["Play again", "Rejouer"],
   "再来一次": ["Try again", "Réessayer"]

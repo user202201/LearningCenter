@@ -33,7 +33,7 @@ export async function fileToAvatar(file: Blob): Promise<string> {
       await img.decode();
       return squareJpeg(img, img.naturalWidth, img.naturalHeight);
     } catch {
-      throw new Error("这张图片打不开，请换一张");
+      throw new Error("无法打开该图片，请更换图片");
     } finally {
       URL.revokeObjectURL(u);
     }
@@ -42,13 +42,13 @@ export async function fileToAvatar(file: Blob): Promise<string> {
 
 /** The front camera with a shutter button. Resolves with the avatar, `null` when cancelled; throws a readable error when there is no camera. */
 export async function takePhoto(): Promise<string | null> {
-  if (!navigator.mediaDevices?.getUserMedia) throw new Error("这个浏览器不能使用相机（需要 https 或 localhost）");
+  if (!navigator.mediaDevices?.getUserMedia) throw new Error("该浏览器无法使用相机（需要 https 或 localhost）");
   let stream: MediaStream;
   try {
     stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
   } catch (e) {
     const name = e instanceof DOMException ? e.name : "";
-    throw new Error(name === "NotAllowedError" || name === "SecurityError" ? "没有相机权限，请在浏览器或系统设置里允许使用相机" : "打不开相机，请改用“从相册选择”");
+    throw new Error(name === "NotAllowedError" || name === "SecurityError" ? "没有相机权限，请在浏览器或系统设置中允许使用相机" : "无法打开相机，请改用“从相册选择”");
   }
   try {
     return await modal<string>((close) => {

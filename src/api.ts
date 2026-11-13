@@ -112,7 +112,7 @@ async function gh(a: Auth, url: string, init: RequestInit = {}): Promise<Respons
       if (i < 2) await sleep(400 * (i + 1));
     }
   }
-  if (!res) { downUntil = Date.now() + DOWN_MS; throw new ApiError(`网络请求失败（${why || "未知"}）：网络断了或被拦截。`, 0); }
+  if (!res) { downUntil = Date.now() + DOWN_MS; throw new ApiError(`网络请求失败（${why || "未知"}）：网络中断或被拦截。`, 0); }
   downUntil = 0;
   if (res.status === 401) {
     logout();
@@ -137,7 +137,7 @@ export async function login(token: string, repo: string, remember = true): Promi
   const info = (await r.json()) as { permissions?: { push?: boolean }; default_branch: string; private: boolean };
   if (!info.permissions?.push) throw new Error("令牌没有该仓库的写权限（需要 Contents: Read and write）");
   if (!info.private && !location.hostname.match(/^(localhost|127\.0\.0\.1)$/)) {
-    throw new Error("该仓库是公开的，学习记录会被所有人看到。请使用私有仓库。");
+    throw new Error("该仓库为公开仓库，学习记录将对所有人可见。请使用私有仓库。");
   }
   a.branch = info.default_branch;
   // not another app's data: the piano app keeps its scores in scores/ inbox/ pdfs/ — this app would mix its files into that repository
@@ -145,7 +145,7 @@ export async function login(token: string, repo: string, remember = true): Promi
   if (root.ok) {
     const items = (await root.json()) as { name: string; type: string }[];
     if (Array.isArray(items) && items.some((i) => i.type === "dir" && ["scores", "inbox", "pdfs"].includes(i.name))) {
-      throw new Error("这是钢琴练习项目的谱子仓库，不能用来存识字数据。请换一个专门的私有仓库（例如 LearningData）。");
+      throw new Error("该仓库为钢琴练习项目的乐谱仓库，不能用于存放识字数据。请改用专用的私有仓库（例如 LearningData）。");
     }
   }
   const u = await fetch("https://api.github.com/user", { headers: headers(a) });
@@ -230,7 +230,7 @@ const clone = <T,>(x: T): T => (x === null || x === undefined ? x : (JSON.parse(
 const lazyFile = (path: string) => /^(kids|english|french|math|science)\/[\w-]+(\.review)?\.json$/.test(path);
 let noticed = false;
 /** told once per offline spell that a change was kept on this device */
-function noticeOffline() { if (noticed) return; noticed = true; toast("没有网络：已保存在这台设备上，联网后会自动同步", 5000); }
+function noticeOffline() { if (noticed) return; noticed = true; toast("无网络：已保存在本设备上，联网后将自动同步", 5000); }
 /** call when the network may be back (the browser's "online" event) */
 export function networkMayBeBack() { downUntil = 0; noticed = false; }
 
@@ -311,7 +311,7 @@ export async function update<T>(path: string, init: T, change: (cur: T) => T, me
     try {
       localStorage.setItem(LOCAL_PREFIX + path, JSON.stringify(next));
     } catch {
-      throw new Error("本机存储已满或被浏览器禁止，数据没有保存。");
+      throw new Error("本机存储空间已满或被浏览器禁用，数据未保存。");
     }
     return next;
   }

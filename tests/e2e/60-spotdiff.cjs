@@ -154,7 +154,7 @@ const CJK = /[㐀-鿿]/;
   const w1 = await hook(() => ({ stars: +document.querySelector('#sd-stars').dataset.stars, el: window.__spotdiff.elapsed(), mis: window.__spotdiff.game().mistakes }));
   const expect = (m, s, n) => { let r = 3; if (m > 1) r--; if (m > 4) r--; if (s > n * 20) r--; return Math.max(1, r); };
   ok(w1.stars === expect(w1.mis, w1.el, 3) && (await p.locator('#sd-stars svg.on').count()) === w1.stars, `the win panel shows ${w1.stars} stars (3 mistakes -> 2 stars)`);
-  ok((await txt('#sd-ovl h2')) === '找到啦！' && /^用时 \d+:\d\d，失误 3 次$/.test(await txt('#sd-ovl p:not(.rec)')) && await p.isVisible('#sd-rec') && (await txt('#sd-start')) === '下一幅', 'the win panel: title, time and mistakes, new record, Next picture');
+  ok((await txt('#sd-ovl h2')) === '已全部找到。' && /^用时 \d+:\d\d，失误 3 次$/.test(await txt('#sd-ovl p:not(.rec)')) && await p.isVisible('#sd-rec') && (await txt('#sd-start')) === '下一幅', 'the win panel: title, time and mistakes, new record, Next picture');
   await p.screenshot({ path: OUT + 'spotdiff-win-wide.png' });
   const store = () => p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1') || '{}').spotdiff || {});
   const st1 = await store();
@@ -166,12 +166,12 @@ const CJK = /[㐀-鿿]/;
     await p.click('#sd-start');
     ok(!(await p.isVisible('#sd-ovl')) && (await txt('#sd-found')).startsWith('找到：0 /'), 'Next picture starts the next picture at once');
     seenLv.push(await hook(() => window.__spotdiff.level()));
-    await winAll(); await p.waitForFunction(() => document.querySelector('#sd-ovl h2').textContent === '找到啦！');
+    await winAll(); await p.waitForFunction(() => document.querySelector('#sd-ovl h2').textContent === '已全部找到。');
   }
   ok(new Set(seenLv).size === 4 && seenLv.every((l) => l >= 0 && l < 4), 'the four easy pictures come one after the other, none repeated: ' + seenLv);
   // timer + stars by time
   await p.click('#sd-start'); await hook(() => window.__spotdiff.setElapsed(999));
-  const lvlSlow = await hook(() => window.__spotdiff.level()); await winAll(); await p.waitForFunction(() => document.querySelector('#sd-ovl h2').textContent === '找到啦！');
+  const lvlSlow = await hook(() => window.__spotdiff.level()); await winAll(); await p.waitForFunction(() => document.querySelector('#sd-ovl h2').textContent === '已全部找到。');
   ok((await p.locator('#sd-stars svg.on').count()) === 2, 'slow but no mistakes: 2 stars');
   ok(!(await p.isVisible('#sd-rec')) || (await store())['best-' + lvlSlow] >= 1, 'a slower time is not a record');
   // difficulty button: 5 and 7 differences

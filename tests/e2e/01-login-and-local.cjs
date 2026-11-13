@@ -32,7 +32,7 @@ const { ok, done } = checks();
   await page.fill('input[type=text]', REPO); await page.fill('input[type=password]', 'good'); await page.click('button.primary');
   await page.waitForSelector('.hub-grid'); ok(true, 'good token: the subject picker comes first');
   await toChinese(page);
-  ok((await page.textContent('.empty-home')).includes('还没有孩子'), 'good token: home screen, no children yet');
+  ok((await page.textContent('.empty-home')).includes('暂无孩子'), 'good token: home screen, no children yet');
   await page.reload();
   await page.waitForSelector('.empty-home');
   ok(true, 'stays signed in after reload');

@@ -5,7 +5,7 @@ const { ok, done } = checks();
 const fs = require('fs');
 const OUT = process.env.D || 'tests/out/work/';
 fs.mkdirSync(OUT, { recursive: true });
-const IDS = ['snake', 'tetris', 'bubble', 'match3', 'klotski', 'gomoku', 'chess', 'xiangqi', 'spider', 'freecell'];
+const IDS = ['snake', 'tetris', 'bubble', 'match3', 'klotski', 'gomoku', 'chess', 'xiangqi', 'spider', 'freecell', 'g2048', 'memory', 'minesweeper', 'sokoban', 'watersort', 'game24', 'hanzipuzzle', 'spotdiff'];
 
 (async () => {
   const t = await start(new Map(), { local: true, today: '2026-11-12', viewport: { width: 820, height: 1180 } });
@@ -14,10 +14,10 @@ const IDS = ['snake', 'tetris', 'bubble', 'match3', 'klotski', 'gomoku', 'chess'
   const names = await p.locator('.subject .s-name').allTextContents();
   ok(names.join() === '识字,数学,英语,科学,音乐,小游戏', 'the picker has six cards, games is the sixth: ' + names.join());
   await p.click('.subject[data-subject=games]'); await p.waitForSelector('.gm-card');
-  ok((await p.locator('.gm-card').count()) === 10 && (await p.locator('.gm-card').evaluateAll((e) => e.map((x) => x.dataset.game))).join() === IDS.join(), 'the home has the ten games in order: ' + IDS.join(' '));
-  const icons = await p.locator('.gm-art svg').evaluateAll((els) => els.map((e) => ({ n: e.querySelectorAll('*').length, ph: /马上就好/.test(e.outerHTML) || (e.querySelectorAll('text').length === 1 && e.querySelectorAll('*').length < 5) })));
+  ok((await p.locator('.gm-card').count()) === IDS.length && (await p.locator('.gm-card').evaluateAll((e) => e.map((x) => x.dataset.game))).join() === IDS.join(), 'the home has all the games in order: ' + IDS.join(' '));
+  const icons = await p.locator('.gm-art > svg').evaluateAll((els) => els.map((e) => ({ n: e.querySelectorAll('*').length, ph: /马上就好/.test(e.outerHTML) || (e.querySelectorAll('text').length === 1 && e.querySelectorAll('*').length < 5) })));
   ok(icons.length === IDS.length && icons.every((i) => i.n >= 10 && !i.ph), 'every game has a real cartoon icon (not a placeholder): shapes ' + icons.map((i) => i.n).join(','));
-  ok(await p.locator('.gm-art svg').count() === 10 && await p.locator('.shortcuts').count() === 0, 'every card has its cartoon picture; no child shortcuts here');
+  ok(await p.locator('.gm-art > svg').count() === IDS.length && await p.locator('.shortcuts').count() === 0, 'every card has its cartoon picture; no child shortcuts here');
   await p.screenshot({ path: OUT + 'games-home-ipad.png' });
   for (const id of IDS) {
     await p.evaluate(() => (location.hash = '#/subject/games')); await p.waitForSelector('.gm-card');
@@ -48,7 +48,7 @@ const IDS = ['snake', 'tetris', 'bubble', 'match3', 'klotski', 'gomoku', 'chess'
       await s.page.evaluate(() => (location.hash = '#/subject/games')); await s.page.waitForSelector('.gm-card');
       await s.page.waitForTimeout(300);
       const m = await s.page.evaluate(() => { const vw = document.documentElement.clientWidth, cards = [...document.querySelectorAll('.gm-card')]; const l = Math.min(...cards.map((c) => c.getBoundingClientRect().left)), r = vw - Math.max(...cards.map((c) => c.getBoundingClientRect().right)); return { sw: document.documentElement.scrollWidth <= vw, l, r, out: cards.filter((c) => c.scrollWidth > c.clientWidth + 1).length, cjk: /[一-鿿]/.test(document.querySelector('main').textContent + document.querySelector('.hero h1').textContent) }; });
-      ok(m.sw && m.out === 0 && Math.abs(m.l - m.r) <= 2, `${name} ${dn}: ten cards inside the screen, equal space left and right (${Math.round(m.l)} / ${Math.round(m.r)})`);
+      ok(m.sw && m.out === 0 && Math.abs(m.l - m.r) <= 2, `${name} ${dn}: all cards inside the screen, equal space left and right (${Math.round(m.l)} / ${Math.round(m.r)})`);
       const oneLineCheck = (sel) => s.page.evaluate((sel) => [...document.querySelectorAll(sel)].filter((e) => { const fs = parseFloat(getComputedStyle(e).fontSize); return e.getBoundingClientRect().height > fs * 1.7 || e.scrollWidth > e.clientWidth + 1; }).map((e) => e.textContent), sel);
       const wrapped = await oneLineCheck('.gm-card b');
       ok(wrapped.length === 0, `${name} ${dn}: every game name stays on one line${wrapped.length ? ' -> ' + wrapped.join() : ''}`);

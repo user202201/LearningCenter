@@ -185,7 +185,7 @@ export function secretTaps(corner: HTMLElement, grid: HTMLElement, toastFn: (msg
     lock = true; setHiddenUnlocked(true);
     const cards = g.__secret!.reveal();
     sound("win");
-    toastFn("隐藏学科出现了：音乐、小游戏！");
+    toastFn("已显示隐藏学科：音乐、小游戏。");
     if (reduced()) { scrollToCards(cards, false); return void done(1800); }   // (no animation, but the same lock: wild tapping must not toggle it back at once)
     cards.forEach((c) => c.classList.add("hub-pre"));                         // (laid out, but not seen yet)
     // 1. slide the page down to them (on a tall phone they are below the fold), 2. the light goes out round them, 3. they fly in, 4. the light comes back
@@ -203,7 +203,7 @@ export function secretTaps(corner: HTMLElement, grid: HTMLElement, toastFn: (msg
     lock = true; setHiddenUnlocked(false);
     const cards = g.__secret!.hide();
     sound("swap");
-    toastFn("隐藏学科收起来了。");
+    toastFn("已收起隐藏学科。");
     const finish = () => { cards.forEach((c) => c.remove()); g.__secret!.removed(); };
     if (reduced()) { finish(); return void done(1800); }
     cards.forEach((c, i) => { c.style.pointerEvents = "none"; c.style.animationDelay = `${i * 0.12}s`; c.classList.add("hub-leave"); });
@@ -336,11 +336,11 @@ export function soonPage(s: Subject, back: HTMLElement, gear: HTMLElement): HTML
     h("main", { class: "scroll" }, h("div", { class: "narrow soon" },
       h("div", { class: "soon-art" }, subjectArt(s.id)),
       h("h2", {}, "正在建设中"),
-      h("p", { class: "muted" }, "很快就和你见面啦，先去试试别的学科吧！"))));
+      h("p", { class: "muted" }, "该学科尚未开放，敬请期待。"))));
 }
 
 export const hubHero = (gear: HTMLElement, gradeChip?: HTMLElement) =>
   h("header", { class: "top hero home-hero hub-hero" },
     h("span", { class: "mascot" }, mascot()),
-    h("div", { class: "hero-text" }, h("h1", {}, "学习乐园"), h("p", {}, "今天想学什么？"), gradeChip ?? null),
+    h("div", { class: "hero-text" }, h("h1", {}, "学习乐园"), h("p", {}, "请选择学科"), gradeChip ?? null),
     gear);

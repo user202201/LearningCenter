@@ -183,9 +183,9 @@ const mode2 = async (page) => { await page.click('#chess-new'); await page.click
   await page.screenshot({ path: OUT + 'chess-mate.png' });
   const res = await page.evaluate(() => document.querySelector('#chess-result').textContent);
   ok(mate.dizzy && mate.cheer === 2 && mate.conf > 20, `checkmate: the king is dizzy, ${mate.cheer} winning pieces cheer, ${mate.conf} confetti pieces`);
-  ok(/白方获胜/.test(res) && await page.evaluate(() => !!document.querySelector('#chess-again') && !!document.querySelector('#chess-look')), `a result window: "${res.slice(0, 20)}", with "再来一局" and "看看棋盘"`);
+  ok(/白方获胜/.test(res) && await page.evaluate(() => !!document.querySelector('#chess-again') && !!document.querySelector('#chess-look')), `a result window: "${res.slice(0, 20)}", with "再来一局" and "查看棋盘"`);
   await page.click('#chess-look');
-  ok(await page.evaluate(() => !document.querySelector('#chess-result')), '"看看棋盘" closes the result window');
+  ok(await page.evaluate(() => !document.querySelector('#chess-result')), '"查看棋盘" closes the result window');
   await click(page, 'a8'); await click(page, 'a7');
   ok((await fen(page)).startsWith('R5k1'), 'no move is possible after the game is over');
   // stalemate
@@ -221,7 +221,7 @@ const mode2 = async (page) => { await page.click('#chess-new'); await page.click
   await setFen(page, '6k1/5ppp/8/8/8/8/8/R3K3 w - - 0 1'); await page.waitForTimeout(80);
   await move(page, 'a1', 'a8'); await page.waitForSelector('#chess-result');
   const rec = await page.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).chess);
-  ok(rec.rec1 && rec.rec1.w === 1 && rec.level === 1 && /你赢啦/.test(await page.evaluate(() => document.querySelector('#chess-result').textContent)), 'winning against the computer: "你赢啦！" and the record (1 win at 简单) is kept in learn.games.v1');
+  ok(rec.rec1 && rec.rec1.w === 1 && rec.level === 1 && /你赢了/.test(await page.evaluate(() => document.querySelector('#chess-result').textContent)), 'winning against the computer: "你赢了。" and the record (1 win at 简单) is kept in learn.games.v1');
   // computer plays mate itself
   await page.click('#chess-again'); await page.waitForTimeout(100);
   await setFen(page, '6k1/8/6K1/8/8/8/8/7q b - - 0 1'); await page.waitForFunction(() => window.__chess.turn() === 'w' || window.__chess.over(), null, { timeout: 8000 }).catch(() => {});

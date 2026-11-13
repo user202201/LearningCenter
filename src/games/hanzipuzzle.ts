@@ -96,7 +96,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     token++; animating = false; chars = []; idx = 0; results = []; strokes = []; boxes = []; selected = -1; lastScore = 0; failed = false;
     phase = "ready";
     clearBoard(); tray.replaceChildren(); nextWrap.hidden = true;
-    setOvl("汉字笔画", mode === "order" ? "按笔顺，先点下一笔，再点田字格；也可以拖过去。" : "把散开的笔画拖到田字格里，拼成汉字。", "开始", true);
+    setOvl("汉字笔画", mode === "order" ? "请按笔顺操作：先点击下一笔，再点击田字格；也可拖动到田字格。" : "将散开的笔画拖入田字格，拼成汉字。", "开始", true);
     refreshHud();
   }
   function clearBoard() { faintG.replaceChildren(); placedG.replaceChildren(); animG.replaceChildren(); ghost.replaceChildren(); fx.replaceChildren(); }
@@ -112,7 +112,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (my !== token) return;
     if (got.some((g) => !g || !g.length)) {
       phase = "ready"; failed = true;
-      setOvl("汉字笔画", "没能加载笔画。请先联网打开一次，再试一次。", "再试一次", true); refreshHud();
+      setOvl("汉字笔画", "无法加载笔画。请先联网打开一次，然后重试。", "再试一次", true); refreshHud();
       return;
     }
     failed = false; all = got as string[][];
@@ -247,7 +247,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (newBest) ctx.store.set(bestKey(), sc);
     ctx.sfx(sc >= 3 ? "win" : "good");
     clearBoard(); tray.replaceChildren();
-    setOvl(sc >= 4 ? "太棒了！" : sc >= 2 ? "做得好！" : "再加油！", newBest && sc > 0 ? `新纪录：${sc}` : `得分：${sc} / ${L.ROUND}`, "再玩一次", true);
+    setOvl(sc >= 4 ? "完成。" : sc >= 2 ? "成绩良好。" : "仍需练习。", newBest && sc > 0 ? `新纪录：${sc}` : `得分：${sc} / ${L.ROUND}`, "再玩一次", true);
     if (sc > 0 && newBest) ctx.toast(`新纪录：${sc}`, 1500);
     refreshHud();
     again.focus({ preventScroll: true });

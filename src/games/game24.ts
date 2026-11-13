@@ -41,7 +41,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const board = h("div", { class: "g24-board" }, field);
   const act = (id: string, label: string, fn: () => void) => h("button", { class: "g24-act", id, onclick: (e: Event) => { blur(e); fn(); } }, label);
   const undoBtn = act("g24-undo", "撤销", () => doUndo());
-  const resetBtn = act("g24-reset", "重来", () => doReset());
+  const resetBtn = act("g24-reset", "重置", () => doReset());
   const hintBtn = act("g24-hint", "提示", () => doHint());
   const skipBtn = act("g24-skip", "跳过", () => doSkip());
   const pad = h("div", { class: "g24-pad" }, undoBtn, resetBtn, hintBtn, skipBtn);
@@ -97,14 +97,14 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
   function setMsg(m: string) { msg = m; msgEl.textContent = m; }
   const clearPick = () => { sel = -1; op = null; };
-  const guide = () => { setMsg(sel < 0 ? "选一张牌" : op === null ? "再选一个运算符" : "再选另一张牌"); };
+  const guide = () => { setMsg(sel < 0 ? "选一张牌" : op === null ? "请再选择一个运算符" : "再选另一张牌"); };
 
   function newDeal() {
     const ranks = deal(level, Math.random, 0.2, lastRanks); lastRanks = ranks;
     hand = newHand(ranks); suits = ranks.map(() => Math.floor(Math.random() * 4));
     clearPick(); hintSteps = null; hinted = false; hintUndo = false;
     if (phase === "won") phase = "play";
-    if (phase === "ready") setOvl("算24点", "点一张牌，点一个运算符，再点另一张牌，把四张牌算成 24。", "开始", true); else setOvl("", "", "", false);
+    if (phase === "ready") setOvl("算24点", "依次点击一张牌、一个运算符、另一张牌，用四张牌算出 24。", "开始", true); else setOvl("", "", "", false);
     guide(); render(); layout();
   }
   function go() {
@@ -124,7 +124,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     hand = r; clearPick(); popIdx = lo;
     const st = status(hand);
     if (st === "won") { phase = "won"; won(); }
-    else if (st === "failed") { ctx.sfx("bad"); setMsg(`结果是 ${fracText(hand.cards[0].v)}，不是 24，撤销再试试。`); }
+    else if (st === "failed") { ctx.sfx("bad"); setMsg(`结果为 ${fracText(hand.cards[0].v)}，不是 24。请撤销后重试。`); }
     else { ctx.sfx("good"); guide(); }
     render();
   }
@@ -142,7 +142,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     ctx.store.set("solved", ctx.store.get<number>("solved", 0) + 1);
     ctx.sfx("win");
     setMsg("");
-    setOvl("24!", hinted ? "做对了！下次试试不看提示。" : `太棒了！连胜 ${streak}`, "下一题", true);
+    setOvl("24!", hinted ? "已解出。下次可尝试不看提示。" : `连胜 ${streak}`, "下一题", true);
   }
   function doUndo() {
     if (phase !== "play" || !hand.hist.length) return;
@@ -156,9 +156,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (phase !== "play" || hand.cards.length < 2) return;
     const s = hint(hand);
     clearPick(); hinted = true;
-    if (!s) { hintSteps = null; hintUndo = true; ctx.sfx("bad"); setMsg("这条路走不通，先撤销一步。"); render(); return; }
+    if (!s) { hintSteps = null; hintUndo = true; ctx.sfx("bad"); setMsg("此路不通，请先撤销一步。"); render(); return; }
     hintSteps = { i: s.i, j: s.j, op: s.op }; ctx.sfx("good");
-    setMsg(`提示：试试 ${fracText(s.a)} ${OP_SYMBOL[s.op]} ${fracText(s.b)}`);
+    setMsg(`提示：${fracText(s.a)} ${OP_SYMBOL[s.op]} ${fracText(s.b)}`);
     render();
   }
   function doSkip() {

@@ -154,9 +154,9 @@ export function renderBeats(d: Deps): void {
     scaleBox.replaceChildren(...B.SCALES.map((s) => h("button", { class: "mopt" + (p.scale === s.id ? " on" : ""), id: `bt-scale-${s.id}`, onclick: () => { p.scale = s.id; persist(); paintAll(); drawPanel(); preview(sel); } }, s.name)));
     hint.hidden = ch.length > 0;
   };
-  const hint = h("span", { class: "muted small bt-hint" }, "点格子点亮；手指拖过去，可以连着画。");
+  const hint = h("span", { class: "muted small bt-hint" }, "点击格子点亮；手指拖过可连续绘制。");
   panel.append(h("div", { class: "bt-pl" }, panelIco, panelName), muteBtn, h("label", { class: "bt-vl" }, h("span", { class: "muted small" }, "音量"), volInput), pitchBox, scaleBox, hint,
-    h("button", { class: "sheet-btn", id: "bt-clear-track", onclick: () => { if (!B.countLit(p, sel)) return void toast("这一行本来就是空的。", 1800); remember(); B.clearTrack(p, sel); changed(); toast(`已清空：${tr(B.trackDef(sel).name)}（可以撤销）`, 2200); } }, "清空这一行"));
+    h("button", { class: "sheet-btn", id: "bt-clear-track", onclick: () => { if (!B.countLit(p, sel)) return void toast("该行已为空。", 1800); remember(); B.clearTrack(p, sel); changed(); toast(`已清空：${tr(B.trackDef(sel).name)}（可撤销）`, 2200); } }, "清空这一行"));
 
   // ---------- changing the cells ----------
   const remember = () => { hist.push(p); };
@@ -249,8 +249,8 @@ export function renderBeats(d: Deps): void {
     bpmNum.textContent = String(p.bpm); tempo.value = String(p.bpm);
   };
   const presetBox = h("div", { class: "bt-presets", id: "bt-presets" }, h("span", { class: "muted small" }, "节奏模板："), ...B.PRESETS.map((pr) => h("button", { class: "mopt", id: `bt-preset-${pr.id}`, onclick: () => { remember(); B.applyPreset(p, pr); persist(); drawControls(); build(); drawPanel(); toast(`已填入：${tr(pr.name)}`, 2000); } }, pr.name)));
-  const randomBtn = h("button", { class: "sheet-btn", id: "bt-random", onclick: () => { remember(); B.randomize(p); persist(); build(); toast("随机编了一段，不喜欢可以撤销。", 2200); } }, "随机");
-  const clearBtn = h("button", { class: "sheet-btn", id: "bt-clear", onclick: () => { if (!B.countLit(p)) return void toast("格子本来就是空的。", 1800); remember(); B.clearAll(p); changed(); toast("已全部清空（可以撤销）", 2200); } }, "全部清空");
+  const randomBtn = h("button", { class: "sheet-btn", id: "bt-random", onclick: () => { remember(); B.randomize(p); persist(); build(); toast("已随机生成一段节奏，可撤销。", 2200); } }, "随机");
+  const clearBtn = h("button", { class: "sheet-btn", id: "bt-clear", onclick: () => { if (!B.countLit(p)) return void toast("格子已为空。", 1800); remember(); B.clearAll(p); changed(); toast("已全部清空（可撤销）", 2200); } }, "全部清空");
   const fullBtn = d.fullToggle(() => root, "bt-full", () => { build(); window.setTimeout(build, 150); });
 
   // ---------- my rhythms (kept on this device, at most 12) ----------
@@ -264,12 +264,12 @@ export function renderBeats(d: Deps): void {
         h("input", { class: "pn-take-name user", value: s.name, "aria-label": "节奏名字", maxLength: 30, onchange: (e: Event) => { s.name = (e.target as HTMLInputElement).value.trim() || s.name; persist(); } }),
         h("span", { class: "muted small" }, `${s.p.bpm} BPM · ${B.countLit(s.p)}`),
         h("button", { class: "icon", id: `bt-load-${s.id}`, title: "读取", "aria-label": "读取", onclick: () => load(s) }, "▶"),
-        h("button", { class: "icon", id: `bt-del-${s.id}`, title: "删除", "aria-label": "删除", onclick: async () => { if (!(await confirmDlg("删除这个节奏？", `“${s.name}”删除后找不到了。`, "删除", true))) return; store.slots = store.slots.filter((x) => x.id !== s.id); persist(); drawMine(); toast("已删除"); } }, "✕"))))
-        : h("p", { class: "muted small" }, "编好一段节奏后，按“保存当前节奏”：它会留在这里，随时可以再读出来。"));
+        h("button", { class: "icon", id: `bt-del-${s.id}`, title: "删除", "aria-label": "删除", onclick: async () => { if (!(await confirmDlg("删除这个节奏？", `“${s.name}”删除后将无法恢复。`, "删除", true))) return; store.slots = store.slots.filter((x) => x.id !== s.id); persist(); drawMine(); toast("已删除"); } }, "✕"))))
+        : h("p", { class: "muted small" }, "编好节奏后，点击“保存当前节奏”：节奏将保存在此处，可随时读取。"));
   };
   const save = () => {
-    if (store.slots.length >= B.MAX_SLOTS) return void toast(`最多保存 ${B.MAX_SLOTS} 个节奏：先删掉一个再保存。`, 4000);
-    if (!B.countLit(p)) return void toast("先点亮一些格子，再保存。", 2500);
+    if (store.slots.length >= B.MAX_SLOTS) return void toast(`最多保存 ${B.MAX_SLOTS} 个节奏，请先删除一个再保存。`, 4000);
+    if (!B.countLit(p)) return void toast("请先点亮部分格子，再保存。", 2500);
     const s: B.Slot = { id: `b${Date.now().toString(36)}${Math.floor(Math.random() * 1296).toString(36)}`, name: nextName(), date: new Date().toISOString().slice(0, 16).replace("T", " "), p: B.clone(p) };
     store.slots = [s, ...store.slots]; persist(); drawMine(); toast(`已保存：${s.name}`);
   };
@@ -282,7 +282,7 @@ export function renderBeats(d: Deps): void {
   const barsBox = h("div", { class: "bt-chips", id: "bt-bars" });
   const drawBars = () => barsBox.replaceChildren(...([2, 4, 8] as const).map((n) => chip(`bt-bars-${n}`, tr("{0} 小节").replace("{0}", String(n)), store.bars === n, () => { store.bars = n; persist(); drawBars(); })));
   const exportBtn = h("button", { class: "primary", id: "bt-export", onclick: () => {
-    if (!B.countLit(p)) return void toast("先点亮一些格子，再导出。", 2500);
+    if (!B.countLit(p)) return void toast("请先点亮部分格子，再导出。", 2500);
     const bytes = R.buildPatternMidi(p, store.bars, "Beat");
     const file = `beat_${p.bpm}bpm_${store.bars}bars.mid`;
     R.downloadBytes(bytes, file);
@@ -296,7 +296,7 @@ export function renderBeats(d: Deps): void {
       h("div", { class: "bt-bar" }, h("span", { class: "muted small" }, "拍号"), sigBox, resBox, swingBtn, undoBtn, randomBtn, clearBtn, fullBtn)),
       presetBox, pager, wrap, panel, mine,
       h("div", { class: "bt-export" }, h("span", { class: "muted small" }, "导出长度："), barsBox, exportBtn),
-      h("p", { class: "muted small center bt-help" }, "点格子点亮，手指拖过去可以连着画；键盘：方向键移动，空格或回车点亮，P 播放。"))));
+      h("p", { class: "muted small center bt-help" }, "点击格子点亮，手指拖过可连续绘制；键盘：方向键移动，空格或回车点亮，P 播放。"))));
   X.show(root);
   drawControls(); drawBars(); build(); drawPanel(); drawMine();
   const onResize = () => { if (root.isConnected) build(); };

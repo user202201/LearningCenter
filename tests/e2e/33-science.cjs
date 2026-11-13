@@ -141,7 +141,7 @@ const openScience = async (page, name) => {
   }
   ok(wrongDone, 'a wrong answer says "没关系" and shows the right answer and the text');
   await page.waitForSelector('#game-end');
-  ok((await page.textContent('#game-end h2')) === '探索完成！' && (await page.textContent('#game-final')) === '5' && !(await page.textContent('#game-end')).includes('用时'), 'the end: "探索完成！", 5 / 6, no time shown');
+  ok((await page.textContent('#game-end h2')) === '探索完成。' && (await page.textContent('#game-final')) === '5' && !(await page.textContent('#game-end')).includes('用时'), 'the end: "探索完成。", 5 / 6, no time shown');
   await page.screenshot({ path: OUT + 'science-end-phone.png' });
   await page.click('#game-done'); await page.waitForSelector('.tabs');
   // saved: boxes of the cards in science/<kid>.review.json

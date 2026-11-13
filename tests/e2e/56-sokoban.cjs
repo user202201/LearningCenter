@@ -130,7 +130,7 @@ const CJK = /[　-〿一-鿿＀-￯]/;
   ok(a.finished && a.moves === path1.length, `level 1 solved with the shortest solution (${a.moves} moves, ${a.pushes} pushes)`);
   await p.waitForFunction(() => { const o = document.querySelector('#sk-ovl'); return !!o && !o.hidden; }, null, { timeout: 3000 });
   await p.screenshot({ path: OUT + 'sokoban-win.png' });
-  ok((await txt('#sk-ovl h2')) === '过关！' && (await txt('#sk-stars')) === '★★★' && (await txt('#sk-ovl p:not(.sk-stars)')).includes(String(a.moves)) && (await txt('#sk-next')) === '下一关', 'win overlay: "level clear", three stars for the shortest solution, the moves, a Next button');
+  ok((await txt('#sk-ovl h2')) === '过关。' && (await txt('#sk-stars')) === '★★★' && (await txt('#sk-ovl p:not(.sk-stars)')).includes(String(a.moves)) && (await txt('#sk-next')) === '下一关', 'win overlay: "level clear", three stars for the shortest solution, the moves, a Next button');
   let store = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).sokoban);
   ok(store.best.l01 === path1.length && store.level === 1, 'the best moves and the level reached are kept in learn.games.v1: ' + JSON.stringify(store));
   ok((await txt('#sk-best')) === '最佳：' + path1.length, 'the best pill shows it');

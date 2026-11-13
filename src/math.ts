@@ -47,13 +47,13 @@ export async function renderHome() {
   const hero = h("header", { class: "top hero home-hero subj-hero", style: `--kid:${COLOR}` },
     X.back("#/", "选择学科"),
     h("span", { class: "subj-ico" }, subjectArt("math")),
-    h("div", { class: "hero-text" }, h("h1", {}, "数学"), h("p", {}, "今天练几道题？")),
+    h("div", { class: "hero-text" }, h("h1", {}, "数学"), h("p", {}, "请选择孩子")),
     X.gear("#/subject/math"));
   if (!kids.length) {
     return X.show(h("div", { class: "page", style: `--kid:${COLOR}` }, hero,
       h("main", { class: "scroll" }, h("div", { class: "narrow home-empty empty-home" },
         h("button", { class: "add-big", id: "add-kid-big", title: "添加孩子", "aria-label": "添加孩子", onclick: () => void X.addKid(() => X.route()) }, "＋"),
-        h("p", {}, "还没有孩子，先添加一个吧。")))));
+        h("p", {}, "暂无孩子。请先添加。")))));
   }
   const list = h("div", { class: "kids" });
   for (const k of kids) {
@@ -104,7 +104,7 @@ export async function renderKid(id: string, tab: Tab) {
   }
   if (my !== X.epoch()) return;
   const k = X.kids().kids.find((x) => x.id === id);
-  if (!k) { toast("找不到这个孩子"); return void (location.hash = "#/subject/math"); }
+  if (!k) { toast("未找到该孩子"); return void (location.hash = "#/subject/math"); }
   if (P.gradeOf(id) === null) {
     const g = await pickKidGrade(k);
     if (my !== X.epoch()) return;
@@ -168,7 +168,7 @@ async function renderWeek(body: HTMLElement, k: M.Kid, kid: M.KidData, names: Ma
   body.replaceChildren(h("div", { class: "narrow week-narrow" }, bar,
     curDay === t ? null : h("button", { class: "link", onclick: () => void go(t) }, "回到今天"),
     h("div", { class: "sec-row" }, h("h2", { class: "sec" }, `知识点（${list.length}）`)),
-    list.length ? h("div", { class: "mtlist" }, ...X.stagger(list.map((id) => topicCard(id, names, review, () => practice(k, [id], names))))) : h("p", { class: "empty" }, "这一天没有知识点。")));
+    list.length ? h("div", { class: "mtlist" }, ...X.stagger(list.map((id) => topicCard(id, names, review, () => practice(k, [id], names))))) : h("p", { class: "empty" }, "该日暂无知识点。")));
 }
 
 async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, names: Map<string, MM.Topic>) {
@@ -186,7 +186,7 @@ async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, names:
       ? h("div", {}, ...mistakes.slice(0, 20).map((m) => { const q = h("span", { class: "user" }), a = h("b", { class: "user" }); renderRich(q, m.q, !/[　-〿一-鿿＀-￯]/.test(m.q)); renderRich(a, m.a, true); return h("div", { class: "mmis", "data-topic": m.topic }, q, a); }))
       : h("p", { class: "muted small" }, "还没有错题。"));
   body.replaceChildren(h("div", { class: "narrow" }, book,
-    all.length ? h("div", { class: "mtlist" }, ...X.stagger(all.map((id) => topicCard(id, names, review)))) : h("p", { class: "empty" }, "还没有入库的知识点，先去“本周”看看吧。")));
+    all.length ? h("div", { class: "mtlist" }, ...X.stagger(all.map((id) => topicCard(id, names, review)))) : h("p", { class: "empty" }, "暂无已入库的知识点。请先查看“本周”。")));
 }
 
 /** the errors book: the wrong questions again (the choices are shuffled anew); a right answer takes a question out of the book */
@@ -257,7 +257,7 @@ async function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, names: M
       opt(set.mode === "choice", "四选一", "choice", () => change({ mode: "choice" })), opt(set.mode === "keypad", "键盘输入", "keypad", () => change({ mode: "keypad" })))));
   body.replaceChildren(h("div", { class: "narrow lobby" },
     h("div", { class: "lobby-hero" }, h("span", { class: "mascot big" }, mascot()), h("h2", {}, "准备好了吗？")),
-    topics.length ? h("p", { class: "muted center", id: "math-info" }, `共 ${topics.length} 题，限时约 ${minutes} 分钟`) : h("p", { class: "empty" }, "还没有知识点，先到“今天”看看吧。"),
+    topics.length ? h("p", { class: "muted center", id: "math-info" }, `共 ${topics.length} 题，限时约 ${minutes} 分钟`) : h("p", { class: "empty" }, "暂无知识点。请先查看“今天”。"),
     settings,
     h("div", { class: "lobby-go" }, h("button", { class: "primary wide", id: "game-start", disabled: topics.length === 0, onclick: () => play(k, kid, names) }, "开始游戏"))));
 }

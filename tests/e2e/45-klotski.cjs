@@ -108,7 +108,7 @@ const INDEP = `(rows, unit) => {
   const open0 = await p.locator('.klotski-lv').evaluateAll((a) => a.map((e) => e.dataset.open));
   ok(open0[0] === '1' && open0.slice(1).every((v) => v === '0'), 'at the beginning only the first level is open');
   await p.click('.klotski-lv[data-level=l03]');
-  ok((await p.textContent('#toasts')).includes('先通过前一关') && await p.locator('.klotski-piece').count() === 0, 'a locked level does not open: a message says why');
+  ok((await p.textContent('#toasts')).includes('通过前一关后') && await p.locator('.klotski-piece').count() === 0, 'a locked level does not open: a message says why');
   await p.waitForFunction(() => ![...document.querySelectorAll('.klotski-min')].some((e) => e.textContent.includes('计算中')), null, { timeout: 30000 });
   const shown = await p.locator('.klotski-min').allTextContents();
   const lv = await p.evaluate(async () => (await import('/src/games/klotski-logic.ts')).LEVELS.map((l) => l.name));
@@ -133,7 +133,7 @@ const INDEP = `(rows, unit) => {
   ok((await p.textContent('#klotski-moves')) === '步数 0' && await p.locator('#klotski-undo').isDisabled(), 'undo takes the move back and is off when there is nothing to take back');
   for (let i = 0; i < 5; i++) { await p.click('#klotski-hint'); await p.click('.klotski-ghost.hinted'); }
   await p.waitForSelector('#klotski-win');
-  ok((await p.textContent('#klotski-win')).includes('曹操逃出来了') && (await p.locator('#klotski-win .klotski-stars svg path[fill="#ffd43b"]').count()) === 3 && (await p.textContent('#klotski-win')).includes('用了 5 步'), 'winning in the minimal 5 moves: message, three gold stars, "用了 5 步"');
+  ok((await p.textContent('#klotski-win')).includes('曹操已到达出口') && (await p.locator('#klotski-win .klotski-stars svg path[fill="#ffd43b"]').count()) === 3 && (await p.textContent('#klotski-win')).includes('用了 5 步'), 'winning in the minimal 5 moves: message, three gold stars, "用了 5 步"');
   const saved = await p.evaluate((k) => JSON.parse(localStorage.getItem(k)).klotski, KEY);
   ok(saved.stars.l01 === 3 && saved.best.l01 === 5, 'stars and best moves are kept in localStorage learn.games.v1: ' + JSON.stringify(saved));
   await p.screenshot({ path: OUT + 'klotski-win-ipad.png' });

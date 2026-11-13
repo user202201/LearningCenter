@@ -169,7 +169,7 @@ export function openMathGame(o: MathGameOpts): void {
     if (o.relaxed) {
       const goNext = () => { clearTimeout(next); idx++; ask(); };
       const text = o.explain?.(q) ?? "";
-      grid.append(h("div", { class: "mexplain", id: "math-explain" }, h("b", { class: right ? "yes" : "no" }, right ? "答对啦！" : "没关系，看看这个小知识～"), !right ? h("p", {}, "正确答案：", ((): HTMLElement => { const b = h("b", { class: "user" }); renderRich(b, q.a, !HAS_CJK.test(q.a)); return b; })()) : null, text ? ((): HTMLElement => { const p = h("p", { class: "user" }); renderRich(p, text); return p; })() : null,
+      grid.append(h("div", { class: "mexplain", id: "math-explain" }, h("b", { class: right ? "yes" : "no" }, right ? "回答正确。" : "回答有误。请查看这条知识。"), !right ? h("p", {}, "正确答案：", ((): HTMLElement => { const b = h("b", { class: "user" }); renderRich(b, q.a, !HAS_CJK.test(q.a)); return b; })()) : null, text ? ((): HTMLElement => { const p = h("p", { class: "user" }); renderRich(p, text); return p; })() : null,
         h("button", { class: "primary", id: "math-next", onclick: goNext }, idx + 1 < total ? "下一题" : "完成")));
       return;
     }
@@ -191,7 +191,7 @@ export function openMathGame(o: MathGameOpts): void {
     const again = h("button", { class: "primary", id: "game-again", onclick: async () => { await saving; root.remove(); o.onAgain(); } }, "再玩一次");
     const fin = h("button", { id: "game-done", onclick: async () => { await saving; root.remove(); o.onClose(); } }, "完成");
     root.replaceChildren(h("div", { class: "gend", id: "game-end" },
-      h("h2", {}, timeUp ? "时间到！" : o.relaxed ? "探索完成！" : score === total ? "全对了！" : "练完了！"),
+      h("h2", {}, timeUp ? "时间到！" : o.relaxed ? "探索完成。" : score === total ? "全部正确。" : "练习完成。"),
       h("div", { class: "gstars", "data-stars": String(stars) }, ...[1, 2, 3].map((n) => starSvg(n <= stars))),
       h("div", { class: "gresult" }, h("strong", { id: "game-final" }, String(score)), ` / ${total}`),
       o.relaxed ? null : h("p", { class: "muted" }, `用时 ${fmtTime(usedS)}`, answers.length < total ? `，做了 ${answers.length} 题` : ""),
@@ -203,7 +203,7 @@ export function openMathGame(o: MathGameOpts): void {
     if (phase === "end") return;
     const wasRunning = !!timer;
     stop();
-    const yes = await confirmDlg("退出游戏？", answers.length ? "已经做过的题会保存下来。" : "还没有答题，不会保存。", "退出", true);
+    const yes = await confirmDlg("退出游戏？", answers.length ? "已完成的题目将被保存。" : "尚未答题，不会保存。", "退出", true);
     if (!yes) {
       if (phase === "feedback" && !o.relaxed) next = setTimeout(() => { idx++; ask(); }, 500);
       if (wasRunning) run();

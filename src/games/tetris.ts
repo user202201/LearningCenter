@@ -60,12 +60,12 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   };
   function reset() {
     s = newTetris(); phase = "ready"; acc = 0; lockT = 0; lockResets = 0; sparks = []; pops = []; clearFx = null; trail = [];
-    setOvl("俄罗斯方块", "点“开始”。方向键移动，上或X旋转，空格直落，C暂存。", "开始", true);
+    setOvl("俄罗斯方块", "点击“开始”。方向键移动，上方向键或 X 旋转，空格键直接落下，C 暂存。", "开始", true);
     layout(); refresh();
   }
   function begin() { if (phase !== "ready") return; phase = "play"; setOvl("", "", "", false); last = performance.now(); acc = 0; refresh(); }
   function togglePause() {
-    if (phase === "play") { phase = "pause"; setOvl("暂停", "点一下继续。", "继续", true); }
+    if (phase === "play") { phase = "pause"; setOvl("暂停", "点击继续。", "继续", true); }
     else if (phase === "pause") { phase = "play"; setOvl("", "", "", false); last = performance.now(); }
     refresh();
   }
@@ -79,7 +79,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       pops.push({ text: `+${r.points}`, y: r.cleared[0], t: now });
       if (r.cleared.length === 4) shakeT = now;
     } else ctx.sfx(hard ? "drop" : "place");
-    if (r.levelUp) { ctx.toast(`升级了！等级 ${s.level}`, 1400); }
+    if (r.levelUp) { ctx.toast(`升级，等级 ${s.level}`, 1400); }
     refresh();
     if (r.over || s.over) gameOver();
   }

@@ -163,7 +163,7 @@ const errors = [];
   await p.evaluate(async () => { const M = await import('/src/games/minesweeper-logic.ts'); const s = window.__mines.state(); s.mine[62] = 1; M.recount(s); }); // (only to have a second hidden mine to look at)
   await p.waitForFunction(() => { const o = document.querySelector('#ms-ovl'); return !!o && !o.hidden; }, null, { timeout: 4000 });
   await p.screenshot({ path: OUT + 'minesweeper-lost.png' });
-  ok((await p.textContent('#ms-ovl h2')) === '哎呀，踩到雷了！' && await p.locator('#ms-start').isVisible(), 'lost: the overlay with a play-again button');
+  ok((await p.textContent('#ms-ovl h2')) === '踩到地雷，本局结束。' && await p.locator('#ms-start').isVisible(), 'lost: the overlay with a play-again button');
   ok(!(await p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1') || '{}').minesweeper?.['best-0'])), 'a loss saves no best time');
   // wrong flag and all mines shown: look at the board before the overlay is on top (pixels of cell 0 = mine shown, not a closed tile)
   await p.click('#ms-start'); a = await S();
@@ -183,7 +183,7 @@ const errors = [];
   await p.waitForFunction(() => { const o = document.querySelector('#ms-ovl'); return !!o && !o.hidden; }, null, { timeout: 4000 });
   await p.screenshot({ path: OUT + 'minesweeper-won.png' });
   a = await S();
-  ok(a.phase === 'won' && (await p.textContent('#ms-ovl h2')) === '太棒了！' && (await p.textContent('#ms-mines')) === '雷：0', 'won: every safe cell open, the mines are flagged, the overlay congratulates');
+  ok(a.phase === 'won' && (await p.textContent('#ms-ovl h2')) === '完成。' && (await p.textContent('#ms-mines')) === '雷：0', 'won: every safe cell open, the mines are flagged, the overlay congratulates');
   const bt = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).minesweeper['best-0']);
   ok(bt >= 0 && bt < 60 && (await p.textContent('#ms-best')) !== '最快：--', 'the best time is kept in learn.games.v1: ' + bt + ' s');
   // a slower win does not replace it, a faster one does
@@ -261,6 +261,6 @@ const errors = [];
   const re = /(["'`])((?:\\.|(?!\1).)*?)\1/g; let mm;
   for (const line of src.split('\n')) { const l = line.replace(/^\s*\/\/.*$/, '').replace(/\/\*.*?\*\//g, ''); re.lastIndex = 0; while ((mm = re.exec(l))) if (/[一-鿿]/.test(mm[2])) lits.add(mm[2].replace(/\$\{[^}]*\}/g, '{0}')); }
   const missing = [...lits].filter((x) => !tr[x]);
-  ok(missing.length === 0 && Object.values(tr).every((v) => v.length === 2 && v[0] && v[1]) && Object.keys(tr).every((k) => k.length > 1) && tr['长按插旗，别踩到雷'], `every Chinese text of the game (${lits.size}) has an English and a French entry` + (missing.length ? ': ' + missing.join(' | ') : ''));
+  ok(missing.length === 0 && Object.values(tr).every((v) => v.length === 2 && v[0] && v[1]) && Object.keys(tr).every((k) => k.length > 1) && tr['长按可插旗，避开地雷'], `every Chinese text of the game (${lits.size}) has an English and a French entry` + (missing.length ? ': ' + missing.join(' | ') : ''));
   await done();
 })().catch((e) => { console.error(e); process.exit(1); });

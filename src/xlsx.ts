@@ -23,11 +23,11 @@ export function readWorkbook(buf: ArrayBuffer): SheetData[] {
   try {
     files = unzipSync(new Uint8Array(buf));
   } catch {
-    throw new Error("读不了这个文件：它不是 .xlsx 表格。Google 表格请用 文件 → 下载 → Microsoft Excel (.xlsx)。");
+    throw new Error("无法读取该文件：不是 .xlsx 表格。Google 表格请使用 文件 → 下载 → Microsoft Excel (.xlsx)。");
   }
   const text = (path: string) => (files[path] ? strFromU8(files[path]) : null);
   const wb = text("xl/workbook.xml");
-  if (!wb) throw new Error("读不了这个文件：它不是 .xlsx 表格。Google 表格请用 文件 → 下载 → Microsoft Excel (.xlsx)。");
+  if (!wb) throw new Error("无法读取该文件：不是 .xlsx 表格。Google 表格请使用 文件 → 下载 → Microsoft Excel (.xlsx)。");
 
   const rels = new Map<string, string>();
   const relsXml = text("xl/_rels/workbook.xml.rels");

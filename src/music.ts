@@ -60,10 +60,10 @@ export function renderMusic() {
     h("main", { class: "scroll" }, h("div", { class: "narrow" },
       h("div", { class: "mus-grid" },
         card("theory", "乐理", "18 章 · 每章有小测验", "#/music/theory"),
-        card("piano", "钢琴", "可以同时按好几个键", "#/music/piano"),
+        card("piano", "钢琴", "支持同时按多个键", "#/music/piano"),
         card("drums", "架子鼓", "九个鼓和镲", "#/music/drums"),
         card("guitar", "吉他", "拨弦、扫弦、和弦", "#/music/guitar"),
-        card("beats", "节奏编辑器", "排格子，自己编鼓点", "#/music/beats")))));
+        card("beats", "节奏编辑器", "排列格子，编写鼓点", "#/music/beats")))));
   X.show(page);
   oneLine([...page.querySelectorAll<HTMLElement>(".mus-card b")], 12);
 }
@@ -147,7 +147,7 @@ export async function renderQuiz(id: string) {
       if (btns.some((b) => b.disabled)) return;
       btns.forEach((b) => { b.disabled = true; if (b.dataset.right === "1") b.classList.add("right"); });
       const ok = x === q.a; if (ok) right++; else (e.currentTarget as HTMLElement).classList.add("wrong");
-      explain.textContent = (ok ? "答对了！" : "再想想：") + (q.e ? ` ${q.e}` : "");
+      explain.textContent = (ok ? "正确。" : "请再思考：") + (q.e ? ` ${q.e}` : "");
       explain.classList.add(ok ? "ok" : "bad");
       nextBtn.style.display = "";
     } }, x));
@@ -160,7 +160,7 @@ export async function renderQuiz(id: string) {
     area.replaceChildren(h("div", { class: "qz-end", id: "qz-end" },
       h("div", { class: "qz-stars" }, "★".repeat(s) + "☆".repeat(3 - s)),
       h("h2", { id: "qz-score" }, `答对 ${right} / ${qs.length} 题`),
-      h("p", { class: "muted" }, right === qs.length ? "全对！太棒了！" : right / qs.length >= 0.6 ? "不错，再看看错的地方吧。" : "没关系，回去再看一遍这一章，再来一次。"),
+      h("p", { class: "muted" }, right === qs.length ? "全部正确。" : right / qs.length >= 0.6 ? "请查看答错的题目。" : "建议重新学习本章后再次测验。"),
       h("div", { class: "qz-end-btns" },
         h("button", { class: "sheet-btn", id: "qz-again", onclick: () => X.route() }, "再来一次"),
         h("button", { class: "sheet-btn", id: "qz-review", onclick: () => { pageAt.set(id, 0); location.hash = `#/music/theory/${id}`; } }, "回去复习"),
@@ -270,7 +270,7 @@ export function renderPiano() {
     if (song) {
       if (m === song.notes[song.at]) {
         song.at++;
-        if (song.at >= song.notes.length) { toast(`《${tr(song.name)}》弹完了，太棒了！`); song = null; songBar.classList.remove("on"); }
+        if (song.at >= song.notes.length) { toast(`《${tr(song.name)}》已弹完。`); song = null; songBar.classList.remove("on"); }
         markNext();
       } else { el.classList.add("miss"); window.setTimeout(() => el.classList.remove("miss"), 220); }
     }
@@ -296,7 +296,7 @@ export function renderPiano() {
     const lo = Math.min(...song.notes), hi = Math.max(...song.notes);
     const span = whites > 7 ? 12 * Math.floor(whites / 7) : 12;
     if (lo < startMidi || hi > startMidi + span) { startMidi = lo - (lo % 12); build(); }
-    songBar.classList.add("on"); songBar.querySelector<HTMLElement>("#pn-song-name")!.textContent = `跟着弹：《${tr(s.name)}》（亮着的键就是下一个）`;
+    songBar.classList.add("on"); songBar.querySelector<HTMLElement>("#pn-song-name")!.textContent = `跟弹：《${tr(s.name)}》（亮起的键为下一个音）`;
     markNext();
   };
   songBar.append(h("span", { id: "pn-song-name", class: "small" }), h("button", { class: "sheet-btn", id: "pn-song-stop", onclick: () => { song = null; songBar.classList.remove("on"); markNext(); } }, "不练了"));
@@ -336,10 +336,10 @@ export function renderPiano() {
       const r = rec; rec = null; window.clearInterval(timer); recBtn.classList.remove("on"); recBtn.textContent = "● 录音";
       active.forEach((a, id) => { r.events.push({ t: Math.round(performance.now() - r.t0), m: +a.el.dataset.midi!, on: 0 }); void id; });
       const notes = r.events.filter((e) => e.on).length;
-      if (!notes) return void toast("没有录到音：先按下录音，再弹琴。");
+      if (!notes) return void toast("未录到声音。请先点击录音，再弹奏。");
       const ms = r.events[r.events.length - 1].t;
       takes = [{ id: `t${Date.now()}`, name: R.nextName(takes), date: new Date().toISOString().slice(0, 16).replace("T", " "), ms, events: r.events }, ...takes].slice(0, R.MAX_TAKES);
-      if (!R.saveTakes(takes)) toast("这台设备不能保存录音（可能是无痕模式）。", 5000);
+      if (!R.saveTakes(takes)) toast("本设备无法保存录音（可能处于无痕模式）。", 5000);
       else toast(`已保存录音：${takes[0].name}（${notes} 个音）`);
       drawTakes();
     } else {
@@ -375,10 +375,10 @@ export function renderPiano() {
         h("span", { class: "muted small" }, `${fmt(t.ms)} · ${t.events.filter((e) => e.on).length} 个音`),
         h("button", { class: "icon", id: `take-play-${t.id}`, title: playing?.id === t.id ? "停止" : "播放", "aria-label": playing?.id === t.id ? "停止" : "播放", onclick: () => playTake(t) }, playing?.id === t.id ? "■" : "▶"),
         h("button", { class: "icon", id: `take-midi-${t.id}`, title: "导出 MIDI 文件", "aria-label": "导出 MIDI 文件", onclick: () => { R.downloadMidi(t); toast(`已导出：${t.name}.mid`); } }, "⇩"),
-        h("button", { class: "icon", id: `take-del-${t.id}`, title: "删除", "aria-label": "删除", onclick: async () => { if (!(await confirmDlg("删除这段录音？", `“${t.name}”删除后找不到了。`, "删除", true))) return; if (playing?.id === t.id) stopPlay(); takes = takes.filter((x) => x.id !== t.id); R.saveTakes(takes); drawTakes(); toast("已删除"); } }, "✕"))))
-        : h("p", { class: "muted small" }, "按“● 录音”，弹一段，再按“■ 停止”：录音会保存在这里，可以回放，也可以导出成 MIDI 文件，拿去做自己的曲子。"));
+        h("button", { class: "icon", id: `take-del-${t.id}`, title: "删除", "aria-label": "删除", onclick: async () => { if (!(await confirmDlg("删除这段录音？", `“${t.name}”删除后将无法恢复。`, "删除", true))) return; if (playing?.id === t.id) stopPlay(); takes = takes.filter((x) => x.id !== t.id); R.saveTakes(takes); drawTakes(); toast("已删除"); } }, "✕"))))
+        : h("p", { class: "muted small" }, "点击“● 录音”开始弹奏，再点击“■ 停止”：录音将保存在此处，可回放，也可导出为 MIDI 文件。"));
   };
-  const rotate = h("div", { class: "pn-rotate", id: "pn-rotate" }, h("span", {}, "横过来弹钢琴，键更多、更好按 ↻"), h("button", { class: "sheet-btn", onclick: () => rotate.remove() }, "还是竖着弹"));
+  const rotate = h("div", { class: "pn-rotate", id: "pn-rotate" }, h("span", {}, "请横屏使用：键位更多，更易操作 ↻"), h("button", { class: "sheet-btn", onclick: () => rotate.remove() }, "还是竖着弹"));
   const root = h("div", { class: "page pn-page", style: `--kid:${COLOR}` }, hero("钢琴", "#/subject/music", "音乐", "#/music/piano"),
     h("main", { class: "scroll pn-main" }, h("div", { class: "narrow pn-narrow" }, rotate,
       h("div", { class: "pn-bar" },
@@ -388,7 +388,7 @@ export function renderPiano() {
       mini, kb, songBar,
       h("div", { class: "pn-songs" }, h("span", { class: "muted small" }, "跟着弹："), ...SONGS.map((s, i) => h("button", { class: "mopt", id: `pn-song-${i}`, onclick: () => startSong(s) }, s.name))),
       takesBox,
-      h("p", { class: "muted small center" }, "用好几个手指一起按，就是和弦；手指在琴键上滑过去，就是滑音。"))));
+      h("p", { class: "muted small center" }, "同时按下多个手指即为和弦；手指在琴键上滑过即为滑音。"))));
   X.show(root);
   drawTakes();
   build();
@@ -438,7 +438,7 @@ export function renderDrums() {
     el.addEventListener("contextmenu", (e) => e.preventDefault());
     pads.set(p.id, el); board.append(el);
   });
-  const hat = h("button", { class: "mopt", id: "dr-hat", onclick: (e: Event) => { open = !open; (e.currentTarget as HTMLElement).classList.toggle("on", open); (e.currentTarget as HTMLElement).textContent = open ? "踩镲：开着（长音）" : "踩镲：闭着（短音）"; } }, "踩镲：闭着（短音）");
+  const hat = h("button", { class: "mopt", id: "dr-hat", onclick: (e: Event) => { open = !open; (e.currentTarget as HTMLElement).classList.toggle("on", open); (e.currentTarget as HTMLElement).textContent = open ? "踩镲：开（长音）" : "踩镲：闭（短音）"; } }, "踩镲：闭（短音）");
   const stopDemo = () => { if (demo !== null) { window.clearInterval(demo); demo = null; } demoBtn.textContent = "听一段示范"; demoBtn.classList.remove("on"); };
   const PATTERN: string[][] = [["kick", "hihat"], ["hihat"], ["snare", "hihat"], ["hihat"], ["kick", "hihat"], ["kick", "hihat"], ["snare", "hihat"], ["hihat"]];
   const demoBtn = h("button", { class: "sheet-btn", id: "dr-demo", onclick: () => {
@@ -451,7 +451,7 @@ export function renderDrums() {
   const root: HTMLElement = h("div", { class: "page inst-page", style: `--kid:${COLOR}` }, hero("架子鼓", "#/subject/music", "音乐", "#/music/drums"),
     h("main", { class: "scroll" }, h("div", { class: "narrow dr-narrow" }, stage,
       h("div", { class: "dr-bar" }, hat, demoBtn, fullToggle(() => root, "dr-full")),
-      h("p", { class: "muted small center" }, "两只手、甚至更多手指可以同时打。大鼓在最下面，军鼓在左边。"))));
+      h("p", { class: "muted small center" }, "支持双手及多指同时敲击。大鼓在最下方，军鼓在左侧。"))));
   X.show(root);
   const watch = new MutationObserver(() => { if (!root.isConnected) { stopDemo(); watch.disconnect(); } });
   watch.observe(document.body, { childList: true, subtree: true });
@@ -506,7 +506,7 @@ export function renderGuitar() {
     cells.flat().forEach((e) => e.classList.remove("on"));
     c?.frets.forEach((f, k) => { if (f >= 0) cells[5 - k][f].classList.add("on"); });
     chordBtns.forEach((b) => b.classList.toggle("on", b.dataset.c === c?.name));
-    info.textContent = c ? `${c.name} 和弦：${c.frets.map((f) => (f < 0 ? "×" : f)).join(" ")}（从粗弦到细弦）` : "选一个和弦，再点“向下扫”";
+    info.textContent = c ? `${c.name} 和弦：${c.frets.map((f) => (f < 0 ? "×" : f)).join(" ")}（从粗弦到细弦）` : "请先选择和弦，再点击“向下扫”";
   };
   const info = h("p", { class: "muted small center", id: "gt-info" });
   const chordBtns = CHORDS.map((c) => h("button", { class: "mopt", id: `gt-chord-${c.name}`, "data-c": c.name, onclick: () => { showChord(c); strum(true); } }, c.name));
@@ -515,7 +515,7 @@ export function renderGuitar() {
       h("div", { class: "gt-ctl" },
         h("div", { class: "gt-chords" }, ...chordBtns),
         h("div", { class: "gt-strum" }, h("button", { class: "primary", id: "gt-down", onclick: () => strum(true) }, "↓ 向下扫"), h("button", { class: "sheet-btn", id: "gt-up", onclick: () => strum(false) }, "↑ 向上扫"), h("button", { class: "sheet-btn", id: "gt-clear", onclick: () => showChord(null) }, "清除"), fullToggle(() => root, "gt-full"))),
-      info, h("p", { class: "muted small center" }, "手指在弦上滑过去就是扫弦；点格子是按在那个品上拨一根弦。"))));
+      info, h("p", { class: "muted small center" }, "手指在弦上滑过即为扫弦；点击格子为按住该品位拨一根弦。"))));
   showChord(null);
   X.show(root);
 }

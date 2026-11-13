@@ -163,7 +163,7 @@ async function autoPickIdioms() {
     let added = 0;
     const builtin = await loadBuiltInStories().catch(() => ({} as Record<string, string>));   // (the picked idioms get their built-in story at once)
     idioms = await api.update<M.IdiomsFile>("idioms.json", M.EMPTY_IDIOMS, (cur) => { const r = M.fillWeek(cur, next); added = r.added.length; return M.fillBuiltInStories(r.data, builtin, r.added).data; }, "pick idioms for next week");
-    if (added) toast(`已为下一周随机选好 ${added} 个成语`);
+    if (added) toast(`已为下一周随机选取 ${added} 个成语`);
   } catch { /* offline or no access right now: it is tried again the next time */ }
 }
 const loadKid = async (id: string) => {
@@ -212,9 +212,9 @@ function renderLogin(message = "") {
     h("div", { class: "login" }, h("div", { class: "card" },
       h("span", { class: "mascot" }, mascot()),
       h("h1", {}, "学习乐园"),
-      h("p", { class: "muted" }, "记录孩子每周学的汉字和成语。数据保存在你自己的私有 GitHub 仓库里，只有你能看到。"),
+      h("p", { class: "muted" }, "记录孩子每周学习的汉字和成语。数据保存在您自己的私有 GitHub 仓库中，仅您本人可见。"),
       scan,
-      h("p", { class: "muted small center" }, "在已经登录的设备上：设置 → 登录到其他设备，会出现二维码。"),
+      h("p", { class: "muted small center" }, "在已登录的设备上：设置 → 登录到其他设备，将显示二维码。"),
       h("div", { class: "or" }, "或者手动输入"),
       h("label", {}, "数据仓库（私有）", repo),
       h("label", {}, "令牌", token),
@@ -223,7 +223,7 @@ function renderLogin(message = "") {
       btn,
       h("div", { class: "or" }, "或者"),
       h("button", { class: "wide", id: "local-btn", onclick: () => { api.useLocal(); restart(); } }, "在本机使用（不需要账号）"),
-      h("p", { class: "muted small" }, "本机使用时，数据只保存在这台设备的浏览器里，不会上传。"),
+      h("p", { class: "muted small" }, "在本机使用时，数据仅保存在本设备的浏览器中，不会上传。"),
     )),
   );
 }
@@ -242,14 +242,14 @@ async function renderHome() {
   const hero = h("header", { class: "top hero home-hero" },
     backBtn("#/", "选择学科"),
     h("span", { class: "mascot" }, mascot()),
-    h("div", { class: "hero-text" }, h("h1", {}, "识字小助手"), h("p", {}, "今天学点什么？")),
+    h("div", { class: "hero-text" }, h("h1", {}, "识字小助手"), h("p", {}, "请选择孩子")),
     gearBtn("#/chinese"));
   if (!kidsFile.kids.length) {
     // the very first time: nothing but one thing to do, in the middle of the screen
     return show(h("div", { class: "page" }, hero,
       h("main", { class: "scroll" }, h("div", { class: "narrow home-empty empty-home" },
         h("button", { class: "add-big", id: "add-kid-big", title: "添加孩子", "aria-label": "添加孩子", onclick: () => void addKid(renderHome) }, "＋"),
-        h("p", {}, "还没有孩子，先添加一个吧。")))));
+        h("p", {}, "暂无孩子。请先添加。")))));
   }
   const list = h("div", { class: "kids" });
   for (const k of kidsFile.kids) {
@@ -300,7 +300,7 @@ async function renderKid(id: string, tab: "week" | "learned" | "game") {
   if (my !== epoch) return;
   const k = kidsFile.kids.find((x) => x.id === id);
   if (!k) {
-    toast("找不到这个孩子");
+    toast("未找到该孩子");
     return void (location.hash = "#/chinese");
   }
   if (curWeekKid !== id || !curWeek) {
@@ -389,7 +389,7 @@ function renderWeek(body: HTMLElement, k: M.Kid, kid: M.KidData) {
         chars.length && chars.length < WEEKLY ? h("button", { class: "plus", id: "enter", title: "录入这一周的内容", "aria-label": "录入这一周的内容", onclick: () => enterDialog(k) }, "＋") : null),
       chars.length
         ? grid
-        : h("div", { class: "add-empty" }, h("button", { class: "add-big", id: "enter", title: "录入这一周的内容", "aria-label": "录入这一周的内容", onclick: () => enterDialog(k) }, "＋"), h("p", {}, "点 ＋ 录入这一周的汉字")),
+        : h("div", { class: "add-empty" }, h("button", { class: "add-big", id: "enter", title: "录入这一周的内容", "aria-label": "录入这一周的内容", onclick: () => enterDialog(k) }, "＋"), h("p", {}, "点击 ＋ 录入本周汉字")),
       // the idioms are the same for every child: one list, one story page (not one per child)
       h("button", { class: "primary wide", id: "idioms-btn", onclick: () => { idiomFrom = `#/kid/${k.id}`; idiomWeek = curWeek; idiomAll = false; idiomColor = k.color; location.hash = "#/idioms"; } }, "成语故事"),
     ),
@@ -435,8 +435,8 @@ async function renderSheet(id: string) {
   show(h("div", { class: "page sheet-page", style: `--kid:${k.color}` },
     h("header", { class: "top plain" }, backBtn(`#/kid/${id}`), h("h1", {}, `字帖 · 第${no}周`), h("span", { class: "slot" })),
     h("main", { class: "scroll sheet-scroll" },
-      h("div", { class: "sheet-hint center" }, chars.length ? h("span", { class: "muted small" }, "在打印窗口里选择“另存为 PDF”，就能保存和打印。") : null, optBtn),
-      paper ?? h("p", { class: "empty" }, "这一周还没有汉字。")),
+      h("div", { class: "sheet-hint center" }, chars.length ? h("span", { class: "muted small" }, "在打印窗口中选择“另存为 PDF”，即可保存为 PDF 文件。") : null, optBtn),
+      paper ?? h("p", { class: "empty" }, "该周暂无汉字。")),
     chars.length ? h("div", { class: "idiom-foot sheet-foot" }, h("button", { class: "primary wide", id: "sheet-print", onclick: () => window.print() }, "打印 / 保存为 PDF")) : null));
 }
 
@@ -505,7 +505,7 @@ async function renderStories() {
   const scale = h("div", { class: "story-scale" }, paper);
   show(h("div", { class: "page sheet-page", style: idiomColor ? `--kid:${idiomColor}` : "" },
     h("header", { class: "top plain" }, backBtn("#/idioms"), h("h1", {}, `故事打印 · 第${no}周`), h("span", { class: "slot" })),
-    h("main", { class: "scroll sheet-scroll" }, items.length ? h("div", { class: "narrow story-wrap" }, note, scale) : h("p", { class: "empty" }, "这一周还没有成语。")),
+    h("main", { class: "scroll sheet-scroll" }, items.length ? h("div", { class: "narrow story-wrap" }, note, scale) : h("p", { class: "empty" }, "该周暂无成语。")),
     items.length ? h("div", { class: "idiom-foot sheet-foot" }, h("button", { class: "primary wide", id: "story-print", onclick: () => window.print() }, "打印 / 保存为 PDF")) : null));
   if (!items.length) return;
   // on screen the page is shown as wide as the screen allows (the printout always uses real mm / pt)
@@ -523,7 +523,7 @@ async function renderStories() {
 let builtInStories: Promise<Record<string, string>> | null = null;
 const loadBuiltInStories = (): Promise<Record<string, string>> =>
   (builtInStories ??= fetch(`${import.meta.env.BASE_URL}stories.json`).then(async (r) => {
-    if (!r.ok) throw new Error("读不到自带的故事。");
+    if (!r.ok) throw new Error("无法读取内置故事。");
     return ((await r.json()) as { stories: Record<string, string> }).stories;
   }).catch((e) => { builtInStories = null; throw e; }));
 
@@ -553,7 +553,7 @@ async function renderIdioms() {
     only && count > 0 ? h("button", { class: "sheet-btn", id: "story-print-btn", onclick: () => { storyWeek = idiomWeek; location.hash = "#/stories"; } }, "打印故事") : null,
     count > 0 && (!only || count < M.IDIOMS_PER_WEEK) ? h("button", { class: "plus", id: "idiom-add", title: addTip, "aria-label": addTip, onclick: () => void addIdiomsDialog() }, "＋") : null);
   const empty = h("div", { class: "add-empty", id: "idiom-empty" }, h("button", { class: "add-big", id: "idiom-add", title: addTip, "aria-label": addTip, onclick: () => void addIdiomsDialog() }, "＋"),
-    h("p", {}, only ? "点 ＋ 添加这一周的成语" : "点 ＋ 添加成语"));
+    h("p", {}, only ? "点击 ＋ 添加本周成语" : "点击 ＋ 添加成语"));
   // the same big button as on the week page; it stays at the bottom of the screen: only the idioms in the middle scroll
   const switchBtn = !idiomWeek ? null : h("button", { class: "primary wide", id: "idiom-scope", onclick: () => { idiomAll = !idiomAll; void renderIdioms(); } }, only ? "全部成语" : "只看这一周");
   show(h("div", { class: "page", style: idiomColor ? `--kid:${idiomColor}` : "" },
@@ -566,7 +566,7 @@ async function renderIdioms() {
 
 async function addIdiomsDialog() {
   const date = h("input", { type: "date", value: idiomWeek || M.sundayOf(M.todayLocal()), "aria-label": "这一周的第一天（周日）" });
-  const text = h("textarea", { rows: 3, placeholder: "把成语粘贴或输入在这里，空格、逗号、换行都可以分开", "aria-label": "成语" });
+  const text = h("textarea", { rows: 3, placeholder: "在此粘贴或输入成语，可用空格、逗号或换行分隔", "aria-label": "成语" });
   const save = h("button", { class: "primary", id: "idiom-save" }, "保存");
   const note = h("div", { class: "note", id: "idiom-check" });
   const r = await modal<string[]>((close) => {
@@ -575,14 +575,14 @@ async function addIdiomsDialog() {
       const list = M.parseIdioms(text.value);
       const c = M.classifyIdioms(idioms, list);
       note.replaceChildren();
-      if (c.learned.length) note.append(h("div", { class: "warn" }, `已经学过了，不能保存：${c.learned.map((x) => `${x.item}（第${M.weekNo(x.start, kidsFile.startWeek ?? x.start)}周）`).join("、")}`));
-      else if (list.length) note.append(h("div", { class: "muted" }, `成语库里有 ${c.fromPool.length} 个，新成语 ${c.brandNew.length} 个（会加进成语库，同步时也会加到你的表格）`));
+      if (c.learned.length) note.append(h("div", { class: "warn" }, `已学过，无法保存：${c.learned.map((x) => `${x.item}（第${M.weekNo(x.start, kidsFile.startWeek ?? x.start)}周）`).join("、")}`));
+      else if (list.length) note.append(h("div", { class: "muted" }, `成语库中已有 ${c.fromPool.length} 个，新成语 ${c.brandNew.length} 个（将加入成语库，同步时也会加入您的表格）`));
       // "did you mean ...": a new idiom that looks like a typo of one the app already has
       for (const x of c.brandNew) {
         for (const y of M.similarIdioms(idioms, x)) {
           const week = idioms.weeks.find((w) => w.items.includes(y));
           note.append(h("div", { class: "similar", "data-typo": x },
-            h("span", {}, `「${x}」和已有的「${y}」很像，是不是想写「${y}」？`), week ? h("span", { class: "muted" }, ` ${`已学：第${M.weekNo(week.start, kidsFile.startWeek ?? week.start)}周`}`) : null,
+            h("span", {}, `「${x}」与已有的「${y}」相近，是否应为「${y}」？`), week ? h("span", { class: "muted" }, ` ${`已学：第${M.weekNo(week.start, kidsFile.startWeek ?? week.start)}周`}`) : null,
             h("button", { class: "mini", "data-fix": y, onclick: () => { text.value = text.value.split(x).join(y); check(); } }, `改成「${y}」`)));
         }
       }
@@ -601,7 +601,7 @@ async function addIdiomsDialog() {
     let added = 0, blocked = 0;
     idioms = await api.update<M.IdiomsFile>("idioms.json", M.EMPTY_IDIOMS, (cur) => { const x = M.addIdiomsByHand(cur, start, r); added = x.added; blocked = x.check.learned.length; return x.data; }, "add idioms");
     done();
-    toast(blocked ? "有的成语已经学过了，没有保存" : added ? `已添加 ${added} 个成语` : "这些成语已经在列表里了");
+    toast(blocked ? "部分成语已学过，未保存" : added ? `已添加 ${added} 个成语` : "这些成语已在列表中");
     void renderIdioms();
   } catch (e) {
     done();
@@ -639,7 +639,7 @@ async function renderIdiom(name: string) {
       row,
       story
         ? h("p", { class: "story user", id: "idiom-story" }, story)
-        : h("p", { class: "empty", id: "idiom-nostory" }, "还没有故事。双击右上角的小铅笔，写一个。"))));
+        : h("p", { class: "empty", id: "idiom-nostory" }, "暂无故事。请双击右上角的小铅笔添加。"))));
   // a tap on the outer quarter of the screen on the left / right, or a swipe, goes to the previous / next story (buttons keep their own job)
   let down: { x: number; y: number } | null = null;
   page.addEventListener("pointerdown", (e) => { down = (e.target as Element).closest("button, a, input, textarea") ? null : { x: e.clientX, y: e.clientY }; });
@@ -658,7 +658,7 @@ async function renderIdiom(name: string) {
 }
 
 async function editStory(name: string, current: string) {
-  const text = h("textarea", { rows: 8, placeholder: "把这个成语的故事写在这里", "aria-label": "故事" }) as HTMLTextAreaElement;
+  const text = h("textarea", { rows: 8, placeholder: "在此填写该成语的故事", "aria-label": "故事" }) as HTMLTextAreaElement;
   text.value = current;
   const counter = h("p", { class: "muted small story-count", id: "story-count" });
   const count = () => { counter.textContent = tr("{0} 字（不含标点）").replace("{0}", String(M.countChars(text.value))); };
@@ -707,7 +707,7 @@ function openViewer(chars: string[], start: number, color: string) {
   const stage = h("div", { class: "vstage" }, box);
   const root = h("div", { class: "viewer" + (settings.pinyin ? " pinyin-on" : ""), id: "viewer", role: "dialog", "aria-modal": "true", style: `--kid:${color}` },
     h("div", { class: "vtop" }, count, close), stage,
-    h("div", { class: "vbar" }, prev, h("p", { class: "vhint" }, "点汉字显示 / 隐藏拼音；点屏幕左边 / 右边，或左右滑动，切换汉字"), next));
+    h("div", { class: "vbar" }, prev, h("p", { class: "vhint" }, "点击汉字可显示 / 隐藏拼音；点击屏幕左侧 / 右侧或左右滑动，可切换汉字"), next));
   const show = (dir = 0) => {
     const ch = chars[i];
     box.dataset.ch = ch;
@@ -775,11 +775,11 @@ function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData) {
       h("span", {}),
       h("div", { class: "big" }, h("strong", { id: "count" }, String(chars.length)), " 字"),
       chars.length ? h("button", { class: "selftest", id: "selftest", onclick: (e: Event) => { e.stopPropagation(); selfTest(k, kid); } }, "自测") : h("span", {})),
-    h("div", { class: "muted small" }, "点汉字放大；点空白处显示 / 隐藏拼音"),
+    h("div", { class: "muted small" }, "点击汉字可放大；点击空白处可显示 / 隐藏拼音"),
   );
   const cells = chars.map((c) => (settings.manage ? withDelete(cell(c), c, (ch) => void deleteChar(k, ch)) : cell(c)));
   const grid = h("div", { class: "grid" + (settings.pinyin ? " pinyin-on" : ""), id: "grid" }, ...stagger(cells));
-  const scroller = h("div", { class: "scroll", id: "learned-scroll" }, h("div", { class: "narrow" }, manageBar()), head, chars.length ? grid : h("p", { class: "empty" }, "还没有入库的字，先去“本周”录入吧。"));
+  const scroller = h("div", { class: "scroll", id: "learned-scroll" }, h("div", { class: "narrow" }, manageBar()), head, chars.length ? grid : h("p", { class: "empty" }, "暂无已入库的字。请先在“本周”中录入。"));
   // a tap on a character opens the big view of it (then back / forward through all the recorded characters, like on the week page);
   // a tap anywhere else on the screen (not a scroll) shows / hides the pinyin
   const tap = (target: HTMLElement) => {
@@ -825,12 +825,12 @@ function selfTest(k: M.Kid, kid: M.KidData) {
 /** shown while manage mode is on: says so and turns it off again */
 function manageBar(): HTMLElement | null {
   if (!settings.manage) return null;
-  return h("div", { class: "managebar" }, h("span", {}, "管理模式：点汉字右上角的红色“−”删除"),
+  return h("div", { class: "managebar" }, h("span", {}, "管理模式：点击汉字右上角的红色“−”可删除"),
     h("button", { class: "mini", id: "manage-off", onclick: () => { settings.manage = false; saveSettings(); void route(); } }, "完成"));
 }
 
 async function deleteChar(k: M.Kid, ch: string) {
-  const yes = await confirmDlg("删除这个汉字？", `把“${ch}”从这个孩子的记录里删除？`, "删除", true);
+  const yes = await confirmDlg("删除这个汉字？", `确定从该孩子的记录中删除“${ch}”？`, "删除", true);
   if (!yes) return; // cancelled: no "done" message
   const done = toast("正在删除…", 0, true);
   try {
@@ -1017,7 +1017,7 @@ async function renderGameLobby(body: HTMLElement, k: M.Kid, kid: M.KidData) {
   const start = h("button", { class: "primary wide", id: "game-start", disabled: g.queue.length === 0, onclick: () => playGame(k, gameQueue(kid, review).queue) }, "开始游戏");
   body.replaceChildren(h("div", { class: "narrow lobby" },
     h("div", { class: "lobby-hero" }, h("span", { class: "mascot big" }, mascot()), h("h2", {}, "准备好了吗？")),
-    g.queue.length ? null : h("p", { class: "empty" }, "还没有汉字，先到“本周”录入吧。"),
+    g.queue.length ? null : h("p", { class: "empty" }, "暂无汉字。请先在“本周”中录入。"),
     h("div", { class: "lobby-go" }, start)));
 }
 
@@ -1026,7 +1026,7 @@ async function enterDialog(k: M.Kid) {
   const kid = kidCache.get(k.id) ?? M.EMPTY_KID;
   const date = h("input", { type: "date", value: curWeek, disabled: true, "aria-label": "这一周的第一天（周日）" });   // (locked for now: the week is the one being shown)
   const label = h("div", { class: "muted small" });
-  const chars = h("textarea", { rows: 3, placeholder: "把这一周的汉字粘贴或输入在这里，空格、标点会自动去掉", "aria-label": "汉字" });
+  const chars = h("textarea", { rows: 3, placeholder: "在此粘贴或输入本周汉字，空格和标点将自动去除", "aria-label": "汉字" });
   const note1 = h("div", { class: "note", id: "note-chars" });
   const save = h("button", { class: "primary" }, "保存");
   const weekStart = () => M.sundayOf(date.value || M.todayLocal());
@@ -1039,7 +1039,7 @@ async function enterDialog(k: M.Kid) {
     note1.replaceChildren();
     if (typedC) note1.append(h("div", {}, `共 ${typedC} 个汉字，新的 ${c.fresh.length} 个`));
     if (c.learned.length) note1.append(h("div", { class: "warn" }, `已入库，保存时会跳过：${learnedText(c.learned)}`));
-    if (c.inWeek.length) note1.append(h("div", { class: "muted" }, `这一周已经有了：${c.inWeek.join("")}`));
+    if (c.inWeek.length) note1.append(h("div", { class: "muted" }, `该周已有：${c.inWeek.join("")}`));
     save.disabled = c.fresh.length === 0;
   };
   for (const el of [date, chars]) el.addEventListener("input", refresh);
@@ -1098,17 +1098,17 @@ function pickSheets(): Promise<SheetData[] | null> {
     });
     const target = h("select", { id: "paste-target", "aria-label": "粘贴到" },
       ...kidsFile.kids.map((k) => h("option", { value: k.name, class: "user" }, k.name)), h("option", { value: "成语" }, "成语"));
-    const paste = h("textarea", { rows: 4, id: "paste-text", placeholder: "在表格里选中这个标签页的内容，复制后粘贴到这里", "aria-label": "表格内容" });
+    const paste = h("textarea", { rows: 4, id: "paste-text", placeholder: "在表格中选中该标签页的内容，复制后粘贴到此处", "aria-label": "表格内容" });
     const go = h("button", { id: "paste-go", onclick: () => {
       const rows = readTable(paste.value);
-      if (!rows.length) return void (err.textContent = "还没有粘贴内容");
+      if (!rows.length) return void (err.textContent = "尚未粘贴内容");
       close([{ name: target.value, rows }]);
     } }, "预览");
     return h("div", { class: "dlg wide-dlg" }, h("h2", {}, "从 Excel 导入"),
-      h("p", { class: "muted" }, "每个孩子一个标签页（标签页的名字就是孩子的名字），每行一周：第一列是“第1周-2026-10-25”，后面是这一周的汉字。标签页“成语”会被保存起来，暂时不在孩子的页面里显示。"),
-      h("p", { class: "muted small" }, "在 Google 表格里：文件 → 下载 → Microsoft Excel (.xlsx)，然后选择下载的文件。"),
+      h("p", { class: "muted" }, "每个孩子对应一个标签页（标签页名称即孩子的名字），每行为一周：第一列为“第1周-2026-10-25”，其后为该周的汉字。标签页“成语”将被保存，暂不在孩子的页面中显示。"),
+      h("p", { class: "muted small" }, "在 Google 表格中：文件 → 下载 → Microsoft Excel (.xlsx)，然后选择下载的文件。"),
       h("label", { class: "filebtn" }, "选择 Excel 文件", file),
-      h("div", { class: "or" }, "或者粘贴一个标签页的内容"),
+      h("div", { class: "or" }, "或粘贴一个标签页的内容"),
       h("label", {}, "粘贴到", target), paste, go,
       err,
       h("button", { class: "wide", onclick: () => close(null) }, "取消"));
@@ -1131,21 +1131,21 @@ function previewImport(entries: I.Entry[]): Promise<I.Entry[]> {
         const q = e.pool;
         lines.push(h("div", {}, `成语库：${q.total} 个成语，其中 ${q.checked} 个已勾选`));
         lines.push(h("div", { class: "muted" }, `表格 A 列有 ${q.filled} 行内容，认出 ${q.total} 个成语`));
-        if (q.ignored.length) lines.push(h("div", { class: "warn" }, `有 ${q.ignored.length} 行没有算进去（重复的、标题或不是成语），第 ${q.ignored.slice(0, 8).join("、")} 行${q.ignored.length > 8 ? " …" : ""}`));
-        if (q.fromSheetWeeks) lines.push(h("div", {}, `表格 D 列写了周的 ${q.fromSheetWeeks} 个成语，回到表格里写的那一周`));
+        if (q.ignored.length) lines.push(h("div", { class: "warn" }, `有 ${q.ignored.length} 行未计入（重复、标题或非成语），第 ${q.ignored.slice(0, 8).join("、")} 行${q.ignored.length > 8 ? " …" : ""}`));
+        if (q.fromSheetWeeks) lines.push(h("div", {}, `表格 D 列标明了周的 ${q.fromSheetWeeks} 个成语，将回到表格中标明的那一周`));
         if (q.assigned) lines.push(h("div", {}, `没写周的已勾选成语按表格顺序分配到 ${q.weeks.length} 周，每周 ${M.IDIOMS_PER_WEEK} 个（${q.weeks.map((w) => w.slice(5).replace("-", "\u2011")).join("、")}）`));
         if (q.storiesInSheet) lines.push(h("div", {}, `表格 E 列有 ${q.storiesInSheet} 个故事，会填入 ${q.storiesFilled} 个（App 里已经有自己故事的 ${q.storiesKept} 个不改）`));
-        if (q.removed) lines.push(h("div", { class: "warn" }, `现有周里的 ${q.removed} 个成语会被冲掉，按表格重新安排（以表格为准）`));
-        if (q.leftover) lines.push(h("div", { class: "warn" }, `还有 ${q.leftover} 个已勾选的放不下，留在成语库里`));
-        lines.push(h("div", { class: "muted" }, `还没有分配到周的 ${q.unticked} 个留在成语库里，以后每周自动随机选 ${M.IDIOMS_PER_WEEK} 个放进下一周`));
-      } else if (!n) lines.push(h("div", { class: "warn" }, "没有认出内容。第一列要写成“第1周-2026-10-25”，后面是汉字。"));
+        if (q.removed) lines.push(h("div", { class: "warn" }, `现有周中的 ${q.removed} 个成语将被清除，按表格重新安排（以表格为准）`));
+        if (q.leftover) lines.push(h("div", { class: "warn" }, `另有 ${q.leftover} 个已勾选的无法安排，保留在成语库中`));
+        lines.push(h("div", { class: "muted" }, `尚未分配到周的 ${q.unticked} 个保留在成语库中，之后每周将自动随机选取 ${M.IDIOMS_PER_WEEK} 个放入下一周`));
+      } else if (!n) lines.push(h("div", { class: "warn" }, "无法识别内容。第一列应为“第1周-2026-10-25”，其后为汉字。"));
       else if (!e.pool) {
         lines.push(h("div", {}, e.kind === "idioms" ? `${n} 周，${e.total} 个成语，其中新的 ${e.added} 个` : `${n} 周，${e.total} 个汉字，其中新的 ${e.added} 个`));
-        if (e.skipped) lines.push(h("div", { class: "warn" }, `已入库，会跳过：${e.skipped} 个（同一个字出现在多周时，只留最早的一周）`));
+        if (e.skipped) lines.push(h("div", { class: "warn" }, `已入库，将跳过：${e.skipped} 个（同一个字出现在多周时，仅保留最早的一周）`));
         if (e.present && !e.added && !e.skipped) lines.push(h("div", { class: "muted" }, "都已经有了"));
-        else if (e.present) lines.push(h("div", { class: "muted" }, `已经有了：${e.present} 个`));
+        else if (e.present) lines.push(h("div", { class: "muted" }, `已存在：${e.present} 个`));
       }
-      if (e.parsed.skippedRows.length) lines.push(h("div", { class: "warn" }, `有 ${e.parsed.skippedRows.length} 行没认出日期，已忽略（第 ${e.parsed.skippedRows.slice(0, 8).join("、")} 行）`));
+      if (e.parsed.skippedRows.length) lines.push(h("div", { class: "warn" }, `有 ${e.parsed.skippedRows.length} 行无法识别日期，已忽略（第 ${e.parsed.skippedRows.slice(0, 8).join("、")} 行）`));
       return h("div", { class: "entry" },
         h("label", { class: "check" }, checks[i], h("strong", { class: "user" }, e.name),
           e.kind === "chars" && !e.exists ? h("span", { class: "badge" }, "新建孩子") : null),
@@ -1159,7 +1159,7 @@ function previewImport(entries: I.Entry[]): Promise<I.Entry[]> {
 async function importFlow() {
   const sheets = await pickSheets();
   if (!sheets) return; // cancelled: no message
-  if (!sheets.length) return void toast("这个文件里没有表格内容");
+  if (!sheets.length) return void toast("该文件中没有表格内容");
   // the library's ticked idioms go to the weeks that have started (every week with characters, up to this week) and to NEXT week (prepared in advance)
   await Promise.all(kidsFile.kids.filter((k) => !kidCache.has(k.id)).map((k) => loadKid(k.id).catch(() => M.EMPTY_KID)));
   const thisWeek = M.sundayOf(M.todayLocal());
@@ -1265,7 +1265,7 @@ async function checkUpdate(quiet = false) {
   if (b === null) return void (quiet || toast("检查更新失败，请检查网络"));
   if (b !== __BUILD__) {
     showUpdateBanner();
-    if (!quiet) toast("有新版本可用，请点下方的“立即更新”", 6000);
+    if (!quiet) toast("有新版本，请点击下方的“立即更新”", 6000);
   } else if (!quiet) toast("已是最新版本");
 }
 if (!__MOBILE__ && import.meta.env.PROD) {
@@ -1349,7 +1349,7 @@ async function renderSettings() {
   const setAdmin = (on: boolean) => { adminBox.classList.toggle("open", on); adminBox.toggleAttribute("inert", !on); };
   const a = api.getAuth();
   const account = api.isLocal()
-    ? h("div", { class: "card" }, h("h3", {}, "数据保存位置"), h("p", {}, "这台设备（浏览器）里，不会上传。换设备或清除浏览器数据会丢失。"),
+    ? h("div", { class: "card" }, h("h3", {}, "数据保存位置"), h("p", {}, "保存在本设备（浏览器）中，不会上传。更换设备或清除浏览器数据后将丢失。"),
         h("button", { class: "wide", onclick: () => { api.leaveLocal(); restart(); } }, "改用 GitHub 私有仓库"))
     : h("div", { class: "card" }, h("h3", {}, "数据保存位置"), h("p", {}, "GitHub：", h("span", { class: "user" }, a?.repo ?? "")),
         h("button", { class: "wide", id: "qr-btn", onclick: showQr }, "登录到其他设备（二维码）"),
@@ -1381,13 +1381,13 @@ async function renderSettings() {
               h("label", { class: "check" }, h("input", { type: "checkbox", id: "egg-allow", checked: eggAllowed(), onchange: (e: Event) => {
                 const on = (e.target as HTMLInputElement).checked;
                 setEggAllowed(on);
-                toast(on ? "彩蛋已开启：在首页左上角连续点 10 次，就会出现音乐和小游戏。" : "彩蛋已关闭，音乐和小游戏已收起。");
+                toast(on ? "彩蛋已开启：在首页左上角连续点击 10 次，将显示音乐和小游戏。" : "彩蛋已关闭，音乐和小游戏已收起。");
               } }), "允许孩子触发彩蛋（音乐、小游戏）"),
-              h("p", { class: "muted small" }, "打开后，在首页左上角连续点 10 次才会出现；关闭后无法触发，已出现的也会立刻收起。想让孩子玩的时候再打开。")),
+              h("p", { class: "muted small" }, "开启后，在首页左上角连续点击 10 次才会显示；关闭后无法触发，已显示的内容也会立即收起。需要让孩子使用时再开启。")),
             h("div", { class: "card" }, h("h3", {}, "管理密码"), h("button", { class: "wide", id: "admin-change", onclick: () => void askNewPassword("修改密码") }, "修改密码"))))),
 
         h("h2", { class: "set-sec" }, "学习和游戏"),
-        h("div", { class: "card" }, h("label", { class: "check" }, pinyin, "显示拼音（在“本周”和“已入库”里）"), h("p", { class: "muted small" }, "拼音在本机生成，不联网。多音字只显示最常见的读音。")),
+        h("div", { class: "card" }, h("label", { class: "check" }, pinyin, "显示拼音（在“本周”和“已入库”里）"), h("p", { class: "muted small" }, "拼音在本机生成，无需联网。多音字仅显示最常见的读音。")),
         h("div", { class: "card" }, h("h3", {}, "倒计时"), secs),
 
         h("h2", { class: "set-sec" }, "通用"),
@@ -1410,7 +1410,7 @@ async function renderSettings() {
 }
 
 async function signOut() {
-  if (!(await confirmDlg("退出登录？", "这台设备上保存的令牌会被删除，数据仍然在 GitHub 上。", "退出"))) return;
+  if (!(await confirmDlg("退出登录？", "本设备上保存的令牌将被删除，数据仍保留在 GitHub 上。", "退出"))) return;
   api.logout();
   toast("已退出登录");
   restart();
@@ -1423,9 +1423,9 @@ async function showQr() {
   const url = await QRCode.toDataURL(link, { margin: 2, width: 320 });
   await modal<boolean>((close) =>
     h("div", { class: "dlg" }, h("h2", {}, "登录到其他设备"),
-      h("p", {}, "在新设备的登录页点“扫码登录”扫描，或直接用手机相机扫描。"),
+      h("p", {}, "在新设备的登录页点击“扫码登录”进行扫描，或直接使用手机相机扫描。"),
       h("img", { class: "qr", src: url, alt: "QR", "data-link": link }),
-      h("p", { class: "warn small" }, "二维码里含有令牌，只给自己的设备扫，不要截图发给别人。"),
+      h("p", { class: "warn small" }, "二维码含有令牌，仅供自己的设备扫描，请勿截图发送给他人。"),
       h("button", { class: "wide primary", onclick: () => close(true) }, "完成")));
 }
 

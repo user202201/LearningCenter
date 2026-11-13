@@ -148,7 +148,7 @@ const JSONKEYS = Object.keys(JSON.parse(fs.readFileSync(__dirname + '/../../src/
   // level 30 by taps, the last level
   await p.screenshot({ path: OUT + 'ws-level30-820.png' });
   const s30 = await solution(30); await play(s30);
-  ok(await api(() => window.__watersort.won()) && await p.locator('#ws-ovl').isVisible() && (await p.textContent('#ws-ovl h2')) === '全部通关！' && (await p.textContent('#ws-next')) === '选关', 'level 30 solved by tapping: the last-level overlay');
+  ok(await api(() => window.__watersort.won()) && await p.locator('#ws-ovl').isVisible() && (await p.textContent('#ws-ovl h2')) === '已全部通关。' && (await p.textContent('#ws-next')) === '选关', 'level 30 solved by tapping: the last-level overlay');
   await p.screenshot({ path: OUT + 'ws-win-last.png' });
   await p.click('#ws-next');
   ok(await p.locator('#ws-picker').isVisible(), 'the last level\'s button opens the level picker');
@@ -157,7 +157,7 @@ const JSONKEYS = Object.keys(JSON.parse(fs.readFileSync(__dirname + '/../../src/
   await p.click('.ws-lv[data-level="1"]');
   const s1 = await solution(1);
   for (const [a, b] of s1) { await p.keyboard.press(String(a + 1)); await p.keyboard.press(String(b + 1)); }
-  ok(await api(() => window.__watersort.won()) && await p.locator('#ws-ovl').isVisible() && (await p.textContent('#ws-ovl h2')) === '过关啦！' && (await p.textContent('#ws-ovl p')) === `用了${s1.length}步`, 'level 1 solved with the number keys: the win overlay says the moves');
+  ok(await api(() => window.__watersort.won()) && await p.locator('#ws-ovl').isVisible() && (await p.textContent('#ws-ovl h2')) === '过关。' && (await p.textContent('#ws-ovl p')) === `用了${s1.length}步`, 'level 1 solved with the number keys: the win overlay says the moves');
   await p.screenshot({ path: OUT + 'ws-win-820.png' });
   const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).watersort);
   ok(saved.solved['1'] === s1.length && saved.solved['30'] === s30.length && saved.level === 1, 'progress is kept in learn.games.v1: ' + JSON.stringify(saved));

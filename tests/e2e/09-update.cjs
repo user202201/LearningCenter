@@ -41,7 +41,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     await page.click('#check-update');
     await page.waitForSelector('#update-bar');
     ok(await page.locator('#update-now').isVisible(), 'a newer build exists: a bar with "Update now" appears');
-    ok(await toastText(/有新版本可用，请点/), 'and the check says so too');
+    ok(await toastText(/有新版本，请点击/), 'and the check says so too');
     await page.screenshot({ path: path.join(OUT, 'update-bar.png') });
 
     // forced refresh: the old cached copy is thrown away, the sign-in is kept

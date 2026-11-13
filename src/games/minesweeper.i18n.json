@@ -1,6 +1,6 @@
 {
   "扫雷": ["Minesweeper", "Démineur"],
-  "长按插旗，别踩到雷": ["Long-press to plant a flag, don't step on a mine", "Appui long pour planter un drapeau, évitez les mines"],
+  "长按可插旗，避开地雷": ["Press and hold to place a flag; avoid the mines", "Appuyez longuement pour poser un drapeau ; évitez les mines"],
   "雷：{0}": ["Mines: {0}", "Mines : {0}"],
   "时间：{0}": ["Time: {0}", "Temps : {0}"],
   "最快：{0}": ["Fastest: {0}", "Meilleur : {0}"],
@@ -10,10 +10,10 @@
   "大小：普通": ["Size: medium", "Taille : moyen"],
   "大小：困难": ["Size: hard", "Taille : difficile"],
   "再玩一次": ["Play again", "Rejouer"],
-  "哎呀，踩到雷了！": ["Oops, you stepped on a mine!", "Oups, vous avez marché sur une mine !"],
-  "再来一次吧。": ["Let's try again.", "Essayons encore."],
-  "踩到雷了": ["Boom!", "Boum !"],
-  "太棒了！": ["Wonderful!", "Bravo !"],
+  "踩到地雷，本局结束。": ["A mine was hit. The game is over.", "Une mine a explosé. La partie est terminée."],
+  "可重新开始。": ["You may start again.", "Vous pouvez recommencer."],
+  "踩到雷了": ["Mine hit", "Mine touchée"],
+  "完成。": ["Completed.", "Terminé."],
   "新纪录：{0}": ["New record: {0}", "Nouveau record : {0}"],
   "用时：{0}": ["Time: {0}", "Durée : {0}"]
 }

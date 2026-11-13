@@ -300,14 +300,14 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
     await load(page, '4k4/R8/9/9/9/8R/9/9/9/3K5 w', 1, 0);
     await click(page, sq(5, 8)); await click(page, sq(0, 8));
     await page.waitForSelector('#xq-result', { timeout: 5000 });
-    ok(await page.$eval('#xq-result', (r) => r.dataset.result === 'win' && /你赢了/.test(r.textContent)), 'checkmate by you: the friendly "你赢了！" card');
+    ok(await page.$eval('#xq-result', (r) => r.dataset.result === 'win' && /你赢了/.test(r.textContent)), 'checkmate by you: the friendly "你赢了。" card');
     ok(await page.$eval('#xq-board .xq-p[data-piece="bgeneral"]', (g) => g.classList.contains('xq-fallen')), 'the losing general has fallen over');
     ok(await page.$$eval('#xq-board .xq-p.xq-cheer', (x) => x.length) === 3 && await page.$$eval('#xq-confetti i', (x) => x.length) > 20, 'the winners cheer and there is confetti');
     await page.screenshot({ path: OUT + 'xq-mate.png' });
     ok(await page.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).xiangqi.wins === 1), 'the win is kept in learn.games.v1');
     ok(/胜 1/.test(await page.textContent('#xq-rec')), 'the record line shows the win');
     await page.click('#xq-look');
-    ok((await page.$$('#xq-over')).length === 0, '"看看棋盘" closes the card');
+    ok((await page.$$('#xq-over')).length === 0, '"查看棋盘" closes the card');
     await page.click('#xq-new');
     ok((await page.$$('#xq-confetti')).length === 0 && (await page.$$('#xq-board .xq-p')).length === 32, 'restart removes the confetti and sets the pieces again');
     // the computer mates you
@@ -319,7 +319,7 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
     // stalemate = loss
     await load(page, '3k5/7R1/9/9/9/9/9/9/9/4RK3 b', 1, 0);
     await page.waitForSelector('#xq-result', { timeout: 8000 });
-    ok(await page.$eval('#xq-result', (r) => r.dataset.result === 'win' && /无路可走/.test(r.textContent)), 'stalemate is a loss for the side without a move (here: black, the computer)');
+    ok(await page.$eval('#xq-result', (r) => r.dataset.result === 'win' && /无子可动/.test(r.textContent)), 'stalemate is a loss for the side without a move (here: black, the computer)');
     // draw
     await load(page, '3k5/9/9/9/9/9/9/9/9/4K4 w', 1, 0);
     await page.evaluate(() => { window.__xq.pos.quiet = 119; });

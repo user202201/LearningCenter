@@ -212,7 +212,7 @@ const SWAP3 = board([[3, 0, 5], [3, 1, 5], [4, 2, 5]]);
   await load(p, SWAP3, { moves: 1, target: 20, seed: 17 });
   await p.click(cell(3, 2)); await p.click(cell(4, 2));
   await p.waitForSelector('#match3-over', { timeout: 15000 });
-  ok((await p.textContent('#match3-over h2')) === '过关啦！' && await p.locator('#match3-stars .on').count() >= 1 && (await S(p)).over, 'out of moves with the goal reached: win message with stars');
+  ok((await p.textContent('#match3-over h2')) === '过关。' && await p.locator('#match3-stars .on').count() >= 1 && (await S(p)).over, 'out of moves with the goal reached: win message with stars');
   await p.screenshot({ path: OUT + 'match3-win.png' });
   const saved = await p.evaluate((k) => JSON.parse(localStorage.getItem(k)).match3, KEY);
   ok(saved.stars[0] >= 1 && saved.best[0] >= 30, 'stars and best score are kept in localStorage: ' + JSON.stringify(saved));
@@ -221,7 +221,7 @@ const SWAP3 = board([[3, 0, 5], [3, 1, 5], [4, 2, 5]]);
   await load(p, SWAP3, { moves: 1, target: 99999, seed: 18 });
   await p.click(cell(3, 2)); await p.click(cell(4, 2));
   await p.waitForSelector('#match3-over', { timeout: 15000 });
-  ok((await p.textContent('#match3-over h2')).startsWith('步数用完了') && await p.locator('#match3-stars').count() === 0 && await p.locator('#match3-next').count() === 0, 'out of moves without the goal: a friendly lose message, no stars');
+  ok((await p.textContent('#match3-over h2')).startsWith('步数已用完') && await p.locator('#match3-stars').count() === 0 && await p.locator('#match3-next').count() === 0, 'out of moves without the goal: a friendly lose message, no stars');
   await p.screenshot({ path: OUT + 'match3-lose.png' });
   await p.click('#match3-again'); s = await S(p); ok(!s.over && s.score === 0 && s.moves === L_MOVES(), 'try again restarts the level');
   // reload: progress

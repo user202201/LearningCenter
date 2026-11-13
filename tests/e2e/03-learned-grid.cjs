@@ -8,7 +8,7 @@ const MANY = Array.from('一二三四五六七八九十上下大小山水火土�
   await addKid(page, 'Dory'); await openKid(page, 'Dory');
   await page.click('button[data-tab=learned]');
   await page.waitForSelector('#learned-scroll');
-  ok((await page.textContent('#learned-scroll')).includes('还没有入库的字'), 'empty library: tells where to add characters');
+  ok((await page.textContent('#learned-scroll')).includes('暂无已入库的字'), 'empty library: tells where to add characters');
   await page.click('button:has-text("本周")');
   await enterWeek(page, '2026-10-25', WEEK1);
   const DATES = ['2026-11-01', '2026-11-08', '2026-11-15', '2026-11-22', '2026-11-29'];

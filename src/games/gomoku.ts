@@ -91,8 +91,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     };
     const setStatus = () => {
       status.className = "gomoku-status"; status.id = "gomoku-status";
-      if (busy) say(turn, "电脑在想…");
-      else if (ai) say(turn, turn !== human ? "电脑在想…" : turn === 1 ? "轮到你了（黑棋）" : "轮到你了（白棋）");
+      if (busy) say(turn, "电脑思考中…");
+      else if (ai) say(turn, turn !== human ? "电脑思考中…" : turn === 1 ? "轮到你了（黑棋）" : "轮到你了（白棋）");
       else say(turn, turn === 1 ? "轮到黑棋" : "轮到白棋");
       status.dataset.turn = String(turn);
     };
@@ -137,9 +137,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       }
       status.className = "gomoku-status won";
       let msg: string, kind: "win" | "lose" | "good" = "win";
-      if (!line) { msg = "平局！棋盘下满了。"; kind = "good"; }
-      else if (ai) { if (winner === human) msg = "你赢了！太棒了！"; else { msg = "电脑赢了，再来一局吧！"; kind = "lose"; } }
-      else msg = winner === 1 ? "黑棋赢了！太棒了！" : "白棋赢了！太棒了！";
+      if (!line) { msg = "和棋：棋盘已满。"; kind = "good"; }
+      else if (ai) { if (winner === human) msg = "你赢了。"; else { msg = "电脑获胜。"; kind = "lose"; } }
+      else msg = winner === 1 ? "黑棋获胜。" : "白棋获胜。";
       say(line ? winner : 0, msg);
       status.dataset.result = line ? String(winner) : "draw";
       ctx.sfx(kind); ctx.toast(msg, 3500);

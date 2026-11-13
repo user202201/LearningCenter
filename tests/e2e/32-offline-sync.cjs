@@ -58,7 +58,7 @@ const { ok, done } = checks();
   await page.click('#tab-game'); await page.click('#game-start'); await page.waitForSelector('#game-char');
   for (let i = 0; i < 40 && !(await page.locator('#game-end').count()); i++) { if (await page.locator('#game-right:enabled').count()) await page.click('#game-right'); await page.waitForTimeout(700); }
   await page.waitForSelector('#game-end', { timeout: 30000 });
-  await page.waitForFunction(() => (document.querySelector('#toasts')?.textContent ?? '').includes('已保存在这台设备上'), null, { timeout: 15000 });
+  await page.waitForFunction(() => (document.querySelector('#toasts')?.textContent ?? '').includes('已保存在本设备上'), null, { timeout: 15000 });
   ok(true, 'OFFLINE: playing a game works and the user is told it is kept on this device');
   ok(!store.has(`english/${id}.review.json`), 'nothing of it is in the repository yet');
   await page.click('#game-done'); await page.waitForSelector('.tabs');

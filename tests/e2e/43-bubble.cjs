@@ -162,7 +162,7 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
   ok(s.score >= 130 + 100 - 0 && s.over === 'won', `popped 7 (70 + 40), the hanging one fell (20), a bonus for clearing: score ${s.score}`);
   await p.screenshot({ path: OUT + 'bubble-popping.png' });
   await p.waitForSelector('#bubble-over');
-  ok(await p.locator('#bubble-stars .on').count() === 3 && (await p.textContent('#bubble-over h2')) === '过关啦！', 'win message with 3 stars (one shot)');
+  ok(await p.locator('#bubble-stars .on').count() === 3 && (await p.textContent('#bubble-over h2')) === '过关。', 'win message with 3 stars (one shot)');
   await p.screenshot({ path: OUT + 'bubble-win.png' });
   const saved = await p.evaluate((k) => JSON.parse(localStorage.getItem(k)).bubble, KEY);
   ok(saved.stars[0] === 3 && saved.best[0] >= 230, 'stars and best score are kept in localStorage ' + KEY + ': ' + JSON.stringify(saved));
@@ -226,7 +226,7 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
   s = await S(p);
   ok(s.over === 'lost', 'a bubble resting on the line loses the game');
   await p.waitForSelector('#bubble-over');
-  ok((await p.textContent('#bubble-over h2')).startsWith('泡泡碰到底线了') && await p.locator('#bubble-stars').count() === 0, 'friendly lose message, no stars');
+  ok((await p.textContent('#bubble-over h2')).startsWith('泡泡触底') && await p.locator('#bubble-stars').count() === 0, 'friendly lose message, no stars');
   await p.screenshot({ path: OUT + 'bubble-lose.png' });
   await p.click('#bubble-again'); s = await S(p); ok(!s.over && s.shots === 0 && s.count > 15, 'try again restarts the level');
   // the restart and levels buttons

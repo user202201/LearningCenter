@@ -103,7 +103,7 @@ const noChinese = (page, sel) => page.evaluate((s) => { const bad = []; const w 
     await t4.page.evaluate(() => (location.hash = '#/settings')); await t4.page.waitForSelector('#manage-mode'); await require('./harness.cjs').adminOn(t4.page); await t4.page.waitForSelector('#import-btn');
     await t4.page.click('#import-btn'); await t4.page.setInputFiles('#import-file', OUT + 'idiom-pool-big.xlsx'); await t4.page.waitForSelector('#import-go');
     const bt = (await t4.page.textContent('.entry')).replace(/\u2011/g, '-');
-    ok(bt.includes('成语库：297 个成语，其中 24 个已勾选') && bt.includes('表格 A 列有 300 行内容，认出 297 个成语') && bt.includes('有 3 行没有算进去') && bt.includes('第 1、299、300 行'), 'the preview of the big sheet says it plainly: 297 idioms read from 300 filled rows, 3 rows not counted (1, 299, 300): ' + bt.replace(/\s+/g, ' ').slice(0, 200));
+    ok(bt.includes('成语库：297 个成语，其中 24 个已勾选') && bt.includes('表格 A 列有 300 行内容，认出 297 个成语') && bt.includes('有 3 行未计入') && bt.includes('第 1、299、300 行'), 'the preview of the big sheet says it plainly: 297 idioms read from 300 filled rows, 3 rows not counted (1, 299, 300): ' + bt.replace(/\s+/g, ' ').slice(0, 200));
     await t4.page.click('#import-go'); await t4.page.waitForSelector('#toasts .toast:has-text("已导入")');
     const sv = await t4.page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.idioms.json')));
     ok(sv.pool.length === 297, 'and all 297 are saved in the library (idioms.json), not only the ticked ones');
@@ -124,7 +124,7 @@ const noChinese = (page, sel) => page.evaluate((s) => { const bad = []; const w 
     const txt = await imp(OUT + 'idiom-pool-d.xlsx');
     const again = await t5.page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.idioms.json')).weeks.map((w) => w.start + ':' + w.items.join(',')));
     const want = REV.slice().sort().map((w) => w + ':' + TICKED.map((i) => IDIOMS[i]).filter((x, k) => REV[Math.floor(k / 6)] === w).join(','));
-    ok(txt.includes('表格 D 列写了周的 24 个成语，回到表格里写的那一周') && txt.includes('现有周里的') && txt.includes('个成语会被冲掉，按表格重新安排'), 'the second import tells that 24 idioms have their week in column D and that the weeks now are arranged again from the sheet: ' + txt.replace(/\s+/g, ' ').slice(0, 260));
+    ok(txt.includes('表格 D 列标明了周的 24 个成语，将回到表格中标明的那一周') && txt.includes('现有周中的') && txt.includes('个成语将被清除，按表格重新安排'), 'the second import tells that 24 idioms have their week in column D and that the weeks now are arranged again from the sheet: ' + txt.replace(/\s+/g, ' ').slice(0, 260));
     ok(JSON.stringify(again) === JSON.stringify(want) && first.join() !== again.map((x) => x.split(',')[0]).join(), 'the four weeks are exactly what column D says (here the reverse of the sheet order), not the order of the rows: ' + again.map((x) => x.slice(0, 16)).join(' | '));
     await t5.browser.close();
   }
@@ -164,7 +164,7 @@ const noChinese = (page, sel) => page.evaluate((s) => { const bad = []; const w 
   await page.reload(); await page.waitForSelector('.weekbar');
   await openManage(page); await page.click('#import-btn'); await page.setInputFiles('#import-file', FILE); await page.waitForSelector('#import-go');
   const pv = (await page.textContent('.entry')).replace(/\u2011/g, '-');
-  ok(pv.includes('成语库：60 个成语，其中 24 个已勾选') && pv.includes('分配到 4 周，每周 6 个（10-25、11-01、11-08、11-15）') && pv.includes('还没有分配到周的 36 个留在成语库里') && pv.includes('现有周里的 8 个成语会被冲掉'), 'the preview says: library of 60, 24 ticked, 4 weeks of 6 (the 3 started weeks and next week), 36 stay in the library; and warns that the 8 idioms now in the weeks will be washed away (the sheet wins)');
+  ok(pv.includes('成语库：60 个成语，其中 24 个已勾选') && pv.includes('分配到 4 周，每周 6 个（10-25、11-01、11-08、11-15）') && pv.includes('尚未分配到周的 36 个保留在成语库中') && pv.includes('现有周中的 8 个成语将被清除'), 'the preview says: library of 60, 24 ticked, 4 weeks of 6 (the 3 started weeks and next week), 36 stay in the library; and warns that the 8 idioms now in the weeks will be washed away (the sheet wins)');
   await page.screenshot({ path: OUT + 'idiom-pool-preview.png' });
   ok((await store(page, 'idioms.json')).weeks[0].items[0] === '测试一', 'nothing is written while only previewing');
   await page.click('#import-go');
@@ -191,8 +191,8 @@ const noChinese = (page, sel) => page.evaluate((s) => { const bad = []; const w 
   // ---------- every week: next week gets 6 random unused idioms by itself (here: a week later, next week = 11-22)
   await page.clock.setFixedTime(new Date('2026-11-17T10:00:00'));
   await page.evaluate(() => (location.hash = '#/chinese'));            // (opening the home screen: the picking is done when the data is loaded)
-  await page.waitForSelector('#toasts .toast:has-text("随机选好")');
-  ok((await page.textContent('#toasts')).includes('已为下一周随机选好 6 个成语'), 'a week later, opening the app: "6 idioms picked at random for next week"');
+  await page.waitForSelector('#toasts .toast:has-text("随机选取")');
+  ok((await page.textContent('#toasts')).includes('已为下一周随机选取 6 个成语'), 'a week later, opening the app: "6 idioms picked at random for next week"');
   await page.evaluate(() => (location.hash = '#/idioms')); await page.waitForSelector('.idiom-scroll');
   ok(await page.locator('#idiom-pool').count() === 0, 'after the weekly pick the idiom page still shows no library-count line');
   await page.evaluate(() => (location.hash = '#/chinese')); await page.waitForSelector('.kid');
@@ -202,13 +202,13 @@ const noChinese = (page, sel) => page.evaluate((s) => { const bad = []; const w 
   ok(next && next.items.length === 6 && new Set(next.items).size === 6 && next.items.every((x) => !old.has(x) && IDIOMS.includes(x)) && s2.weeks.length === 5, 'next week (11-22) got 6 different idioms of the library that nobody had used; the earlier weeks are unchanged');
   ok(JSON.stringify(s2.weeks.slice(0, 4)) === JSON.stringify(saved.weeks) && s2.pool.length === 60, 'the four weeks before are exactly as they were, the library is intact');
   await page.reload(); await page.waitForSelector('.kid'); await page.waitForTimeout(500);
-  ok(JSON.stringify(await store(page, 'idioms.json')) === JSON.stringify(s2) && await page.locator('#toasts .toast:has-text("随机选好")').count() === 0, 'opening the app again the same week picks nothing more (and says nothing)');
+  ok(JSON.stringify(await store(page, 'idioms.json')) === JSON.stringify(s2) && await page.locator('#toasts .toast:has-text("随机选取")').count() === 0, 'opening the app again the same week picks nothing more (and says nothing)');
   // a week with two idioms of its own is topped up to six
   await page.evaluate(([x, y]) => { const d = JSON.parse(localStorage.getItem('learn.local.idioms.json')); d.weeks.push({ start: '2026-11-29', items: [x, y] }); localStorage.setItem('learn.local.idioms.json', JSON.stringify(d)); }, [IDIOMS[40], IDIOMS[41]]);
   await page.clock.setFixedTime(new Date('2026-11-24T10:00:00'));
-  await page.reload(); await page.waitForSelector('#toasts .toast:has-text("随机选好")');
+  await page.reload(); await page.waitForSelector('#toasts .toast:has-text("随机选取")');
   const s3 = await store(page, 'idioms.json'); const w29 = s3.weeks.find((w) => w.start === '2026-11-29');
-  ok(w29.items.length === 6 && w29.items[0] === IDIOMS[40] && w29.items[1] === IDIOMS[41] && (await page.textContent('#toasts')).includes('随机选好 4 个'), 'next week with two idioms the user chose is topped up to six (4 picked), the two stay first');
+  ok(w29.items.length === 6 && w29.items[0] === IDIOMS[40] && w29.items[1] === IDIOMS[41] && (await page.textContent('#toasts')).includes('随机选取 4 个'), 'next week with two idioms the user chose is topped up to six (4 picked), the two stay first');
 
   // ---------- idioms typed by hand: learned ones are refused, library ones are picked, new ones also join the library
   await page.evaluate(() => (location.hash = '#/chinese')); await page.waitForSelector('.kid'); await openKid(page, 'Dory'); await page.click('#idioms-btn'); await page.waitForSelector('.idiom-scroll');
@@ -219,10 +219,10 @@ const noChinese = (page, sel) => page.evaluate((s) => { const bad = []; const w 
   await page.click('#idiom-add'); await require('./harness.cjs').setDate(page, '2026-12-06');
   await page.fill('dialog textarea', `${libA} ${learnedOne} 全新成语`);
   const warn = await page.textContent('#idiom-check');
-  ok(warn.includes('已经学过了，不能保存') && warn.includes(learnedOne + '（第1周）') && !warn.includes(libA) && await page.locator('#idiom-save').isDisabled(), 'an idiom that was already learned is refused: the window says which one (and its week) and the Save button is off: ' + warn);
+  ok(warn.includes('已学过，无法保存') && warn.includes(learnedOne + '（第1周）') && !warn.includes(libA) && await page.locator('#idiom-save').isDisabled(), 'an idiom that was already learned is refused: the window says which one (and its week) and the Save button is off: ' + warn);
   await page.fill('dialog textarea', `${libA} ${libB} 全新成语`);
   const ok2 = await page.textContent('#idiom-check');
-  ok(ok2.includes('成语库里有 2 个，新成语 1 个') && !(await page.locator('#idiom-save').isDisabled()), 'without a learned one: "2 in the library, 1 new" and Save is on: ' + ok2);
+  ok(ok2.includes('成语库中已有 2 个，新成语 1 个') && !(await page.locator('#idiom-save').isDisabled()), 'without a learned one: "2 in the library, 1 new" and Save is on: ' + ok2);
   await page.click('dialog button:has-text("取消")'); await page.waitForSelector('dialog', { state: 'detached' });
   ok(JSON.stringify(await store(page, 'idioms.json')) === JSON.stringify(before) && await page.locator('#toasts .toast:has-text("已添加")').count() === 0, 'cancelling saves nothing and says nothing');
   await page.click('#idiom-add'); await require('./harness.cjs').setDate(page, '2026-12-06'); await page.fill('dialog textarea', `${libA} ${libB} 全新成语`); await page.click('#idiom-save');
@@ -236,24 +236,24 @@ const noChinese = (page, sel) => page.evaluate((s) => { const bad = []; const w 
   const typo = libA.slice(0, 3) + '龘';
   await page.fill('dialog textarea', `${typo} 全然不同的新词`);
   const simTxt = await page.textContent('#idiom-check');
-  ok(simTxt.includes(`「${typo}」和已有的「${libA}」很像，是不是想写「${libA}」？`) && !simTxt.includes('全然不同的新词」和') && !(await page.locator('#idiom-save').isDisabled()), 'typing a new idiom that is one character off a known one: "did you mean ...?" (not for the unrelated one) and saving is still allowed: ' + simTxt.slice(0, 90));
+  ok(simTxt.includes(`「${typo}」与已有的「${libA}」相近，是否应为「${libA}」？`) && !simTxt.includes('全然不同的新词」与') && !(await page.locator('#idiom-save').isDisabled()), 'typing a new idiom that is one character off a known one: "did you mean ...?" (not for the unrelated one) and saving is still allowed: ' + simTxt.slice(0, 90));
   await page.click('#idiom-check button[data-fix]');
-  ok((await page.inputValue('dialog textarea')).includes(libA) && !(await page.inputValue('dialog textarea')).includes(typo) && (await page.textContent('#idiom-check')).includes('已经学过了'), 'the "Change to" button puts the known idiom in the text (here it was learned already, so Save is off)');
+  ok((await page.inputValue('dialog textarea')).includes(libA) && !(await page.inputValue('dialog textarea')).includes(typo) && (await page.textContent('#idiom-check')).includes('已学过'), 'the "Change to" button puts the known idiom in the text (here it was learned already, so Save is off)');
   await page.fill('dialog textarea', `${libB.slice(0, 3)}龘`);
-  ok((await page.textContent('#idiom-check')).includes('很像') && /已学：第\d+周/.test(await page.textContent('#idiom-check')), 'the suggestion of an idiom that was already learned says in which week');
+  ok((await page.textContent('#idiom-check')).includes('相近') && /已学：第\d+周/.test(await page.textContent('#idiom-check')), 'the suggestion of an idiom that was already learned says in which week');
   const unusedNow = after.pool.find((x) => !after.weeks.some((w) => w.items.includes(x)));
   await page.fill('dialog textarea', `${unusedNow.slice(0, 3)}龘`);
   const learnedTxt = await page.textContent('#idiom-check');
-  ok(learnedTxt.includes('很像') && !learnedTxt.includes('已学：第'), 'an unused library idiom is suggested without a week');
+  ok(learnedTxt.includes('相近') && !learnedTxt.includes('已学：第'), 'an unused library idiom is suggested without a week');
   await page.click('dialog button:has-text("取消")'); await page.waitForSelector('dialog', { state: 'detached' });
   await page.click('#idiom-add'); await page.fill('dialog textarea', `${libA}`);
-  ok((await page.textContent('#idiom-check')).includes('已经学过了') && await page.locator('#idiom-save').isDisabled(), 'the idiom just saved is now "already learned" too (typing it again is refused)');
+  ok((await page.textContent('#idiom-check')).includes('已学过') && await page.locator('#idiom-save').isDisabled(), 'the idiom just saved is now "already learned" too (typing it again is refused)');
   await page.click('dialog button:has-text("取消")'); await page.waitForSelector('dialog', { state: 'detached' });
 
   // ---------- no library imported: the app does nothing by itself
   const t2 = await start(new Map(), { local: true, today: '2026-11-10' });
   await addKid(t2.page, 'Leo'); await openKid(t2.page, 'Leo'); await t2.page.waitForTimeout(500);
-  ok(await t2.page.locator('#toasts .toast:has-text("随机选好")').count() === 0 && await store(t2.page, 'idioms.json') === null, 'without an imported library nothing is picked and nothing is written');
+  ok(await t2.page.locator('#toasts .toast:has-text("随机选取")').count() === 0 && await store(t2.page, 'idioms.json') === null, 'without an imported library nothing is picked and nothing is written');
   await t2.browser.close();
 
   // ---------- English and French

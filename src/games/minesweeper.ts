@@ -106,7 +106,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     stopClock(); phase = "lost"; loseAt = now || performance.now(); ctx.sfx("lose");
     for (let i = 0; i < s.mine.length; i++) if (s.mine[i]) { const x = i % cols, y = (i - x) / cols; for (let k = 0; k < 5; k++) sparks.push({ x: x + 0.5, y: y + 0.5, vx: (Math.random() - 0.5) * 5, vy: (Math.random() - 0.7) * 4, life: 0, max: 0.5 + Math.random() * 0.4, color: k % 2 ? "#ffa94d" : "#ffe066", r: 0.1 }); }
     refreshHud(); dirty = true;
-    timers.push(window.setTimeout(() => { if (phase === "lost") { show("哎呀，踩到雷了！", "再来一次吧。"); } }, 1400));
+    timers.push(window.setTimeout(() => { if (phase === "lost") { show("踩到地雷，本局结束。", "可重新开始。"); } }, 1400));
     ctx.toast("踩到雷了", 1200);
   }
   function win() {
@@ -115,7 +115,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (nb) ctx.store.set(bestKey(), elapsed);
     for (let i = 0; i < 40; i++) sparks.push({ x: Math.random() * cols, y: Math.random() * rows, vx: (Math.random() - 0.5) * 3, vy: -Math.random() * 3, life: 0, max: 0.8 + Math.random() * 0.5, color: ["#ffd43b", "#ff6b6b", "#51cf66", "#4dabf7"][i % 4], r: 0.12 });
     refreshHud(); dirty = true;
-    timers.push(window.setTimeout(() => { if (phase === "won") show("太棒了！", nb ? `新纪录：${fmt(elapsed)}` : `用时：${fmt(elapsed)}`); }, 700));
+    timers.push(window.setTimeout(() => { if (phase === "won") show("完成。", nb ? `新纪录：${fmt(elapsed)}` : `用时：${fmt(elapsed)}`); }, 700));
   }
   function show(t: string, m: string) { title.textContent = t; msg.textContent = m; ovl.hidden = false; doneShown = 1; }
 

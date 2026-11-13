@@ -153,8 +153,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   function resultText(o: NonNullable<Outcome>): { title: string; sub: string } {
     if (o.kind === "mate") {
-      if (mode === "cpu") return o.winner === side ? { title: "你赢啦！", sub: "将杀！你真棒！" } : { title: "电脑赢了", sub: "再试试，下一局一定行！" };
-      return { title: o.winner === "w" ? "白方获胜！" : "黑方获胜！", sub: "将杀！" };
+      if (mode === "cpu") return o.winner === side ? { title: "你赢了。", sub: "将杀，你赢了。" } : { title: "电脑赢了", sub: "本局未完成，可重新开始。" };
+      return { title: o.winner === "w" ? "白方获胜。" : "黑方获胜。", sub: "将杀！" };
     }
     const sub = o.kind === "stalemate" ? "逼和：无子可动" : o.kind === "threefold" ? "三次重复局面" : o.kind === "fifty" ? "五十步没有吃子" : "双方子力不足";
     return { title: "和棋", sub };
@@ -305,7 +305,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   function hint() {
     if (over) return;
-    if (thinking || (mode === "cpu" && game.turn() !== side)) { ctx.toast("还没轮到你"); return; }
+    if (thinking || (mode === "cpu" && game.turn() !== side)) { ctx.toast("尚未轮到你"); return; }
     if (hinting) return;
     hinting = true; hintMove = null; msg = ""; updateStatus(); paint();
     const my = token, s = new Searcher(game.fen(), 3, { ms: 700 });
@@ -313,7 +313,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       if (my !== token || disposed) return;
       if (s.step(14)) {
         hinting = false;
-        if (s.best) { hintMove = { from: s.best.from, to: s.best.to }; msg = "提示：试试这一步"; ctx.sfx("good"); }
+        if (s.best) { hintMove = { from: s.best.from, to: s.best.to }; msg = "提示：建议走这一步"; ctx.sfx("good"); }
         paint(); updateStatus();
       } else later(tick, 0);
     };
@@ -322,7 +322,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   function undo() {
     const n = game.history().length;
-    if (!n) { ctx.toast("没有可以悔的棋"); return; }
+    if (!n) { ctx.toast("没有可悔的棋"); return; }
     token++; thinking = false; hinting = false;
     if (mode === "cpu") { do game.undo(); while (game.history().length > 0 && game.turn() !== side); }
     else game.undo();
@@ -354,7 +354,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     cover(h("div", { class: "chess-card", id: "chess-result" }, hero, h("h3", {}, r.title), h("p", {}, r.sub), stats,
       h("div", { class: "chess-row" },
         h("button", { class: "chess-btn big on", id: "chess-again", type: "button", onclick: () => { newGame(); } }, "再来一局"),
-        h("button", { class: "chess-btn big", id: "chess-look", type: "button", onclick: () => closeCover() }, "看看棋盘"))));
+        h("button", { class: "chess-btn big", id: "chess-look", type: "button", onclick: () => closeCover() }, "查看棋盘"))));
   }
 
   function openNew() {

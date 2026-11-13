@@ -40,7 +40,7 @@ const DATA = {};   // char -> strokes, for the pure tests
     await p.evaluate(() => (location.hash = '#/games/hanzipuzzle')); await p.waitForSelector('#hz-field');
     await p.click('#hz-start');
     await p.waitForFunction(() => window.__hanzi.failed());
-    ok((await p.evaluate(() => window.__hanzi.phase())) === 'ready' && await p.locator('#hz-ovl').isVisible() && (await p.textContent('#hz-ovl p')).includes('没能加载') && (await p.textContent('#hz-start')) === '再试一次', 'strokes cannot be loaded: a friendly message and a retry button, no crash');
+    ok((await p.evaluate(() => window.__hanzi.phase())) === 'ready' && await p.locator('#hz-ovl').isVisible() && (await p.textContent('#hz-ovl p')).includes('无法加载') && (await p.textContent('#hz-start')) === '再试一次', 'strokes cannot be loaded: a friendly message and a retry button, no crash');
     await p.unroute('**/strokes/*.json');
     await p.click('#hz-start');
     await p.waitForFunction(() => window.__hanzi.phase() === 'play');
@@ -210,7 +210,7 @@ const DATA = {};   // char -> strokes, for the pure tests
     await p.click('#hz-next');
   }
   await p.waitForFunction(() => window.__hanzi.phase() === 'over');
-  ok((await p.textContent('#hz-ovl h2')) === '太棒了！' && (await p.textContent('#hz-ovl p')) === '新纪录：4' && await p.locator('#hz-ovl').isVisible(), 'end: 4 stars of 5 (the first character had mistakes): wonderful, new record');
+  ok((await p.textContent('#hz-ovl h2')) === '完成。' && (await p.textContent('#hz-ovl p')) === '新纪录：4' && await p.locator('#hz-ovl').isVisible(), 'end: 4 stars of 5 (the first character had mistakes): wonderful, new record');
   ok((await p.textContent('#hz-score')) === '得分：4' && (await p.textContent('#hz-best')) === '最高：4', 'end: score 4, best 4');
   const store = () => p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).hanzipuzzle);
   ok((await store())['best-order-easy'] === 4, 'the best score is kept on this device (learn.games.v1)');
@@ -222,7 +222,7 @@ const DATA = {};   // char -> strokes, for the pure tests
     await finishChar(); await p.click('#hz-next');
   }
   await p.waitForFunction(() => window.__hanzi.phase() === 'over');
-  ok((await p.textContent('#hz-ovl h2')) === '再加油！' && (await p.textContent('#hz-ovl p')) === '得分：0 / 5' && (await store())['best-order-easy'] === 4 && (await p.textContent('#hz-best')) === '最高：4', 'a round with a mistake on every character: 0 stars, keep going, the best stays 4');
+  ok((await p.textContent('#hz-ovl h2')) === '仍需练习。' && (await p.textContent('#hz-ovl p')) === '得分：0 / 5' && (await store())['best-order-easy'] === 4 && (await p.textContent('#hz-best')) === '最高：4', 'a round with a mistake on every character: 0 stars, keep going, the best stays 4');
 
   // ---------- levels: the characters have the right number of strokes ----------
   for (const [lv, name, lo, hi] of [['normal', '难度：普通', 7, 10], ['hard', '难度：较难', 11, 14]]) {
@@ -243,7 +243,7 @@ const DATA = {};   // char -> strokes, for the pure tests
   // ---------- assemble mode ----------
   await p.click('#hz-level'); // back to easy
   await p.click('#hz-mode');
-  ok((await p.textContent('#hz-mode')) === '方式：拼汉字' && (await store()).mode === 'assemble' && (await p.textContent('#hz-ovl p')).includes('拖到田字格'), 'assemble: the mode button, the new instructions, remembered');
+  ok((await p.textContent('#hz-mode')) === '方式：拼汉字' && (await store()).mode === 'assemble' && (await p.textContent('#hz-ovl p')).includes('拖入田字格'), 'assemble: the mode button, the new instructions, remembered');
   await p.click('#hz-start'); await p.waitForFunction(() => window.__hanzi.phase() === 'play');
   const farAway = async (i) => H((i) => { const b = window.__hanzi.boxes()[i], c = window.__hanzi.home(i), f = document.querySelector('#hz-field').getBoundingClientRect(); const px = (f.width / 1024); const left = c.x - f.left > f.width / 2; return { x: left ? f.left + 20 * px + 6 : f.right - 26 * px, y: f.bottom - 10 }; }, i);
   const dragTo = async (i, pt) => {

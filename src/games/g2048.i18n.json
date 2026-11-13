@@ -1,13 +1,13 @@
 {
-  "滑动合并，凑出 2048": ["Slide and merge to make 2048", "Glissez et fusionnez pour faire 2048"],
+  "滑动合并方块，合成 2048": ["Slide to merge tiles and reach 2048", "Faites glisser pour fusionner les tuiles et atteindre 2048"],
   "撤销": ["Undo", "Annuler"],
   "新游戏": ["New game", "Nouvelle partie"],
   "继续玩": ["Keep going", "Continuer"],
   "大小：{0}": ["Size: {0}", "Taille : {0}"],
   "得分：{0}": ["Score: {0}", "Score : {0}"],
   "最高：{0}": ["Best: {0}", "Record : {0}"],
-  "太棒了！": ["Wonderful!", "Bravo !"],
-  "你合成了 {0}！": ["You made {0}!", "Vous avez fait {0} !"],
+  "完成。": ["Completed.", "Terminé."],
+  "已合成 {0}。": ["{0} reached.", "{0} atteint."],
   "游戏结束": ["Game over", "Partie terminée"],
   "新纪录：{0}": ["New record: {0}", "Nouveau record : {0}"],
   "再玩一次": ["Play again", "Rejouer"]

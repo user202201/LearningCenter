@@ -256,7 +256,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   function settle(): void {
     hud();
     if (won || autoT) return;
-    if (L.isStuck(state) && !stuckShown) { stuckShown = true; say("没有可以走的牌了！撤销几步再试试吧。", true); ctx.sfx("bad"); }
+    if (L.isStuck(state) && !stuckShown) { stuckShown = true; say("无牌可走。请撤销几步后重试。", true); ctx.sfx("bad"); }
   }
   function undo(): void {
     if (won || !moves.length) return;
@@ -271,10 +271,10 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (won) return;
     stopAuto();
     const r = L.hints(state);
-    if (!r.move) { say("没有可以走的牌了！撤销几步再试试吧。", true); ctx.sfx("bad"); return; }
+    if (!r.move) { say("无牌可走。请撤销几步后重试。", true); ctx.sfx("bad"); return; }
     clearSel(); render();
     colHighlight(r.move);
-    say(r.unsolvable ? "这一局好像走不通了，撤销几步或换一局吧。" : "提示：试试这一步！", r.unsolvable);
+    say(r.unsolvable ? "本局可能已无解，请撤销几步或更换牌局。" : "提示：建议走这一步。", r.unsolvable);
     ctx.sfx("tap");
   }
 
@@ -348,7 +348,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     ov?.remove();
     ov = h("div", { class: "freecell-ov", id: "fc-win" },
       h("div", { class: "freecell-card-box" },
-        h("h2", {}, "太棒了，通关啦！"),
+        h("h2", {}, "已通关。"),
         h("p", {}, `第${deal}局 · ${mv}步 · ${mmss(ms)}`),
         record && deal > 0 ? h("p", { id: "fc-record" }, "新纪录！") : null,
         h("div", { class: "freecell-row" },

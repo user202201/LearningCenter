@@ -283,7 +283,7 @@ const TODAY = '2026-11-10';
   t = await open({ kids: [{ ...DORY, weeks: [{ start: '2026-11-08', chars: C('波坡板炭') }] }] });
   await toGame(t.page); await t.page.click('#game-start'); await t.page.waitForSelector('#game');
   await t.page.click('#game-quit');
-  ok((await t.page.textContent('dialog')).includes('还没有答题'), 'leaving: asks first (and says nothing has been answered yet)');
+  ok((await t.page.textContent('dialog')).includes('尚未答题'), 'leaving: asks first (and says nothing has been answered yet)');
   const dg = await t.page.evaluate(() => { const d = document.querySelector('dialog .dlg').getBoundingClientRect(), bs = [...document.querySelectorAll('dialog .dlg .row button')].map((b) => b.getBoundingClientRect()), h2 = document.querySelector('dialog .dlg h2'), r = document.querySelector('dialog .dlg .row').getBoundingClientRect(); return { n: bs.length, w: bs.map((b) => Math.round(b.width)), hgt: Math.min(...bs.map((b) => b.height)), fill: (bs.at(-1).right - bs[0].left) / d.width, align: getComputedStyle(h2).textAlign, rowL: r.left - d.left, rowR: d.right - r.right }; });
   ok(dg.n === 2 && Math.abs(dg.w[0] - dg.w[1]) <= 1 && dg.hgt >= 50 && dg.fill > 0.85 && dg.align === 'center' && Math.abs(dg.rowL - dg.rowR) <= 1, 'on a phone the Cancel / Quit question has two big equal buttons filling the width, centred title (buttons ' + dg.w.join(' + ') + ' px, ' + Math.round(dg.hgt) + ' px high)');
   await t.page.clock.runFor(8000);                                                       // the clock must stand still while the question is open
@@ -297,7 +297,7 @@ const TODAY = '2026-11-10';
   await play(t.page, (c, n) => n === 0 ? true : n === 1 ? false : true, 0).catch(() => {});
   for (const right of [true, false]) { const s = await st(t.page); await t.page.click(right ? '#game-right' : '#game-wrong'); await t.page.clock.runFor(right ? 700 : 1800); }
   await t.page.click('#game-quit');
-  ok((await t.page.textContent('dialog')).includes('已经答过的题会保存'), 'after 2 answers the question says what has been answered is saved');
+  ok((await t.page.textContent('dialog')).includes('已答题目将被保存'), 'after 2 answers the question says what has been answered is saved');
   await t.page.click('dialog button.danger'); await t.page.waitForSelector('#game', { state: 'detached' });
   await t.page.waitForSelector('#toasts .toast:has-text("已记录这次练习")');
   const rl = await rec(t.page, 'kdory');

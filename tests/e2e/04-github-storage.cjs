@@ -44,7 +44,7 @@ const { ok, done } = checks();
   opts.offline = true;
   await page.click('button[title=下一周]');           // (the week with its 10 characters has no +: the next week is empty)
   await page.click('#enter'); await page.fill('dialog textarea', '梨桃李'); await page.click('dialog button.primary');
-  await page.waitForSelector('#toasts .toast:has-text("已保存在这台设备上")', { timeout: 15000 });
+  await page.waitForSelector('#toasts .toast:has-text("已保存在本设备上")', { timeout: 15000 });
   ok(true, 'offline: the user is told the change is kept on this device and will sync later');
   ok(await page.locator('#toasts .toast.working').count() === 0, 'the "saving…" spinner is closed');
   ok(!store.get(`kids/${id}.json`).includes('梨'), 'nothing has reached the repository yet');

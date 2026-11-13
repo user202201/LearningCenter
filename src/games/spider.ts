@@ -295,8 +295,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   function doDeal() {
     if (finished || ov) return;
     clearHint();
-    if (!st.stock.length) { ctx.toast("没有牌可以发了。"); ctx.sfx("bad"); return; }
-    if (!L.canDeal(st)) { ctx.toast("有空列的时候不能发牌：先把牌放进空列。"); ctx.sfx("bad"); const s = slots.filter((q) => q.style.display !== "none"); s.forEach((q) => q.classList.add("hint")); later(() => s.forEach((q) => q.classList.remove("hint")), 1600); return; }
+    if (!st.stock.length) { ctx.toast("已无牌可发。"); ctx.sfx("bad"); return; }
+    if (!L.canDeal(st)) { ctx.toast("存在空列时不能发牌，请先将牌放入空列。"); ctx.sfx("bad"); const s = slots.filter((q) => q.style.display !== "none"); s.forEach((q) => q.classList.add("hint")); later(() => s.forEach((q) => q.classList.remove("hint")), 1600); return; }
     const d = st.stock[st.stock.length - 1].slice();
     const dealt = new Map(d.map((c, i) => [L.idOf(c), i]));
     ctx.sfx("drop");
@@ -305,7 +305,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
   function doUndo() {
     if (finished || ov) return;
-    if (!st.hist.length) { ctx.toast("没有可以撤销的步骤。"); return; }
+    if (!st.hist.length) { ctx.toast("没有可撤销的步骤。"); return; }
     clearHint(); sel = null;
     const before = st.found.length, liveBefore = new Set(els.keys());
     L.undo(st);
@@ -321,7 +321,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     clearHint(); select(null);
     const s = L.suggest(st);
     ctx.sfx("tap");
-    if (!s) { ctx.toast("没有可走的步了：试试撤销，或者开始新游戏。"); return; }
+    if (!s) { ctx.toast("已无可走的步：请撤销，或开始新游戏。"); return; }
     if (s.kind === "deal") { stockHost.node?.classList.add("hint"); }
     else {
       const m = s.hint;
@@ -411,7 +411,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const choices = h("div", { class: "spider-choices" });
     for (const [n, name] of LEVELS) choices.append(h("button", { id: `spider-lv${n}`, class: n === st.suits ? "on" : "", onclick: () => { ctx.sfx("tap"); startNew(n); } }, name));
     if (cancelable) choices.append(h("button", { id: "spider-cancel", onclick: () => closeOv() }, inProgress ? "继续当前这局" : "返回"));
-    ov = h("div", { class: "spider-ov", id: "spider-levels" }, h("div", { class: "spider-dlg" }, h("h2", {}, "选择难度"), h("p", {}, "花色越多，越难"), choices));
+    ov = h("div", { class: "spider-ov", id: "spider-levels" }, h("div", { class: "spider-dlg" }, h("h2", {}, "选择难度"), h("p", {}, "花色越多，难度越高"), choices));
     el.board.append(ov);
   }
   function startNew(n: L.Suits, rng?: () => number) {
@@ -442,9 +442,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       ctx.sfx("win");
       const dlg = h("div", { class: "spider-dlg" });
       const sp = h("div", {}); sp.innerHTML = DANCER;
-      dlg.append(sp.firstElementChild as Element, h("h2", {}, "太棒了，你赢了！"), h("p", {}, `得分：${st.score}`), h("p", {}, `步数：${st.moves}`));
+      dlg.append(sp.firstElementChild as Element, h("h2", {}, "你赢了。"), h("p", {}, `得分：${st.score}`), h("p", {}, `步数：${st.moves}`));
       if (record) dlg.append(h("p", { class: "spider-record", id: "spider-record" }, "新纪录！"));
-      dlg.append(h("div", { class: "spider-choices" }, h("button", { class: "primary", id: "spider-again", onclick: () => startNew(st.suits) }, "再来一局"), h("button", { id: "spider-change", onclick: () => showLevels(false) }, "换个难度")));
+      dlg.append(h("div", { class: "spider-choices" }, h("button", { class: "primary", id: "spider-again", onclick: () => startNew(st.suits) }, "再来一局"), h("button", { id: "spider-change", onclick: () => showLevels(false) }, "更换难度")));
       closeOv();
       ov = h("div", { class: "spider-ov", id: "spider-win" });
       if (!reduce()) {

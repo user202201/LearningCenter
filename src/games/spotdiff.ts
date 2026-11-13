@@ -75,7 +75,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     info = levelInfo(level); g = newGame(level);
     phase = "ready"; elapsed = 0; hintIdx = -1; record = false; cursorOn = false; cursor = { x: SW / 2, y: SH / 2 };
     build(); drawFx();
-    setOvl("找不同", `两幅画有 ${info.n} 处不一样，点一点找出来。`, "开始", true);
+    setOvl("找不同", `两幅图有 ${info.n} 处不同，请点击找出。`, "开始", true);
     layout(); refreshHud();
   }
   function begin() { if (phase !== "ready") return; phase = "play"; lastTick = performance.now(); setOvl("", "", "", false); refreshHud(); placeCursor(); }
@@ -121,7 +121,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     starsEl.innerHTML = [1, 2, 3].map((k) => `<svg viewBox="0 0 100 96" class="${k <= st ? "on" : "off"}"><polygon points="${STAR}" stroke-width="6" stroke-linejoin="round"/></svg>`).join("");
     starsEl.setAttribute("data-stars", String(st));
     ctx.sfx("win");
-    later(() => { if (phase !== "won") return; setOvl("找到啦！", `用时 ${fmtTime(elapsed)}，失误 ${g.mistakes} 次`, "下一幅", true, true); refreshHud(); }, 600);
+    later(() => { if (phase !== "won") return; setOvl("已全部找到。", `用时 ${fmtTime(elapsed)}，失误 ${g.mistakes} 次`, "下一幅", true, true); refreshHud(); }, 600);
     placeCursor();
   }
 

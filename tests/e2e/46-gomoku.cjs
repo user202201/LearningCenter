@@ -192,7 +192,7 @@ const KEY = 'learn.games.v1';
     await p.waitForTimeout(100);
   }
   await p.waitForSelector('#gomoku-status.won', { timeout: 8000 });
-  ok((await p.getAttribute('#gomoku-status', 'data-result')) === '1' && (await p.textContent('#gomoku-status')).includes('电脑赢了'), 'the computer wins by itself when I play far away: "电脑赢了，再来一局吧！"');
+  ok((await p.getAttribute('#gomoku-status', 'data-result')) === '1' && (await p.textContent('#gomoku-status')).includes('电脑获胜'), 'the computer wins by itself when I play far away: "电脑获胜。"');
   const win = await p.evaluate(() => ({ wins: document.querySelectorAll('#gm-stones .gomoku-stone.win').length, line: !!document.querySelector('#gomoku-winline'), rings: document.querySelectorAll('.gomoku-ring').length }));
   ok(win.wins >= 5 && win.line && win.rings >= 5, `the winning five is highlighted (${win.wins} stones animated, a line, ${win.rings} rings)`);
   const n1 = await nStones(); await tap(7, 3);
@@ -220,7 +220,7 @@ const KEY = 'learn.games.v1';
   ok(await p.locator('#gomoku-status.won').count() === 0, 'four in a row is not yet a win');
   await tap(7, 7);
   await p.waitForSelector('#gomoku-status.won');
-  ok((await p.getAttribute('#gomoku-status', 'data-result')) === '2' && (await p.textContent('#gomoku-status')).includes('白棋赢了！太棒了！') && (await p.locator('#gm-stones .gomoku-stone.win').count()) === 5, 'five in a row wins: "白棋赢了！太棒了！", five stones highlighted');
+  ok((await p.getAttribute('#gomoku-status', 'data-result')) === '2' && (await p.textContent('#gomoku-status')).includes('白棋获胜。') && (await p.locator('#gm-stones .gomoku-stone.win').count()) === 5, 'five in a row wins: "白棋获胜。", five stones highlighted');
   await p.screenshot({ path: OUT + 'gomoku-two-won-ipad.png' });
   await p.click('#gomoku-reset');
   ok((await nStones()) === 0 && (await p.locator('#gomoku-status.won').count()) === 0 && (await p.locator('#gomoku-winline').count()) === 0, 'restart after a win: clean board');
@@ -229,7 +229,7 @@ const KEY = 'learn.games.v1';
   for (let k = 0; k < 4; k++) { await tap(2 + k, 2 + k); await tap(12, k); }
   await tap(6, 6);
   await p.waitForSelector('#gomoku-status.won');
-  ok((await p.textContent('#gomoku-status')).includes('黑棋赢了！太棒了！'), 'black wins on a diagonal: "黑棋赢了！太棒了！"');
+  ok((await p.textContent('#gomoku-status')).includes('黑棋获胜。'), 'black wins on a diagonal: "黑棋获胜。"');
 
   // ---------- three sizes ----------
   for (const [name, vp] of [['phone', { width: 320, height: 568 }], ['ipad', { width: 820, height: 1180 }], ['sideways', { width: 844, height: 390 }]]) {

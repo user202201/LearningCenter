@@ -29,7 +29,7 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     ok((await cards(p)).join() === 'chinese,math,english,science,music,games' && (motion ? arriving === 2 : arriving === 0), `${dn}: ten quick taps show music and games (${motion ? 'the cards fly in with the "arrive" animation' : 'no animation with reduced motion'})`);
     if (motion) ok(await p.locator('.hub-spot').count() === 1 && (await p.evaluate(() => !!document.querySelector('.hub-veil mask rect[filter] , .hub-veil mask rect[rx]') && !!document.querySelector('.hub-veil feGaussianBlur'))), `${dn}: a spotlight lights the new cards and everything else falls into shadow`);
     ok(motion ? await p.locator('.confetti').count() >= 20 : true, `${dn}: ${motion ? 'confetti flies out of the new cards' : 'no confetti with reduced motion'}`);
-    ok((await p.locator('.toast').allTextContents()).join().includes('隐藏学科出现了'), `${dn}: a message says what happened`);
+    ok((await p.locator('.toast').allTextContents()).join().includes('已显示隐藏学科'), `${dn}: a message says what happened`);
     if (motion) await p.screenshot({ path: OUT + `secret-reveal-${dn}.png` });
     ok((await p.evaluate(() => localStorage.getItem('learn.hidden.v1'))) === '1', `${dn}: the state is kept on this device`);
     // wild tapping during the animation does nothing
@@ -48,7 +48,7 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     await tap(p, 10);
     await p.waitForTimeout(motion ? 1100 : 200);
     ok((await cards(p)).join() === 'chinese,math,english,science' && (await p.evaluate(() => localStorage.getItem('learn.hidden.v1'))) === '0', `${dn}: ten more quick taps hide them again`);
-    ok((await p.locator('.toast').allTextContents()).join().includes('收起来了'), `${dn}: and say so`);
+    ok((await p.locator('.toast').allTextContents()).join().includes('已收起隐藏学科'), `${dn}: and say so`);
     await tap(p, 30, 10); await p.waitForTimeout(300);
     ok((await cards(p)).length === 4, `${dn}: wild tapping right after hiding does not bring them back`);
     ok(await p.locator('.subject[data-subject=chinese]').count() === 1 && t.log.external.length === 0, `${dn}: the school subjects are untouched, no outside request`);

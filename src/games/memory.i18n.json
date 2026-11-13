@@ -1,14 +1,14 @@
 {
   "记忆翻牌": ["Memory Cards", "Jeu de mémoire"],
-  "找出一样的小动物": ["Find the matching animals", "Trouve les animaux identiques"],
+  "找出相同的动物": ["Find the matching animals", "Trouvez les animaux identiques"],
   "步数：{0}": ["Moves: {0}", "Coups : {0}"],
   "用时：{0}": ["Time: {0}", "Temps : {0}"],
   "最少：{0}": ["Fewest: {0}", "Minimum : {0}"],
   "最少：-": ["Fewest: -", "Minimum : -"],
   "重新开始": ["Restart", "Recommencer"],
   "开始": ["Start", "Démarrer"],
-  "翻开两张一样的小动物，就能收走它们。": ["Turn over two cards with the same animal to collect them.", "Retourne deux cartes avec le même animal pour les ramasser."],
-  "太棒了！": ["Wonderful!", "Bravo !"],
+  "翻开两张相同的动物牌即可消除。": ["Turn over two cards showing the same animal to remove them.", "Retournez deux cartes montrant le même animal pour les retirer."],
+  "完成。": ["Completed.", "Terminé."],
   "新纪录：{0} 步，用时 {1}": ["New record: {0} moves, time {1}", "Nouveau record : {0} coups, temps {1}"],
   "{0} 步，用时 {1}": ["{0} moves, time {1}", "{0} coups, temps {1}"],
   "再玩一次": ["Play again", "Rejouer"]

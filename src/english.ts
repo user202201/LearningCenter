@@ -59,13 +59,13 @@ export async function renderHome() {
   const hero = h("header", { class: "top hero home-hero subj-hero", style: "--kid:#2f9e44" },
     X.back("#/", "选择学科"),
     h("span", { class: "subj-ico" }, subjectArt("english")),
-    h("div", { class: "hero-text" }, h("h1", {}, subjectById("english")!.name), h("p", {}, "今天背几个单词？")),
+    h("div", { class: "hero-text" }, h("h1", {}, subjectById("english")!.name), h("p", {}, "请选择孩子")),
     X.gear("#/subject/english"));
   if (!kids.length) {
     return X.show(h("div", { class: "page", style: "--kid:#2f9e44" }, hero,
       h("main", { class: "scroll" }, h("div", { class: "narrow home-empty empty-home" },
         h("button", { class: "add-big", id: "add-kid-big", title: "添加孩子", "aria-label": "添加孩子", onclick: () => void X.addKid(() => X.route()) }, "＋"),
-        h("p", {}, "还没有孩子，先添加一个吧。")))));
+        h("p", {}, "暂无孩子。请先添加。")))));
   }
   const list = h("div", { class: "kids" });
   for (const k of kids) {
@@ -115,7 +115,7 @@ export async function renderKid(id: string, tab: Tab) {
   }
   if (my !== X.epoch()) return;
   const k = X.kids().kids.find((x) => x.id === id);
-  if (!k) { toast("找不到这个孩子"); return void (location.hash = "#/subject/english"); }
+  if (!k) { toast("未找到该孩子"); return void (location.hash = "#/subject/english"); }
   // the grade of this child: asked the first time he is opened (cancelling goes back to the list; nothing is saved)
   if (P.gradeOf(id) === null) {
     const g = await pickKidGrade(k);
@@ -214,7 +214,7 @@ async function renderReading(k: M.Kid) {
   if (!r) return void (location.hash = `#/english/${k.id}`);
   const lang = getLang();
   const meaning = (g: R.Gloss) => (lang === "fr" ? g.fr : g.zh);
-  const bubble = h("div", { class: "rd-bubble", id: "rd-gloss", role: "status" }, "点一下带下划线的单词看意思");
+  const bubble = h("div", { class: "rd-bubble", id: "rd-gloss", role: "status" }, "点击带下划线的单词可查看释义");
   const paras = r.text.split(/\n+/).map((para) => {
     const p = h("p", { class: "rd-p user" });
     for (const part of para.split(/([A-Za-z][A-Za-z'’-]*)/)) {
@@ -272,7 +272,7 @@ function renderLearned(body: HTMLElement, kid: M.KidData, map: Map<string, W.Wor
             h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "sample-title" }, `随机 ${sample.length} 个`), h("span", { class: "muted small" }, `共 ${all.length} 个`),
               all.length > sample.length ? h("button", { class: "sheet-btn", id: "reshuffle", onclick: show }, "换一批") : null),
             h("div", { class: "wlist" }, ...X.stagger(sample.map((c) => wordRow(c, map)))))
-        : h("p", { class: "empty" }, "还没有入库的单词，先去“本周”看看吧。")));
+        : h("p", { class: "empty" }, "暂无已入库的单词。请先查看“本周”。")));
   };
   show();
 }
@@ -337,6 +337,6 @@ async function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, map: Map
   const q = gameQueue(kid);
   body.replaceChildren(h("div", { class: "narrow lobby" },
     h("div", { class: "lobby-hero" }, h("span", { class: "mascot big" }, mascot()), h("h2", {}, "准备好了吗？")),
-    q.length ? null : h("p", { class: "empty" }, "还没有单词，先到“本周”看看吧。"),
+    q.length ? null : h("p", { class: "empty" }, "暂无单词。请先查看“本周”。"),
     h("div", { class: "lobby-go" }, h("button", { class: "primary wide", id: "game-start", disabled: q.length === 0, onclick: () => play(k, gameQueue(kid), map) }, "开始游戏"))));
 }

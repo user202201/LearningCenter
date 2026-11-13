@@ -46,7 +46,7 @@ export async function renderHome() {
   const hero = h("header", { class: "top hero home-hero subj-hero", style: `--kid:${COLOR}` },
     X.back("#/", "选择学科"),
     h("span", { class: "subj-ico" }, subjectArt("science")),
-    h("div", { class: "hero-text" }, h("h1", {}, "科学"), h("p", {}, "今天探索什么？")),
+    h("div", { class: "hero-text" }, h("h1", {}, "科学"), h("p", {}, "请选择孩子")),
     X.gear("#/subject/science"));
   const refs = h("div", { class: "sci-refs" },
     h("button", { class: "sci-ref", id: "open-periodic", onclick: () => (location.hash = "#/science/periodic") }, h("b", {}, "元素周期表"), h("span", { class: "muted small" }, "118 个元素")),
@@ -64,7 +64,7 @@ export async function renderHome() {
   }
   X.stagger([...list.querySelectorAll<HTMLElement>(".kid")]);
   X.show(h("div", { class: "page", style: `--kid:${COLOR}` }, hero, h("main", { class: "scroll" }, h("div", { class: "narrow" },
-    kids.length ? list : h("div", { class: "home-empty empty-home" }, h("button", { class: "add-big", id: "add-kid-big", title: "添加孩子", "aria-label": "添加孩子", onclick: () => void X.addKid(() => X.route()) }, "＋"), h("p", {}, "还没有孩子，先添加一个吧。")),
+    kids.length ? list : h("div", { class: "home-empty empty-home" }, h("button", { class: "add-big", id: "add-kid-big", title: "添加孩子", "aria-label": "添加孩子", onclick: () => void X.addKid(() => X.route()) }, "＋"), h("p", {}, "暂无孩子。请先添加。")),
     refs))));
 }
 
@@ -107,7 +107,7 @@ export async function renderKid(id: string, tab: Tab) {
   }
   if (my !== X.epoch()) return;
   const k = X.kids().kids.find((x) => x.id === id);
-  if (!k) { toast("找不到这个孩子"); return void (location.hash = "#/subject/science"); }
+  if (!k) { toast("未找到该孩子"); return void (location.hash = "#/subject/science"); }
   if (P.gradeOf(id) === null) {
     const g = await pickKidGrade(k);
     if (my !== X.epoch()) return;
@@ -176,9 +176,9 @@ async function renderDay(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: SM.Li
   const again = curDay === t ? SM.reviewIds(kid, review, t).map((i) => lib.byId.get(i)).filter((c): c is SM.Card => !!c && !cards.includes(c)) : [];
   body.replaceChildren(h("div", { class: "narrow week-narrow" }, bar,
     curDay === t ? null : h("button", { class: "link", onclick: () => go(t) }, "回到今天"),
-    h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "day-title" }, `新知识（${cards.length}）`), cards.length ? h("span", { class: "muted small" }, "点一下看答案") : null),
+    h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "day-title" }, `新知识（${cards.length}）`), cards.length ? h("span", { class: "muted small" }, "点击查看答案") : null),
     cards.length ? h("div", { class: "slist" }, ...X.stagger(cards.map((c) => cardEl(c, lib)))) : h("p", { class: "empty" }, "这一天没有知识卡。"),
-    again.length ? h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "again-title" }, `该回顾的旧知识（${again.length}）`), h("span", { class: "muted small" }, "按记忆曲线，隔一段时间再看一遍")) : null,
+    again.length ? h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "again-title" }, `该回顾的旧知识（${again.length}）`), h("span", { class: "muted small" }, "按记忆曲线，间隔一段时间后复习")) : null,
     again.length ? h("div", { class: "slist", id: "again-list" }, ...X.stagger(again.map((c) => cardEl(c, lib)))) : null));
 }
 
@@ -202,7 +202,7 @@ async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: S
             h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "sample-title" }, `随机 ${sample.length} 张`), h("span", { class: "muted small" }, `共 ${all.length} 张`),
               all.length > sample.length ? h("button", { class: "sheet-btn", id: "reshuffle", onclick: show }, "换一批") : null),
             h("div", { class: "slist" }, ...X.stagger(sample.map((c) => cardEl(c, lib)))))
-        : h("p", { class: "empty" }, "还没有入库的知识卡，先去“今天”看看吧。")));
+        : h("p", { class: "empty" }, "暂无已入库的知识卡。请先查看“今天”。")));
   };
   show();
 }
@@ -240,7 +240,7 @@ async function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: SM.
   const start = () => playQuestions(k, SM.buildGame(lib, kid, review, today()).questions, lib, () => X.route());
   body.replaceChildren(h("div", { class: "narrow lobby" },
     h("div", { class: "lobby-hero" }, h("span", { class: "mascot big" }, mascot()), h("h2", {}, "准备好了吗？")),
-    n ? h("p", { class: "muted center", id: "math-info" }, `今天：${g.fresh} 个新知识，${g.again} 个回顾，不限时，慢慢来`) : h("p", { class: "empty" }, "还没有知识卡，先到“今天”看看吧。"),
+    n ? h("p", { class: "muted center", id: "math-info" }, `今天：${g.fresh} 个新知识，${g.again} 个回顾，不限时`) : h("p", { class: "empty" }, "暂无知识卡。请先查看“今天”。"),
     h("div", { class: "lobby-go" }, h("button", { class: "primary wide", id: "game-start", disabled: n === 0, onclick: start }, "开始游戏"))));
 }
 
@@ -264,8 +264,8 @@ export async function renderPeriodic() {
     h("main", { class: "scroll" }, h("div", { class: "wide" },
       h("div", { class: "mset-opts pt-filter" }, ...chips.map((c) => c.el)),
       h("div", { class: "pt-wrap" }, grid), legend,
-      h("p", { class: "muted small center pt-tip" }, "点一下元素看详情。"),
-      h("p", { class: "muted small center pt-rotate" }, "手机竖着拿时字比较小，横过来会看得更清楚。")))));
+      h("p", { class: "muted small center pt-tip" }, "点击元素查看详情。"),
+      h("p", { class: "muted small center pt-rotate" }, "竖屏时文字较小，横屏显示更清晰。")))));
 }
 async function details(e: SM.Element) {
   await modal<boolean>((close) => h("div", { class: "dlg pt-dlg", id: "pt-dlg" },
@@ -374,7 +374,7 @@ export async function renderNotes() {
     const gs = groupsOf(b), at = Math.min(pick[tab], gs.length - 1);
     const list = h("div", { id: "nt-list" }, ...gs[at].sections.map((s, i) => sectionCard(s, i + 1)));
     const chips = gs.length < 2 ? null : h("div", { class: "nt-stages", id: "nt-stages" }, ...gs.map((g, i) => h("button", { class: "mopt" + (i === at ? " on" : ""), id: `grp-${i}`, "data-i": String(i), onclick: () => { pick[tab] = i; draw(); } }, g.name)));
-    return [chips, h("p", { class: "muted small center nt-hint" }, `${gs[at].sections.length} 节 · 点一下标题展开，有 ★ 的有必背考点。`), list].filter((x): x is NonNullable<typeof x> => !!x) as HTMLElement[];
+    return [chips, h("p", { class: "muted small center nt-hint" }, `${gs[at].sections.length} 节 · 点击标题展开，带 ★ 的含必背考点。`), list].filter((x): x is NonNullable<typeof x> => !!x) as HTMLElement[];
   };
   const draw = () => {
     if (tab === "history") {

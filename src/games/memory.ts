@@ -64,7 +64,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     clearInterval(timer); clearTimeout(missTimer); missTimer = 0; timer = 0; winShown = 0;
     s = deal(SIZES[sizeIdx]); sec = 0; cur = 0; phase = "ready";
     build(); layout(); paint(); refreshHud();
-    setOvl("记忆翻牌", "翻开两张一样的小动物，就能收走它们。", "开始", null);
+    setOvl("记忆翻牌", "翻开两张相同的动物牌即可消除。", "开始", null);
   }
   function begin() { if (phase !== "ready") return; phase = "play"; ovl.hidden = true; }
   function startClock() { if (!timer) timer = window.setInterval(() => { sec++; refreshHud(); }, 1000); }
@@ -94,7 +94,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const st = stars(s.moves, s.pairs);
     timers.push(window.setTimeout(() => {
       if (phase !== "won") return;
-      setOvl("太棒了！", nb ? `新纪录：${s.moves} 步，用时 ${fmtTime(sec)}` : `${s.moves} 步，用时 ${fmtTime(sec)}`, "再玩一次", st); winShown = 1;
+      setOvl("完成。", nb ? `新纪录：${s.moves} 步，用时 ${fmtTime(sec)}` : `${s.moves} 步，用时 ${fmtTime(sec)}`, "再玩一次", st); winShown = 1;
     }, 500));
   }
 

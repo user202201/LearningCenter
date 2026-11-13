@@ -96,7 +96,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const last = idx + 1 >= LEVELS.length && Object.keys(map).length >= LEVELS.length;
     timers.push(window.setTimeout(() => {
       if (!finished) return;
-      title.textContent = last ? "全部通关！" : "过关！";
+      title.textContent = last ? "已全部通关。" : "过关。";
       starsEl.textContent = "★".repeat(n) + "☆".repeat(3 - n);
       msg.textContent = isBest && old ? `新纪录：${s.moves} 步` : `${s.moves} 步，推了 ${s.pushes} 次`;
       nextBtn.textContent = idx + 1 < LEVELS.length ? "下一关" : "选关";

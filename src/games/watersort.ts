@@ -152,7 +152,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (newBest) { map[String(level)] = m; ctx.store.set("solved", map); }
     ctx.sfx("win"); refreshHud(); render();
     const last = level >= LEVELS;
-    title.textContent = last ? "全部通关！" : "过关啦！";
+    title.textContent = last ? "已全部通关。" : "过关。";
     msg.textContent = newBest && old ? `新纪录：${m}步` : `用了${m}步`;
     nextBtn.textContent = last ? "选关" : "下一关";
     ovl.hidden = false;

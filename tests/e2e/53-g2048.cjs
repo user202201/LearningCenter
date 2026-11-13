@@ -141,7 +141,7 @@ const CJK = /[㐀-鿿]/;
   await set([[1024, 1024, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]);
   await p.keyboard.press('ArrowLeft');
   await p.waitForFunction(() => !document.querySelector('#g48-ovl').hidden, null, { timeout: 4000 });
-  ok((await p.textContent('#g48-ovl h2')) === '太棒了！' && (await p.textContent('#g48-ovl p')).includes('2048') && await p.locator('#g48-keep').isVisible(), 'making 2048 shows the win overlay with Keep going / New game');
+  ok((await p.textContent('#g48-ovl h2')) === '完成。' && (await p.textContent('#g48-ovl p')).includes('2048') && await p.locator('#g48-keep').isVisible(), 'making 2048 shows the win overlay with Keep going / New game');
   await p.screenshot({ path: OUT + 'g2048-win.png' });
   const gBefore = JSON.stringify((await st()).grid); await p.keyboard.press('ArrowDown'); ok(JSON.stringify((await st()).grid) === gBefore, 'no move while the overlay is open');
   await p.click('#g48-keep'); ok(!(await p.locator('#g48-ovl').isVisible()), 'Keep going closes it');

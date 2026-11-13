@@ -132,7 +132,7 @@ const T = JSON.parse(fs.readFileSync('src/games/memory.i18n.json', 'utf8'));
   s = await st(); ok(s.won && s.phase === 'won' && s.pairs === 6, 'the last pair (turned with Enter) wins the game');
   await p.waitForFunction(() => window.__memory.finished() === 1, null, { timeout: 4000 });
   const ov = await p.evaluate(() => ({ h: document.querySelector('#mem-ovl h2').textContent, st: document.querySelectorAll('#mem-stars span:not(.off)').length, all: document.querySelectorAll('#mem-stars span').length, vis: !document.querySelector('#mem-ovl').hidden, txt: document.querySelector('#mem-ovl p').textContent }));
-  ok(ov.vis && ov.h === '太棒了！' && ov.all === 3 && ov.st >= 1 && ov.st <= 3 && ov.txt.includes(String(s.moves)), `win overlay: stars ${ov.st}/3, "${ov.txt}"`);
+  ok(ov.vis && ov.h === '完成。' && ov.all === 3 && ov.st >= 1 && ov.st <= 3 && ov.txt.includes(String(s.moves)), `win overlay: stars ${ov.st}/3, "${ov.txt}"`);
   await p.screenshot({ path: OUT + 'memory-win.png' });
   const bestV = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).memory['best-3x4']);
   ok(bestV === s.moves && (await p.textContent('#mem-best')) === `最少：${s.moves}`, 'the fewest moves is kept on this device: ' + bestV);

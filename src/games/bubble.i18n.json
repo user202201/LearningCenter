@@ -1,5 +1,5 @@
 {
-  "泡泡龙：选择关卡": ["Bubble Shooter: choose a level", "Bubble Shooter : choisis un niveau"],
+  "泡泡龙：选择关卡": ["Bubble Shooter: choose a level", "Bubble Shooter : choisissez un niveau"],
   "星星：{0} / {1}": ["Stars: {0} / {1}", "Étoiles : {0} / {1}"],
   "最高：{0}": ["Best: {0}", "Meilleur : {0}"],
   "第{0}关": ["Level {0}", "Niveau {0}"],
@@ -12,10 +12,10 @@
   "选关": ["Levels", "Niveaux"],
   "已暂停": ["Paused", "En pause"],
   "继续": ["Resume", "Reprendre"],
-  "天花板落下来了！": ["The ceiling is coming down!", "Le plafond descend !"],
-  "全部通关！你是泡泡大师！": ["All levels done! You are a bubble master!", "Tous les niveaux sont finis ! Tu es un maître des bulles !"],
-  "过关啦！": ["Level cleared!", "Niveau réussi !"],
-  "泡泡碰到底线了，再试一次吧！": ["The bubbles reached the line. Try again!", "Les bulles ont touché la ligne. Réessaie !"],
+  "天花板下降一行。": ["The ceiling moves down one row.", "Le plafond descend d'une ligne."],
+  "已全部通关。": ["All levels cleared.", "Tous les niveaux sont réussis."],
+  "过关。": ["Level cleared.", "Niveau réussi."],
+  "泡泡触底，本关未完成。可重试。": ["The bubbles reached the line. The level was not completed; you may retry.", "Les bulles ont atteint la ligne. Le niveau n'est pas terminé ; vous pouvez réessayer."],
   "下一关": ["Next level", "Niveau suivant"],
   "再玩一次": ["Play again", "Rejouer"],
   "再来一次": ["Try again", "Réessayer"]
