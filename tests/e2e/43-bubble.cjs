@@ -190,14 +190,13 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
       if (before.over) break;
       const present = await p.evaluate(() => window.__L.colorsPresent(window.__bubble.s.grid));
       await p.evaluate((i) => { window.__bubble.aim(40 + ((i * 37) % 100)); window.__bubble.shoot(); }, i);
-      await p.waitForFunction((n) => window.__bubble && window.__bubble.s.shots === n && !window.__bubble.s.flying, before.shots + 1, { timeout: 8000 }).catch(async (e) => { console.log('DBG', i, JSON.stringify(before), await p.evaluate(() => { const s = window.__bubble.s; return JSON.stringify({ ...s, grid: 0 }); })); throw e; });
+      await p.waitForFunction((n) => window.__bubble && window.__bubble.s.shots === n && !window.__bubble.s.flying, before.shots + 1, { timeout: 8000 });
       const after = await S(p);
       const presentAfter = await p.evaluate(() => window.__L.colorsPresent(window.__bubble.s.grid));
       log.push({ fired: before.cur, shownNext: before.nxt, curAfter: after.cur, nxtAfter: after.nxt, present: present.includes(before.nxt), keep: presentAfter.includes(before.nxt) || presentAfter.includes(after.cur), over: after.over });
       if (i === 12) await p.screenshot({ path: OUT + 'bubble-many-shots.png' });
     }
     const real = log.filter((l) => !l.over);
-    console.log('LOG', JSON.stringify(log.slice(0, 8)), await p.evaluate(() => typeof window.__L));
     const fired = log.map((l) => l.fired); let run = 1, maxRun = 1; for (let i = 1; i < fired.length; i++) { run = fired[i] === fired[i - 1] ? run + 1 : 1; maxRun = Math.max(maxRun, run); }
     ok(new Set(fired).size >= 3 && maxRun <= 3, `fired colours over ${log.length} shots on screen: ${fired.join('')} (${new Set(fired).size} different, longest run ${maxRun})`);
     ok(log.length >= 36 && real.every((l) => !l.keep || l.curAfter === l.shownNext), `${log.length} shots: after each one the shooter holds what was shown as next`);
@@ -207,7 +206,8 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
   }
 
   // a miss every time: the ceiling comes down after the limit
-  await p.click('.bubble-lv[data-level="1"]'); await p.waitForSelector('#bubble-canvas');
+  if (await p.locator('.bubble-lv').count()) await p.click('.bubble-lv[data-level="1"]');
+  await p.waitForSelector('#bubble-canvas');
   const miss = rowsToGrid([[0, 0, 2], [0, 1, 2], [0, 2, 3], [0, 3, 3], [0, 4, 2], [0, 5, 2], [0, 6, 3], [0, 7, 3], [0, 8, 2], [0, 9, 2]]);
   await p.evaluate((g) => window.__bubble.load(eval(g), 1, 1, 0), miss);
   await p.evaluate(() => window.__bubble.setMisses(window.__L.LEVELS[0].misses - 1));

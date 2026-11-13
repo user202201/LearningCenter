@@ -248,7 +248,7 @@ fs.mkdirSync(OUT, { recursive: true });
     const e = n ? document.querySelector(`.spider-card[data-col="${col}"][data-idx="${n - 1}"]`).getBoundingClientRect() : null;
     return { x: b.left + m.x0 + col * (m.cw + m.gap) + m.cw / 2, y: e ? e.top + 12 : b.top + m.colsTop + 20 };
   }, col);
-  const state = () => p.evaluate(() => { const s = window.__spider.state; return JSON.stringify([s.cols, s.stock, s.found, s.moves, s.score]); });
+  const state = async () => { await p.waitForFunction(() => window.__spider && window.__spider.state); return p.evaluate(() => { const s = window.__spider.state; return JSON.stringify([s.cols, s.stock, s.found, s.moves, s.score]); }); };
   const hasMove = () => p.evaluate(async () => { const M = await import('/src/games/spider-logic.ts'); return M.hints(window.__spider.state).filter((m) => m.score >= 5)[0] || null; });
   const fresh = async (suits, seed) => { await p.evaluate(([s, sd]) => window.__spider.newGame(s, sd), [suits, seed]); await p.waitForTimeout(700); };
   const firstWithMove = async (suits) => { for (let sd = 1; sd < 40; sd++) { await fresh(suits, sd); const m = await hasMove(); if (m) return m; } return null; };
