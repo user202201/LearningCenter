@@ -157,3 +157,6 @@ export const COUNTRIES = [
 /** NE continent -> mine (for the countries that are only land); Turkey, Kazakhstan, the Caucasus belong to Asia in Chinese books */
 export const NE_CONT = { Asia: "as", Europe: "eu", Africa: "af", "North America": "na", "South America": "sa", Oceania: "oc", Antarctica: "an" };
 export const CONT_OVERRIDE = { TUR: "as", KAZ: "as", GEO: "as", ARM: "as", AZE: "as", CYP: "as", EGY: "af" };
+/** real neighbours the vertex comparison misses (added), and enclave borders that are not a child's idea of a neighbour (removed) */
+export const CNB_ADD = [["ae", "sa"]];
+export const CNB_DEL = [["es", "ma"]];

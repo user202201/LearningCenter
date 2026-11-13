@@ -22,6 +22,7 @@ import * as GM from "./gameshub";
 import * as MA from "./math";
 import * as SC from "./science";
 import { pickKidGrade } from "./gradeui";
+import * as PK from "./pk";
 
 const app = document.getElementById("app")!;
 
@@ -262,7 +263,7 @@ async function renderHome() {
     );
   }
   stagger([...list.querySelectorAll<HTMLElement>(".kid")]);
-  show(h("div", { class: "page" }, hero, h("main", { class: "scroll" }, h("div", { class: "narrow" }, list))));
+  show(h("div", { class: "page" }, hero, h("main", { class: "scroll" }, h("div", { class: "narrow" }, list, PK.homeSection()))));
 }
 
 /** asks for a name and adds the child; `after` shows the screen again */
@@ -1483,6 +1484,8 @@ async function route() {
   if (idiom) return void renderIdiom(decodeURIComponent(idiom[1]));
   if (hash === "#/settings") return void renderSettings();
   if (hash === "#/chinese") return renderHome();
+  if (hash === "#/chinese/pk") return void PK.renderSetup();
+  if (hash === "#/chinese/pk/play") return void PK.renderPlay();
   if (hash === "#/subject/english") return void E.renderHome();
   if (hash === "#/subject/math") return void MA.renderHome();
   if (hash === "#/subject/science") return void SC.renderHome();
@@ -1529,6 +1532,7 @@ const shell = { show, showLoading, showError, loadShared, kids: () => kidsFile, 
 E.initEnglish(shell);
 MA.initMath(shell);
 SC.initScience(shell);
+PK.initPk(shell);
 MU.initMusic(shell);
 GM.initGames(shell);
 // the web version keeps itself in the browser, so it opens without network (sw.js is made by the build; the packaged app and the dev server have none)

@@ -1,0 +1,122 @@
+{
+  "PK认字": [
+    "Character duel",
+    "Duel de caractères"
+  ],
+  "两人面对面比赛": [
+    "A face-to-face game for two",
+    "Un jeu à deux, face à face"
+  ],
+  "选择选手": [
+    "Choose a player",
+    "Choisir un joueur"
+  ],
+  "已被选择": [
+    "Already chosen",
+    "Déjà choisi"
+  ],
+  "至少需要两个孩子才能对战。请先在设置中添加孩子。": [
+    "At least two children are needed to play. Please add children in Settings first.",
+    "Il faut au moins deux enfants pour jouer. Veuillez d'abord ajouter des enfants dans les réglages."
+  ],
+  "选手 {0}": [
+    "Player {0}",
+    "Joueur {0}"
+  ],
+  "点击选择": [
+    "Tap to choose",
+    "Touchez pour choisir"
+  ],
+  "请先选择两位选手。": [
+    "Please choose two players first.",
+    "Veuillez d'abord choisir deux joueurs."
+  ],
+  "已入库的字太少，至少需要 4 个。": [
+    "has too few recorded characters: at least 4 are needed.",
+    "a trop peu de caractères enregistrés : il en faut au moins 4."
+  ],
+  "已入库的字不足 10 个时，字会重复出现，本局仍为 10 题。": [
+    "With fewer than 10 recorded characters, characters repeat; the game still has 10 rounds.",
+    "Avec moins de 10 caractères enregistrés, les caractères se répètent ; la partie compte toujours 10 manches."
+  ],
+  "竖放设备可获得更大的答题区。": [
+    "Hold the device upright for a larger answer area.",
+    "Tenez l'appareil à la verticale pour une zone de réponse plus grande."
+  ],
+  "对战记录": [
+    "Record of games",
+    "Historique des parties"
+  ],
+  "胜 {0} · 负 {1}": [
+    "won {0} · lost {1}",
+    "gagné {0} · perdu {1}"
+  ],
+  "平 {0}": [
+    "drawn {0}",
+    "nul {0}"
+  ],
+  "记录只保存在这台设备上。": [
+    "The record is kept on this device only.",
+    "L'historique reste uniquement sur cet appareil."
+  ],
+  "清除对战记录？": [
+    "Clear the record of games?",
+    "Effacer l'historique des parties ?"
+  ],
+  "清除后无法恢复。": [
+    "This cannot be undone.",
+    "Cette action est irréversible."
+  ],
+  "已清除记录": [
+    "Record cleared.",
+    "Historique effacé."
+  ],
+  "清除记录": [
+    "Clear record",
+    "Effacer l'historique"
+  ],
+  "打开声音": [
+    "Sound on",
+    "Activer le son"
+  ],
+  "关闭声音": [
+    "Sound off",
+    "Couper le son"
+  ],
+  "开始！": [
+    "Go!",
+    "Partez !"
+  ],
+  "准备": [
+    "Get ready",
+    "Prêts"
+  ],
+  "本题无人得分。": [
+    "Nobody scored in this round.",
+    "Personne n'a marqué sur cette manche."
+  ],
+  "等待对方。": [
+    "Waiting for the other player.",
+    "En attente de l'autre joueur."
+  ],
+  "你输了。": [
+    "You lose.",
+    "Vous avez perdu."
+  ],
+  "第 {0} / {1} 题": [
+    "Round {0} / {1}",
+    "Manche {0} / {1}"
+  ],
+  "退出对战": [
+    "Leave the game",
+    "Quitter la partie"
+  ],
+  "退出对战？": [
+    "Leave the game?",
+    "Quitter la partie ?"
+  ],
+  "本局尚未结束。退出后本局不计入记录。": [
+    "The game is not over. If you leave, it will not be recorded.",
+    "La partie n'est pas terminée. Si vous quittez, elle ne sera pas enregistrée."
+  ]
+}

@@ -1,8 +1,8 @@
 /**
  * PK认字: a face-to-face game for two children on ONE device (shared page of the 识字 home, below the list of children).
- * Setup (`#/chinese/pk`): two contestants, the split of the screen (top / bottom or left / right), the record of earlier games.
- * The game (`#/chinese/pk/play`, full screen): each half of the screen faces its player (one half is turned round: 180 degrees for top / bottom, 90 degrees
- * for left / right), each child plays with his OWN recorded characters, ten rounds, the first right tap wins the round. The rules are in pklogic.ts,
+ * Setup (`#/chinese/pk`): two contestants and the record of earlier games.
+ * The game (`#/chinese/pk/play`, full screen): the screen is always split into a TOP half (turned round by 180 degrees) and a BOTTOM half, whatever the
+ * orientation of the device; each half faces its player, each child plays with his OWN recorded characters, ten rounds, the first right tap wins the round. The rules are in pklogic.ts,
  * the characters and choices in pk-chinese.ts. Everything stays on this device (`learn.pk.v1`).
  */
 import { h, toast, modal, confirmDlg } from "./ui";
@@ -18,17 +18,16 @@ let X!: Ctx;
 export const initPk = (c: Ctx) => { X = c; };
 
 // ---------- what is remembered on this device ----------
-type Layout = "tb" | "lr";
 interface Pair { a: string; b: string; wins: Record<string, number>; ties: number }
-interface Store { layout: Layout; mute: boolean; last: [string, string] | null; pairs: Record<string, Pair> }
+interface Store { mute: boolean; last: [string, string] | null; pairs: Record<string, Pair> }
 const KEY = "learn.pk.v1";
 function load(): Store {
   try {
     const s = JSON.parse(localStorage.getItem(KEY) ?? "{}");
     const pairs: Record<string, Pair> = {};
     for (const [k, v] of Object.entries((s.pairs ?? {}) as Record<string, Partial<Pair>>)) if (v && typeof v.a === "string" && typeof v.b === "string") pairs[k] = { a: v.a, b: v.b, wins: { ...(v.wins ?? {}) }, ties: Number(v.ties) || 0 };
-    return { layout: s.layout === "lr" ? "lr" : "tb", mute: !!s.mute, last: Array.isArray(s.last) && s.last.length === 2 && s.last.every((x: unknown) => typeof x === "string") ? [s.last[0], s.last[1]] : null, pairs };
-  } catch { return { layout: "tb", mute: false, last: null, pairs: {} }; }
+    return { mute: !!s.mute, last: Array.isArray(s.last) && s.last.length === 2 && s.last.every((x: unknown) => typeof x === "string") ? [s.last[0], s.last[1]] : null, pairs };
+  } catch { return { mute: false, last: null, pairs: {} }; }
 }
 let store = load();
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch { /* private mode */ } };
@@ -41,8 +40,16 @@ function record(x: string, y: string, winner: string | null) {
   save();
 }
 
-const fsOn = () => { try { void document.documentElement.requestFullscreen?.().catch(() => { /* the page-wide mode is enough */ }); } catch { /* same */ } };
-const fsOff = () => { try { if (document.fullscreenElement) void document.exitFullscreen().catch(() => { /* same */ }); } catch { /* same */ } };
+/** full screen where the device allows it, and the portrait orientation (iOS Safari allows neither: the page-wide stage is enough) */
+const fsOn = () => {
+  try {
+    void document.documentElement.requestFullscreen?.().then(() => (screen.orientation as unknown as { lock?: (o: string) => Promise<void> })?.lock?.("portrait")).catch(() => { /* not allowed here */ });
+  } catch { /* same */ }
+};
+const fsOff = () => {
+  try { (screen.orientation as { unlock?: () => void })?.unlock?.(); } catch { /* same */ }
+  try { if (document.fullscreenElement) void document.exitFullscreen().catch(() => { /* same */ }); } catch { /* same */ }
+};
 
 // ---------- the card on the home screen of 识字 ----------
 const ICON = `<svg viewBox="0 0 120 80" aria-hidden="true">
@@ -107,17 +114,6 @@ export async function renderSetup() {
     };
     body.append(h("div", { class: "pk-slots" }, slot(0), h("span", { class: "pk-vs", "aria-hidden": "true" }, "VS"), slot(1)));
 
-    const seg = (v: Layout, id: string, label: string, icon: string) => {
-      const b = h("button", { class: "pk-seg", id, "aria-pressed": String(store.layout === v), onclick: () => { store.layout = v; save(); draw(); } }, h("span", { class: "pk-seg-ico" }), label);
-      b.firstElementChild!.innerHTML = icon;
-      return b;
-    };
-    const half = (x: number, y: number, w: number, hh: number, rot: number) => `<rect x="${x}" y="${y}" width="${w}" height="${hh}" rx="3" fill="#ffe8cc" stroke="#f76707" stroke-width="2"/><path transform="rotate(${rot} ${x + w / 2} ${y + hh / 2})" d="M${x + w / 2 - 4} ${y + hh / 2 + 3}l4-7 4 7z" fill="#e8590c"/>`;
-    body.append(h("div", { class: "pk-opt" }, h("span", { class: "pk-opt-cap" }, "分屏方式"),
-      h("div", { class: "pk-segs" },
-        seg("tb", "pk-lay-tb", "上下", `<svg viewBox="0 0 28 28" aria-hidden="true">${half(2, 2, 24, 11, 180)}${half(2, 15, 24, 11, 0)}</svg>`),
-        seg("lr", "pk-lay-lr", "左右", `<svg viewBox="0 0 28 28" aria-hidden="true">${half(2, 2, 11, 24, 90)}${half(15, 2, 11, 24, -90)}</svg>`))));
-
     const msgs = h("div", { class: "pk-msgs", id: "pk-msgs" });
     let ok = !!(sel[0] && sel[1]);
     if (!ok) msgs.append(h("p", { class: "pk-msg" }, "请先选择两位选手。"));
@@ -131,6 +127,7 @@ export async function renderSetup() {
       if (ok && short) msgs.append(h("p", { class: "pk-msg pk-note" }, "已入库的字不足 10 个时，字会重复出现，本局仍为 10 题。"));
     }
     body.append(msgs);
+    body.append(h("p", { class: "pk-hint-land muted small", id: "pk-hint-land" }, "竖放设备可获得更大的答题区。"));
     body.append(h("button", { class: "primary pk-start", id: "pk-start", disabled: !ok, onclick: () => {
       store.last = [sel[0]!, sel[1]!]; save(); fsOn(); location.hash = "#/chinese/pk/play";
     } }, "开始"));
@@ -143,10 +140,10 @@ export async function renderSetup() {
         const w = p.wins[p.a] ?? 0, l = p.wins[p.b] ?? 0;
         hist.append(h("div", { class: "pk-hist-row", "data-pair": pairKey(p.a, p.b) },
           h("span", { class: "user" }, kidOf(p.a)!.name), " · ", h("span", { class: "user" }, kidOf(p.b)!.name), "：",
-          h("span", {}, `胜 ${w} · 负 ${l}`), p.ties ? h("span", {}, ` · 平 ${p.ties}`) : null));
+          h("span", {}, `胜 ${w} · 负 ${l}`), p.ties ? h("span", {}, " · ", h("span", {}, `平 ${p.ties}`)) : null));
       }
       hist.append(h("p", { class: "muted small" }, "记录只保存在这台设备上。"),
-        h("button", { class: "danger-outline", id: "pk-reset", onclick: async () => {
+        h("button", { class: "danger", id: "pk-reset", onclick: async () => {
           if (!(await confirmDlg("清除对战记录？", "清除后无法恢复。", "清除", true))) return;
           store.pairs = {}; save(); toast("已清除记录"); draw();
         } }, "清除记录"));
@@ -166,8 +163,8 @@ const MID = 44;
 const KEYS: [string[], string[]] = [["1", "2", "3", "4"], ["7", "8", "9", "0"]];
 
 interface PkHook {
-  seed: number; layout: Layout;
-  state(): ReturnType<typeof L.snapshot> & { items: [L.Item, L.Item]; seed: number; layout: Layout };
+  seed: number;
+  state(): ReturnType<typeof L.snapshot> & { items: [L.Item, L.Item]; seed: number };
   tap(side: 0 | 1, index: number): L.TapEvent;
   step(ms: number): void;
   skip(ms: number): void;
@@ -203,7 +200,6 @@ export async function renderPlay() {
 
 function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: C.Readings, seed0: number, firstItems: [L.Item[], L.Item[]]) {
   let seed = seed0;
-  let layout: Layout = store.layout;
   // ----- the clock: real time, or a clock a test moves by hand -----
   const t0 = performance.now();
   let offset = 0, manual = false, mT = 0, pausedAt: number | null = null;
@@ -222,7 +218,7 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
   setMuted(store.mute);
 
   // ----- the screen -----
-  const stage = h("div", { class: "pk-stage", id: "pk-stage", "data-layout": layout });
+  const stage = h("div", { class: "pk-stage", id: "pk-stage" });
   interface Panel { side: 0 | 1; el: HTMLElement; box: HTMLElement; round: HTMLElement; score: HTMLElement; ch: HTMLElement; opts: HTMLButtonElement[]; labels: HTMLElement[]; over: HTMLElement; bar: HTMLElement }
   const mkPanel = (side: 0 | 1): Panel => {
     const k = kids[side];
@@ -240,49 +236,55 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
     const over = h("div", { class: "pk-over" });
     const box = h("div", { class: "pk-box" },
       h("div", { class: "pk-top" }, X.avatarEl(k), h("span", { class: "pk-name kname user" }, k.name), round, score),
-      h("div", { class: "pk-char" }, ch),
-      h("div", { class: "pk-choices" }, ...opts));
+      h("div", { class: "pk-main" }, h("div", { class: "pk-char" }, ch), h("div", { class: "pk-choices" }, ...opts)));
     const el = h("div", { class: "pk-panel", "data-side": String(side), style: `--kid:${k.color}` }, h("div", { class: "pk-timer" }, bar), box, over);
     return { side, el, box, round, score, ch, opts, labels, over, bar };
   };
   const panels = [mkPanel(0), mkPanel(1)] as const;
-  const exitBtn = h("button", { class: "pk-ctl", id: "pk-exit", type: "button", title: "退出", "aria-label": "退出", onclick: () => void leave() });
+  const exitBtn = h("button", { class: "pk-ctl", id: "pk-exit", type: "button", title: "退出对战", "aria-label": "退出对战", onclick: () => void leave() });
   const muteBtn = h("button", { class: "pk-ctl", id: "pk-mute", type: "button", onclick: () => { store.mute = !store.mute; save(); setMuted(store.mute); drawMute(); } });
-  const mid = h("div", { class: "pk-mid", id: "pk-mid" }, exitBtn, muteBtn);
+  const dots = h("div", { class: "pk-dots", id: "pk-dots", "aria-hidden": "true" });
+  const mid = h("div", { class: "pk-mid", id: "pk-mid" }, exitBtn, dots, muteBtn);
   const drawMute = () => { muteBtn.innerHTML = SPK(store.mute); const t = store.mute ? "打开声音" : "关闭声音"; muteBtn.title = t; muteBtn.setAttribute("aria-label", t); };
   drawMute();
-  stage.append(panels[1].el, panels[0].el, mid);
+  const frame = h("div", { class: "pk-frame", id: "pk-frame" }, panels[1].el, panels[0].el, mid);
+  const hint = h("div", { class: "pk-hint", id: "pk-hint" }, "竖放设备可获得更大的答题区。");
+  stage.append(frame, hint);
 
   // ----- places each half by LAYOUT size (never by measuring a turned element) -----
+  /** The stage is ONE portrait stage (3:4 at the widest). On a portrait screen it fills the screen; on a landscape screen the same stage stands in the middle, as high as fits. */
   function place() {
     const W = stage.offsetWidth, H = stage.offsetHeight;
-    stage.dataset.layout = layout;
-    const put = (p: Panel, left: number, top: number, w: number, hh: number, rot: number) => {
-      const el = p.el;
-      el.style.cssText = `--kid:${kids[p.side].color};left:${left}px;top:${top}px;width:${w}px;height:${hh}px;transform:rotate(${rot}deg)`;
-      fit(p, w, hh);
+    const land = W > H;
+    const showHint = land;
+    hint.style.display = showHint ? "" : "none";
+    stage.classList.toggle("land", land);
+    const fh = showHint ? H - 20 : H;
+    const fw = Math.min(W, Math.floor(fh * 0.75));
+    const mid_ = H < 460 ? 36 : MID;
+    frame.style.cssText = `left:${Math.floor((W - fw) / 2)}px;top:0;width:${fw}px;height:${fh}px`;
+    const hh = Math.floor((fh - mid_) / 2);
+    const put = (p: Panel, top: number, rot: number) => {
+      p.el.style.cssText = `--kid:${kids[p.side].color};left:0;top:${top}px;width:${fw}px;height:${hh}px;transform:rotate(${rot}deg)`;
+      fit(p, fw, hh);
     };
-    if (layout === "tb") {
-      const hh = Math.floor((H - MID) / 2);
-      put(panels[1], 0, 0, W, hh, 180); put(panels[0], 0, H - hh, W, hh, 0);
-      mid.style.cssText = `left:0;top:${hh}px;width:${W}px;height:${H - 2 * hh}px`;
-    } else {
-      const hw = Math.floor((W - MID) / 2);
-      const turned = (x0: number, rot: number) => [x0 + hw / 2 - H / 2, H / 2 - hw / 2, H, hw, rot] as const;
-      put(panels[1], ...turned(0, 90)); put(panels[0], ...turned(W - hw, -90));
-      mid.style.cssText = `left:${hw}px;top:0;width:${W - 2 * hw}px;height:${H}px`;
-    }
+    put(panels[1], 0, 180); put(panels[0], fh - hh, 0);
+    mid.style.cssText = `left:0;top:${hh}px;width:${fw}px;height:${fh - 2 * hh}px`;
   }
-  /** the inner layout of a half follows its own width and height (in the player's own orientation) */
+  /** the inside of a half: the small band (name, round, score), the character above, the four choices below (2 x 2; in a very short half 4 in a row) */
   function fit(p: Panel, w: number, hh: number) {
-    const side = hh < 210;
-    p.el.classList.toggle("side", side);
-    p.el.style.setProperty("--pk-w", `${w}px`); p.el.style.setProperty("--pk-h", `${hh}px`);
-    const rows = 2;
-    const avail = hh - 16 - 12 - 40 - (rows * 58 + 8);
-    const px = side ? (hh - 16) * 0.78 : Math.max(34, Math.min(avail * 0.92, 170, w * 0.42));
-    p.el.style.setProperty("--pk-chsize", `${Math.round(px)}px`);
-    p.el.style.setProperty("--pk-box", `${Math.max(60, hh - 16)}px`);
+    const pad = 6, band = hh < 190 ? 24 : 28, gap = 6;
+    const mainW = w - 2 * pad, mainH = hh - 2 * pad - band - gap;
+    const row4 = mainH - 2 * 56 - 4 < 70;
+    p.el.classList.toggle("row4", row4);
+    p.el.style.setProperty("--pk-band", `${band}px`);
+    const chh = row4 ? 56 : Math.max(116, Math.round(mainH * 0.54));
+    p.el.style.setProperty("--pk-choicesh", `${chh}px`);
+    const px = Math.min((mainH - chh - gap) * 0.86, mainW * 0.55, 240);
+    p.el.style.setProperty("--pk-chsize", `${Math.max(28, Math.round(px))}px`);
+    const bw = row4 ? (mainW - 3 * 6) / 4 : (mainW - 8) / 2, bh = row4 ? 56 : (chh - 8) / 2;
+    p.el.style.setProperty("--pk-ico", `${Math.max(36, Math.min(96, Math.floor(hh * 0.26)))}px`);
+    p.el.style.setProperty("--pk-lab", `${Math.max(13, Math.min(34, Math.floor(bh * 0.42), Math.floor(bw / 5.2)))}px`);
   }
 
   // ----- drawing the state -----
@@ -309,7 +311,7 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
   }
   function render() {
     const sn = L.snapshot(s);
-    const sig = JSON.stringify([sn.phase, sn.count, sn.round, sn.scores, sn.locked, sn.wrongPick, sn.winner, sn.outcome, sn.again, layout, store.mute]);
+    const sig = JSON.stringify([sn.phase, sn.count, sn.round, sn.scores, sn.locked, sn.wrongPick, sn.winner, sn.outcome, sn.again, store.mute]);
     if (sig !== lastSig) {
       lastSig = sig;
       for (const p of panels) {
@@ -340,8 +342,13 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
       exitBtn.classList.toggle("back", final);
       exitBtn.textContent = "";
       exitBtn.append(h("span", { class: "pk-x" }, final ? "‹" : "✕"), final ? h("span", { class: "pk-xt" }, "返回") : "");
-      exitBtn.title = final ? "返回" : "退出"; exitBtn.setAttribute("aria-label", exitBtn.title);
+      exitBtn.title = final ? "返回" : "退出对战"; exitBtn.setAttribute("aria-label", exitBtn.title);
       stage.classList.toggle("is-final", final);
+      dots.replaceChildren(...Array.from({ length: s.total }, (_, i) => {
+        const r = s.results[i];
+        const live = i === s.round && s.phase !== "final" && r === undefined;
+        return h("i", { class: "pk-dot" + (live ? " live" : ""), style: r === 0 || r === 1 ? `background:${kids[r].color}` : r === -1 ? "background:#ced4da" : "" });
+      }));
       if (sn.phase !== lastPhase) { sounds(lastPhase, sn.phase); lastPhase = sn.phase; }
       if (final && !recorded) {
         recorded = true;
@@ -393,7 +400,7 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
     if (asking) return;
     if (s.phase !== "final") {
       asking = true; pause();
-      const yes = await confirmDlg("退出对战？", "本局尚未结束。退出后本局不计入记录。", "退出", true);
+      const yes = await confirmDlg("退出对战？", "本局尚未结束。退出后本局不计入记录。", "退出对战", true);
       asking = false; resume();
       if (!yes) return;
     }
@@ -417,8 +424,7 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
   const watch = new MutationObserver(() => { if (!stage.isConnected) dispose(); });
 
   window.__pk = {
-    get seed() { return seed; }, get layout() { return layout; },
-    state: () => ({ ...L.snapshot(s), items: [cur(0), cur(1)], seed, layout }),
+    get seed() { return seed; }, state: () => ({ ...L.snapshot(s), items: [cur(0), cur(1)], seed }),
     tap: (side, index) => press(side, index, T()),
     step: (ms) => { if (manual) mT += ms; else offset += ms; tick(); },
     skip: (ms) => { if (manual) mT += ms; else offset += ms; tick(); },

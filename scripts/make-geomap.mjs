@@ -172,6 +172,7 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
     // the label point is taken in the largest piece
     const big = polys.slice().sort((a, b) => Math.abs(ringArea(b[0])) - Math.abs(ringArea(a[0])))[0];
     const area = polys.reduce((s, p) => s + Math.abs(ringArea(p[0])) - p.slice(1).reduce((t, r) => t + Math.abs(ringArea(r)), 0), 0);
+    if (!polys.length) throw new Error("no geometry for " + id);
     provinces.push({ id, n, full, ab, cap, ct, type, reg, py: pyName(n), lv, d: encode(polys), lp: labelPoint(big), area: Math.round(area), cp: P([clon, clat]).map(Math.round), nb: [...nb[id]].sort() });
   }
   // inset: 南海诸岛 box in the lower right
@@ -184,7 +185,7 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
   const inset = {
     box: [Math.round(bxL), Math.round(bxT), boxW, boxH], land: encode(insetLand),
     islands: T.ISLANDS.map(([n, lo, la]) => ({ n, p: insetP([lo, la]).map(Math.round) })),
-    dashes: T.DASHES.map((seg) => encodeLine(seg.map((ll) => insetP(ll).map(Math.round)))),
+    dashes: T.DASHES.map((seg) => { const [a, b] = seg.map((ll) => insetP(ll)); const m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; return encodeLine([[m[0] + (a[0] - m[0]) * 1.5, m[1] + (a[1] - m[1]) * 1.5], [m[0] + (b[0] - m[0]) * 1.5, m[1] + (b[1] - m[1]) * 1.5]].map((p) => p.map(Math.round))); }),
   };
   // neighbouring countries as a quiet background (clipped to the frame, heavily simplified); the names of the big ones are labelled
   const wantN = ["RUS", "MNG", "KAZ", "KGZ", "TJK", "AFG", "PAK", "IND", "NPL", "BTN", "BGD", "MMR", "LAO", "VNM", "PRK", "KOR", "JPN", "THA", "PHL", "TWN", "UZB", "BRN", "MYS", "KHM"];
@@ -224,7 +225,13 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
     if (!polys.length) { console.warn("lake too small:", n); continue; }
     lakes.push({ id, n, lv, d: encode(polys), lp: labelPoint(polys.slice().sort((a, b) => Math.abs(ringArea(b[0])) - Math.abs(ringArea(a[0])))[0]) });
   }
-  const areas = T.AREAS.map(([id, n, kind, pts, lv]) => { const r = pts.map(P).map(round); r.push(r[0]); return { id, n, kind, lv, d: encode([[r]]), lp: labelPoint([r]) }; });
+  const chinaAll = unionAll(Object.values(geoOf));
+  const areas = T.AREAS.map(([id, n, kind, pts, lv]) => {
+    const ring = pts.slice(); ring.push(ring[0]);
+    const clipped = pc.intersection([[ring]], chinaAll);   // (only the part inside China)
+    const polys = simplifyPolys(Pall(clipped), 1, 20);
+    return { id, n, kind, lv, d: encode(polys), lp: labelPoint(polys.slice().sort((a, b) => Math.abs(ringArea(b[0])) - Math.abs(ringArea(a[0])))[0]) };
+  });
   const cities = [
     ...T.PROVINCES.filter((p) => p[0] !== "mo").map((p) => ({ id: p[0], n: p[5], cap: 1, p: P([p[10], p[11]]).map(Math.round) })),
     ...T.CITIES.map(([id, n, lo, la]) => ({ id, n, p: P([lo, la]).map(Math.round) })),
@@ -239,7 +246,7 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
   const W = 2000;
   const pr = (ll) => naturalEarth(ll);
   // frame from -180..180 x -58..84 (Antarctica is cut at -62 to keep the page compact; it is a strip at the bottom)
-  const LATMIN = -62, LATMAX = 84;
+  const LATMIN = -78, LATMAX = 84;
   const [fx0, fy0] = pr([-180, LATMAX]), [fx1, fy1] = pr([180, LATMIN]);
   const sc = W / (fx1 - fx0);
   const P = (ll) => { const q = pr([Math.max(-180, Math.min(180, ll[0])), Math.max(-90, Math.min(90, ll[1]))]); return [(q[0] - fx0) * sc, (q[1] - fy0) * sc]; };
@@ -261,6 +268,7 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
     polys = preSimplify(polys, 0.02);
     const row = rows.get(a3);
     const cont = row ? row[4] : a3 === "ATA" ? "an" : CONT(a3, f.properties.CONTINENT);
+    if (!cont) continue;   // open-sea islands
     if (a3 === "ATA") polys = polys.map((poly) => poly.map((r) => r.map((p) => [p[0], Math.max(p[1], LATMIN - 0.5)])));
     if (row) {
       geoOf[row[0]] = { row, polys, cont };
@@ -286,6 +294,8 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
   const nbOf = Object.fromEntries(Object.keys(geoOf).map((id) => [id, new Set()]));
   const ids = Object.keys(geoOf);
   for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) { let n = 0; for (const k of nbSets[ids[i]]) if (nbSets[ids[j]].has(k)) n++; if (n >= 3) { nbOf[ids[i]].add(ids[j]); nbOf[ids[j]].add(ids[i]); } }
+  for (const [a, b] of T.CNB_ADD) { nbOf[a].add(b); nbOf[b].add(a); }
+  for (const [a, b] of T.CNB_DEL) { nbOf[a].delete(b); nbOf[b].delete(a); }
   for (const [id, g] of Object.entries(geoOf)) {
     const [, a3, n, cap, cont, lv, tc] = g.row;
     const polys = pieces(g.polys);
@@ -302,7 +312,7 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
   const spot = { pacific: [[-150, 8], [165, 5]], atlantic: [[-35, 25]], indian: [[78, -22]], arctic: [[-100, 80]] };
   for (const o of oceans) o.lps = spot[o.id].map((ll) => P(ll).map(Math.round));
   out.world = { vb: [0, 0, W, H], continents: T.CONTINENTS.map(([id, n]) => ({ id, n, py: pyName(n) })), land, ural: urals, countries, oceans };
-  function CONT(a3, nec) { return T.CONT_OVERRIDE[a3] ?? T.NE_CONT[nec] ?? "as"; }
+  function CONT(a3, nec) { return T.CONT_OVERRIDE[a3] ?? T.NE_CONT[nec] ?? null; }
 }
 
 fs.writeFileSync("src/data/geomap-china.json", JSON.stringify(out.china));

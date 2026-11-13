@@ -241,7 +241,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   let pid = -1;
   const follow = (e: PointerEvent) => { if (phase !== "play") return; const p = toBoard(e.clientX, e.clientY); tx = Math.max(0, Math.min(W, p.x)); ty = Math.max(0, Math.min(H, p.y - OFFY)); };
   const onDown = (e: PointerEvent) => {
-    if (e.target instanceof HTMLButtonElement) return;
+    if (e.target instanceof Element && e.target.closest("button")) return;   // (a capture would swallow the click of a card or a level button)
     if (pid !== -1) return;   // one finger
     pid = e.pointerId;
     try { field.setPointerCapture(e.pointerId); } catch { /* ok */ }
