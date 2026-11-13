@@ -201,7 +201,7 @@ function parseMidi(b) {
   // ---- the card, the route, back ----
   await p.evaluate(() => (location.hash = '#/subject/music')); await p.waitForSelector('#mus-theory');
   const names = await p.locator('.mus-card b').allTextContents();
-  ok(names.join() === '乐理,钢琴,架子鼓,吉他,节奏编辑器', 'the music home has the new card next to the four others: ' + names.join());
+  ok(names.join() === '乐理,钢琴,架子鼓,吉他,节奏编辑器,DJ 打碟', 'the music home has the new card next to the four others (and the DJ decks after it): ' + names.join());
   const cardArt = await p.evaluate(() => { const c = document.querySelector('#mus-beats'), a = c.querySelector('.mus-art svg'), r = c.querySelector('.mus-art').getBoundingClientRect(), r0 = document.querySelector('#mus-guitar .mus-art').getBoundingClientRect(); return { svg: !!a && a.querySelectorAll('rect').length > 6, same: Math.abs(r.width - r0.width) < 1, bshadow: getComputedStyle(c).boxShadow === getComputedStyle(document.querySelector('#mus-guitar')).boxShadow }; });
   ok(cardArt.svg && cardArt.same && cardArt.bshadow, 'the card has its cartoon picture, the same size and 3D shadow as the other cards');
   await p.screenshot({ path: OUT + 'beats-home-desktop.png' });

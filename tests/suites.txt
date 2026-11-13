@@ -48,3 +48,6 @@
 59-hanzipuzzle
 60-spotdiff
 61-beat-maker
+62-dj
+63-sudoku
+64-breakout
