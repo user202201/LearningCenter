@@ -110,8 +110,9 @@ const PAIRS: Record<string, string> = { "(": ")", "[": "]", "{": "}", '"': '"', 
 const TOOLS: [string, string][] = [[":", ":"], ["(", "("], [")", ")"], ["[", "["], ["]", "]"], ["{", "{"], ["}", "}"], ['"', '"'], ["'", "'"], ["=", "="], ["+", "+"], ["-", "-"], ["*", "*"], ["/", "/"], ["%", "%"], ["#", "#"], ["_", "_"], [",", ","], [".", "."]];
 
 export function createCodeEditor(o: EditorOpts = {}): CodeEditor {
-  const ta = h("textarea", { class: "tx-ta", spellcheck: "false", autocapitalize: "off", autocomplete: "off", "aria-label": o.label ?? "代码", wrap: "off", rows: "8", id: o.id ?? "tx-ta" }) as HTMLTextAreaElement;
-  ta.setAttribute("autocorrect", "off");
+  const ta = h("textarea", { class: "tx-ta", "aria-label": o.label ?? "代码", id: o.id ?? "tx-ta" }) as HTMLTextAreaElement;
+  ta.spellcheck = false; ta.rows = 8; ta.wrap = "off";
+  ta.setAttribute("autocapitalize", "off"); ta.setAttribute("autocomplete", "off"); ta.setAttribute("autocorrect", "off");
   const hl = h("pre", { class: "tx-hl", "aria-hidden": "true" });
   const gutter = h("div", { class: "tx-gutter", "aria-hidden": "true" });
   const wrap = h("div", { class: "tx-wrap" }, hl, ta);
@@ -265,7 +266,8 @@ export function createCodeEditor(o: EditorOpts = {}): CodeEditor {
   // ----- the toolbar -----
   const keep = (e: Event) => e.preventDefault();   // a tap on a toolbar button must not take the focus away from the text (the keyboard stays open)
   const tbtn = (cls: string, label: string, aria: string, act: () => void, id?: string): HTMLElement => {
-    const b = h("button", { type: "button", class: "tx-key " + cls, "aria-label": aria, title: aria, tabindex: "-1", ...(id ? { id } : {}) }, label);
+    const b = h("button", { type: "button", class: "tx-key " + cls, "aria-label": aria, title: aria, ...(id ? { id } : {}) }, label);
+    b.setAttribute("tabindex", "-1");
     b.addEventListener("pointerdown", keep);
     b.addEventListener("mousedown", keep);
     b.addEventListener("click", () => { act(); if (document.activeElement !== ta) ta.focus({ preventScroll: true }); });

@@ -22,6 +22,7 @@ export interface InfoContent {
   labels: Record<string, Tri>;
   dev: Record<string, DevText>;
   projects: Record<string, { name: Tri; text: string }>;
+  projectDefaults: Record<string, any>;
 }
 let cache: InfoContent | null = null;
 export async function loadContent(): Promise<InfoContent> {

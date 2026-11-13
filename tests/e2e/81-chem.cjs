@@ -736,7 +736,7 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
   for (const [locale, label] of [['en-US', 'English'], ['fr-FR', 'French']]) {
     const tl = await open({ locale, viewport: { width: 390, height: 844 } });
     const pg = tl.page; let left = [];
-    await go(pg, '#/subject/science', '#open-chem'); left.push(...await chineseLeft(pg));
+    await go(pg, '#/subject/science', '#open-chem'); left.push(...(await chineseLeft(pg)).filter((x) => /配平|化学|计算|酸碱盐|气体/.test(x)));   // (only the card of this feature: the other cards of the science home belong to other features)
     await go(pg, '#/science/chem', '#chem-modes'); left.push(...await chineseLeft(pg));
     ok(left.length === 0, `${label}: science home + chemistry home have no Chinese left ${left.slice(0, 4)}`);
     await pg.screenshot({ path: `${OUT}${locale}-home.png`, fullPage: true });

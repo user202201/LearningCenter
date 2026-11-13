@@ -19,9 +19,10 @@ import { createEditor, programEl, Editor } from "./coding-editor";
 import { LESSONS, Demo } from "./coding-lessons";
 import { islandSvg, badgeSvg, worldColor } from "./coding-art";
 import { pathsByColor, colorHex } from "./coding-turtle";
+import { initText, renderText, textSection } from "./coding-text";   // text coding, worlds 11-13 (rule 61)
 
 let X!: Ctx;
-export const initCoding = (c: Ctx) => { X = c; };
+export const initCoding = (c: Ctx) => { X = c; initText(c); };
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 const COLOR = "#0c8599";
 const NS = "http://www.w3.org/2000/svg";
@@ -83,6 +84,7 @@ export async function renderKid(id: string, rest: string) {
   if (!k) { toast("未找到该孩子"); return void (location.hash = "#/subject/coding"); }
   let m: RegExpExecArray | null;
   if (!rest) return worldMap(k, doc);
+  if (renderText(k, doc, rest)) return;   // w11-w13, their levels and the workshop (coding-text.ts)
   if ((m = /^w([1-6])$/.exec(rest))) return worldPage(k, doc, Number(m[1]));
   if ((m = /^w([1-6])\/(\d+)$/.exec(rest))) {
     const [wn, ln] = [Number(m[1]), Number(m[2])];
@@ -117,7 +119,7 @@ function worldMap(k: M.Kid, doc: CM.CodingDoc) {
   trail.append(h("a", { class: "cl-island free", id: "cl-free", href: `#/coding/${k.id}/free`, style: "--wc:#d6336c" },
     h("span", { class: "isl-art" }), h("span", { class: "isl-info" }, h("span", { class: "isl-no" }, "自由画图"), h("b", { class: "isl-name" }, "创作"), h("span", { class: "isl-stars" }, `${(CM.loadLocal().drawings[k.id] ?? []).length} / ${CM.MAX_DRAWINGS}`))));
   trail.querySelector("#cl-free .isl-art")!.innerHTML = islandSvg(6);
-  X.show(h("div", { class: "page", style: `--kid:${k.color}` }, kidHero(k, "#/subject/coding", "孩子"), h("main", { class: "scroll" }, h("div", { class: "narrow cl-narrow" }, shelf, trail))));
+  X.show(h("div", { class: "page", style: `--kid:${k.color}` }, kidHero(k, "#/subject/coding", "孩子"), h("main", { class: "scroll" }, h("div", { class: "narrow cl-narrow" }, shelf, trail, textSection(k, doc)))));
 }
 
 function worldPage(k: M.Kid, doc: CM.CodingDoc, world: number) {

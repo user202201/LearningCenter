@@ -287,7 +287,7 @@ export const bits: Mount = (root, io) => {
 };
 
 // ---------- pixel: paint, read the numbers, decode numbers ----------
-function paintGrid(n: number, onChange: () => void) {
+export function paintGrid(n: number, onChange: () => void) {
   const cells = Array(n * n).fill(0);
   const el = h("div", { class: "ci-pixedit", style: `--w:${n}`, "data-n": String(n) });
   const refresh = () => el.querySelectorAll("i").forEach((c, i) => c.classList.toggle("on", !!cells[i]));
@@ -506,21 +506,15 @@ export const sheet: Mount = (root, io) => {
       return h("td", {}, inp);
     }))));
   };
-  const expected = (t: (typeof s.tasks)[0], data: Record<string, string>): number | null => {
-    const vals = (rg: string): number[] => { const [a, b] = rg.split(":"); const c1 = cols.indexOf(a[0]), c2 = cols.indexOf(b[0]), r1 = +a.slice(1), r2 = +b.slice(1); const o: number[] = []; for (let c = c1; c <= c2; c++) for (let r = r1; r <= r2; r++) { const v = Number(data[cols[c] + r]); if (!isNaN(v) && data[cols[c] + r] !== undefined && data[cols[c] + r] !== "") o.push(v); } return o; };
-    if (t.expr) { try { return Function("return (" + t.expr.replace(/[A-F]\d+/g, (m) => String(Number(data[m] ?? 0))) + ")")() as number; } catch { return null; } }
-    const v = vals(t.range!);
-    switch (t.fn) { case "SUM": return v.reduce((a, b) => a + b, 0); case "AVERAGE": return v.reduce((a, b) => a + b, 0) / v.length; case "MAX": return Math.max(...v); case "MIN": return Math.min(...v); case "COUNT": return v.length; }
-    return null;
-  };
+  const formulaFor = (t: (typeof s.tasks)[0]) => (t.expr ? "=" + t.expr : `=${t.fn}(${t.range})`);
+  const refs: Record<string, string> = Object.fromEntries(s.tasks.map((t) => [t.cell, formulaFor(t)]));
   const check = () => {
     const t = s.tasks[ti], mine = (raw[t.cell] ?? "").trim();
     if (!mine.startsWith("=")) { io.bad(); return io.say("请输入以 = 开头的公式。", "bad"); }
-    // the formula must keep working when the data changes: run it on two other versions of the data
-    const variants = [raw, perturb(raw, 1), perturb(raw, 2)];
-    for (const d of variants) {
-      const want = expected(t, { ...s.cells, ...d, [t.cell]: "" }), got = I.evalSheet({ ...d, [t.cell]: mine })[t.cell];
-      if (want === null || typeof got !== "number" || Math.abs(got - want) > 1e-6) { io.bad(); return io.say(typeof got === "string" && got.startsWith("#") ? `公式出错：${got}` : "结果不对。请检查公式。", "bad"); }
+    // the formula must keep working when the data changes: it is run on two other versions of the data and compared with the reference formula
+    for (const d of [raw, perturb(raw, 1), perturb(raw, 2)]) {
+      const want = I.evalSheet({ ...d, ...refs })[t.cell], got = I.evalSheet({ ...d, ...refs, [t.cell]: mine })[t.cell];
+      if (typeof want !== "number" || typeof got !== "number" || Math.abs(got - want) > 1e-6) { io.bad(); return io.say(typeof got === "string" && got.startsWith("#") ? `公式出错：${got}` : "结果不对。请检查公式。", "bad"); }
     }
     ti++;
     if (ti >= s.tasks.length) { io.say("全部正确。", "ok"); return io.win(); }
@@ -530,10 +524,9 @@ export const sheet: Mount = (root, io) => {
   const perturb = (d: Record<string, string>, k: number): Record<string, string> => { const o: Record<string, string> = { ...d }; for (const [c, v] of Object.entries(s.cells)) if (v !== "" && !v.startsWith("=") && !isNaN(Number(v))) o[c] = String(Number(v) + ((c.charCodeAt(0) + c.charCodeAt(1) * k) % 7) + 1); return o; };
   const nextTask = () => { prog.textContent = `${ti + 1} / ${s.tasks.length}`; task.textContent = s.tasks[ti].p; io.prompt(L(io.act.prompt)); draw(); };
   nextTask();
-  const formulaFor = (t: (typeof s.tasks)[0]) => (t.expr ? "=" + t.expr : `=${t.fn}(${t.range})`);
   return {
     solve: () => { for (let k = 0; k < s.tasks.length; k++) { const t = s.tasks[ti]; raw[t.cell] = formulaFor(t); editing = ""; draw(); check(); } },
-    wrong: () => { const t = s.tasks[ti]; raw[t.cell] = String(expected(t, s.cells) ?? 0); editing = ""; draw(); check(); },
+    wrong: () => { const t = s.tasks[ti]; raw[t.cell] = String(I.evalSheet({ ...raw, ...refs })[t.cell]); editing = ""; draw(); check(); },
   };
 };
 

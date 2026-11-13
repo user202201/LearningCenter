@@ -22,6 +22,7 @@ export function blocksToPython(p: Program): Bridge {
       case "sense": runnable = false; return e.s === "colorIs" ? `color_is("${e.c ?? "r"}")` : e.s;
       case "not": return "not " + ex(e.a, 9);
       case "bin": case "cmp": { const q = PREC[e.op]; const s = `${ex(e.a, q)} ${e.op} ${ex(e.b, q + 1)}`; return q < parent ? `(${s})` : s; }
+      default: return "0";
     }
   };
   const used = new Set<string>();

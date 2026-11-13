@@ -2510,3 +2510,4 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 @keyframes pk-sidep { from { opacity: .35; } to { opacity: 1; } }
 @keyframes pk-banner { 0% { transform: translate(-110%, -50%); } 25%, 72% { transform: translate(0, -50%); } 100% { transform: translate(110%, -50%); } }
 @keyframes pk-fast { from { transform: translateX(-50%) scale(.3); opacity: 0; } to { transform: translateX(-50%) scale(1); opacity: 1; } }
+.chem-narrow .mopt { min-height: 42px; }
