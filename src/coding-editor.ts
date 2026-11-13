@@ -112,7 +112,7 @@ function numField(sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void
 function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script: number }>, script: number, inPalette = false): HTMLElement {
   const kind = kindOf(b);
   const grp = GROUP[kind.startsWith("call:") ? "call" : kind] ?? "go";
-  const el = h("div", { class: `cw-b cw-g-${grp}` + (isControl(kind) ? " cw-c" : ""), "data-id": b.id, "data-kind": kind, tabindex: sc.interactive ? 0 : -1 });
+  const el = h("div", { class: `cw-b cw-g-${grp}` + (isControl(kind) ? " cw-c" : ""), "data-id": b.id, "data-kind": kind, tabIndex: sc.interactive ? 0 : -1 });
   const head = h("div", { class: "cw-head" });
   const ico = (k: string) => (ICON[k] ? h("span", { class: "cw-ico", "aria-hidden": "true" }, ICON[k]) : null);
   const setE = (key: "n" | "arg" | "e") => (e: Expr) => { (b as unknown as Record<string, Expr>)[key] = e; };
@@ -127,12 +127,12 @@ function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script
       onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, Object.keys(COLORS).map((c) => ({ label: COLOR_NAMES[c], value: c, cls: `sw-${c}` })), (v) => sc.edit(() => { b.c = v; })) })); break;
     case "repeat": head.append(span("cw-t", "重复"), span("cw-unit", "×"), numField(sc, () => b.n, setE("n"), META.repeat)); break;
     case "until": head.append(span("cw-t", "直到"), condBtn()); break;
-    case "while": head.append(span("cw-t", "当"), condBtn()); break;
+    case "while": head.append(span("cw-t", "只要"), condBtn()); break;
     case "if": case "ifelse": head.append(span("cw-t", "如果"), condBtn()); break;
     case "set": {
       const e = b.e ?? num(0), op = e.k === "bin" ? e.op : "", A = e.k === "bin" ? e.a : e, B = e.k === "bin" ? e.b : num(0);
       const write = (a: Expr, o: string, bb: Expr) => { b.e = o ? { k: "bin", op: o as "+" | "-" | "*", a, b: bb } : a; };
-      head.append(span("cw-t", "设置"),
+      head.append(span("cw-t", "设定"),
         h("button", { class: "cw-name cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择变量", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, sc.vars.map((v) => ({ label: v, value: v })), (v) => sc.edit(() => { b.name = v; })) }, b.name ?? "x"),
         span("cw-unit", "="), numField(sc, () => A, (x) => write(x, op, B), META.val),
         h("button", { class: "cw-op cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择运算",
@@ -210,8 +210,11 @@ export function createEditor(o: EditorOpts): Editor {
     const r = anchor.getBoundingClientRect(), pw = box.offsetWidth, ph = box.offsetHeight;
     box.style.left = `${Math.max(6, Math.min(innerWidth - pw - 6, r.left + r.width / 2 - pw / 2))}px`;
     box.style.top = `${r.bottom + 6 + ph > innerHeight - 6 ? Math.max(6, r.top - ph - 6) : r.bottom + 6}px`;
-    const away = (e: Event) => { if (!box.contains(e.target as Node)) { closePop(); document.removeEventListener("pointerdown", away, true); } };
-    setTimeout(() => document.addEventListener("pointerdown", away, true), 0);
+    // (the click that opens the list comes after its pointerdown, so the listener can be added at once)
+    const off = () => { document.removeEventListener("pointerdown", away, true); document.removeEventListener("keydown", esc, true); };
+    const away = (e: Event) => { if (!box.contains(e.target as Node)) { closePop(); off(); } };
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") { closePop(); off(); } };
+    document.addEventListener("pointerdown", away, true); document.addEventListener("keydown", esc, true);
   };
 
   const commit = () => {

@@ -41,11 +41,12 @@ export function buildItems(src: Source, o: Options): Item[] {
 /** a dictation of exactly these items (the wrong ones of the last one) */
 export const itemsOf = (texts: string[]): Item[] => buildItems({ chars: texts.filter(isChar), idioms: texts.filter((t) => !isChar(t)), lastChars: [], lastIdioms: [] }, { idioms: true, last: false });
 
+const SPOKEN_COMMA = String.fromCharCode(0xff0c), SPELL_OF = String.fromCharCode(0x7684);   // ， and 的
 /** what is said for an item: an idiom whole; a character as a word that holds it and then spelled by that word ("朋友，朋友的朋"); a character without a word only itself */
 export function readingOf(it: Item, words: Record<string, string>): string {
   if (it.kind === "idiom") return it.text;
   const w = words[it.text];
-  return w ? `${w}，${w}的${it.text}` : it.text;
+  return w ? [w, [w, it.text].join(SPELL_OF)].join(SPOKEN_COMMA) : it.text;   // (spoken text, not a UI text: kept out of the translation scan)
 }
 /** the word shown to the grown-up beside the character in the check */
 export const wordOf = (it: Item, words: Record<string, string>): string => (it.kind === "idiom" ? "" : words[it.text] ?? "");

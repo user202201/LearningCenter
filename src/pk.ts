@@ -140,7 +140,7 @@ export async function renderSetup() {
       for (const p of pairs) {
         const w = p.wins[p.a] ?? 0, l = p.wins[p.b] ?? 0;
         hist.append(h("div", { class: "pk-hist-row", "data-pair": pairKey(p.a, p.b) },
-          h("span", { class: "user" }, kidOf(p.a)!.name), " · ", h("span", { class: "user" }, kidOf(p.b)!.name), "：",
+          h("span", { class: "user" }, kidOf(p.a)!.name), " · ", h("span", { class: "user" }, kidOf(p.b)!.name), ": ",
           h("span", {}, `胜 ${w} · 负 ${l}`), p.ties ? h("span", {}, " · ", h("span", {}, `平 ${p.ties}`)) : null));
       }
       hist.append(h("p", { class: "muted small" }, "记录只保存在这台设备上。"),

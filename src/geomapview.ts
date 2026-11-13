@@ -4,7 +4,7 @@
  * round magnified dot). Markers and labels keep their size in pixels when the map is zoomed. Works with touch, pen and mouse (Pointer Events).
  */
 import { h } from "./ui";
-import { chinaShapes, worldShapes, hitTest, continentOf, DOT_OFFSET, DOT_R, type Geo, type Shape, type Hit, type Pt } from "./geomapgeo";
+import { chinaShapes, worldShapes, hitTest, continentOf, inside, edgeDist, DOT_OFFSET, DOT_R, type Geo, type Shape, type Hit, type Pt } from "./geomapgeo";
 
 const NS = "http://www.w3.org/2000/svg";
 const el = <K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<string, string | number> = {}, ...kids: (Node | string)[]): SVGElementTagNameMap[K] => {
@@ -249,9 +249,22 @@ export class MapView {
   toContent(cx: number, cy: number): Pt { const [u, v] = this.toView(cx, cy); return [(u - this.tx) / this.k, (v - this.ty) / this.k]; }
   /** the layers a touch can select: the ones that are drawn (a quiz sets `tapLayers`) */
   tapLayers: string[] | null = null;
+  /** where the last tap was (client px) */
+  lastTap: Pt = [0, 0];
   private visibleLayers(): string[] {
     const on = (n: string) => this.groups.get(n)?.style.display !== "none";
     return this.opts.kind === "china" ? ["prov", ...["river", "mountain", "lake", "area"].filter(on)] : ["country", "land", ...(on("ocean") ? ["ocean"] : [])];
+  }
+  /** every shape under a client point (inside it, or near its line / edge), the best first: a plateau under a river is also "hit" */
+  candidatesAt(cx: number, cy: number, layers?: string[]): Hit[] {
+    const [x, y] = this.toContent(cx, cy), s = this.scale, tol = 14 / s, L = layers ?? this.tapLayers ?? this.visibleLayers();
+    const out: { h: Hit; d: number }[] = [];
+    for (const sh of this.shapes) {
+      if (!L.includes(sh.layer) || x < sh.bbox[0] - tol || x > sh.bbox[2] + tol || y < sh.bbox[1] - tol || y > sh.bbox[3] + tol) continue;
+      const ins = inside(sh, x, y), d = ins ? 0 : edgeDist(sh, x, y);
+      if (ins || d <= tol) out.push({ h: { id: sh.id, layer: sh.layer, via: ins ? "inside" : sh.line ? "line" : "near" }, d: sh.line ? d : ins ? 0 : d });
+    }
+    return out.sort((a, b) => a.d - b.d).map((o) => o.h);
   }
   /** what is at a client point */
   hitAt(cx: number, cy: number, layers?: string[]): { hit: Hit | null; at: Pt } {
@@ -299,7 +312,7 @@ export class MapView {
       this.ptrs.delete(e.pointerId);
       if (this.ptrs.size < 2) this.pinch = null;
       if (this.ptrs.size === 1) { const [id, p] = [...this.ptrs][0]; void id; this.downAt = p; this.startState = { k: this.k, tx: this.tx, ty: this.ty }; this.moved = true; }
-      if (wasTap) { const r = this.hitAt(e.clientX, e.clientY); this.opts.onTap?.(r.hit, r.at); }
+      if (wasTap) { const r = this.hitAt(e.clientX, e.clientY); this.lastTap = [e.clientX, e.clientY]; this.opts.onTap?.(r.hit, r.at); }
     };
     svg.addEventListener("pointerup", up);
     svg.addEventListener("pointercancel", up);

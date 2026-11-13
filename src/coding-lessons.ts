@@ -53,10 +53,10 @@ export const LESSONS: Record<string, Lesson> = {
   ] },
   var: { id: "var", title: "变量：会变化的数字", steps: [
     { text: "变量像一个有名字的盒子，里面放着一个数字。", demo: { rows: ["######", "#>..F#", "######"], program: "repeat 3 { move change count by 1 }" } },
-    { text: "“改变”让数字增加或减少，“设置”直接给它一个数字。", demo: { rows: ["######", "#>..F#", "######"], program: "repeat 3 { move change count by 1 }" } },
+    { text: "“改变”让数字增加或减少，“设定”直接给它一个数字。", demo: { rows: ["######", "#>..F#", "######"], program: "repeat 3 { move change count by 1 }" } },
   ] },
   arith: { id: "arith", title: "算一算", steps: [
-    { text: "“设置”可以做加法、减法和乘法，例如 s = a + b。", demo: { rows: ["########", "#>....F#", "########"], program: "set a = 2 set b = 3 set s = a + b repeat s { move }" } },
+    { text: "“设定”可以做加法、减法和乘法，例如 s = a + b。", demo: { rows: ["########", "#>....F#", "########"], program: "set a = 2 set b = 3 set s = a + b repeat s { move }" } },
     { text: "变量可以放进“重复”里。这样，程序对不同的数字都有效。", demo: { rows: ["########", "#>....F#", "########"], program: "set a = 2 set b = 3 set s = a + b repeat s { move }" } },
   ] },
   turtle: { id: "turtle", title: "画图：笔跟着积木走", steps: [

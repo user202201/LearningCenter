@@ -351,7 +351,7 @@ function runRound(k: M.Kid, lib: PM.Library, mode: PM.Mode, pid: string, questio
   const subject = h("div", { class: "pq-subject user", id: "pq-subject" });
   const ctx = h("div", { class: "pq-ctx user", id: "pq-ctx" });
   const area = h("div", { class: "pq-area", id: "pq-area" });
-  const explain = h("div", { class: "pq-explain user", id: "pq-explain", hidden: true });
+  const explain = h("div", { class: "pq-explain", id: "pq-explain", hidden: true });
   const next = h("button", { class: "primary wide pq-next", id: "pq-next", hidden: true });
   const quit = h("button", { class: "gquit", id: "pq-quit", title: "退出", "aria-label": "退出", onclick: () => void leave() }, "×");
   const body = h("div", { class: "pq-body" }, label, subject, ctx, area, explain, next);
@@ -472,7 +472,7 @@ function runRound(k: M.Kid, lib: PM.Library, mode: PM.Mode, pid: string, questio
       const el = (e.target as HTMLElement).closest<HTMLElement>(".pq-oitem");
       if (!el || list.classList.contains("done") || drag) return;
       drag = { el, startY: e.clientY, moved: false, id: e.pointerId };
-      try { el.setPointerCapture(e.pointerId); } catch { /* pointer already gone */ }
+      try { list.setPointerCapture(e.pointerId); } catch { /* pointer already gone */ }   // (on the LIST: moving the line in the page would end a capture held by the line itself)
     });
     list.addEventListener("pointermove", (e) => {
       if (!drag || e.pointerId !== drag.id) return;
@@ -496,7 +496,7 @@ function runRound(k: M.Kid, lib: PM.Library, mode: PM.Mode, pid: string, questio
       drag = null;
       el.style.transform = "";
       el.classList.remove("drag");
-      try { el.releasePointerCapture(e.pointerId); } catch { /* released */ }
+      try { list.releasePointerCapture(e.pointerId); } catch { /* released */ }
       if (moved) return;
       // a tap: select, then a second tap swaps the two
       if (selected && selected !== el) {

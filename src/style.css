@@ -1622,8 +1622,17 @@ button.dw-hearbtn:active { transform: translateY(5px); box-shadow: none; }
 .mq.has-fig { grid-template-columns: minmax(0, 1fr); align-content: center; gap: 8px; padding-top: 12px; padding-bottom: 12px; flex: none; }
 .mq-fig { display: flex; justify-content: center; max-width: 100%; --fh: min(24vh, 210px); }
 .mq-fig:empty { display: none; }
+.mbody { justify-content: safe center; }   /* (a card taller than the room starts at the top instead of being cut off there) */
 .mq-fig svg { display: block; aspect-ratio: var(--ar, 1); height: auto; width: min(100%, calc(var(--fh) * var(--ar, 1))); }
 @media (max-height: 460px) { .mq-fig { --fh: min(26vh, 110px); } }
+/* a low landscape screen: the figure stands beside the text, so that the card, the choices and the top bar fit */
+@media (orientation: landscape) and (max-height: 520px) {
+  .mq.has-fig:has(.mq-fig:not(.wide)) { grid-template-columns: minmax(0, 42%) minmax(0, 1fr); gap: 4px 12px; padding: 6px 10px; }
+  .mq-fig { --fh: min(36vh, 130px); }
+  .mq-fig.wide { --fh: min(24vh, 90px); }
+  .mathgame .mchoice { min-height: 48px; font-size: clamp(18px, 6.2vh, 26px); }
+  .mathgame .mchoices { gap: 8px; }
+}
 .mmis-fig { flex: none; width: 74px; }
 .mmis-fig svg { display: block; width: 100%; height: auto; }
 .mmis-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
@@ -1842,7 +1851,7 @@ button.dw-hearbtn:active { transform: translateY(5px); box-shadow: none; }
 @media (min-aspect-ratio: 5/4) and (max-height: 560px) {
   .gmap-qbody { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); grid-template-rows: auto auto auto 1fr; column-gap: 12px; row-gap: 8px; max-width: none; align-content: start; }
   .gmap-qbody > .mtopic { grid-column: 1; } .gmap-qbody > .gmap-qbox { grid-column: 1; } .gmap-qbody > .gmap-choices { grid-column: 1; } .gmap-qbody > .gmap-fb { grid-column: 1; }
-  .gmap-qbody > .gmap-qmap { grid-column: 2; grid-row: 1 / 6; min-height: 0; height: 100%; }
+  .gmap-qbody > .gmap-qmap { grid-column: 2; grid-row: 1 / 6; min-height: 0; height: calc(100dvh - 96px); max-height: calc(100dvh - 96px); position: sticky; top: 0; align-self: start; }
   .gmap-quiz.nomap .gmap-qbody { grid-template-columns: minmax(0, 1fr); }
   .gmap-quiz.nomap .gmap-qbody > * { grid-column: 1; }
   .gmap-qflag { width: 120px; } .gmap-q { font-size: clamp(16px, 3.6vw, 24px); }
@@ -1976,15 +1985,15 @@ button.dw-hearbtn:active { transform: translateY(5px); box-shadow: none; }
 .cl-res-stars svg { width: 34px; height: 34px; }
 .cl-result p { margin: 4px 0; }
 .cl-res-btns { justify-content: center; flex-wrap: wrap; }
-.cl-code { margin: 0; padding: 8px 12px; background: #0b2e3a; color: #99e9f2; border-radius: 14px; font: 13px/1.45 ui-monospace, "SF Mono", Menlo, Consolas, monospace; max-height: 150px; overflow: auto; white-space: pre; }
+.cl-code { margin: 0; padding: 8px 12px; background: #0b2e3a; color: #99e9f2; border-radius: 14px; font: 13px/1.45 ui-monospace, "SF Mono", Menlo, Consolas, monospace; max-height: min(150px, 20dvh); flex: none; overflow: auto; white-space: pre; }
 .cl-code[hidden] { display: none; }
-@media (orientation: landscape) and (min-width: 700px) {
+@media (min-width: 700px) {
   .cl-page { --sh: max(150px, calc(100dvh - 330px)); }
   .cl-main { flex-direction: row; align-items: flex-start; }
   .cl-left { width: 44%; }
   .cl-right { align-self: stretch; }
 }
-@media (orientation: landscape) and (min-width: 700px) and (min-height: 600px) { .cl-page { --sh: max(220px, calc(100dvh - 300px)); } }
+@media (min-width: 700px) and (min-height: 600px) { .cl-page { --sh: max(220px, calc(100dvh - 300px)); } }
 
 /* the block editor */
 .cw { position: relative; display: flex; flex-direction: column; flex: 1; min-height: 330px; gap: 6px; user-select: none; -webkit-user-select: none; }

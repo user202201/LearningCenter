@@ -19,6 +19,30 @@ const PROV_CAP = { 江苏: '南京', 浙江: '杭州', 四川: '成都', 云南:
 const SIGHT = { 江苏: '苏', 浙江: '浙', 四川: '川', 云南: '滇', 新疆: '新', 西藏: '藏', 广东: '粤', 山东: '鲁', 河南: '豫', 湖南: '湘', 湖北: '鄂', 北京: '京', 上海: '沪', 重庆: '渝', 香港: '港', 澳门: '澳', 台湾: '台', 内蒙古: '蒙' };
 const spearman = (a, b) => { const rank = (v) => v.map((x) => v.filter((y) => y < x).length + (v.filter((y) => y === x).length - 1) / 2); const ra = rank(a), rb = rank(b); const n = a.length; const d2 = ra.reduce((s, x, i) => s + (x - rb[i]) ** 2, 0); return 1 - (6 * d2) / (n * (n * n - 1)); };
 
+const helpers = (page) => {
+  const toClient = (sel, x, y) => page.evaluate(([sel, x, y]) => {
+    const svg = document.querySelector(sel); const vp = svg.querySelector('.gmap-vp'); const m = /translate\(([-\d.]+) ([-\d.]+)\) scale\(([\d.]+)\)/.exec(vp.getAttribute('transform'));
+    const [tx, ty, k] = [+m[1], +m[2], +m[3]]; const c = svg.getScreenCTM(); return [c.a * (x * k + tx) + c.e, c.d * (y * k + ty) + c.f];
+  }, [sel, x, y]);
+  const answerOf = () => page.evaluate(async () => {
+    const GG = await import('/src/geomapgeo.ts'); const g = await GG.loadGeo(); const root = document.querySelector('#game'); const [mode, item] = root.dataset.qkey.split(/:(.*)/s);
+    if (!/-tap$|ktap$|-feat$/.test(mode) && mode !== 'w-ktap') {
+      if (mode === 'cn-reg') return { type: 'choose', v: g.china.provinces.find((p) => p.id === item).reg };
+      if (mode === 'w-cont') return { type: 'choose', v: g.world.countries.find((p) => p.id === item).cont };
+      return { type: 'choose', v: item };
+    }
+    const sh = GG.chinaShapes(g.china).concat(GG.worldShapes(g.world));
+    if (mode === 'cn-tap') return { type: 'tap', p: g.china.provinces.find((p) => p.id === item).lp };
+    if (mode === 'w-tap') return { type: 'tap', p: g.world.countries.find((p) => p.id === item).lp };
+    if (mode === 'cn-feat') { const f = [...g.china.rivers, ...g.china.mountains, ...g.china.lakes, ...g.china.areas].find((x) => x.id === item); return { type: 'tap', p: f.lp }; }
+    const oc = g.world.oceans.find((o) => o.id === item); if (oc) return { type: "tap", p: oc.lps[oc.lps.length - 1] };
+    const rep = { as: 'cn', eu: 'fr', af: 'eg', na: 'us', sa: 'br', oc: 'au' }[item];
+    if (rep) return { type: 'tap', p: g.world.countries.find((c) => c.id === rep).lp };
+    const an = sh.find((s) => s.layer === 'land' && s.id === 'an'); for (let x = an.bbox[0]; x < an.bbox[2]; x += 10) for (let y = an.bbox[3] - 4; y > an.bbox[1]; y -= 4) if (GG.inside(an, x, y)) return { type: 'tap', p: [x, y] };
+    return null;
+  });
+  return { toClient, answerOf };
+};
 (async () => {
   // =====================================================================================  A. THE DATA (in the page: the real modules)
   {
@@ -289,10 +313,7 @@ const spearman = (a, b) => { const rank = (v) => v.map((x) => v.filter((y) => y 
   const tabs = await page.$$eval('#gmap-tabs button', (b) => b.map((x) => x.textContent.trim()));
   ok(tabs.join() === '中国,世界,国旗', 'tabs: 中国 | 世界 | 国旗');
   ok((await page.$$('.gmap-prov')).length === 34, 'the China map draws 34 province-level divisions');
-  const toClient = (sel, x, y) => page.evaluate(([sel, x, y]) => {
-    const svg = document.querySelector(sel); const vp = svg.querySelector('.gmap-vp'); const m = /translate\(([-\d.]+) ([-\d.]+)\) scale\(([\d.]+)\)/.exec(vp.getAttribute('transform'));
-    const [tx, ty, k] = [+m[1], +m[2], +m[3]]; const c = svg.getScreenCTM(); return [c.a * (x * k + tx) + c.e, c.d * (y * k + ty) + c.f];
-  }, [sel, x, y]);
+  const { toClient, answerOf } = helpers(page);
   const geoPt = (what) => page.evaluate(async (what) => { const GG = await import('/src/geomapgeo.ts'); const g = await GG.loadGeo(); const [kind, id] = what.split(':'); const list = kind === 'prov' ? g.china.provinces : kind === 'country' ? g.world.countries : kind === 'river' ? g.china.rivers : g.china.mountains; return list.find((x) => x.id === id).lp; }, what);
   const clickAt = async (sel, what) => { const p = await geoPt(what); const [x, y] = await toClient(sel, p[0], p[1]); await page.mouse.click(x, y); };
   const name = () => page.textContent('#gmap-name');
@@ -384,23 +405,6 @@ const spearman = (a, b) => { const rank = (v) => v.map((x) => v.filter((y) => y 
   await page.click('#lev-4'); ok(await page.locator('#mode-cn-tap .gmap-known').getAttribute('data-total') === '34', 'the level chips change the range (全部: 34)');
 
   // ---- the practice: every mode, played to the end (as Dory)
-  const answerOf = () => page.evaluate(async () => {
-    const GG = await import('/src/geomapgeo.ts'); const g = await GG.loadGeo(); const root = document.querySelector('#game'); const [mode, item] = root.dataset.qkey.split(/:(.*)/s);
-    if (!/-tap$|ktap$|-feat$/.test(mode) && mode !== 'w-ktap') {
-      if (mode === 'cn-reg') return { type: 'choose', v: g.china.provinces.find((p) => p.id === item).reg };
-      if (mode === 'w-cont') return { type: 'choose', v: g.world.countries.find((p) => p.id === item).cont };
-      return { type: 'choose', v: item };
-    }
-    const sh = GG.chinaShapes(g.china).concat(GG.worldShapes(g.world));
-    if (mode === 'cn-tap') return { type: 'tap', p: g.china.provinces.find((p) => p.id === item).lp };
-    if (mode === 'w-tap') return { type: 'tap', p: g.world.countries.find((p) => p.id === item).lp };
-    if (mode === 'cn-feat') { const f = [...g.china.rivers, ...g.china.mountains, ...g.china.lakes, ...g.china.areas].find((x) => x.id === item); return { type: 'tap', p: f.lp }; }
-    const oc = g.world.oceans.find((o) => o.id === item); if (oc) return { type: 'tap', p: oc.lps[0] };
-    const rep = { as: 'cn', eu: 'fr', af: 'eg', na: 'us', sa: 'br', oc: 'au' }[item];
-    if (rep) return { type: 'tap', p: g.world.countries.find((c) => c.id === rep).lp };
-    const an = sh.find((s) => s.layer === 'land' && s.id === 'an'); for (let x = an.bbox[0]; x < an.bbox[2]; x += 10) for (let y = an.bbox[3] - 4; y > an.bbox[1]; y -= 4) if (GG.inside(an, x, y)) return { type: 'tap', p: [x, y] };
-    return null;
-  });
   const play = async (mode, { wrongFirst = false, shots } = {}) => {
     await page.click(`#mode-${mode}`); await page.waitForSelector('#game .mq');
     let n = 0, rights = 0;
@@ -415,10 +419,10 @@ const spearman = (a, b) => { const rank = (v) => v.map((x) => v.filter((y) => y 
       } else {
         const [x, y] = await toClient('#gmap-qmap .gmap-svg', a.p[0], a.p[1]);
         if (wrongFirst && n === 0) { const wrongP = await page.evaluate(async (item) => { const GG = await import('/src/geomapgeo.ts'); const g = await GG.loadGeo(); const o = g.china.provinces.find((p) => p.id !== item && document.querySelector('#game').dataset.qkey.startsWith('cn-tap')); return o && o.lp; }, (await page.getAttribute('#game', 'data-qkey')).split(':')[1]); if (wrongP) { const [wx, wy] = await toClient('#gmap-qmap .gmap-svg', wrongP[0], wrongP[1]); await page.mouse.click(wx, wy); } else await page.mouse.click(x, y); }
-        else await page.mouse.click(x, y);
+        else { if (shots === null && false) void 0; await page.mouse.click(x, y); if (process.env.GEODEBUG) console.log('   click', mode, Math.round(x), Math.round(y), JSON.stringify(await page.locator('#gmap-qmap .gmap-svg').boundingBox())); }
       }
       await page.waitForSelector('#math-explain');
-      if (await page.locator('#game.ok').count()) rights++; else if (/tap$|feat$/.test(mode)) console.log('   (tap not judged right: ' + (await page.getAttribute('#game', 'data-qkey')) + ')');
+      if (await page.locator('#game.ok').count()) rights++; else if (/tap$|feat$/.test(mode) && !(wrongFirst && n === 0)) console.log('   (tap not judged right: ' + (await page.getAttribute('#game', 'data-qkey')) + ' ' + (await page.locator('#gmap-qmap .wrong').evaluateAll((e) => e.map((x) => x.getAttribute('data-k')))).join() + ')');
       if (shots && n === 0) await page.screenshot({ path: OUT + shots + '-answer.png' });
       n++;
       const last = (await page.textContent('#math-next')).trim() === '完成';
@@ -522,7 +526,7 @@ const spearman = (a, b) => { const rank = (v) => v.map((x) => v.filter((y) => y 
     for (let i = 1; i <= 8; i++) await touch('touchMove', [[cx - 110 + i * 12, cy + 60], [cx + 110 - i * 12, cy + 60]]);
     await touch('touchEnd', []);
     ok(+(await page.getAttribute('.gmap-svg', 'data-k')) < kz, 'pinching in zooms out again');
-    await page.click('#gmap-reset');
+    if (!(await page.isDisabled('#gmap-reset'))) await page.click('#gmap-reset');
     ok(+(await page.getAttribute('.gmap-svg', 'data-k')) === 1, 'reset');
     // after a drag the touch must not also select a region (a drag is not a tap)
     await page.click('#gmap-in'); await page.click('#gmap-in');
@@ -530,7 +534,7 @@ const spearman = (a, b) => { const rank = (v) => v.map((x) => v.filter((y) => y 
     await touch('touchStart', [[cx, cy]]); for (let i = 1; i <= 6; i++) await touch('touchMove', [[cx + i * 10, cy]]); await touch('touchEnd', []);
     ok((await page.getAttribute('#gmap-card', 'data-sel')) === sel0, 'a drag does not select the region it started on');
     // a real tap inside a quiz (dpr 2): the answer is judged
-    await page.click('#gmap-reset');
+    if (!(await page.isDisabled('#gmap-reset'))) await page.click('#gmap-reset');
     await page.evaluate(() => document.querySelector('.gmap-mode').scrollIntoView({ block: 'center' })); await page.click('#mode-cn-tap'); await page.waitForSelector('#gmap-qmap .gmap-svg');
     const key = (await page.getAttribute('#game', 'data-qkey')).split(':')[1];
     const [qx, qy] = await page.evaluate(([x, y]) => { const svg = document.querySelector('#gmap-qmap .gmap-svg'); const vp = svg.querySelector('.gmap-vp'); const m = /translate\(([-\d.]+) ([-\d.]+)\) scale\(([\d.]+)\)/.exec(vp.getAttribute('transform')); const c = svg.getScreenCTM(); return [c.a * (x * +m[3] + +m[1]) + c.e, c.d * (y * +m[3] + +m[2]) + c.f]; }, lp[key] || [0, 0]);
@@ -552,7 +556,7 @@ const spearman = (a, b) => { const rank = (v) => v.map((x) => v.filter((y) => y 
     for (const [w, h] of SIZES) {
       if (loc !== 'zh-CN' && ![390, 1180].includes(w) && !(w === 844)) continue;
       const t = await start(new Map(), { local: true, locale: loc, viewport: { width: w, height: h } });
-      const { page } = t; const tag = `${loc}-${w}x${h}`;
+      const { page } = t; const tag = `${loc}-${w}x${h}`; const { toClient, answerOf } = helpers(page);
       await addKid(page, 'Dory');
       await page.evaluate(() => (location.hash = '#/science/map')); await page.waitForSelector('.gmap-svg');
       const geom = async (label) => {
@@ -588,7 +592,7 @@ const spearman = (a, b) => { const rank = (v) => v.map((x) => v.filter((y) => y 
               return { iw, ih, sw: document.documentElement.scrollWidth, q: q('#gmap-q'), card: q('#math-card'), map: document.querySelector('#gmap-qmap').style.display === 'none' ? null : q('#gmap-qmap .gmap-svg'), ch: [...document.querySelectorAll('#math-choices .mchoice')].map((b) => b.getBoundingClientRect()).map((r) => ({ h: r.height, l: r.left, r: r.right })), exp: q('#math-explain'), next: q('#math-next') };
             });
             ok(g.sw <= g.iw && g.card.l >= 0 && g.card.r <= g.iw + 0.5, `${tag} ${mode} ${label}: nothing overflows`);
-            if (g.map) ok(g.map.l >= -0.5 && g.map.r <= g.iw + 0.5 && g.map.h >= 120 && Math.abs(g.map.l - (g.iw - g.map.r)) < 3 + (g.iw - g.map.w) / 2, `${tag} ${mode} ${label}: the map is inside the screen and tall enough (${Math.round(g.map.w)} x ${Math.round(g.map.h)})`);
+            if (g.map) ok(g.map.l >= -0.5 && g.map.r <= g.iw + 0.5 && g.map.h >= 120 && (g.iw > g.ih && g.ih < 560 || Math.abs(g.map.l - (g.iw - g.map.r)) < 3 + (g.iw - g.map.w) / 2) && g.map.b <= g.ih + 1, `${tag} ${mode} ${label}: the map is inside the screen and tall enough (${Math.round(g.map.w)} x ${Math.round(g.map.h)})`);
             ok(g.ch.every((c) => c.h >= 40 && c.l >= -0.5 && c.r <= g.iw + 0.5), `${tag} ${mode} ${label}: choices are 40 px or more tall and inside the screen`);
             return g;
           };
@@ -597,7 +601,7 @@ const spearman = (a, b) => { const rank = (v) => v.map((x) => v.filter((y) => y 
           if (a.type === 'choose') await page.locator(`.mchoice[data-v="${a.v}"]`).click(); else { const [x, y] = await toClient('#gmap-qmap .gmap-svg', a.p[0], a.p[1]); await page.mouse.click(x, y); }
           await page.waitForSelector('#math-explain');
           const g2 = await qg('answer');
-          ok(g2.next && g2.next.b <= g2.ih + 1 || true, `${tag} ${mode}: the Next button is there`);
+          ok(!!g2.next, `${tag} ${mode}: the Next button is there`);
           const next = await page.evaluate(() => { const e = document.querySelector('#math-next'); e.scrollIntoView({ block: 'nearest' }); const r = e.getBoundingClientRect(); return r.bottom <= innerHeight + 1 && r.top >= 0; });
           ok(next, `${tag} ${mode}: the Next button can be reached on screen`);
           const loq = loc === 'zh-CN' ? [] : await leftover(page); ok(loq.length === 0, `${tag} ${mode}: no Chinese left in the quiz ${loq.slice(0, 3).join('|')}`);

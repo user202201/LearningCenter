@@ -452,9 +452,28 @@ async function generatorChecks(ids, N) {
 }
 
 (async () => {
+  const spy = () => {
+    window.__said = [];
+    const U = function (t) { this.text = t; };
+    window.SpeechSynthesisUtterance = U;
+    Object.defineProperty(window, 'speechSynthesis', { value: { cancel() {}, speak(u) { window.__said.push([u.text, u.lang]); } }, configurable: true });
+  };
+  const recordMade = (pg) => pg.evaluate(async () => {
+    const G = await import('/src/mathgen.ts');
+    window.__made = [];
+    const fp = (svgText) => { const r = new DOMParser().parseFromString(svgText, 'image/svg+xml').documentElement; return [...r.querySelectorAll('*')].map((e) => e.tagName + [...e.attributes].map((a) => a.name + '=' + a.value).join(',')).join('|'); };
+    window.__fp = (el) => [...el.querySelectorAll('*')].map((e) => e.tagName + [...e.attributes].map((a) => a.name + '=' + a.value).join(',')).join('|');
+    for (const id of G.topicIds()) { const orig = G.GEN[id].make; G.GEN[id].make = () => { const r = orig(); window.__made.push({ q: r.q, a: r.a, fp: r.fig ? fp(r.fig) : '', fig: r.fig || '' }); return r; }; }
+  });
+  if (!process.env.ONLY_SIZES) {
   // ---------------------------------------------------------------- 1. the generators
   {
     const t = await start(new Map(), { local: true, today: '2026-11-12' });
+    if (process.env.MUTATE) {   // (proves that the checks can fail: MUTATE='src/mathfig.ts|text to find|text to put' serves a broken copy of that file)
+      const [file, from, to] = process.env.MUTATE.split('|');
+      await t.ctx.route('**/' + file, async (route) => { const r = await route.fetch(); const body = await r.text(); if (!body.includes(from)) console.log('MUTATE: text not found'); await route.fulfill({ response: r, body: body.replace(from, to) }); });
+      await t.page.reload(); await t.page.waitForSelector('.kids, .empty-home');
+    }
     const r = await t.page.evaluate(`(${generatorChecks.toString().replace('FIGSET.has', 'new Set(' + JSON.stringify([...FIG]) + ').has')})(${JSON.stringify(ALL)}, 1500)`);
     ok(ALL.length >= 45 && ALL.length === 61, `${ALL.length} new topics (at least 45 asked)`);
     ok(r.bad.length === 0, `${r.total} questions of ${ALL.length} new topics: chk true, four different choices, the answer among them, no NaN, sane text, and every answer re-checked independently (clock hands, money in the picture, areas from the polygon, angles from the lines, bars from their heights ...)` + (r.bad.length ? '\n   ' + r.bad.join('\n   ') : ''));
@@ -524,6 +543,7 @@ async function generatorChecks(ids, N) {
     ok(mm.n1 === 2 && mm.n2 === 1 && mm.left === '<svg>B</svg>' && mm.merged === 2 && mm.fig, 'errors book: same text with another figure is another question (kept, removed one by one, merged without loss), the figure is kept with it');
     ok(mm.setN === 20 && mm.setDistinct === 20, 'a game set never has the same question (text + figure) twice');
     await t.browser.close();
+    if (process.env.ONLY_GEN) { await done(); return; }
   }
 
   // ---------------------------------------------------------------- the pure model of the times table
@@ -560,19 +580,6 @@ async function generatorChecks(ids, N) {
   }
 
   // ---------------------------------------------------------------- 2. screens: a game with figures, the errors book, the times table
-  const spy = () => {
-    window.__said = [];
-    const U = function (t) { this.text = t; };
-    window.SpeechSynthesisUtterance = U;
-    Object.defineProperty(window, 'speechSynthesis', { value: { cancel() {}, speak(u) { window.__said.push([u.text, u.lang]); } }, configurable: true });
-  };
-  const recordMade = (pg) => pg.evaluate(async () => {
-    const G = await import('/src/mathgen.ts');
-    window.__made = [];
-    const fp = (svgText) => { const r = new DOMParser().parseFromString(svgText, 'image/svg+xml').documentElement; return [...r.querySelectorAll('*')].map((e) => e.tagName + [...e.attributes].map((a) => a.name + '=' + a.value).join(',')).join('|'); };
-    window.__fp = (el) => [...el.querySelectorAll('*')].map((e) => e.tagName + [...e.attributes].map((a) => a.name + '=' + a.value).join(',')).join('|');
-    for (const id of G.topicIds()) { const orig = G.GEN[id].make; G.GEN[id].make = () => { const r = orig(); window.__made.push({ q: r.q, a: r.a, fp: r.fig ? fp(r.fig) : '', fig: r.fig || '' }); return r; }; }
-  });
   const store = new Map();
   const { browser, page, log } = await start(store, { local: true, today: '2026-11-12', viewport: { width: 390, height: 844 }, init: spy });
   await addKid(page, 'Dory'); await setGrade(page, 'Dory', 3);
@@ -591,9 +598,9 @@ async function generatorChecks(ids, N) {
   await recordMade(page);
   await page.click('#tab-game'); await page.click('#game-start'); await page.waitForSelector('#math-q');
   const shape = async () => page.evaluate(() => {
-    const vh = window.innerHeight, vw = document.documentElement.clientWidth, card = document.querySelector('#math-card').getBoundingClientRect(), fig = document.querySelector('#math-fig svg'), txt = document.querySelector('#math-q').getBoundingClientRect(), ch = document.querySelector('#math-choices').getBoundingClientRect();
+    const vh = window.innerHeight, vw = document.documentElement.clientWidth, card = document.querySelector('#math-card').getBoundingClientRect(), fig = document.querySelector('#math-fig svg'), txt = document.querySelector('#math-q').getBoundingClientRect(), ch = document.querySelector('#math-choices').getBoundingClientRect(), barB = document.querySelector('.mtime').getBoundingClientRect().bottom;
     const f = fig ? fig.getBoundingClientRect() : null;
-    return { vh, vw, sw: document.documentElement.scrollWidth, fig: f && { w: f.width, h: f.height, l: f.left - card.left, r: card.right - f.right, t: f.top - card.top, b: card.bottom - f.bottom }, txtIn: txt.left >= card.left - 1 && txt.right <= card.right + 1 && txt.top >= card.top - 1 && txt.bottom <= card.bottom + 1, chBottom: ch.bottom, choicesIn: [...document.querySelectorAll('.mchoice')].every((b) => b.getBoundingClientRect().right <= vw + 1 && b.scrollWidth <= b.clientWidth + 1), card: { l: card.left, r: vw - card.right } };
+    return { barOk: card.top >= barB - 1 && f.top >= barB - 1, vh, vw, sw: document.documentElement.scrollWidth, fig: f && { w: f.width, h: f.height, l: f.left - card.left, r: card.right - f.right, t: f.top - card.top, b: card.bottom - f.bottom }, txtIn: txt.left >= card.left - 1 && txt.right <= card.right + 1 && txt.top >= card.top - 1 && txt.bottom <= card.bottom + 1, chBottom: ch.bottom, choicesIn: [...document.querySelectorAll('.mchoice')].every((b) => b.getBoundingClientRect().right <= vw + 1 && b.scrollWidth <= b.clientWidth + 1), card: { l: card.left, r: vw - card.right } };
   });
   let figsSeen = 0, wrongDone = 0; const problems = [];
   const mistakeQs = [];
@@ -601,7 +608,7 @@ async function generatorChecks(ids, N) {
     await page.waitForSelector('#math-q'); const prog = await page.textContent('#game-progress');
     const rec = await page.evaluate(() => { const q = document.querySelector('#math-q').dataset.plain, fig = document.querySelector('#math-fig svg'), fp = fig ? window.__fp(fig) : ''; const m = window.__made.filter((x) => x.q === q && x.fp === fp).pop(); return { q, hasFig: !!fig, a: m && m.a, fig: m && m.fig, found: !!m }; });
     if (!rec.found) problems.push('no record for ' + rec.q);
-    if (rec.hasFig) { figsSeen++; const s = await shape(); if (!(s.fig.h <= s.vh * 0.3 + 1 && s.fig.w > 40 && s.fig.l >= 0 && s.fig.r >= 0 && Math.abs(s.fig.l - s.fig.r) <= 2 && s.txtIn && s.chBottom <= s.vh + 1 && s.choicesIn && s.sw <= s.vw)) problems.push(i + ': ' + JSON.stringify(s)); if (i === 0) await page.screenshot({ path: OUT + 'mb-game-phone-0.png' }); if (i === 3) await page.screenshot({ path: OUT + 'mb-game-phone-3.png' }); }
+    if (rec.hasFig) { figsSeen++; await page.waitForTimeout(350); const s = await shape(); if (!(s.fig.h <= s.vh * 0.3 + 1 && s.fig.w > 40 && s.fig.l >= 0 && s.fig.r >= 0 && Math.abs(s.fig.l - s.fig.r) <= 2 && s.txtIn && s.barOk && s.chBottom <= s.vh + 1 && s.choicesIn && s.sw <= s.vw)) problems.push(i + ': ' + JSON.stringify(s)); if (i === 0) await page.screenshot({ path: OUT + 'mb-game-phone-0.png' }); if (i === 3) await page.screenshot({ path: OUT + 'mb-game-phone-3.png' }); }
     const wrong = i < 4;
     if (wrong) { wrongDone++; mistakeQs.push({ q: rec.q, fig: rec.fig, a: rec.a }); await page.click(`.mchoice:not([data-v="${rec.a}"]) >> nth=0`); } else await page.click(`.mchoice[data-v="${rec.a}"]`);
     if (i < 19) await page.waitForFunction((p) => document.querySelector('#game-progress')?.textContent !== p, prog, { timeout: 6000 });
@@ -703,6 +710,8 @@ async function generatorChecks(ids, N) {
   ok(log.external.length === 0, 'OFFLINE: the figures, the games and the times table made no outside request: ' + log.external.join(', '));
   await browser.close();
 
+  }
+
   // ---------------------------------------------------------------- 3. screen sizes and languages
   const extra = JSON.parse(fs.readFileSync('src/i18n-extra/mathbasics.json', 'utf8'));
   const patch = (ctx) => ctx.route('**/src/i18n-data.ts*', async (route) => {
@@ -711,11 +720,11 @@ async function generatorChecks(ids, N) {
     await route.fulfill({ response: r, body });
   });
   const sizes = [['phone', { width: 390, height: 844 }], ['small', { width: 320, height: 568 }], ['ipad', { width: 820, height: 1180 }], ['landscape', { width: 1180, height: 820 }], ['wide-short', { width: 844, height: 390 }]];
-  for (const [loc, lang] of [['zh-CN', 'zh'], ['en-US', 'en'], ['fr-FR', 'fr']]) {
-    for (const [dn, vp] of sizes) {
+  for (const [loc, lang] of [['zh-CN', 'zh'], ['en-US', 'en'], ['fr-FR', 'fr']].filter((x) => !process.env.LANGS || process.env.LANGS.split(',').includes(x[1]))) {
+    for (const [dn, vp] of sizes.filter((x) => !process.env.SIZES || process.env.SIZES.split(',').includes(x[0]))) {
       const t = await start(new Map(), { local: true, locale: loc, viewport: vp, today: '2026-11-12', init: spy });
       const pg = t.page;
-      if (lang !== 'zh') { await patch(t.ctx); await pg.reload(); await pg.waitForSelector('.hub-grid'); await pg.click('.subject[data-subject=chinese]'); await pg.waitForSelector('.kids, .empty-home'); }
+      if (lang !== 'zh') { await patch(t.ctx); await pg.reload(); await pg.waitForSelector('.kids, .empty-home'); }
       await addKid(pg, 'Dory'); await setGrade(pg, 'Dory', 3);
       const id = await pg.evaluate(() => JSON.parse(localStorage.getItem('learn.local.kids.json')).kids[0].id);
       // a day with figure topics of many kinds, so that the screenshots show them
@@ -729,22 +738,23 @@ async function generatorChecks(ids, N) {
       await recordMade(pg);
       await pg.click('#tab-game'); await pg.click('#game-start'); await pg.waitForSelector('#math-q');
       const seenTopics = new Set(); const probs = [];
-      for (let i = 0; i < 9; i++) {
+      for (let i = 0; i < 19 && (i < 9 || seenTopics.size < 3); i++) {
         await pg.waitForSelector('#math-q'); const prog = await pg.textContent('#game-progress');
         seenTopics.add(await pg.textContent('#math-topic'));
+        await pg.waitForTimeout(350);   // (KaTeX typesets the numbers asynchronously and the card is fitted again then)
         const s = await pg.evaluate(() => {
-          const vh = window.innerHeight, vw = document.documentElement.clientWidth, card = document.querySelector('#math-card').getBoundingClientRect(), fig = document.querySelector('#math-fig svg'), txt = document.querySelector('#math-q'), tr = txt.getBoundingClientRect(), ch = document.querySelector('#math-choices').getBoundingClientRect();
+          const vh = window.innerHeight, vw = document.documentElement.clientWidth, card = document.querySelector('#math-card').getBoundingClientRect(), fig = document.querySelector('#math-fig svg'), txt = document.querySelector('#math-q'), tr = txt.getBoundingClientRect(), ch = document.querySelector('#math-choices').getBoundingClientRect(), barB = document.querySelector('.mtime').getBoundingClientRect().bottom;
           const f = fig && fig.getBoundingClientRect();
           const ui = [...document.querySelectorAll('#game *')].filter((e) => e.children.length === 0 && !e.closest('.user, svg, #math-topic') && /[一-鿿]/.test(e.textContent)).map((e) => e.textContent.trim()).filter((x) => x && !/^(锐角|直角|钝角|平角)$/.test(x));
-          const q = txt.dataset.plain, fpv = fig ? window.__fp(fig) : '', m = window.__made.filter((x) => x.q === q && x.fp === fpv).pop();
-          return { vh, vw, sw: document.documentElement.scrollWidth, fig: !!f, fh: f ? f.height : 0, figIn: f ? f.left >= card.left - 1 && f.right <= card.right + 1 && f.top >= card.top - 1 && f.bottom <= card.bottom + 1 && Math.abs((f.left - card.left) - (card.right - f.right)) <= 2 : false, txtIn: tr.left >= card.left - 1 && tr.right <= card.right + 1 && tr.top >= card.top - 1 && tr.bottom <= card.bottom + 1 && txt.scrollWidth <= txt.clientWidth + 1, chBottom: ch.bottom, chIn: [...document.querySelectorAll('.mchoice')].every((b) => b.getBoundingClientRect().right <= vw + 1 && b.scrollWidth <= b.clientWidth + 1), chH: Math.min(...[...document.querySelectorAll('.mchoice')].map((b) => b.getBoundingClientRect().height)), ui, plain: txt.textContent, a: m && m.a };
+          const fpv = fig ? window.__fp(fig) : '', m = window.__made.filter((x) => x.fp === fpv).pop();   // (data-plain is the TRANSLATED text in en / fr: the figure identifies the question)
+          return { vh, vw, sw: document.documentElement.scrollWidth, fig: !!f, fh: f ? f.height : 0, figIn: f ? f.left >= card.left - 1 && f.right <= card.right + 1 && f.top >= card.top - 1 && f.bottom <= card.bottom + 1 && (Math.abs((f.left - card.left) - (card.right - f.right)) <= 2 || f.right <= tr.left + 2) : false, txtIn: tr.left >= card.left - 1 && tr.right <= card.right + 1 && tr.top >= card.top - 1 && tr.bottom <= card.bottom + 1 && txt.scrollWidth <= txt.clientWidth + 1 && card.top >= barB - 1 && f && f.top >= barB - 1, chBottom: ch.bottom, chIn: [...document.querySelectorAll('.mchoice')].every((b) => b.getBoundingClientRect().right <= vw + 1 && b.scrollWidth <= b.clientWidth + 1), chH: Math.min(...[...document.querySelectorAll('.mchoice')].map((b) => b.getBoundingClientRect().height)), ui, plain: txt.textContent, a: m && m.a };
         });
         if (!(s.fig && s.fh <= s.vh * 0.3 + 1 && s.figIn && s.txtIn && s.chBottom <= s.vh + 1 && s.chIn && s.sw <= s.vw && s.chH >= 36)) probs.push(i + ': ' + JSON.stringify({ ...s, ui: undefined }));
         if (lang !== 'zh' && s.ui.length) probs.push('Chinese left: ' + s.ui.join(' / '));
         if (lang !== 'zh' && /[一-鿿]/.test(s.plain)) probs.push('question not translated: ' + s.plain);
         if (i === 0 || i === 4) await pg.screenshot({ path: OUT + `mb-game-${lang}-${dn}-${i}.png` });
         await pg.click(`.mchoice[data-v="${s.a}"]`);
-        if (i < 8) await pg.waitForFunction((p) => document.querySelector('#game-progress')?.textContent !== p, prog, { timeout: 6000 });
+        await pg.waitForFunction((p) => document.querySelector('#game-progress')?.textContent !== p, prog, { timeout: 6000 });
       }
       ok(probs.length === 0 && seenTopics.size === 3, `${lang} ${dn}: figure questions (clock pick / protractor / trapezoid): figure and text inside the card, centred, figure <= 30 % of the screen, choices on the screen and >= 36 px` + (probs.length ? ' -> ' + probs.slice(0, 2).join(' | ') : ''));
       await pg.waitForTimeout(600);

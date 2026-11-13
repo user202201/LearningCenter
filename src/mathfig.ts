@@ -26,6 +26,7 @@ export function mountFig(box: HTMLElement, markup: string): void {
   for (const el of [root, ...Array.from(root.querySelectorAll("*"))]) for (const a of Array.from(el.attributes)) if (/^on/i.test(a.name) || /href/i.test(a.name)) el.removeAttribute(a.name);
   const vb = (root.getAttribute("viewBox") ?? "0 0 100 100").split(/\s+/).map(Number);
   box.style.setProperty("--ar", String(Math.round((vb[2] / vb[3]) * 1000) / 1000));
+  box.classList.toggle("wide", vb[2] / vb[3] >= 2);   // (a wide figure always stands above the text)
   box.append(document.importNode(root, true));
 }
 
@@ -49,9 +50,9 @@ export function clockBody(h: number, m: number, cx: number, cy: number, r: numbe
     + `<circle cx="${f(cx)}" cy="${f(cy)}" r="3" fill="${INK}"/>`;
 }
 export const clockFig = (h: number, m: number): string => svg(120, 120, clockBody(h, m, 60, 60, 54));
-/** four clocks in a row, named A B C D */
+/** four clocks in two rows of two, named A B C D (the letters stand under the clocks) */
 export function clocksFig(times: [number, number][]): string {
-  return svg(400, 128, times.map(([h, m], i) => `<g id="clock${"ABCD"[i]}">${clockBody(h, m, 50 + 100 * i, 50, 44, false)}${T(50 + 100 * i, 115, "ABCD"[i], 16, "#1c7ed6")}</g>`).join(""));
+  return svg(214, 236, times.map(([h, m], i) => { const cx = 55 + 104 * (i % 2), cy = 50 + 120 * Math.floor(i / 2); return `<g id="clock${"ABCD"[i]}">${clockBody(h, m, cx, cy, 46, false)}${T(cx, cy + 62, "ABCD"[i], 17, "#1c7ed6")}</g>`; }).join(""));
 }
 
 // ------------------------------------------------------------------ money

@@ -202,7 +202,7 @@ export async function openLesson(id: string): Promise<void> {
 // ---------- the play screen (a level, a random challenge, the free canvas) ----------
 interface Play {
   kid: M.Kid; level: Level; mode: "level" | "random" | "free";
-  backTo: string; backLabel: string; title: string;
+  backTo: string; backLabel: string; title: (Node | string)[];
   /** called after a solved level (stars, blocks) */
   won?: (stars: number, blocks: number) => Promise<void>;
   next?: () => void; again?: () => void;
@@ -349,10 +349,10 @@ function playScreen(p: Play) {
   }
   const refreshGallery = () => { ui.step.focus(); };
   const page = h("div", { class: "page cl-page", style: `--kid:${kid.color}` },
-    h("header", { class: "top hero kid-hero cl-hero" }, X.back(p.backTo, p.backLabel), h("h1", { id: "cl-title" }, p.title), level.lesson ? ui.lesson : h("span", { class: "slot" })),
+    h("header", { class: "top hero kid-hero cl-hero" }, X.back(p.backTo, p.backLabel), h("h1", { id: "cl-title" }, ...p.title), level.lesson ? ui.lesson : h("span", { class: "slot" })),
     h("main", { class: "cl-main", id: "cl-main" },
-      h("section", { class: "cl-left" }, h("div", { class: "cl-scene", id: "cl-scene" }, scene.el), info, msg, result),
-      h("section", { class: "cl-right" }, tools, editor.el, codeEl)));
+      h("section", { class: "cl-left" }, h("div", { class: "cl-scene", id: "cl-scene" }, scene.el), info, msg, tools, result),
+      h("section", { class: "cl-right" }, editor.el, codeEl)));
   X.show(page);
   setSceneMs(); showCode();
   if (level.lesson && !CM.loadLocal().seen.includes(level.lesson) && !free && p.mode === "level") void openLesson(level.lesson);
@@ -393,7 +393,7 @@ function levelPage(k: M.Kid, level: Level) {
   const nextId = CM.nextLevelId(level.id);
   const nxt = nextId ? levelById(nextId) : null;
   playScreen({
-    kid: k, level, mode: "level", backTo: `#/coding/${k.id}/w${level.world}`, backLabel: "关卡", title: `${level.world}-${level.no} ${level.title}`,
+    kid: k, level, mode: "level", backTo: `#/coding/${k.id}/w${level.world}`, backLabel: "关卡", title: [`${level.world}-${level.no} `, h("span", {}, level.title)],
     won: (stars, blocks) => saveProgress(k, level, stars, blocks),
     next: () => { location.hash = nxt ? `#/coding/${k.id}/w${nxt.world}/${nxt.no}` : `#/coding/${k.id}/w${level.world}`; },
   });
@@ -409,7 +409,7 @@ function randomPage(k: M.Kid, world: 1 | 2 | 3) {
   const show = () => {
     const level = make();
     playScreen({
-      kid: k, level, mode: "random", backTo: `#/coding/${k.id}/w${world}`, backLabel: "关卡", title: `${worldName(world)} · ${level.title}`,
+      kid: k, level, mode: "random", backTo: `#/coding/${k.id}/w${world}`, backLabel: "关卡", title: [h("span", {}, worldName(world)), " · ", h("span", {}, level.title)],
       won: async () => {
         const done = toast("正在保存…", 0, true);
         try { docs.set(k.id, await api.update<CM.CodingDoc>(CM.codingPath(k.id), CM.EMPTY_CODING, CM.addChallenge, `coding ${k.id} random`)); done(); toast("已记录进度"); } catch (e) { done(); throw e; }
@@ -426,7 +426,7 @@ const FREE: Level = {
   sol: emptyProgram(), fixed: (() => { const t = makeTurtle(); return { world: t.world, state: t.state, goal: {} }; })(),
 };
 function freePage(k: M.Kid) {
-  playScreen({ kid: k, level: FREE, mode: "free", backTo: `#/coding/${k.id}`, backLabel: "世界", title: "创作" });
+  playScreen({ kid: k, level: FREE, mode: "free", backTo: `#/coding/${k.id}`, backLabel: "世界", title: [h("span", {}, "创作")] });
 }
 function saveDrawing(k: M.Kid, prog: Program, after: () => void) {
   if (countBlocks(prog) === 0) return void toast("请先搭一些积木。");

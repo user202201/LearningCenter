@@ -58,3 +58,12 @@
 69-linkup
 70-maze
 71-whack
+72-hanoi
+73-shooter
+74-lightsout
+75-poems
+76-dictwrite
+77-mathbasics
+78-geomap
+79-coding
+80-pk

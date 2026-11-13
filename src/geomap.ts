@@ -255,8 +255,9 @@ export async function renderMap(X: Ctx): Promise<void> {
       grid.querySelectorAll<HTMLElement>(".mchoice").forEach((b) => { b.setAttribute("disabled", ""); if (b.dataset.v === q.answer) b.classList.add("right"); else if (b.dataset.v === k) b.classList.add("wrong"); });
       lock(right, k, q);
     }
-    function tapped(hit: Hit | null, at: Pt) {
-      if (phase !== "ask" || !hit) return;
+    function tapped(hit0: Hit | null, at: Pt) {
+      if (phase !== "ask" || !hit0) return;
+      let hit: Hit = hit0;
       const q = qs[idx];
       let got: string | null = null;
       if (mode === "w-ktap") {
@@ -270,6 +271,9 @@ export async function renderMap(X: Ctx): Promise<void> {
         return lock(right, got, q);
       }
       if (!q.layers?.includes(hit.layer)) return;
+      // land forms overlap (a plateau under a river, a desert in a basin): the answer is right when the touch is on it, whatever else is there
+      const onAnswer = mode === "cn-feat" && qview!.candidatesAt(qview!.lastTap[0], qview!.lastTap[1]).some((c) => c.id === q.answer);
+      if (onAnswer) hit = { ...hit, id: q.answer, layer: answerLayer(q) };
       const right = hit.id === q.answer;
       if (!right) qview!.mark(hit.layer, hit.id, "wrong");
       qview!.mark(q.layers.includes("prov") ? "prov" : q.layers.includes("country") ? "country" : answerLayer(q), q.answer, "right");

@@ -313,12 +313,12 @@ const W6: LevelSpec[] = [
   S("w6-05", 6, 5, "三角形", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 3 { fd 60 tr 120 }", max: 4, note: "边长 60。" }),
   S("w6-06", 6, 6, "正五边形", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 5 { fd 50 tr 72 }", max: 4, note: "边长 50。" }),
   S("w6-07", 6, 7, "正六边形", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 6 { fd 50 tr 60 }", max: 4, note: "边长 50。" }),
-  S("w6-08", 6, 8, "圆", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 36 { fd 6 tr 10 }", max: 4, note: "每一小段长 6。转一圈一共转 360 度。" }),
+  S("w6-08", 6, 8, "圆形", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 36 { fd 6 tr 10 }", max: 4, note: "每一小段长 6。转一圈一共转 360 度。" }),
   S("w6-09", 6, 9, "两个正方形", { kind: "turtle", palette: [...T, "repeat", "penup", "pendown"], solution: "repeat 4 { fd 30 tr 90 } penup tr 90 fd 50 pendown repeat 4 { fd 30 tr 90 }", max: 11, note: "边长 30。两个正方形之间相隔 50。", lesson: "pen" }),
   S("w6-10", 6, 10, "彩色图形", { kind: "turtle", colors: true, palette: [...T, "repeat", "penup", "pendown", "color"], solution: "color red repeat 4 { fd 40 tr 90 } penup tr 90 fd 60 pendown color blue repeat 3 { fd 40 tr 120 }", max: 13, note: "红色正方形和蓝色三角形，边长都是 40。" }),
   S("w6-11", 6, 11, "五角星", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 5 { fd 80 tr 144 }", max: 4, note: "每条线长 80。" }),
   S("w6-12", 6, 12, "螺旋", { kind: "turtle", palette: [...T, "repeat", "set", "change"], vars: ["n"], solution: "set n = 5 repeat 16 { fd n tl 90 change n by 5 }", max: 6, note: "线长从 5 开始，每次增加 5。" }),
-  S("w6-13", 6, 13, "花", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 12 { repeat 4 { fd 40 tr 90 } tr 30 }", max: 6, note: "正方形边长 40。" }),
+  S("w6-13", 6, 13, "花朵", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 12 { repeat 4 { fd 40 tr 90 } tr 30 }", max: 6, note: "正方形边长 40。" }),
   S("w6-14", 6, 14, "旋转的三角形", { kind: "turtle", boss: true, colors: true, palette: [...T, "repeat", "color"], solution: "repeat 6 { color red repeat 3 { fd 45 tr 120 } tr 30 color blue repeat 3 { fd 45 tr 120 } tr 30 }", max: 12, note: "三角形边长 45，红色和蓝色轮流出现。" }),
 ];
 

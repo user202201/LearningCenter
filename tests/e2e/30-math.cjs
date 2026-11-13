@@ -38,7 +38,7 @@ const playAll = async (page, n = 20) => {
       const ids = G.topicIds();
       const inGrades = new Set(Object.values(data.grades).flat());
       const res = { ids: ids.length, topicsInJson: data.topics.length, missingGen: [...inGrades].filter((x) => !ids.includes(x)), notInList: data.topics.map((x) => x.id).filter((x) => !ids.includes(x)), bad: [], total: 0, ranges: [] };
-      const nonNeg = new Set(['ratadd', 'ratmul', 'lineq1', 'lineq2', 'linfn', 'liketerms', 'polymul', 'quadeq', 'sqrt', 'trig', 'fracsame', 'fracdiff', 'absval', 'power', 'invprop', 'sqform', 'factor', 'ineq', 'quadvertex']);
+      const nonNeg = new Set(['numline', 'ratadd', 'ratmul', 'lineq1', 'lineq2', 'linfn', 'liketerms', 'polymul', 'quadeq', 'sqrt', 'trig', 'fracsame', 'fracdiff', 'absval', 'power', 'invprop', 'sqform', 'factor', 'ineq', 'quadvertex']);
       for (const id of ids) {
         const seen = new Set();
         for (let i = 0; i < 1500; i++) {

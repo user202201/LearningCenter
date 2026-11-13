@@ -55,7 +55,8 @@ export function fitQuestion(el: HTMLElement, box: HTMLElement): void {
   // (the card's height depends on the text and on the screen: measure again after every change of the size until it is stable)
   for (let i = 0; i < 24; i++) {
     // (a figure above the text takes its own room: the text then gets a smaller share of the screen)
-    const fig = box.querySelector<HTMLElement>(".mq-fig"), figH = fig && fig.firstElementChild ? fig.offsetHeight + 8 : 0;
+    // (on a low landscape screen the figure stands BESIDE the text and takes no height from it)
+    const fig = box.querySelector<HTMLElement>(".mq-fig"), side = !!fig && fig.getBoundingClientRect().right <= el.getBoundingClientRect().left + 2 && fig.getBoundingClientRect().width > 0 && el.getBoundingClientRect().top < fig.getBoundingClientRect().bottom - 2, figH = fig && fig.firstElementChild && !side ? fig.offsetHeight + 8 : 0;
     const maxH = Math.max(28, Math.min(window.innerHeight * (figH ? 0.17 : 0.3), (box.clientHeight || 1e4) - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - figH));
     const r = el.getBoundingClientRect(), c = box.getBoundingClientRect();
     if (el.scrollWidth <= el.clientWidth + 1 && r.height <= maxH && r.bottom <= c.bottom + 0.5 && r.top >= c.top - 0.5) break;
@@ -71,6 +72,9 @@ export function fitQuestion(el: HTMLElement, box: HTMLElement): void {
       if (cur <= 60) break;
       fig.style.setProperty("--fh", `${Math.max(60, cur * 0.92)}px`);
     }
+    // still too tall (a very small screen with the scratch paper open): the text gets smaller too, then the figure a little more
+    for (let i = 0; i < 12 && body.scrollHeight > body.clientHeight + 1 && size > 17; i++) { size *= 0.92; el.style.fontSize = `${size}px`; }
+    for (let i = 0; i < 10 && body.scrollHeight > body.clientHeight + 1 && fig.offsetHeight > 44; i++) fig.style.setProperty("--fh", `${Math.max(44, fig.offsetHeight * 0.92)}px`);
   }
 }
 
@@ -152,6 +156,7 @@ export function openMathGame(o: MathGameOpts): void {
       grid.replaceChildren(...q.choices.map((c) => { const b = h("button", { class: HAS_CJK.test(c) && !o.relaxed ? "mchoice" : "mchoice user", "data-v": c, onclick: () => answer(c) }); renderRich(b, c, !HAS_CJK.test(c)); return b; }));
     }
     root.classList.remove("ok", "bad");
+    if (q.fig) fitQuestion(qText, qBox);                         // (fitted again now that the choices are there: a figure shrinks until everything is on the screen)
   }
   /** a key of the keypad */
   function press(k: string) {

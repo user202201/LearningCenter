@@ -1,1 +1,1006 @@
-{}
+{
+ "前进": [
+  "Move forward",
+  "Avancer"
+ ],
+ "左转": [
+  "Turn left",
+  "Tourner à gauche"
+ ],
+ "右转": [
+  "Turn right",
+  "Tourner à droite"
+ ],
+ "拿星星": [
+  "Take star",
+  "Prendre l'étoile"
+ ],
+ "开灯": [
+  "Light on",
+  "Allumer"
+ ],
+ "抬笔": [
+  "Pen up",
+  "Lever le stylo"
+ ],
+ "落笔": [
+  "Pen down",
+  "Baisser le stylo"
+ ],
+ "前方有路": [
+  "Path ahead",
+  "Chemin devant"
+ ],
+ "前方没有路": [
+  "No path ahead",
+  "Pas de chemin devant"
+ ],
+ "左边有路": [
+  "Path on the left",
+  "Chemin à gauche"
+ ],
+ "左边没有路": [
+  "No path on the left",
+  "Pas de chemin à gauche"
+ ],
+ "右边有路": [
+  "Path on the right",
+  "Chemin à droite"
+ ],
+ "右边没有路": [
+  "No path on the right",
+  "Pas de chemin à droite"
+ ],
+ "脚下有星星": [
+  "Star here",
+  "Étoile ici"
+ ],
+ "脚下没有星星": [
+  "No star here",
+  "Pas d'étoile ici"
+ ],
+ "脚下有灯": [
+  "Lamp here",
+  "Lampe ici"
+ ],
+ "脚下没有灯": [
+  "No lamp here",
+  "Pas de lampe ici"
+ ],
+ "到达旗子": [
+  "At the flag",
+  "Au drapeau"
+ ],
+ "还没到旗子": [
+  "Not at the flag",
+  "Pas au drapeau"
+ ],
+ "脚下是红色": [
+  "On red",
+  "Sur le rouge"
+ ],
+ "脚下是绿色": [
+  "On green",
+  "Sur le vert"
+ ],
+ "脚下是蓝色": [
+  "On blue",
+  "Sur le bleu"
+ ],
+ "脚下是黄色": [
+  "On yellow",
+  "Sur le jaune"
+ ],
+ "黑色": [
+  "Black",
+  "Noir"
+ ],
+ "红色": [
+  "Red",
+  "Rouge"
+ ],
+ "橙色": [
+  "Orange",
+  "Orange"
+ ],
+ "黄色": [
+  "Yellow",
+  "Jaune"
+ ],
+ "绿色": [
+  "Green",
+  "Vert"
+ ],
+ "蓝色": [
+  "Blue",
+  "Bleu"
+ ],
+ "紫色": [
+  "Purple",
+  "Violet"
+ ],
+ "增加": [
+  "Increase",
+  "Augmenter"
+ ],
+ "减少": [
+  "Decrease",
+  "Diminuer"
+ ],
+ "选择数值": [
+  "Choose a value",
+  "Choisir une valeur"
+ ],
+ "选择条件": [
+  "Choose a condition",
+  "Choisir une condition"
+ ],
+ "重复": [
+  "Repeat",
+  "Répéter"
+ ],
+ "直到": [
+  "Until",
+  "Jusqu'à"
+ ],
+ "只要": [
+  "While",
+  "Tant que"
+ ],
+ "如果": [
+  "If",
+  "Si"
+ ],
+ "选择变量": [
+  "Choose a variable",
+  "Choisir une variable"
+ ],
+ "选择运算": [
+  "Choose an operation",
+  "Choisir une opération"
+ ],
+ "改变": [
+  "Change",
+  "Modifier"
+ ],
+ "运行": [
+  "Run",
+  "Exécuter"
+ ],
+ "否则": [
+  "Else",
+  "Sinon"
+ ],
+ "定义 {0}{1}": [
+  "Define {0}{1}",
+  "Définir {0}{1}"
+ ],
+ "拖到这里删除": [
+  "Drag here to delete",
+  "Glisser ici pour supprimer"
+ ],
+ "删除积木": [
+  "Delete block",
+  "Supprimer le bloc"
+ ],
+ "重做": [
+  "Redo",
+  "Rétablir"
+ ],
+ "定义": [
+  "Define",
+  "Définir"
+ ],
+ "最多可以使用 {0} 块积木。": [
+  "You can use at most {0} blocks.",
+  "Vous pouvez utiliser au plus {0} blocs."
+ ],
+ "积木不能调用自己或后面的积木。": [
+  "A block cannot call itself or a block defined after it.",
+  "Un bloc ne peut pas s'appeler lui-même ni appeler un bloc défini après lui."
+ ],
+ "前面没有路，机器人撞到了。": [
+  "There is no path ahead. The robot hit a wall.",
+  "Il n'y a pas de chemin devant. Le robot a heurté un mur."
+ ],
+ "程序一直在循环，不会停下来。": [
+  "The program loops forever and will never stop.",
+  "Le programme boucle sans fin et ne s'arrêtera jamais."
+ ],
+ "程序运行的步数太多，已经停止。": [
+  "The program ran too many steps and was stopped.",
+  "Le programme a exécuté trop d'étapes et a été arrêté."
+ ],
+ "积木调用得太深，可能在调用自己。": [
+  "The blocks were called too deeply. A block may be calling itself.",
+  "Les appels de blocs sont trop profonds. Un bloc s'appelle peut-être lui-même."
+ ],
+ "找不到这个积木。": [
+  "This block cannot be found.",
+  "Ce bloc est introuvable."
+ ],
+ "这里没有星星，不能拿。": [
+  "There is no star here to take.",
+  "Il n'y a pas d'étoile à prendre ici."
+ ],
+ "这里没有灯，不能点亮。": [
+  "There is no lamp here to light.",
+  "Il n'y a pas de lampe à allumer ici."
+ ],
+ "机器人还没有到达旗子。": [
+  "The robot has not reached the flag.",
+  "Le robot n'a pas atteint le drapeau."
+ ],
+ "还有星星没有收集。": [
+  "Some stars have not been collected.",
+  "Il reste des étoiles à ramasser."
+ ],
+ "收集的星星数量不对。": [
+  "The number of collected stars is wrong.",
+  "Le nombre d'étoiles ramassées est incorrect."
+ ],
+ "还有灯没有点亮。": [
+  "Some lamps are not lit.",
+  "Il reste des lampes à allumer."
+ ],
+ "点亮的灯太多了。": [
+  "Too many lamps were lit.",
+  "Trop de lampes ont été allumées."
+ ],
+ "变量的数值不对。": [
+  "The value of a variable is wrong.",
+  "La valeur d'une variable est incorrecte."
+ ],
+ "顺序：一步接一步": [
+  "Sequence: one step after another",
+  "Séquence : une étape après l'autre"
+ ],
+ "机器人按积木从上到下的顺序，一步一步执行。": [
+  "The robot runs the blocks from top to bottom, one step at a time.",
+  "Le robot exécute les blocs de haut en bas, une étape à la fois."
+ ],
+ "“前进”走一格。“左转”和“右转”只改变方向，不会移动。": [
+  "“Move forward” goes one cell. “Turn left” and “Turn right” only change direction and do not move.",
+  "« Avancer » fait avancer d'une case. « Tourner à gauche » et « Tourner à droite » changent seulement de direction, sans avancer."
+ ],
+ "拿星星和开灯，要先走到那一格。": [
+  "To take a star or switch on a lamp, first go to that cell.",
+  "Pour prendre une étoile ou allumer une lampe, il faut d'abord aller sur cette case."
+ ],
+ "撞到墙，程序就停止。运行失败时，可以用“提示”或“单步”找出错误。": [
+  "When the robot hits a wall, the program stops. If a run fails, use “Hint” or “Step” to find the mistake.",
+  "Quand le robot heurte un mur, le programme s'arrête. Si l'exécution échoue, utilisez « Indice » ou « Pas à pas » pour trouver l'erreur."
+ ],
+ "循环：重复做同一件事": [
+  "Loops: repeat the same thing",
+  "Boucles : répéter la même chose"
+ ],
+ "同样的积木反复出现时，可以用“重复”积木代替。": [
+  "When the same blocks appear again and again, a “Repeat” block can replace them.",
+  "Quand les mêmes blocs reviennent sans cesse, un bloc « Répéter » peut les remplacer."
+ ],
+ "“重复 ×4”表示里面的积木执行 4 遍。": [
+  "“Repeat ×4” runs the blocks inside 4 times.",
+  "« Répéter ×4 » exécute 4 fois les blocs qu'il contient."
+ ],
+ "数字可以用 + 和 − 修改。重复的积木越少，程序越短，得到的星星越多。": [
+  "Change the number with + and −. The fewer blocks the program uses, the more stars it earns.",
+  "Modifiez le nombre avec + et −. Moins le programme utilise de blocs, plus il rapporte d'étoiles."
+ ],
+ "循环里面的循环": [
+  "A loop inside a loop",
+  "Une boucle dans une boucle"
+ ],
+ "一个“重复”里面可以再放一个“重复”。": [
+  "A “Repeat” block can contain another “Repeat” block.",
+  "Un bloc « Répéter » peut contenir un autre bloc « Répéter »."
+ ],
+ "里面的循环走一条边，外面的循环把四条边走完。": [
+  "The inner loop walks one side, the outer loop walks all four sides.",
+  "La boucle intérieure parcourt un côté, la boucle extérieure parcourt les quatre côtés."
+ ],
+ "直到：不知道要重复几次": [
+  "Until: when you do not know how many times",
+  "Jusqu'à : quand on ne sait pas combien de fois"
+ ],
+ "不知道要走几步时，用“直到”：条件成立之前，一直重复。": [
+  "When you do not know how many steps to take, use “Until”: it repeats until the condition is true.",
+  "Quand on ne sait pas combien de pas faire, on utilise « Jusqu'à » : il répète tant que la condition n'est pas vraie."
+ ],
+ "条件“到达旗子”成立时，循环就停止。": [
+  "When the condition “At the flag” is true, the loop stops.",
+  "Quand la condition « Au drapeau » est vraie, la boucle s'arrête."
+ ],
+ "如果：遇到情况再行动": [
+  "If: act only when needed",
+  "Si : agir seulement si nécessaire"
+ ],
+ "“如果”积木先检查条件。条件成立，才执行里面的积木。": [
+  "An “If” block checks its condition first. Only if it is true, the blocks inside run.",
+  "Un bloc « Si » vérifie d'abord sa condition. Les blocs à l'intérieur ne s'exécutent que si elle est vraie."
+ ],
+ "条件不成立时，里面的积木被跳过，程序继续往下走。": [
+  "If the condition is false, the blocks inside are skipped and the program goes on.",
+  "Si la condition est fausse, les blocs à l'intérieur sont ignorés et le programme continue."
+ ],
+ "如果……否则……": [
+  "If … else …",
+  "Si … sinon …"
+ ],
+ "条件成立，做上面一部分。条件不成立，做“否则”下面的一部分。": [
+  "If the condition is true, the upper part runs. If it is false, the part under “Else” runs.",
+  "Si la condition est vraie, la partie du haut s'exécute. Sinon, c'est la partie sous « Sinon »."
+ ],
+ "这个程序在拐弯的地方转弯，其他地方前进。同一个程序可以走不同的路。": [
+  "This program turns at bends and moves forward elsewhere. One program can follow different paths.",
+  "Ce programme tourne dans les virages et avance ailleurs. Un même programme peut suivre des chemins différents."
+ ],
+ "当：条件成立时一直重复": [
+  "While: repeat as long as the condition holds",
+  "Tant que : répéter tant que la condition est vraie"
+ ],
+ "“当”积木：条件成立时重复，条件不成立就停止。": [
+  "A “While” block repeats while its condition is true and stops when it is false.",
+  "Un bloc « Tant que » répète tant que sa condition est vraie et s'arrête quand elle est fausse."
+ ],
+ "“当”先检查再执行。条件一开始就不成立，里面的积木一次也不执行。": [
+  "“While” checks first and then runs. If the condition is false from the start, the blocks inside never run.",
+  "« Tant que » vérifie d'abord, puis exécute. Si la condition est fausse dès le départ, les blocs à l'intérieur ne s'exécutent jamais."
+ ],
+ "函数：自己的积木": [
+  "Functions: your own blocks",
+  "Fonctions : vos propres blocs"
+ ],
+ "把常用的几步放进“定义”，并起一个名字。": [
+  "Put a few often-used steps into a “Define” block and give it a name.",
+  "Placez quelques étapes souvent utilisées dans un bloc « Définir » et donnez-lui un nom."
+ ],
+ "用“运行”积木调用它。想用几次，就调用几次。": [
+  "Call it with a “Run” block. Call it as many times as you want.",
+  "Appelez-le avec un bloc « Exécuter », autant de fois que vous le souhaitez."
+ ],
+ "只要改一次定义，所有的调用都会跟着改变。": [
+  "Change the definition once and every call changes with it.",
+  "Modifiez la définition une seule fois et tous les appels changent avec elle."
+ ],
+ "带数字的函数": [
+  "Functions with a number",
+  "Fonctions avec un nombre"
+ ],
+ "名字后面的 n 是一个数字。调用时，可以给 n 不同的值。": [
+  "The n after the name is a number. Each call can give n a different value.",
+  "Le n après le nom est un nombre. Chaque appel peut donner à n une valeur différente."
+ ],
+ "walk(2) 走 2 格，walk(3) 走 3 格。定义只写一次。": [
+  "walk(2) moves 2 cells and walk(3) moves 3 cells. The definition is written only once.",
+  "walk(2) avance de 2 cases et walk(3) de 3 cases. La définition n'est écrite qu'une seule fois."
+ ],
+ "变量：会变化的数字": [
+  "Variables: numbers that change",
+  "Variables : des nombres qui changent"
+ ],
+ "变量像一个有名字的盒子，里面放着一个数字。": [
+  "A variable is like a box with a name that holds a number.",
+  "Une variable est comme une boîte avec un nom qui contient un nombre."
+ ],
+ "算一算": [
+  "Doing sums",
+  "Faire des calculs"
+ ],
+ "变量可以放进“重复”里。这样，程序对不同的数字都有效。": [
+  "A variable can be used in “Repeat”. Then the program works for different numbers.",
+  "Une variable peut être utilisée dans « Répéter ». Le programme fonctionne alors pour des nombres différents."
+ ],
+ "画图：笔跟着积木走": [
+  "Drawing: the pen follows the blocks",
+  "Dessin : le stylo suit les blocs"
+ ],
+ "小海龟带着笔前进，走过的路线就是图画。": [
+  "The little turtle moves with a pen, and the path it takes is the drawing.",
+  "La petite tortue avance avec un stylo et son chemin forme le dessin."
+ ],
+ "“右转”按度数转弯。转 90 度就是直角。": [
+  "“Turn right” turns by a number of degrees. 90 degrees makes a right angle.",
+  "« Tourner à droite » tourne d'un certain nombre de degrés. 90 degrés font un angle droit."
+ ],
+ "正方形有 4 条边，每次转 90 度，重复 4 次。": [
+  "A square has 4 sides: turn 90 degrees each time and repeat 4 times.",
+  "Un carré a 4 côtés : tournez de 90 degrés à chaque fois et répétez 4 fois."
+ ],
+ "笔和颜色": [
+  "Pen and colour",
+  "Stylo et couleur"
+ ],
+ "“抬笔”之后移动不会画线，“落笔”之后继续画线。": [
+  "After “Pen up”, moving draws no line. After “Pen down”, lines are drawn again.",
+  "Après « Lever le stylo », se déplacer ne trace rien. Après « Baisser le stylo », les lignes sont tracées de nouveau."
+ ],
+ "“颜色”积木改变后面画出的线条的颜色。": [
+  "The “Colour” block changes the colour of the lines drawn after it.",
+  "Le bloc « Couleur » change la couleur des lignes tracées après lui."
+ ],
+ "出发": [
+  "Start",
+  "Départ"
+ ],
+ "转弯": [
+  "A turn",
+  "Un virage"
+ ],
+ "向左转": [
+  "Turn left",
+  "À gauche"
+ ],
+ "楼梯": [
+  "Stairs",
+  "Escalier"
+ ],
+ "两颗星": [
+  "Two stars",
+  "Deux étoiles"
+ ],
+ "星星和灯": [
+  "Stars and lamp",
+  "Étoiles et lampe"
+ ],
+ "找错误": [
+  "Find the bug",
+  "Trouver l'erreur"
+ ],
+ "少了一步": [
+  "A missing step",
+  "Une étape manquante"
+ ],
+ "顺序错了": [
+  "Wrong order",
+  "Mauvais ordre"
+ ],
+ "总复习": [
+  "Review",
+  "Révision"
+ ],
+ "重复走": [
+  "Repeat steps",
+  "Répéter les pas"
+ ],
+ "绕一圈": [
+  "Around the ring",
+  "Faire le tour"
+ ],
+ "收集一排": [
+  "A row of stars",
+  "Une rangée d'étoiles"
+ ],
+ "隔一格拿星星": [
+  "Every second star",
+  "Une étoile sur deux"
+ ],
+ "两个循环": [
+  "Two loops",
+  "Deux boucles"
+ ],
+ "方形一圈": [
+  "Around a square",
+  "Tour du carré"
+ ],
+ "直到终点": [
+  "Until the end",
+  "Jusqu'à l'arrivée"
+ ],
+ "不知道几级台阶": [
+  "Stairs of unknown size",
+  "Escalier de taille inconnue"
+ ],
+ "一路拿星星": [
+  "Stars all the way",
+  "Des étoiles partout"
+ ],
+ "两行星星": [
+  "Two rows of stars",
+  "Deux rangées d'étoiles"
+ ],
+ "星星楼梯": [
+  "Star stairs",
+  "Escalier d'étoiles"
+ ],
+ "绕圈拿星": [
+  "Ring of stars",
+  "Cercle d'étoiles"
+ ],
+ "循环大挑战": [
+  "Loop challenge",
+  "Défi des boucles"
+ ],
+ "有路就走": [
+  "Go if there is a path",
+  "Avancer s'il y a un chemin"
+ ],
+ "有星星就拿": [
+  "Take if there is a star",
+  "Prendre s'il y a une étoile"
+ ],
+ "只右转": [
+  "Right turns only",
+  "Virages à droite seulement"
+ ],
+ "左右都行": [
+  "Left or right",
+  "Gauche ou droite"
+ ],
+ "颜色路标": [
+  "Colour signs",
+  "Panneaux de couleur"
+ ],
+ "拐弯收集": [
+  "Collect on bends",
+  "Ramasser dans les virages"
+ ],
+ "走到尽头": [
+  "To the end",
+  "Jusqu'au bout"
+ ],
+ "星星串": [
+  "A string of stars",
+  "Une file d'étoiles"
+ ],
+ "路灯": [
+  "Street lamps",
+  "Lampadaires"
+ ],
+ "两段路": [
+  "Two stretches",
+  "Deux tronçons"
+ ],
+ "更大的迷宫": [
+  "A bigger maze",
+  "Un plus grand labyrinthe"
+ ],
+ "终极迷宫": [
+  "The final maze",
+  "Le labyrinthe final"
+ ],
+ "第一个积木": [
+  "First block",
+  "Premier bloc"
+ ],
+ "调用多次": [
+  "Many calls",
+  "Plusieurs appels"
+ ],
+ "积木里的循环": [
+  "A loop in a block",
+  "Une boucle dans un bloc"
+ ],
+ "拐角收集": [
+  "Collecting at corners",
+  "Ramasser aux coins"
+ ],
+ "带数字的积木": [
+  "A block with a number",
+  "Un bloc avec un nombre"
+ ],
+ "数字参数二": [
+  "Number parameter 2",
+  "Paramètre numérique 2"
+ ],
+ "不同的长度": [
+  "Different lengths",
+  "Longueurs différentes"
+ ],
+ "螺旋": [
+  "Spiral",
+  "Spirale"
+ ],
+ "函数调用函数": [
+  "Functions calling functions",
+  "Fonctions qui appellent des fonctions"
+ ],
+ "把一段做成积木": [
+  "Turn a part into a block",
+  "Transformer une partie en bloc"
+ ],
+ "积木复用": [
+  "Reusing a block",
+  "Réutiliser un bloc"
+ ],
+ "函数大挑战": [
+  "Function challenge",
+  "Défi des fonctions"
+ ],
+ "计数": [
+  "Counting",
+  "Compter"
+ ],
+ "数星星": [
+  "Count the stars",
+  "Compter les étoiles"
+ ],
+ "分数": [
+  "Score",
+  "Score"
+ ],
+ "加法": [
+  "Addition",
+  "Addition"
+ ],
+ "乘法": [
+  "Multiplication",
+  "Multiplication"
+ ],
+ "倒数": [
+  "Countdown",
+  "Compte à rebours"
+ ],
+ "拿够就停": [
+  "Stop when enough",
+  "S'arrêter quand il y en a assez"
+ ],
+ "够了才点灯": [
+  "Light only if enough",
+  "Allumer seulement s'il y en a assez"
+ ],
+ "加倍": [
+  "Doubling",
+  "Doubler"
+ ],
+ "综合": [
+  "Mixed challenge",
+  "Défi mixte"
+ ],
+ "画一条线": [
+  "Draw a line",
+  "Tracer une ligne"
+ ],
+ "线长 80。": [
+  "Line length 80.",
+  "Longueur de la ligne : 80."
+ ],
+ "画直角": [
+  "Draw a right angle",
+  "Tracer un angle droit"
+ ],
+ "每条线长 60，转 90 度。": [
+  "Each line is 60 long. Turn 90 degrees.",
+  "Chaque ligne mesure 60. Tournez de 90 degrés."
+ ],
+ "边长 60。": [
+  "Side length 60.",
+  "Longueur du côté : 60."
+ ],
+ "用循环画正方形": [
+  "A square with a loop",
+  "Un carré avec une boucle"
+ ],
+ "正五边形": [
+  "Regular pentagon",
+  "Pentagone régulier"
+ ],
+ "边长 50。": [
+  "Side length 50.",
+  "Longueur du côté : 50."
+ ],
+ "正六边形": [
+  "Regular hexagon",
+  "Hexagone régulier"
+ ],
+ "圆形": [
+  "Circle",
+  "Cercle"
+ ],
+ "每一小段长 6。转一圈一共转 360 度。": [
+  "Each short piece is 6 long. A full turn is 360 degrees in total.",
+  "Chaque petit segment mesure 6. Un tour complet fait 360 degrés au total."
+ ],
+ "两个正方形": [
+  "Two squares",
+  "Deux carrés"
+ ],
+ "边长 30。两个正方形之间相隔 50。": [
+  "Side length 30. The two squares are 50 apart.",
+  "Côté : 30. Les deux carrés sont séparés de 50."
+ ],
+ "彩色图形": [
+  "Coloured shapes",
+  "Formes colorées"
+ ],
+ "红色正方形和蓝色三角形，边长都是 40。": [
+  "A red square and a blue triangle, both with side length 40.",
+  "Un carré rouge et un triangle bleu, tous deux de côté 40."
+ ],
+ "五角星": [
+  "Five-pointed star",
+  "Étoile à cinq branches"
+ ],
+ "每条线长 80。": [
+  "Each line is 80 long.",
+  "Chaque ligne mesure 80."
+ ],
+ "线长从 5 开始，每次增加 5。": [
+  "The line starts at length 5 and grows by 5 each time.",
+  "La ligne mesure 5 au départ et augmente de 5 à chaque fois."
+ ],
+ "花朵": [
+  "Flower",
+  "Fleur"
+ ],
+ "正方形边长 40。": [
+  "The squares have side length 40.",
+  "Les carrés ont un côté de 40."
+ ],
+ "旋转的三角形": [
+  "Turning triangles",
+  "Triangles qui tournent"
+ ],
+ "三角形边长 45，红色和蓝色轮流出现。": [
+  "The triangles have side length 45. Red and blue take turns.",
+  "Les triangles ont un côté de 45. Le rouge et le bleu alternent."
+ ],
+ "顺序": [
+  "Sequence",
+  "Séquence"
+ ],
+ "条件": [
+  "Conditions",
+  "Conditions"
+ ],
+ "函数": [
+  "Functions",
+  "Fonctions"
+ ],
+ "变量和计数": [
+  "Variables and counting",
+  "Variables et comptage"
+ ],
+ "画图": [
+  "Drawing",
+  "Dessin"
+ ],
+ "画出的图形和目标不一样。": [
+  "The drawing differs from the target.",
+  "Le dessin diffère de la cible."
+ ],
+ "还没有画出图形。": [
+  "Nothing has been drawn yet.",
+  "Rien n'a encore été dessiné."
+ ],
+ "这个程序在另一张地图上没有成功。": [
+  "This program failed on another map.",
+  "Ce programme a échoué sur une autre carte."
+ ],
+ "画出和目标一样的图形。": [
+  "Draw the same shape as the target.",
+  "Dessinez la même forme que la cible."
+ ],
+ "走到旗子处。": [
+  "Reach the flag.",
+  "Atteignez le drapeau."
+ ],
+ "收集全部星星。": [
+  "Collect all the stars.",
+  "Ramassez toutes les étoiles."
+ ],
+ "收集 {0} 颗星星。": [
+  "Collect {0} stars.",
+  "Ramassez {0} étoiles."
+ ],
+ "点亮所有的灯。": [
+  "Light all the lamps.",
+  "Allumez toutes les lampes."
+ ],
+ "不要点灯。": [
+  "Do not light the lamp.",
+  "N'allumez pas la lampe."
+ ],
+ "点亮 {0} 盏灯。": [
+  "Light {0} lamps.",
+  "Allumez {0} lampes."
+ ],
+ "变量 {0} 的值要等于 {1}。": [
+  "The value of {0} must equal {1}.",
+  "La valeur de {0} doit être égale à {1}."
+ ],
+ "星星有 5 颗或更多时点亮灯，否则不要点灯。": [
+  "Light the lamp if there are 5 or more stars, otherwise do not.",
+  "Allumez la lampe s'il y a 5 étoiles ou plus, sinon ne l'allumez pas."
+ ],
+ "随机挑战": [
+  "Random challenge",
+  "Défi aléatoire"
+ ],
+ "画布": [
+  "Canvas",
+  "Toile"
+ ],
+ "已完成 {0} 个世界": [
+  "{0} worlds completed",
+  "{0} mondes terminés"
+ ],
+ "徽章": [
+  "Badges",
+  "Badges"
+ ],
+ "未获得": [
+  "Not earned",
+  "Non obtenu"
+ ],
+ "第 {0} 个世界": [
+  "World {0}",
+  "Monde {0}"
+ ],
+ "推荐": [
+  "Recommended",
+  "Conseillé"
+ ],
+ "自由画图": [
+  "Free drawing",
+  "Dessin libre"
+ ],
+ "创作": [
+  "Create",
+  "Créer"
+ ],
+ "课程": [
+  "Lesson",
+  "Leçon"
+ ],
+ "上一步": [
+  "Previous",
+  "Précédent"
+ ],
+ "下一步": [
+  "Next",
+  "Suivant"
+ ],
+ "单步": [
+  "Step",
+  "Pas à pas"
+ ],
+ "看答案": [
+  "Show answer",
+  "Voir la réponse"
+ ],
+ "显示代码": [
+  "Show code",
+  "Afficher le code"
+ ],
+ "隐藏代码": [
+  "Hide code",
+  "Masquer le code"
+ ],
+ "慢速": [
+  "Slow",
+  "Lent"
+ ],
+ "中速": [
+  "Medium",
+  "Moyen"
+ ],
+ "快速": [
+  "Fast",
+  "Rapide"
+ ],
+ "已停止，机器人回到起点。": [
+  "Stopped. The robot is back at the start.",
+  "Arrêté. Le robot est revenu au départ."
+ ],
+ "请先搭一些积木。": [
+  "Please build a program first.",
+  "Veuillez d'abord assembler des blocs."
+ ],
+ "单步运行：每按一次“单步”执行一块积木。": [
+  "Step by step: each press of “Step” runs one block.",
+  "Pas à pas : chaque appui sur « Pas à pas » exécute un bloc."
+ ],
+ "已画完。": [
+  "Drawing finished.",
+  "Dessin terminé."
+ ],
+ "使用了 {0} 块积木，满分需要 {1} 块以内。": [
+  "You used {0} blocks. Three stars need {1} blocks or fewer.",
+  "Vous avez utilisé {0} blocs. Trois étoiles demandent {1} blocs ou moins."
+ ],
+ "看过参考答案，最多得 1 颗星。": [
+  "After viewing the reference answer, at most 1 star.",
+  "Après avoir vu la réponse de référence, une seule étoile au maximum."
+ ],
+ "积木的顺序已经正确。请检查数字和条件。": [
+  "The order of the blocks is correct. Please check the numbers and conditions.",
+  "L'ordre des blocs est correct. Vérifiez les nombres et les conditions."
+ ],
+ "高亮的积木需要修改。": [
+  "The highlighted block needs to be changed.",
+  "Le bloc en surbrillance doit être modifié."
+ ],
+ "多了一块积木。": [
+  "There is one block too many.",
+  "Il y a un bloc en trop."
+ ],
+ "请使用高亮的积木。": [
+  "Please use the highlighted block.",
+  "Veuillez utiliser le bloc en surbrillance."
+ ],
+ "参考答案": [
+  "Reference answer",
+  "Réponse de référence"
+ ],
+ "使用参考答案后，这一关最多得 1 颗星。": [
+  "After using the reference answer, this level gives at most 1 star.",
+  "Après avoir utilisé la réponse de référence, ce niveau donne au plus 1 étoile."
+ ],
+ "使用这个答案": [
+  "Use this answer",
+  "Utiliser cette réponse"
+ ],
+ "已放入参考答案。": [
+  "The reference answer has been placed.",
+  "La réponse de référence a été placée."
+ ],
+ "程序里有一个错误。请修改它。": [
+  "The program contains a mistake. Please correct it.",
+  "Le programme contient une erreur. Veuillez la corriger."
+ ],
+ "清空程序？": [
+  "Clear the program?",
+  "Effacer le programme ?"
+ ],
+ "所有积木都会被移走。": [
+  "All blocks will be removed.",
+  "Tous les blocs seront retirés."
+ ],
+ "已清空": [
+  "Cleared",
+  "Effacé"
+ ],
+ "我的作品": [
+  "My drawings",
+  "Mes dessins"
+ ],
+ "已记录进度": [
+  "Progress saved",
+  "Progression enregistrée"
+ ],
+ "获得徽章：{0}": [
+  "Badge earned: {0}",
+  "Badge obtenu : {0}"
+ ],
+ "最多保存 {0} 幅作品。请先删除一幅。": [
+  "At most {0} drawings can be saved. Please delete one first.",
+  "{0} dessins au maximum. Veuillez d'abord en supprimer un."
+ ],
+ "已保存到这台设备": [
+  "Saved on this device",
+  "Enregistré sur cet appareil"
+ ],
+ "打开作品": [
+  "Open drawing",
+  "Ouvrir le dessin"
+ ],
+ "已打开作品": [
+  "Drawing opened",
+  "Dessin ouvert"
+ ],
+ "删除这幅作品？": [
+  "Delete this drawing?",
+  "Supprimer ce dessin ?"
+ ],
+ "删除后不能恢复。": [
+  "This cannot be undone.",
+  "Cette action est irréversible."
+ ],
+ "暂无作品。": [
+  "No drawings yet.",
+  "Aucun dessin pour l'instant."
+ ],
+ "“改变”让数字增加或减少，“设定”直接给它一个数字。": [
+  "“Change” makes the number larger or smaller. “Set” gives it a number directly.",
+  "« Modifier » augmente ou diminue le nombre. « Définir la valeur » lui donne directement un nombre."
+ ],
+ "“设定”可以做加法、减法和乘法，例如 s = a + b。": [
+  "“Set” can add, subtract and multiply, for example s = a + b.",
+  "« Définir la valeur » peut additionner, soustraire et multiplier, par exemple s = a + b."
+ ],
+ "设定": [
+  "Set",
+  "Définir la valeur"
+ ]
+}

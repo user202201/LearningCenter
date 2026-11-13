@@ -30,7 +30,7 @@ const KNOWN = {
 
 (async () => {
   // ================= the library, the daily pick, the generators, the memory curve (pure) =================
-  {
+  if (!process.env.SKIP_PURE) {   // (SKIP_PURE=1 skips the long pure part while the screens are being worked on)
     const t = await start(new Map(), { local: true });
     const lib = await t.page.evaluate(async () => { const PM = await import('/src/poemmodel.ts'); const l = await PM.loadPoems(); return { poems: l.poems, dynasties: l.dynasties, cluster: l.cluster, anonymous: l.anonymous }; });
     const P = lib.poems;
@@ -302,6 +302,8 @@ const KNOWN = {
   const dayFile = () => JSON.parse(store.get(`poems/${kidId}.json`));
   const revFile = () => JSON.parse(store.get(`poems/${kidId}.review.json`) || '{"cards":{}}');
   const settle = () => page.waitForFunction(() => !document.querySelector('#toasts .toast.working'));
+  // two poems he met two days ago (so that there is something to review and the practice poem is one of his)
+  store.set(`poems/${kidId}.json`, JSON.stringify({ weeks: [{ start: '2026-11-11', chars: [byTitle['静夜思'].id, byTitle['春晓'].id] }] }));
   await page.click('.subject[data-subject=chinese]'); await page.waitForSelector('.kids');
   await openKid(page, 'Dory');
   // the entry: a button like the idiom button, under it
@@ -310,19 +312,20 @@ const KNOWN = {
   ok(bb.sameClass && bb.below && Math.abs(bb.w[0] - bb.w[1]) < 1 && Math.abs(bb.h[0] - bb.h[1]) < 1 && bb.text === '古诗词', 'the child\'s page has a button 古诗词 under the idiom button, the same look');
   await page.click('#poems-btn'); await page.waitForSelector('#pm-today .pm-card'); await settle();
   ok(page.url().endsWith(`#/poems/${kidId}`), 'the button opens #/poems/<kid>');
-  ok((await page.locator('.tabs button').allTextContents()).join('|') === '今天|已入库 1|诗人' && (await page.textContent('#pm-title')) === '古诗词', 'tabs 今天 | 已入库 1 | 诗人');
-  ok((await page.textContent('#day-title')) === '新诗（1）' && await page.locator('#again-title').count() === 0 && (await page.locator('#pm-today .pm-card').count()) === 1, 'today: ONE new poem and nothing to review on the first day');
+  ok((await page.locator('.tabs button').allTextContents()).join('|') === '今天|已入库 3|诗人' && (await page.textContent('#pm-title')) === '古诗词', 'tabs 今天 | 已入库 3 | 诗人 (two older poems and today\'s)');
+  ok((await page.textContent('#day-title')) === '新诗（1）' && (await page.locator('#pm-today .pm-card').count()) === 1, 'today: ONE new poem');
+  ok((await page.textContent('#again-title')) === '该回顾的旧诗（2）' && (await page.locator('#again-list .pm-card').evaluateAll((els) => els.map((e) => e.dataset.poem).sort().join())) === [byTitle['静夜思'].id, byTitle['春晓'].id].sort().join(), 'the two older poems come back as "该回顾的旧诗（2）" (never practised = due first)');
   const first = await page.getAttribute('#pm-today .pm-card', 'data-poem');
   ok(byId[first].grade <= 4, 'the poem is of grade 4 or lower (his grade): ' + byId[first].title);
-  ok(dayFile().weeks.length === 1 && dayFile().weeks[0].start === TODAY && dayFile().weeks[0].chars.join() === first && !store.has('kids/' + kidId + '.review.json'), 'saved in poems/<kid>.json (weeks[].chars = the poem id, start = the date); the Chinese files are not touched');
+  ok(dayFile().weeks.length === 2 && dayFile().weeks[1].start === TODAY && dayFile().weeks[1].chars.join() === first && !store.has('kids/' + kidId + '.review.json'), 'saved in poems/<kid>.json (weeks[].chars = the poem id, start = the date); the Chinese files are not touched');
   await page.screenshot({ path: OUT + 'poems-today-phone.png' });
   await page.reload(); await page.waitForSelector('#pm-today .pm-card');
   ok((await page.getAttribute('#pm-today .pm-card', 'data-poem')) === first, 'made once: after a reload it is the same poem');
   await page.click('#pm-more'); await page.waitForFunction(() => document.querySelectorAll('#pm-today .pm-card').length === 2);
   await page.click('#pm-more'); await page.waitForFunction(() => document.querySelectorAll('#pm-today .pm-card').length === 3); await settle();
-  const three = dayFile().weeks[0].chars;
+  const three = dayFile().weeks.find((w) => w.start === TODAY).chars;
   ok(three.length === 3 && new Set(three).size === 3 && three[0] === first && three.every((i) => byId[i].grade <= 4), '"再学一首" twice: three different poems on the day, saved');
-  ok((await page.textContent('#day-title')) === '新诗（3）' && (await page.locator('.tabs button').nth(1).textContent()) === '已入库 3', 'the title and the tab count follow');
+  ok((await page.textContent('#day-title')) === '新诗（3）' && (await page.locator('.tabs button').nth(1).textContent()) === '已入库 5', 'the title and the tab count follow');
 
   // the poem page
   await page.click(`#pm-today .pm-card[data-poem="${three[0]}"]`); await page.waitForSelector('#pm-poem');
@@ -436,9 +439,9 @@ const KNOWN = {
 
   // recorded tab, recitation
   await page.evaluate((id) => (location.hash = `#/poems/${id}/learned`), kidId); await page.waitForSelector('#pm-learned .pm-card');
-  ok(await page.locator('#pm-learned .pm-card').count() === 3 && (await page.textContent('#learned-title')) === '已学过的古诗词（3）', 'recorded: the three poems he met');
+  ok(await page.locator('#pm-learned .pm-card').count() === 5 && (await page.textContent('#learned-title')) === '已学过的古诗词（5）', 'recorded: the five poems he met');
   const dots = await page.locator(`.pm-card[data-poem="${target.id}"] .pm-mem`).getAttribute('data-level');
-  ok(dots === '0' && await page.locator('.pm-card[data-poem] .pm-mem[data-level="-1"]').count() === 2, 'the memory level is shown: the practised poem 0, the others never practised');
+  ok(dots === '0' && (await page.locator('.pm-card .pm-mem').evaluateAll((els) => els.every((e) => /^-?[0-5]$/.test(e.dataset.level) && e.querySelectorAll('i').length === 5))), 'the memory level is shown on every poem (five dots): the practised poem is at level 0 (failed)');
   await page.screenshot({ path: OUT + 'poems-learned-phone.png' });
   await page.click('#pm-recite-btn'); await page.waitForSelector('#rc-first');
   const rt = await page.textContent('#rc-title'); const RP = byTitle[rt];
@@ -448,7 +451,7 @@ const KNOWN = {
   await page.screenshot({ path: OUT + 'poems-recite-phone.png' });
   const boxBefore = revFile().cards[RP.id]?.box ?? -1;
   await page.click('#rc-yes'); await settle(); await page.waitForSelector('#rc-first');
-  ok((revFile().cards[RP.id]?.box ?? -1) === Math.min(5, Math.max(1, boxBefore + 1)) || boxBefore === -1 && revFile().cards[RP.id].box === 1, '"记得" moves the poem one box up');
+  ok(revFile().cards[RP.id].box >= 1 && revFile().cards[RP.id].box >= boxBefore && revFile().cards[RP.id].right >= 1, '"记得" moves a failed or new poem into box 1 (a poem already climbed today stays: once a day), never down');
   const rt2 = await page.textContent('#rc-title'); const RP2 = byTitle[rt2];
   await page.click('#rc-no'); await settle();
   ok(revFile().cards[RP2.id].box === 0, '"没记住" puts the poem back to box 0 (and a different poem comes next: ' + (RP2.id !== RP.id) + ')');
@@ -470,7 +473,7 @@ const KNOWN = {
   // the grade: changing it picks today's poems again
   await page.evaluate((id) => (location.hash = `#/poems/${id}`), kidId); await page.waitForSelector('#grade-btn');
   await page.click('#grade-btn'); await page.waitForSelector('#grade-dlg'); await page.click('.grade-btn[data-grade="2"]');
-  await page.waitForSelector('#pm-today .pm-card'); await settle();
+  await page.waitForSelector('#toasts .toast:has-text("已按新年级重新选取")'); await page.waitForFunction(() => document.querySelector('#day-title')?.textContent === '新诗（1）'); await settle();
   const g2 = dayFile().weeks.find((w) => w.start === TODAY).chars;
   ok(g2.length === 1 && g2.every((i) => byId[i].grade <= 2), 'a new grade (二年级): today\'s poems are picked again for it (one poem of grade 2 or lower)');
   ok(log.external.length === 0, 'OFFLINE: the poems flow made no request outside the app: ' + log.external.join(', '));
@@ -490,7 +493,7 @@ const KNOWN = {
     const kid = await t.page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.kids.json')).kids[0].id);
     const tp = byTitle['春晓'];
     await t.page.evaluate(([k, id]) => (location.hash = `#/poems/${k}/practice/${id}/order`), [kid, tp.id]);
-    await t.page.waitForSelector('#pq-order'); await t.page.waitForTimeout(500);
+    await t.page.waitForSelector('#pq-order'); await t.page.waitForFunction(() => !document.querySelector('#toasts .toast')); await t.page.waitForTimeout(300);   // (the messages of the top band are gone: a finger would touch them)
     const cdp = await t.page.context().newCDPSession(t.page);
     const rects = () => t.page.locator('.pq-oitem').evaluateAll((els) => els.map((e) => { const r = e.getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height, line: e.dataset.line }; }));
     const touch = async (pts) => { await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [pts[0]] }); for (const q of pts.slice(1)) await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [q] }); await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await t.page.waitForTimeout(120); };
@@ -521,7 +524,7 @@ const KNOWN = {
     after = await rects();
     ok(after[0].line === rs[1].line && after[1].line === rs[0].line && await t.page.locator('.pq-oitem.sel').count() === 0, `${name}: a tap on a second line swaps the two`);
     // the check: put them right with the keyboard / taps and judge
-    const sol = tp.lines.slice(0, after.length);
+    const sol = tp.lines.filter((l, i) => { const w = after.map((r) => r.line); return w.includes(l); });   // (the window of lines on the screen, in the poem's order)
     for (let pos = 0; pos < sol.length; pos++) { const cur = (await rects()).map((r) => r.line); const j = cur.indexOf(sol[pos]); if (j !== pos) { const rr = await rects(); await touch([{ x: rr[pos].x + rr[pos].w / 2, y: rr[pos].y + rr[pos].h / 2 }]); await touch([{ x: rr[j].x + rr[j].w / 2, y: rr[j].y + rr[j].h / 2 }]); } }
     await t.page.click('#pq-check'); await t.page.waitForSelector('#pq-explain:not([hidden])');
     ok(await t.page.locator('.pq-oitem.right').count() === sol.length && (await t.page.textContent('#pq-explain')).startsWith('正确'), `${name}: the lines in the right order are all marked right`);
@@ -536,7 +539,7 @@ const KNOWN = {
     const small = [...document.querySelectorAll('.pq-opt, .pm-mode, .pm-card, .pq-next, .pq-oitem, .pm-pill, .pm-dyn, #pm-more, .rc-btns button, .tabs button, #pm-read, .mopt')].filter((e) => e.offsetParent && e.getBoundingClientRect().height < 40 && getComputedStyle(e).visibility !== 'hidden').map((e) => e.className + ':' + Math.round(e.getBoundingClientRect().height));
     const out = [...document.querySelectorAll('.pm-card, .pq-opt, .pq-subject, .pm-poem, .pm-sec, .pq-oitem, .rc-card, .pm-dyn, .pm-poet')].filter((e) => e.offsetParent).filter((e) => { const r = e.getBoundingClientRect(); return r.left < -0.5 || r.right > vw + 0.5; }).map((e) => e.className);
     const clipped = [...document.querySelectorAll('.pq-opt, .pm-card, .pm-pill, .pm-mode, .pq-oitem')].filter((e) => e.offsetParent && e.scrollWidth > e.clientWidth + 1).map((e) => e.className + ':' + e.textContent.slice(0, 12));
-    const box = document.querySelector('.pm-poem, .pq-subject, .pm-list, .pm-poets, .rc-card, .pq-choices');
+    const box = [...document.querySelectorAll('.pm-poem, .pq-subject, .pm-list, .pm-poets, .rc-card, .pq-choices, .pq-order')].find((e) => e.offsetParent);
     const r = box?.getBoundingClientRect();
     return { sw: document.documentElement.scrollWidth, vw, small, out, clipped, l: r ? r.left : 0, r: r ? vw - r.right : 0 };
   });
@@ -583,8 +586,8 @@ const KNOWN = {
       const cjkLeft = () => t.page.evaluate(() => {
         const out = [];
         const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-        for (let n = w.nextNode(); n; n = w.nextNode()) { const e = n.parentElement; if (!e || e.closest('.user, .user-title, script, style, svg') || !/[一-鿿]/.test(n.nodeValue)) continue; if (e.offsetParent === null && !e.closest('#toasts')) continue; out.push(n.nodeValue.trim().slice(0, 20)); }
-        for (const e of document.querySelectorAll('[title], [aria-label]')) { if (e.closest('.user')) continue; for (const a of ['title', 'aria-label']) { const v = e.getAttribute(a); if (v && /[一-鿿]/.test(v)) out.push(a + ':' + v.slice(0, 20)); } }
+        for (let n = w.nextNode(); n; n = w.nextNode()) { const e = n.parentElement; if (!e || e.closest('.user, .user-title, script, style, svg, .shortcuts') || !/[一-鿿]/.test(n.nodeValue)) continue; if (e.offsetParent === null && !e.closest('#toasts')) continue; out.push(n.nodeValue.trim().slice(0, 20)); }
+        for (const e of document.querySelectorAll('[title], [aria-label]')) { if (e.closest('.user, .shortcuts')) continue; for (const a of ['title', 'aria-label']) { const v = e.getAttribute(a); if (v && /[一-鿿]/.test(v)) out.push(a + ':' + v.slice(0, 20)); } }
         return out;
       });
       await t.page.evaluate((k) => (location.hash = `#/poems/${k}`), kid); await t.page.waitForSelector('#pm-today .pm-card'); await t.page.waitForTimeout(300);
