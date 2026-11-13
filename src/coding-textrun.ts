@@ -237,6 +237,8 @@ const TCOLOR_EXTRA: Record<string, string> = { pink: "#e64980", brown: "#8d5524"
 export const turtleColorHex = (c: string): string => ({ black: "#2d2230", red: "#e03131", orange: "#f76707", yellow: "#f59f00", green: "#2f9e44", blue: "#1c7ed6", purple: "#7048e8" } as Record<string, string>)[c] ?? (c.startsWith("#") ? c : "#2d2230");
 
 const SIG = { brk: 1, cont: 2, ret: 3 } as const;
+/** names from other languages and what Python calls them */
+const CROSS: Record<string, string> = { push: "append", add: "append", toUpperCase: "upper", toLowerCase: "lower", trim: "strip", indexOf: "find", includes: "in（例如 x in 列表）", contains: "in（例如 x in 列表）", length: "len(...)", size: "len(...)", substring: "切片 s[a:b]", charAt: "s[位置]", append_: "append", sorted: "sort（或 sorted(...)）", lenght: "len(...)", reverse_: "reverse", toString: "str(...)", parseInt: "int(...)", split_: "split" };
 const STR_METHODS = ["upper", "lower", "capitalize", "title", "swapcase", "strip", "lstrip", "rstrip", "split", "rsplit", "splitlines", "join", "replace", "find", "rfind", "index", "count", "startswith", "endswith", "isdigit", "isalpha", "isalnum", "isspace", "isupper", "islower", "center", "ljust", "rjust", "zfill", "format", "partition", "isnumeric"];
 const LIST_METHODS = ["append", "extend", "insert", "pop", "remove", "sort", "reverse", "index", "count", "copy", "clear"];
 const DICT_METHODS = ["get", "keys", "values", "items", "pop", "update", "setdefault", "copy", "clear"];
@@ -291,7 +293,9 @@ class Interp {
 
   // ----- errors -----
   err(kind: ConstructorParameters<typeof PyError>[0], msg: string, hint?: string, line = this.line): never { throw new PyError(kind, `第 ${line} 行：${msg}`, line, hint); }
-  tick() { if (++this.steps > this.budget) this.err("StepLimit", `程序运行得太久（超过 ${this.budget} 步），可能是死循环。`, "检查 while 的条件会不会变成 False，或者 for 的范围是否太大。"); }
+  /** the line of the loop that is running (an endless program is reported at its loop, not at some statement inside) */
+  loopLine = 0;
+  tick() { if (++this.steps > this.budget) this.err("StepLimit", `程序运行得太久（超过 ${this.budget} 步），可能是死循环。`, "检查 while 的条件会不会变成 False，或者 for 的范围是否太大。", this.loopLine || this.line); }
   write(s: string) { this.out += s; if (this.out.length > MAX_OUT) this.err("OutputLimit", "输出的内容太多了。", "检查 print 是不是在没有结束的循环里。"); }
 
   // ----- scopes -----
@@ -357,14 +361,16 @@ class Interp {
         return s.els ? this.execBlock(s.els) : 0;
       }
       case "while": {
+        const outer = this.loopLine; this.loopLine = s.line;
         for (;;) {
           this.line = s.line;
           if (!truthy(this.eval(s.c))) break;
           const r = this.execBlock(s.body);
-          if (r === SIG.brk) break; if (r === SIG.ret) return r;
+          if (r === SIG.brk) break; if (r === SIG.ret) { this.loopLine = outer; return r; }
           this.tick();
           if (this.traceOn) this.record(s.line);
         }
+        this.loopLine = outer;
         return 0;
       }
       case "for": {
@@ -372,13 +378,15 @@ class Interp {
         this.line = s.line;
         const seq = this.iterate(it, s.line);
         let first = true;
+        const outer = this.loopLine; this.loopLine = s.line;
         for (const x of seq) {
           if (!first) { this.tick(); if (this.traceOn) this.record(s.line); }
           first = false;
           this.assign(s.target, x);
           const r = this.execBlock(s.body);
-          if (r === SIG.brk) break; if (r === SIG.ret) return r;
+          if (r === SIG.brk) break; if (r === SIG.ret) { this.loopLine = outer; return r; }
         }
+        this.loopLine = outer;
         return 0;
       }
       case "def": {
@@ -799,7 +807,7 @@ class Interp {
     const lists: Record<string, string[]> = { str: STR_METHODS, list: LIST_METHODS, dict: DICT_METHODS, set: SET_METHODS };
     const tn = typeName(o);
     if (lists[tn]?.includes(name) || (tn === "tuple" && (name === "index" || name === "count"))) return new PyBuiltin(name, (a, kw) => this.method(o, name, a, kw, line));
-    const sug = lists[tn] ? didYouMean(name, lists[tn]) : null;
+    const sug = lists[tn] ? didYouMean(name, lists[tn]) ?? CROSS[name] ?? null : null;
     return this.err("AttributeError", `${cnType(o)}没有方法 ${name}。`, sug ? `你是不是想写 ${sug}？` : isNum(o) ? "数字没有方法；如果想把它变成文字，用 str(数字)。" : undefined, line);
   }
 

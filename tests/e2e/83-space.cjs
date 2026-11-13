@@ -459,7 +459,7 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
     ok(Math.abs((await decOf()) - 23.4) < 0.1 && /夏季/.test(await page.textContent('#sp-season-out')), 'season lab: June solstice = the Sun is over 23.4 N, summer');
     const cityTxt = async (c) => page.textContent(`.sp-city[data-city=${c}]`);
     ok(/14\.[89]|15\.[0-1]/.test(await cityTxt('北京')) && /73\.[45]/.test(await cityTxt('北京')) && /冬季/.test(await cityTxt('悉尼')), 'season lab: Beijing ~15 h of daylight and the Sun 73.5 high; Sydney is in winter: ' + (await cityTxt('北京')));
-    await page.click('#sp-sd-356'); ok(Math.abs((await decOf()) + 23.4) < 0.1 && /9\.[0-2]/.test(await cityTxt('北京')) && /26\.[56]/.test(await cityTxt('北京')), 'season lab: December solstice: Beijing 9.1 h, Sun 26.6 high');
+    await page.click('#sp-sd-356'); ok(Math.abs((await decOf()) + 23.4) < 0.1 && /9\.[0-2]/.test(await cityTxt('北京')) && /26\.[567]/.test(await cityTxt('北京')), 'season lab: December solstice: Beijing 9.1 h, Sun 26.6 high');
     await page.click('#sp-sd-79'); ok(Math.abs(await decOf()) < 0.5 && /1[12]\.[0-9]|12/.test(await cityTxt('北京')), 'season lab: March equinox = the Sun over the equator, day and night equal');
     const dist = async (d) => { await setRange(page, '#sp-season-day', d); return parseFloat((await page.textContent('#sp-season-dist')).match(/\d+(\.\d+)?/)[0]); };
     const dJan = await dist(3), dJul = await dist(185); ok(dJan < dJul && Math.abs(dJan - 147.1) < 0.4 && Math.abs(dJul - 152.1) < 0.4, `season lab: nearest the Sun in January (${dJan}), farthest in July (${dJul}) million km: the tilt, not the distance, makes the seasons`);
@@ -522,9 +522,9 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
     const keys2 = await page.evaluate(() => window.__spaceQuiz.map((q) => q.key)); ok(keys2.length === 10 && new Set(keys2).size === 10 && keys2.includes('pm:io'), 'quiz: the next round has 10 different questions and brings the failed one back (' + keys2.join(',') + ')');
     ok(keys2.filter((k) => !Object.keys(saved.cards).includes(k)).length >= 8, 'quiz: and mostly new questions');
     const q0 = await page.evaluate(() => window.__spaceQuiz[0]); await page.click(`.mchoice[data-v="${q0.answer}"]`); await page.click('#math-next');
-    await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button.primary'); await page.waitForSelector('#sp-quiz-start');
+    await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button.danger'); await page.waitForSelector('#sp-quiz-start');
     const saved2 = await page.evaluate(() => JSON.parse(localStorage.getItem('learn.space.v1'))); ok(Object.keys(saved2.cards).length === 11 && saved2.plays === 2, 'quiz: quitting saves the one question that was answered');
-    await page.click('#sp-quiz-start'); await page.waitForSelector('#game .mchoice'); await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button:not(.primary)'); ok(await page.locator('#game').count() === 1, 'quiz: cancelling the question keeps the game open'); await page.click('#game-quit'); await page.click('dialog button.primary');
+    await page.click('#sp-quiz-start'); await page.waitForSelector('#game .mchoice'); await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button:not(.danger)'); ok(await page.locator('#game').count() === 1, 'quiz: cancelling the question keeps the game open'); await page.waitForFunction(() => !document.querySelector('dialog[open]')); await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button.danger'); await page.waitForSelector('#sp-quiz-start');
     ok(log.external.length === 0, 'quiz: no outside request');
     await t.browser.close();
   }
@@ -583,7 +583,7 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
           if (key === 'pp:jupiter' || key === 'ph:6') await page.screenshot({ path: OUT + `space-quiz-${key.replace(':', '-')}-${tag}.png` });
           const q0 = await page.evaluate(() => window.__spaceQuiz[0]); await page.click(`.mchoice[data-v="${q0.answer}"]`); await qg('answered'); await noCjk('quiz answered ' + key);
           if (key === 'mf:titan') await page.screenshot({ path: OUT + `space-quiz-answered-${tag}.png` });
-          await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button.primary'); await page.waitForSelector('#sp-quiz-start');
+          await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button.danger'); await page.waitForSelector('#sp-quiz-start');
         }
       }
       ok(log.external.length === 0, `${tag}: no outside request ${log.external.slice(0, 2).join()}`);

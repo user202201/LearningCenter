@@ -79,10 +79,6 @@
     "Sound off",
     "Couper le son"
   ],
-  "开始！": [
-    "Go!",
-    "Partez !"
-  ],
   "准备": [
     "Get ready",
     "Prêts"
@@ -122,5 +118,57 @@
   "{0} 对 {1}，{2} 比 {3}": [
     "{0} vs {1}, {2} to {3}",
     "{0} contre {1}, {2} à {3}"
+  ],
+  "对战大厅": [
+    "Battle lobby",
+    "Salle de duel"
+  ],
+  "胜场 {0}": [
+    "Wins {0}",
+    "Victoires {0}"
+  ],
+  "连胜 ×{0}": [
+    "Streak ×{0}",
+    "Série ×{0}"
+  ],
+  "抢答 {0} 秒": [
+    "Fastest: {0} s",
+    "Plus rapide : {0} s"
+  ],
+  "PK听单词": [
+    "Word duel",
+    "Duel de mots"
+  ],
+  "听读音，抢先选出答案": [
+    "Listen, then pick the answer first",
+    "Écoutez, puis choisissez la réponse en premier"
+  ],
+  "听音选词": [
+    "Hear and pick the word",
+    "Écouter et choisir le mot"
+  ],
+  "听音选义": [
+    "Hear and pick the meaning",
+    "Écouter et choisir le sens"
+  ],
+  "再听一次": [
+    "Listen again",
+    "Écouter encore"
+  ],
+  "单词取自两位选手各自已入库的单词。": [
+    "Words are taken from the recorded words of the two players.",
+    "Les mots viennent des mots enregistrés des deux joueurs."
+  ],
+  "本设备没有语音，将显示单词。": [
+    "This device has no voice; the word will be shown.",
+    "Cet appareil n'a pas de voix ; le mot sera affiché."
+  ],
+  "已入库的单词合计太少，至少需要 4 个。": [
+    "have too few recorded words together: at least 4 are needed.",
+    "ont trop peu de mots enregistrés ensemble : il en faut au moins 4."
+  ],
+  "词量不足 {0} 个，本局共 {1} 题。": [
+    "Fewer than {0} words: this game has {1} rounds.",
+    "Moins de {0} mots : cette partie compte {1} manches."
   ]
 }

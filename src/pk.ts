@@ -426,7 +426,7 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
       if (sn.phase !== "result") swapSide = null; else if (changed) swapSide = L.leaderOf(sn.scores);
       lastScores = [...sn.scores];
       const tp = L.tugPos(s);
-      tugA.style.width = `${(50 + 50 * tp).toFixed(1)}%`; tugB.style.width = `${(50 - 50 * tp).toFixed(1)}%`; mid.dataset.tug = tp.toFixed(2);
+      tugA.style.width = `${(50 + 50 * tp).toFixed(1)}%`; tugB.style.width = `${(50 - 50 * tp).toFixed(1)}%`; tug.style.setProperty("--p", `${(50 + 50 * tp).toFixed(1)}%`); mid.dataset.tug = tp.toFixed(2);
       knot.classList.toggle("swap", swapSide !== null && swapSide >= 0);
       for (const p of panels) {
         const side = p.side, item = cur(side);

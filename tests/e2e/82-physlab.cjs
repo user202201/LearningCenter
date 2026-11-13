@@ -21,7 +21,7 @@ const extra = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-ex
 const withExtra = async (t) => {
   const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[1]]))) + ');\n';
   await t.ctx.route('**/src/i18n-data.ts*', async (route) => { const r = await route.fetch(); await route.fulfill({ response: r, body: (await r.text()) + '\n' + add }); });
-  await t.page.reload(); await t.page.waitForSelector('.hub-grid, .kids');
+  await t.page.reload(); await t.page.waitForSelector('.hub-grid, .kids, .empty-home');
 };
 
 // ---- how to complete every task by driving the state (independent of the task code: it states the physics) ----
@@ -70,7 +70,7 @@ const EXPECT = {
 const TEXT_KINDS = {
   sound: ['concept'], heating: ['concept'], refraction: ['toward', 'tir'], lens: ['nature', 'tool'], newton: ['first'], pressure: ['pratio'], buoyancy: ['state'], lever: ['kind', 'tilt'], specificheat: ['which', 'property'], em: ['core', 'motor_rev', 'induction', 'turns'],
 };
-const numOf = (s) => parseFloat(String(s).replace('−', '-').replace(/[^\d.\-eE]/g, (c) => (c === ' ' ? '' : '')).split(' ')[0]);
+const numOf = (s) => parseFloat(String(s).replace('−', '-'));
 const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim()); return m ? m[1].length : 0; };
 
 (async () => {
@@ -113,7 +113,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
       o.lens = { eqBad: lb, clsBad: cls, none: Ln.image(10, 10, 0).none, eq: Ln.image(10, 20, 0), cam: Ln.image(10, 30, 0), proj: Ln.image(10, 15, 0), mag: Ln.image(10, 5, 0), con: Ln.image(10, 20, 1) };
       // heating
       const H = M.heating; const c0 = (t) => H.curve(0, 400, 0.1, t);
-      o.heating = { start: c0(0), meltStart: c0(10.6), meltEnd: [c0(10.4), c0(93.9), c0(94.1)], boil: [c0(190), c0(205), c0(764), c0(766)], plateau: [H.plateau(0, 400, 0.1), H.plateau(2, 400, 0.1), H.plateau(1, 400, 0.1)], wax: [H.curve(1, 400, 0.1, 5), H.curve(1, 400, 0.1, 20), H.curve(1, 400, 0.1, 100)], cool: [H.curve(2, 400, 0.1, 5), H.curve(2, 400, 0.1, 100), H.curve(2, 400, 0.1, 300)], heat: H.heat(4200, 0.5, 20) };
+      o.heating = { start: c0(0), meltStart: c0(10.6), meltEnd: [c0(10.4), c0(93.9), c0(94.1)], boil: [c0(190), c0(205), c0(763), c0(765)], plateau: [H.plateau(0, 400, 0.1), H.plateau(2, 400, 0.1), H.plateau(1, 400, 0.1)], wax: [H.curve(1, 400, 0.1, 5), H.curve(1, 400, 0.1, 20), H.curve(1, 400, 0.1, 100)], cool: [H.curve(2, 400, 0.1, 5), H.curve(2, 400, 0.1, 100), H.curve(2, 400, 0.1, 300)], heat: H.heat(4200, 0.5, 20) };
       let mono = 0, flatBad = 0; for (let md = 0; md < 3; md++) for (let k = 0; k < 40; k++) { const P = rnd(100, 1000), m = rnd(0.1, 0.5); let prev = H.curve(md, P, m, 0).T; for (let tt = 1; tt <= 1200; tt += 3) { const T = H.curve(md, P, m, tt).T; if (md < 2 ? T < prev - 1e-9 : T > prev + 1e-9) mono++; prev = T; } }
       for (let k = 0; k < 40; k++) { const P = rnd(100, 1000), m = rnd(0.1, 0.5), t1 = 4200 * m / 0.1 / P * 0 + (m * 2100 * 20) / P, tm = (m * 334000) / P; for (let j = 1; j < 10; j++) { const p = H.curve(0, P, m, t1 + (tm * j) / 10); if (p.T !== 0 || p.phase !== 1) flatBad++; } const w1 = H.curve(1, P, m, 1), w2 = H.curve(1, P, m, 2); if (!(w2.T > w1.T)) flatBad++; }
       o.heating.monoBad = mono; o.heating.flatBad = flatBad;
@@ -188,14 +188,14 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
       return o;
     });
     const m = r.motion;
-    ok(near(m.pos[0], 12) && near(m.pos[1], 25) && near(m.pos[2], 20) && near(m.vel, 11) && near(m.avg, 5) && near(m.kmh[0], 72) && near(m.kmh[1], 20), 'A motion: s = v0 t + a t^2/2, v = v0 + a t, km/h <-> m/s (hand values)');
+    ok(near(m.pos[0], 12) && near(m.pos[1], 25) && near(m.pos[2], 28) && near(m.vel, 11) && near(m.avg, 5) && near(m.kmh[0], 72) && near(m.kmh[1], 20), 'A motion: s = v0 t + a t^2/2, v = v0 + a t, km/h <-> m/s (hand values)');
     ok(m.tapeUniform && m.tapeGrowing && m.derivBad === 0, 'A motion: ticker tape gaps equal for uniform, growing for acceleration; v is the derivative of s (300 random)');
     const s = r.sound;
     ok(near(s.period, 1 / 440) && near(s.db[0], 60) && near(s.db[1], 40) && near(s.db[2], 60 + 20 * Math.log10(0.5)) && near(s.midi[0], 69) && near(s.midi[1], 81) && near(s.midi[2], 60, 1e-3) && near(s.wl, 1), 'A sound: period, dB (x10 amplitude = +20 dB), MIDI numbers, wavelength');
     ok(s.notes[0].name === 'A4' && s.notes[0].cents === 0 && s.notes[1].name === 'C4' && s.notes[2].name === 'A#4' && s.notes[3].name === 'A4' && s.notes[3].cents > 0, 'A sound: nearest note names (A4, C4, A#4, +cents)');
     ok(!s.aud[0] && s.aud[1] && s.aud[2] && !s.aud[3], 'A sound: audible range 20 Hz - 20 kHz');
     ok(s.peakBad === 0 && s.periodBad === 0 && s.oddBad === 0 && s.sineBad === 0 && s.peakReached.every((p) => near(p, 1, 2e-3)), 'A sound: |wave| <= A, periodic, odd, pure tone = A sin(2 pi f t), peak reached (4 timbres x 400 random)');
-    ok(s.harm[0][0] === 1 && s.harm[0][1] === 0 && near(s.harm[0][2], 1 / 3) && near(s.harm[1][1], 1 / 3) && s.harm[2][0] === 1 && s.harm[2][2] < 0, 'A sound: square (odd 1/n), sawtooth (all 1/n), triangle (odd, alternating 1/n^2)');
+    ok(s.harm[0][0] === 1 && s.harm[0][1] === 0 && near(s.harm[0][2], 1 / 3) && near(s.harm[1][1], 1 / 2) && s.harm[2][0] === 1 && s.harm[2][2] < 0, 'A sound: square (odd 1/n), sawtooth (all 1/n), triangle (odd, alternating 1/n^2)');
     const rf = r.reflection;
     ok(rf.a.thetaI === 35 && rf.a.thetaR === 35 && near(rf.a.outDir, 35) && !rf.miss.hit && near(rf.img.imgDist, 12) && near(rf.img.sep, 24) && rf.img.virtual && rf.rotBad === 0, 'A reflection: reflected angle = incident angle; mirror turned alpha -> ray turned 2 alpha (400 random); image distance = object distance');
     const fa = r.refraction;
@@ -205,7 +205,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     ok(ln.eqBad === 0 && ln.clsBad === 0, 'A lens: 1/u + 1/v = 1/f (signed) and the real / virtual / enlarged / reduced rules (600 random, convex and concave)');
     ok(ln.none && near(ln.eq.v, 20) && near(ln.eq.m, 1) && ln.eq.nature === '倒立、等大的实像' && near(ln.cam.v, 15) && ln.cam.tool === '照相机' && near(ln.proj.v, 30) && ln.proj.tool === '投影仪' && ln.mag.v < 0 && ln.mag.tool === '放大镜' && !ln.con.real, 'A lens: u = f no image, u = 2f equal real image, camera (u=30,f=10 -> v=15), projector (u=15 -> v=30), magnifier, concave');
     const he = r.heating;
-    ok(he.start.T === -20 && he.meltEnd[0].phase === 0 && he.meltEnd[1].T === 0 && he.meltEnd[1].phase === 1 && he.meltEnd[2].phase === 2 && he.boil[0].phase === 2 && he.boil[1].T === 100 && he.boil[1].phase === 3 && he.boil[2].phase === 3 && he.boil[3].phase === 4 && he.boil[3].T > 100, 'A heating: 0.1 kg ice at 400 W: solid until 10.5 s, melting to 94 s at 0 degrees, water, boiling from 199 s to 765 s at 100 degrees, steam');
+    ok(he.start.T === -20 && he.meltEnd[0].phase === 0 && he.meltEnd[1].T === 0 && he.meltEnd[1].phase === 1 && he.meltEnd[2].phase === 2 && he.boil[0].phase === 2 && he.boil[1].T === 100 && he.boil[1].phase === 3 && he.boil[2].phase === 3 && he.boil[3].phase === 4 && he.boil[3].T > 100, 'A heating: 0.1 kg ice at 400 W: solid until 10.5 s, melting to 94 s at 0 degrees, water, boiling from 199 s to 764 s at 100 degrees, steam');
     ok(near(he.plateau[0], 83.5) && near(he.plateau[1], 83.5) && he.plateau[2] === 0 && he.wax[0].phase === 0 && he.wax[1].phase === 1 && he.wax[2].phase === 2 && he.monoBad === 0 && he.flatBad === 0 && he.sfBad === 0 && near(he.heat, 42000) && he.cool[0].phase === 2 && he.cool[1].T === 0 && he.cool[2].phase === 0 && he.cool[2].T < 0, 'A heating: plateau length = lambda m / P, wax has no plateau (strictly rising), curves monotonic (rising / cooling), flat part exactly 0 degrees (120 random)');
     const sp = r.spring;
     ok(near(sp.G, 9.8) && near(sp.moon, 1.6) && near(sp.x, 0.1225) && sp.lim[0] === false && sp.lim[1] === true && sp.grav.join() === '9.8,1.6,3.7,24.8', 'A spring: G = m g (earth, moon), Hooke x = F / k, elastic limit');

@@ -6,7 +6,7 @@ export const power = (W: number, t: number) => W / t;
 /** pendulum: theta'' = -(g/L) sin theta, RK4 with a fixed small step; angles in radians */
 export function pendulum(theta0Deg: number, L: number, t: number): { theta: number; omega: number } {
   let th = (theta0Deg * Math.PI) / 180, om = 0;
-  const f = (a: number) => -(g / L) * Math.sin(a), dt = 0.002;
+  const f = (a: number) => -(g / L) * Math.sin(a), dt = 0.001;
   const n = Math.floor(t / dt);
   for (let i = 0; i < n; i++) {
     const k1t = om, k1o = f(th);
