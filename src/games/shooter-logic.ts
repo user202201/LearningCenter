@@ -141,7 +141,7 @@ export function spawnEnemy(s: State, kind: EKind, x: number, o: { size?: number;
     const sz = clamp(o.size ?? 2, 1, 3);
     e.size = sz; e.r = ROCK_R[sz]; e.hp = e.maxhp = ROCK_HP[sz]; e.vy = o.vy ?? [0, 90, 72, 56][sz] + L * 3; if (!o.vx) e.vx = (rnd(s) - 0.5) * 50;
   } else if (kind === "boss") {
-    e.bt = o.bt ?? bossTypeOf(L); e.r = e.bt === 0 ? 34 : 46; e.hp = e.maxhp = bossHp(L); e.size = L; e.cd = 2; e.vy = 80; s.boss = e;
+    e.bt = o.bt ?? bossTypeOf(L); e.r = e.bt === 0 ? 34 : 46; e.hp = e.maxhp = Math.round(bossHp(L) * (s.easy ? 0.8 : 1)); e.size = L; e.cd = 2; e.vy = 80; s.boss = e;
   } else {
     const c = CFG[kind];
     e.r = c.r; e.hp = e.maxhp = c.hp + (kind === "flyer" || kind === "zigzag" ? (L >= 6 ? 1 : 0) : 0); e.vy = o.vy ?? c.vy + (kind === "bomber" || kind === "mother" ? 0 : L * 2);
@@ -253,15 +253,15 @@ const ATT: Record<number, string[][]> = {
 };
 function bossAttack(s: State, e: Enemy, evs: Event[]) {
   const bs = bulletSpeed(s), L = s.level, ph = phaseOf(e), list = ATT[e.bt][ph], a = list[e.atk++ % list.length];
-  let wait = (1.8 - L * 0.05) * (s.easy ? 1.35 : 1) * (ph === 2 ? 0.85 : 1);
+  let wait = (1.8 - L * 0.05) * (s.easy ? 1.7 : 1) * (ph === 2 ? 0.85 : 1);
   if (a === "ring") { const n = 8 + Math.floor(L / 2) - (s.easy ? 3 : 0), off = rnd(s) * 6.28; for (let i = 0; i < n; i++) eShoot(s, e.x, e.y + 20, evs, off + (i * 6.2832) / n, bs * 0.85); }
-  else if (a === "aimed") { const aim = Math.atan2(s.ship.x - e.x, s.ship.y - e.y), n = L >= 6 ? 5 : 3; for (let i = 0; i < n; i++) eShoot(s, e.x, e.y + 20, evs, aim + (i - (n - 1) / 2) * 0.22, bs * 1.05); }
+  else if (a === "aimed") { const aim = Math.atan2(s.ship.x - e.x, s.ship.y - e.y), n = L >= 6 && !s.easy ? 5 : 3; for (let i = 0; i < n; i++) eShoot(s, e.x, e.y + 20, evs, aim + (i - (n - 1) / 2) * 0.22, bs * 1.05); }
   else if (a === "curtain") { const n = 5 - (s.easy ? 1 : 0), o = rnd(s) < 0.5 ? 0 : 0.5; for (let i = 0; i < n; i++) if (s.ebullets.length < MAX_EBULLETS) s.ebullets.push({ x: 40 + ((W - 80) * (i + o)) / n, y: e.y + 20, vx: 0, vy: bs * 0.8, r: 4.5, mine: false, g: false }); evs.push({ t: "shoot", x: e.x, y: e.y }); }
   else if (a === "spiral") { e.sp = 1.8; wait += 1.8; }
   else if (a === "minions") { for (const d of [-1, 1]) spawnEnemy(s, "flyer", e.x + d * 40, { y: e.y + 10 }); evs.push({ t: "shoot", x: e.x, y: e.y }); }
   else if (a === "laser") {
     const xs = ph === 0 ? [s.ship.x] : [s.ship.x - 60, s.ship.x + 60];
-    for (const x of xs) s.haz.push({ x: clamp(x, 20, W - 20), w: 14, t: 0, warn: s.easy ? 1.3 : 1, dur: 0.5, kind: "laser", zapped: false });
+    for (const x of xs) s.haz.push({ x: clamp(x, 20, W - 20), w: 14, t: 0, warn: s.easy ? 1.6 : 1, dur: 0.5, kind: "laser", zapped: false });
     evs.push({ t: "warn" }); wait += 1.2;
   } else if (a === "dash") { e.dash = { ph: 0, t: 0, tx: s.ship.x }; e.tele = 1; evs.push({ t: "warn" }); wait += 3; }
   e.cd = wait;
@@ -497,16 +497,16 @@ export function botInput(s: State): Input {
   for (const p of s.pups) if (p.y > H * 0.3 && Math.abs(p.x - sx) < 140) gx = p.x;
   const ys = [H - 150, H - 100, H - 60];
   let bx = sx, by = s.ship.y, bc = 1e18;
-  for (let cx = 20; cx <= W - 20; cx += 10) {
+  for (let cx = 20; cx <= W - 20; cx += 6) {
     for (const cy of ys) {
       let cost = Math.abs(cx - gx) * 0.05 + Math.abs(cx - sx) * 0.03 + Math.abs(cy - s.ship.y) * 0.01;
       const reach = Math.hypot(cx - sx, cy - s.ship.y) / 480;
-      for (const tau of [0.12, 0.25, 0.4, 0.55]) {
+      for (const tau of [0.08, 0.16, 0.25, 0.35, 0.47, 0.6]) {
         if (tau < reach * 0.6) continue;
-        for (const b of s.ebullets) { const rr = 26 + b.r, dd = Math.hypot(b.x + b.vx * tau - cx, b.y + b.vy * tau - cy); if (dd < rr) cost += (rr - dd) * (rr - dd); }
+        for (const b of s.ebullets) { const rr = 22 + b.r, dd = Math.hypot(b.x + b.vx * tau - cx, b.y + b.vy * tau - cy); if (dd < rr) cost += (rr - dd) * (rr - dd); }
         for (const e of s.enemies) { if (e.kind === "balloon") continue; const rr = e.r + 20, dd = Math.hypot(e.x + e.vx * tau - cx, e.y + e.vy * tau - cy); if (dd < rr) cost += (rr - dd) * (rr - dd) * 0.6; }
       }
-      for (const h of s.haz) { const rem = h.warn + h.dur - h.t; if (rem > 0 && Math.abs(cx - h.x) < h.w + 14) cost += 60000; }
+      for (const h of s.haz) { const rem = h.warn + h.dur - h.t; if (rem > 0 && Math.abs(cx - h.x) < h.w + 9) cost += 60000; }
       if (s.boss && s.boss.dash) { if (Math.abs(cx - s.boss.dash.tx) < 60) cost += 30000; }
       if (cost < bc) { bc = cost; bx = cx; by = cy; }
     }

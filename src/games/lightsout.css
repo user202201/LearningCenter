@@ -69,10 +69,10 @@
   .lo-act .mopt { min-width: 0; }
 }
 @media (min-aspect-ratio: 5/4) and (max-height: 700px) {
-  .lo-wrap { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "hud board act" "opt board act"; align-items: center; gap: 6px 8px; }
-  .lo-hud { flex-direction: row; max-width: 200px; gap: 4px; align-self: end; }
-  .lo-opt { max-width: 200px; gap: 4px; align-self: start; }
-  .lo-act { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 5px; width: 120px; }
+  .lo-wrap { grid-template-columns: 196px minmax(0, 1fr) 196px; grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "hud board act" "opt board act"; align-items: center; gap: 6px 8px; }
+  .lo-hud { flex-direction: row; max-width: 196px; gap: 4px; align-self: end; }
+  .lo-opt { max-width: 196px; gap: 4px; align-self: start; }
+  .lo-act { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 5px; width: 120px; justify-self: center; grid-row: 1 / span 2; }
   .lo-stat { font-size: 14px; padding: 0 8px; }
   .lo-wrap .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
   .lo-wrap .mopt { box-shadow: 0 2px 0 #96f2d7; }
