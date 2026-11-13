@@ -31,7 +31,7 @@ export function mountFig(box: HTMLElement, markup: string): void {
 
 // ------------------------------------------------------------------ clocks
 /** the hands of a clock at h:m, drawn pointing up and then turned by `rotate(angle cx cy)` (the angles are what the tests read back) */
-export const hourAngle = (h: number, m: number): number => ((h % 12) + m / 60) * 30;
+export const hourAngle = (h: number, m: number): number => (h % 12) * 30 + m * 0.5;
 export const minuteAngle = (m: number): number => m * 6;
 export function clockBody(h: number, m: number, cx: number, cy: number, r: number, minuteTicks = true): string {
   let hourT = "", minT = "", nums = "";

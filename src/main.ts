@@ -21,7 +21,9 @@ import * as MU from "./music";
 import * as GM from "./gameshub";
 import * as MA from "./math";
 import * as SC from "./science";
+import * as PO from "./poems";
 import { pickKidGrade } from "./gradeui";
+import * as DW from "./dictwrite";
 import * as PK from "./pk";
 
 const app = document.getElementById("app")!;
@@ -391,8 +393,10 @@ function renderWeek(body: HTMLElement, k: M.Kid, kid: M.KidData) {
       chars.length
         ? grid
         : h("div", { class: "add-empty" }, h("button", { class: "add-big", id: "enter", title: "录入这一周的内容", "aria-label": "录入这一周的内容", onclick: () => enterDialog(k) }, "＋"), h("p", {}, "点击 ＋ 录入本周汉字")),
+      DW.weekTools(k, curWeek, chars.length > 0 || (idioms.weeks.find((x) => x.start === curWeek)?.items.length ?? 0) > 0),
       // the idioms are the same for every child: one list, one story page (not one per child)
       h("button", { class: "primary wide", id: "idioms-btn", onclick: () => { idiomFrom = `#/kid/${k.id}`; idiomWeek = curWeek; idiomAll = false; idiomColor = k.color; location.hash = "#/idioms"; } }, "成语故事"),
+      h("button", { class: "primary wide", id: "poems-btn", onclick: () => (location.hash = `#/poems/${k.id}`) }, "古诗词"),
     ),
   );
   if (settings.pinyin) void fillPinyin(grid);
@@ -870,6 +874,9 @@ async function deleteKid(k: M.Kid) {
     kidsFile = await api.update<M.KidsFile>("kids.json", M.EMPTY_KIDS, (cur) => ({ ...cur, kids: cur.kids.filter((x) => x.id !== k.id) }), `remove ${k.id}`);
     await api.remove(`kids/${k.id}.json`, `remove ${k.id}`);
     await api.remove(`kids/${k.id}.review.json`, `remove ${k.id}`);   // the game's progress goes with the child
+    await api.remove(`poems/${k.id}.json`, `remove ${k.id}`);   // the poems of the child go with the child
+    await api.remove(`poems/${k.id}.review.json`, `remove ${k.id}`);
+    for (const f of [`dictation/${k.id}.json`, `write/${k.id}.json`, `english/${k.id}.dictation.json`, `french/${k.id}.dictation.json`]) await api.remove(f, `remove ${k.id}`).catch(() => { /* never made */ });   // dictation results and writing progress (rule 51)
     kidCache.delete(k.id);
     done();
     toast(`已删除 ${k.name}`);
@@ -1478,6 +1485,13 @@ async function route() {
   if (kid) return renderKid(kid[1], kid[2] === "learned" ? "learned" : kid[2] === "game" ? "game" : "week");
   const sheet = /^#\/sheet\/([\w-]+)$/.exec(hash);
   if (sheet) return void renderSheet(sheet[1]);
+  if (!/^#\/(dictation|write)\//.test(hash) && !/^#\/kid\//.test(hash)) DW.clearWeek();
+  const dict = /^#\/dictation\/([\w-]+)$/.exec(hash);
+  if (dict) return void DW.renderDictation(dict[1]);
+  const wr = /^#\/write\/([\w-]+)$/.exec(hash);
+  if (wr) return void DW.renderWrite(wr[1]);
+  const spell = /^#\/english\/([\w-]+)\/dictation$/.exec(hash);
+  if (spell) return void DW.renderSpelling(spell[1]);
   if (hash === "#/idioms") return void renderIdioms();
   if (hash === "#/stories") return void renderStories();
   const idiom = /^#\/idiom\/(.+)$/.exec(hash);
@@ -1493,6 +1507,7 @@ async function route() {
   if (hash === "#/science/formulas") return void SC.renderFormulas();
   if (hash === "#/science/circuits") return void SC.renderCircuits();
   if (hash === "#/science/notes") return void SC.renderNotes();
+  if (hash === "#/science/map") return void SC.renderMap();
   if (hash === "#/subject/music") return void MU.renderMusic();
   if (hash === "#/subject/games") return void GM.renderGames();
   const gmg = /^#\/games\/([\w-]+)$/.exec(hash);
@@ -1507,6 +1522,8 @@ async function route() {
   if (hash === "#/music/guitar") return void MU.renderGuitar();
   if (hash === "#/music/beats") return void MU.renderBeats();
   if (hash === "#/music/dj") return void MU.renderDJ();
+  const poems = /^#\/poems\/([\w-]+)(?:\/(.+))?$/.exec(hash);
+  if (poems) return void PO.render(poems[1], poems[2] ?? "");
   const sci = /^#\/science\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
   if (sci) return void SC.renderKid(sci[1], sci[2] === "learned" ? "learned" : sci[2] === "game" ? "game" : "week");
   const math = /^#\/math\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
@@ -1530,8 +1547,10 @@ document.addEventListener("touchend", (e) => {
 
 const shell = { show, showLoading, showError, loadShared, kids: () => kidsFile, avatarEl, back: backBtn, gear: gearBtn, stagger, epoch: () => epoch, gameSeconds: () => settings.gameSeconds, route: () => void route(), addKid  };
 E.initEnglish(shell);
+DW.initDictWrite({ ...shell, idioms: () => idioms });
 MA.initMath(shell);
 SC.initScience(shell);
+PO.initPoems(shell);
 PK.initPk(shell);
 MU.initMusic(shell);
 GM.initGames(shell);

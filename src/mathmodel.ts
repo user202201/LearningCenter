@@ -75,7 +75,7 @@ export function applyMath(r: MathReview, answers: Answer[], today: string, summa
     const c = topics[a.topic] ?? { right: 0, wrong: 0 };
     topics[a.topic] = { right: c.right + (a.right ? 1 : 0), wrong: c.wrong + (a.right ? 0 : 1), last: today };
     if (a.q) {
-      mistakes = mistakes.filter((m) => m.q !== a.q!.q);   // (right now = out of the book; wrong = (again) at the top)
+      mistakes = mistakes.filter((m) => !(m.q === a.q!.q && (m.fig ?? "") === (a.q!.fig ?? "")));   // (right now = out of the book; wrong = (again) at the top)
       if (!a.right) mistakes.unshift(a.q);
     }
   }

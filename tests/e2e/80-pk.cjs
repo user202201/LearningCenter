@@ -1,0 +1,525 @@
+// PK认字 (src/pk.ts, pklogic.ts, pk-chinese.ts): the pure rules on hundreds of simulated games against an independent reference, the item maker (every character
+// from its own child's list only), the screens (card on the 识字 home, setup, the portrait stage with a top half turned by 180 degrees, countdown, rounds, final,
+// exit, record), real touch events (CDP, dpr 2) on the turned buttons, six screen sizes in both orientations, EN / FR, no outside request.
+const { start, checks } = require('./harness.cjs');
+const { ok, done } = checks();
+const fs = require('fs');
+const OUT = process.env.D || 'tests/out/work/';
+fs.mkdirSync(OUT, { recursive: true });
+
+const KIDS = [{ id: 'k1', name: 'Anna', color: '#f2545b' }, { id: 'k2', name: 'Ben', color: '#1c7ed6' }, { id: 'k3', name: 'Cy', color: '#2f9e44' }, { id: 'k4', name: 'Dee', color: '#e8590c' }];
+const LISTS = { k1: '假辣酸贫纺炒缸锅烛扇', k2: '鼓旧富言忙桶炉锤泉溪', k3: '波坡板', k4: '山水火土木金' };
+const mk = (ids, lists = LISTS) => {
+  const store = new Map();
+  store.set('kids.json', JSON.stringify({ kids: KIDS.filter((k) => ids.includes(k.id)), startWeek: '2026-11-08' }));
+  for (const id of ids) store.set(`kids/${id}.json`, JSON.stringify({ weeks: [{ start: '2026-11-08', chars: [...lists[id]] }] }));
+  return store;
+};
+const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [1180, 820]];
+
+(async () => {
+  // =====================================================================================================================================
+  // 1. the rules (pure), in the browser through the dev server's modules
+  // =====================================================================================================================================
+  const t = await start(mk(['k1', 'k2', 'k3', 'k4']), { viewport: { width: 820, height: 1180 } });
+  const p = t.page;
+  const R = await p.evaluate(async () => {
+    const L = await import('/src/pklogic.ts');
+    const res = { bad: [], games: 0, taps: 0, kinds: {}, timeouts: 0, bothLocked: 0, wins: [0, 0] };
+    const bad = (m) => { if (res.bad.length < 8) res.bad.push(m); };
+    const mkItems = (r, n) => Array.from({ length: n }, (_, i) => { const right = Math.floor(r() * 4); return { prompt: 'x' + i, choices: ['a', 'b', 'c', 'd'], answers: [right] }; });
+    // --- the random generator ---
+    const a1 = L.rng(5), a2 = L.rng(5), a3 = L.rng(6);
+    const s1 = [a1(), a1(), a1()].join(), s2 = [a2(), a2(), a2()].join(), s3 = [a3(), a3(), a3()].join();
+    if (s1 !== s2 || s1 === s3) bad('seeded random');
+    const sh = L.shuffled([1, 2, 3, 4, 5, 6, 7, 8], L.rng(3));
+    if ([...sh].sort().join() !== '1,2,3,4,5,6,7,8') bad('shuffle loses items');
+    // --- the exact timeline of a game nobody touches: 5200 ms of countdown + intro, then ten times prep + the 12 s limit + result ---
+    {
+      const s = L.create([mkItems(L.rng(1), 10), mkItems(L.rng(2), 10)], 0);
+      const seen = [];
+      let last = '';
+      for (let t = 0; t <= 150000; t += 50) { L.advance(s, t); const k = s.phase + (s.phase === 'countdown' ? s.count : ''); if (k !== last) { seen.push(k + '@' + t); last = k; } }
+      if (s.phase !== 'final' || s.scores.join() !== '0,0' || s.outcome.join() !== 'tie,tie') bad('idle game does not end as a draw');
+      if (seen.slice(0, 6).join() !== 'countdown3@0,countdown2@1000,countdown1@2000,countdown0@3000,intro@3700,prep@5200') bad('opening: ' + seen.slice(0, 6).join());
+      if (!seen.includes('final@148200')) bad('idle game ends at ' + seen[seen.length - 1]);
+      if (s.results.length !== 10 || s.results.some((x) => x !== -1)) bad('idle results');
+    }
+    // --- scripted rounds ---
+    const fresh = (n = 10) => { const s = L.create([mkItems(L.rng(1), n), mkItems(L.rng(2), n)], 0); L.advance(s, 5200 + 900); return s; };   // at the start of the first question
+    const wrongOf = (s, side) => [0, 1, 2, 3].find((i) => !L.current(s, side).answers.includes(i));
+    const rightOf = (s, side) => L.current(s, side).answers[0];
+    let s = fresh(); const qs = s.questionStart;
+    if (s.phase !== 'question' || qs !== 6100) bad('question start ' + qs);
+    let e = L.tap(s, 0, rightOf(s, 0), qs - 1);
+    if (e.type !== 'ignored' || e.why !== 'early' || s.scores.join() !== '0,0') bad('a tap before the question is shown must do nothing');
+    e = L.tap(s, 1, wrongOf(s, 1), qs + 100);
+    if (e.type !== 'wrong' || !s.locked[1] || s.locked[0] || s.phase !== 'question') bad('wrong tap locks that side only');
+    e = L.tap(s, 1, rightOf(s, 1), qs + 150);
+    if (e.type !== 'ignored' || e.why !== 'locked' || s.scores.join() !== '0,0') bad('a locked side cannot answer again');
+    e = L.tap(s, 0, rightOf(s, 0), qs + 200);
+    if (e.type !== 'win' || s.scores.join() !== '1,0' || s.phase !== 'result' || s.winner !== 0 || s.results[0] !== 0) bad('the other side may still win');
+    e = L.tap(s, 1, rightOf(s, 1), qs + 210);
+    if (e.type !== 'ignored' || s.scores.join() !== '1,0') bad('after the win nothing more counts');
+    // both locked
+    s = fresh(); L.tap(s, 0, wrongOf(s, 0), qs + 10); e = L.tap(s, 1, wrongOf(s, 1), qs + 20);
+    if (e.type !== 'wrong' || !e.both || s.phase !== 'result' || s.winner !== -1 || s.scores.join() !== '0,0' || s.results[0] !== -1) bad('both locked out: no winner');
+    // time limit
+    s = fresh(); L.advance(s, qs + 11999); if (s.phase !== 'question') bad('limit reached too early'); L.advance(s, qs + 12000);
+    if (s.phase !== 'result' || s.winner !== -1 || s.results[0] !== -1) bad('time limit');
+    // a tap in the prep phase and in the countdown
+    const q0 = L.create([mkItems(L.rng(1), 10), mkItems(L.rng(2), 10)], 0);
+    e = L.tap(q0, 0, 0, 10); if (e.type !== 'ignored' || e.why !== 'phase') bad('tap during the countdown');
+    L.advance(q0, 5300); e = L.tap(q0, 0, rightOf(q0, 0), 5300); if (e.type !== 'ignored' || q0.scores.join() !== '0,0') bad('tap during prep');
+    e = L.tap(s, 0, 9, qs); if (e.type !== 'ignored' || e.why !== 'index') bad('index out of range');
+    // ties by order of arrival; an earlier timestamp that arrives later takes the win (at most 100 ms earlier)
+    s = fresh(); L.tap(s, 1, rightOf(s, 1), qs + 500); e = L.tap(s, 0, rightOf(s, 0), qs + 500);
+    if (e.type !== 'ignored' || s.winner !== 1 || s.scores.join() !== '0,1') bad('same time: the first to arrive wins');
+    s = fresh(); L.tap(s, 1, rightOf(s, 1), qs + 500); e = L.tap(s, 0, rightOf(s, 0), qs + 470);
+    if (e.type !== 'steal' || s.winner !== 0 || s.scores.join() !== '1,0' || s.results[0] !== 0) bad('earlier time arriving later must win: ' + JSON.stringify(e) + s.scores);
+    s = fresh(); L.tap(s, 1, rightOf(s, 1), qs + 500); e = L.tap(s, 0, rightOf(s, 0), qs + 300);
+    if (e.type !== 'ignored' || s.scores.join() !== '0,1') bad('200 ms earlier is too late to take the win');
+    s = fresh(); L.tap(s, 1, rightOf(s, 1), qs + 500); e = L.tap(s, 0, wrongOf(s, 0), qs + 480);
+    if (e.type !== 'ignored' || s.scores.join() !== '0,1') bad('a wrong tap never takes the win');
+    s = fresh(); L.tap(s, 0, wrongOf(s, 0), qs + 100); L.tap(s, 1, rightOf(s, 1), qs + 500); e = L.tap(s, 0, rightOf(s, 0), qs + 480);
+    if (e.type !== 'ignored' || s.scores.join() !== '0,1') bad('a locked side cannot take the win');
+    // several right answers: every one of them counts
+    { const it = [[{ prompt: 'y', choices: ['a', 'b', 'c', 'd'], answers: [1, 3] }], [{ prompt: 'z', choices: ['a', 'b', 'c', 'd'], answers: [0] }]];
+      for (const idx of [1, 3]) { const q = L.create(it, 0); L.advance(q, 6100); if (L.tap(q, 0, idx, 6200).type !== 'win') bad('polyphone answer ' + idx); }
+      const q = L.create(it, 0); L.advance(q, 6100); if (L.tap(q, 0, 0, 6200).type !== 'wrong') bad('not an answer'); }
+    // fewer items than rounds: the game is as long as the shorter list; zero items goes straight to the end
+    { const q = L.create([mkItems(L.rng(1), 4), mkItems(L.rng(2), 7)], 0); if (q.total !== 4) bad('total is the shorter list'); L.advance(q, 1e6); if (q.phase !== 'final' || q.results.length !== 4) bad('short game'); }
+    { const q = L.create([[], []], 0); L.advance(q, 1e6); if (q.phase !== 'final') bad('empty game'); }
+    // after the end: nothing changes
+    s = fresh(); for (let r = 0; r < 10; r++) { L.tap(s, 0, rightOf(s, 0), s.questionStart + 5); L.advance(s, s.phaseEnd); L.advance(s, s.phaseEnd); }
+    { const before = JSON.stringify(L.snapshot(s)); const ev = [L.tap(s, 0, 0, 1e7), L.tap(s, 1, 1, 1e7 + 5)]; L.advance(s, 2e7); if (s.phase !== 'final' || JSON.stringify(L.snapshot(s)) !== before || ev.some((x) => x.type !== 'ignored')) bad('state changes after the end'); if (s.scores.join() !== '10,0' || s.outcome.join() !== 'win,lose') bad('a 10-0 game: ' + s.scores + s.outcome); }
+    // play again needs both sides
+    { if (L.pressAgain(s, 0) !== false || L.pressAgain(s, 1) !== true) bad('play again needs both'); const q = fresh(); if (L.pressAgain(q, 0) || q.again[0]) bad('play again only in the final'); }
+
+    // --- hundreds of random games against an independent reference ---
+    for (let g = 0; g < 600; g++) {
+      const r = L.rng(1000 + g), items = [mkItems(r, 10), mkItems(r, 10)];
+      const st = L.create(items, 0); res.games++;
+      const skill = [r(), r()], speed = [200 + r() * 6000, 200 + r() * 6000], idle = g % 25 === 0;
+      const ref = { round: -1, locked: [false, false], winner: -1, results: [] };
+      let t = 0, guard = 0;
+      while (st.phase !== 'final' && guard++ < 4000) {
+        t += Math.floor(r() * 2500) + (r() < 0.2 ? 0 : 0);
+        L.advance(st, t);
+        if (st.phase === 'final') break;
+        if (idle) continue;
+        const side = r() < 0.5 ? 0 : 1;
+        const right = r() < skill[side];
+        const item = L.current(st, side);
+        const idx = right ? item.answers[0] : [0, 1, 2, 3].find((i) => !item.answers.includes(i));
+        if (Math.abs(st.round - ref.round) > 1) bad('round jumped');
+        if (st.round !== ref.round) { ref.round = st.round; ref.locked = [false, false]; ref.winner = -1; }
+        // what the reference expects from this tap
+        const inQ = st.phase === 'question' && t >= st.questionStart && ref.winner === -1;
+        const wasLocked = ref.locked[side];
+        const ev = L.tap(st, side, idx, t); res.taps++; res.kinds[ev.type] = (res.kinds[ev.type] || 0) + 1;
+        let exp;
+        if (!inQ) exp = 'ignored'; else if (wasLocked) exp = 'ignored'; else if (right) { exp = 'win'; ref.winner = side; ref.results[st.round] = side; } else { exp = 'wrong'; ref.locked[side] = true; if (ref.locked[0] && ref.locked[1]) { res.bothLocked++; ref.winner = -2; ref.results[st.round] = -1; } }
+        if (ev.type !== exp) bad(`game ${g}: tap gave ${ev.type}, reference says ${exp} (phase ${st.phase})`);
+        if (st.scores[0] + st.scores[1] !== ref.results.filter((x) => x === 0 || x === 1).length) bad('score sum');
+      }
+      L.advance(st, t + 200000);
+      if (st.phase !== 'final') { bad('game ' + g + ' did not end'); continue; }
+      const want = Array.from({ length: 10 }, (_, i) => (ref.results[i] === undefined ? -1 : ref.results[i]));
+      if (st.results.join() !== want.join()) bad(`game ${g}: results ${st.results} vs ${want}`);
+      if (st.scores[0] !== want.filter((x) => x === 0).length || st.scores[1] !== want.filter((x) => x === 1).length) bad('final scores');
+      const [a, b] = st.scores; const o = st.outcome.join();
+      if (o !== (a === b ? 'tie,tie' : a > b ? 'win,lose' : 'lose,win')) bad('outcome ' + o + ' for ' + a + ':' + b);
+      if (st.total !== 10 || st.round !== 9) bad('rounds');
+      res.wins[0] += a > b ? 1 : 0; res.wins[1] += b > a ? 1 : 0;
+    }
+    // --- determinism: the same seed and the same script give the same game ---
+    const play = (seed) => { const r = L.rng(seed), st = L.create([mkItems(r, 10), mkItems(r, 10)], 0), log = []; let t = 0; while (st.phase !== 'final') { t += 400; L.advance(st, t); log.push(L.tap(st, r() < 0.5 ? 0 : 1, Math.floor(r() * 4), t).type); } return JSON.stringify([L.snapshot(st), log]); };
+    if (play(42) !== play(42) || play(42) === play(43)) bad('determinism');
+    return res;
+  });
+  ok(R.bad.length === 0, `rules: scripted rounds and ${R.games} simulated games (${R.taps} taps) agree with an independent reference${R.bad.length ? ' -> ' + R.bad.join('; ') : ''}`);
+  ok(R.kinds.win > 500 && R.kinds.wrong > 300 && R.kinds.ignored > 500 && R.bothLocked > 20 && R.wins[0] > 50 && R.wins[1] > 50, 'the simulation covered wins, wrong taps, ignored taps, both locked out, and wins for each side: ' + JSON.stringify(R.kinds) + ' both-locked ' + R.bothLocked + ' wins ' + R.wins);
+
+  // =====================================================================================================================================
+  // 2. the item maker
+  // =====================================================================================================================================
+  const G = await p.evaluate(async () => {
+    const C = await import('/src/pk-chinese.ts');
+    const L = await import('/src/pklogic.ts');
+    const rd = await C.loadReadings();
+    const res = { bad: [], items: 0, poly: 0, polyBoth: 0, games: 0 };
+    const bad = (m) => { if (res.bad.length < 8) res.bad.push(m); };
+    // syllable pieces
+    const SY = (await import('/src/pk-syllables.ts')).SYLLABLES;
+    for (const b of SY) for (const tone of [1, 2, 3, 4]) { const m = C.markSyllable(b, tone), back = C.splitSyllable(m); if (back.base !== b || back.tone !== tone) bad('mark/split ' + b + tone + ' ' + m); if (!/^[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]+$/.test(m)) bad('letters ' + m); }
+    if (C.markSyllable('hao', 3) !== 'hǎo' || C.markSyllable('liu', 2) !== 'liú' || C.markSyllable('gou', 3) !== 'gǒu' || C.markSyllable('lüe', 4) !== 'lüè' || C.markSyllable('de', 0) !== 'de' || C.markSyllable('xiao', 3) !== 'xiǎo') bad('tone mark placement');
+    // a few readings
+    if (rd('行').length < 3 || !rd('行').includes('xíng') || !rd('行').includes('háng')) bad('readings of 行: ' + rd('行'));
+    if (rd('x').length || rd('😀').length) bad('non Chinese has readings');
+    // every character of the stroke library's everyday set, many seeds
+    const all = []; for (let c = 0x4e00; c <= 0x9fa5; c += 7) if (rd(String.fromCharCode(c)).length) all.push(String.fromCharCode(c));
+    const polys = ['行', '的', '乐', '长', '了', '好', '重', '还', '着', '和', '为', '数', '没', '假', '间', '将'];
+    for (const ch of [...all, ...polys, ...polys, ...polys]) {
+      const r = L.rng(ch.codePointAt(0) + res.items);
+      const it = C.makeItem(ch, rd, r); res.items++;
+      const valid = rd(ch);
+      if (it.prompt !== ch) bad('prompt');
+      if (it.choices.length !== 4 || new Set(it.choices).size !== 4) bad(ch + ' choices not 4 distinct: ' + it.choices);
+      if (!it.answers.length || it.answers.some((i) => !valid.includes(it.choices[i]))) bad(ch + ' answer is not a reading');
+      it.choices.forEach((c, i) => { if (valid.includes(c) !== it.answers.includes(i)) bad(ch + ': choice ' + c + ' valid=' + valid.includes(c) + ' but answers ' + it.answers); });
+      if (it.answers.length > 2 || it.answers.length > valid.length) bad('too many answers');
+      if (valid.length > 1) { res.poly++; if (it.answers.length === 2) res.polyBoth++; }
+      for (const c of it.choices) if (!/^[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]+$/.test(c)) bad('choice letters ' + c);
+    }
+    // the same seed gives the same item
+    if (JSON.stringify(C.makeItem('好', rd, L.rng(9))) !== JSON.stringify(C.makeItem('好', rd, L.rng(9)))) bad('item determinism');
+    // distractors are plausible: most share the syllable, the initial or the final of the answer
+    let near = 0, tot = 0;
+    for (let i = 0; i < 300; i++) { const ch = all[i * 3 % all.length], it = C.makeItem(ch, rd, L.rng(i)), a = C.splitSyllable(rd(ch)[0]).base; for (let k = 0; k < 4; k++) if (!it.answers.includes(k)) { tot++; const b = C.splitSyllable(it.choices[k]).base; if (b === a || b[0] === a[0] || b.slice(-2) === a.slice(-2)) near++; } }
+    if (near / tot < 0.8) bad('distractors not plausible: ' + near + '/' + tot);
+    // lists: every character shown on a side comes from that side's own list
+    const pool = []; for (let c = 0x4e00; c < 0x4e00 + 1200; c++) if (rd(String.fromCharCode(c)).length) pool.push(String.fromCharCode(c));
+    const sizes = [4, 5, 7, 9, 10, 11, 14, 25, 40];
+    for (let g = 0; g < 300; g++) {
+      const r = L.rng(5000 + g), pa = L.shuffled(pool.slice(0, pool.length >> 1), r), pb = L.shuffled(pool.slice(pool.length >> 1), r);
+      const la = pa.slice(0, sizes[g % sizes.length]), lb = pb.slice(0, sizes[(g * 7 + 3) % sizes.length]);
+      // junk the lists contain: latin letters, a number, an emoji, duplicates, a two-character word
+      const A = [...la, 'a', '1', '😀', '词语', la[0]], B = [...lb, 'z', lb[0]];
+      const game = C.makeGame([A, B], rd, g + 1); res.games++;
+      if (!game) { bad('game not made for ' + la.length + '/' + lb.length); continue; }
+      const [ia, ib] = game;
+      if (ia.length !== 10 || ib.length !== 10) bad('ten rounds');
+      for (const [items, list, name] of [[ia, la, 'A'], [ib, lb, 'B']]) {
+        const seq = items.map((x) => x.prompt);
+        if (seq.some((c) => !list.includes(c))) bad(name + ' shows a character that is not in its own list');
+        if (seq.some((c) => (name === 'A' ? lb : la).includes(c))) bad(name + ' shows a character of the other list');
+        if (list.length >= 10 && new Set(seq).size !== 10) bad(name + ' repeats within a game: ' + seq.join(''));
+        if (list.length < 10 && new Set(seq).size !== list.length) bad(name + ' did not use its whole short list: ' + seq.join(''));
+        for (let i = 1; i < 10; i++) if (seq[i] === seq[i - 1]) bad(name + ' same character twice in a row');
+      }
+      if (ia.map((x) => x.prompt).join('') === ib.map((x) => x.prompt).join('')) bad('same characters on both sides');
+    }
+    if (C.makeGame([['山', '水', '火'], [...'山水火土木金']], rd, 1) !== null) bad('3 characters must not make a game');
+    if (C.makeGame([['山', '水', '火', 'a', '1'], [...'山水火土木金']], rd, 1) !== null) bad('junk does not count');
+    if (!C.makeGame([[...'山水火土'], [...'山水火土']], rd, 1)) bad('4 characters make a game');
+    // the same two lists are allowed (two children who know the same characters): each side is its own sequence
+    const same = C.makeGame([[...'山水火土木金日月'], [...'山水火土木金日月']], rd, 3);
+    if (!same || same[0].map((x) => x.prompt).join('') === same[1].map((x) => x.prompt).join('')) bad('two sides with the same list should still differ');
+    return res;
+  });
+  ok(G.bad.length === 0, `items: ${G.items} questions (4 distinct choices, answers are readings, no wrong choice is a reading), ${G.games} games where each side shows only characters of its own list${G.bad.length ? ' -> ' + G.bad.join('; ') : ''}`);
+  ok(G.poly > 40 && G.polyBoth > 5 && G.polyBoth < G.poly, `characters with several readings: ${G.poly}, of which ${G.polyBoth} offered a second right reading`);
+
+  // =====================================================================================================================================
+  // 3. the home screen, the setup page
+  // =====================================================================================================================================
+  await p.evaluate(() => (location.hash = '#/chinese')); await p.waitForSelector('#pk-refs');
+  const H = await p.evaluate(() => { const kids = document.querySelector('.kids').getBoundingClientRect(), pk = document.querySelector('#pk-refs').getBoundingClientRect(), card = document.querySelector('#open-pk'); return { below: pk.top >= kids.bottom - 1, left: pk.left, right: innerWidth - pk.right, text: card.textContent, svg: !!card.querySelector('svg'), sw: document.documentElement.scrollWidth, vw: innerWidth }; });
+  ok(H.below && Math.abs(H.left - H.right) < 2 && H.text.includes('PK认字') && H.svg && H.sw <= H.vw, 'the 识字 home: the PK card (with its drawing) stands below the list of children, centred, no overflow');
+  await p.screenshot({ path: OUT + 'pk-home.png' });
+  await p.click('#open-pk'); await p.waitForSelector('#pk-slot-1');
+  ok((await p.evaluate(() => location.hash)) === '#/chinese/pk' && await p.isDisabled('#pk-start'), 'the card opens the setup page; Start is off until two players are chosen');
+  ok((await p.textContent('#pk-msgs')).includes('请先选择两位选手。'), 'the setup page says to choose two players first');
+  // pick player 1, then player 2: the first child cannot be chosen twice
+  await p.click('#pk-slot-1'); await p.waitForSelector('#pk-pick');
+  ok((await p.locator('.pk-pick-kid').count()) === 4, 'the list shows every child with the picture');
+  await p.click('.pk-pick-kid[data-kid=k1]'); await p.waitForSelector('#pk-pick', { state: 'detached' });
+  await p.click('#pk-slot-2'); await p.waitForSelector('#pk-pick');
+  ok(await p.isDisabled('.pk-pick-kid[data-kid=k1]') && !(await p.isDisabled('.pk-pick-kid[data-kid=k2]')), 'the child already chosen as player 1 cannot be chosen as player 2');
+  await p.click('.pk-pick-kid[data-kid=k3]'); await p.waitForSelector('#pk-pick', { state: 'detached' });
+  ok(await p.isDisabled('#pk-start') && (await p.textContent('#pk-msgs')).includes('Cy') && (await p.textContent('#pk-msgs')).includes('已入库的字太少，至少需要 4 个。'), 'Cy has 3 characters: Start is off and the message names Cy');
+  ok(await p.evaluate(() => !!document.querySelector('#pk-msgs .user')), 'the name in the message is marked as user text');
+  await p.click('#pk-slot-2'); await p.click('.pk-pick-kid[data-kid=k4]'); await p.waitForSelector('#pk-pick', { state: 'detached' });
+  ok(!(await p.isDisabled('#pk-start')) && (await p.textContent('#pk-msgs')).includes('字会重复出现'), 'Dee has 6 characters: Start is on, a short line says that characters repeat');
+  await p.click('#pk-slot-2'); await p.click('.pk-pick-kid[data-kid=k2]'); await p.waitForSelector('#pk-pick', { state: 'detached' });
+  ok(!(await p.isDisabled('#pk-start')) && (await p.textContent('#pk-msgs')).trim() === '', 'two children with 10 characters: no message');
+  ok((await p.locator('#pk-lay-tb, #pk-lay-lr').count()) === 0 && !(await p.evaluate(() => JSON.stringify(localStorage.getItem('learn.pk.v1') || '')).then((s) => /layout/.test(s))), 'there is no layout choice (one layout only)');
+  // the hint for a landscape screen is shown on a landscape screen only
+  const hint = () => p.evaluate(() => getComputedStyle(document.querySelector('#pk-hint-land')).display);
+  ok((await hint()) === 'none', 'portrait screen: no hint line on the setup page');
+  await p.setViewportSize({ width: 1180, height: 820 });
+  ok((await hint()) === 'block' && (await p.textContent('#pk-hint-land')).includes('竖放设备可获得更大的答题区。'), 'landscape screen: the setup page says that holding the device upright gives a larger answer area');
+  await p.screenshot({ path: OUT + 'pk-setup-landscape.png' });
+  await p.setViewportSize({ width: 390, height: 844 });
+  await p.screenshot({ path: OUT + 'pk-setup.png' });
+  // one child only: a formal message
+  const one = await start(mk(['k1']), { viewport: { width: 390, height: 844 } });
+  await one.page.click('#open-pk'); await one.page.waitForSelector('#pk-few');
+  ok((await one.page.textContent('#pk-few')).includes('至少需要两个孩子') && !(await one.page.locator('#pk-slot-1').count()), 'with fewer than two children the page only says so');
+  await one.browser.close();
+
+  // =====================================================================================================================================
+  // 4. the game on the screen
+  // =====================================================================================================================================
+  await p.setViewportSize({ width: 820, height: 1180 });
+  await p.evaluate(() => { window.__pkSeed = 12345; });
+  await p.click('#pk-start'); await p.waitForSelector('#pk-stage');
+  await p.evaluate(() => window.__pk.manual(true));
+  const S = () => p.evaluate(() => window.__pk.state());
+  const step = (ms) => p.evaluate((m) => window.__pk.step(m), ms);
+  const toPhase = async (ph) => { for (let i = 0; i < 80; i++) { const s = await S(); if (s.phase === ph) return s; await p.evaluate(() => { const s = window.__pk.state(); window.__pk.step(Math.max(1, s.phaseEnd - window.__pk.T())); }); } throw new Error('never reached ' + ph); };
+  const tap = (side, i) => p.evaluate(([a, b]) => window.__pk.tap(a, b), [side, i]);
+  const geo = () => p.evaluate(() => {
+    const r = (e) => { const b = e.getBoundingClientRect(); return { l: b.left, t: b.top, r: b.right, b: b.bottom, w: b.width, h: b.height }; };
+    const frame = document.querySelector('#pk-frame');
+    const out = { vw: innerWidth, vh: innerHeight, sw: document.documentElement.scrollWidth, sh: document.documentElement.scrollHeight, frame: r(frame), mid: r(document.querySelector('#pk-mid')), panels: [] };
+    for (const side of [0, 1]) {
+      const el = document.querySelector(`.pk-panel[data-side="${side}"]`), cs = getComputedStyle(el);
+      const opts = [...el.querySelectorAll('.pk-opt')];
+      out.panels[side] = { box: r(el), transform: cs.transform, w: el.offsetWidth, h: el.offsetHeight, opts: opts.map(r), optOver: opts.map((o) => o.scrollWidth > o.clientWidth + 1), ch: r(el.querySelector('.pk-ch')), choices: r(el.querySelector('.pk-choices')), top: r(el.querySelector('.pk-top')), row4: el.classList.contains('row4'), chText: el.querySelector('.pk-ch').textContent, hide: el.querySelector('.pk-ch').classList.contains('hide'), chOver: el.querySelector('.pk-ch').scrollWidth > el.querySelector('.pk-char').clientWidth + 1 };
+    }
+    return out;
+  });
+  const rot = (tr) => { const m = /matrix\(([^)]+)\)/.exec(tr); if (!m) return 0; const [a, b] = m[1].split(',').map(Number); return Math.round((Math.atan2(b, a) * 180) / Math.PI); };
+
+  let s = await S();
+  ok(s.seed === 12345 && s.phase === 'countdown' && s.total === 10, 'the game starts with a countdown and 10 rounds; the test seed is used');
+  // the countdown is shown to both players, each in its own orientation
+  let g = await geo();
+  const overTexts = () => p.evaluate(() => [0, 1].map((side) => document.querySelector(`.pk-panel[data-side="${side}"] .pk-over`).textContent.trim()));
+  ok((await overTexts()).join() === '3,3', 'countdown: both halves show the same big number');
+  await step(1000); ok((await overTexts()).join() === '2,2', 'countdown 2');
+  await step(2000); ok((await overTexts()).join() === '开始！,开始！', 'countdown ends with "Go" on both halves');
+  await step(700);
+  const intro = await overTexts();
+  ok(intro[0].includes('Anna') && intro[0].includes('Ben') && intro[1].includes('Anna') && intro[1].includes('Ben') && intro[0].includes('准备'), 'get ready: both halves name both players');
+  await p.screenshot({ path: OUT + 'pk-intro.png' });
+  await toPhase('prep');
+  g = await geo();
+  ok(g.panels[0].hide && g.panels[1].hide, 'before the reveal the characters are hidden on both halves');
+  const before = await S();
+  await tap(0, before.items[0].answers[0]);
+  ok((await S()).scores.join() === '0,0', 'a tap before the reveal is ignored');
+  s = await toPhase('question');
+  g = await geo();
+  const listA = [...LISTS.k1], listB = [...LISTS.k2];
+  ok(!g.panels[0].hide && !g.panels[1].hide && listA.includes(g.panels[0].chText) && listB.includes(g.panels[1].chText) && g.panels[0].chText !== g.panels[1].chText, `question: the bottom half shows ${g.panels[0].chText} (from Anna's list), the top half ${g.panels[1].chText} (from Ben's list)`);
+  ok(rot(g.panels[1].transform) === 180 && rot(g.panels[0].transform) === 0, 'the top half is turned by exactly 180 degrees, the bottom half is not turned');
+  ok(g.panels[0].box.t > g.panels[1].box.t && Math.abs(g.panels[0].box.h - g.panels[1].box.h) <= 1, 'player 1 (Anna) has the bottom half, player 2 (Ben) the top half, both of the same size');
+  // each half: character above the four choices, 2 x 2
+  const lay = (pn, turned) => {
+    const o = pn.opts;
+    const rows = new Set(o.map((b) => Math.round(b.t / 4))).size, cols = new Set(o.map((b) => Math.round(b.l / 4))).size;
+    const above = turned ? pn.ch.t > pn.choices.b - 1 : pn.ch.b <= pn.choices.t + 1;   // (the turned half: its top is the lower edge of the screen)
+    return { rows, cols, above };
+  };
+  let l0 = lay(g.panels[0], false), l1 = lay(g.panels[1], true);
+  ok(l0.rows === 2 && l0.cols === 2 && l1.rows === 2 && l1.cols === 2, 'four choices in a 2 x 2 grid on each half');
+  ok(l0.above && l1.above, 'the character is above the choices in each player\'s own view (the top half is the mirror image)');
+  ok(g.panels.every((q) => q.opts.every((b) => b.h >= 56 && b.w >= 56)) && g.panels.every((q) => q.choices.h / q.box.h >= 0.4), `choice buttons >= 56 px and the grid is ${(100 * g.panels[0].choices.h / g.panels[0].box.h).toFixed(0)} % of the half's height`);
+  ok(Math.abs(g.frame.l - (g.vw - g.frame.r)) < 1.5 && g.sw <= g.vw && g.sh <= g.vh, 'the stage is centred with equal space left and right; no scrolling');
+  await p.screenshot({ path: OUT + 'pk-question.png' });
+  // keys are not shown without a keyboard; shown after one was used
+  ok(await p.evaluate(() => getComputedStyle(document.querySelector('.pk-kb')).display === 'none'), 'no key hints before a key was pressed');
+  // wrong tap locks that side only; the other may still win
+  const wrongIdx = (st, side) => [0, 1, 2, 3].find((i) => !st.items[side].answers.includes(i));
+  await tap(1, wrongIdx(s, 1));
+  let q = await S();
+  ok(q.locked.join() === 'true,false' || q.locked.join() === 'false,true', 'a wrong tap locks the player out');
+  const lockedHalf = await p.evaluate(() => [...document.querySelectorAll('.pk-panel')].map((e) => [e.dataset.side, e.classList.contains('is-locked'), [...e.querySelectorAll('.pk-opt')].every((b) => b.classList.contains('dimmed') || b.classList.contains('wrong'))]));
+  ok(lockedHalf.find((x) => x[0] === '1')[1] && lockedHalf.find((x) => x[0] === '1')[2] && !lockedHalf.find((x) => x[0] === '0')[1], 'the locked half dims its buttons, the other half does not');
+  const re = await tap(1, s.items[1].answers[0]);
+  ok(re.type === 'ignored' && (await S()).scores.join() === '0,0', 'the locked player cannot try again in this round');
+  await tap(0, s.items[0].answers[0]);
+  q = await S();
+  ok(q.scores.join() === '1,0' && q.phase === 'result' && q.winner === 0, 'the other player taps the right reading: +1 and the round is over');
+  const resView = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`); return { win: e.classList.contains('is-win'), lose: e.classList.contains('is-lose'), plus: e.querySelector('.pk-plus')?.textContent || '', right: e.querySelectorAll('.pk-opt.right').length, wrong: e.querySelectorAll('.pk-opt.wrong').length, score: e.querySelector('.pk-score').textContent }; }));
+  ok(resView[0].win && resView[0].plus === '+1' && resView[0].right === 1 && resView[1].lose && resView[1].right >= 1 && resView[1].wrong === 1 && resView[0].score === '1', 'result: the winner\'s half says +1, both halves show the right reading in green, the loser\'s half is dimmed and keeps its wrong tap in red');
+  await p.screenshot({ path: OUT + 'pk-result.png' });
+  // 1.4 s later the next round starts by itself
+  await step(1399); ok((await S()).phase === 'result', 'the result stays 1.4 seconds');
+  await step(2); q = await S(); ok(q.phase === 'prep' && q.round === 1, 'then the next round starts by itself');
+  ok((await p.textContent('.pk-panel[data-side="0"] .pk-round')) === '第 2 / 10 题', 'the round counter reads "第 2 / 10 题"');
+  // timeout and both locked
+  s = await toPhase('question'); await step(12000); q = await S();
+  ok(q.phase === 'result' && q.winner === -1 && q.results[1] === -1, 'nobody answers: the round ends after 12 seconds without a point');
+  ok((await p.textContent('.pk-panel[data-side="0"] .pk-over')).includes('本题无人得分。'), 'the result says nobody scored');
+  await toPhase('question'); s = await S();
+  await tap(0, wrongIdx(s, 0)); await tap(1, wrongIdx(s, 1)); q = await S();
+  ok(q.phase === 'result' && q.winner === -1 && q.results[2] === -1 && q.scores.join() === '1,0', 'both players wrong: the round ends, no point');
+  // the keyboard: player 1 keys 1-4, player 2 keys 7 8 9 0
+  await toPhase('question'); s = await S();
+  await p.keyboard.press('Escape'); await p.waitForSelector('dialog[open]'); await p.keyboard.press('Escape'); await p.waitForSelector('dialog[open]', { state: 'detached' });
+  ok(await p.evaluate(() => document.querySelector('#pk-stage').classList.contains('kbd') && getComputedStyle(document.querySelector('.pk-kb')).display !== 'none'), 'after a key press the key hints are shown');
+  await p.keyboard.press(['7', '8', '9', '0'][s.items[1].answers[0]]);
+  q = await S(); ok(q.winner === 1 && q.scores.join() === '1,1', 'keyboard: player 2 answers with 7 8 9 0');
+  await toPhase('question'); s = await S();
+  await p.keyboard.press(String(s.items[0].answers[0] + 1)); q = await S();
+  ok(q.winner === 0 && q.scores.join() === '2,1', 'keyboard: player 1 answers with 1 2 3 4');
+
+  // play the rest: side 0 wins every remaining round; check the final screens
+  while ((await S()).phase !== 'final') { const st = await toPhase('question'); await tap(0, st.items[0].answers[0]); await step(1500); }
+  q = await S();
+  ok(q.phase === 'final' && q.results.length === 10 && q.outcome.join() === 'win,lose', `after round 10 the game ends: ${q.scores.join(':')}`);
+  const fin = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`); return { verdict: e.querySelector('.pk-verdict')?.textContent, again: e.querySelector('.pk-again')?.textContent, ico: !!e.querySelector('.pk-ficon svg'), cls: e.querySelector('.pk-final')?.className, score: e.querySelector('.pk-fscore')?.textContent }; }));
+  ok(fin[0].verdict === '你赢了。' && fin[1].verdict === '你输了。' && fin[0].ico && fin[1].ico && /win/.test(fin[0].cls) && /lose/.test(fin[1].cls) && fin[0].again === '再来一局' && fin[1].again === '再来一局', 'final: the winner\'s half says 你赢了。 with a trophy, the loser\'s half 你输了。; each half has its own "play again"');
+  ok(fin[0].score.split(':').map((x) => x.trim()).reverse().join(':') === fin[1].score.split(':').map((x) => x.trim()).join(':'), 'each half shows the score from its own side');
+  g = await geo();
+  ok(rot(g.panels[1].transform) === 180 && rot(g.panels[0].transform) === 0, 'the final screens keep the same turn: the top half is read from the top');
+  const anim = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"] .pk-ficon`); const cs = getComputedStyle(e); return cs.animationName; }));
+  ok(anim.every((x) => x === 'none'), 'reduced motion: the final animations are off (the tests run with reduced motion)');
+  await p.screenshot({ path: OUT + 'pk-final.png' });
+  // the record
+  const hist = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.pk.v1')).pairs);
+  ok(Object.keys(hist).length === 1 && Object.values(hist)[0].wins.k1 === 1 && (Object.values(hist)[0].wins.k2 || 0) === 0, 'the result is saved on this device (one win for Anna)');
+  // play again needs both
+  await p.click('#pk-again-1'); q = await S();
+  ok(q.phase === 'final' && q.again.join() === 'true,false' && (await p.textContent('#pk-again-1')) === '等待对方。' && await p.isDisabled('#pk-again-1'), 'one player presses play again: the half says to wait for the other player');
+  await p.click('#pk-again-2'); q = await S();
+  ok(q.phase === 'countdown' && q.scores.join() === '0,0' && q.seed === 12346, 'both pressed: a new game starts (new seed), scores back to 0');
+  // exit: confirmation while a game runs; Escape asks too; the clock waits while the box is open
+  await p.click('#pk-exit'); await p.waitForSelector('dialog[open]');
+  ok((await p.textContent('dialog[open]')).includes('退出对战？'), 'leaving a game that runs asks first');
+  await p.click('dialog[open] button:has-text("取消")'); await p.waitForSelector('dialog[open]', { state: 'detached' });
+  ok((await p.evaluate(() => location.hash)) === '#/chinese/pk/play' && (await S()).phase === 'countdown', 'cancelling stays in the game');
+  await p.keyboard.press('Escape'); await p.waitForSelector('dialog[open]');
+  await p.click('dialog[open] button.danger'); await p.waitForSelector('#pk-slot-1');
+  ok((await p.evaluate(() => location.hash)) === '#/chinese/pk' && !(await p.evaluate(() => !!window.__pk)), 'Escape asks too; confirming returns to the setup page');
+  const histAfter = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.pk.v1')).pairs);
+  ok(JSON.stringify(histAfter) === JSON.stringify(hist), 'a game that was left is not recorded');
+  ok((await p.textContent('.pk-hist-row')).includes('胜 1 · 负 0') && (await p.textContent('.pk-hist-row')).includes('Anna'), 'the setup page shows "胜 1 · 负 0" for the pair');
+  ok(await p.evaluate(() => document.querySelector('#pk-slot-1 .kname').textContent === 'Anna'), 'the last pick (Anna, Ben) is remembered');
+  // reset of the record
+  await p.click('#pk-reset'); await p.waitForSelector('dialog[open]'); await p.click('dialog[open] button:has-text("取消")'); await p.waitForSelector('dialog[open]', { state: 'detached' });
+  ok((await p.locator('.pk-hist-row').count()) === 1, 'cancelling the reset keeps the record');
+  await p.click('#pk-reset'); await p.click('dialog[open] button.danger'); await p.waitForSelector('.pk-hist-row', { state: 'detached' });
+  ok(await p.evaluate(() => Object.keys(JSON.parse(localStorage.getItem('learn.pk.v1')).pairs).length === 0), 'the reset clears the record');
+  // a tie and a loss by the first player
+  const playout = async (plan) => { while ((await S()).phase !== 'final') { const st = await toPhase('question'); if (plan(st) !== null) await tap(plan(st), st.items[plan(st)].answers[0]); else await step(12000); await step(1500); } return S(); };
+  await p.click('#pk-start'); await p.waitForSelector('#pk-stage'); await p.evaluate(() => window.__pk.manual(true));
+  q = await playout((st) => st.round % 2); // alternating: 5 : 5
+  const tie = await p.evaluate(() => [0, 1].map((side) => document.querySelector(`.pk-panel[data-side="${side}"] .pk-verdict`).textContent));
+  ok(q.outcome.join() === 'tie,tie' && tie.join() === '平局。,平局。', 'a tie shows 平局。 on both halves');
+  await p.screenshot({ path: OUT + 'pk-tie.png' });
+  await p.click('#pk-exit'); await p.waitForSelector('#pk-slot-1');
+  ok(await p.evaluate(() => { const x = Object.values(JSON.parse(localStorage.getItem('learn.pk.v1')).pairs)[0]; return x.ties === 1; }), 'finishing needs no confirmation; a tie is recorded as a tie');
+  await p.click('#pk-start'); await p.waitForSelector('#pk-stage'); await p.evaluate(() => window.__pk.manual(true));
+  q = await playout((st) => (st.round < 3 ? 0 : 1));
+  const lose = await p.evaluate(() => [0, 1].map((side) => document.querySelector(`.pk-panel[data-side="${side}"] .pk-verdict`).textContent));
+  ok(q.outcome.join() === 'lose,win' && lose.join() === '你输了。,你赢了。', 'player 2 wins 7 : 3: the top half says 你赢了。, the bottom half 你输了。');
+  await p.screenshot({ path: OUT + 'pk-final-top-wins.png' });
+  await p.click('#pk-exit'); await p.waitForSelector('#pk-slot-1');
+
+  // =====================================================================================================================================
+  // 5. six screen sizes, both orientations: the same portrait stage
+  // =====================================================================================================================================
+  await p.click('#pk-start'); await p.waitForSelector('#pk-stage'); await p.evaluate(() => window.__pk.manual(true));
+  await toPhase('question');
+  for (const [w, h] of SIZES) {
+    await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(120);
+    const gg = await geo(), land = w > h;
+    const tag = `${w}x${h}`;
+    const pn = gg.panels;
+    ok(rot(pn[1].transform) === 180 && rot(pn[0].transform) === 0, `${tag}: top half 180 degrees, bottom half 0`);
+    const inside = pn.every((q2) => q2.box.l >= gg.frame.l - 1 && q2.box.r <= gg.frame.r + 1 && q2.box.t >= gg.frame.t - 1 && q2.box.b <= gg.frame.b + 1 && q2.opts.every((b) => b.l >= q2.box.l - 1 && b.r <= q2.box.r + 1 && b.t >= q2.box.t - 1 && b.b <= q2.box.b + 1) && q2.ch.t >= q2.box.t - 1 && q2.ch.b <= q2.box.b + 1 && q2.ch.l >= q2.box.l - 1 && q2.ch.r <= q2.box.r + 1);
+    ok(inside && gg.sw <= gg.vw && gg.sh <= gg.vh && pn.every((q2) => !q2.chOver && q2.optOver.every((x) => !x)), `${tag}: every half, character and button inside the screen, no overflow, no clipped label`);
+    ok(pn.every((q2) => q2.opts.every((b) => b.h >= 55.5)), `${tag}: choice buttons >= 56 px high (${Math.min(...pn.flatMap((q2) => q2.opts.map((b) => Math.round(b.h))))} px)`);
+    const lr = pn.map((q2, i) => lay(q2, i === 1));
+    ok(land || (lr.every((x) => x.rows === 2 && x.cols === 2 && x.above) && pn.every((q2) => q2.choices.h / q2.box.h >= 0.4)), `${tag}: ${land ? 'landscape screen (the same stage, see below)' : 'portrait halves: character above a 2 x 2 grid that takes >= 40 % of the half'}`);
+    ok(Math.abs(gg.frame.l - (gg.vw - gg.frame.r)) < 1.5, `${tag}: equal space left and right (${Math.round(gg.frame.l)} / ${Math.round(gg.vw - gg.frame.r)} px)`);
+    if (land) ok(gg.frame.w / gg.frame.h <= 0.76 && gg.frame.w / gg.frame.h >= 0.7 && (await p.evaluate(() => getComputedStyle(document.querySelector('#pk-hint')).display !== 'none')), `${tag}: landscape shows the same 3:4 stage in the middle and the hint line`);
+    else ok(Math.abs(gg.frame.w - gg.vw) <= 1 && (await p.evaluate(() => getComputedStyle(document.querySelector('#pk-hint')).display === 'none')), `${tag}: portrait fills the width, no hint line`);
+    ok(pn[0].choices.h > 0 && Math.abs(pn[0].box.h - pn[1].box.h) <= 1, `${tag}: both halves have the same size`);
+    await p.screenshot({ path: OUT + `pk-q-${tag}.png` });
+  }
+  // the final screen on each size
+  await p.setViewportSize({ width: 390, height: 844 });
+  await playout(() => 0);
+  for (const [w, h] of SIZES) {
+    await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(120);
+    const fit = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`), pb = e.getBoundingClientRect(); return [...e.querySelectorAll('.pk-ficon, .pk-verdict, .pk-fscore, .pk-again')].every((x) => { const r = x.getBoundingClientRect(); return r.left >= pb.left - 1 && r.right <= pb.right + 1 && r.top >= pb.top - 1 && r.bottom <= pb.bottom + 1; }) && e.querySelector('.pk-again').getBoundingClientRect().height >= 55.5; }));
+    ok(fit.every(Boolean), `${w}x${h}: final screen: icon, words, score and the "play again" button (>= 56 px) fit inside each half`);
+    await p.screenshot({ path: OUT + `pk-f-${w}x${h}.png` });
+  }
+  // the exit button of the final screen sits at the centre line
+  const mid = await p.evaluate(() => { const b = document.querySelector('#pk-exit').getBoundingClientRect(), m = document.querySelector('#pk-mid').getBoundingClientRect(); return { cy: b.top + b.height / 2, my: m.top + m.height / 2, text: document.querySelector('#pk-exit').getAttribute('aria-label') }; });
+  ok(Math.abs(mid.cy - mid.my) < 2 && mid.text === '返回', 'the shared "返回" button is on the centre line');
+
+  // =====================================================================================================================================
+  // 6. English and French
+  // =====================================================================================================================================
+  await p.click('#pk-exit'); await p.waitForSelector('#pk-slot-1');
+  for (const lang of ['en', 'fr']) {
+    await p.setViewportSize({ width: 390, height: 844 });
+    await p.evaluate(async (lg) => {
+      const D = await import('/src/i18n-data.ts'), X = await import('/src/i18n-extra/pk.json'), I = await import('/src/i18n.ts');
+      const x = X.default || X; Object.entries(x).forEach(([k, v]) => { D.EN[k] = v[0]; D.FR[k] = v[1]; });
+      I.setLang(lg);
+    }, lang);
+    await p.waitForTimeout(150);
+    const cjk = (sel) => p.evaluate((s2) => { const bad = []; const walk = (n) => { if (n.nodeType === 3) { if (/[一-鿿]/.test(n.nodeValue) && !n.parentElement.closest('.user, .user-title')) bad.push(n.nodeValue.trim()); } else if (n.nodeType === 1 && !['SVG', 'svg', 'SCRIPT', 'STYLE'].includes(n.tagName)) { for (const a of ['title', 'aria-label']) if (/[一-鿿]/.test(n.getAttribute(a) || '')) bad.push(a + ':' + n.getAttribute(a)); n.childNodes.forEach(walk); } }; document.querySelectorAll(s2).forEach(walk); return bad; }, sel);
+    let bad = await cjk('#app');
+    ok(bad.length === 0, `${lang}: setup page has no Chinese left (${bad.join(' | ')})`);
+    await p.screenshot({ path: OUT + `pk-setup-${lang}.png` });
+    await p.click('#pk-start'); await p.waitForSelector('#pk-stage'); await p.evaluate(() => window.__pk.manual(true));
+    bad = await cjk('#app'); ok(bad.length === 0, `${lang}: countdown has no Chinese left (${bad.join(' | ')})`);
+    await toPhase('intro'); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: intro (${bad.join(' | ')})`);
+    await toPhase('question'); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: question (${bad.join(' | ')})`);
+    await p.screenshot({ path: OUT + `pk-q-${lang}.png` });
+    let st = await S(); await tap(0, st.items[0].answers[0]); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: result (${bad.join(' | ')})`);
+    await step(1500); await toPhase('question'); await step(12000); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: nobody scored (${bad.join(' | ')})`);
+    await p.click('#pk-exit'); await p.waitForSelector('dialog[open]'); bad = await cjk('dialog[open]'); ok(bad.length === 0, `${lang}: leave box (${bad.join(' | ')})`);
+    await p.click('dialog[open] button:has-text("' + (lang === 'en' ? 'Cancel' : 'Annuler') + '")');
+    await playout(() => 0); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: final (${bad.join(' | ')})`);
+    await p.click('#pk-again-1'); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: waiting (${bad.join(' | ')})`);
+    await p.screenshot({ path: OUT + `pk-f-${lang}.png` });
+    await p.click('#pk-exit'); await p.waitForSelector('#pk-slot-1');
+    const fits = await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth);
+    ok(fits, `${lang}: nothing sideways on the setup page`);
+  }
+  await p.evaluate(async () => { const I = await import('/src/i18n.ts'); I.setLang('zh'); });
+  ok(t.log.external.length === 0, 'no request left the app: ' + t.log.external.join(','));
+  await t.browser.close();
+
+  // =====================================================================================================================================
+  // 7. real touch events on the turned buttons (CDP, dpr 2, two fingers)
+  // =====================================================================================================================================
+  const tt = await start(mk(['k1', 'k2']), { touch: true, dpr: 2, viewport: { width: 820, height: 1180 }, motion: false });
+  const tp = tt.page;
+  await tp.addInitScript(() => { window.__pkSeed = 777; });
+  await tp.evaluate(() => { localStorage.setItem('learn.pk.v1', JSON.stringify({ mute: true, last: ['k1', 'k2'], pairs: {} })); });
+  await tp.evaluate(() => (location.hash = '#/chinese/pk/play')); await tp.waitForSelector('#pk-stage');
+  await tp.reload(); await tp.waitForSelector('#pk-stage');
+  const cdp = await tt.ctx.newCDPSession(tp);
+  const where = (side, i) => tp.evaluate(([a, b]) => { const r = document.querySelector(`.pk-panel[data-side="${a}"] .pk-opt[data-i="${b}"]`).getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }, [side, i]);
+  const fingers = async (pts, ts) => { await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: pts.map((q, i) => ({ x: q.x, y: q.y, id: i + 1 })), ...(ts ? { timestamp: ts } : {}) }); await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); };
+  const S2 = () => tp.evaluate(() => window.__pk.state());
+  const toQ = async () => { for (let i = 0; i < 40; i++) { const st = await S2(); if (st.phase === 'question') return st; await tp.evaluate(() => { const st2 = window.__pk.state(); window.__pk.skip(Math.max(1, st2.phaseEnd - window.__pk.T() + 5)); }); await tp.waitForTimeout(20); } throw new Error('no question'); };
+  let st = await toQ();
+  // a finger on the TURNED top half's right button: that player scores
+  let pt = await where(1, st.items[1].answers[0]);
+  await fingers([pt]);
+  st = await S2();
+  ok(st.scores.join() === '0,1' && st.winner === 1, 'a real touch on the turned (top) half\'s right button scores for player 2 only');
+  await tp.waitForTimeout(50);
+  // the bottom half: a wrong touch locks player 1 only
+  await tp.evaluate(() => { const s2 = window.__pk.state(); window.__pk.skip(Math.max(1, s2.phaseEnd - window.__pk.T() + 5)); });
+  st = await toQ();
+  const wrongI = (side) => [0, 1, 2, 3].find((i) => !st.items[side].answers.includes(i));
+  pt = await where(0, wrongI(0)); await fingers([pt]); st = await S2();
+  ok(st.locked.join() === 'true,false' && st.phase === 'question', 'a real wrong touch on the bottom half locks player 1 only');
+  // two fingers at once, one on each half: the right taps of both halves arrive together; only one point is given
+  await tp.evaluate(() => { const s2 = window.__pk.state(); window.__pk.skip(Math.max(1, s2.phaseEnd - window.__pk.T() + 5)); });
+  st = await toQ();
+  const pA = await where(0, st.items[0].answers[0]), pB = await where(1, st.items[1].answers[0]);
+  await fingers([pB, pA]);
+  st = await S2();
+  ok(st.scores[0] + st.scores[1] === 2 && (st.scores.join() === '1,2' || st.scores.join() === '0,3' || st.scores.join() === '1,2'), 'two fingers at once on the two halves: exactly one of them gets the point of this round (' + st.scores.join(':') + ')');
+  // an earlier timestamp that arrives later takes the win (CDP carries the time of the touch)
+  await tp.evaluate(() => { const s2 = window.__pk.state(); window.__pk.skip(Math.max(1, s2.phaseEnd - window.__pk.T() + 5)); });
+  st = await toQ();
+  const base = Date.now() / 1000, a = await where(0, st.items[0].answers[0]), b = await where(1, st.items[1].answers[0]);
+  const sc0 = st.scores.slice();
+  await fingers([b], base + 0.05); await fingers([a], base + 0.02);
+  st = await S2();
+  ok(st.scores[0] + st.scores[1] === sc0[0] + sc0[1] + 1, 'the two touches of different times give exactly one point');
+  const stolen = st.scores[0] === sc0[0] + 1;
+  console.log('INFO the earlier touch (player 1, 30 ms before) ' + (stolen ? 'took the win' : 'did not take it: the browser did not pass the event time through CDP, or the order was kept'));
+  // dpr 2 geometry: the buttons were hit where they are drawn (checked by every tap above); the panel is exactly twice as many device pixels
+  ok(await tp.evaluate(() => devicePixelRatio === 2), 'the touch checks ran at device pixel ratio 2');
+  await tp.screenshot({ path: OUT + 'pk-touch.png' });
+  ok(tt.log.external.length === 0, 'touch session: no outside request');
+  await tt.browser.close();
+  await done();
+})();

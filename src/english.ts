@@ -15,6 +15,7 @@ import { mascot } from "./art";
 import { subjectArt, shortcuts, subjectById } from "./hub";
 import * as R from "./readings";
 import { getLang } from "./i18n";
+import { spellButton } from "./dictwrite";
 
 /** what the English screens need from the app shell (main.ts) */
 export interface Ctx {
@@ -186,7 +187,7 @@ function renderWeek(body: HTMLElement, k: M.Kid, kid: M.KidData, map: Map<string
   const list = M.weekOf(kid, curWeek)?.chars ?? [];
   body.append(h("div", { class: "narrow week-narrow" }, bar,
     curWeek === t ? null : h("button", { class: "link", onclick: () => void go(t) }, "回到本周"),
-    h("div", { class: "sec-row" }, h("h2", { class: "sec" }, `单词（${list.length}）`)),
+    h("div", { class: "sec-row" }, h("h2", { class: "sec" }, `单词（${list.length}）`), list.length ? spellButton(k) : null),
     list.length ? h("div", { class: "wlist" }, ...X.stagger(list.map((w) => wordRow(w, map)))) : h("p", { class: "empty" }, "这一周没有单词。"),
     readingCard(k)));
 }

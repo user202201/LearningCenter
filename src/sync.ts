@@ -31,6 +31,21 @@ export function mergeDocs(local: Doc, remote: Doc): Doc {
     if (local.pool || remote.pool) out.pool = uniq([...(remote.pool ?? []), ...(local.pool ?? [])]);
     return out;
   }
+  // the results of dictations (dictation/<kid>.json, english/ french/ <kid>.dictation.json): sessions by id, the newest first, at most 60
+  if (Array.isArray(local.sessions) && Array.isArray(remote.sessions)) {
+    const by = new Map<string, Doc>();
+    for (const x of [...remote.sessions, ...local.sessions]) by.set(x.id, x);
+    return { ...remote, ...local, sessions: [...by.values()].sort((x, y) => (x.date < y.date ? 1 : x.date > y.date ? -1 : 0)).slice(0, 60) };
+  }
+  // the finger writing progress (write/<kid>.json): per character the best stars, the larger count, the later day
+  if (local.written && remote.written && typeof local.written === "object" && typeof remote.written === "object") {
+    const written: Doc = { ...remote.written };
+    for (const [c, w] of Object.entries<Doc>(local.written)) {
+      const r = written[c];
+      written[c] = r ? { stars: Math.max(w.stars ?? 0, r.stars ?? 0), n: Math.max(w.n ?? 0, r.n ?? 0), last: later(w.last, r.last) } : w;
+    }
+    return { ...remote, ...local, written };
+  }
   // the list of children (kids.json)
   if (Array.isArray(local.kids) && Array.isArray(remote.kids)) {
     const ids = new Set(local.kids.map((k: Doc) => k.id));
@@ -49,7 +64,7 @@ export function mergeDocs(local: Doc, remote: Doc): Doc {
       for (const [k, s] of Object.entries<Doc>(local.topics)) topics[k] = !topics[k] || s.right + s.wrong >= topics[k].right + topics[k].wrong ? s : topics[k];
       const seen = new Set<string>();
       out.topics = topics;
-      out.mistakes = [...(local.mistakes ?? []), ...(remote.mistakes ?? [])].filter((m: Doc) => (seen.has(m.q) ? false : (seen.add(m.q), true))).slice(0, 50);
+      out.mistakes = [...(local.mistakes ?? []), ...(remote.mistakes ?? [])].filter((m: Doc) => { const key = `${m.q}\u0000${m.fig ?? ""}`; return seen.has(key) ? false : (seen.add(key), true); }).slice(0, 50);
     }
     return out;
   }

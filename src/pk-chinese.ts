@@ -38,11 +38,11 @@ let readingsFn: Readings | null = null;
 export async function loadReadings(): Promise<Readings> {
   if (readingsFn) return readingsFn;
   const m = await import("pinyin-pro");
-  readingsFn = (ch) => [...new Set(m.pinyin(ch, { multiple: true }).split(/\s+/).map((x) => x.trim().toLowerCase()).filter((x) => /^[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]+$/.test(x)))];
+  readingsFn = (ch) => !isHan(ch) ? [] : [...new Set(m.pinyin(ch, { multiple: true }).split(/\s+/).map((x) => x.trim().toLowerCase()).filter((x) => /^[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]+$/.test(x)))];
   return readingsFn;
 }
 
-const isHan = (c: string) => /^\p{Script=Han}$/u.test(c);
+function isHan(c: string) { return /^\p{Script=Han}$/u.test(c); }
 /** the usable characters of a list: Chinese characters with a known reading, each once, in the list's order */
 export const usableChars = (list: readonly string[], readings: Readings): string[] => [...new Set(list.filter((c) => [...c].length === 1 && isHan(c) && readings(c).length > 0))];
 

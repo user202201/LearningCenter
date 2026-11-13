@@ -409,8 +409,8 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
   }
   const onKey = (e: KeyboardEvent) => {
     if (document.querySelector("dialog[open]")) return;
-    if (e.key === "Escape") { e.preventDefault(); void leave(); return; }
     stage.classList.add("kbd");   // a keyboard is there: show the key hints
+    if (e.key === "Escape") { e.preventDefault(); void leave(); return; }
     if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
     for (const side of [0, 1] as const) { const i = KEYS[side].indexOf(e.key); if (i >= 0) { e.preventDefault(); press(side, i, T()); } }
   };

@@ -241,7 +241,7 @@ export function judgeGoal(goal: Goal, world: World, s: State): { won: boolean; m
     }
     if (goal.lights !== undefined) {
       const need = goal.lights === "all" ? s.total.lamps : goal.lights;
-      if (s.lit < need) missing.push("还有灯没有点亮。");
+      if (goal.lights === "all" ? s.lit < need : s.lit !== need) missing.push(goal.lights === "all" || s.lit < need ? "还有灯没有点亮。" : "点亮的灯太多了。");
     }
   }
   for (const [name, v] of Object.entries(goal.vars ?? {})) if ((s.vars[name] ?? 0) !== v) missing.push("变量的数值不对。");

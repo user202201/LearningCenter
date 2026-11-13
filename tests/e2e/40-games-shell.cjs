@@ -27,6 +27,8 @@ const IDS = [...require('fs').readFileSync('src/games/index.ts', 'utf8').matchAl
     ok(r.hash === `#/games/${id}` && r.kids > 0 && r.sw && !/出错/.test(r.err), `${id}: opens in the stage, nothing sideways`);
   }
   // sound switch and full screen (on the last game)
+  { const sq = await p.evaluate(() => ['#gm-sound', '#gm-full'].map((q) => { const r = document.querySelector(q).getBoundingClientRect(); return [Math.round(r.width * 10) / 10, Math.round(r.height * 10) / 10]; }));
+    ok(sq.every(([w, h]) => Math.abs(w - h) <= 1 && w >= 36), 'the sound and full-screen buttons are round (width = height), not oval: ' + JSON.stringify(sq)); }
   ok((await p.getAttribute('#gm-sound', 'aria-label')) === '音效：开' && await p.locator('#gm-sound.on').count() === 1, 'the sound is on at first');
   await p.click('#gm-sound');
   ok((await p.getAttribute('#gm-sound', 'aria-label')) === '音效：关' && (await p.evaluate(() => localStorage.getItem('learn.games.muted'))) === '1', 'the sound switch turns it off (and keeps it)');

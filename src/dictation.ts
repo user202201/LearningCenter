@@ -88,7 +88,7 @@ export async function renderDictation(id: string): Promise<void> {
     recent.length ? h("div", { class: "dw-recent", id: "dw-recent" }, h("h2", { class: "sec" }, "最近的听写"),
       ...recent.map((s) => h("div", { class: "dw-rec", "data-id": s.id },
         h("span", { class: "muted" }, s.date), h("span", {}, s.wrong.length ? `错 ${s.wrong.length} 项` : "全部正确"),
-        h("span", { class: "user dw-rec-wrong" }, s.wrong.join(" "))))) : null)));
+        h("span", { class: "user dw-rec-wrong" }, s.wrong.join(" "))))) : null))));
   refresh();
 }
 
@@ -195,7 +195,7 @@ async function renderCheck(k: M.Kid, items: D.Item[], week: string, words: Recor
       const w = D.wordOf(it, words);
       card.replaceChildren(h("div", { class: "dw-py", id: "dw-py" }, pinyinOf(it.text)),
         h("div", { class: "dw-bigbox" }, h("span", { class: "ch user", id: "dw-char" }, it.text)),
-        w ? h("div", { class: "dw-word user", id: "dw-word" }, w) : null);
+        ...(w ? [h("div", { class: "dw-word user", id: "dw-word" }, w)] : []));
     }
     undo.hidden = idx === 0;
   };

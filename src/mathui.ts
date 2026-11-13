@@ -7,6 +7,7 @@ import { h, confirmDlg } from "./ui";
 import type { Q } from "./mathgen";
 import { translateNow } from "./i18n";
 import { renderRich } from "./mathtext";
+import { mountFig } from "./mathfig";
 const HAS_CJK = /[　-〿一-鿿＀-￯]/;
 import type { AnswerMode } from "./mathsettings";
 import { loadMathSettings, saveMathSettings } from "./mathsettings";
@@ -53,7 +54,9 @@ export function fitQuestion(el: HTMLElement, box: HTMLElement): void {
   let size = parseFloat(getComputedStyle(el).fontSize);
   // (the card's height depends on the text and on the screen: measure again after every change of the size until it is stable)
   for (let i = 0; i < 24; i++) {
-    const maxH = Math.max(28, Math.min(window.innerHeight * 0.3, (box.clientHeight || 1e4) - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)));
+    // (a figure above the text takes its own room: the text then gets a smaller share of the screen)
+    const fig = box.querySelector<HTMLElement>(".mq-fig"), figH = fig && fig.firstElementChild ? fig.offsetHeight + 8 : 0;
+    const maxH = Math.max(28, Math.min(window.innerHeight * (figH ? 0.17 : 0.3), (box.clientHeight || 1e4) - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - figH));
     const r = el.getBoundingClientRect(), c = box.getBoundingClientRect();
     if (el.scrollWidth <= el.clientWidth + 1 && r.height <= maxH && r.bottom <= c.bottom + 0.5 && r.top >= c.top - 0.5) break;
     size *= 0.92;
@@ -76,7 +79,8 @@ export function openMathGame(o: MathGameOpts): void {
   const bar = h("i", { id: "math-bar" });
   const timeText = h("span", { class: "mtime-text", id: "math-time" });
   const qText = h("div", { class: "mq-text", id: "math-q" });
-  const qBox = h("div", { class: "mq", id: "math-card" }, qText);
+  const figBox = h("div", { class: "mq-fig", id: "math-fig" });
+  const qBox = h("div", { class: "mq", id: "math-card" }, figBox, qText);
   const topic = h("div", { class: "mtopic", id: "math-topic" });
   const grid = h("div", { class: "mchoices", id: "math-choices" });
   let typed = "";
@@ -117,6 +121,8 @@ export function openMathGame(o: MathGameOpts): void {
     progress.textContent = `${idx + 1} / ${total}`;
     topic.textContent = o.topicName(q.topic);
     qText.textContent = q.q;
+    if (q.fig) mountFig(figBox, q.fig); else figBox.replaceChildren();   // (a figure of the question, above its text)
+    qBox.classList.toggle("has-fig", !!q.fig);
     fitQuestion(qText, qBox);                                    // (translated and sized as plain text first ...)
     renderRich(qText, qText.textContent ?? q.q, !HAS_CJK.test(q.q));   // ... then typeset (fractions, roots, exponents) as soon as KaTeX is there
     typing = o.mode === "keypad" && typable(q.a);
@@ -133,7 +139,7 @@ export function openMathGame(o: MathGameOpts): void {
       const longest = Math.max(...q.choices.map((c) => [...c].length));
       grid.classList.toggle("long", longest > 14);
       grid.classList.toggle("mid", longest > 7 && longest <= 14);
-      grid.replaceChildren(...q.choices.map((c) => { const b = h("button", { class: "mchoice user", "data-v": c, onclick: () => answer(c) }); renderRich(b, c, !HAS_CJK.test(c)); return b; }));
+      grid.replaceChildren(...q.choices.map((c) => { const b = h("button", { class: HAS_CJK.test(c) && !o.relaxed ? "mchoice" : "mchoice user", "data-v": c, onclick: () => answer(c) }); renderRich(b, c, !HAS_CJK.test(c)); return b; }));
     }
     root.classList.remove("ok", "bad");
   }

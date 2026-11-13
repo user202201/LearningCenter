@@ -52,7 +52,8 @@ export async function renderHome() {
     h("button", { class: "sci-ref", id: "open-periodic", onclick: () => (location.hash = "#/science/periodic") }, h("b", {}, "元素周期表"), h("span", { class: "muted small" }, "118 个元素")),
     h("button", { class: "sci-ref", id: "open-formulas", onclick: () => (location.hash = "#/science/formulas") }, h("b", {}, "公式与方程式"), h("span", { class: "muted small" }, "数学 · 物理 · 化学")),
     h("button", { class: "sci-ref", id: "open-circuits", onclick: () => (location.hash = "#/science/circuits") }, h("b", {}, "电路与电磁"), h("span", { class: "muted small" }, "电路图 · 三个定则")),
-    h("button", { class: "sci-ref", id: "open-notes", onclick: () => (location.hash = "#/science/notes") }, h("b", {}, "知识总结"), h("span", { class: "muted small" }, "历史 · 地理 · 生物 · 政治")));
+    h("button", { class: "sci-ref", id: "open-notes", onclick: () => (location.hash = "#/science/notes") }, h("b", {}, "知识总结"), h("span", { class: "muted small" }, "历史 · 地理 · 生物 · 政治")),
+    h("button", { class: "sci-ref", id: "open-map", onclick: () => (location.hash = "#/science/map") }, h("b", {}, "地图"), h("span", { class: "muted small" }, "中国 · 世界 · 国旗")));
   const list = h("div", { class: "kids" });
   for (const k of kids) {
     const n = allIds(cache.get(k.id) ?? M.EMPTY_KID).length;
@@ -243,6 +244,9 @@ async function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: SM.
     n ? h("p", { class: "muted center", id: "math-info" }, `今天：${g.fresh} 个新知识，${g.again} 个回顾，不限时`) : h("p", { class: "empty" }, "暂无知识卡。请先查看“今天”。"),
     h("div", { class: "lobby-go" }, h("button", { class: "primary wide", id: "game-start", disabled: n === 0, onclick: start }, "开始游戏"))));
 }
+
+// ---------- the maps (中国 / 世界 / 国旗), in their own module: loaded only when the page is opened ----------
+export const renderMap = () => import("./geomap").then((m) => m.renderMap(X));
 
 // ---------- the periodic table ----------
 const CATS: Record<string, string> = { alkali: "碱金属", alkaline: "碱土金属", transition: "过渡金属", post: "后过渡金属", metalloid: "类金属", nonmetal: "非金属", halogen: "卤素", noble: "稀有气体", lanthanide: "镧系", actinide: "锕系" };

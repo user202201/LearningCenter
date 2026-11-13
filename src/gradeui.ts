@@ -6,6 +6,7 @@ import * as api from "./api";
 import * as W from "./words";
 import * as MM from "./mathmodel";
 import * as SM from "./sciencemodel";
+import * as PO from "./poemmodel";
 import { toast } from "./ui";
 
 export const askGrade = (title: string, current: number | null, note = "", extra?: HTMLElement): Promise<number | null> =>
@@ -32,13 +33,13 @@ export async function pickKidGrade(k: M.Kid): Promise<number | null> {
   P.setKidGrade(k.id, g);
   const thisWeek = M.sundayOf(M.todayLocal());
   // the words (English) and the topics (math) of this week and next week were made for the old grade
-  for (const path of [`english/${k.id}.json`, `french/${k.id}.json`, MM.mathPath(k.id), SM.sciencePath(k.id)]) {
+  for (const path of [`english/${k.id}.json`, `french/${k.id}.json`, MM.mathPath(k.id), SM.sciencePath(k.id), PO.poemsPath(k.id)]) {
     try {
       const cur = await api.readJson<M.KidData>(path);
-      if (!cur?.weeks.some((w) => w.start >= (/^(math|science)\//.test(path) ? M.todayLocal() : thisWeek))) continue;
+      if (!cur?.weeks.some((w) => w.start >= (/^(math|science|poems)\//.test(path) ? M.todayLocal() : thisWeek))) continue;
       const done = toast("正在按新年级重新选…", 0, true);
       try {
-        await api.update(path, M.EMPTY_KID, (c: M.KidData) => W.dropFromWeek(c, /^(math|science)\//.test(path) ? M.todayLocal() : thisWeek), `${path} new grade`);
+        await api.update(path, M.EMPTY_KID, (c: M.KidData) => W.dropFromWeek(c, /^(math|science|poems)\//.test(path) ? M.todayLocal() : thisWeek), `${path} new grade`);
         done();
         toast("已按新年级重新选取本周和下周的内容", 5000);
       } catch (e) {

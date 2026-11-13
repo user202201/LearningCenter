@@ -4,8 +4,9 @@
  * thousands of questions per topic and evaluate it); `make()` adds the four choices (the right one and three plausible wrong ones, shuffled).
  * No screens, no storage.
  */
-export interface Q { topic: string; q: string; a: string; choices: string[]; chk: string }
-interface Raw { q: string; a: string; chk: string; wrong?: string[]; choices?: string[]; neg?: boolean; dec?: number }
+import { GEN2 } from "./mathgen2";
+export interface Q { topic: string; q: string; a: string; choices: string[]; chk: string; /** an inline SVG shown above the question text (src/mathfig.ts; rule 52) */ fig?: string }
+interface Raw { q: string; a: string; chk: string; wrong?: string[]; choices?: string[]; neg?: boolean; dec?: number; fig?: string }
 interface Gen { sec: number; make: () => Raw }
 
 const ri = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
@@ -352,6 +353,9 @@ export const GEN: Record<string, Gen> = {
   } },
 };
 
+/** the foundations of primary school and the figures (rule 52) are in mathgen2.ts */
+Object.assign(GEN, GEN2);
+
 export const topicIds = (): string[] => Object.keys(GEN);
 /** seconds the topic is given per question (the total time of a game is the sum over its questions) */
 export const secOf = (topic: string): number => GEN[topic]?.sec ?? 15;
@@ -361,18 +365,19 @@ export function make(topic: string): Q {
   const g = GEN[topic];
   if (!g) throw new Error(`unknown topic ${topic}`);
   const r = g.make();
-  return { topic, q: r.q, a: r.a, choices: choices(r), chk: r.chk };
+  return { topic, q: r.q, a: r.a, choices: choices(r), chk: r.chk, ...(r.fig ? { fig: r.fig } : {}) };
 }
 
 /** `n` questions for the given topics (round robin, shuffled); the same question text never appears twice in one game */
 export function makeSet(topics: string[], n: number): Q[] {
   const out: Q[] = [];
   const seen = new Set<string>();
+  const key = (x: Q) => x.q + (x.fig ? `\u0000${x.fig}` : "");   // (the same text with another figure is another question)
   const order = shuffle(Array.from({ length: n }, (_, i) => topics[i % topics.length]));
   for (const t of order) {
     let q = make(t);
-    for (let i = 0; i < 12 && seen.has(q.q); i++) q = make(t);
-    seen.add(q.q);
+    for (let i = 0; i < 12 && seen.has(key(q)); i++) q = make(t);
+    seen.add(key(q));
     out.push(q);
   }
   return out;

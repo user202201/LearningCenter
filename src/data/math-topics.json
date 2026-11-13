@@ -389,58 +389,482 @@
    "name": "弧长",
    "domain": "图形与几何",
    "desc": "l = nπr/180"
+  },
+  {
+   "id": "shapes1",
+   "name": "认识图形",
+   "domain": "图形与几何",
+   "desc": "认识长方形、正方形、三角形、圆和立体图形"
+  },
+  {
+   "id": "clock1",
+   "name": "认识钟表",
+   "domain": "图形与几何",
+   "desc": "读出整点和半点"
+  },
+  {
+   "id": "rmb1",
+   "name": "认识人民币",
+   "domain": "综合与实践",
+   "desc": "数一数图中一共有多少元"
+  },
+  {
+   "id": "place1",
+   "name": "数的组成",
+   "domain": "数与代数",
+   "desc": "几个十和几个一"
+  },
+  {
+   "id": "pattern1",
+   "name": "图形找规律",
+   "domain": "数与代数",
+   "desc": "找出下一个图形"
+  },
+  {
+   "id": "wpmore",
+   "name": "求多求少",
+   "domain": "数与代数",
+   "desc": "比多少的简单应用题"
+  },
+  {
+   "id": "kjfill",
+   "name": "乘法口诀",
+   "domain": "数与代数",
+   "desc": "补全乘法口诀"
+  },
+  {
+   "id": "kjwhich",
+   "name": "选口诀",
+   "domain": "数与代数",
+   "desc": "算乘法用哪句口诀"
+  },
+  {
+   "id": "mulmissing",
+   "name": "乘法填数",
+   "domain": "数与代数",
+   "desc": "找出缺少的因数"
+  },
+  {
+   "id": "divinv",
+   "name": "用口诀算除法",
+   "domain": "数与代数",
+   "desc": "想乘法口诀求商"
+  },
+  {
+   "id": "times",
+   "name": "倍的认识",
+   "domain": "数与代数",
+   "desc": "几倍和几的几倍"
+  },
+  {
+   "id": "rem",
+   "name": "有余数的除法",
+   "domain": "数与代数",
+   "desc": "商和余数"
+  },
+  {
+   "id": "clock2",
+   "name": "几时几分",
+   "domain": "图形与几何",
+   "desc": "读出钟表上的时间"
+  },
+  {
+   "id": "clockpick",
+   "name": "选钟表",
+   "domain": "图形与几何",
+   "desc": "找出显示指定时间的钟表"
+  },
+  {
+   "id": "rmb2",
+   "name": "元角分",
+   "domain": "综合与实践",
+   "desc": "元、角的换算和计算"
+  },
+  {
+   "id": "rmbchange",
+   "name": "找钱",
+   "domain": "综合与实践",
+   "desc": "付钱后应找回多少"
+  },
+  {
+   "id": "rmbmake",
+   "name": "凑钱",
+   "domain": "综合与实践",
+   "desc": "怎样付正好的钱数"
+  },
+  {
+   "id": "unitpick",
+   "name": "选单位",
+   "domain": "图形与几何",
+   "desc": "选择合适的长度、质量、时间单位"
+  },
+  {
+   "id": "barread",
+   "name": "条形统计图",
+   "domain": "统计与概率",
+   "desc": "看图读数据"
+  },
+  {
+   "id": "place2",
+   "name": "万以内数的认识",
+   "domain": "数与代数",
+   "desc": "数位和位值"
+  },
+  {
+   "id": "shapes2",
+   "name": "边和角",
+   "domain": "图形与几何",
+   "desc": "数一数图形的边和角"
+  },
+  {
+   "id": "wpshare",
+   "name": "倍和平均分",
+   "domain": "数与代数",
+   "desc": "倍数和平均分的应用题"
+  },
+  {
+   "id": "muldivmix",
+   "name": "乘除混合",
+   "domain": "数与代数",
+   "desc": "乘法和除法的混合运算"
+  },
+  {
+   "id": "remdiv",
+   "name": "余数问题",
+   "domain": "数与代数",
+   "desc": "被除数、余数最大"
+  },
+  {
+   "id": "elapsed",
+   "name": "经过时间",
+   "domain": "综合与实践",
+   "desc": "计算经过了多长时间"
+  },
+  {
+   "id": "clockafter",
+   "name": "钟表与时间",
+   "domain": "综合与实践",
+   "desc": "看钟表算几时几分"
+  },
+  {
+   "id": "unitconv1",
+   "name": "长度和质量单位",
+   "domain": "图形与几何",
+   "desc": "长度和质量单位的换算"
+  },
+  {
+   "id": "unittime",
+   "name": "时间单位",
+   "domain": "综合与实践",
+   "desc": "时、分、年、月、日"
+  },
+  {
+   "id": "perim",
+   "name": "周长",
+   "domain": "图形与几何",
+   "desc": "长方形、正方形、三角形的周长"
+  },
+  {
+   "id": "area1",
+   "name": "面积",
+   "domain": "图形与几何",
+   "desc": "长方形和正方形的面积"
+  },
+  {
+   "id": "fraction1",
+   "name": "认识分数",
+   "domain": "数与代数",
+   "desc": "看图写分数"
+  },
+  {
+   "id": "fraccomp",
+   "name": "分数比大小",
+   "domain": "数与代数",
+   "desc": "同分母分数的大小"
+  },
+  {
+   "id": "decmoney",
+   "name": "小数与元角分",
+   "domain": "数与代数",
+   "desc": "用小数表示钱数"
+  },
+  {
+   "id": "deccomp",
+   "name": "小数的大小",
+   "domain": "数与代数",
+   "desc": "比较小数、认识数位"
+  },
+  {
+   "id": "wpdist",
+   "name": "分配问题",
+   "domain": "数与代数",
+   "desc": "平均分和余数的应用题"
+  },
+  {
+   "id": "bardiff",
+   "name": "统计图计算",
+   "domain": "统计与概率",
+   "desc": "看图求多少、差多少"
+  },
+  {
+   "id": "pattern2",
+   "name": "数列找规律",
+   "domain": "数与代数",
+   "desc": "找出下一个数"
+  },
+  {
+   "id": "stickpat",
+   "name": "小棒图形",
+   "domain": "数与代数",
+   "desc": "图形中的规律"
+  },
+  {
+   "id": "factmult",
+   "name": "因数与倍数",
+   "domain": "数与代数",
+   "desc": "因数的个数和倍数"
+  },
+  {
+   "id": "primecomp",
+   "name": "质数与合数",
+   "domain": "数与代数",
+   "desc": "认识质数和合数"
+  },
+  {
+   "id": "bignum",
+   "name": "大数的认识",
+   "domain": "数与代数",
+   "desc": "万和亿以内数的读写"
+  },
+  {
+   "id": "roundest",
+   "name": "近似数与估算",
+   "domain": "数与代数",
+   "desc": "四舍五入和估算"
+  },
+  {
+   "id": "protract",
+   "name": "量角",
+   "domain": "图形与几何",
+   "desc": "读出量角器上的度数"
+  },
+  {
+   "id": "angleclass",
+   "name": "角的分类",
+   "domain": "图形与几何",
+   "desc": "锐角、直角、钝角和平角"
+  },
+  {
+   "id": "symm",
+   "name": "轴对称",
+   "domain": "图形与几何",
+   "desc": "找出对称轴的条数"
+  },
+  {
+   "id": "unitconv2",
+   "name": "单位换算（含面积）",
+   "domain": "图形与几何",
+   "desc": "长度、质量、面积单位的换算"
+  },
+  {
+   "id": "avgbar",
+   "name": "看图求平均数",
+   "domain": "统计与概率",
+   "desc": "看统计图求平均数"
+  },
+  {
+   "id": "commonfm",
+   "name": "公倍数与公因数",
+   "domain": "数与代数",
+   "desc": "找公倍数和公因数"
+  },
+  {
+   "id": "primefac",
+   "name": "分解质因数",
+   "domain": "数与代数",
+   "desc": "把合数分解成质数的积"
+  },
+  {
+   "id": "areapara",
+   "name": "平行四边形面积",
+   "domain": "图形与几何",
+   "desc": "看图求面积"
+  },
+  {
+   "id": "areatri2",
+   "name": "三角形面积（看图）",
+   "domain": "图形与几何",
+   "desc": "看图求面积"
+  },
+  {
+   "id": "areatrap",
+   "name": "梯形面积",
+   "domain": "图形与几何",
+   "desc": "看图求面积"
+  },
+  {
+   "id": "combo",
+   "name": "组合图形",
+   "domain": "图形与几何",
+   "desc": "求组合图形的面积和周长"
+  },
+  {
+   "id": "cuboid",
+   "name": "长方体和正方体",
+   "domain": "图形与几何",
+   "desc": "体积、表面积和面棱顶点"
+  },
+  {
+   "id": "fracdec",
+   "name": "分数与小数",
+   "domain": "数与代数",
+   "desc": "分数、小数和百分数互化"
+  },
+  {
+   "id": "unitvol",
+   "name": "容积和体积单位",
+   "domain": "图形与几何",
+   "desc": "升、毫升和立方单位的换算"
+  },
+  {
+   "id": "circfig",
+   "name": "圆的周长和面积",
+   "domain": "图形与几何",
+   "desc": "看图求圆的周长和面积"
+  },
+  {
+   "id": "cylvol",
+   "name": "圆柱和圆锥",
+   "domain": "图形与几何",
+   "desc": "看图求体积"
+  },
+  {
+   "id": "anglepair",
+   "name": "相交线",
+   "domain": "图形与几何",
+   "desc": "对顶角和邻补角"
+  },
+  {
+   "id": "numline",
+   "name": "数轴",
+   "domain": "数与代数",
+   "desc": "在数轴上读数和移动"
+  },
+  {
+   "id": "coord",
+   "name": "平面直角坐标系",
+   "domain": "图形与几何",
+   "desc": "读出点的坐标"
   }
  ],
  "grades": {
   "1": [
    "compare",
+   "shapes1",
    "seq",
+   "clock1",
    "add10",
+   "rmb1",
    "sub10",
+   "place1",
    "add20",
+   "pattern1",
    "sub20",
+   "wpmore",
    "wp1"
   ],
   "2": [
    "add100",
+   "kjfill",
    "sub100",
+   "kjwhich",
    "multable",
+   "mulmissing",
    "divtable",
+   "divinv",
    "units",
-   "wp2"
+   "times",
+   "wp2",
+   "rem",
+   "clock2",
+   "clockpick",
+   "rmb2",
+   "rmbchange",
+   "rmbmake",
+   "unitpick",
+   "barread",
+   "place2",
+   "shapes2",
+   "wpshare"
   ],
   "3": [
    "add3",
+   "muldivmix",
    "sub3",
+   "remdiv",
    "mul1",
+   "elapsed",
    "div1",
+   "clockafter",
    "rect",
+   "unitconv1",
    "units",
-   "wp3"
+   "unittime",
+   "wp3",
+   "perim",
+   "area1",
+   "fraction1",
+   "fraccomp",
+   "decmoney",
+   "deccomp",
+   "wpdist",
+   "bardiff",
+   "pattern2",
+   "stickpat"
   ],
   "4": [
    "mul2",
+   "factmult",
    "div2",
+   "primecomp",
    "order",
+   "bignum",
    "decaddsub",
+   "roundest",
    "angle",
+   "protract",
    "average",
-   "wp3"
+   "angleclass",
+   "wp3",
+   "symm",
+   "unitconv2",
+   "avgbar"
   ],
   "5": [
    "decmul",
+   "commonfm",
    "decdiv",
+   "primefac",
    "eqsimple",
+   "areapara",
    "fracsame",
+   "areatri2",
    "fracdiff",
+   "areatrap",
    "fracsimp",
+   "combo",
    "gcdlcm",
+   "cuboid",
    "triarea",
-   "wp4"
+   "fracdec",
+   "wp4",
+   "unitvol"
   ],
   "6": [
    "fracmul",
+   "circfig",
    "fracdiv",
+   "cylvol",
    "percent",
    "ratio",
    "circle",
@@ -449,8 +873,11 @@
   ],
   "7": [
    "ratadd",
+   "anglepair",
    "ratmul",
+   "numline",
    "lineq1",
+   "coord",
    "lineq2",
    "liketerms",
    "absval",

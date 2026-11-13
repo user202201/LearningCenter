@@ -12,7 +12,9 @@ import * as G from "./game";
 
 export interface Note { w: string; x: string }
 export interface Poem { id: string; title: string; author: string; dynasty: string; grade: number; form: string; lines: string[]; notes: Note[]; gist: string; theme: string; excerpt?: boolean; check?: boolean }
-export interface Library { poems: Poem[]; byId: Map<string, Poem>; /** every line of every poem (the pool of wrong choices) */ allLines: string[] }
+export interface Dynasty { n: string; years: string }
+/** `dynasties` are in time order; `cluster` = dynasties that blur into each other; `anonymous` = the "author" of the poems nobody knows the poet of */
+export interface Library { poems: Poem[]; byId: Map<string, Poem>; /** every line of every poem (the pool of wrong choices) */ allLines: string[]; dynasties: Dynasty[]; cluster: string[]; anonymous: string }
 
 export const POEMS_PER_DAY = 1;
 export const REVIEW_MAX = 3;
@@ -25,24 +27,16 @@ export const poemsReviewPath = (kidId: string): string => `poems/${kidId}.review
 export interface PoemReview extends G.Review { stats?: Record<string, { right: number; wrong: number }> }
 export const EMPTY_POEM_REVIEW: PoemReview = { cards: {} };
 
-/** the dynasties in time order (for the timeline of the poets) */
-export const DYNASTIES: { n: string; years: string }[] = [
-  { n: "先秦", years: "前221年以前" }, { n: "汉", years: "前206 – 220" }, { n: "三国", years: "220 – 280" }, { n: "魏晋", years: "265 – 420" },
-  { n: "南北朝", years: "420 – 589" }, { n: "隋", years: "581 – 618" }, { n: "唐", years: "618 – 907" }, { n: "五代", years: "907 – 960" },
-  { n: "宋", years: "960 – 1279" }, { n: "元", years: "1271 – 1368" }, { n: "明", years: "1368 – 1644" }, { n: "清", years: "1644 – 1912" },
-];
-export const DYNASTY_NAMES = DYNASTIES.map((d) => d.n);
-export const FORMS = ["绝句", "律诗", "词", "曲", "古风", "文言"];
 
 let cache: Library | null = null;
 /** the library: part of the program (compiled in, works offline) */
 export async function loadPoems(): Promise<Library> {
   if (cache) return cache;
-  const raw = (await import("./data/poems.json")).default as unknown as { poems: Poem[] };
-  cache = makeLibrary(raw.poems);
+  const raw = (await import("./data/poems.json")).default as unknown as { poems: Poem[]; dynasties: Dynasty[]; cluster: string[]; anonymous: string };
+  cache = makeLibrary(raw.poems, raw.dynasties, raw.cluster, raw.anonymous);
   return cache;
 }
-export const makeLibrary = (poems: Poem[]): Library => ({ poems, byId: new Map(poems.map((p) => [p.id, p])), allLines: poems.flatMap((p) => p.lines) });
+export const makeLibrary = (poems: Poem[], dynasties: Dynasty[], cluster: string[], anonymous: string): Library => ({ poems, byId: new Map(poems.map((p) => [p.id, p])), allLines: poems.flatMap((p) => p.lines), dynasties, cluster, anonymous });
 
 // ---------- small helpers ----------
 const HAN = /[一-鿿]/;
@@ -129,9 +123,11 @@ export interface FillQ { kind: "fill"; mode: "fill"; ask: "fill"; poem: string; 
 export interface OrderQ { kind: "order"; mode: "order"; ask: "order"; poem: string; items: string[]; solution: string[]; explain: string; key: string }
 export type Question = ChoiceQ | FillQ | OrderQ;
 
-const CLUSTER = ["汉", "三国", "魏晋", "南北朝"];
 /** two dynasties that follow each other (or blur into each other): never used as the wrong choice for each other */
-export const closeDynasties = (a: string, b: string): boolean => a === b || Math.abs(DYNASTY_NAMES.indexOf(a) - DYNASTY_NAMES.indexOf(b)) <= 1 || (CLUSTER.includes(a) && CLUSTER.includes(b));
+export const closeDynasties = (lib: Pick<Library, "dynasties" | "cluster">, a: string, b: string): boolean => {
+  const names = lib.dynasties.map((d) => d.n);
+  return a === b || Math.abs(names.indexOf(a) - names.indexOf(b)) <= 1 || (lib.cluster.includes(a) && lib.cluster.includes(b));
+};
 const lineHan = (l: string): number => hanLen(l);
 const MIN_LINE = 4;
 const bare = (l: string): string => hanOf(l).join("");
@@ -234,20 +230,20 @@ export function makeQuestion(lib: Library, mode: Mode, poem: Poem, rnd: () => nu
       if (ask === "author") {
         const key = `match:author:${poem.id}`;
         if (!fresh(key)) continue;
-        const authors = [...new Set(lib.poems.map((p) => p.author))].filter((a) => a !== poem.author && a !== "佚名");
-        if (poem.author === "佚名" || authors.length < 3) continue;
+        const authors = [...new Set(lib.poems.map((p) => p.author))].filter((a) => a !== poem.author && a !== lib.anonymous);
+        if (poem.author === lib.anonymous || authors.length < 3) continue;
         // (someone who wrote a poem with this very title cannot be a wrong choice: a title is shared only by the same poem)
         const wrong = shuffleWith(authors, rnd).slice(0, 3);
         const { choices, answer } = placeAnswer(poem.author, wrong, rnd);
-        return { kind: "choice", mode, ask, poem: poem.id, subject: poem.title, choices, answer, explain: `${poem.title}：${poem.dynasty}·${poem.author}`, key };
+        return { kind: "choice", mode, ask, poem: poem.id, subject: poem.title, choices, answer, explain: `${poem.title} | ${poem.dynasty} | ${poem.author}`, key };
       }
       if (ask === "dynasty") {
         const key = `match:dynasty:${poem.id}`;
-        if (!fresh(key) || poem.author === "佚名") continue;
+        if (!fresh(key) || poem.author === lib.anonymous) continue;
         // (a poet of a neighbouring dynasty could belong to either: only far-away dynasties are wrong choices; 汉 / 三国 / 魏晋 / 南北朝 shade into each other)
-        const wrong = shuffleWith(DYNASTY_NAMES.filter((d) => !closeDynasties(poem.dynasty, d)), rnd).slice(0, 3);
+        const wrong = shuffleWith(lib.dynasties.filter((d) => d.years).map((d) => d.n).filter((d) => !closeDynasties(lib, poem.dynasty, d)), rnd).slice(0, 3);
         const { choices, answer } = placeAnswer(poem.dynasty, wrong, rnd);
-        return { kind: "choice", mode, ask, poem: poem.id, subject: poem.author, choices, answer, explain: `${poem.author}：${poem.dynasty}`, key };
+        return { kind: "choice", mode, ask, poem: poem.id, subject: poem.author, choices, answer, explain: `${poem.author} | ${poem.dynasty}`, key };
       }
       const i = pickIdx(eligible, (j) => `match:title:${poem.id}:${j}`);
       if (i === null) continue;
@@ -256,7 +252,7 @@ export function makeQuestion(lib: Library, mode: Mode, poem: Poem, rnd: () => nu
       const wrong = shuffleWith(lib.poems.filter((p) => p.id !== poem.id && !p.lines.some((l) => bare(l) === bare(line))), rnd).slice(0, 3).map((p) => p.title);
       if (wrong.length < 3) continue;
       const { choices, answer } = placeAnswer(poem.title, wrong, rnd);
-      return { kind: "choice", mode, ask: "title", poem: poem.id, subject: line, choices, answer, explain: `${line} —— ${poem.title}（${poem.author}）`, key: `match:title:${poem.id}:${i}` };
+      return { kind: "choice", mode, ask: "title", poem: poem.id, subject: line, choices, answer, explain: `${line} | ${poem.title} | ${poem.author}`, key: `match:title:${poem.id}:${i}` };
     }
     return null;
   }
@@ -274,7 +270,7 @@ export function makeQuestion(lib: Library, mode: Mode, poem: Poem, rnd: () => nu
       if (wrong.length < 3) continue;
       const { choices, answer } = placeAnswer(note.x, wrong, rnd);
       const ctx = poem.lines.find((l) => l.includes(note.w));
-      return { kind: "choice", mode, ask, poem: poem.id, subject: note.w, context: ctx, choices, answer, explain: `${note.w}：${note.x}`, key: `key:word:${poem.id}:${ni}` };
+      return { kind: "choice", mode, ask, poem: poem.id, subject: note.w, context: ctx, choices, answer, explain: `${note.w}: ${note.x}`, key: `key:word:${poem.id}:${ni}` };
     }
     const key = `key:gist:${poem.id}`;
     if (!fresh(key)) continue;
@@ -337,6 +333,6 @@ export interface PoetEntry { author: string; poems: Poem[] }
 /** the poets of a dynasty (a poet with poems in several dynasties, like 佚名, is listed in each) */
 export function poetsOf(lib: Library, dynasty: string): PoetEntry[] {
   const by = new Map<string, Poem[]>();
-  for (const p of lib.poems) if (p.dynasty === dynasty || (dynasty === "不详" && p.dynasty === "不详")) by.set(p.author, [...(by.get(p.author) ?? []), p]);
+  for (const p of lib.poems) if (p.dynasty === dynasty) by.set(p.author, [...(by.get(p.author) ?? []), p]);
   return [...by.entries()].map(([author, poems]) => ({ author, poems })).sort((a, b) => b.poems.length - a.poems.length || (a.author < b.author ? -1 : 1));
 }
