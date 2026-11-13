@@ -32,7 +32,7 @@ const bar1 = (page) => page.evaluate(() => {
     await page.evaluate((r) => (location.hash = r), route.chinese(id)); await page.waitForSelector('header.kid-hero .shortcuts');
     await page.click(`#go-${target}`);
     await page.waitForFunction((r) => location.hash === r, route[target](id));
-    await page.waitForSelector('header.kid-hero .shortcuts');
+    await page.waitForFunction((x) => document.querySelector('header.kid-hero .shortcuts') && !document.querySelector('#go-' + x), target);   // (the new page, not the one we left)
     const hero = await page.textContent('header.kid-hero h1');
     b = await bar(page);
     ok(hero.includes('Dory') && b.ids.join() === ALL.filter((x) => x !== target).join(), `${target}: the same child (Dory) is open and the icons are now ${b.ids.join(', ')}`);
