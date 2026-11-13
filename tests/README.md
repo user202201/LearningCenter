@@ -44,3 +44,7 @@ Rules: a new feature or a fixed bug gets a suite (or a check) in the same change
 (check it before trusting it). Output (screenshots, logs) goes to `tests/out/` (ignored by git).
 
 Not testable here: a real iPad / iPhone (safe areas are emulated), a real GitHub account, real Apple accounts, real children using it.
+
+
+## Music, games, readings (suites 34-50)
+34 subject shortcuts · 35 language track (English / French screen) · 36 notes and formulas · 37 English reading · 38 music (theory, quiz, piano incl. recording and full screen, drums, guitar) · 39 no double-tap zoom · 40 games shell · 41 snake · 42 tetris · 43 bubble shooter · 44 match-3 · 45 klotski · 46 gomoku · 47 chess · 48 xiangqi · 49 spider solitaire · 50 freecell. Run one with `bash tests/run-all.sh <name>`; do not run two `run-all.sh` at once (the runner wipes `tests/out`).
