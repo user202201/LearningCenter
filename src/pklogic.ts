@@ -4,13 +4,13 @@
  * list and side 1 item n of the second; the first player who taps a RIGHT choice of his own item wins the round. The time is passed in (`advance(state, now)` / `tap(state, side, index, at)`, milliseconds on any one clock), so the rules can
  * be played in a test without waiting. The first subject that makes items is the Chinese pinyin quiz (`pk-chinese.ts`); other subjects can reuse everything here.
  *
- * Phases: countdown (3, 2, 1, GO) -> intro (both names) -> for every round: prep (the round is announced, nothing can be tapped) -> question -> result -> ... -> final.
+ * Phases: intro (both names, VS) -> countdown (3, 2, 1, GO) -> for every round: prep (the round is announced, nothing can be tapped) -> question -> result -> ... -> final.
  * Side 0 is player 1, side 1 is player 2.
  */
 export interface Item { prompt: string; choices: string[]; answers: number[] }
 export interface Config { rounds: number; stepMs: number; goMs: number; introMs: number; prepMs: number; limitMs: number; resultMs: number; stealMs: number }
-export const DEFAULTS: Config = { rounds: 10, stepMs: 1000, goMs: 700, introMs: 1500, prepMs: 900, limitMs: 12000, resultMs: 1400, stealMs: 100 };
-export type Phase = "countdown" | "intro" | "prep" | "question" | "result" | "final";
+export const DEFAULTS: Config = { rounds: 10, stepMs: 600, goMs: 500, introMs: 1200, prepMs: 900, limitMs: 12000, resultMs: 1400, stealMs: 100 };
+export type Phase = "intro" | "countdown" | "prep" | "question" | "result" | "final";
 export type Side = 0 | 1;
 export type Outcome = "win" | "lose" | "tie";
 
@@ -73,7 +73,7 @@ export function shuffled<T>(a: readonly T[], rnd: () => number): T[] {
 export function create(items: [Item[], Item[]], start = 0, cfg: Partial<Config> = {}): State {
   const c = { ...DEFAULTS, ...cfg };
   return {
-    cfg: c, items, total: Math.min(c.rounds, items[0].length, items[1].length), phase: "countdown", phaseStart: start, phaseEnd: start + c.stepMs, count: 3,
+    cfg: c, items, total: Math.min(c.rounds, items[0].length, items[1].length), phase: "intro", phaseStart: start, phaseEnd: start + c.introMs, count: 3,
     round: 0, scores: [0, 0], locked: [false, false], wrongPick: [-1, -1], winner: -1, winAt: 0, questionStart: 0, now: start, results: [], outcome: null, again: [false, false],
   };
 }
@@ -96,11 +96,11 @@ export function advance(s: State, now: number): void {
   if (now > s.now) s.now = now;
   while (s.phase !== "final" && now >= s.phaseEnd) {
     const t = s.phaseEnd;
-    if (s.phase === "countdown") {
+    if (s.phase === "intro") {
+      s.phase = "countdown"; s.count = 3; s.phaseStart = t; s.phaseEnd = t + s.cfg.stepMs;
+    } else if (s.phase === "countdown") {
       if (s.count > 0) { s.count--; s.phaseStart = t; s.phaseEnd = t + (s.count === 0 ? s.cfg.goMs : s.cfg.stepMs); }
-      else { s.phase = "intro"; s.phaseStart = t; s.phaseEnd = t + s.cfg.introMs; }
-    } else if (s.phase === "intro") {
-      if (s.total === 0) toFinal(s, t); else startPrep(s, t);
+      else if (s.total === 0) toFinal(s, t); else startPrep(s, t);
     } else if (s.phase === "prep") {
       s.phase = "question"; s.phaseStart = t; s.questionStart = t; s.phaseEnd = t + s.cfg.limitMs;
     } else if (s.phase === "question") {
@@ -109,6 +109,14 @@ export function advance(s: State, now: number): void {
       if (s.round + 1 < s.total) { s.round++; startPrep(s, t); } else toFinal(s, t);
     }
   }
+}
+
+/** the opening (names, countdown) is skipped: the first round is announced at once */
+export function skipIntro(s: State, now: number): boolean {
+  if (s.phase !== "intro" && s.phase !== "countdown") return false;
+  if (now > s.now) s.now = now;
+  if (s.total === 0) toFinal(s, now); else startPrep(s, now);
+  return true;
 }
 
 /** the item of `side` in the round that is on (the last one in the final) */
