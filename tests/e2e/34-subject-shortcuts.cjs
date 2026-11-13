@@ -60,7 +60,7 @@ const bar1 = (page) => page.evaluate(() => {
         await s.page.evaluate((r) => (location.hash = r), route[subj](sid)); await s.page.waitForSelector('header.kid-hero .shortcuts');
         const m = await bar(s.page);
         ok(m && m.round && m.labelsOk && m.sw <= m.vw && m.right >= 6 && m.h1w >= 60 && m.h1right <= m.left + 1, `${name} ${dn} ${subj}: three round icons right-aligned, no overflow, title keeps ${Math.round(m.h1w)} px`);
-        if (name !== 'zh' && subj === 'chinese') ok(m.titles.join() === (name === 'en' ? 'Math,English,Science' : 'Maths,Anglais,Sciences') && m.labels.join() === m.titles.join(), `${name}: the icon names under the icons are translated (${m.labels.join()})`);
+        if (name !== 'zh' && subj === 'chinese') ok(m.titles.join() === (name === 'en' ? 'Math,French,Science' : 'Maths,Anglais,Sciences') && m.labels.join() === m.titles.join(), `${name}: the icon names under the icons are translated (${m.labels.join()})`);
       }
       await s.browser.close();
     }

@@ -41,7 +41,7 @@ const layout = (page) => page.evaluate(() => {
   }
 
   // ---- English / French: names fit, nothing Chinese left on the cards ----
-  for (const [loc, names] of [['en-US', ['Characters', 'Math', 'English', 'Science']], ['fr-FR', ['Caractères', 'Maths', 'Anglais', 'Sciences']]]) {
+  for (const [loc, names] of [['en-US', ['Characters', 'Math', 'French', 'Science']], ['fr-FR', ['Caractères', 'Maths', 'Anglais', 'Sciences']]]) {
     const { browser, page } = await toHub({ local: true, locale: loc, viewport: { width: 320, height: 568 } });
     const L = await layout(page);
     ok(L.cards.map((c) => c.txt).join() === names.join(), loc + ': the subjects are translated (' + L.cards.map((c) => c.txt).join(', ') + ')');
