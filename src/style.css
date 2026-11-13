@@ -972,3 +972,6 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .pn-win { position: absolute; top: 0; bottom: 0; z-index: 3; border: 3px solid #e64980; border-radius: 8px; box-shadow: 0 0 0 2px #fff; pointer-events: none; }
 .pn-page.pn-full .pn-mini { height: 46px; margin-bottom: 6px; }
 .pn-page.pn-full .pn-kb { height: calc(100dvh - 66px - 52px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+
+/* the names of cards stay on one line (ui.ts oneLine shrinks the font when a translation is longer) */
+.subject .s-name, .gm-card b, .mus-card b { display: block; width: 100%; white-space: nowrap; overflow-wrap: normal; text-align: center; overflow: hidden; }

@@ -78,3 +78,19 @@ export const confirmDlg = async (title: string, message: string, okText: string,
   !!(await modal<boolean>((close) =>
     h("div", { class: "dlg confirm" }, h("h2", {}, title), h("p", {}, message),
       h("div", { class: "row end" }, h("button", { onclick: () => close(null) }, "取消"), h("button", { class: danger ? "danger" : "primary", onclick: () => close(true) }, okText)))));
+
+/**
+ * Keeps every one of these texts on ONE line by making the font smaller when the translated text is longer than its box (English / French names are longer than
+ * the Chinese ones). Measured after the translation and the font are there, and again when the window changes size.
+ */
+export function oneLine(els: HTMLElement[], min = 11): void {
+  const run = () => els.forEach((e) => {
+    if (!e.isConnected) return;
+    e.style.whiteSpace = "nowrap"; e.style.fontSize = "";
+    let size = parseFloat(getComputedStyle(e).fontSize);
+    for (let i = 0; i < 24 && e.scrollWidth > e.clientWidth + 0.5 && size > min; i++) { size *= 0.94; e.style.fontSize = `${size}px`; }
+  });
+  run(); window.requestAnimationFrame(run); window.setTimeout(run, 200); void document.fonts?.ready.then(run);
+  const onResize = () => { if (!els[0]?.isConnected) return window.removeEventListener("resize", onResize); run(); };
+  window.addEventListener("resize", onResize);
+}

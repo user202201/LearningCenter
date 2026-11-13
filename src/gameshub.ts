@@ -3,7 +3,7 @@
  * stage (`#/games/<id>`) with a sound switch and a full-screen button. Games are modules (see `src/games/ctx.ts`); what they remember (best scores, levels) stays on
  * this device in `learn.games.v1`.
  */
-import { h, toast } from "./ui";
+import { h, toast, oneLine } from "./ui";
 import { subjectArt } from "./hub";
 import { GAMES } from "./games/index";
 import type { GameCtx, GameModule, SfxKind } from "./games/ctx";
@@ -29,14 +29,16 @@ export async function renderGames() {
   X.showLoading();
   const mods = await Promise.all(GAMES.map((g) => g.load().catch(() => null)));
   if (my !== X.epoch()) return;
-  X.show(h("div", { class: "page", style: `--kid:${COLOR}` }, hero("小游戏", "#/", "选择学科", "#/subject/games"),
+  const page = h("div", { class: "page", style: `--kid:${COLOR}` }, hero("小游戏", "#/", "选择学科", "#/subject/games"),
     h("main", { class: "scroll" }, h("div", { class: "narrow gm-narrow" },
       h("p", { class: "muted small center mus-lead" }, "不用登录，也不用联网：动动脑，动动手。"),
       h("div", { class: "gm-grid" }, ...GAMES.map((g, i) => {
         const icon = h("span", { class: "gm-art" });
         icon.innerHTML = mods[i]?.ICON ?? "";
         return h("button", { class: "gm-card", id: `gm-${g.id}`, "data-game": g.id, onclick: () => { unlock(); sfx("tap"); location.hash = `#/games/${g.id}`; } }, icon, h("b", {}, g.name), h("span", { class: "muted small" }, g.sub));
-      }))))));
+      })))));
+  X.show(page);
+  oneLine([...page.querySelectorAll<HTMLElement>(".gm-card b")], 11);
 }
 
 export async function renderGame(id: string) {

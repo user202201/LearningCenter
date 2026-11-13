@@ -4,7 +4,7 @@
  * The artwork is drawn here as inline SVG (no image files, nothing from outside); the only texts in it are digits and Latin letters.
  * "识字" leads to the original Learning Chinese app (`#/chinese`); the other subjects have a "coming soon" page for now.
  */
-import { h } from "./ui";
+import { h, oneLine } from "./ui";
 import { mascot } from "./art";
 import { getLang } from "./i18n";
 
@@ -145,6 +145,7 @@ export function hubGrid(go: (route: string) => void): HTMLElement {
       s.ready ? null : h("span", { class: "s-soon" }, "即将开放"));
     grid.append(card);
   });
+  oneLine([...grid.querySelectorAll<HTMLElement>(".s-name")], 12);
   return grid;
 }
 

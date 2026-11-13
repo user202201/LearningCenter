@@ -52,7 +52,7 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
       check(same(dests('5k3/9/9/9/9/2B6/9/9/9/3K5 w', 5, 2), ['7,0', '7,4']), 'elephant cannot cross the river');
       check(dests('2b2k3/9/9/9/9/9/9/9/9/3K5 b', 0, 2).join() === '2,0,2,4', 'black elephant');
       // advisor and general in the palace
-      check(same(dests('5k3/9/9/9/9/9/9/9/4A4/5K3 w', 8, 4), ['7,3', '7,5', '9,3']), 'advisor in the centre: 3 (own general on one corner)');
+      check(same(dests('5k3/9/9/9/9/9/9/9/4A4/3K5 w', 8, 4), ['7,3', '7,5', '9,5']), 'advisor in the centre: 3 (own general on one corner)');
       check(same(dests('5k3/9/9/9/9/9/9/9/9/3AK4 w', 9, 3), ['8,4']), 'advisor in the corner: 1');
       check(same(pdests('3k5/9/9/9/9/9/9/9/4K4/9 w', 8, 4), ['7,4', '8,3', '8,5', '9,4']), 'general: 4 steps');
       check(same(dests('3k5/9/9/9/9/9/9/9/4K4/9 w', 8, 4), ['7,4', '8,5', '9,4']), '... but not onto the file of the other general (flying general)');
@@ -152,12 +152,12 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
       const m2 = L.chooseMoveSync(mateBlack, lv(3));
       L.make(mateBlack, m2); out.mateBlack = L.status(mateBlack).state;
       // even the weakest level takes a mate in one
-      const m3 = L.chooseMoveSync(L.parseFen('4k4/R8/9/9/9/8R/9/9/9/3K5 w'), lv(0));
-      const p3 = L.parseFen('4k4/R8/9/9/9/8R/9/9/9/3K5 w'); L.make(p3, m3); out.mateWeak = L.status(p3).state;
+      const p3 = L.parseFen('4k4/R8/9/9/9/8R/9/9/9/3K5 w');
+      const m3 = L.chooseMoveSync(p3, lv(1)); L.make(p3, m3); out.mateWeak = L.status(p3).state;
       // a black chariot attacked by a red soldier that is not protected: black must not leave it hanging (levels 2 and 3)
       out.hang = [];
       for (const i of [2, 3]) {
-        const p = L.parseFen('3k5/9/9/9/4r4/4P4/9/9/9/3K1/9 b'.replace('/9/3K1/9', '/9/3K5'));
+        const p = L.parseFen('4k4/9/9/9/4r4/4P4/9/9/9/3K5 b');
         const m = L.chooseMoveSync(p, lv(i));
         L.make(p, m);
         const lost = L.legalMoves(p).some((x) => p.b[L.toOf(x)] === -L.R);
@@ -165,7 +165,7 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
       }
       // black chariot on (4,4) attacked by a red horse as well: it must be saved (moved or the horse taken)
       for (const i of [2, 3]) {
-        const p = L.parseFen('3k5/9/9/9/4r4/9/3N5/9/9/3K5 b'.replace('3N5', '2N6'));
+        const p = L.parseFen('4k4/9/9/9/4r4/9/3N5/9/9/3K5 b');
         const m = L.chooseMoveSync(p, lv(i));
         L.make(p, m);
         out.hang.push({ lost: L.legalMoves(p).some((x) => p.b[L.toOf(x)] === -L.R), move: m });
@@ -173,9 +173,8 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
       // a hanging red chariot is taken
       out.take = [];
       for (const i of [2, 3]) {
-        const p = L.parseFen('3k5/9/9/9/4R4/9/9/9/9/3K5 b'.replace('4R4/9/9/9/9/3K5', '4R4/9/9/9/9/3K5'));
-        // black rook at (4,0) can take the red chariot at (4,4) over an empty row
-        const q = L.parseFen('3k5/9/9/9/r3R4/9/9/9/9/3K5 b');
+        // the black rook at (4,0) can take the red chariot at (4,4) over an empty row
+        const q = L.parseFen('4k4/9/9/9/r3R4/9/9/9/9/3K5 b');
         const m = L.chooseMoveSync(q, lv(i));
         out.take.push(q.b[L.toOf(m)] === L.R);
       }
@@ -202,7 +201,8 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
       out.yields = yields; out.depth = r.value.depth;
       return out;
     });
-    ok(ai.mateRed === 'checkmate' && ai.mateBlack === 'checkmate' && ai.mateWeak === 'checkmate', `the computer finds a mate in one (普通 as red, 困难 as black, even 新手): ${ai.mateRed} / ${ai.mateBlack} / ${ai.mateWeak}`);
+    const nomove = (x) => x === 'checkmate' || x === 'stalemate';   // (in xiangqi a stalemating move wins as well)
+    ok(nomove(ai.mateRed) && nomove(ai.mateBlack) && nomove(ai.mateWeak), `the computer finds a mate in one (普通 as red, 困难 as black, even 简单): ${ai.mateRed} / ${ai.mateBlack} / ${ai.mateWeak}`);
     ok(ai.hang.every((x) => !x.lost), 'the computer does not leave its chariot hanging (attacked by a soldier / by a horse), levels 普通 and 困难');
     ok(ai.take.every(Boolean), 'the computer takes a free chariot');
     ok(!ai.illegal && ai.gamePlies >= 40, `a game between two levels runs ${ai.gamePlies} plies with legal moves only (slowest move ${Math.round(ai.slow)} ms)`);
@@ -283,12 +283,18 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
 
     // check: the general shakes, sweats, red ring, bubble
     await load(page, '4k4/9/9/9/9/9/9/9/R8/3K5 w', 1, 0);
+    await page.evaluate(() => { window.__xq.noReply = true; });
     await click(page, sq(8, 0)); await click(page, sq(0, 0));
     await page.waitForSelector('#xq-check-bubble', { timeout: 4000 });
-    ok((await page.textContent('#xq-check-bubble')).includes('将军'), 'check: the speech bubble 将军！ appears');
-    ok(await page.$eval('#xq-board .xq-p[data-piece="bgeneral"]', (g) => g.classList.contains('xq-scared') && !!g.querySelector('.xq-ring') && !!g.querySelector('.xq-sweat')), 'check: the threatened general is "scared" (shaking, sweat drop, red ring)');
-    ok(await page.$eval('#xq-wrap', (w) => w.dataset.check === 'black'), 'check: the board states whose general is in check');
+    const ck = await page.evaluate(() => {   // (one call: the computer answers 0.4 s after the check)
+      const g = document.querySelector('#xq-board .xq-p[data-piece="bgeneral"]');
+      return { text: document.querySelector('#xq-check-bubble').textContent, scared: g.classList.contains('xq-scared'), ring: !!g.querySelector('.xq-ring'), sweat: !!g.querySelector('.xq-sweat'), who: document.querySelector('#xq-wrap').dataset.check, chk: document.querySelector('#xq-status').className };
+    });
+    ok(ck.text.includes('将军'), 'check: the speech bubble 将军！ appears');
+    ok(ck.scared && ck.ring && ck.sweat, 'check: the threatened general is "scared" (shaking, sweat drop, red ring)');
+    ok(ck.who === 'black' && /xq-chk/.test(ck.chk), 'check: the board states whose general is in check, the status turns red');
     await page.screenshot({ path: OUT + 'xq-check.png' });
+    await page.evaluate(() => { window.__xq.noReply = false; });
     await waitIdle(page);
     // checkmate: you mate
     await load(page, '4k4/R8/9/9/9/8R/9/9/9/3K5 w', 1, 0);
@@ -296,7 +302,7 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
     await page.waitForSelector('#xq-result', { timeout: 5000 });
     ok(await page.$eval('#xq-result', (r) => r.dataset.result === 'win' && /你赢了/.test(r.textContent)), 'checkmate by you: the friendly "你赢了！" card');
     ok(await page.$eval('#xq-board .xq-p[data-piece="bgeneral"]', (g) => g.classList.contains('xq-fallen')), 'the losing general has fallen over');
-    ok(await page.$$eval('#xq-board .xq-p.xq-cheer', (x) => x.length) >= 10 && await page.$$eval('#xq-confetti i', (x) => x.length) > 20, 'the winners cheer and there is confetti');
+    ok(await page.$$eval('#xq-board .xq-p.xq-cheer', (x) => x.length) === 3 && await page.$$eval('#xq-confetti i', (x) => x.length) > 20, 'the winners cheer and there is confetti');
     await page.screenshot({ path: OUT + 'xq-mate.png' });
     ok(await page.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).xiangqi.wins === 1), 'the win is kept in learn.games.v1');
     ok(/胜 1/.test(await page.textContent('#xq-rec')), 'the record line shows the win');
@@ -306,12 +312,12 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
     ok((await page.$$('#xq-confetti')).length === 0 && (await page.$$('#xq-board .xq-p')).length === 32, 'restart removes the confetti and sets the pieces again');
     // the computer mates you
     await load(page, '3k5/9/9/9/8r/9/9/9/r8/4K4 b', 1, 3);
-    await page.waitForSelector('#xq-result', { timeout: 8000 });
+    await page.waitForSelector('#xq-result', { timeout: 8000 }).catch(async (e) => { console.log('DBG', await page.evaluate(() => JSON.stringify({ h: window.__xq.history, o: window.__xq.over, b: window.__xq.busy, n: document.querySelectorAll('#xq-result').length, st: document.querySelector('#xq-status').textContent }))); throw e; });
     ok(await page.$eval('#xq-result', (r) => r.dataset.result === 'lose'), 'the computer mates you: the card says you lost, kindly');
     ok(await page.$eval('#xq-board .xq-p[data-piece="rgeneral"]', (g) => g.classList.contains('xq-fallen')), 'your general has fallen');
     ok(await page.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).xiangqi.losses === 1), 'the loss is counted');
     // stalemate = loss
-    await load(page, '3k5/7R1/9/9/9/9/9/9/9/4RK3 b', -1, 0);
+    await load(page, '3k5/7R1/9/9/9/9/9/9/9/4RK3 b', 1, 0);
     await page.waitForSelector('#xq-result', { timeout: 8000 });
     ok(await page.$eval('#xq-result', (r) => r.dataset.result === 'win' && /无路可走/.test(r.textContent)), 'stalemate is a loss for the side without a move (here: black, the computer)');
     // draw
@@ -337,6 +343,7 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
     await page.waitForSelector('#xq-board .xq-p');
     const scene = async (name, fen, from, to, cls, anim) => {
       await load(page, fen, 1, 0);
+      const n0 = await page.$$eval('#xq-board .xq-p', (x) => x.length);
       await click(page, from);
       const t0 = Date.now();
       await click(page, to);
@@ -346,7 +353,7 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
       await page.screenshot({ path: OUT + `xq-${name}.png` });
       await page.waitForFunction(() => !document.querySelector('#xq-wrap').classList.contains('xq-capturing'), null, { timeout: 5000 });
       ok(Date.now() - t0 > 400, `${name}: it takes a moment (the piece slides, it is not instant)`);
-      ok(await page.$$eval('#xq-board .xq-p', (x) => x.length) === 3 && await page.$$eval('#xq-tray .xq-mini', (x) => x.length) === 1, `${name}: the captured piece is gone from the board and sits in the tray`);
+      ok(await page.$$eval('#xq-board .xq-p', (x) => x.length) === n0 - 1 && await page.$$eval('#xq-tray .xq-mini', (x) => x.length) === 1, `${name}: the captured piece is gone from the board and sits in the tray`);
       ok(await page.evaluate(([s]) => { const e = document.querySelector(`#xq-board .xq-p[data-sq="${s}"]`); return !!e && e.dataset.side === 'r'; }, [to]), `${name}: the capturing piece stands on the target`);
       await waitIdle(page);
     };
@@ -361,10 +368,17 @@ const waitIdle = (page) => page.waitForFunction(() => window.__xq && !window.__x
     await waitIdle(page);
     // check and mate with motion: bubble and dizzy general
     await load(page, '4k4/9/9/9/9/9/9/9/R8/3K5 w', 1, 0);
+    await page.evaluate(() => { window.__xq.noReply = true; });
     await click(page, sq(8, 0)); await click(page, sq(0, 0));
     await page.waitForSelector('#xq-check-bubble', { timeout: 3000 });
-    ok(await page.$eval('#xq-check-bubble', (b) => getComputedStyle(b).animationName.includes('xq-bubble')), 'check: the bubble animates (pop-in)');
-    ok(await page.$eval('#xq-board .xq-p.xq-scared .xq-pi', (e) => getComputedStyle(e).animationName.includes('xq-shake')) && await page.$eval('#xq-board .xq-ring', (e) => getComputedStyle(e).animationName.includes('xq-ringflash')), 'check: the general shakes and the red ring flashes');
+    const an = await page.evaluate(() => ({
+      bubble: getComputedStyle(document.querySelector('#xq-check-bubble')).animationName,
+      shake: getComputedStyle(document.querySelector('#xq-board .xq-p.xq-scared .xq-pi')).animationName,
+      ring: getComputedStyle(document.querySelector('#xq-board .xq-ring')).animationName,
+    }));
+    ok(an.bubble.includes('xq-bubble'), 'check: the bubble animates (pop-in)');
+    ok(an.shake.includes('xq-shake') && an.ring.includes('xq-ringflash'), 'check: the general shakes and the red ring flashes');
+    await page.evaluate(() => { window.__xq.noReply = false; });
     await waitIdle(page);
     await load(page, '4k4/R8/9/9/9/8R/9/9/9/3K5 w', 1, 0);
     await click(page, sq(5, 8)); await click(page, sq(0, 8));

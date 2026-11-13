@@ -76,11 +76,11 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     hudCombo = h("span", { class: "match3-chip combo hide", id: "match3-combo" });
     bar = h("div", { class: "match3-bar", id: "match3-bar" }, h("i"));
     const btn = (id: string, t: string, f: () => void, alt = true) => h("button", { class: "match3-btn" + (alt ? " alt" : ""), id, onclick: () => { ctx.sfx("tap"); f(); } }, t);
-    const hud = h("div", { class: "match3-hud" }, hudLevel, hudMoves, hudScore, hudTarget, hudCombo, bar,
-      h("div", { class: "match3-btns" }, btn("match3-hint", "提示", showHint), btn("match3-restart", "重来", () => startLevel(level)), btn("match3-levels-btn", "选关", showLevels)));
+    const hud = h("div", { class: "match3-hud" }, hudLevel, hudMoves, hudScore, hudTarget, hudCombo, bar);
+    const btns = h("div", { class: "match3-btns" }, btn("match3-hint", "提示", showHint), btn("match3-restart", "重来", () => startLevel(level)), btn("match3-levels-btn", "选关", showLevels));
     boardEl = h("div", { class: "match3-board", id: "match3-board" });
     area = h("div", { class: "match3-area" }, boardEl);
-    wrap.append(hud, area);
+    wrap.append(hud, btns, area);
     boardEl.addEventListener("pointerdown", onDown);
     boardEl.addEventListener("pointermove", onMove);
     boardEl.addEventListener("pointerup", onUp);
@@ -125,11 +125,13 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   function fit() {
     if (view !== "play" || !area) return;
+    const side = window.matchMedia("(orientation: landscape) and (max-height: 520px)").matches;
     const top = area.getBoundingClientRect().top + (document.scrollingElement?.scrollTop ?? 0);
     const ah = Math.max(80, Math.floor((window.visualViewport?.height ?? window.innerHeight) - top - 12));
-    area.style.height = ah + "px"; area.style.flex = "none";
-    const sz = Math.min(area.clientWidth, ah) - 12;
-    if (sz < 40 || S * L.N === sz - (sz % L.N) && boardEl.style.width === S * L.N + "px") return;
+    const aw = side ? wrap.clientWidth - 2 * 176 : wrap.clientWidth;
+    area.style.height = ah + "px"; area.style.flex = "none"; area.style.width = side ? aw + "px" : "";
+    const sz = Math.min(aw, ah) - 12;
+    if (sz < 40) return;
     S = Math.floor(sz / L.N);
     boardEl.style.width = boardEl.style.height = S * L.N + "px";
     for (const el of els.values()) { el.style.width = el.style.height = S + "px"; }
@@ -143,6 +145,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     rng = L.mulberry32(seed);
     kinds = spec.kinds; target = preset?.target ?? spec.target; moves = preset?.moves ?? spec.moves;
     board = preset ? L.fromRows(preset.rows) : L.randomBoard(rng, kinds);
+    if (!L.hasMoves(board)) { board = L.shuffle(board, rng); ctx.toast("没有可以消除的了，重新洗牌！", 2000); }
     score = 0; combo = 0; bestCombo = 0; busy = false; over = false; reached = false; sel = null; drag = null;
     buildPlay(); syncAll(); hudUpdate(); armHint();
   }
@@ -189,20 +192,20 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   async function trySwap(a: L.Pos, b: L.Pos) {
     if (busy || over || view !== "play") return;
     clearHint(); setSel(null);
-    busy = true;
+    busy = true; const run = runId;
     const ea = cellEl(a[0], a[1])!, eb = cellEl(b[0], b[1])!;
     ea.style.zIndex = "5";
     place(ea, b[0], b[1]); place(eb, a[0], a[1]); ctx.sfx("swap");
     if (!L.isValidSwap(board, a, b)) {
-      await wait(190); if (!alive) return;
+      await wait(190); if (!alive || run !== runId) return;
       place(ea, a[0], a[1]); place(eb, b[0], b[1]);
       ea.classList.add("shake"); eb.classList.add("shake"); ctx.sfx("bad");
-      await wait(220); if (!alive) return;
+      await wait(220); if (!alive || run !== runId) return;
       ea.classList.remove("shake"); eb.classList.remove("shake"); ea.style.zIndex = "";
       busy = false; armHint();
       return;
     }
-    await wait(190); if (!alive) return;
+    await wait(190); if (!alive || run !== runId) return;
     ea.style.zIndex = "";
     moves--; combo = 0;
     const res = L.resolveSwap(board, a, b, rng, kinds);
@@ -221,13 +224,13 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       ctx.sfx(rd.combo >= 3 ? "line" : "pop"); if (rd.beams.length) ctx.sfx("good");
       hudUpdate();
       if (!reached && score >= target) { reached = true; ctx.toast("达到目标啦！还可以继续冲更高分！", 2200); }
-      await wait(290); if (!alive) return;
+      await wait(290); if (!alive || run !== runId) return;
       for (const f of rd.fall) { const el = els.get(f.id); if (el) { el.classList.add("fall"); place(el, f.tr, f.tc); } }
       for (const sp of rd.spawn) {
         const el = candyEl(sp); el.classList.remove("fall"); el.style.transition = "none"; place(el, sp.fromRow, sp.c);
         void el.offsetWidth; el.style.transition = ""; el.classList.add("fall"); place(el, sp.tr, sp.c);
       }
-      await wait(330); if (!alive) return;
+      await wait(330); if (!alive || run !== runId) return;
     }
     syncAll();
     for (const el of els.values()) el.classList.remove("fall", "born");
@@ -237,7 +240,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       board = L.shuffle(board, rng);
       for (const el of els.values()) el.classList.add("fall");
       syncAll(); for (const el of els.values()) el.classList.add("fall");
-      await wait(400); if (!alive) return;
+      await wait(400); if (!alive || run !== runId) return;
       for (const el of els.values()) el.classList.remove("fall");
     }
     busy = false;

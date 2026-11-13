@@ -55,7 +55,7 @@ export function keyOf(ps: Piece[]): string {
 }
 /** a layout is valid when it has the ten standard pieces, nothing overlaps and exactly two cells are empty */
 export function validLayout(rows: string[]): boolean {
-  if (rows.length !== H || rows.some((r) => r.length !== W)) return false;
+  if (rows.length !== H || rows.some((r) => r.length !== W || /[^CGZRMHs.]/.test(r))) return false;
   const ps = parseLayout(rows), count: Record<string, number> = {};
   for (const p of ps) count[p.kind] = (count[p.kind] ?? 0) + 1;
   const g = new Set<number>();

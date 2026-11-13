@@ -35,6 +35,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   let busy = false;      // an animation is running
   let thinking = false;  // the computer is searching
   let over = false;
+  let noReply = false;   // (tests: the computer waits)
   let epoch = 0;         // changes on restart / undo: stale async work stops
   let U = 30;
   let shown = new Set<number>();
@@ -146,8 +147,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const sideName = (s: L.Side) => (s === L.RED ? "红方" : "黑方");
   const refreshStatus = () => {
     if (over) return;
-    if (thinking) { setStatus("电脑在想", "xq-think xq-dots"); return; }
     const chk = L.inCheck(pos, pos.turn);
+    if (thinking) { if (chk) setStatus("电脑被将军了，在想办法", "xq-chk xq-dots"); else setStatus("电脑在想", "xq-think xq-dots"); return; }
     if (pos.turn === human) setStatus(chk ? "你被将军了，快想办法！" : `轮到你了（${sideName(human)}）`, chk ? "xq-chk" : "");
     else setStatus(chk ? "电脑被将军了！" : "电脑走棋", chk ? "xq-chk" : "xq-think");
   };
@@ -383,7 +384,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
 
   async function think() {
-    if (thinking || over) return;
+    if (thinking || over || noReply) return;
     const ep = epoch;
     thinking = true;
     refreshStatus(); updateButtons();
@@ -566,6 +567,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     get human() { return human; },
     get level() { return level; },
     get over() { return over; },
+    get noReply() { return noReply; },
+    set noReply(v: boolean) { noReply = v; if (!v && !over && pos.turn !== human && !busy) void think(); },
     get busy() { return busy || thinking; },
     get history() { return history.map((r) => r.m); },
     /** a test sets a position (fen), the side the human plays and the level */

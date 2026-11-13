@@ -4,7 +4,7 @@
  * each chapter `#/music/quiz/<id>`) and three instruments played on the screen with several fingers at once: a piano (`#/music/piano`), a drum kit
  * (`#/music/drums`) and a guitar (`#/music/guitar`). All sounds are made in code (musicaudio.ts); the course is `src/data/music-theory.json`.
  */
-import { h, toast, confirmDlg } from "./ui";
+import { h, toast, confirmDlg, oneLine } from "./ui";
 import * as A from "./musicaudio";
 import { figure, type Fig } from "./musicfig";
 import { subjectArt } from "./hub";
@@ -54,14 +54,16 @@ const hero = (title: string, back: string, backLabel: string, gearBack: string) 
 export function renderMusic() {
   const card = (id: string, name: string, sub: string, to: string) =>
     h("button", { class: "mus-card", id: `mus-${id}`, onclick: () => { A.unlock(); location.hash = to; } }, h("span", { class: "mus-art" }, musicArtFor(id)), h("b", {}, name), h("span", { class: "muted small" }, sub));
-  X.show(h("div", { class: "page", style: `--kid:${COLOR}` }, hero("音乐", "#/", "选择学科", "#/subject/music"),
+  const page = h("div", { class: "page", style: `--kid:${COLOR}` }, hero("音乐", "#/", "选择学科", "#/subject/music"),
     h("main", { class: "scroll" }, h("div", { class: "narrow" },
       h("p", { class: "muted small center mus-lead" }, "不用登录，也不需要联网：学乐理，也可以自己弹一弹。"),
       h("div", { class: "mus-grid" },
         card("theory", "乐理", "18 章 · 每章有小测验", "#/music/theory"),
         card("piano", "钢琴", "可以同时按好几个键", "#/music/piano"),
         card("drums", "架子鼓", "九个鼓和镲", "#/music/drums"),
-        card("guitar", "吉他", "拨弦、扫弦、和弦", "#/music/guitar"))))));
+        card("guitar", "吉他", "拨弦、扫弦、和弦", "#/music/guitar")))));
+  X.show(page);
+  oneLine([...page.querySelectorAll<HTMLElement>(".mus-card b")], 12);
 }
 
 // ---------- theory: the list of chapters ----------

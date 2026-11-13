@@ -49,15 +49,12 @@
 @keyframes match3-beam { 0% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes match3-txt { from { opacity: 1; margin-top: 0; } to { opacity: 0; margin-top: -30px; } }
 @keyframes match3-in { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
-@media (orientation: landscape) and (max-height: 520px) {
-  .match3-wrap.playing { flex-direction: row; align-items: stretch; }
-  .match3-wrap.playing .match3-hud { flex-direction: column; flex-wrap: nowrap; width: auto; max-width: 170px; justify-content: center; align-items: stretch; }
-  .match3-wrap.playing .match3-btns { flex-direction: column; }
-  .match3-wrap.playing .match3-bar { max-width: none; }
-}
 @media (max-width: 440px) { .match3-chip { padding: 2px 8px; } .match3-btn { padding: 5px 8px; } }
 @media (orientation: landscape) and (max-height: 520px) {
+  .match3-wrap.playing { display: grid; grid-template-columns: 176px auto 176px; justify-content: center; align-items: center; column-gap: 0; }
+  .match3-wrap.playing .match3-hud { grid-column: 1; grid-row: 1; flex-direction: column; flex-wrap: nowrap; width: 100%; max-width: none; align-items: stretch; padding-right: 8px; box-sizing: border-box; }
+  .match3-wrap.playing .match3-area { grid-column: 2; grid-row: 1; width: auto; }
+  .match3-wrap.playing .match3-btns { grid-column: 3; grid-row: 1; padding-left: 8px; box-sizing: border-box; display: grid; grid-template-columns: 1fr; }
   .match3-wrap.playing .match3-chip { padding: 1px 8px; font-size: 12px; }
-  .match3-wrap.playing .match3-btns { display: grid; grid-template-columns: 1fr 1fr; }
-  .match3-wrap.playing .match3-btn { padding: 4px 6px; font-size: 12px; box-shadow: 0 3px 0 #96f2d7; }
+  .match3-wrap.playing .match3-btn { padding: 5px 6px; font-size: 13px; }
 }

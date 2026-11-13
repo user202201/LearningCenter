@@ -105,21 +105,22 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     hudDots = h("span", { class: "bubble-dots", id: "bubble-dots" });
     const dotsChip = h("span", { class: "bubble-chip", title: "天花板" }, h("span", { class: "bubble-lab" }, "天花板"), hudDots);
     const btn = (id: string, txt: string, f: () => void, alt = true) => h("button", { class: "bubble-btn" + (alt ? " alt" : ""), id, onclick: () => { ctx.sfx("tap"); f(); } }, txt);
-    const hud = h("div", { class: "bubble-hud" }, hudLevel, hudScore, hudBest, hudShots, dotsChip,
-      h("div", { class: "bubble-btns" }, btn("bubble-swap", "交换", swap), btn("bubble-pause", "暂停", () => setPaused(true)), btn("bubble-restart", "重来", () => startLevel(level)), btn("bubble-levels-btn", "选关", showLevels)));
+    const hud = h("div", { class: "bubble-hud" }, hudLevel, hudScore, hudBest, hudShots, dotsChip);
+    const btns = h("div", { class: "bubble-btns" }, btn("bubble-swap", "交换", swap), btn("bubble-pause", "暂停", () => setPaused(true)), btn("bubble-restart", "重来", () => startLevel(level)), btn("bubble-levels-btn", "选关", showLevels));
     field = h("div", { class: "bubble-field", id: "bubble-field" }, canvas);
     area = h("div", { class: "bubble-area" }, field);
-    wrap.append(hud, area);
+    wrap.append(hud, btns, area);
     fit();
   }
 
   function fit() {
     if (view !== "play" || !area) return;
-    const aw = area.clientWidth;
+    const side = window.matchMedia("(orientation: landscape) and (max-height: 520px)").matches;
+    const aw = side ? wrap.clientWidth - 2 * 176 : wrap.clientWidth;
     const top = area.getBoundingClientRect().top + (document.scrollingElement?.scrollTop ?? 0);
     const ah = Math.max(80, Math.floor((window.visualViewport?.height ?? window.innerHeight) - top - 12));
     if (!aw) return;
-    area.style.height = ah + "px"; area.style.flex = "none";
+    area.style.height = ah + "px"; area.style.flex = "none"; area.style.width = side ? aw + "px" : "";
     dpr = Math.min(2, window.devicePixelRatio || 1);
     const d = Math.max(8, Math.floor(Math.min((aw - 8) / L.COLS, (ah - 8) / FH)));
     if (d !== D || canvas.width !== Math.round(L.COLS * d * dpr)) { D = d; sprites.clear(); }
