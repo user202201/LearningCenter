@@ -70,7 +70,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.isComposing) { e.preventDefault(); submitTyped(); } });
   input.addEventListener("input", () => { if (fb.classList.contains("ok") === false) fb.textContent = ""; });
 
-  const setOvl = (t: string, m: string, a: string, b: string, show: boolean) => { title.textContent = t; msg.textContent = m; ans.textContent = a; ans.hidden = !a; again.textContent = b; ovl.hidden = !show; };
+  const setOvl = (t: string, m: string, a: string, b: string, show: boolean) => { title.textContent = t; msg.textContent = m; ans.textContent = a; ans.hidden = !a; again.textContent = b; ovl.hidden = !show; body.classList.toggle("idle", phase === "ready" || phase === "loading"); };
   const last = () => chain[chain.length - 1];
   const need = (): Need => needOf(last().e);
 
@@ -122,7 +122,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     setOvl("", "", "", "", false); ctx.sfx("move");
     showCurrent(true); renderHist(); startTurn();
   }
-  function startTurn() { phase = "player"; fails = 0; cands = []; hintPrefix = ""; renderTurn(); if (mode === "type") input.focus({ preventScroll: true }); }
+  function startTurn() { body.classList.remove("idle"); phase = "player"; fails = 0; cands = []; hintPrefix = ""; renderTurn(); if (mode === "type") input.focus({ preventScroll: true }); }
   function setMode(m: Mode) { if (m === mode) return; mode = m; ctx.store.set("mode", m); ctx.sfx("tap"); reset(); }
 
   function fail(why: Fail, el?: HTMLElement) {

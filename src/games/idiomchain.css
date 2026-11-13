@@ -6,11 +6,11 @@
 .icn-hud .mopt.on { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 3px 0 #087f5b; }
 .icn-hud .mopt:disabled { opacity: .5; }
 .icn-hud .mopt.sure { background: #fff3bf; border-color: #ffd43b; box-shadow: 0 3px 0 #ffd43b; color: #e8590c; }
-.icn-body { grid-area: body; position: relative; width: 100%; max-width: 640px; min-height: 0; max-height: 100%; display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr); align-content: start; justify-items: center; }
+.icn-body { grid-area: body; position: relative; width: 100%; max-width: 640px; min-height: 0; max-height: 100%; display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr); align-content: start; align-self: center; justify-items: center; }
 .icn-stage { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .icn-who { font-weight: 900; font-size: 15px; color: #087f5b; min-height: 20px; }
 .icn-who.you { color: #e8590c; }
-.icn-strip { --cs: clamp(52px, 17.5vw, 96px); display: grid; grid-template-columns: repeat(4, var(--cs)); border: 4px solid #0ca678; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 0 #0ca678; background: #fffdf5; }
+.icn-strip { --cs: clamp(52px, 20vw, 104px); display: grid; grid-template-columns: repeat(4, var(--cs)); border: 4px solid #0ca678; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 0 #0ca678; background: #fffdf5; }
 .icn-strip.pop { animation: icn-pop .28s ease-out; }
 @keyframes icn-pop { 0% { transform: scale(.7); opacity: .2; } 70% { transform: scale(1.05); } 100% { transform: scale(1); opacity: 1; } }
 .icn-cell { display: flex; flex-direction: column; align-items: stretch; min-width: 0; }
@@ -63,3 +63,4 @@
 }
 @media (max-height: 640px) and (max-aspect-ratio: 5/4) { .icn-strip { --cs: clamp(46px, 15vw, 70px); } .icn-chip { min-height: 46px; font-size: 19px; } .icn-input, .icn-form .primary { min-height: 46px; } }
 .icn-chips[hidden], .icn-form[hidden], .icn-ovl p[hidden] { display: none; }
+.icn-body.idle .icn-stage, .icn-body.idle .icn-play { visibility: hidden; }

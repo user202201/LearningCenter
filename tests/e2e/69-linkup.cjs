@@ -383,6 +383,7 @@ const CJK = /[一-鿿]/;
       await route.fulfill({ response: r, body: body + add('EN', 0) + add('FR', 1) });
     });
     const q = tl.page;
+    await q.reload(); await q.waitForLoadState('load');
     const text = () => q.evaluate(() => document.querySelector('.lk-wrap').innerText + '\n' + [...document.querySelectorAll('#toasts .toast')].map((x) => x.innerText).join('\n'));
     const noCjk = async (what) => { const tx = await text(); ok(!CJK.test(tx), `${lang}: ${what} has no Chinese left` + (CJK.test(tx) ? ': ' + tx.replace(/\s+/g, ' ').slice(0, 200) : '')); return tx; };
     await q.evaluate(() => (location.hash = '#/games/linkup')); await q.waitForSelector('#lk-grid .lk-tile');

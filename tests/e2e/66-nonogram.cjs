@@ -173,9 +173,9 @@ const CJK = /[㐀-鿿]/;
   await tap(blank); await p.click('#nng-mode-cross'); await tap(solid); await p.click('#nng-mode-fill');
   await p.click('#nng-check'); s = await st();
   ok(JSON.stringify(s.bad.sort((a, b) => a - b)) === JSON.stringify([blank, solid].sort((a, b) => a - b)) && s.phase === 'play' && s.checks === 1, `check marks exactly the wrong cells (a filled blank and a crossed picture cell) and the game goes on`);
-  ok(await p.locator('.nng-cell.bad').count() === 2, 'the wrong cells are shown in soft red');
+  ok(await p.locator('.nng-cell.nng-bad').count() === 2, 'the wrong cells are shown in soft red');
   await p.screenshot({ path: OUT + 'nonogram-check.png' });
-  await tap(blank); s = await st(); ok(s.bad.length === 0 && await p.locator('.nng-cell.bad').count() === 0, 'the red marks go away at the next change');
+  await tap(blank); s = await st(); ok(s.bad.length === 0 && await p.locator('.nng-cell.nng-bad').count() === 0, 'the red marks go away at the next change');
   await p.click('#nng-check'); ok((await st()).checks === 2, 'check counts');
   // hints
   await p.click('#nng-new'); s = await st();
@@ -190,14 +190,14 @@ const CJK = /[㐀-鿿]/;
   // keyboard
   await p.click('#nng-new'); await p.evaluate(() => document.activeElement && document.activeElement.blur());
   await p.keyboard.press('ArrowRight'); await p.keyboard.press('ArrowDown'); await p.keyboard.press('ArrowDown'); await p.keyboard.press('ArrowRight');
-  ok(await p.locator('.nng-cell.cur[data-i="21"]').count() === 1, 'arrows move the cursor: ' + await p.evaluate(() => document.querySelector('.nng-cell.cur')?.dataset.i));
+  ok(await p.locator('.nng-cell.nng-cur[data-i="21"]').count() === 1, 'arrows move the cursor: ' + await p.evaluate(() => document.querySelector('.nng-cell.nng-cur')?.dataset.i));
   await p.keyboard.press(' '); s = await st(); ok(s.cells[21] === 1, 'Space fills');
   await p.keyboard.press(' '); s = await st(); ok(s.cells[21] === 2, 'Space again crosses');
   await p.keyboard.press('x'); s = await st(); ok(s.cells[21] === 0, 'X toggles the cross (a cross clears)');
   await p.keyboard.press('x'); s = await st(); ok(s.cells[21] === 2, 'X marks a cross');
   await p.keyboard.press('z'); s = await st(); ok(s.cells[21] === 0, 'Z undoes');
   await p.keyboard.press('ArrowLeft'); await p.keyboard.press('ArrowLeft'); await p.keyboard.press('ArrowLeft'); await p.keyboard.press('ArrowUp'); await p.keyboard.press('ArrowUp'); await p.keyboard.press('ArrowUp');
-  ok(await p.locator('.nng-cell.cur[data-i="0"]').count() === 1, 'the cursor stays inside the grid');
+  ok(await p.locator('.nng-cell.nng-cur[data-i="0"]').count() === 1, 'the cursor stays inside the grid');
 
   // ---------- saving an unfinished puzzle, per size ----------
   await p.click('#nng-new'); s = await st(); await tap(5); await tap(6); await p.click('#nng-mode-cross'); await tap(7); await p.click('#nng-mode-fill'); await p.click('#nng-hint');
@@ -225,7 +225,7 @@ const CJK = /[㐀-鿿]/;
   s = await st();
   ok(s.phase === 'won', 'filling exactly the picture wins (crosses on blank cells do not matter)');
   await p.waitForFunction(() => window.__nng.finished() === 1, null, { timeout: 4000 });
-  const colours = await p.evaluate(() => { const set = new Set(); let n = 0; document.querySelectorAll('.nng-cell.f').forEach((e) => { set.add(e.style.getPropertyValue('--bg')); n++; }); return { kinds: set.size, n, empty: set.has('') }; });
+  const colours = await p.evaluate(() => { const set = new Set(); let n = 0; document.querySelectorAll('.nng-cell.nng-f').forEach((e) => { set.add(e.style.getPropertyValue('--bg')); n++; }); return { kinds: set.size, n, empty: set.has('') }; });
   ok(colours.n === s.pic.reduce((a, b) => a + b, 0) && colours.kinds >= 2 && !colours.empty, `the picture gets cartoon colours (${colours.kinds} colours on ${colours.n} cells)`);
   ok((await p.textContent('#nng-ovl h2')) === '你已完成。' && await p.locator('#nng-ovl').isVisible() && (await p.getAttribute('.nng-stars-wrap', 'data-stars')) === '3', 'win overlay: "你已完成。" with 3 stars (no hint, no check)');
   ok((await p.textContent('#nng-ovl p')).includes('1:15'), 'the overlay names the time: ' + (await p.textContent('#nng-ovl p')));
@@ -254,7 +254,7 @@ const CJK = /[㐀-鿿]/;
     await p.waitForFunction(() => window.__nng.finished() === 1, null, { timeout: 5000 });
     s = await st();
     ok(s.phase === 'won' && s.cells.every((v, i) => (v === 1) === (s.pic[i] === 1)), `${n}x${n}: solved with taps and drags (strokes along the runs)`);
-    ok(await p.locator('.nng-rc.done').count() === n && await p.locator('.nng-cc.done').count() === n, `${n}x${n}: every clue is green at the end`);
+    ok(await p.locator('.nng-rc.nng-done').count() === n && await p.locator('.nng-cc.nng-done').count() === n, `${n}x${n}: every clue is green at the end`);
     await p.screenshot({ path: OUT + `nonogram-win-${n}.png` });
     await tap(0); ok((await st()).cells.join('') === s.cells.join(''), `${n}x${n}: nothing changes after the win`);
   }

@@ -14,27 +14,27 @@
 .nng-cc span, .nng-rc span { font-weight: 900; color: #087f5b; font-size: max(9px, calc(var(--c) * .46)); line-height: 1; text-align: center; font-variant-numeric: tabular-nums; }
 .nng-cc span { height: calc(var(--c) * .56); display: flex; align-items: center; justify-content: center; }
 .nng-rc span { min-width: calc(var(--c) * .6); }
-.nng-cc.done span, .nng-rc.done span { color: #adb5bd; }
-.nng-cc.done, .nng-rc.done { background: #d3f9d8; }
-.nng-cc.br, .nng-rc.bb { box-shadow: 2px 0 0 #96f2d7; }
-.nng-rc.bb { box-shadow: 0 2px 0 #96f2d7; }
+.nng-cc.nng-done span, .nng-rc.nng-done span { color: #adb5bd; }
+.nng-cc.nng-done, .nng-rc.nng-done { background: #d3f9d8; }
+.nng-cc.nng-br, .nng-rc.nng-bb { box-shadow: 2px 0 0 #96f2d7; }
+.nng-rc.nng-bb { box-shadow: 0 2px 0 #96f2d7; }
 .nng-grid { grid-column: 2; grid-row: 2; display: grid; grid-template-columns: repeat(var(--n), var(--c)); grid-template-rows: repeat(var(--n), var(--c)); touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; cursor: pointer; }
 .nng-cell { position: relative; box-sizing: border-box; border-right: 1px solid #b2f2e0; border-bottom: 1px solid #b2f2e0; background: #fff; -webkit-tap-highlight-color: transparent; }
-.nng-cell.br { border-right: 3px solid #0ca678; }
-.nng-cell.bb { border-bottom: 3px solid #0ca678; }
-.nng-cell.el { border-right-width: 0; }
-.nng-cell.eb { border-bottom-width: 0; }
-.nng-cell.f::after { content: ""; position: absolute; inset: 9%; border-radius: 28%; background: var(--bg, #12b886); box-shadow: 0 2px 0 var(--bd, #0ca678); }
-.nng-cell.x::after { content: ""; position: absolute; inset: 24%; background: no-repeat center / 100% 100% url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 3L17 17M17 3L3 17' stroke='%23e8590c' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E"); }
-.nng-cell.lk { background: #f1faf6; }
-.nng-cell.bad { background: #ffe3e3; }
-.nng-cell.bad.f::after { background: #ff8787; box-shadow: 0 2px 0 #e03131; }
-.nng-cell.cur { box-shadow: inset 0 0 0 3px #fcc419; z-index: 1; background: #fff3bf; }
-.nng-cell.pulse { animation: nng-hint .7s ease-out; }
+.nng-cell.nng-br { border-right: 3px solid #0ca678; }
+.nng-cell.nng-bb { border-bottom: 3px solid #0ca678; }
+.nng-cell.nng-el { border-right-width: 0; }
+.nng-cell.nng-eb { border-bottom-width: 0; }
+.nng-cell.nng-f::after { content: ""; position: absolute; inset: 9%; border-radius: 28%; background: var(--bg, #12b886); box-shadow: 0 2px 0 var(--bd, #0ca678); }
+.nng-cell.nng-x::after { content: ""; position: absolute; inset: 24%; background: no-repeat center / 100% 100% url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 3L17 17M17 3L3 17' stroke='%23e8590c' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.nng-cell.nng-lk { background: #f1faf6; }
+.nng-cell.nng-bad { background: #ffe3e3; }
+.nng-cell.nng-bad.nng-f::after { background: #ff8787; box-shadow: 0 2px 0 #e03131; }
+.nng-cell.nng-cur { box-shadow: inset 0 0 0 3px #fcc419; z-index: 1; background: #fff3bf; }
+.nng-cell.nng-pulse { animation: nng-hint .7s ease-out; }
 @keyframes nng-hint { 0% { background: #fcc419; } 100% { background: #f1faf6; } }
-.nng-field.won .nng-cell.f::after { animation: nng-pop .5s cubic-bezier(.3, 1.6, .5, 1) both; }
+.nng-field.nng-won .nng-cell.nng-f::after { animation: nng-pop .5s cubic-bezier(.3, 1.6, .5, 1) both; }
 @keyframes nng-pop { 0% { transform: scale(.4); } 100% { transform: scale(1); } }
-@media (prefers-reduced-motion: reduce) { .nng-field.won .nng-cell.f::after { animation: none; } .nng-cell.pulse { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .nng-field.nng-won .nng-cell.nng-f::after { animation: none; } .nng-cell.nng-pulse { animation: none; } }
 .nng-ovl { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 10px; background: rgba(255, 246, 229, .8); color: #3a2e39; z-index: 2; }
 .nng-ovl[hidden] { display: none; }
 .nng-ovl h2 { margin: 0; font-size: 26px; color: #087f5b; }
