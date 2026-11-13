@@ -28,4 +28,6 @@ export const GAMES: GameInfo[] = [
   { id: "linkup", name: "连连看", sub: "用不超过两个拐弯的线连接相同的图案", load: () => import("./linkup") },
   { id: "maze", name: "迷宫", sub: "用手指画出从起点到终点的路线", load: () => import("./maze") },
   { id: "whack", name: "打地鼠", sub: "限时点击地鼠，避开炸弹", load: () => import("./whack") },
+  { id: "hanoi", name: "汉诺塔", sub: "把圆盘从左柱按规则全部移到右柱", load: () => import("./hanoi") },
+  { id: "shooter", name: "太空射击", sub: "拖动飞船自动开火，击落陨石和敌机", load: () => import("./shooter") },
 ];
