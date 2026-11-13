@@ -2171,7 +2171,7 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .sp-stage { position: relative; margin: 8px auto; width: min(100%, 78vh); max-width: 100%; }
 .sp-canvas { display: block; width: 100%; aspect-ratio: 1 / 1; border-radius: 22px; background: #0b0d26; box-shadow: 0 4px 0 #3b3a7a; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
 .sp-zoom { position: absolute; right: 8px; bottom: 8px; display: flex; align-items: center; gap: 6px; background: rgba(10,12,40,.7); border-radius: 22px; padding: 4px 6px; color: #fff; }
-.sp-zoom .mopt { min-width: 44px; min-height: 44px; padding: 0; font-size: 22px; line-height: 1; }
+.sp-zoom .mopt { color: #2d2230; min-width: 44px; min-height: 44px; padding: 0; font-size: 22px; line-height: 1; }
 .sp-zoom .muted { color: #dbe4ff; min-width: 40px; text-align: center; }
 .sp-time { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
 .sp-date { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 20px; }
@@ -2300,3 +2300,128 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .sp-quiz .sp-q { font-size: clamp(20px, 5.4vw, 30px); }
 .sp-quiz .mchoice { font-size: clamp(16px, 4.4vw, 24px); min-height: 64px; }
 @media (max-height: 500px) { .sp-qcv { width: 110px; } .sp-qconst { width: 120px; } .sp-quiz .sp-q { font-size: 18px; } .sp-quiz .mchoice { min-height: 44px; } }
+
+/* ---------- 化学 (#/science/chem) ---------- */
+.sci-ref.chem-homecard { position: relative; padding-right: 64px; }
+.sci-ref.chem-homecard .sci-ico { position: absolute; right: 10px; top: 50%; width: 44px; height: 44px; transform: translateY(-50%); display: block; }
+.sci-ref.chem-homecard .sci-ico svg { width: 100%; height: 100%; display: block; }
+.chem-narrow { width: 100%; box-sizing: border-box; }
+.chem-lead { margin: 6px 0 10px; }
+.chem-levels { justify-content: center; margin-bottom: 12px; }
+.chem-modes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 8px 0 20px; }
+@media (min-width: 820px) { .chem-modes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.chem-mode { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; padding: 12px; min-height: 124px; text-align: left; border-radius: 20px; border: 2px solid #d0bfff; box-shadow: 0 4px 0 #d0bfff; background: linear-gradient(160deg, #f3f0ff, #fff); overflow-wrap: anywhere; min-width: 0; }
+.chem-mode b { font-size: 17px; color: #5430b8; }
+.chem-mode .chem-n { margin-top: auto; color: #7048e8; }
+.chem-badge { display: inline-block; font-size: 20px; font-weight: 800; color: #7048e8; background: #fff; border: 2px solid #d0bfff; border-radius: 12px; padding: 0 10px; min-width: 44px; text-align: center; }
+.chem-card { background: #fff; border: 2px solid #e5dbff; border-radius: 20px; padding: 14px; margin: 10px 0; box-shadow: 0 4px 0 #e5dbff; }
+.chem-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 8px; font-weight: 700; color: #5430b8; }
+.chem-bar { height: 8px; border-radius: 4px; background: #e5dbff; overflow: hidden; margin: 6px 0; }
+.chem-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #b197fc, #7048e8); transition: width .3s; }
+.chem-stem { font-size: 17px; line-height: 1.7; margin-bottom: 10px; }
+.chem-parts { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; min-width: 0; }
+.chem-parts > .chem-eqline, .chem-parts > .chem-crossbox { flex-basis: 100%; }
+.chem-f { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-weight: 700; white-space: nowrap; }
+.chem-f sub { font-size: .7em; line-height: 0; }
+.chem-eqline { display: block; padding: 6px 0; overflow-wrap: anywhere; }
+.chem-eqs { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: 18px; }
+.chem-term { display: inline-flex; align-items: center; gap: 2px; }
+.chem-coef { font-weight: 800; color: #d6336c; }
+.chem-mark { color: #e8590c; font-weight: 800; }
+.chem-plus { color: #868e96; font-weight: 700; }
+.chem-arrow { display: inline-flex; flex-direction: column; align-items: center; line-height: 1.1; padding: 0 4px; }
+.chem-arrow small { font-size: 11px; color: #5430b8; white-space: nowrap; }
+.chem-arrow i { font-style: normal; font-size: 22px; line-height: 1; }
+.chem-arrow.big { align-self: center; font-size: 26px; font-weight: 800; color: #7048e8; }
+.chem-cond span + span { margin-left: 2px; }
+.chem-crossbox svg { width: min(220px, 70%); height: auto; display: block; margin: 6px 0; }
+.chem-fig .chem-apps, .chem-apps { display: flex; gap: 8px; justify-content: center; margin: 8px 0 12px; }
+.chem-app { width: calc(33% - 6px); max-width: 150px; min-width: 84px; height: auto; background: #f8f7ff; border-radius: 14px; border: 2px solid #e5dbff; flex: 1 1 0; }
+.chem-choices { display: flex; flex-direction: column; gap: 8px; }
+.chem-choices.compact { flex-direction: row; flex-wrap: wrap; }
+.chem-choices.compact .chem-ch { flex: 1 1 90px; justify-content: center; }
+.chem-ch { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 48px; text-align: left; white-space: normal; padding: 8px 12px; font-size: 16px; border-radius: 14px; overflow-wrap: anywhere; }
+.chem-ch .chem-parts { flex: 1; }
+.chem-key { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #f3f0ff; color: #5430b8; font-size: 13px; font-weight: 800; flex: none; }
+.chem-ch.right { background: #d3f9d8; border-color: #2f9e44; color: #1b5e20; box-shadow: 0 3px 0 #2f9e44; }
+.chem-ch.wrong { background: #ffe3e3; border-color: #e03131; color: #a61e1e; box-shadow: 0 3px 0 #e03131; }
+.chem-ch:disabled { opacity: 1; }
+.chem-tblwrap { margin: 8px 0; }
+.chem-tbl { width: 100%; border-collapse: collapse; font-size: 14px; table-layout: auto; }
+.chem-tbl th, .chem-tbl td { border: 1px solid #e5dbff; padding: 4px 6px; text-align: center; overflow-wrap: anywhere; }
+.chem-tbl th { background: #f3f0ff; font-weight: 700; }
+.chem-tbl th small { color: #868e96; font-weight: 400; }
+.chem-soltbl td { font-weight: 800; font-family: ui-monospace, Menlo, monospace; }
+.chem-sol-s { background: #d3f9d8; color: #2b8a3e; } .chem-sol-i { background: #ffe3e3; color: #c92a2a; } .chem-sol-m { background: #fff3bf; color: #e67700; } .chem-sol-v { background: #d0ebff; color: #1971c2; } .chem-sol-n { background: #f1f3f5; color: #868e96; }
+.chem-legend { list-style: none; padding: 0; display: grid; gap: 4px; }
+.chem-steps { display: flex; flex-direction: column; gap: 10px; }
+.chem-step { padding: 8px 10px; border-radius: 14px; background: #f8f7ff; border: 2px solid #e5dbff; }
+.chem-step.ok { border-color: #2f9e44; } .chem-step.bad { border-color: #e03131; }
+.chem-steplab { font-weight: 600; margin-bottom: 6px; }
+.chem-inrow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chem-in { font-size: 20px; padding: 8px 12px; border: 2px solid #d0bfff; border-radius: 12px; width: min(160px, 100%); box-sizing: border-box; background: #fff; min-height: 46px; }
+.chem-unit { font-weight: 700; }
+.chem-ok { min-height: 46px; }
+.chem-say { margin: 6px 0 0; min-height: 0; display: flex; flex-wrap: wrap; gap: 4px; align-items: baseline; }
+.chem-say.ok { color: #2b8a3e; } .chem-say.bad { color: #c92a2a; }
+.chem-ar { margin: 4px 0; }
+.chem-msg { min-height: 24px; font-weight: 700; margin: 8px 0 0; text-align: center; }
+.chem-msg.ok { color: #2b8a3e; } .chem-msg.bad { color: #c92a2a; }
+.chem-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+.chem-actions button { min-height: 46px; min-width: 110px; }
+.chem-expl { background: #f8f7ff; border: 2px solid #e5dbff; border-radius: 14px; padding: 10px 12px; margin-top: 12px; line-height: 1.7; }
+.chem-expl .chem-parts + .chem-parts { margin-top: 4px; }
+.chem-verdict { font-weight: 800; margin: 0 0 4px; } .chem-verdict.ok { color: #2b8a3e; } .chem-verdict.bad { color: #c92a2a; }
+.chem-foot { margin: 12px 0 24px; }
+.chem-next { min-height: 50px; }
+.chem-eqwrap { padding: 4px 0; }
+.chem-eqline.bal { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 6px; font-size: 20px; }
+.chem-term.bal { flex-direction: column; gap: 4px; padding: 6px; border-radius: 14px; background: #f8f7ff; border: 2px solid #e5dbff; }
+.chem-term.bal.flash { animation: chem-flash .8s; }
+@keyframes chem-flash { 0%, 100% { background: #f8f7ff; } 40% { background: #ffec99; } }
+.chem-term.bal > .chem-f { margin-top: 2px; }
+.chem-stepper { display: inline-flex; align-items: center; gap: 4px; }
+.chem-step-btn { width: 40px; height: 40px; min-height: 40px; padding: 0; border-radius: 12px; border: 2px solid #d0bfff; background: #fff; font-size: 22px; font-weight: 800; color: #5430b8; box-shadow: 0 3px 0 #d0bfff; }
+.chem-step-btn:disabled { opacity: .35; }
+.chem-val { min-width: 26px; text-align: center; font-size: 20px; }
+.chem-scales { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 10px 0 0; min-height: 0; }
+.chem-scale { width: 92px; border-radius: 14px; background: #fff7ed; border: 2px solid #ffd8a8; padding: 2px; }
+.chem-scale.eq { background: #ebfbee; border-color: #8ce99a; }
+.chem-scale svg { width: 100%; height: auto; display: block; }
+.chem-desc { font-size: 18px; background: #fff9db; border: 2px solid #ffe066; border-radius: 14px; padding: 10px 12px; margin: 4px 0 10px; line-height: 1.6; }
+.chem-sides { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 6px; align-items: stretch; }
+@media (max-width: 560px) { .chem-sides { grid-template-columns: minmax(0, 1fr); } .chem-sides .chem-arrow.big { transform: rotate(90deg); justify-self: center; } }
+.chem-zone { min-height: 96px; border: 2px dashed #d0bfff; border-radius: 16px; padding: 8px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.chem-zone.active { border: 2px solid #7048e8; background: #f8f7ff; }
+.chem-zlab { font-weight: 700; color: #5430b8; }
+.chem-chip { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 6px; padding: 4px 6px; border-radius: 12px; border: 2px solid #e5dbff; background: #fff; font-size: 18px; }
+.chem-x { width: 40px; height: 40px; min-height: 40px; padding: 0; border-radius: 12px; border: 2px solid #ffc9c9; background: #fff5f5; color: #c92a2a; font-size: 20px; }
+.chem-tiles { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; justify-content: center; }
+.chem-tile { min-height: 46px; min-width: 56px; padding: 6px 12px; border-radius: 12px; border: 2px solid #d0bfff; background: #fff; font-size: 18px; box-shadow: 0 3px 0 #d0bfff; }
+.chem-tile.used { opacity: .35; }
+.chem-tray { display: flex; flex-wrap: wrap; gap: 8px; min-height: 64px; padding: 8px; border: 2px dashed #d0bfff; border-radius: 16px; justify-content: center; align-items: center; }
+.chem-tray.empty::after { content: "✓"; color: #2f9e44; font-weight: 800; }
+.chem-item { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 10px; min-height: 52px; min-width: 52px; border-radius: 14px; border: 2px solid #d0bfff; background: #fff; cursor: grab; user-select: none; -webkit-user-select: none; touch-action: none; box-shadow: 0 3px 0 #d0bfff; font-size: 17px; }
+.chem-iname { font-size: 12px; color: #5430b8; }
+.chem-item.sel { outline: 3px solid #7048e8; background: #f3f0ff; }
+.chem-item.dragging { opacity: .35; }
+.chem-item.ok { border-color: #2f9e44; background: #ebfbee; } .chem-item.bad { border-color: #e03131; background: #fff5f5; }
+.chem-right { font-style: normal; font-size: 12px; color: #c92a2a; font-weight: 700; }
+.chem-ghost { position: fixed; z-index: 99999; transform: translate(-50%, -50%) scale(1.08); pointer-events: none; opacity: .92; box-shadow: 0 8px 18px rgba(0, 0, 0, .25); }
+.chem-buckets { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 10px; margin-top: 12px; }
+.chem-bucket { border: 2px solid #b197fc; border-radius: 16px; padding: 8px; min-height: 96px; background: #f8f7ff; }
+.chem-bucket > b { color: #5430b8; }
+.chem-bucket.over { background: #e5dbff; border-style: dashed; }
+.chem-bk-items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chem-big { font-size: 22px; text-align: center; color: #5430b8; }
+.chem-wrong { border-top: 2px solid #e5dbff; padding: 8px 0; }
+.chem-actchip { padding: 8px 12px; border-radius: 12px; background: #f3f0ff; font-weight: 800; border: 2px solid #d0bfff; min-width: 40px; text-align: center; }
+.chem-actchip.h { background: #ffe3e3; border-color: #ffa8a8; }
+.chem-actrow { display: flex; flex-wrap: wrap; gap: 6px; }
+.chem-rules { line-height: 1.7; }
+.chem-ph { display: flex; flex-direction: column; gap: 4px; }
+.chem-phrow { display: grid; grid-template-columns: minmax(80px, 1fr) 1.4fr 36px; gap: 8px; align-items: center; font-size: 14px; }
+.chem-phbar { height: 10px; border-radius: 5px; background: #f1f3f5; overflow: hidden; } .chem-phbar i { display: block; height: 100%; }
+.chem-rxrow { padding: 8px 0; border-bottom: 1px solid #e5dbff; }
+.chem-tag { display: inline-block; padding: 0 8px; border-radius: 10px; background: #f3f0ff; color: #5430b8; font-size: 12px; font-weight: 700; }
+.chem-subtbl th { text-align: left; }

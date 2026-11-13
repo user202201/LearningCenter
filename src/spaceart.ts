@@ -156,7 +156,7 @@ function lookup(px: number, elev: number, lit: boolean): Look {
     // soft edge
     if (r2 > 0.97) mask[k] = Math.round(255 * Math.max(0, (1 - r2) / 0.03));
   }
-  l = { n: px, mask, lon, row, shade };
+  l = { n, mask, lon, row, shade };
   looks.set(key, l);
   return l;
 }

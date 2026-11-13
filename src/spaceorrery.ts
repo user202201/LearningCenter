@@ -42,6 +42,7 @@ export function mountOrrery(S: Space, open: (id: string) => void): OrreryApi {
         h("div", { class: "sp-light-pick" }, ...list().map((x) => h("button", { class: "mopt sp-lp" + (x.id === b.id ? " on" : ""), "data-id": x.id, onclick: () => { st.light = x.id; sync(); } }, user(nameOf(x))))));
     }
     st.dirty = true;
+    if (!loop.running) redraw();
   };
   const setMode = (m: "schem" | "true") => { st.mode = m; modeChips.forEach((c) => c.classList.toggle("on", c.dataset.v === m)); sync(); };
   const modeChips = [h("button", { class: "mopt on", id: "sp-mode-schem", "data-v": "schem", onclick: () => setMode("schem") }, "示意距离"), h("button", { class: "mopt", id: "sp-mode-true", "data-v": "true", onclick: () => setMode("true") }, "真实距离")];
@@ -126,13 +127,13 @@ export function mountOrrery(S: Space, open: (id: string) => void): OrreryApi {
     const scale = Math.max(0.85, Math.min(1.5, R / 180));
     for (const q of placed) {
       const { b, p } = q, [x, y] = p;
-      const dwarf = b.kind === "dwarf", r0 = dwarf ? 3.4 * scale : (3 + 2.4 * Math.sqrt(b.d / 12742)) * scale * (st.dwarfs ? 0.8 : 1);
+      const dwarf = b.kind === "dwarf", r0 = dwarf ? 3.6 * scale : (3.6 + 2.6 * Math.sqrt(b.d / 12742)) * scale * (st.dwarfs ? 0.8 : 1);
       const rr = Math.max(2.4, r0);
       const ringed = b.id === "saturn";
-      const sp = sprite(b.id, 64, ringed);
+      const sp = sprite(b.id, 64, ringed, false);
       const dw = (ringed ? RING_PAD : 1) * rr * 2;
       if (x > -50 && x < w + 50 && y > -50 && y < hh + 50) {
-        const g2 = c.createRadialGradient(x, y, rr * 0.8, x, y, rr * 2.2); g2.addColorStop(0, b.color + "66"); g2.addColorStop(1, b.color + "00"); c.fillStyle = g2; c.beginPath(); c.arc(x, y, rr * 2.2, 0, 7); c.fill();
+        const g2 = c.createRadialGradient(x, y, rr * 0.8, x, y, rr * 2.2); g2.addColorStop(0, b.color + "30"); g2.addColorStop(1, b.color + "00"); c.fillStyle = g2; c.beginPath(); c.arc(x, y, rr * 2.2, 0, 7); c.fill();
         c.drawImage(sp, x - dw / 2, y - dw / 2, dw, dw);
         if (R > 130 && (!dwarf || R > 170 || st.light === b.id)) { c.fillStyle = "rgba(255,255,255,.88)"; c.font = `600 ${st.dwarfs ? 10 : 11}px system-ui, sans-serif`; c.textAlign = "center"; c.fillText(nameOf(b), x, y - rr - (ringed ? rr * 0.5 : 0) - 4); }
       }
@@ -170,9 +171,9 @@ export function mountOrrery(S: Space, open: (id: string) => void): OrreryApi {
     h("div", { class: "sp-stage" }, cv, zoomBtns),
     timeRow, lightBox,
     h("p", { class: "muted small center", id: "sp-orrery-tip" }, "点击行星，进入它的页面。示意距离只保留行星的顺序和方向；真实距离下太阳系几乎是空的。"));
-  let last = -1;
+
   const loop = new Loop(root, (dt) => {
-    last += dt;
+
     if (SPEEDS[st.speed] > 0) { st.day += SPEEDS[st.speed] * dt; dateEl.textContent = dateOfDay(st.day); st.dirty = true; }
     if (st.mode === "true") st.dirty = true;
     if (st.dirty) { draw(performance.now()); st.dirty = false; }

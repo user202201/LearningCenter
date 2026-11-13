@@ -13,10 +13,10 @@ export function scaleSvg(e: string, l: number, r: number): string {
   const cx = 50, cy = 22, len = 36;
   const lx = cx - len * Math.cos(ang), ly = cy + len * Math.sin(ang), rx = cx + len * Math.cos(ang), ry = cy - len * Math.sin(ang);
   const col = eq ? GREEN : ORANGE;
-  const pan = (x: number, y: number, n: number) => `<line x1="${x}" y1="${y}" x2="${x - 9}" y2="${y + 17}" stroke="${INK}" stroke-width="1.2"/><line x1="${x}" y1="${y}" x2="${x + 9}" y2="${y + 17}" stroke="${INK}" stroke-width="1.2"/><path d="M${x - 13} ${y + 17} h26 a13 13 0 0 1 -26 0z" fill="${col}" fill-opacity=".16" stroke="${col}" stroke-width="2"/><text x="${x}" y="${y + 22}" font-size="11" font-weight="800" text-anchor="middle" fill="${col}">${n}</text>`;
-  return `<svg viewBox="0 0 100 80" role="img" aria-label="${e} ${l} ${r}"><path d="M42 72 L50 24 L58 72z" fill="#d0bfff"/><rect x="36" y="70" width="28" height="5" rx="2.5" fill="#9775fa"/>` +
-    `<line x1="${lx.toFixed(1)}" y1="${ly.toFixed(1)}" x2="${rx.toFixed(1)}" y2="${ry.toFixed(1)}" stroke="${INK}" stroke-width="3" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="3.5" fill="${col}"/>` +
-    pan(+lx.toFixed(1), +ly.toFixed(1), l) + pan(+rx.toFixed(1), +ry.toFixed(1), r) + `<text x="50" y="50" font-size="11" font-weight="800" text-anchor="middle" fill="#fff" stroke="none">${e}</text></svg>`;
+  const pan = (x: number, y: number, n: number) => `<line x1="${x}" y1="${y}" x2="${x - 11}" y2="${y + 15}" stroke="${INK}" stroke-width="1.4"/><line x1="${x}" y1="${y}" x2="${x + 11}" y2="${y + 15}" stroke="${INK}" stroke-width="1.4"/><path d="M${x - 14} ${y + 15} h28 a14 14 0 0 1 -28 0z" fill="${col}" stroke="${INK}" stroke-width="1.2"/><text x="${x}" y="${y + 28}" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">${n}</text>`;
+  return `<svg viewBox="0 0 100 94" role="img" aria-label="${e} ${l} ${r}"><path d="M42 74 L50 24 L58 74z" fill="#d0bfff"/><rect x="34" y="72" width="32" height="5" rx="2.5" fill="#9775fa"/>` +
+    `<line x1="${lx.toFixed(1)}" y1="${ly.toFixed(1)}" x2="${rx.toFixed(1)}" y2="${ry.toFixed(1)}" stroke="${INK}" stroke-width="3.5" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="4" fill="${col}"/>` +
+    pan(+lx.toFixed(1), +ly.toFixed(1), l) + pan(+rx.toFixed(1), +ry.toFixed(1), r) + `<text x="50" y="91" font-size="15" font-weight="800" text-anchor="middle" fill="${col}">${e}</text></svg>`;
 }
 
 const FRAME = (id: string, body: string) => `<svg viewBox="0 0 130 112" class="chem-app" data-app="${id}" role="img" aria-label="${id}">${body}<text x="6" y="16" font-size="15" font-weight="800" fill="#5430b8">${id}</text></svg>`;

@@ -58,7 +58,7 @@ export async function renderHome() {
     h("button", { class: "sci-ref", id: "open-map", onclick: () => (location.hash = "#/science/map") }, h("b", {}, "地图"), h("span", { class: "muted small" }, "中国 · 世界 · 国旗")),
     h("button", { class: "sci-ref sp-card", id: "open-space", onclick: () => (location.hash = "#/science/space") }, spaceIcon(), h("b", {}, "天文"), h("span", { class: "muted small" }, "太阳系 · 月相 · 星空")),
     h("button", { class: "sci-ref", id: "open-physics", onclick: () => (location.hash = "#/science/physics") }, h("span", { class: "sci-ref-ico", "aria-hidden": "true", innerHTML: PHYS_ICON }), h("b", {}, "物理实验室"), h("span", { class: "muted small" }, "初中物理 · 动手做实验")),
-    h("button", { class: "sci-ref chem-card", id: "open-chem", onclick: () => (location.hash = "#/science/chem") }, chemIconEl(), h("b", {}, "化学"), h("span", { class: "muted small" }, "配平 · 计算 · 酸碱盐 · 气体")));
+    h("button", { class: "sci-ref chem-homecard", id: "open-chem", onclick: () => (location.hash = "#/science/chem") }, chemIconEl(), h("b", {}, "化学"), h("span", { class: "muted small" }, "配平 · 计算 · 酸碱盐 · 气体")));
   const list = h("div", { class: "kids" });
   for (const k of kids) {
     const n = allIds(cache.get(k.id) ?? M.EMPTY_KID).length;
