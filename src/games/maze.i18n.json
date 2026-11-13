@@ -1,23 +1,90 @@
 {
-  "迷宫": ["Maze", "Labyrinthe"],
-  "用手指画出从起点到终点的路线": ["Draw the route from the start to the exit with your finger", "Tracez du doigt le chemin du départ jusqu'à la sortie"],
-  "时间：{0}": ["Time: {0}", "Temps : {0}"],
-  "最快：{0}": ["Fastest: {0}", "Meilleur : {0}"],
-  "提示：{0} / {1}": ["Hints: {0} / {1}", "Indices : {0} / {1}"],
-  "简单 {0}": ["Easy {0}", "Facile {0}"],
-  "普通 {0}": ["Normal {0}", "Normal {0}"],
-  "困难 {0}": ["Hard {0}", "Difficile {0}"],
-  "专家 {0}": ["Expert {0}", "Expert {0}"],
-  "撤销": ["Undo", "Annuler"],
-  "擦除重来": ["Erase and restart", "Effacer et recommencer"],
-  "提示": ["Hint", "Indice"],
-  "显示答案": ["Show answer", "Voir la solution"],
-  "隐藏答案": ["Hide answer", "Masquer la solution"],
-  "新迷宫": ["New maze", "Nouveau labyrinthe"],
-  "换大小": ["Change size", "Changer la taille"],
-  "答案已显示，本次不计成绩。": ["The answer is shown. This maze does not count for the best time.", "La solution est affichée. Ce labyrinthe ne compte pas pour le meilleur temps."],
-  "迷宫完成。": ["Maze completed.", "Labyrinthe terminé."],
-  "用时 {0}": ["Time taken: {0}", "Temps écoulé : {0}"],
-  "新纪录。": ["New record.", "Nouveau record."],
-  "再来一个": ["Another one", "Un autre"]
+  "迷宫": [
+    "Maze",
+    "Labyrinthe"
+  ],
+  "用手指画出从起点到终点的路线": [
+    "Draw the route from the start to the exit with your finger",
+    "Tracez du doigt le chemin du départ jusqu'à la sortie"
+  ],
+  "时间：{0}": [
+    "Time: {0}",
+    "Temps : {0}"
+  ],
+  "最快：{0}": [
+    "Fastest: {0}",
+    "Meilleur : {0}"
+  ],
+  "提示：{0} / {1}": [
+    "Hints: {0} / {1}",
+    "Indices : {0} / {1}"
+  ],
+  "简单 {0}": [
+    "Easy {0}",
+    "Facile {0}"
+  ],
+  "普通 {0}": [
+    "Normal {0}",
+    "Normal {0}"
+  ],
+  "困难 {0}": [
+    "Hard {0}",
+    "Difficile {0}"
+  ],
+  "专家 {0}": [
+    "Expert {0}",
+    "Expert {0}"
+  ],
+  "撤销": [
+    "Undo",
+    "Annuler"
+  ],
+  "擦除重来": [
+    "Erase and restart",
+    "Effacer et recommencer"
+  ],
+  "提示": [
+    "Hint",
+    "Indice"
+  ],
+  "显示答案": [
+    "Show answer",
+    "Voir la solution"
+  ],
+  "隐藏答案": [
+    "Hide answer",
+    "Masquer la solution"
+  ],
+  "新迷宫": [
+    "New maze",
+    "Nouveau labyrinthe"
+  ],
+  "换大小": [
+    "Change size",
+    "Changer la taille"
+  ],
+  "答案已显示，本次不计成绩。": [
+    "The answer is shown. This maze does not count for the best time.",
+    "La solution est affichée. Ce labyrinthe ne compte pas pour le meilleur temps."
+  ],
+  "迷宫完成。": [
+    "Maze completed.",
+    "Labyrinthe terminé."
+  ],
+  "用时 {0}": [
+    "Time taken: {0}",
+    "Temps écoulé : {0}"
+  ],
+  "新纪录。": [
+    "New record.",
+    "Nouveau record."
+  ],
+  "再来一个": [
+    "Another one",
+    "Un autre"
+  ],
+  "专家": [
+    "Expert",
+    "Expert"
+  ]
 }

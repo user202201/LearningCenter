@@ -144,8 +144,8 @@ const CJK = /[㐀-鿿]/;
   ok(JSON.stringify(clueText.r) === JSON.stringify(s.rows) && JSON.stringify(clueText.c) === JSON.stringify(s.cols), 'the numbers on screen are the clues of the picture (rows left, columns top)');
   ok((await p.textContent('#nng-time')) === '用时：0:00' && (await p.textContent('#nng-hints')) === '剩余提示：3' && (await p.textContent('#nng-best')) === '最佳用时：暂无', 'HUD: time, hints left, best time');
   // tap cycle
-  await tap(0); s = await st(); ok(s.cells[0] === 1 && await p.locator('.nng-cell[data-i="0"].f').count() === 1, 'tap = fill');
-  await tap(0); s = await st(); ok(s.cells[0] === 2 && await p.locator('.nng-cell[data-i="0"].x').count() === 1, 'tap again = cross');
+  await tap(0); s = await st(); ok(s.cells[0] === 1 && await p.locator('.nng-cell[data-i="0"].nng-f').count() === 1, 'tap = fill');
+  await tap(0); s = await st(); ok(s.cells[0] === 2 && await p.locator('.nng-cell[data-i="0"].nng-x').count() === 1, 'tap again = cross');
   await tap(0); s = await st(); ok(s.cells[0] === 0, 'third tap = clear');
   await p.click('#nng-mode-cross'); ok((await st()).mode === 'cross' && await p.locator('#nng-mode-cross.on').count() === 1, 'cross mode switched on (pill pair)');
   await tap(1); s = await st(); ok(s.cells[1] === 2, 'cross mode: tap = cross'); await tap(1); ok((await st()).cells[1] === 0, 'cross mode: tap again clears');
@@ -165,8 +165,8 @@ const CJK = /[㐀-鿿]/;
   // clue colours: complete one row
   s = await st(); let r0 = s.pic.slice(0, 10).some((v) => v) ? 0 : 1;
   const line = rowsOf(s, r0); for (let c = 0; c < 10; c++) if (line[c]) await tap(r0 * 10 + c);
-  ok(await p.locator(`.nng-rc[data-r="${r0}"].done`).count() === 1, 'a finished row: its clue turns green (dimmed)');
-  await tap(r0 * 10 + line.indexOf(1)); ok(await p.locator(`.nng-rc[data-r="${r0}"].done`).count() === 0, 'a broken row: the clue is normal again');
+  ok(await p.locator(`.nng-rc[data-r="${r0}"].nng-done`).count() === 1, 'a finished row: its clue turns green (dimmed)');
+  await tap(r0 * 10 + line.indexOf(1)); ok(await p.locator(`.nng-rc[data-r="${r0}"].nng-done`).count() === 0, 'a broken row: the clue is normal again');
   // check
   await p.click('#nng-new'); s = await st();
   const blank = s.pic.findIndex((v) => v === 0), solid = s.pic.findIndex((v) => v === 1);

@@ -20,7 +20,7 @@
   .mz-wrap { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: minmax(0, 1fr); grid-template-areas: "hud board pad"; align-items: center; }
   .mz-hud { flex-direction: column; width: 128px; gap: 4px; }
   .mz-pad { flex-direction: column; width: 128px; gap: 4px; }
-  .mz-stat { font-size: 14px; padding: 0 8px; }
+  .mz-stat { font-size: 14px; padding: 0 8px; width: 100%; box-sizing: border-box; text-align: center; }
   .mz-pad .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; width: 100%; }
 }
 @media (max-width: 420px) { .mz-pad .mopt { padding: 4px 9px; } .mz-stat { font-size: 16px; padding: 2px 9px; } }

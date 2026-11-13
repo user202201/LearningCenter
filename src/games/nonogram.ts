@@ -72,7 +72,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
   function begin(fresh: boolean) {
     timers.forEach((t) => clearTimeout(t)); timers.length = 0;
-    phase = "play"; hist = []; bad = new Set(); cur = -1; newRecord = false; shown = 0; ovl.hidden = true; field.classList.remove("cover", "won");
+    phase = "play"; hist = []; bad = new Set(); cur = -1; newRecord = false; shown = 0; ovl.hidden = true; field.classList.remove("nng-won");
     if (!(fresh === false && loadSaved())) {
       const before = pic.join("");
       let p = generate(N, Math.floor(rng() * 4294967296));
@@ -93,15 +93,15 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     grid.replaceChildren(); colBox.replaceChildren(); rowBox.replaceChildren();
     for (let i = 0; i < N * N; i++) {
       const r = Math.floor(i / N), c = i % N;
-      const el = h("div", { class: "nng-cell" + (c % 5 === 4 && c !== N - 1 ? " br" : "") + (r % 5 === 4 && r !== N - 1 ? " bb" : "") + (c === N - 1 ? " el" : "") + (r === N - 1 ? " eb" : ""), "data-i": i });
+      const el = h("div", { class: "nng-cell" + (c % 5 === 4 && c !== N - 1 ? " nng-br" : "") + (r % 5 === 4 && r !== N - 1 ? " nng-bb" : "") + (c === N - 1 ? " nng-el" : "") + (r === N - 1 ? " nng-eb" : ""), "data-i": i });
       cellEls.push(el); grid.append(el);
     }
     for (let c = 0; c < N; c++) {
-      const el = h("div", { class: "nng-cc" + (c % 5 === 4 && c !== N - 1 ? " br" : ""), "data-c": c }, ...cols[c].map((v) => h("span", {}, String(v))));
+      const el = h("div", { class: "nng-cc" + (c % 5 === 4 && c !== N - 1 ? " nng-br" : ""), "data-c": c }, ...cols[c].map((v) => h("span", {}, String(v))));
       colEls.push(el); colBox.append(el);
     }
     for (let r = 0; r < N; r++) {
-      const el = h("div", { class: "nng-rc" + (r % 5 === 4 && r !== N - 1 ? " bb" : ""), "data-r": r }, ...rows[r].map((v) => h("span", {}, String(v))));
+      const el = h("div", { class: "nng-rc" + (r % 5 === 4 && r !== N - 1 ? " nng-bb" : ""), "data-r": r }, ...rows[r].map((v) => h("span", {}, String(v))));
       rowEls.push(el); rowBox.append(el);
     }
   }
@@ -119,15 +119,15 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     field.style.setProperty("--ch", `${Math.ceil(kc * 0.56 * c) + 6}px`);
   }
   function cellClass(i: number) {
-    const base: string[] = cellEls[i].className.split(" ").filter((k) => k === "nng-cell" || k === "br" || k === "bb" || k === "el" || k === "eb");
-    if (cells[i] === 1) base.push("f"); else if (cells[i] === 2) base.push("x");
-    if (locked[i]) base.push("lk"); if (bad.has(i)) base.push("bad"); if (i === cur) base.push("cur");
+    const base: string[] = cellEls[i].className.split(" ").filter((k) => k === "nng-cell" || k === "nng-br" || k === "nng-bb" || k === "nng-el" || k === "nng-eb");
+    if (cells[i] === 1) base.push("nng-f"); else if (cells[i] === 2) base.push("nng-x");
+    if (locked[i]) base.push("nng-lk"); if (bad.has(i)) base.push("nng-bad"); if (i === cur) base.push("nng-cur");
     return base.join(" ");
   }
   const refreshCell = (i: number) => { const k = cellClass(i); if (cellEls[i].className !== k) cellEls[i].className = k; };
   function refreshClues() {
-    for (let r = 0; r < N; r++) rowEls[r].classList.toggle("done", lineRight(cells, N, "row", r, rows[r]));
-    for (let c = 0; c < N; c++) colEls[c].classList.toggle("done", lineRight(cells, N, "col", c, cols[c]));
+    for (let r = 0; r < N; r++) rowEls[r].classList.toggle("nng-done", lineRight(cells, N, "row", r, rows[r]));
+    for (let c = 0; c < N; c++) colEls[c].classList.toggle("nng-done", lineRight(cells, N, "col", c, cols[c]));
   }
   function refreshAll() { for (let i = 0; i < N * N; i++) refreshCell(i); refreshClues(); }
   function refreshHud() {
@@ -167,7 +167,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const hc = hintCell(cells, pic, locked, rng);
     if (!hc) { ctx.toast("目前没有可提示的格子。", 1500); return; }
     hints++; locked[hc.i] = 1; cells[hc.i] = hc.v; clearBad(); refreshCell(hc.i); refreshClues(); refreshHud(); persist(); ctx.sfx("good");
-    cellEls[hc.i].classList.add("pulse"); timers.push(window.setTimeout(() => cellEls[hc.i]?.classList.remove("pulse"), 700));
+    cellEls[hc.i].classList.add("nng-pulse"); timers.push(window.setTimeout(() => cellEls[hc.i]?.classList.remove("nng-pulse"), 700));
     if (isSolved(cells, pic)) win();
   }
   function check() {
@@ -191,7 +191,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       const el = cellEls[i]; refreshCell(i);
       if (pic[i] === 1) { const [bg, bd] = palette[Math.floor(rng() * palette.length)]; el.style.setProperty("--bg", bg); el.style.setProperty("--bd", bd); el.style.animationDelay = `${Math.floor(rng() * 500)}ms`; }
     }
-    field.classList.add("won"); refreshHud(); ctx.sfx("win");
+    field.classList.add("nng-won"); refreshHud(); ctx.sfx("win");
     title.textContent = "你已完成。"; stars$.innerHTML = starsSvg(k); (stars$ as HTMLElement).dataset.stars = String(k);
     msg.textContent = newRecord ? `新纪录：${fmtTime(secs)}` : `用时 ${fmtTime(secs)}，提示 ${hints} 次，检查 ${checks} 次。`;
     timers.push(window.setTimeout(() => { if (phase === "won") { ovl.hidden = false; shown = 1; } }, 1100));
