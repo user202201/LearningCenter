@@ -134,6 +134,12 @@ const JSONKEYS = Object.keys(JSON.parse(fs.readFileSync(__dirname + '/../../src/
   ok((await p.locator('#ws-tubes .ws-tube').count()) === 5 && !(await p.locator('#ws-extra').isDisabled()), 'restart removes the extra tube and gives the button back');
 
   // the colours and the marks (children who can not tell the hues apart)
+  // the first levels must not be all warm colours (red / orange / yellow): the user wants blue, green, purple too
+  for (const lv of [1, 2, 3]) {
+    await p.click('#ws-pick'); await p.click(`.ws-lv[data-level="${lv}"]`);
+    const hues = await p.evaluate(() => { const set = new Set([...document.querySelectorAll('#ws-tubes .ws-u')].map((u) => getComputedStyle(u).backgroundColor)); return [...set].map((c) => { const [r, g, b] = c.match(/\d+/g).map(Number).map((v) => v / 255), mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let h = d === 0 ? 0 : mx === r ? ((g - b) / d + 6) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; return Math.round(h * 60); }); });
+    ok(hues.some((h) => h >= 90 && h <= 300), `level ${lv}: the colours are not all warm: it has a green / blue / purple one (hues ${hues.join(', ')})`);
+  }
   await p.click('#ws-pick'); await p.click('.ws-lv[data-level="30"]');
   const cm = await p.evaluate(() => {
     const seen = new Map();

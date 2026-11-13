@@ -5,7 +5,8 @@ import { CAP, LEVELS, levelTubes, colorsOf, pour, pourAmount, isWon, topColor, t
 export const ICON = `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="100" height="100" rx="26" fill="#d0ebff"/><g stroke="#1971c2" stroke-width="4"><path d="M18 36 h24 v44 a12 12 0 0 1 -24 0z" fill="#fff"/><path d="M48 36 h24 v44 a12 12 0 0 1 -24 0z" fill="#fff"/><path d="M78 36 h24 v44 a12 12 0 0 1 -24 0z" fill="#fff"/></g><path d="M20 62 h20 v18 a10 10 0 0 1 -20 0z" fill="#fa5252"/><path d="M20 50 h20 v12 h-20z" fill="#fcc419"/><path d="M50 56 h20 v24 a10 10 0 0 1 -20 0z" fill="#339af0"/><path d="M80 48 h20 v32 a10 10 0 0 1 -20 0z" fill="#51cf66"/><circle cx="60" cy="70" r="3" fill="#fff"/><circle cx="52" cy="22" r="6" fill="#339af0" stroke="#1971c2" stroke-width="3"/><circle cx="50" cy="20" r="1.8" fill="#fff"/><path d="M34 100 q26 8 52 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/></svg>`;
 
 /** ten clear hues; every colour also has its own white mark (a shape) so that children who can not tell the hues apart still can */
-export const COLORS = ["#fa5252", "#ff922b", "#fcc419", "#94d82d", "#20a84d", "#22b8cf", "#339af0", "#ae3ec9", "#f06595", "#a9743a"];
+/** the order matters: level 1 has only the first three colours, so the first ones must be far apart (red, blue, green ...), never red / orange / yellow side by side */
+export const COLORS = ["#fa5252", "#339af0", "#20a84d", "#fcc419", "#ae3ec9", "#ff922b", "#22b8cf", "#f06595", "#94d82d", "#a9743a"];
 const SHAPES = [
   `<circle cx="10" cy="10" r="6.5"/>`,
   `<rect x="4" y="4" width="12" height="12" rx="1.5"/>`,
