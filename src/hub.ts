@@ -134,9 +134,14 @@ const style = (s: Subject) => `--c1:${s.c1};--c2:${s.c2};--cd:${s.dark}`;
 
 /** the grid of big cards; `go(route)` is called when one is chosen (after the effects) */
 const HIDDEN_KEY = "learn.hidden.v1";
+const ALLOW_KEY = "learn.hidden.allow.v1";
+/** may the secret be triggered at all? Decided by the grown-up in Settings -> manage mode (off until switched on) */
+export const eggAllowed = (): boolean => { try { return localStorage.getItem(ALLOW_KEY) === "1"; } catch { return false; } };
+/** the grown-up's switch; turning it off also tucks the secret subjects away again */
+export function setEggAllowed(on: boolean): void { try { localStorage.setItem(ALLOW_KEY, on ? "1" : "0"); if (!on) localStorage.setItem(HIDDEN_KEY, "0"); } catch { /* private window */ } }
 export const hiddenUnlocked = (): boolean => { try { return localStorage.getItem(HIDDEN_KEY) === "1"; } catch { return false; } };
 const setHiddenUnlocked = (v: boolean) => { try { localStorage.setItem(HIDDEN_KEY, v ? "1" : "0"); } catch { /* private window: the secret is forgotten on reload */ } };
-const visibleSubjects = (): Subject[] => SUBJECTS.filter((s) => !s.hidden || hiddenUnlocked());
+const visibleSubjects = (): Subject[] => SUBJECTS.filter((s) => !s.hidden || (eggAllowed() && hiddenUnlocked()));
 
 export function hubGrid(go: (route: string) => void): HTMLElement {
   let busy = false;
@@ -173,7 +178,7 @@ interface HubGrid extends HTMLElement { __secret?: { reveal(): HTMLElement[]; hi
  */
 export function secretTaps(corner: HTMLElement, grid: HTMLElement, toastFn: (msg: string) => void): void {
   const g = grid as HubGrid;
-  let n = 0, last = 0, lock = false;
+  let n = 0, last = 0, lock = false, quiet = false, lastTap = 0;   // quiet: after a toggle, mashing without a pause (0.7 s) is ignored
   const sound = (k: "win" | "swap") => { try { sfx(k); } catch { /* no sound */ } };
   const done = (ms: number) => window.setTimeout(() => { lock = false; n = 0; }, ms);
   const reveal = () => {
@@ -181,10 +186,18 @@ export function secretTaps(corner: HTMLElement, grid: HTMLElement, toastFn: (msg
     const cards = g.__secret!.reveal();
     sound("win");
     toastFn("隐藏学科出现了：音乐、小游戏！");
-    if (reduced()) return void done(1800);   // (no animation, but the same lock: wild tapping must not toggle it back at once)
-    cards.forEach((c, i) => { c.style.animationDelay = `${i * 0.28}s`; c.classList.add("hub-arrive"); c.addEventListener("animationend", () => c.classList.remove("hub-arrive"), { once: true }); });
-    confetti(cards);
-    done(2400);
+    if (reduced()) { scrollToCards(cards, false); return void done(1800); }   // (no animation, but the same lock: wild tapping must not toggle it back at once)
+    cards.forEach((c) => c.classList.add("hub-pre"));                         // (laid out, but not seen yet)
+    // 1. slide the page down to them (on a tall phone they are below the fold), 2. the light goes out round them, 3. they fly in, 4. the light comes back
+    scrollToCards(cards, true).then(() => {
+      const spot = spotlight(cards);
+      window.setTimeout(() => {
+        cards.forEach((c, i) => { c.classList.remove("hub-pre"); c.style.animationDelay = `${i * 0.28}s`; c.classList.add("hub-arrive"); c.addEventListener("animationend", () => c.classList.remove("hub-arrive"), { once: true }); });
+        confetti(cards);
+      }, 420);
+      window.setTimeout(() => spot.remove(), 3300);
+    });
+    done(4200);
   };
   const hide = () => {
     lock = true; setHiddenUnlocked(false);
@@ -198,12 +211,49 @@ export function secretTaps(corner: HTMLElement, grid: HTMLElement, toastFn: (msg
     done(1400);
   };
   corner.addEventListener("pointerdown", (e) => {
-    if (!e.isPrimary || lock) return;
+    if (!e.isPrimary || !eggAllowed()) return;
+    if (lock) { lastTap = performance.now(); return; }   // (switched off in the manage mode: the corner does nothing)
     const now = performance.now();
+    if (quiet) { const gap = now - lastTap; lastTap = now; if (gap < 700) return; quiet = false; n = 0; last = 0; }   // only a real pause lets the counting start again
+    lastTap = now;
     n = now - last > 1500 ? 1 : n + 1; last = now;
     corner.classList.remove("tap-bump"); void corner.offsetWidth; corner.classList.add("tap-bump");
-    if (n >= 10) { n = 0; if (hiddenUnlocked()) hide(); else reveal(); }
+    if (n >= 10) { n = 0; quiet = true; if (hiddenUnlocked()) hide(); else reveal(); }
   });
+}
+
+/** the scrolling box of the picker (the page scrolls inside `main.scroll`) */
+const scroller = (el: HTMLElement): HTMLElement | null => el.closest<HTMLElement>(".scroll");
+/** scrolls so that the new cards are fully in view (smooth when `smooth`); resolves when it has stopped */
+function scrollToCards(cards: HTMLElement[], smooth: boolean): Promise<void> {
+  const box = scroller(cards[0]);
+  if (!box || !cards.length) return Promise.resolve();
+  const r0 = cards[0].getBoundingClientRect(), r1 = cards[cards.length - 1].getBoundingClientRect();
+  const top = Math.min(r0.top, r1.top), bottom = Math.max(r0.bottom, r1.bottom), vh = window.innerHeight;
+  const want = top < 70 || bottom > vh - 16 ? (top + bottom) / 2 - vh / 2 : 0;   // centre them when they are not wholly in view
+  if (!want) return Promise.resolve();
+  const target = Math.max(0, Math.min(box.scrollHeight - box.clientHeight, box.scrollTop + want));
+  box.scrollTo({ top: target, behavior: smooth ? "smooth" : "auto" });
+  if (!smooth) return Promise.resolve();
+  return new Promise((resolve) => {   // done when it has arrived (or after about 1.5 s whatever happens)
+    let n = 0;
+    const tick = () => { if (Math.abs(box.scrollTop - target) < 1 || ++n > 90) return resolve(); window.requestAnimationFrame(tick); };
+    window.requestAnimationFrame(tick);
+  });
+}
+/** the spotlight: everything but the new cards falls into shadow (a huge shadow round a window the size of the cards), then the light fades again */
+function spotlight(cards: HTMLElement[]): HTMLElement {
+  const el = h("div", { class: "hub-spot", "aria-hidden": "true" });
+  document.body.append(el);
+  // the box follows the cards on every frame while they wait (class hub-pre: no transform yet, the page may still be settling); once they fly in it stays where they land
+  const place = () => {
+    if (!el.isConnected || cards.some((c) => c.classList.contains("hub-arrive"))) return;   // (flying in: the boxes are transformed, keep the last good one)
+    const rs = cards.map((c) => c.getBoundingClientRect()), l = Math.min(...rs.map((r) => r.left)) - 14, t = Math.min(...rs.map((r) => r.top)) - 14, r = Math.max(...rs.map((x) => x.right)) + 14, b = Math.max(...rs.map((x) => x.bottom)) + 14;
+    el.style.cssText = `left:${l}px;top:${t}px;width:${r - l}px;height:${b - t}px`;
+    if (cards.some((c) => c.classList.contains("hub-pre"))) window.requestAnimationFrame(place);
+  };
+  place();
+  return el;
 }
 
 /** glitter and confetti flying out of the new cards */

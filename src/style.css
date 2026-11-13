@@ -1026,3 +1026,9 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
   .mathgame.with-pad .pad { flex: 1 1 auto; min-height: 0; margin: 8px max(12px, 2vw) max(12px, env(safe-area-inset-bottom)) 0; }
 }
 @media (max-height: 680px) and (max-aspect-ratio: 11/10) { .mathgame.with-pad .pad { min-height: 110px; } }
+
+/* the spotlight on the new subjects: a window the size of the cards with a huge dark shadow round it (everything else is in the shadow) */
+.subject.hub-pre { opacity: 0; }
+.hub-spot { position: fixed; z-index: 70; border-radius: 34px; pointer-events: none; box-shadow: 0 0 0 200vmax rgba(24, 12, 40, .74), 0 0 50px 12px rgba(255, 224, 102, .55) inset; animation: hub-spot 3.2s ease-in-out both; }
+@keyframes hub-spot { 0% { opacity: 0; } 12% { opacity: 1; } 78% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .hub-spot { display: none; } }

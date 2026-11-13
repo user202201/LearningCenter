@@ -15,7 +15,7 @@ import { openGame } from "./gameui";
 import { scanQr } from "./scan";
 import { readTable, readWorkbook, type SheetData } from "./xlsx";
 import * as I from "./importer";
-import { subjectById, hubGrid, hubHero, soonPage, reveal, shortcuts, secretTaps } from "./hub";
+import { subjectById, hubGrid, hubHero, soonPage, reveal, shortcuts, secretTaps, eggAllowed, setEggAllowed } from "./hub";
 import * as E from "./english";
 import * as MU from "./music";
 import * as GM from "./gameshub";
@@ -1377,6 +1377,13 @@ async function renderSettings() {
         // the rare jobs (children, Excel import, where the data is kept) only show while the manage mode is on
         (adminBox = h("div", { class: "collapse" + (settings.manage ? " open" : ""), id: "admin-box" },
           h("div", { class: "collapse-in" }, kids, h("div", { class: "card" }, h("button", { class: "wide", id: "import-btn", onclick: importFlow }, "从 Excel 导入")), account,
+            h("div", { class: "card", id: "egg-card" }, h("h3", {}, "隐藏彩蛋"),
+              h("label", { class: "check" }, h("input", { type: "checkbox", id: "egg-allow", checked: eggAllowed(), onchange: (e: Event) => {
+                const on = (e.target as HTMLInputElement).checked;
+                setEggAllowed(on);
+                toast(on ? "彩蛋已开启：在首页左上角连续点 10 次，就会出现音乐和小游戏。" : "彩蛋已关闭，音乐和小游戏已收起。");
+              } }), "允许孩子触发彩蛋（音乐、小游戏）"),
+              h("p", { class: "muted small" }, "打开后，在首页左上角连续点 10 次才会出现；关闭后无法触发，已出现的也会立刻收起。想让孩子玩的时候再打开。")),
             h("div", { class: "card" }, h("h3", {}, "管理密码"), h("button", { class: "wide", id: "admin-change", onclick: () => void askNewPassword("修改密码") }, "修改密码"))))),
 
         h("h2", { class: "set-sec" }, "学习和游戏"),

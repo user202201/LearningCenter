@@ -12,6 +12,7 @@ exports.start = async function (store = new Map(), opts = {}) {
   const ctx = await browser.newContext({ colorScheme: opts.colorScheme || 'light', locale: opts.locale || 'zh-CN', viewport: opts.viewport || { width: 1180, height: 820 }, hasTouch: !!opts.touch, reducedMotion: opts.motion ? 'no-preference' : 'reduce' });   // (the pop-in animations are off in tests so that measurements are stable; 06-look tests them)
   const page = await ctx.newPage();
   if (!opts.locked) await page.addInitScript(() => { try { if (localStorage.getItem('learn.hidden.v1') === null) localStorage.setItem('learn.hidden.v1', '1'); } catch (e) { /* no storage */ } });   // (the secret subjects, music and games, are shown unless a test asks for the locked picker)
+  await page.addInitScript((off) => { try { if (!off && localStorage.getItem('learn.hidden.allow.v1') === null) localStorage.setItem('learn.hidden.allow.v1', '1'); } catch (e) { /* no storage */ } }, !!opts.eggOff);   // (the grown-up's switch for the secret is ON in tests unless a test says eggOff)
   if (opts.today) await page.clock.setFixedTime(new Date(opts.today + 'T10:00:00'));
   if (opts.clock) await page.clock.install({ time: new Date(opts.clock) });   // a clock the test can move forward (page.clock.runFor); it also decides what "today" is
   page.on('pageerror', (e) => console.log('PAGEERROR', e.message));

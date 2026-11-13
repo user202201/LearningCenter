@@ -106,10 +106,18 @@ const playAll = async (page, n = 20) => {
   await page.click('button[title=前一天]'); await page.waitForFunction((d) => JSON.stringify([...document.querySelectorAll('.mtcard')].map((e) => e.dataset.topic)) === JSON.stringify(d), day1);
   ok(true, 'yesterday shows yesterday\'s topics');
   await page.click('button[title=后一天]'); await page.waitForFunction((d) => JSON.stringify([...document.querySelectorAll('.mtcard')].map((e) => e.dataset.topic)) === JSON.stringify(d), topics);
-  // days go on: three more days never repeat a topic inside the grade's list until it is used up
-  for (const d of ['2026-11-14', '2026-11-15']) { await page.clock.setFixedTime(new Date(d + 'T10:00:00')); await page.reload(); await page.waitForSelector('.mtcard'); }
-  const day4 = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
-  ok(day4.every((x) => !day1.includes(x) && !topics.includes(x)), 'day 4 is new again (' + day4.join(', ') + ')');
+  // many days in a row: the pure daily pick never repeats a topic until the grade's list is used up, always 2 + 1 topics
+  const cyc = await page.evaluate(async () => {
+    const MM = await import('/src/mathmodel.ts'), G = await import('/src/mathgen.ts'), data = await MM.loadMath();
+    const known = (id) => id in G.GEN, list = data.grades['4'].filter(known);
+    let kid = { weeks: [] }; const days = [];
+    for (let d = 0; d < 12; d++) { const pick = MM.pickTopics(data, kid, 4, known, 3, () => null); days.push(pick); kid = { weeks: [...kid.weeks, { start: '2026-12-' + String(d + 1).padStart(2, '0'), chars: pick }] }; }
+    const own = days.map((p) => p.filter((x) => list.includes(x)));
+    const firstRound = [];
+    for (const p of own) { for (const x of p) if (!firstRound.includes(x)) firstRound.push(x); }
+    return { n: days.map((p) => p.length), ownCounts: own.map((p) => p.length), listLen: list.length, noRepeatInRound: new Set(own.slice(0, Math.floor(list.length / 2)).flat()).size === own.slice(0, Math.floor(list.length / 2)).flat().length, differentDays: days.slice(1).every((p, i) => p.join() !== days[i].join()) };
+  });
+  ok(cyc.n.every((x) => x === 3) && cyc.noRepeatInRound && cyc.differentDays, 'twelve days in a row: always 3 topics, no repeat until the grade\'s list is used up (' + cyc.listLen + ' topics), and no two days are the same');
   await page.clock.setFixedTime(new Date('2026-11-13T10:00:00')); await page.reload(); await page.waitForSelector('.mtcard');
 
   // quick practice of one topic
