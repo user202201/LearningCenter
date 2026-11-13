@@ -307,7 +307,7 @@ const KNOWN = {
   await page.click('.subject[data-subject=chinese]'); await page.waitForSelector('.kids');
   await openKid(page, 'Dory');
   // the entry: a button like the idiom button, under it
-  const bb = await page.evaluate(() => { const a = document.querySelector('#idioms-btn').getBoundingClientRect(), b = document.querySelector('#poems-btn').getBoundingClientRect(), grid = document.querySelector('.cards').getBoundingClientRect(); return { sameClass: document.querySelector('#idioms-btn').className === document.querySelector('#poems-btn').className, below: b.top >= grid.bottom - 1 && a.top >= b.bottom - 1, w: [a.width, b.width], h: [a.height, b.height], text: document.querySelector('#poems-btn').textContent }; });
+  const bb = await page.evaluate(() => { const a = document.querySelector('#idioms-btn').getBoundingClientRect(), b = document.querySelector('#poems-btn').getBoundingClientRect(), grid = (document.querySelector('.cards') || document.querySelector('.add-empty') || document.querySelector('.weekbar')).getBoundingClientRect(); return { sameClass: document.querySelector('#idioms-btn').className === document.querySelector('#poems-btn').className, below: b.top >= grid.bottom - 1 && a.top >= b.bottom - 1, w: [a.width, b.width], h: [a.height, b.height], text: document.querySelector('#poems-btn').textContent }; });
   console.log('INFO button', JSON.stringify(bb));
   ok(bb.sameClass && bb.below && Math.abs(bb.w[0] - bb.w[1]) < 1 && Math.abs(bb.h[0] - bb.h[1]) < 1 && bb.text === '古诗词', 'the child\'s page has a button 古诗词 right under the characters (the idiom button stays at the bottom), the same look as the idiom button');
   await page.click('#poems-btn'); await page.waitForSelector('#pm-today .pm-card'); await settle();

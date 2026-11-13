@@ -344,7 +344,7 @@ export function createEditor(o: EditorOpts): Editor {
     }
     return best as { list: Blk[]; index: number; score: number; line: number; left: number; width: number } | null;
   };
-  const clearDrag = () => { drag?.ghost?.remove(); ind.hidden = true; root.classList.remove("dragging", "over-bin"); ws.querySelectorAll(".cw-b.drag-src").forEach((e) => e.classList.remove("drag-src")); if (drag?.timer) clearTimeout(drag.timer); drag = null; };
+  const clearDrag = () => { if (drag) { try { root.releasePointerCapture(drag.pid); } catch { /* it was not captured */ } } drag?.ghost?.remove(); ind.hidden = true; root.classList.remove("dragging", "over-bin"); ws.querySelectorAll(".cw-b.drag-src").forEach((e) => e.classList.remove("drag-src")); if (drag?.timer) clearTimeout(drag.timer); drag = null; };
   const overDelete = (x: number, y: number) => {
     for (const el of [pal, bin]) { const r = el.getBoundingClientRect(); if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) return true; }
     return false;
