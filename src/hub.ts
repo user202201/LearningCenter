@@ -241,18 +241,35 @@ function scrollToCards(cards: HTMLElement[], smooth: boolean): Promise<void> {
     window.requestAnimationFrame(tick);
   });
 }
-/** the spotlight: everything but the new cards falls into shadow (a huge shadow round a window the size of the cards), then the light fades again */
+/**
+ * The spotlight: everything outside a soft pool of light round the new cards falls into shadow. The edge is FEATHERED (a radial mask, not a hard frame), the pool
+ * breathes, a shimmering golden ring turns round it with twinkling stars, and streamers fall through it together with the confetti.
+ */
 function spotlight(cards: HTMLElement[]): HTMLElement {
-  const el = h("div", { class: "hub-spot", "aria-hidden": "true" });
+  const sparks = Array.from({ length: 22 }, (_, i) => h("i", { class: "hub-star", style: `--i:${i};--d:${(i * 0.37) % 2.2}s;--s:${8 + (i * 7) % 11}px` }, "✦"));
+  const ring = h("div", { class: "hub-ring" });
+  const veil = h("div", { class: "hub-veil" });
+  const streamers = Array.from({ length: 16 }, (_, i) => h("i", { class: "hub-streamer", style: `left:${3 + i * 6.1}%;--c:${["#ff6b6b", "#ffd43b", "#51cf66", "#339af0", "#cc5de8", "#ff922b"][i % 6]};--d:${(i * 0.19) % 1.6}s;--w:${5 + (i % 3) * 3}px;--sway:${(i % 2 ? 1 : -1) * (14 + (i % 4) * 8)}px` }));
+  const el = h("div", { class: "hub-spot", "aria-hidden": "true" }, veil, ring, ...sparks, ...streamers);
   document.body.append(el);
-  // the box follows the cards on every frame while they wait (class hub-pre: no transform yet, the page may still be settling); once they fly in it stays where they land
-  const place = () => {
-    if (!el.isConnected || cards.some((c) => c.classList.contains("hub-arrive"))) return;   // (flying in: the boxes are transformed, keep the last good one)
-    const rs = cards.map((c) => c.getBoundingClientRect()), l = Math.min(...rs.map((r) => r.left)) - 14, t = Math.min(...rs.map((r) => r.top)) - 14, r = Math.max(...rs.map((x) => x.right)) + 14, b = Math.max(...rs.map((x) => x.bottom)) + 14;
-    el.style.cssText = `left:${l}px;top:${t}px;width:${r - l}px;height:${b - t}px`;
-    if (cards.some((c) => c.classList.contains("hub-pre"))) window.requestAnimationFrame(place);
+  let rect = { cx: 0, cy: 0, hw: 0, hh: 0 };
+  const t0 = performance.now();
+  const frame = () => {
+    if (!el.isConnected) return;
+    // while the cards wait (no transform yet) the pool follows them; once they fly in it stays where they land
+    if (!cards.some((c) => c.classList.contains("hub-arrive"))) {
+      const rs = cards.map((c) => c.getBoundingClientRect()), l = Math.min(...rs.map((r) => r.left)), t = Math.min(...rs.map((r) => r.top)), r = Math.max(...rs.map((x) => x.right)), b = Math.max(...rs.map((x) => x.bottom));
+      rect = { cx: (l + r) / 2, cy: (t + b) / 2, hw: (r - l) / 2 + 22, hh: (b - t) / 2 + 22 };
+      el.dataset.l = String(Math.round(l)); el.dataset.t = String(Math.round(t)); el.dataset.r = String(Math.round(r)); el.dataset.b = String(Math.round(b));
+    }
+    const k = 1 + 0.035 * Math.sin((performance.now() - t0) / 260);   // the light breathes
+    const rx = rect.hw * 1.45 * k, ry = rect.hh * 1.45 * k;            // the corners of the cards lie inside the clear core
+    el.style.setProperty("--cx", `${rect.cx}px`); el.style.setProperty("--cy", `${rect.cy}px`); el.style.setProperty("--rx", `${rx}px`); el.style.setProperty("--ry", `${ry}px`);
+    ring.style.cssText = `left:${rect.cx - rx * 1.12}px;top:${rect.cy - ry * 1.12}px;width:${rx * 2.24}px;height:${ry * 2.24}px`;
+    sparks.forEach((st, i) => { const a = (i / sparks.length) * Math.PI * 2 + (performance.now() - t0) / 2600, rr = 1.12 + 0.06 * Math.sin((performance.now() - t0) / 400 + i); st.style.left = `${rect.cx + Math.cos(a) * rx * rr}px`; st.style.top = `${rect.cy + Math.sin(a) * ry * rr}px`; });
+    window.requestAnimationFrame(frame);
   };
-  place();
+  frame();
   return el;
 }
 

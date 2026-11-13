@@ -27,7 +27,7 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     else await p.waitForTimeout(150);
     const arriving = await p.locator('.subject.hub-arrive').count();
     ok((await cards(p)).join() === 'chinese,math,english,science,music,games' && (motion ? arriving === 2 : arriving === 0), `${dn}: ten quick taps show music and games (${motion ? 'the cards fly in with the "arrive" animation' : 'no animation with reduced motion'})`);
-    if (motion) ok(await p.locator('.hub-spot').count() === 1 && (await p.evaluate(() => getComputedStyle(document.querySelector('.hub-spot')).boxShadow)).includes('rgba(24, 12, 40'), `${dn}: a spotlight lights the new cards and everything else falls into shadow`);
+    if (motion) ok(await p.locator('.hub-spot').count() === 1 && (await p.evaluate(() => getComputedStyle(document.querySelector('.hub-veil')).maskImage || getComputedStyle(document.querySelector('.hub-veil')).webkitMaskImage)).includes('radial-gradient'), `${dn}: a spotlight lights the new cards and everything else falls into shadow`);
     ok(motion ? await p.locator('.confetti').count() >= 20 : true, `${dn}: ${motion ? 'confetti flies out of the new cards' : 'no confetti with reduced motion'}`);
     ok((await p.locator('.toast').allTextContents()).join().includes('隐藏学科出现了'), `${dn}: a message says what happened`);
     if (motion) await p.screenshot({ path: OUT + `secret-reveal-${dn}.png` });
@@ -63,9 +63,10 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     await tap(p, 10);
     await p.waitForFunction(() => document.querySelectorAll('.subject.hub-arrive').length === 2, null, { timeout: 5000 });
     await p.waitForTimeout(1900);   // (the cards fly in with a transform: measure them when they have landed)
-    const r = await p.evaluate(() => { const c = [...document.querySelectorAll('.subject[data-subject=music], .subject[data-subject=games]')].map((e) => e.getBoundingClientRect()), box = document.querySelector('.hub-page .scroll'); const sp = document.querySelector('.hub-spot').getBoundingClientRect(); return { top: Math.min(...c.map((x) => x.top)), bottom: Math.max(...c.map((x) => x.bottom)), vh: innerHeight, scroll: box.scrollTop, spot: [sp.top, sp.bottom], lit: document.querySelectorAll('.hub-spot').length }; });
+    const r = await p.evaluate(() => { const c = [...document.querySelectorAll('.subject[data-subject=music], .subject[data-subject=games]')].map((e) => e.getBoundingClientRect()), box = document.querySelector('.hub-page .scroll'); const sp = (() => { const d = document.querySelector('.hub-spot').dataset; return { top: +d.t - 22, bottom: +d.b + 22 }; })(); return { top: Math.min(...c.map((x) => x.top)), bottom: Math.max(...c.map((x) => x.bottom)), vh: innerHeight, scroll: box.scrollTop, spot: [sp.top, sp.bottom], feather: document.querySelectorAll('.hub-ring, .hub-star, .hub-streamer').length, lit: document.querySelectorAll('.hub-spot').length }; });
     ok(r.scroll > before && r.top >= 0 && r.bottom <= r.vh, `phone portrait: the page slid down by itself (${Math.round(before)} -> ${Math.round(r.scroll)}) and both new cards are fully in view (${Math.round(r.top)}-${Math.round(r.bottom)} of ${r.vh})`);
-    ok(r.lit === 1 && r.spot[0] <= r.top + 2 && r.spot[1] >= r.bottom - 2, 'the spotlight window covers the new cards (' + r.spot.map(Math.round).join('-') + ' vs ' + Math.round(r.top) + '-' + Math.round(r.bottom) + '); the rest is dimmed');
+    ok(r.lit === 1 && r.spot[0] <= r.top + 2 && r.spot[1] >= r.bottom - 2, 'the pool of light covers the new cards (' + r.spot.map(Math.round).join('-') + ' vs ' + Math.round(r.top) + '-' + Math.round(r.bottom) + '); the rest is dimmed');
+    ok(r.feather >= 30, 'the edge is soft and alive: a turning ring, twinkling stars and streamers (' + r.feather + ' pieces), not a hard frame');
     await p.screenshot({ path: OUT + 'secret-spotlight-phone.png' });
     await p.waitForTimeout(4500);
     ok(await p.locator('.hub-spot').count() === 0, 'the light comes back (the spotlight is gone)');
