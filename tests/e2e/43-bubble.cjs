@@ -7,7 +7,7 @@ const OUT = process.env.D || 'tests/out/work/';
 fs.mkdirSync(OUT, { recursive: true });
 const KEY = 'learn.games.v1';
 
-const open = async (t) => { await t.page.evaluate(() => (location.hash = '#/games/bubble')); await t.page.waitForSelector('.bubble-lv'); };
+const open = async (t) => { await t.page.evaluate(() => (location.hash = '#/games/bubble')); await t.page.waitForSelector('.bubble-lv'); await t.page.evaluate(async () => { window.__L = await import('/src/games/bubble-logic.ts'); }); };
 const S = (p) => p.evaluate(() => { const s = window.__bubble.s; const { grid, ...rest } = s; return { ...rest, count: grid.flat().filter(Boolean).length }; });
 /** pointer press / move / release on the canvas at a point given in bubble units (the field is 10 wide, 12.2 high) */
 const aimShoot = async (p, ux, uy, shoot = true) => {
@@ -148,7 +148,7 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
   const a0 = (await S(p)).angle;
   await p.keyboard.press('ArrowLeft'); await p.keyboard.press('ArrowLeft'); s = await S(p);
   ok(s.angle > a0, 'arrow keys turn the aim');
-  await aimShoot(p, 5, 11.9); s = await S(p); ok(s.shots === 0, 'releasing below the shooter does not shoot');
+  await aimShoot(p, 8, 11.9); s = await S(p); ok(s.shots === 0, 'releasing below the shooter does not shoot');
   // the real shot: aim at the empty cell under the row, release; it flies, joins the 6 -> they pop, the bubble hanging under them falls, the board is empty: a win
   await aimShoot(p, 4.0, 1.4);
   await p.waitForFunction(() => window.__bubble.s.shots === 1);
@@ -187,7 +187,7 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
   // losing: a long chain reaching the line, one more bubble under it
   const chain = rowsToGrid(Array.from({ length: 11 }, (_, r) => [r, 0, r % 2 ? 3 : 2]));
   await p.evaluate((g) => window.__bubble.load(eval(g), 1, 1, 0), chain);
-  await p.evaluate(() => window.__bubble.aim(167)); await p.keyboard.press('Space');
+  await p.evaluate(() => window.__bubble.aim(162)); await p.keyboard.press('Space');
   await p.waitForFunction(() => window.__bubble.s.over !== '', null, { timeout: 8000 });
   s = await S(p);
   ok(s.over === 'lost', 'a bubble resting on the line loses the game');

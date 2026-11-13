@@ -135,7 +135,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const els = new Map<number, HTMLElement>();
     let cell = 60;
 
-    const title = h("span", { class: "klotski-title" }, `第${index + 1}关 `, h("span", { class: "klotski-lvname" }, level.name));
+    const title = h("span", { class: "klotski-title" }, h("span", {}, `第${index + 1}关`), h("span", { class: "klotski-lvname" }, level.name));
     const movesChip = h("span", { class: "klotski-chip", id: "klotski-moves" });
     const minChip = h("span", { class: "klotski-chip gold", id: "klotski-min" });
     const bestChip = h("span", { class: "klotski-chip", id: "klotski-best" });
@@ -176,7 +176,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       });
     };
     const refresh = () => {
-      for (const p of ps) { pos(p); const e = els.get(p.id)!; e.classList.toggle("sel", p.id === selected); e.classList.toggle("hinted", !!hinted && hinted.id === p.id && p.id !== selected); }
+      for (const p of ps) { pos(p); const e = els.get(p.id)!; e.dataset.x = String(p.x); e.dataset.y = String(p.y); e.classList.toggle("sel", p.id === selected); e.classList.toggle("hinted", !!hinted && hinted.id === p.id && p.id !== selected); }
       drawGhosts(); setChips();
       undoBtn.disabled = history.length === 0 || won; hintBtn.disabled = won;
     };

@@ -1,0 +1,182 @@
+{
+ "计算中…": [
+  "Working it out…",
+  "Calcul en cours…"
+ ],
+ "先通过前一关，这一关才会打开。": [
+  "Finish the level before this one to open it.",
+  "Termine le niveau précédent pour ouvrir celui-ci."
+ ],
+ "第{0}关": [
+  "Level {0}",
+  "Niveau {0}"
+ ],
+ "最少 {0} 步": [
+  "Best: {0} moves",
+  "Minimum : {0} coups"
+ ],
+ "星星：{0} / {1}": [
+  "Stars: {0} / {1}",
+  "Étoiles : {0} / {1}"
+ ],
+ "帮曹操逃出去！把最大的方块（曹操）移到下面的出口。": [
+  "Help Cao Cao escape! Slide the biggest block (Cao Cao) to the exit at the bottom.",
+  "Aide Cao Cao à s'échapper ! Fais glisser le plus grand bloc (Cao Cao) jusqu'à la sortie en bas."
+ ],
+ "步数 {0}": [
+  "Moves {0}",
+  "Coups {0}"
+ ],
+ "最好 {0} 步": [
+  "Your best {0}",
+  "Ton record {0}"
+ ],
+ "撤销": [
+  "Undo",
+  "Annuler"
+ ],
+ "重来": [
+  "Restart",
+  "Recommencer"
+ ],
+ "提示": [
+  "Hint",
+  "Indice"
+ ],
+ "关卡": [
+  "Levels",
+  "Niveaux"
+ ],
+ "出口": [
+  "Exit",
+  "Sortie"
+ ],
+ "点一个方块，再点虚线框；也可以直接拖动。": [
+  "Tap a block, then a dashed frame; or just drag it.",
+  "Touche un bloc, puis un cadre en pointillés ; ou fais-le glisser."
+ ],
+ "曹操逃出来了！": [
+  "Cao Cao escaped!",
+  "Cao Cao s'est échappé !"
+ ],
+ "用了 {0} 步": [
+  "{0} moves used",
+  "{0} coups utilisés"
+ ],
+ "这就是最少的步数，太厉害了！": [
+  "That is the fewest possible moves, amazing!",
+  "C'est le nombre minimal de coups, génial !"
+ ],
+ "最少 {0} 步，你的最好成绩 {1} 步": [
+  "Fewest possible: {0} moves, your best: {1}",
+  "Minimum : {0} coups, ton record : {1}"
+ ],
+ "全部关卡都通过了，你是华容道大师！": [
+  "All levels cleared, you are a Klotski master!",
+  "Tous les niveaux sont réussis, tu es un maître du Klotski !"
+ ],
+ "下一关": [
+  "Next level",
+  "Niveau suivant"
+ ],
+ "再玩一次": [
+  "Play again",
+  "Rejouer"
+ ],
+ "曹操": [
+  "Cao Cao",
+  "Cao Cao"
+ ],
+ "关羽": [
+  "Guan Yu",
+  "Guan Yu"
+ ],
+ "张飞": [
+  "Zhang Fei",
+  "Zhang Fei"
+ ],
+ "赵云": [
+  "Zhao Yun",
+  "Zhao Yun"
+ ],
+ "马超": [
+  "Ma Chao",
+  "Ma Chao"
+ ],
+ "黄忠": [
+  "Huang Zhong",
+  "Huang Zhong"
+ ],
+ "小兵": [
+  "Soldier",
+  "Soldat"
+ ],
+ "初出茅庐": [
+  "First Steps",
+  "Premiers pas"
+ ],
+ "小试牛刀": [
+  "A Small Test",
+  "Petit essai"
+ ],
+ "渐入佳境": [
+  "Getting Better",
+  "De mieux en mieux"
+ ],
+ "左右布兵": [
+  "Soldiers Left and Right",
+  "Soldats à gauche et à droite"
+ ],
+ "雨声淅沥": [
+  "Pattering Rain",
+  "Pluie qui tambourine"
+ ],
+ "桃花园中": [
+  "In the Peach Garden",
+  "Au jardin des pêchers"
+ ],
+ "近在咫尺": [
+  "Close at Hand",
+  "Tout près"
+ ],
+ "齐头并进": [
+  "Side by Side",
+  "Côte à côte"
+ ],
+ "水泄不通": [
+  "Packed Tight",
+  "Bouché"
+ ],
+ "层层设防": [
+  "Layers of Defence",
+  "Défense en couches"
+ ],
+ "兵分三路": [
+  "Three Roads",
+  "Trois routes"
+ ],
+ "捷足先登": [
+  "First to Arrive",
+  "Premier arrivé"
+ ],
+ "指挥若定": [
+  "Calm Commander",
+  "Commandant serein"
+ ],
+ "将拥曹营": [
+  "Generals around Cao",
+  "Les généraux autour de Cao"
+ ],
+ "围而不歼": [
+  "Surrounded",
+  "Encerclé"
+ ],
+ "插翅难飞": [
+  "No Way Out",
+  "Aucune issue"
+ ],
+ "横刀立马": [
+  "Sword Across the Saddle",
+  "Sabre en travers"
+ ]
+}

@@ -1,0 +1,38 @@
+.gomoku-root { flex: 1; min-height: 0; width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: stretch; position: relative; color: #3d2b1f; }
+.gomoku-scroll { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding: 4px 4px 12px; display: flex; flex-direction: column; align-items: center; }
+.gomoku-setup { width: 100%; max-width: 440px; background: #fff; border-radius: 28px; padding: 16px 18px 18px; border: 3px solid #96f2d7; box-shadow: 0 6px 0 #96f2d7; text-align: center; margin-top: 6px; }
+.gomoku-setup h2 { margin: 0 0 6px; color: #087f5b; font-size: 22px; }
+.gomoku-pics { display: flex; justify-content: center; gap: 12px; margin: 4px 0 10px; }
+.gomoku-pics svg { width: 64px; height: 64px; }
+.gomoku-row { margin: 12px 0 0; }
+.gomoku-row > b { display: block; margin-bottom: 6px; color: #495057; font-size: 15px; }
+.gomoku-opts { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.gomoku-opt { min-height: 44px; padding: 6px 16px; border-radius: 999px; font: inherit; font-weight: 800; font-size: 16px; border: 3px solid #ced4da; background: #fff; color: #495057; box-shadow: 0 3px 0 #dee2e6; cursor: pointer; }
+.gomoku-opt.on { border-color: #12b886; color: #087f5b; background: #e6fcf5; box-shadow: 0 3px 0 #96f2d7; }
+.gomoku-record { margin: 12px 0 0; font-size: 14px; font-weight: 700; color: #c47f00; }
+.gomoku-go { margin-top: 14px; min-height: 52px; padding: 8px 34px; border-radius: 999px; font: inherit; font-weight: 900; font-size: 20px; color: #fff; border: 0; background: linear-gradient(180deg, #38d9a9, #12b886); box-shadow: 0 5px 0 #0b7a5c; cursor: pointer; }
+.gomoku-go:active { transform: translateY(3px); box-shadow: 0 2px 0 #0b7a5c; }
+.gomoku-play { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.gomoku-status { min-height: 38px; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 900; font-size: 18px; color: #087f5b; text-align: center; padding: 0 6px; }
+.gomoku-status.won { color: #e8590c; font-size: 22px; animation: gomoku-banner .6s cubic-bezier(.3, 1.6, .5, 1) both; }
+.gomoku-turn { width: 26px; height: 26px; flex: none; }
+.gomoku-wrap { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.gomoku-svg { display: block; touch-action: none; border-radius: 18px; box-shadow: 0 5px 0 #8d5524, 0 10px 18px rgba(0,0,0,.18); user-select: none; -webkit-user-select: none; }
+.gomoku-stone { pointer-events: none; }
+.gomoku-stone .gs { transform-box: fill-box; transform-origin: center; animation: gomoku-drop .28s cubic-bezier(.3, 1.7, .5, 1) both; }
+.gomoku-stone.still .gs { animation: none; }
+.gomoku-last { fill: none; stroke: #fa5252; stroke-width: 3; stroke-dasharray: 5 3; pointer-events: none; }
+.gomoku-ghost { opacity: .4; pointer-events: none; }
+.gomoku-winline { stroke: #ffd43b; stroke-width: 7; stroke-linecap: round; opacity: .9; pointer-events: none; stroke-dasharray: 400; stroke-dashoffset: 400; animation: gomoku-line .7s .1s ease-out forwards; }
+.gomoku-stone.win .gs { animation: gomoku-win .7s ease-in-out infinite; animation-delay: calc(var(--k) * .09s); }
+.gomoku-ring { fill: none; stroke: #ffd43b; stroke-width: 4; }
+.gomoku-btns { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding-bottom: 2px; }
+.gomoku-btns button { min-height: 44px; padding: 6px 16px; border-radius: 999px; font: inherit; font-weight: 800; border: 3px solid #12b886; background: #fff; color: #087f5b; box-shadow: 0 4px 0 #96f2d7; font-size: 16px; cursor: pointer; }
+.gomoku-btns button:active { transform: translateY(3px); box-shadow: 0 1px 0 #96f2d7; }
+.gomoku-btns button:disabled { opacity: .45; }
+.gomoku-btns button.primary { color: #fff; background: linear-gradient(180deg, #38d9a9, #12b886); border-color: transparent; box-shadow: 0 4px 0 #0b7a5c; }
+@keyframes gomoku-drop { from { transform: scale(1.8); opacity: 0; } }
+@keyframes gomoku-win { 50% { transform: scale(1.22); } }
+@keyframes gomoku-line { to { stroke-dashoffset: 0; } }
+@keyframes gomoku-banner { from { transform: scale(.3); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .gomoku-stone .gs, .gomoku-stone.win .gs, .gomoku-winline, .gomoku-status.won { animation: none; } .gomoku-winline { stroke-dashoffset: 0; } }

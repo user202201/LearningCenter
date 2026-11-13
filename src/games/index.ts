@@ -10,4 +10,6 @@ export const GAMES: GameInfo[] = [
   { id: "gomoku", name: "五子棋", sub: "五个连成一线就赢", load: () => import("./gomoku") },
   { id: "chess", name: "国际象棋", sub: "可爱棋子，吃子将军有动画", load: () => import("./chess") },
   { id: "xiangqi", name: "中国象棋", sub: "楚河汉界，将军有动画", load: () => import("./xiangqi") },
+  { id: "spider", name: "蜘蛛纸牌", sub: "把牌按顺序收完，可选一、二、四种花色", load: () => import("./spider") },
+  { id: "freecell", name: "空当接龙", sub: "四个空当，几乎每局都能赢", load: () => import("./freecell") },
 ];

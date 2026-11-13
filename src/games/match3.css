@@ -1,5 +1,5 @@
 .match3-wrap { flex: 1; min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; }
-.match3-hud { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; width: 100%; max-width: 560px; }
+.match3-hud { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; width: 100%; max-width: 560px; }
 .match3-chip { background: #fff; border: 2px solid #96f2d7; border-radius: 14px; box-shadow: 0 3px 0 #96f2d7; padding: 3px 10px; font-weight: 800; color: #087f5b; font-size: 14px; white-space: nowrap; }
 .match3-chip.combo { background: #fff3bf; border-color: #ffd43b; box-shadow: 0 3px 0 #ffd43b; color: #e8590c; }
 .match3-chip.hide { visibility: hidden; }
@@ -7,7 +7,7 @@
 .match3-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ffa94d, #ffd43b); border-radius: 8px; transition: width .35s; }
 .match3-bar.done i { background: linear-gradient(90deg, #51cf66, #12b886); }
 .match3-btns { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
-.match3-btn { font: inherit; font-weight: 800; font-size: 14px; border: 0; border-radius: 14px; padding: 6px 12px; background: #12b886; color: #fff; box-shadow: 0 4px 0 #0b7a5a; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.match3-btn { font: inherit; font-weight: 800; font-size: 13px; border: 0; border-radius: 12px; padding: 5px 10px; background: #12b886; color: #fff; box-shadow: 0 4px 0 #0b7a5a; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .match3-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #0b7a5a; }
 .match3-btn.alt { background: #fff; color: #087f5b; border: 2px solid #96f2d7; box-shadow: 0 4px 0 #96f2d7; }
 .match3-area { flex: 1 1 0; min-height: 0; min-width: 0; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -54,4 +54,10 @@
   .match3-wrap.playing .match3-hud { flex-direction: column; flex-wrap: nowrap; width: auto; max-width: 170px; justify-content: center; align-items: stretch; }
   .match3-wrap.playing .match3-btns { flex-direction: column; }
   .match3-wrap.playing .match3-bar { max-width: none; }
+}
+@media (max-width: 440px) { .match3-chip { padding: 2px 8px; } .match3-btn { padding: 5px 8px; } }
+@media (orientation: landscape) and (max-height: 520px) {
+  .match3-wrap.playing .match3-chip { padding: 1px 8px; font-size: 12px; }
+  .match3-wrap.playing .match3-btns { display: grid; grid-template-columns: 1fr 1fr; }
+  .match3-wrap.playing .match3-btn { padding: 4px 6px; font-size: 12px; box-shadow: 0 3px 0 #96f2d7; }
 }

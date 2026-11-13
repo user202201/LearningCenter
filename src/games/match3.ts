@@ -46,7 +46,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   let view: "levels" | "play" = "levels";
   let level = 0, board: L.Board = [], rng = L.mulberry32(1), score = 0, moves = 0, target = 0, kinds = 6, combo = 0, bestCombo = 0;
-  let busy = false, over = false, reached = false, sel: L.Pos | null = null, S = 40;
+  let runId = 0, busy = false, over = false, reached = false, sel: L.Pos | null = null, S = 40;
   let drag: { pos: L.Pos; x: number; y: number } | null = null;
   let hintTimer = 0, hinted: HTMLElement[] = [];
   const els = new Map<number, HTMLElement>();
@@ -125,8 +125,11 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   function fit() {
     if (view !== "play" || !area) return;
-    const sz = Math.min(area.clientWidth, area.clientHeight) - 12;
-    if (sz < 40) return;
+    const top = area.getBoundingClientRect().top + (document.scrollingElement?.scrollTop ?? 0);
+    const ah = Math.max(80, Math.floor((window.visualViewport?.height ?? window.innerHeight) - top - 12));
+    area.style.height = ah + "px"; area.style.flex = "none";
+    const sz = Math.min(area.clientWidth, ah) - 12;
+    if (sz < 40 || S * L.N === sz - (sz % L.N) && boardEl.style.width === S * L.N + "px") return;
     S = Math.floor(sz / L.N);
     boardEl.style.width = boardEl.style.height = S * L.N + "px";
     for (const el of els.values()) { el.style.width = el.style.height = S + "px"; }
@@ -134,7 +137,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
 
   function startLevel(i: number, preset?: { rows: string[]; moves?: number; target?: number; seed?: number }) {
-    level = i; view = "play";
+    level = i; view = "play"; runId++;
     const spec = L.LEVELS[i];
     const seed = preset?.seed ?? ((Date.now() & 0xffffff) + i * 104729);
     rng = L.mulberry32(seed);
@@ -249,8 +252,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const bs = bests(); if (score > bs[level]) { bs[level] = score; ctx.store.set("best", bs); }
     ctx.store.set("last", level);
     ctx.sfx(won ? "win" : "lose");
+    const my = runId;
     later(() => {
-      if (!alive || view !== "play") return;
+      if (!alive || view !== "play" || my !== runId) return;
       const isLast = level === L.LEVELS.length - 1;
       const btn = (id: string, t: string, f: () => void, alt: boolean) => h("button", { class: "match3-btn" + (alt ? " alt" : ""), id, onclick: () => { ctx.sfx("tap"); f(); } }, t);
       const btns = won
@@ -303,6 +307,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     else setSel(p);
   }
   const onResize = () => fit();
+  const refit = window.setInterval(fit, 400);
   window.addEventListener("resize", onResize);
   window.addEventListener("orientationchange", onResize);
 
@@ -313,7 +318,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   showLevels();
   return () => {
-    alive = false;
+    alive = false; clearInterval(refit);
     timers.forEach((t) => clearTimeout(t)); timers.clear();
     window.removeEventListener("resize", onResize);
     window.removeEventListener("orientationchange", onResize);

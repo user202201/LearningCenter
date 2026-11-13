@@ -47,7 +47,7 @@ export function candidates(b: Board, d = 2): number[] {
 }
 
 /* ---------- patterns ---------- */
-const T_FIVE = 100000, T_OPEN4 = 12000, T_FOUR = 2600, T_OPEN3 = 2200, T_THREE = 200, T_OPEN2 = 120, T_TWO = 30, T_ONE = 4;
+const T_FIVE = 100000, T_OPEN4 = 12000, T_FOUR = 2600, T_OPEN3 = 2200, T_THREE = 500, T_OPEN2 = 400, T_TWO = 60, T_ONE = 4;
 /** what the line through (x, y) is worth for p if p stood there (the cell itself is treated as p's) */
 function lineTier(b: Board, x: number, y: number, dx: number, dy: number, p: Stone): number {
   const s: string[] = [];
@@ -155,7 +155,7 @@ export function chooseMove(b: Board, me: Stone, level: Level, rnd: Rnd = Math.ra
   const pWin = level === "easy" ? 0.85 : 1, pBlock = level === "easy" ? 0.75 : 1;
   if (mine.length && rnd() < pWin) return mine[0];
   if (theirs.length && rnd() < pBlock) return theirs[0];
-  const wAtt = level === "easy" ? 0.8 : 1, wDef = level === "easy" ? 0.5 : level === "normal" ? 0.9 : 0.95;
+  const wAtt = level === "easy" ? 0.8 : level === "hard" ? 1.1 : 1, wDef = level === "easy" ? 0.5 : level === "normal" ? 0.9 : 0.85;
   const scored = cells.map((c) => ({ c, v: cellValue(b, c, me) * wAtt + cellValue(b, c, opp) * wDef })).sort((a, d) => d.v - a.v);
   if (level === "easy") {
     if (rnd() < 0.12) return cells[Math.floor(rnd() * cells.length)];

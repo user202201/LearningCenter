@@ -27,7 +27,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const h = ctx.h;
   const timers = new Set<number>();
   const later = (f: () => void, ms: number) => { const id = window.setTimeout(() => { timers.delete(id); f(); }, ms); timers.add(id); };
-  let raf = 0, alive = true;
+  let raf = 0, alive = true, tick = 0;
 
   // ---- progress
   const stars = (): number[] => { const s = ctx.store.get<number[]>("stars", []); return L.LEVELS.map((_, i) => (typeof s[i] === "number" ? s[i] : 0)); };
@@ -39,7 +39,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   let over: "" | "won" | "lost" = "";
   let paused = false, angle = Math.PI / 2, dragging = false, swapCand = false, moved = false, aimOn = false;
   let flight: { pts: { x: number; y: number }[]; i: number; x: number; y: number; c: number } | null = null;
-  let rng = L.mulberry32(1);
+  let rng = L.mulberry32(1), runId = 0;
   let yOfs = 0, gt = 0, last = 0;
   let fx: Fx[] = [];
   let D = 20, dpr = 1;
@@ -101,9 +101,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     hudLevel = h("span", { class: "bubble-chip", id: "bubble-level" });
     hudScore = h("span", { class: "bubble-chip", id: "bubble-score" });
     hudBest = h("span", { class: "bubble-chip", id: "bubble-best" });
-    hudShots = h("span", { class: "bubble-chip", id: "bubble-shots" });
+    hudShots = h("span", { class: "bubble-chip bubble-lab", id: "bubble-shots" });
     hudDots = h("span", { class: "bubble-dots", id: "bubble-dots" });
-    const dotsChip = h("span", { class: "bubble-chip" }, "天花板", hudDots);
+    const dotsChip = h("span", { class: "bubble-chip", title: "天花板" }, h("span", { class: "bubble-lab" }, "天花板"), hudDots);
     const btn = (id: string, txt: string, f: () => void, alt = true) => h("button", { class: "bubble-btn" + (alt ? " alt" : ""), id, onclick: () => { ctx.sfx("tap"); f(); } }, txt);
     const hud = h("div", { class: "bubble-hud" }, hudLevel, hudScore, hudBest, hudShots, dotsChip,
       h("div", { class: "bubble-btns" }, btn("bubble-swap", "交换", swap), btn("bubble-pause", "暂停", () => setPaused(true)), btn("bubble-restart", "重来", () => startLevel(level)), btn("bubble-levels-btn", "选关", showLevels)));
@@ -115,8 +115,11 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   function fit() {
     if (view !== "play" || !area) return;
-    const aw = area.clientWidth, ah = area.clientHeight;
-    if (!aw || !ah) return;
+    const aw = area.clientWidth;
+    const top = area.getBoundingClientRect().top + (document.scrollingElement?.scrollTop ?? 0);
+    const ah = Math.max(80, Math.floor((window.visualViewport?.height ?? window.innerHeight) - top - 12));
+    if (!aw) return;
+    area.style.height = ah + "px"; area.style.flex = "none";
     dpr = Math.min(2, window.devicePixelRatio || 1);
     const d = Math.max(8, Math.floor(Math.min((aw - 8) / L.COLS, (ah - 8) / FH)));
     if (d !== D || canvas.width !== Math.round(L.COLS * d * dpr)) { D = d; sprites.clear(); }
@@ -136,7 +139,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
 
   function startLevel(i: number) {
-    level = i; view = "play";
+    level = i; view = "play"; runId++;
     const seed = (Date.now() & 0xffff) + i * 7919;
     const spec = L.LEVELS[i];
     grid = L.buildLevel(spec, seed);
@@ -229,8 +232,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     ctx.store.set("last", level);
     hudUpdate();
     ctx.sfx(kind === "won" ? "win" : "lose");
+    const my = runId;
     later(() => {
-      if (!alive || view !== "play") return;
+      if (!alive || view !== "play" || my !== runId) return;
       const isLast = level === L.LEVELS.length - 1;
       const btns = kind === "won"
         ? [!isLast && h("button", { class: "bubble-btn", id: "bubble-next", onclick: () => { ctx.sfx("tap"); startLevel(level + 1); } }, "下一关"),
@@ -352,7 +356,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     raf = requestAnimationFrame(frame);
     const dt = Math.min(0.05, Math.max(0, (now - last) / 1000)); last = now;
     if (view !== "play" || !area) return;
-    if (area.clientWidth && (canvas.style.width === "" )) fit();
+    if (++tick % 15 === 0 || canvas.style.width === "") fit();
     if (!paused) {
       gt += dt;
       if (yOfs < 0) yOfs = Math.min(0, yOfs + dt * 4);
@@ -373,7 +377,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   // test / debug hook: the live state, and a way to set up an exact situation
   (window as any).__bubble = {
     get s() { return { view, level, score, shots, misses, over, paused, angle, flying: !!flight, cur, nxt, grid, parShots, fx: fx.length }; },
-    load(g: L.Grid, c: number, n: number, lvl = level) { view = "play"; level = lvl; grid = g.map((r) => r.slice()); cur = c; nxt = n; misses = 0; score = 0; shots = 0; over = ""; paused = false; flight = null; fx = []; parShots = L.par(grid); if (!canvas.isConnected) buildPlay(); hudUpdate(); },
+    load(g: L.Grid, c: number, n: number, lvl = level) { runId++; view = "play"; level = lvl; grid = g.map((r) => r.slice()); cur = c; nxt = n; misses = 0; score = 0; shots = 0; over = ""; paused = false; flight = null; fx = []; parShots = L.par(grid); if (!canvas.isConnected) buildPlay(); hudUpdate(); },
     aim(deg: number) { angle = (deg * Math.PI) / 180; aimOn = true; },
     shoot, swap,
     setMisses(n: number) { misses = n; hudUpdate(); },

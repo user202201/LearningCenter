@@ -67,3 +67,4 @@
 @keyframes klotski-pop { from { transform: scale(.3); opacity: 0; } }
 @keyframes klotski-star { from { transform: scale(0) rotate(-120deg); } }
 @media (prefers-reduced-motion: reduce) { .klotski-piece, .klotski-piece.drag { transition: none; } .klotski-card, .klotski-card svg, .klotski-over, .klotski-piece.hinted, .klotski-ghost.hinted { animation: none; } }
+.klotski-lvname { margin-left: .4em; }
