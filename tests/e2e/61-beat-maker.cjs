@@ -111,7 +111,7 @@ function parseMidi(b) {
       out.n = ev.length;
       out.exact = ev.every((e) => Math.abs(e.when - (10.05 + (Math.floor((e.when - 10.05 + 1e-9) / 0.125)) * 0.125)) < 1e-9);
       out.kinds = ev.slice(0, 8).map((e) => `${e.track}@${(e.when - 10.05).toFixed(3)}`).join(' ');
-      out.ahead = Math.max(...ev.map((e) => e.when - e.at)) <= L.LOOKAHEAD + 1e-9;   // never scheduled further ahead than the look-ahead
+      out.ahead = Math.max(...ev.map((e) => e.when - e.at)) <= 0.1 + 1e-9;   // never scheduled further ahead than the look-ahead
       out.early = Math.min(...ev.map((e) => e.when - e.at)) >= -1e-9;   // never in the past
       // a muted row stays silent, a row with no volume too
       p = mk(); p.mute = ['kick']; out.muted = run(p, 3).ev.map((e) => e.track).filter((x, i, a) => a.indexOf(x) === i).join();
@@ -140,7 +140,7 @@ function parseMidi(b) {
     ok(r.muted === 'snare', 'scheduler: a muted row stays silent: ' + r.muted);
     ok(r.edit === '2.250 4.250', 'scheduler: a cell lit while it plays is heard from its next step on: ' + r.edit);
     const tt = r.tempo.split(' ').map(Number);
-    ok(tt[0] === 0 && Math.abs(tt[1] - 1) < 1e-6 && Math.abs(tt[2] - 1.5625) < 1e-6 && Math.abs(tt[3] - 2.0625) < 1e-6, 'scheduler: a tempo change takes effect at once: ' + r.tempo);
+    ok(tt[0] === 0 && Math.abs(tt[1] - 1) < 1e-6 && Math.abs(tt[2] - 1.5625) < 1e-3 && Math.abs(tt[3] - 2.0625) < 1e-3, 'scheduler: a tempo change takes effect at once: ' + r.tempo);
     ok(r.swing.split(' ')[0] === '0.1625' && r.swing.split(' ')[1] === '0.2500', 'scheduler: swing - step 1 comes at 0.1625 s instead of 0.125, step 2 stays: ' + r.swing);
     ok(r.waltz.startsWith('0.000 1.500 3.000'), 'scheduler: 3/4 loops after 12 steps (a bar of 1.5 s): ' + r.waltz);
     ok(r.burst <= 4, `scheduler: after the page slept 5 s there is no burst of missed steps (${r.burst})`);

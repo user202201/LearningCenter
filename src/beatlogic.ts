@@ -170,7 +170,7 @@ export function randomize(p: Pattern, rnd: () => number = Math.random): void {
 export const stepSeconds = (p: Pattern): number => 60 / p.bpm / p.res;
 export const barSeconds = (p: Pattern): number => stepSeconds(p) * cols(p);
 /** seconds from the start of the bar to the sound of a step (an odd step is late when swing is on) */
-export const stepOffset = (p: Pattern, step: number): number => step * stepSeconds(p) + 0;
+export const stepOffset = (p: Pattern, step: number): number => step * stepSeconds(p) + (p.swing && step % 2 === 1 ? SWING * stepSeconds(p) : 0);
 
 /** what sounds at one step: muted rows are left out */
 export interface Ev { track: TrackId; kind: TrackDef["kind"]; drum?: Drum; midi: number[]; vel: number; hold: number }
@@ -185,7 +185,7 @@ export function eventsAt(p: Pattern, step: number): Ev[] {
 }
 
 // ---------- the scheduler ("a tale of two clocks": a timer wakes every ~25 ms; it schedules the notes of the next ~100 ms at exact audio-clock times) ----------
-export const LOOKAHEAD = 0.5, INTERVAL_MS = 25;
+export const LOOKAHEAD = 0.1, INTERVAL_MS = 25;
 export class Sequencer {
   private step = 0;
   private nextTime = 0;
@@ -208,7 +208,7 @@ export class Sequencer {
     if (this.nextTime < now - 0.25) this.nextTime = now + 0.02;   // the page was asleep: do not play the missed steps in a burst
     while (this.nextTime < now + LOOKAHEAD) {
       const n = cols(p), step = this.step % n;
-      const when = this.nextTime + 0;
+      const when = this.nextTime + (p.swing && step % 2 === 1 ? SWING * stepSeconds(p) : 0);
       for (const e of eventsAt(p, step)) this.fire(e, when, step);
       this.queue.push({ step, time: when });
       this.nextTime += stepSeconds(p);
