@@ -1347,11 +1347,17 @@ async function renderSettings() {
   // the admin block slides open / shut (no reload of the page)
   let adminBox!: HTMLElement;
   const setAdmin = (on: boolean) => { adminBox.classList.toggle("open", on); adminBox.toggleAttribute("inert", !on); };
+  const expiryText = (): string => {
+    const e = api.tokenExpiry();
+    if (!e) return "令牌到期日：本浏览器无法读取。请在 GitHub 的“Settings → Developer settings → Personal access tokens”中查看。";
+    return e.days < 0 ? `令牌已于 ${e.date} 到期，请重新登录。` : `令牌到期日：${e.date}（还剩 ${e.days} 天）`;
+  };
   const a = api.getAuth();
   const account = api.isLocal()
     ? h("div", { class: "card" }, h("h3", {}, "数据保存位置"), h("p", {}, "保存在本设备（浏览器）中，不会上传。更换设备或清除浏览器数据后将丢失。"),
         h("button", { class: "wide", onclick: () => { api.leaveLocal(); restart(); } }, "改用 GitHub 私有仓库"))
     : h("div", { class: "card" }, h("h3", {}, "数据保存位置"), h("p", {}, "GitHub：", h("span", { class: "user" }, a?.repo ?? "")),
+        h("p", { class: "muted small", id: "token-exp" }, expiryText()),
         h("button", { class: "wide", id: "qr-btn", onclick: showQr }, "登录到其他设备（二维码）"),
         h("button", { class: "wide danger", onclick: signOut }, "退出登录"));
   // the children: not something done every day, so it lives here and not on the home screen

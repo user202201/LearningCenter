@@ -438,7 +438,7 @@ button.gear-btn svg.gear { width: 26px; height: 26px; display: block; margin: au
 .zb-row { position: relative; }
 .zr { position: absolute; top: 0; bottom: 0; width: 9.5cqw; display: grid; align-items: center; min-width: 0; }
 .zr-l { right: 100%; justify-items: end; padding-right: 1.6cqw; } .zr-r { left: 100%; justify-items: start; padding-left: 1.6cqw; }
-.zr-ch { font-family: var(--kai); font-weight: 700; font-size: 5cqw; line-height: 1; color: #1b1420; }
+.zr-ch { font-family: var(--kai); font-weight: 400; font-size: 5cqw; line-height: 1; color: #1b1420; }
 .zb { border: 1px solid var(--kid); display: flex; flex-direction: column; min-height: 0; break-inside: avoid; page-break-inside: avoid; }
 .zb-head { display: grid; grid-template-columns: repeat(12, 1fr); align-items: center; padding: .2cqw 0; border-bottom: 1px solid var(--kid); min-height: 3.4cqw; }   /* the same 12 columns as the cells below: the pinyin is centred over the first cell, the stroke count over the second, the stroke pictures start at the third */
 .zb-py { font-size: 2.1cqw; font-weight: 300; letter-spacing: .02em; color: #3d3340; font-family: -apple-system, "Helvetica Neue", Arial, "Segoe UI", sans-serif; grid-column: 1; text-align: center; white-space: nowrap; }
@@ -472,7 +472,7 @@ button.gear-btn svg.gear { width: 26px; height: 26px; display: block; margin: au
   .page.sheet-page { height: auto; display: block; }
   .sheet-page .top, .sheet-foot, .sheet-hint, #toasts, .update-bar { display: none !important; }
   .sheet-page .scroll { overflow: visible; padding: 0; }
-  .sheet { width: calc(100% - 1.5mm); height: 266mm; aspect-ratio: auto; margin: 0 auto; padding: 0; box-shadow: none; overflow: visible; }
+  .sheet { width: calc(100% - 1.5mm); height: 262mm; max-height: 262mm; break-after: avoid; page-break-after: avoid; aspect-ratio: auto; margin: 0 auto; padding: 0; box-shadow: none; overflow: visible; }
   .sheet-read { width: 170mm; padding: 0; }   /* (the page has 6 mm at the sides instead of 15: 14 mm beside the frame for the characters to read) */
   .zr { width: 14mm; } .zr-l { padding-right: 3.4mm; } .zr-r { padding-left: 3.4mm; }
   .zr-ch { font-size: 10.5mm; }

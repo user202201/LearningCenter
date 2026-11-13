@@ -6,6 +6,24 @@ const { ok, done } = checks();
   const store = new Map();
   const opts = { today: '2026-11-10' };
   const { browser, page, log } = await start(store, opts);
+  // the end date of the token (GitHub's header, when the browser may read it) is shown in Settings
+  {
+    const r = await page.evaluate(async () => {
+      const A = await import('/src/api.ts');
+      const none = A.tokenExpiry();
+      localStorage.setItem('learn.token.exp.v1', '2026-12-01 08:00:00 UTC');
+      const e = A.tokenExpiry(Date.parse('2026-11-20T10:00:00'));
+      const old = (localStorage.setItem('learn.token.exp.v1', '2026-11-01 00:00:00 UTC'), A.tokenExpiry(Date.parse('2026-11-20T10:00:00')));
+      localStorage.removeItem('learn.token.exp.v1');
+      return { none, e, old };
+    });
+    ok(r.none === null && r.e.date === '2026-12-01' && r.e.days === 12 && r.old.days < 0, 'token end date: unknown -> nothing, 2026-12-01 is 12 days away, a past date is negative: ' + JSON.stringify(r));
+    await page.evaluate(() => localStorage.setItem('learn.token.exp.v1', '2026-12-01 08:00:00 UTC'));
+    await openManage(page);
+    ok((await page.textContent('#token-exp')).includes('2026-12-01'), 'Settings shows the end date of the token');
+    await page.evaluate(() => { localStorage.removeItem('learn.token.exp.v1'); location.hash = '#/chinese'; });
+    await page.waitForSelector('.kids, .empty-home');
+  }
   await addKid(page, 'Dory'); await addKid(page, 'Leo');
   const kids = JSON.parse(store.get('kids.json'));
   ok(kids.kids.length === 2 && kids.kids[0].name === 'Dory' && !!kids.kids[0].id, 'kids.json lists the children');

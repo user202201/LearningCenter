@@ -99,6 +99,21 @@ function headers(a: Auth): HeadersInit {
   return { Authorization: `Bearer ${a.token}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" };
 }
 
+/** GitHub sends the end date of a token in `github-authentication-token-expiration` ("2026-12-01 08:00:00 UTC"); a browser may not be allowed to read it, then nothing is stored */
+const EXP_KEY = "learn.token.exp.v1";
+function rememberExpiry(res: Response): void {
+  try { const v = res.headers.get("github-authentication-token-expiration"); if (v) localStorage.setItem(EXP_KEY, v); } catch { /* not readable / no storage */ }
+}
+/** the end date of the token of this device (`date` as YYYY-MM-DD, `days` left, negative = expired) or null when it is not known */
+export function tokenExpiry(now = Date.now()): { date: string; days: number } | null {
+  let raw: string | null = null;
+  try { raw = localStorage.getItem(EXP_KEY); } catch { /* no storage */ }
+  const m = raw && /^(\d{4})-(\d{2})-(\d{2})/.exec(raw);
+  if (!m) return null;
+  const end = Date.parse(`${m[1]}-${m[2]}-${m[3]}T23:59:59`);
+  return Number.isFinite(end) ? { date: `${m[1]}-${m[2]}-${m[3]}`, days: Math.ceil((end - now) / 86400000) } : null;
+}
+
 async function gh(a: Auth, url: string, init: RequestInit = {}): Promise<Response> {
   let res: Response | undefined;
   let why = "";
@@ -114,6 +129,7 @@ async function gh(a: Auth, url: string, init: RequestInit = {}): Promise<Respons
   }
   if (!res) { downUntil = Date.now() + DOWN_MS; throw new ApiError(`网络请求失败（${why || "未知"}）：网络中断或被拦截。`, 0); }
   downUntil = 0;
+  rememberExpiry(res);
   if (res.status === 401) {
     logout();
     throw new AuthExpired("登录已失效，请重新登录");
