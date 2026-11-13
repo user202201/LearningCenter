@@ -7,6 +7,7 @@
 import { h, oneLine } from "./ui";
 import { mascot } from "./art";
 import { getLang } from "./i18n";
+import { sfx } from "./games/sfx";
 
 export interface Subject {
   id: "chinese" | "math" | "english" | "science" | "music" | "games";
@@ -20,6 +21,8 @@ export interface Subject {
   ready: boolean;
   /** false = no child needed (music): not in the shortcuts of a child's page */
   kid?: boolean;
+  /** a secret subject: its card shows only after 10 quick taps on the top-left corner of the picker (see `secretTaps`) */
+  hidden?: boolean;
 }
 
 export const SUBJECTS: Subject[] = [
@@ -27,8 +30,8 @@ export const SUBJECTS: Subject[] = [
   { id: "math", name: "数学", route: "#/subject/math", c1: "#4dabf7", c2: "#1c7ed6", dark: "#1864ab", ready: true },
   { id: "english", /** the Languages subject teaches the OTHER language of the screen: English screen -> French (words.ts studyLang) */ get name() { return getLang() === "en" ? "法语" : "英语"; }, route: "#/subject/english", c1: "#69db7c", c2: "#2f9e44", dark: "#237a35", ready: true },
   { id: "science", name: "科学", route: "#/subject/science", c1: "#b197fc", c2: "#7048e8", dark: "#5430b8", ready: true },
-  { id: "music", name: "音乐", route: "#/subject/music", c1: "#f783ac", c2: "#d6336c", dark: "#a61e4d", ready: true, kid: false },
-  { id: "games", name: "小游戏", route: "#/subject/games", c1: "#63e6be", c2: "#12b886", dark: "#087f5b", ready: true, kid: false },
+  { id: "music", name: "音乐", route: "#/subject/music", c1: "#f783ac", c2: "#d6336c", dark: "#a61e4d", ready: true, kid: false, hidden: true },
+  { id: "games", name: "小游戏", route: "#/subject/games", c1: "#63e6be", c2: "#12b886", dark: "#087f5b", ready: true, kid: false, hidden: true },
 ];
 export const subjectById = (id: string) => SUBJECTS.find((s) => s.id === id);
 
@@ -130,11 +133,16 @@ const reduced = () => !!window.matchMedia?.("(prefers-reduced-motion: reduce)").
 const style = (s: Subject) => `--c1:${s.c1};--c2:${s.c2};--cd:${s.dark}`;
 
 /** the grid of big cards; `go(route)` is called when one is chosen (after the effects) */
+const HIDDEN_KEY = "learn.hidden.v1";
+export const hiddenUnlocked = (): boolean => { try { return localStorage.getItem(HIDDEN_KEY) === "1"; } catch { return false; } };
+const setHiddenUnlocked = (v: boolean) => { try { localStorage.setItem(HIDDEN_KEY, v ? "1" : "0"); } catch { /* private window: the secret is forgotten on reload */ } };
+const visibleSubjects = (): Subject[] => SUBJECTS.filter((s) => !s.hidden || hiddenUnlocked());
+
 export function hubGrid(go: (route: string) => void): HTMLElement {
   let busy = false;
   const grid = h("div", { class: "hub-grid" });
-  SUBJECTS.forEach((s, i) => {
-    const card = h("button", { class: "subject", "data-subject": s.id, style: `${style(s)};--i:${i}`, onclick: (e: MouseEvent) => {
+  const makeCard = (s: Subject, i: number): HTMLElement => {
+    const card: HTMLElement = h("button", { class: "subject", "data-subject": s.id, style: `${style(s)};--i:${i}`, onclick: (e: MouseEvent) => {
       if (busy) return;
       busy = true;
       choose(card, s, e, go);
@@ -143,10 +151,75 @@ export function hubGrid(go: (route: string) => void): HTMLElement {
       h("span", { class: "s-art" }, subjectArt(s.id)),
       h("span", { class: "s-name" }, s.name),
       s.ready ? null : h("span", { class: "s-soon" }, "即将开放"));
-    grid.append(card);
-  });
+    return card;
+  };
+  const count = () => grid.style.setProperty("--n", String(grid.children.length));
+  visibleSubjects().forEach((s, i) => grid.append(makeCard(s, i)));
+  count();
   oneLine([...grid.querySelectorAll<HTMLElement>(".s-name")], 12);
+  (grid as HubGrid).__secret = {
+    reveal(): HTMLElement[] { const out: HTMLElement[] = []; SUBJECTS.forEach((s, i) => { if (s.hidden && !grid.querySelector(`[data-subject="${s.id}"]`)) { const c = makeCard(s, i); grid.append(c); out.push(c); } }); count(); oneLine(out.map((c) => c.querySelector<HTMLElement>(".s-name")!), 12); return out; },
+    hide(): HTMLElement[] { const out = [...grid.querySelectorAll<HTMLElement>(".subject")].filter((c) => subjectById(c.dataset.subject as Subject["id"])?.hidden); return out; },
+    removed() { count(); },
+  };
   return grid;
+}
+interface HubGrid extends HTMLElement { __secret?: { reveal(): HTMLElement[]; hide(): HTMLElement[]; removed(): void } }
+
+/**
+ * The secret subjects (music, games): 10 quick taps (each within 1.5 s of the one before) on the top-left corner of the picker show them with a grand entrance
+ * (the cards fly in with a spin, glitter and a fanfare); 10 more taps hide them again (they shrink away). While an animation runs further taps are ignored, so
+ * nobody can toggle it back and forth by tapping wildly. The state stays on this device (`learn.hidden.v1`).
+ */
+export function secretTaps(corner: HTMLElement, grid: HTMLElement, toastFn: (msg: string) => void): void {
+  const g = grid as HubGrid;
+  let n = 0, last = 0, lock = false;
+  const sound = (k: "win" | "swap") => { try { sfx(k); } catch { /* no sound */ } };
+  const done = (ms: number) => window.setTimeout(() => { lock = false; n = 0; }, ms);
+  const reveal = () => {
+    lock = true; setHiddenUnlocked(true);
+    const cards = g.__secret!.reveal();
+    sound("win");
+    toastFn("隐藏学科出现了：音乐、小游戏！");
+    if (reduced()) return void done(1800);   // (no animation, but the same lock: wild tapping must not toggle it back at once)
+    cards.forEach((c, i) => { c.style.animationDelay = `${i * 0.28}s`; c.classList.add("hub-arrive"); c.addEventListener("animationend", () => c.classList.remove("hub-arrive"), { once: true }); });
+    confetti(cards);
+    done(2400);
+  };
+  const hide = () => {
+    lock = true; setHiddenUnlocked(false);
+    const cards = g.__secret!.hide();
+    sound("swap");
+    toastFn("隐藏学科收起来了。");
+    const finish = () => { cards.forEach((c) => c.remove()); g.__secret!.removed(); };
+    if (reduced()) { finish(); return void done(1800); }
+    cards.forEach((c, i) => { c.style.pointerEvents = "none"; c.style.animationDelay = `${i * 0.12}s`; c.classList.add("hub-leave"); });
+    window.setTimeout(finish, 800);
+    done(1400);
+  };
+  corner.addEventListener("pointerdown", (e) => {
+    if (!e.isPrimary || lock) return;
+    const now = performance.now();
+    n = now - last > 1500 ? 1 : n + 1; last = now;
+    corner.classList.remove("tap-bump"); void corner.offsetWidth; corner.classList.add("tap-bump");
+    if (n >= 10) { n = 0; if (hiddenUnlocked()) hide(); else reveal(); }
+  });
+}
+
+/** glitter and confetti flying out of the new cards */
+function confetti(cards: HTMLElement[]): void {
+  const layer = h("div", { class: "fx-layer", "aria-hidden": "true" });
+  document.body.append(layer);
+  const colors = ["#ff6b6b", "#ffd43b", "#51cf66", "#339af0", "#cc5de8", "#ff922b", "#fff"];
+  cards.forEach((c, ci) => {
+    const r = c.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    for (let i = 0; i < 26; i++) {
+      const a = Math.random() * Math.PI * 2, d = 90 + Math.random() * 170;
+      const p = h("i", { class: "confetti", style: `left:${cx}px;top:${cy}px;--dx:${Math.cos(a) * d}px;--dy:${Math.sin(a) * d - 60}px;--rot:${Math.random() * 720 - 360}deg;background:${colors[i % colors.length]};animation-delay:${0.3 + ci * 0.28}s` });
+      layer.append(p);
+    }
+  });
+  window.setTimeout(() => layer.remove(), 2600);
 }
 
 const SPARK_COLORS = ["#fff", "#ffe066", "#ff8787", "#74c0fc", "#8ce99a", "#e599f7"];

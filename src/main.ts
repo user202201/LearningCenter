@@ -15,7 +15,7 @@ import { openGame } from "./gameui";
 import { scanQr } from "./scan";
 import { readTable, readWorkbook, type SheetData } from "./xlsx";
 import * as I from "./importer";
-import { subjectById, hubGrid, hubHero, soonPage, reveal, shortcuts } from "./hub";
+import { subjectById, hubGrid, hubHero, soonPage, reveal, shortcuts, secretTaps } from "./hub";
 import * as E from "./english";
 import * as MU from "./music";
 import * as GM from "./gameshub";
@@ -1425,8 +1425,10 @@ async function showQr() {
 // ---------- the subject picker ----------
 function renderHubScreen() {
   const gear = gearBtn("#/");
-  show(h("div", { class: "page hub-page" }, hubHero(gear),
-    h("main", { class: "scroll" }, h("div", { class: "hub-wrap" }, hubGrid((route) => (location.hash = route))))));
+  const heroEl = hubHero(gear), grid = hubGrid((route) => (location.hash = route));
+  secretTaps(heroEl.querySelector<HTMLElement>(".mascot")!, grid, (msg) => toast(msg, 3500));
+  show(h("div", { class: "page hub-page" }, heroEl,
+    h("main", { class: "scroll" }, h("div", { class: "hub-wrap" }, grid))));
 }
 
 /** a subject that is not built yet */
