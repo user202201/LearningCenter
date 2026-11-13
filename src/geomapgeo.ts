@@ -16,7 +16,7 @@ export interface ChinaData {
 }
 export interface Country { id: string; a3: string; n: string; py: string; cap: string; cont: string; lv: number; tc: number; d: string; lp: Pt; area: number; nb: string[] }
 export interface WorldData {
-  vb: [number, number, number, number]; continents: { id: string; n: string; py: string }[]; land: Record<string, string>; ural: Pt[];
+  vb: [number, number, number, number]; continents: { id: string; n: string; py: string; lp: Pt }[]; land: Record<string, string>; ural: Pt[];
   countries: Country[]; oceans: { id: string; n: string; d: string; lp: Pt; lps: Pt[] }[];
 }
 export interface Geo { china: ChinaData; world: WorldData }

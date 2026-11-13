@@ -255,6 +255,14 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await p.setViewportSize({ width: 820, height: 1180 });
   await p.evaluate(() => { window.__pkSeed = 12345; });
   await p.click('#pk-start'); await p.waitForSelector('#pk-stage');
+  await p.waitForFunction(() => !!document.fullscreenElement, null, { timeout: 5000 }).catch(() => {});
+  ok(await p.evaluate(() => !!document.fullscreenElement), 'Start asks for full screen (the game fills the whole screen)');
+  await p.evaluate(() => window.__pk.manual(true));
+  await p.click('#pk-exit'); await p.waitForSelector('dialog[open]'); await p.click('dialog[open] button.danger'); await p.waitForSelector('#pk-slot-1');
+  await p.waitForFunction(() => !document.fullscreenElement, null, { timeout: 5000 }).catch(() => {});
+  ok(await p.evaluate(() => !document.fullscreenElement), 'leaving the game leaves full screen');
+  await p.evaluate(() => { document.documentElement.requestFullscreen = () => Promise.reject(new Error('off in the test: a full screen window cannot be resized')); });   // (the rest of the test resizes the window)
+  await p.click('#pk-start'); await p.waitForSelector('#pk-stage');
   await p.evaluate(() => window.__pk.manual(true));
   const S = () => p.evaluate(() => window.__pk.state());
   const step = (ms) => p.evaluate((m) => window.__pk.step(m), ms);
@@ -340,7 +348,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   ok(q.phase === 'result' && q.winner === -1 && q.results[2] === -1 && q.scores.join() === '1,0', 'both players wrong: the round ends, no point');
   // the keyboard: player 1 keys 1-4, player 2 keys 7 8 9 0
   await toPhase('question'); s = await S();
-  await p.keyboard.press('Escape'); await p.waitForSelector('dialog[open]'); await p.keyboard.press('Escape'); await p.waitForSelector('dialog[open]', { state: 'detached' });
+  await p.keyboard.press('Escape'); await p.waitForSelector('dialog[open]'); await p.keyboard.press('Escape'); await p.waitForSelector('dialog', { state: 'detached' });
   ok(await p.evaluate(() => document.querySelector('#pk-stage').classList.contains('kbd') && getComputedStyle(document.querySelector('.pk-kb')).display !== 'none'), 'after a key press the key hints are shown');
   await p.keyboard.press(['7', '8', '9', '0'][s.items[1].answers[0]]);
   q = await S(); ok(q.winner === 1 && q.scores.join() === '1,1', 'keyboard: player 2 answers with 7 8 9 0');
@@ -371,7 +379,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   // exit: confirmation while a game runs; Escape asks too; the clock waits while the box is open
   await p.click('#pk-exit'); await p.waitForSelector('dialog[open]');
   ok((await p.textContent('dialog[open]')).includes('退出对战？'), 'leaving a game that runs asks first');
-  await p.click('dialog[open] button:has-text("取消")'); await p.waitForSelector('dialog[open]', { state: 'detached' });
+  await p.click('dialog[open] button:has-text("取消")'); await p.waitForSelector('dialog', { state: 'detached' });
   ok((await p.evaluate(() => location.hash)) === '#/chinese/pk/play' && (await S()).phase === 'countdown', 'cancelling stays in the game');
   await p.keyboard.press('Escape'); await p.waitForSelector('dialog[open]');
   await p.click('dialog[open] button.danger'); await p.waitForSelector('#pk-slot-1');
@@ -381,7 +389,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   ok((await p.textContent('.pk-hist-row')).includes('胜 1 · 负 0') && (await p.textContent('.pk-hist-row')).includes('Anna'), 'the setup page shows "胜 1 · 负 0" for the pair');
   ok(await p.evaluate(() => document.querySelector('#pk-slot-1 .kname').textContent === 'Anna'), 'the last pick (Anna, Ben) is remembered');
   // reset of the record
-  await p.click('#pk-reset'); await p.waitForSelector('dialog[open]'); await p.click('dialog[open] button:has-text("取消")'); await p.waitForSelector('dialog[open]', { state: 'detached' });
+  await p.click('#pk-reset'); await p.waitForSelector('dialog[open]'); await p.click('dialog[open] button:has-text("取消")'); await p.waitForSelector('dialog', { state: 'detached' });
   ok((await p.locator('.pk-hist-row').count()) === 1, 'cancelling the reset keeps the record');
   await p.click('#pk-reset'); await p.click('dialog[open] button.danger'); await p.waitForSelector('.pk-hist-row', { state: 'detached' });
   ok(await p.evaluate(() => Object.keys(JSON.parse(localStorage.getItem('learn.pk.v1')).pairs).length === 0), 'the reset clears the record');
@@ -505,17 +513,19 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   const pA = await where(0, st.items[0].answers[0]), pB = await where(1, st.items[1].answers[0]);
   await fingers([pB, pA]);
   st = await S2();
-  ok(st.scores[0] + st.scores[1] === 2 && (st.scores.join() === '1,2' || st.scores.join() === '0,3' || st.scores.join() === '1,2'), 'two fingers at once on the two halves: exactly one of them gets the point of this round (' + st.scores.join(':') + ')');
-  // an earlier timestamp that arrives later takes the win (CDP carries the time of the touch)
-  await tp.evaluate(() => { const s2 = window.__pk.state(); window.__pk.skip(Math.max(1, s2.phaseEnd - window.__pk.T() + 5)); });
-  st = await toQ();
-  const base = Date.now() / 1000, a = await where(0, st.items[0].answers[0]), b = await where(1, st.items[1].answers[0]);
-  const sc0 = st.scores.slice();
-  await fingers([b], base + 0.05); await fingers([a], base + 0.02);
-  st = await S2();
-  ok(st.scores[0] + st.scores[1] === sc0[0] + sc0[1] + 1, 'the two touches of different times give exactly one point');
-  const stolen = st.scores[0] === sc0[0] + 1;
-  console.log('INFO the earlier touch (player 1, 30 ms before) ' + (stolen ? 'took the win' : 'did not take it: the browser did not pass the event time through CDP, or the order was kept'));
+  ok(st.scores.join() === '0,2', 'two fingers down in the same moment, one on each half: exactly one point is given, to the touch that arrived first (' + st.scores.join(':') + ')');
+  // two touches of different times: the earlier TIME wins, also when it is delivered second (CDP carries the time of each touch)
+  for (const [firstAt, secondAt, steal] of [[0.05, 0.02, true], [0.02, 0.05, false]]) {
+    await tp.evaluate(() => { const s2 = window.__pk.state(); window.__pk.skip(Math.max(1, s2.phaseEnd - window.__pk.T() + 5)); });
+    st = await toQ();
+    await tp.evaluate(() => window.__pk.skip(500));
+    const base = Date.now() / 1000 - 0.25, a = await where(0, st.items[0].answers[0]), b = await where(1, st.items[1].answers[0]);
+    const sc0 = st.scores.slice();
+    await fingers([b], base + firstAt); await fingers([a], base + secondAt);
+    st = await S2();
+    ok(st.scores[0] + st.scores[1] === sc0[0] + sc0[1] + 1, 'the two touches give exactly one point');
+    ok((st.scores[0] === sc0[0] + 1) === steal, steal ? 'the touch with the EARLIER time (player 1, 30 ms before) wins although it was delivered second' : 'the touch delivered second with the LATER time does not take the point');
+  }
   // dpr 2 geometry: the buttons were hit where they are drawn (checked by every tap above); the panel is exactly twice as many device pixels
   ok(await tp.evaluate(() => devicePixelRatio === 2), 'the touch checks ran at device pixel ratio 2');
   await tp.screenshot({ path: OUT + 'pk-touch.png' });

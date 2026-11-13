@@ -6,6 +6,7 @@
  * Every Chinese sentence is a plain string or template literal so that `check:i18n` finds it.
  */
 import * as G from "./mathfig";
+import { kj, kjHead, readCN } from "./mathcn";
 
 export interface Raw { q: string; a: string; chk: string; wrong?: string[]; choices?: string[]; neg?: boolean; dec?: number; fig?: string }
 export interface Gen2 { sec: number; make: () => Raw }
@@ -32,53 +33,33 @@ function four(a: string, wrongs: string[], top: () => string): string[] {
 }
 const NEG = /−/g;
 
-// ---------------------------------------------------------------- the times table (口诀): "三四十二", "二三得六"
-const D = "一二三四五六七八九";
-const cn = (n: number): string => (n < 10 ? D[n - 1] : n < 20 ? `十${n % 10 ? D[(n % 10) - 1] : ""}` : `${D[Math.floor(n / 10) - 1]}十${n % 10 ? D[(n % 10) - 1] : ""}`);
-/** the first part of a 口诀 (without the product) and the whole 口诀: smaller factor first; "得" when the product has one digit; 二五一十 */
-export const kjHead = (a: number, b: number): string => { const [x, y] = a <= b ? [a, b] : [b, a]; return `${D[x - 1]}${D[y - 1]}${x * y < 10 ? "得" : ""}`; };
-export const kj = (a: number, b: number): string => { const p = a * b; return `${kjHead(a, b)}${p < 10 ? D[p - 1] : p === 10 ? "一十" : cn(p)}`; };
-
-/** a number up to 9 digits read the Chinese way (三万零五百, 一亿零五十) */
-export function readCN(n: number): string {
-  const sec = (v: number, first: boolean): string => {
-    let out = "", zero = false;
-    ([[1000, "千"], [100, "百"], [10, "十"], [1, ""]] as [number, string][]).forEach(([u, name]) => {
-      const d = Math.floor(v / u) % 10;
-      if (d === 0) { if (out) zero = true; return; }
-      if (zero) { out += "零"; zero = false; }
-      out += (first && name === "十" && d === 1 && !out ? "" : D[d - 1]) + name;
-    });
-    return out;
-  };
-  const yi = Math.floor(n / 1e8), wan = Math.floor(n / 1e4) % 1e4, rest = n % 1e4;
-  let out = "";
-  if (yi) out += `${sec(yi, true)}亿`;
-  if (wan) out += `${yi && wan < 1000 ? "零" : ""}${sec(wan, !yi)}万`;
-  if (rest) out += `${(yi || wan) && rest < 1000 ? "零" : ""}${sec(rest, !yi && !wan)}`;
-  return out;
-}
 const PLACES = ["个位", "十位", "百位", "千位", "万位", "十万位", "百万位", "千万位"];
 const NAMES: Record<string, string> = { square: "正方形", rectangle: "长方形", triangle: "三角形", circle: "圆形", cube: "正方体", cuboid: "长方体", cylinder: "圆柱", sphere: "球体" };
 
-// length / mass / time things: [thing, number, right unit, the wrong units]
-const THINGS: [string, number, string, string[]][] = [
-  ["一支铅笔的长度", 18, "厘米", ["毫米", "米", "千米"]], ["一枚硬币的厚度", 2, "毫米", ["厘米", "分米", "米"]], ["教室黑板的长度", 4, "米", ["厘米", "分米", "千米"]],
-  ["学校操场跑道一圈的长度", 400, "米", ["厘米", "千米", "毫米"]], ["从北京到上海的铁路长度", 1300, "千米", ["米", "分米", "厘米"]], ["一支粉笔的长度", 8, "厘米", ["毫米", "米", "千米"]],
-  ["教室门的高度", 2, "米", ["厘米", "毫米", "千米"]], ["数学书的厚度", 7, "毫米", ["厘米", "分米", "米"]], ["一位小学生的身高", 135, "厘米", ["毫米", "米", "千米"]],
-  ["一条马路的宽度", 20, "米", ["厘米", "千米", "毫米"]], ["长江的长度", 6300, "千米", ["米", "厘米", "分米"]],
-  ["一个鸡蛋的质量", 50, "克", ["毫克", "千克", "吨"]], ["一袋大米的质量", 5, "千克", ["毫克", "克", "吨"]], ["一头大象的质量", 5, "吨", ["毫克", "克", "千克"]],
-  ["一个苹果的质量", 200, "克", ["毫克", "千克", "吨"]], ["一位小学生的体重", 30, "千克", ["毫克", "克", "吨"]], ["一辆卡车的载重", 10, "吨", ["毫克", "克", "千克"]], ["一片药的质量", 100, "毫克", ["克", "千克", "吨"]],
-  ["眨一下眼睛的时间", 1, "秒", ["分", "时", "天"]], ["一节课的时间", 40, "分", ["秒", "时", "天"]], ["睡一觉的时间", 9, "时", ["秒", "分", "天"]], ["暑假的时间", 60, "天", ["秒", "分", "时"]],
+// length / mass / time things: [thing, number, right unit, the wrong units] (the units are keys of `unitText`, so that every phrase is a translatable template)
+type UK = "mm" | "cm" | "dm" | "m" | "km" | "mg" | "g" | "kg" | "t" | "s" | "min" | "h" | "d";
+const unitText = (n: number): Record<UK, string> => ({ mm: `${n} 毫米`, cm: `${n} 厘米`, dm: `${n} 分米`, m: `${n} 米`, km: `${n} 千米`, mg: `${n} 毫克`, g: `${n} 克`, kg: `${n} 千克`, t: `${n} 吨`, s: `${n} 秒`, min: `${n} 分`, h: `${n} 时`, d: `${n} 天` });
+const THINGS: [string, number, UK, UK[]][] = [
+  ["一支铅笔的长度", 18, "cm", ["mm", "m", "km"]], ["一枚硬币的厚度", 2, "mm", ["cm", "dm", "m"]], ["教室黑板的长度", 4, "m", ["cm", "dm", "km"]],
+  ["学校操场跑道一圈的长度", 400, "m", ["cm", "km", "mm"]], ["从北京到上海的铁路长度", 1300, "km", ["m", "dm", "cm"]], ["一支粉笔的长度", 8, "cm", ["mm", "m", "km"]],
+  ["教室门的高度", 2, "m", ["cm", "mm", "km"]], ["数学书的厚度", 7, "mm", ["cm", "dm", "m"]], ["一位小学生的身高", 135, "cm", ["mm", "m", "km"]],
+  ["一条马路的宽度", 20, "m", ["cm", "km", "mm"]], ["长江的长度", 6300, "km", ["m", "cm", "dm"]],
+  ["一个鸡蛋的质量", 50, "g", ["mg", "kg", "t"]], ["一袋大米的质量", 5, "kg", ["mg", "g", "t"]], ["一头大象的质量", 5, "t", ["mg", "g", "kg"]],
+  ["一个苹果的质量", 200, "g", ["mg", "kg", "t"]], ["一位小学生的体重", 30, "kg", ["mg", "g", "t"]], ["一辆卡车的载重", 10, "t", ["mg", "g", "kg"]], ["一片药的质量", 100, "mg", ["g", "kg", "t"]],
+  ["一块橡皮的长度", 4, "cm", ["mm", "m", "km"]], ["一把牙刷的长度", 18, "cm", ["mm", "m", "km"]], ["一张床的长度", 2, "m", ["cm", "mm", "km"]], ["黄河的长度", 5464, "km", ["m", "cm", "dm"]],
+  ["一辆小汽车的长度", 4, "m", ["cm", "mm", "km"]], ["一栋六层楼的高度", 20, "m", ["cm", "mm", "km"]],
+  ["一个西瓜的质量", 5, "kg", ["mg", "g", "t"]], ["一瓶矿泉水的质量", 500, "g", ["mg", "kg", "t"]], ["一只猫的质量", 4, "kg", ["mg", "g", "t"]], ["一枚硬币的质量", 6, "g", ["mg", "kg", "t"]],
+  ["一头蓝鲸的质量", 100, "t", ["mg", "g", "kg"]], ["一个书包的质量", 3, "kg", ["mg", "g", "t"]],
+  ["一次呼吸的时间", 3, "s", ["min", "h", "d"]], ["一场电影的时间", 120, "min", ["s", "h", "d"]], ["跑 100 米所用的时间", 15, "s", ["min", "h", "d"]],
+  ["眨一下眼睛的时间", 1, "s", ["min", "h", "d"]], ["一节课的时间", 40, "min", ["s", "h", "d"]], ["睡一觉的时间", 9, "h", ["s", "min", "d"]], ["暑假的时间", 60, "d", ["s", "min", "h"]],
 ];
-
 
 export const GEN2: Record<string, Gen2> = {
   // ============================================================ grade 1
   shapes1: { sec: 10, make: () => {
     const kind = pick([...G.FLAT, ...G.SOLID]), flat = (G.FLAT as readonly string[]).includes(kind);
     const set = flat ? [...G.FLAT] : [...G.SOLID], a = NAMES[kind];
-    return { q: flat ? "这是什么图形？" : "这是什么立体图形？", a, fig: G.shapeFig(kind), choices: shuffle(set.map((k) => NAMES[k])), chk: `${JSON.stringify(NAMES)}[${JSON.stringify(kind)}]===${JSON.stringify(a)}` };
+    return { q: flat ? "这是什么图形？" : "这是什么立体图形？", a, fig: G.shapeFig(kind, pick([0, 40, 80, 120, 160, 200, 240, 300])), choices: shuffle(set.map((k) => NAMES[k])), chk: `${JSON.stringify(NAMES)}[${JSON.stringify(kind)}]===${JSON.stringify(a)}` };
   } },
   clock1: { sec: 10, make: () => {
     const h = ri(1, 12), m = pick([0, 30]), a = hm(h, m);
@@ -182,8 +163,8 @@ export const GEN2: Record<string, Gen2> = {
     return { q: `哪种付法正好是 ${T} 元？`, a, choices: four(a, wrongs, () => txt([...right, pick([1, 5])])), chk: `${right.join("+")}===${T}` };
   } },
   unitpick: { sec: 16, make: () => {
-    const [thing, n, u, others] = pick(THINGS), a = `${n} ${u}`;
-    return { q: `${thing}大约是多少？`, a, choices: shuffle([a, ...others.map((x) => `${n} ${x}`)]), chk: `${JSON.stringify(thing)}.length>0&&${n}>0` };
+    const [thing, n, u, others] = pick(THINGS), t = unitText(n), a = t[u];
+    return { q: `${thing}大约是多少？`, a, choices: shuffle([a, ...others.map((x) => t[x])]), chk: `${JSON.stringify(thing)}.length>0&&${n}>0` };
   } },
   barread: { sec: 14, make: () => {
     const vals: number[] = []; while (vals.length < 4) vals.push(ri(1, 10));

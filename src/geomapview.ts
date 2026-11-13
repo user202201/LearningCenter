@@ -110,6 +110,7 @@ export class MapView {
     }
     // cities (points); the names show when the map is zoomed (capitals first)
     const cities = this.g("city");
+    if (!o.learn) cities.style.display = "none";   // (the quiz must not show where the capitals are)
     for (const ct of c.cities) {
       const g = this.marker(cities, ct.p[0], ct.p[1], "gmap-city" + (ct.cap ? " cap" : ""));
       g.append(el("circle", { r: ct.cap ? 3.2 : 2.6, class: "gmap-cdot" }));
@@ -159,6 +160,7 @@ export class MapView {
   private drawWorld() {
     const w = this.opts.geo.world, o = this.opts;
     const oc = this.g("ocean");
+    oc.style.display = "none";   // (only the ocean quiz shows the outlines)
     for (const x of w.oceans) oc.append(this.path("ocean", x.id, x.d, "gmap-ocean"));
     const land = this.g("land");
     for (const [k, d] of Object.entries(w.land)) land.append(this.path("land", k, d, "gmap-land", o.learn ? `--c:${CONT_COLORS[k === "ruEu" ? "eu" : k === "ruAs" ? "as" : k] ?? "#eee"}` : ""));
@@ -173,9 +175,7 @@ export class MapView {
       const ol = this.g("olabel");
       for (const x of w.oceans) x.lps.forEach((p) => this.label(ol, x.n, p[0], p[1], "gmap-olbl", () => false));
       const kl = this.g("klabel");
-      const kp: Record<string, Pt> = {}; for (const k of w.continents) { const cs2 = w.countries.filter((c) => c.cont === k.id); if (cs2.length) kp[k.id] = [Math.round(cs2.reduce((s, c) => s + c.lp[0], 0) / cs2.length), Math.round(cs2.reduce((s, c) => s + c.lp[1], 0) / cs2.length)]; }
-      kp.an = [1000, w.vb[3] - 28]; kp.oc = [1700, 1000]; kp.af = [1010, 640]; kp.eu = [1100, 250]; kp.as = [1480, 330]; kp.na = [430, 330]; kp.sa = [620, 760];
-      for (const k of w.continents) if (kp[k.id]) this.label(kl, k.n, kp[k.id][0], kp[k.id][1], "gmap-klbl", () => this.k > 2.6);
+      for (const k of w.continents) this.label(kl, k.n, k.lp[0], k.lp[1], "gmap-klbl", () => this.k > 2.6);
     }
     // the line of the Urals (Europe | Asia)
     if (o.learn && w.ural.length) this.vp.append(el("path", { d: `M${w.ural.map((p) => p.join(",")).join("L")}`, class: "gmap-ural", "vector-effect": "non-scaling-stroke" }));

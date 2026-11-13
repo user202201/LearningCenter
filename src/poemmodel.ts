@@ -14,7 +14,7 @@ export interface Note { w: string; x: string }
 export interface Poem { id: string; title: string; author: string; dynasty: string; grade: number; form: string; lines: string[]; notes: Note[]; gist: string; theme: string; excerpt?: boolean; check?: boolean }
 export interface Dynasty { n: string; years: string }
 /** `dynasties` are in time order; `cluster` = dynasties that blur into each other; `anonymous` = the "author" of the poems nobody knows the poet of */
-export interface Library { poems: Poem[]; byId: Map<string, Poem>; /** every line of every poem (the pool of wrong choices) */ allLines: string[]; dynasties: Dynasty[]; cluster: string[]; anonymous: string }
+export interface Library { poems: Poem[]; byId: Map<string, Poem>; /** every line of every poem (the pool of wrong choices) */ allLines: string[]; /** the same lines without punctuation (to see at once whether a text is a real line) */ bareLines: Set<string>; dynasties: Dynasty[]; cluster: string[]; anonymous: string }
 
 export const POEMS_PER_DAY = 1;
 export const REVIEW_MAX = 3;
@@ -36,7 +36,7 @@ export async function loadPoems(): Promise<Library> {
   cache = makeLibrary(raw.poems, raw.dynasties, raw.cluster, raw.anonymous);
   return cache;
 }
-export const makeLibrary = (poems: Poem[], dynasties: Dynasty[], cluster: string[], anonymous: string): Library => ({ poems, byId: new Map(poems.map((p) => [p.id, p])), allLines: poems.flatMap((p) => p.lines), dynasties, cluster, anonymous });
+export const makeLibrary = (poems: Poem[], dynasties: Dynasty[], cluster: string[], anonymous: string): Library => ({ poems, byId: new Map(poems.map((p) => [p.id, p])), allLines: poems.flatMap((p) => p.lines), bareLines: new Set(poems.flatMap((p) => p.lines.map((l) => hanOf(l).join("")))), dynasties, cluster, anonymous });
 
 // ---------- small helpers ----------
 const HAN = /[一-鿿]/;
@@ -184,7 +184,7 @@ export function makeQuestion(lib: Library, mode: Mode, poem: Poem, rnd: () => nu
         for (const c of cand) {
           if (c === right || wrong.includes(c)) continue;
           const changed = [...line]; changed[blanks[bi]] = c;
-          if (lib.allLines.some((l) => bare(l) === bare(changed.join("")))) continue;     // that would be a real line of some poem: also right
+          if (lib.bareLines.has(bare(changed.join("")))) continue;     // that would be a real line of some poem: also right
           wrong.push(c);
           if (wrong.length === 3) break;
         }

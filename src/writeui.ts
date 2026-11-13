@@ -135,7 +135,7 @@ function mount(k: M.Kid, kid: M.KidData, doc0: L.WriteDoc): void {
     placedG.replaceChildren(); hiG.replaceChildren(); clearAnim(); fx.replaceChildren(); redraw();
     faintG.replaceChildren(...(mode === "trace" ? outlines.map((d) => sv("path", { d })) : []));
     phase = outlines.length ? "writing" : "nodata";
-    note(outlines.length ? (mode === "trace" ? "照着描一描。" : "请凭记忆书写。") : "");
+    note(outlines.length ? (mode === "trace" ? "请按提示的笔画描红。" : "请凭记忆书写。") : "");
     markNext(); setData(); paintList();
   };
   const pick = async (c: string) => {
@@ -222,7 +222,7 @@ function mount(k: M.Kid, kid: M.KidData, doc0: L.WriteDoc): void {
       done.add(nextIdx); place(nextIdx); nextIdx++; wrongRun = 0;
       sfx("pop");
       if (nextIdx >= outlines.length) return void complete();
-      note(mode === "trace" ? "照着描一描。" : "请凭记忆书写。");
+      note(mode === "trace" ? "请按提示的笔画描红。" : "请凭记忆书写。");
       markNext(); setData();
       return;
     }

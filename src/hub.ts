@@ -8,9 +8,10 @@ import { h, oneLine } from "./ui";
 import { mascot } from "./art";
 import { getLang } from "./i18n";
 import { sfx } from "./games/sfx";
+import { CODING_CARD_ART } from "./coding-art";
 
 export interface Subject {
-  id: "chinese" | "math" | "english" | "science" | "music" | "games";
+  id: "chinese" | "math" | "english" | "science" | "coding" | "music" | "games";
   /** the name on the card (Chinese source text, translated by i18n) */
   name: string;
   /** where the card leads */
@@ -30,6 +31,7 @@ export const SUBJECTS: Subject[] = [
   { id: "math", name: "数学", route: "#/subject/math", c1: "#4dabf7", c2: "#1c7ed6", dark: "#1864ab", ready: true },
   { id: "english", /** the Languages subject teaches the OTHER language of the screen: English screen -> French (words.ts studyLang) */ get name() { return getLang() === "en" ? "法语" : "英语"; }, route: "#/subject/english", c1: "#69db7c", c2: "#2f9e44", dark: "#237a35", ready: true },
   { id: "science", name: "科学", route: "#/subject/science", c1: "#b197fc", c2: "#7048e8", dark: "#5430b8", ready: true },
+  { id: "coding", name: "编程", route: "#/subject/coding", c1: "#3bc9db", c2: "#1098ad", dark: "#0b7285", ready: true },
   { id: "music", name: "音乐", route: "#/subject/music", c1: "#f783ac", c2: "#d6336c", dark: "#a61e4d", ready: true, kid: false, hidden: true },
   { id: "games", name: "小游戏", route: "#/subject/games", c1: "#63e6be", c2: "#12b886", dark: "#087f5b", ready: true, kid: false, hidden: true },
 ];
@@ -102,6 +104,8 @@ const ART: Record<Subject["id"], string> = {
     ${eye(50, 87, 4)}${eye(70, 87, 4)}${cheeks(95, 22)}${smile(94, 6)}
     <circle cx="57" cy="52" r="4.500" fill="#fff" stroke="#5f3dc4" stroke-width="2"/><circle cx="66" cy="40" r="3.500" fill="#fff" stroke="#5f3dc4" stroke-width="2"/><circle cx="58" cy="28" r="2.800" fill="#fff" stroke="#5f3dc4" stroke-width="2"/>
     ${star(100, 30, 9, "#ffe066")}${star(14, 40, 7, "#ffe066")}${star(104, 58, 5, "#fff3bf")}`,
+  // a friendly robot with an antenna and a code window (src/coding-art.ts)
+  coding: CODING_CARD_ART,
 };
 
 /** the picture of a subject (a fresh SVG element each time) */

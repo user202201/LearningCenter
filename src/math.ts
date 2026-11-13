@@ -13,6 +13,8 @@ import * as MG from "./mathgen";
 import { pickKidGrade } from "./gradeui";
 import { openMathGame } from "./mathui";
 import { renderRich } from "./mathtext";
+import { mountFig } from "./mathfig";
+import * as MT from "./mathtables";
 import * as MS from "./mathsettings";
 import { mascot } from "./art";
 import { subjectArt, shortcuts } from "./hub";
@@ -20,6 +22,8 @@ import type { Ctx } from "./english";
 
 let X!: Ctx;
 export const initMath = (c: Ctx) => { X = c; };
+/** the times table page (口诀表) of a child */
+export const renderTables = (kidId: string) => MT.renderTables(X, kidId);
 
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 const cache = new Map<string, M.KidData>();
@@ -141,6 +145,11 @@ async function changeGrade(k: M.Kid) {
   X.route();
 }
 
+/** the card that opens the times table (口诀表): a little coloured table, a title and one line */
+const tablesCard = (id: string) => h("button", { class: "mtables-card", id: "tables-card", onclick: () => (location.hash = `#/math/${id}/tables`) },
+  h("span", { class: "mtables-ico", "aria-hidden": "true" }, ...[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => h("i", { style: `--hue:${n * 40}` }, String(n * 2 % 10 || 9)))),
+  h("span", { class: "mtables-txt" }, h("b", {}, "口诀表"), h("span", {}, "点一点听口诀，再练一练")));
+
 const chip = (a: number | null) => h("span", { class: "macc" + (a === null ? " none" : a >= 80 ? " good" : a >= 50 ? " mid" : " low") }, a === null ? "还没练过" : `答对率 ${a}%`);
 
 function topicCard(id: string, names: Map<string, MM.Topic>, review: MM.MathReview, onPractice?: () => void): HTMLElement {
@@ -167,6 +176,7 @@ async function renderWeek(body: HTMLElement, k: M.Kid, kid: M.KidData, names: Ma
   const list = M.weekOf(kid, curDay)?.chars ?? [];
   body.replaceChildren(h("div", { class: "narrow week-narrow" }, bar,
     curDay === t ? null : h("button", { class: "link", onclick: () => void go(t) }, "回到今天"),
+    tablesCard(k.id),
     h("div", { class: "sec-row" }, h("h2", { class: "sec" }, `知识点（${list.length}）`)),
     list.length ? h("div", { class: "mtlist" }, ...X.stagger(list.map((id) => topicCard(id, names, review, () => practice(k, [id], names))))) : h("p", { class: "empty" }, "该日暂无知识点。")));
 }
@@ -183,7 +193,7 @@ async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, names:
     h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "mistakes-title" }, `错题本（${mistakes.length}）`),
       mistakes.length ? h("button", { class: "sheet-btn", id: "redo-mistakes", onclick: () => playMistakes(k, mistakes, names) }, "重做错题") : null),
     mistakes.length
-      ? h("div", {}, ...mistakes.slice(0, 20).map((m) => { const q = h("span", { class: "user" }), a = h("b", { class: "user" }); renderRich(q, m.q, !/[　-〿一-鿿＀-￯]/.test(m.q)); renderRich(a, m.a, true); return h("div", { class: "mmis", "data-topic": m.topic }, q, a); }))
+      ? h("div", {}, ...mistakes.slice(0, 20).map((m) => { const q = h("span", { class: "user" }), a = h("b", { class: "user" }); renderRich(q, m.q, !/[　-〿一-鿿＀-￯]/.test(m.q)); renderRich(a, m.a, true); if (!m.fig) return h("div", { class: "mmis", "data-topic": m.topic }, q, a); const fig = h("div", { class: "mmis-fig" }); mountFig(fig, m.fig); return h("div", { class: "mmis has-fig", "data-topic": m.topic }, fig, h("div", { class: "mmis-txt" }, q), a); }))
       : h("p", { class: "muted small" }, "还没有错题。"));
   body.replaceChildren(h("div", { class: "narrow" }, book,
     all.length ? h("div", { class: "mtlist" }, ...X.stagger(all.map((id) => topicCard(id, names, review)))) : h("p", { class: "empty" }, "暂无已入库的知识点。请先查看“本周”。")));
@@ -259,5 +269,6 @@ async function renderLobby(body: HTMLElement, k: M.Kid, kid: M.KidData, names: M
     h("div", { class: "lobby-hero" }, h("span", { class: "mascot big" }, mascot()), h("h2", {}, "准备好了吗？")),
     topics.length ? h("p", { class: "muted center", id: "math-info" }, `共 ${topics.length} 题，限时约 ${minutes} 分钟`) : h("p", { class: "empty" }, "暂无知识点。请先查看“今天”。"),
     settings,
+    tablesCard(k.id),
     h("div", { class: "lobby-go" }, h("button", { class: "primary wide", id: "game-start", disabled: topics.length === 0, onclick: () => play(k, kid, names) }, "开始游戏"))));
 }

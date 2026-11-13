@@ -73,17 +73,17 @@ export function rmbFig(vals: number[]): string {
 // ------------------------------------------------------------------ solids and flat shapes
 export const FLAT = ["square", "rectangle", "triangle", "circle"] as const;
 export const SOLID = ["cube", "cuboid", "cylinder", "sphere"] as const;
-export function shapeFig(kind: string): string {
-  const s = `stroke="${INK}" stroke-width="3" stroke-linejoin="round"`;
+export function shapeFig(kind: string, hue = 50): string {
+  const s = `stroke="${INK}" stroke-width="3" stroke-linejoin="round"`, base = `hsl(${hue} 85% 68%)`, light = `hsl(${hue} 85% 80%)`, dark = `hsl(${hue} 70% 54%)`;
   let b = "";
-  if (kind === "square") b = `<rect x="35" y="15" width="80" height="80" fill="#ffd43b" ${s}/>`;
-  else if (kind === "rectangle") b = `<rect x="20" y="28" width="110" height="56" fill="#74c0fc" ${s}/>`;
-  else if (kind === "triangle") b = `<polygon points="75,12 125,96 25,96" fill="#69db7c" ${s}/>`;
-  else if (kind === "circle") b = `<circle cx="75" cy="55" r="44" fill="#ff8787" ${s}/>`;
-  else if (kind === "cube") b = `<polygon points="30,45 55,22 115,22 90,45" fill="#ffe066" ${s}/><polygon points="30,45 90,45 90,105 30,105" fill="#fcc419" ${s}/><polygon points="90,45 115,22 115,82 90,105" fill="#f59f00" ${s}/>`;
-  else if (kind === "cuboid") b = `<polygon points="14,52 42,26 140,26 112,52" fill="#a5d8ff" ${s}/><polygon points="14,52 112,52 112,100 14,100" fill="#74c0fc" ${s}/><polygon points="112,52 140,26 140,74 112,100" fill="#4dabf7" ${s}/>`;
-  else if (kind === "cylinder") b = `<path d="M30 32V86A45 15 0 0 0 120 86V32" fill="#b2f2bb" ${s}/><ellipse cx="75" cy="32" rx="45" ry="15" fill="#8ce99a" ${s}/>`;
-  else b = `<circle cx="75" cy="55" r="46" fill="#ffa94d" ${s}/><ellipse cx="58" cy="36" rx="10" ry="6" fill="#fff" opacity=".7" transform="rotate(-30 58 36)"/>`;
+  if (kind === "square") b = `<rect x="35" y="15" width="80" height="80" fill="${base}" ${s}/>`;
+  else if (kind === "rectangle") b = `<rect x="20" y="28" width="110" height="56" fill="${base}" ${s}/>`;
+  else if (kind === "triangle") b = `<polygon points="75,12 125,96 25,96" fill="${base}" ${s}/>`;
+  else if (kind === "circle") b = `<circle cx="75" cy="55" r="44" fill="${base}" ${s}/>`;
+  else if (kind === "cube") b = `<polygon points="30,45 55,22 115,22 90,45" fill="${light}" ${s}/><polygon points="30,45 90,45 90,105 30,105" fill="${base}" ${s}/><polygon points="90,45 115,22 115,82 90,105" fill="${dark}" ${s}/>`;
+  else if (kind === "cuboid") b = `<polygon points="14,52 42,26 140,26 112,52" fill="${light}" ${s}/><polygon points="14,52 112,52 112,100 14,100" fill="${base}" ${s}/><polygon points="112,52 140,26 140,74 112,100" fill="${dark}" ${s}/>`;
+  else if (kind === "cylinder") b = `<path d="M30 32V86A45 15 0 0 0 120 86V32" fill="${base}" ${s}/><ellipse cx="75" cy="32" rx="45" ry="15" fill="${light}" ${s}/>`;
+  else b = `<circle cx="75" cy="55" r="46" fill="${base}" ${s}/><ellipse cx="58" cy="36" rx="10" ry="6" fill="#fff" opacity=".7" transform="rotate(-30 58 36)"/>`;
   return svg(150, 112, b);
 }
 

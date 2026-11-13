@@ -126,6 +126,8 @@ function naturalEarth([lo, la]) {
 };
 
 const out = {};
+/** where the name of a continent is written on the world map (lon / lat) */
+const CONT_LABEL = { as: [92, 46], eu: [15, 54], af: [20, 8], na: [-100, 46], sa: [-60, -14], oc: [135, -26], an: [20, -74] };
 const cn0 = await load("ne_10m_admin_0_countries_chn");
 const a1 = await load("ne_10m_admin_1_states_provinces");
 
@@ -247,7 +249,7 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
   const pr = (ll) => naturalEarth(ll);
   // frame from -180..180 x -58..84 (Antarctica is cut at -62 to keep the page compact; it is a strip at the bottom)
   const LATMIN = -78, LATMAX = 84;
-  const [fx0, fy0] = pr([-180, LATMAX]), [fx1, fy1] = pr([180, LATMIN]);
+  const fx0 = pr([-180, 0])[0], fx1 = pr([180, 0])[0], fy0 = pr([0, LATMAX])[1], fy1 = pr([0, LATMIN])[1];   // (the equator is the widest line)
   const sc = W / (fx1 - fx0);
   const P = (ll) => { const q = pr([Math.max(-180, Math.min(180, ll[0])), Math.max(-90, Math.min(90, ll[1]))]); return [(q[0] - fx0) * sc, (q[1] - fy0) * sc]; };
   const H = Math.round((fy1 - fy0) * sc);
@@ -309,9 +311,9 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
     return { id, n, d: encode(s), lp: labelPoint(s.slice().sort((a, b) => Math.abs(ringArea(b[0])) - Math.abs(ringArea(a[0])))[0]) };
   });
   // fixed label spots for the oceans (in the middle of open water, which the rough outlines do not always give)
-  const spot = { pacific: [[-150, 8], [165, 5]], atlantic: [[-35, 25]], indian: [[78, -22]], arctic: [[-100, 80]] };
+  const spot = { pacific: [[-150, 8], [165, 5]], atlantic: [[-35, 25]], indian: [[78, -22]], arctic: [[-150, 77]] };
   for (const o of oceans) o.lps = spot[o.id].map((ll) => P(ll).map(Math.round));
-  out.world = { vb: [0, 0, W, H], continents: T.CONTINENTS.map(([id, n]) => ({ id, n, py: pyName(n) })), land, ural: urals, countries, oceans };
+  out.world = { vb: [0, 0, W, H], continents: T.CONTINENTS.map(([id, n]) => ({ id, n, py: pyName(n), lp: P(CONT_LABEL[id]).map(Math.round) })), land, ural: urals, countries, oceans };
   function CONT(a3, nec) { return T.CONT_OVERRIDE[a3] ?? T.NE_CONT[nec] ?? null; }
 }
 

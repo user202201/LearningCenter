@@ -288,6 +288,7 @@ export async function renderMap(X: Ctx): Promise<void> {
       promptEl.replaceChildren(...(q.flag ? [svgFlag(q.flag, "gmap-qflag")] : []), h("span", { class: "gmap-qtext" }, ...fmt(q.prompt)));
       // the map (only for questions that use it)
       mapBox.style.display = q.map ? "" : "none";
+      root.classList.toggle("nomap", !q.map);
       if (q.map) {
         if (qview && qview.svg.dataset.kind !== q.map) { qview.dispose(); qview = null; mapBox.replaceChildren(); }
         if (!qview) {

@@ -73,7 +73,7 @@ export function icon(name: "prev" | "next" | "pause" | "play" | "repeat" | "spea
     speaker: '<path d="M6 18h8l10-8v28l-10-8H6z" fill="currentColor"/><path d="M31 17a10 10 0 0 1 0 14M36 11a18 18 0 0 1 0 26" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>',
     tick: '<path d="M9 25l10 10L39 13" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>',
     cross: '<path d="M12 12l24 24M36 12L12 36" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>',
-    star: '<path d="M24 4l6 13 14 2-10 10 3 14-13-7-13 7 3-14L4 19l14-2z" fill="currentColor"/>',
+    star: '<path d="M24 4l6 13 14 2-10 10 3 14-13-7-13 7 3-14L4 19l14-2z" stroke-width="2" stroke-linejoin="round"/>',
   };
   s.innerHTML = body[name];
   return s;

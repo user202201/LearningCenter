@@ -285,7 +285,7 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
     const px = Math.min((mainH - chh - gap) * 0.86, mainW * 0.55, 240);
     p.el.style.setProperty("--pk-chsize", `${Math.max(28, Math.round(px))}px`);
     const bw = row4 ? (mainW - 3 * 6) / 4 : (mainW - 8) / 2, bh = row4 ? 56 : (chh - 8) / 2;
-    p.el.style.setProperty("--pk-ico", `${Math.max(36, Math.min(96, Math.floor(hh * 0.26)))}px`);
+    p.el.style.setProperty("--pk-ico", `${Math.max(hh < 190 ? 30 : 36, Math.min(96, Math.floor(hh * 0.26)))}px`);
     p.el.style.setProperty("--pk-lab", `${Math.max(13, Math.min(34, Math.floor(bh * 0.42), Math.floor(bw / 5.2)))}px`);
   }
 
@@ -402,6 +402,7 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
     if (asking) return;
     if (s.phase !== "final") {
       asking = true; pause();
+      await new Promise((r) => setTimeout(r, 30));   // (the Escape key that asked must be over, or the box would be closed by the same key)
       const yes = await confirmDlg("退出对战？", "本局尚未结束。退出后本局不计入记录。", "退出对战", true);
       asking = false; resume();
       if (!yes) return;

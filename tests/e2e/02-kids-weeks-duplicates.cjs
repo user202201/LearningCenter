@@ -9,7 +9,7 @@ const { ok, done } = checks();
   ok(await page.locator('#add-kid-big').count() === 1 && await page.locator('main button').count() === 1, 'first time, nobody yet: the only thing on the screen is the big + (add a child)');
   for (const n of ['Dory', 'Leo', 'Antoine']) await addKid(page, n);
   ok(await page.locator('.kid').count() === 3, 'three children on the home screen');
-  ok(await page.locator('main button').count() === 3 && await page.locator('#add-kid, #add-kid-big, #import-btn').count() === 0, 'once there are children the home screen holds only the children: no add / import buttons');
+  ok(await page.locator('main button:not(#open-pk)').count() === 3 && await page.locator('#pk-refs button').count() === 1 && await page.locator('#add-kid, #add-kid-big, #import-btn').count() === 0, 'once there are children the home screen holds the children and the shared area below them (the PK card): no add / import buttons');
 
   // adding is in Settings: a second "Dory" is refused, cancelling adds nobody and says nothing
   await openManage(page);

@@ -21,6 +21,7 @@ import * as MU from "./music";
 import * as GM from "./gameshub";
 import * as MA from "./math";
 import * as SC from "./science";
+import * as CO from "./coding";
 import * as PO from "./poems";
 import { pickKidGrade } from "./gradeui";
 import * as DW from "./dictwrite";
@@ -874,9 +875,12 @@ async function deleteKid(k: M.Kid) {
     kidsFile = await api.update<M.KidsFile>("kids.json", M.EMPTY_KIDS, (cur) => ({ ...cur, kids: cur.kids.filter((x) => x.id !== k.id) }), `remove ${k.id}`);
     await api.remove(`kids/${k.id}.json`, `remove ${k.id}`);
     await api.remove(`kids/${k.id}.review.json`, `remove ${k.id}`);   // the game's progress goes with the child
+    await api.remove(`math/${k.id}.tables.json`, `remove ${k.id}`);   // the times table results of the math subject (rule 52)
     await api.remove(`poems/${k.id}.json`, `remove ${k.id}`);   // the poems of the child go with the child
     await api.remove(`poems/${k.id}.review.json`, `remove ${k.id}`);
     for (const f of [`dictation/${k.id}.json`, `write/${k.id}.json`, `english/${k.id}.dictation.json`, `french/${k.id}.dictation.json`]) await api.remove(f, `remove ${k.id}`).catch(() => { /* never made */ });   // dictation results and writing progress (rule 51)
+    await api.remove(`coding/${k.id}.json`, `remove ${k.id}`);   // the coding progress (rule 54)
+    await api.remove(`geomap/${k.id}.json`, `remove ${k.id}`).catch(() => { /* never made */ });   // the map practice of the child goes with the child (rule 53)
     kidCache.delete(k.id);
     done();
     toast(`已删除 ${k.name}`);
@@ -1417,6 +1421,7 @@ async function renderSettings() {
         // the stroke data of the practice sheets is under the Arphic Public License, which asks for this notice and the license text to travel with the app
         h("div", { class: "card", id: "credits" }, h("h3", {}, "致谢"), h("p", { class: "muted small" }, "笔顺数据来自 Make Me a Hanzi（Arphic Public License）。"),
           h("p", { class: "muted small" }, "公式排版使用 KaTeX（MIT 许可证）。"),
+          h("p", { class: "muted small" }, "地图数据来自 Natural Earth（公有领域），经简化后内置于应用。"),
           h("a", { class: "link", id: "license-link", href: `${import.meta.env.BASE_URL}strokes/ARPHICPL.TXT`, target: "_blank", rel: "noopener" }, "查看许可证")),
       )),
     ),
@@ -1503,6 +1508,9 @@ async function route() {
   if (hash === "#/subject/english") return void E.renderHome();
   if (hash === "#/subject/math") return void MA.renderHome();
   if (hash === "#/subject/science") return void SC.renderHome();
+  if (hash === "#/subject/coding") return void CO.renderHome();
+  const cod = /^#\/coding\/([\w-]+)(?:\/(.*))?$/.exec(hash);
+  if (cod) return void CO.renderKid(cod[1], cod[2] ?? "");
   if (hash === "#/science/periodic") return void SC.renderPeriodic();
   if (hash === "#/science/formulas") return void SC.renderFormulas();
   if (hash === "#/science/circuits") return void SC.renderCircuits();
@@ -1526,6 +1534,8 @@ async function route() {
   if (poems) return void PO.render(poems[1], poems[2] ?? "");
   const sci = /^#\/science\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
   if (sci) return void SC.renderKid(sci[1], sci[2] === "learned" ? "learned" : sci[2] === "game" ? "game" : "week");
+  const mtab = /^#\/math\/([\w-]+)\/tables$/.exec(hash);
+  if (mtab) return void MA.renderTables(mtab[1]);
   const math = /^#\/math\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
   if (math) return void MA.renderKid(math[1], math[2] === "learned" ? "learned" : math[2] === "game" ? "game" : "week");
   const eng = /^#\/english\/([\w-]+)(?:\/(learned|game|read))?$/.exec(hash);
@@ -1550,6 +1560,7 @@ E.initEnglish(shell);
 DW.initDictWrite({ ...shell, idioms: () => idioms });
 MA.initMath(shell);
 SC.initScience(shell);
+CO.initCoding(shell);
 PO.initPoems(shell);
 PK.initPk(shell);
 MU.initMusic(shell);

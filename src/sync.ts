@@ -68,5 +68,12 @@ export function mergeDocs(local: Doc, remote: Doc): Doc {
     }
     return out;
   }
+  // the coding progress (coding/<kid>.json): the larger star count of every level, the fewer blocks, the larger number of challenges
+  if (local.stars && remote.stars && typeof local.stars === "object" && typeof remote.stars === "object") {
+    const stars: Doc = { ...remote.stars }, blocks: Doc = { ...remote.blocks };
+    for (const [k, v] of Object.entries<number>(local.stars)) stars[k] = Math.max(stars[k] ?? 0, v);
+    for (const [k, v] of Object.entries<number>(local.blocks ?? {})) blocks[k] = blocks[k] === undefined ? v : Math.min(blocks[k], v);
+    return { ...remote, ...local, stars, blocks, challenges: Math.max(local.challenges ?? 0, remote.challenges ?? 0) };
+  }
   return local;
 }
