@@ -196,7 +196,7 @@ const DATA = {};   // char -> strokes, for the pure tests
   // "show the order" (reduced motion: all at once)
   await p.click('#hz-show');
   ok((await H(() => window.__hanzi.animCount())) === a.n + 0 && await p.locator('.hz-anim path').count() === a.n, 'show me the order (reduced motion): all strokes are shown at once');
-  await p.waitForFunction(() => window.__hanzi.animCount() === 0, null, { timeout: 4000 });
+  await p.waitForFunction(() => window.__hanzi && window.__hanzi.animCount() === 0, null, { timeout: 4000 });
   ok(!(await p.locator('#hz-show').isDisabled()), '... and it goes away by itself');
   // the rest of the round: clean characters
   await p.click('#hz-next');
@@ -329,10 +329,10 @@ const DATA = {};   // char -> strokes, for the pure tests
     await q.click('#hz-show');
     const c0 = await q.evaluate(() => window.__hanzi.animCount());
     await q.waitForTimeout(250 + 520 * 1 + 120); const c1 = await q.evaluate(() => window.__hanzi.animCount());
-    await q.waitForFunction((n) => window.__hanzi.animCount() === n, n, { timeout: 8000 });
+    await q.waitForFunction((n) => window.__hanzi && window.__hanzi.animCount() === n, n, { timeout: 8000 });
     ok(c0 === 0 && c1 >= 1 && c1 < n + 1 && (n < 3 || c1 < n), `show me the order (with motion): 0 strokes at first, ${c1} after a moment, then all ${n}, one by one`);
     ok(await q.locator('#hz-show').isDisabled(), 'while it plays the button is off');
-    await q.waitForFunction(() => window.__hanzi.animCount() === 0, null, { timeout: 8000 });
+    await q.waitForFunction(() => window.__hanzi && window.__hanzi.animCount() === 0, null, { timeout: 8000 });
     ok(!(await q.locator('#hz-show').isDisabled()) && (await q.evaluate(() => window.__hanzi.phase())) === 'play', 'then the board is back and the game goes on');
     await s.browser.close();
   }

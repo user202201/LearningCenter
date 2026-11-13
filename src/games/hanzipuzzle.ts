@@ -142,12 +142,12 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const g = sv("g", { transform: flip });
     if (mode === "order") {
       s.setAttribute("viewBox", "0 0 1024 1024");
-      strokes.forEach((d) => g.append(sv("path", { d, fill: "#dee2e6" })));
+      strokes.forEach((d) => g.append(sv("path", { d, fill: "#edf0f2" })));
     } else {
       const b = boxes[i], side = Math.max(b.x1 - b.x0, b.y1 - b.y0, 120) + 90, c = L.centerOf(b);
       s.setAttribute("viewBox", `${c.x - side / 2} ${c.y - side / 2} ${side} ${side}`);
     }
-    g.append(sv("path", { d: strokes[i], fill: L.COLORS[i % L.COLORS.length], stroke: "#3a2e39", "stroke-width": mode === "order" ? 14 : 12, "stroke-linejoin": "round" }));
+    g.append(sv("path", { d: strokes[i], fill: L.COLORS[i % L.COLORS.length], stroke: "#3a2e39", "stroke-width": mode === "order" ? 24 : 12, "stroke-linejoin": "round" }));
     s.append(g);
     return s;
   }

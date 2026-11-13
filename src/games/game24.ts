@@ -188,13 +188,13 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const size = (cols: number) => {
       const rows = 4 / cols;
       const byW = (W - 2 * pad - border - (cols - 1) * gap) / cols, byH = (H - border - 2 * pad - opsH - msgH - 2 * gap - (rows - 1) * gap) / (rows * ratio);
-      return Math.max(40, Math.floor(Math.min(byW, byH, 150)));
+      return Math.max(40, Math.floor(Math.min(byW, byH, 190)));
     };
     const c4 = size(4), c2 = size(2), cols = c2 > c4 * 1.25 ? 2 : 4, cw = cols === 2 ? c2 : c4, rows = 4 / cols;
     field.style.setProperty("--cw", cw + "px");
     cardsEl.style.height = Math.round(rows * cw * ratio + (rows - 1) * gap) + "px";
-    field.style.width = Math.max(cols * cw + (cols - 1) * gap, opsW) + 2 * pad + "px";
-    field.style.height = Math.round(rows * cw * ratio + (rows - 1) * gap + opsH + msgH + 2 * gap + 2 * pad) + "px";
+    field.style.width = Math.max(cols * cw + (cols - 1) * gap, opsW) + "px";
+    field.style.height = Math.round(rows * cw * ratio + (rows - 1) * gap + opsH + msgH + 2 * gap) + "px";
     cardsEl.style.maxWidth = cols * cw + (cols - 1) * gap + "px";
   }
 

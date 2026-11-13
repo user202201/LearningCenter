@@ -232,7 +232,7 @@ fs.mkdirSync(OUT, { recursive: true });
     const m = await p.evaluate(() => {
       const R = (s) => { const r = document.querySelector(s).getBoundingClientRect(); return { l: r.left, r: r.right, t: r.top, b: r.bottom, w: r.width, h: r.height }; };
       const inside = (e) => { const r = e.getBoundingClientRect(); return r.left >= -0.5 && r.right <= innerWidth + 0.5 && r.top >= -0.5 && r.bottom <= innerHeight + 0.5; };
-      return { f: R('#g24-field'), pad: R('.g24-pad'), hud: R('.g24-hud'), vw: innerWidth, vh: innerHeight, sw: document.documentElement.scrollWidth, sh: document.documentElement.scrollHeight,
+      return { bt: Math.round(document.querySelector(".g24-board").getBoundingClientRect().top), bb: Math.round(document.querySelector(".g24-board").getBoundingClientRect().bottom), f: R("#g24-field"), pad: R('.g24-pad'), hud: R('.g24-hud'), vw: innerWidth, vh: innerHeight, sw: document.documentElement.scrollWidth, sh: document.documentElement.scrollHeight,
         all: [...document.querySelectorAll('.g24-card, .g24-op, .g24-act, .g24-hud > *')].every(inside),
         clipped: [...document.querySelectorAll('.g24-card, .g24-op')].filter((e) => { const r = e.getBoundingClientRect(), f = document.querySelector('#g24-field').getBoundingClientRect(); return r.left < f.left || r.right > f.right || r.top < f.top || r.bottom > f.bottom; }).length,
         cw: document.querySelector('.g24-card').getBoundingClientRect().width, btnH: Math.min(...[...document.querySelectorAll('.g24-act')].map((b) => b.getBoundingClientRect().height)) };
@@ -241,7 +241,7 @@ fs.mkdirSync(OUT, { recursive: true });
     ok(inside(m.f) && inside(m.pad) && inside(m.hud) && m.all, `${name} ${w}x${hgt}: board, buttons and cards are on the screen (card ${Math.round(m.cw)}px)`);
     ok(m.clipped === 0, `${name}: nothing sticks out of the board`);
     ok(m.sw <= m.vw && m.sh <= m.vh + 1, `${name}: no page scrolling`);
-    ok(m.f.b <= m.pad.t + 1 || m.f.r <= m.pad.l + 1 || m.pad.r <= m.f.l + 1, `${name}: the buttons do not cover the board (field ${Math.round(m.f.t)}-${Math.round(m.f.b)}, pad ${Math.round(m.pad.t)}-${Math.round(m.pad.b)}, hud ${Math.round(m.hud.b)})`);
+    ok(m.f.b <= m.pad.t + 1 || m.f.r <= m.pad.l + 1 || m.pad.r <= m.f.l + 1, `${name}: the buttons do not cover the board (field ${Math.round(m.f.t)}-${Math.round(m.f.b)}, pad ${Math.round(m.pad.t)}-${Math.round(m.pad.b)}, hud ${Math.round(m.hud.b)}, board ${m.bt}-${m.bb}, vh ${m.vh})`);
     if (name !== 'side') ok(Math.abs(m.f.l - (m.vw - m.f.r)) <= 3, `${name}: the board is centred (${Math.round(m.f.l)} / ${Math.round(m.vw - m.f.r)})`);
     ok(m.cw >= (name === 'side' || name === 'small' ? 52 : 70) && m.btnH >= 44, `${name}: cards and buttons are big enough (${Math.round(m.cw)}px, buttons ${Math.round(m.btnH)}px)`);
     await p.screenshot({ path: OUT + `g24-${name}.png` });

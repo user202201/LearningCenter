@@ -63,7 +63,7 @@ export function buildPatternMidi(p: Pattern, bars: number, name = "Beat"): Uint8
   head.push(0, 0xff, 0x58, 0x04, p.beats, 2, 24, 8);
   head.push(0, 0xc1, 24, 0, 0xc2, 33, 0, 0xc0, 0);   // programs: guitar (nylon) on ch 2, bass (finger) on ch 3, piano on ch 1
   const put = (tick: number, len: number, ch: number, note: number, vel: number) => {
-    evs.push({ tick, order: 1, bytes: [0x90 | ch, note & 127, vel] }, { tick: tick + len, order: 0, bytes: [0x80 | ch, note & 127, 0] });
+    evs.push({ tick, order: 1, bytes: [0x90 | ch, note & 127, vel] }, { tick: Math.min(tick + len, Math.max(tick + 1, bars * barTicks)), order: 0, bytes: [0x80 | ch, note & 127, 0] });   // (a late swing note ends with the last bar)
   };
   for (let bar = 0; bar < bars; bar++) {
     for (let s = 0; s < n; s++) {

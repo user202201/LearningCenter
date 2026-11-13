@@ -12,7 +12,7 @@ export interface LevelDef { id: string; rows: string[]; /** the shortest solutio
 export interface Level { w: number; h: number; wall: boolean[]; goal: boolean[]; start: number; boxes: number[] }
 export interface Step { dir: Dir; pushed: boolean }
 export interface SokState { level: Level; player: number; boxes: number[]; facing: Dir; moves: number; pushes: number; history: Step[] }
-export interface MoveResult { moved: boolean; pushed: boolean; /** the pushed box: from / to cell */ from?: number; to?: number; blocked?: "wall" | "box" }
+export interface MoveResult { moved: boolean; pushed: boolean; /** the pushed box: from / to cell */ from?: number; to?: number; blocked?: "wall" | "box"; /** a box was in the way (the push failed), not just a wall */ boxHit?: boolean }
 
 export function parseLevel(rows: string[]): Level {
   const h = rows.length, w = Math.max(...rows.map((r) => r.length));
@@ -44,8 +44,8 @@ export function move(s: SokState, d: Dir): MoveResult {
   const bi = s.boxes.indexOf(n);
   if (bi < 0) { s.player = n; s.moves++; s.history.push({ dir: d, pushed: false }); return { moved: true, pushed: false }; }
   const t = neighbour(l, n, d);
-  if (t < 0 || l.wall[t]) return { moved: false, pushed: false, blocked: "wall" };
-  if (s.boxes.includes(t)) return { moved: false, pushed: false, blocked: "box" };
+  if (t < 0 || l.wall[t]) return { moved: false, pushed: false, blocked: "wall", boxHit: true };
+  if (s.boxes.includes(t)) return { moved: false, pushed: false, blocked: "box", boxHit: true };
   s.boxes[bi] = t; s.player = n; s.moves++; s.pushes++; s.history.push({ dir: d, pushed: true });
   return { moved: true, pushed: true, from: n, to: t };
 }
@@ -110,6 +110,31 @@ export function solve(level: Level, maxNodes = 3_000_000): { moves: number; path
 }
 
 /** the levels, easy to medium, in three groups of eight (入门 / 进阶 / 挑战). Every one is proved solvable by the suite, `opt` = its shortest solution. */
-export const LEVELS: LevelDef[] = [];
+export const LEVELS: LevelDef[] = [
+  { id: "l01", opt: 9, rows: ["########", "#      #", "# .##  #", "#      #", "#  $@  #", "###  ###", "########"] },
+  { id: "l02", opt: 15, rows: ["########", "##   @##", "# .    #", "# # $# #", "#      #", "# #### #", "########"] },
+  { id: "l03", opt: 17, rows: ["#########", "## .   ##", "##     ##", "#   #  @#", "### #$###", "#       #", "#  # #  #", "#########"] },
+  { id: "l04", opt: 24, rows: ["#######", "#@    #", "##  $##", "#   $ #", "#  .  #", "# .   #", "#     #", "#######"] },
+  { id: "l05", opt: 30, rows: ["#######", "#@    #", "# #$# #", "#  $  #", "#.    #", "#   . #", "#     #", "#######"] },
+  { id: "l06", opt: 37, rows: ["#########", "#@  #   #", "#     $ #", "#       #", "#       #", "#   # $ #", "# .###  #", "#########"] },
+  { id: "l07", opt: 40, rows: ["#########", "# #.  # #", "#  $# $ #", "#       #", "##     ##", "#   .   #", "#@ # #  #", "#########"] },
+  { id: "l08", opt: 53, rows: ["#########", "## . . ##", "##$ # $##", "##  #  ##", "#       #", "#@   .$ #", "#########"] },
+  { id: "l09", opt: 65, rows: ["###########", "#    #@   #", "# $#####. #", "# $   .   #", "# $$   . .#", "#    #    #", "###########"] },
+  { id: "l10", opt: 66, rows: ["###########", "#  #   #@ #", "# $  #    #", "# #    .#.#", "#      .  #", "## $ # $ ##", "#  #   #  #", "###########"] },
+  { id: "l11", opt: 67, rows: ["###########", "##  # #  ##", "#@#   . # #", "# $$#$#  .#", "#    .    #", "#    #    #", "###########"] },
+  { id: "l12", opt: 67, rows: ["##########", "#@# ## # #", "# # .$ # #", "# $$     #", "# $ ## . #", "#   ..   #", "#        #", "##########"] },
+  { id: "l13", opt: 70, rows: ["##########", "#        #", "# $#  #  #", "# @#  #  #", "##$ ##  ##", "# $ $  ..#", "# .  .   #", "#        #", "##########"] },
+  { id: "l14", opt: 77, rows: ["#########", "#@#   #.#", "#   #   #", "#       #", "# #   # #", "#     $ #", "##$   $##", "#  .    #", "#########"] },
+  { id: "l15", opt: 77, rows: ["############", "#          #", "#    .  $  #", "#          #", "# ######## #", "#  .     $ #", "# #  $ .$# #", "#.  #@ #   #", "############"] },
+  { id: "l16", opt: 85, rows: ["##########", "#   .  $ #", "#   ##$  #", "#     $ .#", "# # ## #$#", "# . .   @#", "##########"] },
+  { id: "l17", opt: 85, rows: ["##########", "#  #  #  #", "# $$$ $  #", "#        #", "# # ## # #", "## .    ##", "# .  . . #", "##     @##", "##########"] },
+  { id: "l18", opt: 92, rows: ["##########", "#  # .#  #", "#     $$ #", "#  #  #  #", "#@. ##   #", "### $  ###", "# .      #", "##########"] },
+  { id: "l19", opt: 92, rows: ["##########", "#   ##   #", "#   ##.  #", "#   $   .#", "#  #. #  #", "###  $ ###", "#.  $    #", "# $#  #  #", "#  #  # @#", "##########"] },
+  { id: "l20", opt: 98, rows: ["###########", "## $.   .##", "## #@  # ##", "#  ## ##  #", "##   #   ##", "## . # $ ##", "###    $###", "#         #", "###########"] },
+  { id: "l21", opt: 100, rows: ["##########", "#   ##   #", "# $    $ #", "#.# ## # #", "#. ####  #", "# $.$  . #", "#@#    # #", "##########"] },
+  { id: "l22", opt: 110, rows: ["############", "#  ######  #", "# #@     # #", "#  #    #  #", "# $$ ##    #", "#  #   .#$ #", "#   ####.$ #", "#      .  .#", "############"] },
+  { id: "l23", opt: 118, rows: ["############", "#  .@##    #", "#  #$$  #  #", "# .$.. $   #", "#  # ## #  #", "#   #  #   #", "# #      # #", "############"] },
+  { id: "l24", opt: 119, rows: ["############", "##@     . ##", "# $## $##$ #", "#   #  #   #", "##$  ##   ##", "#   .##  . #", "# ##.## ## #", "#    ##    #", "#          #", "############"] },
+];
 export const GROUPS = 3;
 export const PER_GROUP = 8;
