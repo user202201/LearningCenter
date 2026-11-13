@@ -12,6 +12,7 @@ export type Fig =
   | { t: "text"; s: string };
 export type StaffItem = { p?: string | string[]; d?: string; n?: boolean; bar?: boolean; repeat?: "start" | "end" };
 
+import { tr } from "./i18n";
 const INK = "#2d2230", ACC = "#e8590c", HL = "#ffd43b";
 const LETTER: Record<string, number> = { C: 0, D: 1, E: 2, F: 3, G: 4, A: 5, B: 6 };
 const SEMI: Record<string, number> = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
@@ -177,7 +178,7 @@ function circle5(): string {
     inner += txt(110 + c * 52, 110 + s * 52 + 3, min[i], 9, "middle", "#5f3dc4", 700);
     inner += txt(110 + c * 108, 110 + s * 108 + 3, sig[i], 8, "middle", ACC, 700);
   }
-  inner += txt(110, 108, "五度圈", 12, "middle", INK, 900) + txt(110, 123, "顺时针升五度", 7, "middle", "#6b5d66", 700) + "</g>";
+  inner += txt(110, 108, tr("五度圈"), 12, "middle", INK, 900) + txt(110, 123, tr("顺时针升五度"), 7, "middle", "#6b5d66", 700) + "</g>";
   return svgWrap(248, 248, inner, "mfig-svg circle5");
 }
 

@@ -44,6 +44,23 @@ const clearPlays = (page) => page.evaluate(() => { window.__music.plays.length =
       return res;
     });
     ok(r.n === 18 && r.pages >= 90 && r.quiz === 144 && r.bad.length === 0, `the course: ${r.n} chapters, ${r.pages} pages, ${r.quiz} quiz questions, every drawing valid and drawn${r.bad.length ? ' -> ' + r.bad.slice(0, 6).join('; ') : ''}`);
+    const tr3 = await t.page.evaluate(async () => {
+      const zh = (await import('/src/data/music-theory.json')).default.chapters, out = {};
+      for (const lang of ['en', 'fr']) {
+        const c = (await import(`/src/data/music-theory.${lang}.json`)).default.chapters, bad = [];
+        if (c.length !== zh.length) bad.push('chapters');
+        c.forEach((ch, i) => {
+          const z = zh[i];
+          if (ch.id !== z.id || ch.pages.length !== z.pages.length || ch.quiz.length !== z.quiz.length) bad.push(ch.id + ' shape');
+          ch.pages.forEach((p, j) => { if ((p.fig || {}).t !== (z.pages[j].fig || {}).t || p.text.length !== z.pages[j].text.length) bad.push(`${ch.id}/p${j}`); });
+          ch.quiz.forEach((q, j) => { if (new Set([q.a, ...q.w]).size !== 4) bad.push(`${ch.id}/q${j} choices`); if (JSON.stringify(q.fig && q.fig.notes) !== JSON.stringify(z.quiz[j].fig && z.quiz[j].fig.notes)) bad.push(`${ch.id}/q${j} fig`); });
+        });
+        const s = JSON.stringify(c).replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\uFE0F]/gu, '');
+        out[lang] = { bad, cjk: (s.match(/[一-鿿]/g) || []).length };
+      }
+      return out;
+    });
+    ok(['en', 'fr'].every((l) => tr3[l].bad.length === 0 && tr3[l].cjk === 0), 'the whole course is translated into English and French (same chapters, pages, drawings and quizzes, no Chinese left): ' + JSON.stringify(tr3));
     ok(r.figs >= 120 && (r.types.staff || 0) >= 40 && (r.types.keys || 0) >= 15, `${r.figs} drawings: ` + JSON.stringify(r.types) + `; ${r.nofig} pages without one`);
     await t.browser.close();
   }
@@ -248,6 +265,28 @@ const clearPlays = (page) => page.evaluate(() => { window.__music.plays.length =
     await s.browser.close();
   }
 
+  // ---- drums and guitar: less empty space, and full screen too ----
+  for (const [dn, vp] of [['iPad sideways', { width: 1180, height: 820 }], ['phone sideways', { width: 844, height: 390 }]]) {
+    for (const [inst, route, area, btn, kind] of [['drums', '#/music/drums', '#dr-stage', '#dr-full', 'drum'], ['guitar', '#/music/guitar', '#gt-neck', '#gt-full', 'guitar']]) {
+      const s = await start(new Map(), { local: true, viewport: vp, today: '2026-11-12' });
+      await s.page.evaluate((r) => (location.hash = r), route); await s.page.waitForSelector(area);
+      const nm = await s.page.evaluate((a) => { const r = document.querySelector(a).getBoundingClientRect(); return { l: r.left, r: innerWidth - r.right, w: r.width, vw: innerWidth }; }, area);
+      ok(nm.l <= 40 || inst === 'drums', `${dn} ${inst}: little empty space at the sides (${Math.round(nm.l)} / ${Math.round(nm.r)} px)`);
+      await s.page.click(btn); await s.page.waitForTimeout(400);
+      const f = await s.page.evaluate((a) => { const r = document.querySelector(a).getBoundingClientRect(); return { w: r.width, h: r.height, l: r.left, vw: innerWidth, vh: innerHeight, hero: getComputedStyle(document.querySelector('.inst-page > .top')).display, label: document.querySelector('.inst-page .pn-fullbtn').textContent }; }, area);
+      ok(f.h >= f.vh * 0.72 && f.hero === 'none' && f.label.includes('退出') && f.w >= f.vw * 0.94, `${dn} ${inst} full screen: ${Math.round(f.w)}x${Math.round(f.h)} of ${f.vw}x${f.vh}, the title band is gone, an exit button`);
+      // still playable in full screen
+      await s.page.evaluate(() => (window.__music.plays.length = 0));
+      const target = inst === 'drums' ? '.dr-pad[data-d="snare"]' : '.gt-cell[data-s="2"][data-f="2"]';
+      await ptr(s.page, target, 'pointerdown', 1, 0.5, 0.5, inst === 'guitar' ? '#gt-neck' : undefined);
+      ok((await plays(s.page, kind)).length === 1, `${dn} ${inst}: it still sounds in full screen`);
+      if (dn === 'iPad sideways') await s.page.screenshot({ path: OUT + `music-${inst}-fullscreen-ipad.png` });
+      await s.page.click(btn); await s.page.waitForTimeout(300);
+      ok((await s.page.evaluate(() => getComputedStyle(document.querySelector('.inst-page > .top')).display)) !== 'none', `${dn} ${inst}: leaving full screen brings the page back`);
+      await s.browser.close();
+    }
+  }
+
   // ---- screens and languages ----
   for (const [loc, name] of [['zh-CN', 'zh'], ['en-US', 'en'], ['fr-FR', 'fr']]) {
     for (const [dn, vp] of [['phone', { width: 320, height: 568 }], ['ipad', { width: 820, height: 1180 }], ['landscape-small', { width: 844, height: 390 }]]) {
@@ -257,10 +296,11 @@ const clearPlays = (page) => page.evaluate(() => { window.__music.plays.length =
         await s.page.evaluate((h) => (location.hash = h), hash);
         await s.page.waitForSelector(hash === '#/' ? '.hub-grid' : '.hero h1');
         await s.page.waitForTimeout(hash === '#/' ? 900 : 350);
-        res.push([hash, await s.page.evaluate(() => { const vw = document.documentElement.clientWidth; const out = [...document.querySelectorAll('.mus-card, .th-ch, .th-page, .mfig, .qz-opt, .pn-kb, .dr-stage, .gt-neck, .subject, button, .mfig-table')].filter((e) => { const r = e.getBoundingClientRect(); return r.width > 0 && (r.right > vw + 1 || r.left < -1); }).length; return { sw: document.documentElement.scrollWidth <= vw, out, cjk: /[一-鿿]/.test(document.querySelector('.hero h1')?.textContent ?? '') }; })]);
+        res.push([hash, await s.page.evaluate(() => { const vw = document.documentElement.clientWidth; const out = [...document.querySelectorAll('.mus-card, .th-ch, .th-page, .mfig, .qz-opt, .pn-kb, .dr-stage, .gt-neck, .subject, button, .mfig-table')].filter((e) => { const r = e.getBoundingClientRect(); return r.width > 0 && (r.right > vw + 1 || r.left < -1); }).length; return { sw: document.documentElement.scrollWidth <= vw, out, cjk: /[一-鿿]/.test(document.querySelector('.hero h1')?.textContent ?? ''), cjkBody: /[一-鿿]/.test(document.querySelector('main, .hub-wrap')?.textContent ?? '') }; })]);
       }
       ok(res.every(([, r]) => r.sw && r.out === 0), `${name} ${dn}: music screens stay inside the screen${res.filter(([, r]) => !r.sw || r.out).map(([h]) => ' ' + h).join('')}`);
-      if (name !== 'zh') ok(res.filter(([h]) => !/theory\/c|quiz/.test(h)).slice(1).every(([, r]) => !r.cjk), `${name} ${dn}: titles are translated (chapter titles are course content and stay Chinese)`);
+      if (name !== 'zh') ok(res.slice(1).every(([, r]) => !r.cjk), `${name} ${dn}: titles are translated`);
+        if (name !== 'zh') ok(res.every(([, r]) => !r.cjkBody), `${name} ${dn}: no Chinese left on any music page, the course itself (chapters, drawings' tables, quizzes) is translated${res.filter(([, r]) => r.cjkBody).map(([h]) => ' ' + h).join('')}`);
       if (dn === 'phone') { await s.page.evaluate(() => (location.hash = '#/music/piano')); await s.page.waitForSelector('.pn-key'); await s.page.screenshot({ path: OUT + `music-piano-${name}-phone.png` }); }
       await s.browser.close();
     }

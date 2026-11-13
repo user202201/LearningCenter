@@ -1505,6 +1505,18 @@ document.addEventListener("touchend", (e) => {
 }, { passive: false });
 
 const shell = { show, showLoading, showError, loadShared, kids: () => kidsFile, avatarEl, back: backBtn, gear: gearBtn, stagger, epoch: () => epoch, gameSeconds: () => settings.gameSeconds, route: () => void route(), addKid  };
+// No double-tap zoom: `touch-action: manipulation` (style.css) does it in modern browsers; as a second safeguard a second tap within 350 ms on something that is not
+// a control (text, empty space) is cancelled, and the page-pinch gesture of iOS is cancelled too. Buttons, links, fields and the game screens are left alone
+// (they rely on the click that a cancelled touch would remove).
+(() => {
+  let last = 0;
+  document.addEventListener("touchend", (e) => {
+    const now = Date.now(), t = e.target as HTMLElement | null;
+    if (now - last < 350 && t && !t.closest("button, a, input, textarea, select, label, [role=button], .tappable, .game, dialog, .pn-kb, .dr-stage, .gt-neck")) e.preventDefault();
+    last = now;
+  }, { passive: false });
+  for (const ev of ["gesturestart", "gesturechange"]) document.addEventListener(ev, (e) => e.preventDefault());
+})();
 E.initEnglish(shell);
 MA.initMath(shell);
 SC.initScience(shell);

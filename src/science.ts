@@ -352,9 +352,9 @@ const spanText = (a: number, b: number | null) => (a < -100000 ? "远古" : `${y
 function sectionCard(sec: Section, no: number, open = false): HTMLElement {
   const body = h("div", { class: "nt-body" },
     sec.fig ? figure(sec.fig) : null,
-    sec.must?.length ? h("div", { class: "nt-must user" }, h("b", {}, "必背考点"), h("ul", {}, ...sec.must.map((p) => h("li", {}, p)))) : null,
+    sec.must?.length ? h("div", { class: "nt-must" }, h("b", {}, "必背考点"), h("ul", { class: "user" }, ...sec.must.map((p) => h("li", {}, p)))) : null,
     h("ul", { class: "nt-points user" }, ...sec.points.map((p) => h("li", {}, p))),
-    sec.tip ? h("p", { class: "nt-tip user" }, h("b", {}, "记忆小窍门："), sec.tip) : null);
+    sec.tip ? h("p", { class: "nt-tip" }, h("b", {}, "记忆小窍门："), h("span", { class: "user" }, sec.tip)) : null);
   const card = h("section", { class: "nt-card" + (open ? " open" : ""), "data-h": sec.h },
     h("button", { class: "nt-head", "aria-expanded": String(open), onclick: () => { const o = card.classList.toggle("open"); (card.firstElementChild as HTMLElement).setAttribute("aria-expanded", String(o)); } },
       h("span", { class: "nt-no" }, String(no)), h("span", { class: "nt-title user" }, sec.h), sec.must?.length ? h("span", { class: "nt-star", title: "必背考点" }, "★") : null, h("i", { class: "fm-chev" }, "›")),

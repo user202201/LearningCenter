@@ -35,3 +35,4 @@
 36-notes-formulas
 37-english-reading
 38-music
+39-no-double-tap-zoom

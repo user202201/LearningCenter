@@ -8,7 +8,7 @@ import { h, toast, confirmDlg } from "./ui";
 import * as A from "./musicaudio";
 import { figure, type Fig } from "./musicfig";
 import { subjectArt } from "./hub";
-import { tr } from "./i18n";
+import { tr, getLang } from "./i18n";
 import * as R from "./musicrec";
 import type { Ctx } from "./english";
 
@@ -26,8 +26,14 @@ const writeSaved = (s: Saved) => { try { localStorage.setItem(KEY, JSON.stringif
 interface Page { h: string; text: string[]; fig: Fig | null; tip?: string }
 interface QuizQ { q: string; fig?: Fig | null; a: string; w: string[]; e?: string }
 interface Chapter { id: string; title: string; emoji: string; intro: string; pages: Page[]; quiz: QuizQ[] }
-let course: Chapter[] | null = null;
-const loadCourse = async (): Promise<Chapter[]> => (course ??= (await import("./data/music-theory.json")).default.chapters as unknown as Chapter[]);
+const course: Partial<Record<string, Chapter[]>> = {};
+/** the course in the language of the screen (Chinese, English or French: three files of the same shape, compiled into the app) */
+const loadCourse = async (): Promise<Chapter[]> => {
+  const lang = getLang();
+  if (course[lang]) return course[lang]!;
+  const m = lang === "en" ? await import("./data/music-theory.en.json") : lang === "fr" ? await import("./data/music-theory.fr.json") : await import("./data/music-theory.json");
+  return (course[lang] = m.default.chapters as unknown as Chapter[]);
+};
 const shuffle = <T,>(l: readonly T[]): T[] => { const a = l.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
 // ---------- little cartoon pictures of the four parts ----------
@@ -94,7 +100,7 @@ export async function renderChapter(id: string) {
   const quizBtn = h("button", { class: "primary", id: "th-quiz", onclick: () => (location.hash = `#/music/quiz/${id}`) }, "去小测验 ★");
   const draw = () => {
     const p = c.pages[at];
-    body.replaceChildren(...[h("h2", { class: "th-h user" }, p.h), figure(p.fig), ...p.text.map((t) => h("p", { class: "th-p user" }, t)), p.tip ? h("p", { class: "th-tip user" }, h("b", {}, "小知识："), p.tip) : null].filter((x): x is HTMLElement => !!x));
+    body.replaceChildren(...[h("h2", { class: "th-h user" }, p.h), figure(p.fig), ...p.text.map((t) => h("p", { class: "th-p user" }, t)), p.tip ? h("p", { class: "th-tip" }, h("b", {}, "小知识："), h("span", { class: "user" }, p.tip)) : null].filter((x): x is HTMLElement => !!x));
     dots.replaceChildren(...c.pages.map((_, i) => h("i", { class: i === at ? "on" : "" })));
     prev.disabled = at === 0;
     next.style.display = at === c.pages.length - 1 ? "none" : "";
@@ -348,6 +354,20 @@ export function renderPiano() {
   window.addEventListener("resize", onResize);
 }
 
+/** a full-screen button for an instrument page: the page covers the whole screen (the Fullscreen API where there is one, the page-wide mode everywhere else) */
+function fullToggle(get: () => HTMLElement, id: string, onChange?: (on: boolean) => void): HTMLButtonElement {
+  let on = false;
+  const btn = h("button", { class: "pn-fullbtn", id, onclick: () => set(!on) }, "⛶ 全屏");
+  const set = (v: boolean) => {
+    const root = get();
+    on = v; root.classList.toggle("inst-full", v); btn.textContent = v ? "✕ 退出全屏" : "⛶ 全屏";
+    try { if (v) void (root.requestFullscreen?.() ?? Promise.resolve()).catch(() => { /* the page-wide mode is enough */ }); else if (document.fullscreenElement) void document.exitFullscreen(); } catch { /* same */ }
+    window.requestAnimationFrame(() => onChange?.(v));
+  };
+  document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement && on && get().isConnected) set(false); });
+  return btn;
+}
+
 // ---------- the drum kit ----------
 const PADS: { id: A.Drum | "hihat"; name: string; x: number; y: number; s: number; c: string }[] = [
   { id: "crash", name: "吊镲", x: 4, y: 6, s: 24, c: "#ffd43b" },
@@ -361,7 +381,8 @@ const PADS: { id: A.Drum | "hihat"; name: string; x: number; y: number; s: numbe
 ];
 export function renderDrums() {
   let open = false, demo: number | null = null;
-  const stage = h("div", { class: "dr-stage", id: "dr-stage" });
+  const board = h("div", { class: "dr-board", id: "dr-board" });
+  const stage = h("div", { class: "dr-stage", id: "dr-stage" }, board);
   const pads = new Map<string, HTMLElement>();
   const flash = (id: string) => { const el = pads.get(id); if (!el) return; el.classList.remove("hit"); void el.offsetWidth; el.classList.add("hit"); };
   const hit = (id: string) => { const d = id === "hihat" ? (open ? "hihat-open" : "hihat") : (id as A.Drum); A.drumHit(d); flash(id); };
@@ -370,7 +391,7 @@ export function renderDrums() {
     el.style.cssText = `left:${p.x}%;top:${p.y}%;width:${p.s}%;--c:${p.c}`;
     el.addEventListener("pointerdown", (e) => { e.preventDefault(); A.unlock(); hit(p.id); });
     el.addEventListener("contextmenu", (e) => e.preventDefault());
-    pads.set(p.id, el); stage.append(el);
+    pads.set(p.id, el); board.append(el);
   });
   const hat = h("button", { class: "mopt", id: "dr-hat", onclick: (e: Event) => { open = !open; (e.currentTarget as HTMLElement).classList.toggle("on", open); (e.currentTarget as HTMLElement).textContent = open ? "踩镲：开着（长音）" : "踩镲：闭着（短音）"; } }, "踩镲：闭着（短音）");
   const stopDemo = () => { if (demo !== null) { window.clearInterval(demo); demo = null; } demoBtn.textContent = "听一段示范"; demoBtn.classList.remove("on"); };
@@ -382,9 +403,9 @@ export function renderDrums() {
     const tick = () => { PATTERN[step % 8].forEach((d) => { A.drumHit(d as A.Drum); flash(d); }); step++; if (step >= 32) stopDemo(); };
     tick(); demo = window.setInterval(tick, 300);
   } }, "听一段示范");
-  const root = h("div", { class: "page", style: `--kid:${COLOR}` }, hero("架子鼓", "#/subject/music", "音乐", "#/music/drums"),
+  const root: HTMLElement = h("div", { class: "page inst-page", style: `--kid:${COLOR}` }, hero("架子鼓", "#/subject/music", "音乐", "#/music/drums"),
     h("main", { class: "scroll" }, h("div", { class: "narrow dr-narrow" }, stage,
-      h("div", { class: "dr-bar" }, hat, demoBtn),
+      h("div", { class: "dr-bar" }, hat, demoBtn, fullToggle(() => root, "dr-full")),
       h("p", { class: "muted small center" }, "两只手、甚至更多手指可以同时打。大鼓在最下面，军鼓在左边。"))));
   X.show(root);
   const watch = new MutationObserver(() => { if (!root.isConnected) { stopDemo(); watch.disconnect(); } });
@@ -444,10 +465,11 @@ export function renderGuitar() {
   };
   const info = h("p", { class: "muted small center", id: "gt-info" });
   const chordBtns = CHORDS.map((c) => h("button", { class: "mopt", id: `gt-chord-${c.name}`, "data-c": c.name, onclick: () => { showChord(c); strum(true); } }, c.name));
-  const root = h("div", { class: "page", style: `--kid:${COLOR}` }, hero("吉他", "#/subject/music", "音乐", "#/music/guitar"),
+  const root: HTMLElement = h("div", { class: "page inst-page", style: `--kid:${COLOR}` }, hero("吉他", "#/subject/music", "音乐", "#/music/guitar"),
     h("main", { class: "scroll" }, h("div", { class: "narrow gt-narrow" }, neck, marks,
-      h("div", { class: "gt-chords" }, ...chordBtns),
-      h("div", { class: "gt-strum" }, h("button", { class: "primary", id: "gt-down", onclick: () => strum(true) }, "↓ 向下扫"), h("button", { class: "sheet-btn", id: "gt-up", onclick: () => strum(false) }, "↑ 向上扫"), h("button", { class: "sheet-btn", id: "gt-clear", onclick: () => showChord(null) }, "清除")),
+      h("div", { class: "gt-ctl" },
+        h("div", { class: "gt-chords" }, ...chordBtns),
+        h("div", { class: "gt-strum" }, h("button", { class: "primary", id: "gt-down", onclick: () => strum(true) }, "↓ 向下扫"), h("button", { class: "sheet-btn", id: "gt-up", onclick: () => strum(false) }, "↑ 向上扫"), h("button", { class: "sheet-btn", id: "gt-clear", onclick: () => showChord(null) }, "清除"), fullToggle(() => root, "gt-full"))),
       info, h("p", { class: "muted small center" }, "手指在弦上滑过去就是扫弦；点格子是按在那个品上拨一根弦。"))));
   showChord(null);
   X.show(root);
