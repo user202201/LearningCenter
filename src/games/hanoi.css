@@ -47,7 +47,8 @@
 @media (max-width: 420px) { .hn-stat { font-size: 15px; padding: 1px 9px; } }
 @media (min-aspect-ratio: 5/4) and (max-height: 700px) {
   .hn-wrap { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); grid-template-areas: "hud board"; align-items: center; }
-  .hn-hud { width: 232px; gap: 6px; }
+  .hn-hud { width: 250px; gap: 6px; }
+  .hn-levels { gap: 4px; }
   .hn-stat { font-size: 14px; padding: 0 8px; }
   .hn-acts .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
   .hn-lv { width: 34px; height: 34px; min-height: 34px; font-size: 16px; }
