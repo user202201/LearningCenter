@@ -607,7 +607,12 @@ const helpers = (page) => {
           const loq = loc === 'zh-CN' ? [] : await leftover(page); ok(loq.length === 0, `${tag} ${mode}: no Chinese left in the quiz ${loq.slice(0, 3).join('|')}`);
           if (mode === 'cn-name' || mode === 'w-ktap') await page.screenshot({ path: OUT + `quiz-${mode}-${tag}.png` });
           // play on to the end for the end screen
-          for (let i = 0; i < 9; i++) { await page.click('#math-next'); await page.waitForFunction(() => !document.querySelector('#math-explain')); const b = await answerOf(); if (b.type === 'choose') await page.locator(`.mchoice[data-v="${b.v}"]`).click(); else { const [x, y] = await toClient('#gmap-qmap .gmap-svg', b.p[0], b.p[1]); await page.mouse.click(x, y); } await page.waitForSelector('#math-explain'); }
+          for (let i = 0; i < 9; i++) {
+            await page.click('#math-next'); await page.waitForFunction(() => !document.querySelector('#math-explain'));
+            const b = await answerOf(); let xy = null;
+            if (b.type === 'choose') await page.locator(`.mchoice[data-v="${b.v}"]`).click(); else { xy = await toClient('#gmap-qmap .gmap-svg', b.p[0], b.p[1]); await page.mouse.click(xy[0], xy[1]); }
+            try { await page.waitForSelector('#math-explain', { timeout: 4000 }); } catch (e) { console.log('   STUCK', tag, await page.getAttribute('#game', 'data-qkey'), JSON.stringify(xy), await page.evaluate((p) => { const e = document.elementFromPoint(p[0], p[1]); return e && e.tagName + '.' + e.className; }, xy || [0, 0])); throw e; }
+          }
           await page.click('#math-next'); await page.waitForSelector('#game-end');
           const loe = loc === 'zh-CN' ? [] : await leftover(page); ok(loe.length === 0, `${tag} ${mode}: no Chinese left on the end screen ${loe.slice(0, 3).join('|')}`);
           if (mode === 'cn-name') await page.screenshot({ path: OUT + `quiz-end-${tag}.png` });

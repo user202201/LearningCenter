@@ -17,13 +17,15 @@ const open = async (opts = {}) => {
   await t.page.evaluate(() => localStorage.setItem('learn.coding.v1', JSON.stringify({ seen: ['seq', 'loop', 'nest', 'until', 'if', 'ifelse', 'while', 'func', 'param', 'var', 'arith', 'turtle', 'pen'], speed: 'fast', code: false, drawings: {} })));
   return t;
 };
-const go = async (page, id, lv) => { await page.evaluate((i) => (location.hash = `#/coding/${i}`), id); await page.waitForSelector('.cl-island'); await page.evaluate(([i, l]) => (location.hash = `#/coding/${i}/${l}`), [id, lv]); await page.waitForSelector('.cw .cw-pitem'); await page.waitForTimeout(150); };
+const go = async (page, id, lv) => { await clearToasts(page);  await page.evaluate((i) => (location.hash = `#/coding/${i}`), id); await page.waitForSelector('.cl-island'); await page.evaluate(([i, l]) => (location.hash = `#/coding/${i}/${l}`), [id, lv]); await page.waitForSelector('.cw .cw-pitem'); await page.waitForTimeout(150); };
 const prog = (page) => page.evaluate(() => import('/src/coding-ast.ts').then((A) => A.toText(window.__coding.editor.program()).replace(/\n\s*/g, ' ').replace(/ \{ /g, ' { ').trim()));
 const counter = (page) => page.textContent('#cw-count');
 const pal = (page, kind) => page.locator(`.cw-pitem[data-pal="${kind}"]`);
+const clearToasts = (page) => page.evaluate(() => document.querySelectorAll('#toasts .toast').forEach((x) => x.remove()));   // (a message lies over the top of the page for 3.5 s)
 const center = async (loc) => { const b = await loc.boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2, b }; };
 /** a mouse drag: down on `from`, move in steps to (x, y), up */
 const drag = async (page, from, x, y, steps = 8) => {
+  await clearToasts(page);
   const c = await center(from);
   await page.mouse.move(c.x, c.y); await page.mouse.down();
   await page.mouse.move(c.x + 12, c.y - 12, { steps: 2 });
@@ -170,11 +172,7 @@ const slotCenter = async (page, sel) => center(page.locator(sel).first());
   ok((await prog(page)) === before2 && JSON.stringify(r2.b) !== undefined, 'a repeat dragged into its own slot changes nothing (no loop in itself)');
   // deleting the repeat deletes what is inside
   const binC2 = await center(page.locator('#cw-bin'));
-  console.log('DBG', JSON.stringify(binC2.b), await page.evaluate(() => JSON.stringify([document.querySelector('.cw-bin').getBoundingClientRect().toJSON(), document.elementFromPoint(765, 1066)?.className, window.scrollY, document.querySelector('.cl-main').scrollTop])));
-  { const src = page.locator('.cw-ws .cw-b.cw-c > .cw-head > .cw-t').first(); const c = await center(src);
-    await page.mouse.move(c.x, c.y); await page.mouse.down(); await page.mouse.move(c.x + 12, c.y - 12, { steps: 2 }); await page.mouse.move(binC2.x, binC2.y, { steps: 8 });
-    console.log('DBG2', c.x, c.y, await page.evaluate(([x, y]) => { const e = document.elementFromPoint(x, y); return e && (e.className + ' in ' + e.parentElement.className); }, [c.x, c.y]), await page.screenshot({ path: OUT + 'dbg2.png' }) && '', await page.evaluate(() => document.querySelector('.cw').className + ' ghost=' + !!document.querySelector('.cw-ghost')));
-    await page.mouse.up(); await page.waitForTimeout(60); }
+  await drag(page, page.locator('.cw-ws .cw-b.cw-c > .cw-head > .cw-t').first(), binC2.x, binC2.y);
   ok((await prog(page)) === '' && (await counter(page)).startsWith('0 /'), 'dragging a repeat onto the bin deletes it with everything inside (' + (await prog(page)) + ' / ' + (await counter(page)) + ')');
 
   await go(page, id, 'w3/4');
@@ -289,6 +287,7 @@ const slotCenter = async (page, sel) => center(page.locator(sel).first());
   const cdp = await tt.ctx.newCDPSession(tp);
   const touch = async (type, x, y) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: type === 'touchEnd' ? [] : [{ x, y, id: 1 }] });
   const tdrag = async (from, x, y) => {
+    await clearToasts(tp);
     const c = await center(from);
     await touch('touchStart', c.x, c.y);
     for (let i = 1; i <= 10; i++) await touch('touchMove', c.x + ((x - c.x) * i) / 10, c.y + ((y - c.y) * i) / 10);
