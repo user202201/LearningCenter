@@ -173,8 +173,16 @@ export function streakOf(s: State, side: Side): number {
 export const tugPos = (s: State): number => Math.max(-1, Math.min(1, (s.scores[0] - s.scores[1]) / Math.max(1, s.total)));
 /** who leads: 0, 1 or -1 (level) */
 export const leaderOf = (scores: readonly [number, number]): -1 | 0 | 1 => (scores[0] === scores[1] ? -1 : scores[0] > scores[1] ? 0 : 1);
-/** the lead went from one side to the other (a draw in between does not count) */
-export const leadChanged = (prev: readonly [number, number], cur: readonly [number, number]): boolean => { const a = leaderOf(prev), b = leaderOf(cur); return a >= 0 && b >= 0 && a !== b; };
+/** the round `round` took the lead from the side that led before (a level score in between does not matter: 3 : 2, 3 : 3, 3 : 4 is a lead change at 3 : 4) */
+export function leadSwap(results: readonly number[], round: number): boolean {
+  let a = 0, b = 0, last = -1;
+  for (let i = 0; i <= round; i++) {
+    if (results[i] === 0) a++; else if (results[i] === 1) b++;
+    const lead = a === b ? -1 : a > b ? 0 : 1;
+    if (lead >= 0) { if (i === round && last >= 0 && lead !== last) return true; last = lead; }
+  }
+  return false;
+}
 /** the reaction time of the winner of the round that is shown, in ms (null when nobody won) */
 export const reactionMs = (s: State): number | null => ((s.phase === "result" || s.phase === "final") && s.winner >= 0 ? Math.max(0, Math.round(s.winAt - s.questionStart)) : null);
 /** a reaction time as text: seconds with one decimal ("0.8") */

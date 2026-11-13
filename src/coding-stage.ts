@@ -8,7 +8,7 @@
 import { Program, Script, cloneProgram, parse } from "./coding-ast";
 import { Machine, State, StageSprite, StageState, TPS, makeTurtle } from "./coding-interp";
 
-export interface SpriteSpec { id: string; art: string; x: number; y: number; dir?: number; size?: number; costume?: number; /** the name shown to the child (UI text) */ label: string }
+export interface SpriteSpec { id: string; art: string; x: number; y: number; dir?: number; size?: number; costume?: number; /** the name shown to the child (UI text) */ label: string; /** a short text on a button sprite (digits / symbols) */ text?: string }
 export type Input =
   | { tick: number; type: "tap"; sprite: string }
   | { tick: number; type: "stagetap"; x: number; y: number }
@@ -16,14 +16,20 @@ export type Input =
 /** an input without its time (a live input of the child) */
 export type LiveInput = { type: "tap"; sprite: string } | { type: "stagetap"; x: number; y: number } | { type: "key"; key: string; hold?: number };
 export type Prop = "x" | "y" | "dir" | "size" | "costume" | "visible" | "say";
-export interface Check { tick: number; sprites?: string[]; props?: Prop[]; tol?: number; vars?: string[]; notes?: boolean }
+export interface Check {
+  tick: number; sprites?: string[]; props?: Prop[]; tol?: number; vars?: string[]; notes?: boolean;
+  /** judged on the child's program alone (random positions), on every seed of `StageExt.seeds`: the sprite is inside the ranges, and (moved) not where it started */
+  range?: { sprite: string; x?: [number, number]; y?: [number, number]; moved?: boolean };
+  /** the variables are at least this large */
+  min?: Record<string, number>;
+}
 export interface StageExt {
   sprites: SpriteSpec[];
   /** the places for the child's scripts: the sprite, the event the hat starts with and the events it can be changed to */
   slots: { sprite: string; on: string; events: string[] }[];
   /** scripts and functions that are always there (pseudo-code, not editable) */
   given?: string;
-  inputs: Input[]; ticks: number; checks: Check[]; seed?: number;
+  inputs: Input[]; ticks: number; checks: Check[]; seed?: number; seeds?: number[];
   /** the texts a `say` can use (id -> text), the messages a `broadcast` can send (id -> label), the variables */
   texts: Record<string, string>; msgs?: Record<string, string>; vars?: string[];
   /** the keys of the level: id -> label (the on-screen buttons, the key picker) */
@@ -147,7 +153,7 @@ export function compareSnap(c: Check, mine: Snap, ref: Snap, ext: StageExt): str
     if (!a || !b) continue;
     const label = ext.sprites.find((s) => s.id === id)?.label ?? id;
     const bad = new Set<string>();
-    for (const p of c.props ?? DEFAULT_PROPS) {
+    for (const p of c.props ?? (c.range || c.min ? [] : DEFAULT_PROPS)) {
       const ok = p === "x" || p === "y" ? Math.abs(a[p] - b[p]) <= tol : p === "dir" ? angDiff(a.dir, b.dir) <= 6 : p === "size" ? Math.abs(a.size - b.size) <= 10 : a[p] === b[p];
       if (!ok) bad.add(PROP_NAME[p]);
     }
@@ -169,6 +175,20 @@ export function judgeStage(id: string, prog: Program, ref: Program, ext: StageEx
     const a = mine.snaps.get(c.tick), b = want.get(c.tick);
     if (!a || !b) continue;
     for (const m of compareSnap(c, a, b, ext)) if (!missing.includes(m)) missing.push(m);
+  }
+  // checks on the child's program alone: random positions (every seed) and lower bounds of variables
+  for (const c of ext.checks) {
+    if (c.min) { const a = mine.snaps.get(c.tick); if (a) for (const [v, n] of Object.entries(c.min)) if ((a.vars[v] ?? 0) < n) missing.push(`变量 ${v} 的值太小：至少要是 ${n}。`); }
+    if (c.range) {
+      for (const sd of ext.seeds ?? [ext.seed ?? 7]) {
+        const r = simulate(prog, { ...ext, seed: sd }, [c.tick]);
+        const a = r.snaps.get(c.tick)?.sprites[c.range.sprite], spec = ext.sprites.find((x) => x.id === c.range!.sprite);
+        if (!a || !spec) continue;
+        const inside = (v: number, lim?: [number, number]) => !lim || (v >= lim[0] && v <= lim[1]);
+        const msg = "位置不在要求的范围内。";
+        if ((!inside(a.x, c.range.x) || !inside(a.y, c.range.y) || (c.range.moved && Math.hypot(a.x - spec.x, a.y - spec.y) < 1)) && !missing.includes(msg)) missing.push(msg);
+      }
+    }
   }
   return { won: missing.length === 0, missing, status: "running", message: "" };
 }

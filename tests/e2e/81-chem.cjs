@@ -176,7 +176,7 @@ async function answer(page, q, right = true) {
         if (ba && bb && bb.y > 0 && bb.y + bb.height < 844) { await page.mouse.move(ba.x + ba.width / 2, ba.y + ba.height / 2); await page.mouse.down(); await page.mouse.move(ba.x + ba.width / 2 + 10, ba.y + 20, { steps: 3 }); await page.mouse.move(bb.x + bb.width / 2, bb.y + bb.height / 2, { steps: 6 }); await page.mouse.up(); dragged++; continue; }
       }
       await page.click(`.chem-item[data-id="${it.id.replace(/"/g, '\\"')}"]`);
-      await page.click(`#chem-bk-${cat}`);
+      await page.click(`#chem-bk-${cat} > b`);
     }
     await page.click('#chem-check');
   }
@@ -566,7 +566,7 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
     await compare('at the start');
     ok(await page.getAttribute('#chem-scales', 'data-balanced') === '0', 'unbalanced at the start: scales are orange');
     // the beam turns toward the heavier side: read the beam line of the first unequal scale
-    const tilt = await page.evaluate(() => { const s = [...document.querySelectorAll('.chem-scale')].find((e) => !e.classList.contains('eq')); const ln = s.querySelectorAll('svg line')[ [...s.querySelectorAll('svg line')].length - 1 ]; return { l: +s.dataset.l, r: +s.dataset.r, dy: +ln.getAttribute('y2') - +ln.getAttribute('y1') }; });
+    const tilt = await page.evaluate(() => { const s = [...document.querySelectorAll('.chem-scale')].find((e) => !e.classList.contains('eq')); const ln = s.querySelector('svg line[stroke-width="3.5"]'); return { l: +s.dataset.l, r: +s.dataset.r, dy: +ln.getAttribute('y2') - +ln.getAttribute('y1') }; });
     ok(tilt.l !== tilt.r && ((tilt.l > tilt.r && tilt.dy < 0) || (tilt.l < tilt.r && tilt.dy > 0)), `the beam goes down on the heavier side (${JSON.stringify(tilt)})`);
     // click steppers: each click changes the scale at once
     await page.click('#chem-inc-0'); co[0] = 2; await compare('after one click on + of the first term');
@@ -606,8 +606,8 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
     ok((await page.textContent('#chem-desc')).length > 8 && await page.locator('.chem-tile').count() === q.tiles.length, 'the sentence and the tiles are shown');
     await page.click('#chem-check'); ok((await page.textContent('#chem-msg')).includes('请先'), 'check on an empty equation asks to place formulas first');
     // wrong side: put the first product on the reactant side
-    await page.click(`#chem-zone-l`); await page.click(`.chem-tile[data-f="${r[0].f}"]`); await page.click('#chem-check');
-    ok((await page.textContent('#chem-msg')).includes('物质或位置不对'), 'a formula on the wrong side is refused');
+    await page.click(`#chem-zone-l`); await page.click(`.chem-tile[data-f="${r[0].f}"]`); await page.click(`#chem-zone-r`); await page.click(`.chem-tile[data-f="${l[0].f}"]`); await page.click('#chem-check');
+    ok((await page.textContent('#chem-msg')).includes('物质或位置不对'), 'formulas on the wrong sides are refused');
     await page.click(`.chem-tile[data-f="${r[0].f}"]`); ok((await page.textContent('#chem-msg')).includes('已经放进'), 'the same formula twice is refused');
     await page.click('#chem-clear');
     for (const [side, list] of [[0, l], [1, r]]) { await page.click(`#chem-zone-${side ? 'r' : 'l'}`); for (const x of list) await page.click(`.chem-tile[data-f="${x.f}"]`); }
@@ -677,7 +677,6 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
     let placedByTouch = 0;
     for (const it of q.items) {
       const chipSel = `.chem-item[data-id="${it.id}"]`, bkSel = `#chem-bk-${it.cat}`;
-      await pg.evaluate(({ chipSel }) => { document.querySelector(chipSel).scrollIntoView({ block: 'start' }); window.scrollBy(0, -10); document.querySelector('.scroll')?.scrollBy?.(0, 0); }, { chipSel });
       let from = await pg.evaluate((s) => { const b = document.querySelector(s).getBoundingClientRect(); return [b.x + b.width / 2, b.y + b.height / 2]; }, chipSel);
       let to = await pg.evaluate((s) => { const b = document.querySelector(s).getBoundingClientRect(); return [b.x + b.width / 2, b.y + b.height / 2]; }, bkSel);
       if (to[1] > 820 || to[1] < 0) { await pg.evaluate((s) => document.querySelector(s).scrollIntoView({ block: 'center' }), bkSel); from = await pg.evaluate((s) => { const b = document.querySelector(s).getBoundingClientRect(); return [b.x + b.width / 2, b.y + b.height / 2]; }, chipSel); to = await pg.evaluate((s) => { const b = document.querySelector(s).getBoundingClientRect(); return [b.x + b.width / 2, b.y + b.height / 2]; }, bkSel); }
@@ -693,21 +692,24 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
     // the rest by tap: item, then class; then check
     for (const it of q.items) { if (await pg.evaluate(({ id }) => !!document.querySelector('#chem-tray [data-id="' + id + '"]'), { id: it.id })) { await pg.tap(`.chem-item[data-id="${it.id}"]`); await pg.tap(`#chem-bk-${it.cat}`); } }
     ok(await pg.locator('#chem-check:not([disabled])').count() === 1, 'all items placed: check is enabled');
-    await pg.tap('#chem-check'); await pg.waitForSelector('#chem-verdict');
+    await pg.click('#chem-check'); await pg.waitForSelector('#chem-verdict');   // (a click: after a drag made by CDP touch events the browser sends no "click" for the next tap, only pointer events)
     ok((await pg.textContent('#chem-verdict')).includes('回答正确') && await pg.locator('.chem-item.ok').count() === 8, 'all 8 are right: the verdict is right and each item is green');
     await pg.screenshot({ path: OUT + 'touch-class.png', fullPage: true });
     // a wrong drop shows the right class beside the item
     await pg.click('#chem-next'); await pg.waitForSelector('#chem-q [data-id]');
     const q2 = await currentQ(pg); const wrongB = q2.buckets.find((b) => b !== q2.items[0].cat);
     for (const it of q2.items) { await pg.tap(`.chem-item[data-id="${it.id}"]`); await pg.tap(`#chem-bk-${it === q2.items[0] ? wrongB : it.cat}`); }
-    await pg.tap('#chem-check'); await pg.waitForSelector('#chem-verdict');
+    await pg.click('#chem-check'); await pg.waitForSelector('#chem-verdict');
     ok(await pg.locator('.chem-item.bad').count() === 1 && await pg.locator('.chem-item.bad .chem-right').count() === 1 && (await pg.textContent('#chem-verdict')).includes('不正确'), 'a misplaced item is red and shows its right class');
-    // touch on the steppers of the balance page: targets are big enough and work
-    await pg.evaluate(() => { location.hash = '#/science/chem/bal'; }); await pg.waitForSelector('#chem-q .chem-step-btn');
-    const box = await pg.locator('#chem-inc-0').boundingBox(); ok(box.width >= 40 && box.height >= 40, `a stepper button is at least 40 px (${box.width} x ${box.height})`);
-    await pg.tap('#chem-inc-0'); ok(+(await pg.textContent('#chem-c-0')) === 2, 'tap on + raises the coefficient');
-    ok(log.external.length === 0 && tt.log.external.length === 0, 'no outside request in the touch run');
+    ok(tt.log.external.length === 0, 'no outside request in the touch run');
     await tt.browser.close();
+    // the steppers by a real tap (a fresh touch page: no drag before it)
+    const t3 = await open({ touch: true, dpr: 2, viewport: { width: 390, height: 844 } }); const p3 = t3.page;
+    await p3.evaluate(() => { window.__chemSeed = 2; location.hash = '#/science/chem/bal'; }); await p3.waitForSelector('#chem-q .chem-step-btn');
+    const box = await p3.locator('#chem-inc-0').boundingBox(); ok(box.width >= 40 && box.height >= 40, `a stepper button is at least 40 px (${box.width} x ${box.height})`);
+    await p3.tap('#chem-inc-0'); await p3.waitForTimeout(400); ok(+(await p3.textContent('#chem-c-0')) === 2, 'a tap on + raises the coefficient');
+    await p3.tap('#chem-hint'); await p3.waitForTimeout(300); ok((await p3.textContent('#chem-msg')).includes('已填入'), 'a tap on the hint button works');
+    await t3.browser.close();
   }
 
   // =====================================================================================  E. 5 SCREEN SIZES

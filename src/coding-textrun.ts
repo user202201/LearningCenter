@@ -293,6 +293,8 @@ class Interp {
 
   // ----- errors -----
   err(kind: ConstructorParameters<typeof PyError>[0], msg: string, hint?: string, line = this.line): never { throw new PyError(kind, `第 ${line} 行：${msg}`, line, hint); }
+  /** a comprehension builds its list inside one expression: each element costs only 1/20 step, so reading a long input line is cheap */
+  tickLight() { this.steps += 0.05; if (this.steps > this.budget) { this.steps = this.budget; this.tick(); } }
   /** the line of the loop that is running (an endless program is reported at its loop, not at some statement inside) */
   loopLine = 0;
   tick() { if (++this.steps > this.budget) this.err("StepLimit", `程序运行得太久（超过 ${this.budget} 步），可能是死循环。`, "检查 while 的条件会不会变成 False，或者 for 的范围是否太大。", this.loopLine || this.line); }
@@ -590,7 +592,7 @@ class Interp {
       this.fr = frame;
       const go = (ci: number) => {
         if (ci === e.clauses.length) {
-          this.tick();
+          this.tickLight();
           if (e.kind === "dict") { const k = this.eval(e.elt); dict.put(keyOf(k, e.line), k, this.eval(e.val!)); }
           else if (e.kind === "set") { const v = this.eval(e.elt); set.m.set(keyOf(v, e.line), v); }
           else out.push(this.eval(e.elt));
@@ -1273,5 +1275,5 @@ export function run(source: string, opts: RunOptions = {}): RunResult {
   }
   const globals: [string, string][] = [];
   for (const [k, v] of it.root.vars) { if (v instanceof PyFunc || v instanceof PyBuiltin || v instanceof PyModule) continue; globals.push([k, repr(v)]); }
-  return { stdout: it.out, error, segs: it.segs, fills: it.fills, steps: it.steps, trace: it.trace, traceCut: it.traceCut, globals, usedTurtle: it.t.used };
+  return { stdout: it.out, error, segs: it.segs, fills: it.fills, steps: Math.ceil(it.steps), trace: it.trace, traceCut: it.traceCut, globals, usedTurtle: it.t.used };
 }

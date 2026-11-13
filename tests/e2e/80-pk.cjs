@@ -68,6 +68,16 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
       if (L.skipIntro(q, 1700) || q.phase !== 'question') bad('no skip once the questions began');
       const q2 = L.create([mkItems(L.rng(1), 10), mkItems(L.rng(2), 10)], 0); L.advance(q2, 3200);
       if (q2.phase !== 'countdown' || q2.count !== 1 || !L.skipIntro(q2, 3200) || q2.phase !== 'prep') bad('skip from the countdown'); }
+    // the competitive helpers
+    { const q = L.create([mkItems(L.rng(1), 10), mkItems(L.rng(2), 10)], 0, { rounds: 15 }); if (q.total !== 10) bad('rounds can not exceed the items');
+      const q15 = L.create([mkItems(L.rng(1), 15), mkItems(L.rng(2), 15)], 0, { rounds: 15 }); if (q15.total !== 15) bad('15 rounds');
+      q15.scores = [3, 1]; if (Math.abs(L.tugPos(q15) - 2 / 15) > 1e-9) bad('tug uses the round count'); q15.scores = [15, 0]; if (L.tugPos(q15) !== 1) bad('tug end'); q15.scores = [0, 9]; if (L.tugPos(q15) !== -9 / 15) bad('tug side 1');
+      const z = L.create([mkItems(L.rng(1), 10), mkItems(L.rng(2), 10)], 0); z.results = [0, 0, 1, 1, 1, -1, 0]; if (L.streakOf(z, 0) !== 1 || L.streakOf(z, 1) !== 0) bad('streak after a draw round');
+      z.results = [0, 1, 1, 1]; if (L.streakOf(z, 1) !== 3 || L.streakOf(z, 0) !== 0) bad('streak 3');
+      if (!L.leadSwap([0, 0, 0, 1, 1, 1, 1], 6) || L.leadSwap([0, 0, 0, 1, 1, 1, 1], 5) || L.leadSwap([0, 1], 1) || L.leadSwap([0, 0, 1], 2) || L.leadSwap([0, 0, 1, 1, 1, 0], 4) !== true || L.leadSwap([1, 1, 0, 0, 0], 4) !== true || L.leadSwap([0, -1, 0], 2)) bad('lead change');
+      if (L.leaderOf([1, 1]) !== -1 || L.leaderOf([2, 1]) !== 0 || L.leaderOf([0, 4]) !== 1) bad('leader');
+      if (L.secText(840) !== '0.8' || L.secText(1250) !== '1.3' || L.secText(0) !== '0.0' || L.secText(12000) !== '12.0') bad('seconds text');
+      const w = fresh(); L.tap(w, 1, rightOf(w, 1), w.questionStart + 840); if (L.reactionMs(w) !== 840) bad('reaction ' + L.reactionMs(w)); const w2 = fresh(); if (L.reactionMs(w2) !== null) bad('no reaction in the question'); }
     // both locked
     s = fresh(); L.tap(s, 0, wrongOf(s, 0), qs + 10); e = L.tap(s, 1, wrongOf(s, 1), qs + 20);
     if (e.type !== 'wrong' || !e.both || s.phase !== 'result' || s.winner !== -1 || s.scores.join() !== '0,0' || s.results[0] !== -1) bad('both locked out: no winner');
@@ -402,6 +412,20 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await p.keyboard.press(String(s.items[0].answers[0] + 1)); q = await S();
   ok(q.winner === 0 && q.scores.join() === '2,1', 'keyboard: player 1 answers with 1 2 3 4');
 
+  // competitive touches: the tug of war, the streak badge, the fast-answer flash
+  const tugNow = () => p.evaluate(() => { const t = document.querySelector('#pk-tug'), a = t.querySelector('.a').getBoundingClientRect(), r = t.getBoundingClientRect(), k = t.querySelector('.knot').getBoundingClientRect(); return { pos: document.querySelector('#pk-mid').dataset.tug, a: a.width / r.width, knot: (k.left + k.width / 2 - r.left) / r.width, ca: getComputedStyle(t.querySelector('.a')).backgroundColor, cb: getComputedStyle(t.querySelector('.b')).backgroundColor }; });
+  let tg = await tugNow();
+  ok(tg.pos === '0.10' && Math.abs(tg.a - 0.55) < 0.03 && Math.abs(tg.knot - 0.55) < 0.03 && tg.ca === 'rgb(242, 84, 91)' && tg.cb === 'rgb(28, 126, 214)', 'tug of war: 2 : 1 after 5 rounds and the knot sits at 55 % toward the leader (Anna, red, grows from the left; Ben, blue, from the right)');
+  await toPhase('question'); s = await S(); await step(800); await tap(0, s.items[0].answers[0]);
+  let cmp = await p.evaluate(() => ({ fast: document.querySelector('.pk-panel[data-side="0"] .pk-fast')?.textContent.trim(), other: !!document.querySelector('.pk-panel[data-side="1"] .pk-fast'), s0: document.querySelector('.pk-panel[data-side="0"] .pk-streak').textContent, on0: document.querySelector('.pk-panel[data-side="0"] .pk-streak').classList.contains('on') }));
+  ok(cmp.fast === '抢答 0.8 秒' && !cmp.other, 'fast-answer flash on the winner\'s half only: "' + cmp.fast + '"');
+  ok(cmp.on0 && cmp.s0 === '连胜 ×2', 'two rounds won in a row: the streak badge says "' + cmp.s0 + '"');
+  await step(1500); await toPhase('question'); s = await S(); await tap(0, s.items[0].answers[0]);
+  cmp = await p.evaluate(() => ({ s0: document.querySelector('.pk-panel[data-side="0"] .pk-streak').textContent, s1on: document.querySelector('.pk-panel[data-side="1"] .pk-streak').classList.contains('on') }));
+  ok(cmp.s0 === '连胜 ×3' && !cmp.s1on, 'three in a row: "' + cmp.s0 + '", the other half shows no badge');
+  tg = await tugNow();
+  ok(tg.pos === '0.30' && Math.abs(tg.a - 0.65) < 0.03, 'the knot moved on toward the leader (' + tg.pos + ')');
+  await step(1500);
   // play the rest: side 0 wins every remaining round; check the final screens
   while ((await S()).phase !== 'final') { const st = await toPhase('question'); await tap(0, st.items[0].answers[0]); await step(1500); }
   q = await S();
@@ -445,7 +469,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await p.click('#pk-reset'); await p.click('dialog[open] button.danger'); await p.waitForSelector('.pk-match', { state: 'detached' });
   ok(await p.evaluate(() => Object.keys(JSON.parse(localStorage.getItem('learn.pk.v1')).rec.chinese).length === 0), 'the reset clears the record');
   // a tie and a loss by the first player
-  const playout = async (plan) => { while ((await S()).phase !== 'final') { const st = await toPhase('question'); if (plan(st) !== null) await tap(plan(st), st.items[plan(st)].answers[0]); else await step(12000); await step(1500); } return S(); };
+  const playout = async (plan, after) => { while ((await S()).phase !== 'final') { const st = await toPhase('question'); if (plan(st) !== null) { await tap(plan(st), st.items[plan(st)].answers[0]); if (after) await after(st); } else await step(12000); await step(1500); } return S(); };
   await p.click('#pk-start'); await p.waitForSelector('#pk-stage'); await p.evaluate(() => window.__pk.manual(true));
   q = await playout((st) => st.round % 2); // alternating: 5 : 5
   const tie = await p.evaluate(() => [0, 1].map((side) => document.querySelector(`.pk-panel[data-side="${side}"] .pk-verdict`).textContent));
@@ -454,7 +478,9 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await p.click('#pk-exit'); await p.waitForSelector('#pk-slot-1');
   ok(await p.evaluate(() => { const x = Object.values(JSON.parse(localStorage.getItem('learn.pk.v1')).rec.chinese)[0]; return x.ties === 1; }), 'finishing needs no confirmation; a tie is recorded as a tie');
   await p.click('#pk-start'); await p.waitForSelector('#pk-stage'); await p.evaluate(() => window.__pk.manual(true));
-  q = await playout((st) => (st.round < 3 ? 0 : 1));
+  const swaps = [];
+  q = await playout((st) => (st.round < 3 ? 0 : 1), async (st) => { swaps.push([st.round, await p.evaluate(() => [...document.querySelectorAll('.pk-panel')].map((e) => e.dataset.side + (e.classList.contains('is-swap') ? 'S' : '')).join(' '))]); });
+  ok(swaps.filter((x) => /1S/.test(x[1])).map((x) => x[0]).join() === '6', 'lead change: only in the round where Ben went ahead (3 : 3 -> 3 : 4) his half pulses (' + swaps.filter((x) => /S/.test(x[1])).map((x) => x[0] + ':' + x[1]).join(' / ') + ')');
   const lose = await p.evaluate(() => [0, 1].map((side) => document.querySelector(`.pk-panel[data-side="${side}"] .pk-verdict`).textContent));
   ok(q.outcome.join() === 'lose,win' && lose.join() === '你输了。,你赢了。', 'player 2 wins 7 : 3: the top half says 你赢了。, the bottom half 你输了。');
   await p.screenshot({ path: OUT + 'pk-final-top-wins.png' });
@@ -572,7 +598,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await mPlay(() => 0);
   // fireworks and confetti are drawn on a canvas in the winner's half
   let ink = 0;
-  for (let i = 0; i < 25 && !ink; i++) { await mp.waitForTimeout(150); ink = await mp.evaluate(() => { const c = document.querySelector('.pk-panel[data-side="0"] canvas.pk-fx'); if (!c || !c.width) return 0; const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let k = 3; k < d.length; k += 4 * 7) if (d[k] > 20) n++; return n; }); }
+  for (let i = 0; i < 40 && ink < 25; i++) { await mp.waitForTimeout(150); ink = await mp.evaluate(() => { const c = document.querySelector('.pk-panel[data-side="0"] canvas.pk-fx'); if (!c || !c.width) return 0; const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let k = 3; k < d.length; k += 4 * 7) if (d[k] > 20) n++; return n; }); }
   ok(ink > 20, 'winner\'s half: the canvas shows fireworks / confetti (' + ink + ' painted samples)');
   const fx = await mp.evaluate(() => ({ w: document.querySelectorAll('.pk-panel[data-side="0"] canvas.pk-fx').length, l: document.querySelectorAll('.pk-panel[data-side="1"] canvas.pk-fx').length, size: (() => { const c = document.querySelector('.pk-panel[data-side="0"] canvas.pk-fx'), o = document.querySelector('.pk-panel[data-side="0"] .pk-over'); return [c.offsetWidth === o.offsetWidth, c.offsetHeight === o.offsetHeight, c.width >= c.offsetWidth]; })(), raf: window.__live.raf.size }));
   ok(fx.w === 1 && fx.l === 0 && fx.size.every(Boolean) && fx.raf >= 1, 'only the winner\'s half has a particle canvas, sized by layout size (dpr aware); one frame loop runs');

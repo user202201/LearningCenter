@@ -902,5 +902,117 @@
   "{0} 分 {1} 秒": [
     "{0} min {1} s",
     "{0} min {1} s"
+  ],
+  "核心温度": [
+    "Core temperature",
+    "Température du noyau"
+  ],
+  "年龄": [
+    "Age",
+    "Âge"
+  ],
+  "能量": [
+    "Energy",
+    "Énergie"
+  ],
+  "核心": [
+    "Core",
+    "Noyau"
+  ],
+  "辐射层": [
+    "Radiative zone",
+    "Zone radiative"
+  ],
+  "对流层": [
+    "Convection zone",
+    "Zone convective"
+  ],
+  "光球": [
+    "Photosphere",
+    "Photosphère"
+  ],
+  "色球": [
+    "Chromosphere",
+    "Chromosphère"
+  ],
+  "日冕": [
+    "Corona",
+    "Couronne"
+  ],
+  "星云": [
+    "Nebula",
+    "Nébuleuse"
+  ],
+  "原恒星": [
+    "Protostar",
+    "Protoétoile"
+  ],
+  "主序星": [
+    "Main-sequence star",
+    "Étoile de la séquence principale"
+  ],
+  "红巨星": [
+    "Red giant",
+    "Géante rouge"
+  ],
+  "行星状星云": [
+    "Planetary nebula",
+    "Nébuleuse planétaire"
+  ],
+  "白矮星": [
+    "White dwarf",
+    "Naine blanche"
+  ],
+  "红超巨星": [
+    "Red supergiant",
+    "Supergéante rouge"
+  ],
+  "超新星": [
+    "Supernova",
+    "Supernova"
+  ],
+  "中子星或黑洞": [
+    "Neutron star or black hole",
+    "Étoile à neutrons ou trou noir"
+  ],
+  "地月距离": [
+    "Earth-Moon distance",
+    "Distance Terre-Lune"
+  ],
+  "日地距离": [
+    "Earth-Sun distance",
+    "Distance Terre-Soleil"
+  ],
+  "太阳到海王星": [
+    "Sun to Neptune",
+    "Du Soleil à Neptune"
+  ],
+  "太阳系的边缘（奥尔特云）": [
+    "Edge of the solar system (Oort cloud)",
+    "Bord du système solaire (nuage d'Oort)"
+  ],
+  "最近的恒星比邻星": [
+    "Nearest star, Proxima Centauri",
+    "Étoile la plus proche, Proxima du Centaure"
+  ],
+  "银河系": [
+    "Milky Way",
+    "Voie lactée"
+  ],
+  "本星系群": [
+    "Local Group",
+    "Groupe local"
+  ],
+  "可观测宇宙": [
+    "Observable universe",
+    "Univers observable"
+  ],
+  "云层顶部至 1 个大气压处": [
+    "Cloud top to the 1-bar level",
+    "Du sommet des nuages au niveau de 1 bar"
+  ],
+  "最低温至 1 个大气压处": [
+    "Coldest point to the 1-bar level",
+    "Du point le plus froid au niveau de 1 bar"
   ]
 }

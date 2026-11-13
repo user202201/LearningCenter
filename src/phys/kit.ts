@@ -12,6 +12,7 @@
 import { h, toast } from "../ui";
 import { renderRich, renderTeX } from "../mathtext";
 import { mulberry32, clamp, fmt } from "./qtools";
+import { tr } from "../i18n";
 import type { Q } from "./qtools";
 
 export type St = Record<string, number>;
@@ -61,7 +62,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   const VH = Math.round(VW * aspect);
 
   // ----- canvas
-  const canvas = h("canvas", { class: "pl-canvas", id: "pl-canvas", style: `aspect-ratio:${VW} / ${VH}`, role: "img", "aria-label": def.meta.title });
+  const canvas = h("canvas", { class: "pl-canvas", id: "pl-canvas", style: `aspect-ratio:${VW} / ${VH}`, role: "img", "aria-label": tr(def.meta.title) });   // (a canvas is not translated by the page translator: its label is)
   const c2 = canvas.getContext("2d")!;
   let drawQueued = false;
   const redrawNow = () => {

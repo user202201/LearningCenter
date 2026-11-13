@@ -25,18 +25,14 @@ export function renderLab(X: Ctx): void {
   for (const grade of [8, 9] as const) {
     const ids = ORDER.filter((id) => CATALOG[id].grade === grade);
     body.append(h("h2", { class: "sec pl-grade", "data-grade": String(grade) }, grade === 8 ? "八年级" : "九年级"));
-    const chapters = [...new Set(ids.map((id) => CATALOG[id].chapter))];
-    for (const ch of chapters) {
-      body.append(h("h3", { class: "pl-chapter" }, ch));
-      const row = h("div", { class: "pl-cards" });
-      for (const id of ids.filter((x) => CATALOG[x].chapter === ch)) {
-        const m = CATALOG[id], done = (saved.done[id] ?? []).length;
-        const ico = h("span", { class: "pl-ico" }); ico.innerHTML = m.icon;
-        row.append(h("button", { class: "pl-sc" + (done >= m.tasks ? " all" : ""), "data-sim": id, onclick: () => (location.hash = `#/science/physics/${id}`) },
-          ico, h("b", { class: "pl-ct" }, m.title), h("span", { class: "muted small pl-cs" }, `实验任务 ${done} / ${m.tasks}`)));
-      }
-      body.append(row);
+    const row = h("div", { class: "pl-cards", "data-grade": String(grade) });
+    for (const id of ids) {
+      const m = CATALOG[id], done = (saved.done[id] ?? []).length;
+      const ico = h("span", { class: "pl-ico" }); ico.innerHTML = m.icon;
+      row.append(h("button", { class: "pl-sc" + (done >= m.tasks ? " all" : ""), "data-sim": id, "data-chapter": m.chapter, onclick: () => (location.hash = `#/science/physics/${id}`) },
+        h("span", { class: "pl-chtag" }, m.chapter), ico, h("b", { class: "pl-ct" }, m.title), h("span", { class: "muted small pl-cs" }, `实验任务 ${done} / ${m.tasks}`)));
     }
+    body.append(row);
   }
   X.show(h("div", { class: "page", style: `--kid:${COLOR}` }, hero(X, "物理实验室", "#/subject/science", "返回", "#/science/physics"),
     h("main", { class: "scroll" }, h("div", { class: "wide pl-wrap" }, h("p", { class: "muted small center" }, "拖动滑块，观察结果；完成实验任务，再做小测验。"), body))));

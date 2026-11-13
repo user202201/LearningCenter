@@ -25,7 +25,7 @@ export function dataRows(b: Body): [string, (Node | string)[]][] {
     ["自转周期", [hoursText(b.rot), ...(retro ? [h("small", { class: "sp-sub" }, "逆行")] : [])]],
   ];
   if (Math.abs(b.sday - Math.abs(b.rot)) / Math.abs(b.rot) > 0.1) rows.push(["昼夜交替一次", [hoursText(b.sday)]]);
-  rows.push(["表面温度", [`${b.tmin} ~ ${b.tmax} ℃`, ...(b.tnote ? [h("small", { class: "sp-sub" }, b.tnote)] : [])]]);
+  rows.push(["表面温度", [`${b.tmin} ~ ${b.tmax} ℃`, ...(b.tnote ? [h("small", { class: "sp-sub" }, tr(b.tnote))] : [])]]);
   rows.push(["重力", [`地球的 ${sig(rel, 3)} 倍`, h("small", { class: "sp-sub" }, `${sig(b.g, 3)} 米/秒²`)]]);
   rows.push(["平均密度", [`${sig(b.dens, 3)} 克/厘米³`]]);
   rows.push(["赤道自转速度", [`${big(surfaceSpeedKmh(b))} 千米/小时`]]);

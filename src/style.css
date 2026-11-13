@@ -2087,10 +2087,11 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .pl-wrap { padding-bottom: 28px; }
 .pl-grade { margin: 18px 0 4px; }
 .pl-chapter { margin: 10px 2px 6px; font-size: 15px; color: #5430b8; }
-.pl-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-.pl-sc { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 8px; min-height: 150px; border-radius: 22px; border: 2px solid #d0bfff; box-shadow: 0 4px 0 #d0bfff; background: linear-gradient(160deg, #f3f0ff, #fff); text-align: center; }
+.pl-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.pl-sc { flex: 0 0 calc(50% - 6px); min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 8px 12px; min-height: 176px; border-radius: 22px; border: 2px solid #d0bfff; box-shadow: 0 4px 0 #d0bfff; background: linear-gradient(160deg, #f3f0ff, #fff); text-align: center; }
 .pl-sc.all { border-color: #8ce99a; box-shadow: 0 4px 0 #8ce99a; }
 .pl-ico { width: 76px; height: 76px; display: block; } .pl-ico svg { width: 100%; height: 100%; display: block; }
+.pl-chtag { align-self: stretch; font-size: 11px; font-weight: 800; color: #5430b8; background: #ece6ff; border-radius: 999px; padding: 2px 8px; overflow-wrap: anywhere; }
 .pl-ct { font-size: 16px; color: #2d2230; overflow-wrap: anywhere; }
 .pl-sim { display: flex; flex-direction: column; gap: 14px; }
 .pl-main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
@@ -2139,7 +2140,8 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
   .pl-main { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: start; }
   .pl-info { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
 }
-@media (max-width: 420px) { .pl-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .pl-readouts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 600px) { .pl-sc { flex: 0 0 180px; } }
+@media (max-width: 420px) { .pl-cards { gap: 10px; } .pl-sc { flex-basis: calc(50% - 5px); } .pl-readouts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ===== 天文 (space) ===== */
 .sci-ref.sp-card { position: relative; padding-right: 64px; }

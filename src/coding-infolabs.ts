@@ -8,8 +8,18 @@ import * as I from "./coding-infomodel";
 import { figEl, gridEl } from "./coding-infoart";
 import { InfoAct, InfoContent, L, fill, Tri } from "./coding-infocontent";
 
-export interface Io { act: InfoAct; c: InfoContent; seed: number; say(t: string, kind?: "bad" | "ok" | ""): void; bad(): void; win(): void; prompt(t: string): void }
-export interface Widget { solve(): void; wrong(): void }
+export interface Io {
+  act: InfoAct; c: InfoContent; seed: number;
+  say(t: string, kind?: "bad" | "ok" | ""): void;
+  /** a mistake (a wrong answer) */
+  bad(): void;
+  /** solved; `stars` overrides the stars made from mistakes and hints (levels that count blocks) */
+  win(stars?: number): void;
+  prompt(t: string): void;
+  /** the reference answer was looked at: at most 1 star */
+  cheat(): void;
+}
+export interface Widget { solve(): void; wrong(): void; /** the last step of the hint ladder (the editor lights the next block) */ extraHint?(): string | void }
 export type Mount = (root: HTMLElement, io: Io) => Widget;
 
 export const btn = (id: string, text: string, onclick: () => void, cls = ""): HTMLButtonElement => h("button", { id, class: "ci-btn " + cls, type: "button", onclick }, text) as HTMLButtonElement;

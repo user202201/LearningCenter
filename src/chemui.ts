@@ -334,7 +334,7 @@ function play(mode: string): void {
         if (moved) {
           const b = ev.type === "pointercancel" ? null : bucketAt(ev.clientX, ev.clientY);
           if (b?.dataset.b) place(id, b.dataset.b); else if (was && ev.type !== "pointercancel") unplace(id);
-        } else if (was) unplace(id);
+        } else if (was) { if (sel && sel !== id) place(sel, was); else unplace(id); }   // (with another item selected, a tap on a placed item means "that class")
         else selectItem(id);
       };
       chip.addEventListener("pointermove", move); chip.addEventListener("pointerup", up); chip.addEventListener("pointercancel", up);

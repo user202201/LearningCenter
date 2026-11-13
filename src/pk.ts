@@ -422,7 +422,7 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
     const sig = JSON.stringify([sn.phase, sn.count, sn.round, sn.scores, sn.locked, sn.wrongPick, sn.winner, sn.outcome, sn.again, store.mute]);
     if (sig !== lastSig) {
       lastSig = sig;
-      const changed = L.leadChanged(lastScores, sn.scores);
+      const changed = s.phase === "result" && L.leadSwap(s.results, s.round);
       if (sn.phase !== "result") swapSide = null; else if (changed) swapSide = L.leaderOf(sn.scores);
       lastScores = [...sn.scores];
       const tp = L.tugPos(s);

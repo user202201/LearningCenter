@@ -62,10 +62,10 @@ export function likeness(t: W.Word, c: W.Word): number {
 // ---------- meanings ----------
 /** the meaning of a word in the language of the screen ("" when the library has none) */
 export function meaningIn(x: W.Word, lang: string = getLang()): string { return (lang === "en" ? x.en : lang === "fr" ? x.fr : x.zh) ?? ""; }
-const STOP = new Set(["le", "la", "les", "l'", "un", "une", "des", "de", "du", "d'", "en", "to", "the", "a", "an", "的", "地", "得"]);
+const STOP = new Set(["le", "la", "les", "l'", "un", "une", "des", "de", "du", "d'", "en", "to", "the", "a", "an"]);
 /** the senses a meaning text is made of ("大的，非常的，主要的" -> 大, 非常, 主要; "to run" -> run) */
 export function senses(m: string): string[] {
-  return m.toLowerCase().split(/[；;,，、/（）()\s]+/).map((x) => x.replace(/的$/, "").replace(/^l['’]/, "")).filter((x) => x && !STOP.has(x));
+  return m.toLowerCase().split(/[；;,，、/（）()\s]+/).map((x) => x.replace(/的$/, "").replace(/^l['’]/, "")).filter((x) => x && !STOP.has(x) && !/^[的地得]$/.test(x));
 }
 
 // ---------- the items ----------

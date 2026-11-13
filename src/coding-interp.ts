@@ -25,6 +25,7 @@ export interface State {
   data?: LevelData;
   seed?: number;
   weighs?: number;
+  swaps?: number;
   stage?: StageState;
 }
 /** fixed data a level gives to the program: a graph (nodes 1..n with positions on a 100 x 100 drawing), weights on a balance scale */
@@ -474,7 +475,7 @@ export class Machine {
       case "swap": {
         f.i++;
         const L = this.list(b.list ?? "xs"), i = Math.floor(E(b.n, 1)), j = Math.floor(E(b.e, 2));
-        if (i < 1 || j < 1 || i > L.length || j > L.length) this.bad(MSG.range); else { const t = L[i - 1]; L[i - 1] = L[j - 1]; L[j - 1] = t; }
+        if (i < 1 || j < 1 || i > L.length || j > L.length) this.bad(MSG.range); else { const t = L[i - 1]; L[i - 1] = L[j - 1]; L[j - 1] = t; st.swaps = (st.swaps ?? 0) + 1; }
         break;
       }
       case "lclear": f.i++; this.state.lists![b.list ?? "xs"] = []; break;

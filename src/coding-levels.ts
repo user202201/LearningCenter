@@ -26,7 +26,7 @@ export interface LevelSpec {
   family?: string; seed?: number;
   goal?: Goal;
   palette: PaletteKind[];
-  funcs?: { name: string; param?: string }[];
+  funcs?: { name: string; param?: string; params?: string[] }[];
   /** the variables the blocks can use */
   vars?: string[];
   /** variables with a value at the start */

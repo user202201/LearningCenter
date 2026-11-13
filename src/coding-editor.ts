@@ -6,13 +6,18 @@
  * duplicates it; the number fields have − / + and a list of values; undo / redo; the size limit "n / max".
  */
 import { h, toast } from "./ui";
-import { Blk, BlockKind, Expr, PaletteKind, Program, cloneBlk, cloneProgram, countBlocks, emptyProgram, newId, num, slotsOf, walk, toText } from "./coding-ast";
+import { Blk, BlockKind, Expr, PaletteKind, Program, cloneBlk, cloneProgram, countBlocks, emptyProgram, newId, num, slotsOf, walk, toText, paramsOf, LIST_ARITY, ListFn, FnName, FN_ARITY, MeProp } from "./coding-ast";
 import { COLORS } from "./coding-turtle";
 import { condExpr } from "./coding-levels";
 
+export interface SlotOpt { sprite: string; on: string; events: string[] }
 export interface EditorOpts {
   palette: PaletteKind[];
-  funcs?: { name: string; param?: string }[];
+  funcs?: { name: string; param?: string; params?: string[] }[];
+  /** worlds 7-10: conditions and values are built from small blocks; calls of itself are allowed; lists; the reporters and operators offered; the palette is split in tabs */
+  free?: boolean; recursion?: boolean; lists?: string[]; rep?: string[]; ops?: string[]; tabs?: boolean; nums?: number[];
+  /** the stage: the scripts the child fills (one hat each), the sprites, the texts a sprite can say, the messages and keys */
+  slots?: SlotOpt[]; hideMain?: boolean; sprites?: { id: string; label: string }[]; texts?: Record<string, string>; msgs?: Record<string, string>; keys?: Record<string, string>;
   vars?: string[];
   conds?: string[];
   max: number;
@@ -34,8 +39,8 @@ export interface Editor {
 }
 
 // ---------- looks ----------
-const ORDER: PaletteKind[] = ["move", "left", "right", "take", "light", "fd", "tl", "tr", "penup", "pendown", "color", "repeat", "until", "while", "if", "ifelse", "set", "change", "call"];
-interface Meta { min: number; max: number; step: number; def: number; presets: number[] }
+const ORDER: PaletteKind[] = ["move", "left", "right", "take", "light", "fd", "tl", "tr", "penup", "pendown", "color", "repeat", "forever", "until", "while", "if", "ifelse", "wait", "waitUntil", "for", "each", "set", "change", "smove", "sturn", "goto", "changex", "changey", "say", "sayfor", "costume", "nextcostume", "size", "show", "hide", "note", "broadcast", "push", "lset", "lremove", "swap", "lclear", "call", "return"];
+interface Meta { min: number; max: number; step: number; def: number; presets: number[]; /** the − / + buttons go to the next value of the list */ cycle?: boolean; fmt?: (n: number) => string }
 const META: Record<string, Meta> = {
   repeat: { min: 1, max: 40, step: 1, def: 3, presets: [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 18, 20, 24, 30, 36] },
   fd: { min: 5, max: 200, step: 5, def: 40, presets: [5, 6, 10, 20, 30, 40, 45, 50, 60, 70, 80, 90, 100] },
@@ -43,8 +48,21 @@ const META: Record<string, Meta> = {
   arg: { min: 1, max: 9, step: 1, def: 2, presets: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
   val: { min: -99, max: 99, step: 1, def: 0, presets: [0, 1, 2, 3, 4, 5, 6, 8, 10, 20, 50, 100] },
   by: { min: -99, max: 99, step: 1, def: 1, presets: [-5, -2, -1, 1, 2, 3, 4, 5, 10] },
+  // phase 2
+  idx: { min: -999, max: 999, step: 1, def: 1, presets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+  steps: { min: -300, max: 300, step: 5, def: 10, presets: [-30, -10, 5, 10, 15, 20, 30, 50, 100] },
+  secs: { min: 0, max: 10, step: 0.5, def: 1, presets: [0.5, 1, 2, 3, 5] },
+  coord: { min: -120, max: 120, step: 10, def: 0, presets: [-100, -60, -30, 0, 30, 60, 100] },
+  note: { min: 60, max: 72, step: 1, def: 60, presets: [60, 62, 64, 65, 67, 69, 71, 72], cycle: true, fmt: (n: number) => NOTE_NAME[n] ?? String(n) },
+  beats: { min: 0.5, max: 8, step: 0.5, def: 1, presets: [0.5, 1, 2, 3, 4] },
+  size: { min: 20, max: 300, step: 10, def: 100, presets: [50, 100, 150, 200] },
+  costume: { min: 1, max: 3, step: 1, def: 1, presets: [1, 2, 3] },
+  turnd: { min: -360, max: 360, step: 6, def: 90, presets: [6, 15, 30, 45, 90, 180] },
 };
-const GROUP: Record<string, string> = { move: "go", left: "go", right: "go", take: "go", light: "go", fd: "pen", tl: "pen", tr: "pen", penup: "pen", pendown: "pen", color: "pen", repeat: "loop", until: "loop", while: "loop", if: "cond", ifelse: "cond", set: "var", change: "var", call: "func" };
+/** the notes of a scale in numbered notation (the number is the MIDI note: 60 = middle C) */
+const NOTE_NAME: Record<number, string> = { 60: "1", 62: "2", 64: "3", 65: "4", 67: "5", 69: "6", 71: "7", 72: "1˙" };
+const GROUP: Record<string, string> = { move: "go", left: "go", right: "go", take: "go", light: "go", fd: "pen", tl: "pen", tr: "pen", penup: "pen", pendown: "pen", color: "pen", repeat: "loop", until: "loop", while: "loop", if: "cond", ifelse: "cond", set: "var", change: "var", call: "func", return: "func", forever: "loop", for: "loop", each: "loop", wait: "loop", waitUntil: "loop", smove: "go", sturn: "go", goto: "go", changex: "go", changey: "go",
+  say: "ev", sayfor: "ev", costume: "ev", nextcostume: "ev", size: "ev", show: "ev", hide: "ev", note: "ev", broadcast: "ev", push: "list", lset: "list", lremove: "list", swap: "list", lclear: "list" };
 const ICON: Record<string, string> = { move: "↑", left: "↶", right: "↷", take: "★", light: "☀", fd: "↑", tl: "↶", tr: "↷", penup: "✎", pendown: "✎" };
 const WORD: Record<string, string> = { move: "前进", left: "左转", right: "右转", take: "拿星星", light: "开灯", fd: "前进", tl: "左转", tr: "右转", penup: "抬笔", pendown: "落笔" };
 export const COND_LABEL: Record<string, string> = {
@@ -55,7 +73,7 @@ export const COND_LABEL: Record<string, string> = {
 const COLOR_NAMES: Record<string, string> = { black: "黑色", red: "红色", orange: "橙色", yellow: "黄色", green: "绿色", blue: "蓝色", purple: "紫色" };
 
 export const kindOf = (b: Blk): string => (b.t === "if" && b.els ? "ifelse" : b.t === "call" ? `call:${b.name}` : b.t);
-const isControl = (k: string) => ["repeat", "until", "while", "if", "ifelse"].includes(k);
+const isControl = (k: string) => ["repeat", "until", "while", "if", "ifelse", "forever", "for", "each"].includes(k);
 const exprKey = (e?: Expr): string => (e ? JSON.stringify(e, (k, v) => (k === "id" ? undefined : v)) : "");
 /** a condition expression as the key of COND_LABEL ("!pathAhead", "colorIs(r)", "count < 4") */
 export function condKey(e: Expr): string {
@@ -90,26 +108,54 @@ const cbtn = (props: Record<string, unknown>, ...kids: (Node | string | null)[])
 };
 const span = (cls: string, text: string, user = false) => h("span", { class: cls + (user ? " user" : "") }, text);
 
-interface Scope { param?: string; vars: string[]; conds: Expr[]; funcs: { name: string; param?: string }[]; interactive: boolean; opts: EditorOpts; edit: (fn: () => void) => void; pick: (anchor: HTMLElement, items: PickItem[], onPick: (v: string) => void) => void }
+interface Scope { param?: string; params?: string[]; vars: string[]; conds: Expr[]; funcs: { name: string; param?: string; params?: string[] }[]; interactive: boolean; opts: EditorOpts; edit: (fn: () => void) => void; pick: (anchor: HTMLElement, items: PickItem[], onPick: (v: string) => void) => void }
 interface PickItem { label: string; value: string; cls?: string; user?: boolean }
 
 const newBlock = (kind: string, o: EditorOpts, scope?: { param?: string }): Blk => {
   const conds = (o.conds ?? []).map(condExpr);
   const find = (f: (k: string) => boolean) => conds.find((c) => f(condKey(c))) ?? conds[0] ?? { k: "sense", s: "pathAhead" } as Expr;
   const b: Blk = { id: newId(), t: "move" };
+  const list0 = o.lists?.[0] ?? "xs", text0 = Object.keys(o.texts ?? {})[0] ?? "hi", msg0 = Object.keys(o.msgs ?? {})[0] ?? "go";
+  const cond0 = (): Expr => freeCond(o);
   switch (kind) {
+    case "forever": b.t = "forever"; b.body = []; break;
+    case "for": b.t = "for"; b.name = o.vars?.[0] ?? "i"; b.n = num(1); b.e = num(5); b.body = []; break;
+    case "each": b.t = "each"; b.name = o.vars?.[0] ?? "x"; b.list = list0; b.body = []; break;
+    case "wait": b.t = "wait"; b.n = num(1); break;
+    case "waitUntil": b.t = "waitUntil"; b.cond = cond0(); break;
+    case "return": b.t = "return"; b.e = num(0); break;
+    case "push": b.t = "push"; b.list = list0; b.e = num(1); break;
+    case "lset": b.t = "lset"; b.list = list0; b.n = num(1); b.e = num(0); break;
+    case "lremove": b.t = "lremove"; b.list = list0; b.n = num(1); break;
+    case "swap": b.t = "swap"; b.list = list0; b.n = num(1); b.e = num(2); break;
+    case "lclear": b.t = "lclear"; b.list = list0; break;
+    case "smove": b.t = "smove"; b.n = num(META.steps.def); break;
+    case "sturn": b.t = "sturn"; b.n = num(90); break;
+    case "goto": b.t = "goto"; b.n = num(0); b.e = num(0); break;
+    case "changex": case "changey": b.t = kind; b.n = num(10); break;
+    case "say": b.t = "say"; b.c = text0; break;
+    case "sayfor": b.t = "sayfor"; b.c = text0; b.n = num(1); break;
+    case "costume": b.t = "costume"; b.n = num(1); break;
+    case "size": b.t = "size"; b.n = num(100); break;
+    case "note": b.t = "note"; b.n = num(60); b.e = num(1); break;
+    case "broadcast": b.t = "broadcast"; b.c = msg0; break;
     case "repeat": b.t = "repeat"; b.n = num(META.repeat.def); b.body = []; break;
-    case "until": b.t = "until"; b.cond = find((k) => k === "onFlag"); b.body = []; break;
-    case "while": b.t = "while"; b.cond = conds.find((c) => condKey(c) === "!onFlag") ?? find((k) => !k.startsWith("onFlag")); b.body = []; break;
-    case "if": b.t = "if"; b.cond = find((k) => k !== "onFlag" && k !== "!onFlag"); b.body = []; break;
-    case "ifelse": b.t = "if"; b.cond = find((k) => k !== "onFlag" && k !== "!onFlag"); b.body = []; b.els = []; break;
+    case "until": b.t = "until"; b.cond = o.free && !conds.length ? cond0() : find((k) => k === "onFlag"); b.body = []; break;
+    case "while": b.t = "while"; b.cond = o.free ? cond0() : conds.find((c) => condKey(c) === "!onFlag") ?? find((k) => !k.startsWith("onFlag")); b.body = []; break;
+    case "if": b.t = "if"; b.cond = o.free ? cond0() : find((k) => k !== "onFlag" && k !== "!onFlag"); b.body = []; break;
+    case "ifelse": b.t = "if"; b.cond = o.free ? cond0() : find((k) => k !== "onFlag" && k !== "!onFlag"); b.body = []; b.els = []; break;
     case "fd": b.t = "fd"; b.n = num(META.fd.def); break;
     case "tl": case "tr": b.t = kind; b.n = num(META.turn.def); break;
     case "color": b.t = "color"; b.c = "red"; break;
     case "set": b.t = "set"; b.name = o.vars?.[o.vars.length - 1] ?? "x"; b.e = num(0); break;
     case "change": b.t = "change"; b.name = o.vars?.[0] ?? "x"; b.e = num(1); break;
     default:
-      if (kind.startsWith("call:")) { b.t = "call"; b.name = kind.slice(5); const f = o.funcs?.find((x) => x.name === b.name); if (f?.param) b.arg = scope?.param ? { k: "v", name: scope.param } : num(META.arg.def); }
+      if (kind.startsWith("call:")) {
+        b.t = "call"; b.name = kind.slice(5);
+        const f = o.funcs?.find((x) => x.name === b.name), ps = f ? paramsOf(f) : [];
+        if (ps.length === 1) b.arg = scope?.param ? { k: "v", name: scope.param } : num(META.arg.def);
+        else if (ps.length > 1) b.args = ps.map(() => num(META.arg.def));
+      }
       else b.t = kind as BlockKind;
   }
   return b;
@@ -120,14 +166,129 @@ function numField(sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void
   const cur = get() ?? num(meta.def);
   const isNum = cur.k === "n";
   const clamp = (v: number) => Math.max(meta.min, Math.min(meta.max, v));
-  const mk = (d: number, sym: string) => cbtn({ class: "cw-step cw-ctl", type: "button", "data-d": String(d), "aria-label": d > 0 ? "增加" : "减少", disabled: !sc.interactive || !isNum || (isNum && (d > 0 ? (cur as { v: number }).v >= meta.max : (cur as { v: number }).v <= meta.min)),
-    onclick: () => sc.edit(() => set(num(clamp((cur as { v: number }).v + d * meta.step)))) }, sym);
-  const names = varsOk ? [...(sc.param ? [sc.param] : []), ...sc.vars.filter((v) => v !== sc.param)] : [];
-  const label = cur.k === "n" ? String(cur.v) : cur.k === "v" ? cur.name : exprStr(cur);
+  const stepTo = (d: number): number => {
+    const v = (cur as { v: number }).v;
+    if (!meta.cycle) return clamp(Math.round((v + d * meta.step) * 100) / 100);
+    const i = meta.presets.indexOf(v);
+    return meta.presets[Math.max(0, Math.min(meta.presets.length - 1, (i < 0 ? 0 : i) + d))];
+  };
+  const mk = (d: number, sym: string) => cbtn({ class: "cw-step cw-ctl", type: "button", "data-d": String(d), "aria-label": d > 0 ? "增加" : "减少", disabled: !sc.interactive || !isNum || (isNum && (meta.cycle ? stepTo(d) === (cur as { v: number }).v : d > 0 ? (cur as { v: number }).v >= meta.max : (cur as { v: number }).v <= meta.min)),
+    onclick: () => sc.edit(() => set(num(stepTo(d)))) }, sym);
+  const names = varsOk ? [...new Set([...(sc.params ?? (sc.param ? [sc.param] : [])), ...sc.vars])] : [];
+  const label = cur.k === "n" ? (meta.fmt ? meta.fmt(cur.v) : String(cur.v)) : cur.k === "v" ? cur.name : exprStr(cur);
   const val = cbtn({ class: "cw-val cw-ctl" + (isNum ? "" : " var"), type: "button", disabled: !sc.interactive, "aria-label": "选择数值",
-    onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, [...meta.presets.map((p) => ({ label: String(p), value: `n:${p}` })), ...names.map((n) => ({ label: n, value: `v:${n}`, cls: "var" }))], (v) => sc.edit(() => set(v.startsWith("n:") ? num(Number(v.slice(2))) : { k: "v", name: v.slice(2) }))) }, label);
+    onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, [...meta.presets.map((p) => ({ label: meta.fmt ? meta.fmt(p) : String(p), value: `n:${p}` })), ...names.map((n) => ({ label: n, value: `v:${n}`, cls: "var" })), ...(sc.opts.free ? exprItems(sc, "num") : [])],
+      (v) => sc.edit(() => set(fromPick(sc, v, cur, meta, "num")))) }, label);
   return h("span", { class: "cw-num" }, mk(-1, "−"), val, mk(1, "+"));
 }
+
+// ---------- phase 2: values and conditions built from small blocks (levels with `free`) ----------
+const OP_LABEL: Record<string, string> = { "+": "+", "-": "−", "*": "×", "/": "÷", "%": "mod", "<": "<", "<=": "≤", ">": ">", ">=": "≥", "==": "=", "!=": "≠", and: "并且", or: "或者" };
+const ARITH = ["+", "-", "*", "/", "%"], CMP_OPS = ["<", "<=", ">", ">=", "==", "!="];
+const LIST_LABEL: Record<string, string> = { len: "长度", sum: "总和", max: "最大值", min: "最小值", has: "包含", count: "个数", indexOf: "位置", item: "项" };
+const FN_LABEL: Record<string, string> = { floor: "取整", abs: "绝对值", sqrt: "平方根", round: "四舍五入", rand: "随机数", minOf: "较小的", maxOf: "较大的", deg: "邻居数", nbr: "邻居", heavier: "更重" };
+const ME_LABEL: Record<string, string> = { myX: "我的 x", myY: "我的 y", mySize: "我的大小", myCostume: "我的造型", myDir: "我的方向", floorNum: "脚下的数字", tapX: "点击处的 x", tapY: "点击处的 y" };
+const LISTFNS: ListFn[] = ["len", "item", "sum", "max", "min", "has", "count", "indexOf"];
+/** the condition a new block starts with in a `free` level */
+function freeCond(o: EditorOpts): Expr {
+  const rep = o.rep ?? [];
+  if (rep.includes("keyDown") && o.keys) return { k: "keyDown", key: Object.keys(o.keys)[0] };
+  if (rep.includes("touching") && o.sprites?.length) return { k: "touch", s: o.sprites[o.sprites.length - 1].id };
+  if (rep.includes("heavier")) return { k: "fn", f: "heavier", args: [num(1), num(2)] };
+  const v = o.vars?.[0];
+  return { k: "cmp", op: "==", a: v ? { k: "v", name: v } : num(1), b: num(v ? 0 : 1) };
+}
+const dflt = (f: FnName): Expr[] => (f === "rand" ? [num(-100), num(100)] : Array.from({ length: FN_ARITY[f] }, (_, i) => num(i === 0 && FN_ARITY[f] === 1 ? 0 : 1)));
+/** what the picker of a slot offers beside numbers and variables: operators, reporters, comparisons */
+function exprItems(sc: Scope, mode: "num" | "bool"): PickItem[] {
+  const o = sc.opts, rep = o.rep ?? [], out: PickItem[] = [];
+  if (mode === "num") {
+    for (const op of o.ops ?? ["+", "-", "*"]) out.push({ label: `□ ${OP_LABEL[op]} □`, value: `op:${op}`, cls: "ex" });
+    if (o.lists?.length) for (const f of LISTFNS) if (rep.includes(f)) out.push({ label: f === "item" ? "第 □ 项" : `${LIST_LABEL[f]}(…)`, value: `rep:${f}`, cls: "ex" });
+    for (const f of Object.keys(FN_ARITY) as FnName[]) if (rep.includes(f)) out.push({ label: `${FN_LABEL[f]}(…)`, value: `fn:${f}`, cls: "ex" });
+    for (const m of Object.keys(ME_LABEL)) if (rep.includes(m)) out.push({ label: ME_LABEL[m], value: `me:${m}`, cls: "ex" });
+    if (rep.includes("call")) for (const f of sc.funcs) out.push({ label: `${f.name}(…)`, value: `call:${f.name}`, cls: "ex" });
+  } else {
+    for (const op of CMP_OPS) out.push({ label: `□ ${OP_LABEL[op]} □`, value: `cmp:${op}`, cls: "ex" });
+    out.push({ label: OP_LABEL.and, value: "logic:and", cls: "ex" }, { label: OP_LABEL.or, value: "logic:or", cls: "ex" }, { label: "非", value: "not", cls: "ex" });
+    if (rep.includes("touching")) for (const s of o.sprites ?? []) out.push({ label: `碰到 ${s.label}`, value: `touch:${s.id}`, cls: "ex" });
+    if (rep.includes("keyDown")) for (const [k, l] of Object.entries(o.keys ?? {})) out.push({ label: `按住 ${l}`, value: `key:${k}`, cls: "ex" });
+    if (rep.includes("heavier")) out.push({ label: `${FN_LABEL.heavier}(…)`, value: "fn:heavier", cls: "ex" });
+    if (rep.includes("call")) for (const f of sc.funcs) out.push({ label: `${f.name}(…)`, value: `call:${f.name}`, cls: "ex" });
+    for (const c of sc.conds) { const k = condKey(c); out.push({ label: condText(c), value: `sense:${k}`, user: !COND_LABEL[k] }); }
+  }
+  return out;
+}
+/** the expression a picker value makes; operators wrap what was there */
+function fromPick(sc: Scope, v: string, cur: Expr, meta: Meta, mode: "num" | "bool"): Expr {
+  const [kind, rest] = [v.slice(0, v.indexOf(":") < 0 ? v.length : v.indexOf(":")), v.includes(":") ? v.slice(v.indexOf(":") + 1) : ""];
+  const o = sc.opts, list0 = o.lists?.[0] ?? "xs";
+  switch (kind) {
+    case "n": return num(Number(rest));
+    case "v": return { k: "v", name: rest };
+    case "op": return { k: "bin", op: rest as "+", a: cur.k === "n" || cur.k === "v" || cur.k === "bin" || cur.k === "list" || cur.k === "fn" || cur.k === "call" || cur.k === "me" ? cur : num(meta.def), b: num(1) };
+    case "cmp": return { k: "cmp", op: rest as "<", a: cur.k === "cmp" || cur.k === "logic" || cur.k === "not" ? num(0) : cur, b: num(0) };
+    case "logic": return { k: "logic", op: rest as "and", a: mode === "bool" && (cur.k === "cmp" || cur.k === "touch" || cur.k === "keyDown" || cur.k === "logic" || cur.k === "not" || cur.k === "fn") ? cur : freeCond(o), b: freeCond(o) };
+    case "not": return { k: "not", a: cur };
+    case "rep": return { k: "list", f: rest as ListFn, list: list0, ...(LIST_ARITY[rest as ListFn] === 2 ? { a: num(1) } : {}) };
+    case "fn": return { k: "fn", f: rest as FnName, args: dflt(rest as FnName) };
+    case "me": return { k: "me", p: rest as MeProp };
+    case "touch": return { k: "touch", s: rest };
+    case "key": return { k: "keyDown", key: rest };
+    case "call": { const f = sc.funcs.find((x) => x.name === rest); return { k: "call", name: rest, args: (f ? paramsOf(f) : []).map(() => num(1)) }; }
+    case "sense": return condExpr(rest);
+  }
+  return cur;
+}
+const exprLabelOf = (e: Expr): string => (e.k === "bin" || e.k === "cmp" || e.k === "logic" ? OP_LABEL[e.op] : "");
+const META_VAL = META.val;
+/** one slot: a number (with − / +), or a small tree of blocks: operators, reporters, comparisons (each part is a slot again) */
+function exprEl(sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void, meta: Meta, mode: "num" | "bool", depth: number): HTMLElement {
+  const e = get();
+  const wrap = (cls: string, ...kids: (Node | null)[]) => h("span", { class: `cw-ex cw-ex-${cls} d${Math.min(depth, 3)}` }, ...kids);
+  const reset = () => sc.edit(() => set(mode === "bool" ? freeCond(sc.opts) : num(meta.def)));
+  const x = () => cbtn({ class: "cw-ex-x cw-ctl", type: "button", "aria-label": "还原", title: "还原", disabled: !sc.interactive, onclick: reset }, "✕");
+  const kid = (parent: { [k: string]: unknown }, key: string, m: Meta = META_VAL, md: "num" | "bool" = "num") => exprEl(sc, () => parent[key] as Expr, (v) => { parent[key] = v; }, m, md, depth + 1);
+  const kidAt = (arr: Expr[], i: number) => exprEl(sc, () => arr[i], (v) => { arr[i] = v; }, META_VAL, "num", depth + 1);
+  const opBtn = (cur: string, ops: string[], apply: (op: string) => void) => cbtn({ class: "cw-op cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择运算",
+    onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, [...new Set([cur, ...ops])].map((o) => ({ label: OP_LABEL[o], value: o })), (v) => sc.edit(() => apply(v))) }, OP_LABEL[cur]);
+  const choice = (label: string, items: PickItem[], onPick: (v: string) => void, cls = "cw-name") => cbtn({ class: `${cls} cw-ctl`, type: "button", disabled: !sc.interactive, "aria-label": "选择", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, items, (v) => sc.edit(() => onPick(v))) }, span("", label));
+  const lists = (cur: string) => (sc.opts.lists ?? []).map((l) => ({ label: l, value: l }));
+  const t = (c: string) => span("cw-t", c);
+  const u = (c: string) => span("cw-unit", c);
+  if (e) switch (e.k) {
+    case "bin": return wrap("bin", kid(e as never, "a"), opBtn(e.op, sc.opts.ops ?? ["+", "-", "*"], (v) => { e.op = v as "+"; }), kid(e as never, "b"), x());
+    case "cmp": return wrap("cmp", kid(e as never, "a"), opBtn(e.op, CMP_OPS, (v) => { e.op = v as "<"; }), kid(e as never, "b"), x());
+    case "logic": return wrap("logic", kid(e as never, "a", META_VAL, "bool"), opBtn(e.op, ["and", "or"], (v) => { e.op = v as "and"; }), kid(e as never, "b", META_VAL, "bool"), x());
+    case "not": return wrap("not", t("非"), kid(e as never, "a", META_VAL, "bool"), x());
+    case "list": {
+      const lb = choice(e.list, lists(e.list), (v) => { e.list = v; });
+      if (e.f === "item") return wrap("rep", lb, t("第"), kid(e as never, "a", META.idx), t("项"), x());
+      return wrap("rep", t(LIST_LABEL[e.f]), u("("), lb, ...(LIST_ARITY[e.f] === 2 ? [u(","), kid(e as never, "a")] : []), u(")"), x());
+    }
+    case "fn": {
+      if (e.f === "rand") return wrap("rep", t(FN_LABEL.rand), kidAt(e.args, 0), t("到"), kidAt(e.args, 1), x());
+      const parts: Node[] = [];
+      e.args.forEach((_, i) => { if (i) parts.push(u(",")); parts.push(kidAt(e.args, i)); });
+      return wrap("rep", t(FN_LABEL[e.f]), u("("), ...parts, u(")"), x());
+    }
+    case "call": {
+      const parts: Node[] = [];
+      e.args.forEach((_, i) => { if (i) parts.push(u(",")); parts.push(kidAt(e.args, i)); });
+      return wrap("rep", span("cw-fn", e.name), u("("), ...parts, u(")"), x());
+    }
+    case "touch": return wrap("rep", t("碰到"), choice((sc.opts.sprites ?? []).find((s) => s.id === e.s)?.label ?? e.s, (sc.opts.sprites ?? []).map((s) => ({ label: s.label, value: s.id })), (v) => { e.s = v; }), x());
+    case "keyDown": return wrap("rep", t("按住"), choice(sc.opts.keys?.[e.key] ?? e.key, Object.entries(sc.opts.keys ?? {}).map(([k, l]) => ({ label: l, value: k })), (v) => { e.key = v; }), x());
+    case "me": return wrap("rep", t(ME_LABEL[e.p]), x());
+    case "sense": return wrap("rep", choice(condText(e), sc.conds.map((c) => ({ label: condText(c), value: condKey(c), user: !COND_LABEL[condKey(c)] })), (v) => set(sc.conds.find((c) => condKey(c) === v) ?? e), "cw-cond"));
+  }
+  if (mode === "bool") return cbtn({ class: "cw-cond cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择条件", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, exprItems(sc, "bool"), (v) => sc.edit(() => set(fromPick(sc, v, e ?? num(0), meta, "bool")))) }, "选择条件");
+  return numField(sc, get, set, meta);
+}
+/** a number slot (old levels: the number field; levels with `free`: a slot that can hold a small tree of blocks) */
+const slot = (sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void, meta: Meta): HTMLElement => (sc.opts.free ? exprEl(sc, get, set, meta, "num", 0) : numField(sc, get, set, meta));
+const condSlot = (sc: Scope, b: Blk): HTMLElement => exprEl(sc, () => b.cond, (e) => { b.cond = e; }, META_VAL, "bool", 0);
+void exprLabelOf; void ARITH;
 
 // ---------- one block ----------
 function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script: number }>, script: number, inPalette = false): HTMLElement {

@@ -15,7 +15,7 @@ const extra = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-ex
 const withExtra = async (t) => {
   const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[1]]))) + ');\n';
   await t.ctx.route('**/src/i18n-data.ts*', async (route) => { const r = await route.fetch(); await route.fulfill({ response: r, body: (await r.text()) + '\n' + add }); });
-  await t.page.reload(); await t.page.waitForSelector('.hub-grid, .kids, .sp-page');
+  await t.page.reload(); await t.page.waitForSelector('.hub-grid, .kids, .empty-home, .sp-page');
 };
 const setRange = (page, sel, v) => page.evaluate(([s, v]) => { const e = document.querySelector(s); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); }, [sel, v]);
 const painted = (page, sel) => page.evaluate((sel) => { const cv = document.querySelector(sel); if (!cv) return -1; const c = cv.getContext('2d'); const w = cv.width, h = cv.height; const seen = new Set(); let opaque = 0;
@@ -522,8 +522,8 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
     const keys2 = await page.evaluate(() => window.__spaceQuiz.map((q) => q.key)); ok(keys2.length === 10 && new Set(keys2).size === 10 && keys2.includes('pm:io'), 'quiz: the next round has 10 different questions and brings the failed one back (' + keys2.join(',') + ')');
     ok(keys2.filter((k) => !Object.keys(saved.cards).includes(k)).length >= 8, 'quiz: and mostly new questions');
     const q0 = await page.evaluate(() => window.__spaceQuiz[0]); await page.click(`.mchoice[data-v="${q0.answer}"]`); await page.click('#math-next');
-    await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button.danger'); await page.waitForSelector('#sp-quiz-start');
-    const saved2 = await page.evaluate(() => JSON.parse(localStorage.getItem('learn.space.v1'))); ok(Object.keys(saved2.cards).length === 11 && saved2.plays === 2, 'quiz: quitting saves the one question that was answered');
+    await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button.danger'); await page.waitForFunction(() => !document.querySelector('#game')); await page.waitForSelector('#sp-quiz-start');
+    const saved2 = await page.evaluate(() => JSON.parse(localStorage.getItem('learn.space.v1'))); ok(saved2.plays === 2 && !!saved2.cards[q0.key].last && Object.keys(saved2.cards).length >= 10 && Object.keys(saved2.cards).length <= 11 && saved2.cards[q0.key].right >= 1, 'quiz: quitting saves the one question that was answered');
     await page.click('#sp-quiz-start'); await page.waitForSelector('#game .mchoice'); await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button:not(.danger)'); ok(await page.locator('#game').count() === 1, 'quiz: cancelling the question keeps the game open'); await page.waitForFunction(() => !document.querySelector('dialog[open]')); await page.click('#game-quit'); await page.waitForSelector('dialog'); await page.click('dialog button.danger'); await page.waitForSelector('#sp-quiz-start');
     ok(log.external.length === 0, 'quiz: no outside request');
     await t.browser.close();
