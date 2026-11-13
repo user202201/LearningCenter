@@ -30,11 +30,13 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const pauseBtn = btn("lk-pause", () => togglePause());
   const diffBtn = btn("lk-diff", () => { diffIdx = (diffIdx + 1) % 3; ctx.store.set("diff", diffIdx); ctx.sfx("tap"); reset(); });
   const timedBtn = btn("lk-timed", () => { timed = !timed; ctx.store.set("timed", timed); ctx.sfx("tap"); reset(); });
-  const hud = h("div", { class: "lk-hud" }, scoreEl, bestEl, timeEl, comboEl, bar, hintBtn, shuffleBtn, pauseBtn, diffBtn, timedBtn);
+  const brk = () => h("span", { style: "flex-basis:100%;height:0" });
+  const hud = h("div", { class: "lk-hud" }, scoreEl, bestEl, timeEl, comboEl, brk(), bar, brk(), hintBtn, shuffleBtn, pauseBtn, diffBtn, timedBtn);
 
   const grid = h("div", { class: "lk-grid", id: "lk-grid" });
   const lines = document.createElementNS(NS, "svg");
   lines.setAttribute("class", "lk-lines");
+  lines.innerHTML = `<defs><filter id="lk-crayon" filterUnits="userSpaceOnUse" x="-20" y="-20" width="4000" height="4000"><feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.5"/></filter></defs>`;
   const title = h("h2", {}, ""), msg = h("p", {}, "");
   const startBtn = h("button", { class: "primary", id: "lk-start", onclick: () => { ctx.sfx("tap"); if (phase === "pause") togglePause(); else if (phase === "ready") begin(); else { reset(); begin(); } } }, "开始");
   const ovl = h("div", { class: "lk-ovl", id: "lk-ovl" }, title, msg, startBtn);
@@ -103,6 +105,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     poly.setAttribute("points", pts.map((q) => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(" "));
     poly.setAttribute("class", "lk-line" + (hintLine ? " hintline" : ""));
     poly.setAttribute("stroke-width", String(Math.max(4, Math.round(size * 0.16))));
+    if (!hintLine) poly.setAttribute("filter", "url(#lk-crayon)");
     let len = 0; for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
     if (hintLine) poly.setAttribute("stroke-dasharray", `${Math.round(size * 0.3)} ${Math.round(size * 0.22)}`);
     else { poly.setAttribute("stroke-dasharray", String(len + 2)); poly.setAttribute("stroke-dashoffset", String(len + 2)); }
@@ -161,7 +164,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   // ---------- the game ----------
   function reset() {
-    clearHint(); lines.textContent = "";
+    clearHint(); lines.querySelectorAll("polyline").forEach((n) => n.remove());
     const d = L.DIFFS[diffIdx];
     const W = area.clientWidth, H = area.clientHeight;
     const wide = W > 0 && H > 0 && W > H * 1.15;   // a landscape screen gets the board turned

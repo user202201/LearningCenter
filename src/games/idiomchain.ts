@@ -191,6 +191,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
 
   (window as unknown as Record<string, unknown>).__idiomchain = {
     phase: () => phase, chain: () => chain.map((c) => ({ who: c.who, w: c.e.w })), lib: () => lib, mode: () => mode, homo: () => homo, hints: () => hints, fails: () => fails, need: () => (chain.length ? need() : null),
+    seed: (words: string[], extra: string[] = []) => { if (!lib) return; chain = words.map((w, i) => ({ who: i % 2 ? "you" as const : "cpu" as const, e: lib!.byWord.get(w)! })); used = new Set([...words, ...extra]); setOvl("", "", "", "", false); showCurrent(false); renderHist(); startTurn(); },
     used: () => [...used], cands: () => cands.map((c) => c.w), hintPrefix: () => hintPrefix, delay: CPU_DELAY,
   };
   reset();

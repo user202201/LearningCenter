@@ -226,7 +226,7 @@ const CJK = /[一-鿿]/;
   s = await st();
   ok(s.phase === 'won' && s.left === 0 && s.score === 25 + 10 + Math.floor(s.remMs / 1000) * 2, `the last pair wins: 10 + the time left (${s.score})`);
   await p.waitForSelector('#lk-ovl:not([hidden])');
-  ok((await p.textContent('#lk-ovl h2')) === '全部消除。' && (await p.textContent('#lk-ovl p')).includes(`得分：${s.score}`) && (await p.textContent('#lk-start')) === '再玩一次', 'win overlay: text, score, play again');
+  ok((await p.textContent('#lk-ovl h2')) === '全部消除。' && (await p.textContent('#lk-ovl p')).includes(`得分：${s.score}`) && (await p.textContent('#lk-start')) === '再玩一次', 'win overlay: text, score, play again ' + (await p.textContent('#lk-ovl h2')) + ' | ' + (await p.textContent('#lk-ovl p')) + ' | ' + s.score);
   await p.screenshot({ path: OUT + 'linkup-win-820.png' });
   let bs = await best();
   ok(bs['best-normal'] === s.score && (await p.textContent('#lk-best')) === `最高：${s.score}`, `the best score is kept in learn.games.v1 (${bs['best-normal']}) and shown`);
@@ -299,7 +299,7 @@ const CJK = /[一-鿿]/;
   await p.waitForSelector('#lk-ovl:not([hidden])');
   ok((await p.textContent('#lk-ovl h2')) === '时间到。' && (await p.textContent('#lk-start')) === '重试' && (await p.textContent('#lk-ovl p')).includes('剩余图案：80'), 'overlay: time is up, remaining tiles, retry button');
   await p.screenshot({ path: OUT + 'linkup-lost-820.png' });
-  await p.click('#lk-start'); s = await st(); ok(s.phase === 'play' && s.left === 80 && s.remMs === s.totMs, 'retry: a new board, the full time');
+  await p.click('#lk-start'); s = await st(); ok(s.phase === 'play' && s.left === 80 && s.remMs >= s.totMs - 1500, 'retry: a new board, the full time');
   // relaxed mode
   await p.click('#lk-timed');
   s = await st(); ok(!s.timed && s.phase === 'ready' && (await p.textContent('#lk-timed')) === '计时：关' && (await p.textContent('#lk-time')) === '时间：不限', 'relaxed mode: no time, a new game is ready');

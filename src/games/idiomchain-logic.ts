@@ -65,7 +65,10 @@ export function candidates(lib: Lib, need: Need, homo: boolean, used: Set<string
   const pool = easy ? valid.filter((e) => e.l === 1) : valid;
   const from = pool.length ? pool : valid;
   const nValid = Math.min(from.length, rng() < 0.35 ? 2 : 1);
-  const good = shuffle(from, rng).slice(0, nValid);
+  // the first valid chip is one the computer cannot easily trap (the player is not forced into a dead end)
+  const alive = (e: Entry) => follow(lib, needOf(e), homo, used).some((x) => x !== e && follow(lib, needOf(x), homo, used).length > 0);
+  const sh = shuffle(from, rng), lead = sh.find(alive) ?? sh[0];
+  const good = [lead, ...sh.filter((e) => e !== lead)].slice(0, nValid);
   const bad: Entry[] = [], seen = new Set(good.map((e) => e.w));
   let tries = 0;
   while (bad.length < 4 - nValid && tries++ < 400) {
@@ -81,8 +84,11 @@ export function candidates(lib: Lib, need: Need, homo: boolean, used: Set<string
 const WEIGHTS: Record<"easy" | "hard", number[]> = { easy: [0, 12, 1, 0.1], hard: [0, 3, 3, 1.5] };
 /** the computer's answer: a random valid idiom (level-weighted), never a used one; null = it has none (it loses) */
 export function computerMove(lib: Lib, need: Need, homo: boolean, used: Set<string>, rng: Rng, easy = true): Entry | null {
-  const valid = follow(lib, need, homo, used);
-  if (!valid.length) return null;
+  const all = follow(lib, need, homo, used);
+  if (!all.length) return null;
+  // the computer does not play into a dead end for the player when it has another choice
+  const open = all.filter((e) => follow(lib, needOf(e), homo, used).some((x) => x !== e));
+  const valid = open.length ? open : all;
   const wt = WEIGHTS[easy ? "easy" : "hard"];
   let total = 0; for (const e of valid) total += wt[e.l] ?? 1;
   let r = rng() * total;
