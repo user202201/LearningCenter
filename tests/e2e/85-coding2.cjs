@@ -115,7 +115,7 @@ const { ok, done } = checks();
           switch (b.t) {
             case 'set': S.vars[b.name] = clamp(val(b.e)); break;
             case 'change': S.vars[b.name] = clamp((S.vars[b.name] ?? 0) + val(b.e)); break;
-            case 'push': Ls(b.list).push(clamp(val(b.e))); break;
+            case 'push': { const l = Ls(b.list); if (l.length >= 500) throw new Fault(); l.push(clamp(val(b.e))); break; }
             case 'lset': { const l = Ls(b.list), i = idx(b.n); if (i < 1 || i > l.length) throw new Fault(); l[i - 1] = clamp(val(b.e)); break; }
             case 'lremove': { const l = Ls(b.list), i = idx(b.n); if (i < 1 || i > l.length) throw new Fault(); l.splice(i - 1, 1); break; }
             case 'swap': { const l = Ls(b.list), i = idx(b.n), j = idx(b.e); if (i < 1 || j < 1 || i > l.length || j > l.length) throw new Fault(); [l[i - 1], l[j - 1]] = [l[j - 1], l[i - 1]]; break; }
@@ -322,7 +322,8 @@ const { ok, done } = checks();
     // the same program twice gives the same snapshots (deterministic)
     { const x1 = go('on start cat { forever { changex 3 sturn 7 } }', {}, 30).log, x2 = go('on start cat { forever { changex 3 sturn 7 } }', {}, 30).log; out.det = JSON.stringify(x1) === JSON.stringify(x2); }
     // an endless thread that never waits does not hang the clock (budget); the error message comes out
-    { const e = ext({ ticks: 40 }); const r = new STG.StageRun(A.parse('on start cat { while 1 { change n by 1 } }'), e); const t0 = performance.now(); for (let i = 0; i < 40; i++) r.step(); out.hang = [r.status, performance.now() - t0 < 2000]; }
+    { const e = ext({ ticks: 40 }); const r = new STG.StageRun(A.parse('on start cat { while 1 { change n by 1 } } on start dog { forever { changey 1 } }'), e); const t0 = performance.now(); for (let i = 0; i < 40; i++) r.step(); out.hang = [r.status, performance.now() - t0 < 2000, r.snap().sprites.dog.y, r.snap().vars.n]; }
+    { const e = ext({ ticks: 10 }); const r = new STG.StageRun(A.parse('def f(n) { return f(n + 1) } on start cat { set r = f(0) }'), e); for (let i = 0; i < 3; i++) r.step(); out.deep = [r.status, r.message]; }
     // a live key press and release
     { const e = ext({ keys: { left: 'l' } }); const r = new STG.StageRun(A.parse('on start dog { forever { if keyDown(left) { changex 1 } } } on key(left) cat { say hi }'), e, false); r.step(); r.press('left'); r.step(); r.step(); r.release('left'); r.step(); r.step(); out.live = [r.snap().sprites.dog.x - 50, r.snap().sprites.cat.say]; }
     out.mine = L.LEVELS.filter((l) => l.world === 7).length;
@@ -341,7 +342,7 @@ const { ok, done } = checks();
   ok(ST.touching[0] === 'bye' && ST.touching[1] === 'hi', 'touching(dog) is true while the circles of the two sprites overlap');
   ok(ST.rand[0] && ST.rand[1] && ST.rand[2] && ST.rand[3], 'random numbers: the same seed gives the same numbers, another seed other numbers, always inside the range');
   ok(ST.det, 'the same program gives exactly the same snapshots every time (no real clock, no hidden randomness)');
-  ok(ST.hang[0] === 'error' && ST.hang[1], 'a script that never waits and never ends is stopped with an error (the clock does not hang)');
+  ok(ST.hang[0] === 'running' && ST.hang[1] && ST.hang[2] === 40 && ST.hang[3] === 40 && ST.deep[0] === 'error' && /调用得太深/.test(ST.deep[1]), 'a loop never keeps the clock (while 1 { } does one round a tick, the other script goes on: dog y 40, n 40), an endless recursion is stopped with its message: ' + JSON.stringify([ST.hang, ST.deep]));
   ok(ST.live[0] === 2 && ST.live[1] === 'hi', 'live input: press / release of a key (the hat starts, keyDown is true while held)');
 
   // ---------- 5. the levels ----------
@@ -444,13 +445,14 @@ const { ok, done } = checks();
         // the level is not already solved at the start
         const start = L2.makeRun(l, { main: [], funcs: [] }).state;
         const tg = L2.dataTarget(l, sd);
-        if (!calc && Object.entries(tg.vars).every(([k, v]) => (start.vars[k] ?? 0) === v) && Object.entries(tg.lists).every(([k, v]) => JSON.stringify(start.lists[k] ?? []) === JSON.stringify(v))) out.bad.push(`${l.id} seed ${sd}: already solved at the start`);
+        if (!calc && Object.entries(tg.vars).every(([k, v]) => (start.vars[k] ?? 0) === v) && Object.entries(tg.lists).every(([k, v]) => JSON.stringify(start.lists[k] ?? []) === JSON.stringify(v))) { if (sd === undefined) out.bad.push(`${l.id}: the SHOWN instance is already solved at the start`); out.solved0 = (out.solved0 ?? 0) + 1; }
         const s0 = JSON.stringify([tg.vars, tg.lists]); if (sd === undefined) out.first = s0; else if (s0 !== out.first) same++;
       }
       out.per[l.id] = same;
     }
     return out;
   });
+  ok(OR.solved0 <= 0.08 * OR.n, `an instance that needs no program (nothing to find, nothing to filter) is rare: ${OR.solved0} of ${OR.n}`);
   ok(OR.bad.length === 0, `the reference solution of every data and function level (${Object.keys(OR.per).length} levels, ${OR.n} instances) agrees with an INDEPENDENT oracle (sort / index / gcd / prime / BFS / fib ... written separately in JavaScript); no instance is solved before the program runs` + (OR.bad.length ? ' FAILED: ' + OR.bad.slice(0, 5).join('; ') : ''));
 
   // ---------- 7. wrong programs, programs that fit only the shown data, too slow programs ----------

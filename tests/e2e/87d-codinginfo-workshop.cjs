@@ -68,10 +68,10 @@ const chineseLeft = (page) => page.evaluate((src) => { const re = new RegExp(src
   await page.click('#ci-psave'); await page.click('#ci-tab-run');
   const q0 = await page.textContent('#ci-qrun h3');
   await page.click('.ci-choice:has-text("Trois")'); await page.click('.ci-choice >> nth=0'); await page.click('.ci-choice >> nth=0'); await page.click('.ci-choice >> nth=0');
-  ok(/^\d \/ 5$/.test(await page.textContent('#ci-qscore')) || (await page.textContent('#ci-qscore')).includes('/'), 'the quiz plays the written questions and shows the score (' + q0 + ' -> ' + (await page.textContent('#ci-qscore')) + ')');
+  ok(/^\d \/ 4$/.test(await page.textContent('#ci-qscore')), 'the quiz plays the four written questions (blank ones are skipped) and shows the score (' + q0 + ' -> ' + (await page.textContent('#ci-qscore')) + ')');
   const sc = (await page.textContent('#ci-qscore')).split(' / ').map(Number);
-  ok(sc[1] === 5 && sc[0] >= 1, 'the first answer (Trois = the checked radio) counted as right: ' + sc.join(' / '));
-  await page.click('#ci-qagain'); ok(/1 \/ 5/.test(await page.textContent('#ci-qrun .ci-prog')), 'play again starts over');
+  ok(sc[1] === 4 && sc[0] === 2, 'the first answer (Trois = the checked radio) and the last (A) counted as right, the two default questions answered wrongly: ' + sc.join(' / '));
+  await page.click('#ci-qagain'); ok(/1 \/ 4/.test(await page.textContent('#ci-qrun .ci-prog')), 'play again starts over');
   // ---------- pixel animation ----------
   await go(page, `#/coding/${id}/projects/new/pixel`, '#ci-fadd');
   ok((await page.locator('.ci-frames button').count()) === 3, 'the pixel template starts with 3 frames');
@@ -83,8 +83,8 @@ const chineseLeft = (page) => page.evaluate((src) => { const re = new RegExp(src
   const first4 = await page.evaluate(() => [0, 1, 2, 3].map((i) => document.querySelector(`.ci-pixedit i[data-i="${i}"]`).classList.contains('on')));
   ok(first4.every(Boolean), 'painting with the mouse on a frame (drag over four squares)');
   await page.selectOption('#ci-fps', '8'); await page.click('#ci-psave'); await page.click('#ci-tab-run');
-  const a1 = await page.innerHTML('#ci-anim'); await page.waitForTimeout(700); const a2 = await page.innerHTML('#ci-anim'); await page.waitForTimeout(350); const a3 = await page.innerHTML('#ci-anim');
-  ok(a1 !== a2 || a2 !== a3, 'the animation plays: the picture changes while it runs');
+  const snaps = new Set(); for (let k = 0; k < 10; k++) { snaps.add(await page.innerHTML('#ci-anim')); await page.waitForTimeout(110); }
+  ok(snaps.size >= 2, 'the animation plays: the picture changes while it runs (' + snaps.size + ' different pictures in 1.1 s at 8 frames a second)');
   await page.click('#ci-tab-edit'); const frozen = await page.innerHTML('.ci-pbody');
   ok(!frozen.includes('ci-anim'), 'going back to editing stops the player (its timer is cleared)');
   // ---------- smart home ----------
@@ -97,7 +97,7 @@ const chineseLeft = (page) => page.evaluate((src) => { const re = new RegExp(src
   await page.click('#ci-hplay'); await page.waitForTimeout(900); ok(Number(await page.inputValue('#ci-hour')) > 0, 'the "play a day" button moves the clock');
   // ---------- story ----------
   await go(page, `#/coding/${id}/projects/new/story`, '#ci-sadd');
-  await page.fill('#ci-s0', 'Au début.'); await page.fill('#ci-s0c0', 'Vers la fin'); await page.selectOption('#ci-s0t0', '2');
+  await page.fill('#ci-s0', 'Au début.'); await page.fill('#ci-s0c0', 'Vers la fin'); await page.selectOption('#ci-s0t0', { value: '2' });
   await page.fill('#ci-s2', 'La fin !');
   await page.click('#ci-sadd'); ok((await page.locator('.ci-qedit').count()) === 4, 'a scene can be added (4 scenes)');
   await page.click('#ci-psave'); await page.click('#ci-tab-run');
@@ -191,7 +191,7 @@ const chineseLeft = (page) => page.evaluate((src) => { const re = new RegExp(src
     await go(lp, `#/coding/${lt.id}/certificate`, '#ci-certstat'); await lp.click('#ci-certprev'); { const l = await chineseLeft(lp); if (l.length) bad.push('certificate preview: ' + l.join(' / ')); }
     const head = await lp.evaluate(() => [document.querySelector('.ci-certin h2').textContent, document.querySelector('#ci-certprint').textContent]);
     ok(bad.length === 0, `${nm}: no Chinese UI text left in the workshop (shelf, six editors, a player) and the certificate (project names and your own texts are user boxes)` + (bad.length ? ' -> ' + bad.slice(0, 3).join(' | ') : ''));
-    ok(nm === 'en' ? head[0] === 'Coding Certificate' && head[1] === 'Print / save as PDF' : head[0] === 'Certificat de programmation', `${nm}: the certificate title and the print button are translated (${head.join(' / ')})`);
+    ok(nm === 'en' ? head[0] === 'Coding Certificate' && head[1] === 'Print / Save as PDF' : head[0] === 'Certificat de programmation', `${nm}: the certificate title and the print button are translated (${head.join(' / ')})`);
     await lt.browser.close();
   }
   const ext = await open(); ext.page.on('pageerror', (e) => errors.push(e.message));

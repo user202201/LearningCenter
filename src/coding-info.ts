@@ -127,7 +127,7 @@ export async function openLesson(c: InfoContent, id: string): Promise<void> {
 }
 
 // ---------- an activity ----------
-const LAB1 = new Set(["quiz", "scenario", "sort", "order", "pick", "bits", "pixel", "rgbmix", "wave", "huff", "subst", "fixbit", "sheet", "table"]);
+const LAB1 = new Set(["quiz", "scenario", "sort", "order", "pick", "bits", "pixel", "resolution", "rgbmix", "wave", "huff", "subst", "fixbit", "sheet", "table"]);
 const LAB2 = new Set(["route", "password", "knn", "tree", "rules", "search", "bias", "digit"]);
 export async function loadMount(kind: string): Promise<Mount> {
   const key = kind === "knn" ? "knnLab" : kind === "tree" ? "treeLab" : kind === "rules" ? "rulesLab" : kind === "bias" ? "biasLab" : kind;

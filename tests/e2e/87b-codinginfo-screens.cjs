@@ -1,5 +1,5 @@
 // 编程 worlds 14-16, part 2: the SCREENS. The world map section (three worlds, the workshop, the certificate, the three medals on the shelf), the level lists,
-// every one of the 79 activities opened and solved through its own controls' check (the lab's reference answer; a wrong answer first counts a mistake and does not
+// every one of the 82 activities opened and solved through its own controls' check (the lab's reference answer; a wrong answer first counts a mistake and does not
 // win), the stars rule (mistakes / hints / the shown answer), the mini-lessons (shown once, again with ?), the hint ladder, progress saved in coding/<kid>.json and
 // shown again, the medal of a finished world, two devices writing at once (a 409), layout on 5 screen sizes (nothing sideways, centred, targets >= 40 px, the
 // screenshots are saved), English and French with no Chinese left outside `user` boxes, and no request outside the app.
@@ -56,13 +56,13 @@ const chineseLeft = (page, rootSel = 'body') => page.evaluate(([src, rootSel]) =
     trophies: document.querySelectorAll('.ci-trophy').length, got: document.querySelectorAll('.ci-trophy.got').length, total: document.querySelector('#cl-total').textContent, h: document.querySelector('.ci-sech').textContent,
     blockIslands: document.querySelectorAll('.cl-island:not(.free)').length, links: [...document.querySelectorAll('.ci-icard')].map((e) => e.getAttribute('href').replace(/^#\/coding\/[^/]+/, '')),
   }));
-  ok(map.cards.length === 5 && map.cards[0].startsWith('14:数据与编码:★ 0 / 105:0 / 35') && map.cards[1].startsWith('15:网络、安全与人工智能:★ 0 / 84:0 / 28') && map.cards[2].startsWith('16:过程控制与物联网:★ 0 / 48:0 / 16') && map.cards[3].startsWith('ci-projects:创作工坊') && map.cards[4].startsWith('ci-certificate:证书'), 'the world map has a section 信息科技 with three world cards (35, 28 and 16 levels), the workshop and the certificate: ' + map.cards.join(' | '));
+  ok(map.cards.length === 5 && map.cards[0].startsWith('14:数据与编码:★ 0 / 111:0 / 37') && map.cards[1].startsWith('15:网络、安全与人工智能:★ 0 / 87:0 / 29') && map.cards[2].startsWith('16:过程控制与物联网:★ 0 / 48:0 / 16') && map.cards[3].startsWith('ci-projects:创作工坊') && map.cards[4].startsWith('ci-certificate:证书'), 'the world map has a section 信息科技 with three world cards (37, 29 and 16 levels), the workshop and the certificate: ' + map.cards.join(' | '));
   ok(map.trophies === 3 && map.got === 0 && map.h === '信息科技' && map.links.join() === '/i14,/i15,/i16,/projects,/certificate', 'three more medals on the shelf (none earned), the links go to i14 / i15 / i16 / projects / certificate');
   ok(map.blockIslands >= 6, 'the islands of the block worlds are still there (' + map.blockIslands + ') and the section sits below them');
   await page.evaluate(() => { document.querySelectorAll('#toasts .toast').forEach((x) => x.remove()); document.querySelector('.scroll').scrollTop = 99999; });
   await page.waitForTimeout(250);
   await page.screenshot({ path: OUT + 'info-map-section.png' });
-  for (const [w, n, bosses] of [[14, 35, 'i14-35'], [15, 28, ''], [16, 16, 'i16-16']]) {
+  for (const [w, n, bosses] of [[14, 37, 'i14-37'], [15, 29, ''], [16, 16, 'i16-16']]) {
     await go(page, `#/coding/${t.id}/i${w}`, '.cl-lvl');
     const wp = await page.evaluate(() => ({ n: document.querySelectorAll('.cl-lvl').length, nums: [...document.querySelectorAll('.lvl-no')].map((e) => e.textContent).join(), boss: [...document.querySelectorAll('.cl-lvl.boss')].map((e) => e.dataset.level).join(), stars: document.querySelector('#cl-wstars').textContent, round: [...document.querySelectorAll('.lvl-no')].every((e) => Math.abs(e.getBoundingClientRect().width - e.getBoundingClientRect().height) < 1 && e.getBoundingClientRect().width >= 40), medal: document.querySelectorAll('#cl-medal.got').length, hrefs: [...document.querySelectorAll('.cl-lvl')].every((a, i) => a.getAttribute('href').endsWith(`/i${location.hash.match(/i(\d+)$/)[1]}/${i + 1}`)) }));
     ok(wp.n === n && wp.nums === Array.from({ length: n }, (_, i) => i + 1).join() && wp.boss === bosses && wp.stars === `★ 0 / ${n * 3}` && wp.round && wp.medal === 0 && wp.hrefs, `world ${w}: ${n} numbered round level buttons (boss ${bosses || 'none'}), 0 / ${n * 3} stars, no medal yet, every link goes to its level`);
@@ -92,7 +92,7 @@ const chineseLeft = (page, rootSel = 'body') => page.evaluate(([src, rootSel]) =
   await page.waitForTimeout(500);
   const saved = await doc(page, t.id);
   const ids = acts.map((a) => a.id);
-  ok(ids.every((id) => saved.stars[id] >= 1 && saved.blocks[id] !== undefined) && Object.keys(saved.stars).filter((k) => /^i1[4-6]/.test(k)).length === 79, 'progress is saved in coding/<kid>.json under the ids i14-01 ... i16-16 (79 results, stars and mistakes / blocks): ' + JSON.stringify(Object.fromEntries(Object.entries(saved.stars).slice(0, 4))));
+  ok(ids.every((id) => saved.stars[id] >= 1 && saved.blocks[id] !== undefined) && Object.keys(saved.stars).filter((k) => /^i1[4-6]/.test(k)).length === 82, 'progress is saved in coding/<kid>.json under the ids i14-01 ... i16-16 (82 results, stars and mistakes / blocks): ' + JSON.stringify(Object.fromEntries(Object.entries(saved.stars).slice(0, 4))));
   const ex = await page.evaluate(async () => { const M = await import('/src/coding-model.ts'); return { stars: Object.keys(JSON.parse(localStorage.getItem(Object.keys(localStorage).find((k) => k.startsWith('learn.local.coding/')))).stars).length }; });
   void ex;
 
@@ -102,7 +102,7 @@ const chineseLeft = (page, rootSel = 'body') => page.evaluate(([src, rootSel]) =
   ok(m2.got === '14,15,16' && m2.done === '14,15,16', 'after solving everything the three medals are on the shelf and the three world cards are marked done: ' + m2.stars);
   await go(page, `#/coding/${t.id}/i14`, '.cl-lvl');
   const l2 = await page.evaluate(() => ({ solved: document.querySelectorAll('.cl-lvl.solved').length, medal: document.querySelectorAll('#cl-medal.got').length, rows: [...document.querySelectorAll('.cl-lvl')].every((e) => Number(e.dataset.stars) >= 1 && e.querySelectorAll('.lvl-stars svg').length === 3) }));
-  ok(l2.solved === 35 && l2.medal === 1 && l2.rows, 'the list of world 14 shows 35 solved levels with their stars and the medal');
+  ok(l2.solved === 37 && l2.medal === 1 && l2.rows, 'the list of world 14 shows 37 solved levels with their stars and the medal');
   await page.screenshot({ path: OUT + 'info-world14-done.png' });
 
   // ================= the stars rule, the hint ladder, the mini-lesson, the best result is kept =================
@@ -198,7 +198,7 @@ const chineseLeft = (page, rootSel = 'body') => page.evaluate(([src, rootSel]) =
 
   // ================= layout on 5 sizes =================
   const SIZES = [['phone', 390, 844], ['small', 320, 568], ['ipad', 820, 1180], ['ipadland', 1180, 820], ['landscape', 844, 390]];
-  const SAMPLE = ['i14-01', 'i14-02', 'i14-04', 'i14-09', 'i14-11', 'i14-14', 'i14-16', 'i14-18', 'i14-21', 'i14-23', 'i14-25', 'i14-28', 'i14-31', 'i14-34', 'i15-01', 'i15-02', 'i15-03', 'i15-08', 'i15-11', 'i15-16', 'i15-17', 'i15-18', 'i15-19', 'i15-20', 'i15-22', 'i15-24', 'i15-25', 'i16-03', 'i16-05', 'i16-10', 'i16-12', 'i16-15'];
+  const SAMPLE = ['i14-01', 'i14-02', 'i14-04', 'i14-09', 'i14-11', 'i14-14', 'i14-15', 'i14-19', 'i14-17', 'i14-20', 'i14-23', 'i14-25', 'i14-27', 'i14-30', 'i14-33', 'i14-36', 'i15-01', 'i15-02', 'i15-03', 'i15-08', 'i15-11', 'i15-16', 'i15-17', 'i15-18', 'i15-27', 'i15-19', 'i15-20', 'i15-22', 'i15-24', 'i15-25', 'i16-03', 'i16-05', 'i16-10', 'i16-12', 'i16-15'];
   for (const [name, w, h] of SIZES) {
     const lt = await open({ viewport: { width: w, height: h } }); const lp = lt.page; lp.on('pageerror', (e) => errors.push(e.message));
     const bad = [], small = [], off = [];
@@ -241,7 +241,7 @@ const chineseLeft = (page, rootSel = 'body') => page.evaluate(([src, rootSel]) =
       const firstTitle = await lp.textContent('.cl-lvl .lvl-title');
       await go(lp, `#/coding/${lt.id}/i14/1`, '#cl-lesson'); await left('lesson'); await lp.click('#cl-lesson-close');
       await left('activity 14-1');
-      const acts = ['i14-02', 'i14-11', 'i14-21', 'i14-25', 'i14-28', 'i14-31', 'i14-34', 'i15-01', 'i15-03', 'i15-08', 'i15-11', 'i15-16', 'i15-17', 'i15-19', 'i15-21', 'i15-24', 'i15-25', 'i16-01', 'i16-10'];
+      const acts = ['i14-02', 'i14-11', 'i14-15', 'i14-19', 'i14-23', 'i14-27', 'i14-30', 'i14-33', 'i14-36', 'i15-01', 'i15-03', 'i15-08', 'i15-11', 'i15-16', 'i15-17', 'i15-19', 'i15-21', 'i15-24', 'i15-25', 'i16-01', 'i16-10'];
       for (const aid of acts) { await goAct(lt, aid); await lp.evaluate(() => window.__info.wrong()); await lp.waitForTimeout(50); await left(aid); }
       await goAct(lt, 'i14-05'); await lp.evaluate(() => window.__info.solve()); await lp.waitForSelector('#ci-result:not([hidden])'); await left('result');
       await lp.screenshot({ path: OUT + `info-${nm}-${dn}-result.png` });
@@ -254,7 +254,7 @@ const chineseLeft = (page, rootSel = 'body') => page.evaluate(([src, rootSel]) =
 
   // ================= no request outside the app; no script errors =================
   const ext = await open(); ext.page.on('pageerror', (e) => errors.push(e.message));
-  for (const a of ['i14-18', 'i15-17', 'i16-12', 'i14-10', 'i15-25']) { await goAct(ext, a); await ext.page.evaluate(() => window.__info.solve()); await ext.page.waitForTimeout(150); }
+  for (const a of ['i14-20', 'i15-17', 'i16-12', 'i14-10', 'i15-25']) { await goAct(ext, a); await ext.page.evaluate(() => window.__info.solve()); await ext.page.waitForTimeout(150); }
   await go(ext.page, `#/coding/${ext.id}/certificate`, '#ci-certstat');
   ok(ext.log.external.length === 0, 'no request leaves the app (sound, pictures, the content and the models are all part of the program)' + (ext.log.external.length ? ' -> ' + ext.log.external[0] : ''));
   await ext.browser.close();

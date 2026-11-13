@@ -9,7 +9,9 @@ lessons, acts, dev = {}, [], {}
 
 def lesson(id, title, *steps):
     lessons[id] = {"title": title, "steps": [{"t": t, "d": d} for t, d in steps]}
+_count = {}
 def act(world, no, title, les, kind, spec, prompt=None, hints=None, boss=False):
+    no = _count[world] = _count.get(world, 0) + 1   # the number is the position in the list (the old explicit numbers are ignored)
     a = {"id": f"i{world}-{no:02d}", "world": world, "no": no, "title": title, "lesson": les, "kind": kind, "spec": spec}
     if prompt: a["prompt"] = prompt
     if hints: a["hints"] = hints
@@ -44,9 +46,15 @@ lesson("utf8", T("Unicode 与 UTF-8", "Unicode and UTF-8", "Unicode et UTF-8"),
 lesson("pixels", T("图像的数字化", "Digital images", "Images numériques"),
   ("图片由很多小方格（像素）组成。黑白图片里，黑用 1，白用 0。一行 8 个像素就是一个 8 位二进制数。", {"k": "grid", "rows": ["00011000", "00111100", "01111110", "11111111", "00011000", "00011000", "00011000", "00011000"], "nums": True}),
   ("把每一行的二进制数换成十进制，整幅图就变成 8 个数字。有了这些数字，就能把图画出来。", txt("00011000 = 24", "00111100 = 60", "01111110 = 126", "11111111 = 255")))
+lesson("palette", T("调色板与颜色编号", "Palettes", "Palettes de couleurs"),
+  ("彩色图片不一定要给每个像素存 3 个字节。可以先排一张“调色板”：给每种颜色编一个号，图片里只存编号。", {"k": "grid", "rows": ["0110", "1221", "1221", "0110"], "nums": False}),
+  ("4 种颜色只需要 2 位二进制：00、01、10、11，也就是编号 0、1、2、3。每个像素 2 位，比 24 位小得多。读到编号，再去调色板里查颜色。", txt("0 → 白", "1 → 红", "2 → 蓝", "3 → 绿", "编号 2 1 0 → 蓝 红 白")))
 lesson("rgb", T("彩色与 RGB", "Colour and RGB", "Couleur et RVB"),
   ("彩色屏幕用红（R）、绿（G）、蓝（B）三种光混合出各种颜色。每种光用 1 个字节（0-255）表示亮度。", txt("RGB(255, 0, 0) = 红", "RGB(0, 255, 0) = 绿", "RGB(255, 255, 0) = 黄", "RGB(255, 255, 255) = 白")),
   ("三个字节就是 24 位，一共能表示约 1677 万种颜色。常用十六进制写成 #RRGGBB，例如 #FF8000 是橙色。", txt("FF 80 00", "R=255 G=128 B=0")))
+lesson("resolution", T("分辨率与颜色深度实验", "Resolution and depth experiment", "Résolution et profondeur"),
+  ("同一幅图，用不同的分辨率（像素数）和颜色深度（每个像素的位数）存下来，清晰度和文件大小都会变。像素太少，图会变成马赛克；位数太少，颜色层次会消失。", {"k": "text", "lines": ["8 × 8 · 1 位 → 8 字节", "16 × 16 · 2 位 → 64 字节", "64 × 64 · 8 位 → 4096 字节"]}),
+  ("好的做法是在“看得清”和“文件小”之间找平衡：够用就好。这也是图片压缩和网页优化要做的事。", {"k": "text", "lines": ["够清楚 + 够小 = 好选择"]}))
 lesson("imgsize", T("分辨率与文件大小", "Resolution and size", "Résolution et taille"),
   ("分辨率是图片的像素数（宽 × 高）。像素越多越清晰，需要的存储也越多。颜色深度是每个像素用几位：黑白 1 位，灰度 8 位，真彩色 24 位。", txt("大小（字节）= 宽 × 高 × 位数 ÷ 8")),
   ("例：100 × 100 的真彩色图片：100 × 100 × 24 ÷ 8 = 30000 字节，约 29 KB。", txt("100 × 100 × 24 ÷ 8", "= 30000 字节")))
@@ -250,6 +258,7 @@ kindHints = {
  "order": ["先想哪一步是第一步，哪一步是最后一步。", "每一步都要依靠前一步的结果。", "用 ▲ ▼ 或拖动调整位置。"],
  "pick": ["先扫描，看每个文件的风险。", "注意文件名：假装成图片的程序、来历不明的附件。", "正常的文件不要隔离。"],
  "pixel": ["黑色是 1，白色是 0。一行就是一个 8 位二进制数。", "一行一行来：从左到右看每个格子。", "做完对照一遍每一行。"],
+ "resolution": ["点一点不同的分辨率和位数，看图片和文件大小怎样变化。", "图片要看得清：至少 16 × 16，至少 2 位。", "大小 = 宽 × 高 × 位数 ÷ 8，不能超过 300 字节。"],
  "rgbmix": ["R 是红，G 是绿，B 是蓝。数值越大越亮。", "先调主要的颜色，再微调。", "两个颜色块越像越好。"],
  "wave": ["点一点不同的采样率，看圆点把波连起来像不像。", "采样率要超过声音频率的 2 倍。", "点“听一听”，音高变了就说明太稀了。"],
  "huff": ["每次只看权重最小的两个节点。", "合并后得到的新节点权重是两者之和，它也参与下一轮。", "有两个同样小的时候，任选一个都可以。"],
@@ -284,9 +293,11 @@ act(W, 11, T("画一幅黑白画", "A black-and-white picture", "Une image noir 
 act(W, 12, T("读出图片的数字", "Reading the numbers of a picture", "Lire les nombres d'une image"), "pixels", "pixel", {"mode": "nums", "pic": "arrow"}, T("黑是 1，白是 0。把每一行写成二进制数，再换成十进制，填进框里。", "Black is 1, white is 0. Read each row as a binary number, convert it to decimal and type it in the box.", "Noir = 1, blanc = 0. Lisez chaque ligne comme un nombre binaire, convertissez-le en décimal et saisissez-le."))
 act(W, 13, T("用数字画图", "Drawing from numbers", "Dessiner avec des nombres"), "pixels", "pixel", {"mode": "decode", "pic": "house"}, T("每个数字是一行的二进制数。把图画出来。", "Each number is the binary value of one row. Draw the picture.", "Chaque nombre est la valeur binaire d'une ligne. Dessinez l'image."))
 act(W, 14, T("自由创作 16 × 16", "Free picture 16 × 16", "Image libre 16 × 16"), "imgsize", "pixel", {"mode": "free", "size": 16}, T("画一幅 16 × 16 的黑白图，再算出它需要多少字节。", "Draw a 16 × 16 black-and-white picture, then work out how many bytes it needs.", "Dessinez une image noir et blanc de 16 × 16, puis calculez combien d'octets elle demande."))
-act(W, 15, T("RGB 颜色", "RGB colours", "Couleurs RVB"), "rgb", "quiz", {"gen": "colorName", "n": 4})
+act(W, 15, T("调色板涂色", "Painting with a palette", "Peindre avec une palette"), "palette", "pixel", {"mode": "palette", "n": 6, "rows": ["001100", "012210", "123321", "123321", "012210", "001100"], "colors": ["#ffffff", "#e03131", "#1c7ed6", "#2f9e44"]}, T("数字 0-3 是四种颜色的编号（0 白、1 红、2 蓝、3 绿）。选一种颜色，按编号把图涂出来。", "The digits 0-3 are the numbers of four colours (0 white, 1 red, 2 blue, 3 green). Choose a colour and paint the picture from the numbers.", "Les chiffres 0-3 sont les numéros de quatre couleurs (0 blanc, 1 rouge, 2 bleu, 3 vert). Choisissez une couleur et peignez l'image d'après les numéros."))
+act(W, 16, T("RGB 颜色", "RGB colours", "Couleurs RVB"), "rgb", "quiz", {"gen": "colorName", "n": 4})
 act(W, 16, T("调出颜色", "Mixing colours", "Mélanger les couleurs"), "rgb", "rgbmix", {"targets": [[255, 128, 0], [0, 200, 100], [120, 60, 200]], "tol": 40}, T("调节 R、G、B，让右边的颜色接近左边的目标颜色。", "Adjust R, G and B until the right colour is close to the target on the left.", "Réglez R, V et B pour que la couleur de droite soit proche de la cible à gauche."))
 act(W, 17, T("图片有多大", "How big is a picture", "Quelle taille pour une image"), "imgsize", "quiz", {"gen": "imgSize", "n": 3})
+act(W, 18, T("分辨率与颜色深度", "Resolution and depth", "Résolution et profondeur"), "resolution", "resolution", {"sizes": [4, 8, 16, 32, 64], "depths": [1, 2, 4, 8], "maxBytes": 300, "minSize": 16, "minDepth": 2}, T("调节分辨率和颜色深度：图要看得清（至少 16 × 16，至少 2 位），文件又不能超过 300 字节。", "Adjust the resolution and the colour depth: the picture must stay clear (at least 16 × 16 and 2 bits) and the file must not exceed 300 bytes.", "Réglez la résolution et la profondeur de couleur : l'image doit rester nette (au moins 16 × 16 et 2 bits) et le fichier ne doit pas dépasser 300 octets."))
 act(W, 18, T("声音的采样", "Sampling sound", "Échantillonner le son"), "sampling", "wave", {"freq": 440, "rates": [600, 800, 1000, 2000, 4000, 8000, 44100]}, T("把 440 Hz 的声音数字化。找出仍能还原音高的最小采样率。", "Digitise a 440 Hz tone. Find the lowest sample rate that still keeps the pitch.", "Numérisez un son de 440 Hz. Trouvez la fréquence d'échantillonnage la plus basse qui garde la hauteur."))
 act(W, 19, T("游程编码", "Run-length coding", "Codage par plages"), "rle", "quiz", {"gen": "rleEnc", "n": 3})
 act(W, 20, T("还原与比较", "Decoding and comparing", "Décoder et comparer"), "rle", "quiz", {"gen": ["rleDec", "rleSize"], "n": 4})
@@ -378,7 +389,12 @@ act(W, 23, T("搜索多个词", "Searching several words", "Rechercher plusieurs
 act(W, 24, T("数据里的偏见", "Bias in data", "Biais dans les données"), "bias", "bias", {"seed": 3}, T("历史数据对 B 组更严格。选择机器可以使用的信息，训练模型：让两组之间的差距不超过 20%，同时准确率不低于 85%。", "The history was stricter with group B. Choose what the machine may use and train it: a gap of at most 20 % between the groups with at least 85 % accuracy.", "L'historique était plus strict avec le groupe B. Choisissez ce que la machine peut utiliser et entraînez-la : un écart d'au plus 20 % entre les groupes et au moins 85 % de précision."))
 act(W, 25, T("认数字的机器", "A machine that reads digits", "Une machine qui lit les chiffres"), "digit", "digit", {"mode": "draw", "targets": [3, 7, 1]}, T("在 8 × 8 的格子里画出数字，让机器认出来，画：", "Draw the digit on the 8 × 8 grid and let the machine recognise it. Draw:", "Dessinez le chiffre sur la grille 8 × 8 et laissez la machine le reconnaître. Dessinez :"))
 act(W, 26, T("机器没有把握", "When the machine is unsure", "Quand la machine hésite"), "digit", "digit", {"mode": "unsure"}, T("画一个让机器没有把握的图形（置信度低于 40%）。", "Draw something the machine is unsure about (confidence below 40 %).", "Dessinez quelque chose dont la machine n'est pas sûre (confiance inférieure à 40 %)."))
-act(W, 27, T("生成式人工智能", "Generative AI", "IA générative"), "genai", "scenario", {"qs": [
+act(W, 27, T("推荐与信息茧房", "Recommendations and bubbles", "Recommandations et bulles"), "bias", "scenario", {"qs": [
+  {"p": "视频应用总是给你推荐你看过的那一类视频。这是因为？", "o": ["推荐程序根据你的观看记录，预测你还会喜欢什么", "应用里只有这一类视频", "有人在手动挑选每一个视频"], "a": 0, "w": "推荐算法从历史记录里学习，推荐和你以前看过的相似的内容。这样很方便，但也可能让你只看到一类内容。"},
+  {"p": "一个人长期只看到自己喜欢的观点，很少看到不同的观点，这种现象常被叫做？", "o": ["信息茧房", "网络加速", "数据压缩"], "a": 0, "w": "推荐越符合你的口味，你就越少接触别的内容，像被包在“茧”里。要主动去看不同来源、不同角度的信息。"},
+  {"p": "怎样才能避免被推荐程序“困住”？", "o": ["主动搜索、阅读不同类型和观点的内容，并控制使用时间", "只点推荐的第一个", "不再使用任何网络"], "a": 0, "w": "推荐程序是工具，不是全部。主动选择内容、多方核实、控制时间，才能让自己的视野更宽。"},
+  {"p": "推荐程序的数据来自过去的记录。如果过去的数据带有偏见，会发生什么？", "o": ["推荐也可能带有同样的偏见", "偏见会自动消失", "推荐一定最公平"], "a": 0, "w": "机器从数据里学习，数据里的偏见会被学进去并重复出来。所以要检查结果是否公平，而不只是是否准确。"}]}, T("判断推荐程序是怎样工作的，它有什么风险。", "Judge how a recommender works and what risks it has.", "Jugez comment fonctionne un système de recommandation et quels risques il comporte."))
+act(W, 28, T("生成式人工智能", "Generative AI", "IA générative"), "genai", "scenario", {"qs": [
   {"p": "聊天机器人是怎样写出一段话的？", "o": ["它像人一样理解并思考", "它根据大量文字，预测接下来最可能出现的内容", "它在互联网上找到现成的答案复制"], "a": 1, "w": "生成式模型是用大量文字训练的，每次预测“下一个最可能的词”。它写得流畅，但并不等于真的理解。"},
   {"p": "机器人回答得很自信，但你怀疑有错。应该怎么做？", "o": ["相信，它很自信", "用书本或可靠网站核对重要内容", "再问它一次，它说是对的就行"], "a": 1, "w": "自信不等于正确。生成式人工智能可能编出不存在的事实（“幻觉”），重要信息必须核实。"},
   {"p": "老师让你写一篇关于自己的作文。你用机器人生成，然后交上去。这样做？", "o": ["可以，反正是好文章", "不合适：作文是要练习自己的表达，使用时要如实说明", "没问题，别人看不出来"], "a": 1, "w": "作业的目的是练习。可以把机器人当作帮助理解的工具，但不能代替自己思考，使用了要如实说明。"}]}, T("回答关于生成式人工智能的问题。", "Answer the questions about generative AI.", "Répondez aux questions sur l'IA générative."))

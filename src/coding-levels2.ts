@@ -78,7 +78,7 @@ export const GENS: Record<string, Gen> = {
   count5: (r) => { const xs = Array.from({ length: ri(r, 5, 8) }, () => ri(r, 1, 9)); xs[0] = ri(r, 6, 9); xs[1] = ri(r, 1, 5); return { lists: { xs: shuffle(r, xs) }, vars: {} }; },
   list3: (r) => ({ lists: { xs: Array.from({ length: ri(r, 5, 8) }, () => ri(r, 1, 9)) }, vars: {} }),
   list20: (r) => ({ lists: { xs: Array.from({ length: ri(r, 5, 8) }, () => ri(r, 1, 20)) }, vars: {} }),
-  filter: (r) => ({ lists: { xs: Array.from({ length: ri(r, 6, 9) }, () => ri(r, 1, 20)), evens: [] }, vars: {} }),
+  filter: (r) => { const xs = Array.from({ length: ri(r, 6, 9) }, () => ri(r, 1, 20)); xs[ri(r, 0, xs.length - 1)] = 2 * ri(r, 1, 10); return { lists: { xs, evens: [] }, vars: {} }; },
   search: (r) => { const xs = distinct(r, ri(r, 6, 10), 1, 30); const t = r() < 0.8 ? xs[ri(r, 0, xs.length - 1)] : 31; return { lists: { xs }, vars: { t } }; },
   search64: (r) => { const xs = distinct(r, 64, 1, 200); return { lists: { xs }, vars: { t: xs[ri(r, 1, 4)] } }; },
   sorted64: (r) => { const xs: number[] = []; let v = 0; for (let i = 0; i < 64; i++) { v += ri(r, 1, 3); xs.push(v); } return { lists: { xs }, vars: { t: xs[ri(r, 40, 63)] } }; },
@@ -211,7 +211,7 @@ const TEXTS = { hi: "你好！", bye: "再见！", meow: "喵！", hi2: "你好�
 const SWEEP: Input[] = [{ tick: 0, type: "key", key: "right", hold: 10 }, ...Array.from({ length: 8 }, (_, k): Input => ({ tick: 10 + 20 * k, type: "key", key: k % 2 ? "right" : "left", hold: 20 }))];
 const W7: LevelSpec[] = [
   spec(7, 1, "出发", { kind: "stage", palette: ["smove", "sturn"], solution: "on start cat { smove 100 }", max: 3, lesson: "stage",
-    ext: { goal: ["点“开始”。让小猫向右走 100 步。"], stage: T({ sprites: [CAT], slots: [{ sprite: "cat", on: "start", events: ["start"] }], inputs: [], ticks: sec(2), texts: TEXTS, checks: [{ tick: sec(1) }] }) } as Ext } as LevelSpec),
+    ext: { goal: ["点“运行”。让小猫向右走 100 步。"], stage: T({ sprites: [CAT], slots: [{ sprite: "cat", on: "start", events: ["start"] }], inputs: [], ticks: sec(2), texts: TEXTS, checks: [{ tick: sec(1) }] }) } as Ext } as LevelSpec),
   spec(7, 2, "说话", { kind: "stage", palette: ["say"], solution: "on start cat { say hi }", max: 3,
     ext: { goal: ["让小猫说“你好！”。"], stage: T({ sprites: [CAT], slots: [{ sprite: "cat", on: "start", events: ["start"] }], inputs: [], ticks: sec(2), texts: TEXTS, checks: [{ tick: sec(0.5), props: ["say"] }] }) } as Ext } as LevelSpec),
   spec(7, 3, "等一等", { kind: "stage", palette: ["say", "wait"], solution: "on start cat { say hi wait 1 say bye }", max: 5,

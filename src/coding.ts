@@ -243,7 +243,9 @@ function playScreen(p: Play) {
   const setMsg = (t: string, kind = "") => { msg.textContent = t; msg.className = "cl-msg " + kind; };
   const btn = (id: string, text: string, onclick: () => void, cls = "") => h("button", { id, class: cls, type: "button", onclick }, text);
 
-  const delay = () => SPEED[CM.loadLocal().speed];
+  // a long program (recursive drawings: hundreds of steps) is shown faster, so that a run never takes longer than a few seconds in total
+  const TOTAL = { slow: 40000, normal: 20000, fast: 8000 } as const;
+  const delay = () => { const sp = CM.loadLocal().speed; return Math.max(5, Math.min(SPEED[sp], TOTAL[sp] / Math.max(1, dry?.steps ?? 1))); };
   const setSceneMs = () => (scene.el.style.setProperty("--cs-ms", `${Math.round(delay() * 0.8)}ms`));
   const ui = {
     run: btn("cl-run", "运行", () => void start(false), "primary"),

@@ -80,7 +80,7 @@ const solve = async (page, id) => { const src = await page.evaluate((i) => impor
   await page.waitForTimeout(300);
   ok(await page.locator('#cl-answer').isVisible(), 'after three failed runs the answer button appears');
   await page.click('#cl-answer'); await page.waitForSelector('#cl-answer-dlg');
-  ok((await page.locator('#cl-answer-dlg .cw-static .cw-hat-ev').count()) === 1 && (await page.locator('#cl-answer-dlg .cw-b').count()) === 1, 'the answer is drawn as blocks with the event hat');
+  ok((await page.locator('#cl-answer-dlg .cw-static .cw-hat').count()) === 1 && (await page.locator('#cl-answer-dlg .cw-static .cw-sprite').textContent()) === '小猫' && (await page.locator('#cl-answer-dlg .cw-b').count()) === 1, 'the answer is drawn as blocks with the event hat and the name of the sprite');
   await page.click('#cl-answer-use');
   ok((await prog(page)).includes('on start cat { smove 100 }'), 'the answer is put into the workspace: ' + (await prog(page)));
   await page.click('#cl-run'); r = await result(page);
@@ -89,7 +89,7 @@ const solve = async (page, id) => { const src = await page.evaluate((i) => impor
   await lvl(t, 'w7/1');
   await setProg(page, 'on start cat { repeat 5 { smove 20 } }');
   await page.click('#cl-run'); r = await result(page);
-  ok(r.won && r.stars === '2', 'another program that gets there (more blocks than par: 2 stars)');
+  ok(r.won && r.stars === '1', 'another program that gets there with twice the blocks of par gets 1 star');
   await lvl(t, 'w7/1');
   await setProg(page, 'on start cat { smove 100 }');
   await page.click('#cl-run'); r = await result(page);
@@ -131,7 +131,7 @@ const solve = async (page, id) => { const src = await page.evaluate((i) => impor
   await page.screenshot({ path: OUT + 'c2-catch.png' });
   await lvl(t, 'w7/7');
   r = await solve(page, 'w7-07');
-  ok(r.won && (await page.locator('.sv-sprite[data-sprite=hand]').getAttribute('data-dir')) === '36', 'the clock (7-7): the second hand has turned 36 degrees after 6 seconds');
+  ok(r.won && (await page.locator('.sv-sprite[data-sprite=hand]').getAttribute('data-dir')) === '30', 'the clock (7-7): the second hand has turned 30 degrees (5 turns of 6 degrees) after 6 seconds');
 
   // ================= data levels =================
   await lvl(t, 'w8/9');

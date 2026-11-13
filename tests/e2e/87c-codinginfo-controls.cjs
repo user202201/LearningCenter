@@ -52,7 +52,7 @@ const center = async (page, sel) => { const b = await page.locator(sel).first().
   await goAct(t, 'i14-05');
   for (let k = 0; k < 3; k++) { const bitsN = Number((await page.textContent('#ci-prompt')).match(/\d+/)[0]); await page.click(`.ci-choice[data-v="${2 ** bitsN}"]`); }
   ok(await won(page), 'capacity of n bits answered with the choice buttons (3 questions) wins');
-  await goAct(t, 'i14-23');
+  await goAct(t, 'i14-25');
   const k0 = await page.evaluate(() => Number(document.querySelector('#ci-key').textContent));
   await page.click('#ci-wp'); await page.click('#ci-wp'); await page.click('#ci-wm');
   ok((await page.textContent('#ci-key')) === '1' && k0 === 0 && (await page.getAttribute('#ci-inner', 'transform')).startsWith('rotate(13.8'), 'the Caesar wheel turns with + and - (key 0 -> 1, the inner ring rotates 13.8 degrees)');
@@ -109,7 +109,7 @@ const center = async (page, sel) => { const b = await page.locator(sel).first().
   await page.click('#ci-check'); ok(await won(page), 'the decimal numbers of the picture\'s rows typed in win');
 
   // ---------- Huffman, spreadsheet, flipped bit ----------
-  await goAct(t, 'i14-21');
+  await goAct(t, 'i14-23');
   while (!(await won(page))) {
     const ws = await page.evaluate(() => [...document.querySelectorAll('.ci-hnode')].map((n, i) => ({ i, w: Number(n.querySelector('small').textContent) })).sort((a, b) => a.w - b.w));
     if (ws.length < 2) break;
@@ -117,20 +117,42 @@ const center = async (page, sel) => { const b = await page.locator(sel).first().
     await page.click(`.ci-hnode[data-i="${ws[0].i}"]`); await page.click(`.ci-hnode[data-i="${ws[1].i}"]`);
   }
   ok((await page.textContent('.ci-hout')).includes('23 bits'), 'ABRACADABRA: the tree built by hand costs 23 bits (the codes and the fixed-length cost are shown)');
-  await goAct(t, 'i14-34');
+  await goAct(t, 'i14-36');
   const typeCell = async (k, v) => { await page.click(`.ci-cell[data-k="${k}"]`); await page.fill(`.ci-cell[data-k="${k}"]`, v); await page.keyboard.press('Enter'); };
   await typeCell('B6', '22'); await page.click('#ci-check'); ok(/=/.test(await msg(page)) && (await st(page)).mistakes === 1, 'a typed number instead of a formula is refused (a formula must start with =)');
   await typeCell('B6', '=B2+B3+B4+B5'); await page.click('#ci-check'); ok((await st(page)).mistakes === 1 && /\/ 3|2 \/ 3/.test(await page.textContent('.ci-prog')), 'a formula that adds the cells one by one is accepted and the next task comes (2 / 3)');
   ok((await page.inputValue('.ci-cell[data-k="B6"]')) !== undefined && (await page.evaluate(() => document.querySelector('.ci-cell[data-k="B6"]').value)) === '22', 'the sheet shows the VALUE of a formula (22) when the cell is not being edited');
   await typeCell('C6', '=AVERAGE(C2:C5)'); await page.click('#ci-check'); await typeCell('D6', '=MAX(B2:B5)'); await page.click('#ci-check');
   ok(await won(page), 'AVERAGE and MAX typed into the cells win');
-  await goAct(t, 'i14-28');
+  await goAct(t, 'i14-30');
   for (let k = 0; k < 3; k++) {
     const pos = await page.evaluate(() => { const odd = [...document.querySelectorAll('.ci-bit.odd')].map((e) => [Number(e.dataset.y), Number(e.dataset.x)]); const rows = {}, cols = {}; odd.forEach(([y, x]) => { rows[y] = (rows[y] || 0) + 1; cols[x] = (cols[x] || 0) + 1; }); return odd.find(([y, x]) => rows[y] === 5 && cols[x] === 5); });
     await page.click(`.ci-bit[data-y="${pos[0]}"][data-x="${pos[1]}"]`);
   }
   ok(await won(page), 'the flipped bit found at the crossing of the red row and the red column, three times');
   await page.screenshot({ path: OUT + 'info-controls-fixbit.png' });
+
+  // ---------- a colour palette, painted from numbers; the resolution experiment ----------
+  await goAct(t, 'i14-15');
+  const prow = await page.evaluate(() => window.__info.act.spec.rows), pcol = await page.evaluate(() => window.__info.act.spec.colors);
+  ok((await page.locator('.ci-sbtn').count()) === 4 && (await page.locator('.ci-numlist span').count()) === 6, 'the palette level shows the numbers of the picture (6 rows) and four colour buttons');
+  const pc = async (x, y) => { const b = await page.locator(`.ci-pixedit i[data-i="${y * 6 + x}"]`).boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+  await page.click('#ci-check'); ok((await st(page)).mistakes === 1, 'checking an empty canvas is a mistake');
+  for (const colour of [1, 2, 3]) {
+    await page.click(`.ci-sbtn[data-c="${colour}"]`);
+    for (let y = 0; y < 6; y++) { let x = 0; while (x < 6) { if (Number(prow[y][x]) === colour) { let e = x; while (e + 1 < 6 && Number(prow[y][e + 1]) === colour) e++; const a0 = await pc(x, y), a1 = await pc(e, y); await page.mouse.move(a0.x, a0.y); await page.mouse.down(); await page.mouse.move(a1.x, a1.y, { steps: 3 }); await page.mouse.up(); x = e + 1; } else x++; } }
+  }
+  const bg = await page.evaluate(() => [...document.querySelectorAll('.ci-pixedit i')].map((e) => getComputedStyle(e).backgroundColor));
+  ok(bg[0] === 'rgb(255, 255, 255)' && bg[2] === 'rgb(224, 49, 49)' && bg[8] === 'rgb(28, 126, 214)', 'the squares take the colour of the chosen palette button (white 0, red 1, blue 2 painted with the mouse: ' + bg.slice(0, 3).join(' ') + ')');
+  await page.click('#ci-check'); ok(await won(page), 'a picture painted from the colour numbers with the palette wins');
+  await goAct(t, 'i14-19');
+  const r0 = await page.textContent('#ci-resinfo');
+  await page.click('#ci-sizes .ci-choice[data-v="4"]'); await page.click('#ci-check'); ok(/看不清/.test(await msg(page)) && (await st(page)).mistakes === 1, 'a 4 x 4 picture is too small to see: refused (' + (await page.textContent('#ci-resinfo')) + ')');
+  await page.click('#ci-sizes .ci-choice[data-v="64"]'); await page.click('#ci-check'); ok(/太大/.test(await msg(page)) && (await page.textContent('#ci-resinfo')).includes('4096 B'), 'a 64 x 64 picture with 8 bits is 4096 bytes: too big');
+  const px = async (v) => { await page.click(`#ci-sizes .ci-choice[data-v="${v}"]`); return page.evaluate(() => { const c = document.querySelector('#ci-resv'); const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; return new Set(Array.from({ length: d.length / 4 }, (_, i) => d[i * 4])).size; }); };
+  await page.click('#ci-depths .ci-choice[data-v="8"]'); const levels8 = await px(32); await page.click('#ci-depths .ci-choice[data-v="1"]'); const levels1 = await px(32);
+  ok(levels1 === 2 && levels8 > 8 && r0.includes('4 × 4'), `the picture really changes: with 1 bit it has ${levels1} grey levels, with 8 bits ${levels8}`);
+  await page.click('#ci-sizes .ci-choice[data-v="16"]'); await page.click('#ci-depths .ci-choice[data-v="2"]'); await page.click('#ci-check'); ok(await won(page), '16 x 16 with 2 bits (64 bytes) is clear and small: wins');
 
   // ---------- network: a packet journey ----------
   await goAct(t, 'i15-01');

@@ -77,3 +77,7 @@
 86-codingtext
 86b-codingtext-editor
 86c-codingtext-screens
+87-codinginfo
+87b-codinginfo-screens
+87c-codinginfo-controls
+87d-codinginfo-workshop

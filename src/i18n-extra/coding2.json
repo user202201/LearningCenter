@@ -79,10 +79,6 @@
   "This is fun!",
   "C'est amusant !"
  ],
- "点“开始”。让小猫向右走 100 步。": [
-  "Press “Run”. Make the cat walk 100 steps to the right.",
-  "Appuyez sur « Exécuter ». Faites avancer le chat de 100 pas vers la droite."
- ],
  "说话": [
   "Say",
   "Dire"
@@ -1394,5 +1390,53 @@
  "故事舞台": [
   "Story stage",
   "Scène d'histoires"
+ ],
+ "xs 里有 64 个数。找到以后要马上停下来：步数不能超过限制。": [
+  "xs holds 64 numbers. Stop as soon as the number is found: the steps are limited.",
+  "xs contient 64 nombres. Arrêtez-vous dès que le nombre est trouvé : le nombre d'étapes est limité."
+ ],
+ "列表里没有这一项。": [
+  "The list has no such item.",
+  "La liste ne contient pas cet élément."
+ ],
+ "不能除以 0。": [
+  "Division by 0 is not possible.",
+  "La division par 0 est impossible."
+ ],
+ "列表太长了。": [
+  "The list is too long.",
+  "La liste est trop longue."
+ ],
+ "目标": [
+  "Target",
+  "Objectif"
+ ],
+ "深度": [
+  "Depth",
+  "Profondeur"
+ ],
+ "音乐": [
+  "Music",
+  "Musique"
+ ],
+ "小测验": [
+  "Little quiz",
+  "Petit quiz"
+ ],
+ "函数调用函数": [
+  "Functions calling functions",
+  "Des fonctions qui appellent des fonctions"
+ ],
+ "排序": [
+  "Sorting",
+  "Tri"
+ ],
+ "列表的内容不对。": [
+  "The contents of the list are wrong.",
+  "Le contenu de la liste est incorrect."
+ ],
+ "点“运行”。让小猫向右走 100 步。": [
+  "Press “Run”. Make the cat walk 100 steps to the right.",
+  "Appuyez sur « Exécuter ». Faites avancer le chat de 100 pas vers la droite."
  ]
 }

@@ -326,7 +326,7 @@ const { ok, done } = checks();
   const R12 = await run(async (I, D, A, C) => {
     const c = await C.loadContent(); const bad = [], info = {};
     const cjk = /[一-鿿]/;
-    const KINDS = new Set(['quiz', 'scenario', 'sort', 'order', 'pick', 'bits', 'pixel', 'rgbmix', 'wave', 'huff', 'subst', 'fixbit', 'sheet', 'table', 'route', 'password', 'knn', 'tree', 'rules', 'search', 'bias', 'digit', 'device']);
+    const KINDS = new Set(['quiz', 'scenario', 'sort', 'order', 'pick', 'bits', 'pixel', 'resolution', 'rgbmix', 'wave', 'huff', 'subst', 'fixbit', 'sheet', 'table', 'route', 'password', 'knn', 'tree', 'rules', 'search', 'bias', 'digit', 'device']);
     for (const w of [14, 15, 16]) { info['w' + w] = c.acts.filter((a) => a.world === w).length; if (info['w' + w] < 14) bad.push('world ' + w + ' has only ' + info['w' + w]); const nos = c.acts.filter((a) => a.world === w).map((a) => a.no).sort((a, b) => a - b); if (nos.join() !== nos.map((_, i) => i + 1).join()) bad.push('numbers of world ' + w); if (!c.worlds[w] || c.worlds[w].name.length !== 3) bad.push('world name ' + w); }
     const ids = c.acts.map((a) => a.id); if (new Set(ids).size !== ids.length) bad.push('ids not unique'); info.total = ids.length;
     for (const a of c.acts) {

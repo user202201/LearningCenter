@@ -17,7 +17,7 @@ import type { Q } from "./qtools";
 
 export type St = Record<string, number>;
 export const VW = 640;
-export interface Meta { id: string; title: string; grade: 8 | 9; chapter: string; icon: string; tasks: number }
+export interface Meta { id: string; title: string; grade: number; chapter: string; icon: string; tasks: number }
 export interface ParamDef { id: string; label: string; min: number; max: number; step: number; value: number; unit?: string; dec?: number; when?: (s: St) => boolean }
 export interface ChoiceDef { id: string; label: string; options: [number, string][]; value: number; when?: (s: St) => boolean }
 export interface Readout { label: string; value: string; unit?: string }
@@ -39,6 +39,19 @@ export interface SimDef {
   tasks: Task[];
   quiz(rng: () => number): Q[];
   sound?: SoundDef;
+  /** extra numeric state that has no control (a dragged item, counters); restored by 重置 */
+  hidden?: St;
+  /** buttons that change the state (e.g. a new random sample) */
+  actions?: { id: string; label: string; run: (s: St) => Partial<St> | void }[];
+  /** drags on the canvas that move in every direction (touch-action: none): the page does not scroll under a finger there */
+  drag?: boolean;
+  /** runs after every change of the state (a derived value; may change `s`) */
+  derive?: (s: St, changed: string) => void;
+  /** links under the lesson (other pages of the app) */
+  links?: { text: string; href: string }[];
+  /** where progress is kept (default the physics lab's) and the name of the test handle on `window` */
+  storeKey?: string;
+  handle?: string;
 }
 export interface PhysCtx { id: string; exit(): void }
 
@@ -47,16 +60,17 @@ export type { Q } from "./qtools";
 // ---------- progress on this device ----------
 const KEY = "learn.phys.v1";
 interface Saved { done: Record<string, string[]>; quiz: Record<string, number> }
-export const loadSaved = (): Saved => { try { const o = JSON.parse(localStorage.getItem(KEY) ?? "{}") as Partial<Saved>; return { done: o.done ?? {}, quiz: o.quiz ?? {} }; } catch { return { done: {}, quiz: {} }; } };
-const putSaved = (s: Saved) => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch { /* no storage: nothing is kept */ } };
+export const loadSaved = (key: string = KEY): Saved => { try { const o = JSON.parse(localStorage.getItem(key) ?? "{}") as Partial<Saved>; return { done: o.done ?? {}, quiz: o.quiz ?? {} }; } catch { return { done: {}, quiz: {} }; } };
+const putSaved = (s: Saved, key: string = KEY) => { try { localStorage.setItem(key, JSON.stringify(s)); } catch { /* no storage: nothing is kept */ } };
 
 declare global { interface Window { __phys?: Record<string, unknown> } }
 
 export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => void {
   const st: St = {};
-  const reset = () => { for (const p of def.params) st[p.id] = p.value; for (const c of def.choices ?? []) st[c.id] = c.value; };
+  const KEYS = def.storeKey ?? KEY;
+  const reset = () => { for (const p of def.params) st[p.id] = p.value; for (const c of def.choices ?? []) st[c.id] = c.value; Object.assign(st, def.hidden ?? {}); };
   reset();
-  const saved = loadSaved();
+  const saved = loadSaved(KEYS);
   const doneSet = new Set(saved.done[def.meta.id] ?? []);
   const aspect = def.aspect ?? 0.62;
   const VH = Math.round(VW * aspect);
@@ -128,7 +142,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
       try { ok = t.check(st); } catch { ok = false; }
       if (ok && !doneSet.has(t.id)) {
         doneSet.add(t.id);
-        const s = loadSaved(); s.done[def.meta.id] = [...doneSet]; putSaved(s);
+        const s = loadSaved(KEYS); s.done[def.meta.id] = [...doneSet]; putSaved(s, KEYS);
         if (announce) toast("实验任务已完成", 2200);
       }
     }
@@ -142,6 +156,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
     const p = def.params.find((x) => x.id === id);
     st[id] = p ? clamp(Math.round(v / p.step) * p.step, p.min, p.max) : v;
     if (p) st[id] = Number(st[id].toFixed(6));
+    def.derive?.(st, id);
     update();
   }
 
@@ -175,7 +190,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
     return [((e.clientX - r.left) / k / canvas.offsetWidth) * VW, ((e.clientY - r.top) / k / canvas.offsetHeight) * VH];
   };
   if (def.pointer) {
-    canvas.style.touchAction = "pan-y";
+    canvas.style.touchAction = def.drag ? "none" : "pan-y";
     const go = (kind: "down" | "move" | "up", e: PointerEvent) => { const [x, y] = toDrawing(e); const ch = def.pointer!(kind, x, y, st); if (ch) { for (const [k, v] of Object.entries(ch)) set(k, v as number); } };
     canvas.addEventListener("pointerdown", (e) => { dragging = true; canvas.setPointerCapture(e.pointerId); go("down", e); });
     canvas.addEventListener("pointermove", (e) => { if (dragging) go("move", e); });
@@ -188,14 +203,14 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   let qs: Q[] = [], qi = 0, score = 0, answered = false;
   const drawQuiz = () => {
     quizBox.replaceChildren();
-    const best = loadSaved().quiz[def.meta.id];
+    const best = loadSaved(KEYS).quiz[def.meta.id];
     if (!qs.length) {
       quizBox.append(h("button", { class: "primary", id: "quiz-start", onclick: () => { qs = def.quiz(mulberry32(Date.now() & 0xffffff)); qi = 0; score = 0; answered = false; drawQuiz(); } }, "开始小测验"),
         ...(best !== undefined ? [h("span", { class: "muted small pl-best" }, `最好成绩：${best} / 5`)] : []));
       return;
     }
     if (qi >= qs.length) {
-      const s = loadSaved(); s.quiz[def.meta.id] = Math.max(s.quiz[def.meta.id] ?? 0, score); putSaved(s);
+      const s = loadSaved(KEYS); s.quiz[def.meta.id] = Math.max(s.quiz[def.meta.id] ?? 0, score); putSaved(s, KEYS);
       quizBox.append(h("p", { class: "pl-score", id: "quiz-score" }, `得分 ${score} / ${qs.length}`), h("button", { class: "mopt", id: "quiz-again", onclick: () => { qs = []; drawQuiz(); } }, "再做一次"));
       return;
     }
@@ -219,11 +234,12 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   const lesson = h("div", { class: "pl-lesson user", id: "pl-lesson" }, ...def.lesson.map((t) => { const p = h("p", {}); renderRich(p, t, false); return p; }));
   const formulas = def.formulas?.length ? h("div", { class: "pl-formulas user", id: "pl-formulas" }, ...def.formulas.map((f) => { const d = h("div", { class: "pl-formula" }); renderTeX(d, f, f); return d; })) : null;
   const resetBtn = h("button", { class: "mopt pl-btn", id: "pl-reset", onclick: () => { stopPlay(); reset(); update(false, false); toast("已重置", 1500); } }, "重置");
+  const actBtns = (def.actions ?? []).map((a) => h("button", { class: "mopt pl-btn pl-act", id: `pl-act-${a.id}`, onclick: () => { const ch = a.run(st); if (ch) for (const [k, v] of Object.entries(ch)) st[k] = v as number; def.derive?.(st, a.id); update(); } }, a.label));
   const stage = h("div", { class: "pl-stage" }, canvas, readBox);
   const side = h("div", { class: "pl-side" },
-    h("div", { class: "pl-bar" }, playBtn, soundBtn, resetBtn), ctlBox);
+    h("div", { class: "pl-bar" }, playBtn, soundBtn, ...actBtns, resetBtn), ctlBox);
   const info = h("div", { class: "pl-info" },
-    h("section", { class: "pl-card" }, h("h3", {}, "原理"), lesson, formulas),
+    h("section", { class: "pl-card" }, h("h3", {}, "原理"), lesson, formulas, def.links?.length ? h("div", { class: "pl-links", id: "pl-links" }, ...def.links.map((l) => h("a", { class: "mopt pl-link", href: l.href }, l.text))) : null),
     h("section", { class: "pl-card" }, h("h3", {}, "实验任务 ", taskCount), taskBox),
     h("section", { class: "pl-card" }, h("h3", {}, "小测验"), quizBox));
   const sim = h("div", { class: "pl-sim", "data-sim": def.meta.id }, h("div", { class: "pl-main" }, stage, side), info);
@@ -232,7 +248,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   drawQuiz();
 
   // a handle for the tests (and nothing else): the state, a way to set it by name, to move the clock on, and what was done
-  window.__phys = {
+  (window as unknown as Record<string, unknown>)[def.handle ?? "__phys"] = {
     id: def.meta.id, st, def,
     set: (id: string, v: number) => set(id, v),
     tick: (dt: number) => { if (def.play) advance(dt); },
@@ -242,5 +258,5 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
     soundOn: () => soundOn,
     quiz: () => qs,
   };
-  return () => { stopPlay(); ro.disconnect(); if (soundOn) def.sound?.stop(); delete window.__phys; };
+  return () => { stopPlay(); ro.disconnect(); if (soundOn) def.sound?.stop(); delete (window as unknown as Record<string, unknown>)[def.handle ?? "__phys"]; };
 }

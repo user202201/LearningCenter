@@ -6,7 +6,7 @@
  * duplicates it; the number fields have − / + and a list of values; undo / redo; the size limit "n / max".
  */
 import { h, toast } from "./ui";
-import { Blk, BlockKind, Expr, PaletteKind, Program, allLists, cloneBlk, cloneProgram, countBlocks, emptyProgram, newId, num, slotsOf, walk, toText, paramsOf, LIST_ARITY, ListFn, FnName, FN_ARITY, MeProp } from "./coding-ast";
+import { Blk, BlockKind, Expr, PaletteKind, Program, allLists, cloneBlk, cloneProgram, countBlocks, emptyProgram, newId, num, slotsOf, walk, toText, exprText, paramsOf, LIST_ARITY, ListFn, FnName, FN_ARITY, MeProp } from "./coding-ast";
 import { COLORS } from "./coding-turtle";
 import { condExpr } from "./coding-levels";
 
@@ -87,12 +87,13 @@ const isControl = (k: string) => ["repeat", "until", "while", "if", "ifelse", "f
 const exprKey = (e?: Expr): string => (e ? JSON.stringify(e, (k, v) => (k === "id" ? undefined : v)) : "");
 /** a condition expression as the key of COND_LABEL ("!pathAhead", "colorIs(r)", "count < 4") */
 export function condKey(e: Expr): string {
+  if (e.k !== "sense" && e.k !== "not" && e.k !== "cmp" && e.k !== "n" && e.k !== "v" && e.k !== "bin") return exprText(e);
   if (e.k === "sense") return e.s === "colorIs" ? `colorIs(${e.c})` : e.s;
   if (e.k === "not" && e.a.k === "sense") return "!" + condKey(e.a);
   if (e.k === "cmp") return `${exprStr(e.a)} ${e.op} ${exprStr(e.b)}`;
   return exprStr(e);
 }
-const exprStr = (e: Expr): string => (e.k === "n" ? String(e.v) : e.k === "v" ? e.name : e.k === "bin" ? `${exprStr(e.a)} ${e.op} ${exprStr(e.b)}` : condKey(e));
+const exprStr = (e: Expr): string => (e.k === "n" ? String(e.v) : e.k === "v" ? e.name : e.k === "bin" ? `${exprStr(e.a)} ${e.op} ${exprStr(e.b)}` : e.k === "sense" || e.k === "not" || e.k === "cmp" ? condKey(e) : exprText(e));
 const condText = (e: Expr): string => COND_LABEL[condKey(e)] ?? condKey(e);
 
 /**
@@ -225,7 +226,6 @@ function exprItems(sc: Scope, mode: "num" | "bool"): PickItem[] {
     if (rep.includes("keyDown")) for (const [k, l] of Object.entries(o.keys ?? {})) out.push({ label: `按住 ${l}`, value: `key:${k}`, cls: "ex" });
     if (rep.includes("heavier")) out.push({ label: `${FN_LABEL.heavier}(…)`, value: "fn:heavier", cls: "ex" });
     if (rep.includes("call")) for (const f of sc.funcs) out.push({ label: `${f.name}(…)`, value: `call:${f.name}`, cls: "ex" });
-    for (const c of sc.conds) { const k = condKey(c); out.push({ label: condText(c), value: `sense:${k}`, user: !COND_LABEL[k] }); }
   }
   return out;
 }
@@ -260,7 +260,7 @@ function exprEl(sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void, 
   const x0 = () => cbtn({ class: "cw-ex-x cw-ctl", type: "button", "aria-label": "还原", title: "还原", disabled: !sc.interactive, onclick: reset }, "✕");
   /** a condition can be wrapped (and / or / not) or replaced: the picker of conditions, the current condition becomes the first part */
   const wr = () => cbtn({ class: "cw-ex-x cw-ex-w cw-ctl", type: "button", "aria-label": "改成", title: "改成", disabled: !sc.interactive,
-    onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, exprItems(sc, "bool"), (v) => sc.edit(() => set(fromPick(sc, v, e ?? num(0), meta, "bool")))) }, "⋯");
+    onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, exprItems(sc, "bool"), (v) => sc.edit(() => set(fromPick(sc, v, e ?? num(0), meta, "bool")))) }, "…");
   const x = (): Node => (mode === "bool" ? h("span", { class: "cw-ex-xs" }, wr(), x0()) : x0());
   const kid = (parent: { [k: string]: unknown }, key: string, m: Meta = META_VAL, md: "num" | "bool" = "num") => exprEl(sc, () => parent[key] as Expr, (v) => { parent[key] = v; }, m, md, depth + 1);
   const kidAt = (arr: Expr[], i: number) => exprEl(sc, () => arr[i], (v) => { arr[i] = v; }, META_VAL, "num", depth + 1);

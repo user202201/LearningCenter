@@ -413,6 +413,41 @@
 }
 ]
 },
+"palette": {
+"title": [
+"调色板与颜色编号",
+"Palettes",
+"Palettes de couleurs"
+],
+"steps": [
+{
+"t": "彩色图片不一定要给每个像素存 3 个字节。可以先排一张“调色板”：给每种颜色编一个号，图片里只存编号。",
+"d": {
+"k": "grid",
+"rows": [
+"0110",
+"1221",
+"1221",
+"0110"
+],
+"nums": false
+}
+},
+{
+"t": "4 种颜色只需要 2 位二进制：00、01、10、11，也就是编号 0、1、2、3。每个像素 2 位，比 24 位小得多。读到编号，再去调色板里查颜色。",
+"d": {
+"k": "text",
+"lines": [
+"0 → 白",
+"1 → 红",
+"2 → 蓝",
+"3 → 绿",
+"编号 2 1 0 → 蓝 红 白"
+]
+}
+}
+]
+},
 "rgb": {
 "title": [
 "彩色与 RGB",
@@ -439,6 +474,35 @@
 "lines": [
 "FF 80 00",
 "R=255 G=128 B=0"
+]
+}
+}
+]
+},
+"resolution": {
+"title": [
+"分辨率与颜色深度实验",
+"Resolution and depth experiment",
+"Résolution et profondeur"
+],
+"steps": [
+{
+"t": "同一幅图，用不同的分辨率（像素数）和颜色深度（每个像素的位数）存下来，清晰度和文件大小都会变。像素太少，图会变成马赛克；位数太少，颜色层次会消失。",
+"d": {
+"k": "text",
+"lines": [
+"8 × 8 · 1 位 → 8 字节",
+"16 × 16 · 2 位 → 64 字节",
+"64 × 64 · 8 位 → 4096 字节"
+]
+}
+},
+{
+"t": "好的做法是在“看得清”和“文件小”之间找平衡：够用就好。这也是图片压缩和网页优化要做的事。",
+"d": {
+"k": "text",
+"lines": [
+"够清楚 + 够小 = 好选择"
 ]
 }
 }
@@ -2204,6 +2268,41 @@
 "world": 14,
 "no": 15,
 "title": [
+"调色板涂色",
+"Painting with a palette",
+"Peindre avec une palette"
+],
+"lesson": "palette",
+"kind": "pixel",
+"spec": {
+"mode": "palette",
+"n": 6,
+"rows": [
+"001100",
+"012210",
+"123321",
+"123321",
+"012210",
+"001100"
+],
+"colors": [
+"#ffffff",
+"#e03131",
+"#1c7ed6",
+"#2f9e44"
+]
+},
+"prompt": [
+"数字 0-3 是四种颜色的编号（0 白、1 红、2 蓝、3 绿）。选一种颜色，按编号把图涂出来。",
+"The digits 0-3 are the numbers of four colours (0 white, 1 red, 2 blue, 3 green). Choose a colour and paint the picture from the numbers.",
+"Les chiffres 0-3 sont les numéros de quatre couleurs (0 blanc, 1 rouge, 2 bleu, 3 vert). Choisissez une couleur et peignez l'image d'après les numéros."
+]
+},
+{
+"id": "i14-16",
+"world": 14,
+"no": 16,
+"title": [
 "RGB 颜色",
 "RGB colours",
 "Couleurs RVB"
@@ -2216,9 +2315,9 @@
 }
 },
 {
-"id": "i14-16",
+"id": "i14-17",
 "world": 14,
-"no": 16,
+"no": 17,
 "title": [
 "调出颜色",
 "Mixing colours",
@@ -2253,9 +2352,9 @@
 ]
 },
 {
-"id": "i14-17",
+"id": "i14-18",
 "world": 14,
-"no": 17,
+"no": 18,
 "title": [
 "图片有多大",
 "How big is a picture",
@@ -2269,9 +2368,44 @@
 }
 },
 {
-"id": "i14-18",
+"id": "i14-19",
 "world": 14,
-"no": 18,
+"no": 19,
+"title": [
+"分辨率与颜色深度",
+"Resolution and depth",
+"Résolution et profondeur"
+],
+"lesson": "resolution",
+"kind": "resolution",
+"spec": {
+"sizes": [
+4,
+8,
+16,
+32,
+64
+],
+"depths": [
+1,
+2,
+4,
+8
+],
+"maxBytes": 300,
+"minSize": 16,
+"minDepth": 2
+},
+"prompt": [
+"调节分辨率和颜色深度：图要看得清（至少 16 × 16，至少 2 位），文件又不能超过 300 字节。",
+"Adjust the resolution and the colour depth: the picture must stay clear (at least 16 × 16 and 2 bits) and the file must not exceed 300 bytes.",
+"Réglez la résolution et la profondeur de couleur : l'image doit rester nette (au moins 16 × 16 et 2 bits) et le fichier ne doit pas dépasser 300 octets."
+]
+},
+{
+"id": "i14-20",
+"world": 14,
+"no": 20,
 "title": [
 "声音的采样",
 "Sampling sound",
@@ -2298,9 +2432,9 @@
 ]
 },
 {
-"id": "i14-19",
+"id": "i14-21",
 "world": 14,
-"no": 19,
+"no": 21,
 "title": [
 "游程编码",
 "Run-length coding",
@@ -2314,9 +2448,9 @@
 }
 },
 {
-"id": "i14-20",
+"id": "i14-22",
 "world": 14,
-"no": 20,
+"no": 22,
 "title": [
 "还原与比较",
 "Decoding and comparing",
@@ -2333,9 +2467,9 @@
 }
 },
 {
-"id": "i14-21",
+"id": "i14-23",
 "world": 14,
-"no": 21,
+"no": 23,
 "title": [
 "哈夫曼树",
 "A Huffman tree",
@@ -2353,9 +2487,9 @@
 ]
 },
 {
-"id": "i14-22",
+"id": "i14-24",
 "world": 14,
-"no": 22,
+"no": 24,
 "title": [
 "无损还是有损",
 "Lossless or lossy",
@@ -2410,9 +2544,9 @@
 ]
 },
 {
-"id": "i14-23",
+"id": "i14-25",
 "world": 14,
-"no": 23,
+"no": 25,
 "title": [
 "凯撒密码",
 "Caesar cipher",
@@ -2427,9 +2561,9 @@
 }
 },
 {
-"id": "i14-24",
+"id": "i14-26",
 "world": 14,
-"no": 24,
+"no": 26,
 "title": [
 "破解凯撒密码",
 "Breaking a Caesar cipher",
@@ -2444,9 +2578,9 @@
 }
 },
 {
-"id": "i14-25",
+"id": "i14-27",
 "world": 14,
-"no": 25,
+"no": 27,
 "title": [
 "频率分析",
 "Frequency analysis",
@@ -2466,9 +2600,9 @@
 ]
 },
 {
-"id": "i14-26",
+"id": "i14-28",
 "world": 14,
-"no": 26,
+"no": 28,
 "title": [
 "异或",
 "XOR",
@@ -2485,9 +2619,9 @@
 }
 },
 {
-"id": "i14-27",
+"id": "i14-29",
 "world": 14,
-"no": 27,
+"no": 29,
 "title": [
 "奇偶校验",
 "Parity bits",
@@ -2504,9 +2638,9 @@
 }
 },
 {
-"id": "i14-28",
+"id": "i14-30",
 "world": 14,
-"no": 28,
+"no": 30,
 "title": [
 "找出错误的一位",
 "Find the flipped bit",
@@ -2526,9 +2660,9 @@
 ]
 },
 {
-"id": "i14-29",
+"id": "i14-31",
 "world": 14,
-"no": 29,
+"no": 31,
 "title": [
 "海明码",
 "Hamming code",
@@ -2548,9 +2682,9 @@
 ]
 },
 {
-"id": "i14-30",
+"id": "i14-32",
 "world": 14,
-"no": 30,
+"no": 32,
 "title": [
 "校验码",
 "Check digits",
@@ -2567,9 +2701,9 @@
 }
 },
 {
-"id": "i14-31",
+"id": "i14-33",
 "world": 14,
-"no": 31,
+"no": 33,
 "title": [
 "排序与筛选",
 "Sorting and filtering",
@@ -2643,9 +2777,9 @@
 ]
 },
 {
-"id": "i14-32",
+"id": "i14-34",
 "world": 14,
-"no": 32,
+"no": 34,
 "title": [
 "平均数、中位数、众数",
 "Mean, median and mode",
@@ -2663,9 +2797,9 @@
 }
 },
 {
-"id": "i14-33",
+"id": "i14-35",
 "world": 14,
-"no": 33,
+"no": 35,
 "title": [
 "读图表",
 "Reading charts",
@@ -2683,9 +2817,9 @@
 }
 },
 {
-"id": "i14-34",
+"id": "i14-36",
 "world": 14,
-"no": 34,
+"no": 36,
 "title": [
 "电子表格：求和与平均",
 "Spreadsheet: sum and average",
@@ -2741,9 +2875,9 @@
 ]
 },
 {
-"id": "i14-35",
+"id": "i14-37",
 "world": 14,
-"no": 35,
+"no": 37,
 "title": [
 "电子表格：用公式计算",
 "Spreadsheet: formulas",
@@ -4006,6 +4140,67 @@
 "world": 15,
 "no": 27,
 "title": [
+"推荐与信息茧房",
+"Recommendations and bubbles",
+"Recommandations et bulles"
+],
+"lesson": "bias",
+"kind": "scenario",
+"spec": {
+"qs": [
+{
+"p": "视频应用总是给你推荐你看过的那一类视频。这是因为？",
+"o": [
+"推荐程序根据你的观看记录，预测你还会喜欢什么",
+"应用里只有这一类视频",
+"有人在手动挑选每一个视频"
+],
+"a": 0,
+"w": "推荐算法从历史记录里学习，推荐和你以前看过的相似的内容。这样很方便，但也可能让你只看到一类内容。"
+},
+{
+"p": "一个人长期只看到自己喜欢的观点，很少看到不同的观点，这种现象常被叫做？",
+"o": [
+"信息茧房",
+"网络加速",
+"数据压缩"
+],
+"a": 0,
+"w": "推荐越符合你的口味，你就越少接触别的内容，像被包在“茧”里。要主动去看不同来源、不同角度的信息。"
+},
+{
+"p": "怎样才能避免被推荐程序“困住”？",
+"o": [
+"主动搜索、阅读不同类型和观点的内容，并控制使用时间",
+"只点推荐的第一个",
+"不再使用任何网络"
+],
+"a": 0,
+"w": "推荐程序是工具，不是全部。主动选择内容、多方核实、控制时间，才能让自己的视野更宽。"
+},
+{
+"p": "推荐程序的数据来自过去的记录。如果过去的数据带有偏见，会发生什么？",
+"o": [
+"推荐也可能带有同样的偏见",
+"偏见会自动消失",
+"推荐一定最公平"
+],
+"a": 0,
+"w": "机器从数据里学习，数据里的偏见会被学进去并重复出来。所以要检查结果是否公平，而不只是是否准确。"
+}
+]
+},
+"prompt": [
+"判断推荐程序是怎样工作的，它有什么风险。",
+"Judge how a recommender works and what risks it has.",
+"Jugez comment fonctionne un système de recommandation et quels risques il comporte."
+]
+},
+{
+"id": "i15-28",
+"world": 15,
+"no": 28,
+"title": [
 "生成式人工智能",
 "Generative AI",
 "IA générative"
@@ -4053,9 +4248,9 @@
 ]
 },
 {
-"id": "i15-28",
+"id": "i15-29",
 "world": 15,
-"no": 28,
+"no": 29,
 "title": [
 "人工智能的限制与责任",
 "Limits and responsibility of AI",
@@ -4544,6 +4739,11 @@
 "黑色是 1，白色是 0。一行就是一个 8 位二进制数。",
 "一行一行来：从左到右看每个格子。",
 "做完对照一遍每一行。"
+],
+"resolution": [
+"点一点不同的分辨率和位数，看图片和文件大小怎样变化。",
+"图片要看得清：至少 16 × 16，至少 2 位。",
+"大小 = 宽 × 高 × 位数 ÷ 8，不能超过 300 字节。"
 ],
 "rgbmix": [
 "R 是红，G 是绿，B 是蓝。数值越大越亮。",

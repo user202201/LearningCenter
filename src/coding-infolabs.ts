@@ -290,10 +290,11 @@ export const bits: Mount = (root, io) => {
 };
 
 // ---------- pixel: paint, read the numbers, decode numbers ----------
-export function paintGrid(n: number, onChange: () => void, opts: { id?: string; big?: boolean } = {}) {
+export function paintGrid(n: number, onChange: () => void, opts: { id?: string; big?: boolean; colors?: string[] } = {}) {
   const cells = Array(n * n).fill(0);
   const el = h("div", { class: "ci-pixedit" + (opts.big ? " big" : ""), style: `--w:${n}`, "data-n": String(n), id: opts.id ?? "" });
-  const refresh = () => el.querySelectorAll("i").forEach((c, i) => c.classList.toggle("on", !!cells[i]));
+  let cur = 1;   // the colour number painted when a palette is used
+  const refresh = () => el.querySelectorAll<HTMLElement>("i").forEach((c, i) => { if (opts.colors) c.style.background = opts.colors[cells[i]] ?? "#fff"; else c.classList.toggle("on", !!cells[i]); });
   el.innerHTML = Array.from({ length: n * n }, (_, i) => `<i data-i="${i}"></i>`).join("");
   let paint = -1, pid = -1, last: [number, number] | null = null;
   /** the square under the pointer, from the LAYOUT size of the grid (not from what is under the pointer: a fast drag may jump over squares) */
@@ -308,7 +309,7 @@ export function paintGrid(n: number, onChange: () => void, opts: { id?: string; 
     for (let i = 0; i <= steps; i++) out.push([Math.round(a[0] + ((b[0] - a[0]) * i) / steps), Math.round(a[1] + ((b[1] - a[1]) * i) / steps)]);
     return out;
   };
-  el.addEventListener("pointerdown", (e) => { const c = at(e); if (!c) return; pid = e.pointerId; try { el.setPointerCapture(pid); } catch { /* ignore */ } paint = cells[c[1] * n + c[0]] ? 0 : 1; cells[c[1] * n + c[0]] = paint; last = c; refresh(); onChange(); e.preventDefault(); });
+  el.addEventListener("pointerdown", (e) => { const c = at(e); if (!c) return; pid = e.pointerId; try { el.setPointerCapture(pid); } catch { /* ignore */ } paint = opts.colors ? cur : cells[c[1] * n + c[0]] ? 0 : 1; cells[c[1] * n + c[0]] = paint; last = c; refresh(); onChange(); e.preventDefault(); });
   el.addEventListener("pointermove", (e) => {
     if (e.pointerId !== pid || !last) return;
     const c = at(e); if (!c) return;
@@ -319,10 +320,10 @@ export function paintGrid(n: number, onChange: () => void, opts: { id?: string; 
   });
   const up = (e: PointerEvent) => { if (e.pointerId === pid) { pid = -1; last = null; } };
   el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
-  return { el, rows: (): string[] => Array.from({ length: n }, (_, y) => cells.slice(y * n, y * n + n).join("")), cells: (): number[] => cells.slice(), set: (rows: string[]) => { rows.forEach((r, y) => [...r].forEach((c, x) => (cells[y * n + x] = Number(c)))); refresh(); onChange(); }, clear: () => { cells.fill(0); refresh(); onChange(); }, count: () => cells.reduce((a: number, b: number) => a + b, 0) };
+  return { el, rows: (): string[] => Array.from({ length: n }, (_, y) => cells.slice(y * n, y * n + n).join("")), cells: (): number[] => cells.slice(), set: (rows: string[]) => { rows.forEach((r, y) => [...r].forEach((c, x) => (cells[y * n + x] = Number(c)))); refresh(); onChange(); }, clear: () => { cells.fill(0); refresh(); onChange(); }, setColor: (v: number) => { cur = v; }, count: () => cells.reduce((a: number, b: number) => a + b, 0) };
 }
 export const pixel: Mount = (root, io) => {
-  const s = io.act.spec as { mode: "paint" | "nums" | "decode" | "free"; pic?: string; size?: number };
+  const s = io.act.spec as { mode: "paint" | "nums" | "decode" | "free" | "palette"; pic?: string; size?: number };
   const pic = s.pic ? I.PICS[s.pic] : null;
   io.prompt(L(io.act.prompt));
   if (s.mode === "paint" && pic) {
@@ -345,6 +346,16 @@ export const pixel: Mount = (root, io) => {
     const check = () => { const mine = I.rowNumbers(g.rows()); if (mine.join() === nums.join()) { io.say("图案正确。", "ok"); io.win(); } else { io.bad(); io.say("有些行的数字不对。每个数字写成 8 位二进制。", "bad"); } };
     return { solve: () => { g.set(pic); check(); }, wrong: () => { g.set(pic.map(() => "00000000")); check(); } };
   }
+  if (s.mode === "palette") {
+    const rows: string[] = io.act.spec.rows, colors: string[] = io.act.spec.colors, n = rows.length;
+    const g = paintGrid(n, () => {}, { colors });
+    let pick = 1;
+    const sw = h("div", { class: "ci-swatchbar" }, ...colors.map((c, i) => h("button", { class: "ci-btn ci-sbtn" + (i === pick ? " on" : ""), type: "button", "data-c": String(i), "aria-label": String(i), style: `--c:${c}`, onclick: () => { pick = i; g.setColor(i); sw.querySelectorAll("button").forEach((b, k) => b.classList.toggle("on", k === i)); } }, h("b", {}, String(i)))));
+    g.setColor(1);
+    root.append(h("div", { class: "ci-numlist user" }, ...rows.map((r) => h("span", {}, [...r].join(" ")))), sw, g.el, btn("ci-check", "检查", () => check(), "primary"));
+    const check = () => { if (g.cells().join("") === rows.join("")) { io.say("图案正确。", "ok"); io.win(); } else { io.bad(); io.say("有些格子的颜色不对。请对照上面的编号。", "bad"); } };
+    return { solve: () => { g.set(rows); check(); }, wrong: () => { g.set(rows.map((r) => r.replace(/./g, "0"))); check(); } };
+  }
   // free: 16 x 16 black / white, then the size in bytes
   const n = s.size ?? 16, live = h("div", { class: "ci-live user" }), ans = h("input", { class: "ci-input user", type: "text", inputmode: "numeric", id: "ci-bytes", "aria-label": "答案", autocomplete: "off" }) as HTMLInputElement;
   const g = paintGrid(n, () => { live.textContent = `${g.count()} / ${n * n}`; });
@@ -355,6 +366,45 @@ export const pixel: Mount = (root, io) => {
     if (ans.value.trim() === String(I.imageBytes(n, n, 1))) { io.say("正确。", "ok"); io.win(); } else { io.bad(); io.say("字节数不对。1 字节 = 8 位。", "bad"); }
   };
   return { solve: () => { g.set(I.PICS.heart.map((r) => r + r).concat(I.PICS.heart.map((r) => r + r))); ans.value = String(I.imageBytes(n, n, 1)); check(); }, wrong: () => { g.set(I.PICS.heart.map((r) => r + r).concat(I.PICS.heart.map((r) => r + r))); ans.value = "1"; check(); } };
+};
+
+// ---------- resolution and colour depth ----------
+/** the picture the experiment shows: a round face in 256 grey levels (0 = black, 1 = white), sampled at (u, v) in 0..1 */
+export function faceGrey(u: number, v: number): number {
+  const d = Math.hypot(u - 0.5, v - 0.5);
+  if (d > 0.46) return 1;
+  let g = 0.55 + 0.4 * (1 - d / 0.46);                                         // a round face, lighter in the middle
+  if (Math.hypot(u - 0.36, v - 0.4) < 0.07 || Math.hypot(u - 0.64, v - 0.4) < 0.07) g = 0.05;   // eyes
+  const m = Math.hypot(u - 0.5, v - 0.55);
+  if (m > 0.2 && m < 0.27 && v > 0.58) g = 0.1;                                // a smile
+  if (d > 0.42) g = 0.25;                                                       // the outline
+  return g;
+}
+export const resolution: Mount = (root, io) => {
+  const s = io.act.spec as { sizes: number[]; depths: number[]; maxBytes: number; minSize: number; minDepth: number };
+  let size = s.sizes[0], depth = s.depths[s.depths.length - 1];
+  const cv = h("canvas", { class: "ci-resv", id: "ci-resv", width: "64", height: "64", role: "img", "aria-label": "picture" }) as HTMLCanvasElement, info = h("p", { class: "ci-live user", id: "ci-resinfo" });
+  const row = (id: string, vals: number[], cur: () => number, set: (v: number) => void, fmt: (v: number) => string) => h("div", { class: "ci-choices", id }, ...vals.map((v) => h("button", { class: "ci-btn ci-choice" + (cur() === v ? " on" : ""), type: "button", "data-v": String(v), onclick: () => { set(v); draw(); } }, fmt(v))));
+  const sizeRow = h("div", {}), depthRow = h("div", {});
+  io.prompt(L(io.act.prompt));
+  root.append(h("div", { class: "ci-pixpair" }, cv), info, sizeRow, depthRow, btn("ci-check", "检查", () => check(), "primary"));
+  const bytes = () => I.imageBytes(size, size, depth);
+  function draw() {
+    cv.width = size; cv.height = size;
+    const ctx = cv.getContext("2d");
+    if (ctx) { const img = ctx.createImageData(size, size), lv = 2 ** depth - 1; for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) { const q = Math.round(faceGrey((x + 0.5) / size, (y + 0.5) / size) * lv) / lv, g = Math.round(q * 255), k = (y * size + x) * 4; img.data[k] = g; img.data[k + 1] = g; img.data[k + 2] = g; img.data[k + 3] = 255; } ctx.putImageData(img, 0, 0); }
+    info.textContent = `${size} × ${size} · ${depth} bit  =  ${I.fmtNum(bytes())} B`;
+    sizeRow.replaceChildren(row("ci-sizes", s.sizes, () => size, (v) => (size = v), (v) => `${v} × ${v}`));
+    depthRow.replaceChildren(row("ci-depths", s.depths, () => depth, (v) => (depth = v), (v) => `${v} bit`));
+  }
+  const check = () => {
+    if (size < s.minSize || depth < s.minDepth) { io.bad(); return io.say("图片已经看不清了。请提高分辨率或颜色深度。", "bad"); }
+    if (bytes() > s.maxBytes) { io.bad(); return io.say("文件太大了。请降低分辨率或颜色深度。", "bad"); }
+    io.say("正确。图片仍然清楚，文件也够小。", "ok"); io.win();
+  };
+  draw();
+  const set = (sz: number, d: number) => { size = sz; depth = d; draw(); };
+  return { solve: () => { set(s.minSize, s.minDepth); check(); }, wrong: () => { set(s.sizes[s.sizes.length - 1], s.depths[s.depths.length - 1]); check(); } };
 };
 
 // ---------- rgb mixing ----------

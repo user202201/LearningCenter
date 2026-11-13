@@ -83,6 +83,7 @@ const drag = async (page, from, x, y, steps = 8) => {
   ok((await page.locator('.cw-pop .cw-pi').evaluateAll((l) => l.map((e) => e.textContent).join('|'))) === '开始运行|按下 →|按下 ←', 'the hat offers the events of the level: ' + (await page.locator('.cw-pop .cw-pi').evaluateAll((l) => l.map((e) => e.textContent).join('|'))));
   await page.locator('.cw-pop .cw-pi', { hasText: '按下 →' }).click();
   await choose(page, page.locator('.cw-evsel').nth(1), '按下 ←');
+  await page.locator('.cw-hat-ev').first().click();
   await pal(page, 'changex').click();
   ok((await prog(page)) === 'on key(right) cat { changex 10 } on key(left) cat { }', 'the chosen events are in the program, a tap adds the block to the first script: ' + (await prog(page)));
   await page.locator('.cw-hat-ev').nth(1).click();
@@ -141,7 +142,7 @@ const drag = async (page, from, x, y, steps = 8) => {
   ok(bool.includes('并且') && bool.includes('或者') && bool.includes('不是') && bool.includes('□ ≤ □'), 'the "..." of a condition offers and / or / not and the other signs: ' + bool.join(' '));
   await page.locator('.cw-pop .cw-pi', { hasText: '并且' }).click();
   ok((await prog(page)).startsWith('def bigger(a, b) { if a > b and ') && (await page.locator('.cw-ex-logic').count()) === 1, 'and: the old condition is the first part, a new comparison the second: ' + (await prog(page)));
-  await page.locator('.cw-ws .cw-ex-logic .cw-ex-w').last().click();
+  await page.locator('.cw-ws .cw-ex-logic > .cw-ex-cmp').nth(1).locator('> .cw-ex-xs .cw-ex-w').click();
   await page.locator('.cw-pop .cw-pi', { hasText: '不是' }).click();
   ok(/ and !\(/.test(await prog(page)), 'not wraps a part: ' + (await prog(page)));
   await tab(page, 'funcs').click(); await pal(page, 'return').click();
@@ -153,13 +154,13 @@ const drag = async (page, from, x, y, steps = 8) => {
   await tab(page, 'control').click(); await pal(page, 'forever').click();
   const fev = await page.locator('.cw-ws .cw-inner').first();
   await drag(page, pal(page, 'if'), (await center(fev)).x + 10, (await center(fev)).y);
-  ok((await prog(page)) === 'on start basket { forever { if keyDown(left) { } } }', 'a drag puts "if" into "forever"; the condition starts with a key of the level: ' + (await prog(page)));
+  ok((await prog(page)) === 'on start basket { forever { if keyDown(right) { } } }', 'a drag puts "if" into "forever"; the condition starts with a key of the level: ' + (await prog(page)));
   await page.locator('.cw-ws .cw-ex-rep .cw-name').first().click();
-  ok((await page.locator('.cw-pop .cw-pi').evaluateAll((l) => l.map((e) => e.textContent).join('|'))) === '←|→|↑|↓|空格', 'the key list is the keys of the level');
-  await page.locator('.cw-pop .cw-pi', { hasText: '→' }).click();
+  ok((await page.locator('.cw-pop .cw-pi').evaluateAll((l) => l.map((e) => e.textContent).join('|'))) === '→|←|↑|↓|空格', 'the key list is the keys of the level');
+  await page.locator('.cw-pop .cw-pi', { hasText: '←' }).click();
   await page.locator('.cw-ws .cw-ex-w').first().click();
   const kb = await page.locator('.cw-pop .cw-pi').evaluateAll((l) => l.map((e) => e.textContent));
-  ok(kb.includes('碰到 苹果') && kb.includes('按住 ←') && kb.includes('碰到 篮子'), 'touching and keys are offered as conditions: ' + kb.join(' '));
+  ok(kb.includes('碰到 苹果') && kb.includes('按住 →') && kb.includes('碰到 篮子'), 'touching and keys are offered as conditions: ' + kb.join(' '));
   await page.locator('.cw-pop .cw-pi', { hasText: '碰到 苹果' }).click();
   ok((await prog(page)) === 'on start basket { forever { if touching(apple) { } } }', 'touching(apple): ' + (await prog(page)));
 
@@ -174,7 +175,7 @@ const drag = async (page, from, x, y, steps = 8) => {
   ok((await prog(page)) === 'each x in evens { } add(xs, 1)', 'add(list, value) is added at the end of the script: ' + (await prog(page)));
   await choose(page, page.locator('.cw-ws .cw-b[data-kind="push"] .cw-val').first(), 'x');
   const lit = await page.locator('.cw-ws .cw-b[data-kind="push"] .cw-val').first().click().then(() => page.locator('.cw-pop .cw-pi').evaluateAll((l) => l.map((e) => e.textContent)));
-  ok(lit.includes('□ mod □') === false && lit.includes('□ + □'), 'only the operators of the level are offered (9-8 has + − × ÷ mod, no reporters): ' + lit.join(' '));
+  ok(lit.includes('□ mod □') && lit.includes('□ ÷ □') && !lit.some((x) => /长度|编号/.test(x)), 'the operators of the level are offered (9-8 has + − × ÷ mod) and no reporters (it offers none): ' + lit.join(' '));
   await page.keyboard.press('Escape');
   await go(page, id, 'w10/10');
   await tab(page, 'control').click(); await pal(page, 'while').click();
@@ -185,11 +186,11 @@ const drag = async (page, from, x, y, steps = 8) => {
 
   // ---------- functions: several parameters, calls of itself ----------
   await go(page, id, 'w8/12');
+  await tab(page, 'funcs').click();
   const kb2 = pal(page, 'call:koch');
   ok((await kb2.locator('.cw-par').count()) === 2 && (await kb2.locator('.cw-par').allTextContents()).join() === 'n,len', 'a call of a function with two parameters shows both: n and len');
   await go(page, id, 'w8/6');
   ok((await page.locator('.cw-script').count()) === 2 && (await page.locator('.cw-pitem').evaluateAll((l) => l.map((e) => e.dataset.pal).join())).includes('call:hyp2'), 'level 8-6: two functions sq(n) and hyp2(a, b)');
-  await tab(page, 'funcs').click();
   await pal(page, 'call:hyp2').click();
   ok(/不能调用/.test(await toastText(page)) && (await prog(page)) === 'def sq(n) { } def hyp2(a, b) { }', 'a function cannot call a later one (hyp2 inside sq): ' + (await toastText(page)));
   await pal(page, 'call:sq').click();
@@ -208,7 +209,8 @@ const drag = async (page, from, x, y, steps = 8) => {
   await pal(page, 'smove').click();
   await page.click('#cl-run');
   ok(await page.locator('.cw').evaluate((e) => e.classList.contains('locked')), 'the editor is locked while the program runs');
-  await page.waitForSelector('#cl-result:not([hidden])', { timeout: 8000 });
+  await page.waitForSelector('#cl-result:not([hidden]), #cl-msg.bad', { timeout: 8000 });
+  ok(!(await page.locator('.cw').evaluate((e) => e.classList.contains('locked'))), 'and unlocked when it has ended');
   const stat = await page.evaluate(async () => {
     const E = await import('/src/coding-editor.ts'), L = await import('/src/coding-levels.ts'), X = await import('/src/coding-levels2.ts');
     const l = L.levelById('w10-02'); const el = E.programEl(l.sol, { funcs: l.funcs, vars: l.vars, ed: X.edOpts(l) }); document.body.append(el);
@@ -257,8 +259,13 @@ const drag = async (page, from, x, y, steps = 8) => {
     await tap(tab(tp, 'events'));
     await tdrag(pal(tp, 'broadcast'), inner.x + 10, inner.y);
     ok((await prog(tp)) === 'on start basket { forever { broadcast caught } }', `REAL touch (${name}): a finger drags a block into the inner slot of "forever"`);
+    await tp.locator('.cw-ws .cw-b[data-kind="broadcast"]').scrollIntoViewIfNeeded(); await tp.locator('#cw-bin').scrollIntoViewIfNeeded(); await tp.waitForTimeout(100);
     const bin = await center(tp.locator('#cw-bin'));
-    await tdrag(tp.locator('.cw-ws .cw-b[data-kind="broadcast"]'), bin.x, bin.y);
+    // (a finger on a control of the block, like the message button, does not start a drag: take hold of the block at its left edge)
+    const bb = await tp.locator('.cw-ws .cw-b[data-kind="broadcast"]').boundingBox();
+    await clearToasts(tp); await touch('touchStart', bb.x + 8, bb.y + bb.height / 2);
+    for (let i = 1; i <= 10; i++) await touch('touchMove', bb.x + 8 + ((bin.x - bb.x - 8) * i) / 10, bb.y + bb.height / 2 + ((bin.y - bb.y - bb.height / 2) * i) / 10);
+    await touch('touchEnd', bin.x, bin.y); await tp.waitForTimeout(90);
     ok((await prog(tp)) === 'on start basket { forever { } }', `REAL touch (${name}): dragging a block onto the bin deletes it`);
     await tp.screenshot({ path: OUT + `editor2-touch-${name}.png` });
     await tt.browser.close();

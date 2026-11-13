@@ -7,7 +7,7 @@ import { h, toast, modal, confirmDlg } from "./ui";
 import * as M from "./model";
 import type { Ctx } from "./english";
 import { Program, cloneProgram, nextHint, toText, countBlocks, parse } from "./coding-ast";
-import { Machine, StepInfo, State, cloneState, TPS, BEAT_TICKS } from "./coding-interp";
+import { Machine, StepInfo, State, cloneState, TPS, BEAT_TICKS, MSG } from "./coding-interp";
 import { Level, evaluate, starsFor } from "./coding-levels";
 import * as CM from "./coding-model";
 import { createEditor, programEl, Editor } from "./coding-editor";
@@ -28,8 +28,8 @@ const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 /** the notes of a run are played with Web Audio (a soft triangle tone): the pitch is the MIDI number, the length follows the speed of the run */
 let actx: AudioContext | null = null;
 export const played: { pitch: number; beats: number }[] = [];
-function tone(pitch: number, seconds: number): void {
-  played.push({ pitch, beats: seconds });
+function tone(pitch: number, beats: number, seconds: number): void {
+  played.push({ pitch, beats });
   try {
     const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!AC) return;
@@ -86,7 +86,9 @@ export function play2(host: Host, p: Play2): void {
   const msg = h("p", { class: "cl-msg", id: "cl-msg", role: "status" });
   const result = h("div", { class: "cl-result", id: "cl-result", hidden: true });
   const setMsg = (t: string, kind = "") => { msg.textContent = t; msg.className = "cl-msg " + kind; };
-  const delay = () => SPEED[CM.loadLocal().speed];
+  // a long run (a sort of many items, a deep recursion) is shown faster, so that it never takes longer than a few seconds in total
+  const TOTAL = { slow: 40000, normal: 20000, fast: 6000 } as const;
+  const delay = () => { const sp = CM.loadLocal().speed; return Math.max(4, Math.min(SPEED[sp] / 3, TOTAL[sp] / Math.max(1, dry?.steps ?? 1))); };
   const tickMs = () => TICK_MS[CM.loadLocal().speed];
 
   // ----- state of a run -----
@@ -128,7 +130,7 @@ export function play2(host: Host, p: Play2): void {
     sview!.render(srun.state.stage!, srun.state.vars); showTime(srun.tick);
     // the notes that started in the last tick are played (the length follows the speed of the run)
     const st = srun.state.stage!;
-    while (heard < st.notes.length) { const n = st.notes[heard++]; if (!silent) tone(n.pitch, n.beats * BEAT_TICKS * (playing ? 50 : tickMs()) / 1000); else played.push({ pitch: n.pitch, beats: n.beats }); }
+    while (heard < st.notes.length) { const n = st.notes[heard++]; if (!silent) tone(n.pitch, n.beats, n.beats * BEAT_TICKS * (playing ? 50 : tickMs()) / 1000); else played.push({ pitch: n.pitch, beats: n.beats }); }
   };
   /** a tap / key of the scripted inputs is shown on the stage */
   const showInputs = (tick: number) => {
@@ -191,7 +193,8 @@ export function play2(host: Host, p: Play2): void {
   function dataStart(single: boolean) {
     const prog = editor.program();
     dry = evaluate(level, prog);
-    cap = dry.status === "infinite" || dry.status === "budget" ? 80 : Infinity;
+    // an endless or too deep program is shown for a while only (the message comes from the dry run)
+    cap = dry.status === "infinite" || dry.status === "budget" || (dry.status === "error" && dry.message === MSG.deep) ? 120 : Infinity;
     const r = makeRun(level, prog);
     mach = r.machine; shown = 0; running = true; stepMode = single;
     lock(true);
@@ -209,7 +212,7 @@ export function play2(host: Host, p: Play2): void {
     dview!.render(mach.state, { steps: mach.steps });
     if (x.recursion || dext!.view === "calc") stack.render(mach);
     if (!info || mach.status !== "running" || shown >= cap) return void dataFinish();
-    if (!stepMode) timer = window.setTimeout(dataTick, delay() / 3);
+    if (!stepMode) timer = window.setTimeout(dataTick, delay());
   }
   function dataInstant() {
     if (!mach || !running) return;

@@ -598,5 +598,21 @@
  "关闭预览": [
   "Close preview",
   "Fermer l'aperçu"
+ ],
+ "有些格子的颜色不对。请对照上面的编号。": [
+  "Some squares have the wrong colour. Please compare with the numbers above.",
+  "Certains carrés n'ont pas la bonne couleur. Veuillez comparer avec les numéros ci-dessus."
+ ],
+ "图片已经看不清了。请提高分辨率或颜色深度。": [
+  "The picture is no longer clear. Please raise the resolution or the colour depth.",
+  "L'image n'est plus nette. Veuillez augmenter la résolution ou la profondeur de couleur."
+ ],
+ "文件太大了。请降低分辨率或颜色深度。": [
+  "The file is too large. Please lower the resolution or the colour depth.",
+  "Le fichier est trop volumineux. Veuillez réduire la résolution ou la profondeur de couleur."
+ ],
+ "正确。图片仍然清楚，文件也够小。": [
+  "Correct. The picture is still clear and the file is small enough.",
+  "Correct. L'image reste nette et le fichier est assez petit."
  ]
 }
