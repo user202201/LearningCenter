@@ -83,7 +83,7 @@ export const password: Mount = (root, io) => {
     meter.querySelectorAll("i").forEach((e, i) => { e.className = i <= lv ? "on l" + lv : ""; });
     const t = I.humanTime(I.crackSeconds(b));
     bits.textContent = `${Math.round(b)} bits`;
-    time.textContent = !pw ? "" : t.unit === "s" && t.v === 0 ? "不到 1 秒" : `约 ${t.v} ${({ s: "秒", min: "分钟", h: "小时", d: "天", y: "年", ky: "千年", my: "百万年以上" })[t.unit]}`;
+    time.textContent = !pw ? "" : t.unit === "s" && t.v === 0 ? "不到 1 秒" : t.unit === "my" ? "百万年以上" : `约 ${t.v} ${({ s: "秒", min: "分钟", h: "小时", d: "天", y: "年", ky: "千年" })[t.unit]}`;
   };
   inp.addEventListener("input", upd);
   const show = () => { prog.textContent = `${ti + 1} / ${s.tasks.length}`; task.textContent = s.tasks[ti].p; io.prompt(L(io.act.prompt)); inp.value = ""; upd(); };
@@ -290,14 +290,14 @@ export const digit: Mount = (root, io) => {
   let ti = 0;
   const prog = h("div", { class: "ci-prog" });
   root.append(prog, grid, h("div", { class: "ci-row" }, btn("ci-clear", "清除", () => { pg.clear(); out.textContent = ""; }), btn("ci-check", "识别", () => check(), "primary")), out, note);
-  const show = () => { prog.textContent = s.mode === "draw" ? `${ti + 1} / ${s.targets!.length}` : ""; io.prompt(s.mode === "draw" ? `${L(io.act.prompt)} ${s.targets![ti]}` : L(io.act.prompt)); pg.clear(); out.textContent = ""; };
+  const show = (keep = false) => { prog.textContent = s.mode === "draw" ? `${ti + 1} / ${s.targets!.length}` : ""; io.prompt(s.mode === "draw" ? `${L(io.act.prompt)} ${s.targets![ti]}` : L(io.act.prompt)); pg.clear(); if (!keep) out.textContent = ""; };
   const check = () => {
     if (pg.count() < 6) return io.say("请先画一个数字。", "bad");
     const r = I.recogniseDigit(getModel(), pg.cells());
     const top = r.scores.map((v, d) => [d, v] as const).sort((a, b) => b[1] - a[1]).slice(0, 3);
     out.innerHTML = top.map(([d, v]) => `<div class="ci-conf"><b>${d}</b><i style="width:${Math.round(v * 100)}%"></i><span>${Math.round(v * 100)}%</span></div>`).join("");
     if (s.mode === "draw") {
-      if (r.digit === s.targets![ti] && r.confidence >= 0.5) { ti++; if (ti >= s.targets!.length) { io.say("全部正确。", "ok"); return io.win(); } io.say("机器认出来了。", "ok"); return show(); }
+      if (r.digit === s.targets![ti] && r.confidence >= 0.5) { ti++; if (ti >= s.targets!.length) { io.say("全部正确。", "ok"); return io.win(); } io.say("机器认出来了。", "ok"); return show(true); }
       io.bad(); io.say(r.digit === s.targets![ti] ? "机器认出来了，但把握不大。请画得更清楚。" : `机器认为这是 ${r.digit}。请再画一次。`, "bad");
     } else if (r.confidence < 0.4) { io.say("机器没有把握。", "ok"); io.win(); } else { io.bad(); io.say("机器很有把握。请画一个更含糊的图形。", "bad"); }
   };

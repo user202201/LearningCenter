@@ -7,7 +7,7 @@ import { h, toast, modal, confirmDlg } from "./ui";
 import * as M from "./model";
 import type { Ctx } from "./english";
 import { Program, cloneProgram, nextHint, toText, countBlocks, parse } from "./coding-ast";
-import { Machine, StepInfo, State, cloneState, TPS } from "./coding-interp";
+import { Machine, StepInfo, State, cloneState, TPS, BEAT_TICKS } from "./coding-interp";
 import { Level, evaluate, starsFor } from "./coding-levels";
 import * as CM from "./coding-model";
 import { createEditor, programEl, Editor } from "./coding-editor";
@@ -25,6 +25,22 @@ const SPEED = { slow: 900, normal: 450, fast: 140 } as const;
 /** milliseconds of one tick of the stage clock for each speed (normal = real time: 20 ticks a second) */
 const TICK_MS = { slow: 100, normal: 50, fast: 12 } as const;
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
+/** the notes of a run are played with Web Audio (a soft triangle tone): the pitch is the MIDI number, the length follows the speed of the run */
+let actx: AudioContext | null = null;
+export const played: { pitch: number; beats: number }[] = [];
+function tone(pitch: number, seconds: number): void {
+  played.push({ pitch, beats: seconds });
+  try {
+    const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!AC) return;
+    actx ??= new AC();
+    if (actx.state === "suspended") void actx.resume();
+    const t = actx.currentTime, dur = Math.max(0.08, seconds), o = actx.createOscillator(), g = actx.createGain();
+    o.type = "triangle"; o.frequency.value = 440 * 2 ** ((pitch - 69) / 12);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.22, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + dur * 0.95);
+    o.connect(g).connect(actx.destination); o.start(t); o.stop(t + dur);
+  } catch { /* no sound on this device */ }
+}
 const KEY_OF: Record<string, string> = { ArrowLeft: "left", ArrowRight: "right", ArrowUp: "up", ArrowDown: "down", " ": "space" };
 
 export function play2(host: Host, p: Play2): void {
@@ -75,6 +91,7 @@ export function play2(host: Host, p: Play2): void {
 
   // ----- state of a run -----
   let timer = 0, running = false, playing = false, failures = 0, usedAnswer = false, dry: ReturnType<typeof evaluate> | null = null;
+  let heard = 0, silent = false;
   let srun: StageRun | null = null, mach: Machine | null = null, shown = 0, cap = Infinity, stepMode = false, held: string[] = [];
   const ui = {
     run: btn("cl-run", "运行", () => void start(false), "primary"),
@@ -106,7 +123,13 @@ export function play2(host: Host, p: Play2): void {
   const stageTime = h("span", { class: "sv-time", id: "sv-time" });
   const showTime = (t: number) => { stageTime.replaceChildren(h("b", {}, (t / TPS).toFixed(1)), " ", h("span", {}, "秒钟")); };
   showTime(0);
-  const paint = () => { if (srun) { sview!.render(srun.state.stage!, srun.state.vars); showTime(srun.tick); } };
+  const paint = () => {
+    if (!srun) return;
+    sview!.render(srun.state.stage!, srun.state.vars); showTime(srun.tick);
+    // the notes that started in the last tick are played (the length follows the speed of the run)
+    const st = srun.state.stage!;
+    while (heard < st.notes.length) { const n = st.notes[heard++]; if (!silent) tone(n.pitch, n.beats * BEAT_TICKS * (playing ? 50 : tickMs()) / 1000); else played.push({ pitch: n.pitch, beats: n.beats }); }
+  };
   /** a tap / key of the scripted inputs is shown on the stage */
   const showInputs = (tick: number) => {
     for (const i of sext!.inputs.filter((q) => q.tick === tick)) {
@@ -143,7 +166,7 @@ export function play2(host: Host, p: Play2): void {
     const prog = editor.program();
     if (countBlocks(prog) === 0) return void setMsg("请先搭一些积木。");
     result.hidden = true; renderIdle();
-    srun = new StageRun(prog, sext!, false);
+    srun = new StageRun(prog, sext!, false); heard = 0;
     srun.step();   // tick 0: the "when started" scripts
     playing = true; lock(true); ui.run.setAttribute("disabled", ""); ui.play.textContent = "停止试玩";
     setMsg("试玩：点一点角色或舞台，按一按键盘或下面的按键。");
@@ -213,13 +236,13 @@ export function play2(host: Host, p: Play2): void {
     result.hidden = true;
     if (isStage) {
       renderIdle();
-      srun = new StageRun(prog, sext!); running = true; lock(true); setMsg("");
+      srun = new StageRun(prog, sext!); heard = 0; running = true; lock(true); setMsg("");
       stageLoop();
     } else dataStart(single);
   }
   /** runs the whole program at once (tests and the hook of coding) */
   function instant() {
-    if (isStage) { if (!srun || !running) return; while (stageTick()) { /* all the ticks */ } stageFinish(); } else dataInstant();
+    if (isStage) { if (!srun || !running) return; silent = true; while (stageTick()) { /* all the ticks */ } silent = false; stageFinish(); } else dataInstant();
   }
 
   async function success() {
@@ -286,6 +309,7 @@ export function play2(host: Host, p: Play2): void {
     get editor() { return editor; },
     get state(): State { return cloneState(mach?.state ?? srun?.state ?? (isStage ? stageState(sext!) : makeRun(level, { main: [], funcs: [] }).state)); },
     get run() { return srun; },
+    get played() { return played; },
     get machine() { return mach; },
     get view() { return sview ?? dview; },
     set(src: Program | string) { const prog = typeof src === "string" ? parse(src) : src; editor.setProgram(cloneProgram(prog, true)); return prog; },

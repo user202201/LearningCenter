@@ -245,7 +245,7 @@ const W7: LevelSpec[] = [
       inputs: [{ tick: sec(0.5), type: "stagetap", x: 60, y: 40 }, { tick: sec(1.5), type: "stagetap", x: -70, y: 30 }, { tick: sec(2.5), type: "stagetap", x: 20, y: -60 }], ticks: sec(4), texts: TEXTS, checks: [{ tick: sec(1) }, { tick: sec(2) }, { tick: sec(3.5) }] }) } as Ext } as LevelSpec),
   spec(7, 13, "小测验", { kind: "stage", palette: ["say", "change"], vars: ["score"], solution: "on start teacher { say q } on tap a { say ok change score by 1 } on tap b { say no }", max: 7, lesson: "score",
     ext: { goal: ["老师问：“3 + 4 = 7 吗？”。", "点“对的”：说“答对了！”，得 1 分。", "点“错的”：说“再想想。”。"], stage: T({
-      sprites: [{ id: "teacher", art: "robot", x: -70, y: 30, label: "老师" }, { id: "a", art: "btn", text: "✓", x: -20, y: -55, label: "对的" }, { id: "b", art: "btn", text: "✗", x: 50, y: -55, label: "错的" }],
+      sprites: [{ id: "teacher", art: "robot", x: -60, y: 10, label: "老师" }, { id: "a", art: "btn", text: "✓", x: -20, y: -55, label: "对的" }, { id: "b", art: "btn", text: "✗", x: 50, y: -55, label: "错的" }],
       slots: [{ sprite: "teacher", on: "start", events: ["start"] }, { sprite: "a", on: "start", events: ["start", "tap"] }, { sprite: "b", on: "start", events: ["start", "tap"] }], vars: ["score"],
       inputs: [{ tick: sec(1), type: "tap", sprite: "b" }, { tick: sec(2), type: "tap", sprite: "a" }, { tick: sec(3), type: "tap", sprite: "a" }], ticks: sec(4), texts: TEXTS,
       checks: [{ tick: sec(0.5), sprites: ["teacher"], props: ["say"] }, { tick: sec(1.5), sprites: ["b"], props: ["say"] }, { tick: sec(2.5), sprites: ["a"], props: ["say"], vars: ["score"] }, { tick: sec(3.5), vars: ["score"] }] }) } as Ext } as LevelSpec),

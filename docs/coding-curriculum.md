@@ -191,3 +191,38 @@ Always solvable, never trivial (the reference needs at least 3 blocks / commands
 * `coding-turtle.ts`: segment comparison and drawing helpers.
 * `coding-levels.ts`: all levels as data, the map families and the random generators.
 * A new world = more `LEVELS` entries with `world: 7`; a text-coding world = a level with `editor: "text"` (phase 2) whose solution is already in `parse` syntax.
+
+## 8. Phase 2, block extension: worlds 7-10 (event stories, functions and recursion, lists, algorithms)
+
+Written by a model from memory; a 信息科技 teacher must proofread it. 56 new levels (14 per world), all original, on the engine of phase 1 (the block program is still a plain AST, `toText` / `parse` write and read it).
+Same rules as section 4 (stars by par, hints, answer after three failures, no flattery); the mini-lessons are in `src/coding-lessons2.ts` (24 lessons).
+
+| Standard (逻辑主线) | Where it is taught |
+|---|---|
+| 过程与控制 (事件、并发的程序, 交互) | World 7 (events, sprites, messages, waiting, a step clock) |
+| 算法 (函数、参数、返回值、递归、分治) | World 8 |
+| 数据与编码 (列表、遍历、统计、数据结构) | World 9 |
+| 算法 (查找、排序、贪心、图、效率比较; 7-9 年级) | World 10 |
+
+New kinds of level (registered in `coding-levels.ts` `KINDS`): `stage` (judged on scripted taps / keys: the states of the sprites at given ticks are compared with the reference's, within a tolerance; random positions are judged by ranges on three seeds)
+and `data` (the program runs on the shown instance and five hidden random ones; the named variables / lists must equal what the reference leaves; some levels also judge the number of steps: at most 1.5 x the reference's + 12, the weighings of the balance scale or the swaps).
+The robot (worlds 8-10) and the turtle (world 8) levels use the old kinds with a family of maps / a picture.
+
+### World 7 事件与故事 (stage; blocks: event hats, go / turn / go to, say, wait, note, costume, size, broadcast, repeat, forever, if, variables)
+1 出发 (go 100) · 2 说话 · 3 等一等 (wait 1 s) · 4 点一下 (tap hat) · 5 按键 (key hats) · 6 走路动画 (repeat + costume) · 7 时钟 (forever) · 8 随机跳 (random number, judged by ranges) · 9 两个朋友 (broadcast / receive) · 10 小故事 (three scripts, say for seconds) · 11 音乐 (notes and beats) · 12 宠物跟着点击 (tap position) · 13 小测验 (score) · 14 接苹果 (a catch game: keys held, touching, a message).
+Time: one tick = 1/20 s; a loop gives the other scripts their turn at the end of every round; `wait 1` = 20 ticks.
+
+### World 8 函数进阶与递归 (blocks: functions with several parameters, return, calls inside values, recursion)
+1 两个数字 (turtle: rect(a, b)) · 2 返回数字 · 3 三个参数 · 4 较大的数 · 5 偶数吗 · 6 函数调用函数 · 7 自己调用自己 (robot) · 8 停止条件 (sum 1..n) · 9 阶乘 · 10 斐波那契 · 11 画一棵树 · 12 雪花曲线 · 13 三角形里的三角形 (Sierpinski) · 14 递归大挑战 (power, digit sum).
+The function levels show the tests of the function (fixed main program, hidden tests with other numbers) and, while stepping, the call stack with its depth. The recursion limit is 400 frames ("积木调用得太深").
+
+### World 9 列表与数据 (blocks: add, set item, for, for each, values built from lists)
+1 建立列表 · 2 第几项 · 3 有多长 · 4 求和 · 5 最大值 · 6 最小值 · 7 计数 · 8 筛选偶数 · 9 查找 · 10 地板上的数字 (numbers on the tiles, `floorNum`) · 11 平均数 · 12 出现最多的数 · 13 购物清单 · 14 凑十游戏 (loop in a loop).
+
+### World 10 算法
+1 顺序查找 (steps limit) · 2 二分查找 (64 sorted numbers, steps limit) · 3 选择排序 · 4 冒泡排序 · 5 插入排序 · 6 少换几次 (swaps limit) · 7 贪心找零 · 8 最大公约数 (Euclid, steps limit) · 9 质数吗 (steps limit) · 10 最短路线 (BFS on a graph) · 11 沿着左墙走 (left-hand rule) · 12 天平找最重 (≤ 7 weighings) · 13 天平排序 (≤ 10) · 14 合并两个队伍 (merge, steps limit).
+
+### Engine additions (pure, all in `src/`)
+`coding-ast.ts`: lists (`add(xs, v)`, `setItem`, `removeItem`, `swap`, `clear`, `len / sum / max / min / has / count / indexOf / item`), `for i = a to b`, `each x in xs`, `forever`, `return`, calls with several arguments inside values (`f(a, b)`), `/` `%` `and` `or`, `floor / abs / sqrt / round / rand / minOf / maxOf`, graph and scale reporters (`deg`, `nbr`, `heavier`), stage blocks (`smove`, `sturn`, `goto`, `changex`, `changey`, `say`, `sayfor`, `costume`, `nextcostume`, `size`, `show`, `hide`, `note`, `broadcast`, `wait`, `waitUntil`), event scripts (`on start cat { ... }`, `on key(left) cat`, `on recv(go) dog`, `on tap`, `on stagetap`).
+`coding-interp.ts`: a call inside a value is a call of its own that is shown on the stack (the machine runs the call first, one step each); `return` leaves the function; short-circuit `and` / `or`; faults (division by 0, a missing item) stop the program with a message; the exact endless-loop detector includes the lists and the sprites.
+`coding-stage.ts`: the clock, the threads (a `Machine` each, sharing the stage), the scripted inputs and the judge. `coding-levels2.ts`: the levels, the generators of instances, the judges. `coding-play2.ts`: the screen of both kinds, the free story stage (12 stories on this device). `coding-views.ts`, `coding-art2.ts`: the pictures.
