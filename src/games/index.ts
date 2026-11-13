@@ -22,4 +22,10 @@ export const GAMES: GameInfo[] = [
   { id: "spotdiff", name: "找不同", sub: "比较两幅图，找出不同之处", load: () => import("./spotdiff") },
   { id: "sudoku", name: "数独", sub: "每行、每列、每宫填入数字且不重复", load: () => import("./sudoku") },
   { id: "breakout", name: "打砖块", sub: "移动挡板接球，击碎全部砖块", load: () => import("./breakout") },
+  { id: "nonogram", name: "数织", sub: "根据行列数字涂格子，拼出图案", load: () => import("./nonogram") },
+  { id: "reversi", name: "黑白棋", sub: "夹住对方的棋子并翻转，占据更多格子", load: () => import("./reversi") },
+  { id: "idiomchain", name: "成语接龙", sub: "用上一个成语的最后一个字接下一个", load: () => import("./idiomchain") },
+  { id: "linkup", name: "连连看", sub: "用不超过两个拐弯的线连接相同的图案", load: () => import("./linkup") },
+  { id: "maze", name: "迷宫", sub: "用手指画出从起点到终点的路线", load: () => import("./maze") },
+  { id: "whack", name: "打地鼠", sub: "限时点击地鼠，避开炸弹", load: () => import("./whack") },
 ];
