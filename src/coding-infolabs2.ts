@@ -120,18 +120,18 @@ export const knnLab: Mount = (root, io) => {
     const pts = train.map((p) => `<circle cx="${p.x}" cy="${p.y}" r="2.4" fill="${p.c ? B_COL : A_COL}" stroke="#495057" stroke-width=".5"/>`).join("");
     const tpts = s.task === "k" && ti === 1 ? test.slice(0, 60).concat(test.slice(100, 160)).map((p) => `<path d="M${p.x - 1.6} ${p.y - 1.6}l3.2 3.2m0-3.2l-3.2 3.2" stroke="${p.c ? "#e8590c" : "#1971c2"}" stroke-width=".9"/>`).join("") : "";
     const pr = probe ? `<circle cx="${probe.x}" cy="${probe.y}" r="3.4" fill="#fff" stroke="#212529" stroke-width="1.2"/><circle cx="${probe.x}" cy="${probe.y}" r="6.5" fill="none" stroke="${I.knn(train, probe, k) ? B_COL : A_COL}" stroke-width="1.6"/>` : "";
-    plane.innerHTML = `<svg viewBox="0 0 100 100" class="ci-planesvg" role="img" aria-label="plane">${cells}${pts}${tpts}${pr}</svg>`;
+    plane.innerHTML = `<svg viewBox="-3 -3 106 106" class="ci-planesvg" role="img" aria-label="plane">${cells}${pts}${tpts}${pr}</svg>`;
     chips.querySelectorAll("button").forEach((c) => c.classList.toggle("on", Number((c as HTMLElement).dataset.k) === k));
     if (s.task === "k") info.textContent = `k = ${k}   ${L(["训练准确率", "Training accuracy", "Précision d'entraînement"])} ${Math.round(I.knnAccuracy(train, train, k) * 100)}%   ${L(["测试准确率", "Test accuracy", "Précision de test"])} ${Math.round(I.knnAccuracy(train, test, k) * 100)}%`;
     else info.textContent = `${found} / ${s.goals ?? 3}`;
   };
   const nameOf = (c: number) => L(s.names[c]);
-  const askFind = () => { want = found % 2; task.textContent = `${L(io.act.prompt)} ${nameOf(want)}`; io.prompt(task.textContent); };
+  const askFind = () => { want = found % 2; task.hidden = true; io.prompt(`${L(io.act.prompt)} ${nameOf(want)}`); };
   const askK = () => { task.textContent = s.tasks![ti].p; io.prompt(L(io.act.prompt)); };
   if (s.task === "find") {
     plane.addEventListener("click", (e) => {
       const r = plane.querySelector("svg")!.getBoundingClientRect();
-      probe = { x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 };
+      probe = { x: ((e.clientX - r.left) / r.width) * 106 - 3, y: ((e.clientY - r.top) / r.height) * 106 - 3 };
       const c = I.knn(train, probe, k);
       if (c === want) { found++; io.say("机器的判断和目标一致。", "ok"); if (found >= (s.goals ?? 3)) { draw(); return io.win(); } askFind(); } else { io.bad(); io.say(`机器判断它是 ${nameOf(c)}。请换一个位置。`, "bad"); }
       draw();
@@ -150,7 +150,7 @@ export const knnLab: Mount = (root, io) => {
   const clickAt = (c: number) => {
     const pts = train.filter((p) => p.c === c && I.knn(train, p, k) === c); const p = pts[0] ?? train.find((q) => q.c === c)!;
     const r = plane.querySelector("svg")!.getBoundingClientRect();
-    plane.dispatchEvent(new MouseEvent("click", { clientX: r.left + (p.x / 100) * r.width, clientY: r.top + (p.y / 100) * r.height, bubbles: true }));
+    plane.dispatchEvent(new MouseEvent("click", { clientX: r.left + ((p.x + 3) / 106) * r.width, clientY: r.top + ((p.y + 3) / 106) * r.height, bubbles: true }));
   };
   return {
     solve: () => { if (s.task === "find") { for (let n = 0; n < (s.goals ?? 3); n++) clickAt(want); } else { for (let n = 0; n < s.tasks!.length; n++) { k = s.tasks![ti].goal === "train" ? 1 : bestK; draw(); check(); } } },
@@ -217,7 +217,7 @@ export const rulesLab: Mount = (root, io) => {
     rulesAcc = pts.filter((p) => rule(p) === p.c).length / pts.length;
     mlAcc = loo();
     const shade = learned ? I.boundary(pts, 5, 20, 20).map((row, j) => row.map((c, i) => `<rect x="${i * 5}" y="${j * 5}" width="5.1" height="5.1" fill="${c ? B_COL : A_COL}" opacity=".22"/>`).join("")).join("") : "";
-    plane.innerHTML = `<svg viewBox="0 0 100 100" class="ci-planesvg" role="img" aria-label="plane">${shade}<path d="M${ax} 0V100" stroke="#e03131" stroke-width="1" stroke-dasharray="3 2"/>${mode !== "x" ? `<path d="M0 ${ay}H100" stroke="#e03131" stroke-width="1" stroke-dasharray="3 2"/>` : ""}${pts.map((p) => `<circle cx="${p.x}" cy="${p.y}" r="2.4" fill="${p.c ? B_COL : A_COL}" stroke="#495057" stroke-width=".5"/>`).join("")}</svg>`;
+    plane.innerHTML = `<svg viewBox="-3 -3 106 106" class="ci-planesvg" role="img" aria-label="plane">${shade}<path d="M${ax} 0V100" stroke="#e03131" stroke-width="1" stroke-dasharray="3 2"/>${mode !== "x" ? `<path d="M0 ${ay}H100" stroke="#e03131" stroke-width="1" stroke-dasharray="3 2"/>` : ""}${pts.map((p) => `<circle cx="${p.x}" cy="${p.y}" r="2.4" fill="${p.c ? B_COL : A_COL}" stroke="#495057" stroke-width=".5"/>`).join("")}</svg>`;
     info.textContent = `${L(["规则的准确率", "Rule accuracy", "Précision de la règle"])} ${Math.round(rulesAcc * 100)}%` + (learned ? `   ${L(["机器学习的准确率", "Learned accuracy", "Précision apprise"])} ${Math.round(mlAcc * 100)}%` : "");
     ask.hidden = !(s.data === "diag" && learned);
     if (!ask.hidden && !ask.children.length) ask.append(...(["rule", "learn", "same"] as const).map((v) => h("button", { class: "ci-btn ci-choice", type: "button", "data-v": v, onclick: () => answer(v) }, v === "rule" ? "规则" : v === "learn" ? "机器学习" : "一样")));

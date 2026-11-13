@@ -280,8 +280,10 @@ export function createCodeEditor(o: EditorOpts = {}): CodeEditor {
     tbtn("tx-tab", "⇥", "缩进", () => tab(false), "tx-k-tab"), tbtn("tx-untab", "⇤", "减少缩进", () => tab(true), "tx-k-untab"),
     ...TOOLS.map(([label, ins]) => tbtn("", label, label === "_" ? "下划线" : label === "#" ? "注释 #" : label, () => insert(ins))),
     tbtn("tx-undo", "↶", "撤销", undo, "tx-k-undo"), tbtn("tx-redo", "↷", "重做", redo, "tx-k-redo"));
-  const bar = h("div", { class: "tx-bar" }, keys, fsRow);
-  const root = h("div", { class: "tx-ed", style: `--tx-fs:${font}px` }, body, ...(o.toolbar === false ? [] : [bar]));
+  const bar = h("div", { class: "tx-bar" }, keys);
+  const head = h("div", { class: "tx-ed-head" }, h("span", { class: "tx-ed-title" }, "代码"), fsRow);
+  const root = h("div", { class: "tx-ed" }, ...(o.toolbar === false ? [] : [head]), body, ...(o.toolbar === false ? [] : [bar]));
+  root.style.setProperty("--tx-fs", `${font}px`);
 
   // the toolbar rides above the on-screen keyboard (iOS keeps the layout viewport and covers its lower part): follow the visual viewport
   const vv = window.visualViewport;

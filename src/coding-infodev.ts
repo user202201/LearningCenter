@@ -68,7 +68,7 @@ export function sceneSvg(lv: DevLevel, sc: Scenario, f: Frame | null, frames: Fr
       const ang = ((e.base ?? 0) * Math.PI) / 180, px = 60, py = 140, len = 100;
       const tx = px + Math.cos(-ang) * len, ty = py + Math.sin(-ang) * len;
       const o = ((e.obj ?? 0) * Math.PI) / 180, ox = px + Math.cos(-o) * len, oy = py + Math.sin(-o) * len;
-      return frame(`<rect width="300" height="170" fill="#fff9db"/><path d="M${px + len - 12} ${py - 14}a${len} ${len} 0 0 0 ${-(len - 12) * 0}" fill="none"/><circle cx="${px + len}" cy="${py}" r="10" fill="#b2f2bb" stroke="#2f9e44" stroke-width="3"/><circle cx="${px}" cy="${py}" r="10" fill="#495057"/><path d="M${px} ${py}L${tx} ${ty}" stroke="#e8590c" stroke-width="10" stroke-linecap="round"/><circle cx="${tx}" cy="${ty}" r="${a.claw === 1 ? 6 : 11}" fill="none" stroke="#c92a2a" stroke-width="4"/>${e.done ? "" : `<rect x="${ox - 8}" y="${oy - 8}" width="16" height="16" rx="3" fill="#339af0" stroke="#1864ab" stroke-width="3"/>`}${e.done ? `<rect x="${px + len - 8}" y="${py - 8}" width="16" height="16" rx="3" fill="#339af0"/>` : ""}`);
+      return frame(`<rect width="300" height="170" fill="#fff9db"/><circle cx="${px + len}" cy="${py}" r="10" fill="#b2f2bb" stroke="#2f9e44" stroke-width="3"/><circle cx="${px}" cy="${py}" r="10" fill="#495057"/><path d="M${px} ${py}L${tx} ${ty}" stroke="#e8590c" stroke-width="10" stroke-linecap="round"/><circle cx="${tx}" cy="${ty}" r="${a.claw === 1 ? 6 : 11}" fill="none" stroke="#c92a2a" stroke-width="4"/>${e.done ? "" : `<rect x="${ox - 8}" y="${oy - 8}" width="16" height="16" rx="3" fill="#339af0" stroke="#1864ab" stroke-width="3"/>`}${e.done ? `<rect x="${px + len - 8}" y="${py - 8}" width="16" height="16" rx="3" fill="#339af0"/>` : ""}`);
     }
     case "home": {
       const pr = (sc.p as number[]) ?? [];
@@ -88,9 +88,10 @@ export const device: Mount = (root, io) => {
   const msg = h("p", { class: "ci-live user", id: "dv-count" });
   editor = createEditor({ palette: lv.palette, vars: lv.vars, conds: lv.conds, max: lv.max, onChange: () => { msg.textContent = `${editor.count()} / ${lv.max}`; editor.hint(null); } });
   const draw = () => {
-    const f = frames[fi] ?? null;
-    scene.innerHTML = sceneSvg(lv, lv.scenarios[si], f, frames, fi);
-    const s = f?.s ?? {}, a = f?.a ?? {};
+    const sc = lv.scenarios[si], env0 = lv.init(sc), first: Frame = { t: 0, s: lv.sense(env0, 0, sc), a: {}, e: env0 };   // before a run the scene shows the start
+    const shown = frames.length ? frames : [first], at = frames.length ? fi : 0, f = shown[at];
+    scene.innerHTML = sceneSvg(lv, sc, frames.length ? f : first, shown, at);
+    const s = frames.length ? f.s : {}, a = frames.length ? f.a : {};
     gauges.replaceChildren(...[...lv.sensors.map((k) => [k, s[k], "s"] as const), ...lv.acts.map((k) => [k, a[k], "a"] as const)].map(([k, v, t]) => h("span", { class: "ci-gauge " + t }, h("b", {}, k), String(v ?? "–"))), h("span", { class: "ci-gauge" }, h("b", {}, "t"), frames.length ? String(fi) : "–"));
   };
   const runOne = (instant: boolean) => {

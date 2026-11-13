@@ -102,7 +102,7 @@ export function dataView(o: DataViewOpts): DataView {
     w.append(h("b", { class: "dv-name" }, name));
     if (bars) {
       const mx = Math.max(1, ...vals, ...(goal ?? []));
-      const bx = h("div", { class: "dv-bars" });
+      const bx = h("div", { class: "dv-bars" + (vals.length > 16 ? " many" : "") });
       vals.forEach((v, i) => { const b = h("div", { class: "dv-bar" + (marks.includes(i + 1) ? " mark" : ""), "data-i": String(i + 1), "data-v": String(v), title: String(v) }, h("i", { style: `height:${Math.max(4, (Math.abs(v) / mx) * 100)}%` }), h("span", {}, String(v))); bx.append(b); });
       w.append(bx);
     } else {
@@ -119,6 +119,8 @@ export function dataView(o: DataViewOpts): DataView {
     render(s, extra = {}) {
       body.replaceChildren();
       const lists = s.lists ?? {};
+      // the places the program is looking at: the counters i, j, mid, m
+      const marks = extra.marks ?? ["i", "j", "mid", "m"].map((k) => s.vars[k]).filter((v) => Number.isInteger(v) && v >= 1);
       if (o.view === "calc") {
         const box = h("div", { class: "dv-tests", id: "dv-tests" });
         for (const t of o.tests ?? []) {
@@ -149,7 +151,7 @@ export function dataView(o: DataViewOpts): DataView {
         body.append(coins, h("div", { class: "dv-weighs", id: "dv-weighs" }, h("span", {}, "天平"), h("b", {}, String(s.weighs ?? 0))));
         for (const l of o.lists) body.append(row(l, lists[l] ?? [], target?.lists[l], false));
       } else {
-        for (const n of o.lists) body.append(row(n, lists[n] ?? [], target?.lists[n], o.view === "bars", extra.marks));
+        for (const n of o.lists) body.append(row(n, lists[n] ?? [], target?.lists[n], o.view === "bars", marks));
       }
       const names = Object.keys(s.vars).sort();
       const chips = h("div", { class: "dv-vars", id: "dv-vars" });

@@ -155,7 +155,7 @@ export const sort: Mount = (root, io) => {
   const ghost = h("div", { class: "ci-ghost user", hidden: true });
   root.append(pool, zones, ghost, btn("ci-check", "检查", () => check(), "primary"));
   const cardEl = (ci: number) => {
-    const el = h("button", { class: "ci-card user" + (sel === ci ? " sel" : ""), type: "button", "data-c": String(ci), onclick: () => { if (place[ci] !== null) { place[ci] = null; sel = -1; } else sel = sel === ci ? -1 : ci; draw(); } }, s.cards[ci].t);
+    const el = h("button", { class: "ci-sc user" + (sel === ci ? " sel" : ""), type: "button", "data-c": String(ci), onclick: () => { if (place[ci] !== null) { place[ci] = null; sel = -1; } else sel = sel === ci ? -1 : ci; draw(); } }, s.cards[ci].t);
     dragOn(el, {
       start: () => { ghost.textContent = s.cards[ci].t; ghost.hidden = false; el.classList.add("drag"); },
       move: (e) => { ghost.style.left = e.clientX + "px"; ghost.style.top = e.clientY + "px"; },
@@ -256,7 +256,10 @@ export const bits: Mount = (root, io) => {
   root.append(prog, info, row, val, btn("ci-check", "检查", () => check(), "primary"));
   const cur = () => sw.reduce((v, x) => v * 2 + x, 0);
   const draw = () => {
-    row.replaceChildren(...sw.map((v, i) => h("button", { class: "ci-btn ci-sw" + (v ? " on" : ""), type: "button", "data-i": String(i), "aria-pressed": String(!!v), "aria-label": `bit ${sw.length - 1 - i}`, onclick: () => { sw[i] ^= 1; draw(); } }, h("small", {}, String(2 ** (sw.length - 1 - i))), h("b", {}, String(v)))));
+    const btns = sw.map((v, i) => h("button", { class: "ci-btn ci-sw" + (v ? " on" : ""), type: "button", "data-i": String(i), "aria-pressed": String(!!v), "aria-label": `bit ${sw.length - 1 - i}`, onclick: () => { sw[i] ^= 1; draw(); } }, h("small", {}, String(2 ** (sw.length - 1 - i))), h("b", {}, String(v))));
+    const groups: HTMLElement[] = [];
+    for (let g = sw.length; g > 0; g -= 4) groups.unshift(h("div", { class: "ci-nib" }, ...btns.slice(Math.max(0, g - 4), g)));   // groups of four from the right (a byte = two nibbles)
+    row.replaceChildren(...groups);
     val.textContent = `= ${cur()}`;
   };
   const next = () => {
@@ -482,7 +485,7 @@ export const fixbit: Mount = (root, io) => {
     io.bad(); io.say("这一位没有错。请再找。", "bad");
   };
   make();
-  return { solve: () => { for (let k = 0; k < s.rounds; k++) clickEl(board.querySelector(`.ci-bit[data-y="${bad[0]}"][data-x="${bad[1]}"]`)); }, wrong: () => { const y = (bad[0] + 1) % grid.length, x = bad[1]; clickEl(board.querySelector(`.ci-bit[data-y="${y}"][data-x="${x}"]`)); } };
+  return { solve: () => { for (let k = 0; k < s.rounds; k++) clickEl(board.querySelector(`.ci-bit[data-y="${bad[0]}"][data-x="${bad[1]}"]`)); }, wrong: () => { const y = (bad[0] + 1) % grid.length, x = grid.length === 1 ? (bad[1] + 1) % grid[0].length : bad[1]; clickEl(board.querySelector(`.ci-bit[data-y="${y}"][data-x="${x}"]`)); } };
 };
 
 // ---------- a mini spreadsheet ----------

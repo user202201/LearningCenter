@@ -80,7 +80,7 @@ export const GENS: Record<string, Gen> = {
   search: (r) => { const xs = distinct(r, ri(r, 6, 10), 1, 30); const t = r() < 0.8 ? xs[ri(r, 0, xs.length - 1)] : 31; return { lists: { xs }, vars: { t } }; },
   search20: (r) => { const xs = distinct(r, 20, 1, 60); return { lists: { xs }, vars: { t: xs[ri(r, 1, 4)] } }; },
   sorted64: (r) => { const xs: number[] = []; let v = 0; for (let i = 0; i < 64; i++) { v += ri(r, 1, 3); xs.push(v); } return { lists: { xs }, vars: { t: xs[ri(r, 40, 63)] } }; },
-  sortme: (r) => ({ lists: { xs: distinct(r, ri(r, 6, 8), 1, 30) }, vars: {} }),
+  sortme: (r) => { const xs = distinct(r, ri(r, 6, 8), 1, 30); if (xs.every((v, i) => i === 0 || xs[i - 1] < v)) xs.reverse(); return { lists: { xs }, vars: {} }; },
   avg: (r) => {
     for (;;) { const n = ri(r, 4, 6); const xs = Array.from({ length: n }, () => ri(r, 2, 10)); const s = xs.slice(0, -1).reduce((a, b) => a + b, 0); const last = n * Math.ceil((s + 1) / n) - s; if (last >= 1 && last <= 12) { xs[n - 1] = last; return { lists: { xs }, vars: {} }; } }
   },
@@ -239,7 +239,7 @@ const W7: LevelSpec[] = [
   spec(7, 11, "音乐", { kind: "stage", palette: ["note", "repeat"], solution: "on start bird { repeat 2 { note(60, 1) } repeat 2 { note(67, 1) } repeat 2 { note(69, 1) } note(67, 2) }", max: 9, lesson: "music",
     ext: { goal: ["弹《小星星》的前七个音：1 1 5 5 6 6 5。", "最后一个音长 2 拍。"], stage: T({ sprites: [{ id: "bird", art: "bird", x: 0, y: -10, label: "小鸟" }], slots: [{ sprite: "bird", on: "start", events: ["start"] }], inputs: [], ticks: sec(5), texts: TEXTS, checks: [{ tick: sec(4.5), props: [], notes: true }] }) } as Ext } as LevelSpec),
   spec(7, 12, "宠物跟着点击", { kind: "stage", palette: ["goto"], solution: "on stagetap pet { goto(tapX, tapY) }", max: 3,
-    ext: { free: true, rep: ["me"], goal: ["点一下舞台，宠物跑到被点的位置。"], stage: T({ sprites: [{ id: "pet", art: "dog", x: -80, y: -50, label: "宠物" }], slots: [{ sprite: "pet", on: "start", events: ["start", "stagetap"] }],
+    ext: { free: true, rep: ["tapX", "tapY"], goal: ["点一下舞台，宠物跑到被点的位置。"], stage: T({ sprites: [{ id: "pet", art: "dog", x: -80, y: -50, label: "宠物" }], slots: [{ sprite: "pet", on: "start", events: ["start", "stagetap"] }],
       inputs: [{ tick: sec(0.5), type: "stagetap", x: 60, y: 40 }, { tick: sec(1.5), type: "stagetap", x: -70, y: 30 }, { tick: sec(2.5), type: "stagetap", x: 20, y: -60 }], ticks: sec(4), texts: TEXTS, checks: [{ tick: sec(1) }, { tick: sec(2) }, { tick: sec(3.5) }] }) } as Ext } as LevelSpec),
   spec(7, 13, "小测验", { kind: "stage", palette: ["say", "change"], vars: ["score"], solution: "on start teacher { say q } on tap a { say ok change score by 1 } on tap b { say no }", max: 7, lesson: "score",
     ext: { goal: ["老师问：“3 + 4 = 7 吗？”。", "点“对”：说“答对了！”，得 1 分。", "点“错”：说“再想想。”。"], stage: T({
@@ -263,7 +263,7 @@ const L2 = ["len", "item"];
 const LALL = ["len", "item", "sum", "max", "min", "has", "count", "indexOf"];
 const W8: LevelSpec[] = [
   spec(8, 1, "两个数字", { kind: "turtle", palette: ["fd", "tr", "repeat", "call"], funcs: [{ name: "rect", params: ["a", "b"] }], lesson: "params2",
-    solution: "def rect(a, b) { repeat 2 { fd a tr 90 fd b tr 90 } } rect(80, 40) rect(40, 20)", max: 8, note: "函数 rect(a, b)：画长为 a、宽为 b 的长方形。调用 rect(80, 40) 和 rect(40, 20)。", ext: { free: true, goal: [] } as Ext } as LevelSpec),
+    solution: "def rect(a, b) { repeat 2 { fd a tr 90 fd b tr 90 } } rect(80, 40) rect(40, 20)", max: 8, note: "函数 rect(a, b)：画长为 a、宽为 b 的长方形。调用 rect(80, 40) 和 rect(40, 20)。", ext: { free: true, nums: [20, 40, 80] } as Ext } as LevelSpec),
   spec(8, 2, "返回数字", { kind: "data", palette: ["return"], funcs: [{ name: "double", param: "x" }], solution: "def double(x) { return x * 2 }", max: 2, lesson: "return",
     ext: { free: true, hideMain: true, ops: ["+", "-", "*"], goal: ["完成函数 double(x)：返回 x 的 2 倍。", "下面的测试会调用它。"], data: d("double", ["r1", "r2", "r3"], "calc") } as Ext } as LevelSpec),
   spec(8, 3, "三个参数", { kind: "data", palette: ["return"], funcs: [{ name: "sum3", params: ["a", "b", "c"] }], solution: "def sum3(a, b, c) { return a + b + c }", max: 2,
@@ -283,13 +283,13 @@ const W8: LevelSpec[] = [
   spec(8, 10, "斐波那契数列", { kind: "data", palette: ["return", "if", "call"], funcs: [{ name: "fib", param: "n" }], solution: "def fib(n) { if n < 2 { return n } return fib(n - 1) + fib(n - 2) }", max: 6,
     ext: { free: true, hideMain: true, recursion: true, rep: ["call"], goal: ["完成 fib(n)：数列 0, 1, 1, 2, 3, 5, 8 … 的第 n 项（从第 0 项算起）。", "每一项等于前两项的和。"], data: d("fib", ["r1", "r2", "r3"], "calc") } as Ext } as LevelSpec),
   spec(8, 11, "画一棵树", { kind: "turtle", palette: ["fd", "tl", "tr", "if", "call"], funcs: [{ name: "tree", param: "n" }], lesson: "fractal", conds: ["n > 8"],
-    solution: "def tree(n) { if n > 8 { fd n tl 30 tree(n / 2) tr 60 tree(n / 2) tl 30 fd 0 - n } } tree(48)", max: 12, note: "树干长 48。每个树枝的长度是上一级的一半，小于 8 就不再画。", ext: { free: true, recursion: true } as Ext } as LevelSpec),
+    solution: "def tree(n) { if n > 8 { fd n tl 30 tree(n / 2) tr 60 tree(n / 2) tl 30 fd 0 - n } } tree(48)", max: 12, note: "树干长 48。每个树枝的长度是上一级的一半，小于 8 就不再画。", ext: { free: true, recursion: true, ops: ["+", "-", "*", "/"], nums: [48] } as Ext } as LevelSpec),
   spec(8, 12, "雪花曲线", { kind: "turtle", palette: ["fd", "tl", "tr", "if", "ifelse", "repeat", "call"], funcs: [{ name: "koch", params: ["n", "len"] }], conds: ["n == 0"],
     solution: "def koch(n, len) { if n == 0 { fd len } else { koch(n - 1, len / 3) tl 60 koch(n - 1, len / 3) tr 120 koch(n - 1, len / 3) tl 60 koch(n - 1, len / 3) } } repeat 3 { koch(2, 90) tr 120 }", max: 16,
-    note: "每条边 koch(2, 90)：n 是层数，len 是长度。n 为 0 时画直线，否则分成四段。", ext: { free: true, recursion: true } as Ext } as LevelSpec),
+    note: "每条边 koch(2, 90)：n 是层数，len 是长度。n 为 0 时画直线，否则分成四段。", ext: { free: true, recursion: true, ops: ["+", "-", "*", "/"], nums: [2, 90] } as Ext } as LevelSpec),
   spec(8, 13, "三角形里的三角形", { kind: "turtle", palette: ["fd", "tl", "tr", "if", "ifelse", "repeat", "call"], funcs: [{ name: "tri", params: ["n", "s"] }], conds: ["n == 0"],
     solution: "def tri(n, s) { if n == 0 { repeat 3 { fd s tr 120 } } else { tri(n - 1, s / 2) fd s / 2 tri(n - 1, s / 2) fd 0 - s / 2 tr 60 fd s / 2 tl 60 tri(n - 1, s / 2) tr 60 fd 0 - s / 2 tl 60 } } tri(2, 96)", max: 24,
-    note: "谢尔宾斯基三角形：n 为 0 时画一个三角形，否则在三个角上各画一个小三角形（边长减半）。", ext: { free: true, recursion: true } as Ext } as LevelSpec),
+    note: "谢尔宾斯基三角形：n 为 0 时画一个三角形，否则在三个角上各画一个小三角形（边长减半）。", ext: { free: true, recursion: true, ops: ["+", "-", "*", "/"], nums: [2, 96] } as Ext } as LevelSpec),
   spec(8, 14, "递归大挑战", { kind: "data", boss: true, palette: ["return", "if", "call"], funcs: [{ name: "power", params: ["a", "b"] }, { name: "digsum", param: "n" }],
     solution: "def power(a, b) { if b == 0 { return 1 } return a * power(a, b - 1) } def digsum(n) { if n < 10 { return n } return n % 10 + digsum(floor(n / 10)) }", max: 12,
     ext: { free: true, hideMain: true, recursion: true, rep: ["call", "floor"], ops: ["+", "-", "*", "/", "%"], goal: ["完成 power(a, b)：返回 a 的 b 次方。", "完成 digsum(n)：返回 n 各位数字之和，例如 1234 是 10。"], data: d("boss8", ["r1", "r2", "r3", "r4"], "calc") } as Ext } as LevelSpec),
@@ -316,7 +316,7 @@ const W9: LevelSpec[] = [
     ext: { free: true, lists: ["xs", "evens"], ops: ["+", "-", "*", "/", "%"], goal: ["把 xs 里的偶数依次放进列表 evens。"], data: d("filter", ["evens"], "list") } as Ext } as LevelSpec),
   spec(9, 9, "查找", { kind: "data", palette: ["while", "if", "set", "change"], vars: ["i", "pos"], solution: "set pos = 0 set i = 1 while i <= len(xs) and pos == 0 { if item(xs, i) == t { set pos = i } change i by 1 }", max: 9,
     ext: { free: true, lists: ["xs"], rep: L2, goal: ["在 xs 里找数 t，把它第一次出现的位置放进 pos。", "找不到时，pos 是 0。"], data: d("search", ["pos"], "list") } as Ext } as LevelSpec),
-  spec(9, 10, "地板上的数字", { family: "numrow", goal: { flag: true }, palette: ["move", "until", "push"], conds: ["onFlag"], lesson: "floor", ext: { free: true, lists: ["xs"], rep: ["me"] } as Ext,
+  spec(9, 10, "地板上的数字", { family: "numrow", goal: { flag: true }, palette: ["move", "until", "push"], conds: ["onFlag"], ext: { free: true, lists: ["xs"], rep: ["floorNum"] } as Ext,
     solution: "until onFlag { add(xs, floorNum) move }", max: 6, note: "机器人站在每个数字上时，把脚下的数字放进列表 xs。" } as LevelSpec),
   spec(9, 11, "平均数", { kind: "data", palette: ["set"], vars: ["total", "avg"], solution: "set total = sum(xs) set avg = total / len(xs)", max: 4,
     ext: { free: true, lists: ["xs"], rep: ["len", "sum"], ops: ["+", "-", "*", "/"], goal: ["变量 total 放所有数的和。", "变量 avg 放平均数（和除以个数）。"], data: d("avg", ["total", "avg"], "bars") } as Ext } as LevelSpec),
@@ -384,6 +384,27 @@ function finish(sp: LevelSpec): Level {
   const x = extOf(sp);
   const spec2: LevelSpec = { ...sp, conds: x.free || sp.conds ? [...conds] : sp.conds, vars: vars.size ? [...vars] : sp.vars };
   return build(spec2);
+}
+/** the options of the block editor for a level (worlds 7-10 and the levels of other worlds that use `ext`) */
+export function edOpts(l: Level): Partial<import("./coding-editor").EditorOpts> {
+  const x = extOf(l), st = x.stage;
+  return {
+    free: x.free, recursion: x.recursion, lists: x.lists, rep: x.rep, ops: x.ops, nums: x.nums, tabs: l.world >= 7,
+    ...(st ? { slots: st.slots, sprites: st.sprites.map((s) => ({ id: s.id, label: s.label })), texts: st.texts, msgs: st.msgs, keys: st.keys, hideMain: true } : {}),
+    ...(x.hideMain ? { hideMain: true } : {}),
+  };
+}
+/** a machine for a data level on an instance (the animation of the screen runs the same program as the judge) */
+export function makeRun(l: Level, prog: Program, seed?: number): { machine: Machine; inst: DataInst; state: State } {
+  const inst = dataInst(l, seed), e = extOf(l).data!;
+  const state = dataState(inst);
+  const machine = new Machine(programOn(prog, inst), { kind: "data" }, state, { budget: e.eff ? stepBound(l, seed) : undefined, maxDepth: extOf(l).recursion ? 400 : 60 });
+  return { machine, inst, state: machine.state };
+}
+/** the tests of a function level as lines of text: `double(3)` and the variable that gets the answer */
+export function testLines(l: Level, seed?: number): { name: string; text: string }[] {
+  const inst = dataInst(l, seed);
+  return inst.main ? parse(inst.main).main.filter((b) => b.t === "set").map((b) => ({ name: b.name!, text: exprText(b.e!) })) : [];
 }
 export const WORLDS2 = [{ id: 7, name: "事件与故事" }, { id: 8, name: "函数进阶与递归" }, { id: 9, name: "列表与数据" }, { id: 10, name: "算法" }];
 export const LEVELS2: Level[] = [...W7, ...W8, ...W9, ...W10].map(finish);

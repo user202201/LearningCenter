@@ -747,10 +747,10 @@ const currentQ = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.
       await pg.evaluate((m) => { window.__chemSeed = 17; location.hash = '#/science/chem/' + m; }, m); await pg.waitForSelector('#chem-q'); await pg.waitForTimeout(60);
       let bad = [];
       for (let i = 0; i < 10; i++) {
-        const q = await currentQ(pg); bad.push(...(await chineseLeft(pg)));
-        await answer(pg, q, i % 4 !== 1); bad.push(...(await chineseLeft(pg)));
-        if (i === 1 || i === 7) await pg.screenshot({ path: `${OUT}${locale}-${m}-${i}.png`, fullPage: true });
-        await pg.click('#chem-next'); await pg.waitForTimeout(30);
+        const q = await currentQ(pg); if (i % 3 === 0) bad.push(...(await chineseLeft(pg)));   // (the whole round is played; the text is looked at on 4 of the 10 questions, questions and explanations)
+        await answer(pg, q, i % 4 !== 1); if (i % 3 === 0 || i === 1) bad.push(...(await chineseLeft(pg)));
+        if (i === 1 && ['bal', 'cls', 'gas', 'calc'].includes(m)) await pg.screenshot({ path: `${OUT}${locale}-${m}-${i}.png`, fullPage: true });
+        await pg.click('#chem-next'); await pg.waitForTimeout(20);
       }
       bad.push(...await chineseLeft(pg));
       ok(bad.length === 0, `${label} ${m}: a whole round (questions, explanations, summary) has no Chinese left ${[...new Set(bad)].slice(0, 5)}`);

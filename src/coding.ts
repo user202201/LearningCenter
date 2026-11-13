@@ -17,12 +17,16 @@ import * as CM from "./coding-model";
 import { gridScene, turtleScene, Scene, Mood } from "./coding-scene";
 import { createEditor, programEl, Editor } from "./coding-editor";
 import { LESSONS, Demo } from "./coding-lessons";
+import { LESSONS2, demoRunner2 } from "./coding-lessons2";   // worlds 7-10 (rule 60)
+import { extOf, edOpts } from "./coding-levels2";
+import { play2, freeStageLevel, storyCount, MAX_STORIES, Host } from "./coding-play2";
 import { islandSvg, badgeSvg, worldColor } from "./coding-art";
 import { pathsByColor, colorHex } from "./coding-turtle";
+import * as II from "./coding-info";   // 信息科技 worlds 14-16, workshop and certificate (rule 62)
 import { initText, renderText, textSection } from "./coding-text";   // text coding, worlds 11-13 (rule 61)
 
 let X!: Ctx;
-export const initCoding = (c: Ctx) => { X = c; initText(c); };
+export const initCoding = (c: Ctx) => { X = c; initText(c); II.initInfo(c); };
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 const COLOR = "#0c8599";
 const NS = "http://www.w3.org/2000/svg";
@@ -84,15 +88,17 @@ export async function renderKid(id: string, rest: string) {
   if (!k) { toast("未找到该孩子"); return void (location.hash = "#/subject/coding"); }
   let m: RegExpExecArray | null;
   if (!rest) return worldMap(k, doc);
+  if (II.handles(rest)) return void II.renderInfo(k, doc, rest);   // i14-i16, projects, certificate (coding-info.ts)
   if (renderText(k, doc, rest)) return;   // w11-w13, their levels and the workshop (coding-text.ts)
-  if ((m = /^w([1-6])$/.exec(rest))) return worldPage(k, doc, Number(m[1]));
-  if ((m = /^w([1-6])\/(\d+)$/.exec(rest))) {
+  if ((m = /^w(\d+)$/.exec(rest)) && levelsOf(Number(m[1])).length) return worldPage(k, doc, Number(m[1]));
+  if ((m = /^w(\d+)\/(\d+)$/.exec(rest))) {
     const [wn, ln] = [Number(m[1]), Number(m[2])];
     const lv = levelsOf(wn).find((l) => l.no === ln);
     if (lv) return levelPage(k, lv);
   }
   if ((m = /^r([1-3])$/.exec(rest))) return randomPage(k, Number(m[1]) as 1 | 2 | 3);
   if (rest === "free") return freePage(k);
+  if (rest === "stage") return freeStagePage(k);
   location.hash = `#/coding/${id}`;
 }
 
@@ -119,7 +125,10 @@ function worldMap(k: M.Kid, doc: CM.CodingDoc) {
   trail.append(h("a", { class: "cl-island free", id: "cl-free", href: `#/coding/${k.id}/free`, style: "--wc:#d6336c" },
     h("span", { class: "isl-art" }), h("span", { class: "isl-info" }, h("span", { class: "isl-no" }, "自由画图"), h("b", { class: "isl-name" }, "创作"), h("span", { class: "isl-stars" }, `${(CM.loadLocal().drawings[k.id] ?? []).length} / ${CM.MAX_DRAWINGS}`))));
   trail.querySelector("#cl-free .isl-art")!.innerHTML = islandSvg(6);
-  X.show(h("div", { class: "page", style: `--kid:${k.color}` }, kidHero(k, "#/subject/coding", "孩子"), h("main", { class: "scroll" }, h("div", { class: "narrow cl-narrow" }, shelf, trail, textSection(k, doc)))));
+  trail.append(h("a", { class: "cl-island free", id: "cl-stage", href: `#/coding/${k.id}/stage`, style: "--wc:#5f3dc4" },
+    h("span", { class: "isl-art" }), h("span", { class: "isl-info" }, h("span", { class: "isl-no" }, "自由创作"), h("b", { class: "isl-name" }, "故事舞台"), h("span", { class: "isl-stars" }, `${storyCount(k.id)} / ${MAX_STORIES}`))));
+  trail.querySelector("#cl-stage .isl-art")!.innerHTML = islandSvg(7);
+  X.show(h("div", { class: "page", style: `--kid:${k.color}` }, kidHero(k, "#/subject/coding", "孩子"), h("main", { class: "scroll" }, h("div", { class: "narrow cl-narrow" }, shelf, trail, textSection(k, doc), II.mapSection(k, doc, shelf)))));
 }
 
 function worldPage(k: M.Kid, doc: CM.CodingDoc, world: number) {
@@ -148,6 +157,7 @@ function worldPage(k: M.Kid, doc: CM.CodingDoc, world: number) {
 
 // ---------- mini-lessons ----------
 function demoRunner(box: HTMLElement, demo: Demo): () => void {
+  if (demo.kind) return demoRunner2(box, demo);   // sprites / lists (worlds 7-10)
   let timer = 0, dead = false;
   const build = () => {
     const prog = parse(demo.program);
@@ -175,7 +185,7 @@ function demoRunner(box: HTMLElement, demo: Demo): () => void {
 
 /** opens a mini-lesson (and remembers on this device that it was seen) */
 export async function openLesson(id: string): Promise<void> {
-  const les = LESSONS[id];
+  const les = LESSONS[id] ?? LESSONS2[id];
   if (!les) return;
   let stop = () => {};
   await modal<boolean>((close) => {
@@ -224,7 +234,7 @@ function playScreen(p: Play) {
   const codeEl = h("pre", { class: "cl-code user", id: "cl-code", hidden: !codeOn });
   const showCode = () => { codeEl.textContent = toText(editor.program()) || "// "; };
   editor = createEditor({
-    palette: level.palette, funcs: level.funcs, vars: level.vars, conds: level.conds, max: level.max, program: level.givenProg,
+    palette: level.palette, funcs: level.funcs, vars: level.vars, conds: level.conds, max: level.max, program: level.givenProg, ...edOpts(level),
     onChange: () => { showCode(); hintClear(); },
   });
   const hintClear = () => editor.hint(null);
@@ -269,7 +279,7 @@ function playScreen(p: Play) {
     scene.render(inst.state);
     dry = free ? null : evaluate(level, prog);
     cap = dry && (dry.status === "infinite" || dry.status === "budget") ? 60 : Infinity;
-    mach = new Machine(prog, inst.world, inst.state, { budget: dry?.status === "budget" ? 400 : undefined });
+    mach = new Machine(prog, inst.world, inst.state, { budget: dry?.status === "budget" ? 400 : undefined, maxDepth: extOf(level).recursion ? 400 : undefined });
     running = true; stepMode = single; shown = 0;
     editor.setLocked(true); lockBtns(true); setSceneMs();
     setMsg(single ? "单步运行：每按一次“单步”执行一块积木。" : "");
@@ -330,7 +340,7 @@ function playScreen(p: Play) {
   }
   async function showAnswer() {
     const ok = await modal<boolean>((close) => h("div", { class: "dlg cl-answer", id: "cl-answer-dlg" }, h("h2", {}, "参考答案"),
-      h("div", { class: "cl-answer-body" }, programEl(level.sol, { funcs: level.funcs, vars: level.vars })),
+      h("div", { class: "cl-answer-body" }, programEl(level.sol, { funcs: level.funcs, vars: level.vars, ed: edOpts(level) })),
       h("p", { class: "muted small" }, "使用参考答案后，这一关最多得 1 颗星。"),
       h("div", { class: "row end" }, h("button", { id: "cl-answer-close", onclick: () => close(false) }, "关闭"), h("button", { class: "primary", id: "cl-answer-use", onclick: () => close(true) }, "使用这个答案"))));
     if (!ok) return;
@@ -392,9 +402,17 @@ async function medalDialog(world: number) {
   });
 }
 
+const host2 = (): Host => ({ X, starRow, openLesson, saveProgress });
+function freeStagePage(k: M.Kid) {
+  play2(host2(), { kid: k, level: freeStageLevel(), mode: "free", backTo: `#/coding/${k.id}`, backLabel: "世界", title: [h("span", {}, "故事舞台")] });
+}
 function levelPage(k: M.Kid, level: Level) {
   const nextId = CM.nextLevelId(level.id);
   const nxt = nextId ? levelById(nextId) : null;
+  if (level.kind === "stage" || level.kind === "data") {
+    return play2(host2(), { kid: k, level, mode: "level", backTo: `#/coding/${k.id}/w${level.world}`, backLabel: "关卡", title: [`${level.world}-${level.no} `, h("span", {}, level.title)],
+      next: () => { location.hash = nxt ? `#/coding/${k.id}/w${nxt.world}/${nxt.no}` : `#/coding/${k.id}/w${level.world}`; } });
+  }
   playScreen({
     kid: k, level, mode: "level", backTo: `#/coding/${k.id}/w${level.world}`, backLabel: "关卡", title: [`${level.world}-${level.no} `, h("span", {}, level.title)],
     won: (stars, blocks) => saveProgress(k, level, stars, blocks),

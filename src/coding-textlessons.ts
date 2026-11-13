@@ -81,3 +81,14 @@ export const TLESSONS: Record<string, TLesson> = {
     { text: "import random 以后，random.randint(1, 6) 得到 1 到 6 的随机整数。random.seed(数) 让随机的结果每次都一样，方便检查程序。", code: "import random\nrandom.seed(7)\nfor _ in range(5):\n    print(random.randint(1, 6))\nprint(random.choice([\"石头\", \"剪刀\", \"布\"]))\n" },
   ] },
 };
+
+/** the templates of the workshop (content, shown in a user box) */
+export const TEMPLATES: { name: string; code: string; input?: string }[] = [
+  { name: "你好，世界", code: "print(\"你好，世界\")\n" },
+  { name: "输入和计算", code: "a = int(input())\nb = int(input())\nprint(f\"{a} + {b} = {a + b}\")\nprint(f\"{a} * {b} = {a * b}\")\n", input: "6\n7" },
+  { name: "猜数字", code: "import random\n\nsecret = random.randint(1, 100)\ntries = 0\nwhile True:\n    guess = int(input(\"猜一个 1 到 100 的数：\"))\n    tries += 1\n    if guess < secret:\n        print(\"太小了\")\n    elif guess > secret:\n        print(\"太大了\")\n    else:\n        print(f\"猜对了，用了{tries}次\")\n        break\n", input: "50\n25\n75\n60\n80" },
+  { name: "成绩计算器", code: "scores = [int(x) for x in input().split()]\nprint(\"最高分：\", max(scores))\nprint(\"最低分：\", min(scores))\nprint(\"平均分：\", round(sum(scores) / len(scores), 1))\nfor s in scores:\n    if s >= 90:\n        print(s, \"优秀\")\n    elif s >= 60:\n        print(s, \"及格\")\n    else:\n        print(s, \"不及格\")\n", input: "95 72 58 88 100" },
+  { name: "画花朵", code: "import turtle\nturtle.color(\"red\")\nfor i in range(12):\n    for j in range(4):\n        turtle.forward(50)\n        turtle.right(90)\n    turtle.right(30)\n" },
+  { name: "九九乘法表", code: "for i in range(1, 10):\n    row = []\n    for j in range(1, i + 1):\n        row.append(f\"{j}x{i}={i * j}\")\n    print(\"  \".join(row))\n" },
+  { name: "待办清单", code: "todo = []\nwhile True:\n    line = input()\n    if line == \"quit\":\n        break\n    if line.startswith(\"add \"):\n        todo.append(line[4:])\n    elif line == \"list\":\n        for i in range(len(todo)):\n            print(f\"{i + 1}. {todo[i]}\")\n", input: "add 写作业\nadd 看书\nlist\nquit" },
+];

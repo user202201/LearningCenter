@@ -17,7 +17,7 @@ import { judge, parOf, starsFor, countTokens, Judgement, CaseResult, expectedOut
 import { run, RunResult, turtleColorHex } from "./coding-textrun";
 import { KIND_NAME } from "./coding-textlang";
 import { createCodeEditor, CodeEditor, highlightHtml } from "./coding-texteditor";
-import { TLESSONS } from "./coding-textlessons";
+import { TLESSONS, TEMPLATES } from "./coding-textlessons";
 import { blocksToPython } from "./coding-textbridge";
 import { parse as parseBlocks } from "./coding-ast";
 import { programEl } from "./coding-editor";
@@ -229,10 +229,10 @@ function makePanel(o: { initial: string; input: string; showInput: boolean; extr
     if (!ev) return;
     editor.setCurrent(ev.line);
     out.textContent = trace.stdout.slice(0, ev.out);
-    watch.replaceChildren(h("b", { class: "tx-label" }, "变量"), h("div", { class: "tx-watch-line" }, "第 ", h("b", {}, String(ev.line)), " 行"));
+    watch.replaceChildren(h("b", { class: "tx-label" }, "变量"), h("div", { class: "tx-watch-line" }, `第 ${ev.line} 行`));
     for (const sc of ev.scopes) {
       const rows = sc.vars;
-      watch.append(h("div", { class: "tx-scope" }, h("span", { class: "tx-scope-name user" }, sc.name === "<模块>" ? "main" : sc.name),
+      watch.append(h("div", { class: "tx-scope" }, h("span", { class: "tx-scope-name user" }, sc.name),
         rows.length ? h("table", { class: "tx-vars user" }, ...rows.map(([name, v]) => h("tr", {}, h("th", {}, name), h("td", {}, v)))) : h("span", { class: "muted small" }, "没有变量")));
     }
     if (idx >= n - 1) { if (trace.error) { out.textContent = trace.stdout; showError(trace.error); } else out.textContent = trace.stdout; }
@@ -391,16 +391,6 @@ function levelPage(k: M.Kid, docIn: CM.CodingDoc, level: TLevel) {
 }
 
 // ---------- the workshop ----------
-const TEMPLATES: { name: string; code: string; input?: string }[] = [
-  { name: "你好，世界", code: "print(\"你好，世界\")\n" },
-  { name: "输入和计算", code: "a = int(input())\nb = int(input())\nprint(f\"{a} + {b} = {a + b}\")\nprint(f\"{a} * {b} = {a * b}\")\n", input: "6\n7" },
-  { name: "猜数字", code: "import random\n\nsecret = random.randint(1, 100)\ntries = 0\nwhile True:\n    guess = int(input(\"猜一个 1 到 100 的数：\"))\n    tries += 1\n    if guess < secret:\n        print(\"太小了\")\n    elif guess > secret:\n        print(\"太大了\")\n    else:\n        print(f\"猜对了，用了{tries}次\")\n        break\n", input: "50\n25\n75\n60\n80" },
-  { name: "成绩计算器", code: "scores = [int(x) for x in input().split()]\nprint(\"最高分：\", max(scores))\nprint(\"最低分：\", min(scores))\nprint(\"平均分：\", round(sum(scores) / len(scores), 1))\nfor s in scores:\n    if s >= 90:\n        print(s, \"优秀\")\n    elif s >= 60:\n        print(s, \"及格\")\n    else:\n        print(s, \"不及格\")\n", input: "95 72 58 88 100" },
-  { name: "画花朵", code: "import turtle\nturtle.color(\"red\")\nfor i in range(12):\n    for j in range(4):\n        turtle.forward(50)\n        turtle.right(90)\n    turtle.right(30)\n" },
-  { name: "九九乘法表", code: "for i in range(1, 10):\n    row = []\n    for j in range(1, i + 1):\n        row.append(f\"{j}x{i}={i * j}\")\n    print(\"  \".join(row))\n" },
-  { name: "待办清单", code: "todo = []\nwhile True:\n    line = input()\n    if line == \"quit\":\n        break\n    if line.startswith(\"add \"):\n        todo.append(line[4:])\n    elif line == \"list\":\n        for i in range(len(todo)):\n            print(f\"{i + 1}. {todo[i]}\")\n", input: "add 写作业\nadd 看书\nlist\nquit" },
-];
-
 function workshopPage(k: M.Kid) {
   const local = loadTLocal();
   const saved = local.ws[k.id];

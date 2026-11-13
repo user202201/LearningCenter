@@ -285,7 +285,7 @@ class Interp {
     this.inputLines = (o.input ?? "").replace(/\r\n?/g, "\n").replace(/\n$/, "").split("\n");
     if ((o.input ?? "") === "") this.inputLines = [];
     this.budget = o.budget ?? DEFAULT_STEPS; this.maxDepth = o.maxDepth ?? 200;
-    this.root = new Frame(null, null, null, "<模块>"); this.fr = this.root; this.stack = [this.root];
+    this.root = new Frame(null, null, null, "main"); this.fr = this.root; this.stack = [this.root];
     this.rng = new MT(BigInt(o.seed ?? 1));
     this.traceOn = !!o.trace; this.maxTrace = o.maxTrace ?? 2500;
     this.setupBuiltins();
@@ -342,31 +342,31 @@ class Interp {
     this.tick(); this.line = s.line;
     if (this.traceOn) this.record(s.line);
     switch (s.k) {
-      case "expr": this.eval(s.e); return 0;
+      case "expr": this.ev(s.e); return 0;
       case "pass": return 0;
       case "assign": {
-        const v = this.eval(s.value);
+        const v = this.ev(s.value);
         for (const t of s.targets) this.assign(t, v);
         return 0;
       }
       case "aug": {
         this.line = s.line;
-        if (s.target.k === "name") { const cur = this.lookup(s.target.id, s.line); const nv = this.binop(s.op, cur, this.eval(s.value), s.line, true); this.assignName(s.target.id, nv); }
+        if (s.target.k === "name") { const cur = this.lookup(s.target.id, s.line); const nv = this.binop(s.op, cur, this.ev(s.value), s.line, true); this.assignName(s.target.id, nv); }
         else if (s.target.k === "idx") {
-          const o = this.eval(s.target.o), i = this.eval(s.target.i);
-          const cur = this.getItem(o, i, s.line); this.setItem(o, i, this.binop(s.op, cur, this.eval(s.value), s.line, true), s.line);
+          const o = this.ev(s.target.o), i = this.ev(s.target.i);
+          const cur = this.getItem(o, i, s.line); this.setItem(o, i, this.binop(s.op, cur, this.ev(s.value), s.line, true), s.line);
         }
         return 0;
       }
       case "if": {
-        for (const t of s.tests) { this.line = t.line; if (this.traceOn && t !== s.tests[0]) this.record(t.line); if (truthy(this.eval(t.c))) return this.execBlock(t.body); }
+        for (const t of s.tests) { this.line = t.line; if (this.traceOn && t !== s.tests[0]) this.record(t.line); if (truthy(this.ev(t.c))) return this.execBlock(t.body); }
         return s.els ? this.execBlock(s.els) : 0;
       }
       case "while": {
         const outer = this.loopLine; this.loopLine = s.line;
         for (;;) {
           this.line = s.line;
-          if (!truthy(this.eval(s.c))) break;
+          if (!truthy(this.ev(s.c))) break;
           const r = this.execBlock(s.body);
           if (r === SIG.brk) break; if (r === SIG.ret) { this.loopLine = outer; return r; }
           this.tick();
@@ -376,7 +376,7 @@ class Interp {
         return 0;
       }
       case "for": {
-        const it = this.eval(s.iter);
+        const it = this.ev(s.iter);
         this.line = s.line;
         const seq = this.iterate(it, s.line);
         let first = true;
@@ -392,11 +392,11 @@ class Interp {
         return 0;
       }
       case "def": {
-        const defaults = s.params.map((p) => (p.def ? this.eval(p.def) : undefined));
+        const defaults = s.params.map((p) => (p.def ? this.ev(p.def) : undefined));
         this.assignName(s.name, new PyFunc(s.name, s.params, s.body, s.locals!, s.globals!, this.fr, false, defaults));
         return 0;
       }
-      case "return": this.ret = s.e ? this.eval(s.e) : null; return SIG.ret;
+      case "return": this.ret = s.e ? this.ev(s.e) : null; return SIG.ret;
       case "break": return SIG.brk;
       case "continue": return SIG.cont;
       case "global": return 0;
@@ -414,7 +414,7 @@ class Interp {
       case "del": {
         const t = s.target;
         if (t.k === "idx") {
-          const o = this.eval(t.o), i = this.eval(t.i);
+          const o = this.ev(t.o), i = this.ev(t.i);
           this.line = s.line;
           if (o instanceof PyList) { const k = this.index(i, o.a.length, s.line, "列表"); o.a.splice(k, 1); }
           else if (o instanceof PyDict) { const kk = keyOf(i, s.line); if (!o.m.has(kk)) this.err("KeyError", `字典里没有键 ${repr(i)}。`, undefined, s.line); o.m.delete(kk); }
@@ -424,7 +424,7 @@ class Interp {
         return 0;
       }
       case "assert": {
-        if (!truthy(this.eval(s.c))) this.err("AssertionError", s.msg ? str(this.eval(s.msg)) : "assert 的条件不成立。");
+        if (!truthy(this.ev(s.c))) this.err("AssertionError", s.msg ? str(this.ev(s.msg)) : "assert 的条件不成立。");
         return 0;
       }
     }
@@ -432,7 +432,7 @@ class Interp {
   assign(t: Expr, v: Val) {
     switch (t.k) {
       case "name": this.assignName(t.id, v); return;
-      case "idx": { const o = this.eval(t.o), i = this.eval(t.i); this.setItem(o, i, v, t.line); return; }
+      case "idx": { const o = this.ev(t.o), i = this.ev(t.i); this.setItem(o, i, v, t.line); return; }
       case "tuple": case "list": {
         const vals = [...this.iterate(v, t.line)];
         if (vals.length !== t.items.length) this.err("ValueError", vals.length < t.items.length ? `需要 ${t.items.length} 个值，但只有 ${vals.length} 个。` : `值太多：需要 ${t.items.length} 个，给了 ${vals.length} 个。`, undefined, t.line);
@@ -499,7 +499,7 @@ class Interp {
   }
 
   // ----- expressions -----
-  eval(e: Expr): Val {
+  ev(e: Expr): Val {
     switch (e.k) {
       case "num": return e.v;
       case "str": return e.v;
@@ -509,35 +509,35 @@ class Interp {
         let s = "";
         for (const p of e.parts) {
           if (typeof p === "string") { s += p; continue; }
-          let v = this.eval(p.e);
+          let v = this.ev(p.e);
           if (p.eq !== undefined) s += p.eq;
           if (p.conv === "r") v = repr(v); else if (p.conv === "s") v = str(v);
           let spec = "";
-          if (p.spec) for (const sp of p.spec) spec += typeof sp === "string" ? sp : str(this.eval(sp.e));
+          if (p.spec) for (const sp of p.spec) spec += typeof sp === "string" ? sp : str(this.ev(sp.e));
           this.line = e.line;
           s += p.eq !== undefined && !p.spec && !p.conv ? repr(v) : this.format(v, spec, e.line);
         }
         return s;
       }
-      case "list": return new PyList(e.items.map((x) => this.eval(x)));
-      case "tuple": return new PyTuple(e.items.map((x) => this.eval(x)));
-      case "set": { const s = new PySet(); for (const x of e.items) { const v = this.eval(x); s.m.set(keyOf(v, e.line), v); } return s; }
-      case "dict": { const d = new PyDict(); for (const [k, v] of e.pairs) { const kk = this.eval(k); d.put(keyOf(kk, e.line), kk, this.eval(v)); } return d; }
+      case "list": return new PyList(e.items.map((x) => this.ev(x)));
+      case "tuple": return new PyTuple(e.items.map((x) => this.ev(x)));
+      case "set": { const s = new PySet(); for (const x of e.items) { const v = this.ev(x); s.m.set(keyOf(v, e.line), v); } return s; }
+      case "dict": { const d = new PyDict(); for (const [k, v] of e.pairs) { const kk = this.ev(k); d.put(keyOf(kk, e.line), kk, this.ev(v)); } return d; }
       case "un": {
-        const a = this.eval(e.a);
+        const a = this.ev(e.a);
         if (e.op === "not") return !truthy(a);
         this.line = e.line;
         if (!isNum(a)) this.err("TypeError", `不能对${cnType(a)}使用负号 / 正号。`, undefined, e.line);
         if (e.op === "+") return typeof a === "number" ? a : big(a as bigint | boolean);
         return typeof a === "number" ? -a : -big(a as bigint | boolean);
       }
-      case "bin": { const a = this.eval(e.a), b = this.eval(e.b); return this.binop(e.op, a, b, e.line, false); }
-      case "logic": { const a = this.eval(e.a); return e.op === "and" ? (truthy(a) ? this.eval(e.b) : a) : truthy(a) ? a : this.eval(e.b); }
-      case "cond": return truthy(this.eval(e.c)) ? this.eval(e.a) : this.eval(e.b);
+      case "bin": { const a = this.ev(e.a), b = this.ev(e.b); return this.binop(e.op, a, b, e.line, false); }
+      case "logic": { const a = this.ev(e.a); return e.op === "and" ? (truthy(a) ? this.ev(e.b) : a) : truthy(a) ? a : this.ev(e.b); }
+      case "cond": return truthy(this.ev(e.c)) ? this.ev(e.a) : this.ev(e.b);
       case "cmp": {
-        let left = this.eval(e.first);
+        let left = this.ev(e.first);
         for (const [op, re] of e.ops) {
-          const right = this.eval(re);
+          const right = this.ev(re);
           this.line = e.line;
           let r: boolean;
           switch (op) {
@@ -557,10 +557,10 @@ class Interp {
         }
         return true;
       }
-      case "idx": { const o = this.eval(e.o), i = this.eval(e.i); return this.getItem(o, i, e.line); }
+      case "idx": { const o = this.ev(e.o), i = this.ev(e.i); return this.getItem(o, i, e.line); }
       case "slice": {
-        const o = this.eval(e.o);
-        const lo = e.lo ? this.eval(e.lo) : undefined, hi = e.hi ? this.eval(e.hi) : undefined, st = e.st ? this.eval(e.st) : undefined;
+        const o = this.ev(e.o);
+        const lo = e.lo ? this.ev(e.lo) : undefined, hi = e.hi ? this.ev(e.hi) : undefined, st = e.st ? this.ev(e.st) : undefined;
         this.line = e.line;
         if (typeof o === "string") return this.sliceBounds(o.length, lo, hi, st, e.line).map((i) => o[i]).join("");
         if (o instanceof PyList) return new PyList(this.sliceBounds(o.a.length, lo, hi, st, e.line).map((i) => o.a[i]));
@@ -569,7 +569,7 @@ class Interp {
         return this.err("TypeError", `${cnType(o)}不能切片。`, undefined, e.line);
       }
       case "attr": {
-        const o = this.eval(e.o);
+        const o = this.ev(e.o);
         this.line = e.line;
         return this.getAttr(o, e.name, e.line);
       }
@@ -585,7 +585,7 @@ class Interp {
     for (const c of e.clauses) if ("target" in c) targets(c.target);
     // the first iterable is evaluated in the enclosing scope (like Python)
     const c0 = e.clauses[0];
-    const first = c0 && "iter" in c0 ? this.eval(c0.iter) : null;
+    const first = c0 && "iter" in c0 ? this.ev(c0.iter) : null;
     const frame = new Frame(this.fr, names, null, this.fr.fname);
     const saved = this.fr;
     try {
@@ -593,14 +593,14 @@ class Interp {
       const go = (ci: number) => {
         if (ci === e.clauses.length) {
           this.tickLight();
-          if (e.kind === "dict") { const k = this.eval(e.elt); dict.put(keyOf(k, e.line), k, this.eval(e.val!)); }
-          else if (e.kind === "set") { const v = this.eval(e.elt); set.m.set(keyOf(v, e.line), v); }
-          else out.push(this.eval(e.elt));
+          if (e.kind === "dict") { const k = this.ev(e.elt); dict.put(keyOf(k, e.line), k, this.ev(e.val!)); }
+          else if (e.kind === "set") { const v = this.ev(e.elt); set.m.set(keyOf(v, e.line), v); }
+          else out.push(this.ev(e.elt));
           return;
         }
         const c = e.clauses[ci];
-        if ("cond" in c) { if (truthy(this.eval(c.cond))) go(ci + 1); return; }
-        const it = ci === 0 ? first : this.eval(c.iter);
+        if ("cond" in c) { if (truthy(this.ev(c.cond))) go(ci + 1); return; }
+        const it = ci === 0 ? first : this.ev(c.iter);
         for (const x of this.iterate(it, e.line)) { this.assign(c.target, x); go(ci + 1); }
       };
       go(0);
@@ -755,18 +755,18 @@ class Interp {
   // ----- calls -----
   callExpr(e: Extract<Expr, { k: "call" }>): Val {
     if (e.f.k === "attr") {
-      const o = this.eval(e.f.o);
-      const args = e.args.map((a) => this.eval(a));
-      const kw = e.kw.length ? Object.fromEntries(e.kw.map(([n, x]) => [n, this.eval(x)])) : null;
+      const o = this.ev(e.f.o);
+      const args = e.args.map((a) => this.ev(a));
+      const kw = e.kw.length ? Object.fromEntries(e.kw.map(([n, x]) => [n, this.ev(x)])) : null;
       this.line = e.line;
       if (o instanceof PyModule) { const f = this.getAttr(o, e.f.name, e.line); return this.callValue(f, args, kw, e.line); }
       const r = this.method(o, e.f.name, args, kw, e.line);
       this.line = e.line;
       return r;
     }
-    const f = this.eval(e.f);
-    const args = e.args.map((a) => this.eval(a));
-    const kw = e.kw.length ? Object.fromEntries(e.kw.map(([n, x]) => [n, this.eval(x)])) : null;
+    const f = this.ev(e.f);
+    const args = e.args.map((a) => this.ev(a));
+    const kw = e.kw.length ? Object.fromEntries(e.kw.map(([n, x]) => [n, this.ev(x)])) : null;
     this.line = e.line;
     const r = this.callValue(f, args, kw, e.line, e.f.k === "name" ? e.f.id : undefined);
     this.line = e.line;
@@ -792,7 +792,7 @@ class Interp {
     const savedFr = this.fr;
     this.fr = frame; this.stack.push(frame); this.depth++;
     try {
-      if (fn.isLambda) return this.eval(fn.body as Expr);
+      if (fn.isLambda) return this.ev(fn.body as Expr);
       this.ret = null;
       const r = this.execBlock(fn.body as Stmt[]);
       const v = r === SIG.ret ? this.ret : null;

@@ -92,6 +92,9 @@ export class StageRun {
     else if (inp.type === "stagetap") { st.tapX = inp.x; st.tapY = inp.y; this.fire("stagetap"); }
     else { st.keys[inp.key] = 1; this.releases.push({ tick: this.tick + Math.max(1, inp.hold ?? 1), key: inp.key }); this.fire(`key(${inp.key})`); }
   }
+  /** a key goes down / up (live play): the key hat starts when it goes down */
+  press(key: string): void { const st = this.state.stage!; if (!st.keys[key]) { st.keys[key] = 1; this.fire(`key(${key})`); } }
+  release(key: string): void { delete this.state.stage!.keys[key]; }
   /** the next tick of the clock */
   step(): void {
     if (this.status !== "running") return;

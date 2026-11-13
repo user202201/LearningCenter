@@ -2,7 +2,7 @@
  * 编程: the mini-lessons (3-4 short steps, each with a demo program that runs by itself). One per concept (docs/coding-curriculum.md): the first level that uses a
  * concept opens its lesson; the ? button of a level opens it again. Written by a model; a teacher must proofread.
  */
-export interface Demo { rows?: string[]; start?: { x: number; y: number; dir: number }; program: string; turtle?: boolean; origin?: { x: number; y: number } }
+export interface Demo { rows?: string[]; start?: { x: number; y: number; dir: number }; program: string; turtle?: boolean; origin?: { x: number; y: number }; /** worlds 7-10 (coding-lessons2.ts): sprites on a stage, or lists / bars / a graph / a scale */ kind?: "stage" | "data"; ext?: unknown }
 export interface Lesson { id: string; title: string; steps: { text: string; demo: Demo }[] }
 
 const CORR = ["########", "#>....F#", "########"];

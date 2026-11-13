@@ -1,0 +1,334 @@
+{
+  "自由编写": [
+    "Free writing",
+    "Écriture libre"
+  ],
+  "代码工坊": [
+    "Code workshop",
+    "Atelier de code"
+  ],
+  "文字编程": [
+    "Text coding",
+    "Programmation en texte"
+  ],
+  "从积木走向真正的代码（Python 入门）": [
+    "From blocks to real code (introduction to Python)",
+    "Des blocs au vrai code (initiation à Python)"
+  ],
+  "先拼积木，再看代码": [
+    "Build with blocks first, then read the code",
+    "D'abord les blocs, puis le code"
+  ],
+  "代码": [
+    "Code",
+    "Code"
+  ],
+  "试一试": [
+    "Try it",
+    "Essayer"
+  ],
+  "（没有输出）": [
+    "(no output)",
+    "(aucune sortie)"
+  ],
+  "每行对应一次 input()": [
+    "One line for each input()",
+    "Une ligne pour chaque input()"
+  ],
+  "步骤 {0} / {1}": [
+    "Step {0} / {1}",
+    "Étape {0} / {1}"
+  ],
+  "变量": [
+    "Variables",
+    "Variables"
+  ],
+  "第 {0} 行": [
+    "Line {0}",
+    "Ligne {0}"
+  ],
+  "没有变量": [
+    "No variables",
+    "Aucune variable"
+  ],
+  "自动播放": [
+    "Autoplay",
+    "Lecture automatique"
+  ],
+  "步数很多，只记录了前 2500 步。": [
+    "Many steps: only the first 2500 were recorded.",
+    "Beaucoup d'étapes : seules les 2500 premières ont été enregistrées."
+  ],
+  "通过": [
+    "Passed",
+    "Réussi"
+  ],
+  "未通过": [
+    "Failed",
+    "Échoué"
+  ],
+  "全部通过。": [
+    "All tests passed.",
+    "Tous les tests sont réussis."
+  ],
+  "第 {0} 组测试没有通过。": [
+    "Test {0} failed.",
+    "Le test {0} a échoué."
+  ],
+  "还有要求没有满足。": [
+    "A requirement is not met.",
+    "Une exigence n'est pas satisfaite."
+  ],
+  "测试代码": [
+    "Test code",
+    "Code de test"
+  ],
+  "运行步数超过了限制": [
+    "Step limit exceeded",
+    "Limite d'étapes dépassée"
+  ],
+  "程序出错了": [
+    "The program failed",
+    "Le programme a échoué"
+  ],
+  "限制：{0} 步。请想一个更高效的办法。": [
+    "Limit: {0} steps. Find a more efficient method.",
+    "Limite : {0} étapes. Trouvez une méthode plus efficace."
+  ],
+  "你的图形和要求的图形不一样（灰色的是要求的图形）。": [
+    "Your drawing differs from the required one (the grey one is the required drawing).",
+    "Votre dessin diffère de celui demandé (le gris est le dessin demandé)."
+  ],
+  "期望的输出": [
+    "Expected output",
+    "Sortie attendue"
+  ],
+  "（空）": [
+    "(empty)",
+    "(vide)"
+  ],
+  "你的输出": [
+    "Your output",
+    "Votre sortie"
+  ],
+  "代码长度：{0}（满分需要不超过 {1}，参考答案 {2}）": [
+    "Code length: {0} (full marks need at most {1}; the reference has {2})",
+    "Longueur du code : {0} (la note maximale demande au plus {1} ; la solution de référence : {2})"
+  ],
+  "重置代码？": [
+    "Reset the code?",
+    "Réinitialiser le code ?"
+  ],
+  "你写的代码会被换成这一关开始时的代码。": [
+    "Your code will be replaced by the starting code of this level.",
+    "Votre code sera remplacé par le code de départ de ce niveau."
+  ],
+  "提示（{0} / {1}）": [
+    "Hint ({0} / {1})",
+    "Indice ({0} / {1})"
+  ],
+  "更多提示": [
+    "More hints",
+    "Plus d'indices"
+  ],
+  "已放入参考答案": [
+    "Reference answer inserted",
+    "Solution de référence insérée"
+  ],
+  "限制步数": [
+    "Step limit",
+    "Limite d'étapes"
+  ],
+  "测试代码示例": [
+    "Example test code",
+    "Exemple de code de test"
+  ],
+  "示例输入": [
+    "Example input",
+    "Exemple d'entrée"
+  ],
+  "示例输出": [
+    "Example output",
+    "Exemple de sortie"
+  ],
+  "模板": [
+    "Templates",
+    "Modèles"
+  ],
+  "我的代码": [
+    "My code",
+    "Mon code"
+  ],
+  "积木作品": [
+    "Block works",
+    "Œuvres en blocs"
+  ],
+  "最多保存 {0} 段代码。请先删除一段。": [
+    "At most {0} snippets can be saved. Delete one first.",
+    "Au plus {0} extraits peuvent être enregistrés. Supprimez-en un d'abord."
+  ],
+  "保存代码": [
+    "Save code",
+    "Enregistrer le code"
+  ],
+  "名称": [
+    "Name",
+    "Nom"
+  ],
+  "已打开": [
+    "Opened",
+    "Ouvert"
+  ],
+  "删除这段代码？": [
+    "Delete this code?",
+    "Supprimer ce code ?"
+  ],
+  "暂无保存的代码。": [
+    "No saved code yet.",
+    "Aucun code enregistré."
+  ],
+  "暂无积木作品。请先在“创作”里保存一幅画。": [
+    "No block works yet. Save a drawing in “Create” first.",
+    "Aucune œuvre en blocs. Enregistrez d'abord un dessin dans « Créer »."
+  ],
+  "已把积木转换成代码": [
+    "Blocks converted to code",
+    "Blocs convertis en code"
+  ],
+  "把“创作”里保存的积木作品变成代码。": [
+    "Turn a block work saved in “Create” into code.",
+    "Transforme une œuvre en blocs enregistrée dans « Créer » en code."
+  ],
+  "清空代码？": [
+    "Clear the code?",
+    "Effacer le code ?"
+  ],
+  "编辑区里的代码会被清空。": [
+    "The code in the editor will be cleared.",
+    "Le code de l'éditeur sera effacé."
+  ],
+  "字号": [
+    "Font size",
+    "Taille de police"
+  ],
+  "字号 {0}": [
+    "Font size {0}",
+    "Taille de police {0}"
+  ],
+  "缩进": [
+    "Indent",
+    "Indenter"
+  ],
+  "减少缩进": [
+    "Dedent",
+    "Désindenter"
+  ],
+  "下划线": [
+    "Underscore",
+    "Tiret bas"
+  ],
+  "注释 #": [
+    "Comment #",
+    "Commentaire #"
+  ],
+  "题目要求不能使用 {0}。": [
+    "The task does not allow using {0}.",
+    "L'énoncé interdit d'utiliser {0}."
+  ],
+  "函数 {0} 需要调用它自己（递归）。": [
+    "The function {0} must call itself (recursion).",
+    "La fonction {0} doit s'appeler elle-même (récursivité)."
+  ],
+  "文字编程入门": [
+    "Introduction to text coding",
+    "Initiation à la programmation en texte"
+  ],
+  "print、变量、判断、循环": [
+    "print, variables, decisions, loops",
+    "print, variables, décisions, boucles"
+  ],
+  "函数与列表": [
+    "Functions and lists",
+    "Fonctions et listes"
+  ],
+  "函数、列表、字典、递归、画图": [
+    "Functions, lists, dictionaries, recursion, drawing",
+    "Fonctions, listes, dictionnaires, récursivité, dessin"
+  ],
+  "算法与小项目": [
+    "Algorithms and small projects",
+    "Algorithmes et petits projets"
+  ],
+  "查找、排序、素数和小项目": [
+    "Searching, sorting, primes and small projects",
+    "Recherche, tri, nombres premiers et petits projets"
+  ],
+  "语法错误": [
+    "Syntax error",
+    "Erreur de syntaxe"
+  ],
+  "缩进错误": [
+    "Indentation error",
+    "Erreur d'indentation"
+  ],
+  "名字错误": [
+    "Name error",
+    "Erreur de nom"
+  ],
+  "类型错误": [
+    "Type error",
+    "Erreur de type"
+  ],
+  "值错误": [
+    "Value error",
+    "Erreur de valeur"
+  ],
+  "除以零": [
+    "Division by zero",
+    "Division par zéro"
+  ],
+  "位置超出范围": [
+    "Index out of range",
+    "Indice hors limites"
+  ],
+  "字典没有这个键": [
+    "Key not in the dictionary",
+    "Clé absente du dictionnaire"
+  ],
+  "方法错误": [
+    "Method error",
+    "Erreur de méthode"
+  ],
+  "调用太深": [
+    "Recursion too deep",
+    "Récursion trop profonde"
+  ],
+  "运行太久": [
+    "Running too long",
+    "Exécution trop longue"
+  ],
+  "没有更多输入": [
+    "No more input",
+    "Plus d'entrée"
+  ],
+  "输出太多": [
+    "Too much output",
+    "Trop de sortie"
+  ],
+  "还有空白": [
+    "A blank is left",
+    "Un blanc reste à remplir"
+  ],
+  "数太大": [
+    "Number too large",
+    "Nombre trop grand"
+  ],
+  "断言失败": [
+    "Assertion failed",
+    "Assertion échouée"
+  ],
+  "输出": [
+    "Output",
+    "Sortie"
+  ]
+}

@@ -1,0 +1,602 @@
+{
+ "信息科技": [
+  "Information technology",
+  "Technologies de l'information"
+ ],
+ "毕业项目": [
+  "Graduation projects",
+  "Projets de fin de parcours"
+ ],
+ "创作工坊": [
+  "Workshop",
+  "Atelier de création"
+ ],
+ "毕业": [
+  "Graduation",
+  "Diplôme"
+ ],
+ "证书": [
+  "Certificate",
+  "Certificat"
+ ],
+ "获得徽章": [
+  "Medal earned",
+  "Médaille obtenue"
+ ],
+ "错误 {0} 次，提示 {1} 次。": [
+  "Mistakes: {0}. Hints: {1}.",
+  "Erreurs : {0}. Indices : {1}."
+ ],
+ "程序停不下来或出错了。": [
+  "The program does not stop or has an error.",
+  "Le programme ne s'arrête pas ou comporte une erreur."
+ ],
+ "所有场景都通过了。": [
+  "All scenarios passed.",
+  "Tous les scénarios sont réussis."
+ ],
+ "有 {0} 个场景没有通过。": [
+  "{0} scenario(s) did not pass.",
+  "{0} scénario(s) non réussi(s)."
+ ],
+ "应用代码": [
+  "Apply code",
+  "Appliquer le code"
+ ],
+ "代码有误：{0}": [
+  "The code has an error: {0}",
+  "Le code comporte une erreur : {0}"
+ ],
+ "全部检查": [
+  "Check all",
+  "Tout vérifier"
+ ],
+ "文本": [
+  "Text",
+  "Texte"
+ ],
+ "请先输入答案。": [
+  "Please enter an answer first.",
+  "Veuillez d'abord saisir une réponse."
+ ],
+ "不对。请再试一次。": [
+  "Wrong. Please try again.",
+  "Faux. Veuillez réessayer."
+ ],
+ "全部完成。": [
+  "All done.",
+  "Tout est terminé."
+ ],
+ "不对。请再选一次。": [
+  "Wrong. Please choose again.",
+  "Faux. Veuillez choisir à nouveau."
+ ],
+ "请先把所有卡片放好。": [
+  "Please place all the cards first.",
+  "Veuillez d'abord placer toutes les cartes."
+ ],
+ "有 {0} 张放错了，已退回。": [
+  "{0} card(s) were misplaced and sent back.",
+  "{0} carte(s) mal placée(s), renvoyée(s)."
+ ],
+ "上移": [
+  "Move up",
+  "Monter"
+ ],
+ "下移": [
+  "Move down",
+  "Descendre"
+ ],
+ "顺序正确。": [
+  "The order is correct.",
+  "L'ordre est correct."
+ ],
+ "顺序不对。请再调整。": [
+  "The order is wrong. Please adjust it.",
+  "L'ordre est faux. Veuillez l'ajuster."
+ ],
+ "开始扫描": [
+  "Start scan",
+  "Lancer l'analyse"
+ ],
+ "扫描完成。": [
+  "Scan finished.",
+  "Analyse terminée."
+ ],
+ "还不对。请再检查每一项。": [
+  "Not yet right. Please check every item.",
+  "Pas encore correct. Veuillez vérifier chaque élément."
+ ],
+ "数值不对。请再检查每个开关。": [
+  "The value is wrong. Please check every switch.",
+  "La valeur est fausse. Veuillez vérifier chaque interrupteur."
+ ],
+ "目标": [
+  "Target",
+  "Cible"
+ ],
+ "你的图": [
+  "Your picture",
+  "Votre image"
+ ],
+ "图案一致。": [
+  "The pictures match.",
+  "Les images correspondent."
+ ],
+ "图案还不一样。请对照目标。": [
+  "The pictures differ. Please compare with the target.",
+  "Les images diffèrent. Veuillez comparer avec la cible."
+ ],
+ "有 {0} 行不对。每一行是一个二进制数。": [
+  "{0} row(s) are wrong. Each row is a binary number.",
+  "{0} ligne(s) fausse(s). Chaque ligne est un nombre binaire."
+ ],
+ "图案正确。": [
+  "The picture is correct.",
+  "L'image est correcte."
+ ],
+ "有些行的数字不对。每个数字写成 8 位二进制。": [
+  "Some rows are wrong. Write each number as 8 binary digits.",
+  "Certaines lignes sont fausses. Écrivez chaque nombre sur 8 chiffres binaires."
+ ],
+ "请先画一幅图（至少 12 个黑点）。": [
+  "Please draw a picture first (at least 12 black dots).",
+  "Veuillez d'abord dessiner une image (au moins 12 points noirs)."
+ ],
+ "字节数不对。1 字节 = 8 位。": [
+  "The number of bytes is wrong. 1 byte = 8 bits.",
+  "Le nombre d'octets est faux. 1 octet = 8 bits."
+ ],
+ "颜色还不够接近。请调整滑块。": [
+  "The colour is not close enough. Please adjust the sliders.",
+  "La couleur n'est pas assez proche. Veuillez régler les curseurs."
+ ],
+ "听一听": [
+  "Listen",
+  "Écouter"
+ ],
+ "这台设备不能播放声音。": [
+  "This device cannot play sound.",
+  "Cet appareil ne peut pas émettre de son."
+ ],
+ "正确。这是仍能还原音高的最小采样率。": [
+  "Correct. This is the lowest sample rate that keeps the pitch.",
+  "Correct. C'est la fréquence d'échantillonnage la plus basse qui garde la hauteur."
+ ],
+ "音高对了，但还可以更低。": [
+  "The pitch is right, but the rate can be lower.",
+  "La hauteur est correcte, mais la fréquence peut être plus basse."
+ ],
+ "采样太少，音高变了。": [
+  "Too few samples: the pitch changed.",
+  "Trop peu d'échantillons : la hauteur a changé."
+ ],
+ "编码树完成。": [
+  "The code tree is complete.",
+  "L'arbre de codage est terminé."
+ ],
+ "请选择权重最小的两个节点。": [
+  "Please choose the two nodes of smallest weight.",
+  "Veuillez choisir les deux nœuds de plus petit poids."
+ ],
+ "解密成功。": [
+  "Decrypted.",
+  "Déchiffrement réussi."
+ ],
+ "还没有完全解出。请根据字母出现的次数再猜。": [
+  "Not fully decoded yet. Use the letter counts to guess again.",
+  "Pas encore entièrement déchiffré. Utilisez les occurrences des lettres pour deviner."
+ ],
+ "这一位没有错。请再找。": [
+  "This bit is not wrong. Please look again.",
+  "Ce bit n'est pas erroné. Veuillez chercher encore."
+ ],
+ "请输入以 = 开头的公式。": [
+  "Please enter a formula starting with =.",
+  "Veuillez saisir une formule commençant par =."
+ ],
+ "公式出错：{0}": [
+  "The formula has an error: {0}",
+  "La formule comporte une erreur : {0}"
+ ],
+ "结果不对。请检查公式。": [
+  "The result is wrong. Please check the formula.",
+  "Le résultat est faux. Veuillez vérifier la formule."
+ ],
+ "列": [
+  "Column",
+  "Colonne"
+ ],
+ "值": [
+  "Value",
+  "Valeur"
+ ],
+ "还不对。请再试一次。": [
+  "Not yet right. Please try again.",
+  "Pas encore correct. Veuillez réessayer."
+ ],
+ "重新走": [
+  "Start over",
+  "Recommencer"
+ ],
+ "这条线路堵住了。请换一条。": [
+  "This link is jammed. Please choose another.",
+  "Cette liaison est saturée. Veuillez en choisir une autre."
+ ],
+ "这两个节点之间没有连线。": [
+  "There is no link between these two nodes.",
+  "Il n'y a pas de liaison entre ces deux nœuds."
+ ],
+ "TTL 用完了，数据包被丢弃。请重新走。": [
+  "The TTL ran out and the packet was dropped. Please start over.",
+  "Le TTL est épuisé et le paquet a été abandonné. Veuillez recommencer."
+ ],
+ "所有数据包都到达了。它们的顺序被打乱了。": [
+  "All packets arrived. Their order was shuffled.",
+  "Tous les paquets sont arrivés. Leur ordre a été mélangé."
+ ],
+ "数据包已到达。": [
+  "The packet arrived.",
+  "Le paquet est arrivé."
+ ],
+ "顺序不对。请按编号 1、2、3 …… 依次点击。": [
+  "Wrong order. Please tap 1, 2, 3 ... in turn.",
+  "Ordre incorrect. Veuillez toucher 1, 2, 3 ... dans l'ordre."
+ ],
+ "信息已还原。": [
+  "The message is rebuilt.",
+  "Le message est reconstitué."
+ ],
+ "不到 1 秒": [
+  "Less than 1 second",
+  "Moins d'une seconde"
+ ],
+ "约 {0} {1}": [
+  "About {0} {1}",
+  "Environ {0} {1}"
+ ],
+ "秒": [
+  "seconds",
+  "secondes"
+ ],
+ "分钟": [
+  "minutes",
+  "minutes"
+ ],
+ "小时": [
+  "hours",
+  "heures"
+ ],
+ "天": [
+  "days",
+  "jours"
+ ],
+ "年": [
+  "years",
+  "ans"
+ ],
+ "千年": [
+  "thousand years",
+  "milliers d'années"
+ ],
+ "百万年以上": [
+  "million years or more",
+  "millions d'années ou plus"
+ ],
+ "请先输入密码。": [
+  "Please enter a password first.",
+  "Veuillez d'abord saisir un mot de passe."
+ ],
+ "密码里不能包含个人信息或简单的数字串。": [
+  "The password must not contain personal data or simple digit strings.",
+  "Le mot de passe ne doit pas contenir de données personnelles ni de suites de chiffres simples."
+ ],
+ "密码还不够强。请加长，并混合大小写字母、数字和符号。": [
+  "The password is not strong enough. Make it longer and mix upper and lower case, digits and symbols.",
+  "Le mot de passe n'est pas assez fort. Allongez-le et mélangez majuscules, minuscules, chiffres et symboles."
+ ],
+ "训练准确率": [
+  "Training accuracy",
+  "Précision d'entraînement"
+ ],
+ "测试准确率": [
+  "Test accuracy",
+  "Précision de test"
+ ],
+ "机器的判断和目标一致。": [
+  "The machine's decision matches the target.",
+  "La décision de la machine correspond à la cible."
+ ],
+ "机器判断它是 {0}。请换一个位置。": [
+  "The machine decides it is {0}. Please try another place.",
+  "La machine décide que c'est {0}. Veuillez essayer un autre endroit."
+ ],
+ "训练准确率还没有达到 100%。": [
+  "The training accuracy has not reached 100 % yet.",
+  "La précision d'entraînement n'atteint pas encore 100 %."
+ ],
+ "还有测试准确率更高的 k。": [
+  "Another k has a higher test accuracy.",
+  "Un autre k a une meilleure précision de test."
+ ],
+ "这个问题没有帮助：所有动物的答案都一样。": [
+  "This question does not help: every animal gives the same answer.",
+  "Cette question n'aide pas : tous les animaux donnent la même réponse."
+ ],
+ "信息增益": [
+  "Information gain",
+  "Gain d'information"
+ ],
+ "每个分支都已分清。": [
+  "Every branch is now clear.",
+  "Chaque branche est maintenant claire."
+ ],
+ "只看 x": [
+  "x only",
+  "x seulement"
+ ],
+ "x 并且 y": [
+  "x and y",
+  "x et y"
+ ],
+ "x 或者 y": [
+  "x or y",
+  "x ou y"
+ ],
+ "让机器学习": [
+  "Let the machine learn",
+  "Laisser la machine apprendre"
+ ],
+ "规则的准确率": [
+  "Rule accuracy",
+  "Précision de la règle"
+ ],
+ "机器学习的准确率": [
+  "Learned accuracy",
+  "Précision apprise"
+ ],
+ "规则": [
+  "Rule",
+  "Règle"
+ ],
+ "机器学习": [
+  "Machine learning",
+  "Apprentissage automatique"
+ ],
+ "一样": [
+  "The same",
+  "Pareil"
+ ],
+ "请对照两个准确率再判断。": [
+  "Please compare the two accuracies and decide again.",
+  "Veuillez comparer les deux précisions et décider à nouveau."
+ ],
+ "规则已经足够准确。": [
+  "The rule is accurate enough.",
+  "La règle est assez précise."
+ ],
+ "准确率还没有达到 90%。请调整分界线。": [
+  "The accuracy has not reached 90 % yet. Please adjust the dividing line.",
+  "La précision n'atteint pas encore 90 %. Veuillez ajuster la ligne de séparation."
+ ],
+ "结果不对。请检查每个文档是否包含全部词语。": [
+  "The result is wrong. Check whether each page contains all the words.",
+  "Le résultat est faux. Vérifiez si chaque page contient tous les mots."
+ ],
+ "组别": [
+  "Group",
+  "Groupe"
+ ],
+ "地区": [
+  "District",
+  "Quartier"
+ ],
+ "训练": [
+  "Train",
+  "Entraîner"
+ ],
+ "准确率": [
+  "Accuracy",
+  "Précision"
+ ],
+ "两组之间的差距": [
+  "Gap between the groups",
+  "Écart entre les groupes"
+ ],
+ "正确。这个模型对两组一视同仁，而且仍然准确。": [
+  "Correct. The model treats both groups alike and is still accurate.",
+  "Correct. Le modèle traite les deux groupes de la même façon et reste précis."
+ ],
+ "两组之间的差距仍然很大。": [
+  "The gap between the groups is still large.",
+  "L'écart entre les groupes reste important."
+ ],
+ "准确率太低了。分数是必需的信息。": [
+  "The accuracy is too low. The score is necessary information.",
+  "La précision est trop faible. Le score est une information nécessaire."
+ ],
+ "这是一个很小的演示模型：它只认识 8 × 8 的数字，也会出错。": [
+  "This is a very small demonstration model: it only knows 8 × 8 digits and it makes mistakes.",
+  "Ceci est un très petit modèle de démonstration : il ne connaît que les chiffres 8 × 8 et il se trompe."
+ ],
+ "识别": [
+  "Recognise",
+  "Reconnaître"
+ ],
+ "请先画一个数字。": [
+  "Please draw a digit first.",
+  "Veuillez d'abord dessiner un chiffre."
+ ],
+ "机器认出来了。": [
+  "The machine recognised it.",
+  "La machine l'a reconnu."
+ ],
+ "机器认出来了，但把握不大。请画得更清楚。": [
+  "The machine recognised it but is not sure. Please draw it more clearly.",
+  "La machine l'a reconnu mais hésite. Veuillez dessiner plus clairement."
+ ],
+ "机器认为这是 {0}。请再画一次。": [
+  "The machine thinks this is {0}. Please draw again.",
+  "La machine pense que c'est {0}. Veuillez dessiner à nouveau."
+ ],
+ "机器没有把握。": [
+  "The machine is unsure.",
+  "La machine hésite."
+ ],
+ "机器很有把握。请画一个更含糊的图形。": [
+  "The machine is very sure. Please draw something vaguer.",
+  "La machine est très sûre. Veuillez dessiner quelque chose de plus vague."
+ ],
+ "删除这个作品？": [
+  "Delete this project?",
+  "Supprimer ce projet ?"
+ ],
+ "新建作品": [
+  "New project",
+  "Nouveau projet"
+ ],
+ "我的作品（{0} / {1}）": [
+  "My projects ({0} / {1})",
+  "Mes projets ({0} / {1})"
+ ],
+ "编辑": [
+  "Edit",
+  "Modifier"
+ ],
+ "名称": [
+  "Name",
+  "Nom"
+ ],
+ "最多保存 {0} 个作品。请先删除一个。": [
+  "At most {0} projects can be saved. Please delete one first.",
+  "Au plus {0} projets peuvent être enregistrés. Veuillez d'abord en supprimer un."
+ ],
+ "标题": [
+  "Title",
+  "Titre"
+ ],
+ "数字的范围": [
+  "Range of the number",
+  "Plage du nombre"
+ ],
+ "可以猜几次": [
+  "Number of guesses",
+  "Nombre d'essais"
+ ],
+ "提示“大了 / 小了”": [
+  "Hints \"too high / too low\"",
+  "Indices « trop grand / trop petit »"
+ ],
+ "开": [
+  "On",
+  "Activé"
+ ],
+ "关": [
+  "Off",
+  "Désactivé"
+ ],
+ "正确答案": [
+  "Correct answer",
+  "Bonne réponse"
+ ],
+ "删除这题": [
+  "Delete this question",
+  "Supprimer cette question"
+ ],
+ "添加一题": [
+  "Add a question",
+  "Ajouter une question"
+ ],
+ "添加一帧": [
+  "Add a frame",
+  "Ajouter une image"
+ ],
+ "删除这一帧": [
+  "Delete this frame",
+  "Supprimer cette image"
+ ],
+ "每秒几帧": [
+  "Frames per second",
+  "Images par seconde"
+ ],
+ "光线低于几时开灯": [
+  "Lamp on when light is below",
+  "Lampe allumée si la lumière est inférieure à"
+ ],
+ "温度低于几度时加热": [
+  "Heater on when the temperature is below",
+  "Chauffage allumé si la température est inférieure à"
+ ],
+ "温度高于几度时开风扇": [
+  "Fan on when the temperature is above",
+  "Ventilateur allumé si la température est supérieure à"
+ ],
+ "添加选项": [
+  "Add a choice",
+  "Ajouter un choix"
+ ],
+ "删除这一幕": [
+  "Delete this scene",
+  "Supprimer cette scène"
+ ],
+ "添加一幕": [
+  "Add a scene",
+  "Ajouter une scène"
+ ],
+ "数值": [
+  "Value",
+  "Valeur"
+ ],
+ "添加一行": [
+  "Add a row",
+  "Ajouter une ligne"
+ ],
+ "数字": [
+  "Number",
+  "Nombre"
+ ],
+ "你猜对了。": [
+  "You guessed it.",
+  "Vous avez deviné."
+ ],
+ "答案是 {0}。": [
+  "The answer is {0}.",
+  "La réponse est {0}."
+ ],
+ "猜": [
+  "Guess",
+  "Deviner"
+ ],
+ "暂无题目。请先在“编辑”里添加。": [
+  "No questions yet. Please add some in \"Edit\".",
+  "Aucune question pour l'instant. Veuillez en ajouter dans « Modifier »."
+ ],
+ "播放一天": [
+  "Play a day",
+  "Jouer une journée"
+ ],
+ "暂无数据。": [
+  "No data yet.",
+  "Aucune donnée pour l'instant."
+ ],
+ "编程学习证书": [
+  "Coding Certificate",
+  "Certificat de programmation"
+ ],
+ "兹证明": [
+  "This certifies that",
+  "Il est certifié que"
+ ],
+ "完成了编程课程的全部关卡，并获得全部徽章。": [
+  "has completed every level of the coding course and earned every medal.",
+  "a terminé tous les niveaux du cours de programmation et obtenu toutes les médailles."
+ ],
+ "完成所有世界，获得全部徽章后，可以领取证书。": [
+  "Complete all worlds and earn every medal to receive the certificate.",
+  "Terminez tous les mondes et obtenez toutes les médailles pour recevoir le certificat."
+ ],
+ "关闭预览": [
+  "Close preview",
+  "Fermer l'aperçu"
+ ]
+}
