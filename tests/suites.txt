@@ -39,3 +39,12 @@
 40-games-shell
 51-secret-subjects
 52-math-scratchpad
+53-g2048
+54-memory
+55-minesweeper
+56-sokoban
+57-watersort
+58-game24
+59-hanzipuzzle
+60-spotdiff
+61-beat-maker
