@@ -189,7 +189,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     bad = new Set(); cur = -1;
     for (let i = 0; i < N * N; i++) {
       const el = cellEls[i]; refreshCell(i);
-      if (pic[i] === 1) { const [bg, bd] = palette[Math.floor(rng() * palette.length)]; el.style.setProperty("--bg", bg); el.style.setProperty("--bd", bd); el.style.animationDelay = `${Math.floor(rng() * 500)}ms`; }
+      if (pic[i] === 1) { const [bg, bd] = palette[Math.floor(rng() * palette.length)]; el.style.setProperty("--nng-bg", bg); el.style.setProperty("--nng-bd", bd); el.style.animationDelay = `${Math.floor(rng() * 500)}ms`; }
     }
     field.classList.add("nng-won"); refreshHud(); ctx.sfx("win");
     title.textContent = "你已完成。"; stars$.innerHTML = starsSvg(k); (stars$ as HTMLElement).dataset.stars = String(k);

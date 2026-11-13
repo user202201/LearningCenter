@@ -64,3 +64,4 @@
 @media (max-height: 640px) and (max-aspect-ratio: 5/4) { .icn-strip { --cs: clamp(46px, 15vw, 70px); } .icn-chip { min-height: 46px; font-size: 19px; } .icn-input, .icn-form .primary { min-height: 46px; } }
 .icn-chips[hidden], .icn-form[hidden], .icn-ovl p[hidden] { display: none; }
 .icn-body.idle .icn-stage, .icn-body.idle .icn-play { visibility: hidden; }
+.icn-ovl { border: 4px solid #0ca678; box-shadow: 0 5px 0 #0ca678; }

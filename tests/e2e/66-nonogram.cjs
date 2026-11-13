@@ -225,7 +225,7 @@ const CJK = /[㐀-鿿]/;
   s = await st();
   ok(s.phase === 'won', 'filling exactly the picture wins (crosses on blank cells do not matter)');
   await p.waitForFunction(() => window.__nng.finished() === 1, null, { timeout: 4000 });
-  const colours = await p.evaluate(() => { const set = new Set(); let n = 0; document.querySelectorAll('.nng-cell.nng-f').forEach((e) => { set.add(e.style.getPropertyValue('--bg')); n++; }); return { kinds: set.size, n, empty: set.has('') }; });
+  const colours = await p.evaluate(() => { const set = new Set(); let n = 0; document.querySelectorAll('.nng-cell.nng-f').forEach((e) => { set.add(e.style.getPropertyValue('--nng-bg')); n++; }); return { kinds: set.size, n, empty: set.has('') }; });
   ok(colours.n === s.pic.reduce((a, b) => a + b, 0) && colours.kinds >= 2 && !colours.empty, `the picture gets cartoon colours (${colours.kinds} colours on ${colours.n} cells)`);
   ok((await p.textContent('#nng-ovl h2')) === '你已完成。' && await p.locator('#nng-ovl').isVisible() && (await p.getAttribute('.nng-stars-wrap', 'data-stars')) === '3', 'win overlay: "你已完成。" with 3 stars (no hint, no check)');
   ok((await p.textContent('#nng-ovl p')).includes('1:15'), 'the overlay names the time: ' + (await p.textContent('#nng-ovl p')));

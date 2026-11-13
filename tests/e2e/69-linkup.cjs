@@ -356,7 +356,7 @@ const CJK = /[一-鿿]/;
   { const q = await p.evaluate(() => { const r = document.querySelector('.lk-tile[data-r="3"][data-c="3"]').getBoundingClientRect(); return { x: r.left + 1, y: r.top + 1 }; }); await p.mouse.click(q.x, q.y); const s2 = await st(); ok(s2.sel && s2.sel.r === 3 && s2.sel.c === 3, 'a tap on the very corner of a cell selects it'); }
   // a touch screen: tap with a finger
   { const tt = await start(new Map(), { local: true, viewport: { width: 390, height: 844 }, touch: true });
-    const pp = tt.page; await pp.evaluate(() => (location.hash = '#/games/linkup')); await pp.waitForSelector('#lk-grid .lk-tile'); await pp.tap('#lk-start');
+    const pp = tt.page; await pp.evaluate(() => (location.hash = '#/games/linkup')); await pp.waitForSelector('#lk-grid .lk-tile'); await pp.tap('#lk-start'); await pp.waitForSelector('.lk-tile[data-r="2"][data-c="2"]');
     const q = await pp.evaluate(() => { const r = document.querySelector('.lk-tile[data-r="2"][data-c="2"]').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
     await pp.touchscreen.tap(q.x, q.y);
     const s3 = await pp.evaluate(() => window.__linkup.state());
@@ -389,7 +389,7 @@ const CJK = /[一-鿿]/;
     await q.evaluate(() => (location.hash = '#/games/linkup')); await q.waitForSelector('#lk-grid .lk-tile');
     const stq = () => q.evaluate(() => window.__linkup.state());
     let tx = await noCjk('the ready screen');
-    ok(lang === 'en' ? /Link-up|Connect/i.test(tx) && /Start/.test(tx) && /Score/.test(tx) && /Hint/.test(tx) : /Démarrer/.test(tx) && /Score/.test(tx) && /Indice/.test(tx), `${lang}: the texts are translated (${tx.replace(/\s+/g, ' ').slice(0, 120)})`);
+    ok(lang === 'en' ? /Link-up|Connect/i.test(tx) && /Start/.test(tx) && /Score/.test(tx) && /Hint/.test(tx) : /Commencer|Démarrer/.test(tx) && /Score/.test(tx) && /Indice/.test(tx), `${lang}: the texts are translated (${tx.replace(/\s+/g, ' ').slice(0, 120)})`);
     await q.screenshot({ path: OUT + `linkup-ready-${lang}.png` });
     await q.click('#lk-start'); await noCjk('the board');
     await q.click('#lk-hint'); await noCjk('a hint');
