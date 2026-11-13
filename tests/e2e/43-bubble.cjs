@@ -190,7 +190,7 @@ const rowsToGrid = (spec) => `(() => { const L = window.__L; const g = L.emptyGr
       if (before.over) break;
       const present = await p.evaluate(() => window.__L.colorsPresent(window.__bubble.s.grid));
       await p.evaluate((i) => { window.__bubble.aim(40 + ((i * 37) % 100)); window.__bubble.shoot(); }, i);
-      await p.waitForFunction((n) => window.__bubble && window.__bubble.s.shots === n && !window.__bubble.s.flying, before.shots + 1, { timeout: 8000 }).catch(async (e) => { console.log('DBG', i, JSON.stringify(before), await p.evaluate(() => location.hash + typeof window.__bubble)); throw e; });
+      await p.waitForFunction((n) => window.__bubble && window.__bubble.s.shots === n && !window.__bubble.s.flying, before.shots + 1, { timeout: 8000 }).catch(async (e) => { console.log('DBG', i, JSON.stringify(before), await p.evaluate(() => { const s = window.__bubble.s; return JSON.stringify({ ...s, grid: 0 }); })); throw e; });
       const after = await S(p);
       const presentAfter = await p.evaluate(() => window.__L.colorsPresent(window.__bubble.s.grid));
       log.push({ fired: before.cur, shownNext: before.nxt, curAfter: after.cur, nxtAfter: after.nxt, present: present.includes(before.nxt), keep: presentAfter.includes(before.nxt) || presentAfter.includes(after.cur), over: after.over });

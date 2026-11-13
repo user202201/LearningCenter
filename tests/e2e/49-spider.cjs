@@ -9,7 +9,7 @@ fs.mkdirSync(OUT, { recursive: true });
 (async () => {
   const t = await start(new Map(), { local: true, motion: true, viewport: { width: 820, height: 1180 } });
   const p = t.page;
-  await p.evaluate(() => (location.hash = '#/games/spider')); await p.waitForSelector('#spider-board'); await p.waitForFunction(() => window.__spider && window.__spider.state);
+  await p.evaluate(() => (location.hash = '#/games/spider')); await p.waitForSelector('#spider-board'); await p.waitForFunction(() => window.__spider && window.__spider.state); await p.waitForTimeout(600);
 
   // ---------- the rules ----------
   const L = await p.evaluate(async () => {
@@ -382,7 +382,7 @@ fs.mkdirSync(OUT, { recursive: true });
     const a = await cardInfo(mv.from, mv.idx), b = await colPoint(mv.to);
     await p.mouse.click(a.x, a.y); await p.mouse.click(b.x, b.y); await p.waitForTimeout(400);
     const saved = await state();
-    await p.reload(); await p.waitForSelector('#spider-board'); await p.waitForFunction(() => window.__spider && window.__spider.state); await p.waitForTimeout(500);
+    await p.reload(); await p.waitForSelector('#spider-board'); await p.waitForFunction(() => window.__spider && window.__spider.state); await p.waitForTimeout(900);
     ok((await state()) === saved, 'reopening resumes the game in progress (same cards, score and moves)');
     const hist = await p.evaluate(() => window.__spider.state.hist.length);
     ok(hist === 1, 'the undo history is saved too');
@@ -474,7 +474,7 @@ fs.mkdirSync(OUT, { recursive: true });
   {
     const r = await start(new Map(), { local: true, viewport: { width: 820, height: 1180 } });
     const q = r.page;
-    await q.evaluate(() => (location.hash = '#/games/spider')); await q.waitForSelector('#spider-board'); await q.waitForFunction(() => window.__spider && window.__spider.state);
+    await q.evaluate(() => (location.hash = '#/games/spider')); await q.waitForSelector('#spider-board'); await q.waitForFunction(() => window.__spider && window.__spider.state); await q.waitForTimeout(600);
     await q.evaluate(async () => {
       const M = await import('/src/games/spider-logic.ts');
       const s = M.newGame(1, () => 0.5);

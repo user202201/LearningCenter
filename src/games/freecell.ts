@@ -107,14 +107,14 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const gap = clamp(bw * 0.012, 3, 12), pad = clamp(bw * 0.008, 2, 8);
     const cwW = (bw - 2 * pad - 7 * gap) / 8;
     const cwH = bh / (3.68 * 1.42);
-    const cw = Math.floor(Math.min(cwW, cwH, 100));
+    const cw = Math.floor(Math.min(cwW, cwH, 120));
     const ch = Math.round(cw * 1.42);
     const vgap = Math.max(6, Math.round(ch * 0.12));
     const x0 = (bw - (8 * cw + 7 * gap)) / 2;
     const rowY = ch + vgap;
     let maxLen = 1;
     for (const c of state.cols) maxLen = Math.max(maxLen, c.length);
-    const dy = maxLen <= 1 ? ch * 0.3 : clamp((bh - rowY - ch) / (maxLen - 1), 6, ch * 0.3);
+    const dy = maxLen <= 1 ? ch * 0.3 : clamp((bh - rowY - ch) / (maxLen - 1), 6, ch * 0.4);
     M = { cw, ch, gap, x0, rowY, dy, bw, bh };
     board.style.setProperty("--cw", cw + "px");
     board.style.setProperty("--ch", ch + "px");

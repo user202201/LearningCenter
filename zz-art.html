@@ -1,5 +1,0 @@
-<body style="background:#fff7e0;display:grid;grid-template-columns:repeat(6,120px)"></body>
-<script type="module">
-import { pieceSVG } from '/src/games/chess-art.ts';
-for (const m of ['normal','scared','dizzy','happy']) for (const c of ['w','b']) for (const t of 'pnbrqk') { const d=document.createElement('div'); d.style.cssText='width:120px;height:120px'; d.innerHTML=pieceSVG(t,c,m); document.body.append(d); }
-</script>
