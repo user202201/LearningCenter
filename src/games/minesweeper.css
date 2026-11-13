@@ -1,0 +1,20 @@
+.ms-wrap { flex: 1; width: 100%; min-height: 0; display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "hud" "board"; justify-items: center; }
+.ms-hud { grid-area: hud; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 8px; }
+.ms-stat { background: #fff; border: 3px solid #96f2d7; border-radius: 16px; padding: 2px 12px; font-weight: 900; color: #087f5b; font-size: 17px; box-shadow: 0 3px 0 #96f2d7; white-space: nowrap; }
+.ms-stat.best { color: #e8590c; border-color: #ffd8a8; box-shadow: 0 3px 0 #ffd8a8; }
+.ms-hud .mopt { background: #fff; border: 3px solid #96f2d7; box-shadow: 0 3px 0 #96f2d7; color: #087f5b; font-weight: 800; }
+.ms-hud .mopt.on { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 3px 0 #087f5b; }
+.ms-board { grid-area: board; align-self: stretch; height: 100%; min-width: 0; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.ms-field { position: relative; touch-action: none; border-radius: 18px; overflow: hidden; box-shadow: 0 5px 0 #0ca678; border: 4px solid #0ca678; box-sizing: content-box; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.ms-field canvas { display: block; touch-action: none; }
+.ms-ovl { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 10px; background: rgba(255, 246, 229, .88); color: #3a2e39; }
+.ms-ovl[hidden] { display: none; }
+.ms-ovl h2 { margin: 0; font-size: 26px; color: #087f5b; }
+.ms-ovl p { margin: 0; font-weight: 700; }
+.ms-ovl button { min-height: 48px; padding: 6px 26px; font-size: 20px; border-radius: 999px; }
+@media (min-aspect-ratio: 5/4) and (max-height: 700px) {
+  .ms-wrap { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); grid-template-areas: "hud board"; align-items: center; }
+  .ms-hud { flex-direction: row; max-width: 190px; gap: 4px; }
+  .ms-stat { font-size: 14px; padding: 0 8px; }
+  .ms-hud .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
+}

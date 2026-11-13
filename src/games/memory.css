@@ -1,0 +1,41 @@
+.mem-wrap { flex: 1; width: 100%; min-height: 0; display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "hud" "board"; justify-items: center; }
+.mem-hud { grid-area: hud; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 8px; }
+.mem-stat { background: #fff; border: 3px solid #96f2d7; border-radius: 16px; padding: 2px 12px; font-weight: 900; color: #087f5b; font-size: 17px; box-shadow: 0 3px 0 #96f2d7; white-space: nowrap; }
+.mem-stat.best { color: #e8590c; border-color: #ffd8a8; box-shadow: 0 3px 0 #ffd8a8; }
+.mem-hud .mopt { background: #fff; border: 3px solid #96f2d7; box-shadow: 0 3px 0 #96f2d7; color: #087f5b; font-weight: 800; }
+.mem-hud .mopt.on { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 3px 0 #087f5b; }
+.mem-board { grid-area: board; align-self: stretch; height: 100%; min-width: 0; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.mem-field { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 5px 0 #0ca678; border: 4px solid #0ca678; box-sizing: content-box; background: #e6fcf5; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.mem-grid { position: absolute; inset: 0; display: grid; padding: var(--gap, 6px); gap: var(--gap, 6px); box-sizing: border-box; }
+.mem-card { position: relative; padding: 0; border: 0; background: none; font: inherit; perspective: 600px; min-width: 0; min-height: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; }
+.mem-in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .35s ease; }
+.mem-card.up .mem-in, .mem-card.done .mem-in { transform: rotateY(180deg); }
+.mem-face { position: absolute; inset: 0; border-radius: 16%; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.mem-back { background: #12b886; border: 3px solid #0ca678; box-shadow: 0 4px 0 #087f5b; }
+.mem-back::after { content: ""; width: 46%; height: 46%; border-radius: 50%; border: 3px solid #96f2d7; background: radial-gradient(circle at 35% 35%, #fff 0 12%, transparent 13%), #38d9a9; }
+.mem-card:active .mem-back { transform: translateY(3px); box-shadow: 0 1px 0 #087f5b; }
+.mem-front { transform: rotateY(180deg); background: #fff; border: 3px solid #96f2d7; box-shadow: 0 4px 0 #96f2d7; padding: 6%; }
+.mem-front svg { width: 100%; height: 100%; display: block; pointer-events: none; }
+.mem-card.done .mem-front { background: #d3f9d8; border-color: #51cf66; box-shadow: 0 4px 0 #37b24d; }
+.mem-card.done .mem-in { animation: mem-pop .4s ease-out; }
+.mem-card.cur .mem-face { outline: 4px solid #ffd43b; outline-offset: 1px; }
+.mem-card.shake .mem-front { animation: mem-shake .3s; }
+@keyframes mem-pop { 50% { transform: rotateY(180deg) scale(1.12); } }
+@keyframes mem-shake { 25% { transform: rotateY(180deg) translateX(-4px); } 75% { transform: rotateY(180deg) translateX(4px); } }
+@media (prefers-reduced-motion: reduce) { .mem-in { transition: none; } .mem-card.done .mem-in, .mem-card.shake .mem-front { animation: none; } }
+.mem-ovl { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 10px; background: rgba(255, 246, 229, .88); color: #3a2e39; }
+.mem-ovl[hidden] { display: none; }
+.mem-ovl h2 { margin: 0; font-size: 26px; color: #087f5b; }
+.mem-ovl p { margin: 0; font-weight: 700; }
+.mem-ovl button { min-height: 48px; padding: 6px 26px; font-size: 20px; border-radius: 999px; }
+.mem-stars { font-size: 40px; letter-spacing: 6px; color: #fcc419; text-shadow: 0 3px 0 #e8890c; line-height: 1.1; }
+.mem-stars .off { color: #dee2e6; text-shadow: none; }
+.mem-stars[hidden] { display: none; }
+@media (min-aspect-ratio: 5/4) and (max-height: 700px) {
+  .mem-wrap { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); grid-template-areas: "hud board"; align-items: center; }
+  .mem-hud { max-width: 190px; gap: 4px; }
+  .mem-stat { font-size: 14px; padding: 0 8px; }
+  .mem-hud .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
+  .mem-ovl h2 { font-size: 20px; } .mem-ovl { gap: 4px; padding: 6px; } .mem-ovl button { min-height: 40px; font-size: 17px; }
+  .mem-stars { font-size: 28px; }
+}

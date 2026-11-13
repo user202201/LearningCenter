@@ -1,0 +1,19 @@
+{
+  "扫雷": ["Minesweeper", "Démineur"],
+  "长按插旗，别踩到雷": ["Long-press to plant a flag, don't step on a mine", "Appui long pour planter un drapeau, évitez les mines"],
+  "雷：{0}": ["Mines: {0}", "Mines : {0}"],
+  "时间：{0}": ["Time: {0}", "Temps : {0}"],
+  "最快：{0}": ["Fastest: {0}", "Meilleur : {0}"],
+  "插旗：开": ["Flag mode: on", "Mode drapeau : oui"],
+  "插旗：关": ["Flag mode: off", "Mode drapeau : non"],
+  "大小：简单": ["Size: easy", "Taille : facile"],
+  "大小：普通": ["Size: medium", "Taille : moyen"],
+  "大小：困难": ["Size: hard", "Taille : difficile"],
+  "再玩一次": ["Play again", "Rejouer"],
+  "哎呀，踩到雷了！": ["Oops, you stepped on a mine!", "Oups, vous avez marché sur une mine !"],
+  "再来一次吧。": ["Let's try again.", "Essayons encore."],
+  "踩到雷了": ["Boom!", "Boum !"],
+  "太棒了！": ["Wonderful!", "Bravo !"],
+  "新纪录：{0}": ["New record: {0}", "Nouveau record : {0}"],
+  "用时：{0}": ["Time: {0}", "Durée : {0}"]
+}
