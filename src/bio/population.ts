@@ -36,7 +36,7 @@ export const def: SimDef = {
     { label: "种群数量", value: fmt(N, 0), unit: "只" }, { label: "环境容纳量 K", value: String(s.K), unit: "只" }, { label: "当前增长速率", value: fmt(Mo.growthRate(N, s.r, s.K), 1), unit: "只/单位时间" }, { label: "增长最快时的数量 K/2", value: String(s.K / 2), unit: "只" }]; }
     const tr = lv(s), i = idx(s), eq = Mo.equilibrium(P(s)); return [
     { label: "猎物数量", value: fmt(tr.x[i], 0), unit: "只" }, { label: "捕食者数量", value: fmt(tr.y[i], 1), unit: "只" },
-    { label: "平衡点（猎物，捕食者）", value: `${fmt(eq[0], 1)}，${fmt(eq[1], 1)}` }, { label: "小幅振荡的周期", value: fmt(Mo.period(P(s)), 1) }]; },
+    { label: "平衡点（猎物，捕食者）", value: `${fmt(eq[0], 1)} / ${fmt(eq[1], 1)}` }, { label: "小幅振荡的周期", value: fmt(Mo.period(P(s)), 1) }]; },
   draw(c, w, h, s) {
     if (s.mode === 1) {
       const PL = axes(c, 70, 40, 540, 290, TMAX, s.K * 1.15, "t", "N", 0, 4);

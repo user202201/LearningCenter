@@ -2,6 +2,8 @@ import { mountBio, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-genetics";
 import { mulberry32 } from "../phys/qtools";
+import { tr } from "../i18n";
+const tl = (t: string) => t.replace(/显性|隐性|女孩|男孩/g, (m) => tr(m));
 import { COL, lab, txt, circle, rect } from "./draw";
 export const meta = CATALOG.genetics;
 type S = Record<string, number>;
@@ -32,8 +34,8 @@ export const def: SimDef = {
     const cs = cells(s), ks = Mo.classes(s.mode), sm = sampleOf(s), p = Mo.probs(cs, s.mode);
     return [
       { label: "子代基因型的比", value: Mo.ratioText(cs, s.mode === 0 ? Mo.MONO : s.mode === 2 ? Mo.SEX : ["AA", "Ao", "BB", "Bo", "AB", "oo"]) },
-      { label: "子代表现型的比（理论）", value: Mo.phenoRatioText(cs, s.mode) },
-      { label: "样本中的实际数量", value: ks.map((k, i) => `${k} ${sm[i]}`).join("，") },
+      { label: "子代表现型的比（理论）", value: tl(Mo.phenoRatioText(cs, s.mode)) },
+      { label: "样本中的实际数量", value: ks.map((k, i) => `${tl(k)} ${sm[i]}`).join(" / ") },
       { label: "χ² 偏差值", value: fmt(Mo.chiSquare(sm, p), 2) }];
   },
   draw(c, w, h, s) {

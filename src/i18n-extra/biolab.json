@@ -1,0 +1,2854 @@
+{
+"右心房": [
+"Right atrium",
+"Oreillette droite"
+],
+"左心房": [
+"Left atrium",
+"Oreillette gauche"
+],
+"右心室": [
+"Right ventricle",
+"Ventricule droit"
+],
+"左心室": [
+"Left ventricle",
+"Ventricule gauche"
+],
+"房室瓣": [
+"Atrioventricular valve",
+"Valve auriculo-ventriculaire"
+],
+"打开": [
+"Open",
+"Ouverte"
+],
+"动脉瓣": [
+"Arterial valve",
+"Valve artérielle"
+],
+"肺动脉": [
+"Pulmonary artery",
+"Artère pulmonaire"
+],
+"主动脉": [
+"Aorta",
+"Aorte"
+],
+"供血者 {0} 型": [
+"Donor, type {0}",
+"Donneur, groupe {0}"
+],
+"受血者 {0} 型": [
+"Recipient, type {0}",
+"Receveur, groupe {0}"
+],
+"红细胞分散，可以输血": [
+"Red cells stay apart: transfusion is possible",
+"Les globules rouges restent séparés : transfusion possible"
+],
+"红细胞凝集成团，不能输血": [
+"Red cells clump together: no transfusion",
+"Les globules rouges s'agglutinent : transfusion impossible"
+],
+"心率": [
+"Heart rate",
+"Fréquence cardiaque"
+],
+"次/分钟": [
+"per minute",
+"par minute"
+],
+"心动周期的位置": [
+"Position in the cardiac cycle",
+"Position dans le cycle cardiaque"
+],
+"内容": [
+"Topic",
+"Thème"
+],
+"心脏与瓣膜": [
+"Heart and valves",
+"Cœur et valves"
+],
+"体循环与肺循环": [
+"Systemic and pulmonary circulation",
+"Circulation générale et pulmonaire"
+],
+"ABO 血型输血": [
+"ABO blood transfusion",
+"Transfusion ABO"
+],
+"供血者": [
+"Donor",
+"Donneur"
+],
+"{0} 型": [
+"Type {0}",
+"Groupe {0}"
+],
+"受血者": [
+"Recipient",
+"Receveur"
+],
+"供血者红细胞": [
+"Donor's red cells",
+"Globules rouges du donneur"
+],
+"受血者血浆": [
+"Recipient's plasma",
+"Plasma du receveur"
+],
+"结果": [
+"Result",
+"Résultat"
+],
+"不凝集，可以输血": [
+"No clumping: transfusion possible",
+"Pas d'agglutination : transfusion possible"
+],
+"凝集，不能输血": [
+"Clumping: no transfusion",
+"Agglutination : transfusion impossible"
+],
+"阶段": [
+"Stage",
+"Étape"
+],
+"一个心动周期": [
+"One cardiac cycle",
+"Un cycle cardiaque"
+],
+"心输出量": [
+"Cardiac output",
+"Débit cardiaque"
+],
+"L/分钟": [
+"L/min",
+"L/min"
+],
+"瓣膜": [
+"Valves",
+"Valves"
+],
+"肺循环": [
+"Pulmonary circulation",
+"Circulation pulmonaire"
+],
+"肺静脉（动脉血）": [
+"Pulmonary vein (arterial blood)",
+"Veine pulmonaire (sang artériel)"
+],
+"肺动脉（静脉血）": [
+"Pulmonary artery (venous blood)",
+"Artère pulmonaire (sang veineux)"
+],
+"体循环": [
+"Systemic circulation",
+"Circulation générale"
+],
+"主动脉（动脉血）": [
+"Aorta (arterial blood)",
+"Aorte (sang artériel)"
+],
+"腔静脉（静脉血）": [
+"Vena cava (venous blood)",
+"Veine cave (sang veineux)"
+],
+"找到心室收缩期：动脉瓣打开，房室瓣关闭": [
+"Find ventricular systole: the arterial valve is open, the atrioventricular valve is closed",
+"Trouvez la systole ventriculaire : valve artérielle ouverte, valve auriculo-ventriculaire fermée"
+],
+"提高心率，使心输出量达到 8 L/分钟以上": [
+"Raise the heart rate until the cardiac output exceeds 8 L/min",
+"Augmentez la fréquence cardiaque jusqu'à un débit supérieur à 8 L/min"
+],
+"选择一种输血搭配，使红细胞发生凝集": [
+"Choose a donor and recipient so that the red cells clump",
+"Choisissez un donneur et un receveur provoquant l'agglutination"
+],
+"选择 O 型供血者和 AB 型受血者：可以输血": [
+"Choose a type O donor and a type AB recipient: transfusion is possible",
+"Choisissez un donneur O et un receveur AB : la transfusion est possible"
+],
+"膈肌收缩": [
+"Diaphragm contraction",
+"Contraction du diaphragme"
+],
+"肋骨上升": [
+"Rib elevation",
+"Élévation des côtes"
+],
+"每次呼吸量": [
+"Tidal volume",
+"Volume courant"
+],
+"呼吸频率": [
+"Breathing rate",
+"Fréquence respiratoire"
+],
+"呼吸周期的位置": [
+"Position in the breathing cycle",
+"Position dans le cycle respiratoire"
+],
+"手动控制": [
+"Manual control",
+"Commande manuelle"
+],
+"连续呼吸": [
+"Continuous breathing",
+"Respiration continue"
+],
+"气管": [
+"Airway",
+"Trachée"
+],
+"通畅": [
+"Open",
+"Libre"
+],
+"堵住": [
+"Blocked",
+"Bouchée"
+],
+"胸廓容积": [
+"Thorax volume",
+"Volume du thorax"
+],
+"比放松时增加": [
+"Increase over relaxed",
+"Augmentation par rapport au repos"
+],
+"肺内气压": [
+"Pressure in the lungs",
+"Pression dans les poumons"
+],
+"胸廓扩大（吸气）": [
+"Thorax expanded (inhaling)",
+"Thorax dilaté (inspiration)"
+],
+"胸廓放松（呼气）": [
+"Thorax relaxed (exhaling)",
+"Thorax relâché (expiration)"
+],
+"肺的容积": [
+"Lung volume",
+"Volume des poumons"
+],
+"气流（正为吸入）": [
+"Air flow (positive = in)",
+"Débit d'air (positif = entrant)"
+],
+"每分钟通气量": [
+"Ventilation per minute",
+"Ventilation par minute"
+],
+"膈肌": [
+"Diaphragm",
+"Diaphragme"
+],
+"胸廓": [
+"Thorax",
+"Thorax"
+],
+"收缩膈肌并使肋骨上升，让胸廓容积达到 3000 mL 以上": [
+"Contract the diaphragm and raise the ribs until the thorax volume exceeds 3000 mL",
+"Contractez le diaphragme et soulevez les côtes jusqu'à un volume thoracique supérieur à 3000 mL"
+],
+"堵住气管并扩大胸廓：肺内气压降到 90 kPa 以下": [
+"Block the airway and expand the thorax: the pressure in the lungs falls below 90 kPa",
+"Bouchez la trachée et dilatez le thorax : la pression pulmonaire descend sous 90 kPa"
+],
+"连续呼吸：使每分钟通气量达到 15 L 以上（相当于剧烈运动）": [
+"Continuous breathing: reach a ventilation above 15 L/min (hard exercise)",
+"Respiration continue : atteignez une ventilation supérieure à 15 L/min (effort intense)"
+],
+"食物链与食物网": [
+"Food chains and food webs",
+"Chaînes et réseaux alimentaires"
+],
+"七上 · 生物与环境": [
+"Grade 7, term 1 · Living things and environment",
+"7e, 1er semestre · Êtres vivants et milieu"
+],
+"种群与生态平衡": [
+"Populations and ecological balance",
+"Populations et équilibre écologique"
+],
+"显微镜": [
+"The microscope",
+"Le microscope"
+],
+"七上 · 细胞": [
+"Grade 7, term 1 · Cells",
+"7e, 1er semestre · Cellules"
+],
+"植物细胞与动物细胞": [
+"Plant and animal cells",
+"Cellules végétale et animale"
+],
+"细胞分裂": [
+"Cell division",
+"Division cellulaire"
+],
+"生物体的结构层次": [
+"Levels of organisation",
+"Niveaux d'organisation"
+],
+"七上 · 生物体": [
+"Grade 7, term 1 · Organisms",
+"7e, 1er semestre · Organismes"
+],
+"种子萌发的条件": [
+"Conditions for seed germination",
+"Conditions de germination des graines"
+],
+"七上 · 绿色植物": [
+"Grade 7, term 1 · Green plants",
+"7e, 1er semestre · Plantes vertes"
+],
+"光合作用": [
+"Photosynthesis",
+"Photosynthèse"
+],
+"呼吸作用": [
+"Respiration",
+"Respiration cellulaire"
+],
+"蒸腾作用": [
+"Transpiration",
+"Transpiration"
+],
+"花与果实": [
+"Flowers and fruit",
+"Fleurs et fruits"
+],
+"消化与酶": [
+"Digestion and enzymes",
+"Digestion et enzymes"
+],
+"七下 · 人体的营养": [
+"Grade 7, term 2 · Human nutrition",
+"7e, 2e semestre · Nutrition humaine"
+],
+"呼吸运动": [
+"Breathing movements",
+"Mouvements respiratoires"
+],
+"七下 · 人体的呼吸": [
+"Grade 7, term 2 · Human breathing",
+"7e, 2e semestre · Respiration humaine"
+],
+"血液循环": [
+"Blood circulation",
+"Circulation du sang"
+],
+"七下 · 物质的运输": [
+"Grade 7, term 2 · Transport of substances",
+"7e, 2e semestre · Transport des substances"
+],
+"神经调节": [
+"Nervous regulation",
+"Régulation nerveuse"
+],
+"七下 · 生命活动的调节": [
+"Grade 7, term 2 · Regulation of life processes",
+"7e, 2e semestre · Régulation des fonctions vitales"
+],
+"激素与血糖": [
+"Hormones and blood sugar",
+"Hormones et glycémie"
+],
+"眼与视觉": [
+"The eye and vision",
+"L'œil et la vision"
+],
+"七下 · 感觉器官": [
+"Grade 7, term 2 · Sense organs",
+"7e, 2e semestre · Organes des sens"
+],
+"动物的运动": [
+"Animal movement",
+"Mouvement des animaux"
+],
+"八上 · 动物的运动和行为": [
+"Grade 8, term 1 · Movement and behaviour",
+"8e, 1er semestre · Mouvement et comportement"
+],
+"微生物与发酵": [
+"Microbes and fermentation",
+"Microbes et fermentation"
+],
+"八上 · 细菌、真菌和病毒": [
+"Grade 8, term 1 · Bacteria, fungi and viruses",
+"8e, 1er semestre · Bactéries, champignons et virus"
+],
+"生物的分类": [
+"Classification of living things",
+"Classification des êtres vivants"
+],
+"八上 · 生物的多样性": [
+"Grade 8, term 1 · Biodiversity",
+"8e, 1er semestre · Biodiversité"
+],
+"遗传": [
+"Heredity",
+"Hérédité"
+],
+"八下 · 遗传和变异": [
+"Grade 8, term 2 · Heredity and variation",
+"8e, 2e semestre · Hérédité et variation"
+],
+"自然选择": [
+"Natural selection",
+"Sélection naturelle"
+],
+"八下 · 生物的进化": [
+"Grade 8, term 2 · Evolution",
+"8e, 2e semestre · Évolution"
+],
+"传染病与免疫": [
+"Infectious diseases and immunity",
+"Maladies infectieuses et immunité"
+],
+"八下 · 健康地生活": [
+"Grade 8, term 2 · Living healthily",
+"8e, 2e semestre · Vivre en bonne santé"
+],
+"细胞类型": [
+"Cell type",
+"Type de cellule"
+],
+"植物细胞": [
+"Plant cell",
+"Cellule végétale"
+],
+"动物细胞": [
+"Animal cell",
+"Cellule animale"
+],
+"已放对": [
+"Placed correctly",
+"Bien placés"
+],
+"失误": [
+"Mistakes",
+"Erreurs"
+],
+"次": [
+"times",
+"fois"
+],
+"最后放对的结构": [
+"Last structure placed",
+"Dernière structure placée"
+],
+"功能": [
+"Function",
+"Fonction"
+],
+"再点细胞上的标记": [
+"Now tap a mark on the cell",
+"Touchez maintenant un repère sur la cellule"
+],
+"给植物细胞的 7 个结构全部放对位置": [
+"Place all 7 structures of the plant cell correctly",
+"Placez correctement les 7 structures de la cellule végétale"
+],
+"给动物细胞的 4 个结构全部放对位置": [
+"Place all 4 structures of the animal cell correctly",
+"Placez correctement les 4 structures de la cellule animale"
+],
+"一次失误也没有，完成植物细胞": [
+"Complete the plant cell without a single mistake",
+"Terminez la cellule végétale sans aucune erreur"
+],
+"检索表鉴定": [
+"Identification key",
+"Clé de détermination"
+],
+"分类游戏": [
+"Sorting game",
+"Jeu de classement"
+],
+"分类的内容": [
+"What to sort",
+"Contenu du classement"
+],
+"脊椎动物五大类": [
+"The five vertebrate classes",
+"Les cinq classes de vertébrés"
+],
+"植物的类群": [
+"Plant groups",
+"Groupes de plantes"
+],
+"五个界": [
+"The five kingdoms",
+"Les cinq règnes"
+],
+"回答问题": [
+"Answer the question",
+"Répondez à la question"
+],
+"是": [
+"Yes",
+"Oui"
+],
+"否": [
+"No",
+"Non"
+],
+"换一个": [
+"Another one",
+"Un autre"
+],
+"已提出的问题": [
+"Questions asked",
+"Questions posées"
+],
+"已正确鉴定": [
+"Correctly identified",
+"Identifiés correctement"
+],
+"种": [
+"species",
+"espèces"
+],
+"鉴定结果": [
+"Identification",
+"Identification"
+],
+"鉴定正确": [
+"Correct identification",
+"Identification correcte"
+],
+"鉴定有误：与标本不符": [
+"Wrong identification: it does not match the specimen",
+"Identification erronée : elle ne correspond pas au spécimen"
+],
+"最后放对": [
+"Last one placed",
+"Dernier placé"
+],
+"标本": [
+"Specimen",
+"Spécimen"
+],
+"检索结果：{0}": [
+"Key result: {0}",
+"Résultat de la clé : {0}"
+],
+"标本：{0}": [
+"Specimen: {0}",
+"Spécimen : {0}"
+],
+"问题 {0}": [
+"Question {0}",
+"Question {0}"
+],
+"已回答：": [
+"Answered:",
+"Réponses :"
+],
+"用检索表正确鉴定 3 个标本": [
+"Identify 3 specimens correctly with the key",
+"Identifiez correctement 3 spécimens avec la clé"
+],
+"分类游戏：把 10 个动物全部放进正确的类群（脊椎动物五大类）": [
+"Sorting game: put all 10 animals into the right group (five vertebrate classes)",
+"Jeu de classement : placez les 10 animaux dans le bon groupe (cinq classes de vertébrés)"
+],
+"分类游戏：把 6 种植物全部放进正确的类群": [
+"Sorting game: put all 6 plants into the right group",
+"Jeu de classement : placez les 6 plantes dans le bon groupe"
+],
+"水浴温度": [
+"Water bath temperature",
+"Température du bain-marie"
+],
+"反应时间": [
+"Reaction time",
+"Temps de réaction"
+],
+"食物所在器官": [
+"Organ where the food is",
+"Organe où se trouve l'aliment"
+],
+"唾液淀粉酶": [
+"Salivary amylase",
+"Amylase salivaire"
+],
+"消化道之旅": [
+"Journey through the digestive tract",
+"Voyage dans le tube digestif"
+],
+"食物": [
+"Food",
+"Aliment"
+],
+"酶的相对活性": [
+"Relative enzyme activity",
+"Activité relative de l'enzyme"
+],
+"剩余淀粉": [
+"Starch left",
+"Amidon restant"
+],
+"滴加碘液": [
+"Adding iodine",
+"Ajout d'iode"
+],
+"蓝色消失（棕黄色）": [
+"Blue gone (yellow-brown)",
+"Bleu disparu (jaune-brun)"
+],
+"器官": [
+"Organ",
+"Organe"
+],
+"该器官的消化作用": [
+"Digestion in this organ",
+"Digestion dans cet organe"
+],
+"已消化的程度": [
+"Degree of digestion",
+"Degré de digestion"
+],
+"最终产物": [
+"End product",
+"Produit final"
+],
+"口腔": [
+"Mouth",
+"Bouche"
+],
+"食道": [
+"Oesophagus",
+"Œsophage"
+],
+"胃": [
+"Stomach",
+"Estomac"
+],
+"小肠": [
+"Small intestine",
+"Intestin grêle"
+],
+"大肠": [
+"Large intestine",
+"Gros intestin"
+],
+"找到最适条件（约 37 °C、pH 约 7）并反应 5 分钟以上，淀粉几乎全部水解": [
+"Find the best conditions (about 37 °C, pH about 7) and react for over 5 minutes: almost all the starch is broken down",
+"Trouvez les meilleures conditions (environ 37 °C, pH environ 7) et laissez réagir plus de 5 minutes : presque tout l'amidon est hydrolysé"
+],
+"把水浴温度升到 70 °C 以上：反应 5 分钟后仍几乎没有水解（酶已失活）": [
+"Raise the bath above 70 °C: after 5 minutes almost nothing is broken down (the enzyme is inactive)",
+"Montez le bain au-dessus de 70 °C : après 5 minutes presque rien n'est hydrolysé (enzyme inactivée)"
+],
+"把 pH 调到 2（相当于胃液），温度 37 °C：唾液淀粉酶的活性低于 5%": [
+"Set pH 2 (like gastric juice) at 37 °C: salivary amylase activity is below 5 %",
+"Réglez le pH à 2 (comme le suc gastrique) à 37 °C : l'activité de l'amylase salivaire est inférieure à 5 %"
+],
+"让脂肪来到小肠：脂肪在这里被彻底消化": [
+"Bring fat to the small intestine: it is completely digested there",
+"Amenez la graisse dans l'intestin grêle : elle y est complètement digérée"
+],
+"分裂时期": [
+"Stage of division",
+"Stade de la division"
+],
+"体细胞的染色体数": [
+"Chromosomes of a body cell",
+"Chromosomes d'une cellule somatique"
+],
+"4 条": [
+"4",
+"4"
+],
+"6 条": [
+"6",
+"6"
+],
+"8 条": [
+"8",
+"8"
+],
+"时期": [
+"Stage",
+"Stade"
+],
+"每个细胞的染色体": [
+"Chromosomes per cell",
+"Chromosomes par cellule"
+],
+"染色体": [
+"Chromosomes",
+"Chromosomes"
+],
+"条": [
+"",
+""
+],
+"染色单体": [
+"Chromatids",
+"Chromatides"
+],
+"每个细胞的 DNA": [
+"DNA per cell",
+"ADN par cellule"
+],
+"DNA 分子": [
+"DNA molecules",
+"Molécules d'ADN"
+],
+"个": [
+"",
+""
+],
+"细胞数": [
+"Number of cells",
+"Nombre de cellules"
+],
+"染色体数目加倍": [
+"Chromosome number doubles",
+"Le nombre de chromosomes double"
+],
+"找到后期：染色体数目暂时加倍": [
+"Find anaphase: the chromosome number doubles for a while",
+"Trouvez l'anaphase : le nombre de chromosomes double temporairement"
+],
+"找到中期：每条染色体含有两条染色单体": [
+"Find metaphase: each chromosome has two chromatids",
+"Trouvez la métaphase : chaque chromosome a deux chromatides"
+],
+"把体细胞染色体设为 8 条，观察分裂完成后每个子细胞也是 8 条": [
+"Set 8 chromosomes in the body cell and see that each daughter cell also has 8",
+"Réglez 8 chromosomes dans la cellule et constatez que chaque cellule fille en a aussi 8"
+],
+"相关：安全与急救": [
+"Related: safety and first aid",
+"À voir : sécurité et premiers secours"
+],
+"基本传染数 R0": [
+"Basic reproduction number R0",
+"Nombre de reproduction de base R0"
+],
+"隔离患者（控制传染源）": [
+"Isolate patients (control the source)",
+"Isoler les malades (contrôler la source)"
+],
+"切断传播途径（口罩、消毒）": [
+"Cut the route of spread (masks, disinfection)",
+"Couper la voie de transmission (masques, désinfection)"
+],
+"接种疫苗（保护易感人群）": [
+"Vaccinate (protect the susceptible)",
+"Vacciner (protéger les personnes sensibles)"
+],
+"第二次接触病原体（或加强针）的时间": [
+"Time of the second contact with the pathogen (or booster)",
+"Moment du second contact avec l'agent pathogène (ou rappel)"
+],
+"传染病的传播": [
+"Spread of an infectious disease",
+"Propagation d'une maladie infectieuse"
+],
+"抗体与接种": [
+"Antibodies and vaccination",
+"Anticorps et vaccination"
+],
+"此刻的抗体量": [
+"Antibody level now",
+"Taux d'anticorps actuel"
+],
+"相对值": [
+"relative units",
+"unités relatives"
+],
+"第一次接触后的抗体峰值": [
+"Antibody peak after the first contact",
+"Pic d'anticorps après le premier contact"
+],
+"再次接触后的抗体峰值": [
+"Antibody peak after a later contact",
+"Pic d'anticorps après un nouveau contact"
+],
+"有效传染数 Reff": [
+"Effective reproduction number Reff",
+"Nombre de reproduction effectif Reff"
+],
+"群体免疫阈值": [
+"Herd immunity threshold",
+"Seuil d'immunité collective"
+],
+"感染人数峰值": [
+"Peak number infected",
+"Pic du nombre d'infectés"
+],
+"人": [
+"people",
+"personnes"
+],
+"此刻感染者": [
+"Infected now",
+"Infectés actuellement"
+],
+"再次接触": [
+"Second contact",
+"Second contact"
+],
+"易感者 S": [
+"Susceptible S",
+"Sensibles S"
+],
+"感染者 I": [
+"Infected I",
+"Infectés I"
+],
+"康复或免疫者 R": [
+"Recovered or immune R",
+"Guéris ou immunisés R"
+],
+"只靠接种疫苗（不隔离、不切断途径），使有效传染数 Reff 降到 1 以下，疫情不再扩大": [
+"With vaccination alone (no isolation, no route control), bring Reff below 1 so the epidemic stops growing",
+"Avec la seule vaccination (sans isolement ni coupure de voie), amenez Reff sous 1 : l'épidémie ne croît plus"
+],
+"接种不超过 30%：用隔离和切断途径，使感染人数峰值低于 100 人（总人口 1000）": [
+"With at most 30 % vaccinated: use isolation and route control to keep the peak below 100 people (population 1000)",
+"Avec au plus 30 % de vaccinés : utilisez l'isolement et la coupure des voies pour garder le pic sous 100 personnes (population 1000)"
+],
+"把第二次接触的时间推迟到 14 天以后：再次反应的抗体量大约是第一次的 10 倍": [
+"Move the second contact after day 14: the later response is about 10 times the first",
+"Placez le second contact après le jour 14 : la réponse est environ 10 fois la première"
+],
+"相关：物理实验室·凸透镜成像": [
+"Related: physics lab, convex lens images",
+"À voir : labo de physique, lentille convergente"
+],
+"物体的距离": [
+"Distance of the object",
+"Distance de l'objet"
+],
+"近视程度": [
+"Degree of short-sightedness",
+"Degré de myopie"
+],
+"眼镜的焦度（凹透镜为负）": [
+"Power of the glasses (concave = negative)",
+"Puissance des lunettes (concave = négative)"
+],
+"成像清晰度": [
+"Image sharpness",
+"Netteté de l'image"
+],
+"晶状体的屈光力": [
+"Power of the eye lens",
+"Puissance du cristallin"
+],
+"裸眼看清的范围": [
+"Range seen clearly without glasses",
+"Plage nette sans lunettes"
+],
+"像的位置": [
+"Position of the image",
+"Position de l'image"
+],
+"落在视网膜前方": [
+"In front of the retina",
+"Devant la rétine"
+],
+"落在视网膜上": [
+"On the retina",
+"Sur la rétine"
+],
+"落在视网膜后方": [
+"Behind the retina",
+"Derrière la rétine"
+],
+"视网膜": [
+"Retina",
+"Rétine"
+],
+"晶状体": [
+"Lens",
+"Cristallin"
+],
+"正常眼（近视 0 D）看 5 m 以外的物体：成像清晰（清晰度 95% 以上）": [
+"Normal eye (0 D): look at an object beyond 5 m and see a sharp image (over 95 %)",
+"Œil normal (0 D) : regardez un objet au-delà de 5 m avec une image nette (plus de 95 %)"
+],
+"近视 2.5 D 以上，不戴眼镜看 5 m 以外的物体：看不清（清晰度低于 60%）": [
+"Short-sighted by 2.5 D or more, no glasses, object beyond 5 m: blurred (below 60 %)",
+"Myopie de 2,5 D ou plus, sans lunettes, objet au-delà de 5 m : flou (moins de 60 %)"
+],
+"近视 2 D 以上，用凹透镜矫正，看 5 m 以外的物体：成像清晰": [
+"Short-sighted by 2 D or more, corrected with a concave lens, object beyond 5 m: sharp image",
+"Myopie de 2 D ou plus, corrigée par une lentille concave, objet au-delà de 5 m : image nette"
+],
+"糖的浓度": [
+"Sugar concentration",
+"Concentration en sucre"
+],
+"酵母菌的量": [
+"Amount of yeast",
+"Quantité de levure"
+],
+"培养时间": [
+"Culture time",
+"Durée de culture"
+],
+"酵母菌发酵": [
+"Yeast fermentation",
+"Fermentation par la levure"
+],
+"细菌的生长曲线": [
+"Bacterial growth curve",
+"Courbe de croissance des bactéries"
+],
+"产生气体的速率": [
+"Rate of gas production",
+"Débit de gaz produit"
+],
+"mL/分钟": [
+"mL/min",
+"mL/min"
+],
+"累计的二氧化碳": [
+"Carbon dioxide so far",
+"Dioxyde de carbone cumulé"
+],
+"细菌数量": [
+"Number of bacteria",
+"Nombre de bactéries"
+],
+"所处时期": [
+"Phase",
+"Phase"
+],
+"分裂次数": [
+"Number of divisions",
+"Nombre de divisions"
+],
+"分裂一次所需时间": [
+"Time for one division",
+"Durée d'une division"
+],
+"不能生长": [
+"Cannot grow",
+"Ne pousse pas"
+],
+"30–40 °C、糖的浓度 5% 以上、酵母菌 2 g 以上：发酵 30 分钟，累计二氧化碳超过 60 mL（气球鼓起）": [
+"30–40 °C, sugar at least 5 %, yeast at least 2 g: after 30 minutes over 60 mL of CO2 (the balloon swells)",
+"30–40 °C, sucre au moins 5 %, levure au moins 2 g : après 30 minutes plus de 60 mL de CO2 (le ballon gonfle)"
+],
+"把温度升到 65 °C 以上：发酵 10 分钟后没有气体（酵母菌被杀死）": [
+"Raise the temperature above 65 °C: no gas after 10 minutes (the yeast is killed)",
+"Montez la température au-dessus de 65 °C : pas de gaz après 10 minutes (la levure est tuée)"
+],
+"细菌在 37 °C 下培养：找到对数期（数量迅速增加）": [
+"Culture bacteria at 37 °C: find the log phase (rapid increase)",
+"Cultivez des bactéries à 37 °C : trouvez la phase exponentielle (augmentation rapide)"
+],
+"对数期": [
+"Log phase",
+"Phase exponentielle"
+],
+"37 °C 下继续培养，找到衰亡期": [
+"Keep culturing at 37 °C and find the death phase",
+"Continuez la culture à 37 °C et trouvez la phase de déclin"
+],
+"衰亡期": [
+"Death phase",
+"Phase de déclin"
+],
+"发育阶段": [
+"Stage of development",
+"Stade de développement"
+],
+"子房中的胚珠数": [
+"Ovules in the ovary",
+"Ovules dans l'ovaire"
+],
+"落到柱头上的花粉数": [
+"Pollen grains on the stigma",
+"Grains de pollen sur le stigmate"
+],
+"传粉": [
+"Pollination",
+"Pollinisation"
+],
+"已传粉": [
+"Pollinated",
+"Pollinisée"
+],
+"未传粉": [
+"Not pollinated",
+"Non pollinisée"
+],
+"传粉方式": [
+"Way of pollination",
+"Mode de pollinisation"
+],
+"昆虫传粉": [
+"By insects",
+"Par les insectes"
+],
+"风力传粉": [
+"By wind",
+"Par le vent"
+],
+"受精的胚珠": [
+"Fertilised ovules",
+"Ovules fécondés"
+],
+"种子数": [
+"Number of seeds",
+"Nombre de graines"
+],
+"粒": [
+"",
+""
+],
+"果实": [
+"Fruit",
+"Fruit"
+],
+"形成": [
+"Forms",
+"Se forme"
+],
+"不形成（花凋落）": [
+"Does not form (flower falls)",
+"Ne se forme pas (la fleur tombe)"
+],
+"没有花粉落到柱头上": [
+"No pollen reaches the stigma",
+"Aucun pollen n'atteint le stigmate"
+],
+"没有受精：不结果": [
+"No fertilisation: no fruit",
+"Pas de fécondation : pas de fruit"
+],
+"子房膨大": [
+"The ovary swells",
+"L'ovaire gonfle"
+],
+"花瓣": [
+"Petal",
+"Pétale"
+],
+"花药": [
+"Anther",
+"Anthère"
+],
+"柱头": [
+"Stigma",
+"Stigmate"
+],
+"花柱": [
+"Style",
+"Style"
+],
+"子房": [
+"Ovary",
+"Ovaire"
+],
+"胚珠": [
+"Ovule",
+"Ovule"
+],
+"胚珠数不少于 4，花粉数不少于胚珠数，发育到果实阶段：每个胚珠都发育成种子": [
+"At least 4 ovules and at least as many pollen grains as ovules, up to the fruit stage: every ovule becomes a seed",
+"Au moins 4 ovules et autant de grains de pollen que d'ovules, jusqu'au fruit : chaque ovule devient une graine"
+],
+"把传粉设为“未传粉”，发育到果实阶段：不结果": [
+"Set “Not pollinated” and go to the fruit stage: no fruit forms",
+"Choisissez « Non pollinisée » et allez jusqu'au fruit : aucun fruit ne se forme"
+],
+"花粉数少于胚珠数（至少 1 粒），发育到果实阶段：种子数少于胚珠数": [
+"Fewer pollen grains than ovules (at least 1), up to the fruit stage: fewer seeds than ovules",
+"Moins de grains de pollen que d'ovules (au moins 1), jusqu'au fruit : moins de graines que d'ovules"
+],
+"生产者固定的能量": [
+"Energy fixed by producers",
+"Énergie fixée par les producteurs"
+],
+"能量传递效率": [
+"Energy transfer efficiency",
+"Rendement du transfert d'énergie"
+],
+"生产者体内的毒物浓度": [
+"Poison concentration in producers",
+"Concentration du poison chez les producteurs"
+],
+"每升高一个营养级浓度增大": [
+"Concentration rises per trophic level by",
+"Hausse de concentration par niveau trophique"
+],
+"倍": [
+"times",
+"fois"
+],
+"营养级数": [
+"Number of trophic levels",
+"Nombre de niveaux trophiques"
+],
+"食物网": [
+"Food web",
+"Réseau alimentaire"
+],
+"能量流动": [
+"Energy flow",
+"Flux d'énergie"
+],
+"有毒物质积累": [
+"Accumulation of poison",
+"Accumulation d'un poison"
+],
+"已连好的捕食关系": [
+"Feeding links made",
+"Relations alimentaires tracées"
+],
+"已连成的食物链": [
+"Food chains formed",
+"Chaînes alimentaires formées"
+],
+"数量减少 / 增加的物种": [
+"Species decreasing / increasing",
+"Espèces en baisse / en hausse"
+],
+"最高营养级的能量": [
+"Energy at the top level",
+"Énergie du niveau le plus haut"
+],
+"占生产者能量的": [
+"Share of the producers' energy",
+"Part de l'énergie des producteurs"
+],
+"最高营养级的浓度": [
+"Concentration at the top level",
+"Concentration au niveau le plus haut"
+],
+"是生产者的": [
+"Times the producers'",
+"Fois celle des producteurs"
+],
+"点一下生物：移走它": [
+"Tap an organism to remove it",
+"Touchez un organisme pour le retirer"
+],
+"拖动：从被吃的生物到吃它的生物": [
+"Drag from the organism eaten to the one that eats it",
+"Faites glisser de l'organisme mangé vers celui qui le mange"
+],
+"能量沿食物链逐级递减": [
+"Energy decreases along the food chain",
+"L'énergie diminue le long de la chaîne"
+],
+"毒物沿食物链逐级积累": [
+"Poison builds up along the food chain",
+"Le poison s'accumule le long de la chaîne"
+],
+"连好食物网中全部 11 条捕食关系": [
+"Draw all 11 feeding links of the web",
+"Tracez les 11 relations alimentaires du réseau"
+],
+"连好整个食物网后，点一下“蛇”把它移走：蛙的数量会增加": [
+"With the whole web drawn, tap “snake” to remove it: the frogs increase",
+"Une fois le réseau tracé, touchez « serpent » pour le retirer : les grenouilles augmentent"
+],
+"营养级数设为 5，传递效率 10%：最高营养级只得到生产者能量的 0.01%": [
+"Set 5 trophic levels and 10 % efficiency: the top level gets only 0.01 % of the producers' energy",
+"Réglez 5 niveaux et 10 % : le niveau supérieur ne reçoit que 0,01 % de l'énergie des producteurs"
+],
+"毒物积累：使最高营养级的浓度达到生产者的 1000 倍以上": [
+"Poison build-up: make the top level more than 1000 times the producers",
+"Accumulation : obtenez au niveau supérieur plus de 1000 fois la concentration des producteurs"
+],
+"后代样本数": [
+"Sample of offspring",
+"Échantillon de descendants"
+],
+"一对基因的杂交": [
+"One-gene cross",
+"Croisement d'un gène"
+],
+"ABO 血型": [
+"ABO blood groups",
+"Groupes sanguins ABO"
+],
+"性别决定": [
+"Sex determination",
+"Détermination du sexe"
+],
+"亲本 1": [
+"Parent 1",
+"Parent 1"
+],
+"亲本 2": [
+"Parent 2",
+"Parent 2"
+],
+"父亲的血型基因": [
+"Father's blood-group genes",
+"Gènes du groupe sanguin du père"
+],
+"{0}（{1} 型）": [
+"{0} (type {1})",
+"{0} (groupe {1})"
+],
+"母亲的血型基因": [
+"Mother's blood-group genes",
+"Gènes du groupe sanguin de la mère"
+],
+"重新抽样": [
+"Draw a new sample",
+"Nouveau tirage"
+],
+"子代基因型的比": [
+"Ratio of offspring genotypes",
+"Rapport des génotypes"
+],
+"子代表现型的比（理论）": [
+"Ratio of offspring phenotypes (theory)",
+"Rapport des phénotypes (théorie)"
+],
+"样本中的实际数量": [
+"Actual numbers in the sample",
+"Effectifs réels de l'échantillon"
+],
+"χ² 偏差值": [
+"χ² deviation",
+"Écart χ²"
+],
+"理论比例（左）与样本（右）": [
+"Theory (left) and sample (right)",
+"Théorie (à gauche) et échantillon (à droite)"
+],
+"选择 Aa × Aa：表现型比为 显性 : 隐性 = 3 : 1": [
+"Choose Aa × Aa: phenotype ratio dominant : recessive = 3 : 1",
+"Choisissez Aa × Aa : rapport dominant : récessif = 3 : 1"
+],
+"选择 Aa × aa（测交）：后代显性与隐性各占一半": [
+"Choose Aa × aa (test cross): half dominant, half recessive",
+"Choisissez Aa × aa (croisement test) : moitié dominants, moitié récessifs"
+],
+"选择 I^A i × I^B i：后代有 A、B、AB、O 四种血型": [
+"Choose I^A i × I^B i: the children can have A, B, AB or O blood",
+"Choisissez I^A i × I^B i : les enfants peuvent être A, B, AB ou O"
+],
+"Aa × Aa：把样本增加到 300 以上，观察实际比例接近 3 : 1": [
+"Aa × Aa: raise the sample above 300 and see the ratio approach 3 : 1",
+"Aa × Aa : dépassez 300 descendants et voyez le rapport se rapprocher de 3 : 1"
+],
+"一餐摄入的糖类": [
+"Carbohydrate in the meal",
+"Glucides du repas"
+],
+"注射胰岛素": [
+"Insulin injected",
+"Insuline injectée"
+],
+"单位": [
+"units",
+"unités"
+],
+"进餐后的时间": [
+"Time after the meal",
+"Temps après le repas"
+],
+"胰岛功能": [
+"Pancreas function",
+"Fonction du pancréas"
+],
+"正常": [
+"Normal",
+"Normale"
+],
+"胰岛素分泌不足（糖尿病）": [
+"Too little insulin (diabetes)",
+"Insuline insuffisante (diabète)"
+],
+"此刻的血糖": [
+"Blood sugar now",
+"Glycémie actuelle"
+],
+"此刻的血液胰岛素": [
+"Blood insulin now",
+"Insuline sanguine actuelle"
+],
+"餐后血糖峰值": [
+"Peak blood sugar after the meal",
+"Pic de glycémie après le repas"
+],
+"尿中是否出现葡萄糖": [
+"Sugar in the urine?",
+"Sucre dans les urines ?"
+],
+"会出现": [
+"Yes",
+"Oui"
+],
+"不会出现": [
+"No",
+"Non"
+],
+"血糖": [
+"Blood sugar",
+"Glycémie"
+],
+"胰岛素": [
+"Insulin",
+"Insuline"
+],
+"尿糖线": [
+"Urine sugar level",
+"Seuil du sucre urinaire"
+],
+"健康的人吃 100 g 糖类：3 小时（180 分钟）后血糖回到 7.8 mmol/L 以下": [
+"A healthy person eats 100 g of carbohydrate: after 3 hours (180 min) blood sugar is below 7.8 mmol/L",
+"Une personne saine mange 100 g de glucides : après 3 h (180 min) la glycémie est sous 7,8 mmol/L"
+],
+"选择“胰岛素分泌不足”，不注射胰岛素：血糖峰值超过 11 mmol/L": [
+"Choose “Too little insulin”, no injection: the blood sugar peak exceeds 11 mmol/L",
+"Choisissez « Insuline insuffisante », sans injection : le pic de glycémie dépasse 11 mmol/L"
+],
+"胰岛素分泌不足的人吃 50 g 糖类，注射胰岛素使血糖峰值降到 9 mmol/L 以下": [
+"Someone with too little insulin eats 50 g of carbohydrate: inject insulin to bring the peak below 9 mmol/L",
+"Une personne manquant d'insuline mange 50 g de glucides : injectez de l'insuline pour passer sous 9 mmol/L"
+],
+"生物类型": [
+"Type of organism",
+"Type d'organisme"
+],
+"动物体": [
+"Animal",
+"Animal"
+],
+"植物体": [
+"Plant",
+"Plante"
+],
+"把 10 个动物体的例子放进正确的层次": [
+"Put the 10 animal examples into the right level",
+"Placez les 10 exemples animaux au bon niveau"
+],
+"把 8 个植物体的例子放进正确的层次": [
+"Put the 8 plant examples into the right level",
+"Placez les 8 exemples végétaux au bon niveau"
+],
+"不出一次错，完成一种生物的全部分类": [
+"Sort every example of one kind of organism without a mistake",
+"Classez tous les exemples d'un type d'organisme sans erreur"
+],
+"物镜到玻片的距离": [
+"Distance from objective to slide",
+"Distance objectif–lame"
+],
+"向右移动玻片": [
+"Move the slide to the right",
+"Déplacer la lame vers la droite"
+],
+"目镜": [
+"Eyepiece",
+"Oculaire"
+],
+"物镜": [
+"Objective",
+"Objectif"
+],
+"玻片标本": [
+"Slide specimen",
+"Spécimen sur lame"
+],
+"字母 p": [
+"Letter p",
+"Lettre p"
+],
+"洋葱表皮": [
+"Onion skin",
+"Épiderme d'oignon"
+],
+"总放大倍数": [
+"Total magnification",
+"Grossissement total"
+],
+"视野直径": [
+"Field of view diameter",
+"Diamètre du champ"
+],
+"视野中一行的细胞数": [
+"Cells across the field",
+"Cellules sur un diamètre"
+],
+"清晰度": [
+"Sharpness",
+"Netteté"
+],
+"把总放大倍数调到 400×，并调到图像清晰（清晰度 90% 以上）": [
+"Set a total magnification of 400× and focus until the image is sharp (over 90 %)",
+"Réglez un grossissement de 400× et mettez au point (plus de 90 %)"
+],
+"用低倍镜（总放大倍数不超过 50×）看清洋葱表皮细胞": [
+"With low power (total magnification up to 50×) see the onion cells clearly",
+"À faible grossissement (jusqu'à 50×), observez nettement les cellules d'oignon"
+],
+"把玻片向左移动 0.5 mm 以上，并保持图像清晰，观察物像向右移动": [
+"Move the slide 0.5 mm or more to the left, stay in focus, and see the image move right",
+"Déplacez la lame de 0,5 mm ou plus vers la gauche en restant net : l'image va vers la droite"
+],
+"心房收缩": [
+"Atria contract",
+"Contraction des oreillettes"
+],
+"心室收缩": [
+"Ventricles contract",
+"Contraction des ventricules"
+],
+"心房心室都舒张": [
+"Atria and ventricles relaxed",
+"Oreillettes et ventricules relâchés"
+],
+"无抗原": [
+"No antigen",
+"Aucun antigène"
+],
+"A 抗原": [
+"A antigen",
+"Antigène A"
+],
+"B 抗原": [
+"B antigen",
+"Antigène B"
+],
+"A 和 B 抗原": [
+"A and B antigens",
+"Antigènes A et B"
+],
+"无抗体": [
+"No antibody",
+"Aucun anticorps"
+],
+"抗 A 抗体": [
+"Anti-A antibody",
+"Anticorps anti-A"
+],
+"抗 B 抗体": [
+"Anti-B antibody",
+"Anticorps anti-B"
+],
+"抗 A 和抗 B 抗体": [
+"Anti-A and anti-B antibodies",
+"Anticorps anti-A et anti-B"
+],
+"房室瓣打开，动脉瓣关闭": [
+"AV valve open, arterial valve closed",
+"Valve AV ouverte, valve artérielle fermée"
+],
+"房室瓣关闭，动脉瓣打开": [
+"AV valve closed, arterial valve open",
+"Valve AV fermée, valve artérielle ouverte"
+],
+"细胞壁": [
+"Cell wall",
+"Paroi cellulaire"
+],
+"保护和支持细胞": [
+"Protects and supports the cell",
+"Protège et soutient la cellule"
+],
+"细胞膜": [
+"Cell membrane",
+"Membrane cellulaire"
+],
+"控制物质进出细胞": [
+"Controls what enters and leaves the cell",
+"Contrôle les entrées et sorties de la cellule"
+],
+"细胞质": [
+"Cytoplasm",
+"Cytoplasme"
+],
+"细胞生命活动的主要场所": [
+"Main site of the cell's activities",
+"Principal lieu des activités de la cellule"
+],
+"细胞核": [
+"Nucleus",
+"Noyau"
+],
+"含有遗传物质，控制生物的发育和遗传": [
+"Holds the genetic material and controls development and heredity",
+"Contient le matériel génétique et contrôle le développement et l'hérédité"
+],
+"叶绿体": [
+"Chloroplast",
+"Chloroplaste"
+],
+"进行光合作用，制造有机物": [
+"Carries out photosynthesis and makes organic matter",
+"Réalise la photosynthèse et fabrique de la matière organique"
+],
+"液泡": [
+"Vacuole",
+"Vacuole"
+],
+"储存水分、糖类等物质": [
+"Stores water, sugars and other substances",
+"Stocke eau, sucres et autres substances"
+],
+"线粒体": [
+"Mitochondrion",
+"Mitochondrie"
+],
+"进行呼吸作用，释放能量": [
+"Carries out respiration and releases energy",
+"Réalise la respiration et libère de l'énergie"
+],
+"鲤鱼": [
+"Carp",
+"Carpe"
+],
+"鲨鱼": [
+"Shark",
+"Requin"
+],
+"海马": [
+"Seahorse",
+"Hippocampe"
+],
+"青蛙": [
+"Frog",
+"Grenouille"
+],
+"蟾蜍": [
+"Toad",
+"Crapaud"
+],
+"大鲵": [
+"Giant salamander",
+"Salamandre géante"
+],
+"蛇": [
+"Snake",
+"Serpent"
+],
+"乌龟": [
+"Turtle",
+"Tortue"
+],
+"蜥蜴": [
+"Lizard",
+"Lézard"
+],
+"鳄鱼": [
+"Crocodile",
+"Crocodile"
+],
+"鸡": [
+"Chicken",
+"Poule"
+],
+"鸽子": [
+"Pigeon",
+"Pigeon"
+],
+"企鹅": [
+"Penguin",
+"Manchot"
+],
+"鹰": [
+"Eagle",
+"Aigle"
+],
+"兔": [
+"Rabbit",
+"Lapin"
+],
+"鲸": [
+"Whale",
+"Baleine"
+],
+"蝙蝠": [
+"Bat",
+"Chauve-souris"
+],
+"老虎": [
+"Tiger",
+"Tigre"
+],
+"猴": [
+"Monkey",
+"Singe"
+],
+"大象": [
+"Elephant",
+"Éléphant"
+],
+"蝗虫": [
+"Grasshopper",
+"Criquet"
+],
+"蝴蝶": [
+"Butterfly",
+"Papillon"
+],
+"蜘蛛": [
+"Spider",
+"Araignée"
+],
+"虾": [
+"Shrimp",
+"Crevette"
+],
+"蜈蚣": [
+"Centipede",
+"Mille-pattes"
+],
+"蜗牛": [
+"Snail",
+"Escargot"
+],
+"蚯蚓": [
+"Earthworm",
+"Ver de terre"
+],
+"水母": [
+"Jellyfish",
+"Méduse"
+],
+"海星": [
+"Starfish",
+"Étoile de mer"
+],
+"海带": [
+"Kelp",
+"Laminaire"
+],
+"葫芦藓": [
+"Moss",
+"Mousse"
+],
+"蕨": [
+"Fern",
+"Fougère"
+],
+"松": [
+"Pine",
+"Pin"
+],
+"玉米": [
+"Maize",
+"Maïs"
+],
+"大豆": [
+"Soybean",
+"Soja"
+],
+"蘑菇": [
+"Mushroom",
+"Champignon"
+],
+"青霉": [
+"Penicillium mould",
+"Moisissure Penicillium"
+],
+"酵母菌": [
+"Yeast",
+"Levure"
+],
+"乳酸菌": [
+"Lactic acid bacterium",
+"Bactérie lactique"
+],
+"球菌": [
+"Coccus",
+"Coque"
+],
+"噬菌体": [
+"Bacteriophage",
+"Bactériophage"
+],
+"烟草花叶病毒": [
+"Tobacco mosaic virus",
+"Virus de la mosaïque du tabac"
+],
+"有细胞结构吗？": [
+"Does it have cells?",
+"A-t-il des cellules ?"
+],
+"细胞内有成形的细胞核吗？": [
+"Do the cells have a true nucleus?",
+"Les cellules ont-elles un vrai noyau ?"
+],
+"能进行光合作用、自己制造有机物吗？": [
+"Can it photosynthesise and make its own food?",
+"Peut-il faire la photosynthèse et fabriquer sa nourriture ?"
+],
+"身体由多个细胞构成吗？": [
+"Is the body made of many cells?",
+"Le corps est-il formé de nombreuses cellules ?"
+],
+"能主动运动、摄食吗？": [
+"Can it move and feed actively?",
+"Peut-il se déplacer et se nourrir activement ?"
+],
+"体内有脊柱吗？": [
+"Does it have a backbone?",
+"A-t-il une colonne vertébrale ?"
+],
+"用鳃呼吸吗？": [
+"Does it breathe with gills?",
+"Respire-t-il par des branchies ?"
+],
+"体表有鳞片或硬壳吗？": [
+"Does it have scales or a hard shell?",
+"A-t-il des écailles ou une coque dure ?"
+],
+"体温恒定吗？": [
+"Is its body temperature constant?",
+"Sa température est-elle constante ?"
+],
+"体表有羽毛吗？": [
+"Does it have feathers?",
+"A-t-il des plumes ?"
+],
+"体表被毛、胎生哺乳吗？": [
+"Does it have hair, give live birth and suckle?",
+"A-t-il des poils, met-il bas et allaite-t-il ?"
+],
+"皮肤裸露、湿润吗？": [
+"Is the skin bare and moist?",
+"La peau est-elle nue et humide ?"
+],
+"终生生活在水中吗？": [
+"Does it live in water all its life?",
+"Vit-il dans l'eau toute sa vie ?"
+],
+"身体分节、有外骨骼吗？": [
+"Is the body segmented with an outer skeleton?",
+"Le corps est-il segmenté avec un exosquelette ?"
+],
+"有三对足吗？": [
+"Does it have three pairs of legs?",
+"A-t-il trois paires de pattes ?"
+],
+"有四对足吗？": [
+"Does it have four pairs of legs?",
+"A-t-il quatre paires de pattes ?"
+],
+"每个体节都有一对足吗？": [
+"Does every segment have a pair of legs?",
+"Chaque segment porte-t-il une paire de pattes ?"
+],
+"身体柔软、背着螺旋形的壳吗？": [
+"Is the body soft with a spiral shell?",
+"Le corps est-il mou avec une coquille spiralée ?"
+],
+"身体呈圆筒形、由许多环节组成吗？": [
+"Is the body a cylinder of many rings?",
+"Le corps est-il un cylindre formé de nombreux anneaux ?"
+],
+"身体呈辐射对称吗？": [
+"Is the body radially symmetrical?",
+"Le corps est-il à symétrie radiaire ?"
+],
+"有带刺细胞的触手吗？": [
+"Does it have tentacles with stinging cells?",
+"A-t-il des tentacules à cellules urticantes ?"
+],
+"有五条腕吗？": [
+"Does it have five arms?",
+"A-t-il cinq bras ?"
+],
+"用孢子繁殖吗？": [
+"Does it reproduce by spores?",
+"Se reproduit-il par spores ?"
+],
+"有茎和叶，但没有真正的根吗？": [
+"Does it have stems and leaves but no true roots?",
+"A-t-il des tiges et des feuilles mais pas de vraies racines ?"
+],
+"有真正的根、茎、叶吗？": [
+"Does it have true roots, stems and leaves?",
+"A-t-il de vraies racines, tiges et feuilles ?"
+],
+"用种子繁殖吗？": [
+"Does it reproduce by seeds?",
+"Se reproduit-il par graines ?"
+],
+"种子外面没有果皮包被吗？": [
+"Are the seeds bare, without a fruit wall?",
+"Les graines sont-elles nues, sans enveloppe de fruit ?"
+],
+"种子外有果皮包被吗？": [
+"Are the seeds enclosed in a fruit?",
+"Les graines sont-elles enfermées dans un fruit ?"
+],
+"种子里只有一片子叶吗？": [
+"Does the seed have only one seed leaf?",
+"La graine n'a-t-elle qu'un cotylédon ?"
+],
+"有菌盖和菌柄吗？": [
+"Does it have a cap and a stalk?",
+"A-t-il un chapeau et un pied ?"
+],
+"直立菌丝的顶端呈扫帚状吗？": [
+"Do the upright threads end in brush-like tips?",
+"Les filaments dressés se terminent-ils en pinceau ?"
+],
+"是进行出芽生殖的单细胞生物吗？": [
+"Is it a single cell that reproduces by budding?",
+"Est-ce une cellule unique qui se reproduit par bourgeonnement ?"
+],
+"细胞呈杆状吗？": [
+"Are the cells rod-shaped?",
+"Les cellules sont-elles en bâtonnet ?"
+],
+"细胞呈球状吗？": [
+"Are the cells round?",
+"Les cellules sont-elles sphériques ?"
+],
+"有头部和尾部吗？": [
+"Does it have a head and a tail?",
+"A-t-il une tête et une queue ?"
+],
+"呈杆状、表面螺旋排列吗？": [
+"Is it a rod with a spiral surface?",
+"Est-ce un bâtonnet à surface en spirale ?"
+],
+"骨骼是硬骨吗？": [
+"Is the skeleton made of bone?",
+"Le squelette est-il osseux ?"
+],
+"骨骼是软骨吗？": [
+"Is the skeleton made of cartilage?",
+"Le squelette est-il cartilagineux ?"
+],
+"头部像马头、直立游泳吗？": [
+"Is the head horse-like and does it swim upright?",
+"La tête ressemble-t-elle à celle d'un cheval, nage-t-il debout ?"
+],
+"成体有尾吗？": [
+"Does the adult have a tail?",
+"L'adulte a-t-il une queue ?"
+],
+"皮肤粗糙、有疣状突起吗？": [
+"Is the skin rough with warts?",
+"La peau est-elle rugueuse, avec des verrues ?"
+],
+"后肢发达、善于跳跃吗？": [
+"Are the hind legs strong for jumping?",
+"Les pattes arrière sont-elles fortes pour sauter ?"
+],
+"没有四肢吗？": [
+"Does it have no limbs?",
+"N'a-t-il aucun membre ?"
+],
+"有四肢吗？": [
+"Does it have four limbs?",
+"A-t-il quatre membres ?"
+],
+"背上有坚硬的甲壳吗？": [
+"Does it have a hard shell on its back?",
+"A-t-il une carapace dure sur le dos ?"
+],
+"体形巨大吗？": [
+"Is it very large?",
+"Est-il très grand ?"
+],
+"是常见的家禽吗？": [
+"Is it a common farm bird?",
+"Est-ce une volaille courante ?"
+],
+"能飞行吗？": [
+"Can it fly?",
+"Peut-il voler ?"
+],
+"翅膀呈鳍状、擅长游泳吗？": [
+"Are the wings flippers for swimming?",
+"Les ailes sont-elles des nageoires pour nager ?"
+],
+"喙呈钩状、捕食小动物吗？": [
+"Is the beak hooked for catching small animals?",
+"Le bec est-il crochu pour attraper de petits animaux ?"
+],
+"有一对长耳朵吗？": [
+"Does it have a pair of long ears?",
+"A-t-il de longues oreilles ?"
+],
+"生活在海洋里吗？": [
+"Does it live in the sea?",
+"Vit-il dans la mer ?"
+],
+"是食肉动物吗？": [
+"Is it a meat eater?",
+"Est-ce un carnivore ?"
+],
+"手指灵活、能抓握吗？": [
+"Are the fingers nimble and able to grasp?",
+"Les doigts sont-ils agiles et préhensiles ?"
+],
+"有长长的鼻子吗？": [
+"Does it have a long nose?",
+"A-t-il un long nez ?"
+],
+"翅膀上有细小的鳞片吗？": [
+"Are there tiny scales on the wings?",
+"Les ailes portent-elles de minuscules écailles ?"
+],
+"会结网捕食吗？": [
+"Does it spin a web to catch prey?",
+"Tisse-t-il une toile pour capturer ses proies ?"
+],
+"鱼类": [
+"Fish",
+"Poissons"
+],
+"两栖类": [
+"Amphibians",
+"Amphibiens"
+],
+"爬行类": [
+"Reptiles",
+"Reptiles"
+],
+"鸟类": [
+"Birds",
+"Oiseaux"
+],
+"哺乳类": [
+"Mammals",
+"Mammifères"
+],
+"藻类植物": [
+"Algae",
+"Algues"
+],
+"苔藓植物": [
+"Mosses",
+"Mousses"
+],
+"蕨类植物": [
+"Ferns",
+"Fougères"
+],
+"裸子植物": [
+"Gymnosperms",
+"Gymnospermes"
+],
+"被子植物": [
+"Angiosperms",
+"Angiospermes"
+],
+"动物界": [
+"Animals",
+"Animaux"
+],
+"植物界": [
+"Plants",
+"Plantes"
+],
+"真菌界": [
+"Fungi",
+"Champignons"
+],
+"细菌界": [
+"Bacteria",
+"Bactéries"
+],
+"病毒": [
+"Viruses",
+"Virus"
+],
+"淀粉（米饭）": [
+"Starch (rice)",
+"Amidon (riz)"
+],
+"蛋白质（鸡蛋）": [
+"Protein (egg)",
+"Protéines (œuf)"
+],
+"脂肪（肥肉）": [
+"Fat (fatty meat)",
+"Graisse (viande grasse)"
+],
+"葡萄糖": [
+"Glucose",
+"Glucose"
+],
+"氨基酸": [
+"Amino acids",
+"Acides aminés"
+],
+"甘油和脂肪酸": [
+"Glycerol and fatty acids",
+"Glycérol et acides gras"
+],
+"唾液淀粉酶：淀粉 → 麦芽糖": [
+"Salivary amylase: starch → maltose",
+"Amylase salivaire : amidon → maltose"
+],
+"不消化": [
+"No digestion",
+"Pas de digestion"
+],
+"肠液和胰液中的酶：麦芽糖 → 葡萄糖": [
+"Enzymes of intestinal and pancreatic juice: maltose → glucose",
+"Enzymes des sucs intestinal et pancréatique : maltose → glucose"
+],
+"胃液中的胃蛋白酶：蛋白质 → 多肽": [
+"Pepsin in gastric juice: protein → peptides",
+"Pepsine du suc gastrique : protéines → peptides"
+],
+"肠液和胰液中的酶：多肽 → 氨基酸": [
+"Enzymes of intestinal and pancreatic juice: peptides → amino acids",
+"Enzymes des sucs intestinal et pancréatique : peptides → acides aminés"
+],
+"胆汁乳化脂肪，肠液和胰液中的酶：脂肪 → 甘油和脂肪酸": [
+"Bile emulsifies fat; enzymes of intestinal and pancreatic juice: fat → glycerol and fatty acids",
+"La bile émulsionne la graisse ; enzymes des sucs intestinal et pancréatique : graisse → glycérol et acides gras"
+],
+"间期": [
+"Interphase",
+"Interphase"
+],
+"前期": [
+"Prophase",
+"Prophase"
+],
+"中期": [
+"Metaphase",
+"Métaphase"
+],
+"后期": [
+"Anaphase",
+"Anaphase"
+],
+"末期": [
+"Telophase",
+"Télophase"
+],
+"分裂完成": [
+"Division complete",
+"Division terminée"
+],
+"延缓期": [
+"Lag phase",
+"Phase de latence"
+],
+"不生长": [
+"No growth",
+"Pas de croissance"
+],
+"稳定期": [
+"Stationary phase",
+"Phase stationnaire"
+],
+"花的结构": [
+"Structure of the flower",
+"Structure de la fleur"
+],
+"花粉管伸长": [
+"Pollen tube grows",
+"Le tube pollinique s'allonge"
+],
+"受精": [
+"Fertilisation",
+"Fécondation"
+],
+"花凋谢，子房膨大": [
+"Flower withers, ovary swells",
+"La fleur fane, l'ovaire gonfle"
+],
+"果实和种子": [
+"Fruit and seeds",
+"Fruit et graines"
+],
+"草": [
+"Grass",
+"Herbe"
+],
+"鼠": [
+"Mouse",
+"Souris"
+],
+"蛙": [
+"Frog",
+"Grenouille"
+],
+"狐": [
+"Fox",
+"Renard"
+],
+"显性": [
+"Dominant",
+"Dominant"
+],
+"隐性": [
+"Recessive",
+"Récessif"
+],
+"女孩": [
+"Girl",
+"Fille"
+],
+"男孩": [
+"Boy",
+"Garçon"
+],
+"细胞": [
+"Cell",
+"Cellule"
+],
+"组织": [
+"Tissue",
+"Tissu"
+],
+"系统": [
+"System",
+"Système"
+],
+"个体": [
+"Individual",
+"Individu"
+],
+"神经细胞": [
+"Nerve cell",
+"Cellule nerveuse"
+],
+"红细胞": [
+"Red blood cell",
+"Globule rouge"
+],
+"肌肉组织": [
+"Muscle tissue",
+"Tissu musculaire"
+],
+"上皮组织": [
+"Epithelial tissue",
+"Tissu épithélial"
+],
+"心脏": [
+"Heart",
+"Cœur"
+],
+"消化系统": [
+"Digestive system",
+"Système digestif"
+],
+"呼吸系统": [
+"Respiratory system",
+"Système respiratoire"
+],
+"叶肉细胞": [
+"Leaf mesophyll cell",
+"Cellule du mésophylle"
+],
+"保卫细胞": [
+"Guard cell",
+"Cellule de garde"
+],
+"保护组织": [
+"Protective tissue",
+"Tissu protecteur"
+],
+"输导组织": [
+"Conducting tissue",
+"Tissu conducteur"
+],
+"叶": [
+"Leaf",
+"Feuille"
+],
+"花": [
+"Flower",
+"Fleur"
+],
+"向日葵": [
+"Sunflower",
+"Tournesol"
+],
+"左": [
+"left",
+"gauche"
+],
+"右": [
+"right",
+"droite"
+],
+"上": [
+"up",
+"haut"
+],
+"下": [
+"down",
+"bas"
+],
+"膝跳反射": [
+"Knee-jerk reflex",
+"Réflexe rotulien"
+],
+"非条件反射": [
+"Unconditioned reflex",
+"Réflexe inné"
+],
+"缩手反射": [
+"Hand-withdrawal reflex",
+"Réflexe de retrait de la main"
+],
+"看见红灯后刹车": [
+"Braking at a red light",
+"Freiner à un feu rouge"
+],
+"条件反射": [
+"Conditioned reflex",
+"Réflexe conditionné"
+],
+"感受器": [
+"Receptor",
+"Récepteur"
+],
+"传入神经": [
+"Sensory nerve",
+"Nerf sensitif"
+],
+"神经中枢": [
+"Nerve centre",
+"Centre nerveux"
+],
+"传出神经": [
+"Motor nerve",
+"Nerf moteur"
+],
+"效应器": [
+"Effector",
+"Effecteur"
+],
+"很快": [
+"Very fast",
+"Très rapide"
+],
+"较慢": [
+"Rather slow",
+"Assez lent"
+],
+"光照强度": [
+"Light intensity",
+"Intensité lumineuse"
+],
+"二氧化碳浓度": [
+"CO2 concentration",
+"Concentration en CO2"
+],
+"相关：物理实验室·杠杆": [
+"Related: physics lab, levers",
+"À voir : labo de physique, leviers"
+],
+"肱二头肌收缩程度": [
+"Biceps contraction",
+"Contraction du biceps"
+],
+"肱三头肌收缩程度": [
+"Triceps contraction",
+"Contraction du triceps"
+],
+"手中重物的质量": [
+"Mass held in the hand",
+"Masse tenue dans la main"
+],
+"肌肉附着点到肘的距离": [
+"Muscle attachment to elbow",
+"Attache du muscle au coude"
+],
+"手到肘的距离": [
+"Hand to elbow",
+"Main au coude"
+],
+"肘关节的角度": [
+"Elbow angle",
+"Angle du coude"
+],
+"肱二头肌的拉力": [
+"Biceps force",
+"Force du biceps"
+],
+"前臂的杠杆类型": [
+"Lever type of the forearm",
+"Type de levier de l'avant-bras"
+],
+"肱二头肌的长度变化": [
+"Change in biceps length",
+"Variation de longueur du biceps"
+],
+"肱二头肌": [
+"Biceps",
+"Biceps"
+],
+"肱三头肌": [
+"Triceps",
+"Triceps"
+],
+"肘关节": [
+"Elbow joint",
+"Articulation du coude"
+],
+"屈肘：肱二头肌收缩 70% 以上、肱三头肌放松（20% 以下），肘角小于 60°": [
+"Bend the elbow: biceps over 70 %, triceps relaxed (under 20 %), elbow angle below 60°",
+"Fléchissez le coude : biceps à plus de 70 %, triceps relâché (moins de 20 %), angle inférieur à 60°"
+],
+"握 4 kg 以上的重物：肱二头肌的拉力超过 300 N": [
+"Hold 4 kg or more: the biceps force exceeds 300 N",
+"Tenez 4 kg ou plus : la force du biceps dépasse 300 N"
+],
+"把肌肉附着点移到离肘 6 cm 以上：握 2 kg 重物时拉力小于 150 N": [
+"Move the attachment 6 cm or more from the elbow: holding 2 kg needs under 150 N",
+"Éloignez l'attache de 6 cm ou plus du coude : pour 2 kg, la force est inférieure à 150 N"
+],
+"神经传导速度": [
+"Nerve conduction speed",
+"Vitesse de conduction nerveuse"
+],
+"尺子下落的距离": [
+"Distance the ruler falls",
+"Distance de chute de la règle"
+],
+"反射弧": [
+"Reflex arc",
+"Arc réflexe"
+],
+"反应时间（尺子）": [
+"Reaction time (ruler)",
+"Temps de réaction (règle)"
+],
+"反射": [
+"Reflex",
+"Réflexe"
+],
+"损伤的部位": [
+"Damaged part",
+"Partie lésée"
+],
+"反射类型": [
+"Type of reflex",
+"Type de réflexe"
+],
+"反射弧的神经长度": [
+"Nerve length of the arc",
+"Longueur nerveuse de l'arc"
+],
+"从刺激到反应": [
+"From stimulus to response",
+"Du stimulus à la réponse"
+],
+"发生反射": [
+"Reflex occurs",
+"Le réflexe se produit"
+],
+"不发生反射": [
+"No reflex",
+"Pas de réflexe"
+],
+"评价": [
+"Rating",
+"Évaluation"
+],
+"损伤传入神经：刺激后不发生反射": [
+"Damage the sensory nerve: no reflex after the stimulus",
+"Lésez le nerf sensitif : pas de réflexe après le stimulus"
+],
+"把神经传导速度降到 30 m/s 以下：膝跳反射的潜伏期超过 40 ms": [
+"Lower the conduction speed below 30 m/s: the knee-jerk delay exceeds 40 ms",
+"Baissez la vitesse sous 30 m/s : le délai du réflexe rotulien dépasse 40 ms"
+],
+"做尺子测试：下落 18–22 cm 时抓住，反应时间约 200 ms": [
+"Ruler test: catch it after 18–22 cm for a reaction time of about 200 ms",
+"Test de la règle : attrapez-la après 18–22 cm, temps de réaction d'environ 200 ms"
+],
+"光照时间": [
+"Time in light",
+"Durée d'éclairement"
+],
+"水草放氧气": [
+"Water plant releasing oxygen",
+"Plante aquatique libérant de l'oxygène"
+],
+"淀粉检验": [
+"Starch test",
+"Test de l'amidon"
+],
+"叶片": [
+"Leaf",
+"Feuille"
+],
+"不遮光": [
+"Not covered",
+"Non couverte"
+],
+"锡箔遮住左半": [
+"Left half covered with foil",
+"Moitié gauche couverte d'aluminium"
+],
+"氧气气泡": [
+"Oxygen bubbles",
+"Bulles d'oxygène"
+],
+"个/分钟": [
+"per minute",
+"par minute"
+],
+"此条件下的上限": [
+"Upper limit in these conditions",
+"Limite dans ces conditions"
+],
+"限制因素": [
+"Limiting factor",
+"Facteur limitant"
+],
+"未遮光部分的淀粉": [
+"Starch in the uncovered part",
+"Amidon dans la partie non couverte"
+],
+"遮光部分的淀粉": [
+"Starch in the covered part",
+"Amidon dans la partie couverte"
+],
+"黑暗": [
+"Dark",
+"Obscurité"
+],
+"锡箔": [
+"Foil",
+"Aluminium"
+],
+"碘液检验": [
+"Iodine test",
+"Test à l'iode"
+],
+"把光照强度调到 0：没有氧气放出": [
+"Set the light to 0: no oxygen is released",
+"Réglez la lumière à 0 : pas d'oxygène libéré"
+],
+"加强光照，使速率达到此条件下上限的 85% 以上": [
+"Increase the light until the rate is over 85 % of the limit for these conditions",
+"Augmentez la lumière jusqu'à plus de 85 % de la limite dans ces conditions"
+],
+"强光（60 klx 以上）下，把二氧化碳浓度提高到 0.1% 以上，速率比空气（0.04%）中高 40% 以上": [
+"In strong light (60 klx or more) raise CO2 to 0.1 % or more: the rate is over 40 % higher than in air (0.04 %)",
+"En forte lumière (60 klx ou plus), portez le CO2 à 0,1 % ou plus : le débit dépasse de 40 % celui de l'air (0,04 %)"
+],
+"做淀粉检验：遮住左半，光照 3 小时以上，未遮光部分明显变蓝": [
+"Starch test: cover the left half, light for 3 hours or more: the uncovered part turns clearly blue",
+"Test de l'amidon : couvrez la moitié gauche, éclairez 3 h ou plus : la partie non couverte bleuit nettement"
+],
+"猎物的增长率 a": [
+"Prey growth rate a",
+"Taux de croissance des proies a"
+],
+"被捕食系数 b": [
+"Predation coefficient b",
+"Coefficient de prédation b"
+],
+"捕食者的死亡率 c": [
+"Predator death rate c",
+"Taux de mortalité des prédateurs c"
+],
+"转化率 d": [
+"Conversion rate d",
+"Taux de conversion d"
+],
+"猎物的初始数量": [
+"Initial number of prey",
+"Nombre initial de proies"
+],
+"捕食者的初始数量": [
+"Initial number of predators",
+"Nombre initial de prédateurs"
+],
+"初始数量": [
+"Initial number",
+"Nombre initial"
+],
+"增长率 r": [
+"Growth rate r",
+"Taux de croissance r"
+],
+"环境容纳量 K": [
+"Carrying capacity K",
+"Capacité d'accueil K"
+],
+"捕食者与猎物": [
+"Predators and prey",
+"Prédateurs et proies"
+],
+"种群的 S 形增长": [
+"S-shaped growth of a population",
+"Croissance en S d'une population"
+],
+"种群数量": [
+"Population size",
+"Taille de la population"
+],
+"只": [
+"",
+""
+],
+"当前增长速率": [
+"Current growth rate",
+"Taux de croissance actuel"
+],
+"只/单位时间": [
+"per time unit",
+"par unité de temps"
+],
+"增长最快时的数量 K/2": [
+"Size at fastest growth, K/2",
+"Taille de croissance maximale, K/2"
+],
+"猎物数量": [
+"Number of prey",
+"Nombre de proies"
+],
+"捕食者数量": [
+"Number of predators",
+"Nombre de prédateurs"
+],
+"平衡点（猎物，捕食者）": [
+"Equilibrium (prey, predators)",
+"Équilibre (proies, prédateurs)"
+],
+"小幅振荡的周期": [
+"Period of small oscillations",
+"Période des petites oscillations"
+],
+"猎物": [
+"Prey",
+"Proies"
+],
+"捕食者（×3）": [
+"Predators (×3)",
+"Prédateurs (×3)"
+],
+"把两个种群的初始数量设在平衡点：数量几乎不再变化（先算 c/d 和 a/b）": [
+"Set both initial numbers at the equilibrium: the numbers hardly change (work out c/d and a/b first)",
+"Placez les deux effectifs initiaux à l'équilibre : ils ne varient presque plus (calculez d'abord c/d et a/b)"
+],
+"增加捕食者的初始数量，使猎物数量的最低值降到 5 只以下": [
+"Raise the initial number of predators until the lowest prey number falls below 5",
+"Augmentez les prédateurs initiaux jusqu'à ce que le minimum de proies passe sous 5"
+],
+"S 形增长：使种群数量达到环境容纳量的 90% 以上": [
+"S-shaped growth: let the population reach over 90 % of the carrying capacity",
+"Croissance en S : laissez la population dépasser 90 % de la capacité d'accueil"
+],
+"一天中的时刻": [
+"Time of day",
+"Heure de la journée"
+],
+"时": [
+"h",
+"h"
+],
+"种子质量": [
+"Mass of seeds",
+"Masse des graines"
+],
+"植物的昼夜气体交换": [
+"Gas exchange of a plant, day and night",
+"Échanges gazeux d'une plante, jour et nuit"
+],
+"种子的呼吸": [
+"Respiration of seeds",
+"Respiration des graines"
+],
+"植物": [
+"Plant",
+"Plante"
+],
+"见光": [
+"In light",
+"À la lumière"
+],
+"全天用黑袋罩住": [
+"Covered with a black bag all day",
+"Couverte d'un sac noir toute la journée"
+],
+"种子": [
+"Seeds",
+"Graines"
+],
+"萌发的种子": [
+"Germinating seeds",
+"Graines en germination"
+],
+"煮熟的种子": [
+"Boiled seeds",
+"Graines bouillies"
+],
+"光合速率": [
+"Photosynthesis rate",
+"Taux de photosynthèse"
+],
+"个单位": [
+"units",
+"unités"
+],
+"呼吸速率": [
+"Respiration rate",
+"Taux de respiration"
+],
+"净氧气释放": [
+"Net oxygen release",
+"Libération nette d'oxygène"
+],
+"全天净积累": [
+"Net gain over the day",
+"Bilan net sur la journée"
+],
+"二氧化碳": [
+"Carbon dioxide",
+"Dioxyde de carbone"
+],
+"石灰水浑浊度": [
+"Limewater cloudiness",
+"Turbidité de l'eau de chaux"
+],
+"白天": [
+"Day",
+"Jour"
+],
+"夜晚": [
+"Night",
+"Nuit"
+],
+"澄清石灰水": [
+"Clear limewater",
+"Eau de chaux limpide"
+],
+"把时刻调到夜间：植物净吸收氧气（净氧气释放为负）": [
+"Set a time at night: the plant takes up oxygen (net release is negative)",
+"Choisissez une heure de nuit : la plante absorbe de l'oxygène (bilan négatif)"
+],
+"找到补偿点：光合速率与呼吸速率几乎相等（相差不到 0.6 个单位）": [
+"Find the compensation point: photosynthesis and respiration almost equal (less than 0.6 units apart)",
+"Trouvez le point de compensation : photosynthèse et respiration presque égales (moins de 0,6 unité d'écart)"
+],
+"把温度升到 30 °C 以上：呼吸速率达到 20 °C 时的 2 倍以上": [
+"Raise the temperature to 30 °C or more: respiration is at least twice that at 20 °C",
+"Montez à 30 °C ou plus : la respiration vaut au moins le double de celle à 20 °C"
+],
+"萌发的种子呼吸 30 分钟以上，石灰水明显变浑浊（浑浊度 50% 以上）": [
+"Germinating seeds respire for 30 minutes or more: the limewater turns clearly cloudy (over 50 %)",
+"Des graines en germination respirent 30 minutes ou plus : l'eau de chaux se trouble nettement (plus de 50 %)"
+],
+"A 对照": [
+"A control",
+"A témoin"
+],
+"E 你的": [
+"E yours",
+"E la vôtre"
+],
+"E 皿的温度": [
+"Temperature of dish E",
+"Température de la boîte E"
+],
+"E 皿的水分": [
+"Water in dish E",
+"Eau dans la boîte E"
+],
+"有水": [
+"With water",
+"Avec eau"
+],
+"没有水": [
+"No water",
+"Sans eau"
+],
+"E 皿的空气": [
+"Air in dish E",
+"Air dans la boîte E"
+],
+"有空气": [
+"With air",
+"Avec air"
+],
+"没有空气": [
+"No air",
+"Sans air"
+],
+"E 皿的种子": [
+"Seeds in dish E",
+"Graines de la boîte E"
+],
+"完整有活力": [
+"Whole and alive",
+"Entières et vivantes"
+],
+"煮熟的": [
+"Boiled",
+"Bouillies"
+],
+"对照组 A 萌发": [
+"Germinated in control A",
+"Germées dans le témoin A"
+],
+"E 皿萌发": [
+"Germinated in dish E",
+"Germées dans la boîte E"
+],
+"E 皿与对照不同的条件数": [
+"Conditions of E that differ from the control",
+"Conditions de E différentes du témoin"
+],
+"E 皿萌发率": [
+"Germination rate in dish E",
+"Taux de germination de la boîte E"
+],
+"水": [
+"Water",
+"Eau"
+],
+"空气": [
+"Air",
+"Air"
+],
+"适温": [
+"Good temperature",
+"Bonne température"
+],
+"活胚": [
+"Living embryo",
+"Embryon vivant"
+],
+"培养到种子萌发率达到 90% 以上（E 皿条件都适宜）": [
+"Culture until over 90 % of the seeds have germinated (all conditions in E suitable)",
+"Cultivez jusqu'à plus de 90 % de graines germées (toutes les conditions de E adaptées)"
+],
+"E 皿只缺水（其他条件适宜），培养 6 天以上，种子不萌发": [
+"Dish E lacks only water (the rest suitable): after 6 days or more the seeds do not germinate",
+"La boîte E ne manque que d'eau (le reste adapté) : après 6 jours ou plus, les graines ne germent pas"
+],
+"E 皿放入煮熟的种子（其他条件适宜），培养 6 天以上，种子不萌发": [
+"Dish E has boiled seeds (the rest suitable): after 6 days or more the seeds do not germinate",
+"La boîte E contient des graines bouillies (le reste adapté) : après 6 jours ou plus, elles ne germent pas"
+],
+"E 皿温度降到 5 °C 以下（其他条件适宜），培养 6 天以上，种子不萌发": [
+"Dish E below 5 °C (the rest suitable): after 6 days or more the seeds do not germinate",
+"Boîte E sous 5 °C (le reste adapté) : après 6 jours ou plus, les graines ne germent pas"
+],
+"捕食压力": [
+"Predation pressure",
+"Pression de prédation"
+],
+"树皮的污染程度（0 = 洁净，1 = 全黑）": [
+"Soot on the bark (0 = clean, 1 = black)",
+"Suie sur l'écorce (0 = propre, 1 = noire)"
+],
+"起初深色蛾所占比例": [
+"Starting share of dark moths",
+"Part initiale de papillons sombres"
+],
+"世代": [
+"Generation",
+"Génération"
+],
+"深色蛾所占比例": [
+"Share of dark moths",
+"Part de papillons sombres"
+],
+"浅色蛾所占比例": [
+"Share of light moths",
+"Part de papillons clairs"
+],
+"深色型的存活率": [
+"Survival of the dark form",
+"Survie de la forme sombre"
+],
+"浅色型的存活率": [
+"Survival of the light form",
+"Survie de la forme claire"
+],
+"树皮被污染（污染程度 0.8 以上）、捕食压力 0.5 以上：30 代后深色蛾超过 80%": [
+"Sooty bark (0.8 or more), predation 0.5 or more: after 30 generations over 80 % of the moths are dark",
+"Écorce noircie (0,8 ou plus), prédation 0,5 ou plus : après 30 générations plus de 80 % des papillons sont sombres"
+],
+"树皮洁净（污染程度 0.2 以下）、捕食压力 0.5 以上：30 代后深色蛾不到 2%": [
+"Clean bark (0.2 or less), predation 0.5 or more: after 30 generations under 2 % of the moths are dark",
+"Écorce propre (0,2 ou moins), prédation 0,5 ou plus : après 30 générations moins de 2 % des papillons sont sombres"
+],
+"捕食压力为 0：经过 10 代以上，两种蛾的比例不变": [
+"Predation 0: after 10 generations or more the proportions do not change",
+"Prédation nulle : après 10 générations ou plus, les proportions ne changent pas"
+],
+"空气相对湿度": [
+"Relative humidity of the air",
+"Humidité relative de l'air"
+],
+"风速": [
+"Wind speed",
+"Vitesse du vent"
+],
+"气温": [
+"Air temperature",
+"Température de l'air"
+],
+"叶面积": [
+"Leaf area",
+"Surface foliaire"
+],
+"土壤": [
+"Soil",
+"Sol"
+],
+"水分充足": [
+"Plenty of water",
+"Eau abondante"
+],
+"干旱": [
+"Dry",
+"Sec"
+],
+"气孔开度": [
+"Stomatal opening",
+"Ouverture des stomates"
+],
+"空气饱和差": [
+"Vapour pressure deficit",
+"Déficit de saturation de l'air"
+],
+"失水量": [
+"Water lost",
+"Eau perdue"
+],
+"与初始状态相比": [
+"Compared with the start",
+"Par rapport au départ"
+],
+"气孔": [
+"Stoma",
+"Stomate"
+],
+"下表皮": [
+"Lower epidermis",
+"Épiderme inférieur"
+],
+"叶肉": [
+"Mesophyll",
+"Mésophylle"
+],
+"把光照调到 0：气孔几乎关闭（开度不到 10%）": [
+"Set the light to 0: the stomata almost close (opening under 10 %)",
+"Réglez la lumière à 0 : les stomates se ferment presque (ouverture sous 10 %)"
+],
+"炎热、干燥、有风：使失水量达到初始状态的 2 倍以上": [
+"Hot, dry and windy: lose over twice as much water as at the start",
+"Chaud, sec et venteux : perdez plus de deux fois l'eau du départ"
+],
+"在光照充足时（光照 50% 以上），把空气相对湿度调到 90% 以上：失水量降到初始状态的 25% 以下": [
+"In good light (50 % or more) set humidity to 90 % or more: water loss falls below 25 % of the start",
+"Avec assez de lumière (50 % ou plus), portez l'humidité à 90 % ou plus : la perte tombe sous 25 % du départ"
+]
+}

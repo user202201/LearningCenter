@@ -123,11 +123,11 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   }
   for (const p of def.params) {
     const dec = p.dec ?? Math.max(0, Math.ceil(-Math.log10(p.step) - 1e-9));
-    const val = h("b", { class: "pl-val" });
+    const vn = h("span", {}), vu = h("span", { class: "pl-vu" }), val = h("b", { class: "pl-val" }, vn, vu);
     const input = h("input", { type: "range", class: "pl-range", id: `pl-${p.id}`, min: String(p.min), max: String(p.max), step: String(p.step), value: String(p.value), "aria-label": p.label }) as HTMLInputElement;
     input.addEventListener("input", () => set(p.id, Number(input.value)));
     const el = h("label", { class: "pl-ctl", "data-p": p.id }, h("span", { class: "pl-lab" }, h("span", {}, p.label), val), input);
-    rows.set(p.id, { el, when: p.when, update: () => { if (Number(input.value) !== st[p.id]) input.value = String(st[p.id]); val.textContent = `${fmt(st[p.id], dec)}${p.unit ? " " + p.unit : ""}`; } });
+    rows.set(p.id, { el, when: p.when, update: () => { if (Number(input.value) !== st[p.id]) input.value = String(st[p.id]); vn.textContent = fmt(st[p.id], dec); vu.textContent = p.unit ? " " + p.unit : ""; } });
   }
   // choices first, then the sliders (a choice changes which sliders are there)
   for (const [, r] of rows) ctlBox.append(r.el);

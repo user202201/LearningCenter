@@ -266,7 +266,7 @@ export const renderPhysics = () => import("./physlab").then((m) => m.renderLab(X
 export const renderPhysSim = (id: string) => import("./physlab").then((m) => m.renderSim(X, id));
 // ---------- the biology lab (simulations of the junior-high biology course), in its own module ----------
 /** the biology lab card is shown only when this is true: the lead sets it to true when the lab is finished, translated and tested (the card is hidden on purpose until then) */
-const BIO_READY = false;
+const BIO_READY = true;
 export const renderBio = () => import("./biolab").then((m) => m.renderLab(X));
 export const renderBioSim = (id: string) => import("./biolab").then((m) => m.renderSim(X, id));
 const BIO_ICON = `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M60 98C26 90 22 52 60 18C98 52 94 90 60 98Z" fill="#69db7c" stroke="#2d2230" stroke-width="5" stroke-linejoin="round"/><path d="M60 94V40M60 62L44 48M60 74L78 58" fill="none" stroke="#2d2230" stroke-width="4" stroke-linecap="round"/></svg>`;
