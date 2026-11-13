@@ -67,6 +67,21 @@ export function condKey(e: Expr): string {
 const exprStr = (e: Expr): string => (e.k === "n" ? String(e.v) : e.k === "v" ? e.name : e.k === "bin" ? `${exprStr(e.a)} ${e.op} ${exprStr(e.b)}` : condKey(e));
 const condText = (e: Expr): string => COND_LABEL[condKey(e)] ?? condKey(e);
 
+/**
+ * A tap on a small control. The action runs on pointerup (when the finger / mouse went down and up on the same control without moving), and a click that follows
+ * it is ignored. Some browsers swallow the click of a tap that comes right after a drag; a child must never have to tap twice. A keyboard press only sends a click,
+ * which still works.
+ */
+function tapOn<T extends HTMLElement>(el: T, fn: (e: Event) => void): T {
+  let down: { id: number; x: number; y: number } | null = null, handledAt = -1e9;
+  el.addEventListener("pointerdown", (e) => { down = { id: e.pointerId, x: e.clientX, y: e.clientY }; });
+  el.addEventListener("pointerup", (e) => {
+    if (down && down.id === e.pointerId && Math.hypot(e.clientX - down.x, e.clientY - down.y) < 12 && !(el as unknown as HTMLButtonElement).disabled) { handledAt = performance.now(); fn(e); }
+    down = null;
+  });
+  el.addEventListener("click", (e) => { if (performance.now() - handledAt < 600) return; fn(e); });
+  return el;
+}
 const span = (cls: string, text: string, user = false) => h("span", { class: cls + (user ? " user" : "") }, text);
 
 interface Scope { param?: string; vars: string[]; conds: Expr[]; funcs: { name: string; param?: string }[]; interactive: boolean; opts: EditorOpts; edit: (fn: () => void) => void; pick: (anchor: HTMLElement, items: PickItem[], onPick: (v: string) => void) => void }
