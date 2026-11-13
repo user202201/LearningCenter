@@ -247,10 +247,16 @@ export class MapView {
   }
   /** content point (in the map's own coordinates) of a client point */
   toContent(cx: number, cy: number): Pt { const [u, v] = this.toView(cx, cy); return [(u - this.tx) / this.k, (v - this.ty) / this.k]; }
+  /** the layers a touch can select: the ones that are drawn (a quiz sets `tapLayers`) */
+  tapLayers: string[] | null = null;
+  private visibleLayers(): string[] {
+    const on = (n: string) => this.groups.get(n)?.style.display !== "none";
+    return this.opts.kind === "china" ? ["prov", ...["river", "mountain", "lake", "area"].filter(on)] : ["country", "land", ...(on("ocean") ? ["ocean"] : [])];
+  }
   /** what is at a client point */
   hitAt(cx: number, cy: number, layers?: string[]): { hit: Hit | null; at: Pt } {
     const at = this.toContent(cx, cy), s = this.scale;
-    const hit = hitTest(this.shapes, at[0], at[1], 14 / s, s, layers);
+    const hit = hitTest(this.shapes, at[0], at[1], 14 / s, s, layers ?? this.tapLayers ?? this.visibleLayers());
     return { hit, at };
   }
   private bind() {

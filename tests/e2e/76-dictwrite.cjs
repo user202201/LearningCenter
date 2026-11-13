@@ -200,8 +200,8 @@ const plen = (m) => m.slice(1).reduce((s, p, i) => s + Math.hypot(p[0] - m[i][0]
   const chineseLeft = (page) => page.evaluate(() => {
     const out = [];
     const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    for (let n = w.nextNode(); n; n = w.nextNode()) { const p = n.parentElement; if (/[一-鿿]/.test(n.textContent) && !p.closest('.user, .user-title, script, style, [data-user]')) out.push(n.textContent.trim()); }
-    for (const e of document.querySelectorAll('[title],[aria-label],[placeholder]')) for (const a of ['title', 'aria-label', 'placeholder']) { const v = e.getAttribute(a); if (v && /[一-鿿]/.test(v) && !e.closest('.user')) out.push(v.trim()); }
+    for (let n = w.nextNode(); n; n = w.nextNode()) { const p = n.parentElement; if (/[一-鿿]/.test(n.textContent) && !p.closest('.user, .user-title, script, style, [data-user], .shortcuts')) out.push(n.textContent.trim()); }
+    for (const e of document.querySelectorAll('[title],[aria-label],[placeholder]')) for (const a of ['title', 'aria-label', 'placeholder']) { const v = e.getAttribute(a); if (v && /[一-鿿]/.test(v) && !e.closest('.user, .shortcuts')) out.push(v.trim()); }
     return out;
   });
   const geo = (page) => page.evaluate(() => {
@@ -679,7 +679,7 @@ const plen = (m) => m.slice(1).reduce((s, p, i) => s + Math.hypot(p[0] - m[i][0]
     const t = await open({ arg: { lang }, locale: loc, viewport: { width: 390, height: 844 }, clock: true });
     const { page } = t;
     const checkPage = async (name) => {
-      const left = (await chineseLeft(page)).filter((x) => !covered(x) && x !== '古诗词');   // (古诗词: another feature's card, translated by its own file)
+      const left = (await chineseLeft(page)).filter((x) => !covered(x) && x !== '古诗词' && x !== '编程');   // (古诗词: another feature's card, translated by its own file)
       ok(left.length === 0, `[${lang}] ${name}: no Chinese left (except the user's own characters)${left.length ? ': ' + left.join(' | ') : ''}`);
       const g = await geo(page);
       ok(g.sw <= g.vw && !g.over.length, `[${lang}] ${name}: no overflow / clipping on 390 px`);

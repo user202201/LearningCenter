@@ -33,6 +33,8 @@ export const MSG = {
   budget: "程序运行的步数太多，已经停止。",
   deep: "积木调用得太深，可能在调用自己。",
   nofunc: "找不到这个积木。",
+  noStar: "这里没有星星，不能拿。",
+  noLamp: "这里没有灯，不能点亮。",
 } as const;
 
 export const DIRS = [[0, -1], [1, 0], [0, 1], [-1, 0]] as const;
@@ -65,9 +67,9 @@ export const cloneState = (s: State): State => JSON.parse(JSON.stringify(s));
 const free = (w: GridWorld, x: number, y: number): boolean => x >= 0 && y >= 0 && x < w.w && y < w.h && w.cells[y][x] !== "#";
 const clampNum = (v: number): number => (Number.isFinite(v) ? Math.max(-1e9, Math.min(1e9, v)) : 0);
 
-interface Frame { blocks: Blk[]; i: number; kind: "seq" | "rep" | "call"; left?: number; param?: [string, number]; last?: Map<number, string> }
+interface Frame { blocks: Blk[]; i: number; kind: "seq" | "rep" | "call"; left?: number; param?: [string, number]; last?: Map<number, Set<string>> }
 export interface StepInfo { id: string; t: Blk["t"]; /** the answer of a check (if / while / until) */ yes?: boolean; crash?: boolean }
-export interface RunOpts { budget?: number; maxDepth?: number }
+export interface RunOpts { budget?: number; maxDepth?: number; /** taking / lighting where there is nothing is not a mistake (used to walk a route and find where the stars and lamps are) */ lenient?: boolean }
 export const DEFAULT_BUDGET = 20000;
 
 export class Machine {
@@ -81,10 +83,12 @@ export class Machine {
   private funcs = new Map<string, Func>();
   private budget: number;
   private maxDepth: number;
+  private lenient: boolean;
   constructor(private prog: Program, public world: World, init: State, opts: RunOpts = {}) {
     this.state = cloneState(init);
     this.budget = opts.budget ?? DEFAULT_BUDGET;
     this.maxDepth = opts.maxDepth ?? 60;
+    this.lenient = !!opts.lenient;
     for (const f of prog.funcs) this.funcs.set(f.name, f);
     this.stack.push({ blocks: prog.main, i: 0, kind: "seq" });
     this.settle();
@@ -163,8 +167,21 @@ export class Machine {
       }
       case "left": f.i++; st.rot -= 90; break;
       case "right": f.i++; st.rot += 90; break;
-      case "take": f.i++; if (st.stars[`${st.x},${st.y}`]) { delete st.stars[`${st.x},${st.y}`]; st.got++; } break;
-      case "light": f.i++; if (st.lamps[`${st.x},${st.y}`] === 0) { st.lamps[`${st.x},${st.y}`] = 1; st.lit++; } break;
+      case "take": {
+        f.i++;
+        if (w.kind !== "grid") break;
+        // taking where there is no star is a mistake (so that "if there is a star here" has a reason to exist)
+        if (!st.stars[`${st.x},${st.y}`]) { if (this.lenient) break; st.crashed = true; info.crash = true; this.halt("crash", MSG.noStar); return info; }
+        delete st.stars[`${st.x},${st.y}`]; st.got++; break;
+      }
+      case "light": {
+        f.i++;
+        if (w.kind !== "grid") break;
+        const lk = `${st.x},${st.y}`;
+        if (st.lamps[lk] === undefined) { if (this.lenient) break; st.crashed = true; info.crash = true; this.halt("crash", MSG.noLamp); return info; }
+        if (st.lamps[lk] === 0) { st.lamps[lk] = 1; st.lit++; }
+        break;
+      }
       case "fd": {
         f.i++;
         if (w.kind !== "turtle") break;
@@ -191,10 +208,11 @@ export class Machine {
         const go = b.t === "while" ? c : !c;
         info.yes = go;
         if (!go) { f.i++; break; }
-        const last = (f.last ??= new Map());
+        // the same state at the check of this loop as at an earlier check (every one said "go on"): it will go round for ever
+        const seen = ((f.last ??= new Map()).get(f.i) ?? new Set<string>());
         const k = this.key();
-        if (last.get(f.i) === k) { this.halt("infinite", MSG.infinite); return info; }
-        last.set(f.i, k);
+        if (seen.has(k)) { this.halt("infinite", MSG.infinite); return info; }
+        seen.add(k); f.last.set(f.i, seen);
         seq(b.body, false);
         break;
       }

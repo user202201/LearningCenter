@@ -14,7 +14,7 @@ export interface Note { w: string; x: string }
 export interface Poem { id: string; title: string; author: string; dynasty: string; grade: number; form: string; lines: string[]; notes: Note[]; gist: string; theme: string; excerpt?: boolean; check?: boolean }
 export interface Dynasty { n: string; years: string }
 /** `dynasties` are in time order; `cluster` = dynasties that blur into each other; `anonymous` = the "author" of the poems nobody knows the poet of */
-export interface Library { poems: Poem[]; byId: Map<string, Poem>; /** every line of every poem (the pool of wrong choices) */ allLines: string[]; /** the same lines without punctuation (to see at once whether a text is a real line) */ bareLines: Set<string>; dynasties: Dynasty[]; cluster: string[]; anonymous: string }
+export interface Library { poems: Poem[]; byId: Map<string, Poem>; /** every line of every poem (the pool of wrong choices) */ allLines: string[]; /** the same lines without punctuation (to see at once whether a text is a real line) */ bareLines: Set<string>; uniqueLines: string[]; dynasties: Dynasty[]; cluster: string[]; anonymous: string }
 
 export const POEMS_PER_DAY = 1;
 export const REVIEW_MAX = 3;
@@ -36,7 +36,7 @@ export async function loadPoems(): Promise<Library> {
   cache = makeLibrary(raw.poems, raw.dynasties, raw.cluster, raw.anonymous);
   return cache;
 }
-export const makeLibrary = (poems: Poem[], dynasties: Dynasty[], cluster: string[], anonymous: string): Library => ({ poems, byId: new Map(poems.map((p) => [p.id, p])), allLines: poems.flatMap((p) => p.lines), bareLines: new Set(poems.flatMap((p) => p.lines.map((l) => hanOf(l).join("")))), dynasties, cluster, anonymous });
+export const makeLibrary = (poems: Poem[], dynasties: Dynasty[], cluster: string[], anonymous: string): Library => ({ poems, byId: new Map(poems.map((p) => [p.id, p])), allLines: poems.flatMap((p) => p.lines), bareLines: new Set(poems.flatMap((p) => p.lines.map((l) => hanOf(l).join("")))), uniqueLines: [...new Set(poems.flatMap((p) => p.lines))], dynasties, cluster, anonymous });
 
 // ---------- small helpers ----------
 const HAN = /[一-鿿]/;
@@ -130,7 +130,8 @@ export const closeDynasties = (lib: Pick<Library, "dynasties" | "cluster">, a: s
 };
 const lineHan = (l: string): number => hanLen(l);
 const MIN_LINE = 4;
-const bare = (l: string): string => hanOf(l).join("");
+const bareCache = new Map<string, string>();
+const bare = (l: string): string => { let b = bareCache.get(l); if (b === undefined) { b = hanOf(l).join(""); bareCache.set(l, b); } return b; };
 
 /** the lines (of the whole library) that FOLLOW a line with this text (a line like "鱼戏莲叶东" can occur more than once) */
 function neighbours(lib: Library, line: string, dir: 1 | -1): Set<string> {
@@ -142,7 +143,7 @@ function neighbours(lib: Library, line: string, dir: 1 | -1): Set<string> {
 /** three wrong lines of the same length (a little different if there are not enough), none of them a right answer */
 function wrongLines(lib: Library, right: string, notAnswers: Set<string>, rnd: () => number): string[] | null {
   const len = lineHan(right);
-  const pool = [...new Set(lib.allLines)].filter((l) => !notAnswers.has(bare(l)) && bare(l) !== bare(right) && lineHan(l) >= 3);
+  const pool = lib.uniqueLines.filter((l) => !notAnswers.has(bare(l)) && bare(l) !== bare(right) && lineHan(l) >= 3);
   for (const spread of [0, 1, 2, 3]) {
     const cand = shuffleWith(pool.filter((l) => Math.abs(lineHan(l) - len) <= spread), rnd);
     const out: string[] = [];

@@ -342,7 +342,7 @@ a.linkbtn:active { transform: translateY(3px); box-shadow: none; }
 button.secbtn { min-width: 68px; min-height: 44px; padding: 6px 12px; border-radius: 999px; }
 button.secbtn.on { background: var(--kid); color: #fff; border-color: transparent; box-shadow: 0 3px 0 color-mix(in srgb, var(--kid) 70%, #000); }
 .mini-h.center { text-align: center; }
-#game-start, #idioms-btn, #idiom-scope, #sheet-print { font-size: 22px; min-height: 64px; border-radius: 22px; background: linear-gradient(180deg, color-mix(in srgb, var(--kid) 82%, #fff), var(--kid)); box-shadow: 0 6px 0 color-mix(in srgb, var(--kid) 70%, #000); }
+#game-start, #idioms-btn, #poems-btn, #idiom-scope, #sheet-print { font-size: 22px; min-height: 64px; border-radius: 22px; background: linear-gradient(180deg, color-mix(in srgb, var(--kid) 82%, #fff), var(--kid)); box-shadow: 0 6px 0 color-mix(in srgb, var(--kid) 70%, #000); }
 
 /* the game: a round 田字格 with a ring that runs down, a big tick and a big cross */
 .game { position: fixed; inset: 0; z-index: 35; display: flex; flex-direction: column; user-select: none; -webkit-user-select: none; touch-action: manipulation; animation: pop .25s both;
@@ -1619,7 +1619,7 @@ button.dw-hearbtn:active { transform: translateY(5px); box-shadow: none; }
 .pm-pill { min-height: 40px; padding: 4px 14px; border-radius: 999px; background: var(--kid-soft); border: 2px solid var(--kid-line); font: 700 17px var(--kai); color: #2d2230; box-shadow: none; }
 
 /* ===== math foundations: figures in the question (rule 52) ===== */
-.mq.has-fig { grid-template-columns: minmax(0, 1fr); align-content: center; gap: 8px; padding-top: 12px; padding-bottom: 12px; }
+.mq.has-fig { grid-template-columns: minmax(0, 1fr); align-content: center; gap: 8px; padding-top: 12px; padding-bottom: 12px; flex: none; }
 .mq-fig { display: flex; justify-content: center; max-width: 100%; --fh: min(24vh, 210px); }
 .mq-fig:empty { display: none; }
 .mq-fig svg { display: block; aspect-ratio: var(--ar, 1); height: auto; width: min(100%, calc(var(--fh) * var(--ar, 1))); }
@@ -2068,3 +2068,4 @@ button.dw-hearbtn:active { transform: translateY(5px); box-shadow: none; }
 .dw-switch { color: #2d2230; font-size: 17px; }
 .dw-count { font-size: 17px; }
 .dw-runtop { width: 100%; }
+#poems-btn { margin: 4px 0 8px; }

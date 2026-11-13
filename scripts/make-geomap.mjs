@@ -95,13 +95,13 @@ function polyDist(x, y, poly) {
   return ins ? d : -d;
 }
 /** the point inside the polygon that is farthest from its edge (the "label point"): a coarse grid, then refined round the best cell */
-function labelPoint(poly) {
+function labelPoint(poly, avoid) {
   const xs = poly[0].map((p) => p[0]), ys = poly[0].map((p) => p[1]);
   let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
   let best = { x: poly[0][0][0], y: poly[0][0][1], d: -Infinity };
   let step = Math.max(x1 - x0, y1 - y0) / 24;
   for (let pass = 0; pass < 5; pass++) {
-    for (let x = x0; x <= x1; x += step) for (let y = y0; y <= y1; y += step) { const d = polyDist(x, y, poly); if (d > best.d) best = { x, y, d }; }
+    for (let x = x0; x <= x1; x += step) for (let y = y0; y <= y1; y += step) { const d = avoid && avoid(x, y) ? -1e9 : polyDist(x, y, poly); if (d > best.d) best = { x, y, d }; }
     x0 = best.x - step; x1 = best.x + step; y0 = best.y - step; y1 = best.y + step; step /= 4;
   }
   return [Math.round(best.x), Math.round(best.y)];
@@ -232,8 +232,17 @@ const a1 = await load("ne_10m_admin_1_states_provinces");
     const ring = pts.slice(); ring.push(ring[0]);
     const clipped = pc.intersection([[ring]], chinaAll);   // (only the part inside China)
     const polys = simplifyPolys(Pall(clipped), 1, 20);
-    return { id, n, kind, lv, d: encode(polys), lp: labelPoint(polys.slice().sort((a, b) => Math.abs(ringArea(b[0])) - Math.abs(ringArea(a[0])))[0]) };
+    return { id, n, kind, lv, d: encode(polys), polys };
   });
+  // the label point of an area is put where no SMALLER area lies on top of it (a tap there then selects this area, not the desert inside the basin)
+  const areaSize = (a) => a.polys.reduce((s, p) => s + Math.abs(ringArea(p[0])), 0);
+  for (const a of areas) {
+    const smaller = areas.filter((b) => b !== a && areaSize(b) < areaSize(a));
+    const inSmaller = (x, y) => smaller.some((b) => b.polys.some((poly) => inRing(x, y, poly[0])));
+    const avoid = (x, y) => [[0, 0], [8, 0], [-8, 0], [0, 8], [0, -8]].some(([dx, dy]) => inSmaller(x + dx, y + dy));   // (with a margin of 8 units)
+    a.lp = labelPoint(a.polys.slice().sort((p, q) => Math.abs(ringArea(q[0])) - Math.abs(ringArea(p[0])))[0], avoid);
+  }
+  for (const a of areas) delete a.polys;
   const cities = [
     ...T.PROVINCES.filter((p) => p[0] !== "mo").map((p) => ({ id: p[0], n: p[5], cap: 1, p: P([p[10], p[11]]).map(Math.round) })),
     ...T.CITIES.map(([id, n, lo, la]) => ({ id, n, p: P([lo, la]).map(Math.round) })),

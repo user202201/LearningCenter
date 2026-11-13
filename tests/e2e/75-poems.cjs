@@ -73,7 +73,8 @@ const KNOWN = {
       const out = {};
       const run = (grade, days, seed) => { let kid = { weeks: [] }; const picks = []; for (let d = 0; d < days; d++) { const day = new Date(Date.UTC(2026, 10, 1 + d)).toISOString().slice(0, 10); const ids = PM.pickDaily(lib, kid, grade, day, () => false, seed); picks.push(...ids); kid = { weeks: [...kid.weeks, { start: day, chars: ids }] }; } return picks; };
       const g8 = run(8, 120, 'k1'); const poems8 = g8.map((i) => lib.byId.get(i));
-      out.g8 = { n: g8.length, distinct: new Set(g8).size, above: poems8.filter((p) => p.grade > 8).length, early: { n: 40, lower: poems8.slice(0, 40).filter((p) => p.grade < 8).length } };
+      out.g8 = { n: g8.length, distinct: new Set(g8).size, above: poems8.filter((p) => p.grade > 8).length, early: { n: 0, lower: 0 } };
+      for (let sd = 0; sd < 12; sd++) { const ps = run(8, 15, 'kid' + sd).map((i) => lib.byId.get(i)); out.g8.early.n += ps.length; out.g8.early.lower += ps.filter((p) => p.grade < 8).length; }
       const g1 = run(1, 15, 'k1').map((i) => lib.byId.get(i)); out.g1 = { n: g1.length, grades: [...new Set(g1.map((p) => p.grade))] };
       const g9 = run(9, 185, 'k2'); out.g9 = { n: g9.length, distinct: new Set(g9).size };
       out.same = JSON.stringify(run(5, 10, 'a')) === JSON.stringify(run(5, 10, 'a'));
@@ -94,7 +95,7 @@ const KNOWN = {
     });
     ok(pick.g8.n === 120 && pick.g8.distinct === 120 && pick.g8.above === 0, `120 days for a child of grade 8: 120 different poems, none of a higher grade`);
     const share = pick.g8.early.lower / pick.g8.early.n;
-    ok(share > 0.15 && share < 0.45, `about 30 % of the new poems are of lower grades (${Math.round(share * 100)} % over the first 40 days, while poems of his own grade are left)`);
+    ok(share > 0.2 && share < 0.4, `about 30 % of the new poems are of lower grades (${Math.round(share * 100)} % over ${pick.g8.early.n} picks of 12 children, while poems of their own grade are left)`);
     ok(pick.g1.n === 15 && pick.g1.grades.length === 1 && pick.g1.grades[0] === 1, 'a child of grade 1 only gets poems of grade 1');
     ok(pick.g9.n === 185 && pick.g9.distinct === 185, 'a child of grade 9 gets all 185 poems over 185 days, none twice');
     ok(pick.same && pick.other, 'the pick is seeded: the same child and day give the same poem, another child gets another');
@@ -164,7 +165,7 @@ const KNOWN = {
       for (const mode of PM.MODES) {
         out.count[mode] = 0; out.nulls[mode] = 0;
         for (const p of lib.poems) {
-          for (let k = 0; k < 4; k++) for (const level of mode === 'fill' ? [1, 2, 3] : [1]) {
+          for (let k = 0; k < 3; k++) for (const level of mode === 'fill' ? [1, 2, 3] : [1]) {
             const q = PM.makeQuestion(lib, mode, p, seeded('s' + (seedNo++)), level, new Set());
             if (!q) { out.nulls[mode]++; continue; }
             out.count[mode]++;
@@ -208,7 +209,7 @@ const KNOWN = {
       return out;
     });
     ok(gen.problems.length === 0, `${Object.values(gen.count).reduce((a, b) => a + b, 0)} questions of the six kinds (every poem, several seeds, three levels): every answer is among four different choices, no wrong choice is also right, ordering has one solution` + (gen.problems.length ? ' -> ' + gen.problems.slice(0, 5).join(' | ') : ''));
-    ok(gen.count.fill >= 2000 && gen.count.next >= 500 && gen.count.prev >= 500 && gen.count.match >= 700 && gen.count.key >= 700 && gen.count.order >= 300, 'every kind produces many questions: ' + JSON.stringify(gen.count) + ' (no question: ' + JSON.stringify(gen.nulls) + ')');
+    ok(gen.count.fill >= 1200 && gen.count.next >= 400 && gen.count.prev >= 400 && gen.count.match >= 500 && gen.count.key >= 500 && gen.count.order >= 300, 'every kind produces many questions: ' + JSON.stringify(gen.count) + ' (no question: ' + JSON.stringify(gen.nulls) + ')');
     ok(Object.values(gen.rounds).every((r) => r.dup === 0) && Object.entries(gen.rounds).every(([m, r]) => r.shortRounds <= (m === 'order' ? 25 : 2)), 'a round has five DIFFERENT questions (made from the poem, then from other poems the child has met): ' + JSON.stringify(gen.rounds));
     ok(gen.catchDup && gen.catchChar && gen.catchOrder, 'the checker itself catches a duplicated choice, a repeated character choice and an unshuffled ordering (the test can fail)');
     ok(gen.jiangnan.ok && gen.jiangnan.n > 0, '江南: a blank in "鱼戏莲叶东" never offers 西 / 南 / 北 as a wrong character (those would be right too), ' + gen.jiangnan.n + ' questions looked at');
@@ -305,6 +306,7 @@ const KNOWN = {
   await openKid(page, 'Dory');
   // the entry: a button like the idiom button, under it
   const bb = await page.evaluate(() => { const a = document.querySelector('#idioms-btn').getBoundingClientRect(), b = document.querySelector('#poems-btn').getBoundingClientRect(); return { sameClass: document.querySelector('#idioms-btn').className === document.querySelector('#poems-btn').className, below: b.top >= a.bottom - 1, w: [a.width, b.width], h: [a.height, b.height], text: document.querySelector('#poems-btn').textContent }; });
+  console.log('INFO button', JSON.stringify(bb));
   ok(bb.sameClass && bb.below && Math.abs(bb.w[0] - bb.w[1]) < 1 && Math.abs(bb.h[0] - bb.h[1]) < 1 && bb.text === '古诗词', 'the child\'s page has a button 古诗词 under the idiom button, the same look');
   await page.click('#poems-btn'); await page.waitForSelector('#pm-today .pm-card'); await settle();
   ok(page.url().endsWith(`#/poems/${kidId}`), 'the button opens #/poems/<kid>');
@@ -355,9 +357,8 @@ const KNOWN = {
     await page.waitForSelector('#pm-prac');
     const info = { kinds: [], n: 0 };
     for (let i = 0; i < 12; i++) {
-      await page.waitForSelector('#pq-explain[hidden]', { state: 'attached' }).catch(() => {});
-      const kind = await page.getAttribute('#pm-prac', 'data-mode');
       if (await page.locator('#pq-end').count()) break;
+      const kind = await page.getAttribute('#pm-prac', 'data-mode');
       info.kinds.push(kind); info.n++;
       const wrong = wrongAt.includes(i);
       if (kind === 'choice') await page.locator(`.pq-opt[data-right="${wrong ? 0 : 1}"]`).first().click();

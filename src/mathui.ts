@@ -62,6 +62,16 @@ export function fitQuestion(el: HTMLElement, box: HTMLElement): void {
     size *= 0.92;
     el.style.fontSize = `${size}px`;
   }
+  // a figure above the text: when the whole card does not fit the screen (a scratch paper under it, a low screen), the figure is made smaller
+  const fig = box.querySelector<HTMLElement>(".mq-fig"), body = box.closest<HTMLElement>(".mbody");
+  if (fig && fig.firstElementChild && body) {
+    fig.style.removeProperty("--fh");
+    for (let i = 0; i < 16 && body.scrollHeight > body.clientHeight + 1; i++) {
+      const cur = fig.offsetHeight;
+      if (cur <= 60) break;
+      fig.style.setProperty("--fh", `${Math.max(60, cur * 0.92)}px`);
+    }
+  }
 }
 
 export function openMathGame(o: MathGameOpts): void {

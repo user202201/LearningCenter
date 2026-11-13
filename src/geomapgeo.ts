@@ -82,7 +82,7 @@ export function edgeDist(s: Shape, x: number, y: number): number {
   return d;
 }
 /** where the magnified dot of a small region sits on screen: round the region's label point, moved by a fixed number of pixels (so that two close regions do not overlap) */
-export const DOT_OFFSET: Record<string, Pt> = { bj: [-30, -22], tj: [30, -10], sh: [34, 8], hk: [30, 22], mo: [-28, 26] };
+export const DOT_OFFSET: Record<string, Pt> = { bj: [-30, -22], tj: [30, -10], sh: [34, 8], hk: [34, 12], mo: [6, 40] };
 /** the radius of a dot in pixels */
 export const DOT_R = 13;
 /** the point of the dot in view units, at `s` pixels per view unit */

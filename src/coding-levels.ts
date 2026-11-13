@@ -79,7 +79,7 @@ export function traceRoute(prog: Program, dir: number, init?: Record<string, num
   const N = 121, rows = Array.from({ length: N }, () => ".".repeat(N));
   const { world, state } = makeGrid(rows, { x: 60, y: 60, dir });
   state.vars = { ...(init ?? {}) };
-  const m = new Machine(prog, world, state, { budget: 50000 });
+  const m = new Machine(prog, world, state, { budget: 50000, lenient: true });
   const cells: Cell[] = [{ x: 60, y: 60 }], takes = new Set<string>(), lights = new Set<string>();
   const seen = new Set([key(cells[0])]);
   for (;;) {
@@ -249,14 +249,14 @@ const W2: LevelSpec[] = [
   S("w2-03", 2, 3, "楼梯", { ...R1, goal: F, palette: ["move", "left", "right", "repeat"], solution: "repeat 4 { move left move right }", max: 6 }),
   S("w2-04", 2, 4, "收集一排", { ...R1, goal: FS, palette: ["move", "take", "repeat"], solution: "repeat 5 { move take } move", max: 6 }),
   S("w2-05", 2, 5, "隔一格拿星星", { ...R1, goal: FS, palette: ["move", "take", "repeat"], solution: "repeat 3 { move move take } move", max: 6 }),
-  S("w2-06", 2, 6, "两个循环", { ...R1, goal: F, palette: ["move", "right", "repeat"], solution: "repeat 3 { move } right repeat 3 { move }", max: 6 }),
+  S("w2-06", 2, 6, "两个循环", { ...R1, goal: F, palette: ["move", "right", "repeat"], solution: "repeat 3 { move } right repeat 2 { move }", max: 6 }),
   S("w2-07", 2, 7, "方形一圈", { ...R1, goal: { stars: "all" }, palette: ["move", "right", "take", "repeat"], solution: "repeat 4 { repeat 3 { move } take right }", max: 6, lesson: "nest" }),
   S("w2-08", 2, 8, "直到终点", { family: "line", goal: F, palette: ["move", "repeat", "until"], conds: ["onFlag"], solution: "until onFlag { move }", max: 3, lesson: "until" }),
   S("w2-09", 2, 9, "不知道几级台阶", { family: "stairs", goal: F, palette: ["move", "left", "right", "repeat", "until"], conds: ["onFlag"], solution: "until onFlag { move left move right }", max: 6 }),
   S("w2-10", 2, 10, "一路拿星星", { family: "starsline", goal: FS, palette: ["move", "take", "repeat", "until"], conds: ["onFlag"], solution: "until onFlag { take move }", max: 4 }),
   S("w2-11", 2, 11, "两行星星", { ...R1, goal: { stars: "all" }, palette: ["move", "right", "take", "repeat"], solution: "repeat 2 { repeat 3 { take move } take right move right }", max: 9 }),
   S("w2-12", 2, 12, "星星楼梯", { ...R1, goal: FS, palette: ["move", "left", "right", "take", "repeat"], solution: "repeat 4 { move take left move right }", max: 7 }),
-  S("w2-13", 2, 13, "绕圈拿星", { ...R1, goal: { stars: "all" }, palette: ["move", "right", "take", "repeat"], solution: "repeat 4 { take move take move right }", max: 7 }),
+  S("w2-13", 2, 13, "绕圈拿星", { ...R1, goal: { stars: "all" }, palette: ["move", "right", "take", "repeat"], solution: "repeat 4 { repeat 2 { move take } right }", max: 7 }),
   S("w2-14", 2, 14, "循环大挑战", { ...R1, boss: true, goal: { flag: true, lights: "all" }, palette: G2, solution: "repeat 3 { move left move right } light repeat 3 { move }", max: 9 }),
 ];
 const WIND = "if pathAhead { move } else { if pathLeft { left } else { right } }";
@@ -279,7 +279,7 @@ const W3: LevelSpec[] = [
 ];
 const W4: LevelSpec[] = [
   S("w4-01", 4, 1, "第一个积木", { ...R1, goal: { stars: "all" }, palette: ["move", "take", "call"], funcs: [{ name: "step" }], solution: "def step { move take } step step step", max: 5, lesson: "func" }),
-  S("w4-02", 4, 2, "调用多次", { ...R1, goal: F, palette: ["move", "right", "call"], funcs: [{ name: "corner" }], solution: "def corner { move move right } corner corner corner corner", max: 8 }),
+  S("w4-02", 4, 2, "调用多次", { ...R1, goal: { stars: "all" }, palette: ["move", "right", "take", "call"], funcs: [{ name: "corner" }], solution: "def corner { move move take right } corner corner corner corner", max: 10 }),
   S("w4-03", 4, 3, "积木里的循环", { ...R1, goal: F, palette: ["move", "left", "right", "repeat", "call"], funcs: [{ name: "side" }], solution: "def side { repeat 3 { move } } side right side left side", max: 7 }),
   S("w4-04", 4, 4, "拐角收集", { ...R1, goal: { stars: "all" }, palette: ["move", "take", "left", "right", "call"], funcs: [{ name: "pair" }], solution: "def pair { take move take move } pair right pair left pair", max: 10 }),
   S("w4-05", 4, 5, "带数字的积木", { ...R1, goal: F, palette: ["move", "left", "right", "repeat", "call"], funcs: [{ name: "walk", param: "n" }], solution: "def walk(n) { repeat n { move } } walk(2) right walk(3) left walk(4)", max: 7, lesson: "param" }),
@@ -302,7 +302,7 @@ const W5: LevelSpec[] = [
   S("w5-07", 5, 7, "拿够就停", { family: "starcount", goal: { stars: 3, vars: { count: 3 } }, palette: ["move", "take", "while", "if", "set", "change"], vars: ["count"], conds: ["count < 3", "starHere", "count < 4"], solution: "while count < 3 { if starHere { take change count by 1 } move }", max: 7 }),
   S("w5-08", 5, 8, "够了才点灯", { family: "lampcount", goal: { stars: "all", lights: 1 }, palette: ["move", "take", "light", "repeat", "if", "change"], vars: ["count"], conds: ["starHere", "count >= 5", "count >= 3"], solution: "repeat 6 { if starHere { take change count by 1 } move } if count >= 5 { light }", max: 8 }),
   S("w5-09", 5, 9, "加倍", { ...R1, goal: F, palette: ["move", "right", "repeat", "set"], vars: ["n"], solution: "set n = 1 repeat 3 { repeat n { move } right set n = n * 2 }", max: 7 }),
-  S("w5-10", 5, 10, "综合", { ...R1, boss: true, goal: { flag: true, stars: "all", lights: "all", vars: { score: 8 } }, palette: VAR, vars: ["score"], conds: ["score >= 8", "score >= 4"], solution: "repeat 4 { move take change score by 2 } if score >= 8 { light } move", max: 9 }),
+  S("w5-10", 5, 10, "综合", { ...R1, boss: true, goal: { flag: true, stars: "all", lights: "all", vars: { score: 8 } }, palette: VAR, vars: ["score"], conds: ["score >= 8", "score >= 4"], solution: "repeat 4 { move take change score by 2 } move if score >= 8 { light } move", max: 10 }),
 ];
 const T = ["fd", "tl", "tr"] as PaletteKind[];
 const W6: LevelSpec[] = [
@@ -317,7 +317,7 @@ const W6: LevelSpec[] = [
   S("w6-09", 6, 9, "两个正方形", { kind: "turtle", palette: [...T, "repeat", "penup", "pendown"], solution: "repeat 4 { fd 30 tr 90 } penup tr 90 fd 50 pendown repeat 4 { fd 30 tr 90 }", max: 11, note: "边长 30。两个正方形之间相隔 50。", lesson: "pen" }),
   S("w6-10", 6, 10, "彩色图形", { kind: "turtle", colors: true, palette: [...T, "repeat", "penup", "pendown", "color"], solution: "color red repeat 4 { fd 40 tr 90 } penup tr 90 fd 60 pendown color blue repeat 3 { fd 40 tr 120 }", max: 13, note: "红色正方形和蓝色三角形，边长都是 40。" }),
   S("w6-11", 6, 11, "五角星", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 5 { fd 80 tr 144 }", max: 4, note: "每条线长 80。" }),
-  S("w6-12", 6, 12, "螺旋", { kind: "turtle", palette: [...T, "repeat", "set", "change"], vars: ["n"], solution: "set n = 5 repeat 16 { fd n tr 90 change n by 5 }", max: 6, note: "线长从 5 开始，每次增加 5。" }),
+  S("w6-12", 6, 12, "螺旋", { kind: "turtle", palette: [...T, "repeat", "set", "change"], vars: ["n"], solution: "set n = 5 repeat 16 { fd n tl 90 change n by 5 }", max: 6, note: "线长从 5 开始，每次增加 5。" }),
   S("w6-13", 6, 13, "花", { kind: "turtle", palette: [...T, "repeat"], solution: "repeat 12 { repeat 4 { fd 40 tr 90 } tr 30 }", max: 6, note: "正方形边长 40。" }),
   S("w6-14", 6, 14, "旋转的三角形", { kind: "turtle", boss: true, colors: true, palette: [...T, "repeat", "color"], solution: "repeat 6 { color red repeat 3 { fd 45 tr 120 } tr 30 color blue repeat 3 { fd 45 tr 120 } tr 30 }", max: 12, note: "三角形边长 45，红色和蓝色轮流出现。" }),
 ];
@@ -482,7 +482,7 @@ function randomRoom(r: () => number): { rows: string[]; start: { x: number; y: n
   for (let i = 0; i < nLamp; i++) place("L");
   return { rows: g.map((row) => row.join("")), start: { ...s, dir: rint(r, 0, 3) }, goal: { flag: true, ...(nStars ? { stars: "all" as const } : {}), ...(nLamp ? { lights: "all" as const } : {}) } };
 }
-const UNITS2 = ["move move right", "move right move left", "move take right", "move left move right", "move move take", "move take move right", "move move left", "move take move take right", "take move left move right"];
+const UNITS2 = ["move move right", "move right move left", "move take right", "move left move right", "move move take", "move take move right", "move move left", "move take move take right", "move take left move right", "move move right move left", "move right move move", "move take move left", "move move take right", "move left move left move right", "move take move take", "move right move take"];
 
 /** a random solvable level of world 1, 2 or 3; never the same map as `avoid` (the key of the one before) */
 export function randomLevel(world: 1 | 2 | 3, r: () => number, avoid = ""): Challenge {
@@ -500,7 +500,7 @@ export function randomLevel(world: 1 | 2 | 3, r: () => number, avoid = ""): Chal
       return { level: lv, key: k };
     }
     if (world === 2) {
-      const unit = UNITS2[rint(r, 0, UNITS2.length - 1)], k = rint(r, 3, 6), dir = rint(r, 0, 3);
+      const unit = UNITS2[rint(r, 0, UNITS2.length - 1)], k = rint(r, 3, 7), dir = rint(r, 0, 3);
       const sol = `repeat ${k} { ${unit} }`;
       const prog = parse(sol), hasTake = unit.includes("take");
       const goal: Goal = hasTake ? { stars: "all" } : { flag: true };

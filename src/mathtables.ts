@@ -35,7 +35,7 @@ export function pickRound(doc: TablesDoc, n = ROUND, rnd: () => number = Math.ra
   const cells: { a: number; b: number; w: number }[] = [];
   for (let a = 1; a <= 9; a++) for (let b = 1; b <= 9; b++) {
     const s = doc.topics[cellKey(a, b)];
-    let w = isWeak(s) ? 8 : !s ? 2 : s.right >= 3 && s.wrong === 0 ? 0.6 : 1.2;
+    let w = isWeak(s) ? 30 : !s ? 2 : s.right >= 3 && s.wrong === 0 ? 0.6 : 1.2;
     if (a === 1 || b === 1) w *= 0.12;
     cells.push({ a, b, w });
   }

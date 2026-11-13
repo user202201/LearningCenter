@@ -296,6 +296,7 @@ export async function renderMap(X: Ctx): Promise<void> {
           mapBox.replaceChildren(qview.el);
         }
         qview.unmark(); qview.dimOthers(false); qview.reset();
+        qview.tapLayers = q.layers ?? [];
         qview.el.classList.toggle("gmap-notap", q.type !== "tap");
         if (q.lit) { qview.mark(q.map === "china" ? "prov" : "country", q.lit, "lit"); qview.dimOthers(true); }
         // the layers of the land forms are only shown when they are what is asked
