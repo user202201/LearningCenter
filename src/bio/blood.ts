@@ -64,9 +64,8 @@ export const def: SimDef = {
     { label: "心输出量", value: fmt(Mo.output(s.hr), 1), unit: "L/分钟" }, { label: "瓣膜", value: Mo.valveText(Mo.stage(s.frac)) }],
   draw(c, w, h, s) {
     if (s.mode === 0) heart(c, s);
-    else if (s.mode === 1) { loop(c, 160, 190, 120, 120, s.frac * 2, 0.5, "肺循环", "肺静脉（动脉血）", "肺动脉（静脉血）"); loop(c, 470, 190, 120, 120, s.frac * 2, 0.5, "体循环", "主动脉（动脉血）", "腔静脉（静脉血）"); txt(c, "", 0, 0, 1, "#fff"); }
+    else if (s.mode === 1) { loop(c, 160, 190, 120, 120, s.frac * 2, 0.5, "肺循环", "肺静脉（动脉血）", "肺动脉（静脉血）"); loop(c, 470, 190, 120, 120, s.frac * 2, 0.5, "体循环", "主动脉（动脉血）", "腔静脉（静脉血）"); }
     else abo(c, s);
-    void ell;
   },
   tasks: [
     { id: "vsys", text: "找到心室收缩期：动脉瓣打开，房室瓣关闭", check: (s) => s.mode === 0 && Mo.stage(s.frac) === 1 },

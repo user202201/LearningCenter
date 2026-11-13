@@ -35,7 +35,6 @@ export const def: SimDef = {
     for (const y0 of [-30, 0, 30]) { line(c, 20, cy - (y0 * spread) / 30 * 0 - 0, LENS_X, cy + y0, "#f08c00", 2.5); if (img < 2000) line(c, LENS_X, cy + y0, ix, cy, "#f08c00", 2.5); }
     circle(c, 20, cy, 9, COL.green, COL.ink, 3); lab(c, `${fmt(s.u, 1)} m`, 20, cy - 24, 16, COL.green, "left");
     if (img < 2000) circle(c, ix, cy, 6, COL.red, COL.ink, 2);
-    rect(c, 8, 340, 624, 0.1, "", null, 0, 0); txt(c, "", 0, 0, 1, "#fff");
   },
   tasks: [
     { id: "far", text: "正常眼（近视 0 D）看 5 m 以外的物体：成像清晰（清晰度 95% 以上）", check: (s) => s.myopia === 0 && s.u >= 5 && s.glass === 0 && Mo.sharpness(s.u, s.glass, s.myopia) >= 0.95 },

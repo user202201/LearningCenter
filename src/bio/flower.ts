@@ -51,7 +51,6 @@ export const def: SimDef = {
     if (st >= 4 && !fruit) lab(c, wither && !fert ? "没有受精：不结果" : "子房膨大", x, 440, 17, COL.red);
     if (st === 0) { for (const [t, tx, ty, lx, ly] of [["花瓣", 90, 150, 140, 200], ["花药", 90, 100, 190, 188], ["柱头", 400, 100, 258, 192], ["花柱", 400, 170, 246, 240], ["子房", 400, 240, 270, 300], ["胚珠", 400, 310, 256, 312]] as [string, number, number, number, number][]) { line(c, tx + (tx < 240 ? 36 : -36), ty, lx, ly, COL.grey, 2); lab(c, t, tx, ty, 19, COL.purple); } }
     lab(c, Mo.STAGES[st], 620, 24, 19, COL.purple, "right");
-    txt(c, `${s.ov}`, 620, 60, 1, "#fff");
   },
   tasks: [
     { id: "full", text: "胚珠数不少于 4，花粉数不少于胚珠数，发育到果实阶段：每个胚珠都发育成种子", check: (s) => s.ov >= 4 && s.pollen >= s.ov && s.pol === 1 && s.stage === 5 },

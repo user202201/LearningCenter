@@ -58,7 +58,8 @@ export async function renderHome() {
     h("button", { class: "sci-ref", id: "open-map", onclick: () => (location.hash = "#/science/map") }, h("b", {}, "地图"), h("span", { class: "muted small" }, "中国 · 世界 · 国旗")),
     h("button", { class: "sci-ref sp-card", id: "open-space", onclick: () => (location.hash = "#/science/space") }, spaceIcon(), h("b", {}, "天文"), h("span", { class: "muted small" }, "太阳系 · 月相 · 星空")),
     h("button", { class: "sci-ref", id: "open-physics", onclick: () => (location.hash = "#/science/physics") }, h("span", { class: "sci-ref-ico", "aria-hidden": "true", innerHTML: PHYS_ICON }), h("b", {}, "物理实验室"), h("span", { class: "muted small" }, "初中物理 · 动手做实验")),
-    h("button", { class: "sci-ref chem-homecard", id: "open-chem", onclick: () => (location.hash = "#/science/chem") }, chemIconEl(), h("b", {}, "化学"), h("span", { class: "muted small" }, "配平 · 计算 · 酸碱盐 · 气体")));
+    h("button", { class: "sci-ref chem-homecard", id: "open-chem", onclick: () => (location.hash = "#/science/chem") }, chemIconEl(), h("b", {}, "化学"), h("span", { class: "muted small" }, "配平 · 计算 · 酸碱盐 · 气体")),
+    h("button", { class: "sci-ref", id: "open-bio", onclick: () => (location.hash = "#/science/bio") }, h("span", { class: "sci-ref-ico", "aria-hidden": "true", innerHTML: BIO_ICON }), h("b", {}, "生物实验室"), h("span", { class: "muted small" }, "初中生物 · 动手做实验")));
   const list = h("div", { class: "kids" });
   for (const k of kids) {
     const n = allIds(cache.get(k.id) ?? M.EMPTY_KID).length;
@@ -263,6 +264,10 @@ export const renderPlanet = (id: string) => import("./space").then((m) => m.rend
 // ---------- the physics lab (simulations of the junior-high physics course), in its own module ----------
 export const renderPhysics = () => import("./physlab").then((m) => m.renderLab(X));
 export const renderPhysSim = (id: string) => import("./physlab").then((m) => m.renderSim(X, id));
+// ---------- the biology lab (simulations of the junior-high biology course), in its own module ----------
+export const renderBio = () => import("./biolab").then((m) => m.renderLab(X));
+export const renderBioSim = (id: string) => import("./biolab").then((m) => m.renderSim(X, id));
+const BIO_ICON = `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M60 98C26 90 22 52 60 18C98 52 94 90 60 98Z" fill="#69db7c" stroke="#2d2230" stroke-width="5" stroke-linejoin="round"/><path d="M60 94V40M60 62L44 48M60 74L78 58" fill="none" stroke="#2d2230" stroke-width="4" stroke-linecap="round"/></svg>`;
 const PHYS_ICON = `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="10" fill="#7048e8"/><g fill="none" stroke="#2d2230" stroke-width="5"><ellipse cx="60" cy="60" rx="46" ry="18"/><ellipse cx="60" cy="60" rx="46" ry="18" transform="rotate(60 60 60)"/><ellipse cx="60" cy="60" rx="46" ry="18" transform="rotate(120 60 60)"/></g></svg>`;
 
 // ---------- the periodic table ----------

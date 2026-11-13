@@ -34,7 +34,6 @@ export const def: SimDef = {
     c.beginPath(); r.I.forEach((v, i) => { const x = Q.X(i), y = Q.Y(Math.min(100, v)); if (i) c.lineTo(x, y); else c.moveTo(x, y); }); c.strokeStyle = COL.blue; c.lineWidth = 4; c.stroke();
     circle(c, Q.X(s.t), Q.Y(Math.min(100, r.I[s.t])), 7, COL.blue, COL.ink, 3);
     lab(c, "血糖", 80, 18, 18, COL.red, "left"); lab(c, "胰岛素", 80, 238, 18, COL.blue, "left"); lab(c, "尿糖线", 610, P.Y(Mo.KIDNEY) - 10, 14, COL.orange, "right");
-    void rect; void txt;
   },
   tasks: [
     { id: "meal", text: "健康的人吃 100 g 糖类：3 小时（180 分钟）后血糖回到 7.8 mmol/L 以下", check: (s) => s.dia === 0 && s.carbs >= 100 && run(s).G[180] < 7.8 },

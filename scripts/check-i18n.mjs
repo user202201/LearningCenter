@@ -12,7 +12,19 @@ const SKIP_FILES = new Set(["coding-infomodel.ts", "coding-textlevels.ts", "codi
 
 const texts = new Map();
 // the games (src/games/*.ts, one module each) are checked too
-const files = [...fs.readdirSync(dir), ...fs.readdirSync(path.join(dir, "games")).map((x) => `games/${x}`)];
+// the physics lab (src/phys) and the biology lab (src/bio) too: their UI texts (labels, tasks, readouts, canvas labels) are translated; their CONTENT (lessons, quiz questions and the tables only the quizzes use) is not, it is shown in `user` boxes
+const files = [...fs.readdirSync(dir), ...["games", "phys", "bio"].flatMap((d) => (fs.existsSync(path.join(dir, d)) ? fs.readdirSync(path.join(dir, d)).map((x) => `${d}/${x}`) : []))];
+const CONTENT_TABLES = new Set(["ROLES", "DEV", "GLANDS", "LACK", "EXAMPLES", "PRODUCTS", "LINKS", "GENO", "defs", "VALVE_TEXT_QUIZ"]);
+const isContent = (n, f) => {
+  if (!/^(phys|bio)\//.test(f)) return false;
+  for (let p = n.parent; p; p = p.parent) {
+    if (ts.isCallExpression(p) && ts.isIdentifier(p.expression) && /^(makeQ|numQ)$/.test(p.expression.text)) return true;
+    if (ts.isPropertyAssignment(p) && /^(lesson|formulas|why)$/.test(p.name.getText())) return true;
+    if (ts.isFunctionDeclaration(p) && p.name?.text === "quiz") return true;
+    if (ts.isVariableDeclaration(p) && p.name.getText && CONTENT_TABLES.has(p.name.getText()) && /^(phys|bio)\//.test(f)) return true;
+  }
+  return false;
+};
 for (const f of files.filter((x) => x.endsWith(".ts") && !x.endsWith(".d.ts") && !SKIP_FILES.has(x))) {
   const sf = ts.createSourceFile(f, fs.readFileSync(path.join(dir, f), "utf8"), ts.ScriptTarget.Latest, true);
   const add = (t) => {
@@ -22,8 +34,8 @@ for (const f of files.filter((x) => x.endsWith(".ts") && !x.endsWith(".d.ts") &&
     else texts.set(t.trim(), f);
   };
   (function walk(n) {
-    if (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) add(n.text);
-    else if (ts.isTemplateExpression(n)) add(n.templateSpans.reduce((s, sp, i) => s + `{${i}}` + sp.literal.text, n.head.text));
+    if (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) { if (!isContent(n, f)) add(n.text); }
+    else if (ts.isTemplateExpression(n)) { if (!isContent(n, f)) add(n.templateSpans.reduce((s, sp, i) => s + `{${i}}` + sp.literal.text, n.head.text)); }
     ts.forEachChild(n, walk);
   })(sf);
 }

@@ -54,10 +54,8 @@ export const def: SimDef = {
     } else {
       const P = axes(c, 330, 50, 290, 240, 6.28, Mo.V0 + 3200, "phase", "V (mL)", Mo.V0 - 100, 4);
       curve(c, P, (x) => Mo.volAt(x, s.Vt), COL.blue, 6.28, 100); circle(c, P.X(s.ph), P.Y(V(s)), 8, COL.red, COL.ink, 3);
-      arrow(c, 300, 40, 300, 40 + (Mo.flow(s.ph, s.Vt, s.f) > 0 ? 40 : -0), COL.green, 1);
     }
     if (s.mode === 1) { const fl = Mo.flow(s.ph, s.Vt, s.f); if (Math.abs(fl) > 20) arrow(c, 155, fl > 0 ? 6 : 36, 155, fl > 0 ? 36 : 6, fl > 0 ? COL.green : COL.red, 5); }
-    txt(c, "", 0, 0, 1, "#fff");
   },
   tasks: [
     { id: "vol", text: "收缩膈肌并使肋骨上升，让胸廓容积达到 3000 mL 以上", check: (s) => s.mode === 0 && Mo.vol(s.dd, s.rr) >= 3000 },

@@ -36,7 +36,6 @@ export const def: SimDef = {
     curve(c, P, (x) => tr(s)[Math.min(50, Math.round(x))] * 100, COL.ink, 50, 50, 4);
     circle(c, P.X(s.gen), P.Y(p * 100), 8, COL.red, COL.ink, 3);
     lab(c, "深色蛾所占比例", 360, 30, 16, COL.grey, "left");
-    txt(c, "", 0, 0, 1, "#fff");
   },
   tasks: [
     { id: "soot", text: "树皮被污染（污染程度 0.8 以上）、捕食压力 0.5 以上：30 代后深色蛾超过 80%", check: (s) => s.s >= 0.8 && s.e >= 0.5 && s.gen >= 30 && tr(s)[s.gen] > 0.8 },

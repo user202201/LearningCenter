@@ -56,7 +56,7 @@ export const def: SimDef = {
   },
   tasks: [
     { id: "dark", text: "把光照强度调到 0：没有氧气放出", check: (s) => s.mode === 0 && s.I === 0 },
-    { id: "sat", text: "加强光照，使速率达到此条件下上限的 90% 以上", check: (s) => s.mode === 0 && Mo.limit(s.C, s.T) > 0 && Mo.rate(s.I, s.C, s.T) >= 0.9 * Mo.limit(s.C, s.T) },
+    { id: "sat", text: "加强光照，使速率达到此条件下上限的 85% 以上", check: (s) => s.mode === 0 && Mo.limit(s.C, s.T) > 0 && Mo.rate(s.I, s.C, s.T) >= 0.85 * Mo.limit(s.C, s.T) },
     { id: "co2", text: "强光（60 klx 以上）下，把二氧化碳浓度提高到 0.1% 以上，速率比空气（0.04%）中高 40% 以上", check: (s) => s.mode === 0 && s.I >= 60 && s.C >= 0.1 && Mo.rate(s.I, s.C, s.T) >= 1.4 * Mo.rate(s.I, 0.04, s.T) },
     { id: "starch", text: "做淀粉检验：遮住左半，光照 3 小时以上，未遮光部分明显变蓝", check: (s) => s.mode === 1 && s.cover === 1 && s.hours >= 3 && Mo.starch(Mo.rate(s.I, s.C, s.T), s.hours) > 0.6 },
   ],
