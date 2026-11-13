@@ -13,7 +13,7 @@ import { sfx, setMuted } from "./games/sfx";
 import type { Ctx } from "./english";
 import * as L from "./pklogic";
 import * as C from "./pk-chinese";
-import { TROPHY, CROWN, FACES, startFx, countUp, fanfare, trombone, jingle } from "./pkfx";
+import { TROPHY, CROWN, CLOUD, FACES, startFx, countUp, fanfare, trombone, jingle } from "./pkfx";
 
 let X!: Ctx;
 export const initPk = (c: Ctx) => { X = c; };
