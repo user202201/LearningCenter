@@ -313,6 +313,9 @@ const GASES = [
   { f: "H2", n: "氢气", rx: ["Zn+H2SO4=ZnSO4+H2↑"], gen: { "Zn+H2SO4=ZnSO4+H2↑": "B" }, col: ["C", "E"], why: "氢气难溶于水，密度比空气小。", test: "点燃，产生淡蓝色火焰；混有空气时点燃会发出爆鸣声。", full: "用排水法收集，集气瓶口有气泡冒出时已满。", bad: [["铜片和稀硫酸", "铜排在氢的后面，不能与稀硫酸反应放出氢气。"], ["锌粒和浓硝酸", "浓硝酸有强氧化性，反应放出的不是氢气。"]] },
   { f: "CO2", n: "二氧化碳", rx: ["CaCO3+2HCl=CaCl2+H2O+CO2↑"], gen: { "CaCO3+2HCl=CaCl2+H2O+CO2↑": "B" }, col: ["D"], why: "二氧化碳能溶于水，密度比空气大，所以用向上排空气法。", test: "通入澄清石灰水，石灰水变浑浊。", full: "把燃着的木条放在瓶口，木条熄灭。", bad: [["大理石和稀硫酸", "生成的硫酸钙微溶，覆盖在大理石表面，反应会逐渐停止。"], ["碳酸钠粉末和稀盐酸", "反应太快，不容易控制和收集。"], ["木炭在氧气中燃烧", "产物不纯，收集不到纯净的二氧化碳。"]] },
 ];
+// words used to put a description into a sentence (kept in the data so that no Chinese literal is needed in the code)
+const SAY = { and: "和", under: "在", byCat: "的作用下", byCond: "的条件下", mid: "反应，生成", end: "。" };
+const PHKEYS = ["白色沉淀", "蓝色沉淀", "红褐色沉淀", "气泡", "淡蓝色火焰", "蓝紫色火焰", "蓝色火焰", "火星四射", "白烟", "石蕊溶液，溶液变红", "变黑", "变红", "变蓝", "浅绿色", "变为黄色", "刺激性气味", "水珠", "耀眼", "放出大量的热", "浑浊", "无明显现象"];
 const CHAPTERS = { air: "空气和氧气", water: "自然界的水", carbon: "碳和碳的氧化物", fuel: "燃料及其利用", metal: "金属和金属材料", acid: "酸和碱", salt: "盐和化肥" };
 
 // ---------- checks ----------
@@ -336,5 +339,5 @@ for (const s of SUBS) { const el = Object.keys(parse(s.f)); for (const e of el) 
 if (bad) { console.log(bad + " problem(s)"); process.exit(1); }
 
 const reactions = RX.map(([eq, cond, type, ch, ph], i) => ({ id: "r" + String(i + 1).padStart(3, "0"), eq, cond: cond.split("+"), type, ch, ph }));
-fs.writeFileSync(out, JSON.stringify({ chapters: CHAPTERS, reactions, subs: SUBS, mix: MIX, elements: EL, groups: GROUPS, ions: { cat: CATIONS, catZh: CATZH, catCh: CATCH, an: ANIONS, sol: SOL }, activity: ACTIVITY, indicators: INDICATORS, ph: PH, solub: SOLUB, gases: GASES }));
+fs.writeFileSync(out, JSON.stringify({ chapters: CHAPTERS, reactions, subs: SUBS, mix: MIX, elements: EL, groups: GROUPS, ions: { cat: CATIONS, catZh: CATZH, catCh: CATCH, an: ANIONS, sol: SOL }, say: SAY, phKeys: PHKEYS, activity: ACTIVITY, indicators: INDICATORS, ph: PH, solub: SOLUB, gases: GASES }));
 console.log("ok: " + reactions.length + " reactions, " + SUBS.length + " substances, " + (fs.statSync(out).size / 1024).toFixed(0) + " KB");
