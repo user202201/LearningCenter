@@ -40,8 +40,8 @@
 .g24-ovl h2 { margin: 0; font-size: 26px; color: #087f5b; }
 .g24-ovl p { margin: 0; font-weight: 700; }
 .g24-ovl button { min-height: 48px; padding: 6px 26px; font-size: 20px; border-radius: 999px; }
-.g24-pad { grid-area: pad; display: grid; grid-template-columns: repeat(4, minmax(64px, 84px)); gap: 6px; justify-content: center; }
-.g24-act { padding: 4px 6px; min-height: 48px; font-size: 17px; font-weight: 900; border-radius: 18px; color: #fff; background: #12b886; border: 3px solid #0ca678; box-shadow: 0 4px 0 #087f5b; touch-action: manipulation; white-space: nowrap; }
+.g24-pad { grid-area: pad; display: grid; grid-template-columns: repeat(4, auto); gap: 6px; justify-content: center; }
+.g24-act { padding: 4px 8px; min-height: 48px; font-size: 16px; font-weight: 900; border-radius: 18px; color: #fff; background: #12b886; border: 3px solid #0ca678; box-shadow: 0 4px 0 #087f5b; touch-action: manipulation; white-space: nowrap; }
 .g24-act:active { transform: translateY(3px); box-shadow: 0 1px 0 #087f5b; }
 .g24-act:disabled { opacity: .45; }
 @keyframes g24-pop { 0% { transform: scale(.6); } 70% { transform: scale(1.1); } 100% { transform: scale(1); } }
@@ -53,6 +53,7 @@
   .g24-hud { flex-direction: row; max-width: 190px; gap: 4px; }
   .g24-stat { font-size: 14px; padding: 0 8px; }
   .g24-hud .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
-  .g24-pad { grid-template-columns: repeat(2, 76px); }
+  .g24-pad { grid-template-columns: repeat(2, auto); }
   .g24-act { min-height: 44px; }
 }
+@media (max-width: 360px) { .g24-act { font-size: 15px; padding: 4px 6px; } .g24-pad { gap: 5px; } }

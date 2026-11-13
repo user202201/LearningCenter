@@ -281,10 +281,10 @@ export function newGame(level: number): Game {
   const info = levelInfo(level);
   return { level, spots: info.diffs.map((d) => diffSpot(info.scene, d)), found: info.diffs.map(() => false), mistakes: 0, hintsUsed: 0 };
 }
-/** a tap at scene coordinates: the nearest difference within its radius is found (a found one is not counted twice); anything else is a mistake */
-export function tap(g: Game, x: number, y: number): TapResult {
+/** a tap at scene coordinates (`minR`: a smallest radius in scene units, so that a small screen still has a finger-sized target): the nearest difference within its radius is found (a found one is not counted twice); anything else is a mistake */
+export function tap(g: Game, x: number, y: number, minR = 0): TapResult {
   let best = -1, bd = Infinity;
-  g.spots.forEach((s, i) => { const d = Math.hypot(s.x - x, s.y - y); if (d <= s.r && d < bd) { bd = d; best = i; } });
+  g.spots.forEach((s, i) => { const d = Math.hypot(s.x - x, s.y - y); if (d <= Math.max(s.r, minR) && d < bd) { bd = d; best = i; } });
   if (best < 0) { g.mistakes++; return { kind: "miss" }; }
   if (g.found[best]) return { kind: "again", i: best };
   g.found[best] = true;
