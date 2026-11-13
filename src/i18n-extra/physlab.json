@@ -1,0 +1,1586 @@
+{
+ "物理实验室": [
+  "Physics lab",
+  "Laboratoire de physique"
+ ],
+ "初中物理 · 动手做实验": [
+  "Junior-high physics · experiments",
+  "Physique du collège · expériences"
+ ],
+ "拖动滑块，观察结果；完成实验任务，再做小测验。": [
+  "Drag the sliders and watch the result. Complete the tasks, then take the quiz.",
+  "Faites glisser les curseurs et observez le résultat. Réalisez les tâches, puis faites le quiz."
+ ],
+ "八年级": [
+  "Grade 8",
+  "Classe de 4e"
+ ],
+ "九年级": [
+  "Grade 9",
+  "Classe de 3e"
+ ],
+ "实验任务 {0} / {1}": [
+  "Tasks {0} / {1}",
+  "Tâches {0} / {1}"
+ ],
+ "实验任务": [
+  "Experiment tasks",
+  "Tâches expérimentales"
+ ],
+ "实验任务已完成": [
+  "Task completed",
+  "Tâche accomplie"
+ ],
+ "已重置": [
+  "Reset",
+  "Réinitialisé"
+ ],
+ "该实验出错：{0}": [
+  "This experiment failed: {0}",
+  "Cette expérience a échoué : {0}"
+ ],
+ "原理": [
+  "Principle",
+  "Principe"
+ ],
+ "小测验": [
+  "Quiz",
+  "Quiz"
+ ],
+ "开始小测验": [
+  "Start the quiz",
+  "Commencer le quiz"
+ ],
+ "再做一次": [
+  "Do it again",
+  "Recommencer"
+ ],
+ "查看得分": [
+  "See the score",
+  "Voir le score"
+ ],
+ "得分 {0} / {1}": [
+  "Score {0} / {1}",
+  "Score {0} / {1}"
+ ],
+ "最好成绩：{0} / 5": [
+  "Best score: {0} / 5",
+  "Meilleur score : {0} / 5"
+ ],
+ "播放声音": [
+  "Play the sound",
+  "Jouer le son"
+ ],
+ "第一章 机械运动": [
+  "Chapter 1 Mechanical motion",
+  "Chapitre 1 Mouvement mécanique"
+ ],
+ "第二章 声现象": [
+  "Chapter 2 Sound",
+  "Chapitre 2 Le son"
+ ],
+ "第三章 物态变化": [
+  "Chapter 3 Changes of state",
+  "Chapitre 3 Changements d'état"
+ ],
+ "第四章 光现象": [
+  "Chapter 4 Light",
+  "Chapitre 4 La lumière"
+ ],
+ "第五章 透镜及其应用": [
+  "Chapter 5 Lenses and their uses",
+  "Chapitre 5 Les lentilles et leurs usages"
+ ],
+ "第七章 力": [
+  "Chapter 7 Force",
+  "Chapitre 7 La force"
+ ],
+ "第八章 运动和力": [
+  "Chapter 8 Motion and force",
+  "Chapitre 8 Mouvement et force"
+ ],
+ "第九章 压强": [
+  "Chapter 9 Pressure",
+  "Chapitre 9 La pression"
+ ],
+ "第十章 浮力": [
+  "Chapter 10 Buoyancy",
+  "Chapitre 10 La poussée d'Archimède"
+ ],
+ "第十一章 功和机械能": [
+  "Chapter 11 Work and mechanical energy",
+  "Chapitre 11 Travail et énergie mécanique"
+ ],
+ "第十二章 简单机械": [
+  "Chapter 12 Simple machines",
+  "Chapitre 12 Machines simples"
+ ],
+ "第十三章 内能": [
+  "Chapter 13 Internal energy",
+  "Chapitre 13 Énergie interne"
+ ],
+ "第十七章 欧姆定律": [
+  "Chapter 17 Ohm's law",
+  "Chapitre 17 Loi d'Ohm"
+ ],
+ "第二十章 电与磁": [
+  "Chapter 20 Electricity and magnetism",
+  "Chapitre 20 Électricité et magnétisme"
+ ],
+ "速度与图像": [
+  "Speed and graphs",
+  "Vitesse et graphiques"
+ ],
+ "声音的三要素": [
+  "Pitch, loudness and timbre",
+  "Hauteur, intensité et timbre"
+ ],
+ "熔化、凝固与沸腾": [
+  "Melting, freezing and boiling",
+  "Fusion, solidification et ébullition"
+ ],
+ "光的反射与平面镜": [
+  "Reflection and the plane mirror",
+  "Réflexion et miroir plan"
+ ],
+ "光的折射": [
+  "Refraction of light",
+  "Réfraction de la lumière"
+ ],
+ "凸透镜成像": [
+  "Images in a convex lens",
+  "Images d'une lentille convergente"
+ ],
+ "弹簧测力计与重力": [
+  "Spring scale and weight",
+  "Dynamomètre et poids"
+ ],
+ "摩擦力与斜面": [
+  "Friction and the inclined plane",
+  "Frottement et plan incliné"
+ ],
+ "牛顿第一定律与二力平衡": [
+  "Newton's first law and balanced forces",
+  "Première loi de Newton et forces équilibrées"
+ ],
+ "压强与大气压": [
+  "Pressure and atmospheric pressure",
+  "Pression et pression atmosphérique"
+ ],
+ "阿基米德原理与浮沉": [
+  "Archimedes' principle and floating",
+  "Principe d'Archimède et flottaison"
+ ],
+ "功、功率与机械能": [
+  "Work, power and mechanical energy",
+  "Travail, puissance et énergie mécanique"
+ ],
+ "杠杆": [
+  "Lever",
+  "Levier"
+ ],
+ "滑轮组与机械效率": [
+  "Pulley systems and efficiency",
+  "Palans et rendement"
+ ],
+ "比热容": [
+  "Specific heat capacity",
+  "Capacité thermique massique"
+ ],
+ "欧姆定律与电路": [
+  "Ohm's law and circuits",
+  "Loi d'Ohm et circuits"
+ ],
+ "电与磁": [
+  "Electricity and magnetism",
+  "Électricité et magnétisme"
+ ],
+ "实验": [
+  "Experiment",
+  "Expérience"
+ ],
+ "操作": [
+  "Operation",
+  "Opération"
+ ],
+ "机械": [
+  "Machine",
+  "Machine"
+ ],
+ "电路": [
+  "Circuit",
+  "Circuit"
+ ],
+ "透镜": [
+  "Lens",
+  "Lentille"
+ ],
+ "液体": [
+  "Liquid",
+  "Liquide"
+ ],
+ "接触面": [
+  "Contact surface",
+  "Surface de contact"
+ ],
+ "水平面": [
+  "Horizontal surface",
+  "Surface horizontale"
+ ],
+ "所在的星球": [
+  "Planet",
+  "Planète"
+ ],
+ "另一种物质": [
+  "Other substance",
+  "Autre substance"
+ ],
+ "铁芯": [
+  "Iron core",
+  "Noyau de fer"
+ ],
+ "电流方向": [
+  "Current direction",
+  "Sens du courant"
+ ],
+ "左边的磁极": [
+  "Left pole",
+  "Pôle de gauche"
+ ],
+ "光的传播方向": [
+  "Direction of the light",
+  "Sens de propagation de la lumière"
+ ],
+ "物体的初始运动状态": [
+  "Initial state of motion",
+  "État de mouvement initial"
+ ],
+ "F₂ 的方向": [
+  "Direction of F₂",
+  "Direction de F₂"
+ ],
+ "音色（波形）": [
+  "Timbre (waveform)",
+  "Timbre (forme d'onde)"
+ ],
+ "纯音": [
+  "Pure tone",
+  "Son pur"
+ ],
+ "方波": [
+  "Square wave",
+  "Onde carrée"
+ ],
+ "锯齿波": [
+  "Sawtooth wave",
+  "Onde en dents de scie"
+ ],
+ "三角波": [
+  "Triangle wave",
+  "Onde triangulaire"
+ ],
+ "冰的熔化与水的沸腾": [
+  "Melting ice and boiling water",
+  "Fusion de la glace et ébullition de l'eau"
+ ],
+ "石蜡的熔化": [
+  "Melting wax",
+  "Fusion de la cire"
+ ],
+ "水的凝固": [
+  "Freezing water",
+  "Solidification de l'eau"
+ ],
+ "光的反射": [
+  "Reflection of light",
+  "Réflexion de la lumière"
+ ],
+ "平面镜成像": [
+  "Image in a plane mirror",
+  "Image dans un miroir plan"
+ ],
+ "空气→水": [
+  "Air → water",
+  "Air → eau"
+ ],
+ "空气→玻璃": [
+  "Air → glass",
+  "Air → verre"
+ ],
+ "水→空气": [
+  "Water → air",
+  "Eau → air"
+ ],
+ "玻璃→空气": [
+  "Glass → air",
+  "Verre → air"
+ ],
+ "水→玻璃": [
+  "Water → glass",
+  "Eau → verre"
+ ],
+ "凸透镜": [
+  "Convex lens",
+  "Lentille convergente"
+ ],
+ "凹透镜": [
+  "Concave lens",
+  "Lentille divergente"
+ ],
+ "地球": [
+  "Earth",
+  "Terre"
+ ],
+ "月球": [
+  "Moon",
+  "Lune"
+ ],
+ "火星": [
+  "Mars",
+  "Mars"
+ ],
+ "木星": [
+  "Jupiter",
+  "Jupiter"
+ ],
+ "冰面": [
+  "Ice",
+  "Glace"
+ ],
+ "木板": [
+  "Wooden board",
+  "Planche de bois"
+ ],
+ "橡胶垫": [
+  "Rubber mat",
+  "Tapis en caoutchouc"
+ ],
+ "静止": [
+  "At rest",
+  "Au repos"
+ ],
+ "已在向上运动": [
+  "Already moving up the slope",
+  "Déjà en mouvement vers le haut"
+ ],
+ "阻力对运动的影响": [
+  "Effect of resistance on motion",
+  "Effet de la résistance sur le mouvement"
+ ],
+ "二力平衡": [
+  "Balanced forces",
+  "Forces équilibrées"
+ ],
+ "毛巾": [
+  "Towel",
+  "Serviette"
+ ],
+ "棉布": [
+  "Cotton cloth",
+  "Tissu en coton"
+ ],
+ "玻璃": [
+  "Glass",
+  "Verre"
+ ],
+ "理想光滑表面": [
+  "Ideal frictionless surface",
+  "Surface idéale sans frottement"
+ ],
+ "同一方向": [
+  "Same direction",
+  "Même sens"
+ ],
+ "相反方向": [
+  "Opposite directions",
+  "Sens opposés"
+ ],
+ "互相垂直": [
+  "Perpendicular",
+  "Perpendiculaires"
+ ],
+ "液体压强": [
+  "Liquid pressure",
+  "Pression du liquide"
+ ],
+ "大气压": [
+  "Atmospheric pressure",
+  "Pression atmosphérique"
+ ],
+ "固体压强": [
+  "Pressure of a solid",
+  "Pression d'un solide"
+ ],
+ "清水": [
+  "Fresh water",
+  "Eau douce"
+ ],
+ "盐水": [
+  "Salt water",
+  "Eau salée"
+ ],
+ "酒精": [
+  "Alcohol",
+  "Alcool"
+ ],
+ "水银": [
+  "Mercury",
+  "Mercure"
+ ],
+ "浓盐水": [
+  "Strong brine",
+  "Saumure concentrée"
+ ],
+ "手动浸入": [
+  "Lower by hand",
+  "Immerger à la main"
+ ],
+ "自由释放": [
+  "Release",
+  "Lâcher"
+ ],
+ "单摆": [
+  "Pendulum",
+  "Pendule"
+ ],
+ "过山车": [
+  "Roller coaster",
+  "Montagnes russes"
+ ],
+ "功与功率": [
+  "Work and power",
+  "Travail et puissance"
+ ],
+ "滑轮组": [
+  "Pulley system",
+  "Palan"
+ ],
+ "斜面": [
+  "Inclined plane",
+  "Plan incliné"
+ ],
+ "煤油": [
+  "Kerosene",
+  "Kérosène"
+ ],
+ "食用油": [
+  "Cooking oil",
+  "Huile alimentaire"
+ ],
+ "沙子": [
+  "Sand",
+  "Sable"
+ ],
+ "铜块": [
+  "Copper block",
+  "Bloc de cuivre"
+ ],
+ "串联": [
+  "Series",
+  "Série"
+ ],
+ "并联": [
+  "Parallel",
+  "Parallèle"
+ ],
+ "电磁铁": [
+  "Electromagnet",
+  "Électroaimant"
+ ],
+ "电磁感应（发电机）": [
+  "Electromagnetic induction (generator)",
+  "Induction électromagnétique (générateur)"
+ ],
+ "没有铁芯": [
+  "No iron core",
+  "Sans noyau de fer"
+ ],
+ "插入铁芯": [
+  "Iron core inserted",
+  "Noyau de fer inséré"
+ ],
+ "正向": [
+  "Forward",
+  "Sens direct"
+ ],
+ "反向": [
+  "Reverse",
+  "Sens inverse"
+ ],
+ "N 极": [
+  "N pole",
+  "Pôle N"
+ ],
+ "S 极": [
+  "S pole",
+  "Pôle S"
+ ],
+ "初速度": [
+  "Initial speed",
+  "Vitesse initiale"
+ ],
+ "加速度": [
+  "Acceleration",
+  "Accélération"
+ ],
+ "时间": [
+  "Time",
+  "Temps"
+ ],
+ "频率": [
+  "Frequency",
+  "Fréquence"
+ ],
+ "振幅": [
+  "Amplitude",
+  "Amplitude"
+ ],
+ "加热功率": [
+  "Heating power",
+  "Puissance de chauffe"
+ ],
+ "质量": [
+  "Mass",
+  "Masse"
+ ],
+ "入射光线与法线的夹角": [
+  "Angle between the incident ray and the normal",
+  "Angle entre le rayon incident et la normale"
+ ],
+ "镜面转过的角度": [
+  "Angle the mirror is turned",
+  "Angle de rotation du miroir"
+ ],
+ "物体到平面镜的距离": [
+  "Distance from the object to the mirror",
+  "Distance de l'objet au miroir"
+ ],
+ "入射角": [
+  "Angle of incidence",
+  "Angle d'incidence"
+ ],
+ "焦距": [
+  "Focal length",
+  "Distance focale"
+ ],
+ "物距": [
+  "Object distance",
+  "Distance objet"
+ ],
+ "挂钩码的质量": [
+  "Mass of the hanging weights",
+  "Masse suspendue"
+ ],
+ "弹簧的劲度系数": [
+  "Spring constant",
+  "Constante de raideur du ressort"
+ ],
+ "物体的质量": [
+  "Mass of the object",
+  "Masse de l'objet"
+ ],
+ "沿斜面向上的拉力": [
+  "Pull up the slope",
+  "Force de traction vers le haut de la pente"
+ ],
+ "斜面的倾角（0° 为水平面）": [
+  "Angle of the slope (0° = level)",
+  "Inclinaison de la pente (0° = horizontale)"
+ ],
+ "到达水平面时的速度": [
+  "Speed on reaching the level surface",
+  "Vitesse en arrivant sur le plan horizontal"
+ ],
+ "向右的力 F₁": [
+  "Force F₁ to the right",
+  "Force F₁ vers la droite"
+ ],
+ "另一个力 F₂": [
+  "The other force F₂",
+  "L'autre force F₂"
+ ],
+ "两个力的作用线相距": [
+  "Distance between the two lines of action",
+  "Distance entre les deux droites d'action"
+ ],
+ "探头所在的深度": [
+  "Depth of the probe",
+  "Profondeur de la sonde"
+ ],
+ "海拔高度": [
+  "Altitude",
+  "Altitude"
+ ],
+ "玻璃管倾斜的角度": [
+  "Tilt of the glass tube",
+  "Inclinaison du tube de verre"
+ ],
+ "压力": [
+  "Force on the surface",
+  "Force exercée"
+ ],
+ "受力面积": [
+  "Contact area",
+  "Aire de contact"
+ ],
+ "物体的密度": [
+  "Density of the object",
+  "Masse volumique de l'objet"
+ ],
+ "物体的体积": [
+  "Volume of the object",
+  "Volume de l'objet"
+ ],
+ "浸入液体的体积占比": [
+  "Share of the volume under the liquid",
+  "Part du volume immergé"
+ ],
+ "摆长": [
+  "Pendulum length",
+  "Longueur du pendule"
+ ],
+ "释放时偏离竖直方向的角度": [
+  "Release angle from the vertical",
+  "Angle de lâcher par rapport à la verticale"
+ ],
+ "起点的高度": [
+  "Starting height",
+  "Hauteur de départ"
+ ],
+ "摩擦损失（占起点能量的比例）": [
+  "Friction loss (share of the starting energy)",
+  "Perte par frottement (part de l'énergie initiale)"
+ ],
+ "小车的位置": [
+  "Position of the car",
+  "Position du chariot"
+ ],
+ "推力": [
+  "Pushing force",
+  "Force de poussée"
+ ],
+ "沿推力方向移动的距离": [
+  "Distance moved along the force",
+  "Distance parcourue dans le sens de la force"
+ ],
+ "所用时间": [
+  "Time taken",
+  "Durée"
+ ],
+ "左边钩码的个数（每个 0.5 N）": [
+  "Weights on the left (0.5 N each)",
+  "Masses à gauche (0,5 N chacune)"
+ ],
+ "左边钩码到支点的距离": [
+  "Distance of the left weights from the pivot",
+  "Distance des masses de gauche au pivot"
+ ],
+ "右边钩码的个数（每个 0.5 N）": [
+  "Weights on the right (0.5 N each)",
+  "Masses à droite (0,5 N chacune)"
+ ],
+ "右边钩码到支点的距离": [
+  "Distance of the right weights from the pivot",
+  "Distance des masses de droite au pivot"
+ ],
+ "物重": [
+  "Weight of the load",
+  "Poids de la charge"
+ ],
+ "承担重物的绳子段数": [
+  "Strands carrying the load",
+  "Brins portant la charge"
+ ],
+ "动滑轮重": [
+  "Weight of the moving pulley",
+  "Poids de la poulie mobile"
+ ],
+ "摩擦（折算为作用在重物一侧的力）": [
+  "Friction (as a force on the load side)",
+  "Frottement (en force côté charge)"
+ ],
+ "重物提升的高度": [
+  "Height the load is lifted",
+  "Hauteur de levage de la charge"
+ ],
+ "斜面的倾角": [
+  "Angle of the slope",
+  "Inclinaison de la pente"
+ ],
+ "摩擦因数": [
+  "Friction coefficient",
+  "Coefficient de frottement"
+ ],
+ "每个加热器的功率": [
+  "Power of each heater",
+  "Puissance de chaque chauffage"
+ ],
+ "水的质量": [
+  "Mass of the water",
+  "Masse de l'eau"
+ ],
+ "另一种物质的质量": [
+  "Mass of the other substance",
+  "Masse de l'autre substance"
+ ],
+ "加热时间": [
+  "Heating time",
+  "Durée de chauffe"
+ ],
+ "电源电压": [
+  "Supply voltage",
+  "Tension du générateur"
+ ],
+ "电阻 R₁": [
+  "Resistor R₁",
+  "Résistance R₁"
+ ],
+ "电阻 R₂": [
+  "Resistor R₂",
+  "Résistance R₂"
+ ],
+ "滑动变阻器的滑片位置（0 到 50 Ω）": [
+  "Slider position of the rheostat (0 to 50 Ω)",
+  "Position du curseur du rhéostat (0 à 50 Ω)"
+ ],
+ "通电时间": [
+  "Time the current flows",
+  "Durée de passage du courant"
+ ],
+ "线圈匝数": [
+  "Number of turns",
+  "Nombre de spires"
+ ],
+ "电流": [
+  "Current",
+  "Courant"
+ ],
+ "磁感应强度": [
+  "Magnetic field strength",
+  "Intensité du champ magnétique"
+ ],
+ "磁铁的速度（正为向右）": [
+  "Speed of the magnet (positive = right)",
+  "Vitesse de l'aimant (positive = vers la droite)"
+ ],
+ "磁铁的起始位置": [
+  "Starting position of the magnet",
+  "Position initiale de l'aimant"
+ ],
+ "路程": [
+  "Distance",
+  "Distance"
+ ],
+ "瞬时速度": [
+  "Instantaneous speed",
+  "Vitesse instantanée"
+ ],
+ "平均速度": [
+  "Average speed",
+  "Vitesse moyenne"
+ ],
+ "响度级": [
+  "Loudness level",
+  "Niveau sonore"
+ ],
+ "最接近的音名": [
+  "Nearest note",
+  "Note la plus proche"
+ ],
+ "空气中的波长": [
+  "Wavelength in air",
+  "Longueur d'onde dans l'air"
+ ],
+ "温度": [
+  "Temperature",
+  "Température"
+ ],
+ "状态": [
+  "State",
+  "État"
+ ],
+ "吸收的热量": [
+  "Heat absorbed",
+  "Chaleur absorbée"
+ ],
+ "放出的热量": [
+  "Heat released",
+  "Chaleur cédée"
+ ],
+ "固态": [
+  "Solid",
+  "Solide"
+ ],
+ "固液共存（熔化）": [
+  "Solid and liquid (melting)",
+  "Solide et liquide (fusion)"
+ ],
+ "液态": [
+  "Liquid",
+  "Liquide"
+ ],
+ "沸腾（液气共存）": [
+  "Boiling (liquid and gas)",
+  "Ébullition (liquide et gaz)"
+ ],
+ "气态": [
+  "Gas",
+  "Gaz"
+ ],
+ "硬（固态）": [
+  "Hard (solid)",
+  "Dure (solide)"
+ ],
+ "变软": [
+  "Softening",
+  "Ramollissement"
+ ],
+ "固液共存（凝固）": [
+  "Solid and liquid (freezing)",
+  "Solide et liquide (solidification)"
+ ],
+ "物高": [
+  "Object height",
+  "Hauteur de l'objet"
+ ],
+ "像高": [
+  "Image height",
+  "Hauteur de l'image"
+ ],
+ "像距": [
+  "Image distance",
+  "Distance image"
+ ],
+ "物与像的距离": [
+  "Distance between object and image",
+  "Distance entre l'objet et l'image"
+ ],
+ "像的性质": [
+  "Nature of the image",
+  "Nature de l'image"
+ ],
+ "正立、等大的虚像": [
+  "Upright virtual image, same size",
+  "Image virtuelle droite, de même taille"
+ ],
+ "反射角": [
+  "Angle of reflection",
+  "Angle de réflexion"
+ ],
+ "入射光线与反射光线的夹角": [
+  "Angle between incident and reflected rays",
+  "Angle entre les rayons incident et réfléchi"
+ ],
+ "折射角": [
+  "Angle of refraction",
+  "Angle de réfraction"
+ ],
+ "现象": [
+  "Phenomenon",
+  "Phénomène"
+ ],
+ "全反射": [
+  "Total reflection",
+  "Réflexion totale"
+ ],
+ "折射": [
+  "Refraction",
+  "Réfraction"
+ ],
+ "临界角": [
+  "Critical angle",
+  "Angle critique"
+ ],
+ "上方介质中的光速": [
+  "Speed of light in the upper medium",
+  "Vitesse de la lumière dans le milieu supérieur"
+ ],
+ "下方介质中的光速": [
+  "Speed of light in the lower medium",
+  "Vitesse de la lumière dans le milieu inférieur"
+ ],
+ "放大倍数": [
+  "Magnification",
+  "Grandissement"
+ ],
+ "不成像（折射光线平行射出）": [
+  "No image (rays leave parallel)",
+  "Pas d'image (rayons parallèles en sortie)"
+ ],
+ "倒立、缩小的实像（照相机）": [
+  "Inverted, reduced real image (camera)",
+  "Image réelle renversée et réduite (appareil photo)"
+ ],
+ "倒立、等大的实像": [
+  "Inverted real image, same size",
+  "Image réelle renversée, de même taille"
+ ],
+ "倒立、放大的实像（投影仪）": [
+  "Inverted, enlarged real image (projector)",
+  "Image réelle renversée et agrandie (projecteur)"
+ ],
+ "正立、放大的虚像（放大镜）": [
+  "Upright, enlarged virtual image (magnifier)",
+  "Image virtuelle droite et agrandie (loupe)"
+ ],
+ "正立、缩小的虚像（凹透镜）": [
+  "Upright, reduced virtual image (concave lens)",
+  "Image virtuelle droite et réduite (lentille divergente)"
+ ],
+ "重力加速度 g": [
+  "Gravitational field g",
+  "Intensité de la pesanteur g"
+ ],
+ "重力 / 弹簧测力计示数": [
+  "Weight / spring scale reading",
+  "Poids / lecture du dynamomètre"
+ ],
+ "弹簧的伸长量": [
+  "Extension of the spring",
+  "Allongement du ressort"
+ ],
+ "弹性限度": [
+  "Elastic limit",
+  "Limite d'élasticité"
+ ],
+ "已超出": [
+  "Exceeded",
+  "Dépassée"
+ ],
+ "在限度内": [
+  "Within the limit",
+  "Dans la limite"
+ ],
+ "压力 N": [
+  "Normal force N",
+  "Force normale N"
+ ],
+ "重力沿斜面向下的分力": [
+  "Component of weight down the slope",
+  "Composante du poids le long de la pente"
+ ],
+ "摩擦力": [
+  "Friction force",
+  "Force de frottement"
+ ],
+ "摩擦的种类": [
+  "Kind of friction",
+  "Type de frottement"
+ ],
+ "静摩擦": [
+  "Static friction",
+  "Frottement statique"
+ ],
+ "滑动摩擦": [
+  "Sliding friction",
+  "Frottement de glissement"
+ ],
+ "最大静摩擦力": [
+  "Maximum static friction",
+  "Frottement statique maximal"
+ ],
+ "运动状态": [
+  "State of motion",
+  "État de mouvement"
+ ],
+ "保持静止": [
+  "Stays at rest",
+  "Reste au repos"
+ ],
+ "匀速向上运动": [
+  "Moves up at constant speed",
+  "Monte à vitesse constante"
+ ],
+ "向上加速": [
+  "Speeds up going up",
+  "Accélère vers le haut"
+ ],
+ "向上减速": [
+  "Slows down going up",
+  "Ralentit vers le haut"
+ ],
+ "向下滑动": [
+  "Slides down",
+  "Glisse vers le bas"
+ ],
+ "合力": [
+  "Net force",
+  "Force résultante"
+ ],
+ "两个力": [
+  "The two forces",
+  "Les deux forces"
+ ],
+ "平衡": [
+  "Balanced",
+  "Équilibrées"
+ ],
+ "不平衡": [
+  "Not balanced",
+  "Non équilibrées"
+ ],
+ "物体的运动": [
+  "Motion of the object",
+  "Mouvement de l'objet"
+ ],
+ "保持静止或匀速直线运动": [
+  "Stays at rest or moves at constant speed in a straight line",
+  "Reste au repos ou en mouvement rectiligne uniforme"
+ ],
+ "会发生转动": [
+  "Will rotate",
+  "Va tourner"
+ ],
+ "运动状态改变": [
+  "State of motion changes",
+  "L'état de mouvement change"
+ ],
+ "滑行的路程": [
+  "Distance slid",
+  "Distance parcourue"
+ ],
+ "小车受到的阻力产生的加速度": [
+  "Deceleration caused by resistance",
+  "Décélération due à la résistance"
+ ],
+ "停下来的路程": [
+  "Stopping distance",
+  "Distance d'arrêt"
+ ],
+ "小车的运动": [
+  "Motion of the car",
+  "Mouvement du chariot"
+ ],
+ "一直做匀速直线运动": [
+  "Moves at constant speed forever",
+  "Se déplace à vitesse constante indéfiniment"
+ ],
+ "已停下": [
+  "Stopped",
+  "Arrêté"
+ ],
+ "减速滑行": [
+  "Slowing down",
+  "Ralentit"
+ ],
+ "液体密度": [
+  "Liquid density",
+  "Masse volumique du liquide"
+ ],
+ "深度": [
+  "Depth",
+  "Profondeur"
+ ],
+ "加上大气压后的总压强": [
+  "Total pressure with the atmosphere",
+  "Pression totale avec l'atmosphère"
+ ],
+ "水银柱的竖直高度": [
+  "Vertical height of the mercury column",
+  "Hauteur verticale de la colonne de mercure"
+ ],
+ "玻璃管内水银柱的长度": [
+  "Length of mercury in the tube",
+  "Longueur de mercure dans le tube"
+ ],
+ "管顶": [
+  "Top of the tube",
+  "Haut du tube"
+ ],
+ "真空": [
+  "Vacuum",
+  "Vide"
+ ],
+ "压强": [
+  "Pressure",
+  "Pression"
+ ],
+ "物体的重力 G": [
+  "Weight of the object G",
+  "Poids de l'objet G"
+ ],
+ "浮力 F浮": [
+  "Buoyant force F",
+  "Poussée d'Archimède F"
+ ],
+ "排开液体的体积": [
+  "Volume of liquid displaced",
+  "Volume de liquide déplacé"
+ ],
+ "排开液体的重力 G排": [
+  "Weight of liquid displaced G",
+  "Poids du liquide déplacé G"
+ ],
+ "弹簧测力计的示数": [
+  "Spring scale reading",
+  "Lecture du dynamomètre"
+ ],
+ "容器底部的支持力": [
+  "Support force from the bottom",
+  "Force d'appui du fond"
+ ],
+ "物体的状态": [
+  "State of the object",
+  "État de l'objet"
+ ],
+ "漂浮": [
+  "Floating",
+  "Flotte"
+ ],
+ "悬浮": [
+  "Suspended",
+  "En suspension"
+ ],
+ "沉底（或下沉）": [
+  "Sunk (or sinking)",
+  "Coulé (ou en train de couler)"
+ ],
+ "动能": [
+  "Kinetic energy",
+  "Énergie cinétique"
+ ],
+ "重力势能": [
+  "Gravitational potential energy",
+  "Énergie potentielle de pesanteur"
+ ],
+ "转化为内能的能量": [
+  "Energy turned into heat",
+  "Énergie transformée en chaleur"
+ ],
+ "总能量": [
+  "Total energy",
+  "Énergie totale"
+ ],
+ "高度": [
+  "Height",
+  "Hauteur"
+ ],
+ "小车到不了这里": [
+  "The car cannot reach this point",
+  "Le chariot ne peut pas atteindre ce point"
+ ],
+ "做的功": [
+  "Work done",
+  "Travail effectué"
+ ],
+ "功率": [
+  "Power",
+  "Puissance"
+ ],
+ "动力 × 动力臂": [
+  "Effort × effort arm",
+  "Force motrice × bras de levier moteur"
+ ],
+ "阻力 × 阻力臂": [
+  "Load × load arm",
+  "Force résistante × bras de levier résistant"
+ ],
+ "杠杆的状态": [
+  "State of the lever",
+  "État du levier"
+ ],
+ "杠杆的种类": [
+  "Kind of lever",
+  "Type de levier"
+ ],
+ "水平平衡": [
+  "Balanced level",
+  "Équilibré à l'horizontale"
+ ],
+ "左端下沉": [
+  "Left end goes down",
+  "L'extrémité gauche descend"
+ ],
+ "右端下沉": [
+  "Right end goes down",
+  "L'extrémité droite descend"
+ ],
+ "省力杠杆": [
+  "Force-saving lever",
+  "Levier qui économise la force"
+ ],
+ "费力杠杆": [
+  "Force-costing lever",
+  "Levier qui demande plus de force"
+ ],
+ "等臂杠杆": [
+  "Equal-arm lever",
+  "Levier à bras égaux"
+ ],
+ "拉力 F": [
+  "Pulling force F",
+  "Force de traction F"
+ ],
+ "绳子自由端移动的距离": [
+  "Distance the free end moves",
+  "Distance parcourue par le brin libre"
+ ],
+ "斜面长": [
+  "Length of the slope",
+  "Longueur de la pente"
+ ],
+ "有用功": [
+  "Useful work",
+  "Travail utile"
+ ],
+ "总功": [
+  "Total work",
+  "Travail total"
+ ],
+ "机械效率": [
+  "Efficiency",
+  "Rendement"
+ ],
+ "每个加热器吸收的热量": [
+  "Heat absorbed by each heater",
+  "Chaleur absorbée par chaque chauffage"
+ ],
+ "水的温度": [
+  "Temperature of the water",
+  "Température de l'eau"
+ ],
+ "水升高的温度": [
+  "Temperature rise of the water",
+  "Élévation de température de l'eau"
+ ],
+ "另一种物质的温度": [
+  "Temperature of the other substance",
+  "Température de l'autre substance"
+ ],
+ "另一种物质升高的温度": [
+  "Temperature rise of the other substance",
+  "Élévation de température de l'autre substance"
+ ],
+ "另一种物质的比热容": [
+  "Specific heat of the other substance",
+  "Capacité thermique de l'autre substance"
+ ],
+ "总电阻": [
+  "Total resistance",
+  "Résistance totale"
+ ],
+ "干路电流 I": [
+  "Main current I",
+  "Courant principal I"
+ ],
+ "R₁ 两端的电压": [
+  "Voltage across R₁",
+  "Tension aux bornes de R₁"
+ ],
+ "R₂ 两端的电压": [
+  "Voltage across R₂",
+  "Tension aux bornes de R₂"
+ ],
+ "通过 R₁ 的电流": [
+  "Current through R₁",
+  "Courant dans R₁"
+ ],
+ "通过 R₂ 的电流": [
+  "Current through R₂",
+  "Courant dans R₂"
+ ],
+ "R₁ 的电功率": [
+  "Power of R₁",
+  "Puissance de R₁"
+ ],
+ "R₂ 的电功率": [
+  "Power of R₂",
+  "Puissance de R₂"
+ ],
+ "总电功率": [
+  "Total electric power",
+  "Puissance électrique totale"
+ ],
+ "R₁ 产生的热量": [
+  "Heat produced in R₁",
+  "Chaleur produite dans R₁"
+ ],
+ "R₂ 的阻值": [
+  "Value of R₂",
+  "Valeur de R₂"
+ ],
+ "磁性强弱（相对值）": [
+  "Magnetic strength (relative)",
+  "Force magnétique (relative)"
+ ],
+ "吸起的回形针": [
+  "Paper clips lifted",
+  "Trombones soulevés"
+ ],
+ "右端的磁极": [
+  "Right-hand pole",
+  "Pôle de droite"
+ ],
+ "导线受到的力": [
+  "Force on the wire",
+  "Force sur le fil"
+ ],
+ "转动方向": [
+  "Direction of rotation",
+  "Sens de rotation"
+ ],
+ "不转动": [
+  "Does not turn",
+  "Ne tourne pas"
+ ],
+ "顺时针": [
+  "Clockwise",
+  "Sens horaire"
+ ],
+ "逆时针": [
+  "Counter-clockwise",
+  "Sens antihoraire"
+ ],
+ "磁铁的位置": [
+  "Position of the magnet",
+  "Position de l'aimant"
+ ],
+ "穿过线圈的磁通量": [
+  "Magnetic flux through the coil",
+  "Flux magnétique dans la bobine"
+ ],
+ "感应电动势": [
+  "Induced EMF",
+  "Force électromotrice induite"
+ ],
+ "电流表指针": [
+  "Ammeter needle",
+  "Aiguille de l'ampèremètre"
+ ],
+ "不偏转": [
+  "No deflection",
+  "Pas de déviation"
+ ],
+ "向右偏转": [
+  "Deflects to the right",
+  "Dévie vers la droite"
+ ],
+ "向左偏转": [
+  "Deflects to the left",
+  "Dévie vers la gauche"
+ ],
+ "使小车做匀速直线运动，速度不小于 5 m/s（加速度为 0）": [
+  "Make the car move at constant speed, at least 5 m/s (acceleration 0).",
+  "Faites rouler le chariot à vitesse constante, au moins 5 m/s (accélération 0)."
+ ],
+ "使小车在 5 s 时通过的路程为 50 m（误差不超过 1 m）": [
+  "Make the car cover 50 m after 5 s (within 1 m).",
+  "Faites parcourir 50 m au chariot en 5 s (à 1 m près)."
+ ],
+ "使小车做匀加速运动，5 s 末的速度不小于 15 m/s，且加速度不超过 2 m/s²": [
+  "Make the car accelerate uniformly: at least 15 m/s after 5 s, with an acceleration of at most 2 m/s².",
+  "Faites accélérer le chariot de façon uniforme : au moins 15 m/s après 5 s, avec une accélération d'au plus 2 m/s²."
+ ],
+ "把频率调到 440 Hz（标准音 A4），使用纯音": [
+  "Set the frequency to 440 Hz (standard pitch A4) with the pure tone.",
+  "Réglez la fréquence à 440 Hz (La 440, A4) avec le son pur."
+ ],
+ "增大振幅，使响度级不低于 58 dB": [
+  "Increase the amplitude until the loudness level is at least 58 dB.",
+  "Augmentez l'amplitude jusqu'à un niveau sonore d'au moins 58 dB."
+ ],
+ "选择方波，并把频率调到 880 Hz（比 A4 高一个八度）": [
+  "Choose the square wave and set 880 Hz (one octave above A4).",
+  "Choisissez l'onde carrée et réglez 880 Hz (une octave au-dessus de A4)."
+ ],
+ "冰的熔化：使加热时间处在熔化阶段（固液共存），观察温度保持 0 °C 不变": [
+  "Melting ice: set a heating time in the melting stage (solid and liquid) and watch the temperature stay at 0 °C.",
+  "Fusion de la glace : choisissez une durée dans l'étape de fusion (solide et liquide) et observez la température rester à 0 °C."
+ ],
+ "使水沸腾：水温保持在 100 °C 不变（沸腾阶段）": [
+  "Make the water boil: the temperature stays at 100 °C (boiling stage).",
+  "Faites bouillir l'eau : la température reste à 100 °C (étape d'ébullition)."
+ ],
+ "石蜡的熔化：使石蜡处在变软阶段，温度仍在上升（没有水平线）": [
+  "Melting wax: set a time when the wax is softening; the temperature keeps rising (no flat part).",
+  "Fusion de la cire : choisissez un moment où la cire ramollit ; la température continue de monter (pas de palier)."
+ ],
+ "使入射角为 30°，观察反射角也是 30°": [
+  "Set the angle of incidence to 30° and see that the angle of reflection is also 30°.",
+  "Réglez l'angle d'incidence à 30° et constatez que l'angle de réflexion vaut aussi 30°."
+ ],
+ "保持入射光线与法线的夹角为 35°，使镜面转过 10°，观察反射光线转过 20°": [
+  "Keep the incident ray at 35° from the normal, turn the mirror by 10° and see the reflected ray turn by 20°.",
+  "Gardez le rayon incident à 35° de la normale, tournez le miroir de 10° et constatez que le rayon réfléchi tourne de 20°."
+ ],
+ "平面镜成像：使物体到镜面的距离为 12 cm，读出物与像的距离 24 cm": [
+  "Plane mirror: put the object 12 cm from the mirror and read 24 cm between object and image.",
+  "Miroir plan : placez l'objet à 12 cm du miroir et lisez 24 cm entre l'objet et l'image."
+ ],
+ "空气→水：使入射角为 45°，读出折射角约 32°": [
+  "Air → water: set the angle of incidence to 45° and read an angle of refraction of about 32°.",
+  "Air → eau : réglez l'angle d'incidence à 45° et lisez un angle de réfraction d'environ 32°."
+ ],
+ "水→空气：使入射角超过临界角（约 49°），观察全反射": [
+  "Water → air: make the angle of incidence larger than the critical angle (about 49°) and watch the total reflection.",
+  "Eau → air : dépassez l'angle critique (environ 49°) et observez la réflexion totale."
+ ],
+ "任选一种光的传播方向，使入射角为 0°：光线垂直入射，方向不变": [
+  "Choose any direction and set the angle of incidence to 0°: the light enters along the normal and does not change direction.",
+  "Choisissez un sens quelconque et réglez l'angle d'incidence à 0° : la lumière arrive suivant la normale et ne change pas de direction."
+ ],
+ "使物体成倒立、缩小的实像（照相机）": [
+  "Make an inverted, reduced real image (camera).",
+  "Obtenez une image réelle renversée et réduite (appareil photo)."
+ ],
+ "使物体成倒立、放大的实像（投影仪）": [
+  "Make an inverted, enlarged real image (projector).",
+  "Obtenez une image réelle renversée et agrandie (projecteur)."
+ ],
+ "使物体成正立、放大的虚像（放大镜）": [
+  "Make an upright, enlarged virtual image (magnifier).",
+  "Obtenez une image virtuelle droite et agrandie (loupe)."
+ ],
+ "使物距等于焦距，此时不成像": [
+  "Make the object distance equal to the focal length: no image forms.",
+  "Placez l'objet à la distance focale : aucune image ne se forme."
+ ],
+ "在地球上使弹簧测力计的示数约为 5 N（4.9 N）": [
+  "On Earth, make the spring scale read about 5 N (4.9 N).",
+  "Sur Terre, faites afficher environ 5 N (4,9 N) au dynamomètre."
+ ],
+ "把同样质量的物体放到月球上：先在地球上选质量 1 kg，再选月球，读出示数约为 1.6 N": [
+  "Take the same mass to the Moon: choose 1 kg, then the Moon, and read about 1.6 N.",
+  "Emportez la même masse sur la Lune : choisissez 1 kg, puis la Lune, et lisez environ 1,6 N."
+ ],
+ "使弹簧的伸长量超过弹性限度（0.3 m），观察提示": [
+  "Stretch the spring beyond its elastic limit (0.3 m) and read the note.",
+  "Étirez le ressort au-delà de sa limite d'élasticité (0,3 m) et lisez la remarque."
+ ],
+ "水平面（0°）上，物体已在向上运动：调节拉力，使物体做匀速直线运动（加速度接近 0）": [
+  "On the level surface (0°), with the object already moving: adjust the pull so that it moves at constant speed (acceleration close to 0).",
+  "Sur la surface horizontale (0°), l'objet étant déjà en mouvement : réglez la traction pour qu'il avance à vitesse constante (accélération proche de 0)."
+ ],
+ "水平面上，物体静止：增大拉力，但物体仍保持静止（摩擦力等于拉力，且拉力不为 0）": [
+  "On the level surface with the object at rest: increase the pull while it stays at rest (friction equals the pull, which is not 0).",
+  "Sur la surface horizontale, l'objet étant au repos : augmentez la traction sans qu'il bouge (le frottement égale la traction, qui n'est pas nulle)."
+ ],
+ "选择冰面，倾角 30°，拉力为 0：物体向下滑动": [
+  "Choose ice, a 30° slope and no pull: the object slides down.",
+  "Choisissez la glace, une pente de 30° et aucune traction : l'objet glisse vers le bas."
+ ],
+ "选择理想光滑表面，让时间超过 5 s：小车一直做匀速直线运动，速度不变": [
+  "Choose the ideal frictionless surface and let more than 5 s pass: the car keeps moving at constant speed.",
+  "Choisissez la surface idéale sans frottement et laissez passer plus de 5 s : le chariot garde une vitesse constante."
+ ],
+ "选择毛巾，初速度不小于 2 m/s：小车停下的路程不超过 0.5 m": [
+  "Choose the towel with a speed of at least 2 m/s: the car stops within 0.5 m.",
+  "Choisissez la serviette avec une vitesse d'au moins 2 m/s : le chariot s'arrête en moins de 0,5 m."
+ ],
+ "二力平衡：使 F₁ 和 F₂ 大小相等、方向相反、在同一直线上（F₁ 不为 0）": [
+  "Balanced forces: make F₁ and F₂ equal, opposite and on the same line (F₁ not 0).",
+  "Forces équilibrées : rendez F₁ et F₂ égales, opposées et sur la même droite (F₁ non nulle)."
+ ],
+ "使两个力大小相等、方向相反，但不在同一直线上：物体会转动": [
+  "Make the two forces equal and opposite but not on the same line: the object rotates.",
+  "Rendez les deux forces égales et opposées mais pas sur la même droite : l'objet tourne."
+ ],
+ "清水中（液体选“清水”）：使探头所在的深度为 20 cm，读出液体压强约 1960 Pa": [
+  "In fresh water (choose “Fresh water”): set the probe depth to 20 cm and read a pressure of about 1960 Pa.",
+  "Dans l'eau douce (choisissez « Eau douce ») : réglez la profondeur de la sonde à 20 cm et lisez une pression d'environ 1960 Pa."
+ ],
+ "托里拆利实验：海拔 0 m 时，把玻璃管倾斜 30°，观察水银柱的竖直高度不变（760 mm 左右）": [
+  "Torricelli experiment: at 0 m altitude, tilt the glass tube by 30° and see that the vertical height stays about 760 mm.",
+  "Expérience de Torricelli : à 0 m d'altitude, inclinez le tube de 30° et constatez que la hauteur verticale reste d'environ 760 mm."
+ ],
+ "固体压强：压力 100 N，使受力面积减小到 5 cm²，压强变为 200 kPa": [
+  "Pressure of a solid: with a force of 100 N, reduce the area to 5 cm² and the pressure becomes 200 kPa.",
+  "Pression d'un solide : avec une force de 100 N, réduisez l'aire à 5 cm² : la pression devient 200 kPa."
+ ],
+ "选择“自由释放”，使物体悬浮：物体的密度等于液体的密度": [
+  "Choose “Release” and make the object suspended: its density equals the liquid's density.",
+  "Choisissez « Lâcher » et mettez l'objet en suspension : sa masse volumique égale celle du liquide."
+ ],
+ "选择“手动浸入”，使物体浸入一半（占比 0.5），读出 F浮 与 G排 相等": [
+  "Choose “Lower by hand”, immerse half the object (share 0.5) and see that F and the displaced weight are equal.",
+  "Choisissez « Immerger à la main », immergez la moitié de l'objet (part 0,5) et constatez que F égale le poids déplacé."
+ ],
+ "选择“自由释放”，使物体漂浮，且露出液面的部分超过一半": [
+  "Choose “Release” and make the object float with more than half above the surface.",
+  "Choisissez « Lâcher » et faites flotter l'objet avec plus de la moitié hors du liquide."
+ ],
+ "选择“自由释放”，使物体下沉到底部：浮力小于重力": [
+  "Choose “Release” and make the object sink to the bottom: the buoyant force is smaller than the weight.",
+  "Choisissez « Lâcher » et faites couler l'objet au fond : la poussée est inférieure au poids."
+ ],
+ "单摆：使摆球到达最高点（速度为 0），读出此时动能为 0、势能最大": [
+  "Pendulum: bring the bob to its highest point (speed 0) and read zero kinetic energy and maximum potential energy.",
+  "Pendule : amenez la masse au point le plus haut (vitesse 0) et lisez une énergie cinétique nulle et une énergie potentielle maximale."
+ ],
+ "过山车：使小车的动能大于 40 J（质量 1 kg，起点高度 8 m，位置在最低点附近）": [
+  "Roller coaster: make the car's kinetic energy greater than 40 J (1 kg, start height 8 m, near the lowest point).",
+  "Montagnes russes : obtenez une énergie cinétique supérieure à 40 J (1 kg, hauteur de départ 8 m, près du point le plus bas)."
+ ],
+ "功与功率：使功率超过 100 W": [
+  "Work and power: make the power greater than 100 W.",
+  "Travail et puissance : obtenez une puissance supérieure à 100 W."
+ ],
+ "使杠杆在水平位置平衡（左右两边都挂有钩码）": [
+  "Balance the lever in the level position (weights on both sides).",
+  "Équilibrez le levier à l'horizontale (des masses des deux côtés)."
+ ],
+ "使杠杆平衡，并且是省力杠杆（动力臂大于阻力臂）": [
+  "Balance the lever so that it saves force (effort arm longer than load arm).",
+  "Équilibrez le levier de sorte qu'il économise la force (bras moteur plus long que bras résistant)."
+ ],
+ "使杠杆平衡，并且是费力杠杆（动力臂小于阻力臂）": [
+  "Balance the lever so that it costs force (effort arm shorter than load arm).",
+  "Équilibrez le levier de sorte qu'il demande plus de force (bras moteur plus court que bras résistant)."
+ ],
+ "滑轮组：使 3 段绳子承担重物，动滑轮重 0、没有摩擦：拉力等于物重的三分之一": [
+  "Pulley system: 3 strands carry the load, moving pulley weight 0 and no friction: the pull is one third of the load.",
+  "Palan : 3 brins portent la charge, poulie mobile sans poids et sans frottement : la traction vaut le tiers de la charge."
+ ],
+ "滑轮组：使机械效率不低于 90%（增大物重、减小动滑轮重和摩擦）": [
+  "Pulley system: reach an efficiency of at least 90% (heavier load, lighter moving pulley, less friction).",
+  "Palan : atteignez un rendement d'au moins 90 % (charge plus lourde, poulie plus légère, moins de frottement)."
+ ],
+ "斜面：倾角 30°、没有摩擦：推力等于物重的一半": [
+  "Inclined plane: 30° and no friction: the force is half the weight.",
+  "Plan incliné : 30° et sans frottement : la force vaut la moitié du poids."
+ ],
+ "使水和另一种物质的质量相等，加热 300 s 以上：比热容小的物质升温更快": [
+  "Give the water and the other substance equal masses and heat for more than 300 s: the one with the smaller specific heat warms faster.",
+  "Donnez la même masse à l'eau et à l'autre substance et chauffez plus de 300 s : celle de plus faible capacité thermique chauffe plus vite."
+ ],
+ "调节质量，使两者在加热 100 s 以上后升高的温度相同（相差不超过 1 °C，且至少升高 5 °C）": [
+  "Adjust the masses so that both rise by the same temperature after more than 100 s (within 1 °C, at least 5 °C).",
+  "Ajustez les masses pour que les deux s'élèvent de la même température après plus de 100 s (à 1 °C près, au moins 5 °C)."
+ ],
+ "选择铜块，两者质量相等，加热 60 s 以上：铜块升温最快": [
+  "Choose the copper block with equal masses and heat for more than 60 s: the copper warms fastest.",
+  "Choisissez le bloc de cuivre, à masses égales, et chauffez plus de 60 s : le cuivre chauffe le plus vite."
+ ],
+ "串联：使电路中的电流为 0.2 A（U = 6 V 时 R₁ + R₂ = 30 Ω）": [
+  "Series: make the current 0.2 A (with U = 6 V, R₁ + R₂ = 30 Ω).",
+  "Série : obtenez un courant de 0,2 A (avec U = 6 V, R₁ + R₂ = 30 Ω)."
+ ],
+ "并联：使总电阻为 6 Ω": [
+  "Parallel: make the total resistance 6 Ω.",
+  "Parallèle : obtenez une résistance totale de 6 Ω."
+ ],
+ "滑动变阻器：使 10 Ω 定值电阻两端的电压为 3 V（电源 6 V）": [
+  "Rheostat: make the voltage across the 10 Ω resistor 3 V (supply 6 V).",
+  "Rhéostat : obtenez 3 V aux bornes de la résistance de 10 Ω (générateur de 6 V)."
+ ],
+ "使电路的总功率超过 5 W": [
+  "Make the total power of the circuit greater than 5 W.",
+  "Obtenez une puissance totale supérieure à 5 W."
+ ],
+ "电磁铁：插入铁芯，使它吸起至少 5 个回形针": [
+  "Electromagnet: insert the iron core and lift at least 5 paper clips.",
+  "Électroaimant : insérez le noyau de fer et soulevez au moins 5 trombones."
+ ],
+ "电磁铁：不插铁芯，通过增大匝数和电流，吸起至少 3 个回形针": [
+  "Electromagnet: without the core, raise the turns and current to lift at least 3 paper clips.",
+  "Électroaimant : sans noyau, augmentez les spires et le courant pour soulever au moins 3 trombones."
+ ],
+ "电动机：改变电流方向或对调磁极，使线圈逆时针转动": [
+  "Motor: reverse the current or swap the poles so that the coil turns counter-clockwise.",
+  "Moteur : inversez le courant ou échangez les pôles pour que la bobine tourne dans le sens antihoraire."
+ ],
+ "电磁感应：使感应电动势的大小超过 100 mV": [
+  "Induction: make the induced EMF larger than 100 mV.",
+  "Induction : obtenez une force électromotrice induite supérieure à 100 mV."
+ ]
+}

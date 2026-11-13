@@ -1868,7 +1868,6 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .pk-empty { display: flex !important; align-items: center; justify-content: center; font-size: 40px; font-weight: 900; color: #fff; }
 .pk-vsb { display: block; flex: none; transform: rotate(-8deg); filter: drop-shadow(0 3px 0 #a61e4d); }
 .pk-vsb svg { display: block; height: 100%; width: auto; }
-.pk-vsb.big { height: 54px; } .pk-vsb.small { height: 26px; } .pk-vsb.huge { height: calc(var(--pk-av, 60px) * 0.85); }
 .pk-msgs { display: flex; flex-direction: column; gap: 6px; }
 .pk-msg { margin: 0; font-size: 15px; line-height: 1.4; color: var(--muted); text-align: center; }
 .pk-warn { color: #c92a2a; font-weight: 700; }
@@ -1954,20 +1953,6 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .pk-dot.done { border-color: rgba(0, 0, 0, .15); }
 .pk-dot.live { border-color: #e8590c; background: #ffd8a8; }
 /* the opening */
-.pk-intro { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
-.pk-cast { display: flex; align-items: center; justify-content: center; gap: 4%; width: 100%; }
-.pk-hero { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; max-width: 34%; }
-.pk-hero .avatar { width: var(--pk-av, 70px); height: var(--pk-av, 70px); border-width: 4px; box-shadow: 0 5px 0 var(--kid), 0 8px 14px rgba(0, 0, 0, .18); }
-.pk-hname { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--kid); font-size: 17px; font-weight: 900; }
-.pk-vsbig { position: relative; display: grid; place-items: center; }
-.pk-ready { font-size: 14px; font-weight: 800; color: var(--muted); }
-.pk-spk2, .pk-spk3, .pk-spk { position: absolute; left: 50%; top: 50%; width: 9px; height: 9px; margin: -4.5px; border-radius: 3px; background: #fcc419; transform: rotate(var(--a)) translateY(-1.1em); font-size: calc(var(--pk-av, 60px) * 0.8); opacity: 0; }
-.pk-spk2:nth-child(3n), .pk-spk3:nth-child(3n), .pk-spk:nth-child(3n) { background: #ff6b6b; } .pk-spk2:nth-child(3n+1), .pk-spk3:nth-child(3n+1), .pk-spk:nth-child(3n+1) { background: #4dabf7; }
-.pk-cd { position: relative; display: grid; place-items: center; }
-.pk-ring { width: calc(var(--pk-av, 60px) * 1.6); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; border: calc(var(--pk-av, 60px) * 0.12) solid var(--kid); background: #fff; box-shadow: 0 6px 0 color-mix(in srgb, var(--kid) 60%, #000), 0 10px 20px rgba(0, 0, 0, .15); }
-.pk-ring2 { position: absolute; inset: 0; margin: auto; width: calc(var(--pk-av, 60px) * 1.6); aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--kid); opacity: 0; }
-.pk-num { font-family: var(--round); font-size: calc(var(--pk-av, 60px) * 1); font-weight: 900; line-height: 1; color: var(--kid); }
-.pk-gotxt { font-family: var(--round); font-size: calc(var(--pk-av, 60px) * 0.95); font-weight: 900; color: var(--kid); text-shadow: 0 4px 0 color-mix(in srgb, var(--kid) 35%, #fff); white-space: nowrap; }
 /* a round's result */
 .pk-hit { position: absolute; width: 0; height: 0; }
 .pk-plus { position: absolute; transform: translate(-50%, -50%); font-size: 40px; font-weight: 900; color: #2f9e44; text-shadow: 0 2px 0 #fff, 0 0 10px #fff; white-space: nowrap; }
@@ -2022,7 +2007,6 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 @media (prefers-reduced-motion: no-preference) {
   .pk-ref .pk-ico { animation: pk-bob 3s ease-in-out infinite; }
   .pk-slot .avatar, .pk-empty { animation: pk-bob 2.4s ease-in-out infinite; }
-  .pk-slot + .pk-vsb, .pk-vsb.big { animation: pk-wobble 1.6s ease-in-out infinite; }
   .pk-start:not(:disabled) { animation: pk-glow 1.8s ease-in-out infinite; }
   .pk-match { animation: pk-pop .35s ease-out both; }
   .pk-deco i { animation: pk-drift var(--t) linear var(--d) infinite; }
@@ -2036,12 +2020,6 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
   .pk-dot.pop { animation: pk-pop .4s cubic-bezier(.2, 1.8, .4, 1); }
   .pk-dot.live { animation: pk-pulse 1s ease-in-out infinite; }
   .pk-panel.is-win .pk-box { animation: pk-pulse .6s ease-in-out 2; }
-  .pk-hero.me { animation: pk-in-l .65s cubic-bezier(.2, 1.4, .4, 1) both; } .pk-hero.opp { animation: pk-in-r .65s cubic-bezier(.2, 1.4, .4, 1) both; }
-  .pk-vsbig .pk-vsb { animation: pk-stamp .5s .5s cubic-bezier(.2, 1.5, .4, 1) both; }
-  .pk-spk2 { animation: pk-burst .7s .9s ease-out both; }
-  .pk-ready { animation: pk-pop .4s .9s both; }
-  .pk-ring { animation: pk-num .6s cubic-bezier(.2, 1.6, .4, 1) both; } .pk-ring2 { animation: pk-ring2 .6s ease-out both; }
-  .pk-gotxt { animation: pk-go .5s cubic-bezier(.2, 1.8, .4, 1) both; } .pk-spk3 { animation: pk-burst .6s ease-out both; }
   .pk-plus { animation: pk-float 1s ease-out both; } .pk-hit .pk-spk { animation: pk-burst .8s ease-out both; animation-delay: var(--d); }
   .pk-rays { animation: pk-spin 14s linear infinite; } .pk-pulse { animation: pk-beat .6s ease-in-out infinite alternate; }
   .pk-trophy { animation: pk-drop .95s cubic-bezier(.3, 1.6, .5, 1) both; } .pk-shine { animation: pk-shine 2.2s 1s ease-in-out infinite; }

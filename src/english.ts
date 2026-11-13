@@ -15,6 +15,7 @@ import { mascot } from "./art";
 import { subjectArt, shortcuts, subjectById } from "./hub";
 import * as R from "./readings";
 import { getLang } from "./i18n";
+import * as PK from "./pk";
 import { spellButton } from "./dictwrite";
 
 /** what the English screens need from the app shell (main.ts) */
@@ -77,7 +78,7 @@ export async function renderHome() {
       h("span", { class: "chev" }, "›")));
   }
   X.stagger([...list.querySelectorAll<HTMLElement>(".kid")]);
-  X.show(h("div", { class: "page", style: "--kid:#2f9e44" }, hero, h("main", { class: "scroll" }, h("div", { class: "narrow" }, list))));
+  X.show(h("div", { class: "page", style: "--kid:#2f9e44" }, hero, h("main", { class: "scroll" }, h("div", { class: "narrow" }, list, PK.homeSection("english")))));
 }
 
 // ---------- a child ----------

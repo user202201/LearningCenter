@@ -9,7 +9,11 @@ import type { Seg } from "./coding-interp";
 
 export class PyList { constructor(public a: Val[]) {} }
 export class PyTuple { constructor(public a: Val[]) {} }
-export class PyDict { m = new Map<string, [Val, Val]>(); }
+export class PyDict {
+  m = new Map<string, [Val, Val]>();
+  /** sets a value; an existing key keeps its first key object (like Python: {1: "a", True: "b"} is {1: "b"}) */
+  put(kk: string, k: Val, v: Val) { const e = this.m.get(kk); if (e) e[1] = v; else this.m.set(kk, [k, v]); }
+}
 export class PySet { m = new Map<string, Val>(); }
 export class PyRange {
   constructor(public s: bigint, public e: bigint, public st: bigint) {}
@@ -462,7 +466,7 @@ class Interp {
   setItem(o: Val, i: Val, v: Val, line: number) {
     this.line = line;
     if (o instanceof PyList) { o.a[this.index(i, o.a.length, line, "列表")] = v; return; }
-    if (o instanceof PyDict) { o.m.set(keyOf(i, line), [i, v]); return; }
+    if (o instanceof PyDict) { o.put(keyOf(i, line), i, v); return; }
     if (typeof o === "string" || o instanceof PyTuple) this.err("TypeError", `${cnType(o)}不能被修改（赋值）。`, typeof o === "string" ? "文字是不可变的：可以用 replace 或拼接做出一个新的文字。" : undefined, line);
     this.err("TypeError", `${cnType(o)}不能用 [ ] 赋值。`, undefined, line);
   }
@@ -496,7 +500,7 @@ class Interp {
         for (const p of e.parts) {
           if (typeof p === "string") { s += p; continue; }
           let v = this.eval(p.e);
-          if (p.eq !== undefined) s += p.eq + "=";
+          if (p.eq !== undefined) s += p.eq;
           if (p.conv === "r") v = repr(v); else if (p.conv === "s") v = str(v);
           let spec = "";
           if (p.spec) for (const sp of p.spec) spec += typeof sp === "string" ? sp : str(this.eval(sp.e));
@@ -508,7 +512,7 @@ class Interp {
       case "list": return new PyList(e.items.map((x) => this.eval(x)));
       case "tuple": return new PyTuple(e.items.map((x) => this.eval(x)));
       case "set": { const s = new PySet(); for (const x of e.items) { const v = this.eval(x); s.m.set(keyOf(v, e.line), v); } return s; }
-      case "dict": { const d = new PyDict(); for (const [k, v] of e.pairs) { const kk = this.eval(k); d.m.set(keyOf(kk, e.line), [kk, this.eval(v)]); } return d; }
+      case "dict": { const d = new PyDict(); for (const [k, v] of e.pairs) { const kk = this.eval(k); d.put(keyOf(kk, e.line), kk, this.eval(v)); } return d; }
       case "un": {
         const a = this.eval(e.a);
         if (e.op === "not") return !truthy(a);
@@ -579,7 +583,7 @@ class Interp {
       const go = (ci: number) => {
         if (ci === e.clauses.length) {
           this.tick();
-          if (e.kind === "dict") { const k = this.eval(e.elt); dict.m.set(keyOf(k, e.line), [k, this.eval(e.val!)]); }
+          if (e.kind === "dict") { const k = this.eval(e.elt); dict.put(keyOf(k, e.line), k, this.eval(e.val!)); }
           else if (e.kind === "set") { const v = this.eval(e.elt); set.m.set(keyOf(v, e.line), v); }
           else out.push(this.eval(e.elt));
           return;
@@ -929,7 +933,7 @@ class Interp {
         case "values": want(0); return new PyList([...o.m.values()].map(([, v]) => v));
         case "items": want(0); return new PyList([...o.m.values()].map(([k, v]) => new PyTuple([k, v])));
         case "pop": { want(1, 2); const kk = keyOf(args[0], line); const e = o.m.get(kk); if (!e) { if (args.length > 1) return args[1]; this.err("KeyError", `字典里没有键 ${repr(args[0])}。`, undefined, line); } o.m.delete(kk); return e![1]; }
-        case "update": { want(1); const src = args[0]; if (src instanceof PyDict) for (const [kk, e] of src.m) o.m.set(kk, e); else this.err("TypeError", "update 需要另一个字典。", undefined, line); return null; }
+        case "update": { want(1); const src = args[0]; if (src instanceof PyDict) for (const [kk, e] of src.m) o.put(kk, e[0], e[1]); else this.err("TypeError", "update 需要另一个字典。", undefined, line); return null; }
         case "setdefault": { want(1, 2); const kk = keyOf(args[0], line); if (!o.m.has(kk)) o.m.set(kk, [args[0], args.length > 1 ? args[1] : null]); return o.m.get(kk)![1]; }
         case "copy": want(0); { const d = new PyDict(); for (const [kk, e] of o.m) d.m.set(kk, [...e]); return d; }
         case "clear": want(0); o.m.clear(); return null;
@@ -1050,7 +1054,7 @@ class Interp {
     B("set", (a) => { need("set", a, 0, 1); const s = new PySet(); if (a.length) for (const x of this.iterate(a[0], this.line)) s.m.set(keyOf(x, this.line), x); return s; });
     B("dict", (a, kw) => {
       const d = new PyDict();
-      if (a.length) for (const p of this.iterate(a[0], this.line)) { const kv = [...this.iterate(p, this.line)]; d.m.set(keyOf(kv[0], this.line), [kv[0], kv[1]]); }
+      if (a.length) for (const p of this.iterate(a[0], this.line)) { const kv = [...this.iterate(p, this.line)]; d.put(keyOf(kv[0], this.line), kv[0], kv[1]); }
       if (kw) for (const [k, v] of Object.entries(kw)) d.m.set("s" + k, [k, v]);
       return d;
     });
@@ -1153,7 +1157,7 @@ class Interp {
       if (n <= 0n) this.err("ValueError", "randrange 的范围是空的。");
       return start + step * below(n);
     };
-    const seqOf = (v: Val): Val[] => (v instanceof PyList || v instanceof PyTuple ? v.a : typeof v === "string" ? [...v] : this.err("TypeError", `需要列表或文字，不能是${cnType(v)}。`));
+    const seqOf = (v: Val): Val[] => (v instanceof PyList || v instanceof PyTuple ? v.a : typeof v === "string" ? [...v] : v instanceof PyRange ? [...this.iterate(v, this.line)] : this.err("TypeError", `需要列表或文字，不能是${cnType(v)}。`));
     this.modules.set("random", new PyModule("random", {
       seed: rnd("seed", (a) => { this.rng.seed(a.length && a[0] !== null ? (isInt(a[0]) ? big(a[0]) : BigInt(Math.trunc(flt(a[0] as number)))) : 1n); return null; }),
       random: rnd("random", () => this.rng.random()),

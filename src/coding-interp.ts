@@ -34,7 +34,9 @@ export interface StageSprite { id: string; art: string; x: number; y: number; di
 export interface StageState { sprites: StageSprite[]; notes: { tick: number; pitch: number; beats: number; sprite: string }[]; msgs: string[]; keys: Record<string, 1>; tapX: number; tapY: number; tick: number }
 export interface GridWorld { kind: "grid"; w: number; h: number; cells: string[] }
 export interface TurtleWorld { kind: "turtle" }
-export type World = GridWorld | TurtleWorld;
+/** the worlds of worlds 7-10 (coding-stage.ts, coding-levels2.ts) have no map: the sprites / the lists are in the state */
+export interface PlainWorld { kind: "stage" | "data" }
+export type World = GridWorld | TurtleWorld | PlainWorld;
 export interface Goal { flag?: boolean; stars?: "all" | number; lights?: "all" | number; vars?: Record<string, number>; lists?: Record<string, number[]> }
 
 export type Status = "running" | "done" | "crash" | "infinite" | "budget" | "error";

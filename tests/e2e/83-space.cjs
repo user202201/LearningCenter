@@ -107,7 +107,7 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
       return out;
     });
     ok(R.bad.length === 0, 'data: order, values, Kepler, gravity from mass and radius, moon counts, moons, constellations, timeline ' + R.bad.join(' | '));
-    ok(R.moonCount === 23, 'data: 23 moons ' + R.moonCount);
+    ok(R.moonCount === 24, 'data: 24 moons (7 worlds with moons) ' + R.moonCount);
     const bytes = await page.evaluate(async () => (await (await fetch('/src/data/space.json')).text()).length);
     ok(bytes > 15000 && bytes < 300000, 'data: space.json is under 300 KB and not empty (' + bytes + ' bytes)');
 
@@ -304,10 +304,8 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
 
   // =====================================================================================  C. THE ORRERY WITH A REAL CLOCK, REAL TOUCH (CDP at dpr 2), LEAVING THE PAGE
   {
-    const t = await start(new Map(), { local: true, viewport: { width: 390, height: 844 }, dpr: 2, touch: true, motion: true });
+    const t = await start(new Map(), { local: true, viewport: { width: 390, height: 844 }, dpr: 2, touch: true, motion: true, init: () => { let n = 0; const o = CanvasRenderingContext2D.prototype.clearRect; CanvasRenderingContext2D.prototype.clearRect = function (...a) { n++; return o.apply(this, a); }; window.__draws = () => n; } });
     const { page, ctx } = t;
-    await page.addInitScript(() => { let n = 0; const o = CanvasRenderingContext2D.prototype.clearRect; CanvasRenderingContext2D.prototype.clearRect = function (...a) { n++; return o.apply(this, a); }; window.__draws = () => n; });
-    await page.reload(); await page.waitForSelector('.hub-grid'); await page.click('.subject[data-subject=chinese]').catch(() => {});
     await page.evaluate(() => (location.hash = '#/science/space')); await page.waitForSelector('#sp-orrery'); await page.waitForFunction(() => window.__space && window.__space.bodies().length === 8);
     const d0 = await page.evaluate(() => window.__space.st.day);
     await setRange(page, '#sp-speed', 5); await page.waitForTimeout(1200);

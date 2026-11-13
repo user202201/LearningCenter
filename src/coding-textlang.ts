@@ -28,7 +28,7 @@ const FULLWIDTH: Record<string, string> = { "：": ":", "（": "(", "）": ")", 
 
 const OPS3 = ["**=", "//=", "..."];
 const OPS2 = ["**", "//", "==", "!=", "<=", ">=", "+=", "-=", "*=", "/=", "%=", "->"];
-const OPS1 = "+-*/%<>=()[]{},:.";
+const OPS1 = "+-*/%<>=()[]{},:.;";
 
 const isNameStart = (c: string) => /[\p{L}_]/u.test(c);
 const isNameChar = (c: string) => /[\p{L}\p{N}_]/u.test(c);
@@ -145,7 +145,6 @@ export function lex(src: string): Tok[] {
       }
       push("op", op); i += op.length; continue;
     }
-    if (c === ";") throw new PyError("SyntaxError", `第 ${line} 行：不能用分号 ; 连接语句。`, line, "每条语句单独写一行。");
     if (c === "!") throw new PyError("SyntaxError", `第 ${line} 行：单独的 ! 不能使用。`, line, "“不等于”写成 !=，“非”写成 not。");
     if (c === "$" || c === "?" || c === "`" || c === "@" || c === "&" || c === "|" || c === "^" || c === "~") throw new PyError("SyntaxError", `第 ${line} 行：这里不能使用符号“${c}”。`, line, "这门入门语言不支持这个符号。");
     throw new PyError("SyntaxError", `第 ${line} 行：不认识的字符“${c}”。`, line);
@@ -522,11 +521,13 @@ export function parseProgram(src: string): Stmt[] {
     }
     p++;
     const body: Stmt[] = [];
-    while (peek().t !== "dedent" && peek().t !== "eof") body.push(statement());
+    while ((peek().t !== "dedent" && peek().t !== "eof") || pending.length) body.push(statement());
     if (peek().t === "dedent") p++;
     return body;
   }
+  const pending: Stmt[] = [];
   function statement(): Stmt {
+    if (pending.length) return pending.shift()!;
     const t = peek(), line = t.line;
     if (t.t === "indent") return unexpected() as never;
     if (t.t === "name") {
@@ -575,6 +576,13 @@ export function parseProgram(src: string): Stmt[] {
       }
     }
     const s = simpleStatement();
+    if (isOp(";")) {   // two statements on one line:  a = 1; b = 2
+      const more: Stmt[] = [s];
+      while (isOp(";")) { p++; if (peek().t === "nl" || peek().t === "eof") break; more.push(simpleStatement()); }
+      if (peek().t === "nl") p++;
+      pending.push(...more.slice(1));
+      return more[0];
+    }
     if (peek().t === "nl") p++;
     else if (peek().t !== "eof") {
       const nt = peek();
@@ -640,9 +648,9 @@ export function parseProgram(src: string): Stmt[] {
   }
 
   const prog: Stmt[] = [];
-  while (peek().t !== "eof") {
-    if (peek().t === "nl") { p++; continue; }
-    if (peek().t === "dedent") { p++; continue; }
+  while (peek().t !== "eof" || pending.length) {
+    if (!pending.length && peek().t === "nl") { p++; continue; }
+    if (!pending.length && peek().t === "dedent") { p++; continue; }
     prog.push(statement());
   }
   return prog;

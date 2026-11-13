@@ -1504,8 +1504,10 @@ async function route() {
   if (idiom) return void renderIdiom(decodeURIComponent(idiom[1]));
   if (hash === "#/settings") return void renderSettings();
   if (hash === "#/chinese") return renderHome();
-  if (hash === "#/chinese/pk") return void PK.renderSetup();
-  if (hash === "#/chinese/pk/play") return void PK.renderPlay();
+  if (hash === "#/chinese/pk") return void PK.renderSetup("chinese");
+  if (hash === "#/chinese/pk/play") return void PK.renderPlay("chinese");
+  if (hash === "#/english/pk") return void PK.renderSetup("english");   // (before the pattern below, which would take "pk" for a child)
+  if (hash === "#/english/pk/play") return void PK.renderPlay("english");
   if (hash === "#/subject/english") return void E.renderHome();
   if (hash === "#/subject/math") return void MA.renderHome();
   if (hash === "#/subject/science") return void SC.renderHome();
