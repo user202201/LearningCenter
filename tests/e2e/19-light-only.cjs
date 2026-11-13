@@ -17,6 +17,9 @@ const shot = async (scheme) => {
     text: getComputedStyle(document.body).color,
   }));
   await addKid(page, 'Dory'); await openKid(page, 'Dory');
+  await page.addStyleTag({ content: '*, *::before, *::after { animation: none !important; transition: none !important; } .hero-avatar { visibility: hidden; }' });   // (a new child gets a RANDOM animal picture: not part of the comparison)
+    // (the mascot / avatar blink: both runs must be compared in the same pose)
+  await page.waitForTimeout(150);
   const kid = await page.screenshot();
   await page.emulateMedia({ media: 'print' });
   info.print = await page.evaluate(() => ({ scheme: getComputedStyle(document.documentElement).colorScheme, bg: getComputedStyle(document.body).backgroundColor, img: getComputedStyle(document.body).backgroundImage, filter: getComputedStyle(document.body).filter }));
@@ -33,7 +36,7 @@ const shot = async (scheme) => {
   ok(dark.info.bg === light.info.bg && dark.info.text === light.info.text && dark.info.bgImg === light.info.bgImg, 'background and text colours are the same in dark mode (' + dark.info.bg + ' / ' + dark.info.text + ')');
   const same = (a, b) => Buffer.compare(a, b) === 0;
   fs.mkdirSync(OUT, { recursive: true });
-  fs.writeFileSync(OUT + 'light-only-home-dark.png', dark.home); fs.writeFileSync(OUT + 'light-only-kid-dark.png', dark.kid);
+  fs.writeFileSync(OUT + 'light-only-kid-light.png', light.kid); fs.writeFileSync(OUT + 'light-only-home-dark.png', dark.home); fs.writeFileSync(OUT + 'light-only-kid-dark.png', dark.kid);
   ok(same(light.home, dark.home), 'the first screen (mascot with eyes and mouth, dotted background) looks exactly the same in dark mode');
   ok(same(light.kid, dark.kid), "a child's page looks exactly the same in dark mode");
   await done();
