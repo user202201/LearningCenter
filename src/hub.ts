@@ -9,7 +9,7 @@ import { mascot } from "./art";
 import { getLang } from "./i18n";
 
 export interface Subject {
-  id: "chinese" | "math" | "english" | "science";
+  id: "chinese" | "math" | "english" | "science" | "music";
   /** the name on the card (Chinese source text, translated by i18n) */
   name: string;
   /** where the card leads */
@@ -18,6 +18,8 @@ export interface Subject {
   c1: string; c2: string; dark: string;
   /** false = the subject page says "coming soon" */
   ready: boolean;
+  /** false = no child needed (music): not in the shortcuts of a child's page */
+  kid?: boolean;
 }
 
 export const SUBJECTS: Subject[] = [
@@ -25,6 +27,7 @@ export const SUBJECTS: Subject[] = [
   { id: "math", name: "数学", route: "#/subject/math", c1: "#4dabf7", c2: "#1c7ed6", dark: "#1864ab", ready: true },
   { id: "english", /** the Languages subject teaches the OTHER language of the screen: English screen -> French (words.ts studyLang) */ get name() { return getLang() === "en" ? "法语" : "英语"; }, route: "#/subject/english", c1: "#69db7c", c2: "#2f9e44", dark: "#237a35", ready: true },
   { id: "science", name: "科学", route: "#/subject/science", c1: "#b197fc", c2: "#7048e8", dark: "#5430b8", ready: true },
+  { id: "music", name: "音乐", route: "#/subject/music", c1: "#f783ac", c2: "#d6336c", dark: "#a61e4d", ready: true, kid: false },
 ];
 export const subjectById = (id: string) => SUBJECTS.find((s) => s.id === id);
 
@@ -68,6 +71,16 @@ const ART: Record<Subject["id"], string> = {
     <text x="60" y="54" font-size="36" ${FONT}><tspan fill="#ff6b6b">A</tspan><tspan fill="#fab005">B</tspan><tspan fill="#339af0">C</tspan></text>
     ${eye(48, 68, 3.800)}${eye(72, 68, 3.800)}${cheeks(76, 29)}${smile(74, 7)}
     ${star(16, 102, 8, "#fff3bf")}${star(106, 106, 6, "#fff3bf")}`,
+  // a cheerful piano with notes dancing above it
+  music: `${shadow}
+    <rect x="12" y="52" width="96" height="52" rx="10" fill="#fff"/>
+    <rect x="12" y="52" width="96" height="52" rx="10" fill="none" stroke="#a61e4d" stroke-width="3.500"/>
+    ${[36, 60, 84].map((x) => `<path d="M${x} 76V104" stroke="#ced4da" stroke-width="2"/>`).join("")}
+    ${[30, 54, 78, 98].map((x) => `<rect x="${x - 5}" y="52" width="10" height="30" rx="2" fill="#2d2230"/>`).join("")}
+    ${eye(46, 92, 3.800)}${eye(74, 92, 3.800)}${smile(98, 7)}
+    <ellipse cx="38" cy="30" rx="8" ry="6" transform="rotate(-20 38 30)" fill="#ffe066"/><path d="M45 28V8" stroke="#fff" stroke-width="3.500" stroke-linecap="round"/>
+    <ellipse cx="78" cy="22" rx="8" ry="6" transform="rotate(-20 78 22)" fill="#fff"/><path d="M85 20V2" stroke="#fff" stroke-width="3.500" stroke-linecap="round"/><path d="M45 8L85 2" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    ${star(100, 40, 8, "#ffe066")}${star(16, 36, 7, "#fff3bf")}`,
   // a bubbling flask with a smiling potion
   science: `${shadow}
     <path d="M49 12h22v6h-2.500v30l25 46q6 13-7 15H33.500q-13-2-7-15l25-46V18H49z" fill="#e7f5ff"/>
@@ -98,7 +111,7 @@ export const kidRoute = (subject: Subject["id"], kidId: string): string => (subj
  * (the grade is asked there the first time, as always). Right-aligned.
  */
 export function shortcuts(kidId: string, current: Subject["id"]): HTMLElement {
-  return h("nav", { class: "shortcuts", "aria-label": "学科" }, ...SUBJECTS.filter((s) => s.id !== current).map((s) =>
+  return h("nav", { class: "shortcuts", "aria-label": "学科" }, ...SUBJECTS.filter((s) => s.id !== current && s.kid !== false).map((s) =>
     h("a", { class: "shortcut", id: `go-${s.id}`, href: kidRoute(s.id, kidId), title: s.name, "aria-label": s.name, style: `--c1:${s.c1};--c2:${s.c2};--cd:${s.dark}` },
       h("span", { class: "sc-ico" }, subjectArt(s.id)), h("span", { class: "sc-name" }, s.name))));
 }

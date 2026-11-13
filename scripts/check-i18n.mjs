@@ -7,8 +7,8 @@ import path from "node:path";
 const dir = new URL("../src/", import.meta.url).pathname;
 const cjk = /[一-鿿　-〿＀-￯]/;
 // not UI texts: translation tables themselves, and keywords used to recognise "primo / secondo" file names
-// figures.ts: the labels of the drawings of the summaries (Chinese content like the science cards, shown in a `user` box: never translated)
-const SKIP_FILES = new Set(["i18n-data.ts", "figures.ts"]);
+// musicfig.ts: the course drawings (labels like 五度圈 are Chinese course content). figures.ts: the labels of the drawings of the summaries (Chinese content like the science cards, shown in a `user` box: never translated)
+const SKIP_FILES = new Set(["i18n-data.ts", "figures.ts", "musicfig.ts"]);
 
 const texts = new Map();
 for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".ts") && !x.endsWith(".d.ts") && !SKIP_FILES.has(x))) {

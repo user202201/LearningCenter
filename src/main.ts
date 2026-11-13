@@ -17,6 +17,7 @@ import { readTable, readWorkbook, type SheetData } from "./xlsx";
 import * as I from "./importer";
 import { subjectById, hubGrid, hubHero, soonPage, reveal, shortcuts } from "./hub";
 import * as E from "./english";
+import * as MU from "./music";
 import * as MA from "./math";
 import * as SC from "./science";
 import { pickKidGrade } from "./gradeui";
@@ -1473,6 +1474,15 @@ async function route() {
   if (hash === "#/science/formulas") return void SC.renderFormulas();
   if (hash === "#/science/circuits") return void SC.renderCircuits();
   if (hash === "#/science/notes") return void SC.renderNotes();
+  if (hash === "#/subject/music") return void MU.renderMusic();
+  if (hash === "#/music/theory") return void MU.renderTheory();
+  const mth = /^#\/music\/theory\/(c\d+)$/.exec(hash);
+  if (mth) return void MU.renderChapter(mth[1]);
+  const mq = /^#\/music\/quiz\/(c\d+)$/.exec(hash);
+  if (mq) return void MU.renderQuiz(mq[1]);
+  if (hash === "#/music/piano") return void MU.renderPiano();
+  if (hash === "#/music/drums") return void MU.renderDrums();
+  if (hash === "#/music/guitar") return void MU.renderGuitar();
   const sci = /^#\/science\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
   if (sci) return void SC.renderKid(sci[1], sci[2] === "learned" ? "learned" : sci[2] === "game" ? "game" : "week");
   const math = /^#\/math\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
@@ -1498,6 +1508,7 @@ const shell = { show, showLoading, showError, loadShared, kids: () => kidsFile, 
 E.initEnglish(shell);
 MA.initMath(shell);
 SC.initScience(shell);
+MU.initMusic(shell);
 // the web version keeps itself in the browser, so it opens without network (sw.js is made by the build; the packaged app and the dev server have none)
 if (!__MOBILE__ && import.meta.env.PROD && "serviceWorker" in navigator) {
   window.addEventListener("load", () => { navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => { /* no service worker here: the app still works online */ }); });
