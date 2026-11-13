@@ -74,3 +74,6 @@
 79b-coding-editor
 79c-coding-screens
 88-pk-english
+86-codingtext
+86b-codingtext-editor
+86c-codingtext-screens

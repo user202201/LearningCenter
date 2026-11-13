@@ -42,12 +42,14 @@ const robotSvg = (mood: Mood) => {
     <rect x="-18" y="-2" width="4" height="9" rx="2" fill="#1971c2"/><rect x="14" y="-2" width="4" height="9" rx="2" fill="#1971c2"/>`;
 };
 
-function varsBar(): { el: HTMLElement; set(v: Record<string, number>): void } {
+function varsBar(): { el: HTMLElement; set(v: Record<string, number>, lists?: Record<string, number[]>): void } {
   const el = div("cs-vars");
-  return { el, set(v) {
-    const names = Object.keys(v).sort();
-    el.hidden = names.length === 0;
-    el.replaceChildren(...names.map((n) => { const c = div("cs-var"); c.append(Object.assign(document.createElement("b"), { textContent: n }), ` = ${v[n]}`); c.dataset.name = n; return c; }));
+  return { el, set(v, lists = {}) {
+    const names = Object.keys(v).sort(), ls = Object.keys(lists).filter((n) => lists[n].length).sort();
+    el.hidden = names.length + ls.length === 0;
+    el.replaceChildren(...names.map((n) => { const c = div("cs-var"); c.append(Object.assign(document.createElement("b"), { textContent: n }), ` = ${v[n]}`); c.dataset.name = n; return c; }),
+      // (lists of worlds 9-10: a robot that collects the numbers of the floor)
+      ...ls.map((n) => { const c = div("cs-var cs-list"); c.append(Object.assign(document.createElement("b"), { textContent: n }), ` = [${lists[n].join(", ")}]`); c.dataset.name = n; return c; }));
   } };
 }
 
@@ -59,6 +61,8 @@ export function gridScene(world: GridWorld, init: State): Scene {
     const c = world.cells[y][x];
     if (c === "#") { root.append(svg("rect", { x: x * U + 1, y: y * U + 1, width: U - 2, height: U - 2, rx: 7, fill: "#868e96" }), svg("rect", { x: x * U + 4, y: y * U + 4, width: U - 8, height: 8, rx: 4, fill: "#adb5bd" })); continue; }
     root.append(svg("rect", { x: x * U + 1, y: y * U + 1, width: U - 2, height: U - 2, rx: 7, fill: TILE[c] ?? "#fff4d6", stroke: "#f1d9a0", "stroke-width": 1.500 }));
+    // a number on the floor (worlds 9-10: `floorNum`)
+    if (c >= "0" && c <= "9") root.append(svg("text", { x: x * U + 20, y: y * U + 28, "text-anchor": "middle", "font-size": 22, "font-weight": 900, fill: "#8a5a1a", class: "cs-num" }, c));
     if (c === "F") root.append(svg("g", { transform: `translate(${x * U + 20} ${y * U + 22})`, class: "cs-flag" }, FLAG));
   }
   for (const k of Object.keys(init.stars)) { const [x, y] = k.split(",").map(Number); const s = svg("path", { d: STAR, transform: `translate(${x * U + 20} ${y * U + 21})`, fill: "#ffd43b", stroke: "#f59f00", "stroke-width": 2, "stroke-linejoin": "round", class: "cs-star", "data-at": k }); stars.set(k, s); root.append(s); }
@@ -87,7 +91,7 @@ export function gridScene(world: GridWorld, init: State): Scene {
       for (const [k, el] of stars) el.style.display = s.stars[k] ? "" : "none";
       for (const [k, el] of lamps) { const on = s.lamps[k] === 1; if (on !== lit.has(k)) { on ? lit.add(k) : lit.delete(k); el.innerHTML = BULB(on); } }
       if (mood !== moodNow) { moodNow = mood; face.innerHTML = robotSvg(mood); wrap.dataset.mood = mood; }
-      vars.set(s.vars);
+      vars.set(s.vars, s.lists);
       wrap.dataset.got = String(s.got); wrap.dataset.lit = String(s.lit);
       if (first) { first = false; requestAnimationFrame(() => wrap.classList.remove("cs-instant")); }
     },

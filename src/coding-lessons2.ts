@@ -29,8 +29,8 @@ const BIN = "set lo = 1 set hi = len(xs) set pos = 0 while lo <= hi and pos == 0
 export const LESSONS2: Record<string, Lesson> = {
   stage: { id: "stage", title: "舞台和角色", steps: [
     { text: "舞台上有角色。每个角色都可以有自己的程序。", demo: sd("on start cat { smove 60 }", [CAT]) },
-    { text: "“当开始运行”的程序，在点“运行”时开始。", demo: sd("on start cat { smove 60 say hi }", [CAT]) },
-    { text: "“走”让角色移动，“说”让角色说话。", demo: sd("on start cat { smove 40 sturn 90 say hi }", [CAT]) },
+    { text: "“事件：开始运行”的程序，在点“运行”时开始。", demo: sd("on start cat { smove 60 say hi }", [CAT]) },
+    { text: "“前进”让角色移动，“说话”让角色说话。", demo: sd("on start cat { smove 40 sturn 90 say hi }", [CAT]) },
   ] },
   events: { id: "events", title: "事件：等一件事发生", steps: [
     { text: "事件是发生的一件事：角色被点击、按下一个键、收到一条消息。", demo: sd("on tap cat { say meow }", [CAT], { inputs: [tap(24)], ticks: 70 }) },
@@ -38,7 +38,7 @@ export const LESSONS2: Record<string, Lesson> = {
     { text: "事件没有发生时，这段程序不会运行。", demo: sd("on tap cat { say meow }", [CAT], { inputs: [tap(60)], ticks: 100 }) },
   ] },
   anim: { id: "anim", title: "动画：重复和等待", steps: [
-    { text: "重复“走”和“下一个造型”，角色就像在走路。", demo: sd("on start cat { repeat 8 { smove 10 nextcostume } }", [CAT], { ticks: 60 }) },
+    { text: "重复“前进”和“下一个造型”，角色就像在走路。", demo: sd("on start cat { repeat 8 { smove 10 nextcostume } }", [CAT], { ticks: 60 }) },
     { text: "每重复一次，角色会停一小会儿，所以动作一格一格地出现。", demo: sd("on start cat { repeat 8 { smove 10 nextcostume } }", [CAT], { ticks: 60 }) },
     { text: "“一直重复”不会停下。时钟的秒针就是这样转的。", demo: sd("on start hand { forever { wait 0.5 sturn 6 } }", [{ id: "hand", art: "hand", x: 0, y: 0, dir: 0, label: "秒针" }], { ticks: 130 }) },
   ] },
@@ -55,7 +55,7 @@ export const LESSONS2: Record<string, Lesson> = {
     { text: "“重复”可以让同一个音符弹好几遍。", demo: sd("on start bird { repeat 3 { note(60, 1) changey 12 } }", [BIRD], { ticks: 80 }) },
   ] },
   score: { id: "score", title: "分数：变量和碰到", steps: [
-    { text: "变量可以记分。每答对一次，分数增加 1。", demo: sd("on tap a { say ok change score by 1 }", [{ id: "a", art: "btn", text: "✓", x: 0, y: -10, label: "对" }], { vars: ["score"], inputs: [tap(20, "a"), tap(50, "a")], ticks: 80 }) },
+    { text: "变量可以记分。每答对一次，分数增加 1。", demo: sd("on tap a { say ok change score by 1 }", [{ id: "a", art: "btn", text: "✓", x: 0, y: -10, label: "对的" }], { vars: ["score"], inputs: [tap(20, "a"), tap(50, "a")], ticks: 80 }) },
     { text: "“碰到”和“按住某个键”可以放进“如果”里使用。", demo: sd("on start cat { forever { if keyDown(right) { changex 8 } } }", [CAT], { inputs: [{ tick: 10, type: "key", key: "right", hold: 18 }], ticks: 50 }) },
   ] },
   params2: { id: "params2", title: "有两个数字的函数", steps: [
@@ -81,7 +81,7 @@ export const LESSONS2: Record<string, Lesson> = {
   list: { id: "list", title: "列表：一排有编号的盒子", steps: [
     { text: "列表像一排盒子，每个盒子里有一个数，盒子从 1 开始编号。", demo: dd("add(xs, 4) add(xs, 8) add(xs, 15)", { xs: [] }) },
     { text: "“加入”把一个数放到列表的最后。", demo: dd("add(xs, 4) add(xs, 8) add(xs, 15)", { xs: [] }) },
-    { text: "“第 □ 项”读出第几个盒子里的数，“长度”说明有几个盒子。", demo: dd("set a = item(xs, 2) set n = len(xs)", { xs: [4, 8, 15] }) },
+    { text: "“编号”读出某个盒子里的数，“长度”说明有几个盒子。", demo: dd("set a = item(xs, 2) set n = len(xs)", { xs: [4, 8, 15] }) },
   ] },
   each: { id: "each", title: "对每一项", steps: [
     { text: "“对每一项”让列表里的数一个一个轮流出现。", demo: dd("each x in xs { change s by x }", { xs: [3, 5, 2, 6] }) },

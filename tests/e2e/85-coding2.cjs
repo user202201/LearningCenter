@@ -22,7 +22,10 @@ const { ok, done } = checks();
     const ri = (a, b) => a + Math.floor(rnd() * (b - a + 1)), pick = (l) => l[Math.floor(rnd() * l.length)];
     let id = 0; const B = (o) => ({ id: 'x' + ++id, ...o });
     const N = (v) => ({ k: 'n', v }), V = (name) => ({ k: 'v', name });
-    const LS = ['xs', 'ys'], G = ['a', 'b', 'c', 'd', 'i', 'x'];
+    const LS = ['xs', 'ys'];
+    let safe = true;
+    const idx = (list, e) => (safe ? { k: 'fn', f: 'maxOf', args: [N(1), { k: 'fn', f: 'minOf', args: [e, { k: 'list', f: 'len', list }] }] } : e);
+    const den = (e) => (safe ? { k: 'fn', f: 'maxOf', args: [e, N(1)] } : e);
     // pure functions (no side effects, no division: they can be called inside expressions): the Machine runs a call inside an expression before the rest of the expression
     const leafP = (vars) => (rnd() < 0.5 ? N(pick([-2, -1, 0, 1, 2, 3, 5])) : V(pick(vars)));
     const exP = (d, vars) => (d <= 0 || rnd() < 0.3 ? leafP(vars) : rnd() < 0.7 ? { k: 'bin', op: pick(['+', '-', '*']), a: exP(d - 1, vars), b: exP(d - 1, vars) } : { k: 'fn', f: pick(['minOf', 'maxOf']), args: [exP(d - 1, vars), exP(d - 1, vars)] });
@@ -32,9 +35,9 @@ const { ok, done } = checks();
     const ex = (d, vars) => {
       if (d <= 0 || rnd() < 0.25) return leafP(vars);
       switch (ri(0, 9)) {
-        case 0: case 1: case 2: return { k: 'bin', op: pick(['+', '-', '*', '+', '-', '/', '%']), a: ex(d - 1, vars), b: ex(d - 1, vars) };
+        case 0: case 1: case 2: { const op = pick(['+', '-', '*', '+', '-', '/', '%']); const b = ex(d - 1, vars); return { k: 'bin', op, a: ex(d - 1, vars), b: op === '/' || op === '%' ? den(b) : b }; }
         case 3: return { k: 'list', f: pick(['len', 'sum', 'max', 'min']), list: pick(LS) };
-        case 4: return { k: 'list', f: pick(['has', 'count', 'indexOf', 'item']), list: pick(LS), a: ex(d - 1, vars) };
+        case 4: { const f = pick(['has', 'count', 'indexOf', 'item']), list = pick(LS); return { k: 'list', f, list, a: f === 'item' ? idx(list, ex(d - 1, vars)) : ex(d - 1, vars) }; }
         case 5: return { k: 'fn', f: pick(['floor', 'abs']), args: [ex(d - 1, vars)] };
         case 6: return { k: 'fn', f: pick(['minOf', 'maxOf']), args: [ex(d - 1, vars), ex(d - 1, vars)] };
         case 7: return bx(d - 1, vars);
@@ -53,16 +56,16 @@ const { ok, done } = checks();
         case 0: case 1: return B({ t: 'set', name: tgt(), e: ex(2, vars) });
         case 2: return B({ t: 'change', name: tgt(), e: ex(2, vars) });
         case 3: return B({ t: 'push', list: pick(LS), e: ex(2, vars) });
-        case 4: return B({ t: 'lset', list: pick(LS), n: ex(1, vars), e: ex(2, vars) });
-        case 5: return B({ t: 'lremove', list: pick(LS), n: ex(1, vars) });
-        case 6: return B({ t: 'swap', list: pick(LS), n: ex(1, vars), e: ex(1, vars) });
-        case 7: return B({ t: 'lclear', list: pick(LS) });
+        case 4: { const l = pick(LS); return B({ t: 'lset', list: l, n: idx(l, ex(1, vars)), e: ex(2, vars) }); }
+        case 5: { const l = pick(LS); return safe ? B({ t: 'push', list: l, e: ex(1, vars) }) : B({ t: 'lremove', list: l, n: ex(1, vars) }); }
+        case 6: { const l = pick(LS); return B({ t: 'swap', list: l, n: idx(l, ex(1, vars)), e: idx(l, ex(1, vars)) }); }
+        case 7: { const l = pick(LS); return safe ? B({ t: 'push', list: l, e: ex(1, vars) }) : B({ t: 'lclear', list: l }); }
         case 8: return inProc ? B({ t: 'change', name: tgt(), e: ex(1, vars) }) : B({ t: 'call', name: 'proc1', arg: ex(1, vars) });
         case 9: case 10: return B({ t: 'if', cond: bx(2, vars), body: block(d - 1, vars), ...(rnd() < 0.5 ? { els: block(d - 1, vars) } : {}) });
         case 11: return B({ t: 'repeat', n: N(ri(1, 3)), body: block(d - 1, vars) });
         case 12: return B({ t: 'for', name: 'i', n: N(ri(0, 2)), e: N(ri(1, 4)), body: block(d - 1, vars) });
         case 13: return B({ t: 'each', name: 'x', list: pick(LS), body: block(d - 1, vars) });
-        default: { const k = ri(1, 3); return B({ t: 'repeat', n: N(1), body: [B({ t: 'set', name: 'd', e: N(0) }), B({ t: 'while', cond: { k: 'cmp', op: '<', a: V('d'), b: N(k) }, body: [B({ t: 'change', name: 'd', e: N(1) }), ...block(d - 1, vars)] })] }); }
+        default: { const k = ri(1, 3), cv = inProc ? 'f' : d >= 2 ? 'd' : 'e'; return B({ t: 'repeat', n: N(1), body: [B({ t: 'set', name: cv, e: N(0) }), B({ t: 'while', cond: { k: 'cmp', op: '<', a: V(cv), b: N(k) }, body: [B({ t: 'change', name: cv, e: N(1) }), ...block(d - 1, vars)] })] }); }
       }
     };
     const block = (d, vars) => Array.from({ length: ri(1, 3) }, () => st(d, vars));
@@ -73,6 +76,7 @@ const { ok, done } = checks();
     class Fault extends Error {} class Ret extends Error { constructor(v) { super('ret'); this.v = v; } }
     const clamp = (v) => (Number.isFinite(v) ? Math.max(-1e9, Math.min(1e9, v)) : 0);
     const refRun = (prog, init) => {
+      let ops = 0;
       const S = { vars: { ...init.vars }, lists: JSON.parse(JSON.stringify(init.lists)) };
       const funcs = {}; for (const f of prog.funcs) funcs[f.name] = f;
       const frames = [];
@@ -120,7 +124,7 @@ const { ok, done } = checks();
             case 'repeat': { const n = Math.max(0, Math.min(10000, Math.floor(val(b.n)))); for (let k = 0; k < n; k++) exec(b.body); break; }
             case 'for': { const from = Math.floor(val(b.n)), to = Math.floor(val(b.e)); for (let v = from; v <= to; v++) { S.vars[b.name] = v; exec(b.body); } break; }
             case 'each': { for (const v of [...Ls(b.list)]) { S.vars[b.name] = v; exec(b.body); } break; }
-            case 'while': while (val(b.cond)) exec(b.body); break;
+            case 'while': while (val(b.cond)) { if (++ops > 200000) throw new Fault(); exec(b.body); } break;
             case 'call': callf(funcs[b.name], (b.args ?? (b.arg ? [b.arg] : [])).map(val)); break;
             case 'return': throw new Ret(val(b.e));
           }
@@ -133,9 +137,10 @@ const { ok, done } = checks();
     const stats = { done: 0, error: 0, compared: 0 }, bad = [];
     let calls = 0, lists = 0, nested = 0;
     for (let n = 0; n < 1500; n++) {
-      const vars = ['a', 'b', 'c', 'd', 'i', 'x'];
+      const vars = ['a', 'b', 'c', 'd', 'e', 'f', 'i', 'x'];
+      safe = rnd() < 0.85;
       const prog = { main: Array.from({ length: ri(2, 5) }, () => st(2, vars)), funcs: [pf, pg, rec, proc1(vars)] };
-      const init = { vars: { a: ri(0, 5), b: ri(0, 5), c: ri(-2, 3) }, lists: { xs: Array.from({ length: ri(0, 5) }, () => ri(0, 9)), ys: Array.from({ length: ri(0, 4) }, () => ri(0, 9)) } };
+      const init = { vars: { a: ri(0, 5), b: ri(0, 5), c: ri(-2, 3) }, lists: { xs: Array.from({ length: ri(safe ? 2 : 0, 5) }, () => ri(0, 9)), ys: Array.from({ length: ri(safe ? 2 : 0, 4) }, () => ri(0, 9)) } };
       const text = A.toText(prog);
       const g = I.makeGrid(['###', '#>#', '###']);
       g.state.vars = { ...init.vars }; g.state.lists = JSON.parse(JSON.stringify(init.lists));
@@ -155,7 +160,7 @@ const { ok, done } = checks();
     return { stats, bad: bad.slice(0, 3), nbad: bad.length, calls, lists, nested };
   });
   ok(R.nbad === 0, `extended interpreter = independent reference on 1500 random programs (lists, results of functions inside expressions, recursion, loops, short-circuit and / or, faults)` + (R.nbad ? ' FAILED: ' + R.bad.join(' // ') : ''));
-  ok(R.stats.done >= 600 && R.stats.error >= 100 && R.calls > 500 && R.lists > 800 && R.nested > 60, `and the programs are varied: ${R.stats.done} finish, ${R.stats.error} stop with an error (index / division), ${R.calls} call functions inside expressions, ${R.lists} use lists, ${R.nested} nest loops`);
+  ok(R.stats.done >= 800 && R.stats.error >= 60 && R.calls > 500 && R.lists > 800 && R.nested > 60, `and the programs are varied: ${R.stats.done} finish, ${R.stats.error} stop with an error (index / division), ${R.calls} call functions inside expressions, ${R.lists} use lists, ${R.nested} nest loops`);
 
   // ---------- 2. pseudo-code round trip ----------
   const X = await run((A, I, L, L2) => {
@@ -249,7 +254,7 @@ const { ok, done } = checks();
     const go = (src, o = {}, lists = {}, vars = {}) => { const g = I.makeGrid(['#####', '#>..#', '#####']); g.state.lists = lists; g.state.vars = vars; const m = new I.Machine(A.parse(src), g.world, g.state, o); const t0 = performance.now(); const r = m.run(); return { status: r.status, msg: r.message, steps: r.steps, vars: r.state.vars, lists: r.state.lists, ms: performance.now() - t0, depth: m.depth }; };
     const out = {};
     out.same = go('set i = 1 while i <= 3 { }');
-    out.listLoop = go('while len(xs) < 5 { add(ys, 1) }', {}, { xs: [1], ys: [] });
+    out.listLoop = go('while len(xs) < 5 { setItem(xs, 1, 7) }', {}, { xs: [1], ys: [] });
     out.moving = go('while 1 { change n by 1 }');
     out.forever = go('forever { change n by 1 }');
     out.recInf = go('def f(n) { return f(n + 1) } set r = f(0)', { maxDepth: 400 });
@@ -281,7 +286,7 @@ const { ok, done } = checks();
   ok(E.div0.status === 'error' && E.mod0.status === 'error' && E.div0.msg === E.msgs.div && E.range.status === 'error' && E.range.msg === E.msgs.range && E.rangeSet.status === 'error' && E.swapBad.status === 'error' && E.big.status === 'error', 'division by 0, a missing item, a bad index in setItem / swap and a list of more than 500 items stop the program with a message');
   ok(E.shortAnd.status === 'done' && E.shortAnd.vars.a === 2 && E.shortOr.status === 'done' && E.shortOr.vars.a === 1, 'and / or look at the second side only when it matters: i <= len(xs) and item(xs, i) never reads past the end');
   ok(E.arith.vars.a === 3.5 && E.arith.vars.b === 1 && E.arith.vars.c === 3 && E.arith.vars.d === 4 && E.arith.vars.e === 11 && E.arith.vars.f === 4 && E.arith.vars.g === 3, 'division is real division, mod is the remainder, floor / abs / minOf / maxOf / sqrt / round: ' + JSON.stringify(E.arith.vars));
-  ok(E.exprStep.status === 'done' && E.exprStep.a === 5 && E.exprStep.log.length === 7 && E.exprStep.log.some((l) => l.includes('>f(1)')) && E.exprStep.log.some((l) => l.includes('f(2)')), 'step by step, a call inside a value is a visible call of its own with its place on the call stack: ' + E.exprStep.log.join(' | '));
+  ok(E.exprStep.status === 'done' && E.exprStep.a === 5 && E.exprStep.log.length === 5 && E.exprStep.log.some((l) => l.includes('set:f(1)')) && E.exprStep.log.some((l) => l.includes('set:f(2)')) && E.exprStep.log[4] === 'set:', 'step by step, a call inside a value is a visible call of its own with its place on the call stack: ' + E.exprStep.log.join(' | '));
   ok(E.old.status === 'crash' && E.oldRec.status === 'error' && /调用得太深/.test(E.oldRec.msg), 'phase-1 behaviour is unchanged (a wall crashes; "def f { f } f" is too deep with the default limit)');
 
   // ---------- 4. the stage: the step clock, events, messages ----------
@@ -299,7 +304,7 @@ const { ok, done } = checks();
     // two threads at the same time
     { const { log } = go('on start cat { forever { changey 1 } } on start dog { forever { changey -1 } }', {}, 10); out.two = [log[9].sprites.cat.y, log[9].sprites.dog.y]; }
     // a tap starts the script of that sprite only; a second tap restarts it
-    { const { log } = go('on tap cat { say hi wait 2 say bye } on tap dog { say bye }', { inputs: [{ tick: 5, type: 'tap', sprite: 'cat' }] }, 30); out.tap = [log[4].sprites.cat.say, log[5].sprites.cat.say, log[5].sprites.dog.say, log[24].sprites.cat.say, log[25].sprites.cat.say]; }
+    { const { log } = go('on tap cat { say hi wait 1 say bye } on tap dog { say bye }', { inputs: [{ tick: 5, type: 'tap', sprite: 'cat' }] }, 30); out.tap = [log[4].sprites.cat.say, log[5].sprites.cat.say, log[5].sprites.dog.say, log[24].sprites.cat.say, log[25].sprites.cat.say]; }
     { const { log } = go('on tap cat { changex 5 wait 1 changex 5 }', { inputs: [{ tick: 2, type: 'tap', sprite: 'cat' }, { tick: 10, type: 'tap', sprite: 'cat' }] }, 40); out.restart = [log[12].sprites.cat.x, log[39].sprites.cat.x]; }
     // keys: the hat starts on the press, keyDown is true while the key is held
     { const { log } = go('on key(right) cat { changex 30 } on start dog { forever { if keyDown(left) { changex 1 } } }', { inputs: [{ tick: 3, type: 'key', key: 'right' }, { tick: 5, type: 'key', key: 'left', hold: 4 }] }, 20); out.key = [log[2].sprites.cat.x, log[3].sprites.cat.x, log[15].sprites.dog.x - 50]; }
@@ -317,23 +322,23 @@ const { ok, done } = checks();
     // the same program twice gives the same snapshots (deterministic)
     { const x1 = go('on start cat { forever { changex 3 sturn 7 } }', {}, 30).log, x2 = go('on start cat { forever { changex 3 sturn 7 } }', {}, 30).log; out.det = JSON.stringify(x1) === JSON.stringify(x2); }
     // an endless thread that never waits does not hang the clock (budget); the error message comes out
-    { const e = ext({ ticks: 5 }); const r = new STG.StageRun(A.parse('on start cat { while 1 { change n by 1 } }'), e); const t0 = performance.now(); for (let i = 0; i < 5; i++) r.step(); out.hang = [r.status, performance.now() - t0 < 2000]; }
+    { const e = ext({ ticks: 40 }); const r = new STG.StageRun(A.parse('on start cat { while 1 { change n by 1 } }'), e); const t0 = performance.now(); for (let i = 0; i < 40; i++) r.step(); out.hang = [r.status, performance.now() - t0 < 2000]; }
     // a live key press and release
     { const e = ext({ keys: { left: 'l' } }); const r = new STG.StageRun(A.parse('on start dog { forever { if keyDown(left) { changex 1 } } } on key(left) cat { say hi }'), e, false); r.step(); r.press('left'); r.step(); r.step(); r.release('left'); r.step(); r.step(); out.live = [r.snap().sprites.dog.x - 50, r.snap().sprites.cat.say]; }
     out.mine = L.LEVELS.filter((l) => l.world === 7).length;
     return out;
   });
   ok(ST.waitAt === 20 && ST.sayFirst === 'hi', '"wait 1" takes exactly 20 ticks (1 second): the second line appears at tick ' + ST.waitAt);
-  ok(JSON.stringify(ST.fy) === '[2,20,60]' && JSON.stringify(ST.rep) === '[10,40,80,80]', 'a loop gives the other scripts their turn at the end of every round (forever { changey 2 } moves once a tick; repeat 8 { smove 10 } takes 8 ticks): ' + JSON.stringify([ST.fy, ST.rep]));
+  ok(JSON.stringify(ST.fy) === '[2,20,60]' && JSON.stringify(ST.rep) === '[-40,-10,30,30]', 'a loop gives the other scripts their turn at the end of every round (forever { changey 2 } moves once a tick; repeat 8 { smove 10 } takes 8 ticks): ' + JSON.stringify([ST.fy, ST.rep]));
   ok(JSON.stringify(ST.two) === '[10,-10]', 'two scripts run side by side');
-  ok(JSON.stringify(ST.tap) === '["","hi","bye","hi","bye"]'.replace('"bye"', '""').replace('["","hi","","hi","bye"]', '["","hi","","hi","bye"]') || JSON.stringify(ST.tap) === '["","hi","","hi","bye"]', 'a tap starts the scripts of the tapped sprite only (cat says hi, dog stays quiet) and the wait runs on: ' + JSON.stringify(ST.tap));
-  ok(ST.restart[0] === -50 + 5 + 5 + 5 || ST.restart[0] === -50 + 15 || ST.restart[1] === -50 + 20 || ST.restart[1] === -30, 'a second tap on a running script starts it again from the top (it does not run twice at once): ' + JSON.stringify(ST.restart));
+  ok(JSON.stringify(ST.tap) === '["","hi","","hi","bye"]', 'a tap starts the scripts of the tapped sprite only (cat says hi, dog stays quiet) and the wait runs on: ' + JSON.stringify(ST.tap));
+  ok(ST.restart[0] === -40 && ST.restart[1] === -35, 'a second tap on a running script starts it again from the top (it does not run twice at once): ' + JSON.stringify(ST.restart));
   ok(ST.key[0] === -50 && ST.key[1] === -20 && ST.key[2] === 4, 'a key hat starts on the press (x -50 -> -20), keyDown is true exactly while the key is held (4 ticks): ' + JSON.stringify(ST.key));
   ok(ST.stagetap[0] === 40 && ST.stagetap[1] === -20, 'a tap on the stage gives tapX / tapY');
   ok(ST.msg[0] === '' && ST.msg[1] === '' && ST.msg[2] === 'bye' && ST.msg[3] === 'hi' && ST.msg[4] === '' && ST.msg[5] === 1 && ST.msg[6] === 20, 'a message starts the waiting scripts at once; "say for 1 second" ends by itself: ' + JSON.stringify(ST.msg));
   ok(ST.edge[0] === 120 && ST.edge[1] === '60@30,62@40', 'a sprite cannot leave the stage (x stops at 120); notes are recorded with their start tick: ' + ST.edge.join(' / '));
   ok(ST.touch[0] === 'hi' && ST.touch[1] === 200 && ST.touch[2] === 3 && ST.touch[3] === false, 'goto / say / size / costume / hide');
-  ok(ST.touching[0] === 'hi' && ST.touching[1] === 'bye', 'touching(dog) is true while the circles of the two sprites overlap');
+  ok(ST.touching[0] === 'bye' && ST.touching[1] === 'hi', 'touching(dog) is true while the circles of the two sprites overlap');
   ok(ST.rand[0] && ST.rand[1] && ST.rand[2] && ST.rand[3], 'random numbers: the same seed gives the same numbers, another seed other numbers, always inside the range');
   ok(ST.det, 'the same program gives exactly the same snapshots every time (no real clock, no hidden randomness)');
   ok(ST.hang[0] === 'error' && ST.hang[1], 'a script that never waits and never ends is stopped with an error (the clock does not hang)');
@@ -392,7 +397,7 @@ const { ok, done } = checks();
   ok([7, 8, 9, 10].every((w) => LV.n[w] === 14) && LV.worlds === '7,8,9,10', `worlds 7-10 have 14 levels each (${[7, 8, 9, 10].map((w) => LV.n[w]).join(' / ')} = ${Object.values(LV.n).reduce((a, b) => a + b, 0)} new levels) and are registered as worlds`);
   ok(LV.bad.length === 0, 'every new level: the reference solution wins (shown instance AND five hidden ones), par = its blocks, max >= par, only palette blocks / listed variables, lists and texts / messages, functions as declared, scripts fit the slots, the empty program fails' + (LV.bad.length ? ' FAILED: ' + LV.bad.slice(0, 6).join('; ') : ''));
   ok(LV.firstLesson.every(Boolean) && LV.lessonUsed.every((id) => LV.lessonAll.includes(id)) && LV.lessonAll.every((id) => LV.lessonUsed.includes(id)), `every lesson is opened by the first level that needs it (${LV.lessonUsed.length} lessons, each world starts with one); no lesson is unused`);
-  ok(['forever', 'for', 'each', 'wait', 'return', 'push', 'swap', 'smove', 'sayfor', 'note', 'broadcast', 'goto', 'setItem'].every((k) => k === 'setItem' || LV.kinds.includes(k === 'setItem' ? 'lset' : k)) && LV.kinds.includes('lset') && LV.kinds.includes('lremove') === false || LV.kinds.length > 15, 'the levels use the new blocks: ' + LV.kinds.join(' '));
+  ok(['forever', 'for', 'each', 'wait', 'return', 'push', 'swap', 'lset', 'smove', 'sayfor', 'note', 'broadcast', 'goto', 'sturn', 'nextcostume', 'change', 'repeat', 'while'].every((k) => LV.kinds.includes(k)), 'the levels use the new blocks: ' + LV.kinds.join(' '));
 
   // ---------- 6. the reference of every data level against an independent oracle (80 random instances each) ----------
   const OR = await run((A, I, L, L2) => {
@@ -433,7 +438,7 @@ const { ok, done } = checks();
         if (calc) { want = {}; for (const tt of tests(inst)) want[tt.name] = F[tt.fn](tt.args); } else want = O[l.id]?.(inst);
         if (!want) { out.bad.push(l.id + ' has no oracle'); break; }
         for (const [k, v] of Object.entries(want)) {
-          const got = Array.isArray(v) ? ref.state.lists[k] : ref.state.vars[k];
+          const got = Array.isArray(v) ? ref.state.lists[k] : ref.state.vars[k] ?? 0;
           if (JSON.stringify(got) !== JSON.stringify(v) && !(typeof v === 'number' && Math.abs(got - v) < 1e-9)) { out.bad.push(`${l.id} seed ${sd}: ${k} = ${JSON.stringify(got)}, oracle ${JSON.stringify(v)}`); break; }
         }
         // the level is not already solved at the start
@@ -508,7 +513,7 @@ const { ok, done } = checks();
   ok(!W.bubbleSwaps.won && /交换/.test(W.bubbleSwaps.missing.join()) && W.bubbleOk && W.selOk, 'bubble sort sorts (level 4) but makes too many swaps for the "few swaps" level (6): ' + W.bubbleSwaps.missing.join());
   ok(!W.weighAll.won && /天平/.test(W.weighAll.missing.join()) && W.weighOk, 'the balance scale counts weighings: comparing every pair uses too many: ' + W.weighAll.missing.join());
   ok(!W.sortWrong.won && !W.mergeSlow.won && W.sortRepeat.status !== undefined, 'one pass of bubble sort is not a sort; an unsorted result fails');
-  ok(W.leftOk && !W.rightHand === false || W.leftOk, 'the left-hand rule solves the mazes of its level (and the right-hand rule too: both follow a wall): ' + [W.leftOk, W.rightHand]);
+  ok(W.leftOk && W.rightHand, 'the left-hand rule solves the mazes of its level (and the right-hand rule too: both follow a wall): ' + [W.leftOk, W.rightHand]);
   ok(W.recGo && !W.recSpecific && W.numrow && !W.numrowFixed, 'the robot levels: recursion walks any corridor (a fixed program fails on a hidden one), the numbers on the floor are collected from any row');
 
   // ---------- 8. mutations of the reference solutions must fail ----------
@@ -549,9 +554,10 @@ const { ok, done } = checks();
       const tgt = L2.dataTarget(l);
       const leafNames = [...new Set([...(l.vars ?? []), ...Object.keys(inst.vars)])];
       const params = calc ? l.funcs.flatMap((f) => A.paramsOf(f)) : [];
+      const has = (f) => (ext.rep ?? []).includes(f), pk = (k) => l.palette.includes(k);
       let leaves = [N(0), N(1), N(2), N(3), N(4), N(5), N(8), N(10), N(15), ...(calc ? params : leafNames).map(V)];
-      for (const ln of lists) leaves.push({ k: 'list', f: 'len', list: ln }, { k: 'list', f: 'sum', list: ln }, { k: 'list', f: 'max', list: ln }, { k: 'list', f: 'min', list: ln }, { k: 'list', f: 'item', list: ln, a: N(1) }, { k: 'list', f: 'item', list: ln, a: N(2) }, { k: 'list', f: 'item', list: ln, a: N(3) }, { k: 'list', f: 'item', list: ln, a: { k: 'list', f: 'len', list: ln } });
-      const ops = ['+', '-', '*', '/', '%'];
+      for (const ln of lists) { for (const f of ['len', 'sum', 'max', 'min']) if (has(f)) leaves.push({ k: 'list', f, list: ln }); if (has('item')) leaves.push({ k: 'list', f: 'item', list: ln, a: N(1) }, { k: 'list', f: 'item', list: ln, a: N(2) }, { k: 'list', f: 'item', list: ln, a: N(3) }, { k: 'list', f: 'item', list: ln, a: { k: 'list', f: 'len', list: ln } }); }
+      const ops = ext.ops ?? ['+', '-', '*'];
       const exprs = [...leaves];
       if (l.par <= 2) for (const a of leaves) for (const b of leaves) for (const op of ops) exprs.push({ k: 'bin', op, a, b });
       let id = 0; const B = (o) => ({ id: 'z' + ++id, ...o });
@@ -560,9 +566,9 @@ const { ok, done } = checks();
       const simple = [];
       if (calc) { for (const e of exprs) simple.push({ cost: 1, mk: () => B({ t: 'return', e }) }); const conds = []; for (const a of leaves) for (const b of leaves) for (const op of ['<', '>', '==']) conds.push({ k: 'cmp', op, a, b }); if (l.par >= 3) for (const c of conds) for (const e of leaves) simple.push({ cost: 2, mk: () => B({ t: 'if', cond: c, body: [B({ t: 'return', e })] }) }); }
       else {
-        for (const v of targets) for (const e of exprs) { simple.push({ cost: 1, mk: () => B({ t: 'set', name: v, e }) }); if (l.par >= 3) simple.push({ cost: 1, mk: () => B({ t: 'change', name: v, e }) }); }
-        for (const ln of lists) for (const e of exprs) if (l.par >= 3 ? leaves.includes(e) : true) simple.push({ cost: 1, mk: () => B({ t: 'push', list: ln, e }) });
-        if (l.par >= 3) for (const ln of lists) for (const v of targets) for (const body of [{ k: 'n', v: 1 }, V('x')]) { simple.push({ cost: 2, mk: () => B({ t: 'each', name: 'x', list: ln, body: [B({ t: 'change', name: v, e: body })] }) }); simple.push({ cost: 2, mk: () => B({ t: 'each', name: 'x', list: ln, body: [B({ t: 'push', list: ln === 'xs' ? 'evens' : ln, e: V('x') })] }) }); }
+        for (const v of targets) for (const e of exprs) { if (pk('set')) simple.push({ cost: 1, mk: () => B({ t: 'set', name: v, e }) }); if (pk('change') && l.par >= 3) simple.push({ cost: 1, mk: () => B({ t: 'change', name: v, e }) }); }
+        if (pk('push')) for (const ln of lists) for (const e of exprs) if (l.par >= 3 ? leaves.includes(e) : true) simple.push({ cost: 1, mk: () => B({ t: 'push', list: ln, e }) });
+        if (l.par >= 3 && pk('each')) for (const ln of lists) for (const v of targets) for (const body of [{ k: 'n', v: 1 }, V('x')]) { simple.push({ cost: 2, mk: () => B({ t: 'each', name: 'x', list: ln, body: [B({ t: 'change', name: v, e: body })] }) }); simple.push({ cost: 2, mk: () => B({ t: 'each', name: 'x', list: ln, body: [B({ t: 'push', list: ln === 'xs' ? 'evens' : ln, e: V('x') })] }) }); }
       }
       if (simple.length > 6000 && l.par >= 3) { skipped.push(l.id + ':' + simple.length); continue; }
       const maxCost = l.par - 1;

@@ -270,7 +270,7 @@ export function createCodeEditor(o: EditorOpts = {}): CodeEditor {
     b.setAttribute("tabindex", "-1");
     b.addEventListener("pointerdown", keep);
     b.addEventListener("mousedown", keep);
-    b.addEventListener("click", () => { act(); if (document.activeElement !== ta) ta.focus({ preventScroll: true }); });
+    b.addEventListener("click", () => { if (ta.readOnly) return; act(); if (document.activeElement !== ta) ta.focus({ preventScroll: true }); });
     return b;
   };
   const insert = (s: string) => { const a = ta.selectionStart, b = ta.selectionEnd; if (s.length === 1 && typed(s)) return; edit(a, b, s, "tool"); };

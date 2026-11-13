@@ -18,7 +18,7 @@ export interface DataExt {
   gen: string;
   /** the variables and lists compared with the reference's */
   check: string[];
-  /** the program is judged by its number of steps: at most 1.5 x the reference's + 30 on every instance */
+  /** the program is judged by its number of steps: at most 1.5 x the reference's + 12 on every instance */
   eff?: boolean;
   maxWeighs?: number; maxSwaps?: number | "len-1";
   /** how the data is drawn: lists as boxes, bars, a graph, a balance scale, the function tests */
@@ -74,11 +74,13 @@ function graphInst(r: () => number): DataInst {
 }
 export const GENS: Record<string, Gen> = {
   empty: () => ({ lists: { xs: [] }, vars: {} }),
+  // at least one number above 5 and one not above 5 (so that the count is neither 0 nor everything)
+  count5: (r) => { const xs = Array.from({ length: ri(r, 5, 8) }, () => ri(r, 1, 9)); xs[0] = ri(r, 6, 9); xs[1] = ri(r, 1, 5); return { lists: { xs: shuffle(r, xs) }, vars: {} }; },
   list3: (r) => ({ lists: { xs: Array.from({ length: ri(r, 5, 8) }, () => ri(r, 1, 9)) }, vars: {} }),
   list20: (r) => ({ lists: { xs: Array.from({ length: ri(r, 5, 8) }, () => ri(r, 1, 20)) }, vars: {} }),
   filter: (r) => ({ lists: { xs: Array.from({ length: ri(r, 6, 9) }, () => ri(r, 1, 20)), evens: [] }, vars: {} }),
   search: (r) => { const xs = distinct(r, ri(r, 6, 10), 1, 30); const t = r() < 0.8 ? xs[ri(r, 0, xs.length - 1)] : 31; return { lists: { xs }, vars: { t } }; },
-  search20: (r) => { const xs = distinct(r, 20, 1, 60); return { lists: { xs }, vars: { t: xs[ri(r, 1, 4)] } }; },
+  search64: (r) => { const xs = distinct(r, 64, 1, 200); return { lists: { xs }, vars: { t: xs[ri(r, 1, 4)] } }; },
   sorted64: (r) => { const xs: number[] = []; let v = 0; for (let i = 0; i < 64; i++) { v += ri(r, 1, 3); xs.push(v); } return { lists: { xs }, vars: { t: xs[ri(r, 40, 63)] } }; },
   sortme: (r) => { const xs = distinct(r, ri(r, 6, 8), 1, 30); if (xs.every((v, i) => i === 0 || xs[i - 1] < v)) xs.reverse(); return { lists: { xs }, vars: {} }; },
   avg: (r) => {
@@ -141,7 +143,7 @@ export function refOutcome(l: Level, seed?: number): Outcome {
   return o;
 }
 /** the most steps a program may use on this instance */
-export const stepBound = (l: Level, seed?: number): number => Math.ceil(refOutcome(l, seed).steps * 1.5) + 30;
+export const stepBound = (l: Level, seed?: number): number => Math.ceil(refOutcome(l, seed).steps * 1.5) + 12;
 export const weighBound = (l: Level): number => extOf(l).data?.maxWeighs ?? 1e9;
 
 function sameValue(a: number[] | number | undefined, b: number[] | number | undefined): boolean {
@@ -242,8 +244,8 @@ const W7: LevelSpec[] = [
     ext: { free: true, rep: ["tapX", "tapY"], goal: ["点一下舞台，宠物跑到被点的位置。"], stage: T({ sprites: [{ id: "pet", art: "dog", x: -80, y: -50, label: "宠物" }], slots: [{ sprite: "pet", on: "start", events: ["start", "stagetap"] }],
       inputs: [{ tick: sec(0.5), type: "stagetap", x: 60, y: 40 }, { tick: sec(1.5), type: "stagetap", x: -70, y: 30 }, { tick: sec(2.5), type: "stagetap", x: 20, y: -60 }], ticks: sec(4), texts: TEXTS, checks: [{ tick: sec(1) }, { tick: sec(2) }, { tick: sec(3.5) }] }) } as Ext } as LevelSpec),
   spec(7, 13, "小测验", { kind: "stage", palette: ["say", "change"], vars: ["score"], solution: "on start teacher { say q } on tap a { say ok change score by 1 } on tap b { say no }", max: 7, lesson: "score",
-    ext: { goal: ["老师问：“3 + 4 = 7 吗？”。", "点“对”：说“答对了！”，得 1 分。", "点“错”：说“再想想。”。"], stage: T({
-      sprites: [{ id: "teacher", art: "robot", x: -70, y: 30, label: "老师" }, { id: "a", art: "btn", text: "✓", x: -20, y: -55, label: "对" }, { id: "b", art: "btn", text: "✗", x: 50, y: -55, label: "错" }],
+    ext: { goal: ["老师问：“3 + 4 = 7 吗？”。", "点“对的”：说“答对了！”，得 1 分。", "点“错的”：说“再想想。”。"], stage: T({
+      sprites: [{ id: "teacher", art: "robot", x: -70, y: 30, label: "老师" }, { id: "a", art: "btn", text: "✓", x: -20, y: -55, label: "对的" }, { id: "b", art: "btn", text: "✗", x: 50, y: -55, label: "错的" }],
       slots: [{ sprite: "teacher", on: "start", events: ["start"] }, { sprite: "a", on: "start", events: ["start", "tap"] }, { sprite: "b", on: "start", events: ["start", "tap"] }], vars: ["score"],
       inputs: [{ tick: sec(1), type: "tap", sprite: "b" }, { tick: sec(2), type: "tap", sprite: "a" }, { tick: sec(3), type: "tap", sprite: "a" }], ticks: sec(4), texts: TEXTS,
       checks: [{ tick: sec(0.5), sprites: ["teacher"], props: ["say"] }, { tick: sec(1.5), sprites: ["b"], props: ["say"] }, { tick: sec(2.5), sprites: ["a"], props: ["say"], vars: ["score"] }, { tick: sec(3.5), vars: ["score"] }] }) } as Ext } as LevelSpec),
@@ -311,7 +313,7 @@ const W9: LevelSpec[] = [
   spec(9, 6, "最小值", { kind: "data", palette: ["each", "if", "set"], vars: ["m", "x"], solution: "set m = item(xs, 1) each x in xs { if x < m { set m = x } }", max: 7,
     ext: { free: true, lists: ["xs"], rep: L2, goal: ["找出 xs 里最小的数，放进变量 m。"], data: d("list20", ["m"], "bars") } as Ext } as LevelSpec),
   spec(9, 7, "计数", { kind: "data", palette: ["each", "if", "change"], vars: ["c", "x"], solution: "each x in xs { if x > 5 { change c by 1 } }", max: 5,
-    ext: { free: true, lists: ["xs"], goal: ["数一数 xs 里有几个数大于 5，结果放进 c。"], data: d("list3", ["c"], "list") } as Ext } as LevelSpec),
+    ext: { free: true, lists: ["xs"], goal: ["数一数 xs 里有几个数大于 5，结果放进 c。"], data: d("count5", ["c"], "list") } as Ext } as LevelSpec),
   spec(9, 8, "筛选偶数", { kind: "data", palette: ["each", "if", "push"], vars: ["x"], solution: "each x in xs { if x % 2 == 0 { add(evens, x) } }", max: 5, lesson: "filter",
     ext: { free: true, lists: ["xs", "evens"], ops: ["+", "-", "*", "/", "%"], goal: ["把 xs 里的偶数依次放进列表 evens。"], data: d("filter", ["evens"], "list") } as Ext } as LevelSpec),
   spec(9, 9, "查找", { kind: "data", palette: ["while", "if", "set", "change"], vars: ["i", "pos"], solution: "set pos = 0 set i = 1 while i <= len(xs) and pos == 0 { if item(xs, i) == t { set pos = i } change i by 1 }", max: 9,
@@ -331,7 +333,7 @@ const W9: LevelSpec[] = [
 const SORTP: PaletteKind[] = ["for", "while", "if", "set", "change", "swap"];
 const W10: LevelSpec[] = [
   spec(10, 1, "顺序查找", { kind: "data", palette: ["while", "if", "set", "change"], vars: ["i", "pos"], solution: "set pos = 0 set i = 1 while i <= len(xs) and pos == 0 { if item(xs, i) == t { set pos = i } change i by 1 }", max: 9, lesson: "search",
-    ext: { free: true, lists: ["xs"], rep: L2, goal: ["在 xs 里找数 t，把第一次出现的位置放进 pos。", "找到以后要马上停下来：步数不能超过限制。"], data: d("search20", ["pos"], "bars", { eff: true }) } as Ext } as LevelSpec),
+    ext: { free: true, lists: ["xs"], rep: L2, goal: ["在 xs 里找数 t，把第一次出现的位置放进 pos。", "xs 里有 64 个数。找到以后要马上停下来：步数不能超过限制。"], data: d("search64", ["pos"], "bars", { eff: true }) } as Ext } as LevelSpec),
   spec(10, 2, "二分查找", { kind: "data", palette: ["while", "if", "ifelse", "set"], vars: ["lo", "hi", "mid", "pos"], lesson: "binary",
     solution: "set lo = 1 set hi = len(xs) set pos = 0 while lo <= hi and pos == 0 { set mid = floor((lo + hi) / 2) if item(xs, mid) == t { set pos = mid } else { if item(xs, mid) < t { set lo = mid + 1 } else { set hi = mid - 1 } } }", max: 16,
     ext: { free: true, lists: ["xs"], rep: ["len", "item", "floor"], ops: ["+", "-", "*", "/"], goal: ["xs 已经从小到大排好，一共有 64 个数。", "每次看中间的数，把范围缩小一半。找到 t，把位置放进 pos。"], data: d("sorted64", ["pos"], "bars", { eff: true }) } as Ext } as LevelSpec),

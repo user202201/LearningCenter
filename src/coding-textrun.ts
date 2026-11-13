@@ -266,6 +266,7 @@ export function didYouMean(name: string, cands: Iterable<string>): string | null
   return best !== null && bd <= (name.length <= 4 ? 1 : 2) ? best : null;
 }
 
+class ExitSignal extends Error {}
 class Interp {
   out = "";
   inputLines: string[]; inputPos = 0;
@@ -576,6 +577,7 @@ class Interp {
       case "lambda": return new PyFunc("<lambda>", e.params.map((n) => ({ name: n })), e.body, new Set(e.params), new Set(), this.fr, true, e.params.map(() => undefined));
       case "comp": return this.comprehension(e);
       case "call": return this.callExpr(e);
+      case "star": return this.err("SyntaxError", "这里不能用 *。", "* 只能用在函数调用的括号里，例如 print(*列表)。", e.line);
     }
   }
   comprehension(e: Extract<Expr, { k: "comp" }>): Val {
@@ -753,10 +755,16 @@ class Interp {
   }
 
   // ----- calls -----
+  /** the arguments of a call; *list is spread */
+  evalArgs(list: Expr[]): Val[] {
+    const out: Val[] = [];
+    for (const a of list) { if (a.k === "star") out.push(...this.iterate(this.ev(a.e), a.line)); else out.push(this.ev(a)); }
+    return out;
+  }
   callExpr(e: Extract<Expr, { k: "call" }>): Val {
     if (e.f.k === "attr") {
       const o = this.ev(e.f.o);
-      const args = e.args.map((a) => this.ev(a));
+      const args = this.evalArgs(e.args);
       const kw = e.kw.length ? Object.fromEntries(e.kw.map(([n, x]) => [n, this.ev(x)])) : null;
       this.line = e.line;
       if (o instanceof PyModule) { const f = this.getAttr(o, e.f.name, e.line); return this.callValue(f, args, kw, e.line); }
@@ -765,7 +773,7 @@ class Interp {
       return r;
     }
     const f = this.ev(e.f);
-    const args = e.args.map((a) => this.ev(a));
+    const args = this.evalArgs(e.args);
     const kw = e.kw.length ? Object.fromEntries(e.kw.map(([n, x]) => [n, this.ev(x)])) : null;
     this.line = e.line;
     const r = this.callValue(f, args, kw, e.line, e.f.k === "name" ? e.f.id : undefined);
@@ -779,8 +787,10 @@ class Interp {
     this.tick();
     if (this.depth >= this.maxDepth) this.err("RecursionError", `函数调用得太深了（超过 ${this.maxDepth} 层）。`, "递归函数必须有结束的条件，并且每次调用要更接近这个条件。", line);
     const frame = new Frame(fn.closure, fn.locals, fn.globals, fn.name);
-    const np = fn.params.length;
-    if (args.length > np) this.err("TypeError", `函数 ${fn.name} 只需要 ${np} 个参数，却给了 ${args.length} 个。`, undefined, line);
+    const np = fn.params.filter((p) => !p.star).length;
+    const starP = fn.params.find((p) => p.star);
+    if (starP) frame.vars.set(starP.name, new PyTuple(args.slice(np)));
+    else if (args.length > np) this.err("TypeError", `函数 ${fn.name} 只需要 ${np} 个参数，却给了 ${args.length} 个。`, undefined, line);
     for (let i = 0; i < np; i++) {
       const p = fn.params[i];
       if (i < args.length) frame.vars.set(p.name, args[i]);
@@ -788,7 +798,7 @@ class Interp {
       else if (fn.defaults[i] !== undefined) frame.vars.set(p.name, fn.defaults[i]!);
       else this.err("TypeError", `调用函数 ${fn.name} 时缺少参数 ${p.name}。`, `${fn.name} 需要 ${np} 个参数：${fn.params.map((x) => x.name).join(", ")}。`, line);
     }
-    if (kw) for (const k of Object.keys(kw)) if (!fn.params.some((p) => p.name === k)) this.err("TypeError", `函数 ${fn.name} 没有名叫 ${k} 的参数。`, undefined, line);
+    if (kw) for (const k of Object.keys(kw)) if (!fn.params.some((p) => p.name === k && !p.star)) this.err("TypeError", `函数 ${fn.name} 没有名叫 ${k} 的参数。`, undefined, line);
     const savedFr = this.fr;
     this.fr = frame; this.stack.push(frame); this.depth++;
     try {
@@ -1127,6 +1137,10 @@ class Interp {
     for (const n of ["int", "float", "str", "bool", "list", "tuple", "dict", "set"]) types.set(n, this.builtins.get(n) as PyBuiltin);
     B("type", (a) => { need("type", a, 1); return types.get(typeName(a[0])) ?? new PyBuiltin(typeName(a[0]), () => null); });
     this.builtins.set("__name__", "__main__");
+    const exit = new PyBuiltin("exit", () => { throw new ExitSignal(); });
+    this.builtins.set("exit", exit); this.builtins.set("quit", exit);
+    this.modules.set("sys", new PyModule("sys", { exit }));
+    this.modules.set("time", new PyModule("time", { sleep: new PyBuiltin("sleep", () => null), time: new PyBuiltin("time", () => this.steps * 1e-6 + 1.7e9) }));
 
     // ----- math -----
     const mathFn = (name: string, f: (x: number) => number, dom?: (x: number) => boolean) => new PyBuiltin(name, (a) => {
@@ -1269,7 +1283,8 @@ export function run(source: string, opts: RunOptions = {}): RunResult {
   const it = new Interp(opts);
   let error: PyError | null = null;
   try { it.execBlock(prog); } catch (e) {
-    if (e instanceof PyError) error = e;
+    if (e instanceof ExitSignal) { /* exit() ends the program quietly */ }
+    else if (e instanceof PyError) error = e;
     else if (e instanceof RangeError) error = new PyError("RecursionError", `第 ${it.line} 行：函数调用得太深了。`, it.line, "递归函数必须有结束的条件。");
     else throw e;
   }

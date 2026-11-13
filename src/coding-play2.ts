@@ -104,7 +104,7 @@ export function play2(host: Host, p: Play2): void {
 
   // ----- stage: the scripted run and the free play -----
   const stageTime = h("span", { class: "sv-time", id: "sv-time" });
-  const showTime = (t: number) => { stageTime.replaceChildren(h("b", {}, (t / TPS).toFixed(1)), " ", h("span", {}, "秒")); };
+  const showTime = (t: number) => { stageTime.replaceChildren(h("b", {}, (t / TPS).toFixed(1)), " ", h("span", {}, "秒钟")); };
   showTime(0);
   const paint = () => { if (srun) { sview!.render(srun.state.stage!, srun.state.vars); showTime(srun.tick); } };
   /** a tap / key of the scripted inputs is shown on the stage */

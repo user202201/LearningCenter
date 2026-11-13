@@ -107,11 +107,11 @@ export function dataView(o: DataViewOpts): DataView {
       w.append(bx);
     } else {
       const bx = h("div", { class: "dv-cells" });
-      if (!vals.length) bx.append(h("span", { class: "dv-empty" }, "空"));
+      if (!vals.length) bx.append(h("span", { class: "dv-empty" }, "空列表"));
       vals.forEach((v, i) => bx.append(h("span", { class: "dv-cell" + (marks.includes(i + 1) ? " mark" : ""), "data-i": String(i + 1) }, h("small", {}, String(i + 1)), String(v))));
       w.append(bx);
     }
-    if (goal) w.append(h("div", { class: "dv-goal", "data-goal": name }, h("span", {}, "目标"), h("span", { class: "dv-cells small" }, ...(goal.length ? goal.map((v) => h("span", { class: "dv-cell" }, String(v))) : [h("span", { class: "dv-empty" }, "空")]))));
+    if (goal) w.append(h("div", { class: "dv-goal", "data-goal": name }, h("span", {}, "目标"), h("span", { class: "dv-cells small" }, ...(goal.length ? goal.map((v) => h("span", { class: "dv-cell" }, String(v))) : [h("span", { class: "dv-empty" }, "空列表")]))));
     return w;
   };
   const view: DataView = {
@@ -182,7 +182,7 @@ export function stackPanel(): { el: HTMLElement; render(m: Machine | null): void
       const st = m ? m.callStack() : [];
       el.hidden = !m;
       el.replaceChildren(h("div", { class: "sk-head" }, h("b", {}, "调用栈"), h("span", { class: "sk-depth", id: "sk-depth" }, h("span", {}, "深度"), h("b", {}, String(st.length)))),
-        ...(st.length ? [...st].reverse().map((f, i) => h("div", { class: "sk-frame" + (i === 0 ? " top" : ""), "data-fn": f.name }, h("code", {}, `${f.name}(${Object.values(f.args).join(", ")})`))) : [h("div", { class: "sk-empty" }, "空")]));
+        ...(st.length ? [...st].reverse().map((f, i) => h("div", { class: "sk-frame" + (i === 0 ? " top" : ""), "data-fn": f.name }, h("code", {}, `${f.name}(${Object.values(f.args).join(", ")})`))) : [h("div", { class: "sk-empty" }, "无调用")]));
     },
   };
 }

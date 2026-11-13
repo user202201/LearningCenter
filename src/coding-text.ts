@@ -111,6 +111,8 @@ function worldPage(k: M.Kid, doc: CM.CodingDoc, world: number) {
     h("main", { class: "scroll" }, h("div", { class: "narrow cl-narrow" },
       h("div", { class: "cl-wsum" }, medal, h("div", {}, h("b", { id: "tx-wstars" }, `★ ${st.stars} / ${st.max}`), h("span", { class: "muted" }, ` · ${st.solved} / ${st.total}`)), tools),
       grid))));
+  // the first time the child opens world 11: "build with blocks first, then read the code"
+  if (world === 11 && !loadTLocal().seen.includes("bridge")) void openTextLesson("bridge");
 }
 
 // ---------- mini-lessons ----------
@@ -282,7 +284,7 @@ function makePanel(o: { initial: string; input: string; showInput: boolean; extr
     }
     return box;
   }
-  const el = h("div", { class: "tx-panel" }, editor.el, btns, stepbar, inputBox, outBox, o.draw ? canvas : null, watch, result);
+  const el = h("div", { class: "tx-panel" }, editor.el, btns, stepbar, inputBox, ...(o.draw ? [canvas] : []), outBox, watch, result);
   return {
     el, editor, runNow, input: () => inputEl.value, setInput: (s) => { inputEl.value = s; }, clearOutput, showJudge, stepStart, stepStop, stepping,
     setGhost: (g) => { ghost = g; draw(null); }, buttons: btns,

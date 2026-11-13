@@ -155,7 +155,7 @@ export const sort: Mount = (root, io) => {
   const ghost = h("div", { class: "ci-ghost user", hidden: true });
   root.append(pool, zones, ghost, btn("ci-check", "检查", () => check(), "primary"));
   const cardEl = (ci: number) => {
-    const el = h("button", { class: "ci-sc user" + (sel === ci ? " sel" : ""), type: "button", "data-c": String(ci), onclick: () => { if (place[ci] !== null) { place[ci] = null; sel = -1; } else sel = sel === ci ? -1 : ci; draw(); } }, s.cards[ci].t);
+    const el = h("button", { class: "ci-sc user" + (sel === ci ? " sel" : ""), type: "button", "data-c": String(ci), onclick: (e: Event) => { e.stopPropagation(); if (sel >= 0 && sel !== ci && place[ci] !== null) { place[sel] = place[ci]; sel = -1; } else if (place[ci] !== null) { place[ci] = null; sel = -1; } else sel = sel === ci ? -1 : ci; draw(); } }, s.cards[ci].t);
     dragOn(el, {
       start: () => { ghost.textContent = s.cards[ci].t; ghost.hidden = false; el.classList.add("drag"); },
       move: (e) => { ghost.style.left = e.clientX + "px"; ghost.style.top = e.clientY + "px"; },
@@ -290,18 +290,36 @@ export const bits: Mount = (root, io) => {
 };
 
 // ---------- pixel: paint, read the numbers, decode numbers ----------
-export function paintGrid(n: number, onChange: () => void) {
+export function paintGrid(n: number, onChange: () => void, opts: { id?: string; big?: boolean } = {}) {
   const cells = Array(n * n).fill(0);
-  const el = h("div", { class: "ci-pixedit", style: `--w:${n}`, "data-n": String(n) });
+  const el = h("div", { class: "ci-pixedit" + (opts.big ? " big" : ""), style: `--w:${n}`, "data-n": String(n), id: opts.id ?? "" });
   const refresh = () => el.querySelectorAll("i").forEach((c, i) => c.classList.toggle("on", !!cells[i]));
   el.innerHTML = Array.from({ length: n * n }, (_, i) => `<i data-i="${i}"></i>`).join("");
-  let paint = -1, pid = -1;
-  const at = (e: PointerEvent): number => { const t = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null; return t && el.contains(t) && t.dataset.i ? Number(t.dataset.i) : -1; };
-  el.addEventListener("pointerdown", (e) => { const i = at(e); if (i < 0) return; pid = e.pointerId; try { el.setPointerCapture(pid); } catch { /* ignore */ } paint = cells[i] ? 0 : 1; cells[i] = paint; refresh(); onChange(); e.preventDefault(); });
-  el.addEventListener("pointermove", (e) => { if (e.pointerId !== pid) return; const i = at(e); if (i >= 0 && cells[i] !== paint) { cells[i] = paint; refresh(); onChange(); } });
-  const up = (e: PointerEvent) => { if (e.pointerId === pid) pid = -1; };
+  let paint = -1, pid = -1, last: [number, number] | null = null;
+  /** the square under the pointer, from the LAYOUT size of the grid (not from what is under the pointer: a fast drag may jump over squares) */
+  const at = (e: PointerEvent): [number, number] | null => {
+    const r = el.getBoundingClientRect(); if (!r.width || !r.height) return null;
+    const x = Math.floor(((e.clientX - r.left) / r.width) * n), y = Math.floor(((e.clientY - r.top) / r.height) * n);
+    return x >= 0 && y >= 0 && x < n && y < n ? [x, y] : null;
+  };
+  /** every square on the straight line between two squares (the pointer events of a fast finger are far apart) */
+  const line = (a: [number, number], b: [number, number]): [number, number][] => {
+    const out: [number, number][] = [], steps = Math.max(Math.abs(b[0] - a[0]), Math.abs(b[1] - a[1]), 1);
+    for (let i = 0; i <= steps; i++) out.push([Math.round(a[0] + ((b[0] - a[0]) * i) / steps), Math.round(a[1] + ((b[1] - a[1]) * i) / steps)]);
+    return out;
+  };
+  el.addEventListener("pointerdown", (e) => { const c = at(e); if (!c) return; pid = e.pointerId; try { el.setPointerCapture(pid); } catch { /* ignore */ } paint = cells[c[1] * n + c[0]] ? 0 : 1; cells[c[1] * n + c[0]] = paint; last = c; refresh(); onChange(); e.preventDefault(); });
+  el.addEventListener("pointermove", (e) => {
+    if (e.pointerId !== pid || !last) return;
+    const c = at(e); if (!c) return;
+    let changed = false;
+    for (const [x, y] of line(last, c)) if (cells[y * n + x] !== paint) { cells[y * n + x] = paint; changed = true; }
+    last = c;
+    if (changed) { refresh(); onChange(); }
+  });
+  const up = (e: PointerEvent) => { if (e.pointerId === pid) { pid = -1; last = null; } };
   el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
-  return { el, rows: (): string[] => Array.from({ length: n }, (_, y) => cells.slice(y * n, y * n + n).join("")), set: (rows: string[]) => { rows.forEach((r, y) => [...r].forEach((c, x) => (cells[y * n + x] = Number(c)))); refresh(); onChange(); }, count: () => cells.reduce((a: number, b: number) => a + b, 0) };
+  return { el, rows: (): string[] => Array.from({ length: n }, (_, y) => cells.slice(y * n, y * n + n).join("")), cells: (): number[] => cells.slice(), set: (rows: string[]) => { rows.forEach((r, y) => [...r].forEach((c, x) => (cells[y * n + x] = Number(c)))); refresh(); onChange(); }, clear: () => { cells.fill(0); refresh(); onChange(); }, count: () => cells.reduce((a: number, b: number) => a + b, 0) };
 }
 export const pixel: Mount = (root, io) => {
   const s = io.act.spec as { mode: "paint" | "nums" | "decode" | "free"; pic?: string; size?: number };

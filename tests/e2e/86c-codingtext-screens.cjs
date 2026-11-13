@@ -21,13 +21,13 @@ const open = async (opts = {}) => {
 };
 const go = async (page, hash, sel) => { await page.evaluate(() => document.querySelectorAll('#toasts .toast').forEach((x) => x.remove())); await page.evaluate((h) => (location.hash = h), hash); await page.waitForSelector(sel); await page.waitForTimeout(150); };
 const doc = (page, id) => page.evaluate((i) => { const s = localStorage.getItem('learn.local.coding/' + i + '.json'); return s ? JSON.parse(s) : null; }, id);
-const chineseLeft = (page) => page.evaluate((src) => {
+const chineseLeft = (page, scope = 'body') => page.evaluate(([src, sc]) => {
   const re = new RegExp(src), out = [];
-  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const w = document.createTreeWalker(document.querySelector(sc) || document.body, NodeFilter.SHOW_TEXT);
   for (let n; (n = w.nextNode()); ) { const p = n.parentElement; if (!p || p.closest('.user, .user-title, script, style, textarea, svg, .tx-hl')) continue; if (re.test(n.nodeValue)) out.push(n.nodeValue.trim().slice(0, 30)); }
   for (const e of document.querySelectorAll('[title],[aria-label],[placeholder]')) { if (e.closest('.user, .user-title')) continue; for (const a of ['title', 'aria-label', 'placeholder']) { const v = e.getAttribute(a); if (v && re.test(v)) out.push(a + ':' + v.slice(0, 30)); } }
   return out;
-}, CJK.source);
+}, [CJK.source, scope]);
 const submit = async (page, code) => { await page.fill('#tx-ta', code); await page.click('#tx-submit'); await page.waitForSelector('#tx-result:not([hidden])'); await page.waitForTimeout(120); };
 const resultInfo = (page) => page.evaluate(() => ({ passed: document.querySelector('#tx-result').dataset.passed, stars: document.querySelector('#tx-result').dataset.stars, chips: [...document.querySelectorAll('#tx-chips .tx-chip')].map((c) => c.classList.contains('ok') ? 1 : 0).join(''), title: document.querySelector('.tx-res-title').textContent, caseText: document.querySelector('#tx-case')?.textContent || '' }));
 
@@ -70,10 +70,10 @@ const resultInfo = (page) => page.evaluate(() => ({ passed: document.querySelect
   // a wrong submit: the first failing case with input, expected and got
   await submit(page, 'score = int(input())\nif score >= 90:\n    print("优秀")\nelse:\n    print("x")');
   let ri = await resultInfo(page);
-  ok(ri.passed === '0' && /^1{1}0+/.test(ri.chips) && /第 2 组测试没有通过/.test(ri.title) && ri.chips.length === 9, 'a wrong submit: one chip per case (9), the first is green, the first failing case is named: ' + ri.chips + ' ' + ri.title);
+  ok(ri.passed === '0' && ri.chips === '110000001' && /第 3 组测试没有通过/.test(ri.title), 'a wrong submit: one chip per case (9), 95 and 90 pass, the first failing case (89) is named: ' + ri.chips + ' ' + ri.title);
   ok(/输入/.test(ri.caseText) && /90/.test(ri.caseText) === false && /期望的输出/.test(ri.caseText) && /你的输出/.test(ri.caseText), 'the failing case shows the input, the expected and the own output');
   const detail = await page.evaluate(() => ({ input: document.querySelector('#tx-case .tx-pre')?.textContent, exp: document.querySelector('#tx-case .exp')?.textContent, got: document.querySelector('#tx-case .got')?.textContent }));
-  ok(detail.input === '90' && detail.exp === '优秀' && detail.got === 'x', 'case 2: input 90, expected 优秀, got x: ' + JSON.stringify(detail));
+  ok(detail.input === '89' && detail.exp === '良好' && detail.got === 'x', 'case 3: input 89, expected 良好, got x: ' + JSON.stringify(detail));
   await page.screenshot({ path: OUT + 'tx-fail.png' });
   // hints one by one
   await page.click('#tx-hint');
@@ -112,6 +112,7 @@ const resultInfo = (page) => page.evaluate(() => ({ passed: document.querySelect
   await page.waitForTimeout(300);
   d = await doc(page, t.id);
   ok(d.stars['t11-09'] === 3, 'a later failed or weaker attempt never lowers the stars');
+  await submit(page, 'score = int(input())\nif score >= 90:\n    print("优秀")\nelif score >= 75:\n    print("良好")\nelif score >= 60:\n    print("及格")\nelse:\n    print("不及格")');
   await page.click('#tx-next');
   await page.waitForSelector('#tx-ta');
   ok(page.url().endsWith('/w11/10'), '下一关 opens the next level (11-10)');
@@ -156,7 +157,7 @@ const resultInfo = (page) => page.evaluate(() => ({ passed: document.querySelect
   ok(ri.passed === '0' && /运行步数超过了限制/.test(ri.caseText) && /700/.test(ri.caseText), '13-2: a correct but slow program fails on the step limit and the limit (700) is named');
   // a drawing level
   await go(page, `#/coding/${t.id}/w12/13`, '#tx-ta');
-  ok((await page.locator('#tx-canvas svg').count()) === 1 && (await page.locator('#tx-canvas path[stroke="#adb5bd"]').count()) === 1, '12-13: the drawing area shows the grey target');
+  ok((await page.locator('#tx-canvas svg').count()) === 1 && (await page.locator('#tx-canvas g[stroke="#adb5bd"] path').count()) === 1, '12-13: the drawing area shows the grey target');
   await page.fill('#tx-ta', 'import turtle\nfor i in range(3):\n    turtle.forward(80)\n    turtle.right(120)');
   await page.click('#tx-run');
   await page.waitForTimeout(100);
@@ -175,7 +176,7 @@ const resultInfo = (page) => page.evaluate(() => ({ passed: document.querySelect
   const w0 = await page.evaluate(() => ({ info: document.querySelector('#tx-stepinfo').textContent, watch: document.querySelector('#tx-watch').textContent }));
   ok(/1 \//.test(w0.info) && /第 1 行/.test(w0.watch), 'stepping starts at the first line: ' + w0.info);
   for (let i = 0; i < 12; i++) await page.click('#tx-step-next');
-  const w1 = await page.evaluate(() => ({ vars: [...document.querySelectorAll('#tx-watch .tx-vars tr')].map((r) => r.textContent).join('|'), line: document.querySelector('#tx-watch .tx-watch-line b').textContent, out: document.querySelector('#tx-out').textContent }));
+  const w1 = await page.evaluate(() => ({ vars: [...document.querySelectorAll('#tx-watch .tx-vars tr')].map((r) => r.textContent).join('|'), line: document.querySelector('#tx-watch .tx-watch-line').textContent, out: document.querySelector('#tx-out').textContent }));
   ok(/n3/.test(w1.vars) && /total\d/.test(w1.vars) && /i\d/.test(w1.vars), 'the variables window shows n, total and i with their current values: ' + w1.vars);
   await page.screenshot({ path: OUT + 'tx-step.png' });
   for (let i = 0; i < 40; i++) { if (await page.locator('#tx-step-next:disabled').count()) break; await page.click('#tx-step-next'); }
@@ -189,7 +190,7 @@ const resultInfo = (page) => page.evaluate(() => ({ passed: document.querySelect
   await page.fill('#tx-ta', 'def f(a):\n    b = a * 2\n    return b\nprint(f(4))');
   await page.click('#tx-step');
   await page.waitForSelector('#tx-stepbar:not([hidden])');
-  for (let i = 0; i < 4; i++) await page.click('#tx-step-next');
+  for (let i = 0; i < 2; i++) await page.click('#tx-step-next');
   ok((await page.locator('#tx-watch .tx-scope').count()) === 2 && /a4/.test(await page.textContent('#tx-watch')), 'inside a function the window shows the global scope and the call with its parameter a = 4');
   await page.click('#tx-step-stop');
   // reset asks; drafts are kept
@@ -232,6 +233,13 @@ const resultInfo = (page) => page.evaluate(() => ({ passed: document.querySelect
   ok((await page.locator('#tx-lesson').count()) === 0, 'a level without a new concept opens no lesson');
   await page.click('#tx-lesson-btn').catch(() => {});
   await go(page, `#/coding/${t.id}/w11`, '#tx-world-lesson');
+  await page.waitForSelector('#tx-lesson-blocks:not([hidden])');
+  ok(true, 'the first visit to world 11 opens the bridge lesson by itself');
+  await page.click('#tx-lesson-close');
+  await page.waitForSelector('#tx-lesson', { state: 'detached' });
+  await go(page, `#/coding/${t.id}/w11`, '#tx-world-lesson');
+  await page.waitForTimeout(300);
+  ok((await page.locator('#tx-lesson').count()) === 0, 'it opens only once (then the button 先拼积木，再看代码 opens it)');
   await page.click('#tx-world-lesson');
   await page.waitForSelector('#tx-lesson-blocks:not([hidden])');
   const br = await page.evaluate(() => ({ blocks: document.querySelectorAll('#tx-lesson-blocks .cw-block, #tx-lesson-blocks [class*=cw-]').length, code: document.querySelector('#tx-lesson-ta').value }));
@@ -365,7 +373,7 @@ const resultInfo = (page) => page.evaluate(() => ({ passed: document.querySelect
     for (const [hash, sel, name] of [[`#/coding/${t.id}`, '#tx-section', 'map'], [`#/coding/${t.id}/w11`, '.tx-lvl', 'world'], [`#/coding/${t.id}/w11/9`, '#tx-ta', 'level'], [`#/coding/${t.id}/w13/2`, '#tx-ta', 'efficiency'], [`#/coding/${t.id}/w12/13`, '#tx-ta', 'draw'], [`#/coding/${t.id}/code`, '#tx-ta', 'workshop']]) {
       await go(page, hash, sel);
       await page.waitForTimeout(250);
-      for (const x of await chineseLeft(page)) left.push(`${name}: ${x}`);
+      for (const x of await chineseLeft(page, name === 'map' ? '#tx-section' : 'body')) left.push(`${name}: ${x}`);
       if (name === 'level') {
         await page.fill('#tx-ta', 'score = int(input())\nprint(scor)'); await page.click('#tx-run'); await page.waitForSelector('#tx-error:not([hidden])');
         await page.click('#tx-submit'); await page.waitForSelector('#tx-result:not([hidden])'); await page.click('#tx-hint'); await page.waitForTimeout(250);

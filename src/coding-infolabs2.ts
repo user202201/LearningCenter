@@ -5,7 +5,7 @@
  */
 import { h } from "./ui";
 import * as I from "./coding-infomodel";
-import { Mount, btn, clickEl } from "./coding-infolabs";
+import { Mount, btn, clickEl, paintGrid } from "./coding-infolabs";
 import { L, Tri } from "./coding-infocontent";
 
 // ---------- a packet journey ----------
@@ -285,21 +285,15 @@ let digitModel: I.DigitModel | null = null;
 const getModel = (): I.DigitModel => (digitModel ??= I.trainDigits());
 export const digit: Mount = (root, io) => {
   const s = io.act.spec as { mode: "draw" | "unsure"; targets?: number[] };
-  const cells = Array(64).fill(0), grid = h("div", { class: "ci-pixedit big", style: "--w:8", id: "ci-digit" }), out = h("div", { class: "ci-digitout user" }), note = h("p", { class: "ci-note" }, "这是一个很小的演示模型：它只认识 8 × 8 的数字，也会出错。");
-  grid.innerHTML = Array.from({ length: 64 }, (_, i) => `<i data-i="${i}"></i>`).join("");
-  let ti = 0, paint = -1, pid = -1;
-  const refresh = () => grid.querySelectorAll("i").forEach((c, i) => c.classList.toggle("on", !!cells[i]));
-  const at = (e: PointerEvent): number => { const t = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null; return t && grid.contains(t) && t.dataset.i ? Number(t.dataset.i) : -1; };
-  grid.addEventListener("pointerdown", (e) => { const i = at(e); if (i < 0) return; pid = e.pointerId; try { grid.setPointerCapture(pid); } catch { /* ignore */ } paint = cells[i] ? 0 : 1; cells[i] = paint; refresh(); e.preventDefault(); });
-  grid.addEventListener("pointermove", (e) => { if (e.pointerId !== pid) return; const i = at(e); if (i >= 0 && cells[i] !== paint) { cells[i] = paint; refresh(); } });
-  const up = (e: PointerEvent) => { if (e.pointerId === pid) pid = -1; };
-  grid.addEventListener("pointerup", up); grid.addEventListener("pointercancel", up);
+  const out = h("div", { class: "ci-digitout user" }), note = h("p", { class: "ci-note" }, "这是一个很小的演示模型：它只认识 8 × 8 的数字，也会出错。");
+  const pg = paintGrid(8, () => {}, { id: "ci-digit", big: true }), grid = pg.el;
+  let ti = 0;
   const prog = h("div", { class: "ci-prog" });
-  root.append(prog, grid, h("div", { class: "ci-row" }, btn("ci-clear", "清除", () => { cells.fill(0); refresh(); out.textContent = ""; }), btn("ci-check", "识别", () => check(), "primary")), out, note);
-  const show = () => { prog.textContent = s.mode === "draw" ? `${ti + 1} / ${s.targets!.length}` : ""; io.prompt(s.mode === "draw" ? `${L(io.act.prompt)} ${s.targets![ti]}` : L(io.act.prompt)); cells.fill(0); refresh(); out.textContent = ""; };
+  root.append(prog, grid, h("div", { class: "ci-row" }, btn("ci-clear", "清除", () => { pg.clear(); out.textContent = ""; }), btn("ci-check", "识别", () => check(), "primary")), out, note);
+  const show = () => { prog.textContent = s.mode === "draw" ? `${ti + 1} / ${s.targets!.length}` : ""; io.prompt(s.mode === "draw" ? `${L(io.act.prompt)} ${s.targets![ti]}` : L(io.act.prompt)); pg.clear(); out.textContent = ""; };
   const check = () => {
-    if (cells.reduce((a: number, b: number) => a + b, 0) < 6) return io.say("请先画一个数字。", "bad");
-    const r = I.recogniseDigit(getModel(), cells);
+    if (pg.count() < 6) return io.say("请先画一个数字。", "bad");
+    const r = I.recogniseDigit(getModel(), pg.cells());
     const top = r.scores.map((v, d) => [d, v] as const).sort((a, b) => b[1] - a[1]).slice(0, 3);
     out.innerHTML = top.map(([d, v]) => `<div class="ci-conf"><b>${d}</b><i style="width:${Math.round(v * 100)}%"></i><span>${Math.round(v * 100)}%</span></div>`).join("");
     if (s.mode === "draw") {
@@ -308,7 +302,7 @@ export const digit: Mount = (root, io) => {
     } else if (r.confidence < 0.4) { io.say("机器没有把握。", "ok"); io.win(); } else { io.bad(); io.say("机器很有把握。请画一个更含糊的图形。", "bad"); }
   };
   show();
-  const set = (g: number[]) => { g.forEach((v, i) => (cells[i] = v)); refresh(); };
+  const set = (g: number[]) => { pg.set(Array.from({ length: 8 }, (_, y) => g.slice(y * 8, y * 8 + 8).join(""))); };
   const blur = () => { const a = I.digitGrid(1), b = I.digitGrid(7); return a.map((v, i) => (i % 2 ? v : b[i])).map((v, i) => (i < 8 ? 0 : v)); };
   return {
     solve: () => { if (s.mode === "draw") { for (let k = 0; k < s.targets!.length; k++) { set(I.digitGrid(s.targets![ti])); check(); } } else { for (let seed = 1; seed < 400 && !(io as unknown as { done?: boolean }).done; seed++) { const g = I.noisyDigit(seed % 10, seed, 14, true); if (I.recogniseDigit(getModel(), g).confidence < 0.4 && g.reduce((a, b) => a + b, 0) >= 6) { set(g); check(); return; } } set(blur()); check(); } },

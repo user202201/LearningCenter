@@ -173,6 +173,7 @@ export type Expr =
   | { k: "logic"; op: "and" | "or"; a: Expr; b: Expr; line: number }
   | { k: "cmp"; first: Expr; ops: [string, Expr][]; line: number }
   | { k: "call"; f: Expr; args: Expr[]; kw: [string, Expr][]; line: number }
+  | { k: "star"; e: Expr; line: number }
   | { k: "idx"; o: Expr; i: Expr; line: number }
   | { k: "slice"; o: Expr; lo?: Expr; hi?: Expr; st?: Expr; line: number }
   | { k: "attr"; o: Expr; name: string; line: number }
@@ -180,7 +181,7 @@ export type Expr =
   | { k: "lambda"; params: string[]; body: Expr; line: number }
   | { k: "comp"; kind: "list" | "set" | "dict" | "gen"; elt: Expr; val?: Expr; clauses: ({ target: Expr; iter: Expr } | { cond: Expr })[]; line: number };
 
-export interface Param { name: string; def?: Expr }
+export interface Param { name: string; def?: Expr; /** *args: collects the rest of the positional arguments */ star?: boolean }
 export type Stmt =
   | { k: "expr"; e: Expr; line: number }
   | { k: "assign"; targets: Expr[]; value: Expr; line: number }
@@ -305,7 +306,8 @@ export function parseProgram(src: string): Stmt[] {
         p++;
         const args: Expr[] = [], kw: [string, Expr][] = [];
         while (!isOp(")")) {
-          if (peek().t === "name" && isOp("=", 1) && !KEYWORDS.has(peek().v)) { const n = toks[p].v; p += 2; kw.push([n, parseTest()]); }
+          if (isOp("*")) { p++; args.push({ k: "star", e: parseTest(), line }); }
+          else if (peek().t === "name" && isOp("=", 1) && !KEYWORDS.has(peek().v)) { const n = toks[p].v; p += 2; kw.push([n, parseTest()]); }
           else {
             const e = parseTest();
             if (isKw("for")) args.push({ k: "comp", kind: "gen", elt: e, clauses: parseClauses(), line });
@@ -558,10 +560,12 @@ export function parseProgram(src: string): Stmt[] {
           eat("(");
           const params: Param[] = [];
           while (!isOp(")")) {
+            const star = isOp("*");
+            if (star) p++;
             const n = eatName();
             let def: Expr | undefined;
-            if (isOp("=")) { p++; def = parseTest(); }
-            params.push({ name: n, def });
+            if (isOp("=") && !star) { p++; def = parseTest(); }
+            params.push({ name: n, def, star });
             if (isOp(",")) p++; else break;
           }
           if (!isOp(")")) unexpected("，def 的括号没有闭合");

@@ -209,6 +209,12 @@ add(`s = "hello"\nprint(s.upper().lower().capitalize().swapcase())\nprint("a-b-c
 add(`import math\nfor n in [1, 4, 10, 16, 99, 100]:\n    r = math.isqrt(n)\n    print(n, r, r * r == n, round(math.sqrt(n), 3))`);
 add(`print(3 // 2 + 3 % 2 * 2 ** 2 - 1)\nprint(((((2)))))\nprint(2 * (3 + 4) ** 2 // 5 % 7)\nprint(-2 ** 2 + 3 * -1)\nprint(10 - 2 - 3 - 1)\nprint(2 ** 2 ** 3)\nprint(100 / 10 / 5)\nprint(7 - -3, 7 + +3, 7 * -3)`);
 
+// ---------- star arguments, exit, time ----------
+add(`xs = [3, 1, 2]\nprint(*xs)\nprint(*xs, sep=", ")\nprint(*"abc")\nprint(max(*xs), sum(xs))`);
+add(`def total(*nums):\n    s = 0\n    for n in nums:\n        s += n\n    return s\nprint(total(), total(1), total(1, 2, 3), total(*[4, 5]))\ndef f(a, *rest):\n    return (a, rest, len(rest))\nprint(f(1), f(1, 2, 3))`);
+add(`print("before")\nfor i in range(5):\n    if i == 2:\n        exit()\n    print(i)\nprint("never")`);
+add(`import time\ntime.sleep(0.5)\nt = time.time()\nprint(t > 0)\nimport sys\nprint("a")\nsys.exit()\nprint("b")`);
+
 // ---------- GENERATED: random expression programs (seeded, so every run is the same) ----------
 function mulberry(a) { return () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const rnd = mulberry(86);

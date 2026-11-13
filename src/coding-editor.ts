@@ -195,7 +195,7 @@ function numField(sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void
 // ---------- phase 2: values and conditions built from small blocks (levels with `free`) ----------
 const OP_LABEL: Record<string, string> = { "+": "+", "-": "−", "*": "×", "/": "÷", "%": "mod", "<": "<", "<=": "≤", ">": ">", ">=": "≥", "==": "=", "!=": "≠", and: "并且", or: "或者" };
 const ARITH = ["+", "-", "*", "/", "%"], CMP_OPS = ["<", "<=", ">", ">=", "==", "!="];
-const LIST_LABEL: Record<string, string> = { len: "长度", sum: "总和", max: "最大值", min: "最小值", has: "包含", count: "个数", indexOf: "位置", item: "项" };
+const LIST_LABEL: Record<string, string> = { len: "长度", sum: "总和", max: "最大值", min: "最小值", has: "包含", count: "个数", indexOf: "查找位置", item: "编号" };
 const FN_LABEL: Record<string, string> = { floor: "取整", abs: "绝对值", sqrt: "平方根", round: "四舍五入", rand: "随机数", minOf: "较小的", maxOf: "较大的", deg: "邻居数", nbr: "邻居", heavier: "更重" };
 const ME_LABEL: Record<string, string> = { myX: "我的 x", myY: "我的 y", mySize: "我的大小", myCostume: "我的造型", myDir: "我的方向", floorNum: "脚下的数字", tapX: "点击处的 x", tapY: "点击处的 y" };
 const LISTFNS: ListFn[] = ["len", "item", "sum", "max", "min", "has", "count", "indexOf"];
@@ -214,13 +214,13 @@ function exprItems(sc: Scope, mode: "num" | "bool"): PickItem[] {
   const o = sc.opts, rep = o.rep ?? [], out: PickItem[] = [];
   if (mode === "num") {
     for (const op of o.ops ?? ["+", "-", "*"]) out.push({ label: `□ ${OP_LABEL[op]} □`, value: `op:${op}`, cls: "ex" });
-    if (o.lists?.length) for (const f of LISTFNS) if (rep.includes(f)) out.push({ label: f === "item" ? "第 □ 项" : `${LIST_LABEL[f]}(…)`, value: `rep:${f}`, cls: "ex" });
+    if (o.lists?.length) for (const f of LISTFNS) if (rep.includes(f)) out.push({ label: f === "item" ? "编号 □ 的值" : `${LIST_LABEL[f]}(…)`, value: `rep:${f}`, cls: "ex" });
     for (const f of Object.keys(FN_ARITY) as FnName[]) if (rep.includes(f)) out.push({ label: `${FN_LABEL[f]}(…)`, value: `fn:${f}`, cls: "ex" });
     for (const m of Object.keys(ME_LABEL)) if (rep.includes(m)) out.push({ label: ME_LABEL[m], value: `me:${m}`, cls: "ex" });
     if (rep.includes("call")) for (const f of sc.funcs) out.push({ label: `${f.name}(…)`, value: `call:${f.name}`, cls: "ex" });
   } else {
     for (const op of CMP_OPS) out.push({ label: `□ ${OP_LABEL[op]} □`, value: `cmp:${op}`, cls: "ex" });
-    out.push({ label: OP_LABEL.and, value: "logic:and", cls: "ex" }, { label: OP_LABEL.or, value: "logic:or", cls: "ex" }, { label: "非", value: "not", cls: "ex" });
+    out.push({ label: OP_LABEL.and, value: "logic:and", cls: "ex" }, { label: OP_LABEL.or, value: "logic:or", cls: "ex" }, { label: "不是", value: "not", cls: "ex" });
     if (rep.includes("touching")) for (const s of o.sprites ?? []) out.push({ label: `碰到 ${s.label}`, value: `touch:${s.id}`, cls: "ex" });
     if (rep.includes("keyDown")) for (const [k, l] of Object.entries(o.keys ?? {})) out.push({ label: `按住 ${l}`, value: `key:${k}`, cls: "ex" });
     if (rep.includes("heavier")) out.push({ label: `${FN_LABEL.heavier}(…)`, value: "fn:heavier", cls: "ex" });
@@ -257,7 +257,11 @@ function exprEl(sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void, 
   const e = get();
   const wrap = (cls: string, ...kids: (Node | null)[]) => h("span", { class: `cw-ex cw-ex-${cls} d${Math.min(depth, 3)}` }, ...kids);
   const reset = () => sc.edit(() => set(mode === "bool" ? freeCond(sc.opts) : num(meta.def)));
-  const x = () => cbtn({ class: "cw-ex-x cw-ctl", type: "button", "aria-label": "还原", title: "还原", disabled: !sc.interactive, onclick: reset }, "✕");
+  const x0 = () => cbtn({ class: "cw-ex-x cw-ctl", type: "button", "aria-label": "还原", title: "还原", disabled: !sc.interactive, onclick: reset }, "✕");
+  /** a condition can be wrapped (and / or / not) or replaced: the picker of conditions, the current condition becomes the first part */
+  const wr = () => cbtn({ class: "cw-ex-x cw-ex-w cw-ctl", type: "button", "aria-label": "改成", title: "改成", disabled: !sc.interactive,
+    onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, exprItems(sc, "bool"), (v) => sc.edit(() => set(fromPick(sc, v, e ?? num(0), meta, "bool")))) }, "⋯");
+  const x = (): Node => (mode === "bool" ? h("span", { class: "cw-ex-xs" }, wr(), x0()) : x0());
   const kid = (parent: { [k: string]: unknown }, key: string, m: Meta = META_VAL, md: "num" | "bool" = "num") => exprEl(sc, () => parent[key] as Expr, (v) => { parent[key] = v; }, m, md, depth + 1);
   const kidAt = (arr: Expr[], i: number) => exprEl(sc, () => arr[i], (v) => { arr[i] = v; }, META_VAL, "num", depth + 1);
   const opBtn = (cur: string, ops: string[], apply: (op: string) => void) => cbtn({ class: "cw-op cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择运算",
@@ -270,14 +274,14 @@ function exprEl(sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void, 
     case "bin": return wrap("bin", kid(e as never, "a"), opBtn(e.op, sc.opts.ops ?? ["+", "-", "*"], (v) => { e.op = v as "+"; }), kid(e as never, "b"), x());
     case "cmp": return wrap("cmp", kid(e as never, "a"), opBtn(e.op, CMP_OPS, (v) => { e.op = v as "<"; }), kid(e as never, "b"), x());
     case "logic": return wrap("logic", kid(e as never, "a", META_VAL, "bool"), opBtn(e.op, ["and", "or"], (v) => { e.op = v as "and"; }), kid(e as never, "b", META_VAL, "bool"), x());
-    case "not": return wrap("not", t("非"), kid(e as never, "a", META_VAL, "bool"), x());
+    case "not": return wrap("not", t("不是"), kid(e as never, "a", META_VAL, "bool"), x());
     case "list": {
       const lb = choice(e.list, lists(e.list), (v) => { e.list = v; });
-      if (e.f === "item") return wrap("rep", lb, t("第"), kid(e as never, "a", META.idx), t("项"), x());
+      if (e.f === "item") return wrap("rep", lb, t("的编号"), kid(e as never, "a", META.idx), x());
       return wrap("rep", t(LIST_LABEL[e.f]), u("("), lb, ...(LIST_ARITY[e.f] === 2 ? [u(","), kid(e as never, "a")] : []), u(")"), x());
     }
     case "fn": {
-      if (e.f === "rand") return wrap("rep", t(FN_LABEL.rand), kidAt(e.args, 0), t("到"), kidAt(e.args, 1), x());
+      if (e.f === "rand") return wrap("rep", t(FN_LABEL.rand), kidAt(e.args, 0), u("~"), kidAt(e.args, 1), x());
       const parts: Node[] = [];
       e.args.forEach((_, i) => { if (i) parts.push(u(",")); parts.push(kidAt(e.args, i)); });
       return wrap("rep", t(FN_LABEL[e.f]), u("("), ...parts, u(")"), x());
@@ -319,23 +323,23 @@ function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script
   const S = (key: "n" | "e", meta: Meta) => slot(sc, () => b[key], setE(key), meta);
   switch (kind) {
     case "forever": head.append(T("一直重复")); break;
-    case "for": head.append(T("计数"), varBtn(), T("从"), S("n", META.idx), T("到"), S("e", META.idx)); break;
-    case "each": head.append(T("对每一项"), varBtn(), T("在"), listBtn()); break;
-    case "wait": head.append(T("等待"), S("n", META.secs), T("秒")); break;
+    case "for": head.append(T("计数"), varBtn(), T("起点"), S("n", META.idx), T("终点"), S("e", META.idx)); break;
+    case "each": head.append(T("对每一项"), varBtn(), T("来自"), listBtn()); break;
+    case "wait": head.append(T("等待"), S("n", META.secs), T("秒钟")); break;
     case "waitUntil": head.append(T("等到"), condSlot(sc, b)); break;
     case "return": head.append(T("返回"), S("e", META.val)); break;
-    case "push": head.append(T("加入"), S("e", META.val), T("到"), listBtn()); break;
-    case "lset": head.append(T("把"), listBtn(), T("第"), S("n", META.idx), T("项设为"), S("e", META.val)); break;
-    case "lremove": head.append(T("删除"), listBtn(), T("第"), S("n", META.idx), T("项")); break;
-    case "swap": head.append(T("交换"), listBtn(), T("第"), S("n", META.idx), T("和"), S("e", META.idx), T("项")); break;
+    case "push": head.append(T("加入"), S("e", META.val), T("到列表"), listBtn()); break;
+    case "lset": head.append(T("修改"), listBtn(), T("的编号"), S("n", META.idx), T("改为"), S("e", META.val)); break;
+    case "lremove": head.append(T("删除"), listBtn(), T("的编号"), S("n", META.idx)); break;
+    case "swap": head.append(T("交换"), listBtn(), T("的编号"), S("n", META.idx), T("和编号"), S("e", META.idx)); break;
     case "lclear": head.append(T("清空"), listBtn()); break;
-    case "smove": head.append(T("走"), S("n", META.steps), T("步")); break;
-    case "sturn": head.append(T("转"), S("n", META.turnd), U("°")); break;
+    case "smove": head.append(T("前进"), S("n", META.steps)); break;
+    case "sturn": head.append(T("旋转"), S("n", META.turnd), U("°")); break;
     case "goto": head.append(T("移到 x"), S("n", META.coord), T("y"), S("e", META.coord)); break;
     case "changex": head.append(T("x 增加"), S("n", META.steps)); break;
     case "changey": head.append(T("y 增加"), S("n", META.steps)); break;
-    case "say": head.append(T("说"), textBtn()); break;
-    case "sayfor": head.append(T("说"), textBtn(), S("n", META.secs), T("秒")); break;
+    case "say": head.append(T("说话"), textBtn()); break;
+    case "sayfor": head.append(T("说话"), textBtn(), S("n", META.secs), T("秒钟")); break;
     case "costume": head.append(T("造型"), S("n", META.costume)); break;
     case "nextcostume": head.append(T("下一个造型")); break;
     case "size": head.append(T("大小"), S("n", META.size), U("%")); break;
@@ -416,7 +420,7 @@ export function programEl(p: Program, o: { vars?: string[]; funcs?: { name: stri
     return h("div", { class: "cw-script" }, h("div", { class: "cw-hat" }, span("cw-t", first), rest.length ? span("cw-fn", rest.join(" ")) : null, ...(hatKids ?? [])), box);
   };
   for (let i = 0; i < p.funcs.length; i++) { const ps = paramsOf(p.funcs[i]); root.append(script(`定义 ${p.funcs[i].name}${ps.length ? `(${ps.join(", ")})` : ""}`, p.funcs[i].body, i + 1, ps)); }
-  (p.scripts ?? []).forEach((sp, j) => root.append(script(`当 ${eventLabel(sp.on, opts)}`, sp.body, p.funcs.length + 1 + j, undefined, [span("cw-sprite", opts.sprites?.find((x) => x.id === sp.sprite)?.label ?? sp.sprite)])));
+  (p.scripts ?? []).forEach((sp, j) => root.append(script(`事件 ${eventLabel(sp.on, opts)}`, sp.body, p.funcs.length + 1 + j, undefined, [span("cw-sprite", opts.sprites?.find((x) => x.id === sp.sprite)?.label ?? sp.sprite)])));
   if (p.main.length || !(p.scripts ?? []).length) root.append(script("开始", p.main, 0));
   return root;
 }
@@ -494,7 +498,7 @@ export function createEditor(o: EditorOpts): Editor {
       for (const b of sp.body) box.append(blockEl(b, sc(script), seqs, script));
       const evBtn = cbtn({ class: "cw-evsel cw-ctl", type: "button", disabled: locked || slotO.events.length < 2, "aria-label": "选择事件", "data-on": sp.on,
         onclick: (ev: Event) => pick(ev.currentTarget as HTMLElement, slotO.events.map((e) => ({ label: eventLabel(e, o), value: e })), (v) => edit(() => { sp.on = v; })) }, span("", eventLabel(sp.on, o)));
-      const hat = h("div", { class: "cw-hat cw-hat-ev", "data-script": String(script), onclick: () => { cur = script; mark(); } }, span("cw-sprite", o.sprites?.find((x) => x.id === sp.sprite)?.label ?? sp.sprite), span("cw-t", "当"), evBtn);
+      const hat = h("div", { class: "cw-hat cw-hat-ev", "data-script": String(script), onclick: () => { cur = script; mark(); } }, span("cw-sprite", o.sprites?.find((x) => x.id === sp.sprite)?.label ?? sp.sprite), span("cw-t", "事件"), evBtn);
       return h("div", { class: "cw-script cw-script-ev" + (script === cur ? " cur" : ""), "data-script": String(script) }, hat, box);
     };
     for (let i = 1; i <= prog.funcs.length; i++) ws.append(mk("定义", prog.funcs[i - 1].name, i));

@@ -206,6 +206,10 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click('#tx-step-next'); await page.click('#tx-step-next');
   ok((await page.evaluate(() => [...document.querySelectorAll('.tx-hl .tx-line')].findIndex((e) => e.classList.contains('tx-cur')))) === 2, 'after two steps line 3 is lit');
   ok((await page.locator('#tx-ta[readonly]').count()) === 1, 'the editor is read-only while stepping');
+  const frozen = await val();
+  await page.evaluate(() => { document.querySelector('.tx-keys').scrollLeft = 0; });
+  await key(':').click(); await key('⇥').click();
+  ok((await val()) === frozen, 'the toolbar changes nothing while the editor is read-only (stepping)');
   await page.click('#tx-step-stop');
   ok((await page.locator('.tx-line.tx-cur').count()) === 0 && (await page.locator('#tx-ta[readonly]').count()) === 0, 'stopping gives the editor back');
 

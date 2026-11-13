@@ -201,7 +201,7 @@ const { ok, done } = checks();
       const text = A.toText(p); const back = A.parse(text); n++;
       if (A.shape(back) !== A.shape(p) || A.toText(back) !== text) bad++;
     }
-    const sol = L.LEVELS.every((l) => A.shape(A.parse(A.toText(l.sol))) === A.shape(l.sol));
+    const sol = L.LEVELS.filter((l) => l.world <= 6).every((l) => A.shape(A.parse(A.toText(l.sol))) === A.shape(l.sol));
     const samples = { a: A.toText(A.parse('repeat 3 { if pathAhead { move } else { left } } def f(n) { fd n + 2 * 3 }')), neg: A.toText(A.parse('change n by -1 set a = (b + 1) * 2')), cmp: A.toText(A.parse('while count < 4 { take }')) };
     let err = null; try { A.parse('repeat 3 { move'); } catch (e) { err = e.constructor.name; }
     let err2 = null; try { A.parse('move $'); } catch (e) { err2 = e.constructor.name; }
@@ -216,9 +216,9 @@ const { ok, done } = checks();
 
   // ---------- 4. the levels ----------
   const LV = await run((A, I, L) => {
-    const out = { n: L.LEVELS.length, bad: [], per: {}, ids: new Set(), kinds: {} };
+    const out = { n: L.LEVELS.filter((x) => x.world <= 6).length, bad: [], per: {}, ids: new Set(), kinds: {} };
     const used = (l) => { const kinds = new Set(), conds = new Set(), vars = new Set(), funcs = new Set(); for (const li of [l.sol.main, ...l.sol.funcs.map((f) => f.body)]) A.walk(li, (b) => { kinds.add(b.t === 'if' && b.els ? 'ifelse' : b.t); if (b.cond) conds.add(A.exprText(b.cond)); if (b.t === 'set' || b.t === 'change') vars.add(b.name); if (b.t === 'call') funcs.add(b.name); }); return { kinds, conds, vars, funcs }; };
-    for (const l of L.LEVELS) {
+    for (const l of L.LEVELS.filter((x) => x.world <= 6)) {   // (worlds 7+ have their own suites: 85, 85b, 85c)
       out.per[l.world] = (out.per[l.world] || 0) + 1;
       if (out.ids.has(l.id)) out.bad.push('duplicate id ' + l.id); out.ids.add(l.id);
       if (l.id !== `w${l.world}-${String(l.no).padStart(2, '0')}`) out.bad.push('id / number ' + l.id);
@@ -253,7 +253,7 @@ const { ok, done } = checks();
   const BF = await run((A, I, L) => {
     const proven = [], skipped = [], found = [], t0 = performance.now();
     const NUMS = [2, 3, 4, 5, 6, 7, 8, 9];
-    const levels = L.LEVELS.filter((l) => !['fd', 'tl', 'tr', 'penup', 'pendown', 'color', 'call', 'set', 'change'].some((k) => l.palette.includes(k)));
+    const levels = L.LEVELS.filter((l) => l.world <= 6 && !['fd', 'tl', 'tr', 'penup', 'pendown', 'color', 'call', 'set', 'change'].some((k) => l.palette.includes(k)));
     for (const l of levels) {
       const simple = l.palette.filter((k) => ['move', 'left', 'right', 'take', 'light'].includes(k));
       const conds = (l.conds ?? []).map((c) => L.condExpr(c));
@@ -436,7 +436,7 @@ const { ok, done } = checks();
     out.w1 = M.worldStat(full1, 1); out.w2 = M.worldStat(half2, 2);
     out.rec = [M.recommendedWorld(e, null), M.recommendedWorld(e, 2), M.recommendedWorld(e, 5), M.recommendedWorld(e, 8), M.recommendedWorld(full1, 1), M.recommendedWorld(half2, 9)];
     const all = { stars: Object.fromEntries(L.LEVELS.map((l) => [l.id, 1])), blocks: {}, challenges: 0 };
-    out.recAll = M.recommendedWorld(all, 3); out.total = M.totalStars(all);
+    out.recAll = M.recommendedWorld(all, 3); out.total = M.totalStars(all); out.nLevels = L.LEVELS.length;
     out.next = [M.nextLevelId('w1-01'), M.nextLevelId('w1-12'), M.nextLevelId('w6-14')];
     out.chal = M.addChallenge(e).challenges;
     out.path = M.codingPath('k1');
@@ -447,7 +447,7 @@ const { ok, done } = checks();
   const canon = (o) => JSON.stringify(o, (k, v) => (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.entries(v).sort()) : v));
   ok(canon(PM.merge) === canon(PM.merge2) && canon(PM.merge.stars) === canon(PM.mergeCoding.stars) && PM.mergeNull && PM.other === '"2026-01-02"', 'the merge is symmetric, agrees with mergeCoding, handles a missing side and does not disturb the older rules');
   ok(PM.w1.done && PM.w1.stars === 36 && PM.w1.max === 36 && !PM.w2.done && PM.w2.stars === 2 && PM.w2.solved === 1, 'world statistics: stars, solved levels, finished world');
-  ok(PM.rec.join() === '1,1,2,3,2,2' && PM.recAll === 0 && PM.total === 76, 'the recommended world: first unfinished one; with no progress the grade decides (no grade or 1-4 -> 1, 5-6 -> 2, 7-9 -> 3); 0 when everything is done: ' + PM.rec.join());
+  ok(PM.rec.join() === '1,1,2,3,2,2' && PM.recAll === 0 && PM.total === PM.nLevels, 'the recommended world: first unfinished one; with no progress the grade decides (no grade or 1-4 -> 1, 5-6 -> 2, 7-9 -> 3); 0 when everything is done: ' + PM.rec.join());
   ok(PM.next.join() === 'w1-02,,' && PM.chal === 1 && PM.path === 'coding/k1.json', 'next level, challenge counter, file name coding/<kid>.json');
 
   // ---------- 11. the lessons ----------
@@ -467,7 +467,7 @@ const { ok, done } = checks();
       }
     }
     // every lesson named by a level exists; the first level of a world has the world's lesson
-    for (const l of L.LEVELS) if (l.lesson) { out.firstUse[l.lesson] = l.id; if (!LE.LESSONS[l.lesson]) out.bad.push(l.id + ' unknown lesson ' + l.lesson); }
+    for (const l of L.LEVELS.filter((x) => x.world <= 6)) if (l.lesson) { out.firstUse[l.lesson] = l.id; if (!LE.LESSONS[l.lesson]) out.bad.push(l.id + ' unknown lesson ' + l.lesson); }
     for (const w of [1, 2, 3, 4, 5, 6]) if (!L.levelsOf(w)[0].lesson) out.bad.push('world ' + w + ' has no opening lesson');
     out.unused = Object.keys(LE.LESSONS).filter((k) => !out.firstUse[k]);
     return out;
