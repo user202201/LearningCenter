@@ -1,4 +1,4 @@
-// The subject picker (the screen between signing in and a subject): five big cartoon cards (识字 / 数学 / 英语 / 科学 / 音乐), a tap effect (sparkles + ring),
+// The subject picker (the screen between signing in and a subject): six big cartoon cards (识字 / 数学 / 英语 / 科学 / 音乐 / 小游戏), a tap effect (sparkles + ring),
 // a curtain that grows from the card and lifts on the next screen, "识字" = the original Learning Chinese app (`#/chinese`), the other subjects a
 // "coming soon" page, back buttons and Settings that return to where they were opened. Also: nothing overflows / is clipped on small and large screens,
 // and in English / French; with "reduce motion" the effects are skipped but the navigation still works.
@@ -7,8 +7,8 @@ const { ok, done } = checks();
 const fs = require('fs');
 const OUT = process.env.D || 'tests/out/work/';
 fs.mkdirSync(OUT, { recursive: true });
-const NAMES = ["识字", "数学", "英语", "科学", "音乐"];
-const IDS = ["chinese", "math", "english", "science", "music"];
+const NAMES = ["识字", "数学", "英语", "科学", "音乐", "小游戏"];
+const IDS = ["chinese", "math", "english", "science", "music", "games"];
 
 /** signs in on this device (no GitHub) and stops at the picker */
 const toHub = async (opts) => {
@@ -27,10 +27,10 @@ const layout = (page) => page.evaluate(() => {
 
 (async () => {
   // ---- the picker itself, on phones and tablets ----
-  for (const [name, vp, min] of [['iPhone SE', { width: 320, height: 568 }, 120], ['iPhone', { width: 390, height: 844 }, 150], ['iPad portrait', { width: 820, height: 1180 }, 300], ['iPad landscape', { width: 1180, height: 820 }, 200], ['desktop', { width: 1440, height: 900 }, 240]]) {
+  for (const [name, vp, min] of [['iPhone SE', { width: 320, height: 568 }, 120], ['iPhone', { width: 390, height: 844 }, 150], ['iPad portrait', { width: 820, height: 1180 }, 300], ['iPad landscape', { width: 1180, height: 820 }, 160], ['desktop', { width: 1440, height: 900 }, 190]]) {
     const { browser, page } = await toHub({ local: true, viewport: vp });
     const L = await layout(page);
-    ok(L.order.join() === IDS.join() && L.cards.map((c) => c.txt).join() === NAMES.join(), name + ': five cards in order 识字 / 数学 / 英语 / 科学 / 音乐');
+    ok(L.order.join() === IDS.join() && L.cards.map((c) => c.txt).join() === NAMES.join(), name + ': six cards in order 识字 / 数学 / 英语 / 科学 / 音乐 / 小游戏');
     ok(L.cards.every((c) => c.w >= min && c.h >= min && c.art >= min * 0.6), name + ': the cards are big (' + L.cards.map((c) => Math.round(c.w) + 'x' + Math.round(c.h)).join(', ') + ')');
     ok(L.sw <= L.vw, name + ': no sideways scrolling');
     const left = Math.min(...L.cards.map((c) => c.l)), right = L.vw - Math.max(...L.cards.map((c) => c.r));
@@ -41,7 +41,7 @@ const layout = (page) => page.evaluate(() => {
   }
 
   // ---- English / French: names fit, nothing Chinese left on the cards ----
-  for (const [loc, names] of [['en-US', ['Characters', 'Math', 'French', 'Science', 'Music']], ['fr-FR', ['Caractères', 'Maths', 'Anglais', 'Sciences', 'Musique']]]) {
+  for (const [loc, names] of [['en-US', ['Characters', 'Math', 'French', 'Science', 'Music', 'Games']], ['fr-FR', ['Caractères', 'Maths', 'Anglais', 'Sciences', 'Musique', 'Jeux']]]) {
     const { browser, page } = await toHub({ local: true, locale: loc, viewport: { width: 320, height: 568 } });
     const L = await layout(page);
     ok(L.cards.map((c) => c.txt).join() === names.join(), loc + ': the subjects are translated (' + L.cards.map((c) => c.txt).join(', ') + ')');

@@ -188,13 +188,16 @@ export function renderPiano() {
   const songBar = h("div", { class: "pn-songbar", id: "pn-songbar" });
 
   const keyEls = new Map<number, HTMLElement>();
+  /** how many semitones from the first C to the last white key shown */
+  const lastSpan = () => 12 * Math.floor(whites / 7) + ([0, 2, 4, 5, 7, 9, 11][whites % 7 - 1] ?? -1) + (whites % 7 ? 0 : 0);
   const build = () => {
     const wpx = Math.max(280, kb.clientWidth || (X ? window.innerWidth - 24 : 360));
-    // full screen: keys about 37 px wide (an iPad sideways: 32 white keys = 55 keys with the black ones); normal: about 46 px
-    whites = full ? Math.max(14, Math.min(36, Math.round(wpx / 37))) : Math.max(7, Math.min(21, Math.round(wpx / 46)));
+    // full screen: BIG keys, whole octaves (2 or 3 octaves and the C on top; 3 when the keys still stay 60 px wide) and the minimap above chooses which octaves; normal: about 46 px keys
+    whites = full ? (wpx / 22 >= 60 ? 3 : 2) * 7 + 1 : Math.max(7, Math.min(21, Math.round(wpx / 46)));
     if (startMidi + 0 < 24) startMidi = 24;
     // the first white key is always a C
     startMidi = startMidi - ((startMidi % 12) === 0 ? 0 : (startMidi % 12));
+    startMidi = Math.max(24, Math.min(108 - lastSpan(), startMidi));
     kb.replaceChildren(); keyEls.clear();
     kb.classList.toggle("names", names);
     let wi = 0; const blacks: HTMLElement[] = [];
@@ -213,16 +216,51 @@ export function renderPiano() {
     blacks.forEach((b) => kb.append(b));
     info.textContent = `${A.midiName(startMidi)} – ${A.midiName(startMidi + 12 * Math.floor(whites / 7) + (whites % 7 ? [0, 2, 4, 5, 7, 9, 11][whites % 7 - 1] : -1) )}`;
     markNext();
+    drawWindow();
   };
   const markNext = () => {
     keyEls.forEach((e) => e.classList.remove("next"));
     if (song) keyEls.get(song.notes[song.at])?.classList.add("next");
   };
+  // ----- the minimap: all 88 keys across the screen; the bright frame is what the keyboard below shows, the rest is dimmed; drag the frame to choose (it jumps by octaves) -----
+  const mini = h("div", { class: "pn-mini", id: "pn-mini" });
+  const MINI_FROM = 21, MINI_TO = 108;
+  const whiteIdx = (m: number): number => { let n = 0; for (let x = MINI_FROM; x < m; x++) if (!A.isBlack(x)) n++; return n; };
+  const MINI_WHITES = whiteIdx(MINI_TO + 1);
+  const miniEls = new Map<number, HTMLElement>();
+  for (let m = MINI_FROM; m <= MINI_TO; m++) {
+    const black = A.isBlack(m), i = whiteIdx(m);
+    const e = h("i", { class: "pn-mk " + (black ? "b" : "w"), "data-midi": String(m) });
+    e.style.left = black ? `${(i / MINI_WHITES) * 100 - 100 / MINI_WHITES * 0.3}%` : `${(i / MINI_WHITES) * 100}%`;
+    e.style.width = `${(black ? 0.6 : 1) * 100 / MINI_WHITES}%`;
+    miniEls.set(m, e); mini.append(e);
+    if (m % 12 === 0) { const l = h("span", { class: "pn-ml" }, `C${m / 12 - 1}`); l.style.left = `${(i / MINI_WHITES) * 100}%`; mini.append(l); }
+  }
+  const dimL = h("i", { class: "pn-dim" }), dimR = h("i", { class: "pn-dim" }), win = h("i", { class: "pn-win", id: "pn-win" });
+  mini.append(dimL, dimR, win);
+  function drawWindow() {
+    const a = whiteIdx(startMidi) / MINI_WHITES, w = whites / MINI_WHITES;
+    win.style.left = `${a * 100}%`; win.style.width = `${w * 100}%`;
+    dimL.style.cssText = `left:0;width:${a * 100}%`; dimR.style.cssText = `left:${(a + w) * 100}%;right:0`;
+  }
+  let miniDrag: number | null = null;
+  const miniTo = (e: PointerEvent) => {
+    const r = mini.getBoundingClientRect(), frac = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+    const start = frac * MINI_WHITES - whites / 2;                       // the white-key index the frame starts at
+    const k = Math.round((start - 2) / 7) + 1;                           // the nearest C (C1 is the third white key of the 88)
+    const m = Math.max(24, Math.min(108 - lastSpan(), 12 * (k + 1)));
+    if (m !== startMidi) { startMidi = m; build(); }
+  };
+  mini.addEventListener("pointerdown", (e) => { e.preventDefault(); miniDrag = e.pointerId; try { mini.setPointerCapture(e.pointerId); } catch { /* synthetic */ } miniTo(e); });
+  mini.addEventListener("pointermove", (e) => { if (miniDrag === e.pointerId) miniTo(e); });
+  for (const t of ["pointerup", "pointercancel", "lostpointercapture"]) mini.addEventListener(t, (e) => { if (miniDrag === (e as PointerEvent).pointerId) miniDrag = null; });
+
   const keyAt = (x: number, y: number): HTMLElement | null => { const e = document.elementFromPoint(x, y); return e instanceof HTMLElement ? e.closest<HTMLElement>(".pn-key") : null; };
   const press = (id: number, el: HTMLElement) => {
     const m = +el.dataset.midi!;
     active.set(id, { el, voice: A.pianoDown(m) });
     el.classList.add("down");
+    miniEls.get(m)?.classList.add("on");
     if (rec) rec.events.push({ t: Math.round(performance.now() - rec.t0), m, on: 1 });
     count.textContent = String(active.size);
     if (song) {
@@ -235,7 +273,7 @@ export function renderPiano() {
   };
   const lift = (id: number) => {
     const a = active.get(id); if (!a) return;
-    a.voice.release(); a.el.classList.remove("down"); active.delete(id);
+    a.voice.release(); a.el.classList.remove("down"); active.delete(id); miniEls.get(+a.el.dataset.midi!)?.classList.remove("on");
     if (rec) rec.events.push({ t: Math.round(performance.now() - rec.t0), m: +a.el.dataset.midi!, on: 0 });
     count.textContent = String(active.size);
   };
@@ -263,7 +301,7 @@ export function renderPiano() {
     root.classList.toggle("pn-full", on);
     fullBtn.textContent = on ? "✕ 退出全屏" : "⛶ 全屏";
     if (on) {
-      startMidi = 36;   // a wide keyboard starts at C2 (C2 to G6 = 55 keys on an iPad sideways); middle C stays in view
+      startMidi = 48;   // big keys: two or three octaves from C3 (middle C is in view); the minimap moves them
       try { void (root.requestFullscreen?.() ?? Promise.resolve()).catch(() => { /* the page-wide mode is enough (an iPhone has no element full screen) */ }); } catch { /* same */ }
     } else {
       startMidi = 60;
@@ -343,7 +381,7 @@ export function renderPiano() {
         h("button", { class: "pn-shift", id: "pn-down", "aria-label": "低一个八度", title: "低一个八度", onclick: () => shift(-1) }, "‹ 低"), info,
         h("button", { class: "pn-shift", id: "pn-up", "aria-label": "高一个八度", title: "高一个八度", onclick: () => shift(1) }, "高 ›"),
         recBtn, names_btn, fullBtn, h("span", { class: "pn-fingers muted small" }, "同时按着：", count)),
-      kb, songBar,
+      mini, kb, songBar,
       h("div", { class: "pn-songs" }, h("span", { class: "muted small" }, "跟着弹："), ...SONGS.map((s, i) => h("button", { class: "mopt", id: `pn-song-${i}`, onclick: () => startSong(s) }, s.name))),
       takesBox,
       h("p", { class: "muted small center" }, "用好几个手指一起按，就是和弦；手指在琴键上滑过去，就是滑音。"))));

@@ -9,7 +9,7 @@ import { mascot } from "./art";
 import { getLang } from "./i18n";
 
 export interface Subject {
-  id: "chinese" | "math" | "english" | "science" | "music";
+  id: "chinese" | "math" | "english" | "science" | "music" | "games";
   /** the name on the card (Chinese source text, translated by i18n) */
   name: string;
   /** where the card leads */
@@ -28,6 +28,7 @@ export const SUBJECTS: Subject[] = [
   { id: "english", /** the Languages subject teaches the OTHER language of the screen: English screen -> French (words.ts studyLang) */ get name() { return getLang() === "en" ? "法语" : "英语"; }, route: "#/subject/english", c1: "#69db7c", c2: "#2f9e44", dark: "#237a35", ready: true },
   { id: "science", name: "科学", route: "#/subject/science", c1: "#b197fc", c2: "#7048e8", dark: "#5430b8", ready: true },
   { id: "music", name: "音乐", route: "#/subject/music", c1: "#f783ac", c2: "#d6336c", dark: "#a61e4d", ready: true, kid: false },
+  { id: "games", name: "小游戏", route: "#/subject/games", c1: "#63e6be", c2: "#12b886", dark: "#087f5b", ready: true, kid: false },
 ];
 export const subjectById = (id: string) => SUBJECTS.find((s) => s.id === id);
 
@@ -81,6 +82,14 @@ const ART: Record<Subject["id"], string> = {
     <ellipse cx="38" cy="30" rx="8" ry="6" transform="rotate(-20 38 30)" fill="#ffe066"/><path d="M45 28V8" stroke="#fff" stroke-width="3.500" stroke-linecap="round"/>
     <ellipse cx="78" cy="22" rx="8" ry="6" transform="rotate(-20 78 22)" fill="#fff"/><path d="M85 20V2" stroke="#fff" stroke-width="3.500" stroke-linecap="round"/><path d="M45 8L85 2" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
     ${star(100, 40, 8, "#ffe066")}${star(16, 36, 7, "#fff3bf")}`,
+  // a smiling game controller with a joystick, buttons and sparkles
+  games: `${shadow}
+    <path d="M30 40h60q20 0 26 28l5 22q4 18-10 18q-9 0-16-12l-6-10H31l-6 10q-7 12-16 12q-14 0-10-18l5-22q6-28 26-28z" fill="#fff"/>
+    <path d="M30 40h60q20 0 26 28l5 22q4 18-10 18q-9 0-16-12l-6-10H31l-6 10q-7 12-16 12q-14 0-10-18l5-22q6-28 26-28z" fill="none" stroke="#087f5b" stroke-width="3.500" stroke-linejoin="round"/>
+    <path d="M34 62h14M41 55v14" stroke="#12b886" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="82" cy="58" r="5.500" fill="#ff6b6b"/><circle cx="94" cy="68" r="5.500" fill="#fab005"/><circle cx="70" cy="68" r="5.500" fill="#339af0"/>
+    ${eye(54, 80, 3.500)}${eye(66, 80, 3.500)}${smile(86, 6)}
+    ${star(18, 24, 8, "#fff3bf")}${star(104, 22, 9, "#fff3bf")}${star(60, 14, 6, "#fff3bf")}`,
   // a bubbling flask with a smiling potion
   science: `${shadow}
     <path d="M49 12h22v6h-2.500v30l25 46q6 13-7 15H33.500q-13-2-7-15l25-46V18H49z" fill="#e7f5ff"/>

@@ -18,6 +18,7 @@ import * as I from "./importer";
 import { subjectById, hubGrid, hubHero, soonPage, reveal, shortcuts } from "./hub";
 import * as E from "./english";
 import * as MU from "./music";
+import * as GM from "./gameshub";
 import * as MA from "./math";
 import * as SC from "./science";
 import { pickKidGrade } from "./gradeui";
@@ -1475,6 +1476,9 @@ async function route() {
   if (hash === "#/science/circuits") return void SC.renderCircuits();
   if (hash === "#/science/notes") return void SC.renderNotes();
   if (hash === "#/subject/music") return void MU.renderMusic();
+  if (hash === "#/subject/games") return void GM.renderGames();
+  const gmg = /^#\/games\/([\w-]+)$/.exec(hash);
+  if (gmg) return void GM.renderGame(gmg[1]);
   if (hash === "#/music/theory") return void MU.renderTheory();
   const mth = /^#\/music\/theory\/(c\d+)$/.exec(hash);
   if (mth) return void MU.renderChapter(mth[1]);
@@ -1521,6 +1525,7 @@ E.initEnglish(shell);
 MA.initMath(shell);
 SC.initScience(shell);
 MU.initMusic(shell);
+GM.initGames(shell);
 // the web version keeps itself in the browser, so it opens without network (sw.js is made by the build; the packaged app and the dev server have none)
 if (!__MOBILE__ && import.meta.env.PROD && "serviceWorker" in navigator) {
   window.addEventListener("load", () => { navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => { /* no service worker here: the app still works online */ }); });

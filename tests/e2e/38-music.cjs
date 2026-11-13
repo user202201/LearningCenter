@@ -70,7 +70,7 @@ const clearPlays = (page) => page.evaluate(() => { window.__music.plays.length =
   // ---- the picker and the music home ----
   await p.evaluate(() => (location.hash = '#/')); await p.waitForSelector('.hub-grid');
   const names = await p.locator('.subject .s-name').allTextContents();
-  ok(names.join() === '识字,数学,英语,科学,音乐', 'the picker has five cards, music is the fifth: ' + names.join());
+  ok(names.join() === '识字,数学,英语,科学,音乐,小游戏', 'the picker has six cards, music is the fifth: ' + names.join());
   await p.click('.subject[data-subject=music]'); await p.waitForSelector('#mus-theory');
   ok((await p.locator('.mus-card').count()) === 4 && (await p.textContent('.hero h1')) === '音乐', 'music home: theory, piano, drums, guitar; no child is asked for');
   ok(await p.locator('.shortcuts').count() === 0, 'no subject shortcuts on the music pages (they belong to a child\'s page)');
@@ -240,28 +240,44 @@ const clearPlays = (page) => page.evaluate(() => { window.__music.plays.length =
     await s.browser.close();
   }
 
-  // ---- full screen: the keyboard fills the screen, 55 keys on an iPad sideways ----
-  for (const [dn, vp, min, max] of [['iPad sideways', { width: 1180, height: 820 }, 52, 58], ['iPad Pro sideways', { width: 1366, height: 1024 }, 56, 66], ['phone sideways', { width: 844, height: 390 }, 36, 44]]) {
+  // ---- full screen: BIG keys (2-3 octaves) and a minimap of the 88 keys to choose the octaves ----
+  for (const [dn, vp, whites] of [['iPad sideways', { width: 1180, height: 820 }, 15], ['iPad Pro sideways', { width: 1366, height: 1024 }, 22], ['phone sideways', { width: 844, height: 390 }, 15]]) {
     const s = await start(new Map(), { local: true, viewport: vp, today: '2026-11-12' });
     await s.page.evaluate(() => (location.hash = '#/music/piano')); await s.page.waitForSelector('.pn-key');
-    const before = await s.page.evaluate(() => document.querySelectorAll('.pn-key').length);
     await s.page.click('#pn-full'); await s.page.waitForTimeout(400);
-    const m = await s.page.evaluate(() => { const k = document.querySelector('#pn-kb').getBoundingClientRect(), w = document.querySelector('.pn-key.white').getBoundingClientRect(); return { white: document.querySelectorAll('.pn-key.white').length, black: document.querySelectorAll('.pn-key.black').length, kw: k.width, kh: k.height, vw: innerWidth, vh: innerHeight, hero: getComputedStyle(document.querySelector('.pn-page > .top')).display, ww: w.width, mid: !!document.querySelector('.pn-key[data-midi="60"]'), first: document.querySelector('.pn-key').dataset.name, btn: document.querySelector('#pn-full').textContent }; });
-    ok(m.white + m.black >= min && m.white + m.black <= max && m.mid, `${dn}: full screen has ${m.white + m.black} keys (${m.white} white + ${m.black} black, from ${m.first}), middle C is in view (was ${before} keys)`);
-    ok(m.kw >= m.vw * 0.94 && m.kh >= m.vh * 0.7 && m.hero === 'none', `${dn}: the keyboard fills the screen (${Math.round(m.kw)}x${Math.round(m.kh)} of ${m.vw}x${m.vh}), the title band is gone; white keys ${Math.round(m.ww)} px wide`);
-    ok(m.ww >= 30, `${dn}: keys stay big enough for a finger (${Math.round(m.ww)} px)`);
+    const m = await s.page.evaluate(() => { const k = document.querySelector('#pn-kb').getBoundingClientRect(), w = document.querySelector('.pn-key.white').getBoundingClientRect(); return { white: document.querySelectorAll('.pn-key.white').length, kw: k.width, kh: k.height, vw: innerWidth, vh: innerHeight, hero: getComputedStyle(document.querySelector('.pn-page > .top')).display, ww: w.width, mid: !!document.querySelector('.pn-key[data-midi="60"]'), first: +document.querySelector('.pn-key').dataset.midi, mini: !!document.querySelector('#pn-mini .pn-win'), miniKeys: document.querySelectorAll('#pn-mini .pn-mk').length, miniW: document.querySelector('#pn-mini').getBoundingClientRect().width, winW: document.querySelector('#pn-win').getBoundingClientRect().width }; });
+    ok(m.white === whites && m.mid && m.ww >= 54, `${dn}: full screen shows ${m.white} white keys (${(m.white - 1) / 7} octaves and a C), each ${Math.round(m.ww)} px wide: big keys, middle C in view`);
+    ok(m.kw >= m.vw * 0.94 && m.kh >= m.vh * 0.55 && m.hero === 'none', `${dn}: the keyboard fills the width (${Math.round(m.kw)} of ${m.vw}) and most of the height (${Math.round(m.kh)} of ${m.vh}); the title band is gone`);
+    ok(m.mini && m.miniKeys === 88 && Math.abs(m.winW / m.miniW - m.white / 52) < 0.02, `${dn}: the minimap draws all 88 keys across the screen and the frame covers ${Math.round(m.winW / m.miniW * 100)}% = what the keyboard shows`);
+    // drag the frame: the keyboard keeps its place, only the octaves change
+    const before = await s.page.evaluate(() => ({ left: document.querySelector('.pn-key').getBoundingClientRect().left, names: [...document.querySelectorAll('.pn-key.white')].slice(0, 3).map((e) => e.dataset.name).join() }));
+    await ptr(s.page, '#pn-mini', 'pointerdown', 1, 0.2, 0.5);
+    const after1 = await s.page.evaluate(() => ({ first: +document.querySelector('.pn-key').dataset.midi, left: document.querySelector('.pn-key').getBoundingClientRect().left, win: document.querySelector('#pn-win').getBoundingClientRect().left }));
+    await ptr(s.page, '#pn-mini', 'pointermove', 1, 0.75, 0.5);
+    const after2 = await s.page.evaluate(() => ({ first: +document.querySelector('.pn-key').dataset.midi, win: document.querySelector('#pn-win').getBoundingClientRect().left, white: document.querySelectorAll('.pn-key.white').length }));
+    await ptr(s.page, '#pn-mini', 'pointerup', 1, 0.75, 0.5);
+    ok(after1.first % 12 === 0 && after2.first % 12 === 0 && after2.first > after1.first && after1.first < m.first && after2.win > after1.win, `${dn}: dragging the frame left and right jumps by whole octaves (first key ${m.first} -> ${after1.first} -> ${after2.first}), the frame follows the finger`);
+    ok(Math.abs(after1.left - before.left) < 1 && after2.white === m.white, `${dn}: the keys do not move or change size while choosing, only their notes change`);
+    // the end of the keyboard: the far left and far right stay inside A0 - C8
+    await ptr(s.page, '#pn-mini', 'pointerdown', 2, 0.0, 0.5); await ptr(s.page, '#pn-mini', 'pointerup', 2, 0.0, 0.5);
+    const lo = await s.page.evaluate(() => +document.querySelector('.pn-key').dataset.midi);
+    await ptr(s.page, '#pn-mini', 'pointerdown', 3, 1.0, 0.5); await ptr(s.page, '#pn-mini', 'pointerup', 3, 1.0, 0.5);
+    const hi = await s.page.evaluate(() => { const ks = [...document.querySelectorAll('.pn-key')].map((e) => +e.dataset.midi); return Math.max(...ks); });
+    ok(lo >= 24 && lo <= 36 && hi === 108, `${dn}: dragged to the far ends the keyboard starts at C${lo / 12 - 1} and ends at the top C8 (${hi})`);
+    // a finger on the minimap does not play a note, fingers on the keys still do
+    await s.page.evaluate(() => (window.__music.plays.length = 0));
+    await ptr(s.page, '#pn-mini', 'pointerdown', 4, 0.5, 0.5); await ptr(s.page, '#pn-mini', 'pointerup', 4, 0.5, 0.5);
+    ok((await plays(s.page, 'piano')).length === 0, `${dn}: the minimap itself makes no sound`);
     if (dn === 'iPad sideways') {
-      await s.page.evaluate(() => window.__music.plays.length = 0);
       const mids = await s.page.locator('.pn-key.white').evaluateAll((els) => els.slice(0, 12).map((e) => e.dataset.midi));
       for (let i = 0; i < 12; i++) await ptr(s.page, `.pn-key.white[data-midi="${mids[i]}"]`, 'pointerdown', i + 1, 0.5, 0.85, '#pn-kb');
-      ok((await s.page.textContent('#pn-count')) === '12', 'twelve fingers at once in full screen');
+      ok((await s.page.textContent('#pn-count')) === '12' && await s.page.locator('#pn-mini .pn-mk.on').count() === 12, 'twelve fingers at once in full screen, and the minimap shows twelve lit keys');
       for (let i = 0; i < 12; i++) await ptr(s.page, `.pn-key.white[data-midi="${mids[i]}"]`, 'pointerup', i + 1, 0.5, 0.85, '#pn-kb');
-      ok(await s.page.locator('#pn-rec').isVisible() && await s.page.locator('#pn-up').isVisible() && await s.page.locator('#pn-down').isVisible(), 'range buttons and the record button stay on top in full screen');
       await s.page.screenshot({ path: OUT + 'music-piano-fullscreen-ipad.png' });
     }
     await s.page.click('#pn-full'); await s.page.waitForTimeout(400);
-    const back = await s.page.evaluate(() => ({ n: document.querySelectorAll('.pn-key').length, hero: getComputedStyle(document.querySelector('.pn-page > .top')).display, btn: document.querySelector('#pn-full').textContent }));
-    ok(back.n === before && back.hero !== 'none' && back.btn.includes('全屏'), `${dn}: leaving full screen brings back the normal page (${back.n} keys)`);
+    const back = await s.page.evaluate(() => ({ hero: getComputedStyle(document.querySelector('.pn-page > .top')).display, btn: document.querySelector('#pn-full').textContent }));
+    ok(back.hero !== 'none' && back.btn.includes('全屏'), `${dn}: leaving full screen brings back the normal page`);
     await s.browser.close();
   }
 

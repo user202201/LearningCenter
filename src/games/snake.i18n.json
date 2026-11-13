@@ -1,0 +1,19 @@
+{
+  "贪吃蛇": ["Snake", "Serpent"],
+  "暂停": ["Pause", "Pause"],
+  "继续": ["Continue", "Continuer"],
+  "开始": ["Start", "Démarrer"],
+  "得分：{0}": ["Score: {0}", "Score : {0}"],
+  "最高：{0}": ["Best: {0}", "Record : {0}"],
+  "速度：{0}": ["Speed: {0}", "Vitesse : {0}"],
+  "穿墙：开": ["Wrap walls: on", "Murs traversables : oui"],
+  "穿墙：关": ["Wrap walls: off", "Murs traversables : non"],
+  "模式：简单": ["Mode: easy", "Mode : facile"],
+  "模式：普通": ["Mode: normal", "Mode : normal"],
+  "点一下开始，用手指滑动或按方向键转弯。": ["Tap to start. Swipe or use the arrow keys to turn.", "Touchez pour commencer. Glissez le doigt ou utilisez les flèches pour tourner."],
+  "点一下继续。": ["Tap to continue.", "Touchez pour continuer."],
+  "游戏结束": ["Game over", "Partie terminée"],
+  "太棒了！": ["Wonderful!", "Bravo !"],
+  "新纪录：{0}": ["New record: {0}", "Nouveau record : {0}"],
+  "再玩一次": ["Play again", "Rejouer"]
+}

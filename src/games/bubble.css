@@ -1,0 +1,31 @@
+.bubble-wrap { flex: 1; min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; }
+.bubble-hud { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; width: 100%; max-width: 560px; }
+.bubble-chip { background: #fff; border: 2px solid #96f2d7; border-radius: 14px; box-shadow: 0 3px 0 #96f2d7; padding: 3px 10px; font-weight: 800; color: #087f5b; font-size: 14px; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
+.bubble-dots { display: inline-flex; gap: 3px; }
+.bubble-dots i { width: 9px; height: 9px; border-radius: 50%; background: #dee2e6; display: block; }
+.bubble-dots i.on { background: #ff6b6b; }
+.bubble-btns { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.bubble-btn { font: inherit; font-weight: 800; font-size: 14px; border: 0; border-radius: 14px; padding: 6px 12px; background: #12b886; color: #fff; box-shadow: 0 4px 0 #0b7a5a; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.bubble-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #0b7a5a; }
+.bubble-btn.alt { background: #fff; color: #087f5b; border: 2px solid #96f2d7; box-shadow: 0 4px 0 #96f2d7; }
+.bubble-area { flex: 1 1 0; min-height: 0; min-width: 0; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.bubble-field { position: relative; flex: none; border-radius: 18px; overflow: hidden; box-shadow: 0 5px 0 #96f2d7; border: 3px solid #96f2d7; background: #e7f5ff; touch-action: none; }
+.bubble-field canvas { display: block; touch-action: none; }
+.bubble-ov { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: rgba(255, 255, 255, .82); text-align: center; padding: 10px; animation: bubble-in .25s ease-out; }
+.bubble-ov h2 { margin: 0; font-size: 26px; color: #087f5b; }
+.bubble-ov p { margin: 0; font-weight: 700; color: #495057; }
+.bubble-stars { font-size: 40px; letter-spacing: 6px; color: #fcc419; text-shadow: 0 3px 0 #e8890c; }
+.bubble-stars .off { color: #dee2e6; text-shadow: none; }
+.bubble-levels { width: 100%; max-width: 520px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 4px 0 8px; overflow: auto; }
+.bubble-levels h2 { margin: 0; color: #087f5b; font-size: 22px; }
+.bubble-lvgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; width: 100%; }
+.bubble-lv { font: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; aspect-ratio: 1; border-radius: 20px; border: 3px solid #96f2d7; background: #fff; box-shadow: 0 5px 0 #96f2d7; cursor: pointer; font-weight: 900; font-size: 24px; color: #087f5b; -webkit-tap-highlight-color: transparent; }
+.bubble-lv:active { transform: translateY(3px); box-shadow: 0 2px 0 #96f2d7; }
+.bubble-lv small { font-size: 13px; color: #fcc419; text-shadow: 0 1px 0 #e8890c; letter-spacing: 1px; min-height: 16px; }
+.bubble-lv:disabled { background: #f1f3f5; border-color: #dee2e6; box-shadow: 0 5px 0 #dee2e6; color: #adb5bd; cursor: default; }
+@keyframes bubble-in { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+@media (orientation: landscape) and (max-height: 520px) {
+  .bubble-wrap.playing { flex-direction: row; align-items: stretch; }
+  .bubble-wrap.playing .bubble-hud { flex-direction: column; flex-wrap: nowrap; width: auto; max-width: 150px; justify-content: center; align-items: stretch; }
+  .bubble-wrap.playing .bubble-btns { flex-direction: column; }
+}

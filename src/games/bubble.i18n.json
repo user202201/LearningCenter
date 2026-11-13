@@ -1,0 +1,22 @@
+{
+  "泡泡龙：选择关卡": ["Bubble Shooter: choose a level", "Bubble Shooter : choisis un niveau"],
+  "星星：{0} / {1}": ["Stars: {0} / {1}", "Étoiles : {0} / {1}"],
+  "最高：{0}": ["Best: {0}", "Meilleur : {0}"],
+  "第{0}关": ["Level {0}", "Niveau {0}"],
+  "得分：{0}": ["Score: {0}", "Score : {0}"],
+  "发射：{0}": ["Shots: {0}", "Tirs : {0}"],
+  "天花板": ["Ceiling", "Plafond"],
+  "交换": ["Swap", "Échanger"],
+  "暂停": ["Pause", "Pause"],
+  "重来": ["Restart", "Recommencer"],
+  "选关": ["Levels", "Niveaux"],
+  "已暂停": ["Paused", "En pause"],
+  "继续": ["Resume", "Reprendre"],
+  "天花板落下来了！": ["The ceiling is coming down!", "Le plafond descend !"],
+  "全部通关！你是泡泡大师！": ["All levels done! You are a bubble master!", "Tous les niveaux sont finis ! Tu es un maître des bulles !"],
+  "过关啦！": ["Level cleared!", "Niveau réussi !"],
+  "泡泡碰到底线了，再试一次吧！": ["The bubbles reached the line. Try again!", "Les bulles ont touché la ligne. Réessaie !"],
+  "下一关": ["Next level", "Niveau suivant"],
+  "再玩一次": ["Play again", "Rejouer"],
+  "再来一次": ["Try again", "Réessayer"]
+}
