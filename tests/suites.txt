@@ -67,3 +67,9 @@
 78-geomap
 79-coding
 80-pk
+81-chem
+82-physlab
+83-space
+84-safety
+79b-coding-editor
+79c-coding-screens

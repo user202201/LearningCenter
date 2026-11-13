@@ -6,7 +6,7 @@
  * duplicates it; the number fields have − / + and a list of values; undo / redo; the size limit "n / max".
  */
 import { h, toast } from "./ui";
-import { Blk, BlockKind, Expr, PaletteKind, Program, cloneBlk, cloneProgram, countBlocks, emptyProgram, newId, num, slotsOf, walk, toText, paramsOf, LIST_ARITY, ListFn, FnName, FN_ARITY, MeProp } from "./coding-ast";
+import { Blk, BlockKind, Expr, PaletteKind, Program, allLists, cloneBlk, cloneProgram, countBlocks, emptyProgram, newId, num, slotsOf, walk, toText, paramsOf, LIST_ARITY, ListFn, FnName, FN_ARITY, MeProp } from "./coding-ast";
 import { COLORS } from "./coding-turtle";
 import { condExpr } from "./coding-levels";
 
@@ -46,6 +46,8 @@ const META: Record<string, Meta> = {
   fd: { min: 5, max: 200, step: 5, def: 40, presets: [5, 6, 10, 20, 30, 40, 45, 50, 60, 70, 80, 90, 100] },
   turn: { min: 1, max: 360, step: 5, def: 90, presets: [10, 15, 30, 36, 40, 45, 60, 72, 90, 108, 120, 135, 144, 150, 180] },
   arg: { min: 1, max: 9, step: 1, def: 2, presets: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
+  /** the arguments of a call in a level with free values (the level can give its own numbers: `nums`) */
+  argf: { min: -999, max: 999, step: 1, def: 1, presets: [0, 1, 2, 3, 4, 5, 6, 8, 10, 20, 40, 50, 60, 80, 90, 100] },
   val: { min: -99, max: 99, step: 1, def: 0, presets: [0, 1, 2, 3, 4, 5, 6, 8, 10, 20, 50, 100] },
   by: { min: -99, max: 99, step: 1, def: 1, presets: [-5, -2, -1, 1, 2, 3, 4, 5, 10] },
   // phase 2
@@ -73,6 +75,14 @@ export const COND_LABEL: Record<string, string> = {
 const COLOR_NAMES: Record<string, string> = { black: "黑色", red: "红色", orange: "橙色", yellow: "黄色", green: "绿色", blue: "蓝色", purple: "紫色" };
 
 export const kindOf = (b: Blk): string => (b.t === "if" && b.els ? "ifelse" : b.t === "call" ? `call:${b.name}` : b.t);
+const TAB_KINDS: [string, string, string[]][] = [
+  ["motion", "动作", ["move", "left", "right", "take", "light", "fd", "tl", "tr", "penup", "pendown", "color", "smove", "sturn", "goto", "changex", "changey"]],
+  ["events", "事件", ["say", "sayfor", "costume", "nextcostume", "size", "show", "hide", "note", "broadcast"]],
+  ["control", "控制", ["repeat", "forever", "until", "while", "if", "ifelse", "wait", "waitUntil", "for", "each"]],
+  ["vars", "变量", ["set", "change"]],
+  ["lists", "列表", ["push", "lset", "lremove", "swap", "lclear"]],
+  ["funcs", "函数", ["call", "return"]],
+];
 const isControl = (k: string) => ["repeat", "until", "while", "if", "ifelse", "forever", "for", "each"].includes(k);
 const exprKey = (e?: Expr): string => (e ? JSON.stringify(e, (k, v) => (k === "id" ? undefined : v)) : "");
 /** a condition expression as the key of COND_LABEL ("!pathAhead", "colorIs(r)", "count < 4") */
@@ -177,7 +187,7 @@ function numField(sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void
   const names = varsOk ? [...new Set([...(sc.params ?? (sc.param ? [sc.param] : [])), ...sc.vars])] : [];
   const label = cur.k === "n" ? (meta.fmt ? meta.fmt(cur.v) : String(cur.v)) : cur.k === "v" ? cur.name : exprStr(cur);
   const val = cbtn({ class: "cw-val cw-ctl" + (isNum ? "" : " var"), type: "button", disabled: !sc.interactive, "aria-label": "选择数值",
-    onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, [...meta.presets.map((p) => ({ label: meta.fmt ? meta.fmt(p) : String(p), value: `n:${p}` })), ...names.map((n) => ({ label: n, value: `v:${n}`, cls: "var" })), ...(sc.opts.free ? exprItems(sc, "num") : [])],
+    onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, [...(sc.opts.nums && meta === META.argf ? sc.opts.nums : meta.presets).map((p) => ({ label: meta.fmt ? meta.fmt(p) : String(p), value: `n:${p}` })), ...names.map((n) => ({ label: n, value: `v:${n}`, cls: "var" })), ...(sc.opts.free ? exprItems(sc, "num") : [])],
       (v) => sc.edit(() => set(fromPick(sc, v, cur, meta, "num")))) }, label);
   return h("span", { class: "cw-num" }, mk(-1, "−"), val, mk(1, "+"));
 }
@@ -301,17 +311,49 @@ function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script
   const condBtn = () => cbtn({ class: "cw-cond cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择条件",
     onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, sc.conds.map((c) => ({ label: condText(c), value: condKey(c), user: !COND_LABEL[condKey(c)] })), (v) => sc.edit(() => { b.cond = sc.conds.find((c) => condKey(c) === v) ?? b.cond; })) },
     h("span", { class: COND_LABEL[condKey(b.cond ?? num(0))] ? "" : "user" }, condText(b.cond ?? num(0))));
+  const varBtn = (field: "name" = "name") => cbtn({ class: "cw-name cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择变量", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, sc.vars.map((v) => ({ label: v, value: v })), (v) => sc.edit(() => { b[field] = v; })) }, b.name ?? "x");
+  const listBtn = () => cbtn({ class: "cw-name cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择列表", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, (sc.opts.lists ?? []).map((v) => ({ label: v, value: v })), (v) => sc.edit(() => { b.list = v; })) }, b.list ?? "xs");
+  const textBtn = () => cbtn({ class: "cw-text cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择说的话", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, Object.entries(sc.opts.texts ?? {}).map(([k, t]) => ({ label: t, value: k })), (v) => sc.edit(() => { b.c = v; })) }, span("", sc.opts.texts?.[b.c ?? ""] ?? b.c ?? ""));
+  const msgBtn = () => cbtn({ class: "cw-name cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择消息", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, Object.entries(sc.opts.msgs ?? {}).map(([k, t]) => ({ label: t, value: k })), (v) => sc.edit(() => { b.c = v; })) }, span("", sc.opts.msgs?.[b.c ?? ""] ?? b.c ?? ""));
+  const T = (c: string) => span("cw-t", c), U = (c: string) => span("cw-unit", c);
+  const S = (key: "n" | "e", meta: Meta) => slot(sc, () => b[key], setE(key), meta);
   switch (kind) {
+    case "forever": head.append(T("一直重复")); break;
+    case "for": head.append(T("计数"), varBtn(), T("从"), S("n", META.idx), T("到"), S("e", META.idx)); break;
+    case "each": head.append(T("对每一项"), varBtn(), T("在"), listBtn()); break;
+    case "wait": head.append(T("等待"), S("n", META.secs), T("秒")); break;
+    case "waitUntil": head.append(T("等到"), condSlot(sc, b)); break;
+    case "return": head.append(T("返回"), S("e", META.val)); break;
+    case "push": head.append(T("加入"), S("e", META.val), T("到"), listBtn()); break;
+    case "lset": head.append(T("把"), listBtn(), T("第"), S("n", META.idx), T("项设为"), S("e", META.val)); break;
+    case "lremove": head.append(T("删除"), listBtn(), T("第"), S("n", META.idx), T("项")); break;
+    case "swap": head.append(T("交换"), listBtn(), T("第"), S("n", META.idx), T("和"), S("e", META.idx), T("项")); break;
+    case "lclear": head.append(T("清空"), listBtn()); break;
+    case "smove": head.append(T("走"), S("n", META.steps), T("步")); break;
+    case "sturn": head.append(T("转"), S("n", META.turnd), U("°")); break;
+    case "goto": head.append(T("移到 x"), S("n", META.coord), T("y"), S("e", META.coord)); break;
+    case "changex": head.append(T("x 增加"), S("n", META.steps)); break;
+    case "changey": head.append(T("y 增加"), S("n", META.steps)); break;
+    case "say": head.append(T("说"), textBtn()); break;
+    case "sayfor": head.append(T("说"), textBtn(), S("n", META.secs), T("秒")); break;
+    case "costume": head.append(T("造型"), S("n", META.costume)); break;
+    case "nextcostume": head.append(T("下一个造型")); break;
+    case "size": head.append(T("大小"), S("n", META.size), U("%")); break;
+    case "show": head.append(T("显示")); break;
+    case "hide": head.append(T("隐藏")); break;
+    case "note": head.append(T("弹音符"), S("n", META.note), T("拍数"), S("e", META.beats)); break;
+    case "broadcast": head.append(T("广播"), msgBtn()); break;
     case "move": case "left": case "right": case "take": case "light": case "penup": case "pendown": head.append(ico(kind)!, span("cw-t", WORD[kind])); break;
-    case "fd": head.append(ico("fd")!, span("cw-t", WORD.fd), numField(sc, () => b.n, setE("n"), META.fd)); break;
-    case "tl": case "tr": head.append(ico(kind)!, span("cw-t", WORD[kind]), numField(sc, () => b.n, setE("n"), META.turn), span("cw-unit", "°")); break;
+    case "fd": head.append(ico("fd")!, span("cw-t", WORD.fd), slot(sc, () => b.n, setE("n"), META.fd)); break;
+    case "tl": case "tr": head.append(ico(kind)!, span("cw-t", WORD[kind]), slot(sc, () => b.n, setE("n"), META.turn), span("cw-unit", "°")); break;
     case "color": head.append(span("cw-t", "颜色"), cbtn({ class: "cw-swatch cw-ctl", type: "button", style: `background:${COLORS[b.c ?? "black"]}`, title: COLOR_NAMES[b.c ?? "black"], "aria-label": COLOR_NAMES[b.c ?? "black"], disabled: !sc.interactive,
       onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, Object.keys(COLORS).map((c) => ({ label: COLOR_NAMES[c], value: c, cls: `sw-${c}` })), (v) => sc.edit(() => { b.c = v; })) })); break;
-    case "repeat": head.append(span("cw-t", "重复"), span("cw-unit", "×"), numField(sc, () => b.n, setE("n"), META.repeat)); break;
-    case "until": head.append(span("cw-t", "直到"), condBtn()); break;
-    case "while": head.append(span("cw-t", "只要"), condBtn()); break;
-    case "if": case "ifelse": head.append(span("cw-t", "如果"), condBtn()); break;
+    case "repeat": head.append(span("cw-t", "重复"), span("cw-unit", "×"), slot(sc, () => b.n, setE("n"), META.repeat)); break;
+    case "until": head.append(span("cw-t", "直到"), sc.opts.free ? condSlot(sc, b) : condBtn()); break;
+    case "while": head.append(span("cw-t", "只要"), sc.opts.free ? condSlot(sc, b) : condBtn()); break;
+    case "if": case "ifelse": head.append(span("cw-t", "如果"), sc.opts.free ? condSlot(sc, b) : condBtn()); break;
     case "set": {
+      if (sc.opts.free) { head.append(span("cw-t", "设定"), varBtn(), span("cw-unit", "="), slot(sc, () => b.e, setE("e"), META.val)); break; }
       const e = b.e ?? num(0), op = e.k === "bin" ? e.op : "", A = e.k === "bin" ? e.a : e, B = e.k === "bin" ? e.b : num(0);
       const write = (a: Expr, o: string, bb: Expr) => { b.e = o ? { k: "bin", op: o as "+" | "-" | "*", a, b: bb } : a; };
       head.append(span("cw-t", "设定"),
@@ -322,12 +364,18 @@ function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script
         ...(op ? [numField(sc, () => B, (x) => write(A, op, x), META.val)] : []));
       break;
     }
-    case "change": head.append(span("cw-t", "改变"),
+    case "change": if (sc.opts.free) { head.append(span("cw-t", "改变"), varBtn(), span("cw-unit", "+="), slot(sc, () => b.e, setE("e"), META.by)); break; }
+      head.append(span("cw-t", "改变"),
       cbtn({ class: "cw-name cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择变量", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, sc.vars.map((v) => ({ label: v, value: v })), (v) => sc.edit(() => { b.name = v; })) }, b.name ?? "x"),
       span("cw-unit", "+="), numField(sc, () => b.e, setE("e"), META.by)); break;
     default: {   // call:<name>
-      const f = sc.funcs.find((x) => x.name === b.name);
-      head.append(span("cw-t", "运行"), span("cw-fn", b.name ?? ""), ...(f?.param ? [numField(sc, () => b.arg, setE("arg"), META.arg)] : []));
+      const f = sc.funcs.find((x) => x.name === b.name), ps = f ? paramsOf(f) : [];
+      if (ps.length > 1 || (sc.opts.free && ps.length === 1)) {
+        // one slot for every parameter; a call with one argument keeps `arg` (the form of phase 1), several arguments are `args`
+        const args = (): Expr[] => (b.args ?? (b.arg ? [b.arg] : [])).concat(ps.map(() => num(META.arg.def))).slice(0, ps.length);
+        const write = (i: number, e: Expr) => { const a = args(); a[i] = e; if (a.length === 1) { b.arg = a[0]; delete b.args; } else { b.args = a; delete b.arg; } };
+        head.append(span("cw-t", "运行"), span("cw-fn", b.name ?? ""), ...ps.flatMap((pn, i) => [span("cw-par", pn), slot(sc, () => args()[i], (e) => write(i, e), META.argf)]));
+      } else head.append(span("cw-t", "运行"), span("cw-fn", b.name ?? ""), ...(ps.length ? [numField(sc, () => b.arg, setE("arg"), META.arg)] : []));
     }
   }
   el.append(head);
@@ -345,19 +393,31 @@ function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script
   return el;
 }
 
+/** the name of an event of a script hat ("start", "tap", "stagetap", "key(right)", "recv(go)") */
+export function eventLabel(on: string, o: Pick<EditorOpts, "keys" | "msgs">): string {
+  if (on === "start") return "开始运行";
+  if (on === "tap") return "被点击";
+  if (on === "stagetap") return "舞台被点击";
+  if (on.startsWith("key(")) return `按下 ${o.keys?.[on.slice(4, -1)] ?? on.slice(4, -1)}`;
+  if (on.startsWith("recv(")) return `收到 ${o.msgs?.[on.slice(5, -1)] ?? on.slice(5, -1)}`;
+  return on;
+}
 /** a program drawn as blocks, not editable (the reference answer, the lessons) */
-export function programEl(p: Program, o: { vars?: string[]; funcs?: { name: string; param?: string }[]; conds?: string[] } = {}): HTMLElement {
-  const sc: Scope = { vars: o.vars ?? [], conds: [], funcs: o.funcs ?? p.funcs, interactive: false, opts: { palette: [], max: 99 }, edit: () => {}, pick: () => {} };
+export function programEl(p: Program, o: { vars?: string[]; funcs?: { name: string; param?: string; params?: string[] }[]; conds?: string[]; ed?: Partial<EditorOpts> } = {}): HTMLElement {
+  const opts: EditorOpts = { palette: [], max: 99, ...(o.ed ?? {}) };
+  const sc: Scope = { vars: o.vars ?? [], conds: [], funcs: o.funcs ?? p.funcs, interactive: false, opts, edit: () => {}, pick: () => {} };
   const seqs = new Map<HTMLElement, { list: Blk[]; script: number }>();
   const root = h("div", { class: "cw-static" });
-  const script = (title: string, list: Blk[], i: number, param?: string) => {
+  const script = (title: string, list: Blk[], i: number, params?: string[], hatKids?: (Node | null)[]) => {
     const box = h("div", { class: "cw-seq", "data-slot": "script" });
-    const s2 = { ...sc, param };
+    const s2 = { ...sc, param: params?.[0], params };
     for (const b of list) box.append(blockEl(b, s2, seqs, i));
-    return h("div", { class: "cw-script" }, h("div", { class: "cw-hat" }, span("cw-t", title.split(" ")[0]), title.includes(" ") ? span("cw-fn", title.split(" ")[1]) : null), box);
+    const [first, ...rest] = title.split(" ");
+    return h("div", { class: "cw-script" }, h("div", { class: "cw-hat" }, span("cw-t", first), rest.length ? span("cw-fn", rest.join(" ")) : null, ...(hatKids ?? [])), box);
   };
-  for (let i = 0; i < p.funcs.length; i++) root.append(script(`定义 ${p.funcs[i].name}${p.funcs[i].param ? `(${p.funcs[i].param})` : ""}`, p.funcs[i].body, i + 1, p.funcs[i].param));
-  root.append(script("开始", p.main, 0));
+  for (let i = 0; i < p.funcs.length; i++) { const ps = paramsOf(p.funcs[i]); root.append(script(`定义 ${p.funcs[i].name}${ps.length ? `(${ps.join(", ")})` : ""}`, p.funcs[i].body, i + 1, ps)); }
+  (p.scripts ?? []).forEach((sp, j) => root.append(script(`当 ${eventLabel(sp.on, opts)}`, sp.body, p.funcs.length + 1 + j, undefined, [span("cw-sprite", opts.sprites?.find((x) => x.id === sp.sprite)?.label ?? sp.sprite)])));
+  if (p.main.length || !(p.scripts ?? []).length) root.append(script("开始", p.main, 0));
   return root;
 }
 
@@ -365,9 +425,12 @@ export function programEl(p: Program, o: { vars?: string[]; funcs?: { name: stri
 export function createEditor(o: EditorOpts): Editor {
   const funcs = o.funcs ?? [];
   let prog = o.program ? cloneProgram(o.program) : emptyProgram(funcs);
-  for (const f of funcs) if (!prog.funcs.some((x) => x.name === f.name)) prog.funcs.push({ name: f.name, param: f.param, body: [] });
+  for (const f of funcs) if (!prog.funcs.some((x) => x.name === f.name)) prog.funcs.push({ name: f.name, ...(f.params ? { params: f.params } : { param: f.param }), body: [] });
+  /** the scripts of a stage level: one for every slot, in the order of the slots */
+  const fixSlots = () => { if (o.slots) prog.scripts = o.slots.map((sl, i) => ({ sprite: sl.sprite, on: prog.scripts?.[i]?.on ?? sl.on, body: prog.scripts?.[i]?.body ?? [] })); };
+  fixSlots();
   const hist: string[] = [JSON.stringify(prog)];
-  let hi = 0, cur = 0, locked = false, hintMark: HintMark | null = null, running: string | null = null;
+  let hi = 0, cur = o.hideMain ? (prog.funcs.length ? 1 : 1 + prog.funcs.length) : 0, locked = false, hintMark: HintMark | null = null, running: string | null = null;
   const conds = (o.conds ?? []).map(condExpr);
   const vars = o.vars ?? [];
   const seqs = new Map<HTMLElement, { list: Blk[]; script: number }>();
@@ -379,7 +442,9 @@ export function createEditor(o: EditorOpts): Editor {
   const redoB = cbtn({ class: "cw-ubtn", id: "cw-redo", type: "button", "aria-label": "重做", title: "重做", onclick: () => api.redo() }, "↷");
   const bar = h("div", { class: "cw-bar" }, undoB, redoB, countEl, bin);
   const pal = h("div", { class: "cw-pal", id: "cw-pal" });
-  const root = h("div", { class: "cw" }, ws, bar, pal);
+  const tabsEl = h("div", { class: "cw-tabs", id: "cw-tabs", role: "tablist", hidden: true });
+  const root = h("div", { class: "cw" }, ws, bar, tabsEl, pal);
+  let tab = "";
   let pop: HTMLElement | null = null;
 
   const closePop = () => { pop?.remove(); pop = null; };
@@ -407,8 +472,9 @@ export function createEditor(o: EditorOpts): Editor {
     render(); o.onChange?.(prog); api.onHistory?.();
   };
   const edit = (fn: () => void) => { fn(); commit(); };
-  const sc = (script: number): Scope => ({ param: script > 0 ? prog.funcs[script - 1]?.param : undefined, vars, conds, funcs, interactive: !locked, opts: o, edit, pick });
-  const listOf = (script: number) => (script === 0 ? prog.main : prog.funcs[script - 1].body);
+  const F = () => prog.funcs.length;
+  const sc = (script: number): Scope => { const ps = script > 0 && script <= F() ? paramsOf(prog.funcs[script - 1]) : []; return { param: ps[0], params: ps, vars, conds, funcs, interactive: !locked, opts: o, edit, pick }; };
+  const listOf = (script: number) => (script === 0 ? prog.main : script <= F() ? prog.funcs[script - 1].body : prog.scripts![script - F() - 1].body);
 
   function render() {
     seqs.clear();
@@ -418,11 +484,22 @@ export function createEditor(o: EditorOpts): Editor {
       seqs.set(box, { list: listOf(script), script });
       for (const b of listOf(script)) box.append(blockEl(b, sc(script), seqs, script));
       const hat = h("div", { class: "cw-hat", "data-script": String(script), onclick: () => { cur = script; mark(); } }, span("cw-t", title), fn ? span("cw-fn", fn) : null,
-        script > 0 && prog.funcs[script - 1].param ? span("cw-par", `(${prog.funcs[script - 1].param})`) : null);
+        script > 0 && paramsOf(prog.funcs[script - 1]).length ? span("cw-par", `(${paramsOf(prog.funcs[script - 1]).join(", ")})`) : null);
       return h("div", { class: "cw-script" + (script === cur ? " cur" : ""), "data-script": String(script) }, hat, box);
     };
+    const mkEvent = (j: number) => {
+      const script = F() + 1 + j, slotO = o.slots![j], sp = prog.scripts![j];
+      const box = h("div", { class: "cw-seq cw-root", "data-slot": "script", "data-script": String(script) });
+      seqs.set(box, { list: sp.body, script });
+      for (const b of sp.body) box.append(blockEl(b, sc(script), seqs, script));
+      const evBtn = cbtn({ class: "cw-evsel cw-ctl", type: "button", disabled: locked || slotO.events.length < 2, "aria-label": "选择事件", "data-on": sp.on,
+        onclick: (ev: Event) => pick(ev.currentTarget as HTMLElement, slotO.events.map((e) => ({ label: eventLabel(e, o), value: e })), (v) => edit(() => { sp.on = v; })) }, span("", eventLabel(sp.on, o)));
+      const hat = h("div", { class: "cw-hat cw-hat-ev", "data-script": String(script), onclick: () => { cur = script; mark(); } }, span("cw-sprite", o.sprites?.find((x) => x.id === sp.sprite)?.label ?? sp.sprite), span("cw-t", "当"), evBtn);
+      return h("div", { class: "cw-script cw-script-ev" + (script === cur ? " cur" : ""), "data-script": String(script) }, hat, box);
+    };
     for (let i = 1; i <= prog.funcs.length; i++) ws.append(mk("定义", prog.funcs[i - 1].name, i));
-    ws.append(mk("开始", null, 0));
+    (prog.scripts ?? []).forEach((_, j) => ws.append(mkEvent(j)));
+    if (!o.hideMain) ws.append(mk("开始", null, 0));
     ws.append(ind);
     mark();
     const n = countBlocks(prog);
@@ -440,10 +517,14 @@ export function createEditor(o: EditorOpts): Editor {
   };
 
   // the palette
+  /** the tabs of the palette (worlds 7-10): only the groups that have a block in this level */
+  const tabList = () => (o.tabs ? TAB_KINDS.map(([id, label, ks]) => ({ id, label, kinds: ks.filter((k) => o.palette.includes(k as PaletteKind)) })).filter((t) => t.kinds.length) : []);
   const kinds = (): string[] => {
     const out: string[] = [];
+    const tabs = tabList(), active = tabs.length > 1 ? tabs.find((t) => t.id === tab) ?? tabs[0] : null;
     for (const k of ORDER) {
       if (!o.palette.includes(k)) continue;
+      if (active && !active.kinds.includes(k)) continue;
       if (k === "call") for (const f of funcs) out.push(`call:${f.name}`);
       else out.push(k);
     }
@@ -451,6 +532,12 @@ export function createEditor(o: EditorOpts): Editor {
   };
   const buildPal = () => {
     pal.replaceChildren();
+    const tabs = tabList();
+    tabsEl.hidden = tabs.length < 2;
+    if (tabs.length > 1) {
+      if (!tabs.some((t) => t.id === tab)) tab = tabs[0].id;
+      tabsEl.replaceChildren(...tabs.map((t) => cbtn({ class: "cw-tab" + (t.id === tab ? " on" : ""), type: "button", role: "tab", "aria-selected": String(t.id === tab), "data-tab": t.id, onclick: () => { tab = t.id; buildPal(); mark(); } }, t.label)));
+    }
     for (const k of kinds()) {
       const b = newBlock(k, o);
       const s: Scope = { vars, conds, funcs, interactive: false, opts: o, edit, pick };
@@ -469,8 +556,8 @@ export function createEditor(o: EditorOpts): Editor {
     walk([b], (x) => {
       if (x.t !== "call") return;
       const idx = prog.funcs.findIndex((f) => f.name === x.name);
-      // a function may call only the functions defined before it (no recursion in this phase)
-      if (script > 0 && idx >= script - 1) ok = false;
+      // a function may call only the functions defined before it (no recursion in phase 1; levels about recursion allow it)
+      if (script > 0 && script <= F() && !o.recursion && idx >= script - 1) ok = false;
     });
     return ok;
   };
@@ -480,7 +567,7 @@ export function createEditor(o: EditorOpts): Editor {
   };
   const append = (kind: string) => {
     if (locked) return;
-    const b = newBlock(kind, o, { param: cur > 0 ? prog.funcs[cur - 1]?.param : undefined });
+    const b = newBlock(kind, o, { param: cur > 0 && cur <= F() ? paramsOf(prog.funcs[cur - 1])[0] : undefined });
     if (!canPlace(b, cur)) return void toast("积木不能调用自己或后面的积木。");
     if (!room(1)) return;
     listOf(cur).push(b);
@@ -489,7 +576,7 @@ export function createEditor(o: EditorOpts): Editor {
   };
   const locate = (id: string): { list: Blk[]; i: number; b: Blk } | null => {
     let r: { list: Blk[]; i: number; b: Blk } | null = null;
-    for (const l of [prog.main, ...prog.funcs.map((f) => f.body)]) walk(l, (b, parent, i) => { if (b.id === id) r = { list: parent, i, b }; });
+    for (const l of allLists(prog)) walk(l, (b, parent, i) => { if (b.id === id) r = { list: parent, i, b }; });
     return r;
   };
   const duplicate = (id: string) => {
@@ -534,7 +621,7 @@ export function createEditor(o: EditorOpts): Editor {
   const place = (d: Drag, t: { list: Blk[]; index: number }) => {
     if (d.src === "pal") {
       const script = scriptOfList(t.list);
-      const b = newBlock(d.kind!, o, { param: script > 0 ? prog.funcs[script - 1]?.param : undefined });
+      const b = newBlock(d.kind!, o, { param: script > 0 && script <= F() ? paramsOf(prog.funcs[script - 1])[0] : undefined });
       if (!canPlace(b, script)) return void toast("积木不能调用自己或后面的积木。");
       if (!room(1)) return;
       t.list.splice(t.index, 0, b);
@@ -631,10 +718,15 @@ export function createEditor(o: EditorOpts): Editor {
   const api: Editor = {
     el: root,
     program: () => cloneProgram(prog),
-    setProgram(p) { prog = cloneProgram(p); for (const f of funcs) if (!prog.funcs.some((x) => x.name === f.name)) prog.funcs.push({ name: f.name, param: f.param, body: [] }); hist.splice(0, hist.length, JSON.stringify(prog)); hi = 0; render(); o.onChange?.(prog); api.onHistory?.(); },
+    setProgram(p) { prog = cloneProgram(p); for (const f of funcs) if (!prog.funcs.some((x) => x.name === f.name)) prog.funcs.push({ name: f.name, ...(f.params ? { params: f.params } : { param: f.param }), body: [] }); fixSlots(); hist.splice(0, hist.length, JSON.stringify(prog)); hi = 0; render(); o.onChange?.(prog); api.onHistory?.(); },
     count: () => countBlocks(prog),
     highlight(id) { running = id; mark(); if (id) ws.querySelector(`[data-id="${id}"]`)?.scrollIntoView({ block: "nearest" }); },
-    hint(m) { hintMark = m; mark(); },
+    hint(m) {
+      // the block that is needed may be in another tab
+      const t = m?.needed ? tabList().find((x) => x.kinds.includes(m.needed as string)) : null;
+      if (t && tabList().length > 1 && t.id !== tab) { tab = t.id; buildPal(); }
+      hintMark = m; mark();
+    },
     setLocked(on) { locked = on; root.classList.toggle("locked", on); render(); },
     undo() { if (hi > 0 && !locked) { hi--; prog = JSON.parse(hist[hi]); render(); o.onChange?.(prog); api.onHistory?.(); } },
     redo() { if (hi < hist.length - 1 && !locked) { hi++; prog = JSON.parse(hist[hi]); render(); o.onChange?.(prog); api.onHistory?.(); } },
