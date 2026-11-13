@@ -213,9 +213,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
 
   function advance() {
-    const present = L.colorsPresent(grid);
-    if (present.length && !present.includes(cur)) cur = L.nextColor(rng, grid, 1);
-    if (present.length && !present.includes(nxt)) nxt = L.nextColor(rng, grid, 1);
+    const q = L.advanceQueue(rng, grid, nxt, cur); cur = q.cur; nxt = q.nxt;
     hudUpdate();
     if (L.count(grid) === 0) return finish("won");
     if (L.lowestRow(grid) >= L.LOSE_ROW) return finish("lost");

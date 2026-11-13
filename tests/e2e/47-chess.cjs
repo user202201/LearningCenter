@@ -107,7 +107,7 @@ const mode2 = async (page) => { await page.click('#chess-new'); await page.click
   await goChess(page);
   await page.screenshot({ path: OUT + 'chess-start.png' });
   const n0 = await page.evaluate(() => ({ sq: document.querySelectorAll('.chess-sq').length, pc: document.querySelectorAll('.chess-pc').length, svg: document.querySelectorAll('.chess-pc svg').length, white: document.querySelectorAll('.chess-pc[data-p^=w]').length, kinds: [...new Set([...document.querySelectorAll('.chess-pc')].map((e) => e.dataset.p))].length, eyes: document.querySelectorAll('.chess-pc .chess-face').length }));
-  ok(n0.sq === 64 && n0.pc === 32 && n0.svg === 32 && n0.white === 16 && n0.kinds === 12 && n0.eyes === 31, `the board: 64 squares, 32 cartoon pieces (12 kinds, ${n0.eyes} faces; the knights' faces are in their profile)`);
+  ok(n0.sq === 64 && n0.pc === 32 && n0.svg === 32 && n0.white === 16 && n0.kinds === 12 && n0.eyes === 28, `the board: 64 squares, 32 cartoon pieces (12 kinds, ${n0.eyes} faces; the knights' faces are in their profile)`);
   const loc = await page.evaluate(() => { const s = (q) => document.querySelector(q).getBoundingClientRect(); const a = s('.chess-sq[data-sq=a1]'), e1 = s('.chess-pc[data-sq=e1]'); return { a1x: a.left, a1y: a.top, e1x: e1.left, e1y: e1.top, sq: a.width }; });
   ok(loc.e1x > loc.a1x + loc.sq * 3.9 && loc.e1x < loc.a1x + loc.sq * 4.1 && Math.abs(loc.e1y - loc.a1y) < 2, 'white is at the bottom: the king on e1 sits on the e1 square');
   ok((await page.evaluate(() => document.querySelectorAll('.chess-sq .chess-co').length)) === 16, 'coordinates a-h and 1-8 are on the board');

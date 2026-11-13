@@ -175,7 +175,5 @@ export function audit(s: State): string | null {
   for (let i = 0; i < s.cols.length; i++) { const c = s.cols[i]; if (c.length && !isUp(c[c.length - 1])) return `column ${i} top face down`; }
   for (const d of s.stock) for (const x of d) if (!isUp(x)) return "stock card face up flag";
   if (s.found.length > RUNS) return "too many runs";
-  const per: Record<number, number> = {};
-  for (const id of seen) { const su = s.f[id] >> 4; per[su] = (per[su] ?? 0) + 1; }
   return null;
 }

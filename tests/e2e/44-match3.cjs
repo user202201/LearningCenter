@@ -99,7 +99,8 @@ const SWAP3 = board([[3, 0, 5], [3, 1, 5], [4, 2, 5]]);
       const dead = fr(Array.from({ length: 8 }, (_, r) => Array.from({ length: 8 }, (_, c) => (r + c) % 2).join('')));
       const deadNoMove = !L.hasMoves(dead) && L.findMove(dead) === null;
       let shuffleOk = true;
-      for (let s = 1; s <= 60; s++) { const sh = L.shuffle(dead, L.mulberry32(s)); if (L.findMatches(sh).length || !L.hasMoves(sh) || sh.flat().filter((x) => x.k === 0).length !== 32 || new Set(sh.flat().map((x) => x.id)).size !== 64) shuffleOk = false; }
+      for (let s = 1; s <= 60; s++) { const sh = L.shuffle(dead, L.mulberry32(s)); if (L.findMatches(sh).length || !L.hasMoves(sh) || new Set(sh.flat().map((x) => x.id)).size !== 64) shuffleOk = false; }
+      for (let s = 1; s <= 60; s++) { const rb = L.randomBoard(L.mulberry32(s), 5), ids = rb.flat().map((x) => x.id).sort().join(), ks = rb.flat().map((x) => x.k).sort().join(); const sh = L.shuffle(rb, L.mulberry32(s + 99)); if (sh.flat().map((x) => x.id).sort().join() !== ids || sh.flat().map((x) => x.k).sort().join() !== ks) shuffleOk = false; }
       const hm = { found: !!L.findMove(sw), swapNull: L.findMove(sw) && L.isValidSwap(sw, ...L.findMove(sw)) };
       // levels
       const lv = L.LEVELS;
@@ -258,7 +259,10 @@ const SWAP3 = board([[3, 0, 5], [3, 1, 5], [4, 2, 5]]);
     ok(m.sw && m.out === 0 && m.w > 150 && m.cellsIn, `${name} ${vw}x${vh}: no overflow, board ${Math.round(m.w)}x${Math.round(m.h)}, every candy inside it`);
     ok(Math.abs(m.l - m.r) <= 2 && Math.abs(lv.l - lv.r) <= 2 && lv.sw, `${name}: centred (board ${Math.round(m.l)} / ${Math.round(m.r)}, levels ${Math.round(lv.l)} / ${Math.round(lv.r)})`);
     ok(m.bottom <= m.vh + 1 && m.btnsVisible, `${name}: the whole board and the buttons are on the screen`);
-    await t2.page.click(cell(3, 3)).catch(() => {});
+    await t2.page.evaluate(() => window.__m3.load(['01234012', '12340123', '23401234', '34012340', '40123401', '01234012', '12346123', '23401234'], { moves: 5, target: 100, seed: 3 }));
+    await t2.page.waitForTimeout(500);
+    const ratio = await t2.page.evaluate(() => { const rs = []; for (const e of document.querySelectorAll('.match3-cell')) { const c = e.getBoundingClientRect(), sh = e.querySelector('svg > :first-child').getBoundingClientRect(); rs.push(Math.max(sh.width, sh.height) / c.width); } return { min: Math.min(...rs), kinds: new Set([...document.querySelectorAll('.match3-cell')].map((e) => e.dataset.k)).size }; });
+    ok(ratio.min >= 0.88 && ratio.kinds === 6, `${name}: every candy (5 kinds + bomb) fills at least 88% of its cell (smallest ${ratio.min.toFixed(2)})`);
     await t2.page.screenshot({ path: OUT + `match3-${name}.png` });
     await t2.browser.close();
   }

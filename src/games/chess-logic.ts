@@ -29,31 +29,42 @@ const PST: Record<string, number[]> = {
 };
 const KING_END = [-50, -40, -30, -20, -20, -30, -40, -50, -30, -20, -10, 0, 0, -10, -20, -30, -30, -10, 20, 30, 30, 20, -10, -30, -30, -10, 30, 40, 40, 30, -10, -30, -30, -10, 30, 40, 40, 30, -10, -30, -30, -10, 20, 30, 30, 20, -10, -30, -30, -30, 0, 0, 0, 0, -30, -30, -50, -30, -30, -30, -30, -30, -30, -50];
 
+/**
+ * Speed: chess.js builds the SAN text of every move (and tests for check to do it), which is far too slow for a search. So the search uses its raw
+ * move generator and make / undo (`_moves`, `_makeMove`, `_undoMove`, `_board`: chess.js 1.x internals, pinned by the ^1.4.0 range and checked by the
+ * tests); everything the screen sees (legal moves, results, FEN) still comes from chess.js's public API.
+ */
+interface Raw { color: "w" | "b"; from: number; to: number; piece: string; captured?: string; promotion?: string; flags: number }
+interface Inner { _moves(o?: { legal?: boolean }): Raw[]; _makeMove(m: Raw): void; _undoMove(): void; _board: ({ type: string; color: "w" | "b" } | undefined)[]; _turn: "w" | "b"; _isKingAttacked(c: "w" | "b"): boolean }
+const inner = (g: Chess) => g as unknown as Inner;
+const CAPTURE = 2, PROMO = 16;
+const sqName = (n: number) => `${"abcdefgh"[n & 15]}${8 - (n >> 4)}`;
+const lanOf = (m: Raw) => sqName(m.from) + sqName(m.to) + (m.promotion ?? "");
+
 /** score in centipawns from the side to move's point of view (not for finished games: the caller handles mate / draws) */
 export function evaluate(game: Chess): number {
-  const board = game.board();
+  const g = inner(game), bd = g._board;
   let score = 0, material = 0;
-  for (let r = 0; r < 8; r++) for (let f = 0; f < 8; f++) { const p = board[r][f]; if (p && p.type !== "k" && p.type !== "p") material += VALUE[p.type]; }
+  for (let sq = 0; sq < 120; sq++) { if (sq & 0x88) continue; const p = bd[sq]; if (p && p.type !== "k" && p.type !== "p") material += VALUE[p.type]; }
   const endgame = material <= 2600;
-  for (let r = 0; r < 8; r++) for (let f = 0; f < 8; f++) {
-    const p = board[r][f]; if (!p) continue;
-    const i = r * 8 + f, idx = p.color === "w" ? i : (7 - r) * 8 + f;
+  for (let sq = 0; sq < 120; sq++) {
+    if (sq & 0x88) continue;
+    const p = bd[sq]; if (!p) continue;
+    const r = sq >> 4, f = sq & 7, idx = p.color === "w" ? r * 8 + f : (7 - r) * 8 + f;
     const table = p.type === "k" && endgame ? KING_END : PST[p.type];
     const v = VALUE[p.type] + table[idx];
     score += p.color === "w" ? v : -v;
   }
-  return game.turn() === "w" ? score : -score;
+  return g._turn === "w" ? score : -score;
 }
 
 class Timeout extends Error {}
 
-const orderScore = (m: Move, pv?: string): number => {
+const orderScore = (m: Raw, pv?: string): number => {
   let s = 0;
-  if (pv && m.lan === pv) s += 100000;
+  if (pv && lanOf(m) === pv) s += 100000;
   if (m.captured) s += 10 * VALUE[m.captured] - VALUE[m.piece] / 10 + 1000;
   if (m.promotion) s += VALUE[m.promotion] + 800;
-  if (m.san.endsWith("+") || m.san.endsWith("#")) s += 60;
-  if (m.flags.includes("k") || m.flags.includes("q")) s += 30;
   return s;
 };
 
@@ -63,17 +74,20 @@ export class Searcher {
   bestScore = 0;
   depthDone = 0;
   nodes = 0;
+  finished = false;
   private game: Chess;
+  private pub: Move[];
   private deadline: number;
   private maxDepth: number;
   private tolerance: number;
-  private roots: Move[];
+  private roots: Raw[];
   private depth = 0;
   private idx = 0;
   private scores: number[] = [];
   private alpha = -MATE * 2;
   private pv?: string;
-  finished = false;
+  private depthStart = 0;
+  private lastDepthMs = 0;
 
   constructor(fen: string, level: Level, opts: { ms?: number; depth?: number; tolerance?: number } = {}) {
     const L = LEVELS[level];
@@ -81,46 +95,40 @@ export class Searcher {
     this.deadline = Date.now() + (opts.ms ?? L.ms);
     this.maxDepth = opts.depth ?? L.depth;
     this.tolerance = opts.tolerance ?? L.tolerance;
-    this.roots = this.game.moves({ verbose: true });
+    this.pub = this.game.moves({ verbose: true });
+    this.roots = inner(this.game)._moves();
     if (this.roots.length === 0) this.finished = true;
     else if (level === 0) this.pickBeginner();
-    else { this.best = this.roots[0]; this.depth = 1; this.startDepth(); }
+    else { this.best = this.publicOf(this.roots[0]); this.depth = 1; this.startDepth(); }
   }
+
+  private publicOf(m: Raw): Move { const lan = lanOf(m); return this.pub.find((x) => x.lan === lan) ?? this.pub[0]; }
 
   /** 新手: random, but likes captures (and takes a mate in one when it sees it) */
   private pickBeginner() {
-    const ws = this.roots.map((m) => {
-      if (m.san.endsWith("#")) return 40;
-      let w = 1;
-      if (m.captured) w += 3 + VALUE[m.captured] / 100;
-      if (m.san.endsWith("+")) w += 2;
-      if (m.promotion) w += 3;
-      return w;
-    });
+    const ws = this.pub.map((m) => (m.san.endsWith("#") ? 40 : 1 + (m.captured ? 3 + VALUE[m.captured] / 100 : 0) + (m.san.endsWith("+") ? 2 : 0) + (m.promotion ? 3 : 0)));
     let r = Math.random() * ws.reduce((a, b) => a + b, 0), i = 0;
     for (; i < ws.length - 1; i++) { r -= ws[i]; if (r <= 0) break; }
-    this.best = this.roots[i];
+    this.best = this.pub[i];
     this.finished = true;
   }
 
   private startDepth() {
     this.roots.sort((a, b) => orderScore(b, this.pv) - orderScore(a, this.pv));
-    this.idx = 0; this.scores = []; this.alpha = -MATE * 2;
+    this.idx = 0; this.scores = []; this.alpha = -MATE * 2; this.depthStart = Date.now();
   }
 
   step(sliceMs = 12): boolean {
     if (this.finished) return true;
-    const t0 = Date.now();
+    const g = inner(this.game), t0 = Date.now();
     try {
       while (Date.now() - t0 < sliceMs) {
         if (Date.now() > this.deadline && this.depthDone >= 1) throw new Timeout();
         const m = this.roots[this.idx];
-        this.game.move(m.san);
+        g._makeMove(m);
         // a tolerance > 0 needs an exact score for every root move (full window); otherwise the usual alpha-beta window
-        let score = -this.negamax(this.depth - 1, -MATE * 2, this.tolerance > 0 ? MATE * 2 : -this.alpha, 1);
-        this.game.undo();
-        // do not walk into a repetition draw when ahead
-        if (score > 150) { this.game.move(m.san); if (this.game.isThreefoldRepetition()) score = 0; this.game.undo(); }
+        const score = -this.negamax(this.depth - 1, -MATE * 2, this.tolerance > 0 ? MATE * 2 : -this.alpha, 1);
+        g._undoMove();
         this.scores[this.idx] = score;
         if (score > this.alpha) this.alpha = score;
         this.idx++;
@@ -142,24 +150,35 @@ export class Searcher {
       const near = this.scores.map((s, i) => (s >= this.scores[bi] - this.tolerance ? i : -1)).filter((i) => i >= 0);
       pick = near[Math.floor(Math.random() * near.length)];
     }
-    this.best = this.roots[pick]; this.bestScore = this.scores[bi]; this.depthDone = this.depth; this.pv = this.roots[bi].lan;
-    if (this.depth >= this.maxDepth || Date.now() > this.deadline || this.bestScore > MATE / 2) { this.finished = true; return; }
+    // do not walk into a repetition draw when clearly ahead
+    if (this.scores[pick] > 150) {
+      const order = this.scores.map((s, i) => i).sort((a, b) => this.scores[b] - this.scores[a]);
+      for (const i of order) {
+        if (this.scores[i] < this.scores[pick] - 30) break;
+        const probe = new Chess(this.game.fen()); const pm = this.publicOf(this.roots[i]);
+        probe.move(pm.san);
+        if (!probe.isThreefoldRepetition()) { pick = i; break; }
+      }
+    }
+    this.best = this.publicOf(this.roots[pick]); this.bestScore = this.scores[bi]; this.depthDone = this.depth; this.pv = lanOf(this.roots[bi]);
+    this.lastDepthMs = Date.now() - this.depthStart;
+    // another depth is only started when it has a fair chance to finish (a depth costs about 4 times the one before)
+    if (this.depth >= this.maxDepth || this.bestScore > MATE / 2 || Date.now() + this.lastDepthMs * 3 > this.deadline) { this.finished = true; return; }
     this.depth++; this.startDepth();
   }
 
   private negamax(depth: number, alpha: number, beta: number, ply: number): number {
-    if ((++this.nodes & 255) === 0 && Date.now() > this.deadline && this.depthDone >= 1) throw new Timeout();
-    const g = this.game;
+    if ((++this.nodes & 127) === 0 && Date.now() > this.deadline && this.depthDone >= 1) throw new Timeout();
     if (depth <= 0) return this.quiesce(alpha, beta, 0);
-    const moves = g.moves({ verbose: true });
-    if (moves.length === 0) return g.inCheck() ? -MATE + ply : 0;
-    if (g.isInsufficientMaterial()) return 0;
+    const g = inner(this.game);
+    const moves = g._moves();
+    if (moves.length === 0) return g._isKingAttacked(g._turn) ? -MATE + ply : 0;
     moves.sort((a, b) => orderScore(b) - orderScore(a));
     let best = -MATE * 2;
     for (const m of moves) {
-      g.move(m.san);
+      g._makeMove(m);
       const s = -this.negamax(depth - 1, -beta, -alpha, ply + 1);
-      g.undo();
+      g._undoMove();
       if (s > best) best = s;
       if (s > alpha) alpha = s;
       if (alpha >= beta) break;
@@ -168,18 +187,19 @@ export class Searcher {
   }
 
   private quiesce(alpha: number, beta: number, qd: number): number {
-    const g = this.game;
-    const stand = evaluate(g);
+    if ((++this.nodes & 127) === 0 && Date.now() > this.deadline && this.depthDone >= 1) throw new Timeout();
+    const stand = evaluate(this.game);
     if (stand >= beta) return stand;
     if (qd >= 6) return stand;
     if (stand > alpha) alpha = stand;
-    const caps = g.moves({ verbose: true }).filter((m) => m.captured || m.promotion);
+    const g = inner(this.game);
+    const caps = g._moves().filter((m) => m.flags & (CAPTURE | PROMO));
     caps.sort((a, b) => orderScore(b) - orderScore(a));
     for (const m of caps) {
       if (!m.promotion && stand + VALUE[m.captured as string] + 200 < alpha) continue;   // delta pruning
-      g.move(m.san);
+      g._makeMove(m);
       const s = -this.quiesce(-beta, -alpha, qd + 1);
-      g.undo();
+      g._undoMove();
       if (s >= beta) return s;
       if (s > alpha) alpha = s;
     }

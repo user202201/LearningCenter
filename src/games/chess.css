@@ -34,7 +34,7 @@
 .chess-dot { position: absolute; left: 50%; top: 50%; width: 30%; height: 30%; margin: -15% 0 0 -15%; border-radius: 50%; background: rgba(32, 100, 80, .45); pointer-events: none; animation: chess-pop .18s ease-out; }
 .chess-dot.cap { width: 86%; height: 86%; margin: -43% 0 0 -43%; background: none; border: 5px solid rgba(240, 62, 62, .6); }
 
-.chess-pieces, .chess-fx { position: absolute; inset: 0; pointer-events: none; }
+.chess-pieces, .chess-fx { position: absolute; inset: 4px; pointer-events: none; }   /* = the board's border */
 .chess-pieces { z-index: 2; }
 .chess-fx { z-index: 6; overflow: visible; }
 .chess-pc { position: absolute; left: 0; top: 0; width: 12.5%; height: 12.5%; transition: transform .28s cubic-bezier(.3, .8, .35, 1); will-change: transform; }

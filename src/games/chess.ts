@@ -391,8 +391,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   // ---------- input: tap, tap / drag (pointer events) ----------
   let drag: { sq: string; piece: Piece; id: number; x0: number; y0: number; moved: boolean; wasSel: boolean } | null = null;
   const sqFromEvent = (e: PointerEvent): string | null => {
-    const r = board.getBoundingClientRect();
-    const col = Math.floor(((e.clientX - r.left) / r.width) * 8), row = Math.floor(((e.clientY - r.top) / r.height) * 8);
+    const r = board.getBoundingClientRect(), x0 = r.left + board.clientLeft, y0 = r.top + board.clientTop, w = board.clientWidth;
+    const col = Math.floor(((e.clientX - x0) / w) * 8), row = Math.floor(((e.clientY - y0) / w) * 8);
     return col < 0 || col > 7 || row < 0 || row > 7 ? null : sqAt(col, row);
   };
   const humanTurn = () => !over && !thinking && !wrap.querySelector(".chess-cover") && (mode === "two" || game.turn() === side);
@@ -426,9 +426,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     if (!drag || e.pointerId !== drag.id) return;
     if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 7) return;
     drag.moved = true;
-    const r = board.getBoundingClientRect(), px = r.width / 8;
+    const r = board.getBoundingClientRect(), px = board.clientWidth / 8;
     drag.piece.el.classList.add("drag");
-    drag.piece.el.style.transform = `translate(${e.clientX - r.left - px / 2}px, ${e.clientY - r.top - px * 0.7}px) scale(1.12)`;
+    drag.piece.el.style.transform = `translate(${e.clientX - r.left - board.clientLeft - px / 2}px, ${e.clientY - r.top - board.clientTop - px * 0.7}px) scale(1.12)`;
   });
   const endDrag = (e: PointerEvent, cancel: boolean) => {
     if (!drag || e.pointerId !== drag.id) return;

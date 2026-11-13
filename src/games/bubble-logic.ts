@@ -78,6 +78,13 @@ export function nextColor(rng: () => number, g: Grid, fallback: number): number 
   return p.length ? p[Math.floor(rng() * p.length)] : fallback;
 }
 
+/** after a shot: the next bubble moves to the shooter, a new next one is drawn; both are always colours that are still on the board */
+export function advanceQueue(rng: () => number, g: Grid, nxt: number, fallback = 1): { cur: number; nxt: number } {
+  const present = colorsPresent(g);
+  const cur = present.length === 0 || present.includes(nxt) ? nxt : nextColor(rng, g, fallback);
+  return { cur, nxt: nextColor(rng, g, fallback) };
+}
+
 /** the empty cell where a bubble that stopped at (x, y) comes to rest */
 export function snap(g: Grid, x: number, y: number): Cell | null {
   const mid = Math.round((y - 0.5) / ROWH);

@@ -172,7 +172,7 @@ const INDEP = `(rows, unit) => {
   await p.mouse.move(a.x, a.y); await p.mouse.down(); await p.mouse.move(a.x, a.y + c0 * 3, { steps: 8 }); await p.mouse.up();
   ok(await p.locator(pieceAt(1, 0)).count() === 1 && (await p.textContent('#klotski-moves')) === '步数 1', '曹操 can not be dragged through other pieces: nothing happens, no move is counted');
   // tap, then tap: select a piece, the dashed frames show where it can go
-  a = await centre(pieceAt(3, 4));
+  a = await centre(pieceAt(2, 4));
   await p.mouse.click(a.x, a.y);
   const nGhost = await p.locator('.klotski-ghost').count();
   const expect = await p.evaluate(async () => { const K = await import('/src/games/klotski-logic.ts'); const els = [...document.querySelectorAll('.klotski-piece')]; const ps = els.map((e) => ({ id: +e.dataset.id, kind: e.dataset.kind, x: +e.dataset.x, y: +e.dataset.y })); const sel = els.find((e) => e.classList.contains('sel')); const big = K.parseLayout(K.LEVELS[16].rows); const cur = big.map((q) => ({ ...q, ...ps.find((z) => z.id === q.id) })); return sel ? K.reachable(cur, +sel.dataset.id).length : -1; });
@@ -208,11 +208,11 @@ const INDEP = `(rows, unit) => {
   // ---------- layout on three screens ----------
   for (const [name, vp] of [['phone', { width: 320, height: 568 }], ['ipad', { width: 820, height: 1180 }], ['sideways', { width: 844, height: 390 }]]) {
     await p.setViewportSize(vp);
-    await p.evaluate(() => (location.hash = '#/subject/games')); await p.evaluate(() => (location.hash = '#/games/klotski')); await p.waitForSelector('#klotski-levels');
+    await p.evaluate(() => (location.hash = '#/subject/games')); await p.evaluate(() => (location.hash = '#/games/klotski')); await p.waitForFunction(() => !document.querySelector('.klotski-piece') && document.querySelector('#klotski-levels'));
     const list = await p.evaluate(() => { const r = document.querySelector('.klotski-levels').getBoundingClientRect(), cards = [...document.querySelectorAll('.klotski-lv')].map((e) => e.getBoundingClientRect()); return { left: r.left, right: innerWidth - r.right, sw: document.documentElement.scrollWidth, iw: innerWidth, cardsIn: cards.every((c) => c.left >= -1 && c.right <= innerWidth + 1) }; });
     ok(list.sw <= list.iw && list.cardsIn && Math.abs(list.left - list.right) <= 3, `${name}: the list has no overflow and is centred (${Math.round(list.left)} | ${Math.round(list.right)})`);
     await p.screenshot({ path: OUT + `klotski-list-${name}.png` });
-    await p.click('.klotski-lv[data-level=l17]'); await p.waitForSelector('.klotski-piece'); await p.waitForTimeout(150);
+    await p.waitForTimeout(300); await p.click('.klotski-lv[data-level=l17]'); await p.waitForSelector('.klotski-frame'); await p.waitForTimeout(300);
     const m = await p.evaluate(() => {
       const f = document.querySelector('.klotski-frame').getBoundingClientRect(), bs = [...document.querySelectorAll('.klotski-btns button')].map((b) => b.getBoundingClientRect()), pc = document.querySelector('.klotski-piece[data-kind=s]').getBoundingClientRect();
       const lab = document.querySelector('.klotski-exit-label').getBoundingClientRect();
@@ -230,7 +230,20 @@ const INDEP = `(rows, unit) => {
   const src = ['klotski.ts', 'klotski-logic.ts'].map((f) => fs.readFileSync('src/games/' + f, 'utf8')).join('\n');
   const tr = JSON.parse(fs.readFileSync('src/games/klotski.i18n.json', 'utf8'));
   const lits = new Set();
-  for (const m of src.matchAll(/(["`])((?:\\.|(?!\1)[^\\\n])*[一-鿿](?:\\.|(?!\1)[^\\\n])*)\1/g)) lits.add(m[2].replace(/\$\{[^}]*\}/g, (x, i) => '\u0000').split('\u0000').reduce((acc, part, i, arr) => acc + part + (i < arr.length - 1 ? `{${i}}` : ''), ''));
+  // the string literals of the source (a small scanner: comments and nested ${} are skipped), turned into the form of the translation keys ({0} for the variable parts)
+  const scan = (txt) => {
+    let i = 0; const out = [];
+    while (i < txt.length) {
+      const c = txt[i];
+      if (c === '/' && txt[i + 1] === '/') { while (i < txt.length && txt[i] !== '\n') i++; continue; }
+      if (c === '/' && txt[i + 1] === '*') { i = txt.indexOf('*/', i) + 2; continue; }
+      if (c === '"' || c === "'") { let j = i + 1; while (txt[j] !== c) { if (txt[j] === '\\') j++; j++; } out.push(txt.slice(i + 1, j)); i = j + 1; continue; }
+      if (c === '`') { let j = i + 1, s = '', n = 0; while (txt[j] !== '`') { if (txt[j] === '\\') { s += txt[j] + txt[j + 1]; j += 2; continue; } if (txt[j] === '$' && txt[j + 1] === '{') { let d = 1; j += 2; while (d) { if (txt[j] === '{') d++; else if (txt[j] === '}') d--; j++; } s += `{${n++}}`; continue; } s += txt[j++]; } out.push(s); i = j + 1; continue; }
+      i++;
+    }
+    return out;
+  };
+  for (const s of scan(src)) if (/[一-鿿]/.test(s)) lits.add(s);
   const missing = [...lits].filter((s) => !tr[s]);
   ok(missing.length === 0 && Object.values(tr).every((v) => v.length === 2 && v[0] && v[1]) && Object.keys(tr).every((k) => k.length > 1), `every Chinese text of the game (${lits.size}) has an English and a French entry, no one-character keys` + (missing.length ? ': missing ' + missing.join(' | ') : ''));
   await done(t.browser);

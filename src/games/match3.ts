@@ -13,9 +13,9 @@ const FILL = ["#ff6b6b", "#ffa94d", "#ffd43b", "#51cf66", "#4dabf7", "#cc5de8"];
 const EDGE = ["#e03131", "#e8590c", "#f08c00", "#2f9e44", "#1c7ed6", "#9c36b5"];
 const SHAPE = [
   `<circle cx="50" cy="52" r="38"`,
-  `<rect x="14" y="16" width="72" height="72" rx="22"`,
-  `<polygon points="50,10 86,30 86,70 50,90 14,70 14,30" stroke-linejoin="round"`,
-  `<path d="M50 10C60 32 86 50 86 66A36 36 0 0 1 14 66C14 50 40 32 50 10Z"`,
+  `<rect x="12" y="14" width="76" height="76" rx="22"`,
+  `<polygon points="50,8 88,29 88,71 50,92 12,71 12,29" stroke-linejoin="round"`,
+  `<path d="M50 8C61 32 88 50 88 66A38 38 0 0 1 12 66C12 50 39 32 50 8Z"`,
   `<polygon points="50,8 90,50 50,92 10,50" stroke-linejoin="round"`,
   `<path d="M50 88C8 60 8 22 32 18C42 17 48 24 50 30C52 24 58 17 68 18C92 22 92 60 50 88Z"`,
 ];
@@ -23,13 +23,13 @@ const FACE_Y = [52, 52, 50, 62, 50, 48];
 function candySvg(k: number, s: number): string {
   if (k === L.BOMB) {
     const dots = ["#ff6b6b", "#ffd43b", "#51cf66", "#4dabf7", "#cc5de8", "#ffa94d"].map((c, i) => `<circle cx="${50 + 30 * Math.cos(i * 1.047)}" cy="${52 + 30 * Math.sin(i * 1.047)}" r="6" fill="${c}"/>`).join("");
-    return `<svg viewBox="0 0 100 100"><circle cx="50" cy="52" r="38" fill="#6f4e37" stroke="#4a3426" stroke-width="5"/>${dots}<ellipse cx="36" cy="32" rx="9" ry="5" fill="#fff" opacity=".35" transform="rotate(-30 36 32)"/><circle cx="40" cy="48" r="7" fill="#fff"/><circle cx="60" cy="48" r="7" fill="#fff"/><circle cx="41" cy="49" r="3.4" fill="#343a40"/><circle cx="61" cy="49" r="3.4" fill="#343a40"/><path d="M40 62Q50 72 60 62" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M50 14Q56 4 64 8" fill="none" stroke="#868e96" stroke-width="4" stroke-linecap="round"/><circle cx="66" cy="8" r="4" fill="#ffd43b"/></svg>`;
+    return `<svg viewBox="10 10 80 80"><circle cx="50" cy="52" r="38" fill="#6f4e37" stroke="#4a3426" stroke-width="5"/>${dots}<ellipse cx="36" cy="32" rx="9" ry="5" fill="#fff" opacity=".35" transform="rotate(-30 36 32)"/><circle cx="40" cy="48" r="7" fill="#fff"/><circle cx="60" cy="48" r="7" fill="#fff"/><circle cx="41" cy="49" r="3.4" fill="#343a40"/><circle cx="61" cy="49" r="3.4" fill="#343a40"/><path d="M40 62Q50 72 60 62" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M50 14Q56 4 64 8" fill="none" stroke="#868e96" stroke-width="4" stroke-linecap="round"/><circle cx="66" cy="8" r="4" fill="#ffd43b"/></svg>`;
   }
   const y = FACE_Y[k];
   let stripes = "";
   if (s === 1) stripes = `<g stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".85"><path d="M22 ${y - 22}H78M16 ${y - 4}H84M22 ${y + 28}H78"/></g>`;
   if (s === 2) stripes = `<g stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".85"><path d="M26 20V82M74 20V82M50 12V90" transform="translate(0 0)"/></g>`;
-  return `<svg viewBox="0 0 100 100">${SHAPE[k]} fill="${FILL[k]}" stroke="${EDGE[k]}" stroke-width="5"/>${stripes}<ellipse cx="34" cy="32" rx="9" ry="5" fill="#fff" opacity=".5" transform="rotate(-35 34 32)"/><ellipse cx="40" cy="${y - 2}" rx="6" ry="7.5" fill="#fff"/><ellipse cx="60" cy="${y - 2}" rx="6" ry="7.5" fill="#fff"/><circle cx="41" cy="${y - 1}" r="3.4" fill="#343a40"/><circle cx="61" cy="${y - 1}" r="3.4" fill="#343a40"/><path d="M41 ${y + 11}Q50 ${y + 20} 59 ${y + 11}" fill="none" stroke="#343a40" stroke-width="3.4" stroke-linecap="round"/><ellipse cx="30" cy="${y + 8}" rx="5" ry="3.2" fill="#ff8fab" opacity=".6"/><ellipse cx="70" cy="${y + 8}" rx="5" ry="3.2" fill="#ff8fab" opacity=".6"/></svg>`;
+  return `<svg viewBox="10 10 80 80">${SHAPE[k]} fill="${FILL[k]}" stroke="${EDGE[k]}" stroke-width="5"/>${stripes}<ellipse cx="34" cy="32" rx="9" ry="5" fill="#fff" opacity=".5" transform="rotate(-35 34 32)"/><ellipse cx="40" cy="${y - 2}" rx="6" ry="7.5" fill="#fff"/><ellipse cx="60" cy="${y - 2}" rx="6" ry="7.5" fill="#fff"/><circle cx="41" cy="${y - 1}" r="3.4" fill="#343a40"/><circle cx="61" cy="${y - 1}" r="3.4" fill="#343a40"/><path d="M41 ${y + 11}Q50 ${y + 20} 59 ${y + 11}" fill="none" stroke="#343a40" stroke-width="3.4" stroke-linecap="round"/><ellipse cx="30" cy="${y + 8}" rx="5" ry="3.2" fill="#ff8fab" opacity=".6"/><ellipse cx="70" cy="${y + 8}" rx="5" ry="3.2" fill="#ff8fab" opacity=".6"/></svg>`;
 }
 
 const HINT_MS = 6000;
