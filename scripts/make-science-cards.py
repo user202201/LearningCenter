@@ -10,7 +10,7 @@ import json, os, random, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(HERE, 'science'))
-import geo, life, matter, hist, hand, phys
+import geo, life, matter, hist, hand, phys, fill
 
 rng = random.Random(20261112)
 base = json.load(open(os.path.join(ROOT, 'src/data/science-cards-handwritten.json'), encoding='utf-8'))
@@ -238,7 +238,7 @@ for line in hand.HAND.strip().split('\n'):
     cards[-1]['w'] = ws   # (the wrong choices are exactly the ones written)
 
 # ---------------------------------------------------------------- junior-high physics (circuits, rules ...), chemistry, biology (hand-written)
-for code, block in (('hp', phys.PHYS), ('hc', phys.CHEM), ('hb', phys.BIO)):
+for code, block in (('hp', phys.PHYS), ('hc', phys.CHEM), ('hb', phys.BIO), ('f1', fill.GEO1), ('fn', fill.NAT1), ('f9', fill.BIO9)):
     for line in block.strip().split('\n'):
         t, q, a, w, e, gr = [x.strip() for x in line.split('‖')]
         g, gx = grades(gr)

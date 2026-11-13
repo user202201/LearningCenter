@@ -656,6 +656,14 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .sq { font-size: 18px; line-height: 1.4; color: #2d2230; overflow-wrap: anywhere; }
 .sans { display: none; padding: 8px 12px; border-radius: 14px; background: #d3f9d8; color: #1b7a32; font-weight: 800; overflow-wrap: anywhere; }
 .scard.open .sans { display: block; }
+.scard .sans > b { display: none; }   /* (the right choice is marked above; only the "did you know" sentence is shown below) */
+.sopts { display: grid; gap: 6px; grid-template-columns: 1fr 1fr; }
+.sopt { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 12px; background: #f6f1ee; border: 2px solid transparent; font-size: 15px; font-weight: 700; color: #2d2230; min-width: 0; overflow-wrap: anywhere; }
+.sopt i { flex: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-style: normal; font-size: 12px; font-weight: 900; color: #8a7d84; }
+.sopt-t { min-width: 0; }
+.scard.open .sopt[data-right="1"] { background: #d3f9d8; border-color: #51cf66; color: #1b7a32; }
+.scard.open .sopt[data-right="0"] { opacity: .55; }
+@media (max-width: 420px) { .sopts { grid-template-columns: 1fr; } }
 .mchoices.long { grid-template-columns: minmax(0, 1fr); }
 .mchoices.long .mchoice { min-height: 56px; font-size: clamp(15px, 4.4vw, 20px); font-weight: 700; line-height: 1.3; }
 .mchoices.mid .mchoice { font-size: clamp(16px, 4.6vw, 24px); }

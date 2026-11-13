@@ -139,13 +139,17 @@ async function changeGrade(k: M.Kid) {
   X.route();
 }
 
-/** a card: the topic, the question; a tap shows / hides the answer */
+const hash = (t: string): number => { let h = 2166136261; for (const ch of t) h = Math.imul(h ^ ch.charCodeAt(0), 16777619); return h >>> 0; };
+/** a card: the topic, the question and its four choices; a tap shows / hides the answer */
 function cardEl(c: SM.Card, lib: SM.Library): HTMLElement {
   const aEl = h("b", {}), eEl = h("span", { class: "sfun" }), qEl = h("b", { class: "sq user" });
   renderRich(aEl, c.a); renderRich(eEl, c.e); renderRich(qEl, c.q);   // (formulas written as $...$ are typeset)
   const ans = h("div", { class: "sans user" }, aEl, eEl);
+  // the four choices are on the card (always in the same order for a card); a tap shows which one is right and the "did you know" sentence
+  const order = [c.a, ...c.w].map((x) => ({ x, k: hash(`${c.id}:${x}`) })).sort((p, q) => p.k - q.k).map((o) => o.x);
+  const opts = h("div", { class: "sopts" }, ...order.map((x, i) => { const o = h("span", { class: "sopt user", "data-right": x === c.a ? "1" : "0" }, h("i", {}, "ABCD"[i]), h("span", { class: "sopt-t" })); renderRich(o.querySelector(".sopt-t") as HTMLElement, x); return o; }));
   const el = h("div", { class: "scard tappable", "data-card": c.id, role: "button", tabindex: "0" },
-    h("span", { class: "stopic" }, lib.topics[c.t] ?? c.t), qEl, ans);
+    h("span", { class: "stopic" }, lib.topics[c.t] ?? c.t), qEl, opts, ans);
   const flip = () => el.classList.toggle("open");
   el.addEventListener("click", flip);
   el.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), flip()));

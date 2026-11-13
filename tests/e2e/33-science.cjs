@@ -105,8 +105,12 @@ const openScience = async (page, name) => {
   ok((await page.textContent('#day-title')) === '新知识（6）' && await page.locator('#again-title').count() === 0, 'the first day has no old knowledge to review yet');
   ok(todayIds.every((id) => byId[id].g <= 4), 'every card is of grade 4 or lower (his highest level)');
   ok(!(await page.locator('.scard.open').count()), 'the answers are hidden at first');
+  const optsOk = await page.locator('.scard').evaluateAll((els, byId) => els.every((e) => { const o = [...e.querySelectorAll('.sopt')]; const c = byId[e.dataset.card]; return o.length === 4 && o.filter((x) => x.dataset.right === '1').length === 1 && o.some((x) => x.textContent.replace(/[ABCD]/, '').includes(c.a.replace(/\$/g, '').slice(0, 3))) && o.every((x) => x.getBoundingClientRect().height > 20 && e.getBoundingClientRect().right >= x.getBoundingClientRect().right); }), byId);
+  ok(optsOk, 'every question card shows its four choices (A-D) on the card, so the question can be answered by looking at it');
+  ok(await page.locator('.scard .sopt.right, .scard.open').count() === 0, 'the right choice is not marked before the tap');
   await page.click('.scard >> nth=0');
   ok(await page.locator('.scard.open .sans').isVisible() && (await page.textContent('.scard.open .sans')).includes(byId[todayIds[0]].a.replace(/\$/g, '')) && (await page.textContent('.scard.open .sfun')).includes(byId[todayIds[0]].e.replace(/\$/g, '')), 'a tap shows the answer and the "did you know" sentence');
+  ok(await page.locator('.scard.open .sopt[data-right="1"]').evaluate((e) => getComputedStyle(e).backgroundColor !== getComputedStyle(e.parentElement.querySelector('.sopt[data-right="0"]')).backgroundColor), 'a tap marks the right choice (green) among the four');
   await page.screenshot({ path: OUT + 'science-day-phone.png' });
   // reload: the same cards (made once)
   await page.reload(); await page.waitForSelector('.scard');
