@@ -71,7 +71,7 @@ export function homeSection(): HTMLElement {
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 void errText;
 /** the "VS" badge: bold, slanted Latin letters with an outline and a small shadow, drawn as SVG */
-const VS_SVG = `<svg viewBox="0 0 64 44" aria-hidden="true"><g transform="skewX(-10)" font-family="ui-rounded, 'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui, sans-serif" font-weight="900" font-style="italic" font-size="34" text-anchor="middle"><text x="36" y="37" fill="#a61e4d" stroke="#a61e4d" stroke-width="7" stroke-linejoin="round">VS</text><text x="34" y="34" fill="#ffd43b" stroke="#e03131" stroke-width="5" stroke-linejoin="round" paint-order="stroke">VS</text><text x="34" y="34" fill="#fff3bf" opacity=".55" font-size="34" clip-path="inset(0 0 55% 0)">VS</text></g></svg>`;
+const VS_SVG = `<svg viewBox="0 0 64 44" aria-hidden="true"><g transform="skewX(-10)" font-family="ui-rounded, 'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui, sans-serif" font-weight="900" font-style="italic" font-size="34" text-anchor="middle"><text x="34" y="34" fill="#ffd43b" stroke="#e03131" stroke-width="5.500" stroke-linejoin="round" paint-order="stroke">VS</text></g></svg>`;
 const vsBadge = (cls = "") => { const b = h("span", { class: "pk-vsb " + cls, "aria-hidden": "true" }); b.innerHTML = VS_SVG; return b; };
 
 export async function renderSetup() {
@@ -111,8 +111,8 @@ export async function renderSetup() {
     const tile = (n: number, lead: boolean) => h("span", { class: "pk-tile" + (lead ? " lead" : "") }, String(n));
     const side = (k: M.Kid) => h("span", { class: "pk-pl", style: `--kid:${k.color}` }, X.avatarEl(k), h("span", { class: "pk-pn user" }, k.name));
     const row = h("div", { class: "pk-match", "data-pair": pairKey(p.a, p.b), role: "group", "aria-label": `${a.name} 对 ${b.name}，${wa} 比 ${wb}` },
-      h("div", { class: "pk-mrow" }, side(a), " ", vsBadge("small"), " ", side(b)),
-      h("div", { class: "pk-score-row" }, tile(wa, wa > wb), ":", tile(wb, wb > wa), p.ties ? h("span", { class: "pk-draws" }, `平 ${p.ties}`) : null));
+      h("div", { class: "pk-mrow" }, side(a), " ", vsBadge("small"), " ", side(b)), " ",
+      h("div", { class: "pk-score-row" }, tile(wa, wa > wb), ":", tile(wb, wb > wa), p.ties ? " " : null, p.ties ? h("span", { class: "pk-draws" }, `平 ${p.ties}`) : null));
     return row;
   };
 

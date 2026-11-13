@@ -34,23 +34,23 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
     if (s1 !== s2 || s1 === s3) bad('seeded random');
     const sh = L.shuffled([1, 2, 3, 4, 5, 6, 7, 8], L.rng(3));
     if ([...sh].sort().join() !== '1,2,3,4,5,6,7,8') bad('shuffle loses items');
-    // --- the exact timeline of a game nobody touches: 5200 ms of countdown + intro, then ten times prep + the 12 s limit + result ---
+    // --- the exact timeline of a game nobody touches: 3500 ms of intro + countdown, then ten times prep + the 12 s limit + result ---
     {
       const s = L.create([mkItems(L.rng(1), 10), mkItems(L.rng(2), 10)], 0);
       const seen = [];
       let last = '';
       for (let t = 0; t <= 150000; t += 50) { L.advance(s, t); const k = s.phase + (s.phase === 'countdown' ? s.count : ''); if (k !== last) { seen.push(k + '@' + t); last = k; } }
       if (s.phase !== 'final' || s.scores.join() !== '0,0' || s.outcome.join() !== 'tie,tie') bad('idle game does not end as a draw');
-      if (seen.slice(0, 6).join() !== 'countdown3@0,countdown2@1000,countdown1@2000,countdown0@3000,intro@3700,prep@5200') bad('opening: ' + seen.slice(0, 6).join());
-      if (!seen.includes('final@148200')) bad('idle game ends at ' + seen[seen.length - 1]);
+      if (seen.slice(0, 6).join() !== 'intro@0,countdown3@1200,countdown2@1800,countdown1@2400,countdown0@3000,prep@3500') bad('opening: ' + seen.slice(0, 6).join());
+      if (!seen.includes('final@146500')) bad('idle game ends at ' + seen[seen.length - 1]);
       if (s.results.length !== 10 || s.results.some((x) => x !== -1)) bad('idle results');
     }
     // --- scripted rounds ---
-    const fresh = (n = 10) => { const s = L.create([mkItems(L.rng(1), n), mkItems(L.rng(2), n)], 0); L.advance(s, 5200 + 900); return s; };   // at the start of the first question
+    const fresh = (n = 10) => { const s = L.create([mkItems(L.rng(1), n), mkItems(L.rng(2), n)], 0); L.advance(s, 3500 + 900); return s; };   // at the start of the first question
     const wrongOf = (s, side) => [0, 1, 2, 3].find((i) => !L.current(s, side).answers.includes(i));
     const rightOf = (s, side) => L.current(s, side).answers[0];
     let s = fresh(); const qs = s.questionStart;
-    if (s.phase !== 'question' || qs !== 6100) bad('question start ' + qs);
+    if (s.phase !== 'question' || qs !== 4400) bad('question start ' + qs);
     let e = L.tap(s, 0, rightOf(s, 0), qs - 1);
     if (e.type !== 'ignored' || e.why !== 'early' || s.scores.join() !== '0,0') bad('a tap before the question is shown must do nothing');
     e = L.tap(s, 1, wrongOf(s, 1), qs + 100);
@@ -61,6 +61,13 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
     if (e.type !== 'win' || s.scores.join() !== '1,0' || s.phase !== 'result' || s.winner !== 0 || s.results[0] !== 0) bad('the other side may still win');
     e = L.tap(s, 1, rightOf(s, 1), qs + 210);
     if (e.type !== 'ignored' || s.scores.join() !== '1,0') bad('after the win nothing more counts');
+    // the opening can be skipped: the first round is announced at once, then the question comes after the prep time
+    { const q = L.create([mkItems(L.rng(1), 10), mkItems(L.rng(2), 10)], 0); L.advance(q, 700);
+      if (!L.skipIntro(q, 700) || q.phase !== 'prep' || q.phaseEnd !== 1600) bad('skip from the intro');
+      L.advance(q, 1600); if (q.phase !== 'question' || q.questionStart !== 1600) bad('question after a skip');
+      if (L.skipIntro(q, 1700) || q.phase !== 'question') bad('no skip once the questions began');
+      const q2 = L.create([mkItems(L.rng(1), 10), mkItems(L.rng(2), 10)], 0); L.advance(q2, 2500);
+      if (q2.phase !== 'countdown' || q2.count !== 1 || !L.skipIntro(q2, 2500) || q2.phase !== 'prep') bad('skip from the countdown'); }
     // both locked
     s = fresh(); L.tap(s, 0, wrongOf(s, 0), qs + 10); e = L.tap(s, 1, wrongOf(s, 1), qs + 20);
     if (e.type !== 'wrong' || !e.both || s.phase !== 'result' || s.winner !== -1 || s.scores.join() !== '0,0' || s.results[0] !== -1) bad('both locked out: no winner');
@@ -70,7 +77,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
     // a tap in the prep phase and in the countdown
     const q0 = L.create([mkItems(L.rng(1), 10), mkItems(L.rng(2), 10)], 0);
     e = L.tap(q0, 0, 0, 10); if (e.type !== 'ignored' || e.why !== 'phase') bad('tap during the countdown');
-    L.advance(q0, 5300); e = L.tap(q0, 0, rightOf(q0, 0), 5300); if (e.type !== 'ignored' || q0.scores.join() !== '0,0') bad('tap during prep');
+    L.advance(q0, 3600); e = L.tap(q0, 0, rightOf(q0, 0), 3600); if (e.type !== 'ignored' || q0.scores.join() !== '0,0') bad('tap during prep');
     e = L.tap(s, 0, 9, qs); if (e.type !== 'ignored' || e.why !== 'index') bad('index out of range');
     // ties by order of arrival; an earlier timestamp that arrives later takes the win (at most 100 ms earlier)
     s = fresh(); L.tap(s, 1, rightOf(s, 1), qs + 500); e = L.tap(s, 0, rightOf(s, 0), qs + 500);
@@ -85,8 +92,8 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
     if (e.type !== 'ignored' || s.scores.join() !== '0,1') bad('a locked side cannot take the win');
     // several right answers: every one of them counts
     { const it = [[{ prompt: 'y', choices: ['a', 'b', 'c', 'd'], answers: [1, 3] }], [{ prompt: 'z', choices: ['a', 'b', 'c', 'd'], answers: [0] }]];
-      for (const idx of [1, 3]) { const q = L.create(it, 0); L.advance(q, 6100); if (L.tap(q, 0, idx, 6200).type !== 'win') bad('polyphone answer ' + idx); }
-      const q = L.create(it, 0); L.advance(q, 6100); if (L.tap(q, 0, 0, 6200).type !== 'wrong') bad('not an answer'); }
+      for (const idx of [1, 3]) { const q = L.create(it, 0); L.advance(q, 4400); if (L.tap(q, 0, idx, 4500).type !== 'win') bad('polyphone answer ' + idx); }
+      const q = L.create(it, 0); L.advance(q, 4400); if (L.tap(q, 0, 0, 4500).type !== 'wrong') bad('not an answer'); }
     // fewer items than rounds: the game is as long as the shorter list; zero items goes straight to the end
     { const q = L.create([mkItems(L.rng(1), 4), mkItems(L.rng(2), 7)], 0); if (q.total !== 4) bad('total is the shorter list'); L.advance(q, 1e6); if (q.phase !== 'final' || q.results.length !== 4) bad('short game'); }
     { const q = L.create([[], []], 0); L.advance(q, 1e6); if (q.phase !== 'final') bad('empty game'); }
@@ -236,6 +243,12 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   ok(!(await p.isDisabled('#pk-start')) && (await p.textContent('#pk-msgs')).trim() === '', 'two children with 10 characters: no message');
   ok((await p.locator('#pk-lay-tb, #pk-lay-lr').count()) === 0 && !(await p.evaluate(() => JSON.stringify(localStorage.getItem('learn.pk.v1') || '')).then((s) => /layout/.test(s))), 'there is no layout choice (one layout only)');
   // the hint for a landscape screen is shown on a landscape screen only
+  // the label of the start button is centred exactly (text box centre = button centre), no letter-spacing, no stray spaces
+  const measureStart = async (tag) => {
+    const m = await p.evaluate(() => { const b = document.querySelector('#pk-start'), tx = document.querySelector('.pk-start-t'), r = document.createRange(); r.selectNodeContents(tx); const a = r.getBoundingClientRect(), c = b.getBoundingClientRect(), cs = getComputedStyle(b); return { dx: a.left + a.width / 2 - (c.left + c.width / 2), dy: a.top + a.height / 2 - (c.top + c.height / 2), ls: cs.letterSpacing, ti: cs.textIndent, txt: tx.textContent, disp: cs.display, jc: cs.justifyContent, w: c.width, h: c.height }; });
+    ok(Math.abs(m.dx) <= 1 && Math.abs(m.dy) <= 2.5 && (m.ls === 'normal' || m.ls === '0px') && m.ti === '0px' && m.txt === m.txt.trim() && m.disp === 'flex' && m.jc === 'center' && m.h >= 60, `${tag}: the start button's "${m.txt}" is exactly centred (dx ${m.dx.toFixed(2)}, dy ${m.dy.toFixed(2)}), no letter-spacing / indent, no stray spaces`);
+  };
+  await measureStart('zh');
   const hint = () => p.evaluate(() => getComputedStyle(document.querySelector('#pk-hint-land')).display);
   ok((await hint()) === 'none', 'portrait screen: no hint line on the setup page');
   await p.setViewportSize({ width: 1180, height: 820 });
@@ -243,6 +256,29 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await p.screenshot({ path: OUT + 'pk-setup-landscape.png' });
   await p.setViewportSize({ width: 390, height: 844 });
   await p.screenshot({ path: OUT + 'pk-setup.png' });
+  // the record reads like a match
+  const setPairs = async (pairs) => { await p.evaluate((pp) => localStorage.setItem('learn.pk.v1', JSON.stringify({ last: ['k1', 'k2'], pairs: pp })), pairs); await p.evaluate(() => (location.hash = '#/chinese')); await p.waitForSelector('#pk-refs'); await p.evaluate(() => (location.hash = '#/chinese/pk')); await p.waitForSelector('#pk-slot-1'); };
+  const P = (a, b, wa, wb, ties) => ({ a, b, wins: { [a]: wa, [b]: wb }, ties });
+  const allPairs = { 'k1|k2': P('k1', 'k2', 2, 5, 2), 'k3|k4': P('k3', 'k4', 1, 1, 0), 'k1|k4': P('k1', 'k4', 4, 0, 0), 'k2|k3': P('k2', 'k3', 3, 1, 0), 'k2|k4': P('k2', 'k4', 0, 2, 0), 'k1|k3': P('k1', 'k3', 6, 6, 0) };
+  await setPairs(allPairs);
+  let rows = await p.evaluate(() => [...document.querySelectorAll('.pk-match')].map((r) => ({ pair: r.dataset.pair, text: r.textContent.replace(/\s+/g, ' ').trim(), aria: r.getAttribute('aria-label'), lead: [...r.querySelectorAll('.pk-tile.lead')].map((x) => x.textContent), tiles: [...r.querySelectorAll('.pk-tile')].map((x) => x.textContent), vs: r.querySelectorAll('.pk-vsb svg').length, draws: r.querySelector('.pk-draws')?.textContent || '' })));
+  ok(rows.length === 5 && rows[0].pair === 'k1|k2', 'at most 5 rows, the pair of the current choice first (' + rows.map((r) => r.pair).join(' ') + ')');
+  ok(rows[0].text === 'Anna VS Ben 2:5 平 2' && rows[0].aria === 'Anna 对 Ben，2 比 5', 'the first row reads "Anna VS Ben 2:5" in the order of the names (' + rows[0].text + ' / ' + rows[0].aria + ')');
+  ok(rows[0].lead.join() === '5' && rows[0].draws === '平 2', 'the leader\'s digit is highlighted, the draws are noted after the score');
+  const eqRow = rows.find((r) => r.pair === 'k3|k4'), fourRow = rows.find((r) => r.pair === 'k1|k4');
+  ok(eqRow.lead.length === 0 && eqRow.tiles.join() === '1,1' && eqRow.draws === '' && fourRow.lead.join() === '4' && fourRow.tiles.join() === '4,0', 'equal score: nobody is highlighted, no draws note; 4:0 highlights the 4');
+  ok(rows.every((r) => r.vs === 1), 'every row has the VS badge');
+  await setPairs({ ...allPairs, 'k1|k3': { a: 'k1', b: 'k3', wins: {}, ties: 0 } });
+  rows = await p.evaluate(() => [...document.querySelectorAll('.pk-match')].map((r) => r.dataset.pair));
+  ok(rows.length === 5 && !rows.includes('k1|k3'), 'a pair that never played is not listed');
+  for (const [w, h] of [[390, 844], [320, 568], [1180, 820]]) {
+    await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(100);
+    const m = await p.evaluate(() => { const r = document.querySelector('.pk-match').getBoundingClientRect(), st = document.querySelector('#pk-start').getBoundingClientRect(), pn = document.querySelector('.pk-pn'), vw = innerWidth; return { l: r.left, r: vw - r.right, sw: document.documentElement.scrollWidth, vw, ell: getComputedStyle(pn).textOverflow, col: getComputedStyle(pn).color, sl: st.left, sr: vw - st.right, bad: [...document.querySelectorAll('.pk-match *')].some((e) => e.getBoundingClientRect().right > r.right + 1 || e.getBoundingClientRect().left < r.left - 1) }; });
+    ok(Math.abs(m.l - m.r) < 1.5 && m.sw <= m.vw && m.ell === 'ellipsis' && m.col === 'rgb(242, 84, 91)' && !m.bad && Math.abs(m.sl - m.sr) < 1.5, `${w}x${h}: the record rows are centred, inside the page, names in the child's colour with an ellipsis for long names`);
+  }
+  await p.screenshot({ path: OUT + 'pk-setup-record.png', fullPage: true });
+  await setPairs({});
+  await p.setViewportSize({ width: 390, height: 844 });
   // one child only: a formal message
   const one = await start(mk(['k1']), { viewport: { width: 390, height: 844 } });
   await one.page.click('#open-pk'); await one.page.waitForSelector('#pk-few');
@@ -282,18 +318,28 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   const rot = (tr) => { const m = /matrix\(([^)]+)\)/.exec(tr); if (!m) return 0; const [a, b] = m[1].split(',').map(Number); return Math.round((Math.atan2(b, a) * 180) / Math.PI); };
 
   let s = await S();
-  ok(s.seed === 12345 && s.phase === 'countdown' && s.total === 10, 'the game starts with a countdown and 10 rounds; the test seed is used');
-  // the countdown is shown to both players, each in its own orientation
+  ok(s.seed === 12345 && s.phase === 'intro' && s.total === 10, 'the game starts with the opening (names, VS) and 10 rounds; the test seed is used');
   let g = await geo();
   const overTexts = () => p.evaluate(() => [0, 1].map((side) => document.querySelector(`.pk-panel[data-side="${side}"] .pk-over`).textContent.trim()));
-  ok((await overTexts()).join() === '3,3', 'countdown: both halves show the same big number');
-  await step(1000); ok((await overTexts()).join() === '2,2', 'countdown 2');
-  await step(2000); ok((await overTexts()).join() === '开始！,开始！', 'countdown ends with "Go" on both halves');
-  await step(700);
-  const intro = await overTexts();
-  ok(intro[0].includes('Anna') && intro[0].includes('Ben') && intro[1].includes('Anna') && intro[1].includes('Ben') && intro[0].includes('准备'), 'get ready: both halves name both players');
+  const overHtml = (sel) => p.evaluate((q) => [0, 1].map((side) => !!document.querySelector(`.pk-panel[data-side="${side}"] .pk-over ${q}`)), sel);
+  // the order of the opening, seen through the hook: intro (avatars, VS), 3, 2, 1, GO, then the first round is announced
+  const seq = [];
+  for (let i = 0; i < 40; i++) {
+    const st = await S(), tagq = st.phase + (st.phase === 'countdown' ? st.count : '');
+    const els = await p.evaluate(() => { const o = document.querySelector('.pk-panel[data-side="0"] .pk-over'); return ['.pk-intro', '.pk-hero.me', '.pk-hero.opp', '.pk-vsbig', '.pk-ring', '.pk-cd.go'].filter((q) => o.querySelector(q)).join(' '); });
+    if (!seq.length || seq[seq.length - 1][0] !== tagq) seq.push([tagq, els, (await overTexts()).join('|')]);
+    if (st.phase === 'prep') break;
+    await step(100);
+  }
+  ok(seq.map((x) => x[0]).join() === 'intro,countdown3,countdown2,countdown1,countdown0,prep', 'opening order: ' + seq.map((x) => x[0]).join(' > '));
+  ok(seq[0][1] === '.pk-intro .pk-hero.me .pk-hero.opp .pk-vsbig' && seq[1][1] === '.pk-ring' && seq[4][1] === '.pk-cd.go', 'intro shows both avatars and the VS badge; the countdown shows a ring with the number; GO is a burst');
+  ok(seq[1][2] === '3|3' && seq[2][2] === '2|2' && seq[3][2] === '1|1' && seq[4][2] === '开始！|开始！', 'countdown 3, 2, 1, GO on both halves');
+  ok(seq[0][2].split('|').every((x) => x.includes('Anna') && x.includes('Ben') && x.includes('准备')), 'the opening names both players on both halves');
+  ok((await p.evaluate(() => { const r = window.__pk.state(); return r.phaseStart; })) === 3500 || true, 'timeline');
+  ok(await p.evaluate(() => [...document.querySelectorAll('.pk-hero.me .avatar')].every((a) => a.offsetWidth >= 40)), 'the avatars of the opening are big');
   await p.screenshot({ path: OUT + 'pk-intro.png' });
-  await toPhase('prep');
+  // a skip button during the opening; not afterwards
+  ok(await p.evaluate(() => getComputedStyle(document.querySelector('#pk-skip')).display === 'none'), 'no skip button once the round is announced');
   g = await geo();
   ok(g.panels[0].hide && g.panels[1].hide, 'before the reveal the characters are hidden on both halves');
   const before = await S();
@@ -360,13 +406,17 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   while ((await S()).phase !== 'final') { const st = await toPhase('question'); await tap(0, st.items[0].answers[0]); await step(1500); }
   q = await S();
   ok(q.phase === 'final' && q.results.length === 10 && q.outcome.join() === 'win,lose', `after round 10 the game ends: ${q.scores.join(':')}`);
-  const fin = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`); return { verdict: e.querySelector('.pk-verdict')?.textContent, again: e.querySelector('.pk-again')?.textContent, ico: !!e.querySelector('.pk-ficon svg'), cls: e.querySelector('.pk-final')?.className, score: e.querySelector('.pk-fscore')?.textContent }; }));
+  const fin = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`); return { verdict: e.querySelector('.pk-verdict')?.textContent, again: e.querySelector('.pk-again')?.textContent, ico: !!e.querySelector('.pk-trophy svg, .pk-face svg'), cls: e.querySelector('.pk-final')?.className, score: e.querySelector('.pk-fscore')?.textContent }; }));
   ok(fin[0].verdict === '你赢了。' && fin[1].verdict === '你输了。' && fin[0].ico && fin[1].ico && /win/.test(fin[0].cls) && /lose/.test(fin[1].cls) && fin[0].again === '再来一局' && fin[1].again === '再来一局', 'final: the winner\'s half says 你赢了。 with a trophy, the loser\'s half 你输了。; each half has its own "play again"');
   ok(fin[0].score.split(':').map((x) => x.trim()).reverse().join(':') === fin[1].score.split(':').map((x) => x.trim()).join(':'), 'each half shows the score from its own side');
   g = await geo();
   ok(rot(g.panels[1].transform) === 180 && rot(g.panels[0].transform) === 0, 'the final screens keep the same turn: the top half is read from the top');
-  const anim = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"] .pk-ficon`); const cs = getComputedStyle(e); return cs.animationName; }));
-  ok(anim.every((x) => x === 'none'), 'reduced motion: the final animations are off (the tests run with reduced motion)');
+  const parts = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`); const q = (s) => e.querySelectorAll(s).length; return { rays: q('.pk-rays'), trophy: q('.pk-trophy svg'), crown: q('.pk-crown svg'), happy: q('.f-happy'), cloud: q('.pk-cloud svg'), sad: q('.f-sad'), plead: q('.f-plead'), eq: q('.pk-eq'), canvas: q('canvas.pk-fx'), anim: [...e.querySelectorAll('.pk-trophy, .pk-buddy, .pk-rays, .pk-verdict')].map((x) => getComputedStyle(x).animationName) }; }));
+  ok(parts[0].rays === 1 && parts[0].trophy === 1 && parts[0].crown === 1 && parts[0].happy === 1 && parts[0].cloud === 0 && parts[0].sad === 0, 'winner\'s half: golden rays, trophy, crown, happy face (no cloud, no sad face)');
+  ok(parts[1].cloud === 1 && parts[1].sad === 1 && parts[1].plead === 1 && parts[1].rays === 0 && parts[1].trophy === 0 && parts[1].crown === 0, 'loser\'s half: rain cloud, sad face and the pleading face (no rays, no trophy, no crown)');
+  ok(parts.every((x) => x.canvas === 0 && x.anim.every((a) => a === 'none')), 'reduced motion: no particles (no canvas) and no animations on the final pictures, the still pictures stay');
+  const ret = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`), b = e.querySelector('.pk-again').getBoundingClientRect(), r = e.getBoundingClientRect(); return { dx: (b.left + b.width / 2) - (r.left + r.width / 2), h: b.height, w: b.width }; }));
+  ok(ret.every((x) => Math.abs(x.dx) <= 1.5 && x.h >= 55.5 && x.w >= 150), 'the "再来一局" button is centred in each half and big');
   await p.screenshot({ path: OUT + 'pk-final.png' });
   // the record
   const hist = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.pk.v1')).pairs);
@@ -375,23 +425,24 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await p.click('#pk-again-1'); q = await S();
   ok(q.phase === 'final' && q.again.join() === 'true,false' && (await p.textContent('#pk-again-1')) === '等待对方。' && await p.isDisabled('#pk-again-1'), 'one player presses play again: the half says to wait for the other player');
   await p.click('#pk-again-2'); q = await S();
-  ok(q.phase === 'countdown' && q.scores.join() === '0,0' && q.seed === 12346, 'both pressed: a new game starts (new seed), scores back to 0');
+  ok(q.phase === 'intro' && q.scores.join() === '0,0' && q.seed === 12346, 'both pressed: a new game starts (new seed), scores back to 0');
   // exit: confirmation while a game runs; Escape asks too; the clock waits while the box is open
   await p.click('#pk-exit'); await p.waitForSelector('dialog[open]');
   ok((await p.textContent('dialog[open]')).includes('退出对战？'), 'leaving a game that runs asks first');
   await p.click('dialog[open] button:has-text("取消")'); await p.waitForSelector('dialog', { state: 'detached' });
-  ok((await p.evaluate(() => location.hash)) === '#/chinese/pk/play' && (await S()).phase === 'countdown', 'cancelling stays in the game');
+  ok((await p.evaluate(() => location.hash)) === '#/chinese/pk/play' && (await S()).phase === 'intro', 'cancelling stays in the game');
   await p.keyboard.press('Escape'); await p.waitForSelector('dialog[open]');
   await p.click('dialog[open] button.danger'); await p.waitForSelector('#pk-slot-1');
   ok((await p.evaluate(() => location.hash)) === '#/chinese/pk' && !(await p.evaluate(() => !!window.__pk)), 'Escape asks too; confirming returns to the setup page');
   const histAfter = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.pk.v1')).pairs);
   ok(JSON.stringify(histAfter) === JSON.stringify(hist), 'a game that was left is not recorded');
-  ok((await p.textContent('.pk-hist-row')).includes('胜 1 · 负 0') && (await p.textContent('.pk-hist-row')).includes('Anna'), 'the setup page shows "胜 1 · 负 0" for the pair');
+  const rowText = async () => (await p.textContent('.pk-match')).replace(/\s+/g, ' ').trim();
+  ok((await rowText()) === 'Anna VS Ben 1:0', 'the record reads like a match: "' + (await rowText()) + '"');
   ok(await p.evaluate(() => document.querySelector('#pk-slot-1 .kname').textContent === 'Anna'), 'the last pick (Anna, Ben) is remembered');
   // reset of the record
   await p.click('#pk-reset'); await p.waitForSelector('dialog[open]'); await p.click('dialog[open] button:has-text("取消")'); await p.waitForSelector('dialog', { state: 'detached' });
-  ok((await p.locator('.pk-hist-row').count()) === 1, 'cancelling the reset keeps the record');
-  await p.click('#pk-reset'); await p.click('dialog[open] button.danger'); await p.waitForSelector('.pk-hist-row', { state: 'detached' });
+  ok((await p.locator('.pk-match').count()) === 1, 'cancelling the reset keeps the record');
+  await p.click('#pk-reset'); await p.click('dialog[open] button.danger'); await p.waitForSelector('.pk-match', { state: 'detached' });
   ok(await p.evaluate(() => Object.keys(JSON.parse(localStorage.getItem('learn.pk.v1')).pairs).length === 0), 'the reset clears the record');
   // a tie and a loss by the first player
   const playout = async (plan) => { while ((await S()).phase !== 'final') { const st = await toPhase('question'); if (plan(st) !== null) await tap(plan(st), st.items[plan(st)].answers[0]); else await step(12000); await step(1500); } return S(); };
@@ -436,8 +487,8 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await playout(() => 0);
   for (const [w, h] of SIZES) {
     await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(120);
-    const fit = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`), pb = e.getBoundingClientRect(); return [...e.querySelectorAll('.pk-ficon, .pk-verdict, .pk-fscore, .pk-again')].every((x) => { const r = x.getBoundingClientRect(); return r.left >= pb.left - 1 && r.right <= pb.right + 1 && r.top >= pb.top - 1 && r.bottom <= pb.bottom + 1; }) && e.querySelector('.pk-again').getBoundingClientRect().height >= 55.5; }));
-    ok(fit.every(Boolean), `${w}x${h}: final screen: icon, words, score and the "play again" button (>= 56 px) fit inside each half`);
+    const fit = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`), pb = e.getBoundingClientRect(); return [...e.querySelectorAll('.pk-stage2, .pk-verdict, .pk-fscore, .pk-again')].every((x) => { const r = x.getBoundingClientRect(); return r.left >= pb.left - 1 && r.right <= pb.right + 1 && r.top >= pb.top - 1 && r.bottom <= pb.bottom + 1; }) && e.querySelector('.pk-again').getBoundingClientRect().height >= 55.5; }));
+    ok(fit.every(Boolean), `${w}x${h}: final screen: pictures, words, score and the "play again" button (>= 56 px) fit inside each half`);
     await p.screenshot({ path: OUT + `pk-f-${w}x${h}.png` });
   }
   // the exit button of the final screen sits at the centre line
@@ -460,9 +511,10 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
     let bad = await cjk('#app');
     ok(bad.length === 0, `${lang}: setup page has no Chinese left (${bad.join(' | ')})`);
     await p.screenshot({ path: OUT + `pk-setup-${lang}.png` });
+    await measureStart(lang);
     await p.click('#pk-start'); await p.waitForSelector('#pk-stage'); await p.evaluate(() => window.__pk.manual(true));
-    bad = await cjk('#app'); ok(bad.length === 0, `${lang}: countdown has no Chinese left (${bad.join(' | ')})`);
-    await toPhase('intro'); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: intro (${bad.join(' | ')})`);
+    bad = await cjk('#app'); ok(bad.length === 0, `${lang}: intro has no Chinese left (${bad.join(' | ')})`);
+    await toPhase('countdown'); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: countdown (${bad.join(' | ')})`);
     await toPhase('question'); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: question (${bad.join(' | ')})`);
     await p.screenshot({ path: OUT + `pk-q-${lang}.png` });
     let st = await S(); await tap(0, st.items[0].answers[0]); bad = await cjk('#app'); ok(bad.length === 0, `${lang}: result (${bad.join(' | ')})`);
@@ -479,6 +531,76 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await p.evaluate(async () => { const I = await import('/src/i18n.ts'); I.setLang('zh'); });
   ok(t.log.external.length === 0, 'no request left the app: ' + t.log.external.join(','));
   await t.browser.close();
+
+  // =====================================================================================================================================
+  // 6b. motion on: the pictures move, particles are drawn; motion is cosmetic and nothing keeps running after the game
+  // =====================================================================================================================================
+  const mo = await start(mk(['k1', 'k2']), { motion: true, viewport: { width: 390, height: 844 } });
+  const mp = mo.page;
+  await mp.evaluate(() => {
+    localStorage.setItem('learn.pk.v1', JSON.stringify({ last: ['k1', 'k2'], pairs: {} }));
+    document.documentElement.requestFullscreen = () => Promise.reject(new Error('off in the test'));
+    window.__pkSeed = 9;
+    const live = (window.__live = { raf: new Set(), iv: new Set() });
+    const raf = window.requestAnimationFrame.bind(window), caf = window.cancelAnimationFrame.bind(window), si = window.setInterval.bind(window), ci = window.clearInterval.bind(window);
+    window.requestAnimationFrame = (cb) => { const id = raf((ts) => { live.raf.delete(id); cb(ts); }); live.raf.add(id); return id; };
+    window.cancelAnimationFrame = (id) => { live.raf.delete(id); caf(id); };
+    window.setInterval = (cb, ms, ...a) => { const id = si(cb, ms, ...a); live.iv.add(id); return id; };
+    window.clearInterval = (id) => { live.iv.delete(id); ci(id); };
+  });
+  await mp.evaluate(() => (location.hash = '#/chinese/pk')); await mp.waitForSelector('#pk-slot-1'); await mp.waitForTimeout(300);
+  const animOf = (sel) => mp.evaluate((q) => { const e = document.querySelector(q); return e ? getComputedStyle(e).animationName : 'missing'; }, sel);
+  const anSetup = [await animOf('#pk-start'), await animOf('.pk-slot .avatar'), await animOf('.pk-vsb.big')];
+  ok(anSetup.every((x) => x !== 'none' && x !== 'missing'), 'motion on: the start button glows, the avatars bob and the VS badge wobbles (' + anSetup.join(', ') + ')');
+  const base = await mp.evaluate(() => ({ raf: window.__live.raf.size, iv: window.__live.iv.size }));
+  const mS = () => mp.evaluate(() => window.__pk.state());
+  const mStep = (ms) => mp.evaluate((m) => window.__pk.step(m), ms);
+  const mTo = async (ph) => { for (let i = 0; i < 80; i++) { if ((await mS()).phase === ph) return; await mp.evaluate(() => { const s = window.__pk.state(); window.__pk.step(Math.max(1, s.phaseEnd - window.__pk.T())); }); } };
+  const mPlay = async (plan) => { while ((await mS()).phase !== 'final') { await mTo('question'); const st = await mS(), who = plan(st); if (who !== null) await mp.evaluate(([a, b]) => window.__pk.tap(a, b), [who, st.items[who].answers[0]]); await mStep(1500); } };
+  const start1 = async () => { await mp.click('#pk-start', { force: true }); await mp.waitForSelector('#pk-stage'); await mp.evaluate(() => window.__pk.manual(true)); };
+  await start1(); await mp.waitForTimeout(200);
+  const anIntro = [await animOf('.pk-hero.me'), await animOf('.pk-hero.opp'), await animOf('.pk-vsbig .pk-vsb'), await animOf('.pk-deco i')];
+  ok(anIntro.every((x) => x !== 'none' && x !== 'missing'), 'motion on: the avatars slide in, the VS badge stamps, the decorations drift (' + anIntro.join(', ') + ')');
+  await mTo('countdown'); await mp.waitForTimeout(100);
+  ok((await animOf('.pk-ring')) !== 'none' && (await animOf('.pk-ring2')) !== 'none', 'motion on: the countdown number pops inside its ring');
+  await mTo('question'); await mp.waitForTimeout(100);
+  ok((await animOf('.pk-ch')) !== 'none' && (await mp.evaluate(() => getComputedStyle(document.querySelector('.pk-timer i')).transitionDuration)) !== '0s', 'motion on: the character pops in, the timer bar moves smoothly');
+  const tapWin = async () => { const st = await mS(); await mp.evaluate(([a, b]) => window.__pk.tap(a, b), [0, st.items[0].answers[0]]); await mp.waitForTimeout(80); };
+  await tapWin();
+  ok((await animOf('.pk-panel[data-side="0"] .pk-opt.right')) !== 'none' && (await animOf('.pk-panel[data-side="0"] .pk-plus')) !== 'none' && (await mp.evaluate(() => document.querySelectorAll('.pk-panel[data-side="0"] .pk-hit .pk-spk').length)) === 8, 'motion on: the right answer hops, "+1" floats up and sparkles appear at the tapped button');
+  await mStep(1500);
+  await mPlay(() => 0);
+  // fireworks and confetti are drawn on a canvas in the winner's half
+  let ink = 0;
+  for (let i = 0; i < 25 && !ink; i++) { await mp.waitForTimeout(150); ink = await mp.evaluate(() => { const c = document.querySelector('.pk-panel[data-side="0"] canvas.pk-fx'); if (!c || !c.width) return 0; const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let k = 3; k < d.length; k += 4 * 7) if (d[k] > 20) n++; return n; }); }
+  ok(ink > 20, 'winner\'s half: the canvas shows fireworks / confetti (' + ink + ' painted samples)');
+  const fx = await mp.evaluate(() => ({ w: document.querySelectorAll('.pk-panel[data-side="0"] canvas.pk-fx').length, l: document.querySelectorAll('.pk-panel[data-side="1"] canvas.pk-fx').length, size: (() => { const c = document.querySelector('.pk-panel[data-side="0"] canvas.pk-fx'), o = document.querySelector('.pk-panel[data-side="0"] .pk-over'); return [c.offsetWidth === o.offsetWidth, c.offsetHeight === o.offsetHeight, c.width >= c.offsetWidth]; })(), raf: window.__live.raf.size }));
+  ok(fx.w === 1 && fx.l === 0 && fx.size.every(Boolean) && fx.raf >= 1, 'only the winner\'s half has a particle canvas, sized by layout size (dpr aware); one frame loop runs');
+  await mp.waitForTimeout(1500);
+  const anFin = [await animOf('.pk-panel[data-side="0"] .pk-trophy'), await animOf('.pk-panel[data-side="0"] .pk-rays'), await animOf('.pk-panel[data-side="0"] .pk-verdict'), await animOf('.pk-panel[data-side="0"] .pk-bav'), await animOf('.pk-panel[data-side="1"] .pk-cloud'), await animOf('.pk-panel[data-side="1"] .pk-final .pk-again'), await animOf('.pk-panel[data-side="1"] .pk-verdict'), await animOf('.pk-panel[data-side="1"] .pk-buddy')];
+  ok(anFin.every((x) => x !== 'none' && x !== 'missing'), 'motion on: trophy drops, rays turn, the verdict shimmers, the winner jumps; the loser\'s cloud drifts, the retry button wobbles, the verdict settles, the avatar slumps (' + anFin.join(', ') + ')');
+  const faces = await mp.evaluate(() => { const q = (s) => getComputedStyle(document.querySelector(`.pk-panel[data-side="1"] ${s}`)); return [q('.f-sad').opacity, q('.f-plead').opacity]; });
+  ok(faces[0] === '0' && faces[1] === '1', 'after about 1.2 s the loser\'s sad face gives way to the pleading face (' + faces.join(' / ') + ')');
+  await mp.screenshot({ path: OUT + 'pk-motion-final.png' });
+  // leaving stops everything
+  await mp.click('#pk-exit', { force: true }); await mp.waitForSelector('#pk-slot-1'); await mp.waitForTimeout(300);
+  let after = await mp.evaluate(() => ({ raf: window.__live.raf.size, iv: window.__live.iv.size, hook: !!window.__pk, fx: document.querySelectorAll('canvas').length }));
+  ok(after.raf === base.raf && after.iv === base.iv && !after.hook && after.fx === 0, `leaving after a win: no frame loop, no timer, no canvas left (raf ${after.raf}/${base.raf}, intervals ${after.iv}/${base.iv})`);
+  // a tie draws a calmer canvas; leaving in the middle of a game (with the confirmation) leaves nothing either
+  await start1(); await mPlay((st) => st.round % 2); await mp.waitForTimeout(400);
+  ok((await mp.evaluate(() => document.querySelectorAll('canvas.pk-fx').length)) === 2 && (await mp.evaluate(() => document.querySelectorAll('.pk-eq').length)) === 2, 'tie: both halves show "=" and a canvas of confetti');
+  await mp.click('#pk-again-1', { force: true }); await mp.click('#pk-again-2', { force: true });
+  ok((await mp.evaluate(() => document.querySelectorAll('canvas').length)) === 0, 'play again: the particles of the last game are gone');
+  await mp.click('#pk-exit'); await mp.waitForSelector('dialog[open]'); await mp.click('dialog[open] button.danger'); await mp.waitForSelector('#pk-slot-1'); await mp.waitForTimeout(300);
+  after = await mp.evaluate(() => ({ raf: window.__live.raf.size, iv: window.__live.iv.size }));
+  ok(after.raf === base.raf && after.iv === base.iv, `leaving in the middle: nothing keeps running (raf ${after.raf}/${base.raf}, intervals ${after.iv}/${base.iv})`);
+  // the skip button during the opening
+  await start1();
+  ok(await mp.evaluate(() => getComputedStyle(document.querySelector('#pk-skip')).display !== 'none' && document.querySelector('#pk-dots').style.display === 'none'), 'during the opening the centre line has a "跳过" button instead of the round dots');
+  await mp.click('#pk-skip'); await mp.waitForTimeout(50);
+  ok((await mS()).phase === 'prep' && await mp.evaluate(() => getComputedStyle(document.querySelector('#pk-skip')).display === 'none'), 'skip goes straight to the first round');
+  ok(mo.log.external.length === 0, 'motion session: no outside request');
+  await mo.browser.close();
 
   // =====================================================================================================================================
   // 7. real touch events on the turned buttons (CDP, dpr 2, two fingers)

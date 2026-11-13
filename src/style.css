@@ -1675,7 +1675,7 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 /* ===== 编程 (coding), rule 54: cl- = screens, cw- = the block editor, cs- = the scenes ===== */
 .cl-narrow { max-width: 560px; }
 .cl-shelf { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; margin: 2px 0 14px; padding: 10px 8px; background: rgba(255,255,255,.7); border: 3px solid var(--kid-line); border-radius: 22px; box-shadow: 0 5px 0 var(--kid-line); }
-.cl-trophy { display: block; width: 40px; height: 50px; flex: none; }
+.cl-trophy { display: block; width: 38px; height: 47px; flex: none; }
 .cl-trophy svg { width: 100%; height: 100%; display: block; }
 .cl-trophy:not(.got) { opacity: .75; }
 .cl-total { margin-left: 8px; font-weight: 900; color: #b87400; font-size: 20px; white-space: nowrap; }
@@ -1719,7 +1719,7 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .cl-stars { display: inline-flex; gap: 2px; }
 
 /* the level screen: scene + goal + tools on top (left), the program workspace and the palette below (right); side by side on wide landscape screens */
-.cl-page { --sh: min(33dvh, calc(100vw - 32px)); }
+.cl-page { --sh: min(31dvh, calc(100vw - 32px)); }
 .cl-hero h1 { font-size: 19px; }
 .cl-round { width: 46px; min-height: 46px; padding: 0; border-radius: 50%; font-size: 24px; font-weight: 900; flex: none; color: var(--kid); }
 .cl-main { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; padding: 8px calc(env(safe-area-inset-right) + 12px) calc(env(safe-area-inset-bottom) + 10px) calc(env(safe-area-inset-left) + 12px); }
@@ -1867,7 +1867,7 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .pk-slot-name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 22px; font-weight: 900; color: var(--kid); }
 .pk-slot-cap { padding: 2px 12px; border-radius: 999px; background: var(--kid); color: #fff; font-size: 13px; font-weight: 800; }
 .pk-empty { display: flex !important; align-items: center; justify-content: center; font-size: 40px; font-weight: 900; color: #fff; }
-.pk-vsb { display: block; flex: none; transform: rotate(-8deg); filter: drop-shadow(0 3px 0 rgba(166, 30, 77, .25)); }
+.pk-vsb { display: block; flex: none; transform: rotate(-8deg); filter: drop-shadow(0 3px 0 #a61e4d); }
 .pk-vsb svg { display: block; height: 100%; width: auto; }
 .pk-vsb.big { height: 54px; } .pk-vsb.small { height: 26px; } .pk-vsb.huge { height: calc(var(--pk-av, 60px) * 0.85); }
 .pk-msgs { display: flex; flex-direction: column; gap: 6px; }
@@ -2097,3 +2097,4 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 @keyframes pk-wobble2 { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
 @keyframes pk-bump-l { 0%, 100% { transform: translateX(-4%) rotate(-3deg); } 50% { transform: translateX(8%) rotate(5deg); } }
 @keyframes pk-bump-r { 0%, 100% { transform: translateX(4%) rotate(3deg); } 50% { transform: translateX(-8%) rotate(-5deg); } }
+@media (max-width: 360px) { .cl-trophy { width: 30px; height: 38px; } .cl-shelf { gap: 4px; padding: 8px 6px; } .cl-total { font-size: 17px; margin-left: 4px; } .top { gap: 4px; } }

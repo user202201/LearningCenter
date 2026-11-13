@@ -53,7 +53,7 @@ function varsBar(): { el: HTMLElement; set(v: Record<string, number>): void } {
 
 export function gridScene(world: GridWorld, init: State): Scene {
   const W = world.w * U, H = world.h * U;
-  const root = svg("svg", { viewBox: `0 0 ${W} ${H}`, class: "cs-svg", role: "img", "aria-label": "地图", preserveAspectRatio: "xMidYMid meet" });
+  const root = svg("svg", { viewBox: `0 0 ${W} ${H}`, class: "cs-svg", "aria-hidden": "true", preserveAspectRatio: "xMidYMid meet" });
   const stars = new Map<string, SVGElement>(), lamps = new Map<string, SVGElement>();
   for (let y = 0; y < world.h; y++) for (let x = 0; x < world.w; x++) {
     const c = world.cells[y][x];
@@ -71,6 +71,7 @@ export function gridScene(world: GridWorld, init: State): Scene {
   root.append(robot);
   const vars = varsBar();
   const wrap = div("cs-wrap cs-grid");
+  wrap.setAttribute("role", "img"); wrap.setAttribute("aria-label", "地图");
   wrap.style.setProperty("--ar", String(world.w / world.h));
   wrap.append(root as unknown as Node, vars.el);
   let moodNow: Mood | "" = "";
@@ -94,7 +95,7 @@ export function gridScene(world: GridWorld, init: State): Scene {
 }
 
 export function turtleScene(init: State, target?: Seg[]): Scene {
-  const root = svg("svg", { viewBox: "-100 -100 200 200", class: "cs-svg", role: "img", "aria-label": "画布", preserveAspectRatio: "xMidYMid meet" });
+  const root = svg("svg", { viewBox: "-100 -100 200 200", class: "cs-svg", "aria-hidden": "true", preserveAspectRatio: "xMidYMid meet" });
   root.append(svg("rect", { x: -100, y: -100, width: 200, height: 200, rx: 8, fill: "#fffdf5" }));
   let grid = "";
   for (let v = -80; v <= 80; v += 20) grid += `M${v} -100V100M-100 ${v}H100`;
@@ -108,6 +109,7 @@ export function turtleScene(init: State, target?: Seg[]): Scene {
   root.append(tgt, drawn, pen);
   const vars = varsBar();
   const wrap = div("cs-wrap cs-turtle-wrap");
+  wrap.setAttribute("role", "img"); wrap.setAttribute("aria-label", "画布");
   wrap.append(root as unknown as Node, vars.el);
   let first = true;
   return {

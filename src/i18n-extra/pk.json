@@ -47,10 +47,6 @@
     "Record of games",
     "Historique des parties"
   ],
-  "胜 {0} · 负 {1}": [
-    "won {0} · lost {1}",
-    "gagné {0} · perdu {1}"
-  ],
   "平 {0}": [
     "drawn {0}",
     "nul {0}"
@@ -118,5 +114,13 @@
   "本局尚未结束。退出后本局不计入记录。": [
     "The game is not over. If you leave, it will not be recorded.",
     "La partie n'est pas terminée. Si vous quittez, elle ne sera pas enregistrée."
+  ],
+  "跳过": [
+    "Skip",
+    "Passer"
+  ],
+  "{0} 对 {1}，{2} 比 {3}": [
+    "{0} vs {1}, {2} to {3}",
+    "{0} contre {1}, {2} à {3}"
   ]
 }

@@ -12,7 +12,7 @@ fs.mkdirSync(OUT, { recursive: true });
 const CJK = /[　-〿一-鿿＀-￯]/;
 
 const kidIds = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.kids.json')).kids.map((k) => k.id));
-const seen = (all = true) => JSON.stringify({ seen: all ? ['seq', 'loop', 'nest', 'until', 'if', 'ifelse', 'while', 'func', 'param', 'var', 'arith', 'turtle', 'pen'] : [], speed: 'fast', code: false, drawings: {} });
+const seen = (all = true) => JSON.stringify({ seen: all ? ['seq', 'loop', 'nest', 'until', 'if', 'ifelse', 'while', 'func', 'param', 'var', 'arith', 'turtle', 'pen'] : [], speed: 'fast', drawings: {} });
 const open = async (opts = {}) => {
   const t = await start(new Map(), { local: true, today: '2026-11-12', viewport: { width: 390, height: 844 }, ...opts });
   await addKid(t.page, 'Dory');
@@ -304,7 +304,7 @@ const chineseLeft = (page) => page.evaluate((src) => {
   ok((await page.locator('.cw-pitem').count()) >= 8 && !(await page.locator('.cs-target path').count()), 'the free canvas has the turtle blocks and no target picture');
   await page.evaluate(() => window.__coding.run('repeat 4 { fd 40 tr 90 }'));
   await page.click('#cl-run');
-  await page.waitForFunction(() => document.querySelector('.cs-wrap').dataset.segs === '4', null, { timeout: 8000 });
+  await page.waitForFunction(() => /已画完/.test(document.querySelector('#cl-msg').textContent) && document.querySelector('.cs-wrap').dataset.segs === '4', null, { timeout: 8000 });
   ok(/已画完/.test(await page.textContent('#cl-msg')), 'a program draws on the canvas (4 segments) and says "drawing finished"');
   await page.click('#cl-save');
   ok(JSON.parse(await page.evaluate(() => localStorage.getItem('learn.coding.v1'))).drawings[t.id].length === 1, 'save keeps the drawing on this device (learn.coding.v1)');
@@ -372,7 +372,7 @@ const chineseLeft = (page) => page.evaluate((src) => {
       await p.waitForTimeout(100);
       const sc = await metrics('.cs-wrap'), ws = await metrics('.cw-ws'), pal = await metrics('.cw-pal'), main = await metrics('.cl-main');
       const small = await p.evaluate(() => [...document.querySelectorAll('.cw-pitem, .cw-ws .cw-b, .cw-ubtn, #cl-run, #cl-step, #cl-stop, #cl-hint')].filter((e) => e.getBoundingClientRect().height > 0 && e.getBoundingClientRect().height < 40).map((e) => e.className + ':' + Math.round(e.getBoundingClientRect().height)));
-      ok(await sw() && sc.w >= 140 && ws.w >= 220 && ws.h >= 90 && pal.h >= 40 && small.length === 0, `${name} ${label}: no overflow, scene ${sc.w}x${sc.h}, workspace ${ws.w}x${ws.h}, palette ${pal.h} high, every button / block at least 40 px high` + (small.length ? ' SMALL: ' + small.slice(0, 3) : ''));
+      ok(await sw() && sc.w >= 120 && sc.h >= 140 && ws.w >= 220 && ws.h >= 90 && pal.h >= 40 && small.length === 0, `${name} ${label}: no overflow, scene ${sc.w}x${sc.h}, workspace ${ws.w}x${ws.h}, palette ${pal.h} high, every button / block at least 40 px high` + (small.length ? ' SMALL: ' + small.slice(0, 3) : ''));
       // the scene is centred in its column
       const scn = await p.evaluate(() => { const c = document.querySelector('.cl-scene').getBoundingClientRect(), s2 = document.querySelector('.cs-wrap').getBoundingClientRect(); return Math.abs((s2.left - c.left) - (c.right - s2.right)); });
       ok(scn <= 2, `${name} ${label}: the scene is centred in its column (off by ${Math.round(scn)} px)`);
@@ -417,8 +417,9 @@ const chineseLeft = (page) => page.evaluate((src) => {
     await lvl(s, 'w6/12'); await scan('level 6-12');
     await go(p, `#/coding/${s.id}/r3`, '.cw-pitem'); await scan('random');
     await go(p, `#/coding/${s.id}/free`, '.cw-pitem'); await scan('free drawing');
-    await p.evaluate(() => window.__coding.run('repeat 4 { fd 40 tr 90 }')); await p.click('#cl-run'); await p.waitForTimeout(1200); await scan('drawn'); await p.click('#cl-save'); await p.click('#cl-gallery'); await p.waitForSelector('.cl-gal-item'); await scan('gallery');
+    await p.evaluate(() => window.__coding.run('repeat 4 { fd 40 tr 90 }')); await p.click('#cl-run'); await p.waitForFunction(() => document.querySelector('#cl-msg').textContent.length > 0); await scan('drawn'); await p.click('#cl-save'); await p.click('#cl-gallery'); await p.waitForSelector('.cl-gal-item'); await scan('gallery');
     await p.screenshot({ path: OUT + `coding-${name}-gallery.png` });
+    await p.click('#cl-gal-close');
     ok(left.length === 0, `${name}: no Chinese text is left on any coding screen (picker, children, map, world, lesson, level, hint, answer, result, lists, free drawing, gallery)` + (left.length ? ' FOUND: ' + left.join(' // ') : ''));
     // phones: the long French texts fit
     const sw = await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1);

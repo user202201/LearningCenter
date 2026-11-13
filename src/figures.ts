@@ -61,6 +61,8 @@ export const FIGS: Record<string, string> = {
   "state-organs": wrap(`${box(60, 6, 120, 24, "全国人民代表大会", "#ffd8a8", 12)}${[["国家主席", 4], ["国务院", 44], ["中央军委", 84], ["监察委", 124], ["最高法", 164], ["最高检", 204]].map(([n, x]) => `<path d="M120 30L120 46L${(x as number) + 16} 46L${(x as number) + 16} 66"/>${box(x as number - 2, 66, 36, 26, String(n), FILL2, 9)}`).join("")}${t(120, 112, "由人民代表大会产生，对它负责，受它监督", 10, "middle", RED)}${t(120, 130, "（国家机构的组成示意）", 10)}`),
   flower: wrap(`<path d="M120 138L120 74" stroke="#2f9e44" stroke-width="5"/><path d="M70 40Q60 90 120 80Q180 90 170 40Q150 62 120 50Q90 62 70 40Z" fill="#ffc9c9"/><path d="M120 76L120 34" stroke-width="3"/><circle cx="120" cy="30" r="6" fill="#fff3bf"/><path d="M96 78L88 46M144 78L152 46" stroke-width="2.5"/><circle cx="88" cy="42" r="6" fill="#ffd43b"/><circle cx="152" cy="42" r="6" fill="#ffd43b"/><ellipse cx="120" cy="92" rx="14" ry="16" fill="#e6fcf5"/><circle cx="120" cy="94" r="4" fill="#fcc2d7"/>${t(120, 16, "柱头", 11)}${t(60, 44, "花药", 11, "end")}${arrow(62, 46, 80, 44)}${t(180, 44, "花丝", 11, "start")}${arrow(178, 46, 160, 58)}${t(66, 96, "子房", 11, "end")}${arrow(68, 94, 104, 94)}${t(176, 96, "胚珠", 11, "start")}${arrow(174, 94, 126, 94)}${t(172, 66, "花瓣", 11, "start")}`),
 };
+import { SAFETY_FIGS } from "./safetyfig";
+Object.assign(FIGS, SAFETY_FIGS);   // the safety summaries' drawings (rule 59)
 export const figure = (id: string): HTMLElement | null => {
   const svg = FIGS[id];
   if (!svg) return null;

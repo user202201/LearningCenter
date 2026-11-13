@@ -14,7 +14,7 @@ const open = async (opts = {}) => {
   await addKid(t.page, 'Dory');
   t.id = await kidId(t.page);
   // the mini-lessons would open on their own: they have their own test
-  await t.page.evaluate(() => localStorage.setItem('learn.coding.v1', JSON.stringify({ seen: ['seq', 'loop', 'nest', 'until', 'if', 'ifelse', 'while', 'func', 'param', 'var', 'arith', 'turtle', 'pen'], speed: 'fast', code: false, drawings: {} })));
+  await t.page.evaluate(() => localStorage.setItem('learn.coding.v1', JSON.stringify({ seen: ['seq', 'loop', 'nest', 'until', 'if', 'ifelse', 'while', 'func', 'param', 'var', 'arith', 'turtle', 'pen'], speed: 'fast', drawings: {} })));
   return t;
 };
 const go = async (page, id, lv) => { await clearToasts(page);  await page.evaluate((i) => (location.hash = `#/coding/${i}`), id); await page.waitForSelector('.cl-island'); await page.evaluate(([i, l]) => (location.hash = `#/coding/${i}/${l}`), [id, lv]); await page.waitForSelector('.cw .cw-pitem'); await page.waitForTimeout(150); };

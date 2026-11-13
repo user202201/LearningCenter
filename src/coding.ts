@@ -218,7 +218,8 @@ function playScreen(p: Play) {
   scene.render(inst0.state);
   let editor!: Editor;
   let mach: Machine | null = null, timer = 0, dry: Evaluation | null = null, failures = 0, usedAnswer = false, running = false, stepMode = false, cap = Infinity, shown = 0;
-  const codeEl = h("pre", { class: "cl-code user", id: "cl-code", hidden: !local.code && !free && level.world < 3 });
+  const codeOn = local.code ?? (!free ? level.world >= 3 && innerWidth >= 700 : false);
+  const codeEl = h("pre", { class: "cl-code user", id: "cl-code", hidden: !codeOn });
   const showCode = () => { codeEl.textContent = toText(editor.program()) || "// "; };
   editor = createEditor({
     palette: level.palette, funcs: level.funcs, vars: level.vars, conds: level.conds, max: level.max, program: level.givenProg,

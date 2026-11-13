@@ -49,14 +49,14 @@ export function nextLevelId(id: string): string | null {
 
 // ---------- this device ----------
 export interface Drawing { id: string; date: string; prog: Program }
-export interface Local { seen: string[]; speed: "slow" | "normal" | "fast"; code: boolean; drawings: Record<string, Drawing[]> }
+export interface Local { seen: string[]; speed: "slow" | "normal" | "fast"; /** the pseudo-code panel: null = not chosen yet (shown from world 3 on wide screens) */ code: boolean | null; drawings: Record<string, Drawing[]> }
 const KEY = "learn.coding.v1";
 export const MAX_DRAWINGS = 12;
 export function loadLocal(): Local {
   try {
     const j = JSON.parse(localStorage.getItem(KEY) ?? "{}");
-    return { seen: Array.isArray(j.seen) ? j.seen : [], speed: j.speed === "slow" || j.speed === "fast" ? j.speed : "normal", code: !!j.code, drawings: j.drawings && typeof j.drawings === "object" ? j.drawings : {} };
-  } catch { return { seen: [], speed: "normal", code: false, drawings: {} }; }
+    return { seen: Array.isArray(j.seen) ? j.seen : [], speed: j.speed === "slow" || j.speed === "fast" ? j.speed : "normal", code: typeof j.code === "boolean" ? j.code : null, drawings: j.drawings && typeof j.drawings === "object" ? j.drawings : {} };
+  } catch { return { seen: [], speed: "normal", code: null, drawings: {} }; }
 }
 export function saveLocal(l: Local): void { try { localStorage.setItem(KEY, JSON.stringify(l)); } catch { /* private window: forgotten on reload */ } }
 export function patchLocal(f: (l: Local) => void): Local { const l = loadLocal(); f(l); saveLocal(l); return l; }
