@@ -38,3 +38,4 @@
 39-no-double-tap-zoom
 40-games-shell
 51-secret-subjects
+52-math-scratchpad
