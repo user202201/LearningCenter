@@ -47,7 +47,7 @@ export const def: SimDef = {
     }
   },
   tasks: [
-    { id: "bubbles", text: "30–40 °C、糖的浓度 5% 以上、酵母菌 2 g 以上：发酵 30 分钟，累计二氧化碳超过 100 mL（气球鼓起）", check: (s) => s.mode === 0 && s.T >= 30 && s.T <= 40 && s.sugar >= 5 && s.yeast >= 2 && s.t >= 30 && gas(s) > 100 },
+    { id: "bubbles", text: "30–40 °C、糖的浓度 5% 以上、酵母菌 2 g 以上：发酵 30 分钟，累计二氧化碳超过 60 mL（气球鼓起）", check: (s) => s.mode === 0 && s.T >= 30 && s.T <= 40 && s.sugar >= 5 && s.yeast >= 2 && s.t >= 30 && gas(s) > 60 },
     { id: "hot", text: "把温度升到 65 °C 以上：发酵 10 分钟后没有气体（酵母菌被杀死）", check: (s) => s.mode === 0 && s.T >= 65 && s.sugar >= 5 && s.t >= 10 && gas(s) === 0 },
     { id: "log", text: "细菌在 37 °C 下培养：找到对数期（数量迅速增加）", check: (s) => s.mode === 1 && s.T === 37 && Mo.bacteria(s.T, s.hours).phase === "对数期" },
     { id: "death", text: "37 °C 下继续培养，找到衰亡期", check: (s) => s.mode === 1 && s.T === 37 && Mo.bacteria(s.T, s.hours).phase === "衰亡期" },
