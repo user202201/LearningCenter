@@ -21,8 +21,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const timeEl = h("span", { class: "hn-stat", id: "hn-time" }, "");
   const bestEl = h("span", { class: "hn-stat best", id: "hn-best" }, "");
   const levelBtns = Array.from({ length: MAX_DISCS - MIN_DISCS + 1 }, (_, i) => {
-    const k = MIN_DISCS + i;
-    return h("button", { class: "hn-lv", "data-n": String(k), "aria-label": `${k} 个圆盘`, onclick: () => { ctx.sfx("tap"); stopDemo(); n = k; ctx.store.set("level", n); reset(); } }, String(k));
+    const k = MIN_DISCS + i, label = `${k} 个圆盘`;
+    return h("button", { class: "hn-lv", "data-n": String(k), "aria-label": label, onclick: () => { ctx.sfx("tap"); stopDemo(); n = k; ctx.store.set("level", n); reset(); } }, String(k));
   });
   const undoBtn = h("button", { class: "mopt", id: "hn-undo", onclick: () => undo() }, "撤销");
   const hintBtn = h("button", { class: "mopt", id: "hn-hint", onclick: () => showHint() }, "提示");
@@ -33,7 +33,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     h("div", { class: "hn-levels", role: "group", "aria-label": "圆盘数" }, ...levelBtns),
     h("div", { class: "hn-acts" }, undoBtn, hintBtn, restartBtn, demoBtn));
 
-  const pegEls = [0, 1, 2].map((p) => h("div", { class: "hn-peg", "data-p": String(p), "aria-label": `第 ${p + 1} 柱` }, h("i", { class: "hn-post" }), h("b", { class: "hn-no" }, String(p + 1))));
+  const pegEls = [0, 1, 2].map((p) => { const label = `第 ${p + 1} 柱`; return h("div", { class: "hn-peg", "data-p": String(p), "aria-label": label }, h("i", { class: "hn-post" }), h("b", { class: "hn-no" }, String(p + 1))); });
   const base = h("div", { class: "hn-base" });
   const stage = h("div", { class: "hn-stage", id: "hn-stage" }, base, ...pegEls);
   const title = h("h2", {}, ""), starsEl = h("div", { class: "hn-stars", id: "hn-stars" }), msg = h("p", { id: "hn-msg" }, ""), rec = h("p", { class: "hn-rec", id: "hn-rec" }, "");
@@ -66,7 +66,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     discEls = [];
     for (let d = 0; d < n; d++) {
       const [c, dk] = colorOf(d, n);
-      const el = h("div", { class: "hn-disc", "data-d": String(d), "aria-label": `圆盘 ${d + 1}`, style: `--c:${c};--dk:${dk}` }, h("i", { class: "hn-eye l" }), h("i", { class: "hn-eye r" }), h("b", { class: "hn-mouth" }));
+      const label = `圆盘 ${d + 1}`;
+      const el = h("div", { class: "hn-disc", "data-d": String(d), "aria-label": label, style: `--c:${c};--dk:${dk}` }, h("i", { class: "hn-eye l" }), h("i", { class: "hn-eye r" }), h("b", { class: "hn-mouth" }));
       stage.append(el); discEls.push(el);
     }
   }
