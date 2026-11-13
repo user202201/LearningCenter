@@ -13,6 +13,8 @@ import { pickKidGrade } from "./gradeui";
 import { openGame } from "./gameui";
 import { mascot } from "./art";
 import { subjectArt, shortcuts, subjectById } from "./hub";
+import * as R from "./readings";
+import { getLang } from "./i18n";
 
 /** what the English screens need from the app shell (main.ts) */
 export interface Ctx {
@@ -78,7 +80,7 @@ export async function renderHome() {
 }
 
 // ---------- a child ----------
-type Tab = "week" | "learned" | "game";
+type Tab = "week" | "learned" | "game" | "read";
 
 /** a week gets its 20 words once: only this week and next week are generated (earlier weeks that were never opened stay empty) */
 async function ensureWeek(k: M.Kid, start: string): Promise<void> {
@@ -123,6 +125,7 @@ export async function renderKid(id: string, tab: Tab) {
   if (curKid !== id || !curWeek) { curKid = id; curWeek = todayWeek(); }
   await ensureWeek(k, curWeek);
   if (my !== X.epoch()) return;
+  if (tab === "read") return void (await renderReading(k));
   const kid = cache.get(id) ?? M.EMPTY_KID;
   const map = W.wordMap(words);
   const n = M.allChars(kid).length;
@@ -184,7 +187,78 @@ function renderWeek(body: HTMLElement, k: M.Kid, kid: M.KidData, map: Map<string
   body.append(h("div", { class: "narrow week-narrow" }, bar,
     curWeek === t ? null : h("button", { class: "link", onclick: () => void go(t) }, "回到本周"),
     h("div", { class: "sec-row" }, h("h2", { class: "sec" }, `单词（${list.length}）`)),
-    list.length ? h("div", { class: "wlist" }, ...X.stagger(list.map((w) => wordRow(w, map)))) : h("p", { class: "empty" }, "这一周没有单词。")));
+    list.length ? h("div", { class: "wlist" }, ...X.stagger(list.map((w) => wordRow(w, map)))) : h("p", { class: "empty" }, "这一周没有单词。"),
+    readingCard(k)));
+}
+
+/** the weekly reading: a card under the words (English track only; the French track has no passages yet) */
+function readingCard(k: M.Kid): HTMLElement | null {
+  if (W.studyLang() !== "en") return null;
+  const slot = h("div", { class: "rd-slot" });
+  void R.loadReadings().then((all) => {
+    const r = R.readingFor(all, P.gradeOf(k.id) ?? 1, curWeek);
+    if (!r) return;
+    slot.append(h("div", { class: "sec-row" }, h("h2", { class: "sec" }, "本周阅读")),
+      h("button", { class: "rd-card tappable", id: "read-card", onclick: () => (location.hash = `#/english/${k.id}/read`) },
+        h("b", { class: "rd-title user" }, r.t), h("span", { class: "rd-snip user" }, r.text.replace(/\s+/g, " ").slice(0, 70) + "…"), h("span", { class: "rd-go" }, "读一读 ›")));
+  }).catch(() => { /* no readings: nothing is shown */ });
+  return slot;
+}
+
+/** the reading page: the passage (glossed words can be tapped), read aloud, three questions */
+async function renderReading(k: M.Kid) {
+  const my = X.epoch();
+  const all = await R.loadReadings();
+  if (my !== X.epoch()) return;
+  const r = R.readingFor(all, P.gradeOf(k.id) ?? 1, curWeek || todayWeek());
+  if (!r) return void (location.hash = `#/english/${k.id}`);
+  const lang = getLang();
+  const meaning = (g: R.Gloss) => (lang === "fr" ? g.fr : g.zh);
+  const bubble = h("div", { class: "rd-bubble", id: "rd-gloss", role: "status" }, "点一下带下划线的单词看意思");
+  const paras = r.text.split(/\n+/).map((para) => {
+    const p = h("p", { class: "rd-p user" });
+    for (const part of para.split(/([A-Za-z][A-Za-z'’-]*)/)) {
+      const g = /^[A-Za-z]/.test(part) ? R.glossOf(r.gl, part) : undefined;
+      if (g) p.append(h("span", { class: "rw-gl", role: "button", tabindex: "0", "data-w": g.w, onclick: () => { bubble.textContent = `${part} — ${meaning(g)}`; bubble.classList.add("on"); } }, part));
+      else p.append(part);
+    }
+    return p;
+  });
+  let speaking = false;
+  const speakBtn = h("button", { class: "sheet-btn", id: "rd-speak", onclick: () => {
+    try {
+      const s = window.speechSynthesis; if (!s) return;
+      if (speaking) { s.cancel(); speaking = false; speakBtn.textContent = "朗读全文"; return; }
+      s.cancel(); const u = new SpeechSynthesisUtterance(r.text.replace(/\n+/g, " ")); u.lang = "en-US"; u.rate = 0.85;
+      u.onend = () => { speaking = false; speakBtn.textContent = "朗读全文"; };
+      speaking = true; speakBtn.textContent = "停止朗读"; s.speak(u);
+    } catch { /* no speech on this device */ }
+  } }, "朗读全文");
+  let right = 0, done = 0;
+  const score = h("p", { class: "rd-score", id: "rd-score" });
+  const quiz = r.q.map((q, i) => {
+    const order = [q.a, ...q.w].map((x) => ({ x, k: [...`${i}${x}`].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 16777619), 2166136261) >>> 0 })).sort((a, b) => a.k - b.k).map((o) => o.x);
+    const box = h("div", { class: "rd-q", "data-q": String(i) }, h("b", { class: "user" }, `${i + 1}. ${q.q}`));
+    const btns = order.map((x) => h("button", { class: "rd-opt user", "data-right": x === q.a ? "1" : "0", onclick: (e: Event) => {
+      if (box.classList.contains("done")) return;
+      box.classList.add("done"); done++;
+      const ok = x === q.a; if (ok) right++;
+      (e.currentTarget as HTMLElement).classList.add(ok ? "right" : "wrong");
+      btns.forEach((b) => b.dataset.right === "1" && b.classList.add("right"));
+      if (done === r.q.length) score.textContent = `答对 ${right} / ${r.q.length} 题`;
+    } }, x));
+    box.append(h("div", { class: "rd-opts" }, ...btns));
+    return box;
+  });
+  X.show(h("div", { class: "page", style: "--kid:#2f9e44" },
+    h("header", { class: "top hero kid-hero" }, X.back(`#/english/${k.id}`, "返回"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), shortcuts(k.id, "english")),
+    h("main", { class: "scroll" }, h("div", { class: "narrow rd-narrow" },
+      h("h2", { class: "rd-h user", id: "rd-title" }, r.t),
+      h("div", { class: "rd-tools" }, speakBtn, h("span", { class: "muted small user" }, `来源：${r.src === "original" ? "原创" : r.src}`)),
+      h("div", { class: "rd-text", id: "rd-text" }, ...paras), bubble,
+      h("div", { class: "sec-row" }, h("h2", { class: "sec" }, "生词")),
+      h("div", { class: "rd-words" }, ...r.gl.map((g) => h("span", { class: "rd-w user" }, h("b", {}, g.w), ` ${meaning(g)}`))),
+      h("div", { class: "sec-row" }, h("h2", { class: "sec" }, "读后小测")), ...quiz, score))));
 }
 
 function renderLearned(body: HTMLElement, kid: M.KidData, map: Map<string, W.Word>) {

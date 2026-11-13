@@ -1477,8 +1477,8 @@ async function route() {
   if (sci) return void SC.renderKid(sci[1], sci[2] === "learned" ? "learned" : sci[2] === "game" ? "game" : "week");
   const math = /^#\/math\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
   if (math) return void MA.renderKid(math[1], math[2] === "learned" ? "learned" : math[2] === "game" ? "game" : "week");
-  const eng = /^#\/english\/([\w-]+)(?:\/(learned|game))?$/.exec(hash);
-  if (eng) return void E.renderKid(eng[1], eng[2] === "learned" ? "learned" : eng[2] === "game" ? "game" : "week");
+  const eng = /^#\/english\/([\w-]+)(?:\/(learned|game|read))?$/.exec(hash);
+  if (eng) return void E.renderKid(eng[1], eng[2] === "learned" ? "learned" : eng[2] === "game" ? "game" : eng[2] === "read" ? "read" : "week");
   const subject = /^#\/subject\/(\w+)$/.exec(hash);
   if (subject && subjectById(subject[1])) return renderSubject(subject[1]);
   return renderHubScreen();

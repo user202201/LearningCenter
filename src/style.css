@@ -768,3 +768,29 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .nt-must b { color: #c92a2a; font-size: 13px; }
 .nt-must ul { margin: 4px 0 0; padding-left: 18px; font-size: 15px; line-height: 1.55; font-weight: 800; color: #2d2230; }
 .nt-must li { margin: 2px 0; overflow-wrap: anywhere; }
+
+/* weekly English reading */
+.rd-card { display: flex; flex-direction: column; gap: 4px; width: 100%; text-align: left; padding: 14px 16px; border-radius: 20px; border: 2px solid #b2f2bb; box-shadow: 0 4px 0 #b2f2bb; background: #fff; cursor: pointer; font: inherit; }
+.rd-title { font-size: 18px; color: #237a35; }
+.rd-snip { font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.rd-go { align-self: flex-end; font-weight: 800; color: #2f9e44; }
+.rd-narrow { padding-bottom: 40px; }
+.rd-h { margin: 8px 0 6px; font-size: 22px; text-align: center; color: #237a35; overflow-wrap: anywhere; }
+.rd-tools { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.rd-text { padding: 14px 16px; border-radius: 20px; background: #fff; border: 2px solid var(--kid-line); }
+.rd-p { margin: 0 0 10px; font-size: 19px; line-height: 1.75; color: #2d2230; overflow-wrap: anywhere; }
+.rd-p:last-child { margin-bottom: 0; }
+.rw-gl { border-bottom: 3px dotted #2f9e44; cursor: pointer; }
+.rd-bubble { position: sticky; bottom: 8px; margin: 10px 0 0; padding: 10px 14px; border-radius: 16px; background: #ebfbee; color: #237a35; font-weight: 800; text-align: center; border: 2px solid #b2f2bb; }
+.rd-bubble.on { background: #2f9e44; color: #fff; }
+.rd-words { display: flex; flex-wrap: wrap; gap: 8px; }
+.rd-w { padding: 6px 10px; border-radius: 12px; background: #f1f3f5; font-size: 14px; }
+.rd-w b { color: #237a35; }
+.rd-q { margin: 10px 0; padding: 12px 14px; border-radius: 18px; background: #fff; border: 2px solid var(--kid-line); }
+.rd-q > b { display: block; margin-bottom: 8px; font-size: 16px; overflow-wrap: anywhere; }
+.rd-opts { display: grid; gap: 8px; }
+.rd-opt { text-align: left; padding: 10px 12px; border-radius: 14px; border: 2px solid #e9ecef; background: #f8f9fa; font: inherit; font-weight: 700; color: #2d2230; cursor: pointer; overflow-wrap: anywhere; }
+.rd-q.done .rd-opt { cursor: default; opacity: .6; }
+.rd-opt.right { background: #d3f9d8; border-color: #51cf66; color: #1b7a32; opacity: 1 !important; }
+.rd-opt.wrong { background: #ffe3e3; border-color: #ff8787; color: #c92a2a; opacity: 1 !important; }
+.rd-score { margin: 14px 0 0; text-align: center; font-size: 20px; font-weight: 900; color: #237a35; }
