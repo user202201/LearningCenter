@@ -21,13 +21,13 @@
 .sk-pad [data-d=D] { grid-column: 2; grid-row: 2; }
 .sk-pad [data-d=R] { grid-column: 3; grid-row: 2; }
 /* the level picker: covers the playing area */
-.sk-picker { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 6px; overflow-y: auto; border-radius: 22px; background: rgba(255, 246, 229, .96); color: #3a2e39; }
+.sk-picker { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 6px; overflow-y: auto; border-radius: 22px; background: #fff6e5; color: #3a2e39; }
 .sk-picker[hidden] { display: none; }
 .sk-picker h2 { margin: 0; font-size: 24px; color: #087f5b; }
 .sk-group { width: 100%; max-width: 520px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .sk-group h3 { margin: 2px 0 0; font-size: 16px; font-weight: 900; color: #087f5b; }
-.sk-levels { display: grid; grid-template-columns: repeat(4, 50px); gap: 6px 10px; justify-content: center; }
-.sk-lvl { position: relative; width: 50px; height: 50px; padding: 0; border-radius: 50%; background: #fff; color: #087f5b; border: 3px solid #96f2d7; box-shadow: 0 4px 0 #96f2d7; font-size: 18px; font-weight: 900; display: flex; align-items: center; justify-content: center; touch-action: manipulation; }
+.sk-levels { display: grid; grid-template-columns: repeat(4, 50px); gap: 12px 10px; justify-content: center; }
+.sk-lvl { position: relative; width: 50px; height: 50px; min-height: 0; min-width: 0; padding: 0; border-radius: 50%; background: #fff; color: #087f5b; border: 3px solid #96f2d7; box-shadow: 0 4px 0 #96f2d7; font-size: 18px; font-weight: 900; display: flex; align-items: center; justify-content: center; touch-action: manipulation; }
 .sk-lvl:active { transform: translateY(3px); box-shadow: 0 1px 0 #96f2d7; }
 .sk-lvl.done { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 4px 0 #087f5b; }
 .sk-lvl.cur { outline: 3px solid #e8590c; outline-offset: 2px; }
@@ -43,9 +43,10 @@
   .sk-picker { gap: 3px; padding: 6px; }
   .sk-picker h2 { font-size: 18px; }
   .sk-group { flex-direction: row; max-width: none; gap: 10px; justify-content: center; }
-  .sk-group h3 { writing-mode: horizontal-tb; width: 3.2em; }
+  .sk-group { padding-right: 62px; }
+  .sk-group h3 { width: 52px; text-align: right; margin: 0; }
   .sk-lvl { width: 40px; height: 40px; font-size: 15px; }
-  .sk-levels { grid-template-columns: repeat(8, 40px); gap: 4px 8px; }
+  .sk-levels { grid-template-columns: repeat(8, 40px); gap: 11px 8px; }
   .sk-picker .sk-close { min-height: 36px; }
 }
 @media (max-height: 640px) and (max-aspect-ratio: 5/4) { .sk-pad { grid-template-columns: repeat(3, 48px); grid-template-rows: repeat(2, 48px); } }

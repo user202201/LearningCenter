@@ -292,8 +292,8 @@ export function renderBeats(d: Deps): void {
   // ---------- the page ----------
   const root: HTMLElement = h("div", { class: "page inst-page bt-page", style: `--kid:${d.color}` }, d.hero("节奏编辑器", "#/subject/music", "音乐", "#/music/beats"),
     h("main", { class: "scroll" }, h("div", { class: "narrow bt-narrow" },
-      h("div", { class: "bt-bar" }, playBtn, h("button", { class: "pn-shift", id: "bt-slower", "aria-label": "慢一点", title: "慢一点", onclick: () => setBpm(p.bpm - 5) }, "−"), h("span", { class: "bt-bpmbox" }, bpmNum, h("span", { class: "muted small" }, "BPM")), h("button", { class: "pn-shift", id: "bt-faster", "aria-label": "快一点", title: "快一点", onclick: () => setBpm(p.bpm + 5) }, "+"), tempo),
-      h("div", { class: "bt-bar" }, h("span", { class: "muted small" }, "拍号"), sigBox, resBox, swingBtn, undoBtn, randomBtn, clearBtn, fullBtn),
+      h("div", { class: "bt-ctl" }, h("div", { class: "bt-bar" }, playBtn, h("button", { class: "pn-shift", id: "bt-slower", "aria-label": "慢一点", title: "慢一点", onclick: () => setBpm(p.bpm - 5) }, "−"), h("span", { class: "bt-bpmbox" }, bpmNum, h("span", { class: "muted small" }, "BPM")), h("button", { class: "pn-shift", id: "bt-faster", "aria-label": "快一点", title: "快一点", onclick: () => setBpm(p.bpm + 5) }, "+"), tempo),
+      h("div", { class: "bt-bar" }, h("span", { class: "muted small" }, "拍号"), sigBox, resBox, swingBtn, undoBtn, randomBtn, clearBtn, fullBtn)),
       presetBox, pager, wrap, panel, mine,
       h("div", { class: "bt-export" }, h("span", { class: "muted small" }, "导出长度："), barsBox, exportBtn),
       h("p", { class: "muted small center bt-help" }, "点格子点亮，手指拖过去可以连着画；键盘：方向键移动，空格或回车点亮，P 播放。"))));

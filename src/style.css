@@ -1112,3 +1112,11 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .bt-bar .mopt { min-height: 36px; }
 .bt-bar .pn-shift { min-width: 44px; }
 @media (max-width: 480px) { .bt-bar { gap: 6px; margin: 6px 0; } .bt-bar .sheet-btn, .bt-bar .pn-fullbtn, .bt-bar .pn-shift { padding: 0 10px; } .bt-bar .mopt { padding: 4px 9px; } .bt-presets { gap: 6px; margin: 6px 0; } .bt-play { min-width: 100px; } }
+.bt-ctl { display: contents; }
+@media (max-height: 520px) {
+  .inst-page.bt-page.inst-full .bt-ctl { display: flex; flex: none; gap: 14px; overflow-x: auto; margin: 0 0 6px; scrollbar-width: none; }
+  .inst-page.bt-page.inst-full .bt-ctl > .bt-bar { flex: none; margin: 0; }
+  .inst-page.bt-page.inst-full .bt-presets { display: none; }
+  .inst-page.bt-page.inst-full .bt-panel { padding: 2px 8px; }
+}
+@media (max-height: 520px) { .inst-page.bt-page.inst-full .bt-grid { grid-template-rows: auto repeat(10, minmax(23px, 1fr)); gap: 3px; padding: 5px 8px; } .inst-page.bt-page.inst-full .bt-lab { width: 24px; height: 24px; border-width: 2px; } .inst-page.bt-page.inst-full .bt-panel { min-height: 0; } .inst-page.bt-page.inst-full .bt-panel .pn-shift { height: 32px; min-height: 32px; } }

@@ -491,6 +491,8 @@ const top = (r) => ({ x: r.x + r.w / 2, y: r.y + Math.min(14, r.h / 4) });
     await q.waitForTimeout(900);
     const fl = await q.evaluate(() => ({ fly: document.querySelectorAll('.freecell-fly').length, conf: document.querySelectorAll('.freecell-conf').length, over: !!document.querySelector('#fc-win') }));
     ok(fl.fly >= 3 && fl.conf > 10 && !fl.over, `the win: bouncing cards (${fl.fly}) and confetti (${fl.conf}) first`);
+    const left = await q.evaluate(() => ({ hidden: [...document.querySelectorAll('.freecell-card:not(.freecell-fly)')].filter((e) => e.style.visibility === 'hidden').length, fly: document.querySelectorAll('.freecell-fly').length }));
+    ok(left.hidden >= left.fly, `a card that flies off leaves its pile: no king stays in front of the animation (${left.hidden} piles emptied, ${left.fly} cards flying)`);
     await q.screenshot({ path: OUT + 'freecell-win-bounce.png' });
     await q.waitForSelector('#fc-win', { timeout: 5000 });
     ok(true, 'then the friendly overlay');

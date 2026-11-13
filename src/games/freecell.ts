@@ -281,7 +281,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   // ---- winning: the classic bouncing cards, confetti, a friendly overlay
   let ov: HTMLElement | null = null;
   let flyers: { e: HTMLElement; x: number; y: number; vx: number; vy: number; t: number; dead: boolean }[] = [];
-  function clearFly(): void { cancelAnimationFrame(raf); raf = 0; flyers.forEach((f) => f.e.remove()); flyers = []; board.querySelectorAll(".freecell-conf").forEach((e) => e.remove()); }
+  function clearFly(): void { cancelAnimationFrame(raf); raf = 0; for (const c of cardEls) if (c) c.style.visibility = ""; flyers.forEach((f) => f.e.remove()); flyers = []; board.querySelectorAll(".freecell-conf").forEach((e) => e.remove()); }
   function win(): void {
     won = true; stopAuto();
     const best = bestMap(), key = String(deal), mv = userMoves();
@@ -317,6 +317,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
         e.className = "freecell-fly freecell-card " + (L.isRed(c) ? "red" : "blk");
         const p = where(c);
         board.append(e);
+        cardEls[c].style.visibility = "hidden";   // the card itself leaves its pile (the clone flies), so no king stays in front of the animation
         const dir = Math.random() < 0.5 ? -1 : 1;
         flyers.push({ e, x: p.x, y: p.y, vx: dir * (M.bw * (0.25 + Math.random() * 0.45)), vy: -M.bh * (0.2 + Math.random() * 0.8), t: 0, dead: false });
       }
