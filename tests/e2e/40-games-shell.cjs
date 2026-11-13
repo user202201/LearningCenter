@@ -5,7 +5,7 @@ const { ok, done } = checks();
 const fs = require('fs');
 const OUT = process.env.D || 'tests/out/work/';
 fs.mkdirSync(OUT, { recursive: true });
-const IDS = ['snake', 'tetris', 'bubble', 'match3', 'klotski', 'gomoku', 'chess', 'xiangqi', 'spider', 'freecell', 'g2048', 'memory', 'minesweeper', 'sokoban', 'watersort', 'game24', 'hanzipuzzle', 'spotdiff'];
+const IDS = [...require('fs').readFileSync('src/games/index.ts', 'utf8').matchAll(/id: "([a-z0-9]+)"/g)].map((m) => m[1]);   // (the list of games of the app itself: the test does not go stale when a game is added)
 
 (async () => {
   const t = await start(new Map(), { local: true, today: '2026-11-12', viewport: { width: 820, height: 1180 } });
