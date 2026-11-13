@@ -56,7 +56,7 @@ export const def: SimDef = {
   },
   tasks: [
     { id: "eq", text: "把两个种群的初始数量设在平衡点：数量几乎不再变化（先算 c/d 和 a/b）", check: (s) => s.mode === 0 && Math.abs(s.x0 - s.c / s.d) < 0.6 && Math.abs(s.y0 - s.a / s.b) < 0.6 },
-    { id: "crash", text: "增大捕食系数 b，使猎物数量的最低值降到 5 只以下", check: (s) => s.mode === 0 && Math.min(...lv(s).x) < 5 },
+    { id: "crash", text: "增加捕食者的初始数量，使猎物数量的最低值降到 5 只以下", check: (s) => s.mode === 0 && Math.min(...lv(s).x) < 5 },
     { id: "k90", text: "S 形增长：使种群数量达到环境容纳量的 90% 以上", check: (s) => s.mode === 1 && Mo.logistic(s.N0, s.r, s.K, s.T) >= 0.9 * s.K },
   ],
   quiz: Mo.quiz,
