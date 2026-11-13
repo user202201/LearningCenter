@@ -388,7 +388,7 @@ export class Machine {
       case "pendown": f.i++; st.pen = true; break;
       case "color": f.i++; st.color = b.c ?? "black"; break;
       case "set": f.i++; this.assign(b.name ?? "x", clampNum(E(b.e))); break;
-      case "change": f.i++; this.assign(b.name ?? "x", clampNum(this.lookup(b.name ?? "x") + E(b.e, 1))); break;
+      case "change": f.i++; this.assign(b.name ?? "x", clampNum((st.vars[b.name ?? "x"] ?? 0) + E(b.e, 1))); break;   // (the global variable: a parameter is only read, as in phase 1)
       case "repeat": {
         f.i++;
         const n = Math.max(0, Math.min(10000, Math.floor(E(b.n, 1))));

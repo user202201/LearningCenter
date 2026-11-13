@@ -92,7 +92,7 @@ const SVGNS = "http://www.w3.org/2000/svg";
 const sv = (tag: string, a: Record<string, string | number> = {}, kids: (Node | string)[] = []): SVGElement => { const e = document.createElementNS(SVGNS, tag); for (const k in a) e.setAttribute(k, String(a[k])); for (const c of kids) e.append(c); return e as SVGElement; };
 
 export function dataView(o: DataViewOpts): DataView {
-  const el = h("div", { class: `dv dv-${o.view}`, id: "dv", role: "img", "aria-label": "数据" });
+  const el = h("div", { class: `dv dvv-${o.view}`, id: "dv", role: "img", "aria-label": "数据" });   // (dvv-: the kind of view; not dv-bars / dv-graph, which are parts inside)
   const body = h("div", { class: "dv-body" });
   const info = h("div", { class: "dv-info", id: "dv-info" });
   el.append(body, info);

@@ -81,3 +81,6 @@
 87b-codinginfo-screens
 87c-codinginfo-controls
 87d-codinginfo-workshop
+85-coding2
+85b-coding2-editor
+85c-coding2-screens

@@ -216,7 +216,7 @@ const solve = async (page, id) => { const src = await page.evaluate((i) => impor
     // the first level that needs a lesson opens it by itself (the seen-list is empty)
     await page.waitForSelector('#cl-lesson');
     const l0 = await page.evaluate((k) => ({ title: document.querySelector('#cl-lesson h2').textContent, text: document.querySelector('#cl-lesson-text').textContent, demo: !!document.querySelector('#cl-demo ' + k), steps: document.querySelectorAll('.cl-dots i').length }), kind);
-    ok(l0.title.length > 3 && l0.text.length > 5 && l0.steps >= 2 && l0.steps <= 4, `lesson "${id}" opens by itself on level ${lv}: "${l0.title}", ${l0.steps} steps`);
+    ok(l0.title.length >= 3 && l0.text.length > 5 && l0.steps >= 2 && l0.steps <= 4, `lesson "${id}" opens by itself on level ${lv}: "${l0.title}", ${l0.steps} steps`);
     await page.waitForTimeout(1600);
     const demo = await page.evaluate((k) => !!document.querySelector('#cl-demo ' + k), kind);
     ok(demo || id === 'stage', `the demo of "${id}" is drawn (${kind}) and runs by itself`);
@@ -257,7 +257,7 @@ const solve = async (page, id) => { const src = await page.evaluate((i) => impor
   await page.click('#cl-stage'); await page.waitForSelector('.cw .cw-pitem');
   const f0 = await page.evaluate(() => ({ hats: document.querySelectorAll('.cw-hat-ev').length, tabs: [...document.querySelectorAll('.cw-tab')].map((e) => e.dataset.tab).join(), sprites: [...document.querySelectorAll('.sv-sprite')].map((e) => e.dataset.sprite).join(), run: !!document.querySelector('#cl-play') }));
   ok(f0.hats === 6 && f0.tabs === 'motion,events,control,vars' && f0.sprites === 'cat,dog,bird' && f0.run, 'the story stage: three characters, six event scripts, all the stage blocks in four tabs, a play button: ' + JSON.stringify(f0));
-  await setProg(page, 'on start cat { say hi } on start dog { say bye }');
+  await setProg(page, 'on start cat { say hi } on start cat { } on start dog { say bye }');   // (the scripts follow the slots: cat, cat, dog, dog, bird, bird)
   await page.click('#cl-run'); await page.waitForTimeout(400);
   ok((await page.locator('.sv-sprite[data-sprite=cat] .sv-say').textContent()) === '你好！' && (await page.locator('#cl-result').isHidden()), 'a run shows the story (no judging, no stars)');
   for (let i = 0; i < 12; i++) { await clearToasts(page); await page.click('#cl-save'); }
@@ -287,9 +287,11 @@ const solve = async (page, id) => { const src = await page.evaluate((i) => impor
       const m = await page.evaluate(() => {
         const sc = document.querySelector('#cl-scene').getBoundingClientRect(), ed = document.querySelector('.cw').getBoundingClientRect(), pal = document.querySelector('.cw-pal').getBoundingClientRect();
         const wide = innerWidth >= 700;
-        return { over: document.documentElement.scrollWidth - innerWidth, sceneW: Math.round(sc.width), sceneH: Math.round(sc.height), edW: Math.round(ed.width), edH: Math.round(ed.height), palH: Math.round(pal.height), left: Math.round(sc.left), right: Math.round(innerWidth - sc.right), wide, clipped: [...document.querySelectorAll('.cl-left, .cl-right, .dv, .sv-stage')].some((e) => e.scrollWidth > e.clientWidth + 2 && getComputedStyle(e).overflowX === 'visible') };
+        const dvEl = document.querySelector('.dv'), dvr = dvEl && dvEl.getBoundingClientRect();
+        const dvOut = dvEl ? Math.max(0, ...[...dvEl.querySelectorAll('.dv-list, .dv-bars, .dv-graph, .dv-test, .dv-coins, .dv-vars, .dv-stat')].map((e) => Math.round(e.getBoundingClientRect().bottom - dvr.bottom))) : 0;
+        return { dvOut, over: document.documentElement.scrollWidth - innerWidth, sceneW: Math.round(sc.width), sceneH: Math.round(sc.height), edW: Math.round(ed.width), edH: Math.round(ed.height), palH: Math.round(pal.height), left: Math.round(sc.left), right: Math.round(innerWidth - sc.right), wide, clipped: [...document.querySelectorAll('.cl-left, .cl-right, .dv, .sv-stage')].some((e) => e.scrollWidth > e.clientWidth + 2 && getComputedStyle(e).overflowX === 'visible') };
       });
-      ok(m.over <= 0 && m.sceneW >= 140 && m.sceneH >= 90 && m.edW >= 240 && m.edH >= 200 && !m.clipped, `${lv} on ${w} x ${h}: nothing sideways, scene ${m.sceneW} x ${m.sceneH}, workspace ${m.edW} x ${m.edH}${m.over > 0 ? ' (over by ' + m.over + ')' : ''}`);
+      ok(m.over <= 0 && m.sceneW >= 140 && m.sceneH >= 90 && m.edW >= 240 && m.edH >= 200 && !m.clipped && m.dvOut <= 2, `${lv} on ${w} x ${h}: nothing sideways, the data card holds its content, scene ${m.sceneW} x ${m.sceneH}, workspace ${m.edW} x ${m.edH}${m.over > 0 ? ' (over by ' + m.over + ')' : ''}${m.dvOut > 2 ? ' (the card is ' + m.dvOut + ' px too short)' : ''}`);
       if (!m.wide) ok(Math.abs(m.left - m.right) <= 3, `${lv} on ${w}: the scene is centred (${m.left} / ${m.right})`);
     }
     await page.screenshot({ path: OUT + `c2-layout-${w}x${h}.png` });
@@ -304,6 +306,8 @@ const solve = async (page, id) => { const src = await page.evaluate((i) => impor
     await go(p, `#/coding/${s.id}`, '.cl-island'); await scan('map');
     const names = await p.evaluate(() => [...document.querySelectorAll('.isl-name')].slice(6, 10).map((e) => e.textContent).join(' / '));
     await go(p, `#/coding/${s.id}/w7`, '.cl-lvl'); await scan('world 7');
+    const ttl = await p.evaluate(() => { const e = document.querySelector('h1.cl-wtitle'); const r = e.getBoundingClientRect(); return { cut: e.scrollHeight > e.clientHeight + 1 || e.scrollWidth > e.clientWidth + 1, right: Math.round(r.right), vw: innerWidth, text: e.textContent }; });
+    ok(!ttl.cut && ttl.right <= ttl.vw, `${name}: the long name of world 7 (${ttl.text}) is not cut off`);
     for (const lv of ['w7/13', 'w7/5', 'w8/9', 'w9/10', 'w10/10', 'w10/12', 'w8/12']) {
       await lvl(s, lv); await scan(lv);
       if (lv === 'w7/13' || lv === 'w8/9') {

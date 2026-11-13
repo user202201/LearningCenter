@@ -149,7 +149,7 @@ function worldPage(k: M.Kid, doc: CM.CodingDoc, world: number) {
   const medal = h("span", { class: "cl-trophy" + (st.done ? " got" : ""), id: "cl-medal" });
   medal.innerHTML = badgeSvg(world, st.done);
   X.show(h("div", { class: "page", style: `--kid:${k.color}` },
-    h("header", { class: "top hero kid-hero" }, X.back(`#/coding/${k.id}`, "世界"), h("h1", {}, worldName(world)), shortcuts(k.id, "coding")),
+    h("header", { class: "top hero kid-hero" }, X.back(`#/coding/${k.id}`, "世界"), h("h1", { class: "cl-wtitle" }, worldName(world)), shortcuts(k.id, "coding")),
     h("main", { class: "scroll" }, h("div", { class: "narrow cl-narrow" },
       h("div", { class: "cl-wsum" }, medal, h("div", {}, h("b", { id: "cl-wstars" }, `★ ${st.stars} / ${st.max}`), h("span", { class: "muted" }, ` · ${st.solved} / ${st.total}`)), tools),
       grid))));

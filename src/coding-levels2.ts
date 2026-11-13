@@ -93,7 +93,8 @@ export const GENS: Record<string, Gen> = {
   pairs: (r) => ({ lists: { xs: Array.from({ length: ri(r, 6, 8) }, () => ri(r, 1, 9)) }, vars: {} }),
   coins: (r) => ({ lists: { coins: [25, 10, 5, 1] }, vars: { amt: ri(r, 41, 99) } }),
   gcd: (r) => { const g = ri(r, 2, 9), p = ri(r, 20, 60), q = ri(r, 2, 15); return { lists: {}, vars: { a: g * p, b: g * q } }; },
-  prime: (r) => ({ lists: {}, vars: { n: [53, 97, 91, 221, 997, 1001, 541, 589, 899, 983, 713, 1009][ri(r, 0, 11)] } }),
+  // (the shown number is a prime: p = 1 at the end, so the empty program does not already win there)
+  prime: (r, shown) => ({ lists: {}, vars: { n: shown ? 997 : [53, 97, 91, 221, 1001, 541, 589, 899, 983, 713, 1009, 997][ri(r, 0, 11)] } }),
   graph: (r) => graphInst(r),
   weights8: (r) => ({ lists: {}, vars: {}, data: { weights: distinct(r, 8, 10, 99) } }),
   weights5: (r) => ({ lists: { order: [1, 2, 3, 4, 5] }, vars: {}, data: { weights: distinct(r, 5, 10, 99) } }),
@@ -290,7 +291,7 @@ const W8: LevelSpec[] = [
     solution: "def koch(n, len) { if n == 0 { fd len } else { koch(n - 1, len / 3) tl 60 koch(n - 1, len / 3) tr 120 koch(n - 1, len / 3) tl 60 koch(n - 1, len / 3) } } repeat 3 { koch(2, 90) tr 120 }", max: 16,
     note: "每条边 koch(2, 90)：n 是层数，len 是长度。n 为 0 时画直线，否则分成四段。", ext: { free: true, recursion: true, ops: ["+", "-", "*", "/"], nums: [2, 90] } as Ext } as LevelSpec),
   spec(8, 13, "三角形里的三角形", { kind: "turtle", palette: ["fd", "tl", "tr", "if", "ifelse", "repeat", "call"], funcs: [{ name: "tri", params: ["n", "s"] }], conds: ["n == 0"],
-    solution: "def tri(n, s) { if n == 0 { repeat 3 { fd s tr 120 } } else { tri(n - 1, s / 2) fd s / 2 tri(n - 1, s / 2) fd 0 - s / 2 tr 60 fd s / 2 tl 60 tri(n - 1, s / 2) tr 60 fd 0 - s / 2 tl 60 } } tri(2, 96)", max: 24,
+    solution: "def tri(n, s) { if n == 0 { repeat 3 { fd s tr 120 } } else { tri(n - 1, s / 2) fd s / 2 tri(n - 1, s / 2) fd s / 2 * -1 tr 60 fd s / 2 tl 60 tri(n - 1, s / 2) tr 60 fd s / 2 * -1 tl 60 } } tri(2, 96)", max: 24,
     note: "谢尔宾斯基三角形：n 为 0 时画一个三角形，否则在三个角上各画一个小三角形（边长减半）。", ext: { free: true, recursion: true, ops: ["+", "-", "*", "/"], nums: [2, 96] } as Ext } as LevelSpec),
   spec(8, 14, "递归大挑战", { kind: "data", boss: true, palette: ["return", "if", "call"], funcs: [{ name: "power", params: ["a", "b"] }, { name: "digsum", param: "n" }],
     solution: "def power(a, b) { if b == 0 { return 1 } return a * power(a, b - 1) } def digsum(n) { if n < 10 { return n } return n % 10 + digsum(floor(n / 10)) }", max: 12,
