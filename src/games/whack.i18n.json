@@ -1,0 +1,74 @@
+{
+  "打地鼠": [
+    "Whack-a-mole",
+    "Taupe-là"
+  ],
+  "限时点击地鼠，避开炸弹": [
+    "Whack the moles against the clock and avoid the bombs",
+    "Frappez les taupes contre la montre et évitez les bombes"
+  ],
+  "轻点地鼠得分，避开炸弹和兔子。": [
+    "Tap the moles to score. Avoid the bombs and the bunnies.",
+    "Touchez les taupes pour marquer. Évitez les bombes et les lapins."
+  ],
+  "开始": [
+    "Start",
+    "Commencer"
+  ],
+  "暂停": [
+    "Pause",
+    "Pause"
+  ],
+  "继续": [
+    "Resume",
+    "Reprendre"
+  ],
+  "点击继续。": [
+    "Tap to continue.",
+    "Touchez pour continuer."
+  ],
+  "难度：简单": [
+    "Level: easy",
+    "Niveau : facile"
+  ],
+  "难度：普通": [
+    "Level: normal",
+    "Niveau : normal"
+  ],
+  "难度：困难": [
+    "Level: hard",
+    "Niveau : difficile"
+  ],
+  "时间：{0}": [
+    "Time: {0}",
+    "Temps : {0}"
+  ],
+  "得分：{0}": [
+    "Score: {0}",
+    "Score : {0}"
+  ],
+  "最高：{0}": [
+    "Best: {0}",
+    "Meilleur : {0}"
+  ],
+  "连击：{0}": [
+    "Combo: {0}",
+    "Combo : {0}"
+  ],
+  "时间到！": [
+    "Time's up!",
+    "Temps écoulé !"
+  ],
+  "新纪录：{0}": [
+    "New record: {0}",
+    "Nouveau record : {0}"
+  ],
+  "命中：{0}，准确率：{1}%": [
+    "Hits: {0}, accuracy: {1}%",
+    "Réussis : {0}, précision : {1} %"
+  ],
+  "再来一局": [
+    "Play again",
+    "Rejouer"
+  ]
+}

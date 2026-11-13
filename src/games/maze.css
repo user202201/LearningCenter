@@ -1,0 +1,26 @@
+.mz-wrap { flex: 1; width: 100%; min-height: 0; display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: "hud" "board" "pad"; justify-items: center; }
+.mz-hud { grid-area: hud; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 8px; }
+.mz-stat { background: #fff; border: 3px solid #96f2d7; border-radius: 16px; padding: 2px 12px; font-weight: 900; color: #087f5b; font-size: 17px; box-shadow: 0 3px 0 #96f2d7; white-space: nowrap; }
+.mz-stat.best { color: #e8590c; border-color: #ffd8a8; box-shadow: 0 3px 0 #ffd8a8; }
+.mz-pad { grid-area: pad; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 8px; max-width: 100%; }
+.mz-pad .mopt { background: #fff; border: 3px solid #96f2d7; box-shadow: 0 3px 0 #96f2d7; color: #087f5b; font-weight: 800; white-space: nowrap; }
+.mz-pad .mopt:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 0 0 #96f2d7; }
+.mz-pad .mopt.on { background: #12b886; color: #fff; border-color: #0ca678; box-shadow: 0 3px 0 #087f5b; }
+.mz-pad .mopt:disabled { opacity: .5; }
+.mz-board { grid-area: board; align-self: stretch; height: 100%; min-width: 0; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.mz-field { position: relative; touch-action: none; border-radius: 18px; overflow: hidden; box-shadow: 0 5px 0 #0ca678; border: 4px solid #0ca678; box-sizing: content-box; }
+.mz-field canvas { display: block; touch-action: none; }
+.mz-ovl { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 10px; background: rgba(255, 246, 229, .88); color: #3a2e39; }
+.mz-ovl[hidden] { display: none; }
+.mz-ovl h2 { margin: 0; font-size: 26px; color: #087f5b; }
+.mz-ovl p { margin: 0; font-weight: 700; }
+.mz-ovl p.mz-stars { font-size: 30px; letter-spacing: 4px; color: #f59f00; line-height: 1.1; }
+.mz-ovl button { min-height: 48px; padding: 6px 26px; font-size: 20px; border-radius: 999px; }
+@media (min-aspect-ratio: 5/4) and (max-height: 700px) {
+  .mz-wrap { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: minmax(0, 1fr); grid-template-areas: "hud board pad"; align-items: center; }
+  .mz-hud { flex-direction: column; width: 128px; gap: 4px; }
+  .mz-pad { flex-direction: column; width: 128px; gap: 4px; }
+  .mz-stat { font-size: 14px; padding: 0 8px; }
+  .mz-pad .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; width: 100%; }
+}
+@media (max-width: 420px) { .mz-pad .mopt { padding: 4px 9px; } .mz-stat { font-size: 16px; padding: 2px 9px; } }

@@ -1,0 +1,23 @@
+{
+  "数织": ["Nonogram", "Nonogramme"],
+  "根据行列数字涂格子，拼出图案": ["Fill cells by the row and column numbers to reveal a picture", "Remplir les cases selon les nombres des lignes et colonnes pour former une image"],
+  "5×5 简单": ["5×5 Easy", "5×5 Facile"],
+  "10×10 普通": ["10×10 Normal", "10×10 Normal"],
+  "15×15 困难": ["15×15 Hard", "15×15 Difficile"],
+  "新题目": ["New puzzle", "Nouvelle grille"],
+  "涂色": ["Fill", "Remplir"],
+  "打叉": ["Cross", "Croix"],
+  "撤销": ["Undo", "Annuler"],
+  "提示": ["Hint", "Indice"],
+  "检查": ["Check", "Vérifier"],
+  "用时：{0}": ["Time: {0}", "Temps : {0}"],
+  "剩余提示：{0}": ["Hints left: {0}", "Indices restants : {0}"],
+  "最佳用时：{0}": ["Best time: {0}", "Meilleur temps : {0}"],
+  "最佳用时：暂无": ["Best time: none yet", "Meilleur temps : aucun"],
+  "目前没有可提示的格子。": ["No cell is left to reveal.", "Aucune case à révéler."],
+  "有 {0} 格错误。": ["{0} cells are wrong.", "{0} cases sont fausses."],
+  "目前没有错误。": ["There are no mistakes.", "Il n'y a aucune erreur."],
+  "你已完成。": ["You have completed it.", "Vous avez terminé."],
+  "新纪录：{0}": ["New record: {0}", "Nouveau record : {0}"],
+  "用时 {0}，提示 {1} 次，检查 {2} 次。": ["Time {0}, hints {1}, checks {2}.", "Temps {0}, indices {1}, vérifications {2}."]
+}
