@@ -54,8 +54,8 @@ export function fanfare(): void {
   [784, 988, 1175, 1568].forEach((f, i) => note(f, f, 1.5 + i * 0.1, 0.5, "triangle", 0.14));
 }
 /** a soft descending "wah wah wah wahhh" */
-export function trombone(): void {
-  [[311, 293], [293, 277], [277, 261], [233, 196]].forEach(([a, b], i) => note(a, b, i * 0.34, i === 3 ? 0.9 : 0.3, "sawtooth", 0.1, 700));
+export function trombone(delay = 0): void {
+  [[311, 293], [293, 277], [277, 261], [233, 196]].forEach(([a, b], i) => note(a, b, delay + i * 0.34, i === 3 ? 0.9 : 0.3, "sawtooth", 0.1, 700));
 }
 export function jingle(): void { [523, 659, 523].forEach((f, i) => note(f, f, i * 0.12, 0.16, "triangle", 0.18)); }
 
