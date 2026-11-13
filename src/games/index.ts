@@ -30,4 +30,5 @@ export const GAMES: GameInfo[] = [
   { id: "whack", name: "打地鼠", sub: "限时点击地鼠，避开炸弹", load: () => import("./whack") },
   { id: "hanoi", name: "汉诺塔", sub: "把圆盘从左柱按规则全部移到右柱", load: () => import("./hanoi") },
   { id: "shooter", name: "太空射击", sub: "拖动飞船自动开火，击落陨石和敌机", load: () => import("./shooter") },
+  { id: "lightsout", name: "关灯游戏", sub: "点击一格，翻转它和上下左右四格，把全部灯关掉", load: () => import("./lightsout") },
 ];
