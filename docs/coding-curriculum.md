@@ -48,8 +48,9 @@ Mini-lessons (3-4 illustrated steps with a running demo) open each world and eac
 
 ## 4. Rules of every level
 
+* **Mistakes:** the robot crashes when it walks into a wall, and also when it takes a star or lights a lamp where there is none (so that “if there is a star here” has a reason to exist). The message says which.
 * A level is data: a map (or a target picture), the allowed blocks, the maximum number of blocks, the reference solution (written in the pseudo-code syntax), the goal.
-* **Stars:** 3 stars = the program uses at most `par` blocks (par = the blocks of the reference solution; for the small levels a brute-force search proves that no shorter program exists), 2 stars = at most 1.5 x par, otherwise 1 star.
+* **Stars:** 3 stars = the program uses at most `par` blocks (par = the blocks of the reference solution; for the small levels of worlds 1-2 a brute-force search over every shorter program proves that none exists; in world 3 the search found cleverer shorter programs for five levels, the teaching solution stays par there), 2 stars = at most 1.5 x par, otherwise 1 star.
   A level solved after "看答案" (the reference was shown) gives at most 1 star. The best block count is kept.
 * **Block count:** every block counts 1, also loops, conditions, calls, `set` / `change`; the header of a definition does not count.
 * **Hints:** "提示" lights the next block the reference needs (or marks a wrong / extra block); "看答案" is offered after 3 failed runs and shows the reference as blocks.
@@ -87,14 +88,14 @@ Notation: pseudo-code of the reference. `n / max` = blocks used / allowed.
 | 3 | 楼梯 | `repeat 4 { move left move right }` | the staircase of W1-4 with a loop |
 | 4 | 收集一排 | `repeat 5 { move take }` `move` | take inside a loop |
 | 5 | 隔一格拿星星 | `repeat 3 { move move take }` `move` | the unit can be longer |
-| 6 | 两个循环 | `repeat 3 { move }` `right` `repeat 3 { move }` | two loops in a row |
+| 6 | 两个循环 | `repeat 3 { move }` `right` `repeat 2 { move }` | two loops in a row |
 | 7 | 方形一圈 | `repeat 4 { repeat 3 { move } take right }` | nested loops |
 | 8 ⚙ | 直到终点 | `until onFlag { move }` (length 3-9) | repeat until |
 | 9 ⚙ | 不知道几级台阶 | `until onFlag { move left move right }` (2-6 steps) | until with a pattern |
 | 10 ⚙ | 一路拿星星 | `until onFlag { take move }` | until with take |
 | 11 | 两行星星 | `repeat 2 { repeat 3 { take move } take right move right }` | nested loops, a snake |
 | 12 | 星星楼梯 | `repeat 4 { move take left move right }` | loop with several commands |
-| 13 | 绕圈拿星 | `repeat 4 { take move take move right }` | the whole ring |
+| 13 | 绕圈拿星 | `repeat 4 { repeat 2 { move take } right }` | the whole ring |
 | 14 | 循环大挑战 | `repeat 3 { move left move right }` `light` `repeat 3 { move }` | boss |
 
 ### World 3 条件 (conditions) — adds if, if-else, while, sensors — 14 levels
@@ -125,7 +126,7 @@ Function names are Latin (the code bridge). The palette of the first levels has 
 | # | Title | Idea |
 |---|---|---|
 | 1 | 第一个积木 | `step = move take`, called three times |
-| 2 | 调用多次 | `corner = move move right`, four calls make a ring |
+| 2 | 调用多次 | `corner = move move take right`, four calls make a ring of stars |
 | 3 | 积木里的循环 | a function that contains a loop |
 | 4 | 拐角收集 | calls separated by turns |
 | 5 | 带数字的积木 | `walk(n)`: one parameter |
@@ -150,7 +151,7 @@ Function names are Latin (the code bridge). The palette of the first levels has 
 | 7 ⚙ | 拿够就停 | take exactly 3 of a random row of stars |
 | 8 | 够了才点灯 | `if count >= 5 { light }` |
 | 9 | 加倍 | `n = n * 2` |
-| 10 | 综合 | boss |
+| 10 | 综合 | `repeat 4 { move take change score by 2 } move if score >= 8 { light } move` (boss) |
 
 ### World 6 画图 (turtle graphics) — adds fd, turn, pen, colour — 14 levels
 
@@ -170,7 +171,7 @@ every point of one drawing must lie within 3 units of the other drawing (and the
 | 9 | 两个正方形 | squares joined by `penup fd 70 pendown` | pen up / down |
 | 10 | 彩色图形 | a red square and a blue triangle | colour |
 | 11 | 五角星 | `repeat 5 { fd 80 tr 144 }` | star polygon (turn 720 / 5) |
-| 12 | 螺旋 | `set n = 10 repeat 20 { fd n tr 90 change n by 5 }` | variable in a drawing |
+| 12 | 螺旋 | `set n = 5 repeat 16 { fd n tl 90 change n by 5 }` | variable in a drawing |
 | 13 | 花 | `def square(s) {...}` `repeat 12 { square(40) tr 30 }` | function + loop of a loop |
 | 14 | 旋转的三角形 | `repeat 8 { repeat 3 { fd 40 tr 120 } tr 45 }` | boss |
 

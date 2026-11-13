@@ -99,6 +99,11 @@ export const CONDS = ["点燃", "加热", "通电", "高温", "催化剂", "常�
 
 // ---------- random ----------
 export type Rnd = () => number;
+/** punctuation of the sentences is made here (not written as a literal) so that it is not taken for a UI text that needs a translation */
+const U = { dot: String.fromCharCode(0x3002), comma: String.fromCharCode(0xff0c), colon: String.fromCharCode(0xff1a), semi: String.fromCharCode(0xff1b), sep: String.fromCharCode(0x3001), lp: String.fromCharCode(0xff08), rp: String.fromCharCode(0xff09) };
+const SUBS_DIGITS = "\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089";
+/** a formula as plain text with real subscript characters (for texts that are translated as a whole): H2SO4 -> H\u2082SO\u2084 */
+export const sub = (f: string): string => f.replace(/([A-Za-z)])(\d+)/g, (_, a: string, d: string) => a + d.replace(/\d/g, (x) => SUBS_DIGITS[+x]));
 export function rng(seed: number): Rnd { let a = seed >>> 0; return () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const ri = (r: Rnd, n: number) => Math.floor(r() * n);
 const pick = <T,>(r: Rnd, a: readonly T[]): T => a[ri(r, a.length)];
@@ -108,7 +113,7 @@ const shuf = <T,>(r: Rnd, a: readonly T[]): T[] => G.shuffle(a, r);
 /** a piece of text: UI text (translated), the user's own content, a formula, or an equation */
 export type Part = string | { u: string } | { f: string } | { eq: string } | { cross: { cat: string; cc: number; an: string; ac: number } };
 export interface QBase { key: string; mode: string; kind: string; lv: number; stem: Part[]; expl: Part[] }
-export interface ChoiceQ extends QBase { t: "choice"; fig?: string; tbl?: { head: string[]; rows: string[][] }; choices: Part[][]; right: number }
+export interface ChoiceQ extends QBase { t: "choice"; meta?: Record<string, unknown>; fig?: string; tbl?: { head: string[]; rows: string[][] }; choices: Part[][]; right: number }
 export interface NumStep { label: Part[]; answer: number; tol: number; unit?: string; say: Part[] }
 export interface NumQ extends QBase { t: "num"; steps: NumStep[]; meta?: Record<string, unknown> }
 export interface BalQ extends QBase { t: "bal"; rx: string }
@@ -164,7 +169,7 @@ export function crossFormula(cat: Ion, an: Ion): string {
   return build(cat, an, -an.ch / g, cat.ch / g);
 }
 export function ionName(cat: Ion, an: Ion): string {
-  if (cat.k === "H") return an.k === "Cl" ? "盐酸" : an.k === "O" ? "水" : an.k === "S" ? "氢硫酸" : an.n + "";
+  if (cat.k === "H") return an.k === "Cl" ? "盐酸" : an.k === "O" || an.k === "OH" ? "水" : an.k === "S" ? "氢硫酸" : an.n;
   if (an.k === "Cl" || an.k === "O" || an.k === "S") return an.n + "化" + cat.n;
   if (an.k === "OH") return "氢氧化" + cat.n;
   return an.n + cat.n;
@@ -199,24 +204,37 @@ const choiceQ = (base: Omit<QBase, "expl"> & { expl: Part[] }, r: Rnd, right: Pa
 /** valences of an element in a compound by the rule "the sum of all valences is zero": other elements are taken from the table; null when not solvable (or fractional) */
 const FIXED: Record<string, number> = { H: 1, Li: 1, Na: 1, K: 1, Ag: 1, Ca: 2, Mg: 2, Ba: 2, Zn: 2, Al: 3, O: -2, F: -1 };
 export function valenceIn(f: string, target: string): { v: number; terms: string } | null {
-  const atoms = parseFormula(f);
-  if (!(target in atoms) || f.includes("·")) return null;
+  if (f.includes("·") || f === "NH4NO3") return null;
+  const rest = parseFormula(f);
+  if (!(target in rest)) return null;
   const known: Record<string, number> = { ...FIXED };
-  if (!("O" in atoms)) known.Cl = -1;
-  if (target === "N" && "H" in atoms && !("O" in atoms)) known.N = NaN;
-  const unknown = Object.keys(atoms).filter((e) => !(e in known));
-  if (unknown.length !== 1 || unknown[0] !== target) return null;
+  if (!("O" in rest)) known.Cl = -1;
   let sum = 0; const parts: string[] = [];
-  for (const [e, n] of Object.entries(atoms)) if (e !== target) { sum += known[e] * n; parts.push(`(${sgn(known[e])})×${n}`); }
-  const x = -sum / atoms[target];
+  let unknown = Object.keys(rest).filter((e) => !(e in known));
+  if (unknown.length > 1 && unknown.includes(target)) {
+    // an atom group (SO4, NO3, OH ...) written in the formula counts as one unit with its charge
+    for (const g of D.groups) {
+      const ga = parseFormula(g.f);
+      if (target in ga || !f.includes(g.f)) continue;
+      const k = Math.min(...Object.entries(ga).map(([e, n]) => Math.floor((rest[e] ?? 0) / n)));
+      if (k < 1) continue;
+      for (const [e, n] of Object.entries(ga)) rest[e] -= n * k;
+      for (const e of Object.keys(rest)) if (rest[e] === 0) delete rest[e];
+      sum += g.c * k; parts.push(`(${sgn(g.c)})×${k}`);
+    }
+    unknown = Object.keys(rest).filter((e) => !(e in known));
+  }
+  if (unknown.length !== 1 || unknown[0] !== target) return null;
+  for (const [e, n] of Object.entries(rest)) if (e !== target) { sum += known[e] * n; parts.push(`(${sgn(known[e])})×${n}`); }
+  const x = -sum / rest[target];
   if (!Number.isInteger(x) || x === 0) return null;
-  return { v: x, terms: `${atoms[target] > 1 ? atoms[target] + "x" : "x"}${parts.length ? " + " + parts.join(" + ") : ""} = 0` };
+  return { v: x, terms: `${rest[target] > 1 ? rest[target] + "x" : "x"}${parts.length ? " + " + parts.join(" + ") : ""} = 0` };
 }
 let FINDS: { f: string; e: string }[] | null = null;
 function findList() {
   if (FINDS) return FINDS;
   FINDS = [];
-  for (const s of D.subs) { if (s.c === "other" || s.f.includes("·")) continue; for (const e of Object.keys(parseFormula(s.f))) if (!(e in FIXED) && e !== "Cl" && valenceIn(s.f, e)) FINDS.push({ f: s.f, e }); else if (e === "Cl" && valenceIn(s.f, e)) FINDS.push({ f: s.f, e }); }
+  for (const s of D.subs) { if (s.c === "other" || (s.c === "org" && s.f !== "CH4")) continue; for (const e of Object.keys(parseFormula(s.f))) if (valenceIn(s.f, e)) FINDS.push({ f: s.f, e }); }
   return FINDS;
 }
 export const findCases = (): { f: string; e: string }[] => findList();
@@ -229,15 +247,18 @@ function genVal(r: Rnd, lv: number, kind: string): Q {
     const cat = pick(r, catPool(lvl)), an = pick(r, anPool(lvl));
     const right = crossFormula(cat, an);
     const showCat = cat.f, showAn = an.f;
-    const stem: Part[] = ["已知化合价：", { f: showCat }, `${sgn(cat.ch)}`, "，", { f: showAn }, `${sgn(an.ch)}`, "。写出它们组成的化合物的化学式。"];
-    return choiceQ({ ...base, lv: lvl, key: `val:cross`, stem, expl: ["交叉法：把化合价的绝对值交叉写在对方元素的右下角，约成最简整数比，原子团超过 1 个要加括号。化学式：", { f: right }, "。"] }, r, [{ f: right }], badFormulas(cat, an, right, r).map((x) => [{ f: x }] as Part[]), { }, 4) && { ...choiceQ({ ...base, lv: lvl, key: `val:cross`, stem, expl: ["交叉法：把化合价的绝对值交叉写在对方元素的右下角，约成最简整数比，原子团超过 1 个要加括号。化学式：", { f: right }, "。", { cross: { cat: cat.f, cc: cat.ch, an: an.f, ac: an.ch } }] }, r, [{ f: right }], badFormulas(cat, an, right, r).map((x) => [{ f: x }] as Part[])), meta: { cat: { f: cat.f, ch: cat.ch }, an: { f: an.f, ch: an.ch } } } as ChoiceQ;
+    const stem: Part[] = ["已知化合价：", { f: showCat }, `${sgn(cat.ch)}`, { u: U.comma }, { f: showAn }, `${sgn(an.ch)}`, "。写出它们组成的化合物的化学式。"];
+    const wr = badFormulas(cat, an, right, r).map((x) => [{ f: x }] as Part[]);
+    const q = choiceQ({ ...base, lv: lvl, key: "val:cross", stem, expl: ["交叉法：把化合价的绝对值交叉写在对方元素的右下角，约成最简整数比，原子团超过 1 个要加括号。化学式：", { f: right }, { u: U.dot }, { cross: { cat: cat.f, cc: cat.ch, an: an.f, ac: an.ch } }] }, r, [{ f: right }], wr);
+    q.meta = { cat: { f: cat.f, ch: cat.ch }, an: { f: an.f, ch: an.ch } };
+    return q;
   }
   if (kind === "find") {
     const list = findList().filter((x) => !lv || (lv === 1 ? !/[()]/.test(x.f) && Object.keys(parseFormula(x.f)).length <= 2 : true));
     const c = pick(r, list.length ? list : findList()); const sol = valenceIn(c.f, c.e)!;
     const cands = [-4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7];
     const wrongs = shuf(r, cands.filter((v) => v !== sol.v).sort((a, b) => Math.abs(a - sol.v) - Math.abs(b - sol.v)).slice(0, 6)).map((v) => [{ f: sgn(v) }] as Part[]);
-    return choiceQ({ ...base, key: `val:find`, stem: ["求下列化合物中指定元素的化合价：", { f: c.f }, " 中的 ", { f: c.e }], expl: ["在化合物中各元素化合价的代数和为零。设该元素的化合价为 x：", { f: sol.terms }, "，得 x = ", { f: sgn(sol.v) }, "。"] }, r, [{ f: sgn(sol.v) }], wrongs) as Q;
+    return choiceQ({ ...base, key: `val:find`, stem: ["求下列化合物中指定元素的化合价：", { f: c.f }, " 中的 ", { f: c.e }], expl: ["在化合物中各元素化合价的代数和为零。设该元素的化合价为 x：", { f: sol.terms }, "，得 x = ", { f: sgn(sol.v) }, { u: U.dot }] }, r, [{ f: sgn(sol.v) }], wrongs) as Q;
   }
   if (kind === "n2f" || kind === "f2n") {
     const pool = nameable().filter((s) => !lv || (lv === 1 ? (s.c === "elem" || s.c === "oxide" || s.c === "acid") : lv === 2 ? s.c !== "org" : true));
@@ -245,8 +266,8 @@ function genVal(r: Rnd, lv: number, kind: string): Q {
     const sameKind = shuf(r, nameable().filter((x) => x.f !== s.f && x.c === s.c));
     const near = shuf(r, nameable().filter((x) => x.f !== s.f && x.c !== s.c && Object.keys(parseFormula(x.f)).some((e) => e in parseFormula(s.f))));
     const wr = [...sameKind.slice(0, 4), ...near.slice(0, 3), ...shuf(r, nameable().filter((x) => x.f !== s.f)).slice(0, 3)];
-    if (kind === "n2f") return choiceQ({ ...base, key: `val:n2f`, stem: ["下列物质的化学式是：", { u: s.n }], expl: [{ u: s.n }, " 的化学式是 ", { f: s.f }, "。", ...(s.a ? ["（", { u: s.a }, "）"] as Part[] : [])] }, r, [{ f: s.f }], wr.map((x) => [{ f: x.f }] as Part[])) as Q;
-    return choiceQ({ ...base, key: `val:f2n`, stem: ["下列化学式表示的物质是：", { f: s.f }], expl: [{ f: s.f }, " 是 ", { u: s.n }, "。", ...(s.a ? ["（", { u: s.a }, "）"] as Part[] : [])] }, r, [{ u: s.n }], wr.map((x) => [{ u: x.n }] as Part[])) as Q;
+    if (kind === "n2f") return choiceQ({ ...base, key: `val:n2f`, stem: ["下列物质的化学式是：", { u: s.n }], expl: [{ u: s.n }, " 的化学式是 ", { f: s.f }, { u: U.dot }, ...(s.a ? [{ u: U.lp }, { u: s.a }, { u: U.rp }] as Part[] : [])] }, r, [{ f: s.f }], wr.map((x) => [{ f: x.f }] as Part[])) as Q;
+    return choiceQ({ ...base, key: `val:f2n`, stem: ["下列化学式表示的物质是：", { f: s.f }], expl: [{ f: s.f }, " 是 ", { u: s.n }, { u: U.dot }, ...(s.a ? [{ u: U.lp }, { u: s.a }, { u: U.rp }] as Part[] : [])] }, r, [{ u: s.n }], wr.map((x) => [{ u: x.n }] as Part[])) as Q;
   }
   if (kind === "mr" || kind === "pct") {
     const pool = D.subs.filter((s) => s.c !== "other" && (lv === 1 ? Object.keys(parseFormula(s.f)).length <= 2 && !s.f.includes("(") && !s.f.includes("·") : lv === 2 ? !s.f.includes("·") : true) && mr(s.f) < 400);
@@ -255,10 +276,10 @@ function genVal(r: Rnd, lv: number, kind: string): Q {
     const calc = els.map((e) => `${num(ar(e))}×${atoms[e]}`).join(" + ");
     if (kind === "mr" || els.length === 1) {
       const m = mr(s.f);
-      return { ...base, t: "num", key: "val:mr", kind: "mr", stem: ["计算相对分子质量：", { f: s.f }, "（相对原子质量：", { f: els.map((e) => `${e}=${num(ar(e))}`).join("，") }, "）"], steps: [{ label: ["相对分子质量"], answer: m, tol: 0.001, say: [{ f: `${calc} = ${num(m)}` }] }], expl: ["相对分子质量等于各原子的相对原子质量之和：", { f: `${calc} = ${num(m)}` }, "。"], meta: { f: s.f, m } } as NumQ;
+      return { ...base, t: "num", key: "val:mr", kind: "mr", stem: ["计算相对分子质量：", { f: s.f }, "（相对原子质量：", { f: els.map((e) => `${e}=${num(ar(e))}`).join({ u: U.comma }) }, { u: U.rp }], steps: [{ label: ["相对分子质量"], answer: m, tol: 0.001, say: [{ f: `${calc} = ${num(m)}` }] }], expl: ["相对分子质量等于各原子的相对原子质量之和：", { f: `${calc} = ${num(m)}` }, { u: U.dot }], meta: { f: s.f, m } } as NumQ;
     }
     const e = pick(r, els), m = mr(s.f), p = +(ar(e) * atoms[e] / m * 100).toFixed(1);
-    return { ...base, t: "num", key: "val:pct", kind: "pct", stem: ["计算质量分数（%，保留一位小数）：", { f: s.f }, " 中 ", { f: e }, " 的质量分数（相对原子质量：", { f: els.map((x) => `${x}=${num(ar(x))}`).join("，") }, "）"], steps: [{ label: ["质量分数 / %"], answer: p, tol: 0.1, unit: "%", say: [{ f: `${num(ar(e))}×${atoms[e]} ÷ ${num(m)} × 100% = ${p}%` }] }], expl: ["元素的质量分数 = 该元素的相对原子质量之和 ÷ 相对分子质量 × 100%：", { f: `${num(ar(e))}×${atoms[e]} ÷ ${num(m)} × 100% = ${p}%` }, "。"], meta: { f: s.f, e, p } } as NumQ;
+    return { ...base, t: "num", key: "val:pct", kind: "pct", stem: ["计算质量分数（%，保留一位小数）：", { f: s.f }, " 中 ", { f: e }, " 的质量分数（相对原子质量：", { f: els.map((x) => `${x}=${num(ar(x))}`).join({ u: U.comma }) }, { u: U.rp }], steps: [{ label: ["质量分数 / %"], answer: p, tol: 0.1, unit: "%", say: [{ f: `${num(ar(e))}×${atoms[e]} ÷ ${num(m)} × 100% = ${p}%` }] }], expl: ["元素的质量分数 = 该元素的相对原子质量之和 ÷ 相对分子质量 × 100%：", { f: `${num(ar(e))}×${atoms[e]} ÷ ${num(m)} × 100% = ${p}%` }, { u: U.dot }], meta: { f: s.f, e, p } } as NumQ;
   }
   throw new Error("kind " + kind);
 }
@@ -267,30 +288,25 @@ function genVal(r: Rnd, lv: number, kind: string): Q {
 const PH_KEYS = ["白色沉淀", "蓝色沉淀", "红褐色沉淀", "气泡", "淡蓝色火焰", "蓝紫色火焰", "蓝色火焰", "火星四射", "白烟", "石蕊溶液，溶液变红", "变黑", "变红", "变蓝", "浅绿色", "变为黄色", "刺激性气味", "水珠", "耀眼", "放出大量的热", "浑浊", "无明显现象"];
 const phSet = (t: string) => PH_KEYS.filter((k) => t.includes(k));
 const distinctivePh = (rx: Rx) => phSet(rx.ph).length > 0 && rx.ph.length > 6;
-const condText = (c: string[]) => c.join("、");
+const condText = (c: string[]) => c.join(U.sep);
 function genType(r: Rnd, lv: number, kind: string, rx: Rx): Q {
   const base = { mode: "type", kind, lv: lv || levelOf(rx), key: `type:${rx.id}` };
   const answerType = rx.type;
   if (kind === "type") {
-    const wrongs = TYPES.filter((t) => t !== answerType).map((t) => [TYPE_NAME[t]] as Part[]);
-    const q = choiceQ({ ...base, stem: ["判断下面反应的基本类型：", eqP(rx)], expl: [TYPE_NAME[answerType], "。", TYPE_RULE[answerType]] }, r, [TYPE_NAME[answerType]], wrongs, {}, 5);
+    const q = choiceQ({ ...base, stem: ["判断下面反应的基本类型：", eqP(rx)], expl: [TYPE_NAME[answerType], { u: U.dot }, TYPE_RULE[answerType]] }, r, [TYPE_NAME[answerType]], TYPES.filter((t) => t !== answerType).map((t) => [TYPE_NAME[t]] as Part[]), {}, 5);
     q.choices = TYPES.map((t) => [TYPE_NAME[t]] as Part[]); q.right = TYPES.indexOf(answerType);
     return q;
   }
   if (kind === "pick") {
-    const pool = D.reactions.filter((x) => x.type !== answerType);
-    const others = shuf(r, pool).filter((x, i, a) => a.findIndex((y) => y.type === x.type) === i).slice(0, 3);
-    const types = new Set(others.map((x) => x.type));
-    const wr = shuf(r, D.reactions.filter((x) => x.type !== answerType && types.has(x.type))).slice(0, 8);
-    const right: Part[] = [eqP(rx)];
-    return choiceQ({ ...base, key: `type:${rx.id}`, stem: ["下列反应中，属于", TYPE_NAME[answerType], "的是："], expl: [TYPE_NAME[answerType], "。", TYPE_RULE[answerType]] }, r, right, wr.map((x) => [eqP(x)] as Part[])) as Q;
+    const wr = shuf(r, D.reactions.filter((x) => x.type !== answerType));
+    return choiceQ({ ...base, stem: ["下列反应中，属于" + TYPE_NAME[answerType] + "的是："], expl: [TYPE_NAME[answerType], { u: U.dot }, TYPE_RULE[answerType]] }, r, [eqP(rx)], wr.map((x) => [eqP(x)] as Part[])) as Q;
   }
   if (kind === "cond") {
     const mine = condText(rx.cond);
     const combos = new Set<string>(CONDS);
     for (const x of D.reactions) combos.add(condText(x.cond));
-    const wr = shuf(r, [...combos].filter((c) => c !== mine)).map((c) => [c] as Part[]);
-    return choiceQ({ ...base, stem: ["下面反应发生需要的条件是：", eqP(rx)], expl: ["条件：", condText(rx.cond), "。"] }, r, [mine], wr) as Q;
+    const wr = shuf(r, [...combos].filter((c) => !c.split(U.sep).some((t) => rx.cond.includes(t)))).map((c) => [c] as Part[]);
+    return choiceQ({ ...base, stem: ["下面反应发生需要的条件是：", eqP(rx)], expl: ["条件：", condText(rx.cond), { u: U.dot }] }, r, [mine], wr) as Q;
   }
   // phenomenon
   const mine = phSet(rx.ph);
@@ -301,13 +317,12 @@ export const phEligible = (rx: Rx): boolean => distinctivePh(rx) && D.reactions.
 
 // ---------- balancing and writing ----------
 function genBal(_r: Rnd, lv: number, rx: Rx): Q {
-  return { t: "bal", mode: "bal", kind: "bal", lv: lv || levelOf(rx), key: `bal:${rx.id}`, rx: rx.id, stem: ["配平下面的化学方程式（先让各元素的原子数相等，再检查系数是最简整数比）："], expl: ["配平后：", eqP(rx), "。"] };
+  return { t: "bal", mode: "bal", kind: "bal", lv: lv || levelOf(rx), key: `bal:${rx.id}`, rx: rx.id, stem: ["配平下面的化学方程式（先让各元素的原子数相等，再检查系数是最简整数比）："], expl: ["配平后：", eqP(rx), { u: U.dot }] };
 }
-const COND_SENT: Record<string, string> = { 点燃: "点燃的条件下", 加热: "加热的条件下", 通电: "通电的条件下", 高温: "高温的条件下", 催化剂: "催化剂的作用下", 常温: "", 光照: "光照的条件下" };
 export function describeRx(rx: Rx): string {
   const names = (t: Term[]) => t.map((x) => nameOf(x.f)).join("和");
-  const conds = rx.cond.map((c) => COND_SENT[c]).filter(Boolean);
-  const cs = conds.length ? "在" + conds.join("、").replace(/的条件下/g, "").replace(/的作用下/g, "") + (rx.cond.includes("催化剂") ? "作用下" : "条件下") : "";
+  const conds = rx.cond.filter((c) => c !== "常温");
+  const cs = conds.length ? "在" + conds.join({ u: U.sep }) + (rx.cond.includes("催化剂") ? "的作用下" : "的条件下") : "";
   return `${names(rx.l)}${cs}反应，生成${names(rx.r)}。`;
 }
 function genWrite(r: Rnd, lv: number, rx: Rx): Q {
@@ -351,8 +366,6 @@ function genCalc(r: Rnd, lv: number, rx: Rx): Q | null {
   if (!cc) return null;
   const { a, b } = cc;
   const ma = mr(a.f), mb = mr(b.f), wa = a.c * ma, wb = b.c * mb;
-  const side = (t: Term) => (rx.l.includes(t) ? "反应物" : "生成物");
-  void side;
   return {
     t: "num", mode: "calc", kind: "calc", lv: lv || levelOf(rx), key: `calc:${rx.id}`,
     stem: ["根据化学方程式计算（相对原子质量见下方；结果保留到小数点后一位或两位）：", eqP(rx), { f: `${a.f}：${num(cc.given)} g，求 ${b.f} 的质量（g）` }],
@@ -361,7 +374,7 @@ function genCalc(r: Rnd, lv: number, rx: Rx): Q | null {
       { label: ["第 2 步：所求物质的 系数 × 相对分子质量 = ", { f: b.f }], answer: wb, tol: 0.001, say: [{ f: `${b.c} × ${num(mb)} = ${num(wb)}` }] },
       { label: ["第 3 步：列比例 ", { f: `${num(wa)} : ${num(wb)} = ${num(cc.given)} : x` }, "，求 x（g）"], answer: cc.ans, tol: calcTol(cc.ans), unit: "g", say: [{ f: `x = ${num(cc.given)} × ${num(wb)} ÷ ${num(wa)} = ${num(cc.ans)}` }] },
     ],
-    expl: ["质量比等于（系数 × 相对分子质量）之比：", { f: `${num(wa)} : ${num(wb)} = ${num(cc.given)} : x，x = ${num(cc.ans)} g` }, "。"],
+    expl: ["质量比等于（系数 × 相对分子质量）之比：", { f: `${num(wa)} : ${num(wb)} = ${num(cc.given)} : x，x = ${num(cc.ans)} g` }, { u: U.dot }],
     meta: { rx: rx.id, a: a.f, ac: a.c, b: b.f, bc: b.c, given: cc.given, ans: cc.ans },
   };
 }
@@ -377,19 +390,19 @@ function genSol(r: Rnd, lv: number, kind: string): Q {
   if (kind === "frac") {
     const total = pick(r, [50, 100, 200, 250, 500]), p = pick(r, [2, 4, 5, 8, 10, 15, 20, 25]);
     const solute = total * p / 100, water = total - solute;
-    return one(["质量分数 / %"], p, 0.05, [{ f: `${num(solute)} ÷ ${total} × 100% = ${p}%` }], [`${num(solute)} g 溶质完全溶解在 ${num(water)} g 水中，所得溶液的溶质质量分数是多少（%）？`], ["质量分数 = 溶质质量 ÷ 溶液质量 × 100%，溶液质量 = 溶质质量 + 溶剂质量：", { f: `${num(solute)} ÷ ${total} × 100% = ${p}%` }, "。"], { solute, water, p });
+    return one(["质量分数 / %"], p, 0.05, [{ f: `${num(solute)} ÷ ${total} × 100% = ${p}%` }], [`${num(solute)} g 溶质完全溶解在 ${num(water)} g 水中，所得溶液的溶质质量分数是多少（%）？`], ["质量分数 = 溶质质量 ÷ 溶液质量 × 100%，溶液质量 = 溶质质量 + 溶剂质量：", { f: `${num(solute)} ÷ ${total} × 100% = ${p}%` }, { u: U.dot }], { solute, water, p });
   }
   if (kind === "prep") {
     const [f] = pick(r, SOLUTES), total = pick(r, [50, 100, 150, 200, 250, 500]), p = pick(r, [2, 4, 5, 8, 10, 15, 20]);
     const solute = total * p / 100, water = total - solute, askWater = r() < 0.5;
     const stem: Part[] = [`配制 ${total} g 质量分数为 ${p}% 的 ${f} 溶液，需要${askWater ? "水" : "溶质 " + f}多少 g？`];
     const ans = askWater ? water : solute;
-    return one([askWater ? "水的质量 / g" : "溶质的质量 / g"], ans, 0.05, [{ f: askWater ? `${total} − ${num(solute)} = ${num(water)}` : `${total} × ${p}% = ${num(solute)}` }], stem, ["溶质质量 = 溶液质量 × 质量分数 = ", { f: `${total} × ${p}% = ${num(solute)} g` }, "；水的质量 = 溶液质量 − 溶质质量 = ", { f: `${total} − ${num(solute)} = ${num(water)} g` }, "。"], { total, p, solute, water, askWater });
+    return one([askWater ? "水的质量 / g" : "溶质的质量 / g"], ans, 0.05, [{ f: askWater ? `${total} − ${num(solute)} = ${num(water)}` : `${total} × ${p}% = ${num(solute)}` }], stem, ["溶质质量 = 溶液质量 × 质量分数 = ", { f: `${total} × ${p}% = ${num(solute)} g` }, "；水的质量 = 溶液质量 − 溶质质量 = ", { f: `${total} − ${num(solute)} = ${num(water)} g` }, { u: U.dot }], { total, p, solute, water, askWater });
   }
   if (kind === "dilute") {
     const q = pick(r, [2, 4, 5, 10]), k = pick(r, [2, 3, 4, 5]), p = q * k, a = pick(r, [20, 30, 40, 50, 60, 100, 200]);
     const water = a * (k - 1);
-    return one(["加入水的质量 / g"], water, 0.05, [{ f: `${a} × ${p}% ÷ ${q}% − ${a} = ${water}` }], [`把 ${a} g 质量分数为 ${p}% 的溶液稀释成质量分数为 ${q}% 的溶液，需要加水多少 g？`], ["稀释前后溶质的质量不变：", { f: `${a} × ${p}% = (${a} + x) × ${q}%，x = ${water} g` }, "。"], { a, p, q, water });
+    return one(["加入水的质量 / g"], water, 0.05, [{ f: `${a} × ${p}% ÷ ${q}% − ${a} = ${water}` }], [`把 ${a} g 质量分数为 ${p}% 的溶液稀释成质量分数为 ${q}% 的溶液，需要加水多少 g？`], ["稀释前后溶质的质量不变：", { f: `${a} × ${p}% = (${a} + x) × ${q}%，x = ${water} g` }, { u: U.dot }], { a, p, q, water });
   }
   if (kind === "read" || kind === "sat" || kind === "satfrac") {
     const row = pick(r, kind === "read" ? D.solub.d : D.solub.d.filter((d) => ["KNO3", "NaCl", "NH4Cl", "KCl"].includes(d.f)));
@@ -404,10 +417,10 @@ function genSol(r: Rnd, lv: number, kind: string): Q {
       if (x === S) return genSol(r, lv, kind);
       const sat = x > S;
       const right = sat ? "饱和溶液，有固体剩余" : "不饱和溶液";
-      return choiceQ({ ...base, stem: [`${T} ℃时，把 ${x} g ${row.f} 加入 100 g 水中充分搅拌，得到的溶液是："`.replace(/"$/, "")], expl: [`${T} ℃时 ${row.f} 的溶解度是 ${S} g，100 g 水最多溶解 ${S} g；加入 ${x} g，${sat ? "超过" : "没有超过"} ${S} g，所以是${right}。`] }, r, [right], ["饱和溶液，有固体剩余", "不饱和溶液", "恰好饱和", "无法判断"].filter((c) => c !== right).map((c) => [c] as Part[]), { tbl }) as Q;
+      return choiceQ({ ...base, stem: [`${T} ℃时，把 ${x} g ${row.f} 加入 100 g 水中充分搅拌，得到的溶液是：`], expl: [`${T} ℃时 ${row.f} 的溶解度是 ${S} g，100 g 水最多溶解 ${S} g；加入 ${x} g，${sat ? "超过" : "没有超过"} ${S} g，所以是${right}。`] }, r, [right], ["饱和溶液，有固体剩余", "不饱和溶液", "恰好饱和", "无法判断"].filter((c) => c !== right).map((c) => [c] as Part[]), { tbl }) as Q;
     }
     const p = +(S / (100 + S) * 100).toFixed(1);
-    return { t: "num", ...base, stem: [`${T} ℃时，${row.f} 饱和溶液的溶质质量分数是多少（%，保留一位小数）？`], steps: [{ label: ["质量分数 / %"], answer: p, tol: 0.1, unit: "%", say: [{ f: `${S} ÷ (100 + ${S}) × 100% = ${p}%` }] }], expl: ["饱和溶液的质量分数 = 溶解度 ÷ (100 + 溶解度) × 100%：", { f: `${S} ÷ ${100 + S} × 100% = ${p}%` }, "。"], meta: { f: row.f, T, S, p } } as NumQ;
+    return { t: "num", ...base, stem: [`${T} ℃时，${row.f} 饱和溶液的溶质质量分数是多少（%，保留一位小数）？`], steps: [{ label: ["质量分数 / %"], answer: p, tol: 0.1, unit: "%", say: [{ f: `${S} ÷ (100 + ${S}) × 100% = ${p}%` }] }], expl: ["饱和溶液的质量分数 = 溶解度 ÷ (100 + 溶解度) × 100%：", { f: `${S} ÷ ${100 + S} × 100% = ${p}%` }, { u: U.dot }], meta: { f: row.f, T, S, p } } as NumQ;
   }
   throw new Error("kind " + kind);
 }
@@ -483,8 +496,8 @@ function genDec(r: Rnd, lv: number): Q {
     const fa = cmpFormula(a), fb = cmpFormula(b);
     const right = m.happens ? REASON_ZH[m.reasons[0]] : "不能反应";
     const names = (c: Cmp) => ({ u: ionName(catByK(c.cat), AN.find((x) => x.k === c.an)!) });
-    const eqs: Part[] = m.happens ? ["生成物：", { f: m.products.join(" + ") }, "。"] : [];
-    return choiceQ({ mode: "dec", kind: "dec", lv: lv || 2, key: "dec:" + [fa, fb].sort().join("+"), stem: ["判断下面两种物质能否发生复分解反应（两种物质都在溶液中）：", { f: fa }, " + ", { f: fb }, " （", names(a), "、", names(b), "）"], expl: [m.why, ...eqs, "复分解反应的条件：生成物中有沉淀、气体或水，反应物要能溶于水（酸与不溶性碱或碳酸盐反应除外）。"] }, r, [right], ["能反应，生成沉淀", "能反应，生成气体", "能反应，生成水", "不能反应"].filter((c) => c !== right).map((c) => [c] as Part[])) as Q;
+    const eqs: Part[] = m.happens ? ["生成物：", { f: m.products.join(" + ") }, { u: U.dot }] : [];
+    return choiceQ({ mode: "dec", kind: "dec", lv: lv || 2, key: "dec:" + [fa, fb].sort().join("+"), stem: ["判断下面两种物质能否发生复分解反应（两种物质都在溶液中）：", { f: fa }, " + ", { f: fb }, " （", names(a), { u: U.sep }, names(b), { u: U.rp }], expl: [m.why, ...eqs, "复分解反应的条件：生成物中有沉淀、气体或水，反应物要能溶于水（酸与不溶性碱或碳酸盐反应除外）。"] }, r, [right], ["能反应，生成沉淀", "能反应，生成气体", "能反应，生成水", "不能反应"].filter((c) => c !== right).map((c) => [c] as Part[])) as Q;
   }
   throw new Error("no pair");
 }
@@ -503,13 +516,13 @@ function genAct(r: Rnd, lv: number, kind: string): Q {
     const four = shuf(r, ACT_METALS).slice(0, 4);
     const sorted = four.slice().sort((a, b) => actIdx(a.f) - actIdx(b.f));
     const right = most ? sorted[0] : sorted[3];
-    return choiceQ({ ...base, key: `act:order`, stem: [most ? "下列金属中，活动性最强的是：" : "下列金属中，活动性最弱的是："], expl: ["金属活动性顺序（由强到弱）：", { f: D.activity.join(" ") }, "。"] }, r, [{ f: sym(right) }], four.filter((x) => x !== right).map((x) => [{ f: sym(x) }] as Part[])) as Q;
+    return choiceQ({ ...base, key: `act:order`, stem: [most ? "下列金属中，活动性最强的是：" : "下列金属中，活动性最弱的是："], expl: ["金属活动性顺序（由强到弱）：", { f: D.activity.join(" ") }, { u: U.dot }] }, r, [{ f: sym(right) }], four.filter((x) => x !== right).map((x) => [{ f: sym(x) }] as Part[])) as Q;
   }
   if (kind === "notreact") {
     const acid = r() < 0.5 ? "HCl" : "H2SO4";
     const not = pick(r, [ACT_METALS[4], ACT_METALS[5]]);
     const yes = shuf(r, ACT_METALS.slice(0, 4)).slice(0, 3);
-    return choiceQ({ ...base, key: `act:notreact`, stem: [`下列金属中，不能与稀${acid === "HCl" ? "盐酸" : "硫酸"}反应放出氢气的是：`], expl: [{ f: sym(not) }, " 排在氢的后面，不能置换出酸中的氢。金属活动性顺序：", { f: D.activity.join(" ") }, "。"] }, r, [{ f: sym(not) }], yes.map((x) => [{ f: sym(x) }] as Part[])) as Q;
+    return choiceQ({ ...base, key: `act:notreact`, stem: [`下列金属中，不能与稀${acid === "HCl" ? "盐酸" : "硫酸"}反应放出氢气的是：`], expl: [{ f: sym(not) }, " 排在氢的后面，不能置换出酸中的氢。金属活动性顺序：", { f: D.activity.join(" ") }, { u: U.dot }] }, r, [{ f: sym(not) }], yes.map((x) => [{ f: sym(x) }] as Part[])) as Q;
   }
   const dec = (cat: Ion, an: Ion): string => crossFormula(cat, an);
   const label = (prod: string[]): string => `能反应，生成 ${prod.join(" 和 ")}`;
@@ -518,10 +531,11 @@ function genAct(r: Rnd, lv: number, kind: string): Q {
     const an = ANION_BY(acid === "HCl" ? "Cl" : "SO4");
     const reacts = reactsWithAcid(m.f);
     const salt = dec(m, an);
-    const wrongSalt = m.k === "Fe2" ? dec(catByK("Fe3"), an) : m.k === "Al" ? build(m, an, 2, 3 - (an.ch === -2 ? 0 : 0)) : build(m, an, 1, 1);
+    const wrongSalt = m.k === "Fe2" ? dec(catByK("Fe3"), an) : badFormulas(m, an, salt, r)[0];
     const right = reacts ? label([salt, "H2"]) : "不能反应";
     const wrongs = [reacts ? "不能反应" : label([salt, "H2"]), label([wrongSalt, "H2"]), label([salt, "H2O"]), label([salt, "O2"])].filter((x) => x !== right);
-    return choiceQ({ ...base, key: `act:acid`, stem: [`${sym(m)} 与稀${acid === "HCl" ? "盐酸" : "硫酸"}混合：`, { f: `${sym(m)} + ${acid}` }], expl: [reacts ? [sym(m), " 排在氢的前面，能置换出酸中的氢：", { f: `${sym(m)} + ${acid} → ${salt} + H2` }, m.k === "Fe2" ? "。铁与酸反应生成亚铁盐（+2 价）。" : "。"] : [sym(m), " 排在氢的后面，不能与稀酸反应。"]].flat() as Part[] }, r, [right], wrongs.map((x) => [{ f: x.replace(/^能反应，生成 /, "") === x ? "" : "" } as Part].length ? [x] : [x])) as Q;
+    const ex: Part[] = reacts ? [sym(m), " 排在氢的前面，能置换出酸中的氢：", { f: `${sym(m)} + ${acid} → ${salt} + H2` }, m.k === "Fe2" ? "。铁与稀酸反应生成亚铁盐（+2 价）。" : { u: U.dot }] : [sym(m), " 排在氢的后面，不能与稀酸反应。"];
+    return choiceQ({ ...base, key: "act:acid", stem: [`${sym(m)} 与稀${acid === "HCl" ? "盐酸" : "硫酸"}混合：`, { f: `${sym(m)} + ${acid}` }], expl: ex }, r, [right], wrongs.map((x) => [x] as Part[])) as Q;
   }
   // a metal in a salt solution
   const m = pick(r, ACT_METALS), s = pick(r, ACT_METALS.filter((x) => x !== m));
@@ -529,10 +543,10 @@ function genAct(r: Rnd, lv: number, kind: string): Q {
   const saltF = dec(s, anSalt), prodF = dec(m, anSalt);
   const reacts = displaces(m.f, s.f);
   const right = reacts ? label([prodF, s.f]) : "不能反应";
-  const badProd = m.k === "Fe2" ? dec(catByK("Fe3"), anSalt) : build(m, anSalt, 1, 1);
-  const rev = label([dec(s, anSalt) === saltF ? dec(m, anSalt) : prodF, s.f]);
-  const wrongs = [reacts ? "不能反应" : rev, label([badProd === prodF ? build(m, anSalt, 2, 1) : badProd, s.f]), label([prodF, "H2"]), label([saltF, m.f])].filter((x) => x !== right);
-  return choiceQ({ ...base, key: `act:salt`, stem: [`${m.f} 放入 ${saltF} 溶液中：`, { f: `${m.f} + ${saltF}` }], expl: [reacts ? [m.f, " 比 ", s.f, " 活泼，能把 ", s.f, " 从盐溶液中置换出来：", { f: `${m.f} + ${saltF} → ${prodF} + ${s.f}` }, "。"] : [m.f, " 不如 ", s.f, " 活泼，不能把 ", s.f, " 从盐溶液中置换出来，不反应。"], "金属活动性顺序：", { f: D.activity.join(" ") }, "。"].flat() as Part[] }, r, [right], wrongs.map((x) => [x])) as Q;
+  const badProd = m.k === "Fe2" ? dec(catByK("Fe3"), anSalt) : badFormulas(m, anSalt, prodF, r)[0];
+  const wrongs = [reacts ? "不能反应" : label([prodF, s.f]), label([badProd, s.f]), label([prodF, "H2"]), label([saltF, m.f])].filter((x) => x !== right);
+  const ex: Part[] = reacts ? [m.f, " 比 ", s.f, " 活泼，能把 ", s.f, " 从盐溶液中置换出来：", { f: `${m.f} + ${saltF} → ${prodF} + ${s.f}` }, { u: U.dot }] : [m.f, " 不如 ", s.f, " 活泼，不能把 ", s.f, " 从盐溶液中置换出来，不反应。"];
+  return choiceQ({ ...base, key: "act:salt", stem: [`${m.f} 放入 ${saltF} 溶液中：`, { f: `${m.f} + ${saltF}` }], expl: [...ex, "金属活动性顺序：", { f: D.activity.join(" ") }, { u: U.dot }] }, r, [right], wrongs.map((x) => [x] as Part[])) as Q;
 }
 
 // ---------- classification ----------
@@ -548,7 +562,7 @@ function genClass(r: Rnd, lv: number): Q {
   const per = Math.ceil(8 / buckets.length);
   for (const b of shuf(r, buckets)) items.push(...shuf(r, pool.filter((x) => x.cat === b)).slice(0, items.length + per > 8 ? 8 - items.length : per));
   while (items.length < 8) { const x = pick(r, pool); if (!items.includes(x)) items.push(x); }
-  return { t: "class", mode: "cls", kind: "class", lv: lv || 2, key: "cls:" + items.map((x) => x.id).sort().join(","), items: shuf(r, items).slice(0, 8), buckets: BUCKETS && buckets, stem: ["把下面的物质拖到所属的类别中（也可以先点物质，再点类别）。"], expl: ["纯净物分为单质和化合物；由两种元素组成、其中一种是氧的化合物是氧化物；酸、碱、盐是电离出的离子不同的三类化合物；混合物由多种物质组成。"] };
+  return { t: "class", mode: "cls", kind: "class", lv: lv || 2, key: "cls:" + items.map((x) => x.id).sort().join(","), items: shuf(r, items).slice(0, 8), buckets, stem: ["把下面的物质拖到所属的类别中（也可以先点物质，再点类别）。"], expl: ["纯净物分为单质和化合物；由两种元素组成、其中一种是氧的化合物是氧化物；酸、碱、盐是电离出的离子不同的三类化合物；混合物由多种物质组成。"] };
 }
 
 // ---------- indicators and pH ----------
@@ -564,13 +578,13 @@ function genInd(r: Rnd, lv: number, kind: string): Q {
   }
   if (kind === "acidity") {
     const it = pick(r, D.ph), right = ACID_ZH[acidity(it.v)];
-    return choiceQ({ ...base, stem: [{ u: it.n }, ` 的 pH 约为 ${it.v}，它是：`], expl: ["pH < 7 显酸性，pH = 7 显中性，pH > 7 显碱性。pH 约为 ", { f: String(it.v) }, "，所以显", right, "。"] }, r, [right], ["酸性", "中性", "碱性"].filter((c) => c !== right).map((c) => [c] as Part[]), {}, 3) as Q;
+    return choiceQ({ ...base, stem: [{ u: it.n }, ` 的 pH 约为 ${it.v}，它是：`], expl: ["pH < 7 显酸性，pH = 7 显中性，pH > 7 显碱性。pH 约为 ", { f: String(it.v) }, "，所以显", right, { u: U.dot }] }, r, [right], ["酸性", "中性", "碱性"].filter((c) => c !== right).map((c) => [c] as Part[]), {}, 3) as Q;
   }
   if (kind === "more") {
     const two = shuf(r, D.ph).slice(0, 4).sort((a, b) => a.v - b.v);
     if (new Set(two.map((x) => x.v)).size < 4) return genInd(r, lv, kind);
     const acid = r() < 0.5, right = acid ? two[0] : two[3];
-    return choiceQ({ ...base, stem: [acid ? "下列溶液中，酸性最强的是：" : "下列溶液中，碱性最强的是："], expl: [acid ? "pH 越小，酸性越强。" : "pH 越大，碱性越强。", { u: right.n }, " 的 pH 约为 ", { f: String(right.v) }, "。"] }, r, [{ u: right.n }], two.filter((x) => x !== right).map((x) => [{ u: x.n }] as Part[])) as Q;
+    return choiceQ({ ...base, stem: [acid ? "下列溶液中，酸性最强的是：" : "下列溶液中，碱性最强的是："], expl: [acid ? "pH 越小，酸性越强。" : "pH 越大，碱性越强。", { u: right.n }, " 的 pH 约为 ", { f: String(right.v) }, { u: U.dot }] }, r, [{ u: right.n }], two.filter((x) => x !== right).map((x) => [{ u: x.n }] as Part[])) as Q;
   }
   if (kind === "red") {
     const baseOnes = D.ph.filter((x) => x.v > 7), others = D.ph.filter((x) => x.v <= 7);
@@ -600,7 +614,7 @@ export function genGas(r: Rnd, lv: number, kind: string): Q {
     const right = rx.l.length > 1 || rx.l.length === 1 ? label(rx.l) : "";
     const wrongs = [...g.bad.map((b) => b[0]), ...D.gases.filter((x) => x !== g).map((x) => label(D.reactions.find((y) => y.eq === x.rx[0])!.l))];
     const why = g.bad.map((b) => b[1]);
-    return choiceQ({ ...base, stem: ["实验室制取", { f: g.f }, "（", { u: g.n }, "）可以选用的药品是："], expl: [eqP(rx), "。", ...why.length ? ["其他药品不合适：", { u: g.bad.map((b) => b[0] + "：" + b[1]).join(" ") }] as Part[] : []] }, r, [{ u: right }], wrongs.filter((x) => x !== right).map((x) => [{ u: x }] as Part[])) as Q;
+    return choiceQ({ ...base, stem: ["实验室制取", { f: g.f }, { u: U.lp }, { u: g.n }, "）可以选用的药品是："], expl: [eqP(rx), { u: U.dot }, ...why.length ? ["其他药品不合适：", { u: g.bad.map((b) => b[0] + { u: U.colon } + b[1]).join(" ") }] as Part[] : []] }, r, [{ u: right }], wrongs.filter((x) => x !== right).map((x) => [{ u: x }] as Part[])) as Q;
   }
   if (kind === "gen") {
     const rxe = pick(r, g.rx), rx = D.reactions.find((x) => x.eq === rxe)!, right = g.gen[rxe];
@@ -611,12 +625,12 @@ export function genGas(r: Rnd, lv: number, kind: string): Q {
     const dry = r() < 0.5 && g.f !== "CO2";
     const want = g.f === "CO2" ? "D" : dry ? (g.col.includes("E") ? "E" : "D") : "C";
     const phrase = g.f === "CO2" ? "收集" : dry ? "收集较干燥的" : "收集较纯净的";
-    return choiceQ({ ...base, stem: [phrase, { f: g.f }, "（", { u: g.n }, "）应选用的收集装置是："], expl: [g.why, `装置 ${want}：${want === "C" ? "排水法" : want === "D" ? "向上排空气法" : "向下排空气法"}。`] }, r, [want], ["C", "D", "E"].filter((x) => x !== want).map((x) => [x] as Part[]), { fig: "CDE" }, 3) as Q;
+    return choiceQ({ ...base, stem: [phrase, { f: g.f }, { u: U.lp }, { u: g.n }, "）应选用的收集装置是："], expl: [g.why, `装置 ${want}：${want === "C" ? "排水法" : want === "D" ? "向上排空气法" : "向下排空气法"}。`] }, r, [want], ["C", "D", "E"].filter((x) => x !== want).map((x) => [x] as Part[]), { fig: "CDE" }, 3) as Q;
   }
   if (kind === "test") {
-    return choiceQ({ ...base, stem: ["检验", { f: g.f }, "（", { u: g.n }, "）的方法是："], expl: [{ u: g.test }] }, r, [{ u: g.test }], D.gases.filter((x) => x !== g).map((x) => [{ u: x.test }] as Part[]), {}, 3) as Q;
+    return choiceQ({ ...base, stem: ["检验", { f: g.f }, { u: U.lp }, { u: g.n }, "）的方法是："], expl: [{ u: g.test }] }, r, [{ u: g.test }], D.gases.filter((x) => x !== g).map((x) => [{ u: x.test }] as Part[]), {}, 3) as Q;
   }
-  return choiceQ({ ...base, key: "gas:full", kind: "full", stem: ["怎样证明", { f: g.f }, "（", { u: g.n }, "）已经收集满："], expl: [{ u: g.full }] }, r, [{ u: g.full }], D.gases.filter((x) => x !== g).map((x) => [{ u: x.full }] as Part[]), {}, 3) as Q;
+  return choiceQ({ ...base, key: "gas:full", kind: "full", stem: ["怎样证明", { f: g.f }, { u: U.lp }, { u: g.n }, "）已经收集满："], expl: [{ u: g.full }] }, r, [{ u: g.full }], D.gases.filter((x) => x !== g).map((x) => [{ u: x.full }] as Part[]), {}, 3) as Q;
 }
 
 // ---------- rounds ----------

@@ -98,6 +98,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   };
 
   // ----- controls
+  let playBtn: HTMLButtonElement | null = null;
   const ctlBox = h("div", { class: "pl-controls", id: "pl-controls" });
   const rows = new Map<string, { el: HTMLElement; update: () => void; when?: (s: St) => boolean }>();
   for (const c of def.choices ?? []) {
@@ -115,7 +116,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
   }
   // choices first, then the sliders (a choice changes which sliders are there)
   for (const [, r] of rows) ctlBox.append(r.el);
-  const drawControls = () => { for (const [, r] of rows) { r.update(); r.el.hidden = r.when ? !r.when(st) : false; } };
+  const drawControls = () => { for (const [, r] of rows) { r.update(); r.el.hidden = r.when ? !r.when(st) : false; } if (playBtn && def.play) playBtn.hidden = !!rows.get(def.play.param)?.el.hidden; };
 
   // ----- tasks
   const taskBox = h("ol", { class: "pl-tasks", id: "pl-tasks" }, ...def.tasks.map((t) => h("li", { class: "pl-task", "data-task": t.id }, h("span", { class: "pl-tick", "aria-hidden": "true" }, "○"), h("span", { class: "pl-tt" }, t.text))));
@@ -152,7 +153,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
     st[pl.param] = Number(clamp(v, p.min, p.max).toFixed(6));
     update(false);
   };
-  const playBtn = def.play ? h("button", { class: "mopt pl-btn", id: "pl-play", onclick: () => (playing ? stopPlay() : startPlay()) }, "播放") : null;
+  playBtn = def.play ? h("button", { class: "mopt pl-btn", id: "pl-play", onclick: () => (playing ? stopPlay() : startPlay()) }, "播放") : null;
   function loop(ts: number) { if (!playing) return; advance(Math.min(0.1, (ts - last) / 1000)); last = ts; raf = requestAnimationFrame(loop); }
   function startPlay() {
     const pl = def.play!, p = def.params.find((x) => x.id === pl.param)!;
