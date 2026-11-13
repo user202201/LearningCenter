@@ -145,7 +145,7 @@ const chineseLeft = (page) => page.evaluate((src) => {
   await lvl(t, 'w1/5');
   ok(await page.locator('#cl-answer').isHidden(), 'the "show answer" button is hidden at first');
   await tap(page, ['move']); await page.click('#cl-hint');
-  ok(await page.locator('.cw-pitem[data-pal="move"].hint').count() === 0, 'the hint of a program that starts right does not mark the palette');
+  ok(await page.locator('.cw-pitem[data-pal="move"].hint').count() === 1 && !(await page.locator('.cw-b.hint-wrong').count()), 'the hint of a program that starts right marks only the next block in the palette (move), nothing wrong in the workspace');
   await page.click('.cw-ws .cw-b'); // no change
   for (let i = 0; i < 3; i++) { await page.click('#cl-run'); await result(page); await page.waitForTimeout(150); }
   ok(await page.locator('#cl-answer').isVisible(), 'after 3 failed runs the "show answer" button appears');
@@ -176,7 +176,8 @@ const chineseLeft = (page) => page.evaluate((src) => {
   await page.click('#cl-run'); r = await result(page);
   ok(r.won && r.stars === '3', 'fixing the one block solves it with 3 stars');
   await lvl(t, 'w2/8');
-  await page.evaluate(() => window.__coding.run('repeat 4 { move }'));
+  const cols = await page.evaluate(() => Math.round(window.__coding.scene.el.querySelector('svg').viewBox.baseVal.width / 40));
+  await page.evaluate((n) => window.__coding.run(`repeat ${n} { move }`), cols - 3);
   await page.click('#cl-run'); r = await result(page);
   ok(!r.won && /另一张地图/.test(r.msg), 'a family level: a program that fits only the shown map is rejected: ' + r.msg);
   await page.evaluate(() => window.__coding.run('until onFlag { move }'));
@@ -286,8 +287,8 @@ const chineseLeft = (page) => page.evaluate((src) => {
     const k = await page.evaluate(() => JSON.stringify([window.__coding.level.fixed.world.cells, window.__coding.level.fixed.state.x, window.__coding.level.fixed.state.y, Object.keys(window.__coding.level.fixed.state.stars)]));
     if (k === prevKey) ok(false, 'two random levels in a row were the same');
     prevKey = k; keys.add(k);
-    await page.evaluate(() => window.__coding.run(window.__coding.level.solution));
-    await page.click('#cl-run'); r = await result(page);
+    await page.evaluate(() => window.__coding.runUI(window.__coding.level.solution));
+    r = await result(page);
     if (!r.won) { ok(false, 'a random level could not be solved by its reference'); break; }
     if (i < 5) { await page.click('#cl-new'); await page.waitForTimeout(150); }
   }
@@ -296,7 +297,7 @@ const chineseLeft = (page) => page.evaluate((src) => {
   ok((await doc(page, t.id)).challenges === 6, 'every solved random challenge is counted in the progress file (6)');
   ok(!(await doc(page, t.id)).stars || Object.keys((await doc(page, t.id)).stars).length === 0, 'and gives no stars of the numbered levels');
   await page.screenshot({ path: OUT + 'coding-random.png' });
-  for (const w of [2, 3]) { await go(page, `#/coding/${t.id}/r${w}`, '.cw-pitem'); await page.evaluate(() => window.__coding.run(window.__coding.level.solution)); await page.click('#cl-run'); r = await result(page); ok(r.won, `a random level of world ${w} is solved by its reference`); }
+  for (const w of [2, 3]) { await go(page, `#/coding/${t.id}/r${w}`, '.cw-pitem'); await page.evaluate(() => window.__coding.runUI(window.__coding.level.solution)); r = await result(page); ok(r.won, `a random level of world ${w} is solved by its reference`); }
 
   // ================= free drawing =================
   await go(page, `#/coding/${t.id}/free`, '.cw-pitem');

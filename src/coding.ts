@@ -362,7 +362,7 @@ function playScreen(p: Play) {
     get state(): State { return cloneState(mach?.state ?? instanceOf(level).state); },
     get editor() { return editor; },
     get scene() { return scene; },
-    run(src: Program | string) { const prog = typeof src === "string" ? parse(src) : src; editor.setProgram(cloneProgram(prog, true)); return evaluate(level, prog); },
+    run(src: Program | string) { const prog = typeof src === "string" ? parse(src) : src; editor.setProgram(cloneProgram(prog, true)); return free ? null : evaluate(level, prog); },
     runUI(src?: Program | string) { if (src !== undefined) hook.run(src); reset(false); void start(false).then(() => instant()); },
     step() { if (!running) void start(true); else tick(); return mach?.status ?? null; },
     get status() { return mach?.status ?? null; },

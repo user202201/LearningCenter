@@ -627,5 +627,29 @@ const withExtra = async (t) => {
       await t.browser.close();
     }
   }
+  // =====================================================================================  G. OFFLINE (the maps are in the program; the progress waits on the device)
+  {
+    const store = new Map();
+    const t = await start(store, { viewport: { width: 390, height: 844 }, today: '2026-11-12' });
+    const { page } = t; const { answerOf } = helpers(page);
+    await addKid(page, 'Dory');
+    await page.evaluate(() => (location.hash = '#/science/map')); await page.waitForSelector('.gmap-svg');
+    t.opts.offline = true;   // the pretend GitHub now refuses every request
+    await page.click('#gmap-who .mopt:has-text("Dory")'); await page.waitForSelector('#who-guest:not(.on)');
+    ok(await page.locator('.gmap-svg').count() === 1 && await page.locator('#mode-cn-ab').isEnabled(), 'offline: the map page and the practice open (the child\'s file was never read: "nothing yet")');
+    await page.click('#mode-cn-ab'); await page.waitForSelector('#game .mq');
+    for (let i = 0; i < 10; i++) { const a = await answerOf(); await page.locator(`.mchoice[data-v="${a.v}"]`).click(); await page.waitForSelector('#math-explain'); await page.click('#math-next'); if (i < 9) await page.waitForFunction(() => !document.querySelector('#math-explain')); }
+    await page.waitForSelector('#game-end');
+    await page.waitForSelector('#toasts .toast:has-text("没有网络")', { timeout: 8000 });
+    ok([...store.keys()].every((k) => !k.startsWith('geomap/')), 'offline: a round is played to the end, a message says it is kept on this device, nothing reaches the repository yet');
+    await page.waitForFunction(() => !document.querySelector('#toasts .toast.working'));
+    await page.click('#game-done');
+    t.opts.offline = false; await page.evaluate(() => window.dispatchEvent(new Event('online')));
+    await page.waitForTimeout(2000);
+    const f = [...store.keys()].find((k) => k.startsWith('geomap/'));
+    ok(!!f && Object.keys(JSON.parse(store.get(f)).cards).length === 10, 'back online: the child\'s practice is sent to the repository (' + f + ')');
+    ok(t.log.external.length === 0, 'offline run: no outside request');
+    await t.browser.close();
+  }
   await done();
 })();

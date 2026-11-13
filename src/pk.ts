@@ -330,7 +330,7 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
       const crown = h("div", { class: "pk-crown" }); crown.innerHTML = CROWN;
       root.append(h("div", { class: "pk-rays" }), h("div", { class: "pk-pulse" }),
         h("div", { class: "pk-stage2" }, trophy, buddy(me, "win", ["happy"], [crown])), text, again);
-      p.stops.push(startFx(p.over, "win", me.color), countUp(cnt, own, 900));
+      queueMicrotask(() => { if (p.finalBuilt && root.isConnected) p.stops.push(startFx(p.over, "win", me.color), countUp(cnt, own, 900)); });
     } else if (o === "lose") {
       const cloud = h("div", { class: "pk-cloud" }, h("i", { class: "r0" }), h("i", { class: "r1" }), h("i", { class: "r2" }), h("i", { class: "r3" }));
       cloud.insertAdjacentHTML("afterbegin", CLOUD);
@@ -338,7 +338,7 @@ function mountGame(kids: [M.Kid, M.Kid], lists: [string[], string[]], readings: 
     } else {
       const eq = h("span", { class: "pk-eq" }, "=");
       root.append(h("div", { class: "pk-stage2" }, buddy(me, "tie", ["shrug"]), eq, buddy(opp, "tie opp", ["shrug"])), text, again);
-      p.stops.push(startFx(p.over, "tie", me.color));
+      queueMicrotask(() => { if (p.finalBuilt && root.isConnected) p.stops.push(startFx(p.over, "tie", me.color)); });
     }
     return root;
   }
