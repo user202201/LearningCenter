@@ -8,7 +8,8 @@ fs.mkdirSync(OUT, { recursive: true });
 const ALL = ['chinese', 'math', 'english', 'science'];
 const route = { chinese: (id) => `#/kid/${id}`, math: (id) => `#/math/${id}`, english: (id) => `#/english/${id}`, science: (id) => `#/science/${id}` };
 const kidId = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.kids.json')).kids[0].id);
-const bar = (page) => page.evaluate(() => {
+const bar = async (page) => { for (let i = 0; i < 5; i++) { const r = await bar1(page); if (r) return r; await page.waitForTimeout(200); await page.waitForSelector('header.kid-hero .shortcuts'); } return bar1(page); };   // (a page may redraw once while it loads)
+const bar1 = (page) => page.evaluate(() => {
   const top = document.querySelector('header.kid-hero'), nav = top && top.querySelector('.shortcuts');
   if (!nav) return null;
   const vw = document.documentElement.clientWidth, t = top.getBoundingClientRect(), b = [...nav.children].map((e) => e.getBoundingClientRect()), h1 = top.querySelector('h1').getBoundingClientRect();
