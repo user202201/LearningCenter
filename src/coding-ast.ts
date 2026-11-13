@@ -118,7 +118,8 @@ export function exprText(e: Expr, parent = 0): string {
     case "not": return "!" + exprText(e.a, 9);
     case "bin": case "cmp": case "logic": {
       const p = PREC[e.op];
-      const s = `${exprText(e.a, p)} ${e.op} ${exprText(e.b, p + 1)}`;
+      // (a comparison does not chain: `a < b == c` is not read back, so a comparison on its left side gets brackets)
+      const s = `${exprText(e.a, e.k === "cmp" ? p + 1 : p)} ${e.op} ${exprText(e.b, p + 1)}`;
       return p < parent ? `(${s})` : s;
     }
     case "call": return `${e.name}(${e.args.map((x) => exprText(x)).join(", ")})`;

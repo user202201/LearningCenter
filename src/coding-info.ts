@@ -78,7 +78,7 @@ export async function renderInfo(k: M.Kid, doc: CM.CodingDoc, rest: string): Pro
   }
   const pctx: PJ.PCtx = { c, kid: k, X, today: todayLocal() };
   if (rest === "projects") return PJ.renderShelf(pctx);
-  if ((m = /^projects\/new\/(\w+)$/.exec(rest)) && (PJ.TEMPLATES as readonly string[]).includes(m[1])) return PJ.renderProject(pctx, PJ.newProject(c, m[1] as PJ.Tpl, ""), true);
+  if ((m = /^projects\/new\/(\w+)$/.exec(rest)) && (PJ.TEMPLATES as readonly string[]).includes(m[1])) return PJ.renderProject(pctx, PJ.newProject(c, m[1] as PJ.Tpl), true);
   if ((m = /^projects\/(p[\w]+)$/.exec(rest))) { const pid = m[1], p = PJ.projectsOf(k.id).find((x) => x.id === pid); if (p) return PJ.renderProject(pctx, p, false); }
   if (rest === "certificate") return PJ.renderCertificate(pctx, medalsOf(c, doc), todayLocal());
   location.hash = `#/coding/${k.id}`;

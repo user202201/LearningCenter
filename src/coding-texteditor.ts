@@ -134,7 +134,7 @@ export function createCodeEditor(o: EditorOpts = {}): CodeEditor {
   const changed = () => { render(); for (const f of listeners) f(ta.value); };
   const snap = (): Snap => ({ v: ta.value, a: ta.selectionStart, b: ta.selectionEnd });
   const push = (kind: string) => {
-    const now = Date.now();
+    const now = performance.now();
     if (kind === "type" && lastKind === "type" && now - lastPush < 700 && past.length) { lastPush = now; return; }   // typing in one go = one undo step
     past.push(snap()); if (past.length > 300) past.shift();
     future = []; lastPush = now; lastKind = kind;
@@ -233,7 +233,7 @@ export function createCodeEditor(o: EditorOpts = {}): CodeEditor {
     const ev = e as InputEvent;
     // anything the browser typed itself (letters, paste, delete): remember the state before for undo
     if (ev.inputType === "historyUndo" || ev.inputType === "historyRedo") return;
-    const now = Date.now();
+    const now = performance.now();
     if (!(lastKind === "type" && now - lastPush < 700 && past.length)) { /* the snapshot before this change is unknown: keep the last known text */ past.push({ v: lastText, a: lastSel[0], b: lastSel[1] }); if (past.length > 300) past.shift(); }
     future = []; lastPush = now; lastKind = "type";
     changed(); markBracket();

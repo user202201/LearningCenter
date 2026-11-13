@@ -496,7 +496,15 @@ export function makeQuestion(spec: Spec, seed: number): Q {
     case "colorName": { const t: [number[], string][] = [[[255, 0, 0], "red"], [[0, 255, 0], "green"], [[0, 0, 255], "blue"], [[255, 255, 0], "yellow"], [[0, 0, 0], "black"], [[255, 255, 255], "white"], [[0, 255, 255], "cyan"], [[255, 0, 255], "magenta"]]; const [rgb, name] = pick(t, r); return { args: [rgb.join(", ")], answer: name, choices: shuffle(uniq([name, ...shuffle(t.map((x) => x[1]).filter((x) => x !== name), r).slice(0, 3)]), r) }; }
     case "rleEnc": { const k = rint(r, 3, 5), letters = LETTERS.slice(0, 3); let s = "", prev = ""; for (let i = 0; i < k; i++) { let c = pick([...letters], r); if (c === prev) c = letters[(letters.indexOf(c) + 1) % 3]; s += c.repeat(rint(r, 1, 5)); prev = c; } return { args: [s], answer: rleEncode(s) }; }
     case "rleDec": { const k = rint(r, 2, 4), letters = LETTERS.slice(0, 3); let enc = "", prev = ""; for (let i = 0; i < k; i++) { let c = pick([...letters], r); if (c === prev) c = letters[(letters.indexOf(c) + 1) % 3]; enc += `${rint(r, 1, 6)}${c}`; prev = c; } return { args: [enc], answer: rleDecode(enc) }; }
-    case "rleSize": { const s = pick(["AAAAAAAABBBB", "AAAABBBBCCCC", "ABABABABAB", "AAAAAAAAAAAA", "ABCABCABC"], r); const enc = rleEncode(s); return { args: [s, enc], answer: enc.length < s.length ? "shorter" : "longer", choices: ["shorter", "longer"] }; }
+    case "rleSize": {
+      for (let tries = 0; tries < 50; tries++) {
+        const runs = rint(r, 2, 4), longRuns = r() < 0.5, letters = LETTERS.slice(0, 4); let s = "", prev = "";
+        for (let i = 0; i < runs; i++) { let c = pick([...letters], r); if (c === prev) c = letters[(letters.indexOf(c) + 1) % 4]; s += c.repeat(longRuns ? rint(r, 3, 7) : rint(r, 1, 2)); prev = c; }
+        const enc = rleEncode(s);
+        if (enc.length !== s.length) return { args: [s, enc], answer: enc.length < s.length ? "shorter" : "longer", choices: ["shorter", "longer"] };
+      }
+      return { args: ["AAAAAA", "6A"], answer: "shorter", choices: ["shorter", "longer"] };
+    }
     case "caesarDec": { const k = rint(r, 1, 25), w = pick(WORDS, r); return { args: [caesar(w, k), k], answer: w }; }
     case "caesarBreak": { const k = rint(r, 1, 25), w = pick(WORDS, r); return { args: [caesar(w, k)], answer: w }; }
     case "caesarKey": { const k = rint(r, 1, 25), w = pick(WORDS, r); return { args: [w, caesar(w, k)], answer: String(k) }; }

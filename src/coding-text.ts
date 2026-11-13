@@ -209,7 +209,7 @@ function makePanel(o: { initial: string; input: string; showInput: boolean; extr
     const code = editor.value();
     const r = run(code, { input: inputEl.value, budget: o.budget ?? 400_000, seed: 1 });
     out.textContent = r.stdout || (r.error ? "" : o.draw ? "" : "（没有输出）");
-    out.classList.toggle("empty", !r.stdout);
+    out.classList.toggle("tx-none", !r.stdout);
     showError(r.error);
     draw(r);
     o.onRun?.();

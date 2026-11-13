@@ -87,11 +87,11 @@ export function renderProject(x: PCtx, p: Project, isNew: boolean): void {
     if (isNew) { isNew = false; history.replaceState(null, "", `#/coding/${kidId}/projects/${p.id}`); }
   };
   x.X.show(h("div", { class: "page", style: `--kid:${x.kid.color}` }, h("header", { class: "top hero kid-hero" }, x.X.back(`#/coding/${kidId}/projects`, "创作工坊"), h("h1", { class: "user-title" }, p.name || L(x.c.projects[p.tpl].name))),
-    h("main", { class: "scroll" }, h("div", { class: "narrow cl-narrow ci-proj" }, h("div", { class: "ci-row" }, name, h("button", { class: "ci-btn primary", id: "ci-psave", type: "button", onclick: save }, "保存")), h("div", { class: "ci-row" }, tabEdit, tabRun), body))));
+    h("main", { class: "scroll" }, h("div", { class: "narrow cl-narrow ci-proj" }, h("div", { class: "ci-row ci-prow" }, name, h("button", { class: "ci-btn primary", id: "ci-psave", type: "button", onclick: save }, "保存")), h("div", { class: "ci-row" }, tabEdit, tabRun), body))));
   show("edit");
   (window as unknown as { __infoProj: unknown }).__infoProj = { project: p, save, show };
 }
-export const newProject = (c: InfoContent, tpl: Tpl, name: string): Project => ({ id: `p${Date.now()}${Math.floor(Math.random() * 1000)}`, tpl, name, date: "", data: JSON.parse(JSON.stringify(c.projectDefaults[tpl])) });
+export const newProject = (c: InfoContent, tpl: Tpl, name = ""): Project => ({  id: `p${Date.now()}${Math.floor(Math.random() * 1000)}`, tpl, name: name || L(c.projects[tpl].name), date: "", data: JSON.parse(JSON.stringify(c.projectDefaults[tpl])) });
 
 type Part = (root: HTMLElement, data: any, c: InfoContent) => void | (() => void);
 const field = (label: string, el: HTMLElement) => h("label", { class: "ci-pfield" }, h("span", {}, label), el);
@@ -127,7 +127,7 @@ const EDIT: Record<Tpl, Part> = {
   story: (root, d) => {
     const list = h("div", { class: "ci-qlist" });
     const draw = () => list.replaceChildren(...d.scenes.map((s: Scene, i: number) => h("div", { class: "ci-qedit", "data-i": String(i) }, h("b", {}, `${i + 1}`), textIn(s.text, (v) => (s.text = v), `ci-s${i}`, 120),
-      ...s.choices.map((c, k) => h("div", { class: "ci-row" }, textIn(c.t, (v) => (c.t = v), `ci-s${i}c${k}`, 30), sel(d.scenes.map((_: Scene, j: number) => [String(j), String(j + 1)] as [string, string]), String(c.to), (v) => (c.to = Number(v)), `ci-s${i}t${k}`))),
+      ...s.choices.map((c, k) => h("div", { class: "ci-row" }, textIn(c.t, (v) => (c.t = v), `ci-s${i}c${k}`, 30), h("span", {}, "→"), sel(d.scenes.map((_: Scene, j: number) => [String(j), String(j + 1)] as [string, string]), String(c.to), (v) => (c.to = Number(v)), `ci-s${i}t${k}`))),
       h("div", { class: "ci-row" }, h("button", { class: "ci-btn", type: "button", onclick: () => { if (s.choices.length < 2) { s.choices.push({ t: "", to: 0 }); draw(); } } }, "添加选项"), i > 0 ? h("button", { class: "ci-btn danger", type: "button", onclick: () => { d.scenes.splice(i, 1); for (const sc of d.scenes) sc.choices = sc.choices.filter((c: any) => c.to !== i).map((c: any) => ({ ...c, to: c.to > i ? c.to - 1 : c.to })); draw(); } }, "删除这一幕") : null))));
     root.append(field("标题", textIn(d.title, (s) => (d.title = s), "ci-stitle")), list, h("button", { class: "ci-btn", id: "ci-sadd", type: "button", onclick: () => { if (d.scenes.length < 8) { d.scenes.push({ text: "", choices: [] }); draw(); } } }, "添加一幕"));
     draw();

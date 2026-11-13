@@ -155,14 +155,17 @@ lesson("scan", T("控制器的扫描周期", "The scan cycle", "Le cycle de scru
   ("自动化设备的“大脑”叫控制器。它不停地重复：读传感器 → 运行程序 → 控制执行器。每一轮叫一个周期。", flow("读传感器", "运行程序", "输出到执行器", "再来一轮")),
   ("这里的传感器和执行器都是变量。例如 light 是光线传感器的读数，lamp 是路灯（1 = 亮，0 = 灭）。用“如果 light < 30，就让 lamp = 1”来控制。", txt("如果 light < 30", "    lamp = 1", "否则 lamp = 0")))
 lesson("timing", T("计时与状态", "Timers and state", "Minuterie et état"),
-  ("控制器每一轮都会忘记什么吗？不会：变量会保留。用一个变量计数，就能“记住”过了多少轮，用它控制时间。", txt("每一轮：timer = timer + 1", "timer ≤ 4 → 绿灯", "timer = 5 → 黄灯", "之后 → 红灯，到 9 归零")))
+  ("控制器每一轮都会忘记什么吗？不会：变量会保留。用一个变量计数，就能“记住”过了多少轮，用它控制时间。", txt("每一轮：timer = timer + 1", "timer ≤ 4 → 绿灯", "timer = 5 → 黄灯", "之后 → 红灯，到 9 归零")),
+  ("一个周期共 9 轮：绿灯 4 轮，黄灯 1 轮，红灯 4 轮。数到 9 以后把 timer 设回 0，周期就重新开始。每次只能亮一盏灯，要把另外两盏设为 0。", flow("timer 1-4：绿", "timer 5：黄", "timer 6-9：红", "归零")))
 lesson("hyst", T("滞回：留一点余地", "Hysteresis", "Hystérésis"),
   ("如果光线刚好在 30 附近晃动，路灯就会一直闪。解决办法：天黑到 30 以下才开，天亮到 50 以上才关，中间保持不变。", txt("light < 30 → 开", "light > 50 → 关", "30 到 50 之间 → 保持")),
   ("恒温器、空调、冰箱都这样工作：低于下限开始加热，高于上限停止，避免开关太频繁。", txt("temp < 18 → 加热", "temp ≥ 22 → 停止")))
 lesson("delay", T("延迟关闭", "Delayed closing", "Fermeture différée"),
-  ("自动门不能一没人就立刻关，否则会夹到人。办法：没人后再等几轮才关。用一个计数变量 wait，有人时清零，没人时加 1。", txt("有人 → 开门, wait = 0", "没人 → wait = wait + 1", "wait ≥ 3 → 关门")))
+  ("自动门不能一没人就立刻关，否则会夹到人。办法：没人后再等几轮才关。用一个计数变量 wait，有人时清零，没人时加 1。", txt("有人 → 开门, wait = 0", "没人 → wait = wait + 1", "wait ≥ 3 → 关门")),
+  ("只有门开着的时候才需要等待。所以“没人”时先检查 door = 1，再让 wait 加 1。有人又出现时，wait 要清零，重新计时。", flow("有人：开门，wait = 0", "没人：wait + 1", "wait ≥ 3：关门")))
 lesson("guard", T("保护条件", "Safety conditions", "Conditions de sécurité"),
-  ("好的控制程序要先想“什么时候不能做”。水泵没有水时空转会烧坏。所以要检查水箱：水位为 0 就必须关泵，哪怕土壤很干。", txt("土壤干 → 开泵", "土壤湿 → 关泵", "水箱空 → 一定关泵")))
+  ("好的控制程序要先想“什么时候不能做”。水泵没有水时空转会烧坏。所以要检查水箱：水位为 0 就必须关泵，哪怕土壤很干。", txt("土壤干 → 开泵", "土壤湿 → 关泵", "水箱空 → 一定关泵")),
+  ("保护规则写在最后：后面的规则会覆盖前面的结果。这样无论前面怎么决定，水箱空了泵一定是关的。", txt("1. soil < 30 → pump = 1", "2. soil ≥ 60 → pump = 0", "3. tank ≤ 0 → pump = 0  （最后，最优先）")))
 lesson("logic", T("与、或", "AND and OR", "ET et OU"),
   ("报警条件常常有“并且”和“或者”：有烟，或者（有人移动并且门开着）。把所有可能的输入都列出来，叫真值表，可以检查没有漏掉。", txt("烟  动  门 → 报警", "0   0   0 → 0", "1   0   0 → 1", "0   1   1 → 1")),
   ("没有“与”的积木时，可以把两个开关相加：motion + door == 2 就表示两个都是 1。“或”可以写成相加 ≥ 1。", txt("motion + door == 2  → 与", "smoke + motion ≥ 1 → 或")))
@@ -179,9 +182,11 @@ lesson("lift", T("请求队列", "A queue of requests", "File de demandes"),
   ("电梯按先来先服务的顺序处理请求。传感器 target 是最早的未完成请求（0 表示没有）。比较 target 和当前楼层 floor，决定上行、下行或停止。", txt("target > floor → 上", "target < floor → 下", "target = 0 → 不动")),
   ("注意：没有请求时 target = 0，0 比任何楼层都小，如果只写“小于就下行”，电梯会一直往下冲。要先排除 0。", txt("先检查 target ≠ 0", "再比较大小")))
 lesson("follow", T("巡线小车", "A line follower", "Un suiveur de ligne"),
-  ("小车底部有左、右两个传感器，看见黑线时为 1。左边看见线，说明线在左边，车要向左转；右边看见线，向右转；都看不见，说明在线上，直行。", txt("left = 1 → 向左 (steer = −1)", "right = 1 → 向右 (steer = 1)", "都是 0 → 直行 (steer = 0)")))
+  ("小车底部有左、右两个传感器，看见黑线时为 1。左边看见线，说明线在左边，车要向左转；右边看见线，向右转；都看不见，说明在线上，直行。", txt("left = 1 → 向左 (steer = −1)", "right = 1 → 向右 (steer = 1)", "都是 0 → 直行 (steer = 0)")),
+  ("先把 steer 设为 0，再用两条规则修正。每一轮小车都重新读传感器，一点一点把自己拉回线上，这叫“反馈”。", flow("读传感器", "线在哪边？", "往那边转", "再读传感器")))
 lesson("follow2", T("按偏差大小转向", "Proportional steering", "Direction proportionnelle"),
-  ("线弯得很急时，每次只转一点点就追不上。增加两个更靠外的传感器：线偏得越远，转得越大。这就是“比例控制”的思想：偏差越大，修正越大。", txt("近的传感器 → 转 1", "远的传感器 → 转 3")))
+  ("线弯得很急时，每次只转一点点就追不上。增加两个更靠外的传感器：线偏得越远，转得越大。这就是“比例控制”的思想：偏差越大，修正越大。", txt("近的传感器 → 转 1", "远的传感器 → 转 3")),
+  ("规则的顺序有讲究：先写小的修正，再写大的修正。两个传感器同时看见线时，后面的大修正会覆盖前面的小修正。", txt("1. left → −1  right → 1", "2. farleft → −3  farright → 3", "后写的优先")))
 lesson("rover", T("避障", "Avoiding obstacles", "Éviter les obstacles"),
   ("超声波传感器测量前方障碍物的距离 dist。距离还远时全速前进；距离很近时先停下，再换到另一条车道。别忘了留出足够的刹车距离：每次走 3，停止的距离要大于 3。", txt("dist < 12 → 停止并变道", "否则 → 速度 3")))
 lesson("arm", T("机械臂", "A robot arm", "Un bras robotique"),
@@ -384,7 +389,7 @@ act(W, 28, T("人工智能的限制与责任", "Limits and responsibility of AI"
 W = 16
 D = [
  ("i16-01", T("智能路灯：第一步", "A street lamp", "Un lampadaire"), T("天黑（光线低于 30）时点亮路灯，否则熄灭。传感器 light，执行器 lamp（1 = 亮）。", "Turn the lamp on when it is dark (light below 30), otherwise off. Sensor light, actuator lamp (1 = on).", "Allumez le lampadaire quand il fait sombre (light inférieur à 30), sinon éteignez-le. Capteur light, actionneur lamp (1 = allumé)."), "scan",
-   ["“如果 light < 30 就让 lamp = 1，否则 lamp = 0。”用“如果…否则”积木。"], ["天黑时灯没有亮。", "天亮时灯还亮着。"], ["黄昏", "黎明", "多云"]),
+   ["“如果 light < 30 就让 lamp = 1，否则 lamp = 0。”用“如果…否则”积木。", "写好后点“全部检查”，看哪个场景没有通过，再对照提示修改。"], ["天黑时灯没有亮。", "天亮时灯还亮着。"], ["黄昏", "黎明", "多云"]),
  ("i16-02", T("红绿灯", "A traffic light", "Un feu tricolore"), T("让红绿灯循环：绿灯 4 轮，黄灯 1 轮，红灯 4 轮，每次只亮一盏。用变量 timer 计时。", "Cycle the lights: green for 4 ticks, yellow for 1, red for 4, only one lamp on at a time. Use the variable timer.", "Faites cycler les feux : vert 4 tours, orange 1, rouge 4, une seule lampe à la fois. Utilisez la variable timer."), "timing",
    ["每一轮先让 timer 加 1。", "timer ≤ 4 绿灯；timer = 5 黄灯；其余红灯；timer ≥ 9 时归零。"], ["没有任何灯亮。", "同时亮了不止一盏灯。", "灯的顺序或时间不对。"], ["循环", "长时间"]),
  ("i16-03", T("路灯：留点余地", "Street lamp with hysteresis", "Lampadaire avec hystérésis"), T("光线在 30 到 50 之间晃动时灯不能闪。低于 30 开灯，高于 50 关灯，中间保持原来的状态。", "The lamp must not flicker when light wobbles between 30 and 50. On below 30, off above 50, unchanged in between.", "Le lampadaire ne doit pas clignoter quand light oscille entre 30 et 50. Allumé sous 30, éteint au-dessus de 50, inchangé entre les deux."), "hyst",
