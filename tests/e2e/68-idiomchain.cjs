@@ -146,7 +146,7 @@ const CJK = /[㐀-鿿]/;
   let ch = await hook(() => window.__idiomchain.chain()), need = await hook(() => window.__idiomchain.need());
   ok(ch.length === 1 && ch[0].who === 'cpu' && (await p.locator('.icn-cell').count()) === 4 && (await txt('#icn-len')) === '接龙：1', 'Start: the computer opens with an idiom shown in four cells');
   const cells = await p.evaluate(() => [...document.querySelectorAll('.icn-cell')].map((c) => [c.querySelector('.icn-py').textContent, c.querySelector('.icn-ch').textContent, c.querySelector('.icn-ch').classList.contains('user')]));
-  ok(cells.map((c) => c[1]).join('') === ch[0].w && cells.every((c) => /^[a-zü]/i.test(c[0]) && c[2]), 'the cells show the characters with pinyin and carry the user class');
+  ok(cells.map((c) => c[1]).join('') === ch[0].w && cells.every((c) => /^[a-zA-Züāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]+$/.test(c[0]) && c[2]), 'the cells show the characters with pinyin and carry the user class');
   ok((await txt('#icn-exp')).length > 0 && (await txt('#icn-need')) === need.ch && (await hook(() => window.__idiomchain.mode())) === 'choose', 'the explanation and the needed first character are shown; the mode is Choose');
   ok(await p.isVisible('#icn-chips') && !(await p.isVisible('#icn-form')) && (await p.locator('.icn-chip').count()) === 4, 'four chips, no input');
   await hook(() => window.__idiomchain.seed(['一心一意']));   // (a known position: many answers lead on, so the steps below cannot end the game by chance)
@@ -184,6 +184,10 @@ const CJK = /[㐀-鿿]/;
   await waitPlayer();
   // three mistakes in a row end the game
   await hook(() => { /* nothing */ });
+  for (let tries = 0; tries < 40; tries++) {   // (two valid chips leave only two wrong ones: draw the chips again until three wrong ones are there)
+    chips = await chipInfo(); if (chips.filter((c) => !c.right && !c.off).length >= 3) break;
+    await hook(() => { const G = window.__idiomchain; G.seed(G.chain().map((x) => x.w), G.used()); });
+  }
   for (let k = 0; k < 3; k++) {
     chips = await chipInfo(); const wi = chips.findIndex((c) => !c.right && !c.off);
     if (wi < 0) break; await p.click(`#icn-chip-${wi}`);

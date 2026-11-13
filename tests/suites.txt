@@ -52,3 +52,9 @@
 63-sudoku
 64-breakout
 65-dj-pro
+66-nonogram
+67-reversi
+68-idiomchain
+69-linkup
+70-maze
+71-whack
