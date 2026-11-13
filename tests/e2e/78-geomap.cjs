@@ -43,6 +43,15 @@ const helpers = (page) => {
   });
   return { toClient, answerOf };
 };
+// The translations of this page are written in src/i18n-extra/geomap.json and merged into src/i18n-data.ts by the person who integrates the change; until then (and
+// harmlessly afterwards) the test puts them into the page's translation tables itself, so that English / French can be checked.
+const extra = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/geomap.json'), 'utf8'));
+const withExtra = async (t) => {
+  const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[1]]))) + ');\n';
+  await t.ctx.route('**/src/i18n-data.ts*', async (route) => { const r = await route.fetch(); await route.fulfill({ response: r, body: (await r.text()) + '\n' + add }); });
+  await t.page.reload(); await t.page.waitForSelector('.hub-grid, .kids, .gmap-svg');
+};
+
 (async () => {
   // =====================================================================================  A. THE DATA (in the page: the real modules)
   {
@@ -558,6 +567,7 @@ const helpers = (page) => {
       const t = await start(new Map(), { local: true, locale: loc, viewport: { width: w, height: h } });
       const { page } = t; const tag = `${loc}-${w}x${h}`; const { toClient, answerOf } = helpers(page);
       await addKid(page, 'Dory');
+      if (loc !== 'zh-CN') await withExtra(t);
       await page.evaluate(() => (location.hash = '#/science/map')); await page.waitForSelector('.gmap-svg');
       const geom = async (label) => {
         const g = await page.evaluate(() => {

@@ -192,10 +192,14 @@ const slotCenter = async (page, sel) => center(page.locator(sel).first());
   ok((await prog(page)) === 'until onFlag { if pathAhead { move } else { left } }', 'an if-else moved into the until: nested two deep: "' + (await prog(page)) + '"');
   await page.screenshot({ path: OUT + 'editor-nested.png' });
   // the code panel (from world 3 on)
-  await page.click('#cl-code-btn');
-  ok(await page.locator('#cl-code').isVisible() && (await page.textContent('#cl-code')) === 'until onFlag {\n  if pathAhead {\n    move\n  } else {\n    left\n  }\n}', 'the pseudo-code panel shows the program as text: ' + JSON.stringify((await page.textContent('#cl-code')).slice(0, 40)));
+  ok(await page.locator('#cl-code').isVisible() && (await page.textContent('#cl-code-btn')) === '隐藏代码', 'from world 3 on the pseudo-code panel is shown by default');
+  ok(await page.locator('#cl-code').isVisible() && (await page.textContent('#cl-code')) === 'until onFlag {\n  if pathAhead {\n    move\n  } else {\n    left\n  }\n}', 'the pseudo-code panel shows the program as text: ' + JSON.stringify((await page.textContent('#cl-code'))));
   await pal(page, 'right').click();
   ok((await page.textContent('#cl-code')).endsWith('}\nright'), 'and follows every change');
+  await page.click('#cl-code-btn');
+  ok(!(await page.locator('#cl-code').isVisible()) && (await page.textContent('#cl-code-btn')) === '显示代码', 'the toggle hides it ...');
+  await page.click('#cl-code-btn');
+  ok(await page.locator('#cl-code').isVisible(), '... and shows it again');
 
   // ---------- number fields and the condition list ----------
   await go(page, id, 'w2/1');
@@ -311,6 +315,7 @@ const slotCenter = async (page, sel) => center(page.locator(sel).first());
   await tdrag(mv, bc.x, bc.y);
   ok((await prog(tp)) === 'repeat 3 { move }', 'REAL touch: dragging a block onto the bin deletes it');
   // the stepper with a finger
+  await clearToasts(tp);
   const plus = await center(tp.locator('.cw-ws .cw-step[data-d="1"]'));
   await touch('touchStart', plus.x, plus.y); await touch('touchEnd', plus.x, plus.y); await tp.waitForTimeout(80);
   ok(await tp.textContent('.cw-ws .cw-val') === '4', 'REAL touch: the + of a stepper works with a finger (not taken for a drag): ' + (await tp.textContent('.cw-ws .cw-val')) + ' ' + JSON.stringify(plus));

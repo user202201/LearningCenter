@@ -2077,4 +2077,5 @@ button.dw-hearbtn:active { transform: translateY(5px); box-shadow: none; }
 .dw-switch { color: #2d2230; font-size: 17px; }
 .dw-count { font-size: 17px; }
 .dw-runtop { width: 100%; }
-#poems-btn { margin: 4px 0 8px; }
+#poems-btn { margin: 12px 0 0; }
+.cw-ctl, .cw-ubtn, .cl-row button, .cl-lvl, .cl-island { touch-action: manipulation; }   /* no double-tap delay: a tap right after a drag must still be a tap */

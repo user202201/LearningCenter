@@ -395,9 +395,10 @@ function renderWeek(body: HTMLElement, k: M.Kid, kid: M.KidData) {
         ? grid
         : h("div", { class: "add-empty" }, h("button", { class: "add-big", id: "enter", title: "录入这一周的内容", "aria-label": "录入这一周的内容", onclick: () => enterDialog(k) }, "＋"), h("p", {}, "点击 ＋ 录入本周汉字")),
       DW.weekTools(k, curWeek, chars.length > 0 || (idioms.weeks.find((x) => x.start === curWeek)?.items.length ?? 0) > 0),
+      // the classical poems of this child (same look as the idiom button, under the characters; the idiom button stays at the bottom of the screen)
+      h("button", { class: "primary wide", id: "poems-btn", onclick: () => (location.hash = `#/poems/${k.id}`) }, "古诗词"),
       // the idioms are the same for every child: one list, one story page (not one per child)
       h("button", { class: "primary wide", id: "idioms-btn", onclick: () => { idiomFrom = `#/kid/${k.id}`; idiomWeek = curWeek; idiomAll = false; idiomColor = k.color; location.hash = "#/idioms"; } }, "成语故事"),
-      h("button", { class: "primary wide", id: "poems-btn", onclick: () => (location.hash = `#/poems/${k.id}`) }, "古诗词"),
     ),
   );
   if (settings.pinyin) void fillPinyin(grid);

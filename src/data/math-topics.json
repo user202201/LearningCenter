@@ -760,18 +760,18 @@
  "grades": {
   "1": [
    "compare",
-   "shapes1",
    "seq",
-   "clock1",
    "add10",
-   "rmb1",
+   "shapes1",
    "sub10",
-   "place1",
+   "clock1",
    "add20",
-   "pattern1",
+   "rmb1",
    "sub20",
-   "wpmore",
-   "wp1"
+   "place1",
+   "wp1",
+   "pattern1",
+   "wpmore"
   ],
   "2": [
    "add100",
