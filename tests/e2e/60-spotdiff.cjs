@@ -1,6 +1,6 @@
-// Spot the difference (找不同): the scene data and the rules (every difference really changes the picture, none overlap, all inside, the counts of the levels, hit
-// testing, hints, stars, no repeat of a picture until all four were seen), the screen (taps on either picture, a wrong tap, hints, win, next picture, best time,
-// keyboard), the layout on four screens, EN / FR, and no request leaves the app.
+// Spot the difference (找不同): the pictures are GENERATED from a seed. Properties checked over 1500 generated scenes (every difference really changes picture B, none overlap, all inside,
+// pieces never touch, counts 3 / 5 / 7, deterministic per seed, the next picture differs, fast), the rules (hit testing, hints, stars), the screen (taps on either picture, a wrong
+// tap, hints, win, next picture, best time, keyboard), four screen sizes, EN / FR, and no request leaves the app.
 const { start, checks } = require('./harness.cjs');
 const { ok, done } = checks();
 const fs = require('fs');
@@ -14,92 +14,104 @@ const CJK = /[㐀-鿿]/;
   const p = t.page;
   await p.evaluate(() => (location.hash = '#/games/spotdiff')); await p.waitForSelector('#sd-start');
 
-  // ---------- the data and the rules ----------
+  // ---------- the generator and the rules ----------
   const L = await p.evaluate(async () => {
     const M = await import('/src/games/spotdiff-logic.ts');
-    const res = { bad: [], kinds: {}, scenes: M.SCENES.length, spots: 0 };
-    const bad = (m) => res.bad.push(m);
-    if (M.LEVEL_COUNT !== 12 || M.SCENES.length < 12) bad('need 12 levels / at least 12 scenes');
-    // counts of the levels: 3 / 5 / 7, four levels of each
-    const per = [0, 0, 0];
-    for (let l = 0; l < M.LEVEL_COUNT; l++) { const i = M.levelInfo(l); per[i.difficulty]++; if (i.diffs.length !== [3, 5, 7][i.difficulty] || i.n !== i.diffs.length) bad('level ' + l + ' has ' + i.diffs.length + ' differences'); }
-    if (per.join() !== '4,4,4') bad('4 levels per difficulty: ' + per);
-    const sceneIds = new Set();
-    for (const sc of M.SCENES) {
-      if (sceneIds.has(sc.id)) bad('duplicate scene ' + sc.id); sceneIds.add(sc.id);
-      const ids = new Set(sc.pieces.map((q) => q.id)); if (ids.size !== sc.pieces.length) bad(sc.id + ': duplicate piece ids');
-      if (sc.pieces.length < 12) bad(sc.id + ': scene too empty');
-      if (sc.diffs.length < 7) bad(sc.id + ': needs 7 differences, has ' + sc.diffs.length);
-      const base = M.sceneMarkup(sc, []);
-      if (!base.includes('<circle') || base.length < 800) bad(sc.id + ': scene looks empty');
-      const spots = [];
-      for (const d of sc.diffs) {
-        res.kinds[d.kind] = (res.kinds[d.kind] || 0) + 1;
-        const one = M.sceneMarkup(sc, [d]);
-        if (one === base) bad(sc.id + '/' + d.id + ': does not change the picture');
-        if (d.kind === 'missing') { if (one.includes('data-p="' + d.p + '"') || !base.includes('data-p="' + d.p + '"')) bad(d.id + ': missing piece still drawn'); }
-        if (d.kind === 'added') { if (!d.add || !one.includes('data-p="' + d.add.id + '"') || base.includes('data-p="' + d.add.id + '"')) bad(d.id + ': added piece wrong'); }
-        if (d.kind === 'colour' && !('f' in d.set)) bad(d.id + ': a colour difference changes no colour');
-        if (d.kind === 'size' && !(('r' in d.set) || ('w' in d.set) || ('h' in d.set) || ('rx' in d.set))) bad(d.id + ': a size difference changes no size');
-        if (d.kind === 'pattern' && !('pat' in d.set)) bad(d.id + ': pattern');
-        if (d.kind === 'moved' && !('x' in d.set || 'y' in d.set)) bad(d.id + ': moved');
-        if (d.p && !sc.pieces.some((q) => q.id === d.p)) bad(d.id + ': names a piece that does not exist');
-        if (d.add && sc.pieces.some((q) => q.id === d.add.id)) bad(d.id + ': added piece already in the scene');
-        // the differences do not touch each other: applying one leaves the others' pieces alone, so two differences never change the same piece
-        const s = M.diffSpot(sc, d), b = M.diffBox(sc, d); spots.push(s); res.spots++;
-        if (s.x - s.r < 0 || s.y - s.r < 0 || s.x + s.r > M.SW || s.y + s.r > M.SH) bad(d.id + ': hit area leaves the scene');
-        if (s.x < b.x0 || s.x > b.x1 || s.y < b.y0 || s.y > b.y1) bad(d.id + ': spot is not on the changed piece');
-        if (s.r < 13) bad(d.id + ': hit radius ' + s.r);
+    const res = { bad: [], kinds: {}, themes: {}, scenes: 0, spots: 0, partKinds: new Set(), times: [] };
+    const bad = (m) => { if (res.bad.length < 40) res.bad.push(m); };
+    if (M.KIND_NAMES.length < 25) bad('library has only ' + M.KIND_NAMES.length + ' kinds');
+    for (const k of M.KIND_NAMES) { const svg = M.partSvg({ id: 'x', k, x: 100, y: 75, R: 15, f: '#fa5252', d: 0, flip: 1, rot: 0 }); if (svg.length < 120) bad(k + ' draws nothing'); }
+    const seenMarkup = new Map();
+    for (let diff = 0; diff < 3; diff++) {
+      const N = [3, 5, 7][diff], want = [8, 12, 16][diff];
+      for (let seed = 1; seed <= 500; seed++) {
+        const t0 = performance.now(); const sc = M.makeScene(seed, diff); res.times.push(performance.now() - t0); res.scenes++;
+        const tag = `d${diff}/seed${seed}`;
+        res.themes[sc.back.theme] = (res.themes[sc.back.theme] || 0) + 1;
+        if (sc.diffs.length !== N) bad(tag + ': ' + sc.diffs.length + ' differences, need ' + N);
+        if (sc.parts.length < want * 0.8 || sc.parts.length > want) bad(tag + ': ' + sc.parts.length + ' pieces for ' + want);
+        // pieces: inside, never touching, readable colour, a size that is not tiny
+        for (const q of sc.parts) {
+          res.partKinds.add(q.k);
+          if (q.x - q.R < 0 || q.x + q.R > M.SW || q.y - q.R < 0 || q.y + q.R > M.SH) bad(tag + ': ' + q.id + ' cut by the edge');
+          if (q.R < 10) bad(tag + ': tiny piece ' + q.R);
+          const bg = q.y < sc.back.gy ? sc.back.sky : sc.back.ground;
+          if (q.k !== 'cloud' && M.colourDist(q.f, bg) < 80) bad(tag + ': ' + q.k + ' has low contrast against the backdrop');
+        }
+        for (let i = 0; i < sc.parts.length; i++) for (let j = i + 1; j < sc.parts.length; j++) { const a = sc.parts[i], c = sc.parts[j]; if (Math.hypot(a.x - c.x, a.y - c.y) < a.R + c.R) bad(tag + ': pieces ' + a.id + ' and ' + c.id + ' overlap'); }
+        if (new Set(sc.parts.map((q) => q.id)).size !== sc.parts.length) bad(tag + ': duplicate piece ids');
+        // differences
+        const base = M.sceneMarkup(sc, []), all = M.sceneMarkup(sc, sc.diffs), spots = [], touched = [];
+        for (const d of sc.diffs) {
+          res.kinds[d.kind] = (res.kinds[d.kind] || 0) + 1; res.spots++;
+          if (M.sceneMarkup(sc, [d]) === base) bad(tag + '/' + d.id + ' (' + d.kind + '): does not change picture B');
+          if (M.sceneMarkup(sc, sc.diffs.filter((x) => x !== d)) === all) bad(tag + '/' + d.id + ' (' + d.kind + '): does not show in the full picture B');
+          const q = d.p ? sc.parts.find((x) => x.id === d.p) : null;
+          if (d.p && !q) bad(tag + ': difference names a missing piece');
+          touched.push(d.p || d.add.id);
+          if (d.kind === 'missing' && (d.set || d.add)) bad(tag + ': missing with data');
+          if (d.kind === 'added' && (!d.add || sc.parts.some((x) => x.id === d.add.id))) bad(tag + ': added piece is wrong');
+          if (d.kind === 'colour' && M.colourDist(q.f, d.set.f) < 150) bad(tag + ': colour change too small ' + M.colourDist(q.f, d.set.f));
+          if (d.kind === 'size') { const r = d.set.R / q.R; if (r > 0.75 && r < 1.25) bad(tag + ': size change only ' + r); }
+          if (d.kind === 'moved' && Math.hypot(d.set.x - q.x, d.set.y - q.y) < q.R * 0.99) bad(tag + ': moved less than a radius');
+          if (d.kind === 'moved') { const nc = { x: d.set.x, y: d.set.y, r: q.R }; if (nc.x - nc.r < 0 || nc.x + nc.r > M.SW || nc.y - nc.r < 0 || nc.y + nc.r > M.SH) bad(tag + ': moved piece leaves the scene'); if (sc.parts.some((o) => o !== q && Math.hypot(o.x - nc.x, o.y - nc.y) < o.R + nc.r)) bad(tag + ': moved piece lands on another'); }
+          if (d.kind === 'pattern' && d.set.d === q.d) bad(tag + ': pattern unchanged');
+          if (d.kind === 'flipped' && (!M.KINDS[q.k].asym || d.set.flip !== -q.flip)) bad(tag + ': flip invisible');
+          if (d.kind === 'added') { const a = d.add; if (a.x - a.R < 0 || a.x + a.R > M.SW || a.y - a.R < 0 || a.y + a.R > M.SH) bad(tag + ': added piece outside'); if (sc.parts.some((o) => Math.hypot(o.x - a.x, o.y - a.y) < o.R + a.R)) bad(tag + ': added piece on another'); }
+          const s = M.diffSpot(sc, d); spots.push(s);
+          if (s.x - s.r < 0 || s.y - s.r < 0 || s.x + s.r > M.SW || s.y + s.r > M.SH) bad(tag + '/' + d.id + ': hit area leaves the scene');
+          if (s.r < 13) bad(tag + ': hit radius ' + s.r);
+          if (d.p && !(Math.hypot(s.x - q.x, s.y - q.y) <= s.r)) bad(tag + ': spot does not cover the piece');
+        }
+        if (new Set(touched).size !== touched.length) bad(tag + ': two differences on one piece');
+        for (let i = 0; i < spots.length; i++) for (let j = i + 1; j < spots.length; j++) if (Math.hypot(spots[i].x - spots[j].x, spots[i].y - spots[j].y) < spots[i].r + spots[j].r) bad(tag + ': differences ' + i + ' and ' + j + ' overlap');
+        // determinism, and (for the first 50 seeds) that scenes differ from each other
+        if (seed <= 50) {
+          if (JSON.stringify(M.makeScene(seed, diff)) !== JSON.stringify(sc)) bad(tag + ': not deterministic');
+          if (seenMarkup.has(base)) bad(tag + ': same picture as ' + seenMarkup.get(base)); seenMarkup.set(base, tag);
+        }
       }
-      const touched = sc.diffs.map((d) => d.p || d.add.id); if (new Set(touched).size !== touched.length) bad(sc.id + ': two differences on one piece');
-      for (let i = 0; i < spots.length; i++) for (let j = i + 1; j < spots.length; j++) if (Math.hypot(spots[i].x - spots[j].x, spots[i].y - spots[j].y) < spots[i].r + spots[j].r) bad(sc.id + ': differences ' + i + ' and ' + j + ' overlap');
-      // all together: picture B differs from A and from every picture with one difference missing
-      const all = M.sceneMarkup(sc, sc.diffs);
-      for (const d of sc.diffs) if (M.sceneMarkup(sc, sc.diffs.filter((x) => x !== d)) === all) bad(sc.id + '/' + d.id + ': does not show in the full picture');
     }
+    // the next picture never equals the one before
+    let prev = M.makeScene(5, 1), rep = 0;
+    for (let i = 0; i < 200; i++) { const sd = M.nextSeed(prev, 1), sc = M.makeScene(sd, 1); if (sd === prev.seed || M.sceneMarkup(sc, []) === M.sceneMarkup(prev, [])) rep++; prev = sc; }
+    if (rep) bad(rep + ' repeated pictures in a row');
+    // different difficulty = different count even for one seed
+    if (M.makeScene(9, 0).diffs.length !== 3 || M.makeScene(9, 2).diffs.length !== 7) bad('counts by difficulty');
     // the game: hit testing
-    const g = M.newGame(5), n = g.spots.length; if (n !== 5) bad('level 5 has ' + n);
+    const g = M.newGame(M.makeScene(11, 1)), n = g.spots.length; if (n !== 5) bad('game has ' + n);
     const s0 = g.spots[0];
     let r = M.tap(g, s0.x + s0.r * 0.9, s0.y); if (r.kind !== 'hit' || r.i !== 0) bad('tap near the edge missed');
     r = M.tap(g, s0.x, s0.y); if (r.kind !== 'again' || g.mistakes !== 0 || M.foundCount(g) !== 1) bad('the same difference was counted twice');
     r = M.tap(g, s0.x + s0.r + 3, s0.y + s0.r + 3); if (r.kind !== 'miss' || g.mistakes !== 1) bad('a tap beside counted as a hit');
-    r = M.tap(g, g.spots[1].x, g.spots[1].y + 200); if (r.kind !== 'miss' || g.mistakes !== 2) bad('a tap far away');
     if (M.won(g)) bad('won too early');
-    // minimal radius
-    const g2 = M.newGame(0); const sp = g2.spots[0]; if (M.tap(g2, sp.x + sp.r + 4, sp.y).kind !== 'miss') bad('without minR a far tap hit'); if (M.tap(g2, sp.x + sp.r + 4, sp.y, sp.r + 6).kind !== 'hit') bad('minR did not widen');
-    // hints: 3 per picture, never a found one, the button lights after 3 mistakes
-    const g3 = M.newGame(8); if (M.hintLit(g3)) bad('hint lit at the start');
-    for (let k = 0; k < 3; k++) M.tap(g3, 1, 1); if (!M.hintLit(g3)) bad('hint not lit after 3 mistakes'); if (M.won(g3)) bad('3 mistakes must not end the game');
+    const g2 = M.newGame(M.makeScene(12, 0)), sp = g2.spots[0]; if (M.tap(g2, sp.x + sp.r + 4, sp.y).kind !== 'miss') bad('without minR a far tap hit'); if (M.tap(g2, sp.x + sp.r + 4, sp.y, sp.r + 6).kind !== 'hit') bad('minR did not widen');
+    const g3 = M.newGame(M.makeScene(13, 2)); if (M.hintLit(g3)) bad('hint lit at the start');
+    for (let k = 0; k < 3; k++) M.tap(g3, -5, -5); if (!M.hintLit(g3)) bad('hint not lit after 3 mistakes'); if (M.won(g3)) bad('3 mistakes must not end the game');
     M.tap(g3, g3.spots[0].x, g3.spots[0].y);
     const seenH = []; for (let k = 0; k < 4; k++) seenH.push(M.hint(g3));
     if (seenH[0] !== 1 || seenH[1] !== 1 || seenH[2] !== 1 || seenH[3] !== -1 || M.hintsLeft(g3) !== 0 || M.hintLit(g3)) bad('hints: ' + seenH);
-    // random games: tap every spot in random order with random misses between
     let seed = 7; const rng = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
     for (let gi = 0; gi < 300; gi++) {
-      const lv = Math.floor(rng() * 12), g4 = M.newGame(lv), order = g4.spots.map((_, i) => i).sort(() => rng() - 0.5); let mis = 0;
+      const g4 = M.newGame(M.makeScene(1000 + gi, gi % 3)), order = g4.spots.map((_, i) => i).sort(() => rng() - 0.5); let mis = 0;
       for (const i of order) {
         if (rng() < 0.4) { const before = g4.mistakes; M.tap(g4, -50, -50); if (g4.mistakes !== before + 1) bad('miss not counted'); mis++; }
         if (M.won(g4)) bad('won before the last');
         const s = g4.spots[i], a = rng() * 6.28, rr = s.r * 0.6 * rng();
-        const rs = M.tap(g4, s.x + Math.cos(a) * rr, s.y + Math.sin(a) * rr); if (rs.kind !== 'hit') bad('random tap inside missed (level ' + lv + ')');
+        const rs = M.tap(g4, s.x + Math.cos(a) * rr, s.y + Math.sin(a) * rr); if (rs.kind !== 'hit') bad('random tap inside missed');
       }
       if (!M.won(g4) || g4.mistakes !== mis) bad('game not won / mistakes wrong');
     }
-    // stars
     const st = M.stars; if (st(0, 10, 5) !== 3 || st(1, 90, 5) !== 3 || st(2, 10, 5) !== 2 || st(5, 10, 5) !== 1 || st(0, 5 * 20 + 1, 5) !== 2 || st(9, 999, 5) !== 1) bad('stars');
-    // no repeat until all four were seen
-    for (let d = 0; d < 3; d++) {
-      let seen = [], all = [];
-      for (let k = 0; k < 12; k++) { const pk = M.pickLevel(d, seen, rng); if (k % 4 === 0) all = []; if (all.includes(pk.k)) bad('picture repeated inside a round'); all.push(pk.k); seen = pk.seen; if (pk.k < 0 || pk.k > 3) bad('pickLevel range'); }
-      let lastK = -1; seen = [0, 1, 2, 3]; for (let k = 0; k < 20; k++) { const pk = M.pickLevel(d, seen, rng); if (pk.k === seen[seen.length - 1]) bad('same picture twice at the start of a new round'); seen = pk.seen; }
-    }
-    // cursor
     let c = { x: 195, y: 148 }; c = M.moveCursor(c, 1, 1); if (c.x !== 200 || c.y !== 150) bad('cursor not clamped'); c = M.moveCursor({ x: 3, y: 4 }, -1, -1); if (c.x !== 0 || c.y !== 0) bad('cursor not clamped low');
     if (M.fmtTime(75) !== '1:15' || M.fmtTime(9) !== '0:09') bad('time format');
+    res.partKinds = res.partKinds.size; res.times.sort((a, b) => a - b); res.p95 = res.times[Math.floor(res.times.length * 0.95)]; res.mean = res.times.reduce((a, b) => a + b, 0) / res.times.length; delete res.times;
     return res;
   });
-  ok(L.bad.length === 0, `scene data and rules: ${L.scenes} scenes, ${L.spots} differences, 300 random games${L.bad.length ? ' -> ' + L.bad.slice(0, 8).join('; ') : ''}`);
-  ok(['missing', 'added', 'colour', 'size', 'pattern', 'moved'].every((k) => L.kinds[k] >= 3), 'all kinds of differences are used: ' + JSON.stringify(L.kinds));
+  ok(L.bad.length === 0, `generator and rules over ${L.scenes} generated scenes (${L.spots} differences) + 300 random games${L.bad.length ? ' -> ' + L.bad.slice(0, 8).join('; ') : ''}`);
+  ok(['missing', 'added', 'colour', 'size', 'pattern', 'moved', 'flipped'].every((k) => L.kinds[k] >= 300), 'all seven kinds of differences are generated: ' + JSON.stringify(L.kinds));
+  ok(Object.keys(L.themes).length >= 5 && L.partKinds >= 25, `${Object.keys(L.themes).length} backdrops and ${L.partKinds} kinds of pieces are used`);
+  ok(L.p95 < 20 && L.mean < 10, `the generator is fast (mean ${L.mean.toFixed(1)} ms, 95% under ${L.p95.toFixed(1)} ms per scene)`);
 
   // ---------- the screen ----------
   const hook = (f) => p.evaluate(f);
@@ -109,7 +121,7 @@ const CJK = /[㐀-鿿]/;
   }, [i, side]);
   const txt = (sel) => p.textContent(sel);
   ok(await p.isVisible('#sd-ovl') && (await txt('#sd-ovl h2')) === '找不同', 'a start panel with the name of the game');
-  const lvl0 = await hook(() => window.__spotdiff.level()), n0 = await hook(() => window.__spotdiff.game().spots.length);
+  const seed0 = await hook(() => window.__spotdiff.seed()), n0 = await hook(() => window.__spotdiff.game().spots.length);
   ok(n0 === 3 && (await txt('#sd-found')) === '找到：0 / 3' && (await txt('#sd-diff')) === '难度：简单', 'starts on easy: 3 differences');
   await p.click('#sd-start');
   ok(!(await p.isVisible('#sd-ovl')), 'Start hides the panel');
@@ -158,32 +170,31 @@ const CJK = /[㐀-鿿]/;
   await p.screenshot({ path: OUT + 'spotdiff-win-wide.png' });
   const store = () => p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1') || '{}').spotdiff || {});
   const st1 = await store();
-  ok(st1['best-' + lvl0] >= 1 && st1['stars-' + lvl0] === w1.stars && st1.level === lvl0 && (st1.diff ?? 0) === 0, 'best time, stars and the level reached are kept on this device');
-  // next picture: never the same until all four were seen
+  ok(st1['best-0'] >= 1 && st1['stars-0'] === w1.stars && st1.solved === 1, 'best time and stars of the difficulty and the number of pictures solved are kept on this device');
+  // next picture: a new random picture every time, never the same twice in a row
   const winAll = async () => { const n = await hook(() => window.__spotdiff.game().spots.length); for (let i = 0; i < n; i++) { const q = await spotPx(i, i % 2 ? 'a' : 'b'); await p.mouse.click(q.x, q.y); } await p.waitForSelector('#sd-stars svg'); };
-  const seenLv = [lvl0];
+  const seenLv = [seed0], marks = [await p.evaluate(() => document.querySelector('.sd-pic[data-pic=a] svg').innerHTML.replace(/<g class="sd-fx".*$/s, ''))];
   for (let k = 0; k < 3; k++) {
     await p.click('#sd-start');
     ok(!(await p.isVisible('#sd-ovl')) && (await txt('#sd-found')).startsWith('找到：0 /'), 'Next picture starts the next picture at once');
-    seenLv.push(await hook(() => window.__spotdiff.level()));
+    seenLv.push(await hook(() => window.__spotdiff.seed())); marks.push(await p.evaluate(() => document.querySelector('.sd-pic[data-pic=a] svg').innerHTML.replace(/<g class="sd-fx".*$/s, '')));
     await winAll(); await p.waitForFunction(() => document.querySelector('#sd-ovl h2').textContent === '已全部找到。');
   }
-  ok(new Set(seenLv).size === 4 && seenLv.every((l) => l >= 0 && l < 4), 'the four easy pictures come one after the other, none repeated: ' + seenLv);
+  ok(new Set(seenLv).size === 4 && new Set(marks).size === 4, 'four pictures in a row are four different generated pictures: ' + seenLv);
   // timer + stars by time
   await p.click('#sd-start'); await hook(() => window.__spotdiff.setElapsed(999));
-  const lvlSlow = await hook(() => window.__spotdiff.level()); await winAll(); await p.waitForFunction(() => document.querySelector('#sd-ovl h2').textContent === '已全部找到。');
+  await winAll(); await p.waitForFunction(() => document.querySelector('#sd-ovl h2').textContent === '已全部找到。');
   ok((await p.locator('#sd-stars svg.on').count()) === 2, 'slow but no mistakes: 2 stars');
-  ok(!(await p.isVisible('#sd-rec')) || (await store())['best-' + lvlSlow] >= 1, 'a slower time is not a record');
+  ok(!(await p.isVisible('#sd-rec')), 'a slower time is not a record');
   // difficulty button: 5 and 7 differences
   await p.click('#sd-start'); await p.click('#sd-diff');
   ok((await txt('#sd-diff')) === '难度：普通' && (await hook(() => window.__spotdiff.game().spots.length)) === 5 && await p.isVisible('#sd-ovl') && (await txt('#sd-found')) === '找到：0 / 5', 'difficulty button: normal = 5 differences, back to the start panel');
   await p.click('#sd-diff');
   ok((await txt('#sd-diff')) === '难度：困难' && (await hook(() => window.__spotdiff.game().spots.length)) === 7 && await p.evaluate(() => document.querySelector('#sd-diff').classList.contains('on')), 'hard = 7 differences');
-  ok((await hook(() => window.__spotdiff.level())) >= 8, 'hard levels are numbers 8-11');
   await p.click('#sd-start');
   for (let i = 0; i < 7; i++) { const q = await spotPx(i, 'b'); await p.mouse.click(q.x, q.y); }
   await p.waitForSelector('#sd-stars svg'); ok((await p.locator('.sd-ring').count()) === 14 && (await p.locator('#sd-stars svg.on').count()) === 3, 'hard: all 7 found, rings on both pictures, 3 stars');
-  ok((await store()).diff === 2, 'the difficulty is remembered');
+  ok((await store()).diff === 2 && (await store()).solved >= 6, 'the difficulty and the number of solved pictures are remembered');
   // leaving removes the hook
   await p.evaluate(() => (location.hash = '#/subject/games')); await p.waitForSelector('.gm-grid');
   await p.waitForFunction(() => !window.__spotdiff);

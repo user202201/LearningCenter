@@ -1,6 +1,6 @@
 import type { GameCtx } from "./ctx";
 import "./spotdiff.css";
-import { SW, SH, DIFFICULTIES, DIFF_COUNTS, LEVELS_PER_DIFFICULTY, levelInfo, pickLevel, sceneMarkup, newGame, tap, foundCount, won, hintsLeft, hintLit, hint, stars, moveCursor, fmtTime, type Game, type LevelInfo } from "./spotdiff-logic";
+import { SW, SH, DIFFICULTIES, DIFF_COUNTS, makeScene, nextSeed, sceneMarkup, newGame, tap, foundCount, won, hintsLeft, hintLit, hint, stars, moveCursor, fmtTime, type Game, type Scene } from "./spotdiff-logic";
 
 export const ICON = `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="100" height="100" rx="26" fill="#d3f9d8"/><rect x="22" y="18" width="60" height="38" rx="10" fill="#d0ebff" stroke="#0ca678" stroke-width="4"/><rect x="22" y="64" width="60" height="38" rx="10" fill="#d0ebff" stroke="#0ca678" stroke-width="4"/><circle cx="40" cy="37" r="10" fill="#ffd43b"/><circle cx="37" cy="35" r="1.8" fill="#3a2e39"/><circle cx="43" cy="35" r="1.8" fill="#3a2e39"/><path d="M36 40 Q40 44 44 40" fill="none" stroke="#3a2e39" stroke-width="2" stroke-linecap="round"/><circle cx="40" cy="83" r="10" fill="#ff8787"/><circle cx="37" cy="81" r="1.8" fill="#3a2e39"/><circle cx="43" cy="81" r="1.8" fill="#3a2e39"/><path d="M36 86 Q40 90 44 86" fill="none" stroke="#3a2e39" stroke-width="2" stroke-linecap="round"/><circle cx="66" cy="30" r="5" fill="#69db7c"/><circle cx="66" cy="76" r="5" fill="#69db7c"/><circle cx="84" cy="80" r="17" fill="rgba(255,255,255,.55)" stroke="#e8590c" stroke-width="6"/><path d="M96 93 L108 106" stroke="#e8590c" stroke-width="8" stroke-linecap="round"/></svg>`;
 
@@ -10,11 +10,12 @@ const STAR = "50,6 62,36 94,38 69,58 78,90 50,72 22,90 31,58 6,38 38,36";
 export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const { h } = ctx;
   let difficulty = Math.max(0, Math.min(2, ctx.store.get<number>("diff", 0)));
-  let info!: LevelInfo, g!: Game, phase: Phase = "ready", elapsed = 0, lastTick = 0, raf = 0;
+  let scene!: Scene, g!: Game, phase: Phase = "ready", elapsed = 0, lastTick = 0, raf = 0;
   let cursor = { x: SW / 2, y: SH / 2 }, cursorOn = false, scale = 1, hintIdx = -1, record = false;
   const timers = new Set<number>();
   const later = (fn: () => void, ms: number) => { const t = window.setTimeout(() => { timers.delete(t); fn(); }, ms); timers.add(t); };
-  const best = () => ctx.store.get<number>(`best-${info.level}`, 0);
+  const best = () => ctx.store.get<number>(`best-${difficulty}`, 0);
+  let solved = Math.max(0, ctx.store.get<number>("solved", 0));
 
   const foundEl = h("span", { class: "sd-stat", id: "sd-found" }, "");
   const missEl = h("span", { class: "sd-stat", id: "sd-miss" }, "");
@@ -36,9 +37,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const fxOf = (pic: HTMLElement) => pic.querySelector(".sd-fx") as SVGGElement;
   const curOf = (pic: HTMLElement) => pic.querySelector(".sd-cur") as SVGGElement;
   function build() {
-    const mk = (diffs: typeof info.diffs) => `<svg viewBox="0 0 ${SW} ${SH}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">${sceneMarkup(info.scene, diffs)}<g class="sd-fx"></g><g class="sd-cur" style="display:none"><circle r="9"/><path d="M-13 0H-5M5 0H13M0 -13V-5M0 5V13"/></g></svg>`;
-    picA.innerHTML = mk([]); picB.innerHTML = mk(info.diffs);
-    for (const pic of [picA, picB]) pic.setAttribute("data-scene", info.scene.id);
+    const mk = (diffs: Scene["diffs"]) => `<svg viewBox="0 0 ${SW} ${SH}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">${sceneMarkup(scene, diffs)}<g class="sd-fx"></g><g class="sd-cur" style="display:none"><circle r="9"/><path d="M-13 0H-5M5 0H13M0 -13V-5M0 5V13"/></g></svg>`;
+    picA.innerHTML = mk([]); picB.innerHTML = mk(scene.diffs);
+    for (const pic of [picA, picB]) pic.setAttribute("data-scene", `${scene.seed}`);
   }
   const ringMarkup = (i: number) => { const s = g.spots[i], r = s.r * 0.9; return `<g data-found="${i}"><circle class="sd-ring" cx="${s.x}" cy="${s.y}" r="${r}"/><circle class="sd-ring-in" cx="${s.x}" cy="${s.y}" r="${r - 2.5}"/></g>`; };
   function drawFx() {
@@ -63,19 +64,13 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     starsEl.hidden = !extra; recEl.hidden = !(extra && record);
   }
 
-  /** a level of the chosen difficulty that was not seen yet */
-  function pick() {
-    const seen = ctx.store.get<number[]>(`seen-${difficulty}`, []);
-    const r = pickLevel(difficulty, Array.isArray(seen) ? seen : []);
-    ctx.store.set(`seen-${difficulty}`, r.seen);
-    ctx.store.set("level", difficulty * LEVELS_PER_DIFFICULTY + r.k);
-    setup(difficulty * LEVELS_PER_DIFFICULTY + r.k);
-  }
-  function setup(level: number) {
-    info = levelInfo(level); g = newGame(level);
+  /** a new random picture of the chosen difficulty (never the same as the one just shown) */
+  function pick() { setup(nextSeed(scene ?? null, difficulty)); }
+  function setup(seed: number) {
+    scene = makeScene(seed, difficulty); g = newGame(scene);
     phase = "ready"; elapsed = 0; hintIdx = -1; record = false; cursorOn = false; cursor = { x: SW / 2, y: SH / 2 };
     build(); drawFx();
-    setOvl("找不同", `两幅图有 ${info.n} 处不同，请点击找出。`, "开始", true);
+    setOvl("找不同", `两幅图有 ${scene.diffs.length} 处不同，请点击找出。`, "开始", true);
     layout(); refreshHud();
   }
   function begin() { if (phase !== "ready") return; phase = "play"; lastTick = performance.now(); setOvl("", "", "", false); refreshHud(); placeCursor(); }
@@ -116,8 +111,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     phase = "won";
     const n = g.spots.length, st = stars(g.mistakes, elapsed, n), b = best();
     record = !b || elapsed < b;
-    if (record) ctx.store.set(`best-${info.level}`, Math.max(1, Math.round(elapsed)));
-    if (st > ctx.store.get<number>(`stars-${info.level}`, 0)) ctx.store.set(`stars-${info.level}`, st);
+    if (record) ctx.store.set(`best-${difficulty}`, Math.max(1, Math.round(elapsed)));
+    if (st > ctx.store.get<number>(`stars-${difficulty}`, 0)) ctx.store.set(`stars-${difficulty}`, st);
+    solved++; ctx.store.set("solved", solved);
     starsEl.innerHTML = [1, 2, 3].map((k) => `<svg viewBox="0 0 100 96" class="${k <= st ? "on" : "off"}"><polygon points="${STAR}" stroke-width="6" stroke-linejoin="round"/></svg>`).join("");
     starsEl.setAttribute("data-stars", String(st));
     ctx.sfx("win");
@@ -171,12 +167,12 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     lastTick = now;
   };
 
-  // start: the level of the last time is not repeated: a picture not seen yet of the chosen difficulty
+  // start: a new random picture
   pick();
   raf = requestAnimationFrame(tick);
   (window as unknown as Record<string, unknown>).__spotdiff = {
-    game: () => g, phase: () => phase, info: () => info, scale: () => scale, elapsed: () => elapsed, setElapsed: (s: number) => { elapsed = s; },
-    level: () => info.level, difficulty: () => difficulty, counts: DIFF_COUNTS, names: DIFFICULTIES,
+    game: () => g, phase: () => phase, scale: () => scale, elapsed: () => elapsed, setElapsed: (s: number) => { elapsed = s; },
+    scene: () => scene, seed: () => scene.seed, solved: () => solved, difficulty: () => difficulty, counts: DIFF_COUNTS, names: DIFFICULTIES,
   };
   return () => {
     cancelAnimationFrame(raf); timers.forEach(clearTimeout); timers.clear(); ro?.disconnect();
