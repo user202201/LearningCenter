@@ -191,7 +191,7 @@ export async function renderMap(X: Ctx): Promise<void> {
   function flagGrid(): HTMLElement {
     const list = geo.world.countries.filter((c) => FLAG_IDS.includes(c.id) && c.lv <= level && (!flagCont || c.cont === flagCont));
     const chips = h("div", { class: "mset-opts gmap-layers", id: "gmap-fconts" }, chip("全部", flagCont === "", "fc-all", () => { flagCont = ""; draw(); }),
-      ...geo.world.continents.filter((k) => k.id !== "an").map((k) => chip(k.n, flagCont === k.id, `fc-${k.id}`, () => { flagCont = k.id; draw(); })));
+      ...geo.world.continents.filter((k) => k.id !== "an").map((k) => chip(k.n, flagCont === k.id, `fc-${k.id}`, () => { flagCont = k.id; draw(); }, true)));
     const grid = h("div", { class: "gmap-flags", id: "gmap-flags" }, ...list.map((c) => h("button", { class: "gmap-flagtile" + (selected === `country:${c.id}` ? " pick" : ""), "data-id": c.id, onclick: () => { select("country", c.id); grid.querySelectorAll(".gmap-flagtile").forEach((b) => b.classList.toggle("pick", (b as HTMLElement).dataset.id === c.id)); } }, svgFlag(c.id), h("span", { class: "user" }, c.n))));
     return h("div", {}, chips, grid);
   }

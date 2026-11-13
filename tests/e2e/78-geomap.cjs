@@ -298,8 +298,8 @@ const withExtra = async (t) => {
     ok(['北京', '天津', '上海', '重庆', '新疆', '西藏', '内蒙古'].every((n) => r.lowFirst.includes(n)), 'level 1 holds the 直辖市 and the big ones (' + r.lowFirst + ')');
     ok(r.k1 === 7 && r.k2 === 11, 'continents are asked from level 1 (7), the oceans from level 2 (11)');
     ok(r.sel[0] === 10 && r.sel[1] === 10 && r.sel[2] === 5 && r.sel[3] === 0, 'a round = what is due (5) + new items; items known well and not due are NOT chosen while others exist: ' + r.sel.join());
-    ok(r.sel2[0] === 10 && r.sel2[1] === 5 && r.sel2[2] === false || (r.sel2[0] === 10 && r.sel2[1] === 5), 'with only due + known items: the due ones first, then the least known: ' + r.sel2.join());
-    ok(r.round[0] === 11 ? false : r.round[0] === 7 && r.round[1] === 10, 'a round has 10 questions (fewer when the mode has fewer items)');
+    ok(r.sel2[0] === 10 && r.sel2[1] === 5 && r.sel2[2] === true && r.sel2[3] === 5, 'with only due + known items: the due ones first, then the least known (the box-1 item is in): ' + r.sel2.join());
+    ok(r.round[0] === 7 && r.round[1] === 10, 'a round has 10 questions (fewer when the mode has fewer items)');
     ok(r.trace === '1@2026-11-13 2@2026-11-16 3@2026-11-23 4@2026-12-07 5@2027-01-06', 'right answers climb the boxes: asked again after 1, 3, 7, 14, 30 days (' + r.trace + ')');
     ok(r.twice === 1 && r.wrongBox[0] === 0 && r.wrongBox[1] === '2026-12-08' && r.wrongBox[2] === 1, 'twice a day does not climb twice; a wrong answer goes to box 0, due at once');
     ok(r.plays === 6 && r.last && r.last.stars === 3 && r.mastery.join() === '1,34', 'plays are counted, the last result is kept with its stars, "known" = box 3+');
@@ -313,8 +313,6 @@ const withExtra = async (t) => {
   const page = T.page;
   await addKid(page, 'Dory'); await addKid(page, 'Leo');
   await setGrade(page, 'Dory', 5); await setGrade(page, 'Leo', 1);
-  const kid = async (n) => page.evaluate((n) => { const l = JSON.parse(localStorage.getItem('learn.kids.cache') || 'null'); return null; }, n);
-  void kid;
   await page.click('.subject[data-subject=science]'); await page.waitForSelector('.kids');
   ok(await page.locator('#open-map').count() === 1 && /地图/.test(await page.textContent('#open-map')), 'the science home has a card 地图 next to the periodic table, formulas, circuits and summaries');
   await page.click('#open-map'); await page.waitForSelector('.gmap-svg');
@@ -404,7 +402,6 @@ const withExtra = async (t) => {
   // level: Dory (grade 5) and Leo (grade 1)
   ok(await page.locator('#gmap-who .mopt').count() === 3, 'the learner chips: guest + 2 children');
   await page.click('#who-guest'); ok(await page.locator('#lev-4.on').count() === 1, 'a guest sees everything (范围: 全部)');
-  const kidIds = await page.evaluate(() => JSON.parse(localStorage.getItem('learn.local.kids.json') || 'null')); void kidIds;
   await page.click('#gmap-who .mopt:has-text("Leo")'); await page.waitForSelector('#lev-1.on');
   ok(await page.locator('#lev-1.on').count() === 1, 'Leo (grade 1) starts at the 入门 level');
   await page.click('#gmap-tab-china');
@@ -429,14 +426,13 @@ const withExtra = async (t) => {
       } else {
         const [x, y] = await toClient('#gmap-qmap .gmap-svg', a.p[0], a.p[1]);
         if (wrongFirst && n === 0) { const wrongP = await page.evaluate(async (item) => { const GG = await import('/src/geomapgeo.ts'); const g = await GG.loadGeo(); const o = g.china.provinces.find((p) => p.id !== item && document.querySelector('#game').dataset.qkey.startsWith('cn-tap')); return o && o.lp; }, (await page.getAttribute('#game', 'data-qkey')).split(':')[1]); if (wrongP) { const [wx, wy] = await toClient('#gmap-qmap .gmap-svg', wrongP[0], wrongP[1]); await page.mouse.click(wx, wy); } else await page.mouse.click(x, y); }
-        else { if (shots === null && false) void 0; await page.mouse.click(x, y); if (process.env.GEODEBUG) console.log('   click', mode, Math.round(x), Math.round(y), JSON.stringify(await page.locator('#gmap-qmap .gmap-svg').boundingBox())); }
+        else { await page.mouse.click(x, y); if (process.env.GEODEBUG) console.log('   click', mode, Math.round(x), Math.round(y), JSON.stringify(await page.locator('#gmap-qmap .gmap-svg').boundingBox())); }
       }
       await page.waitForSelector('#math-explain');
       if (await page.locator('#game.ok').count()) rights++; else if (/tap$|feat$/.test(mode) && !(wrongFirst && n === 0)) console.log('   (tap not judged right: ' + (await page.getAttribute('#game', 'data-qkey')) + ' ' + (await page.locator('#gmap-qmap .wrong').evaluateAll((e) => e.map((x) => x.getAttribute('data-k')))).join() + ')');
       if (shots && n === 0) await page.screenshot({ path: OUT + shots + '-answer.png' });
       n++;
       const last = (await page.textContent('#math-next')).trim() === '完成';
-      void prog;
       await page.click('#math-next');
       if (last) break;
       await page.waitForFunction((p) => !document.querySelector('#math-explain'), prog);
@@ -508,9 +504,6 @@ const withExtra = async (t) => {
     const svgBox = async () => page.locator('.gmap-svg').boundingBox();
     const tc = (x, y) => page.evaluate(([x, y]) => { const svg = document.querySelector('.gmap-svg'); const vp = svg.querySelector('.gmap-vp'); const m = /translate\(([-\d.]+) ([-\d.]+)\) scale\(([\d.]+)\)/.exec(vp.getAttribute('transform')); const c = svg.getScreenCTM(); return [c.a * (x * +m[3] + +m[1]) + c.e, c.d * (y * +m[3] + +m[2]) + c.f]; }, [x, y]);
     const lp = await page.evaluate(async () => { const GG = await import('/src/geomapgeo.ts'); const g = await GG.loadGeo(); return Object.fromEntries(g.china.provinces.map((p) => [p.id, p.lp])); });
-    await page.evaluate(() => window.scrollTo(0, 0));
-    const scrollY0 = await page.evaluate(() => document.querySelector('main.scroll').scrollTop);
-    void scrollY0;
     // make the map fully visible: scroll the main area so that the map is inside the screen
     await page.evaluate(() => document.querySelector('.gmap-view').scrollIntoView({ block: 'center' }));
     await page.waitForTimeout(200);

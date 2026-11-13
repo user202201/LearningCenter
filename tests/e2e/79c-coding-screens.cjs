@@ -22,7 +22,7 @@ const open = async (opts = {}) => {
 };
 const clearToasts = (page) => page.evaluate(() => document.querySelectorAll('#toasts .toast').forEach((x) => x.remove()));
 const go = async (page, hash, sel) => { await clearToasts(page); await page.evaluate((h) => (location.hash = h), hash); await page.waitForSelector(sel); await page.waitForTimeout(120); };
-const lvl = (t, l) => go(t.page, `#/coding/${t.id}/${l}`, '.cw .cw-pitem');
+const lvl = async (t, l) => { await go(t.page, `#/coding/${t.id}`, '.cl-island'); await go(t.page, `#/coding/${t.id}/${l}`, '.cw .cw-pitem'); };   // (via the map: the same address twice would not load the level again)
 const prog = (page) => page.evaluate(() => import('/src/coding-ast.ts').then((A) => A.toText(window.__coding.editor.program()).replace(/\n\s*/g, ' ')));
 const doc = (page, id) => page.evaluate((i) => { const s = localStorage.getItem('learn.local.coding/' + i + '.json'); return s ? JSON.parse(s) : null; }, id);
 const tap = async (page, kinds) => { for (const k of kinds) await page.click(`.cw-pitem[data-pal="${k}"]`); };
@@ -82,7 +82,7 @@ const chineseLeft = (page) => page.evaluate((src) => {
   ok(!r.won && /还没有到达旗子/.test(r.msg) && (await page.locator('#cl-answer').isHidden()), 'a program that stops short: "robot has not reached the flag", no answer offered yet: ' + r.msg);
   ok((await page.evaluate(() => document.querySelector('#cs-robot').dataset.x)) === '3', 'the robot walked two cells (x = 3)');
   await page.click('#cl-hint');
-  ok(await page.locator('.cw-pitem[data-pal="move"].hint').count() === 0 && /顺序已经正确|请使用高亮|多了|高亮/.test(await page.textContent('#cl-msg')), 'the hint answers (' + (await page.textContent('#cl-msg')) + ')');
+  ok(await page.locator('.cw-pitem[data-pal="move"].hint').count() === 1 && /请使用高亮的积木/.test(await page.textContent('#cl-msg')), 'the hint lights the block that is needed in the palette and says so (' + (await page.textContent('#cl-msg')) + ')');
   await tap(page, ['move']);
   await page.click('#cl-run');
   r = await result(page);
@@ -98,9 +98,13 @@ const chineseLeft = (page) => page.evaluate((src) => {
   ok(page.url().endsWith(`#/coding/${t.id}/w1/2`), 'the next-level button opens level 1-2');
   // a longer program gives fewer stars
   await lvl(t, 'w1/1');
+  await tap(page, ['move', 'move', 'move', 'left']);
+  await page.click('#cl-run'); r = await result(page);
+  ok(r.won && r.stars === '2', '4 blocks for par 3 (at most 1.5 x 3 = 4.5) give 2 stars: ' + r.stars);
+  await lvl(t, 'w1/1');
   await tap(page, ['move', 'move', 'move', 'left', 'right']);
   await page.click('#cl-run'); r = await result(page);
-  ok(r.won && r.stars === '2', '5 blocks for par 3 (<= 4.5? no: 1.5 x 3 = 4.5): ' + r.stars + ' stars');
+  ok(r.won && r.stars === '1', '5 blocks give 1 star: ' + r.stars + ' (program: ' + (await prog(page)) + ', ' + (await page.textContent('#cw-count')) + ')');
   // the best result is kept: a worse run does not lower it
   await page.waitForTimeout(500);
   const keep = await doc(page, t.id);
@@ -109,7 +113,7 @@ const chineseLeft = (page) => page.evaluate((src) => {
   await lvl(t, 'w1/1');
   await tap(page, ['left', 'move']);
   await page.click('#cl-run'); r = await result(page);
-  ok(!r.won && /撞到了/.test(r.msg) && (await page.evaluate(() => document.querySelector('.cs-wrap').dataset.mood)) === 'crash', 'a crash into a wall: the message names it and the robot shows a crash face');
+  ok(!r.won && /撞到了/.test(r.msg) && (await page.evaluate(() => document.querySelector('.cs-wrap').dataset.mood)) === 'crash', 'a crash into a wall: the message names it and the robot shows a crash face (' + r.msg + ' / ' + (await page.evaluate(() => document.querySelector('.cs-wrap').dataset.mood)) + ')');
   // single step: one block per press, the running block is lit, stop resets
   await lvl(t, 'w1/1');
   await tap(page, ['move', 'move', 'move']);

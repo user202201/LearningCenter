@@ -1,100 +1,394 @@
 {
-  "地图": ["Maps", "Cartes"],
-  "学习者：": ["Learner:", "Apprenant :"],
-  "访客": ["Guest", "Invité"],
-  "练习记录保存在：": ["Practice is saved for:", "La progression est enregistrée pour :"],
-  "未选择孩子：练习记录只保存在这台设备上。": ["No child selected: practice is saved on this device only.", "Aucun enfant sélectionné : la progression est enregistrée sur cet appareil uniquement."],
-  "范围：": ["Scope:", "Niveau :"],
-  "国旗": ["Flags", "Drapeaux"],
-  "朗读": ["Read aloud", "Lire à voix haute"],
-  "全称": ["Full name", "Nom complet"],
-  "简称": ["Abbreviation", "Abréviation"],
-  "省会": ["Provincial capital", "Capitale de la province"],
-  "首府": ["Regional capital", "Capitale de la région"],
-  "类型": ["Type", "Type"],
-  "地理区域": ["Region", "Région"],
-  "相邻": ["Neighbours", "Voisins"],
-  "无陆地相邻": ["No land neighbour", "Aucun voisin terrestre"],
-  "首都": ["Capital", "Capitale"],
-  "大洲": ["Continent", "Continent"],
-  "非洲、亚洲": ["Africa, Asia", "Afrique, Asie"],
-  "欧洲、亚洲": ["Europe, Asia", "Europe, Asie"],
-  "亚洲、欧洲": ["Asia, Europe", "Asie, Europe"],
-  "相邻（本页收录）": ["Neighbours (listed here)", "Voisins (présents ici)"],
-  "无": ["None", "Aucun"],
-  "河流": ["River", "Fleuve"],
-  "山脉": ["Mountain range", "Chaîne de montagnes"],
-  "湖泊": ["Lake", "Lac"],
-  "地形区": ["Landforms", "Reliefs"],
-  "高原": ["Plateau", "Plateau"],
-  "平原": ["Plain", "Plaine"],
-  "盆地": ["Basin", "Bassin"],
-  "沙漠": ["Desert", "Désert"],
-  "流经": ["Flows through", "Traverse"],
-  "位于": ["Located in", "Située dans"],
-  "大洋": ["Ocean", "Océan"],
-  "本页收录的国家": ["Countries listed here", "Pays présents ici"],
-  "点击国旗，查看国家的信息。": ["Tap a flag to see the country.", "Touchez un drapeau pour voir le pays."],
-  "点击地图上的地区，查看详细信息。": ["Tap a region on the map to see its details.", "Touchez une région sur la carte pour voir les détails."],
-  "已掌握 {0} / {1}": ["Known {0} / {1}", "Maîtrisés {0} / {1}"],
-  "每轮 10 题，没有时间限制。": ["10 questions per round, no time limit.", "10 questions par manche, sans limite de temps."],
-  "两指缩放，单指拖动；点击地区查看信息。": ["Pinch to zoom, drag with one finger; tap a region for details.", "Pincez pour zoomer, faites glisser avec un doigt ; touchez une région pour les détails."],
-  "回答有误。": ["Incorrect.", "Réponse incorrecte."],
-  "需要复习：": ["To review:", "À revoir :"],
-  "基础": ["Basic", "Base"],
-  "提高": ["Advanced", "Avancé"],
-  "找位置": ["Find the place", "Trouver l'endroit"],
-  "在地图上点出省级行政区": ["Tap the province-level division on the map", "Touchez la division de niveau provincial sur la carte"],
-  "认名字": ["Name the place", "Nommer l'endroit"],
-  "看地图，选出名称": ["Look at the map and choose the name", "Regardez la carte et choisissez le nom"],
-  "省会（首府）": ["Capitals", "Capitales"],
-  "省与省会、首府配对": ["Match provinces and their capitals", "Associer provinces et capitales"],
-  "京、沪、苏……是哪里": ["Which place is 京, 沪, 苏 ...", "Quel est le lieu de 京, 沪, 苏 ..."],
-  "华北、华东、西南……": ["North China, East China, Southwest ...", "Nord, Est, Sud-Ouest de la Chine ..."],
-  "山河与地形": ["Rivers, mountains, landforms", "Fleuves, montagnes, reliefs"],
-  "点出河流、山脉、高原……": ["Tap rivers, mountain ranges, plateaus ...", "Touchez fleuves, chaînes de montagnes, plateaux ..."],
-  "在地图上点出国家": ["Tap the country on the map", "Touchez le pays sur la carte"],
-  "看地图，选出国家": ["Look at the map and choose the country", "Regardez la carte et choisissez le pays"],
-  "国家与首都配对": ["Match countries and their capitals", "Associer pays et capitales"],
-  "国家在哪个大洲": ["Which continent a country is on", "Sur quel continent se trouve un pays"],
-  "大洲与大洋": ["Continents and oceans", "Continents et océans"],
-  "点出七大洲和四大洋": ["Tap the seven continents and four oceans", "Touchez les sept continents et les quatre océans"],
-  "看国旗，选国家": ["Flag to country", "Du drapeau au pays"],
-  "国旗是哪个国家的": ["Which country a flag belongs to", "À quel pays appartient un drapeau"],
-  "看国家，选国旗": ["Country to flag", "Du pays au drapeau"],
-  "哪一面是它的国旗": ["Which flag is its flag", "Quel drapeau est le sien"],
-  "直辖市": ["Municipality", "Municipalité"],
-  "特别行政区": ["Special administrative region", "Région administrative spéciale"],
-  "{0}，简称“{1}”，省会：{2}，属于{3}地区。": ["{0}, abbreviated “{1}”, provincial capital: {2}, in the {3} region.", "{0}, abrégé « {1} », capitale de la province : {2}, dans la région {3}."],
-  "{0}，简称“{1}”，首府：{2}，属于{3}地区。": ["{0}, abbreviated “{1}”, regional capital: {2}, in the {3} region.", "{0}, abrégé « {1} », capitale de la région : {2}, dans la région {3}."],
-  "{0}，简称“{1}”，是直辖市，属于{2}地区。": ["{0}, abbreviated “{1}”, is a municipality directly under the central government, in the {2} region.", "{0}, abrégé « {1} », est une municipalité relevant directement du gouvernement central, dans la région {2}."],
-  "{0}，简称“{1}”，是特别行政区，属于{2}地区。": ["{0}, abbreviated “{1}”, is a special administrative region, in the {2} region.", "{0}, abrégé « {1} », est une région administrative spéciale, dans la région {2}."],
-  "{0}是中国的一条河流。": ["{0} is a river of China.", "{0} est un fleuve de la Chine."],
-  "{0}是中国的一列山脉。": ["{0} is a mountain range of China.", "{0} est une chaîne de montagnes de la Chine."],
-  "{0}是中国的一个湖泊。": ["{0} is a lake of China.", "{0} est un lac de la Chine."],
-  "{0}是中国的一个高原。": ["{0} is a plateau of China.", "{0} est un plateau de la Chine."],
-  "{0}是中国的一个平原。": ["{0} is a plain of China.", "{0} est une plaine de la Chine."],
-  "{0}是中国的一个盆地。": ["{0} is a basin of China.", "{0} est un bassin de la Chine."],
-  "{0}是中国的一个沙漠。": ["{0} is a desert of China.", "{0} est un désert de la Chine."],
-  "{0}，首都：{1}，位于{2}。": ["{0}, capital: {1}, located in {2}.", "{0}, capitale : {1}, située en {2}."],
-  "请在地图上点出：{0}": ["Tap on the map: {0}", "Touchez sur la carte : {0}"],
-  "图中亮起的是哪一个？": ["Which one is lit on the map?", "Lequel est mis en évidence sur la carte ?"],
-  "{0}的省会（首府）是哪里？": ["What is the capital of {0}?", "Quelle est la capitale de {0} ?"],
-  "{0}是哪个省级行政区的省会（首府）？": ["{0} is the capital of which province-level division?", "{0} est la capitale de quelle division de niveau provincial ?"],
-  "“{0}”是哪个省级行政区的简称？": ["“{0}” is the abbreviation of which province-level division?", "« {0} » est l'abréviation de quelle division de niveau provincial ?"],
-  "{0}属于哪个地理区域？": ["Which region does {0} belong to?", "À quelle région appartient {0} ?"],
-  "{0}的首都是哪里？": ["What is the capital of {0}?", "Quelle est la capitale de {0} ?"],
-  "{0}是哪个国家的首都？": ["{0} is the capital of which country?", "{0} est la capitale de quel pays ?"],
-  "{0}位于哪个大洲？": ["Which continent is {0} on?", "Sur quel continent se trouve {0} ?"],
-  "这里是{0}。": ["This is {0}.", "Voici {0}."],
-  "这是哪个国家的国旗？": ["Which country does this flag belong to?", "À quel pays appartient ce drapeau ?"],
-  "{0}的国旗是哪一面？": ["Which flag is the flag of {0}?", "Quel drapeau est celui de {0} ?"],
-  "中国地图": ["Map of China", "Carte de la Chine"],
-  "世界地图": ["World map", "Carte du monde"],
-  "放大": ["Zoom in", "Agrandir"],
-  "缩小": ["Zoom out", "Réduire"],
-  "复位": ["Reset", "Réinitialiser"],
-  "南海诸岛": ["South China Sea Islands", "Îles de la mer de Chine méridionale"],
-  "地图数据来自 Natural Earth（公有领域），经简化后内置于应用。": ["Map data comes from Natural Earth (public domain), simplified and built into the app.", "Les données cartographiques proviennent de Natural Earth (domaine public), simplifiées et intégrées à l'application."],
-  "中国 · 世界 · 国旗": ["China · World · Flags", "Chine · Monde · Drapeaux"]
+  "地图": [
+    "Maps",
+    "Cartes"
+  ],
+  "学习者：": [
+    "Learner:",
+    "Apprenant :"
+  ],
+  "访客": [
+    "Guest",
+    "Invité"
+  ],
+  "练习记录保存在：": [
+    "Practice is saved for:",
+    "La progression est enregistrée pour :"
+  ],
+  "未选择孩子：练习记录只保存在这台设备上。": [
+    "No child selected: practice is saved on this device only.",
+    "Aucun enfant sélectionné : la progression est enregistrée sur cet appareil uniquement."
+  ],
+  "范围：": [
+    "Scope:",
+    "Niveau :"
+  ],
+  "国旗": [
+    "Flags",
+    "Drapeaux"
+  ],
+  "朗读": [
+    "Read aloud",
+    "Lire à voix haute"
+  ],
+  "全称": [
+    "Full name",
+    "Nom complet"
+  ],
+  "简称": [
+    "Abbreviation",
+    "Abréviation"
+  ],
+  "省会": [
+    "Provincial capital",
+    "Capitale de la province"
+  ],
+  "首府": [
+    "Regional capital",
+    "Capitale de la région"
+  ],
+  "类型": [
+    "Type",
+    "Type"
+  ],
+  "地理区域": [
+    "Region",
+    "Région"
+  ],
+  "相邻": [
+    "Neighbours",
+    "Voisins"
+  ],
+  "无陆地相邻": [
+    "No land neighbour",
+    "Aucun voisin terrestre"
+  ],
+  "首都": [
+    "Capital",
+    "Capitale"
+  ],
+  "大洲": [
+    "Continent",
+    "Continent"
+  ],
+  "非洲、亚洲": [
+    "Africa, Asia",
+    "Afrique, Asie"
+  ],
+  "欧洲、亚洲": [
+    "Europe, Asia",
+    "Europe, Asie"
+  ],
+  "亚洲、欧洲": [
+    "Asia, Europe",
+    "Asie, Europe"
+  ],
+  "相邻（本页收录）": [
+    "Neighbours (listed here)",
+    "Voisins (présents ici)"
+  ],
+  "无": [
+    "None",
+    "Aucun"
+  ],
+  "河流": [
+    "River",
+    "Fleuve"
+  ],
+  "山脉": [
+    "Mountain range",
+    "Chaîne de montagnes"
+  ],
+  "湖泊": [
+    "Lake",
+    "Lac"
+  ],
+  "地形区": [
+    "Landforms",
+    "Reliefs"
+  ],
+  "高原": [
+    "Plateau",
+    "Plateau"
+  ],
+  "平原": [
+    "Plain",
+    "Plaine"
+  ],
+  "盆地": [
+    "Basin",
+    "Bassin"
+  ],
+  "沙漠": [
+    "Desert",
+    "Désert"
+  ],
+  "流经": [
+    "Flows through",
+    "Traverse"
+  ],
+  "位于": [
+    "Located in",
+    "Située dans"
+  ],
+  "大洋": [
+    "Ocean",
+    "Océan"
+  ],
+  "本页收录的国家": [
+    "Countries listed here",
+    "Pays présents ici"
+  ],
+  "点击国旗，查看国家的信息。": [
+    "Tap a flag to see the country.",
+    "Touchez un drapeau pour voir le pays."
+  ],
+  "点击地图上的地区，查看详细信息。": [
+    "Tap a region on the map to see its details.",
+    "Touchez une région sur la carte pour voir les détails."
+  ],
+  "已掌握 {0} / {1}": [
+    "Known {0} / {1}",
+    "Maîtrisés {0} / {1}"
+  ],
+  "每轮 10 题，没有时间限制。": [
+    "10 questions per round, no time limit.",
+    "10 questions par manche, sans limite de temps."
+  ],
+  "两指缩放，单指拖动；点击地区查看信息。": [
+    "Pinch to zoom, drag with one finger; tap a region for details.",
+    "Pincez pour zoomer, faites glisser avec un doigt ; touchez une région pour les détails."
+  ],
+  "回答有误。": [
+    "Incorrect.",
+    "Réponse incorrecte."
+  ],
+  "需要复习：": [
+    "To review:",
+    "À revoir :"
+  ],
+  "基础": [
+    "Basic",
+    "Base"
+  ],
+  "提高": [
+    "Advanced",
+    "Avancé"
+  ],
+  "找位置": [
+    "Find the place",
+    "Trouver l'endroit"
+  ],
+  "在地图上点出省级行政区": [
+    "Tap the province-level division on the map",
+    "Touchez la division de niveau provincial sur la carte"
+  ],
+  "认名字": [
+    "Name the place",
+    "Nommer l'endroit"
+  ],
+  "看地图，选出名称": [
+    "Look at the map and choose the name",
+    "Regardez la carte et choisissez le nom"
+  ],
+  "省会（首府）": [
+    "Capitals",
+    "Capitales"
+  ],
+  "省与省会、首府配对": [
+    "Match provinces and their capitals",
+    "Associer provinces et capitales"
+  ],
+  "京、沪、苏……是哪里": [
+    "Abbreviations of the provinces",
+    "Abréviations des provinces"
+  ],
+  "华北、华东、西南……": [
+    "North, East, Southwest China ...",
+    "Nord, Est, Sud-Ouest de la Chine ..."
+  ],
+  "山河与地形": [
+    "Rivers, mountains, landforms",
+    "Fleuves, montagnes, reliefs"
+  ],
+  "点出河流、山脉、高原……": [
+    "Tap rivers, mountain ranges, plateaus ...",
+    "Touchez fleuves, chaînes de montagnes, plateaux ..."
+  ],
+  "在地图上点出国家": [
+    "Tap the country on the map",
+    "Touchez le pays sur la carte"
+  ],
+  "看地图，选出国家": [
+    "Look at the map and choose the country",
+    "Regardez la carte et choisissez le pays"
+  ],
+  "国家与首都配对": [
+    "Match countries and their capitals",
+    "Associer pays et capitales"
+  ],
+  "国家在哪个大洲": [
+    "Which continent a country is on",
+    "Sur quel continent se trouve un pays"
+  ],
+  "大洲与大洋": [
+    "Continents and oceans",
+    "Continents et océans"
+  ],
+  "点出七大洲和四大洋": [
+    "Tap the seven continents and four oceans",
+    "Touchez les sept continents et les quatre océans"
+  ],
+  "看国旗，选国家": [
+    "Flag to country",
+    "Du drapeau au pays"
+  ],
+  "国旗是哪个国家的": [
+    "Which country a flag belongs to",
+    "À quel pays appartient un drapeau"
+  ],
+  "看国家，选国旗": [
+    "Country to flag",
+    "Du pays au drapeau"
+  ],
+  "哪一面是它的国旗": [
+    "Which flag is its flag",
+    "Quel drapeau est le sien"
+  ],
+  "直辖市": [
+    "Municipality",
+    "Municipalité"
+  ],
+  "特别行政区": [
+    "Special administrative region",
+    "Région administrative spéciale"
+  ],
+  "{0}，简称“{1}”，省会：{2}，属于{3}地区。": [
+    "{0}, abbreviated “{1}”, provincial capital: {2}, in the {3} region.",
+    "{0}, abrégé « {1} », capitale de la province : {2}, dans la région {3}."
+  ],
+  "{0}，简称“{1}”，首府：{2}，属于{3}地区。": [
+    "{0}, abbreviated “{1}”, regional capital: {2}, in the {3} region.",
+    "{0}, abrégé « {1} », capitale de la région : {2}, dans la région {3}."
+  ],
+  "{0}，简称“{1}”，是直辖市，属于{2}地区。": [
+    "{0}, abbreviated “{1}”, is a municipality directly under the central government, in the {2} region.",
+    "{0}, abrégé « {1} », est une municipalité relevant directement du gouvernement central, dans la région {2}."
+  ],
+  "{0}，简称“{1}”，是特别行政区，属于{2}地区。": [
+    "{0}, abbreviated “{1}”, is a special administrative region, in the {2} region.",
+    "{0}, abrégé « {1} », est une région administrative spéciale, dans la région {2}."
+  ],
+  "{0}是中国的一条河流。": [
+    "{0} is a river of China.",
+    "{0} est un fleuve de la Chine."
+  ],
+  "{0}是中国的一列山脉。": [
+    "{0} is a mountain range of China.",
+    "{0} est une chaîne de montagnes de la Chine."
+  ],
+  "{0}是中国的一个湖泊。": [
+    "{0} is a lake of China.",
+    "{0} est un lac de la Chine."
+  ],
+  "{0}是中国的一个高原。": [
+    "{0} is a plateau of China.",
+    "{0} est un plateau de la Chine."
+  ],
+  "{0}是中国的一个平原。": [
+    "{0} is a plain of China.",
+    "{0} est une plaine de la Chine."
+  ],
+  "{0}是中国的一个盆地。": [
+    "{0} is a basin of China.",
+    "{0} est un bassin de la Chine."
+  ],
+  "{0}是中国的一个沙漠。": [
+    "{0} is a desert of China.",
+    "{0} est un désert de la Chine."
+  ],
+  "{0}，首都：{1}，位于{2}。": [
+    "{0}, capital: {1}, located in {2}.",
+    "{0}, capitale : {1}, située en {2}."
+  ],
+  "请在地图上点出：{0}": [
+    "Tap on the map: {0}",
+    "Touchez sur la carte : {0}"
+  ],
+  "图中亮起的是哪一个？": [
+    "Which one is lit on the map?",
+    "Lequel est mis en évidence sur la carte ?"
+  ],
+  "{0}的省会（首府）是哪里？": [
+    "What is the capital of {0}?",
+    "Quelle est la capitale de {0} ?"
+  ],
+  "{0}是哪个省级行政区的省会（首府）？": [
+    "{0} is the capital of which province-level division?",
+    "{0} est la capitale de quelle division de niveau provincial ?"
+  ],
+  "“{0}”是哪个省级行政区的简称？": [
+    "“{0}” is the abbreviation of which province-level division?",
+    "« {0} » est l'abréviation de quelle division de niveau provincial ?"
+  ],
+  "{0}属于哪个地理区域？": [
+    "Which region does {0} belong to?",
+    "À quelle région appartient {0} ?"
+  ],
+  "{0}的首都是哪里？": [
+    "What is the capital of {0}?",
+    "Quelle est la capitale de {0} ?"
+  ],
+  "{0}是哪个国家的首都？": [
+    "{0} is the capital of which country?",
+    "{0} est la capitale de quel pays ?"
+  ],
+  "{0}位于哪个大洲？": [
+    "Which continent is {0} on?",
+    "Sur quel continent se trouve {0} ?"
+  ],
+  "这里是{0}。": [
+    "This is {0}.",
+    "Voici {0}."
+  ],
+  "这是哪个国家的国旗？": [
+    "Which country does this flag belong to?",
+    "À quel pays appartient ce drapeau ?"
+  ],
+  "{0}的国旗是哪一面？": [
+    "Which flag is the flag of {0}?",
+    "Quel drapeau est celui de {0} ?"
+  ],
+  "中国地图": [
+    "Map of China",
+    "Carte de la Chine"
+  ],
+  "世界地图": [
+    "World map",
+    "Carte du monde"
+  ],
+  "放大": [
+    "Zoom in",
+    "Agrandir"
+  ],
+  "缩小": [
+    "Zoom out",
+    "Réduire"
+  ],
+  "复位": [
+    "Reset",
+    "Réinitialiser"
+  ],
+  "南海诸岛": [
+    "South China Sea Islands",
+    "Îles de la mer de Chine méridionale"
+  ],
+  "地图数据来自 Natural Earth（公有领域），经简化后内置于应用。": [
+    "Map data comes from Natural Earth (public domain), simplified and built into the app.",
+    "Les données cartographiques proviennent de Natural Earth (domaine public), simplifiées et intégrées à l'application."
+  ],
+  "中国 · 世界 · 国旗": [
+    "China · World · Flags",
+    "Chine · Monde · Drapeaux"
+  ]
 }
