@@ -12,6 +12,7 @@ import { tr, getLang } from "./i18n";
 import * as R from "./musicrec";
 import type { Ctx } from "./english";
 import { renderBeats as beatsPage } from "./beats";
+import { renderDJ as djPage } from "./dj";
 
 let X!: Ctx;
 export const initMusic = (c: Ctx) => { X = c; };
@@ -45,6 +46,7 @@ const ARTS: Record<string, string> = {
   piano: `<rect x="10" y="38" width="100" height="62" rx="10" fill="#fff" stroke="#495057" stroke-width="3"/>${[30, 50, 70, 90].map((x) => `<path d="M${x} 62V100" stroke="#adb5bd" stroke-width="2"/>`).join("")}${[24, 44, 76, 96].map((x) => `<rect x="${x - 6}" y="38" width="12" height="38" rx="2" fill="#2d2230"/>`).join("")}${face(60, 90)}<ellipse cx="34" cy="22" rx="6" ry="4.5" transform="rotate(-20 34 22)" fill="#e64980"/><path d="M40 21V6" stroke="#e64980" stroke-width="2.5"/>`,
   drums: `<ellipse cx="60" cy="74" rx="38" ry="12" fill="#ffa8a8" stroke="#c92a2a" stroke-width="3"/><path d="M22 74V98q0 12 38 12t38-12V74" fill="#ff8787" stroke="#c92a2a" stroke-width="3"/>${face(60, 92)}<path d="M26 14L58 58M96 12L66 56" stroke="#8d6e63" stroke-width="5" stroke-linecap="round"/><circle cx="26" cy="14" r="5" fill="#ffd43b"/><circle cx="96" cy="12" r="5" fill="#ffd43b"/>`,
   beats: `<rect x="8" y="22" width="104" height="76" rx="12" fill="#fff" stroke="#f783ac" stroke-width="3"/>${[0, 1, 2].map((r) => [0, 1, 2, 3].map((c) => { const on = (r * 4 + c * 3 + (r === 1 ? 1 : 0)) % 5 < 2; return `<rect x="${16 + c * 24}" y="${30 + r * 22}" width="20" height="16" rx="5" fill="${on ? ["#f03e3e", "#fab005", "#845ef7"][r] : "#ffe3ee"}"/>`; }).join("")).join("")}<rect x="64" y="22" width="8" height="76" rx="3" fill="#ffd43b" opacity=".75"/>${face(60, 112)}<path d="M92 8l16-4M95 14l16-4" stroke="#e64980" stroke-width="4" stroke-linecap="round"/>`,
+  dj: `<path d="M16 64Q60 -6 104 64" fill="none" stroke="#845ef7" stroke-width="7" stroke-linecap="round"/><rect x="8" y="52" width="17" height="30" rx="7" fill="#e64980"/><rect x="95" y="52" width="17" height="30" rx="7" fill="#e64980"/><circle cx="60" cy="76" r="38" fill="#2b2230" stroke="#6741d9" stroke-width="3"/><circle cx="60" cy="76" r="31" fill="none" stroke="#4b3f55" stroke-width="1.5"/><circle cx="60" cy="76" r="25" fill="none" stroke="#4b3f55" stroke-width="1.5"/><path d="M60 76L60 38A38 38 0 0 1 87 49Z" fill="#fff" opacity=".1"/><circle cx="60" cy="76" r="15" fill="#f783ac" stroke="#fff" stroke-width="2"/>${face(60, 74)}<circle cx="60" cy="76" r="1.8" fill="#fff"/><path d="M96 20l8-3v12" fill="none" stroke="#e64980" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="94" cy="30" r="3.5" fill="#e64980"/>`,
   guitar: `<path d="M84 8l8 8-34 34" stroke="#8d6e63" stroke-width="9" stroke-linecap="round"/><path d="M88 6l10 10" stroke="#5f3dc4" stroke-width="10" stroke-linecap="round"/><path d="M52 46q-16-4-26 8t-2 20q-12 10-2 24t30 6q14-6 12-20q16-4 12-22q-6-14-24-16z" fill="#fcc419" stroke="#e67700" stroke-width="3"/><circle cx="52" cy="76" r="8" fill="#5c3d2e"/>${face(46, 62)}<path d="M52 76L88 28" stroke="#fff" stroke-width="1.5"/>`,
 };
 export const musicArtFor = (id: string): SVGSVGElement => art(ARTS[id] ?? ARTS.theory);
@@ -63,7 +65,8 @@ export function renderMusic() {
         card("piano", "钢琴", "支持同时按多个键", "#/music/piano"),
         card("drums", "架子鼓", "九个鼓和镲", "#/music/drums"),
         card("guitar", "吉他", "拨弦、扫弦、和弦", "#/music/guitar"),
-        card("beats", "节奏编辑器", "排列格子，编写鼓点", "#/music/beats")))));
+        card("beats", "节奏编辑器", "排列格子，编写鼓点", "#/music/beats"),
+        card("dj", "DJ 打碟", "两个唱盘，搓碟与混音", "#/music/dj")))));
   X.show(page);
   oneLine([...page.querySelectorAll<HTMLElement>(".mus-card b")], 12);
 }
@@ -412,6 +415,8 @@ export function fullToggle(get: () => HTMLElement, id: string, onChange?: (on: b
 
 /** the beat maker (节奏编辑器): the screen is in beats.ts */
 export function renderBeats() { beatsPage({ X, hero, fullToggle, color: COLOR }); }
+/** the DJ turntables (DJ 打碟): the screen is in dj.ts */
+export function renderDJ() { djPage({ X, hero, fullToggle, color: COLOR }); }
 
 // ---------- the drum kit ----------
 const PADS: { id: A.Drum | "hihat"; name: string; x: number; y: number; s: number; c: string }[] = [

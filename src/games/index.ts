@@ -20,4 +20,6 @@ export const GAMES: GameInfo[] = [
   { id: "game24", name: "算24点", sub: "用四张牌算出 24", load: () => import("./game24") },
   { id: "hanzipuzzle", name: "汉字笔画", sub: "按笔顺拼出汉字", load: () => import("./hanzipuzzle") },
   { id: "spotdiff", name: "找不同", sub: "比较两幅图，找出不同之处", load: () => import("./spotdiff") },
+  { id: "sudoku", name: "数独", sub: "每行、每列、每宫填入数字且不重复", load: () => import("./sudoku") },
+  { id: "breakout", name: "打砖块", sub: "移动挡板接球，击碎全部砖块", load: () => import("./breakout") },
 ];
