@@ -43,8 +43,8 @@
   .sk-picker { gap: 3px; padding: 6px; }
   .sk-picker h2 { font-size: 18px; }
   .sk-group { flex-direction: row; max-width: none; gap: 10px; justify-content: center; }
-  .sk-group { padding-right: 62px; }
-  .sk-group h3 { width: 52px; text-align: right; margin: 0; }
+  .sk-group { padding-right: 90px; }
+  .sk-group h3 { width: 80px; text-align: right; margin: 0; font-size: 15px; }
   .sk-lvl { width: 40px; height: 40px; font-size: 15px; }
   .sk-levels { grid-template-columns: repeat(8, 40px); gap: 11px 8px; }
   .sk-picker .sk-close { min-height: 36px; }
