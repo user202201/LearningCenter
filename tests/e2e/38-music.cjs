@@ -72,7 +72,7 @@ const clearPlays = (page) => page.evaluate(() => { window.__music.plays.length =
   const names = await p.locator('.subject .s-name').allTextContents();
   ok(names.join() === '识字,数学,英语,科学,音乐,小游戏', 'the picker has six cards, music is the fifth: ' + names.join());
   await p.click('.subject[data-subject=music]'); await p.waitForSelector('#mus-theory');
-  ok((await p.locator('.mus-card').count()) === 4 && (await p.textContent('.hero h1')) === '音乐', 'music home: theory, piano, drums, guitar; no child is asked for');
+  ok((await p.locator('.mus-card').count()) === 5 && (await p.textContent('.hero h1')) === '音乐', 'music home: theory, piano, drums, guitar, beat maker; no child is asked for');
   ok(await p.locator('.shortcuts').count() === 0, 'no subject shortcuts on the music pages (they belong to a child\'s page)');
   await p.screenshot({ path: OUT + 'music-home-ipad.png' });
 
