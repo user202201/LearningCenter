@@ -85,21 +85,32 @@ const playAll = async (page, n = 20) => {
   await page.click('.kid:has-text("Dory")'); await page.waitForSelector('#grade-dlg');
   ok((await page.textContent('#grade-dlg h2')).includes('Dory'), 'the first time a child is opened: his grade is asked');
   await page.click('.grade-btn[data-grade="4"]'); await page.waitForSelector('.mtcard');
-  const topics = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
+  let topics = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
   const gradeList = await page.evaluate(async () => (await import('/src/data/math-topics.json')).default.grades['4']);
   const lowerLists = await page.evaluate(async () => { const d = (await import('/src/data/math-topics.json')).default; return [1, 2, 3].flatMap((g) => d.grades[String(g)]); });
-  ok(topics.length === 3 && topics[0] === gradeList[0] && topics[1] === gradeList[1] && lowerLists.includes(topics[2]), 'this week: 2 topics of grade 4 in the list\'s order + 1 of the lower grades (the grade is his highest level) (' + topics.join(', ') + ')');
+  ok(topics.length === 3 && topics[0] === gradeList[0] && topics[1] === gradeList[1] && lowerLists.includes(topics[2]), 'today: 2 topics of grade 4 in the list\'s order + 1 of the lower grades (the grade is his highest level) (' + topics.join(', ') + ')');
   ok((await page.locator('.mtcard .mtname').allTextContents()).every((x) => x.length > 1) && await page.locator('.mtcard .macc.none').count() === 3, 'each shows its name, a short description and "not practised yet"');
   const id1 = await kidIdOf(page, 0);
   ok(await page.evaluate((i) => !!localStorage.getItem('learn.local.math/' + i + '.json') && !localStorage.getItem('learn.local.english/' + i + '.json'), id1), 'saved in math/<child>.json only (nothing in the English or Chinese files)');
-  ok((await page.locator('.tabs button').allTextContents()).join('|') === '游戏|本周|已入库 3', 'tabs like 识字: 游戏 | 本周 | 已入库 3');
+  ok((await page.locator('.tabs button').allTextContents()).join('|') === '游戏|今天|已入库 3', 'tabs: 游戏 | 今天 | 已入库 3 (new topics every DAY: practice is not memory work)');
   await page.reload(); await page.waitForSelector('.mtcard');
   ok(JSON.stringify(await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic))) === JSON.stringify(topics), 'opening again: the same 3 topics');
-  await page.click('button[title=下一周]'); await page.waitForFunction(() => document.querySelector('#week-label strong')?.textContent === '第2周');
-  const next = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
-  ok(next.length === 3 && next.every((x) => !topics.includes(x)), 'next week: 3 other topics (' + next.join(', ') + ')');
-  ok(await page.locator('button[title=下一周]').isDisabled(), 'the right arrow stops at next week');
-  await page.click('button[title=上一周]'); await page.waitForFunction(() => document.querySelector('#week-label strong')?.textContent === '第1周');
+  ok(await page.locator('button[title=前一天]').isDisabled() && await page.locator('button[title=后一天]').isDisabled(), 'the first day: nothing before and nothing after yet');
+  ok((await page.textContent('#week-label strong')) === '今天', 'the label says 今天');
+  // the next day: other topics (a new set every day), yesterday can be looked at
+  const day1 = topics.slice();
+  await page.clock.setFixedTime(new Date('2026-11-13T10:00:00')); await page.reload(); await page.waitForSelector('.mtcard');
+  topics = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
+  ok(topics.length === 3 && topics.every((x) => !day1.includes(x)), 'the next day: 3 OTHER topics (' + day1.join(', ') + ' -> ' + topics.join(', ') + ')');
+  ok(await page.locator('button[title=前一天]').isEnabled(), 'and the arrow back to yesterday is on');
+  await page.click('button[title=前一天]'); await page.waitForFunction((d) => JSON.stringify([...document.querySelectorAll('.mtcard')].map((e) => e.dataset.topic)) === JSON.stringify(d), day1);
+  ok(true, 'yesterday shows yesterday\'s topics');
+  await page.click('button[title=后一天]'); await page.waitForFunction((d) => JSON.stringify([...document.querySelectorAll('.mtcard')].map((e) => e.dataset.topic)) === JSON.stringify(d), topics);
+  // days go on: three more days never repeat a topic inside the grade's list until it is used up
+  for (const d of ['2026-11-14', '2026-11-15']) { await page.clock.setFixedTime(new Date(d + 'T10:00:00')); await page.reload(); await page.waitForSelector('.mtcard'); }
+  const day4 = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
+  ok(day4.every((x) => !day1.includes(x) && !topics.includes(x)), 'day 4 is new again (' + day4.join(', ') + ')');
+  await page.clock.setFixedTime(new Date('2026-11-13T10:00:00')); await page.reload(); await page.waitForSelector('.mtcard');
 
   // quick practice of one topic
   await page.click('.mpractice >> nth=0'); await page.waitForSelector('#math-q');
@@ -134,9 +145,9 @@ const playAll = async (page, n = 20) => {
   ok(/共 20 题，限时约 \d+ 分钟/.test(infoTxt), 'the lobby: ' + infoTxt);
   await page.click('#game-start'); await page.waitForSelector('#math-q');
   const names = await page.evaluate(async () => Object.fromEntries((await import('/src/data/math-topics.json')).default.topics.map((t) => [t.id, t.name])));
-  const prevNames = prev.map((x) => names[x]), thisNames = topics.map((x) => names[x]);
+  const prevNames = day1.map((x) => names[x]), thisNames = topics.map((x) => names[x]);
   const asked = await playAll(page, 20);
-  ok(asked.length === 20 && asked.filter((n) => thisNames.includes(n)).length === 14 && asked.filter((n) => prevNames.includes(n)).length === 6, 'the game: 20 questions = 14 of this week\'s 3 topics + 6 of last week\'s (' + asked.filter((n) => prevNames.includes(n)).length + ' of last week)');
+  ok(asked.length === 20 && asked.filter((n) => thisNames.includes(n)).length === 14 && asked.filter((n) => prevNames.includes(n)).length === 6, 'the game: 20 questions = 14 of today\'s 3 topics + 6 of yesterday\'s (' + asked.filter((n) => prevNames.includes(n)).length + ' of yesterday)');
   const end = await page.evaluate(() => ({ final: document.querySelector('#game-final').textContent, rows: [...document.querySelectorAll('.mrow')].map((r) => r.textContent), stars: document.querySelector('.gstars').dataset.stars, head: document.querySelector('#game-end h2').textContent }));
   ok(/^\d+$/.test(end.final) && +end.final <= 20 && end.rows.length >= 4, 'the end screen: score ' + end.final + ' / 20, a line per topic (' + end.rows.length + ')');
   await page.screenshot({ path: OUT + 'math-end-phone.png' });
@@ -144,19 +155,19 @@ const playAll = async (page, n = 20) => {
   const rev1 = JSON.parse(await page.evaluate((i) => localStorage.getItem('learn.local.math/' + i + '.review.json'), id1));
   ok(rev1.last && rev1.last.total === 20 && rev1.last.score === +end.final && rev1.plays >= 2 && Object.keys(rev1.topics).length >= 4, 'saved in math/<child>.review.json: last time ' + rev1.last?.score + ' / 20, per topic counts');
   await page.click('[data-tab=learned]'); await page.waitForSelector('.mtcard');
-  ok(await page.locator('.mtcard').count() === 9 && (await page.textContent('.tabs button:nth-child(3)')) === '已入库 9', 'Recorded: all 9 topics (last week\'s, this week\'s and next week\'s, which was opened) with their answer rates');
+  ok(await page.locator('.mtcard').count() === 9 && (await page.textContent('.tabs button:nth-child(3)')) === '已入库 9', 'Recorded: all 9 topics (the older ones, yesterday\'s and today\'s) with their answer rates');
   // another child: nothing shared
   await page.evaluate(() => (location.hash = '#/subject/math')); await page.waitForSelector('.kids');
   await page.click('.kid:has-text("Leo")'); await page.waitForSelector('#grade-dlg'); await page.click('.grade-btn[data-grade="1"]'); await page.waitForSelector('.mtcard');
   const leo = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
   ok(leo.join() === 'compare,seq,add10' && await page.locator('.macc.none').count() === 3, 'Leo (一年级): his own 3 topics of grade 1 (' + leo.join(', ') + '), nothing of Dory\'s results');
-  // changing the grade picks this week's and next week's topics again
+  // changing the grade picks today's topics again
   await page.click('#grade-btn'); await page.waitForSelector('#grade-dlg'); await page.click('.grade-btn[data-grade="6"]');
   await page.waitForFunction(() => !document.querySelector('.mtcard[data-topic=compare]') && document.querySelector('.mtcard'), null, { timeout: 8000 });
   const leo6 = await page.locator('.mtcard').evaluateAll((els) => els.map((e) => e.dataset.topic));
   const g6 = await page.evaluate(async () => (await import('/src/data/math-topics.json')).default.grades['6']);
   const lower5 = await page.evaluate(async () => (await import('/src/data/math-topics.json')).default.grades['5']);
-  ok(leo6[0] === g6[0] && leo6[1] === g6[1] && lower5.includes(leo6[2]), 'changing Leo to 六年级 picks this week\'s topics again: 2 of grade 6 + 1 of grade 5 (' + leo6.join(', ') + ')');
+  ok(leo6[0] === g6[0] && leo6[1] === g6[1] && lower5.includes(leo6[2]), 'changing Leo to 六年级 picks today\'s topics again: 2 of grade 6 + 1 of grade 5 (' + leo6.join(', ') + ')');
   ok(log.external.length === 0, 'OFFLINE: the whole math flow (list, grade, topics, practice, games, results) made no request outside the app: ' + log.external.join(', '));
   await browser.close();
 

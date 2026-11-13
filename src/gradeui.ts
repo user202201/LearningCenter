@@ -35,10 +35,10 @@ export async function pickKidGrade(k: M.Kid): Promise<number | null> {
   for (const path of [`english/${k.id}.json`, `french/${k.id}.json`, MM.mathPath(k.id), SM.sciencePath(k.id)]) {
     try {
       const cur = await api.readJson<M.KidData>(path);
-      if (!cur?.weeks.some((w) => w.start >= thisWeek)) continue;
+      if (!cur?.weeks.some((w) => w.start >= (/^(math|science)\//.test(path) ? M.todayLocal() : thisWeek))) continue;
       const done = toast("正在按新年级重新选…", 0, true);
       try {
-        await api.update(path, M.EMPTY_KID, (c: M.KidData) => W.dropFromWeek(c, thisWeek), `${path} new grade`);
+        await api.update(path, M.EMPTY_KID, (c: M.KidData) => W.dropFromWeek(c, /^(math|science)\//.test(path) ? M.todayLocal() : thisWeek), `${path} new grade`);
         done();
         toast("已按新年级重新选了这周和下周的内容", 5000);
       } catch (e) {
