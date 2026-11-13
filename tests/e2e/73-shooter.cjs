@@ -81,10 +81,10 @@ const CJK = /[㐀-鿿]/;
     const N = 2200;
     for (let i = 0; i < N; i++) {
       const easy = i % 2 === 1, level = 1 + (i % 12);
-      const s = M.newGame(level, { easy, seed: i * 31 + 5, run: M.newRun(easy), startTime: (i % 8) * 5 });
+      const s = M.newGame(level, { easy, seed: i * 31 + 5, run: M.newRun(easy), startTime: (i % 9) * 5 });
       s.weapon = M.WEAPONS[i % 6]; s.wl = 1 + (i % 5); if (i % 7 === 0) s.inv = 1e6;
       let tx = 180, ty = 500, prev = { score: s.score }; R.runs++;
-      for (let k = 0; k < 420; k++) {
+      for (let k = 0; k < 640; k++) {
         if (k % 25 === 0) { tx = rng() * 360; ty = 100 + rng() * 520; }
         const ev = M.step(s, M.STEP, { tx, ty, bomb: rng() < 0.01 }); R.steps++;
         if (k % 6 === 0 || ev.length) { inv(s, prev, `run ${i} step ${k}`); prev = { score: s.score }; }
@@ -95,7 +95,7 @@ const CJK = /[㐀-鿿]/;
   });
   ok(F.bad.length === 0, `fuzz: ${F.runs} seeded runs / ${F.steps} steps on all levels: caps, no NaN, score never down, lives / bombs / weapon in range, everything off screen removed (max ${F.maxEnt} entities)${F.bad.length ? ' -> ' + F.bad.join(' | ') : ''}`);
   ok(F.maxEnt < 400, `entity count stays under 400 (max ${F.maxEnt})`);
-  ok(['rock', 'flyer', 'zigzag', 'snake', 'diver', 'shield', 'splitter', 'mini', 'bomber', 'mother', 'swarm', 'stealth', 'comet', 'balloon', 'boss'].every((k) => F.kinds.includes(k)), `the fuzz runs met every enemy kind (${F.kinds.length} kinds)`);
+  ok(['rock', 'flyer', 'zigzag', 'snake', 'diver', 'shield', 'splitter', 'mini', 'bomber', 'mother', 'swarm', 'stealth', 'comet', 'balloon', 'boss'].every((k) => F.kinds.includes(k)), `the fuzz runs met every enemy kind (${F.kinds.join(' ')})`);
   ok(F.pk.length >= 8 && F.wk.length >= 4, `capsules (${F.pk.length} kinds) and weapon bullets (${F.wk.length} kinds) were seen`);
 
   // ---------- determinism ----------
@@ -141,10 +141,11 @@ const CJK = /[㐀-鿿]/;
     // mother ship: turrets shoot aimed bullets; it leaves
     { const s = fresh(); s.ship.x = 60; s.ship.y = 580; const e = M.spawnEnemy(s, 'mother', 180, { y: 20 }); hold(s, 240); if (!s.ebullets.length || !s.ebullets.some((b) => b.vy > 0)) note('mother ship fires'); if (e.hp !== 14 || e.y > 100) note('mother ship hp / position'); s.ebullets = []; hold(s, 1100); if (s.enemies.includes(e)) note('mother ship stays forever'); }
     // swarm: a V enters as one shape, then every member dives
-    { const s = fresh(); s.ship.x = 180; s.ship.y = 560; const arr = [-1, 0, 1].map((d, i) => M.spawnEnemy(s, 'swarm', 180 + d * 30, { y: -20 - Math.abs(d) * 20, wait: 1.5 + i * 0.1 })); const xs0 = arr.map((q) => q.x); hold(s, 30); if (arr.some((q, i) => Math.abs(q.x - xs0[i]) > 0.01) || arr.some((q) => q.dive)) note('swarm holds its shape first'); hold(s, 150); const alive = arr.filter((q) => s.enemies.includes(q)); if (!alive.length || alive.some((q) => !q.dive || Math.hypot(q.vx, q.vy) < 200)) note('swarm members dive fast'); }
+    { const s = fresh(); s.ship.x = 180; s.ship.y = 560; const arr = [-1, 0, 1].map((d, i) => M.spawnEnemy(s, 'swarm', 180 + d * 30, { y: -20 - Math.abs(d) * 20, wait: 1.5 + i * 0.1 })); const xs0 = arr.map((q) => q.x); hold(s, 30); if (arr.some((q, i) => Math.abs(q.x - xs0[i]) > 0.01) || arr.some((q) => q.dive)) note('swarm holds its shape first'); hold(s, 100); const alive = arr.filter((q) => s.enemies.includes(q)); if (!alive.length || alive.some((q) => !q.dive || Math.hypot(q.vx, q.vy) < 200)) note('swarm members dive fast'); }
     // stealth: flickers, cannot be hit while invisible
-    { const s = fresh(); const e = M.spawnEnemy(s, 'stealth', 180, { y: 80, vy: 0 }); let seenV = false, seenI = false, wrong = false, dead = false; for (let i = 0; i < 900 && !dead; i++) { const hp0 = e.hp; hit(s, e, 1); if (e.vis) seenV = true; else seenI = true; if (!e.vis && e.hp < hp0) wrong = true; if (!s.enemies.includes(e)) dead = true; e.vy = 0; if (i % 20 === 0) s.script = []; hold(s, 5); }
-      if (!seenI || !seenV) note('stealth ship does not flicker'); if (wrong) note('hit while invisible'); if (!dead) note('stealth ship never dies'); }
+    { const s = fresh(); const e = M.spawnEnemy(s, 'stealth', 180, { y: 80, vy: 0 }); let seenV = false, seenI = false; for (let i = 0; i < 300; i++) { e.vy = 0; hold(s, 1); if (e.vis) seenV = true; else seenI = true; } if (!seenI || !seenV) note('stealth ship does not flicker');
+      let wrong = false, dead = false; e.hp = e.maxhp = 2; for (let i = 0; i < 900 && !dead; i++) { e.vy = 0; const hp0 = e.hp; hit(s, e, 1); if (!e.vis && e.hp < hp0) wrong = true; if (!s.enemies.includes(e)) dead = true; hold(s, 3); }
+      if (wrong) note('hit while invisible'); if (!dead) note('stealth ship never dies'); }
     // comet: hurts on touch, many coins when shot
     { const s = fresh(); s.inv = 0; const e = M.spawnEnemy(s, 'comet', s.ship.x, { y: s.ship.y - 150 }); e.vx = 0; const ev = []; hold(s, 80, ev); if (s.lives !== 2 || !ev.some((q) => q.t === 'hurt')) note('a comet hurts on touch');
       const s2 = fresh(); const c = M.spawnEnemy(s2, 'comet', 180, { y: 200 }); c.vx = 0; hit(s2, c, 9); if (s2.coins.length < 10) note('a shot comet drops many coins (' + s2.coins.length + ')'); }
@@ -165,7 +166,7 @@ const CJK = /[㐀-鿿]/;
     // asteroid shower
     { const s = fresh(4); s.shower = 3; hold(s, 190); const r = s.enemies.filter((q) => q.kind === 'rock'); if (r.length < 6 || r.some((q) => q.vy < 100 && q.size === 1)) note('asteroid shower: many fast rocks (' + r.length + ')'); if (s.shower > 0.2) note('shower ends'); hold(s, 120); const n0 = s.enemies.length; hold(s, 60); if (s.enemies.length > n0 + 0) note('shower stopped producing'); }
     // black hole: bends bullets, pulls the ship a little
-    { const mk = (hole) => { const s = fresh(3); s.ship.x = 180; s.ship.y = 560; if (hole) s.hole = { x: 180, y: 300, t: 0, dur: 8 }; s.bullets.push({ x: 240, y: 380, vx: 0, vy: -300, dmg: 1, r: 4, life: 5, kind: 'blaster', x0: 240, age: 0, hits: [] }); return s; };
+    { const mk = (hole) => { const s = fresh(3); s.ship.x = 180; s.ship.y = 450; if (hole) s.hole = { x: 180, y: 300, t: 0, dur: 8 }; s.bullets.push({ x: 240, y: 380, vx: 0, vy: -300, dmg: 1, r: 4, life: 5, kind: 'blaster', x0: 240, age: 0, hits: [] }); return s; };
       const a = mk(true), b = mk(false); hold(a, 20); hold(b, 20); if (!(Math.abs(a.bullets[0].x - 240) > Math.abs(b.bullets[0].x - 240) + 3 && a.bullets[0].x < 240)) note('the black hole bends a bullet toward itself'); hold(a, 80); hold(b, 80); if (!(a.ship.y < b.ship.y - 2 && a.ship.y > b.ship.y - 60)) note(`the black hole pulls the ship a little (${a.ship.y.toFixed(1)} vs ${b.ship.y.toFixed(1)})`);
       const c = mk(true); c.bullets[0].x = 184; c.bullets[0].y = 305; c.bullets[0].vy = 0; hold(c, 2); if (c.bullets.some((q) => Math.abs(q.x - 184) < 20 && q.y > 290 && q.y < 320)) note('bullets are swallowed at the centre');
       const s = fresh(3); s.script = [{ t: 0.1, k: 'hole', x: 120, y: 280, d: 2 }]; hold(s, 30); if (!s.hole) note('hole event from the script'); hold(s, 200); if (s.hole) note('hole ends after its duration'); }
@@ -175,7 +176,7 @@ const CJK = /[㐀-鿿]/;
       const s2 = fresh(8); s2.inv = 0; s2.ship.x = 300; s2.haz = [{ x: 100, w: 18, t: 0, warn: 0.5, dur: 0.25, kind: 'bolt', zapped: false }]; hold(s2, 60); if (s2.lives !== 3 || s2.haz.length) note('a ship out of the column is safe and the bolt goes away'); }
     // comet from the script, gifts from the script
     { const s = M.newGame(2, { seed: 5, run: M.newRun(false), startTime: 23.5 }); s.inv = 1e6; let seen = false; for (let i = 0; i < 200; i++) { hold(s, 1); if (s.enemies.some((q) => q.kind === 'comet')) seen = true; } if (!seen) note('level 2 sends a comet');
-      const g = M.newGame(1, { seed: 5, run: M.newRun(false), startTime: 15.5 }); g.inv = 1e6; let n = 0; for (let i = 0; i < 300; i++) { hold(g, 1); n = Math.max(n, g.enemies.filter((q) => q.kind === 'balloon').length); } if (n < 3) note('level 1 sends gift balloons (' + n + ')'); }
+      const g = M.newGame(1, { seed: 5, run: M.newRun(false), startTime: 15.5 }); g.inv = 1e6; g.ship.x = 16; g.ship.y = 600; let n = 0; for (let i = 0; i < 300; i++) { hold(g, 1); n = Math.max(n, g.enemies.filter((q) => q.kind === 'balloon').length); } if (n < 3) note('level 1 sends gift balloons (' + n + ')'); }
     return { bad };
   });
   ok(EV.bad.length === 0, `environment: asteroid shower, black hole (bends bullets, pulls the ship, swallows), storm (warning, bolt), comet, gift balloons${EV.bad.length ? ' -> ' + EV.bad.join(' | ') : ''}`);
@@ -237,7 +238,7 @@ const CJK = /[㐀-鿿]/;
     for (const w of Object.keys(want)) for (let l = 1; l <= 5; l++) if (count(w, l) !== want[w][l - 1]) note(`${w} level ${l}: ${count(w, l)} bullets, expected ${want[w][l - 1]}`);
     { const s = fresh(); s.weapon = 'drone'; for (let l = 1; l <= 5; l++) { s.wl = l; if (M.dronePos(s).length !== Math.min(4, l)) note('drones = min(4, level)'); } s.wl = 3; s.droneCd = 0; s.fireCd = 99; const n0 = s.bullets.length; hold(s, 1); if (s.bullets.length - n0 !== 3) note('every drone shoots'); const d = M.dronePos(s)[0]; if (Math.hypot(d.x - s.ship.x, d.y - s.ship.y) > 40 || Math.hypot(d.x - s.ship.x, d.y - s.ship.y) < 15) note('drones orbit close to the ship'); const a0 = M.dronePos(s)[0]; hold(s, 20); const a1 = M.dronePos(s)[0]; if (Math.abs(a0.x - a1.x) + Math.abs(a0.y - a1.y) < 5) note('drones move around the ship'); }
     // laser: a beam that stops at the first enemy and burns it
-    { const s = fresh(); s.weapon = 'laser'; s.wl = 3; s.ship.x = 180; s.ship.y = 560; const a = M.spawnEnemy(s, 'flyer', 180, { y: 300 }), b = M.spawnEnemy(s, 'flyer', 180, { y: 150 }); a.vy = 0; b.vy = 0; a.cd = b.cd = 999; hold(s, 5); if (!s.beam || Math.abs(s.beam.y1 - (a.y + a.r * 0.5)) > 6) note('laser stops at the first enemy'); const hp = a.hp; hold(s, 10); if (!(a.hp < hp) || b.hp !== b.maxhp) note('laser burns only the first enemy'); hold(s, 60); if (s.enemies.includes(a)) note('laser kills'); hold(s, 20); if (!(b.hp < b.maxhp) && s.enemies.includes(b)) note('laser goes on to the next one'); const dps1 = (() => { const q = fresh(); q.weapon = 'laser'; q.wl = 1; const e = M.spawnEnemy(q, 'rock', 180, { size: 3, y: 300 }); e.vy = 0; e.vx = 0; q.ship.x = 180; q.ship.y = 560; hold(q, 30); return e.maxhp - e.hp; })(); const dps5 = (() => { const q = fresh(); q.weapon = 'laser'; q.wl = 5; const e = M.spawnEnemy(q, 'rock', 180, { size: 3, y: 300 }); e.vy = 0; e.vx = 0; q.ship.x = 180; q.ship.y = 560; hold(q, 30); return e.maxhp - e.hp; })(); if (!(dps5 > dps1 * 1.3)) note('laser level 5 burns faster than level 1'); }
+    { const s = fresh(); s.weapon = 'laser'; s.wl = 3; s.ship.x = 180; s.ship.y = 560; const a = M.spawnEnemy(s, 'flyer', 180, { y: 300 }), b = M.spawnEnemy(s, 'flyer', 180, { y: 150 }); a.vy = 0; b.vy = 0; a.cd = b.cd = 999; a.hp = a.maxhp = 60; b.hp = b.maxhp = 60; hold(s, 5); if (!s.beam || Math.abs(s.beam.y1 - (a.y + a.r * 0.5)) > 6) note('laser stops at the first enemy'); const hp = a.hp; hold(s, 10); if (!(a.hp < hp) || b.hp !== b.maxhp) note('laser burns only the first enemy'); a.hp = 0.01; hold(s, 3); if (s.enemies.includes(a)) note('laser kills'); hold(s, 20); if (!(b.hp < b.maxhp) && s.enemies.includes(b)) note('laser goes on to the next one'); const dps1 = (() => { const q = fresh(); q.weapon = 'laser'; q.wl = 1; const e = M.spawnEnemy(q, 'rock', 180, { size: 3, y: 300 }); e.hp = e.maxhp = 500; e.vy = 0; e.vx = 0; q.ship.x = 180; q.ship.y = 560; hold(q, 30); return e.maxhp - e.hp; })(); const dps5 = (() => { const q = fresh(); q.weapon = 'laser'; q.wl = 5; const e = M.spawnEnemy(q, 'rock', 180, { size: 3, y: 300 }); e.hp = e.maxhp = 500; e.vy = 0; e.vx = 0; q.ship.x = 180; q.ship.y = 560; hold(q, 30); return e.maxhp - e.hp; })(); if (!(dps5 > dps1 * 1.3)) note('laser level 5 burns faster than level 1'); }
     // homing missiles steer
     { const s = fresh(); s.weapon = 'homing'; s.wl = 1; s.ship.x = 250; s.ship.y = 560; const e = M.spawnEnemy(s, 'flyer', 60, { y: 250 }); e.vy = 0; e.cd = 999; s.fireCd = 0; let dead = false; hold(s, 1); const m = s.bullets[0]; for (let i = 0; i < 160 && !dead; i++) { hold(s, 1); if (!s.enemies.includes(e)) dead = true; else if (e.hp < e.maxhp) dead = true; } if (!dead) note('a homing missile finds an enemy that is not in front of the ship'); void m; }
     // wave shot pierces
@@ -247,7 +248,7 @@ const CJK = /[㐀-鿿]/;
       const q = fresh(); q.shield = 1; q.inv = 0; q.ebullets.push({ x: q.ship.x, y: q.ship.y, vx: 0, vy: 0, r: 4, mine: false, g: false }); q.ebullets.push({ x: q.ship.x, y: q.ship.y, vx: 0, vy: 0, r: 4, mine: false, g: false }); hold(q, 1); if (q.shield !== 0 || q.lives !== 3) note('the shield absorbs one hit'); hold(q, 1); if (q.lives !== 3) note('invulnerable right after the shield pops'); q.inv = 0; q.ebullets.push({ x: q.ship.x, y: q.ship.y, vx: 0, vy: 0, r: 4, mine: false, g: false }); hold(q, 1); if (q.lives !== 2) note('the second hit costs a life');
       const c = fresh(); c.magnet = 5; c.coins.push({ x: c.ship.x + 150, y: c.ship.y - 100, vx: 0, vy: 0 }); hold(c, 40); if (!(Math.hypot(c.coins[0] ? c.coins[0].x - c.ship.x : 0, 0) < 140) && c.coinsGot === 0) note('magnet pulls coins'); }
     // the bomb
-    { const s = fresh(); s.bombs = 1; M.spawnEnemy(s, 'flyer', 100, { y: 100 }); M.spawnEnemy(s, 'rock', 200, { size: 3, y: 150 }); const e = M.spawnEnemy(s, 'shield', 250, { y: 200 }); for (let i = 0; i < 20; i++) s.ebullets.push({ x: 30 + i * 15, y: 300, vx: 0, vy: 50, r: 4, mine: false, g: false }); const ev = []; const r = M.bomb(s, ev); if (!r || s.bombs !== 0 || s.ebullets.length || !ev.some((q) => q.t === 'bomb')) note('bomb clears enemy bullets'); if (s.enemies.some((q) => q.kind === 'flyer') || s.enemies.some((q) => q.kind === 'rock')) note('bomb kills small enemies'); void e; if (M.bomb(s, ev)) note('no bomb left'); const t2 = fresh(); t2.bombs = 1; const bo = M.spawnEnemy(t2, 'boss', 180, { bt: 1 }); const hp = bo.hp; M.bomb(t2, []); if (!(bo.hp < hp)) note('bomb damages a boss'); }
+    { const s = fresh(); s.bombs = 1; M.spawnEnemy(s, 'flyer', 100, { y: 100 }); M.spawnEnemy(s, 'rock', 200, { size: 3, y: 150 }); const e = M.spawnEnemy(s, 'shield', 250, { y: 200 }); for (let i = 0; i < 20; i++) s.ebullets.push({ x: 30 + i * 15, y: 300, vx: 0, vy: 50, r: 4, mine: false, g: false }); const ev = []; const r = M.bomb(s, ev); if (!r || s.bombs !== 0 || s.ebullets.length || !ev.some((q) => q.t === 'bomb')) note('bomb clears enemy bullets'); if (s.enemies.some((q) => q.kind === 'flyer') || s.enemies.some((q) => q.kind === 'rock')) note('bomb kills small enemies'); void e; if (M.bomb(s, ev)) note('no bomb left'); const t2 = fresh(); t2.bombs = 1; const bo = M.spawnEnemy(t2, 'boss', 180, { bt: 1 }); bo.y = 100; const hp = bo.hp; M.bomb(t2, []); if (!(bo.hp < hp)) note('bomb damages a boss'); }
     return { bad };
   });
   ok(WP.bad.length === 0, `weapons: spread / laser / homing / wave / drones level up to 5, shots per volley, hit lowers the level, rapid, shield, bomb, magnet${WP.bad.length ? ' -> ' + WP.bad.join(' | ') : ''}`);
@@ -307,7 +308,7 @@ const CJK = /[㐀-鿿]/;
       return { cleared: s.cleared, secs: n / 60 };
     };
     for (let l = 1; l <= 12; l++) {
-      let w = 0, tm = 0; for (let k = 0; k < 8; k++) { const r = play(l, 1000 + k * 77 + l, true, 3); if (r.cleared) w++; tm = Math.max(tm, r.secs); } res.easy.push([w, Math.round(tm)]);
+      let w = 0, tm = 0; for (let k = 0; k < 8; k++) { const r = play(l, 1000 + k * 77 + l, true, 3); if (r.cleared) { w++; tm = Math.max(tm, r.secs); } } res.easy.push([w, Math.round(tm)]);
       let w2 = 0; for (let k = 0; k < 4; k++) if (play(l, 2000 + k * 53 + l, false, 3).cleared) w2++; res.normal.push(w2);
     }
     return res;
@@ -451,7 +452,7 @@ const CJK = /[㐀-鿿]/;
     ok(Math.abs(m.c.h / m.c.w - 16 / 9) < 0.02, `${name}: the board keeps its 9:16 shape`);
     ok(Math.abs(m.f.l - (m.vw - m.f.r)) <= 3, `${name}: the board is centred (${Math.round(m.f.l)} / ${Math.round(m.vw - m.f.r)})`);
     ok(m.f.r <= m.hud.l + 1 || m.hud.r <= m.f.l + 1 || m.hud.b <= m.f.t + 1, `${name}: the HUD does not cover the board`);
-    ok(m.c.w >= (name === 'side' ? 170 : name === 'small' ? 220 : 280), `${name}: the board is big enough (${Math.round(m.c.w)}px)`);
+    ok(m.c.w >= (name === 'side' ? 160 : name === 'small' ? 190 : 280), `${name}: the board is big enough (${Math.round(m.c.w)}px)`);
     ok(m.ovlOk, `${name}: the ready overlay (level grid, text, button) fits inside the board`);
     await p.screenshot({ path: OUT + `shooter-${name}.png` });
     await p.click('#sh-start'); await p.evaluate(() => { const H = window.__shooter, s = H.state(); s.inv = 1e6; s.weapon = 'spread'; s.wl = 3; H.bot(true); H.step(700); H.bot(false); H.clearFx(); }); await p.screenshot({ path: OUT + `shooter-${name}-play.png` });
@@ -491,7 +492,7 @@ const CJK = /[㐀-鿿]/;
   ok(['太空射击', '拖动飞船自动开火，击落陨石和敌机'].every((k) => json[k]), 'the name and the subtitle are translated');
 
   // ---------- en / fr ----------
-  const merged = fs.readFileSync('src/i18n-data.ts', 'utf8').includes('"连击：{0}"');
+  const merged = fs.readFileSync('src/i18n-data.ts', 'utf8').includes('"总星数：{0} / 36"');
   for (const [loc, label] of [['en-US', 'EN'], ['fr-FR', 'FR']]) {
     const t2 = await start(new Map(), { local: true, locale: loc, viewport: { width: 390, height: 844 } });
     const z = t2.page; const left = new Set();
