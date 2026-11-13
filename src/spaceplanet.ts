@@ -111,6 +111,7 @@ export async function renderPlanet(X: Ctx, id: string): Promise<void> {
     };
     const mloop = new Loop(mc, (dt) => { day += base * msp * dt; drawMoons(); });
     loops.push(mloop);
+    (window as unknown as { __spaceMoons?: () => unknown }).__spaceMoons = () => { const r = mc.getBoundingClientRect(); return pos.map((q) => ({ id: q.m.id, x: r.left + (q.x / mc.offsetWidth) * r.width, y: r.top + (q.y / mc.offsetHeight) * r.height })); };
     const cards = h("div", { class: "sp-moon-cards", id: "sp-moon-cards" });
     const select = (id: string, scroll = true) => { msel = id; cards.querySelectorAll<HTMLElement>(".sp-moon").forEach((e) => e.classList.toggle("sel", e.dataset.id === id)); drawMoons(); if (scroll) cards.querySelector<HTMLElement>(`.sp-moon[data-id=${id}]`)?.scrollIntoView({ block: "nearest", behavior: reducedMotion() ? "auto" : "smooth" }); };
     mc.addEventListener("pointerup", (e) => { const r = mc.getBoundingClientRect(); const hit = nearest(pos, ((e.clientX - r.left) / r.width) * mc.offsetWidth, ((e.clientY - r.top) / r.height) * mc.offsetHeight, 8); if (hit) select(hit.m.id); });

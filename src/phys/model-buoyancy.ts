@@ -13,7 +13,7 @@ export function solve(rhoB: number, rhoL: number, V: number, mode: number, frac:
   const F = rhoL * g * Vm * fr;
   return { G, F, Vdisp: V * fr, frac: fr, state, Tscale: mode === 0 ? G - F : 0, Gdisp: F, bottomN: mode === 1 && state === "sink" ? G - F : 0 };
 }
-export const SOLVE_LIQ: [number, string, number][] = [[0.8, "酒精", 800], [1, "水", 1000], [1.2, "盐水", 1200], [1.4, "浓盐水", 1400]];
+export const SOLVE_LIQ: [number, string, number][] = [[0.8, "酒精", 800], [1, "清水", 1000], [1.2, "盐水", 1200], [1.4, "浓盐水", 1400]];
 export function quiz(rng: () => number): Q[] {
   const V1 = pick(rng, [100, 200, 500, 1000]);
   const G2 = pick(rng, [2, 3, 4, 5]), T2 = pick(rng, [0.5, 1, 1.5, 2]);

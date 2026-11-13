@@ -285,6 +285,8 @@ const CATIONS = ["H", "NH4", "K", "Na", "Ba", "Ca", "Mg", "Al", "Zn", "Fe2", "Fe
 const CATZH = ["氢", "铵", "钾", "钠", "钡", "钙", "镁", "铝", "锌", "亚铁", "铁", "铜", "银"];
 const CATCH = [1, 1, 1, 1, 2, 2, 2, 3, 2, 2, 3, 2, 1];
 const ANIONS = ["OH", "NO3", "Cl", "SO4", "CO3"];
+// parts of the names of ionic compounds (氯化钠, 硫酸铜, 氢氧化钙, 盐酸 ...)
+const NAMES = { an: { Cl: "氯", O: "氧", S: "硫", OH: "氢氧", NO3: "硝酸", SO4: "硫酸", CO3: "碳酸", PO4: "磷酸" }, hua: "化", qingyanghua: "氢氧化", yansuan: "盐酸", qingliusuan: "氢硫酸", shui: "水", cat: { H: "氢", Na: "钠", K: "钾", Ag: "银", Mg: "镁", Ca: "钙", Ba: "钡", Zn: "锌", Al: "铝", Fe2: "亚铁", Fe3: "铁", Cu: "铜", NH4: "铵" } };
 const SOL = {
   OH:  ["-", "v", "s", "s", "s", "m", "i", "i", "i", "i", "i", "i", "-"],
   NO3: ["v", "s", "s", "s", "s", "s", "s", "s", "s", "s", "s", "s", "s"],
@@ -339,5 +341,5 @@ for (const s of SUBS) { const el = Object.keys(parse(s.f)); for (const e of el) 
 if (bad) { console.log(bad + " problem(s)"); process.exit(1); }
 
 const reactions = RX.map(([eq, cond, type, ch, ph], i) => ({ id: "r" + String(i + 1).padStart(3, "0"), eq, cond: cond.split("+"), type, ch, ph }));
-fs.writeFileSync(out, JSON.stringify({ chapters: CHAPTERS, reactions, subs: SUBS, mix: MIX, elements: EL, groups: GROUPS, ions: { cat: CATIONS, catZh: CATZH, catCh: CATCH, an: ANIONS, sol: SOL }, say: SAY, phKeys: PHKEYS, activity: ACTIVITY, indicators: INDICATORS, ph: PH, solub: SOLUB, gases: GASES }));
+fs.writeFileSync(out, JSON.stringify({ chapters: CHAPTERS, reactions, subs: SUBS, mix: MIX, elements: EL, groups: GROUPS, ions: { cat: CATIONS, catZh: CATZH, catCh: CATCH, an: ANIONS, sol: SOL }, say: SAY, names: NAMES, phKeys: PHKEYS, activity: ACTIVITY, indicators: INDICATORS, ph: PH, solub: SOLUB, gases: GASES }));
 console.log("ok: " + reactions.length + " reactions, " + SUBS.length + " substances, " + (fs.statSync(out).size / 1024).toFixed(0) + " KB");

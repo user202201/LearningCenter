@@ -135,7 +135,7 @@ export function mountOrrery(S: Space, open: (id: string) => void): OrreryApi {
       if (x > -50 && x < w + 50 && y > -50 && y < hh + 50) {
         const g2 = c.createRadialGradient(x, y, rr * 0.8, x, y, rr * 2.2); g2.addColorStop(0, b.color + "30"); g2.addColorStop(1, b.color + "00"); c.fillStyle = g2; c.beginPath(); c.arc(x, y, rr * 2.2, 0, 7); c.fill();
         c.drawImage(sp, x - dw / 2, y - dw / 2, dw, dw);
-        if (R > 130 && (!dwarf || R > 170 || st.light === b.id)) { c.fillStyle = "rgba(255,255,255,.88)"; c.font = `600 ${st.dwarfs ? 10 : 11}px system-ui, sans-serif`; c.textAlign = "center"; c.fillText(nameOf(b), x, y - rr - (ringed ? rr * 0.5 : 0) - 4); }
+        if (R > 130 && (!dwarf || R > 170 || st.light === b.id) && (schem || p[2] > 30 || st.light === b.id)) { c.fillStyle = "rgba(255,255,255,.88)"; c.font = `600 ${st.dwarfs ? 10 : 11}px system-ui, sans-serif`; c.textAlign = "center"; c.fillText(nameOf(b), x, y - rr - (ringed ? rr * 0.5 : 0) - 4); }
       }
       bodies.push({ b, x, y, r: Math.max(rr * (ringed ? 1.8 : 1), 13) });
     }

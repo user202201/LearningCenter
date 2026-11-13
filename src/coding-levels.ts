@@ -16,7 +16,10 @@ export interface LevelSpec {
   id: string; world: number; no: number;
   /** the short name of the level (UI text) */
   title: string;
-  kind?: "grid" | "turtle";
+  /** "grid" (default) / "turtle"; other files register their own kinds ("stage", "data", ... see `KINDS`) */
+  kind?: string;
+  /** extra data of a kind that another file defines (worlds 7-10: coding-levels2.ts) */
+  ext?: unknown;
   map?: string[]; start?: { x: number; y: number; dir: number };
   /** make the map from the solution */
   route?: boolean; dir?: number; open?: boolean;
@@ -322,17 +325,27 @@ const W6: LevelSpec[] = [
   S("w6-14", 6, 14, "旋转的三角形", { kind: "turtle", boss: true, colors: true, palette: [...T, "repeat", "color"], solution: "repeat 6 { color red repeat 3 { fd 45 tr 120 } tr 30 color blue repeat 3 { fd 45 tr 120 } tr 30 }", max: 12, note: "三角形边长 45，红色和蓝色轮流出现。" }),
 ];
 
-export const WORLDS = [
+export const WORLDS: { id: number; name: string }[] = [
   { id: 1, name: "顺序" }, { id: 2, name: "循环" }, { id: 3, name: "条件" }, { id: 4, name: "函数" }, { id: 5, name: "变量和计数" }, { id: 6, name: "画图" },
-] as const;
+];
+/** worlds that other files add (coding-levels2.ts: worlds 7-10, ...): call `registerWorlds` once, kept sorted by number */
+export function registerWorlds(ws: { id: number; name: string }[]): void {
+  for (const w of ws) if (!WORLDS.some((x) => x.id === w.id)) WORLDS.push(w);
+  WORLDS.sort((a, b) => a.id - b.id);
+}
+/** kinds of level that another file defines: how to make the world of a level and how to judge a program on it */
+export interface KindHandler { instance(l: Level, seed?: number): Instance; evaluate(l: Level, prog: Program, budget?: number): Evaluation }
+export const KINDS: Record<string, KindHandler> = {};
 
-function build(sp: LevelSpec): Level {
+export function build(sp: LevelSpec): Level {
   const sol = parse(sp.solution);
   const par = countBlocks(sol);
   // `max` is a size limit that keeps programs sane; the stars (not the limit) reward the short solution
   return { ...sp, max: Math.max(sp.max, Math.floor(par * 1.5) + 1), sol, givenProg: sp.given ? parse(sp.given) : undefined, par };
 }
 export const LEVELS: Level[] = [...W1, ...W2, ...W3, ...W4, ...W5, ...W6].map(build);
+/** levels that other files add (worlds 7+): they are put after the levels of the worlds before */
+export function registerLevels(ls: Level[]): void { for (const l of ls) if (!LEVELS.some((x) => x.id === l.id)) LEVELS.push(l); }
 export const levelById = (id: string): Level | undefined => LEVELS.find((l) => l.id === id);
 export const levelsOf = (world: number): Level[] => LEVELS.filter((l) => l.world === world);
 export const isFamily = (l: Level) => !!l.family;
@@ -346,6 +359,7 @@ const centered = (segs: Seg[]): { x: number; y: number } => {
 /** the world of a level; `seed` picks another map of a family (the hidden variants) */
 export function instanceOf(l: Level, seed?: number): Instance {
   if (l.fixed) return l.fixed;
+  if (l.kind && KINDS[l.kind]) return KINDS[l.kind].instance(l, seed);
   const k = `${l.id}#${seed ?? ""}`;
   const hit = memo.get(k);
   if (hit) return { ...hit, state: cloneState(hit.state) };
@@ -394,6 +408,7 @@ function evalOn(l: Level, prog: Program, inst: Instance, budget?: number): Evalu
 }
 /** runs a program on a level: the shown map and, for a family, the hidden maps too */
 export function evaluate(l: Level, prog: Program, budget?: number): Evaluation {
+  if (l.kind && KINDS[l.kind]) return KINDS[l.kind].evaluate(l, prog, budget);
   const first = evalOn(l, prog, instanceOf(l), budget);
   if (!first.won || !l.family) return first;
   for (const s of VARIANT_SEEDS) {

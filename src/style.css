@@ -2170,7 +2170,7 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .sp-chips { margin: 8px 0; }
 .sp-stage { position: relative; margin: 8px auto; width: min(100%, 78vh); max-width: 100%; }
 .sp-canvas { display: block; width: 100%; aspect-ratio: 1 / 1; border-radius: 22px; background: #0b0d26; box-shadow: 0 4px 0 #3b3a7a; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-.sp-zoom { position: absolute; right: 8px; bottom: 8px; display: flex; align-items: center; gap: 6px; background: rgba(10,12,40,.7); border-radius: 22px; padding: 4px 6px; color: #fff; }
+.sp-zoom { position: absolute; right: 8px; top: 8px; display: flex; align-items: center; gap: 6px; background: rgba(10,12,40,.7); border-radius: 22px; padding: 4px 6px; color: #fff; }
 .sp-zoom .mopt { color: #2d2230; min-width: 44px; min-height: 44px; padding: 0; font-size: 22px; line-height: 1; }
 .sp-zoom .muted { color: #dbe4ff; min-width: 40px; text-align: center; }
 .sp-time { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }

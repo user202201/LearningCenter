@@ -1,7 +1,7 @@
 /** 压强 (pure): p = F/S, liquid pressure p = rho g h, atmospheric pressure and the mercury column. */
 import { makeQ, numQ, pick, type Q } from "./qtools";
 export const g = 9.8;
-export const LIQUIDS: [number, string, number][] = [[0, "水", 1000], [1, "盐水", 1200], [2, "酒精", 800], [3, "水银", 13600]];
+export const LIQUIDS: [number, string, number][] = [[0, "清水", 1000], [1, "盐水", 1200], [2, "酒精", 800], [3, "水银", 13600]];
 export const rhoOf = (i: number) => LIQUIDS[i][2];
 export const P0 = 101325;
 export const liquidP = (rho: number, h: number) => rho * g * h;

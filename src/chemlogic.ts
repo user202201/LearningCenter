@@ -13,6 +13,7 @@ export interface Elem { s: string; n: string; ar: number; v: number[] }
 export interface ChemData {
   chapters: Record<string, string>; reactions: Rx[]; subs: Sub[]; mix: { n: string; a: string }[]; elements: Elem[]; groups: { f: string; n: string; c: number }[];
   ions: { cat: string[]; catZh: string[]; catCh: number[]; an: string[]; sol: Record<string, string[]> };
+  names: { an: Record<string, string>; hua: string; qingyanghua: string; yansuan: string; qingliusuan: string; shui: string; cat: Record<string, string> };
   say: { and: string; under: string; byCat: string; byCond: string; mid: string; end: string }; phKeys: string[];
   activity: string[]; indicators: { n: string; acid: string; neutral: string; base: string }[]; ph: { n: string; v: number }[];
   solub: { T: number[]; d: { f: string; n: string; v: number[] }[] };
@@ -157,8 +158,8 @@ export const condParts = (c: string[]): Part[] => c.flatMap((x, i) => (i ? [{ u:
 
 // ---------- valence: ions, formula by the cross method ----------
 interface Ion { k: string; f: string; ch: number; n: string }
-const CAT: Ion[] = [["H", "H", 1, "氢"], ["Na", "Na", 1, "钠"], ["K", "K", 1, "钾"], ["Ag", "Ag", 1, "银"], ["Mg", "Mg", 2, "镁"], ["Ca", "Ca", 2, "钙"], ["Ba", "Ba", 2, "钡"], ["Zn", "Zn", 2, "锌"], ["Al", "Al", 3, "铝"], ["Fe2", "Fe", 2, "亚铁"], ["Fe3", "Fe", 3, "铁"], ["Cu", "Cu", 2, "铜"], ["NH4", "NH4", 1, "铵"]].map(([k, f, ch, n]) => ({ k, f, ch, n } as Ion));
-const AN: Ion[] = [["Cl", "Cl", -1, "氯"], ["O", "O", -2, "氧"], ["S", "S", -2, "硫"], ["OH", "OH", -1, "氢氧"], ["NO3", "NO3", -1, "硝酸"], ["SO4", "SO4", -2, "硫酸"], ["CO3", "CO3", -2, "碳酸"], ["PO4", "PO4", -3, "磷酸"]].map(([k, f, ch, n]) => ({ k, f, ch, n } as Ion));
+const CAT: Ion[] = [["H", "H", 1, ""], ["Na", "Na", 1, ""], ["K", "K", 1, ""], ["Ag", "Ag", 1, ""], ["Mg", "Mg", 2, ""], ["Ca", "Ca", 2, ""], ["Ba", "Ba", 2, ""], ["Zn", "Zn", 2, ""], ["Al", "Al", 3, ""], ["Fe2", "Fe", 2, ""], ["Fe3", "Fe", 3, ""], ["Cu", "Cu", 2, ""], ["NH4", "NH4", 1, ""]].map(([k, f, ch, n]) => ({ k, f, ch, n } as Ion));
+const AN: Ion[] = [["Cl", "Cl", -1, ""], ["O", "O", -2, ""], ["S", "S", -2, ""], ["OH", "OH", -1, ""], ["NO3", "NO3", -1, ""], ["SO4", "SO4", -2, ""], ["CO3", "CO3", -2, ""], ["PO4", "PO4", -3, ""]].map(([k, f, ch, n]) => ({ k, f, ch, n } as Ion));
 const catByK = (k: string) => CAT.find((c) => c.k === k)!;
 const part = (f: string, n: number): string => (n === 1 ? f : (Object.keys(parseFormula(f)).length > 1 ? `(${f})` : f) + n);
 const build = (cat: Ion, an: Ion, a: number, b: number, parens = true): string => {
@@ -171,11 +172,13 @@ export function crossFormula(cat: Ion, an: Ion): string {
   return build(cat, an, -an.ch / g, cat.ch / g);
 }
 export function ionName(cat: Ion, an: Ion): string {
-  if (cat.k === "H") return an.k === "Cl" ? "盐酸" : an.k === "O" || an.k === "OH" ? "水" : an.k === "S" ? "氢硫酸" : an.n;
-  if (an.k === "Cl" || an.k === "O" || an.k === "S") return an.n + "化" + cat.n;
-  if (an.k === "OH") return "氢氧化" + cat.n;
-  return an.n + cat.n;
+  const N = D.names, c = N.cat[cat.k], a = N.an[an.k];
+  if (cat.k === "H") return an.k === "Cl" ? N.yansuan : an.k === "O" || an.k === "OH" ? N.shui : an.k === "S" ? N.qingliusuan : a;
+  if (an.k === "Cl" || an.k === "O" || an.k === "S") return a + N.hua + c;
+  if (an.k === "OH") return N.qingyanghua + c;
+  return a + c;
 }
+export const catName = (k: string): string => D.names.cat[k];
 export const IONS = { CAT, AN, catByK, crossFormula, ionName };
 const catPool = (lv: number) => CAT.filter((c) => c.k !== "H" && (lv >= 3 || !["NH4", "Ag", "Fe3", "Fe2"].includes(c.k)) && (lv >= 2 || !["Ba", "Zn", "Cu"].includes(c.k)));
 const anPool = (lv: number) => AN.filter((a) => lv >= 3 || (lv >= 2 ? a.k !== "PO4" : ["Cl", "O", "OH", "SO4"].includes(a.k)));
@@ -502,7 +505,7 @@ function genDec(r: Rnd, lv: number): Q {
 }
 
 // ---------- metal activity ----------
-export const ACT_METALS: Ion[] = [["Mg", "Mg", 2, "镁"], ["Al", "Al", 3, "铝"], ["Zn", "Zn", 2, "锌"], ["Fe2", "Fe", 2, "亚铁"], ["Cu", "Cu", 2, "铜"], ["Ag", "Ag", 1, "银"]].map(([k, f, ch, n]) => ({ k, f, ch, n } as Ion));
+export const ACT_METALS: Ion[] = [["Mg", "Mg", 2, ""], ["Al", "Al", 3, ""], ["Zn", "Zn", 2, ""], ["Fe2", "Fe", 2, ""], ["Cu", "Cu", 2, ""], ["Ag", "Ag", 1, ""]].map(([k, f, ch, n]) => ({ k, f, ch, n } as Ion));
 const actIdx = (sym: string) => D.activity.indexOf(sym);
 export const reactsWithAcid = (sym: string): boolean => actIdx(sym) < actIdx("H");
 export const displaces = (m: string, saltMetal: string): boolean => actIdx(m) < actIdx(saltMetal);
@@ -547,7 +550,7 @@ function genAct(r: Rnd, lv: number, kind: string): Q {
 }
 
 // ---------- classification ----------
-export const BUCKETS: Record<string, string> = { elem: "单质", oxide: "氧化物", acid: "酸", base: "碱", salt: "盐", mix: "混合物", org: "有机物" };
+export const BUCKETS: Record<string, string> = { elem: "单质", oxide: "氧化物", acid: "酸类", base: "碱类", salt: "盐类", mix: "混合物", org: "有机物" };
 export function classPool(): { id: string; f?: string; n: string; cat: string }[] {
   return [...D.subs.filter((s) => s.c !== "other").map((s) => ({ id: s.f, f: s.f, n: s.n, cat: s.c })), ...D.mix.map((m) => ({ id: "mix:" + m.n, n: m.n, cat: "mix" }))];
 }

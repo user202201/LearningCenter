@@ -9,7 +9,7 @@
  */
 export interface Item { prompt: string; choices: string[]; answers: number[] }
 export interface Config { rounds: number; stepMs: number; goMs: number; introMs: number; prepMs: number; limitMs: number; resultMs: number; stealMs: number }
-export const DEFAULTS: Config = { rounds: 10, stepMs: 600, goMs: 500, introMs: 1200, prepMs: 900, limitMs: 12000, resultMs: 1400, stealMs: 100 };
+export const DEFAULTS: Config = { rounds: 10, stepMs: 700, goMs: 600, introMs: 1700, prepMs: 900, limitMs: 12000, resultMs: 1400, stealMs: 100 };
 export type Phase = "intro" | "countdown" | "prep" | "question" | "result" | "final";
 export type Side = 0 | 1;
 export type Outcome = "win" | "lose" | "tie";
@@ -163,6 +163,23 @@ export function pressAgain(s: State, side: Side): boolean {
 
 /** how it ended for each side (null until the final) */
 export const outcomeOf = (s: State, side: Side): Outcome | null => (s.outcome ? s.outcome[side] : null);
+/** how many rounds in a row `side` has won, counting back from the newest finished round (the round that is on is not counted until it is over) */
+export function streakOf(s: State, side: Side): number {
+  let n = 0;
+  for (let i = s.results.length - 1; i >= 0; i--) { if (s.results[i] === side) n++; else break; }
+  return n;
+}
+/** the tug of war: -1 .. 1, positive = side 0 leads (the share of all rounds by which one side is ahead) */
+export const tugPos = (s: State): number => Math.max(-1, Math.min(1, (s.scores[0] - s.scores[1]) / Math.max(1, s.total)));
+/** who leads: 0, 1 or -1 (level) */
+export const leaderOf = (scores: readonly [number, number]): -1 | 0 | 1 => (scores[0] === scores[1] ? -1 : scores[0] > scores[1] ? 0 : 1);
+/** the lead went from one side to the other (a draw in between does not count) */
+export const leadChanged = (prev: readonly [number, number], cur: readonly [number, number]): boolean => { const a = leaderOf(prev), b = leaderOf(cur); return a >= 0 && b >= 0 && a !== b; };
+/** the reaction time of the winner of the round that is shown, in ms (null when nobody won) */
+export const reactionMs = (s: State): number | null => ((s.phase === "result" || s.phase === "final") && s.winner >= 0 ? Math.max(0, Math.round(s.winAt - s.questionStart)) : null);
+/** a reaction time as text: seconds with one decimal ("0.8") */
+export const secText = (ms: number): string => (Math.round(ms / 100) / 10).toFixed(1);
+
 /** a copy of what a screen / test may look at (no items) */
 export function snapshot(s: State) {
   return { phase: s.phase, round: s.round, total: s.total, count: s.count, scores: [...s.scores] as [number, number], locked: [...s.locked] as [boolean, boolean], wrongPick: [...s.wrongPick] as [number, number], winner: s.winner, results: [...s.results], outcome: s.outcome ? ([...s.outcome] as [Outcome, Outcome]) : null, again: [...s.again] as [boolean, boolean], phaseStart: s.phaseStart, phaseEnd: s.phaseEnd, questionStart: s.questionStart };

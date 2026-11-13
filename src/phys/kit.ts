@@ -239,6 +239,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
     done: () => [...doneSet],
     redraw: () => redrawNow(),
     soundOn: () => soundOn,
+    quiz: () => qs,
   };
   return () => { stopPlay(); ro.disconnect(); if (soundOn) def.sound?.stop(); delete window.__phys; };
 }

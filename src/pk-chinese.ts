@@ -6,6 +6,11 @@
  */
 import { rng, shuffled, type Item } from "./pklogic";
 import { SYLLABLES } from "./pk-syllables";
+import { h } from "./ui";
+import { mascot } from "./art";
+import * as api from "./api";
+import * as M from "./model";
+import type { PkAdapter } from "./pkadapter";
 
 export const ROUNDS = 10;
 export const MIN_CHARS = 4;
@@ -102,3 +107,41 @@ export function makeGame(lists: [readonly string[], readonly string[]], readings
   const a = makeSideItems(lists[0], readings, seed * 2 + 1, n), b = makeSideItems(lists[1], readings, seed * 2 + 2, n);
   return a && b ? [a, b] : null;
 }
+
+// ---------- the adapter: the first subject of the PK shell ----------
+interface ChData { lists: Map<string, string[]>; readings: Readings }
+const CARD = `<svg viewBox="0 0 120 80" aria-hidden="true">
+  <g transform="rotate(-9 32 44)"><rect x="6" y="14" width="52" height="52" rx="10" fill="#fff" stroke="#f76707" stroke-width="4"/><path d="M32 16v48M8 40h48" stroke="#ffd8a8" stroke-width="2" stroke-dasharray="4 3"/>
+    <circle cx="24" cy="36" r="4" fill="#2d2230"/><circle cx="40" cy="36" r="4" fill="#2d2230"/><path d="M23 49q9 8 18 0" fill="none" stroke="#2d2230" stroke-width="3.500" stroke-linecap="round"/></g>
+  <g transform="rotate(9 88 44)"><rect x="62" y="14" width="52" height="52" rx="10" fill="#fff" stroke="#1c7ed6" stroke-width="4"/><path d="M88 16v48M64 40h48" stroke="#a5d8ff" stroke-width="2" stroke-dasharray="4 3"/>
+    <circle cx="80" cy="36" r="4" fill="#2d2230"/><circle cx="96" cy="36" r="4" fill="#2d2230"/><path d="M79 49q9 8 18 0" fill="none" stroke="#2d2230" stroke-width="3.500" stroke-linecap="round"/></g>
+  <circle cx="60" cy="40" r="15" fill="#ffd43b" stroke="#e67700" stroke-width="3"/><text x="60" y="46" text-anchor="middle" font-family="ui-rounded, system-ui, sans-serif" font-weight="900" font-size="16" fill="#c92a2a">VS</text></svg>`;
+export const chineseAdapter: PkAdapter<ChData> = {
+  id: "chinese",
+  title: () => "PK认字",
+  sub: () => "两人面对面比赛",
+  color: "#f76707",
+  setupRoute: "#/chinese/pk", playRoute: "#/chinese/pk/play", backRoute: "#/chinese",
+  cardId: "open-pk", cardArt: CARD,
+  heroIcon: () => h("span", { class: "mascot" }, mascot()),
+  recordKey: () => "chinese",
+  rounds: ROUNDS, present: "char", sameItems: false,
+  async load(kids) {
+    const readings = await loadReadings();
+    const lists = new Map<string, string[]>();
+    await Promise.all(kids.map(async (k) => { lists.set(k.id, M.allChars((await api.readJson<M.KidData>(`kids/${k.id}.json`)) ?? M.EMPTY_KID)); }));
+    return { lists, readings };
+  },
+  check(d, a, b) {
+    const msgs: HTMLElement[] = [];
+    let ok = true, short = false;
+    for (const k of [a, b]) {
+      const n = usableChars(d.lists.get(k.id) ?? [], d.readings).length;
+      if (n < MIN_CHARS) { ok = false; msgs.push(h("p", { class: "pk-msg pk-warn" }, h("span", { class: "user" }, k.name), " 已入库的字太少，至少需要 4 个。")); }
+      else if (n < ROUNDS) short = true;
+    }
+    if (ok && short) msgs.push(h("p", { class: "pk-msg pk-note" }, "已入库的字不足 10 个时，字会重复出现，本局仍为 10 题。"));
+    return { ok, msgs };
+  },
+  make: (d, a, b, seed) => makeGame([d.lists.get(a.id) ?? [], d.lists.get(b.id) ?? []], d.readings, seed),
+};

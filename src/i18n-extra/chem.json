@@ -1,0 +1,962 @@
+{
+ "化合": [
+  "Combination",
+  "Synthèse"
+ ],
+ "分解": [
+  "Decomposition",
+  "Décomposition"
+ ],
+ "置换": [
+  "Displacement",
+  "Substitution"
+ ],
+ "复分解": [
+  "Double displacement",
+  "Double substitution"
+ ],
+ "其他": [
+  "Other",
+  "Autre"
+ ],
+ "点燃": [
+  "Ignition",
+  "Allumage"
+ ],
+ "加热": [
+  "Heating",
+  "Chauffage"
+ ],
+ "通电": [
+  "Electricity",
+  "Électricité"
+ ],
+ "高温": [
+  "High temperature",
+  "Haute température"
+ ],
+ "催化剂": [
+  "Catalyst",
+  "Catalyseur"
+ ],
+ "常温": [
+  "Room temperature",
+  "Température ambiante"
+ ],
+ "光照": [
+  "Light",
+  "Lumière"
+ ],
+ "配平": [
+  "Balancing",
+  "Équilibrage"
+ ],
+ "用天平把方程式配平": [
+  "Balance equations with a scale",
+  "Équilibrer les équations avec une balance"
+ ],
+ "写方程式": [
+  "Writing equations",
+  "Écriture d'équations"
+ ],
+ "由文字写出化学方程式": [
+  "Write the equation from the words",
+  "Écrire l'équation à partir du texte"
+ ],
+ "化学式与化合价": [
+  "Formulas and valences",
+  "Formules et valences"
+ ],
+ "交叉法、化合价、相对分子质量": [
+  "Cross method, valences, molecular mass",
+  "Méthode croisée, valences, masse moléculaire"
+ ],
+ "反应类型与现象": [
+  "Reaction types and observations",
+  "Types de réactions et observations"
+ ],
+ "类型、条件、实验现象": [
+  "Type, conditions, observations",
+  "Type, conditions, observations"
+ ],
+ "根据方程式计算": [
+  "Calculation by the equation",
+  "Calcul d'après l'équation"
+ ],
+ "分步计算质量": [
+  "Step-by-step mass calculation",
+  "Calcul des masses pas à pas"
+ ],
+ "溶液": [
+  "Solutions",
+  "Solutions"
+ ],
+ "质量分数、配制、溶解度": [
+  "Mass fraction, preparation, solubility",
+  "Fraction massique, préparation, solubilité"
+ ],
+ "复分解反应": [
+  "Double displacement",
+  "Double substitution"
+ ],
+ "能否发生，为什么": [
+  "Whether it occurs, and why",
+  "Se produit-elle, et pourquoi"
+ ],
+ "金属活动性": [
+  "Metal activity",
+  "Activité des métaux"
+ ],
+ "能否反应，生成什么": [
+  "Whether it reacts, and what forms",
+  "Réagit-elle, et que se forme-t-il"
+ ],
+ "物质分类": [
+  "Classifying substances",
+  "Classification des substances"
+ ],
+ "把物质拖进正确的类别": [
+  "Drag substances into the right class",
+  "Glisser les substances dans la bonne classe"
+ ],
+ "指示剂与 pH": [
+  "Indicators and pH",
+  "Indicateurs et pH"
+ ],
+ "颜色、酸碱性、pH 变化": [
+  "Colours, acidity, pH changes",
+  "Couleurs, acidité, variations du pH"
+ ],
+ "气体的制取": [
+  "Preparing gases",
+  "Préparation des gaz"
+ ],
+ "药品、装置、收集与检验": [
+  "Reagents, apparatus, collection, tests",
+  "Réactifs, appareils, recueil, tests"
+ ],
+ "化合反应": [
+  "Combination reaction",
+  "Réaction de synthèse"
+ ],
+ "分解反应": [
+  "Decomposition reaction",
+  "Réaction de décomposition"
+ ],
+ "置换反应": [
+  "Displacement reaction",
+  "Réaction de substitution"
+ ],
+ "其他反应": [
+  "Other reaction",
+  "Autre réaction"
+ ],
+ "化合反应：两种或两种以上的物质生成一种物质（多变一）。": [
+  "Combination reaction: two or more substances form one substance (many to one).",
+  "Réaction de synthèse : deux substances ou plus forment une seule substance."
+ ],
+ "分解反应：一种物质生成两种或两种以上的物质（一变多）。": [
+  "Decomposition reaction: one substance forms two or more substances (one to many).",
+  "Réaction de décomposition : une substance forme deux substances ou plus."
+ ],
+ "置换反应：一种单质与一种化合物反应，生成另一种单质和另一种化合物。": [
+  "Displacement reaction: an element reacts with a compound and forms another element and another compound.",
+  "Réaction de substitution : un corps simple réagit avec un composé et forme un autre corps simple et un autre composé."
+ ],
+ "复分解反应：两种化合物互相交换成分，生成另外两种化合物。": [
+  "Double displacement reaction: two compounds exchange components and form two other compounds.",
+  "Réaction de double substitution : deux composés échangent leurs constituants et forment deux autres composés."
+ ],
+ "不属于四种基本反应类型，例如氧气与有机物的反应，或非金属氧化物与碱、一氧化碳与金属氧化物的反应。": [
+  "Not one of the four basic types, for example oxygen with an organic compound, a non-metal oxide with a base, or carbon monoxide with a metal oxide.",
+  "Ne relève pas des quatre types de base, par exemple le dioxygène avec un composé organique, un oxyde non métallique avec une base, ou le monoxyde de carbone avec un oxyde métallique."
+ ],
+ "已知化合价：{0} 为 {1}，{2} 为 {3}。写出它们组成的化合物的化学式。": [
+  "Given valences: {0} is {1}, {2} is {3}. Write the formula of the compound they form.",
+  "Valences données : {0} vaut {1}, {2} vaut {3}. Écrivez la formule du composé qu'ils forment."
+ ],
+ "交叉法：把化合价的绝对值交叉写在对方元素的右下角，约成最简整数比；原子团个数大于 1 时要加括号。化学式：": [
+  "Cross method: write the absolute values of the valences crosswise at the lower right of the other element, reduce to the simplest whole-number ratio, and use brackets when a group occurs more than once. Formula:",
+  "Méthode croisée : écrivez les valeurs absolues des valences en croix, en indice de l'autre élément, simplifiez au plus petit rapport entier et mettez des parenthèses quand un groupe figure plus d'une fois. Formule :"
+ ],
+ "求 {0} 在 {1} 中的化合价。": [
+  "Find the valence of {0} in {1}.",
+  "Trouvez la valence de {0} dans {1}."
+ ],
+ "在化合物中各元素化合价的代数和为零。设该元素的化合价为 x：": [
+  "In a compound the valences add up to zero. Let the valence of the element be x:",
+  "Dans un composé, la somme des valences est nulle. Soit x la valence de l'élément :"
+ ],
+ "得 x = {0}。": [
+  "So x = {0}.",
+  "Donc x = {0}."
+ ],
+ "下列物质的化学式是：": [
+  "The formula of this substance is:",
+  "La formule de cette substance est :"
+ ],
+ "的化学式是 {0}。": [
+  "has the formula {0}.",
+  "a pour formule {0}."
+ ],
+ "下列化学式表示的物质是：{0}": [
+  "The substance with this formula is: {0}",
+  "La substance de formule {0} est :"
+ ],
+ "该物质是：": [
+  "The substance is:",
+  "La substance est :"
+ ],
+ "计算相对分子质量：{0}": [
+  "Calculate the relative molecular mass: {0}",
+  "Calculez la masse moléculaire relative : {0}"
+ ],
+ "相对分子质量": [
+  "Relative molecular mass",
+  "Masse moléculaire relative"
+ ],
+ "相对分子质量等于各原子的相对原子质量之和：": [
+  "The relative molecular mass is the sum of the relative atomic masses of all atoms:",
+  "La masse moléculaire relative est la somme des masses atomiques relatives de tous les atomes :"
+ ],
+ "计算 {0} 中 {1} 元素的质量分数（%，保留一位小数）。": [
+  "Calculate the mass fraction (%, one decimal) of {1} in {0}.",
+  "Calculez la fraction massique (%, une décimale) de {1} dans {0}."
+ ],
+ "质量分数 / %": [
+  "Mass fraction / %",
+  "Fraction massique / %"
+ ],
+ "元素的质量分数 = 该元素的相对原子质量之和 ÷ 相对分子质量 × 100%：": [
+  "Mass fraction of an element = sum of its relative atomic masses ÷ relative molecular mass × 100%:",
+  "Fraction massique d'un élément = somme de ses masses atomiques relatives ÷ masse moléculaire relative × 100 % :"
+ ],
+ "判断下面反应的基本类型：": [
+  "Determine the basic type of this reaction:",
+  "Déterminez le type de base de cette réaction :"
+ ],
+ "下列反应中，属于{0}的是：": [
+  "Which of these reactions is a {0}?",
+  "Laquelle de ces réactions est : {0} ?"
+ ],
+ "下面反应发生需要的条件是：": [
+  "The conditions needed for this reaction are:",
+  "Les conditions nécessaires à cette réaction sont :"
+ ],
+ "条件：": [
+  "Conditions:",
+  "Conditions :"
+ ],
+ "下面反应的实验现象是：": [
+  "The observation in this reaction is:",
+  "L'observation dans cette réaction est :"
+ ],
+ "配平下面的化学方程式：先让各元素的原子数相等，再检查系数是最简整数比。": [
+  "Balance this equation: make the atoms of every element equal, then check that the coefficients are the simplest whole-number ratio.",
+  "Équilibrez cette équation : rendez égal le nombre d'atomes de chaque élément, puis vérifiez que les coefficients forment le plus petit rapport entier."
+ ],
+ "配平后：": [
+  "Balanced:",
+  "Équilibrée :"
+ ],
+ "用下面的化学式组成化学方程式，并配平。": [
+  "Build the equation from these formulas and balance it.",
+  "Composez l'équation avec ces formules et équilibrez-la."
+ ],
+ "根据化学方程式计算：": [
+  "Calculate by the equation:",
+  "Calculez d'après l'équation :"
+ ],
+ "已知 {0} 的质量为 {1} g，求 {2} 的质量（g）。": [
+  "The mass of {0} is {1} g. Find the mass of {2} (g).",
+  "La masse de {0} est de {1} g. Trouvez la masse de {2} (g)."
+ ],
+ "第 1 步：{0} 的 系数 × 相对分子质量": [
+  "Step 1: coefficient × relative molecular mass of {0}",
+  "Étape 1 : coefficient × masse moléculaire relative de {0}"
+ ],
+ "第 2 步：{0} 的 系数 × 相对分子质量": [
+  "Step 2: coefficient × relative molecular mass of {0}",
+  "Étape 2 : coefficient × masse moléculaire relative de {0}"
+ ],
+ "第 3 步：列比例 {0} : {1} = {2} : x，求 x（g）": [
+  "Step 3: set up the ratio {0} : {1} = {2} : x and find x (g)",
+  "Étape 3 : posez la proportion {0} : {1} = {2} : x et trouvez x (g)"
+ ],
+ "质量比等于（系数 × 相对分子质量）之比：": [
+  "The mass ratio equals the ratio of (coefficient × relative molecular mass):",
+  "Le rapport des masses est celui de (coefficient × masse moléculaire relative) :"
+ ],
+ "{0} g 溶质完全溶解在 {1} g 水中，所得溶液的溶质质量分数是多少（%）？": [
+  "{0} g of solute dissolves completely in {1} g of water. What is the mass fraction of the solute in the solution (%)?",
+  "{0} g de soluté se dissolvent entièrement dans {1} g d'eau. Quelle est la fraction massique du soluté dans la solution (%) ?"
+ ],
+ "质量分数 = 溶质质量 ÷ 溶液质量 × 100%，溶液质量 = 溶质质量 + 溶剂质量：": [
+  "Mass fraction = mass of solute ÷ mass of solution × 100%; mass of solution = mass of solute + mass of solvent:",
+  "Fraction massique = masse de soluté ÷ masse de solution × 100 % ; masse de solution = masse de soluté + masse de solvant :"
+ ],
+ "配制 {0} g 质量分数为 {1}% 的 {2} 溶液，需要水多少 g？": [
+  "To prepare {0} g of {2} solution with a mass fraction of {1}%, how many g of water are needed?",
+  "Pour préparer {0} g de solution de {2} de fraction massique {1} %, combien de g d'eau faut-il ?"
+ ],
+ "配制 {0} g 质量分数为 {1}% 的 {2} 溶液，需要溶质多少 g？": [
+  "To prepare {0} g of {2} solution with a mass fraction of {1}%, how many g of solute are needed?",
+  "Pour préparer {0} g de solution de {2} de fraction massique {1} %, combien de g de soluté faut-il ?"
+ ],
+ "水的质量 / g": [
+  "Mass of water / g",
+  "Masse d'eau / g"
+ ],
+ "溶质的质量 / g": [
+  "Mass of solute / g",
+  "Masse de soluté / g"
+ ],
+ "溶质质量 = 溶液质量 × 质量分数；水的质量 = 溶液质量 − 溶质质量：": [
+  "Mass of solute = mass of solution × mass fraction; mass of water = mass of solution − mass of solute:",
+  "Masse de soluté = masse de solution × fraction massique ; masse d'eau = masse de solution − masse de soluté :"
+ ],
+ "加入水的质量 / g": [
+  "Mass of water added / g",
+  "Masse d'eau ajoutée / g"
+ ],
+ "把 {0} g 质量分数为 {1}% 的溶液稀释成质量分数为 {2}% 的溶液，需要加水多少 g？": [
+  "{0} g of a solution with a mass fraction of {1}% is diluted to {2}%. How many g of water must be added?",
+  "{0} g d'une solution de fraction massique {1} % sont dilués à {2} %. Combien de g d'eau faut-il ajouter ?"
+ ],
+ "稀释前后溶质的质量不变：": [
+  "The mass of solute does not change on dilution:",
+  "La masse de soluté ne change pas à la dilution :"
+ ],
+ "{0} ℃时，下表中 {1} 的溶解度是多少（g / 100 g 水）？": [
+  "At {0} ℃, what is the solubility of {1} in the table (g / 100 g of water)?",
+  "À {0} ℃, quelle est la solubilité de {1} dans le tableau (g / 100 g d'eau) ?"
+ ],
+ "{0} ℃时 {1} 的溶解度是 {2} g：在该温度下，100 g 水中最多溶解 {3} g。": [
+  "At {0} ℃ the solubility of {1} is {2} g: at this temperature 100 g of water dissolves at most {3} g.",
+  "À {0} ℃ la solubilité de {1} est de {2} g : à cette température, 100 g d'eau dissolvent au plus {3} g."
+ ],
+ "饱和溶液，有固体剩余": [
+  "Saturated solution, some solid remains",
+  "Solution saturée, du solide reste"
+ ],
+ "不饱和溶液": [
+  "Unsaturated solution",
+  "Solution non saturée"
+ ],
+ "{0} ℃时 {1} 的溶解度是 {2} g，100 g 水最多溶解 {3} g；加入 {4} g，超过了 {5} g，所以得到饱和溶液，有固体剩余。": [
+  "At {0} ℃ the solubility of {1} is {2} g, so 100 g of water dissolves at most {3} g; {4} g is added, which exceeds {5} g, so the solution is saturated and some solid remains.",
+  "À {0} ℃ la solubilité de {1} est de {2} g, donc 100 g d'eau dissolvent au plus {3} g ; on en ajoute {4} g, ce qui dépasse {5} g : la solution est saturée et du solide reste."
+ ],
+ "{0} ℃时 {1} 的溶解度是 {2} g，100 g 水最多溶解 {3} g；加入 {4} g，没有超过 {5} g，所以得到不饱和溶液。": [
+  "At {0} ℃ the solubility of {1} is {2} g, so 100 g of water dissolves at most {3} g; {4} g is added, which does not exceed {5} g, so the solution is unsaturated.",
+  "À {0} ℃ la solubilité de {1} est de {2} g, donc 100 g d'eau dissolvent au plus {3} g ; on en ajoute {4} g, ce qui ne dépasse pas {5} g : la solution n'est pas saturée."
+ ],
+ "{0} ℃时，把 {1} g {2} 加入 100 g 水中充分搅拌，得到的溶液是：": [
+  "At {0} ℃, {1} g of {2} is stirred into 100 g of water. The solution obtained is:",
+  "À {0} ℃, on agite {1} g de {2} dans 100 g d'eau. La solution obtenue est :"
+ ],
+ "恰好饱和": [
+  "Exactly saturated",
+  "Exactement saturée"
+ ],
+ "无法判断": [
+  "Cannot be decided",
+  "Impossible à déterminer"
+ ],
+ "{0} ℃时，{1} 饱和溶液的溶质质量分数是多少（%，保留一位小数）？": [
+  "At {0} ℃, what is the mass fraction of solute in a saturated solution of {1} (%, one decimal)?",
+  "À {0} ℃, quelle est la fraction massique de soluté d'une solution saturée de {1} (%, une décimale) ?"
+ ],
+ "饱和溶液的质量分数 = 溶解度 ÷ (100 + 溶解度) × 100%：": [
+  "Mass fraction of a saturated solution = solubility ÷ (100 + solubility) × 100%:",
+  "Fraction massique d'une solution saturée = solubilité ÷ (100 + solubilité) × 100 % :"
+ ],
+ "两种酸或两种碱之间不发生复分解反应。": [
+  "Two acids or two bases do not undergo double displacement.",
+  "Deux acides ou deux bases ne donnent pas de double substitution."
+ ],
+ "酸与碱发生中和反应，生成水。": [
+  "An acid and a base neutralise each other and form water.",
+  "Un acide et une base se neutralisent et forment de l'eau."
+ ],
+ "碳酸盐与酸反应，生成二氧化碳气体和水。": [
+  "A carbonate reacts with an acid and forms carbon dioxide gas and water.",
+  "Un carbonate réagit avec un acide et forme du dioxyde de carbone gazeux et de l'eau."
+ ],
+ "不溶于水的盐不能与酸发生反应（碳酸盐除外）。": [
+  "A salt that does not dissolve in water does not react with an acid (carbonates excepted).",
+  "Un sel insoluble dans l'eau ne réagit pas avec un acide (sauf les carbonates)."
+ ],
+ "生成了沉淀。": [
+  "A precipitate forms.",
+  "Un précipité se forme."
+ ],
+ "没有沉淀、气体或水生成。": [
+  "No precipitate, gas or water forms.",
+  "Aucun précipité, gaz ou eau ne se forme."
+ ],
+ "不溶于水的碱不能与盐反应。": [
+  "A base that does not dissolve in water does not react with a salt.",
+  "Une base insoluble dans l'eau ne réagit pas avec un sel."
+ ],
+ "不溶于水的盐不能与碱反应。": [
+  "A salt that does not dissolve in water does not react with a base.",
+  "Un sel insoluble dans l'eau ne réagit pas avec une base."
+ ],
+ "生成了沉淀或气体。": [
+  "A precipitate or a gas forms.",
+  "Un précipité ou un gaz se forme."
+ ],
+ "不溶于水的盐不能与盐反应。": [
+  "A salt that does not dissolve in water does not react with another salt.",
+  "Un sel insoluble dans l'eau ne réagit pas avec un autre sel."
+ ],
+ "能反应，生成沉淀": [
+  "Reacts, forms a precipitate",
+  "Réagit, forme un précipité"
+ ],
+ "能反应，生成气体": [
+  "Reacts, forms a gas",
+  "Réagit, forme un gaz"
+ ],
+ "能反应，生成水": [
+  "Reacts, forms water",
+  "Réagit, forme de l'eau"
+ ],
+ "不能反应": [
+  "Does not react",
+  "Ne réagit pas"
+ ],
+ "生成物：": [
+  "Products:",
+  "Produits :"
+ ],
+ "判断下面两种物质能否发生复分解反应（两种物质都在溶液中）：": [
+  "Decide whether these two substances undergo double displacement (both in solution):",
+  "Déterminez si ces deux substances donnent une double substitution (toutes deux en solution) :"
+ ],
+ "复分解反应的条件：生成物中有沉淀、气体或水，反应物要能溶于水（酸与不溶性碱或碳酸盐反应除外）。": [
+  "Condition for double displacement: the products include a precipitate, a gas or water, and the reactants must dissolve in water (except an acid reacting with an insoluble base or a carbonate).",
+  "Condition de la double substitution : les produits comprennent un précipité, un gaz ou de l'eau, et les réactifs doivent être solubles (sauf un acide avec une base insoluble ou un carbonate)."
+ ],
+ "能反应，生成 {0} 和 {1}": [
+  "Reacts, forms {0} and {1}",
+  "Réagit, forme {0} et {1}"
+ ],
+ "下列金属中，活动性最强的是：": [
+  "Which of these metals is the most active?",
+  "Lequel de ces métaux est le plus actif ?"
+ ],
+ "下列金属中，活动性最弱的是：": [
+  "Which of these metals is the least active?",
+  "Lequel de ces métaux est le moins actif ?"
+ ],
+ "金属活动性顺序（由强到弱）：": [
+  "Activity series of metals (strong to weak):",
+  "Série d'activité des métaux (du plus au moins actif) :"
+ ],
+ "下列金属中，不能与稀盐酸反应放出氢气的是：": [
+  "Which of these metals does not react with dilute hydrochloric acid to give hydrogen?",
+  "Lequel de ces métaux ne réagit pas avec l'acide chlorhydrique dilué pour donner du dihydrogène ?"
+ ],
+ "下列金属中，不能与稀硫酸反应放出氢气的是：": [
+  "Which of these metals does not react with dilute sulfuric acid to give hydrogen?",
+  "Lequel de ces métaux ne réagit pas avec l'acide sulfurique dilué pour donner du dihydrogène ?"
+ ],
+ "{0} 排在氢的后面，不能置换出酸中的氢。": [
+  "{0} is below hydrogen and cannot displace hydrogen from an acid.",
+  "{0} est après l'hydrogène et ne peut pas déplacer l'hydrogène d'un acide."
+ ],
+ "金属活动性顺序：": [
+  "Activity series of metals:",
+  "Série d'activité des métaux :"
+ ],
+ "{0} 排在氢的前面，能置换出酸中的氢：": [
+  "{0} is above hydrogen and displaces hydrogen from an acid:",
+  "{0} est avant l'hydrogène et déplace l'hydrogène d'un acide :"
+ ],
+ "铁与稀酸反应生成亚铁盐（+2 价）。": [
+  "Iron and a dilute acid form an iron(II) salt (valence +2).",
+  "Le fer et un acide dilué forment un sel de fer(II) (valence +2)."
+ ],
+ "{0} 排在氢的后面，不能与稀酸反应。": [
+  "{0} is below hydrogen and does not react with a dilute acid.",
+  "{0} est après l'hydrogène et ne réagit pas avec un acide dilué."
+ ],
+ "{0} 与稀盐酸混合：": [
+  "{0} is mixed with dilute hydrochloric acid:",
+  "{0} est mélangé à de l'acide chlorhydrique dilué :"
+ ],
+ "{0} 与稀硫酸混合：": [
+  "{0} is mixed with dilute sulfuric acid:",
+  "{0} est mélangé à de l'acide sulfurique dilué :"
+ ],
+ "{0} 比 {1} 活泼，能把 {2} 从盐溶液中置换出来：": [
+  "{0} is more active than {1} and displaces {2} from its salt solution:",
+  "{0} est plus actif que {1} et déplace {2} de sa solution saline :"
+ ],
+ "{0} 不如 {1} 活泼，不能把 {2} 从盐溶液中置换出来，不反应。": [
+  "{0} is less active than {1} and cannot displace {2} from its salt solution: no reaction.",
+  "{0} est moins actif que {1} et ne peut pas déplacer {2} de sa solution saline : pas de réaction."
+ ],
+ "{0} 放入 {1} 溶液中：": [
+  "{0} is put into a solution of {1}:",
+  "{0} est plongé dans une solution de {1} :"
+ ],
+ "单质": [
+  "Elements",
+  "Corps simples"
+ ],
+ "氧化物": [
+  "Oxides",
+  "Oxydes"
+ ],
+ "酸类": [
+  "Acids",
+  "Acides"
+ ],
+ "碱类": [
+  "Bases",
+  "Bases"
+ ],
+ "盐类": [
+  "Salts",
+  "Sels"
+ ],
+ "混合物": [
+  "Mixtures",
+  "Mélanges"
+ ],
+ "有机物": [
+  "Organic compounds",
+  "Composés organiques"
+ ],
+ "把下面的物质拖到所属的类别中（也可以先点物质，再点类别）。": [
+  "Drag each substance into its class (or tap the substance first, then the class).",
+  "Glissez chaque substance dans sa classe (ou touchez d'abord la substance, puis la classe)."
+ ],
+ "纯净物分为单质和化合物；由两种元素组成、其中一种是氧的化合物是氧化物；酸、碱、盐是三类不同的化合物；混合物由多种物质组成。": [
+  "Pure substances are elements or compounds; an oxide is a compound of two elements, one of which is oxygen; acids, bases and salts are three kinds of compounds; a mixture consists of several substances.",
+  "Les corps purs sont des corps simples ou des composés ; un oxyde est un composé de deux éléments dont l'oxygène ; acides, bases et sels sont trois sortes de composés ; un mélange contient plusieurs substances."
+ ],
+ "酸性": [
+  "acidic",
+  "acide"
+ ],
+ "中性": [
+  "neutral",
+  "neutre"
+ ],
+ "碱性": [
+  "alkaline",
+  "basique"
+ ],
+ "无色": [
+  "Colourless",
+  "Incolore"
+ ],
+ "遇到{0}溶液显示的颜色是：": [
+  "Its colour in a {0} solution is:",
+  "Sa couleur dans une solution {0} est :"
+ ],
+ "：酸性 {0}，中性 {1}，碱性 {2}。": [
+  ": acidic {0}, neutral {1}, alkaline {2}.",
+  " : acide {0}, neutre {1}, basique {2}."
+ ],
+ "的 pH 约为 {0}，它是：": [
+  "has a pH of about {0}. It is:",
+  "a un pH d'environ {0}. Elle est :"
+ ],
+ "pH < 7 显酸性，pH = 7 显中性，pH > 7 显碱性。pH 约为 {0}，所以显{1}。": [
+  "pH < 7 is acidic, pH = 7 is neutral, pH > 7 is alkaline. The pH is about {0}, so it is {1}.",
+  "pH < 7 : acide, pH = 7 : neutre, pH > 7 : basique. Le pH est d'environ {0}, donc elle est {1}."
+ ],
+ "下列溶液中，酸性最强的是：": [
+  "Which of these solutions is the most acidic?",
+  "Laquelle de ces solutions est la plus acide ?"
+ ],
+ "下列溶液中，碱性最强的是：": [
+  "Which of these solutions is the most alkaline?",
+  "Laquelle de ces solutions est la plus basique ?"
+ ],
+ "pH 越小，酸性越强。": [
+  "The lower the pH, the stronger the acidity.",
+  "Plus le pH est bas, plus l'acidité est forte."
+ ],
+ "pH 越大，碱性越强。": [
+  "The higher the pH, the stronger the alkalinity.",
+  "Plus le pH est élevé, plus la basicité est forte."
+ ],
+ "下列溶液中，能使无色酚酞溶液变红的是：": [
+  "Which of these solutions turns colourless phenolphthalein red?",
+  "Laquelle de ces solutions fait virer la phénolphtaléine incolore au rouge ?"
+ ],
+ "无色酚酞溶液遇碱性溶液变红，遇酸性或中性溶液不变色。": [
+  "Colourless phenolphthalein turns red in an alkaline solution and stays colourless in an acidic or neutral one.",
+  "La phénolphtaléine incolore devient rouge en solution basique et reste incolore en solution acide ou neutre."
+ ],
+ "向稀盐酸中不断滴加氢氧化钠溶液，溶液的 pH 变化是：": [
+  "Sodium hydroxide solution is added continuously to dilute hydrochloric acid. The pH:",
+  "On ajoute continuellement de la soude à de l'acide chlorhydrique dilué. Le pH :"
+ ],
+ "逐渐增大": [
+  "Increases gradually",
+  "Augmente progressivement"
+ ],
+ "酸被中和，酸性减弱，pH 增大；恰好中和时 pH = 7，氢氧化钠过量后 pH 大于 7。": [
+  "The acid is neutralised, the acidity decreases and the pH rises; at exact neutralisation pH = 7, and with excess sodium hydroxide the pH is above 7.",
+  "L'acide est neutralisé, l'acidité diminue et le pH augmente ; à la neutralisation exacte pH = 7, et avec un excès de soude le pH dépasse 7."
+ ],
+ "逐渐减小": [
+  "Decreases gradually",
+  "Diminue progressivement"
+ ],
+ "不变": [
+  "Does not change",
+  "Ne change pas"
+ ],
+ "先增大后减小": [
+  "Rises, then falls",
+  "Augmente puis diminue"
+ ],
+ "向氢氧化钠溶液中不断滴加稀盐酸，溶液的 pH 变化是：": [
+  "Dilute hydrochloric acid is added continuously to sodium hydroxide solution. The pH:",
+  "On ajoute continuellement de l'acide chlorhydrique dilué à de la soude. Le pH :"
+ ],
+ "碱被中和，碱性减弱，pH 减小；恰好中和时 pH = 7，盐酸过量后 pH 小于 7。": [
+  "The base is neutralised, the alkalinity decreases and the pH falls; at exact neutralisation pH = 7, and with excess hydrochloric acid the pH is below 7.",
+  "La base est neutralisée, la basicité diminue et le pH baisse ; à la neutralisation exacte pH = 7, et avec un excès d'acide chlorhydrique le pH est inférieur à 7."
+ ],
+ "先减小后增大": [
+  "Falls, then rises",
+  "Diminue puis augmente"
+ ],
+ "向稀盐酸中加水稀释，溶液的 pH 变化是：": [
+  "Water is added to dilute hydrochloric acid. The pH:",
+  "On ajoute de l'eau à de l'acide chlorhydrique dilué. Le pH :"
+ ],
+ "逐渐增大，但始终小于 7": [
+  "Increases gradually but always stays below 7",
+  "Augmente progressivement mais reste toujours inférieur à 7"
+ ],
+ "酸性减弱，pH 增大，但稀释不能使酸变成碱，pH 只会无限接近 7。": [
+  "The acidity decreases and the pH rises, but dilution cannot turn an acid into a base: the pH only comes ever closer to 7.",
+  "L'acidité diminue et le pH augmente, mais la dilution ne peut pas transformer un acide en base : le pH se rapproche seulement de 7."
+ ],
+ "逐渐增大，最后大于 7": [
+  "Increases gradually and ends above 7",
+  "Augmente progressivement et finit au-dessus de 7"
+ ],
+ "向氢氧化钠溶液中加水稀释，溶液的 pH 变化是：": [
+  "Water is added to sodium hydroxide solution. The pH:",
+  "On ajoute de l'eau à de la soude. Le pH :"
+ ],
+ "逐渐减小，但始终大于 7": [
+  "Decreases gradually but always stays above 7",
+  "Diminue progressivement mais reste toujours supérieur à 7"
+ ],
+ "碱性减弱，pH 减小，但稀释不能使碱变成酸，pH 只会无限接近 7。": [
+  "The alkalinity decreases and the pH falls, but dilution cannot turn a base into an acid: the pH only comes ever closer to 7.",
+  "La basicité diminue et le pH baisse, mais la dilution ne peut pas transformer une base en acide : le pH se rapproche seulement de 7."
+ ],
+ "逐渐减小，最后小于 7": [
+  "Decreases gradually and ends below 7",
+  "Diminue progressivement et finit au-dessous de 7"
+ ],
+ "酸雨是指 pH 小于多少的雨水：": [
+  "Acid rain is rain with a pH below:",
+  "Une pluie acide a un pH inférieur à :"
+ ],
+ "正常雨水溶有二氧化碳，pH 约为 5.6；pH 小于 5.6 的雨水叫酸雨。": [
+  "Normal rain contains dissolved carbon dioxide and has a pH of about 5.6; rain with a pH below 5.6 is acid rain.",
+  "La pluie normale contient du dioxyde de carbone dissous et a un pH d'environ 5,6 ; une pluie de pH inférieur à 5,6 est une pluie acide."
+ ],
+ "装置 C：排水法。": [
+  "Apparatus C: collection over water.",
+  "Appareil C : recueil sur l'eau."
+ ],
+ "装置 D：向上排空气法。": [
+  "Apparatus D: upward displacement of air.",
+  "Appareil D : déplacement d'air vers le haut."
+ ],
+ "装置 E：向下排空气法。": [
+  "Apparatus E: downward displacement of air.",
+  "Appareil E : déplacement d'air vers le bas."
+ ],
+ "实验室制取 {0} 可以选用的药品是：": [
+  "The reagents that can be used to prepare {0} in the laboratory are:",
+  "Les réactifs utilisables pour préparer {0} au laboratoire sont :"
+ ],
+ "其他药品不合适的原因：": [
+  "Why the other reagents are unsuitable:",
+  "Pourquoi les autres réactifs ne conviennent pas :"
+ ],
+ "用下面的反应制取 {0}，应选用的发生装置是：": [
+  "To prepare {0} by this reaction, the generator to use is:",
+  "Pour préparer {0} par cette réaction, le générateur à utiliser est :"
+ ],
+ "反应物是固体，需要加热：选用装置 A（固体加热型）。": [
+  "The reactant is a solid and needs heating: use apparatus A (solid, heated).",
+  "Le réactif est solide et doit être chauffé : appareil A (solide chauffé)."
+ ],
+ "反应物是固体和液体，不需要加热：选用装置 B（固液常温型）。": [
+  "The reactants are a solid and a liquid and need no heating: use apparatus B (solid and liquid, room temperature).",
+  "Les réactifs sont un solide et un liquide, sans chauffage : appareil B (solide et liquide, température ambiante)."
+ ],
+ "收集 {0} 应选用的收集装置是：": [
+  "The apparatus to collect {0} is:",
+  "L'appareil pour recueillir {0} est :"
+ ],
+ "收集较干燥的 {0} 应选用的收集装置是：": [
+  "The apparatus to collect fairly dry {0} is:",
+  "L'appareil pour recueillir {0} assez sec est :"
+ ],
+ "收集较纯净的 {0} 应选用的收集装置是：": [
+  "The apparatus to collect fairly pure {0} is:",
+  "L'appareil pour recueillir {0} assez pur est :"
+ ],
+ "检验 {0} 的方法是：": [
+  "The test for {0} is:",
+  "Le test de {0} est :"
+ ],
+ "怎样证明 {0} 已经收集满：": [
+  "How to show that {0} has filled the bottle:",
+  "Comment montrer que {0} a rempli le flacon :"
+ ],
+ "相对原子质量：": [
+  "Relative atomic masses:",
+  "Masses atomiques relatives :"
+ ],
+ "初级": [
+  "Basic",
+  "Débutant"
+ ],
+ "中级": [
+  "Intermediate",
+  "Intermédiaire"
+ ],
+ "高级": [
+  "Advanced",
+  "Avancé"
+ ],
+ "已练习 {0} 项": [
+  "{0} items practised",
+  "{0} éléments travaillés"
+ ],
+ "尚未开始": [
+  "Not started",
+  "Pas encore commencé"
+ ],
+ "查阅表格": [
+  "Reference tables",
+  "Tableaux de référence"
+ ],
+ "溶解性表、活动性顺序、化合价、方程式": [
+  "Solubility table, activity series, valences, equations",
+  "Table de solubilité, série d'activité, valences, équations"
+ ],
+ "每轮 10 题，答完马上讲解。进度保存在这台设备上。": [
+  "10 questions per round, each followed by an explanation. Progress is kept on this device.",
+  "10 questions par série, chacune suivie d'une explication. La progression est conservée sur cet appareil."
+ ],
+ "暂无题目。": [
+  "No questions available.",
+  "Aucune question disponible."
+ ],
+ "第 {0} 题 / 共 {1} 题": [
+  "Question {0} / {1}",
+  "Question {0} / {1}"
+ ],
+ "回答不正确。": [
+  "Incorrect.",
+  "Incorrect."
+ ],
+ "答案": [
+  "Answer",
+  "Réponse"
+ ],
+ "请输入数字。": [
+  "Enter a number.",
+  "Saisissez un nombre."
+ ],
+ "正确：": [
+  "Correct:",
+  "Correct :"
+ ],
+ "系数已经全部正确，请点“检查”。": [
+  "All coefficients are correct. Press Check.",
+  "Tous les coefficients sont corrects. Appuyez sur Vérifier."
+ ],
+ "已填入一个系数。": [
+  "One coefficient has been filled in.",
+  "Un coefficient a été renseigné."
+ ],
+ "已配平。": [
+  "Balanced.",
+  "Équilibrée."
+ ],
+ "已配平，但系数不是最简整数比。": [
+  "Balanced, but the coefficients are not the simplest whole-number ratio.",
+  "Équilibrée, mais les coefficients ne sont pas le plus petit rapport entier."
+ ],
+ "还没有配平。不相等的元素：{0}": [
+  "Not balanced yet. Elements that differ: {0}",
+  "Pas encore équilibrée. Éléments différents : {0}"
+ ],
+ "生成物": [
+  "Products",
+  "Produits"
+ ],
+ "反应物": [
+  "Reactants",
+  "Réactifs"
+ ],
+ "点下面的化学式放到这里": [
+  "Tap a formula below to place it here",
+  "Touchez une formule ci-dessous pour la placer ici"
+ ],
+ "这个化学式已经放进方程式了。": [
+  "This formula is already in the equation.",
+  "Cette formule est déjà dans l'équation."
+ ],
+ "方程式正确。": [
+  "The equation is correct.",
+  "L'équation est correcte."
+ ],
+ "请先把化学式放进反应物和生成物。": [
+  "Place formulas in the reactants and the products first.",
+  "Placez d'abord des formules dans les réactifs et les produits."
+ ],
+ "物质或位置不对。请检查反应物和生成物各有哪些。": [
+  "A substance or its side is wrong. Check which substances are reactants and which are products.",
+  "Une substance ou son côté est incorrect. Vérifiez quels sont les réactifs et les produits."
+ ],
+ "有 {0} 个放错了，正确的类别已标在物质旁边。": [
+  "{0} placed wrongly; the correct class is shown beside each substance.",
+  "{0} mal placé(s) ; la classe correcte est indiquée à côté de chaque substance."
+ ],
+ "本轮完成：{0} / {1}": [
+  "Round finished: {0} / {1}",
+  "Série terminée : {0} / {1}"
+ ],
+ "本轮得分：{0} / {1}": [
+  "Score of this round: {0} / {1}",
+  "Score de la série : {0} / {1}"
+ ],
+ "需要再看一遍的题目": [
+  "Questions to look at again",
+  "Questions à revoir"
+ ],
+ "空气和氧气": [
+  "Air and oxygen",
+  "L'air et le dioxygène"
+ ],
+ "自然界的水": [
+  "Water in nature",
+  "L'eau dans la nature"
+ ],
+ "碳和碳的氧化物": [
+  "Carbon and its oxides",
+  "Le carbone et ses oxydes"
+ ],
+ "燃料及其利用": [
+  "Fuels and their use",
+  "Les combustibles et leur usage"
+ ],
+ "金属和金属材料": [
+  "Metals and metal materials",
+  "Les métaux et matériaux métalliques"
+ ],
+ "酸和碱": [
+  "Acids and bases",
+  "Acides et bases"
+ ],
+ "盐和化肥": [
+  "Salts and fertilisers",
+  "Sels et engrais"
+ ],
+ "溶解性表": [
+  "Solubility table",
+  "Table de solubilité"
+ ],
+ "活动性顺序": [
+  "Activity series",
+  "Série d'activité"
+ ],
+ "化合价": [
+  "Valences",
+  "Valences"
+ ],
+ "常见物质": [
+  "Common substances",
+  "Substances courantes"
+ ],
+ "化学方程式": [
+  "Chemical equations",
+  "Équations chimiques"
+ ],
+ "溶于水": [
+  "soluble in water",
+  "soluble dans l'eau"
+ ],
+ "不溶于水": [
+  "insoluble in water",
+  "insoluble dans l'eau"
+ ],
+ "微溶于水": [
+  "slightly soluble in water",
+  "faiblement soluble dans l'eau"
+ ],
+ "溶于水，易挥发或易分解": [
+  "soluble in water, volatile or unstable",
+  "soluble dans l'eau, volatil ou instable"
+ ],
+ "这种物质不存在或遇水就分解": [
+  "does not exist or decomposes in water",
+  "n'existe pas ou se décompose dans l'eau"
+ ],
+ "金属活动性由强到弱": [
+  "Metal activity from strong to weak",
+  "Activité des métaux, du plus au moins actif"
+ ],
+ "排在氢前面的金属，能与稀盐酸、稀硫酸反应放出氢气（钾、钙、钠与水反应，不在此列）。": [
+  "Metals above hydrogen react with dilute hydrochloric or sulfuric acid and give hydrogen (potassium, calcium and sodium react with water and are not covered here).",
+  "Les métaux placés avant l'hydrogène réagissent avec l'acide chlorhydrique ou sulfurique dilué et donnent du dihydrogène (le potassium, le calcium et le sodium réagissent avec l'eau et ne sont pas concernés ici)."
+ ],
+ "排在前面的金属，能把排在后面的金属从它的盐溶液中置换出来（钾、钙、钠除外）。": [
+  "A metal higher in the series displaces a lower metal from its salt solution (potassium, calcium and sodium excepted).",
+  "Un métal placé plus haut dans la série déplace un métal placé plus bas de sa solution saline (sauf le potassium, le calcium et le sodium)."
+ ],
+ "铁与酸或盐溶液发生置换反应时，生成的是亚铁盐（+2 价）。": [
+  "When iron displaces from an acid or a salt solution it forms an iron(II) salt (valence +2).",
+  "Quand le fer déplace à partir d'un acide ou d'une solution saline, il forme un sel de fer(II) (valence +2)."
+ ],
+ "元素": [
+  "Element",
+  "Élément"
+ ],
+ "常见化合价": [
+  "Common valences",
+  "Valences courantes"
+ ],
+ "常见原子团": [
+  "Common atom groups",
+  "Groupes d'atomes courants"
+ ],
+ "原子团": [
+  "Atom group",
+  "Groupe d'atomes"
+ ],
+ "指示剂": [
+  "Indicator",
+  "Indicateur"
+ ],
+ "常见物质的 pH": [
+  "pH of common substances",
+  "pH de substances courantes"
+ ],
+ "配平 · 计算 · 酸碱盐 · 气体": [
+  "Balancing · calculation · acids, bases, salts · gases",
+  "Équilibrage · calculs · acides, bases, sels · gaz"
+ ]
+}

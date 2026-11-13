@@ -8,7 +8,9 @@ import * as SM from "./spacemodel";
 
 export function openQuiz(S: SM.Space, done: () => void): void {
   let doc = SM.loadDoc();
-  const qs = SM.buildRound(S, doc, todayLocal());
+  const forced = (window as unknown as { __spaceKeys?: string[] }).__spaceKeys;   // (a hook for the tests: a fixed list of questions)
+  const qs = forced ? forced.map((k) => SM.makeQuestion(S, k)) : SM.buildRound(S, doc, todayLocal());
+  (window as unknown as { __spaceQuiz?: SM.Question[] }).__spaceQuiz = qs;
   const answers: { key: string; right: boolean; q: SM.Question }[] = [];
   let idx = 0, score = 0, phase: "ask" | "feedback" | "end" = "ask";
   const quit = h("button", { class: "gquit", id: "game-quit", title: "退出游戏", "aria-label": "退出游戏", onclick: () => void leave() }, "×");

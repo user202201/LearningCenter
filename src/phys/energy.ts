@@ -29,7 +29,7 @@ export const def: SimDef = {
   play: { param: "t", rate: 0.5, loop: true },
   aspect: 0.62,
   readouts: (s) => {
-    if (s.mode === 2) { const W = Mo.work(s.F, s.s); return [{ label: "功", value: fmt(W, 0), unit: "J" }, { label: "功率", value: fmt(Mo.power(W, s.tw), 1), unit: "W" }, { label: "平均速度", value: fmt(s.s / s.tw, 2), unit: "m/s" }]; }
+    if (s.mode === 2) { const W = Mo.work(s.F, s.s); return [{ label: "做的功", value: fmt(W, 0), unit: "J" }, { label: "功率", value: fmt(Mo.power(W, s.tw), 1), unit: "W" }, { label: "平均速度", value: fmt(s.s / s.tw, 2), unit: "m/s" }]; }
     const e = energyOf(s)!;
     const r = [{ label: "动能", value: fmt(e.Ek, 2), unit: "J" }, { label: "重力势能", value: fmt(e.Ep, 2), unit: "J" }, { label: "转化为内能的能量", value: fmt(e.Eloss, 2), unit: "J" },
       { label: "总能量", value: fmt(e.Ek + e.Ep + e.Eloss, 2), unit: "J" }, { label: "速度", value: fmt(e.v, 2), unit: "m/s" }, { label: "高度", value: fmt(e.h, 2), unit: "m" }];

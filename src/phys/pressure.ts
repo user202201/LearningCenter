@@ -77,7 +77,7 @@ export const def: SimDef = {
     arrow(c, 320, 60, 320, 250 + dent - 94, COL.red, 6 + s.F / 100); txt(c, "F", 346, 110, 24, COL.red, "left");
   },
   tasks: [
-    { id: "water1", text: "水中（液体选“水”）：使探头所在的深度为 20 cm，读出液体压强约 1960 Pa", check: (s) => s.mode === 0 && s.liq === 0 && s.h === 20 },
+    { id: "water1", text: "清水中（液体选“清水”）：使探头所在的深度为 20 cm，读出液体压强约 1960 Pa", check: (s) => s.mode === 0 && s.liq === 0 && s.h === 20 },
     { id: "mercury", text: "托里拆利实验：海拔 0 m 时，把玻璃管倾斜 30°，观察水银柱的竖直高度不变（760 mm 左右）", check: (s) => s.mode === 1 && s.alt === 0 && s.tilt === 30 },
     { id: "nail", text: "固体压强：压力 100 N，使受力面积减小到 5 cm²，压强变为 200 kPa", check: (s) => s.mode === 2 && s.F === 100 && s.S === 5 },
   ],

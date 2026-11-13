@@ -386,7 +386,7 @@ function renderRef(): void {
     if (tab === "sol") {
       const sol = D.ions.sol;
       const head = h("tr", {}, h("th", {}), ...D.ions.an.map((a) => { const an = C.IONS.AN.find((x) => x.k === a)!; return h("th", { class: "user" }, ionText(an.f, an.ch)); }));
-      const rows = D.ions.cat.map((c, ci) => { const ion = C.IONS.catByK(c); return h("tr", {}, h("th", { class: "user" }, ionText(ion.f, ion.ch), h("small", {}, ` ${ion.n}`)), ...D.ions.an.map((a) => h("td", { class: `chem-sol-${sol[a][ci] === "-" ? "n" : sol[a][ci]} user`, "data-c": c, "data-a": a }, sol[a][ci] === "-" ? "–" : sol[a][ci]))); });
+      const rows = D.ions.cat.map((c, ci) => { const ion = C.IONS.catByK(c); return h("tr", {}, h("th", { class: "user" }, ionText(ion.f, ion.ch), h("small", {}, ` ${C.catName(ion.k)}`)), ...D.ions.an.map((a) => h("td", { class: `chem-sol-${sol[a][ci] === "-" ? "n" : sol[a][ci]} user`, "data-c": c, "data-a": a }, sol[a][ci] === "-" ? "–" : sol[a][ci]))); });
       body.push(h("div", { class: "chem-tblwrap" }, h("table", { class: "chem-tbl chem-soltbl", id: "chem-soltbl" }, h("thead", {}, head), h("tbody", {}, ...rows))),
         h("ul", { class: "chem-legend small" }, h("li", {}, h("b", { class: "user" }, "s"), " 溶于水"), h("li", {}, h("b", { class: "user" }, "i"), " 不溶于水"), h("li", {}, h("b", { class: "user" }, "m"), " 微溶于水"), h("li", {}, h("b", { class: "user" }, "v"), " 溶于水，易挥发或易分解"), h("li", {}, h("b", { class: "user" }, "–"), " 这种物质不存在或遇水就分解")));
     } else if (tab === "act") {
@@ -396,7 +396,7 @@ function renderRef(): void {
       body.push(h("table", { class: "chem-tbl chem-valtbl" }, h("thead", {}, h("tr", {}, h("th", {}, "元素"), h("th", {}, "常见化合价"))), h("tbody", {}, ...D.elements.map((e) => h("tr", {}, h("th", { class: "user" }, `${e.s} `, h("small", {}, e.n)), h("td", { class: "user" }, e.v.map((v) => (v > 0 ? `+${v}` : `${v}`)).join("  ")))))),
         h("h3", {}, "常见原子团"), h("table", { class: "chem-tbl" }, h("thead", {}, h("tr", {}, h("th", {}, "原子团"), h("th", {}, "化合价"))), h("tbody", {}, ...D.groups.map((g) => h("tr", {}, h("th", { class: "user" }, formulaEl(g.f), h("small", {}, ` ${g.n}`)), h("td", { class: "user" }, g.c > 0 ? `+${g.c}` : `${g.c}`))))));
     } else if (tab === "subs") {
-      const cats: [string, string][] = [["", "全部"], ["elem", "单质"], ["oxide", "氧化物"], ["acid", "酸"], ["base", "碱"], ["salt", "盐"], ["org", "有机物"]];
+      const cats: [string, string][] = [["", "全部"], ["elem", "单质"], ["oxide", "氧化物"], ["acid", "酸类"], ["base", "碱类"], ["salt", "盐类"], ["org", "有机物"]];
       body.push(chips(cats, () => cat, (v) => (cat = v), "rc"), h("table", { class: "chem-tbl chem-subtbl", id: "chem-subtbl" }, h("tbody", {}, ...D.subs.filter((s) => s.c !== "other" && (!cat || s.c === cat)).map((s) => h("tr", { "data-f": s.f }, h("th", { class: "user" }, s.n), h("td", {}, formulaEl(s.f)), h("td", { class: "user small" }, s.a))))));
     } else if (tab === "ind") {
       body.push(h("table", { class: "chem-tbl" }, h("thead", {}, h("tr", {}, h("th", {}, "指示剂"), h("th", {}, "酸性"), h("th", {}, "中性"), h("th", {}, "碱性"))), h("tbody", {}, ...D.indicators.map((i) => h("tr", {}, h("th", { class: "user" }, i.n), h("td", { class: "user" }, i.acid), h("td", { class: "user" }, i.neutral), h("td", { class: "user" }, i.base))))),

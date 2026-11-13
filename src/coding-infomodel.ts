@@ -372,11 +372,11 @@ export function trainBias(data: Person[], feats: BiasFeat[]): (p: Person) => num
   return (p) => { const c = m.get(key(p)); return c ? (c[1] / (c[0] + c[1]) >= 0.5 ? 1 : 0) : all >= 0.5 ? 1 : 0; };
 }
 export const biasAccuracy = (model: (p: Person) => number, data: Person[]): number => data.filter((p) => model(p) === p.yes).length / data.length;
-/** the largest difference between the two groups in the share of accepted people of the same score and district mix: the "gap" (0 = equal treatment) */
+/** the largest difference between the two groups, over all scores, in the decision for people of the SAME score (the district of a person is that of the group nine times out of ten): 0 = equal treatment */
 export function biasGap(model: (p: Person) => number): number {
   let worst = 0;
   for (let s = 0; s <= 10; s++) {
-    const acc = (g: number) => { let n = 0; for (const d of [0, 1]) n += model({ group: g, district: d, score: s, yes: 0 }); return n / 2; };
+    const acc = (g: number) => 0.9 * model({ group: g, district: g, score: s, yes: 0 }) + 0.1 * model({ group: g, district: 1 - g, score: s, yes: 0 });
     worst = Math.max(worst, Math.abs(acc(0) - acc(1)));
   }
   return worst;
@@ -404,19 +404,20 @@ export function noisyDigit(d: number, seed: number, flips: number, shift = true)
   for (let k = 0; k < flips; k++) { const i = rint(r, 0, 63); o[i] = 1 - o[i]; }
   return o;
 }
-export interface DigitModel { centroids: number[][]; samples: { g: number[]; d: number }[] }
-/** "training": the bundled samples are made by code (seeded), the model is the average picture of every digit */
-export function trainDigits(seed = 11, per = 20, flips = 3): DigitModel {
+export interface DigitModel { samples: { g: number[]; d: number }[] }
+/** "training": the bundled samples are made by code (seeded, with a few turned pixels and shifts); the model remembers them (nearest neighbours) */
+export function trainDigits(seed = 11, per = 30, flips = 1): DigitModel {
   const samples: { g: number[]; d: number }[] = [];
   for (let d = 0; d < 10; d++) for (let i = 0; i < per; i++) samples.push({ g: noisyDigit(d, seed * 1000 + i, flips), d });
-  const centroids = Array.from({ length: 10 }, (_, d) => { const s = samples.filter((x) => x.d === d), c = Array(64).fill(0); for (const x of s) x.g.forEach((v, i) => (c[i] += v / s.length)); return c; });
-  return { centroids, samples };
+  return { samples };
 }
-export function recogniseDigit(m: DigitModel, g: number[]): { digit: number; confidence: number; scores: number[] } {
-  const dist = m.centroids.map((c) => c.reduce((s, v, i) => s + (v - g[i]) ** 2, 0));
-  const w = dist.map((d) => Math.exp(-d / 2)), sum = w.reduce((a, b) => a + b, 0) || 1;
-  const scores = w.map((x) => x / sum);
-  const digit = dist.indexOf(Math.min(...dist));
+/** the five nearest remembered pictures vote; the confidence is the share of the vote of the winner */
+export function recogniseDigit(m: DigitModel, g: number[], k = 5): { digit: number; confidence: number; scores: number[] } {
+  const near = m.samples.map((x) => ({ d: x.d, e: x.g.reduce((s, v, i) => s + (v - g[i]) ** 2, 0) })).sort((a, b) => a.e - b.e || a.d - b.d).slice(0, k);
+  const w = Array(10).fill(0);
+  for (const n of near) w[n.d] += Math.exp(-n.e / 4);
+  const sum = w.reduce((a, b) => a + b, 0) || 1, scores = w.map((x) => x / sum);
+  const digit = scores.indexOf(Math.max(...scores));
   return { digit, confidence: scores[digit], scores };
 }
 
@@ -478,7 +479,7 @@ export function makeQuestion(spec: Spec, seed: number): Q {
     case "binWrite": { const bits = num(spec, "bits", 4); const n = rint(r, 1, 2 ** bits - 1); return { args: [n], answer: toBin(n, bits) }; }
     case "binAdd": { const bits = num(spec, "bits", 4); const a = rint(r, 1, 2 ** bits - 2), b = rint(r, 1, 2 ** bits - 1 - a); return { args: [toBin(a, bits), toBin(b, bits)], answer: addBinary(toBin(a, bits), toBin(b, bits)).sum.replace(/^0+(?=.)/, "").padStart(bits, "0") }; }
     case "binShift": { const n = rint(r, 1, 30); return { args: [toBin(n), n * 2], answer: toBin(n * 2) }; }   // x2 appends a 0
-    case "capacity": { const bits = rint(r, 2, 10); const kind = num(spec, "kind", 0); return kind === 0 ? { args: [bits], answer: String(2 ** bits), choices: numChoices(2 ** bits, r, 3).map((x) => x) } : { args: [bits], answer: String(2 ** bits - 1) }; }
+    case "capacity": { const bits = rint(r, 2, 10); const kind = num(spec, "kind", 0); return kind === 0 ? { args: [bits], answer: String(2 ** bits), choices: numChoices(2 ** bits, r, 3) } : { args: [bits], answer: String(2 ** bits - 1) }; }
     case "bitsFor": { const n = pick([5, 9, 17, 30, 60, 100, 200, 255, 256, 1000], r); const need = Math.max(1, Math.ceil(Math.log2(n + 1))); return { args: [n], answer: String(need) }; }
     case "hexRead": { const n = rint(r, 16, 255); return { args: [toHex(n)], answer: String(n) }; }
     case "hexWrite": { const n = rint(r, 16, 255); return { args: [n], answer: toHex(n) }; }
@@ -489,11 +490,10 @@ export function makeQuestion(spec: Spec, seed: number): Q {
     case "encodeWord": { const w = pick(WORDS.filter((x) => x.length <= num(spec, "max", 4)), r); return { args: [w], answer: [...w].map((c) => String(asciiCode(c))), fig: { t: "ascii" } }; }
     case "decodeWord": { const w = pick(WORDS.filter((x) => x.length <= 4), r); return { args: [[...w].map((c) => asciiCode(c)).join(" ")], answer: w, fig: { t: "ascii" } }; }
     case "utf8Len": { const c = pick(CHARS.concat(["A", "z", "7"]), r); return { args: [c], answer: String(utf8Length(c)), choices: ["1", "2", "3", "4"] }; }
-    case "utf8Hex": { const c = pick(CHARS, r); return { args: [c], answer: utf8Hex(c), fig: { t: "bytes", hex: [] } }; }
+    case "utf8Hex": { const c = pick(CHARS, r); return { args: [c], answer: utf8Hex(c) }; }
     case "utf8First": { const c = pick(CHARS, r); return { args: [c, utf8Hex(c).join(" ")], answer: utf8Hex(c)[0] }; }
-    case "mojibake": { const c = pick(CHARS, r); const bad = mojibake(c); return { args: [utf8Hex(c).join(" "), bad], answer: "B", choices: ["A", "B", "C"] }; }
     case "imgSize": { const w = pick([8, 16, 32, 64], r), h = pick([8, 16, 32, 64], r), bpp = pick([1, 8, 24], r); return { args: [w, h, bpp], answer: String(imageBytes(w, h, bpp)) }; }
-    case "colorName": { const t: [number[], string][] = [[[255, 0, 0], "red"], [[0, 255, 0], "green"], [[0, 0, 255], "blue"], [[255, 255, 0], "yellow"], [[0, 0, 0], "black"], [[255, 255, 255], "white"], [[0, 255, 255], "cyan"], [[255, 0, 255], "magenta"]]; const [rgb, name] = pick(t, r); return { args: [rgb.join(", ")], answer: name, choices: shuffle(uniq([name, ...shuffle(t.map((x) => x[1]), r)]).slice(0, 4).concat(uniq([name])), r).filter((v, i, a) => a.indexOf(v) === i).slice(0, 4) }; }
+    case "colorName": { const t: [number[], string][] = [[[255, 0, 0], "red"], [[0, 255, 0], "green"], [[0, 0, 255], "blue"], [[255, 255, 0], "yellow"], [[0, 0, 0], "black"], [[255, 255, 255], "white"], [[0, 255, 255], "cyan"], [[255, 0, 255], "magenta"]]; const [rgb, name] = pick(t, r); return { args: [rgb.join(", ")], answer: name, choices: shuffle(uniq([name, ...shuffle(t.map((x) => x[1]).filter((x) => x !== name), r).slice(0, 3)]), r) }; }
     case "rleEnc": { const k = rint(r, 3, 5), letters = LETTERS.slice(0, 3); let s = "", prev = ""; for (let i = 0; i < k; i++) { let c = pick([...letters], r); if (c === prev) c = letters[(letters.indexOf(c) + 1) % 3]; s += c.repeat(rint(r, 1, 5)); prev = c; } return { args: [s], answer: rleEncode(s) }; }
     case "rleDec": { const k = rint(r, 2, 4), letters = LETTERS.slice(0, 3); let enc = "", prev = ""; for (let i = 0; i < k; i++) { let c = pick([...letters], r); if (c === prev) c = letters[(letters.indexOf(c) + 1) % 3]; enc += `${rint(r, 1, 6)}${c}`; prev = c; } return { args: [enc], answer: rleDecode(enc) }; }
     case "rleSize": { const s = pick(["AAAAAAAABBBB", "AAAABBBBCCCC", "ABABABABAB", "AAAAAAAAAAAA", "ABCABCABC"], r); const enc = rleEncode(s); return { args: [s, enc], answer: enc.length < s.length ? "shorter" : "longer", choices: ["shorter", "longer"] }; }
@@ -501,7 +501,7 @@ export function makeQuestion(spec: Spec, seed: number): Q {
     case "caesarKey": { const k = rint(r, 1, 25), w = pick(WORDS, r); return { args: [w, caesar(w, k)], answer: String(k) }; }
     case "caesarEnc": { const k = rint(r, 1, 6), w = pick(WORDS.filter((x) => x.length <= 4), r); return { args: [w, k], answer: caesar(w, k) }; }
     case "xor": { const a = rint(r, 0, 15), b = rint(r, 0, 15); return { args: [toBin(a, 4), toBin(b, 4)], answer: xorBits(toBin(a, 4), toBin(b, 4)) }; }
-    case "xorBack": { const a = rint(r, 0, 15), k = rint(r, 1, 15); return { args: [toBin(xorBits(toBin(a, 4), toBin(k, 4)) === "" ? 0 : fromBin(xorBits(toBin(a, 4), toBin(k, 4))), 4), toBin(k, 4)], answer: toBin(a, 4) }; }
+    case "xorBack": { const a = rint(r, 0, 15), k = rint(r, 1, 15); return { args: [toBin(a ^ k, 4), toBin(k, 4)], answer: toBin(a, 4) }; }
     case "parity": { const bits = Array.from({ length: 7 }, () => rint(r, 0, 1)).join(""); return { args: [bits], answer: parityBit(bits, true), choices: ["0", "1"] }; }
     case "parityCheck": { const bits = Array.from({ length: 7 }, () => rint(r, 0, 1)).join(""); const full = bits + parityBit(bits, true); const bad = r() < 0.5; const send = bad ? full.slice(0, 3) + (full[3] === "1" ? "0" : "1") + full.slice(4) : full; return { args: [send], answer: bad ? "error" : "ok", choices: ["ok", "error"] }; }
     case "isbn": { let d = ""; for (let i = 0; i < 12; i++) d += rint(r, 0, 9); return { args: [d], answer: String(isbn13Check(d)) }; }

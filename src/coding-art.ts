@@ -14,13 +14,14 @@ export const CODING_CARD_ART = `<ellipse cx="60" cy="111" rx="36" ry="6" fill="#
   <text x="52" y="100" font-size="17" ${FONT} fill="#66d9e8">{</text><text x="68" y="100" font-size="17" ${FONT} fill="#66d9e8">}</text><rect x="58.500" y="88" width="3" height="12" rx="1.500" fill="#ffd43b"/>
   <path transform="translate(16 82) scale(8)" d="M0-1 .28-.28 1 0 .28.28 0 1-.28.28-1 0-.28-.28z" fill="#fff3bf"/><path transform="translate(104 24) scale(7)" d="M0-1 .28-.28 1 0 .28.28 0 1-.28.28-1 0-.28-.28z" fill="#fff3bf"/>`;
 
-const COLOR = ["#1971c2", "#e8590c", "#7048e8", "#d6336c", "#2b8a3e", "#0b7285"];
-const LIGHT = ["#74c0fc", "#ffa94d", "#b197fc", "#faa2c1", "#8ce99a", "#66d9e8"];
+/** (exported so that coding-art2.ts can add the colours and emblems of worlds 7+) */
+export const COLOR = ["#1971c2", "#e8590c", "#7048e8", "#d6336c", "#2b8a3e", "#0b7285"];
+export const LIGHT = ["#74c0fc", "#ffa94d", "#b197fc", "#faa2c1", "#8ce99a", "#66d9e8"];
 export const worldColor = (w: number) => COLOR[(w - 1) % COLOR.length];
 export const worldLight = (w: number) => LIGHT[(w - 1) % LIGHT.length];
 
 /** the emblem of a world (what it teaches), 60 x 60 */
-const EMBLEM: Record<number, string> = {
+export const EMBLEM: Record<number, string> = {
   1: `<g fill="#fff"><circle cx="14" cy="42" r="6"/><circle cx="30" cy="30" r="6"/><circle cx="46" cy="18" r="6"/></g><path d="M18 38l8-6M34 26l8-6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 5"/>`,
   2: `<path d="M44 22a16 16 0 1 0 3 12" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M36 14l12 6-8 10z" fill="#fff"/>`,
   3: `<path d="M30 52V32M30 32L14 14M30 32l16-18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><circle cx="14" cy="12" r="5" fill="#fff"/><circle cx="46" cy="12" r="5" fill="#fff"/>`,

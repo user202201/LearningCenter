@@ -23,6 +23,9 @@ export const TROPHY = `<svg viewBox="0 0 100 110" aria-hidden="true">
 </svg>`;
 export const CROWN = `<svg viewBox="0 0 100 60" aria-hidden="true"><path d="M8 52L4 14l24 18 22-26 22 26 24-18-4 38z" fill="#ffd43b" stroke="#e67700" stroke-width="4" stroke-linejoin="round"/><rect x="8" y="46" width="84" height="10" rx="4" fill="#fab005" stroke="#e67700" stroke-width="3"/><circle cx="50" cy="30" r="5" fill="#fa5252"/><circle cx="24" cy="38" r="3.500" fill="#4dabf7"/><circle cx="76" cy="38" r="3.500" fill="#69db7c"/></svg>`;
 export const CLOUD = `<svg viewBox="0 0 120 70" aria-hidden="true"><path d="M30 58a20 20 0 0 1-2-40 26 26 0 0 1 48-6 22 22 0 0 1 20 28 14 14 0 0 1-6 18z" fill="#adb5bd" stroke="#868e96" stroke-width="3" stroke-linejoin="round"/><path d="M34 26q10-8 20-4" fill="none" stroke="#dee2e6" stroke-width="4" stroke-linecap="round"/></svg>`;
+/** the "PK" mark: heavy slanted letters on a lightning bolt, drawn in code (Latin letters in the art) */
+export const PK_MARK = `<svg viewBox="0 0 120 90" aria-hidden="true"><path d="M70 2L22 52h26L36 88 98 34H68z" fill="#ffd43b" stroke="#e8590c" stroke-width="4" stroke-linejoin="round"/><g transform="skewX(-8)" font-family="ui-rounded, 'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui, sans-serif" font-weight="900" font-size="46" text-anchor="middle"><text x="66" y="62" fill="#7a1c1c" stroke="#7a1c1c" stroke-width="9" stroke-linejoin="round">PK</text><text x="64" y="59" fill="#fff" stroke="#e03131" stroke-width="6" stroke-linejoin="round" paint-order="stroke">PK</text></g></svg>`;
+export const BOLT = `<svg viewBox="0 0 24 32" aria-hidden="true"><path d="M14 1L3 18h7l-3 13 14-19h-8z" fill="currentColor"/></svg>`;
 export const STAR4 = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="currentColor"/></svg>`;
 
 const FACE = (inner: string) => `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#ffd43b" stroke="#f59f00" stroke-width="4"/>${inner}</svg>`;
@@ -58,6 +61,30 @@ export function trombone(delay = 0): void {
   [[311, 293], [293, 277], [277, 261], [233, 196]].forEach(([a, b], i) => note(a, b, delay + i * 0.34, i === 3 ? 0.9 : 0.3, "sawtooth", 0.1, 700));
 }
 export function jingle(): void { [523, 659, 523].forEach((f, i) => note(f, f, i * 0.12, 0.16, "triangle", 0.18)); }
+
+/** a burst of filtered noise (a whoosh when the filter sweeps, a crack when it is short) */
+const noise = (at: number, dur: number, f0: number, f1: number, peak: number, q = 1.2) => {
+  const c = unlock();
+  if (!c || isMuted()) return;
+  const t = c.currentTime + at, len = Math.max(1, Math.floor(c.sampleRate * dur));
+  const buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  const src = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+  src.buffer = buf; f.type = "bandpass"; f.Q.value = q; f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + dur);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + dur * 0.4); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  src.connect(f); f.connect(g); g.connect(c.destination); src.start(t); src.stop(t + dur + 0.02);
+};
+/** a heavy hit: a falling low tone and a crack of noise */
+export function impact(at = 0, deep = false): void {
+  note(deep ? 110 : 160, deep ? 38 : 50, at, deep ? 0.5 : 0.32, "sine", deep ? 0.55 : 0.42);
+  noise(at, 0.18, 2600, 600, deep ? 0.3 : 0.22, 0.8);
+}
+/** the opening: a rising whoosh, then the impact when the "PK" mark lands */
+export function openingSound(): void { noise(0, 0.5, 300, 4200, 0.2); impact(0.5); note(880, 1320, 0.72, 0.22, "square", 0.05); }
+/** the countdown tick of `n` (3, 2, 1): the pitch rises with every number, a short impact under it */
+export function countTick(n: number): void { const f = 330 * Math.pow(1.26, 3 - n); note(f, f, 0, 0.16, "square", 0.12, 2400); impact(0, false); }
+/** "GO": a deeper hit, a rising chord and a burst of noise */
+export function goHit(): void { impact(0, true); noise(0, 0.5, 600, 5200, 0.22); [392, 523, 659, 784].forEach((f, i) => note(f, f, 0.04 + i * 0.03, 0.4, "sawtooth", 0.08, 2800)); }
 
 // ---------- particles ----------
 interface Part { x: number; y: number; vx: number; vy: number; g: number; life: number; age: number; c: string; w: number; h: number; rot: number; vr: number; kind: "dot" | "rect" | "star" }

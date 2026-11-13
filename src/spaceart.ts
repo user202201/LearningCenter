@@ -51,6 +51,7 @@ const base = (c: Ctx, a: string, b: string) => { const g = c.createLinearGradien
 
 function paint(id: string, c: Ctx) {
   const rnd = mkRng(hash(id));
+  c.fillStyle = "#8a8a8a"; c.fillRect(0, 0, TW, TH);   // no transparent gaps (they would turn black on the sphere)
   switch (id) {
     case "mercury": base(c, "#8a8782", "#a8a39a"); specks(c, 900, rnd, 0.1); craters(c, 170, 2, 16, rnd); break;
     case "venus": base(c, "#d9b878", "#eed39b"); swirls(c, 70, rnd, ["rgba(255,244,214,.35)", "rgba(190,140,70,.28)", "rgba(255,226,160,.3)"], 6, 18); break;
@@ -196,6 +197,11 @@ export function sprite(id: string, px: number, ring = false, lit = true): HTMLCa
 /** the rings of a planet seen from `elev` degrees above its ring plane; "back" = the half behind the planet, "front" = the half in front */
 export function drawRings(c: Ctx, cx: number, cy: number, R: number, elev: number, kind: string, part: "back" | "front"): void {
   const k = Math.sin(elev * Math.PI / 180);
+  if (kind === "faint" && part === "front") {   // faint rings: the near half is only drawn outside the planet's disc
+    c.save(); c.beginPath(); c.rect(cx - R * 3, cy - R * 3, R * 6, R * 6); c.arc(cx, cy, R * 1.02, 0, Math.PI * 2, true); c.clip("evenodd");
+    drawRings(c, cx, cy, R, elev, "faintx", "front"); c.restore(); return;
+  }
+  if (kind === "faintx") kind = "faint";
   const sets: [number, number, string][] = kind === "saturn"
     ? [[1.24, 1.52, "rgba(150,130,100,.45)"], [1.53, 1.94, "rgba(226,206,160,.95)"], [1.95, 2.03, "rgba(30,25,20,.35)"], [2.03, 2.27, "rgba(205,186,146,.85)"], [2.3, 2.33, "rgba(220,200,160,.5)"]]
     : [[1.6, 1.64, "rgba(210,225,235,.6)"], [1.8, 1.84, "rgba(210,225,235,.5)"], [2.0, 2.03, "rgba(210,225,235,.4)"]];
