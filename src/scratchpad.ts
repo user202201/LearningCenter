@@ -19,8 +19,10 @@ export function createPad(): Pad {
   const ctx2d = () => canvas.getContext("2d")!;
 
   const size = () => {
-    const r = canvas.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
-    const w = Math.max(1, Math.round(r.width * dpr)), hh = Math.max(1, Math.round(r.height * dpr));
+    // the LAYOUT size (offsetWidth / Height), never getBoundingClientRect: the game screen grows in with a scale animation, and while it runs the rectangle is a fraction of the real size;
+    // a sheet measured then stayed that small (ink only in the top-left corner, the rest of the lines away from the finger)
+    const dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(canvas.offsetWidth * dpr)), hh = Math.max(1, Math.round(canvas.offsetHeight * dpr));
     if (canvas.width !== w || canvas.height !== hh) { canvas.width = w; canvas.height = hh; }
     redraw();
   };
@@ -49,7 +51,11 @@ export function createPad(): Pad {
     if (cur) line(c, cur, dpr);
     canvas.dataset.strokes = String(strokes.length + (cur ? 1 : 0));
   };
-  const pos = (e: PointerEvent): [number, number, number] => { const r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top, e.pointerType === "pen" && e.pressure > 0 ? e.pressure : 0.5]; };
+  const pos = (e: PointerEvent): [number, number, number] => {
+    // finger position in the sheet's own CSS pixels, also while an ancestor is scaled (an animation, a zoom): rectangle / layout size = that scale
+    const r = canvas.getBoundingClientRect(), kx = r.width && canvas.offsetWidth ? r.width / canvas.offsetWidth : 1, ky = r.height && canvas.offsetHeight ? r.height / canvas.offsetHeight : 1;
+    return [(e.clientX - r.left) / kx, (e.clientY - r.top) / ky, e.pointerType === "pen" && e.pressure > 0 ? e.pressure : 0.5];
+  };
   canvas.addEventListener("pointerdown", (e) => {
     if (e.pointerType === "pen") penSeen = true;
     if (active !== null || (penSeen && e.pointerType === "touch") || (e.pointerType === "mouse" && e.button !== 0)) return;   // one finger / pencil at a time; palms are ignored once a pencil was used
@@ -89,5 +95,7 @@ export function createPad(): Pad {
   const ro = new ResizeObserver(() => size());
   ro.observe(canvas);
   window.requestAnimationFrame(size);
+  const again = () => { size(); };
+  window.setTimeout(again, 400); window.setTimeout(again, 1200);   // (after the grow-in animation of the screen)
   return { el, clear, dispose() { ro.disconnect(); } };
 }

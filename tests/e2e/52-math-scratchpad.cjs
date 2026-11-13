@@ -114,6 +114,23 @@ const strokes = (page) => page.evaluate(() => +document.querySelector('#pad-canv
     ok(r.x1 > 0 && r.x1 <= r.wantX + 6 && r.y1 <= r.wantY + 6, 'wrong coalesced coordinates are ignored: the ink stays on the finger path (right end ' + Math.round(r.x1) + ' / ' + r.wantX + ', bottom ' + Math.round(r.y1) + ' / ' + r.wantY + ')');
     await browser.close();
   }
+  // ---- with the screen's grow-in animation running (real devices have it; the other tests switch animations off): the sheet is as big as it looks, ink works over its whole area ----
+  for (const [n, vp, dpr] of [['ipad', { width: 820, height: 1180 }, 2], ['ipad landscape', { width: 1180, height: 820 }, 2], ['ipad pro landscape', { width: 1366, height: 1024 }, 2], ['phone', { width: 390, height: 844 }, 3], ['phone landscape', { width: 844, height: 390 }, 3]]) {
+    const { browser, page } = await open(vp, null, { motion: true, touch: true, dpr });
+    await page.waitForTimeout(1600);
+    const m = await page.evaluate(() => { const c = document.querySelector('#pad-canvas'), r = c.getBoundingClientRect(); return { cw: c.width, ch: c.height, w: r.width, h: r.height }; });
+    ok(Math.abs(m.cw - m.w * dpr) <= 2 && Math.abs(m.ch - m.h * dpr) <= 2, n + ' (animations on): the sheet\'s pixels match its size (' + m.cw + ' x ' + m.ch + ' for ' + Math.round(m.w) + ' x ' + Math.round(m.h) + ' CSS px at ratio ' + dpr + ')');
+    const b = await page.locator('#pad-canvas').boundingBox();
+    const cdp = await page.context().newCDPSession(page);
+    const path = [[0.55, 0.55], [0.7, 0.7], [0.9, 0.85]].map(([x, y]) => ({ x: b.x + x * b.width, y: b.y + y * b.height }));
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [path[0]] });
+    for (const q of path.slice(1)) await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [q] });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await page.waitForTimeout(150);
+    const bb = await page.evaluate(() => { const c = document.querySelector('#pad-canvas'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data, k = c.width / c.getBoundingClientRect().width; let x1 = -1, y1 = -1; for (let y = 0; y < c.height; y++) for (let x = 0; x < c.width; x++) if (d[(y * c.width + x) * 4 + 3] > 0) { x1 = Math.max(x1, x / k); y1 = Math.max(y1, y / k); } return { x1, y1 }; });
+    ok(bb.x1 > 0.8 * b.width && bb.y1 > 0.75 * b.height, n + ' (animations on): writing in the lower right of the sheet leaves ink there, not only in the top-left corner (ink reaches ' + Math.round(bb.x1) + ', ' + Math.round(bb.y1) + ' of ' + Math.round(b.width) + ' x ' + Math.round(b.height) + ')');
+    await browser.close();
+  }
   // ---- tall screens: under the question; small phone; remembered hidden state on a new game ----
   for (const [n, vp] of [['phone', { width: 390, height: 844 }], ['small', { width: 320, height: 568 }], ['ipad', { width: 820, height: 1180 }]]) {
     const { browser, page } = await open(vp);
