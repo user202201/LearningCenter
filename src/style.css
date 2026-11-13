@@ -1133,7 +1133,7 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .dj-badge { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--kid); color: #fff; font-weight: 900; border: 3px solid rgba(0, 0, 0, .2); box-shadow: 0 3px 0 rgba(0, 0, 0, .2); box-sizing: border-box; }
 .dj-bpmbox { display: inline-flex; align-items: baseline; gap: 2px; padding: 2px 10px; border-radius: 14px; background: #fff; border: 2px solid #fcc2d7; font-size: 18px; color: #a61e4d; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .dj-load { font-size: 13px; font-weight: 800; color: #5f3dc4; }
-.dj-plat-wrap { width: max(110px, min(100%, 360px, calc(100dvh - 545px))); display: flex; flex-direction: column; align-items: center; }
+.dj-plat-wrap { width: max(110px, min(100%, 360px, calc(100dvh - 565px))); display: flex; flex-direction: column; align-items: center; }
 .dj-platter { width: 100%; aspect-ratio: 1; border-radius: 50%; border: 3px solid #f783ac; box-shadow: 0 5px 0 #f783ac; background: #fff; padding: 3px; box-sizing: border-box; touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 .dj-platter svg { display: block; width: 100%; height: 100%; border-radius: 50%; transform-origin: 50% 50%; will-change: transform; pointer-events: none; }
 .dj-platter.held { cursor: grabbing; transform: translateY(3px); box-shadow: 0 2px 0 #f783ac; }
@@ -1180,7 +1180,7 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .dj-crossrow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; }
 .dj-fxrow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .dj-sync { grid-column: 1 / -1; height: 46px; min-height: 46px; border-radius: 23px; font-size: 17px; letter-spacing: .5px; }
-.dj-fx { min-height: 44px; padding: 4px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dj-fx { min-height: 44px; padding: 4px 3px; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dj-pads { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; margin: 14px auto 0; max-width: 1400px; }
 .dj-pad { position: relative; height: clamp(58px, 11dvh, 84px); min-width: 0; padding: 2px 4px; border-radius: 18px; border: 3px solid rgba(0, 0, 0, .25); background: linear-gradient(180deg, color-mix(in srgb, var(--c) 72%, #fff), var(--c)); box-shadow: 0 5px 0 rgba(0, 0, 0, .28); color: #fff; font: inherit; display: flex; align-items: center; justify-content: center; text-align: center; cursor: pointer; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; box-sizing: border-box; }
 .dj-pad b { font-size: 14px; line-height: 1.1; overflow-wrap: anywhere; text-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
@@ -1228,7 +1228,7 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
   .dj-knob { width: 40px; height: 40px; }
   .dj-knob .dj-cap::after { height: 11px; top: 3px; }
   .dj-mixer { gap: 6px; padding: 8px; }
-  .dj-bar .pn-shift, .dj-bar .pn-fullbtn { height: 36px; min-height: 36px; padding: 0 10px; }
+  .dj-bar .pn-shift, .dj-bar .pn-fullbtn { height: 40px; min-height: 40px; padding: 0 10px; }
   .dj-vfader { height: 84px; }
   .dj-sync, .dj-fx { height: 40px; min-height: 40px; }
   .dj-pads { margin-top: 8px; gap: 6px; }

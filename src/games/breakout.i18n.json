@@ -1,0 +1,20 @@
+{
+  "打砖块": ["Breakout", "Casse-briques"],
+  "移动挡板接球，击碎全部砖块": ["Move the paddle to catch the ball and break every brick", "Déplacez la raquette pour rattraper la balle et casser toutes les briques"],
+  "拖动手指移动挡板，轻点发球。": ["Drag to move the paddle, tap to launch the ball.", "Faites glisser pour déplacer la raquette, touchez pour lancer la balle."],
+  "关卡：{0}": ["Level: {0}", "Niveau : {0}"],
+  "得分：{0}": ["Score: {0}", "Score : {0}"],
+  "最高：{0}": ["Best: {0}", "Record : {0}"],
+  "暂停": ["Pause", "Pause"],
+  "继续": ["Resume", "Reprendre"],
+  "开始": ["Start", "Commencer"],
+  "点击继续。": ["Tap to continue.", "Touchez pour continuer."],
+  "已通关。": ["Level cleared.", "Niveau terminé."],
+  "全部通关。": ["All levels cleared.", "Tous les niveaux sont terminés."],
+  "下一关": ["Next level", "Niveau suivant"],
+  "再玩一次": ["Play again", "Rejouer"],
+  "游戏结束": ["Game over", "Partie terminée"],
+  "本关未完成，可重试。": ["Level not completed. You can try again.", "Niveau non terminé. Vous pouvez réessayer."],
+  "重试": ["Retry", "Réessayer"],
+  "新纪录：{0}": ["New record: {0}", "Nouveau record : {0}"]
+}

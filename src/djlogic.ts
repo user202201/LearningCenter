@@ -23,10 +23,13 @@ export const bpmOf = (trackBpm: number, pitch: number): number => trackBpm * rat
  * track can follow a 124 one); when nothing fits the fader goes as far as it can (`ok` false).
  */
 export function syncPitch(masterBpm: number, trackBpm: number): { pitch: number; ok: boolean; mult: number } {
-  let best = { pitch: (masterBpm / trackBpm - 1) * 100, mult: 1 };
-  for (const mult of [0.5, 2]) { const p = (masterBpm / (trackBpm * mult) - 1) * 100; if (Math.abs(p) < Math.abs(best.pitch)) best = { pitch: p, mult }; }
-  const ok = Math.abs(best.pitch) <= PITCH_RANGE + 1e-9;
-  return { pitch: Math.round(clamp(best.pitch, -PITCH_RANGE, PITCH_RANGE) * 10) / 10, ok, mult: best.mult };
+  let best = { pitch: 0, mult: 1, err: Infinity, ok: false };
+  for (const mult of [1, 0.5, 2]) {   // (the plain tempo first: it wins a tie)
+    const raw = (masterBpm / (trackBpm * mult) - 1) * 100, pitch = Math.round(clamp(raw, -PITCH_RANGE, PITCH_RANGE) * 10) / 10;
+    const err = Math.abs(trackBpm * mult * (1 + pitch / 100) - masterBpm);   // how far from the master BPM the fader can get
+    if (err < best.err - 1e-9) best = { pitch, mult, err, ok: Math.abs(raw) <= PITCH_RANGE + 1e-9 };
+  }
+  return { pitch: best.pitch, ok: best.ok, mult: best.mult };
 }
 
 // ---------- the platter ----------

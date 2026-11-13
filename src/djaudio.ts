@@ -146,7 +146,7 @@ export class DJ {
     const a = this.s.decks[0], b = this.s.decks[1];
     const r = L.syncPitch(a.bpm, L.trackById(b.track)?.bpm ?? 120);
     this.setPitch(1, r.pitch); this.s.syncs++;
-    return { ...r, bpm: b.bpm };
+    return { ...r, bpm: b.bpm * r.mult };   // (a half-time track is reported in the master's beats)
   }
   async load(i: 0 | 1, id: string): Promise<boolean> {
     const def = L.trackById(id); if (!def) return false;
@@ -212,9 +212,9 @@ export class DJ {
       const d = this.s.decks[i], buf = this.bufs[i];
       if (d.scratching && now - this.lastMove[i] > 60) d.scratchRate = 0;   // the finger rests: the record is held
       const target = d.scratching ? d.scratchRate : d.playing || d.cueHold ? L.rateOf(d.pitch) * (this.s.fx.brake ? 0 : 1) : 0;
-      const tc = d.scratching ? 0.03 : this.s.fx.brake ? 0.4 : 0.1;
+      const tc = d.scratching ? 0.03 : this.s.fx.brake ? 0.35 : 0.15;
       d.cur += (target - d.cur) * (1 - Math.exp(-dt / tc));
-      if (Math.abs(target - d.cur) < 0.002) d.cur = target;
+      if (Math.abs(target - d.cur) < 0.002 || (target === 0 && Math.abs(d.cur) < 0.02)) d.cur = target;   // (a record that is almost still is still)
       const dur = buf?.duration ?? 1;
       d.pos = (((d.pos + d.cur * dt) % dur) + dur) % dur;
       if (!d.scratching) d.angle = (((d.angle + L.platterSpeed(d.cur) * dt) % 360) + 360) % 360;
