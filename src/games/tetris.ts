@@ -21,8 +21,8 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const nextBox = h("div", { class: "tetris-box" }, h("small", {}, "下一个"), nextCv);
   const pauseBtn = h("button", { class: "mopt", id: "tetris-pause", onclick: () => togglePause() }, "暂停");
   const newBtn = h("button", { class: "mopt", id: "tetris-new", onclick: () => { ctx.sfx("tap"); reset(); begin(); } }, "重新开始");
-  const left = h("div", { class: "tetris-left" }, holdBox, h("div", { class: "tetris-stats" }, scoreEl, linesEl, levelEl, bestEl));
-  const right = h("div", { class: "tetris-right" }, nextBox, h("div", { class: "tetris-btns" }, pauseBtn, newBtn));
+  const stats = h("div", { class: "tetris-stats" }, scoreEl, linesEl, levelEl, bestEl);
+  const btns = h("div", { class: "tetris-btns" }, pauseBtn, newBtn);
 
   const cv = h("canvas", { id: "tetris-canvas" });
   const title = h("h2", {}, ""), msg = h("p", {}, "");
@@ -45,7 +45,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   };
   const cl = h("div", { class: "tetris-cl" }, key("left", "◀", () => act("left"), true), key("down", "▼", () => act("soft"), true), key("right", "▶", () => act("right"), true));
   const cr = h("div", { class: "tetris-cr" }, key("hold", "暂存", () => act("hold"), false, "hold"), key("rot", "↻", () => act("rot"), false, "alt"), key("drop", "⤓", () => act("hard"), false, "alt"));
-  root.append(h("div", { class: "tetris-wrap" }, left, right, board, cl, cr));
+  root.append(h("div", { class: "tetris-wrap" }, stats, holdBox, btns, nextBox, board, cl, cr));
 
   let s!: TetrisState, phase: Phase = "ready";
   let acc = 0, lockT = 0, lockResets = 0, last = 0, raf = 0, now = 0, cell = 20, dpr = 1, trail: { x: number; y0: number; y1: number; t: number; color: string }[] = [];

@@ -376,6 +376,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     load(g: L.Grid, c: number, n: number, lvl = level) { view = "play"; level = lvl; grid = g.map((r) => r.slice()); cur = c; nxt = n; misses = 0; score = 0; shots = 0; over = ""; paused = false; flight = null; fx = []; parShots = L.par(grid); if (!canvas.isConnected) buildPlay(); hudUpdate(); },
     aim(deg: number) { angle = (deg * Math.PI) / 180; aimOn = true; },
     shoot, swap,
+    setMisses(n: number) { misses = n; hudUpdate(); },
   };
 
   showLevels();

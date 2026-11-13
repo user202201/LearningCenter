@@ -165,7 +165,7 @@ const SHAPES: Record<Shape, (r: number, c: number, n: number, w: number) => bool
   full: () => true,
   pyramid: (r, c, n, w) => half(c, w) <= (w / 2) * (1 - r / (n + 1)) + 0.3,
   diamond: (r, c, n, w) => half(c, w) <= (w / 2) * (1 - Math.abs(r - (n - 1) / 2) / ((n + 1) / 2)) + 0.4,
-  stripes: (r) => r % 3 !== 2,
+  stripes: (r, c) => r % 3 !== 2 || c % 4 === 0,
   checker: (r, c) => (r + c) % 2 === 0 || r === 0,
   hourglass: (r, c, n, w) => half(c, w) >= (w / 2) * (1 - Math.abs(r - (n - 1) / 2) / ((n + 1) / 2)) * 0.9 - 0.5 || r === 0 || r === n - 1,
   zigzag: (r, c) => ((c + (Math.floor(r / 2) % 2 ? 3 : 0)) % 6) < 4 || r === 0,
@@ -178,7 +178,7 @@ const SHAPES: Record<Shape, (r: number, c: number, n: number, w: number) => bool
 export const LEVELS: LevelSpec[] = [
   { rows: 4, colors: 3, shape: "full", misses: 7, clump: 0.45 },
   { rows: 5, colors: 3, shape: "pyramid", misses: 7, clump: 0.4 },
-  { rows: 5, colors: 4, shape: "stripes", misses: 6, clump: 0.4 },
+  { rows: 6, colors: 4, shape: "stripes", misses: 6, clump: 0.4 },
   { rows: 6, colors: 4, shape: "diamond", misses: 6, clump: 0.35 },
   { rows: 6, colors: 4, shape: "checker", misses: 6, clump: 0.3 },
   { rows: 7, colors: 5, shape: "columns", misses: 5, clump: 0.35 },

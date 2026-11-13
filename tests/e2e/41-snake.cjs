@@ -135,7 +135,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await p.evaluate(() => { const s = window.__snake.state(); s.snake = [{ x: 15, y: 5 }, { x: 14, y: 5 }, { x: 13, y: 5 }]; s.dir = 'R'; s.queue = []; s.food = { x: 0, y: 0 }; });
   await tick(); a = await st();
   ok(!a.alive && a.phase === 'dead', 'the wall kills when wrap is off');
-  await p.waitForFunction(() => document.querySelector('#snake-ovl') && !document.querySelector('#snake-ovl').hidden, null, { timeout: 4000 });
+  await p.waitForFunction(() => (() => { const o = document.querySelector('#snake-ovl'); return !!o && !o.hidden; })(), null, { timeout: 4000 });
   await p.screenshot({ path: OUT + 'snake-dead.png' });
   ok((await p.textContent('#snake-ovl h2')) === '游戏结束' && (await p.textContent('#snake-ovl p')).includes('10'), 'game over overlay with the score');
   const best = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).snake['best-normal']);

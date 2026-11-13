@@ -4,6 +4,7 @@
  */
 import { Chess } from "chess.js";
 import type { Move } from "chess.js";
+export { Chess };
 
 export type Level = 0 | 1 | 2 | 3;
 export interface LevelInfo { name: string; depth: number; ms: number; tolerance: number }

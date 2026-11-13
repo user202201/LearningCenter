@@ -55,7 +55,7 @@ export function boardSvg(): string {
   let marks = "";
   for (const [c, r] of [[1, 2], [7, 2], [1, 7], [7, 7], [0, 3], [2, 3], [4, 3], [6, 3], [8, 3], [0, 6], [2, 6], [4, 6], [6, 6], [8, 6]]) marks += mark(c, r);
   const leaf = (x: number, y: number, rot: number, s = 1) => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})"><path d="M0 0 Q0.25 -0.45 0 -0.9 Q-0.25 -0.45 0 0Z" fill="#69db7c" stroke="#2b8a3e" stroke-width="0.05"/></g>`;
-  const bamboo = (x: number, y: number, flip: number) => `<g transform="translate(${x} ${y}) scale(${flip} 1)"><path d="M0 0 L0.5 0.25" stroke="#2b8a3e" stroke-width="0.09" stroke-linecap="round"/>${leaf(0.1, 0.05, 60, 0.9)}${leaf(0.3, 0.12, 20, 0.8)}${leaf(0.45, 0.2, 100, 0.7)}</g>`;
+  const bamboo = (x: number, y: number, flip: number) => `<g transform="translate(${x} ${y}) scale(${flip * 0.6} 0.6)"><path d="M0 0 L0.5 0.25" stroke="#2b8a3e" stroke-width="0.09" stroke-linecap="round"/>${leaf(0.1, 0.05, 60, 0.9)}${leaf(0.3, 0.12, 20, 0.8)}${leaf(0.45, 0.2, 100, 0.7)}</g>`;
   return `<svg class="xq-lines" viewBox="0 0 9.4 10.4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <rect x="${o - 0.09}" y="${o - 0.09}" width="${8.18}" height="${9.18}" fill="none" stroke="#7a4a1d" stroke-width="0.09" rx="0.05"/>
 <g fill="none" stroke="#7a4a1d" stroke-width="0.055" stroke-linecap="round" stroke-linejoin="round">${g}</g>
@@ -63,7 +63,7 @@ export function boardSvg(): string {
 <rect x="${o + 0.05}" y="${o + 4.08}" width="7.9" height="0.84" fill="#fff6d6" opacity=".55"/>
 <text class="user" x="${o + 2}" y="${o + 4.72}" text-anchor="middle" font-size="0.62" letter-spacing="0.1">\u695a\u6cb3</text>
 <text class="user" x="${o + 6}" y="${o + 4.72}" text-anchor="middle" font-size="0.62" letter-spacing="0.1">\u6c49\u754c</text>
-${bamboo(0.05, 0.12, 1)}${bamboo(9.35, 0.12, -1)}${bamboo(0.05, 10.25, 1).replace("scale(1 1)", "scale(1 -1)")}${bamboo(9.35, 10.25, -1).replace("scale(-1 1)", "scale(-1 -1)")}
+${bamboo(0.05, 0.12, 1)}${bamboo(9.35, 0.12, -1)}${bamboo(0.05, 10.25, 1).replace("scale(0.6 0.6)", "scale(0.6 -0.6)")}${bamboo(9.35, 10.25, -1).replace("scale(-0.6 0.6)", "scale(-0.6 -0.6)")}
 </svg>`;
 }
 

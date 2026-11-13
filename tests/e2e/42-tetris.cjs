@@ -121,7 +121,7 @@ fs.mkdirSync(OUT, { recursive: true });
         else if (a < 0.88) { res = M.hardDrop(q); } else res = M.gravity(q);
         if (res) { locked++; linesSeen += res.cleared.length; }
         const filled = q.board.flat().filter(Boolean).length;
-        if (filled !== 4 * locked - 10 * linesSeen) bad.push('cell count g' + gm + ' i' + i);
+        if (!q.over && filled !== 4 * locked - 10 * linesSeen) bad.push('cell count g' + gm + ' i' + i);
         if (q.lines !== linesSeen) bad.push('lines g' + gm);
         if (q.score < scoreSeen) bad.push('score went down'); scoreSeen = q.score;
         if (q.board.some((row) => row.some((c) => c < 0 || c > 7))) bad.push('bad cell');
@@ -198,7 +198,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await p.evaluate(() => { const s = window.__tetris.state(); s.board = s.board.map(() => new Array(10).fill(0)); for (let y = 0; y < 3; y++) for (let x = 0; x < 9; x++) s.board[y][x] = 3; s.cur = { t: 'O', r: 0, x: 4, y: 10 }; });
   await p.keyboard.press(' ');
   a = await S(); ok(a.over && a.phase === 'over', 'the stack reaches the top: game over');
-  await p.waitForFunction(() => !document.querySelector('#tetris-ovl').hidden, null, { timeout: 4000 });
+  await p.waitForFunction(() => { const o = document.querySelector('#tetris-ovl'); return !!o && !o.hidden; }, null, { timeout: 4000 });
   await p.screenshot({ path: OUT + 'tetris-over.png' });
   const best = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.games.v1')).tetris.best);
   ok((await p.textContent('#tetris-ovl h2')) === '游戏结束' && best > 800 && (await p.textContent('#tetris-best')) === `最高：${best}`, 'game over overlay, best score kept in learn.games.v1: ' + best);

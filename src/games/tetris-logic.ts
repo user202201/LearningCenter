@@ -117,7 +117,8 @@ export interface LockResult { cleared: number[]; points: number; levelUp: boolea
 export function lock(s: TetrisState): LockResult {
   if (!s.cur || s.over) return { cleared: [], points: 0, levelUp: false, over: s.over };
   const idx = kindIndex(s.cur.t);
-  for (const [x, y] of cellsOf(s.cur)) if (y >= 0) s.board[y][x] = idx;
+  let lockOut = false;
+  for (const [x, y] of cellsOf(s.cur)) { if (y >= 0) s.board[y][x] = idx; else lockOut = true; }
   const cleared: number[] = [];
   s.board.forEach((row, y) => { if (row.every((c) => c)) cleared.push(y); });
   if (cleared.length) {
@@ -128,7 +129,7 @@ export function lock(s: TetrisState): LockResult {
   const before = s.level;
   s.level = Math.max(s.level, levelFor(s.lines, s.startLevel));
   s.canHold = true;
-  spawn(s);
+  if (lockOut) s.over = true; else spawn(s);
   return { cleared, points, levelUp: s.level > before, over: s.over };
 }
 /** one gravity step: down one row, or lock when it cannot go down */

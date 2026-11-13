@@ -99,8 +99,7 @@
 .xq-btn.xq-go { color: #fff; border-color: transparent; background: linear-gradient(180deg, #38d9a9, #12b886); box-shadow: 0 4px 0 #0b8a66; }
 .xq-btn.xq-go:active { box-shadow: 0 0 0 #0b8a66; }
 .xq-opts { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 12px; width: 100%; }
-.xq-chips { display: inline-flex; align-items: center; gap: 4px; }
-.xq-chips .mopt { min-height: 32px; padding: 2px 10px; font-size: 13px; border-radius: 12px; }
+.xq-select { min-height: 36px; padding: 2px 28px 2px 12px; font: inherit; font-size: 14px; font-weight: 800; color: #e8590c; background: #fff; border: 3px solid #ffd8a8; border-radius: 14px; box-shadow: 0 3px 0 #ffd8a8; cursor: pointer; }
 
 /* the end */
 .xq-conf { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 20; border-radius: calc(var(--u) * 0.6); }
@@ -122,5 +121,7 @@
   .xq-top { grid-column: 2; grid-row: 1; }
   .xq-bottom { grid-column: 2; grid-row: 2; }
   .xq-head { flex-direction: column; }
+  .xq-wrap { width: 100%; margin: 0 auto; }
+  .xq-play { width: auto; }
 }
 @media (prefers-reduced-motion: reduce) { .xq-p, .xq-p * { transition: none !important; } }
