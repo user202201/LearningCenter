@@ -975,3 +975,14 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 
 /* the names of cards stay on one line (ui.ts oneLine shrinks the font when a translation is longer) */
 .subject .s-name, .gm-card b, .mus-card b { display: block; width: 100%; white-space: nowrap; overflow-wrap: normal; text-align: center; overflow: hidden; }
+
+/* games: a compact title band so that the game gets the room */
+.gm-hero { padding-bottom: 8px !important; gap: 8px; border-radius: 0 0 22px 22px !important; }
+.gm-hero h1 { font-size: 19px; text-align: center; }
+.gm-ib { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 2px solid rgba(255,255,255,.7); background: rgba(255,255,255,.2); color: #fff; font: inherit; font-size: 19px; font-weight: 900; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.gm-ib.on { background: #fff; color: #087f5b; }
+.gm-page.gm-full > .top.hero.gm-hero { display: flex; position: absolute; top: calc(env(safe-area-inset-top) + 6px); right: 6px; left: auto; z-index: 5; background: transparent; padding: 0 !important; box-shadow: none; gap: 6px; }
+.gm-page.gm-full > .top.hero.gm-hero > :not(.gm-ib) { display: none; }
+.gm-page.gm-full > .gm-hero .gm-ib { background: rgba(8,127,91,.85); border-color: #fff; color: #fff; }
+.gm-page.gm-full > .gm-hero .gm-ib.on { background: #fff; color: #087f5b; }
+.gm-page.gm-full .gm-main { padding-top: calc(env(safe-area-inset-top) + 52px); }

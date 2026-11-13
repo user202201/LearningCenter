@@ -51,19 +51,23 @@ export async function renderGame(id: string) {
   if (my !== X.epoch()) return;
   const stage = h("div", { class: "gm-stage", id: "gm-stage" });
   const ctx: GameCtx = { id, h, toast, sfx: (k: SfxKind) => sfx(k), store: storeFor(id), exit: () => (location.hash = "#/subject/games") };
-  const snd = h("button", { class: "mopt" + (isMuted() ? "" : " on"), id: "gm-sound", onclick: (e: Event) => { setMuted(!isMuted()); (e.currentTarget as HTMLElement).classList.toggle("on", !isMuted()); (e.currentTarget as HTMLElement).textContent = isMuted() ? "音效：关" : "音效：开"; ctx.sfx("tap"); try { localStorage.setItem("learn.games.muted", isMuted() ? "1" : "0"); } catch { /* ok */ } } }, isMuted() ? "音效：关" : "音效：开");
+  const soundLabel = () => (isMuted() ? "音效：关" : "音效：开");
+  const snd = h("button", { class: "gm-ib" + (isMuted() ? "" : " on"), id: "gm-sound", onclick: () => { setMuted(!isMuted()); syncSnd(); ctx.sfx("tap"); try { localStorage.setItem("learn.games.muted", isMuted() ? "1" : "0"); } catch { /* ok */ } } }, "♪");
+  const syncSnd = () => { snd.classList.toggle("on", !isMuted()); snd.title = soundLabel(); snd.setAttribute("aria-label", soundLabel()); snd.setAttribute("aria-pressed", String(!isMuted())); };
   let full = false;
-  const fullBtn = h("button", { class: "pn-fullbtn", id: "gm-full", onclick: () => setFull(!full) }, "⛶ 全屏");
-  const root: HTMLElement = h("div", { class: "page gm-page", style: `--kid:${COLOR}` }, hero(info.name, "#/subject/games", "小游戏", `#/games/${id}`),
-    h("div", { class: "gm-bar" }, snd, fullBtn), h("main", { class: "gm-main" }, stage));
+  const fullBtn = h("button", { class: "gm-ib", id: "gm-full", title: "全屏", "aria-label": "全屏", onclick: () => setFull(!full) }, "⛶");
+  // a compact title band (the games need the room): back, title, sound, full screen
+  const root: HTMLElement = h("div", { class: "page gm-page", style: `--kid:${COLOR}` },
+    h("header", { class: "top hero gm-hero", style: `--kid:${COLOR}` }, X.back("#/subject/games", "小游戏"), h("h1", {}, info.name), snd, fullBtn),
+    h("main", { class: "gm-main" }, stage));
   const setFull = (v: boolean) => {
-    full = v; root.classList.toggle("gm-full", v); fullBtn.textContent = v ? "✕ 退出全屏" : "⛶ 全屏";
+    full = v; root.classList.toggle("gm-full", v); fullBtn.textContent = v ? "✕" : "⛶"; fullBtn.title = v ? "退出全屏" : "全屏"; fullBtn.setAttribute("aria-label", fullBtn.title);
     try { if (v) void (root.requestFullscreen?.() ?? Promise.resolve()).catch(() => { /* the page-wide mode is enough */ }); else if (document.fullscreenElement) void document.exitFullscreen(); } catch { /* same */ }
     window.setTimeout(() => window.dispatchEvent(new Event("resize")), 80);
   };
   document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement && full && root.isConnected) setFull(false); });
   try { setMuted(localStorage.getItem("learn.games.muted") === "1"); } catch { /* ok */ }
-  snd.className = "mopt" + (isMuted() ? "" : " on"); snd.textContent = isMuted() ? "音效：关" : "音效：开";
+  syncSnd();
   X.show(root);
   let stop: (() => void) | null = null;
   try { stop = mod.default(stage, ctx); } catch (e) { toast(`这个游戏出错了：${e instanceof Error ? e.message : String(e)}`, 6000); }

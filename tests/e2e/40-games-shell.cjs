@@ -27,15 +27,17 @@ const IDS = ['snake', 'tetris', 'bubble', 'match3', 'klotski', 'gomoku', 'chess'
     ok(r.hash === `#/games/${id}` && r.kids > 0 && r.sw && !/出错/.test(r.err), `${id}: opens in the stage, nothing sideways`);
   }
   // sound switch and full screen (on the last game)
-  ok((await p.textContent('#gm-sound')) === '音效：开', 'the sound is on at first');
+  ok((await p.getAttribute('#gm-sound', 'aria-label')) === '音效：开' && await p.locator('#gm-sound.on').count() === 1, 'the sound is on at first');
   await p.click('#gm-sound');
-  ok((await p.textContent('#gm-sound')) === '音效：关' && (await p.evaluate(() => localStorage.getItem('learn.games.muted'))) === '1', 'the sound switch turns it off (and keeps it)');
+  ok((await p.getAttribute('#gm-sound', 'aria-label')) === '音效：关' && (await p.evaluate(() => localStorage.getItem('learn.games.muted'))) === '1', 'the sound switch turns it off (and keeps it)');
   await p.click('#gm-sound');
+  const bandH = await p.evaluate(() => document.querySelector('.gm-hero').getBoundingClientRect().height);
+  ok(bandH <= 76, 'the title band is compact (' + Math.round(bandH) + ' px) so that the game gets the room');
   await p.click('#gm-full'); await p.waitForTimeout(300);
-  ok(await p.evaluate(() => document.querySelector('.gm-page').classList.contains('gm-full') && getComputedStyle(document.querySelector('.gm-page > .top')).display === 'none') && (await p.textContent('#gm-full')).includes('退出'), 'full screen hides the title band and shows an exit button');
+  ok(await p.evaluate(() => document.querySelector('.gm-page').classList.contains('gm-full')) && (await p.getAttribute('#gm-full', 'aria-label')) === '退出全屏' && await p.locator('#gm-sound').isVisible(), 'full screen: the sound and exit buttons float in the corner');
   await p.click('#gm-full'); await p.waitForTimeout(200);
   ok(!(await p.evaluate(() => document.querySelector('.gm-page').classList.contains('gm-full'))), 'and leaves it again');
-  await p.click('.gm-page .top button, .gm-page .top a'); await p.waitForSelector('.gm-card');
+  await p.click('.gm-hero .back, .gm-hero a, .gm-hero button >> nth=0'); await p.waitForSelector('.gm-card');
   ok((await p.evaluate(() => location.hash)) === '#/subject/games', 'the back button of a game returns to the home of games');
   ok(t.log.external.length === 0, 'OFFLINE: no request left the app');
   await t.browser.close();

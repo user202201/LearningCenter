@@ -132,8 +132,9 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     area.style.height = ah + "px"; area.style.flex = "none"; area.style.width = side ? aw + "px" : "";
     const sz = Math.min(aw, ah) - 12;
     if (sz < 40) return;
-    S = Math.floor(sz / L.N);
-    boardEl.style.width = boardEl.style.height = S * L.N + "px";
+    S = Math.floor((sz - 6) / L.N);
+    boardEl.style.setProperty("--pad", Math.max(0.5, S * 0.012) + "px");
+    boardEl.style.width = boardEl.style.height = S * L.N + 6 + "px";
     for (const el of els.values()) { el.style.width = el.style.height = S + "px"; }
     for (let r = 0; r < L.N; r++) for (let c = 0; c < L.N; c++) { const cd = board[r]?.[c]; const el = cd && els.get(cd.id); if (el) place(el, r, c); }
   }

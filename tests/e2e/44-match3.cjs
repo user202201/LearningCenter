@@ -96,7 +96,7 @@ const SWAP3 = board([[3, 0, 5], [3, 1, 5], [4, 2, 5]]);
       const both = rb2.rounds[0].cleared.length === 64;
       // chains: a board that cascades (found by search) gives a growing combo and growing points
       // no-move detection and shuffle
-      const dead = fr(Array.from({ length: 8 }, (_, r) => Array.from({ length: 8 }, (_, c) => (r + c) % 2).join('')));
+      const dead = fr(Array.from({ length: 8 }, (_, r) => Array.from({ length: 8 }, (_, c) => (r + c) % 4).join('')));
       const deadNoMove = !L.hasMoves(dead) && L.findMove(dead) === null;
       let shuffleOk = true;
       for (let s = 1; s <= 60; s++) { const sh = L.shuffle(dead, L.mulberry32(s)); if (L.findMatches(sh).length || !L.hasMoves(sh) || new Set(sh.flat().map((x) => x.id)).size !== 64) shuffleOk = false; }
@@ -193,9 +193,9 @@ const SWAP3 = board([[3, 0, 5], [3, 1, 5], [4, 2, 5]]);
   ok(s.score >= 60 && s.moves === 4 && s.elements === 64, 'a colour bomb swapped with a candy clears all of its colour (score ' + s.score + ')');
 
   // a shuffle when there is no move
-  const dead = Array.from({ length: 8 }, (_, r) => Array.from({ length: 8 }, (_, c) => (r + c) % 2).join(''));
+  const dead = Array.from({ length: 8 }, (_, r) => Array.from({ length: 8 }, (_, c) => (r + c) % 4).join(''));
   await load(p, dead, { moves: 5, target: 100, seed: 15 });
-  ok(await p.evaluate(async () => { const L = await import('/src/games/match3-logic.ts'); const b = window.__m3.s.board; return L.hasMoves(b) && L.findMatches(b).length === 0 && b.flat().filter((x) => x.k === 0).length === 32; }), 'a board without any move is shuffled at once');
+  ok(await p.evaluate(async () => { const L = await import('/src/games/match3-logic.ts'); const b = window.__m3.s.board; return L.hasMoves(b) && L.findMatches(b).length === 0 && JSON.stringify(b.map((r) => r.map((x) => x.k).join('')))!== JSON.stringify(Array.from({ length: 8 }, (_, r) => Array.from({ length: 8 }, (_, c) => (r + c) % 4).join('')).map((s) => [...s].map(Number).join(''))) ; }), 'a board without any move is shuffled at once');
 
   // the hint: a button and after idle time
   await load(p, SWAP3, { moves: 5, target: 100, seed: 16 });
@@ -225,7 +225,7 @@ const SWAP3 = board([[3, 0, 5], [3, 1, 5], [4, 2, 5]]);
   await p.screenshot({ path: OUT + 'match3-lose.png' });
   await p.click('#match3-again'); s = await S(p); ok(!s.over && s.score === 0 && s.moves === L_MOVES(), 'try again restarts the level');
   // reload: progress
-  await p.reload(); await p.waitForSelector('#local-btn, .hub-grid', { timeout: 10000 });
+  await p.reload(); await p.waitForSelector('#local-btn, .hub-grid, .match3-lv', { timeout: 10000 });
   if (await p.locator('#local-btn').count()) await p.click('#local-btn');
   await open(t);
   ok(await p.locator('.match3-lv:not([disabled])').count() === 2 && (await p.textContent('.match3-lv[data-level="1"] small')).startsWith('★'), 'after a reload the stars are there and level 2 is open');

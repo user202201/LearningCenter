@@ -13,7 +13,7 @@
 .match3-area { flex: 1 1 0; min-height: 0; min-width: 0; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .match3-board { position: relative; flex: none; border-radius: 18px; border: 3px solid #f8a5c2; box-shadow: 0 5px 0 #f8a5c2; background: #fff0f6; touch-action: none; overflow: hidden; user-select: none; -webkit-user-select: none; }
 .match3-board::before { content: ""; position: absolute; inset: 0; background-image: conic-gradient(#ffe3ee 25%, #fff0f6 0 50%, #ffe3ee 0 75%, #fff0f6 0); background-size: 25% 25%; opacity: .8; }
-.match3-cell { position: absolute; left: 0; top: 0; padding: 1.5%; box-sizing: border-box; transition: transform .2s ease-out; touch-action: none; will-change: transform; }
+.match3-cell { position: absolute; left: 0; top: 0; padding: var(--pad, 1px); box-sizing: border-box; transition: transform .2s ease-out; touch-action: none; will-change: transform; }
 .match3-cell.fall { transition: transform .3s cubic-bezier(.4, 0, .7, 1.2); }
 .match3-cell svg { width: 100%; height: 100%; display: block; overflow: visible; pointer-events: none; }
 .match3-cell.sel { z-index: 3; animation: match3-sel .5s ease-in-out infinite alternate; }
