@@ -30,3 +30,4 @@
 31-offline-web
 32-offline-sync
 33-science
+34-subject-shortcuts

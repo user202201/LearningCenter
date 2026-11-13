@@ -15,7 +15,7 @@ import { openMathGame } from "./mathui";
 import { renderRich } from "./mathtext";
 import * as MS from "./mathsettings";
 import { mascot } from "./art";
-import { subjectArt } from "./hub";
+import { subjectArt, shortcuts } from "./hub";
 import type { Ctx } from "./english";
 
 let X!: Ctx;
@@ -125,7 +125,7 @@ export async function renderKid(id: string, tab: Tab) {
   const body = h("div", { class: "scroll" });
   const gradeBtn = h("button", { class: "link", id: "grade-btn", title: "修改年级", onclick: () => void changeGrade(k) }, "年级：", P.gradeName(P.gradeOf(id) ?? 1));
   const page = h("div", { class: "page", style: `--kid:${k.color}` },
-    h("header", { class: "top hero kid-hero" }, X.back("#/subject/math", "孩子"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), h("span", { class: "slot" })),
+    h("header", { class: "top hero kid-hero" }, X.back("#/subject/math", "孩子"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), shortcuts(k.id, "math")),
     h("div", { class: "tabs-row" }, tabs),
     h("div", { class: "grade-row" }, gradeBtn),
     body);

@@ -15,7 +15,7 @@ import { openMathGame } from "./mathui";
 import { renderRich, renderTeX } from "./mathtext";
 import { SYMBOLS, CIRCUITS, RULES } from "./diagrams";
 import { mascot } from "./art";
-import { subjectArt } from "./hub";
+import { subjectArt, shortcuts } from "./hub";
 import type { Ctx } from "./english";
 
 let X!: Ctx;
@@ -124,7 +124,7 @@ export async function renderKid(id: string, tab: Tab) {
   const body = h("div", { class: "scroll" });
   const gradeBtn = h("button", { class: "link", id: "grade-btn", title: "修改年级", onclick: () => void changeGrade(k) }, "年级：", P.gradeName(P.gradeOf(id) ?? 1));
   X.show(h("div", { class: "page", style: `--kid:${k.color}` },
-    h("header", { class: "top hero kid-hero" }, X.back("#/subject/science", "孩子"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), h("span", { class: "slot" })),
+    h("header", { class: "top hero kid-hero" }, X.back("#/subject/science", "孩子"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), shortcuts(k.id, "science")),
     h("div", { class: "tabs-row" }, tabs), h("div", { class: "grade-row" }, gradeBtn), body));
   if (tab === "week") await renderDay(body, k, kid, lib);
   else if (tab === "learned") await renderLearned(body, k, kid, lib);

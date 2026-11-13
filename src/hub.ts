@@ -89,6 +89,18 @@ export function subjectArt(id: Subject["id"]): SVGSVGElement {
   return s;
 }
 
+/** where a child's own page is in each subject */
+export const kidRoute = (subject: Subject["id"], kidId: string): string => (subject === "chinese" ? `#/kid/${kidId}` : `#/${subject}/${kidId}`);
+
+/**
+ * Three round shortcuts for the top bar of a child's page: the OTHER subjects, each leading to the same child's page there
+ * (the grade is asked there the first time, as always). Right-aligned.
+ */
+export function shortcuts(kidId: string, current: Subject["id"]): HTMLElement {
+  return h("nav", { class: "shortcuts", "aria-label": "学科" }, ...SUBJECTS.filter((s) => s.id !== current).map((s) =>
+    h("a", { class: "shortcut", id: `go-${s.id}`, href: kidRoute(s.id, kidId), title: s.name, "aria-label": s.name, style: `--c1:${s.c1};--c2:${s.c2};--cd:${s.dark}` }, subjectArt(s.id))));
+}
+
 // ---------- the screen ----------
 const reduced = () => !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 const style = (s: Subject) => `--c1:${s.c1};--c2:${s.c2};--cd:${s.dark}`;

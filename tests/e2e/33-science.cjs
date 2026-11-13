@@ -67,6 +67,8 @@ const openScience = async (page, name) => {
       const game = SM.buildGame(lib2, k2, rv, '2026-11-12');
       res.game = [game.questions.length, game.fresh, game.again];
       res.noOutside = performance.getEntriesByType('resource').filter((x) => !x.name.startsWith(location.origin)).length;
+      const hp = lib.cards.filter((c) => c.id.startsWith('x-hp-')), hc = lib.cards.filter((c) => c.id.startsWith('x-hc-')), hb = lib.cards.filter((c) => c.id.startsWith('x-hb-'));
+      res.phys = [hp.length, hc.length, hb.length, ['电流表应该怎样接入电路？', '通电导体在磁场中受力的方向，用什么判断？', '导体切割磁感线产生感应电流的方向，用什么判断？', '通电螺线管的磁场方向用什么来判断？'].filter((q) => lib.cards.some((c) => c.q === q)).length, lib.cards.filter((c) => /\$/.test(c.a)).length];
       const els = lib.cards.filter((c) => c.id.startsWith('el-')); res.elBad = els.filter((c) => new Set([c.a, ...c.w]).size !== 4).length;
       const fe = lib.byId.get('el-sym-26'); res.fe = fe ? [fe.q, fe.a] : [];
       return res;
@@ -83,6 +85,7 @@ const openScience = async (page, name) => {
     ok(r.rv.later.includes('a') && r.rv.later.includes('b') && !r.rv.later.includes('z') && r.rv.later.every((i) => i !== 'z'), 'old cards come back (due ones and ones never asked), today\'s own cards are not "old": ' + r.rv.later.join());
     ok(r.game[1] === 1 && r.game[2] >= 3 && r.game[0] === r.game[1] + r.game[2], 'the game = today\'s new cards + the old ones that are due: ' + r.game.join('/'));
     ok(r.elBad === 0 && (r.fe.length === 0 || /Fe|铁/.test(r.fe.join())), 'the element cards (if any) are made from the periodic table');
+    ok(r.phys[0] >= 150 && r.phys[1] >= 70 && r.phys[2] >= 70 && r.phys[3] === 4 && r.phys[4] >= 20, 'junior-high physics (circuits, the left-hand / right-hand / Ampère rules ...), chemistry and biology cards are there: ' + r.phys.join(' / ') + ' (physics / chemistry / biology / rule cards / answers typeset as TeX)');
     ok(r.noOutside === 0, 'nothing is fetched from outside');
     await t.browser.close();
   }

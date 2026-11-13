@@ -12,7 +12,7 @@ import * as W from "./words";
 import { pickKidGrade } from "./gradeui";
 import { openGame } from "./gameui";
 import { mascot } from "./art";
-import { subjectArt } from "./hub";
+import { subjectArt, shortcuts } from "./hub";
 
 /** what the English screens need from the app shell (main.ts) */
 export interface Ctx {
@@ -131,7 +131,7 @@ export async function renderKid(id: string, tab: Tab) {
   const body = h("div", { class: "scroll" });
   const gradeBtn = h("button", { class: "link", id: "grade-btn", title: "修改年级", onclick: () => void changeGrade(k) }, "年级：", P.gradeName(P.gradeOf(id) ?? 1));
   const page = h("div", { class: "page", style: `--kid:${k.color}` },
-    h("header", { class: "top hero kid-hero" }, X.back("#/subject/english", "孩子"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), h("span", { class: "slot" })),
+    h("header", { class: "top hero kid-hero" }, X.back("#/subject/english", "孩子"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), shortcuts(k.id, "english")),
     h("div", { class: "tabs-row" }, tabs),
     h("div", { class: "grade-row" }, gradeBtn),
     body);

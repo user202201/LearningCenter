@@ -15,7 +15,7 @@ import { openGame } from "./gameui";
 import { scanQr } from "./scan";
 import { readTable, readWorkbook, type SheetData } from "./xlsx";
 import * as I from "./importer";
-import { subjectById, hubGrid, hubHero, soonPage, reveal } from "./hub";
+import { subjectById, hubGrid, hubHero, soonPage, reveal, shortcuts } from "./hub";
 import * as E from "./english";
 import * as MA from "./math";
 import * as SC from "./science";
@@ -318,7 +318,7 @@ async function renderKid(id: string, tab: "week" | "learned" | "game") {
         backBtn("#/chinese", "孩子"),
         h("h1", { class: "user-title" },
           doubleTap(h("button", { class: "hero-avatar", id: "hero-avatar", title: "双击修改头像和颜色", "aria-label": "双击修改头像和颜色" }, avatarEl(k)), () => void changeAvatar(k, () => void route())), k.name),
-        h("span", { class: "slot" })),
+        shortcuts(id, "chinese")),
       h("div", { class: "tabs-row" }, tabs),
       body,
     )
