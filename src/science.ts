@@ -345,10 +345,10 @@ export function renderCircuits() {
 }
 
 // ---------- summaries: history (dynasties, events, key points), geography, biology and politics (key points by stage / textbook, with drawings) ----------
-interface Section { h: string; level?: string; points: string[]; must?: string[]; tip?: string; fig?: string }
+interface Section { h: string; level?: string; points: string[]; must?: string[]; tip?: string; fig?: string; check?: boolean }
 interface Group { name: string; sections: Section[] }
 interface Block { groups?: Group[]; sections?: Section[] }
-interface Notes { history: Block & { dynasties: { n: string; from: number; to: number | null; cap: string; who: string; gist: string }[]; events: { y: number; t: string; d: string; w?: boolean }[] }; geo: Block; bio: Block; politics: Block }
+interface Notes { history: Block & { dynasties: { n: string; from: number; to: number | null; cap: string; who: string; gist: string }[]; events: { y: number; t: string; d: string; w?: boolean }[] }; geo: Block; bio: Block; politics: Block; safety: Block }
 const groupsOf = (b: Block): Group[] => b.groups ?? [{ name: "全部", sections: b.sections ?? [] }];
 const yearText = (y: number | null) => (y === null ? "至今" : y < 0 ? `前${-y}` : String(y));
 const spanText = (a: number, b: number | null) => (a < -100000 ? "远古" : `${yearText(a)} – ${yearText(b)}`);
@@ -358,7 +358,8 @@ function sectionCard(sec: Section, no: number, open = false): HTMLElement {
     sec.fig ? figure(sec.fig) : null,
     sec.must?.length ? h("div", { class: "nt-must" }, h("b", {}, "必背考点"), h("ul", { class: "user" }, ...sec.must.map((p) => h("li", {}, p)))) : null,
     h("ul", { class: "nt-points user" }, ...sec.points.map((p) => h("li", {}, p))),
-    sec.tip ? h("p", { class: "nt-tip" }, h("b", {}, "记忆小窍门："), h("span", { class: "user" }, sec.tip)) : null);
+    sec.tip ? h("p", { class: "nt-tip" }, h("b", {}, "记忆小窍门："), h("span", { class: "user" }, sec.tip)) : null,
+    sec.check ? h("p", { class: "nt-check muted small" }, "此节的数字和规定请对照最新的官方说明核对。") : null);
   const card = h("section", { class: "nt-card" + (open ? " open" : ""), "data-h": sec.h },
     h("button", { class: "nt-head", "aria-expanded": String(open), onclick: () => { const o = card.classList.toggle("open"); (card.firstElementChild as HTMLElement).setAttribute("aria-expanded", String(o)); } },
       h("span", { class: "nt-no" }, String(no)), h("span", { class: "nt-title user" }, sec.h), sec.must?.length ? h("span", { class: "nt-star", title: "必背考点" }, "★") : null, h("i", { class: "fm-chev" }, "›")),
@@ -368,10 +369,10 @@ function sectionCard(sec: Section, no: number, open = false): HTMLElement {
 
 export async function renderNotes() {
   const notes = (await import("./data/notes.json")).default as unknown as Notes;
-  type Tab = "history" | "geo" | "bio" | "politics";
+  type Tab = "history" | "geo" | "bio" | "politics" | "safety";
   let tab: Tab = "history", evFilter: "all" | "cn" | "world" = "all";
   let hsub: "dyn" | "ev" | "key" = "dyn";   // history is long: three small tabs
-  const pick: Record<Tab, number> = { history: 0, geo: 0, bio: 0, politics: 0 };   // the stage / textbook chosen in each tab
+  const pick: Record<Tab, number> = { history: 0, geo: 0, bio: 0, politics: 0, safety: 0 };   // the stage / textbook chosen in each tab
   const body = h("div", { id: "nt-body" });
   /** the chips of the stages (小学, 七年级上册 ...) and the numbered sections of the chosen one */
   const stages = (b: Block) => {
@@ -398,5 +399,5 @@ export async function renderNotes() {
   draw();
   X.show(h("div", { class: "page", style: `--kid:${COLOR}` },
     h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, "知识总结")), X.gear("#/science/notes")),
-    h("main", { class: "scroll" }, h("div", { class: "narrow" }, h("div", { class: "mset-opts pt-filter nt-tabs" }, tabBtn("历史", "history"), tabBtn("地理", "geo"), tabBtn("生物", "bio"), tabBtn("政治", "politics")), body))));
+    h("main", { class: "scroll" }, h("div", { class: "narrow" }, h("div", { class: "mset-opts pt-filter nt-tabs" }, tabBtn("历史", "history"), tabBtn("地理", "geo"), tabBtn("生物", "bio"), tabBtn("政治", "politics"), tabBtn("安全", "safety")), body))));
 }
