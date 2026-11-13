@@ -32,7 +32,7 @@ export async function pickKidGrade(k: M.Kid): Promise<number | null> {
   P.setKidGrade(k.id, g);
   const thisWeek = M.sundayOf(M.todayLocal());
   // the words (English) and the topics (math) of this week and next week were made for the old grade
-  for (const path of [W.wordsPath(k.id), MM.mathPath(k.id), SM.sciencePath(k.id)]) {
+  for (const path of [`english/${k.id}.json`, `french/${k.id}.json`, MM.mathPath(k.id), SM.sciencePath(k.id)]) {
     try {
       const cur = await api.readJson<M.KidData>(path);
       if (!cur?.weeks.some((w) => w.start >= thisWeek)) continue;

@@ -14,7 +14,7 @@ export function mergeDocs(local: Doc, remote: Doc): Doc {
   if (local === null || local === undefined) return remote;
   if (typeof local !== "object" || typeof remote !== "object" || Array.isArray(local) || Array.isArray(remote)) return local;
 
-  // weeks of characters / words / topics / cards (kids/<id>.json, english/, math/, science/) and of idioms (idioms.json)
+  // weeks of characters / words / topics / cards (kids/<id>.json, english/, french/, math/, science/) and of idioms (idioms.json)
   if (Array.isArray(local.weeks) && Array.isArray(remote.weeks)) {
     const by = new Map<string, Doc>();
     for (const w of remote.weeks) by.set(w.start, w);

@@ -725,3 +725,38 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .dg-card ul, .dg-card ol { margin: 6px 0; padding-left: 22px; line-height: 1.55; }
 
 .wide { max-width: 1240px; margin: 0 auto; }
+
+/* formulas: a tap opens the meaning, an example and a drawing */
+.fm-row.tappable { cursor: pointer; }
+.fm-chev { font-style: normal; font-size: 22px; line-height: 1; color: var(--muted); transition: transform .2s; margin-left: 8px; }
+.fm-row.open .fm-chev, .nt-card.open .fm-chev { transform: rotate(90deg); }
+.fm-more { display: none; margin-top: 8px; padding-top: 8px; border-top: 2px dashed var(--kid-line); }
+.fm-row.open .fm-more { display: block; }
+.fm-lab { display: inline-block; margin: 4px 0 2px; padding: 1px 8px; border-radius: 8px; background: #e7f5ff; color: #1864ab; font-size: 12px; }
+.fm-x, .fm-ex { margin: 2px 0 6px; font-size: 15px; line-height: 1.55; color: #2d2230; font-weight: 600; overflow-wrap: anywhere; }
+.fm-ex { color: #1b7a32; }
+.fig { margin: 8px auto 2px; max-width: 320px; background: #fffaf0; border-radius: 16px; padding: 6px; border: 2px solid var(--kid-line); }
+.fig-svg { display: block; width: 100%; height: auto; }
+/* summaries */
+.nt-tabs { margin-top: 10px; }
+.nt-hint { margin: 6px 0 10px; }
+.nt-card { margin-bottom: 10px; border-radius: 18px; background: #fff; border: 2px solid var(--kid-line); overflow: hidden; }
+.nt-head { width: 100%; display: flex; align-items: center; gap: 8px; padding: 12px 14px; text-align: left; background: none; border: 0; font: inherit; cursor: pointer; }
+.nt-title { flex: 1; min-width: 0; font-size: 16px; font-weight: 800; color: #2d2230; overflow-wrap: anywhere; }
+.nt-body { display: none; padding: 0 14px 12px; }
+.nt-card.open .nt-body { display: block; }
+.nt-points { margin: 6px 0 4px; padding-left: 20px; font-size: 15px; line-height: 1.6; font-weight: 600; color: #2d2230; }
+.nt-points li { margin: 3px 0; overflow-wrap: anywhere; }
+.nt-tip { margin: 8px 0 0; padding: 8px 10px; border-radius: 12px; background: #fff3bf; font-size: 14px; color: #8a5a00; font-weight: 600; }
+.nt-dyn { display: grid; gap: 8px; }
+.nt-d { padding: 10px 12px; border-radius: 16px; background: #fff; border: 2px solid var(--kid-line); }
+.nt-d-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.nt-d-top b { font-size: 18px; color: #5430b8; }
+.nt-d-yr { font-size: 13px; font-weight: 800; color: var(--muted); white-space: nowrap; }
+.nt-d-gist { margin-top: 2px; font-size: 14px; line-height: 1.5; color: #2d2230; overflow-wrap: anywhere; }
+.nt-events { display: grid; gap: 6px; margin-top: 8px; }
+.nt-ev { display: flex; gap: 10px; align-items: flex-start; padding: 8px 12px; border-radius: 14px; background: #fff; border: 2px solid var(--kid-line); }
+.nt-ev.world { border-color: #a5d8ff; background: #f3faff; }
+.nt-ev-y { flex: none; min-width: 52px; font-weight: 900; color: #5430b8; font-size: 14px; }
+.nt-ev-t { flex: 1; min-width: 0; display: flex; flex-direction: column; font-size: 15px; overflow-wrap: anywhere; }
+.nt-ev-t small { font-size: 13px; color: var(--muted); font-weight: 600; }

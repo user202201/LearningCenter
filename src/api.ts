@@ -227,7 +227,7 @@ const memo = new Map<string, { json: unknown; at: number }>();
 const MEMO_MS = 8000;
 const clone = <T,>(x: T): T => (x === null || x === undefined ? x : (JSON.parse(JSON.stringify(x)) as T));
 /** a per-child file that may well not exist yet (made on first use): when offline and never read, "nothing there yet" is the right answer */
-const lazyFile = (path: string) => /^(kids|english|math|science)\/[\w-]+(\.review)?\.json$/.test(path);
+const lazyFile = (path: string) => /^(kids|english|french|math|science)\/[\w-]+(\.review)?\.json$/.test(path);
 let noticed = false;
 /** told once per offline spell that a change was kept on this device */
 function noticeOffline() { if (noticed) return; noticed = true; toast("没有网络：已保存在这台设备上，联网后会自动同步", 5000); }

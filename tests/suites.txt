@@ -31,3 +31,5 @@
 32-offline-sync
 33-science
 34-subject-shortcuts
+35-language-track
+36-notes-formulas

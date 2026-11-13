@@ -12,7 +12,7 @@ import * as W from "./words";
 import { pickKidGrade } from "./gradeui";
 import { openGame } from "./gameui";
 import { mascot } from "./art";
-import { subjectArt, shortcuts } from "./hub";
+import { subjectArt, shortcuts, subjectById } from "./hub";
 
 /** what the English screens need from the app shell (main.ts) */
 export interface Ctx {
@@ -34,7 +34,9 @@ let X!: Ctx;
 export const initEnglish = (c: Ctx) => { X = c; };
 
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
-const cache = new Map<string, M.KidData>();
+const store = new Map<string, M.KidData>();
+/** one cache entry per child AND per track (English / French words are different files) */
+const cache = { get: (id: string) => store.get(`${W.wordsDir()}:${id}`), set: (id: string, d: M.KidData) => void store.set(`${W.wordsDir()}:${id}`, d), delete: (id: string) => store.delete(`${W.wordsDir()}:${id}`) };
 const loadKid = async (id: string) => { const d = (await api.readJson<M.KidData>(W.wordsPath(id))) ?? M.EMPTY_KID; cache.set(id, d); return d; };
 let curWeek = "";
 let curKid = "";
@@ -55,7 +57,7 @@ export async function renderHome() {
   const hero = h("header", { class: "top hero home-hero subj-hero", style: "--kid:#2f9e44" },
     X.back("#/", "选择学科"),
     h("span", { class: "subj-ico" }, subjectArt("english")),
-    h("div", { class: "hero-text" }, h("h1", {}, "英语"), h("p", {}, "今天背几个单词？")),
+    h("div", { class: "hero-text" }, h("h1", {}, subjectById("english")!.name), h("p", {}, "今天背几个单词？")),
     X.gear("#/subject/english"));
   if (!kids.length) {
     return X.show(h("div", { class: "page", style: "--kid:#2f9e44" }, hero,
@@ -157,7 +159,7 @@ function wordRow(w: string, map: Map<string, W.Word>): HTMLElement {
   const x = map.get(W.wordKey(w));
   const row = h("div", { class: "wrow tappable", "data-w": w, role: "button", tabindex: "0" },
     h("span", { class: "wmain" }, h("b", { class: "wword user" }, w), x?.ph ? h("span", { class: "wph user" }, `/${x.ph}/`) : null),
-    h("span", { class: "wzh user" }, x?.pos ? h("i", { class: "wpos" }, x.pos) : null, x?.zh ?? ""));
+    h("span", { class: "wzh user" }, x?.pos ? h("i", { class: "wpos" }, x.pos) : null, W.meaningOf(x)));
   row.addEventListener("click", () => W.speak(w));
   row.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), row.click()));
   return row;
@@ -232,7 +234,7 @@ async function saveGame(k: M.Kid, results: G.Result[], score: number, total: num
 function play(k: M.Kid, queue: G.Q[], map: Map<string, W.Word>) {
   openGame({
     color: k.color, seconds: X.gameSeconds(), queue,
-    words: { meaning: (w) => map.get(W.wordKey(w))?.zh ?? "", speak: W.speak },
+    words: { meaning: (w) => W.meaningOf(map.get(W.wordKey(w))), speak: W.speak },
     onSave: (results, score, total, finished) => saveGame(k, results, score, total, finished),
     onAgain: () => void startGame(k, map),
     onClose: () => X.route(),

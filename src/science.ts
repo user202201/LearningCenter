@@ -14,6 +14,7 @@ import { pickKidGrade } from "./gradeui";
 import { openMathGame } from "./mathui";
 import { renderRich, renderTeX } from "./mathtext";
 import { SYMBOLS, CIRCUITS, RULES } from "./diagrams";
+import { figure } from "./figures";
 import { mascot } from "./art";
 import { subjectArt, shortcuts } from "./hub";
 import type { Ctx } from "./english";
@@ -50,7 +51,8 @@ export async function renderHome() {
   const refs = h("div", { class: "sci-refs" },
     h("button", { class: "sci-ref", id: "open-periodic", onclick: () => (location.hash = "#/science/periodic") }, h("b", {}, "元素周期表"), h("span", { class: "muted small" }, "118 个元素")),
     h("button", { class: "sci-ref", id: "open-formulas", onclick: () => (location.hash = "#/science/formulas") }, h("b", {}, "公式与方程式"), h("span", { class: "muted small" }, "数学 · 物理 · 化学")),
-    h("button", { class: "sci-ref", id: "open-circuits", onclick: () => (location.hash = "#/science/circuits") }, h("b", {}, "电路与电磁"), h("span", { class: "muted small" }, "电路图 · 三个定则")));
+    h("button", { class: "sci-ref", id: "open-circuits", onclick: () => (location.hash = "#/science/circuits") }, h("b", {}, "电路与电磁"), h("span", { class: "muted small" }, "电路图 · 三个定则")),
+    h("button", { class: "sci-ref", id: "open-notes", onclick: () => (location.hash = "#/science/notes") }, h("b", {}, "知识总结"), h("span", { class: "muted small" }, "历史 · 地理 · 生物")));
   const list = h("div", { class: "kids" });
   for (const k of kids) {
     const n = allIds(cache.get(k.id) ?? M.EMPTY_KID).length;
@@ -280,7 +282,23 @@ async function details(e: SM.Element) {
 }
 
 // ---------- formulas (math, physics, chemistry) ----------
-interface Formula { g: number; k: string; s: string; n: string; t: string }
+interface Formula { g: number; k: string; s: string; n: string; t: string; x?: string; ex?: string; fig?: string }
+/** one formula: the name and the formula; a tap opens what it means, a worked example and a drawing (when there is one) */
+function formulaRow(x: Formula): HTMLElement {
+  const f = h("div", { class: "fm-formula user" });
+  renderTeX(f, x.t, x.t.replace(/\\[a-z]+|[{}]/g, ""));
+  const more = h("div", { class: "fm-more" });
+  if (x.x) { const e = h("p", { class: "fm-x user" }); renderRich(e, x.x); more.append(h("b", { class: "fm-lab" }, "含义"), e); }
+  if (x.ex) { const e = h("p", { class: "fm-ex user" }); renderRich(e, x.ex); more.append(h("b", { class: "fm-lab" }, "例子"), e); }
+  const fig = x.fig ? figure(x.fig) : null;
+  if (fig) more.append(fig);
+  const row = h("div", { class: "fm-row tappable", "data-k": x.k, "data-g": String(x.g), role: "button", tabindex: "0", "aria-expanded": "false" },
+    h("div", { class: "fm-head" }, h("span", { class: "fm-name user" }, x.n), h("span", { class: "muted small" }, P.gradeName(x.g)), h("i", { class: "fm-chev" }, "›")), f, more);
+  const flip = () => { const o = row.classList.toggle("open"); row.setAttribute("aria-expanded", String(o)); };
+  row.addEventListener("click", flip);
+  row.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), flip()));
+  return row;
+}
 export async function renderFormulas() {
   const list = (await import("./data/formulas.json")).default.formulas as Formula[];
   let kind = "", level = "";
@@ -293,7 +311,7 @@ export async function renderFormulas() {
       const [k, s] = key.split("|");
       return h("section", { class: "fm-group", "data-k": k },
         h("h3", { class: "fm-title" }, h("span", { class: "stopic" }, k), s),
-        ...rows.map((x) => { const f = h("div", { class: "fm-formula user" }); renderTeX(f, x.t, x.t.replace(/\\[a-z]+|[{}]/g, "")); return h("div", { class: "fm-row", "data-k": x.k, "data-g": String(x.g) }, h("div", { class: "fm-head" }, h("span", { class: "fm-name user" }, x.n), h("span", { class: "muted small" }, P.gradeName(x.g))), f); }));
+        ...rows.map((x) => formulaRow(x)));
     }), ...(items.length ? [] : [h("p", { class: "empty" }, "没有符合条件的公式。")]));
   };
   const chips = (opts: [string, string][], pick: (v: string) => void, idp: string) => {
@@ -320,4 +338,53 @@ export function renderCircuits() {
       ...CIRCUITS.map((c) => h("section", { class: "dg-card", "data-circuit": c.title }, h("h3", {}, c.title), fig(c.svg), h("ul", {}, ...c.notes.map((n) => h("li", {}, n))))),
       h("h2", { class: "sec" }, "电与磁的三个定则"),
       ...RULES.map((r) => h("section", { class: "dg-card", "data-rule": r.title }, h("h3", {}, r.title), fig(r.svg), h("ol", {}, ...r.steps.map((n) => h("li", {}, n))), h("p", { class: "muted small" }, r.note)))))));
+}
+
+// ---------- summaries: history (dynasties, events, key points), geography and biology (key points with drawings) ----------
+interface Section { h: string; level?: string; points: string[]; tip?: string; fig?: string }
+interface Notes { history: { dynasties: { n: string; from: number; to: number | null; cap: string; who: string; gist: string }[]; events: { y: number; t: string; d: string; w?: boolean }[]; sections: Section[] }; geo: { sections: Section[] }; bio: { sections: Section[] } }
+const yearText = (y: number | null) => (y === null ? "至今" : y < 0 ? `前${-y}` : String(y));
+const spanText = (a: number, b: number | null) => (a < -100000 ? "远古" : `${yearText(a)} – ${yearText(b)}`);
+
+function sectionCard(sec: Section, open = false): HTMLElement {
+  const body = h("div", { class: "nt-body" },
+    sec.fig ? figure(sec.fig) : null,
+    h("ul", { class: "nt-points user" }, ...sec.points.map((p) => h("li", {}, p))),
+    sec.tip ? h("p", { class: "nt-tip user" }, h("b", {}, "记忆小窍门："), sec.tip) : null);
+  const card = h("section", { class: "nt-card" + (open ? " open" : ""), "data-h": sec.h },
+    h("button", { class: "nt-head", "aria-expanded": String(open), onclick: () => { const o = card.classList.toggle("open"); (card.firstElementChild as HTMLElement).setAttribute("aria-expanded", String(o)); } },
+      h("span", { class: "nt-title user" }, sec.h), sec.level ? h("span", { class: "muted small" }, sec.level === "primary" ? "小学" : "初中") : null, h("i", { class: "fm-chev" }, "›")),
+    body);
+  return card;
+}
+
+export async function renderNotes() {
+  const notes = (await import("./data/notes.json")).default as unknown as Notes;
+  type Tab = "history" | "geo" | "bio";
+  let tab: Tab = "history", evFilter: "all" | "cn" | "world" = "all";
+  const body = h("div", { id: "nt-body" });
+  const draw = () => {
+    if (tab === "history") {
+      const hs = notes.history;
+      const dyn = h("div", { class: "nt-dyn", id: "nt-dynasties" }, ...hs.dynasties.map((d) => h("div", { class: "nt-d", "data-n": d.n },
+        h("div", { class: "nt-d-top" }, h("b", { class: "user" }, d.n), h("span", { class: "nt-d-yr user" }, spanText(d.from, d.to))),
+        h("div", { class: "nt-d-gist user" }, `${d.cap} · ${d.who}`), h("div", { class: "nt-d-gist user" }, d.gist))));
+      const evs = hs.events.filter((e) => evFilter === "all" || (evFilter === "world") === !!e.w);
+      const ev = h("div", { class: "nt-events", id: "nt-events" }, ...evs.map((e) => h("div", { class: "nt-ev" + (e.w ? " world" : ""), "data-y": String(e.y) },
+        h("span", { class: "nt-ev-y user" }, yearText(e.y)), h("span", { class: "nt-ev-t user" }, h("b", {}, e.t), h("small", {}, e.d)))));
+      const evChips = h("div", { class: "mset-opts pt-filter" }, ...([["全部", "all"], ["中国", "cn"], ["世界", "world"]] as const).map(([label, v]) => h("button", { class: "mopt" + (evFilter === v ? " on" : ""), id: `ev-${v}`, onclick: () => { evFilter = v; draw(); } }, label)));
+      body.replaceChildren(
+        h("h2", { class: "sec" }, "朝代表"), dyn,
+        h("h2", { class: "sec" }, "大事年表"), evChips, ev,
+        h("h2", { class: "sec" }, "考点重点"), ...hs.sections.map((s) => sectionCard(s)));
+    } else {
+      const secs = notes[tab].sections;
+      body.replaceChildren(h("p", { class: "muted small center nt-hint" }, "点一下标题展开，有图的先看图。"), ...secs.map((s) => sectionCard(s)));
+    }
+  };
+  const tabBtn = (label: string, v: Tab) => h("button", { class: "mopt" + (tab === v ? " on" : ""), id: `nt-${v}`, "data-v": v, onclick: (e: Event) => { tab = v; (e.currentTarget as HTMLElement).parentElement!.querySelectorAll("button").forEach((b) => b.classList.toggle("on", (b as HTMLElement).dataset.v === v)); draw(); } }, label);
+  draw();
+  X.show(h("div", { class: "page", style: `--kid:${COLOR}` },
+    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, "知识总结")), X.gear("#/science/notes")),
+    h("main", { class: "scroll" }, h("div", { class: "narrow" }, h("div", { class: "mset-opts pt-filter nt-tabs" }, tabBtn("历史", "history"), tabBtn("地理", "geo"), tabBtn("生物", "bio")), body))));
 }

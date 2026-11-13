@@ -4,8 +4,15 @@
  * shape as the characters of the Chinese part (`weeks[].chars` holds the words), so the game's rules (game.ts) are shared as they are.
  */
 import type { KidData } from "./model";
+import { getLang } from "./i18n";
 
-export interface Word { w: string; zh: string; ph: string; pos: string; g: number; t?: string }
+export interface Word { w: string; zh: string; ph: string; pos: string; g: number; t?: string; /** the French meaning (English words, French UI) */ fr?: string; /** the English meaning (French words, English UI) */ en?: string }
+/**
+ * What the Languages subject teaches follows the language of the screen: Chinese screen -> English words (meaning in Chinese), French screen -> English words
+ * (meaning in French), English screen -> FRENCH words (meaning in English). The French track has its own files (`french/<kid>.json`).
+ */
+export type Study = "en" | "fr";
+export const studyLang = (): Study => (getLang() === "en" ? "fr" : "en");
 /** words a week: the week page offers exactly this many new words */
 export const WEEKLY_WORDS = 20;
 /** the game asks all of this week's words plus this many random words of the week before (none if there was no week before: then it is "the first week") */
@@ -13,13 +20,19 @@ export const REVIEW_WORDS = 10;
 /** the Recorded tab shows this many random words out of all the recorded ones */
 export const RECORDED_SAMPLE = 30;
 
-let cache: Word[] | null = null;
-/** the whole library: part of the app itself (src/data/english-words.json is compiled into the program: no network request, works offline and in a packaged app) */
+const cache: Partial<Record<Study, Word[]>> = {};
+/** the whole library: part of the app itself (src/data/english-words.json / french-words.json are compiled into the program: no network request, works offline and in a packaged app) */
 export async function loadWords(): Promise<Word[]> {
-  if (cache) return cache;
-  cache = (await import("./data/english-words.json")).default.words as Word[];
-  return cache;
+  const lang = studyLang();
+  if (cache[lang]) return cache[lang]!;
+  if (lang === "fr") {
+    const f = (await import("./data/french-words.json")).default.words as { w: string; en: string; pos: string; g: number; t?: string }[];
+    cache.fr = f.map((x) => ({ w: x.w, zh: "", en: x.en, ph: "", pos: x.pos, g: x.g, t: x.t }));
+  } else cache.en = (await import("./data/english-words.json")).default.words as Word[];
+  return cache[lang]!;
 }
+/** the meaning of a word in the language of the screen */
+export const meaningOf = (x: Word | undefined): string => (!x ? "" : getLang() === "en" ? x.en ?? "" : getLang() === "fr" ? x.fr ?? x.zh : x.zh);
 export const wordKey = (w: string): string => w.toLowerCase();
 export const wordMap = (all: Word[]): Map<string, Word> => new Map(all.map((x) => [wordKey(x.w), x]));
 
@@ -55,8 +68,9 @@ export function addWeek(kid: KidData, start: string, words: string[]): { data: K
 }
 /** the child's grade changed: this week's and next week's words were picked for the OLD grade, so they are dropped (and picked again for the new one when the week is opened); past weeks stay */
 export const dropFromWeek = (kid: KidData, thisWeek: string): KidData => ({ weeks: kid.weeks.filter((w) => w.start < thisWeek) });
-export const wordsPath = (kidId: string): string => `english/${kidId}.json`;
-export const wordsReviewPath = (kidId: string): string => `english/${kidId}.review.json`;
+export const wordsDir = (): string => (studyLang() === "fr" ? "french" : "english");
+export const wordsPath = (kidId: string): string => `${wordsDir()}/${kidId}.json`;
+export const wordsReviewPath = (kidId: string): string => `${wordsDir()}/${kidId}.review.json`;
 
 /** says a word aloud with the device's own voice (offline; silently nothing where the device has no speech) */
 export function speak(w: string): void {
@@ -65,7 +79,7 @@ export function speak(w: string): void {
     if (!s) return;
     s.cancel();
     const u = new SpeechSynthesisUtterance(w);
-    u.lang = "en-US";
+    u.lang = studyLang() === "fr" ? "fr-FR" : "en-US";
     u.rate = 0.85;
     s.speak(u);
   } catch { /* no speech on this device */ }

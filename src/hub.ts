@@ -6,6 +6,7 @@
  */
 import { h } from "./ui";
 import { mascot } from "./art";
+import { getLang } from "./i18n";
 
 export interface Subject {
   id: "chinese" | "math" | "english" | "science";
@@ -22,7 +23,7 @@ export interface Subject {
 export const SUBJECTS: Subject[] = [
   { id: "chinese", name: "识字", route: "#/chinese", c1: "#ffa94d", c2: "#f76707", dark: "#c64f00", ready: true },
   { id: "math", name: "数学", route: "#/subject/math", c1: "#4dabf7", c2: "#1c7ed6", dark: "#1864ab", ready: true },
-  { id: "english", name: "英语", route: "#/subject/english", c1: "#69db7c", c2: "#2f9e44", dark: "#237a35", ready: true },
+  { id: "english", /** the Languages subject teaches the OTHER language of the screen: English screen -> French (words.ts studyLang) */ get name() { return getLang() === "en" ? "法语" : "英语"; }, route: "#/subject/english", c1: "#69db7c", c2: "#2f9e44", dark: "#237a35", ready: true },
   { id: "science", name: "科学", route: "#/subject/science", c1: "#b197fc", c2: "#7048e8", dark: "#5430b8", ready: true },
 ];
 export const subjectById = (id: string) => SUBJECTS.find((s) => s.id === id);
