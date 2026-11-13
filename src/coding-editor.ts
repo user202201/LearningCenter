@@ -82,6 +82,12 @@ function tapOn<T extends HTMLElement>(el: T, fn: (e: Event) => void): T {
   el.addEventListener("click", (e) => { if (performance.now() - handledAt < 600) return; fn(e); });
   return el;
 }
+const cbtn = (props: Record<string, unknown>, ...kids: (Node | string | null)[]): HTMLButtonElement => {
+  const { onclick, ...rest } = props;
+  const el = h("button", rest, ...kids);
+  if (typeof onclick === "function") tapOn(el, onclick as (e: Event) => void);
+  return el;
+};
 const span = (cls: string, text: string, user = false) => h("span", { class: cls + (user ? " user" : "") }, text);
 
 interface Scope { param?: string; vars: string[]; conds: Expr[]; funcs: { name: string; param?: string }[]; interactive: boolean; opts: EditorOpts; edit: (fn: () => void) => void; pick: (anchor: HTMLElement, items: PickItem[], onPick: (v: string) => void) => void }
@@ -114,11 +120,11 @@ function numField(sc: Scope, get: () => Expr | undefined, set: (e: Expr) => void
   const cur = get() ?? num(meta.def);
   const isNum = cur.k === "n";
   const clamp = (v: number) => Math.max(meta.min, Math.min(meta.max, v));
-  const mk = (d: number, sym: string) => h("button", { class: "cw-step cw-ctl", type: "button", "data-d": String(d), "aria-label": d > 0 ? "增加" : "减少", disabled: !sc.interactive || !isNum || (isNum && (d > 0 ? (cur as { v: number }).v >= meta.max : (cur as { v: number }).v <= meta.min)),
+  const mk = (d: number, sym: string) => cbtn({ class: "cw-step cw-ctl", type: "button", "data-d": String(d), "aria-label": d > 0 ? "增加" : "减少", disabled: !sc.interactive || !isNum || (isNum && (d > 0 ? (cur as { v: number }).v >= meta.max : (cur as { v: number }).v <= meta.min)),
     onclick: () => sc.edit(() => set(num(clamp((cur as { v: number }).v + d * meta.step)))) }, sym);
   const names = varsOk ? [...(sc.param ? [sc.param] : []), ...sc.vars.filter((v) => v !== sc.param)] : [];
   const label = cur.k === "n" ? String(cur.v) : cur.k === "v" ? cur.name : exprStr(cur);
-  const val = h("button", { class: "cw-val cw-ctl" + (isNum ? "" : " var"), type: "button", disabled: !sc.interactive, "aria-label": "选择数值",
+  const val = cbtn({ class: "cw-val cw-ctl" + (isNum ? "" : " var"), type: "button", disabled: !sc.interactive, "aria-label": "选择数值",
     onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, [...meta.presets.map((p) => ({ label: String(p), value: `n:${p}` })), ...names.map((n) => ({ label: n, value: `v:${n}`, cls: "var" }))], (v) => sc.edit(() => set(v.startsWith("n:") ? num(Number(v.slice(2))) : { k: "v", name: v.slice(2) }))) }, label);
   return h("span", { class: "cw-num" }, mk(-1, "−"), val, mk(1, "+"));
 }
@@ -131,14 +137,14 @@ function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script
   const head = h("div", { class: "cw-head" });
   const ico = (k: string) => (ICON[k] ? h("span", { class: "cw-ico", "aria-hidden": "true" }, ICON[k]) : null);
   const setE = (key: "n" | "arg" | "e") => (e: Expr) => { (b as unknown as Record<string, Expr>)[key] = e; };
-  const condBtn = () => h("button", { class: "cw-cond cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择条件",
+  const condBtn = () => cbtn({ class: "cw-cond cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择条件",
     onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, sc.conds.map((c) => ({ label: condText(c), value: condKey(c), user: !COND_LABEL[condKey(c)] })), (v) => sc.edit(() => { b.cond = sc.conds.find((c) => condKey(c) === v) ?? b.cond; })) },
     h("span", { class: COND_LABEL[condKey(b.cond ?? num(0))] ? "" : "user" }, condText(b.cond ?? num(0))));
   switch (kind) {
     case "move": case "left": case "right": case "take": case "light": case "penup": case "pendown": head.append(ico(kind)!, span("cw-t", WORD[kind])); break;
     case "fd": head.append(ico("fd")!, span("cw-t", WORD.fd), numField(sc, () => b.n, setE("n"), META.fd)); break;
     case "tl": case "tr": head.append(ico(kind)!, span("cw-t", WORD[kind]), numField(sc, () => b.n, setE("n"), META.turn), span("cw-unit", "°")); break;
-    case "color": head.append(span("cw-t", "颜色"), h("button", { class: "cw-swatch cw-ctl", type: "button", style: `background:${COLORS[b.c ?? "black"]}`, title: COLOR_NAMES[b.c ?? "black"], "aria-label": COLOR_NAMES[b.c ?? "black"], disabled: !sc.interactive,
+    case "color": head.append(span("cw-t", "颜色"), cbtn({ class: "cw-swatch cw-ctl", type: "button", style: `background:${COLORS[b.c ?? "black"]}`, title: COLOR_NAMES[b.c ?? "black"], "aria-label": COLOR_NAMES[b.c ?? "black"], disabled: !sc.interactive,
       onclick: (e: Event) => sc.pick(e.currentTarget as HTMLElement, Object.keys(COLORS).map((c) => ({ label: COLOR_NAMES[c], value: c, cls: `sw-${c}` })), (v) => sc.edit(() => { b.c = v; })) })); break;
     case "repeat": head.append(span("cw-t", "重复"), span("cw-unit", "×"), numField(sc, () => b.n, setE("n"), META.repeat)); break;
     case "until": head.append(span("cw-t", "直到"), condBtn()); break;
@@ -148,15 +154,15 @@ function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script
       const e = b.e ?? num(0), op = e.k === "bin" ? e.op : "", A = e.k === "bin" ? e.a : e, B = e.k === "bin" ? e.b : num(0);
       const write = (a: Expr, o: string, bb: Expr) => { b.e = o ? { k: "bin", op: o as "+" | "-" | "*", a, b: bb } : a; };
       head.append(span("cw-t", "设定"),
-        h("button", { class: "cw-name cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择变量", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, sc.vars.map((v) => ({ label: v, value: v })), (v) => sc.edit(() => { b.name = v; })) }, b.name ?? "x"),
+        cbtn({ class: "cw-name cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择变量", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, sc.vars.map((v) => ({ label: v, value: v })), (v) => sc.edit(() => { b.name = v; })) }, b.name ?? "x"),
         span("cw-unit", "="), numField(sc, () => A, (x) => write(x, op, B), META.val),
-        h("button", { class: "cw-op cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择运算",
+        cbtn({ class: "cw-op cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择运算",
           onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, [{ label: "·", value: "" }, { label: "+", value: "+" }, { label: "−", value: "-" }, { label: "×", value: "*" }], (v) => sc.edit(() => write(A, v, B))) }, op === "*" ? "×" : op === "-" ? "−" : op || "·"),
         ...(op ? [numField(sc, () => B, (x) => write(A, op, x), META.val)] : []));
       break;
     }
     case "change": head.append(span("cw-t", "改变"),
-      h("button", { class: "cw-name cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择变量", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, sc.vars.map((v) => ({ label: v, value: v })), (v) => sc.edit(() => { b.name = v; })) }, b.name ?? "x"),
+      cbtn({ class: "cw-name cw-ctl", type: "button", disabled: !sc.interactive, "aria-label": "选择变量", onclick: (ev: Event) => sc.pick(ev.currentTarget as HTMLElement, sc.vars.map((v) => ({ label: v, value: v })), (v) => sc.edit(() => { b.name = v; })) }, b.name ?? "x"),
       span("cw-unit", "+="), numField(sc, () => b.e, setE("e"), META.by)); break;
     default: {   // call:<name>
       const f = sc.funcs.find((x) => x.name === b.name);
@@ -208,8 +214,8 @@ export function createEditor(o: EditorOpts): Editor {
   const ind = h("div", { class: "cw-ind", hidden: true });
   const countEl = h("span", { class: "cw-count", id: "cw-count" });
   const bin = h("div", { class: "cw-bin", id: "cw-bin", title: "拖到这里删除", "aria-label": "删除积木" }, h("span", { "aria-hidden": "true" }, "✕"), h("span", { class: "cw-bin-t" }, "删除"));
-  const undoB = h("button", { class: "cw-ubtn", id: "cw-undo", type: "button", "aria-label": "撤销", title: "撤销", onclick: () => api.undo() }, "↶");
-  const redoB = h("button", { class: "cw-ubtn", id: "cw-redo", type: "button", "aria-label": "重做", title: "重做", onclick: () => api.redo() }, "↷");
+  const undoB = cbtn({ class: "cw-ubtn", id: "cw-undo", type: "button", "aria-label": "撤销", title: "撤销", onclick: () => api.undo() }, "↶");
+  const redoB = cbtn({ class: "cw-ubtn", id: "cw-redo", type: "button", "aria-label": "重做", title: "重做", onclick: () => api.redo() }, "↷");
   const bar = h("div", { class: "cw-bar" }, undoB, redoB, countEl, bin);
   const pal = h("div", { class: "cw-pal", id: "cw-pal" });
   const root = h("div", { class: "cw" }, ws, bar, pal);
@@ -219,7 +225,7 @@ export function createEditor(o: EditorOpts): Editor {
   const pick: Scope["pick"] = (anchor, items, onPick) => {
     closePop();
     const box = h("div", { class: "cw-pop", role: "listbox" });
-    for (const it of items) box.append(h("button", { class: "cw-pi " + (it.cls ?? ""), type: "button", role: "option", style: it.cls?.startsWith("sw-") ? `--sw:${COLORS[it.cls.slice(3)]}` : "", onclick: () => { closePop(); onPick(it.value); } }, h("span", { class: it.user ? "user" : "" }, it.label)));
+    for (const it of items) box.append(cbtn({ class: "cw-pi " + (it.cls ?? ""), type: "button", role: "option", style: it.cls?.startsWith("sw-") ? `--sw:${COLORS[it.cls.slice(3)]}` : "", onclick: () => { closePop(); onPick(it.value); } }, h("span", { class: it.user ? "user" : "" }, it.label)));
     document.body.append(box);
     pop = box;
     const r = anchor.getBoundingClientRect(), pw = box.offsetWidth, ph = box.offsetHeight;
