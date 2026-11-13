@@ -98,7 +98,8 @@ export const kidRoute = (subject: Subject["id"], kidId: string): string => (subj
  */
 export function shortcuts(kidId: string, current: Subject["id"]): HTMLElement {
   return h("nav", { class: "shortcuts", "aria-label": "学科" }, ...SUBJECTS.filter((s) => s.id !== current).map((s) =>
-    h("a", { class: "shortcut", id: `go-${s.id}`, href: kidRoute(s.id, kidId), title: s.name, "aria-label": s.name, style: `--c1:${s.c1};--c2:${s.c2};--cd:${s.dark}` }, subjectArt(s.id))));
+    h("a", { class: "shortcut", id: `go-${s.id}`, href: kidRoute(s.id, kidId), title: s.name, "aria-label": s.name, style: `--c1:${s.c1};--c2:${s.c2};--cd:${s.dark}` },
+      h("span", { class: "sc-ico" }, subjectArt(s.id)), h("span", { class: "sc-name" }, s.name))));
 }
 
 // ---------- the screen ----------

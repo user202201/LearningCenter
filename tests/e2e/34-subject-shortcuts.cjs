@@ -13,7 +13,7 @@ const bar1 = (page) => page.evaluate(() => {
   const top = document.querySelector('header.kid-hero'), nav = top && top.querySelector('.shortcuts');
   if (!nav) return null;
   const vw = document.documentElement.clientWidth, t = top.getBoundingClientRect(), b = [...nav.children].map((e) => e.getBoundingClientRect()), h1 = top.querySelector('h1').getBoundingClientRect();
-  return { ids: [...nav.children].map((e) => e.id.replace('go-', '')), hrefs: [...nav.children].map((e) => e.getAttribute('href')), round: b.every((r) => Math.abs(r.width - r.height) < 1 && r.width >= 30), right: vw - Math.max(...b.map((r) => r.right)), left: Math.min(...b.map((r) => r.left)), vw, sw: document.documentElement.scrollWidth, h1w: h1.width, h1right: h1.right, art: [...nav.children].every((e) => e.querySelector('svg')), titles: [...nav.children].map((e) => e.title) };
+  return { ids: [...nav.children].map((e) => e.id.replace('go-', '')), hrefs: [...nav.children].map((e) => e.getAttribute('href')), round: [...nav.querySelectorAll('.sc-ico')].map((e) => e.getBoundingClientRect()).every((r) => Math.abs(r.width - r.height) < 1 && r.width >= 30), labels: [...nav.querySelectorAll('.sc-name')].map((e) => e.textContent.trim()), labelsOk: [...nav.querySelectorAll('.sc-name')].every((e) => e.scrollWidth <= e.clientWidth + 1 && e.getBoundingClientRect().right <= vw && e.getBoundingClientRect().height > 8), right: vw - Math.max(...b.map((r) => r.right)), left: Math.min(...b.map((r) => r.left)), vw, sw: document.documentElement.scrollWidth, h1w: h1.width, h1right: h1.right, art: [...nav.children].every((e) => e.querySelector('svg')), titles: [...nav.children].map((e) => e.title) };
 });
 
 (async () => {
@@ -24,7 +24,7 @@ const bar1 = (page) => page.evaluate(() => {
   // from 识字: math, english, science
   await page.evaluate((r) => (location.hash = r), route.chinese(id)); await page.waitForSelector('header.kid-hero .shortcuts');
   let b = await bar(page);
-  ok(b && b.ids.join() === 'math,english,science' && b.round && b.art, '识字 child page: three round icons (math, english, science) with their pictures');
+  ok(b && b.ids.join() === 'math,english,science' && b.round && b.art && b.labels.join() === '数学,英语,科学' && b.labelsOk, '识字 child page: three round icons (math, english, science) with their pictures and their NAMES under them');
   ok(b.right >= 8 && b.right <= 16 && b.sw <= b.vw && b.h1right <= b.left, 'right-aligned at the edge, no overflow, the title does not run under them');
   await page.screenshot({ path: OUT + 'shortcuts-chinese.png' });
   // each icon leads to the same child in that subject; there the icons are the other three
@@ -59,8 +59,8 @@ const bar1 = (page) => page.evaluate(() => {
       for (const subj of ALL) {
         await s.page.evaluate((r) => (location.hash = r), route[subj](sid)); await s.page.waitForSelector('header.kid-hero .shortcuts');
         const m = await bar(s.page);
-        ok(m && m.round && m.sw <= m.vw && m.right >= 6 && m.h1w >= 60 && m.h1right <= m.left + 1, `${name} ${dn} ${subj}: three round icons right-aligned, no overflow, title keeps ${Math.round(m.h1w)} px`);
-        if (name !== 'zh' && subj === 'chinese') ok(m.titles.join() === (name === 'en' ? 'Math,English,Science' : 'Maths,Anglais,Sciences'), `${name}: the icon names are translated (${m.titles.join()})`);
+        ok(m && m.round && m.labelsOk && m.sw <= m.vw && m.right >= 6 && m.h1w >= 60 && m.h1right <= m.left + 1, `${name} ${dn} ${subj}: three round icons right-aligned, no overflow, title keeps ${Math.round(m.h1w)} px`);
+        if (name !== 'zh' && subj === 'chinese') ok(m.titles.join() === (name === 'en' ? 'Math,English,Science' : 'Maths,Anglais,Sciences') && m.labels.join() === m.titles.join(), `${name}: the icon names under the icons are translated (${m.labels.join()})`);
       }
       await s.browser.close();
     }

@@ -28,10 +28,18 @@ export interface GameOpts {
 export function fitWord(ch: HTMLElement): void {
   const box = ch.closest<HTMLElement>(".gbox");
   if (!box) return;
-  ch.style.fontSize = "";
-  const avail = box.clientWidth * 0.88;
-  const w = ch.getBoundingClientRect().width;
-  if (avail > 0 && w > avail) ch.style.fontSize = `${(parseFloat(getComputedStyle(ch).fontSize) * avail) / w}px`;
+  const run = () => {
+    ch.style.fontSize = "";
+    // inside the ring with a margin all round: the layout width (not the one of the animated / scaled box), 76 % of the board
+    const avail = box.clientWidth * 0.76;
+    const w = ch.offsetWidth || ch.getBoundingClientRect().width;
+    if (avail > 0 && w > avail) ch.style.fontSize = `${(parseFloat(getComputedStyle(ch).fontSize) * avail) / w}px`;
+  };
+  run();
+  // the font of the device may arrive after the first measure, and the board may still be growing in: measure again
+  const text = ch.textContent;
+  requestAnimationFrame(() => { if (ch.isConnected && ch.textContent === text) run(); });
+  void document.fonts?.ready.then(() => { if (ch.isConnected && ch.textContent === text) run(); });
 }
 const SVG = "http://www.w3.org/2000/svg";
 const R = 48.5;                                // radius of the ring in a 100 x 100 drawing (a thin ring on the very edge)
