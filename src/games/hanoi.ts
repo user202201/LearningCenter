@@ -78,11 +78,12 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   }
 
   // ---- layout and drawing (all positions in px, so the animation is just a CSS transition) ----
-  const discW = (d: number) => { const zw = bw / 3, maxW = zw * 0.92, minW = Math.max(26, zw * 0.3); return n === 1 ? maxW : minW + ((maxW - minW) * d) / (n - 1); };
+  const discW = (d: number) => { const zw = bw / 3, maxW = zw * 0.92, minW = Math.min(maxW * 0.7, Math.max(dh * 1.7, zw * 0.3)); return n === 1 ? maxW : minW + ((maxW - minW) * d) / (n - 1); };
   function layout() {
     const W = board.clientWidth, H = board.clientHeight;
     bw = Math.max(210, Math.min(W - 14, 780));
-    dh = Math.max(12, Math.min(40, Math.floor((H - 8 - 5 - BASE_H - 12) / (n + 2))));
+    const fit = Math.floor((H - 8 - 5 - BASE_H - 12) / (n + 2));
+    dh = Math.max(12, Math.min(fit, 64, Math.max(Math.round(bw * 0.11), Math.ceil((250 - BASE_H - 8) / (n + 2)))));
     bh = BASE_H + (n + 2) * dh + 8;
     stage.style.width = `${bw}px`; stage.style.height = `${bh}px`; stage.style.setProperty("--dh", `${dh}px`); stage.style.setProperty("--base", `${BASE_H}px`);
     stage.style.setProperty("--post", `${(n + 1) * dh + 4}px`);

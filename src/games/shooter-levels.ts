@@ -69,4 +69,4 @@ export const scriptOf = (level: number, easy = false): Ev[] => {
   let n = 0;
   return s.filter((v) => { if (v.k === "boss" || v.k === "balloon" || v.k === "shower" || v.k === "hole" || v.k === "storm" || v.k === "snake" || v.k === "swarm" || v.k === "comet") return true; return n++ % 3 !== 2; });
 };
-export const bossHp = (level: number) => (level % 3 === 0 ? 70 + 22 * level : 22 + 3 * level);
+export const bossHp = (level: number) => (level % 3 === 0 ? 40 + 10 * level : 18 + 2 * level);

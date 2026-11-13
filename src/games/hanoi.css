@@ -16,7 +16,7 @@
 .hn-peg { position: absolute; top: 0; bottom: 0; width: 33.3333%; touch-action: none; border-radius: 14px; }
 .hn-peg[data-p="0"] { left: 0; } .hn-peg[data-p="1"] { left: 33.3333%; } .hn-peg[data-p="2"] { left: 66.6667%; }
 .hn-peg.sel, .hn-peg.over { background: rgba(18, 184, 134, .16); }
-.hn-peg.hint-to { background: rgba(255, 146, 43, .2); outline: 3px dashed #e8590c; outline-offset: -4px; }
+.hn-peg.hint-to { background: rgba(255, 146, 43, .12); outline: 3px dashed #e8590c; outline-offset: -4px; }
 .hn-peg.cur { outline: 3px solid #12b886; outline-offset: -4px; }
 .hn-post { position: absolute; left: 50%; bottom: var(--base); width: 12px; height: var(--post); margin-left: -6px; border-radius: 6px 6px 0 0; background: linear-gradient(90deg, #e0a458, #c68642); border: 2px solid #8d5524; border-bottom: 0; box-sizing: border-box; }
 .hn-no { position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); font-size: 13px; line-height: 16px; font-weight: 900; color: #fff; text-shadow: 0 1px 0 #8d5524; pointer-events: none; }
