@@ -13,6 +13,7 @@ import * as PM from "./poemmodel";
 import { pickKidGrade } from "./gradeui";
 import { shortcuts } from "./hub";
 import { mascot } from "./art";
+import { speakText } from "./speech";
 import type { Ctx } from "./english";
 
 let X!: Ctx;
@@ -34,15 +35,7 @@ const saveLocal = (l: Local) => { try { localStorage.setItem(KEY, JSON.stringify
 // ---------- speech and pinyin ----------
 /** says a text with the device's own Chinese voice, slowly (offline; silently nothing where a device has no speech) */
 export function speak(text: string, rate = 0.8): void {
-  try {
-    const s = window.speechSynthesis;
-    if (!s) return;
-    s.cancel();
-    const u = new SpeechSynthesisUtterance(text.replace(/[“”‘’]/g, ""));
-    u.lang = "zh-CN";
-    u.rate = rate;
-    s.speak(u);
-  } catch { /* no voice on this device */ }
+  speakText(text.replace(/[“”‘’]/g, ""), "zh-CN", { rate });
 }
 let pyFn: ((t: string) => string[]) | null = null;
 /** the pinyin of every character of a poem, one list per line, read IN CONTEXT (so that a character with two readings gets the right one); "" for punctuation */

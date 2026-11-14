@@ -23,13 +23,7 @@ const mk = () => {
   }
   return store;
 };
-const speechInit = (arg) => {
-  window.__says = [];
-  if (arg.voices) {
-    Object.defineProperty(window, 'speechSynthesis', { value: { speak: (u) => window.__says.push([u.text, u.lang]), cancel() { /* nothing */ }, getVoices: () => arg.voices }, configurable: true });
-    window.SpeechSynthesisUtterance = function (x) { this.text = x; this.lang = ''; };
-  } else Object.defineProperty(window, 'speechSynthesis', { value: undefined, configurable: true });
-};
+const { speechInit } = require('./speechstub.cjs');
 const ALLV = [{ lang: 'en-US' }, { lang: 'fr-FR' }, { lang: 'zh-CN' }];
 const SIZES = [[390, 844], [844, 390], [320, 568], [820, 1180], [1180, 820]];
 
@@ -212,7 +206,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [820, 1180], [1180, 820]];
   sp = await says();
   ok(sp.length === 2 && sp[1][0] === s.items[0].prompt, 'replay speaks the same word again (and is not counted as an answer)');
   ok((await S()).scores.join() === '0,0' && (await S()).phase === 'question', 'the replay does not change the game');
-  await p.evaluate(() => { const b = document.querySelector('.pk-panel[data-side="1"] .pk-replay'); b.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true })); });
+  await p.evaluate(() => { const b = document.querySelector('.pk-panel[data-side="1"] .pk-replay'); b.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, cancelable: true })); });
   ok((await says()).length === 3, 'the other half\'s button speaks too');
   await tap(1, s.items[1].answers[0]);
   ok((await S()).scores.join() === '0,1' && (await S()).winner === 1, 'the first right tap wins (player 2)');
@@ -225,22 +219,24 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [820, 1180], [1180, 820]];
 
   // dots, tug of war and round counter on every screen size
   await toPhase('question');
-  for (const [w, h] of SIZES.concat([[568, 320]])) {
+  for (const [w, h] of SIZES.concat([[568, 320], [1366, 1024]])) {
     await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(100);
     const g = await p.evaluate(() => {
-      const r = (e) => { const b = e.getBoundingClientRect(); return { l: b.left, t: b.top, r: b.right, b: b.bottom, w: b.width, h: b.height }; };
+      const stg = document.querySelector('#pk-stage'), rotd = stg.classList.contains('rot');   // (rectangles in the INNER coordinates of the stage: a landscape screen turns it by 90 degrees)
+      const r = (e) => { const b = e.getBoundingClientRect(); if (!rotd) return { l: b.left, t: b.top, r: b.right, b: b.bottom, w: b.width, h: b.height }; const l = b.top, rr = b.bottom, t = innerWidth - b.right, bb = innerWidth - b.left; return { l, t, r: rr, b: bb, w: rr - l, h: bb - t }; };
       const rot = (e) => { const m = /matrix\(([^)]+)\)/.exec(getComputedStyle(e).transform); if (!m) return 0; const [a, b] = m[1].split(',').map(Number); return Math.round(Math.atan2(b, a) * 180 / Math.PI); };
       const pn = [0, 1].map((side) => document.querySelector(`.pk-panel[data-side="${side}"]`));
       const mid = r(document.querySelector('#pk-mid')), dots = r(document.querySelector('#pk-dots')), ex = r(document.querySelector('#pk-exit')), mu = r(document.querySelector('#pk-mute')), frame = r(document.querySelector('#pk-frame'));
-      return { rot: pn.map(rot), mid, dots, ex, mu, frame, n: document.querySelectorAll('#pk-dots .pk-dot').length, sw: document.documentElement.scrollWidth, vw: innerWidth, sh: document.documentElement.scrollHeight, vh: innerHeight,
+      return { rot: pn.map(rot), mid, dots, ex, mu, frame, n: document.querySelectorAll('#pk-dots .pk-dot').length, fit: document.documentElement.scrollWidth <= innerWidth && document.documentElement.scrollHeight <= innerHeight, vw: rotd ? innerHeight : innerWidth, vh: rotd ? innerWidth : innerHeight, rvw: innerWidth, rvh: innerHeight, wrap: (() => { const b = stg.getBoundingClientRect(); return [b.left, b.top, b.width, b.height]; })(), tf: getComputedStyle(stg).transform,
         opts: pn.map((e) => [...e.querySelectorAll('.pk-opt')].map(r)), box: pn.map(r), ch: pn.map((e) => r(e.querySelector('.pk-char'))), over: pn.map((e) => [...e.querySelectorAll('.pk-lab')].some((l) => l.scrollWidth > l.clientWidth + 1)), tug: r(document.querySelector('#pk-tug')) };
     });
     const tag = `${w}x${h}`;
     ok(g.rot[1] === 180 && g.rot[0] === 0, `${tag}: top half 180 degrees, bottom half 0 (the same shell as the Chinese duel)`);
     ok(g.n === 15 && g.dots.l >= g.ex.r - 1 && g.dots.r <= g.mu.l + 1 && g.dots.l >= g.mid.l && g.dots.r <= g.mid.r && g.dots.h > 0, `${tag}: 15 round dots fit between the exit and the sound buttons (${Math.round(g.dots.w)} px wide, free ${Math.round(g.mu.l - g.ex.r)} px)`);
     ok(g.tug.l >= g.mid.l && g.tug.r <= g.mid.r && g.tug.b <= g.mid.b + 1, `${tag}: the tug of war bar is inside the centre line`);
-    ok(g.opts.every((o) => o.every((b) => b.h >= 55.5)) && g.sw <= g.vw && g.sh <= g.vh && !g.over.some(Boolean), `${tag}: choice buttons >= 56 px, no overflow, no clipped word`);
-    ok(g.opts.every((o, i) => o.every((b) => b.l >= g.box[i].l - 1 && b.r <= g.box[i].r + 1 && b.t >= g.box[i].t - 1 && b.b <= g.box[i].b + 1)) && Math.abs(g.frame.l - (g.vw - g.frame.r)) < 1.5, `${tag}: every button inside its half, the stage centred`);
+    ok(g.opts.every((o) => o.every((b) => b.h >= 55.5)) && g.fit && !g.over.some(Boolean), `${tag}: choice buttons >= 56 px, no overflow, no clipped word`);
+    ok(g.opts.every((o, i) => o.every((b) => b.l >= g.box[i].l - 1 && b.r <= g.box[i].r + 1 && b.t >= g.box[i].t - 1 && b.b <= g.box[i].b + 1)) && Math.abs(g.frame.l - (g.vw - g.frame.r)) < 1.5 && Math.abs(g.frame.w - g.vw) <= 1 && Math.abs(g.frame.h - g.vh) <= 1, `${tag}: every button inside its half, the stage fills the whole viewport (${Math.round(g.frame.w)} x ${Math.round(g.frame.h)})`);
+    ok(Math.abs(g.wrap[0]) <= 1 && Math.abs(g.wrap[1]) <= 1 && Math.abs(g.wrap[2] - g.rvw) <= 1 && Math.abs(g.wrap[3] - g.rvh) <= 1 && (w > h ? /matrix\(0, 1, -1, 0/.test(g.tf) : g.tf === 'none'), `${tag}: the stage covers the viewport exactly, ${w > h ? 'turned by 90 degrees (landscape)' : 'not turned (portrait)'}`);
     await p.screenshot({ path: OUT + `pke-q-${tag}.png` });
   }
   await p.setViewportSize({ width: 390, height: 844 });

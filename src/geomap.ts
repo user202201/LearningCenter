@@ -10,6 +10,7 @@ import * as api from "./api";
 import * as P from "./profile";
 import * as G from "./game";
 import { tr } from "./i18n";
+import { speakText, speechSupported } from "./speech";
 import { subjectArt } from "./hub";
 import { loadGeo, provincesAlong, continentOf, type Geo, type Prov, type Country, type Hit, type Pt } from "./geomapgeo";
 import * as GM from "./geomapmodel";
@@ -37,10 +38,9 @@ export function fmt(t: GM.Text): (Node | string)[] {
   return out.filter((x) => x !== "");
 }
 /** reads a name aloud with the device's own voice (nothing where there is none) */
-const canSpeak = () => typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
+const canSpeak = () => speechSupported();
 function speak(text: string) {
-  if (!canSpeak()) return;
-  try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = "zh-CN"; u.rate = 0.85; speechSynthesis.speak(u); } catch { /* no voice */ }
+  speakText(text, "zh-CN", { rate: 0.85 });
 }
 const svgFlag = (id: string, cls = ""): HTMLElement => { const d = h("span", { class: "gmap-flagbox " + cls }); d.innerHTML = flagSvg(id); return d; };
 

@@ -3214,5 +3214,2225 @@
  "家蚕有蛹期，是完全变态发育；蝗虫没有蛹期，是不完全变态发育。": [
   "The silkworm has a pupal stage and shows complete metamorphosis; the locust has no pupal stage and shows incomplete metamorphosis.",
   "Le ver à soie a un stade de nymphe et subit une métamorphose complète ; le criquet n'a pas de stade de nymphe et subit une métamorphose incomplète."
+ ],
+ "无脊椎动物体内没有脊柱，主要类群有：腔肠动物（水螅、海蜇，辐射对称，有刺细胞）、扁形动物（涡虫、华枝睾吸虫，背腹扁平，有口无肛门）、线形动物（蛔虫，圆柱形，体表有角质层）、环节动物（蚯蚓，由许多体节组成）、软体动物（河蚌、蜗牛，柔软，有外套膜和贝壳）和节肢动物（蝗虫、虾、蜘蛛，有外骨骼，身体和附肢分节）。": [
+  "Invertebrates have no backbone. The main groups are: cnidarians (hydra, jellyfish: radial symmetry, stinging cells), flatworms (planarian, liver fluke: flat from back to belly, a mouth but no anus), roundworms (Ascaris: cylindrical, with a cuticle), annelids (earthworm: body made of many similar segments), molluscs (river mussel, snail: soft body, mantle and shell) and arthropods (grasshopper, shrimp, spider: exoskeleton, segmented body and limbs).",
+  "Les invertébrés n'ont pas de colonne vertébrale. Les principaux groupes sont : les cnidaires (hydre, méduse : symétrie radiaire, cellules urticantes), les plathelminthes (planaire, douve du foie : corps aplati, une bouche mais pas d'anus), les nématodes (ascaris : corps cylindrique, cuticule), les annélides (ver de terre : corps formé de nombreux segments semblables), les mollusques (moule d'eau douce, escargot : corps mou, manteau et coquille) et les arthropodes (criquet, crevette, araignée : exosquelette, corps et appendices segmentés)."
+ ],
+ "脊椎动物体内有脊柱，分为鱼类、两栖动物、爬行动物、鸟类和哺乳动物。把动物或特征拖到所属的类群中（也可以先点再点类群）；在“脊椎动物”中比较五个类群的体表、呼吸器官、体温和生殖方式。": [
+  "Vertebrates have a backbone and are divided into fish, amphibians, reptiles, birds and mammals. Drag the animals or features into their groups (or tap first, then tap the group); under “Vertebrates” compare the body covering, breathing organ, body temperature and reproduction of the five groups.",
+  "Les vertébrés ont une colonne vertébrale et se divisent en poissons, amphibiens, reptiles, oiseaux et mammifères. Faites glisser les animaux ou les caractères dans leur groupe (ou touchez d'abord, puis touchez le groupe) ; dans « Vertébrés », comparez le revêtement du corps, l'organe respiratoire, la température corporelle et la reproduction des cinq groupes."
+ ],
+ "血压是血液在血管内向前流动时对血管壁的侧压力，通常指体循环中动脉的压力。心脏收缩时血压最高，叫收缩压；心脏舒张时血压最低，叫舒张压。健康成年人的收缩压约为 12–18.7 kPa（90–140 mmHg），舒张压约为 8–12 kPa（60–90 mmHg）；1 kPa 约等于 7.5 mmHg。": [
+  "Blood pressure is the lateral pressure of the blood on the vessel wall as it flows through the vessels; it usually means the pressure in the arteries of the systemic circulation. It is highest when the heart contracts (systolic pressure) and lowest when the heart relaxes (diastolic pressure). In a healthy adult the systolic pressure is about 12–18.7 kPa (90–140 mmHg) and the diastolic pressure about 8–12 kPa (60–90 mmHg); 1 kPa is about 7.5 mmHg.",
+  "La pression artérielle est la pression latérale exercée par le sang sur la paroi des vaisseaux lorsqu'il circule ; elle désigne en général la pression dans les artères de la grande circulation. Elle est la plus élevée quand le cœur se contracte (pression systolique) et la plus basse quand le cœur se relâche (pression diastolique). Chez un adulte en bonne santé, la pression systolique est d'environ 12 à 18,7 kPa (90 à 140 mmHg) et la pression diastolique d'environ 8 à 12 kPa (60 à 90 mmHg) ; 1 kPa vaut environ 7,5 mmHg."
+ ],
+ "本模型：血压的高低取决于心输出量（每搏输出量 × 心率）、血管的阻力和动脉壁的弹性；动脉变窄或变硬，血压会升高。测量血压时，袖带压力高于收缩压，血流被阻断；袖带压力降到收缩压时开始听到脉搏声，降到舒张压时声音消失。脉搏是动脉随心脏跳动而产生的搏动，在手腕处可摸到，次数与心率相同。（这是教学模型，不是诊断工具。）": [
+  "In this model blood pressure depends on the cardiac output (stroke volume × heart rate), the resistance of the vessels and the elasticity of the arterial wall; narrower or stiffer arteries raise the pressure. When measuring, a cuff pressure above the systolic pressure stops the blood flow; the pulse sound starts when the cuff pressure falls to the systolic pressure and disappears when it falls to the diastolic pressure. The pulse is the beat of an artery with each heartbeat; it can be felt at the wrist and its rate equals the heart rate. (This is a teaching model, not a diagnostic tool.)",
+  "Dans ce modèle, la pression artérielle dépend du débit cardiaque (volume d'éjection × fréquence cardiaque), de la résistance des vaisseaux et de l'élasticité de la paroi artérielle ; des artères plus étroites ou plus rigides font monter la pression. Lors de la mesure, une pression du brassard supérieure à la pression systolique arrête la circulation du sang ; le bruit du pouls apparaît quand la pression du brassard descend jusqu'à la pression systolique et disparaît quand elle descend jusqu'à la pression diastolique. Le pouls est le battement d'une artère à chaque battement du cœur ; on le sent au poignet et sa fréquence est égale à la fréquence cardiaque. (Il s'agit d'un modèle pédagogique, pas d'un outil de diagnostic.)"
+ ],
+ "杂交育种：让不同品种的生物杂交，从后代中选出具有优良性状的新品种，如杂交水稻。诱变育种：用射线、药物处理或太空环境（太空育种）使生物的遗传物质发生改变，再从变异的后代中选育新品种。转基因技术：把一种生物的基因转入另一种生物体内，使它获得新的性状，如抗虫棉。克隆技术：用体细胞的细胞核培育出遗传物质与供核个体基本相同的个体，如多莉羊。": [
+  "Cross breeding: crossing different varieties and selecting from the offspring a new variety with good traits, such as hybrid rice. Mutation breeding: radiation, chemicals or the space environment (space breeding) change the genetic material of organisms, and new varieties are selected from the mutated offspring. Transgenic technology: a gene of one organism is put into another organism, which then gains a new trait, such as insect-resistant cotton. Cloning: an individual with genetic material almost identical to that of the nucleus donor is raised from the nucleus of a body cell, such as Dolly the sheep.",
+  "Croisement (hybridation) : on croise des variétés différentes et on sélectionne dans la descendance une nouvelle variété aux bonnes qualités, comme le riz hybride. Sélection par mutation : des rayonnements, des produits chimiques ou l'environnement spatial (sélection dans l'espace) modifient le matériel génétique des organismes, et l'on sélectionne de nouvelles variétés parmi les descendants mutants. Transgenèse : un gène d'un organisme est introduit dans un autre organisme, qui acquiert ainsi un nouveau caractère, comme le coton résistant aux insectes. Clonage : on obtient, à partir du noyau d'une cellule du corps, un individu dont le matériel génétique est presque identique à celui du donneur du noyau, comme la brebis Dolly."
+ ],
+ "在杂交育种模型中，高产（A）对低产（a）、抗病（B）对感病（b）都是显性。纯种高产感病（AAbb）与纯种低产抗病（aaBB）杂交，F1 都是 AaBb，表现为高产抗病；F1 自交，F2 出现四种表现型，比例约 9 : 3 : 3 : 1，其中只有 AABB（1/16）的高产抗病植株能稳定遗传。克隆模型中，克隆羊的性状主要像提供细胞核的羊。": [
+  "In the cross-breeding model high yield (A) is dominant over low yield (a), and disease resistance (B) over susceptibility (b). A pure high-yield, susceptible plant (AAbb) crossed with a pure low-yield, resistant plant (aaBB) gives F1 plants that are all AaBb, high-yield and resistant; when the F1 self-pollinates, the F2 shows four phenotypes in a ratio of about 9 : 3 : 3 : 1, and only the AABB plants (1/16) breed true. In the cloning model the cloned sheep resembles the sheep that gave the nucleus.",
+  "Dans le modèle de croisement, le rendement élevé (A) est dominant sur le rendement faible (a), et la résistance à la maladie (B) sur la sensibilité (b). Une plante pure à rendement élevé et sensible (AAbb) croisée avec une plante pure à rendement faible et résistante (aaBB) donne des plantes F1 toutes AaBb, à rendement élevé et résistantes ; quand la F1 s'autoféconde, la F2 montre quatre phénotypes dans un rapport d'environ 9 : 3 : 3 : 1, et seules les plantes AABB (1/16) se reproduisent fidèlement. Dans le modèle de clonage, la brebis clonée ressemble à la brebis qui a donné le noyau."
+ ],
+ "杂交育种": [
+  "Cross breeding",
+  "Croisement (hybridation)"
+ ],
+ "提供细胞核的羊": [
+  "Sheep that gives the nucleus",
+  "Brebis qui donne le noyau"
+ ],
+ "提供卵细胞的羊": [
+  "Sheep that gives the egg cell",
+  "Brebis qui donne la cellule-œuf"
+ ],
+ "水蚤是一种体型很小的水生动物，身体透明，在显微镜下可以看到心脏的跳动，常用来探究某些因素对心率的影响。实验时先在清水中数 10 s 内的心跳次数，再换用不同浓度的酒精溶液，用同样的方法数心跳；每种条件重复数 3 次取平均值。清水是对照，只有酒精的浓度不同。": [
+  "The water flea is a very small aquatic animal with a transparent body; its beating heart can be seen under the microscope, so it is often used to study the effect of certain factors on heart rate. First count the heartbeats in 10 s in clear water, then change to alcohol solutions of different concentrations and count in the same way; repeat each condition 3 times and take the average. Clear water is the control: only the alcohol concentration differs.",
+  "La daphnie est un très petit animal aquatique au corps transparent ; on voit son cœur battre au microscope, c'est pourquoi on l'utilise souvent pour étudier l'effet de certains facteurs sur le rythme cardiaque. On compte d'abord les battements en 10 s dans l'eau claire, puis on change pour des solutions d'alcool de concentrations différentes et on compte de la même façon ; on répète chaque condition 3 fois et on prend la moyenne. L'eau claire est le témoin : seule la concentration d'alcool diffère."
+ ],
+ "实验结果：酒精浓度越高，水蚤的心率越慢；浓度过高时，水蚤死亡，心脏停止跳动。这说明酒精对心脏有抑制作用。本实验的数据是教学数据，计数的误差为 ±1 次。": [
+  "Result: the higher the alcohol concentration, the slower the heart rate of the water flea; at too high a concentration the water flea dies and its heart stops. This shows that alcohol inhibits the heart. The data of this experiment are teaching data, and the counting error is ±1 beat.",
+  "Résultat : plus la concentration d'alcool est élevée, plus le rythme cardiaque de la daphnie est lent ; à une concentration trop élevée, la daphnie meurt et son cœur s'arrête. Cela montre que l'alcool a un effet inhibiteur sur le cœur. Les données de cette expérience sont des données pédagogiques et l'erreur de comptage est de ±1 battement."
+ ],
+ "细胞核中有染色体，染色体由 DNA 和蛋白质组成；DNA 是主要的遗传物质，呈规则的双螺旋结构；基因是 DNA 上具有特定遗传信息的片段，控制生物的性状。一个 DNA 分子上有许多个基因。": [
+  "The nucleus contains chromosomes, which are made of DNA and protein; DNA is the main genetic material and has a regular double-helix structure; a gene is a segment of DNA that carries specific genetic information and controls a trait of the organism. One DNA molecule carries many genes.",
+  "Le noyau contient des chromosomes, formés d'ADN et de protéines ; l'ADN est le principal matériel génétique et a une structure régulière en double hélice ; un gène est un segment d'ADN qui porte une information génétique précise et commande un caractère de l'organisme. Une molécule d'ADN porte de nombreux gènes."
+ ],
+ "每种生物的体细胞中染色体的数目是一定的，成对存在，如人有 23 对（46 条）。生殖细胞（精子和卵细胞）中的染色体数目减半，受精卵恢复到 46 条。人的性别由性染色体决定：女性是 XX，男性是 XY；精子有 X 或 Y 两种，卵细胞只有 X，所以男女比例接近 1:1。碱基互补配对（A–T，C–G）属于拓展内容，教科书只要求知道 DNA 是双螺旋结构。": [
+  "The number of chromosomes in the body cells of each species is fixed and they exist in pairs; humans have 23 pairs (46 chromosomes). The number in the sex cells (sperm and egg cell) is halved, and the zygote has 46 again. Sex in humans is decided by the sex chromosomes: a woman is XX, a man is XY; a sperm carries X or Y, an egg cell only X, so the ratio of boys to girls is close to 1:1. Base pairing (A–T, C–G) is an extension; the textbook only requires knowing that DNA is a double helix.",
+  "Le nombre de chromosomes dans les cellules du corps de chaque espèce est fixe et ils existent par paires ; l'être humain a 23 paires (46 chromosomes). Le nombre dans les cellules sexuelles (spermatozoïde et ovule) est réduit de moitié, et l'œuf fécondé en a de nouveau 46. Le sexe chez l'être humain est déterminé par les chromosomes sexuels : une femme est XX, un homme est XY ; un spermatozoïde porte X ou Y, un ovule seulement X, donc le rapport garçons-filles est proche de 1:1. L'appariement des bases (A–T, C–G) est un approfondissement ; le manuel exige seulement de savoir que l'ADN est une double hélice."
+ ],
+ "环境中影响生物生活的因素分为非生物因素（光、温度、水、空气、土壤等）和生物因素（其他生物）。探究鼠妇的分布：在一个盒子的两半设置不同的条件（如明亮与阴暗），把鼠妇放在中间，过一段时间数各侧的数量。对照实验只能有一个变量，其他条件相同；用较多的鼠妇并重复几次，可以减少偶然性。": [
+  "The factors that affect living things in the environment are divided into abiotic factors (light, temperature, water, air, soil and so on) and biotic factors (other organisms). Investigating the distribution of woodlice: set different conditions in the two halves of a box (for example bright and dark), put the woodlice in the middle and count those on each side after a while. A controlled experiment may have only one variable, all other conditions being the same; using more woodlice and repeating several times reduces chance effects.",
+  "Les facteurs qui agissent sur les êtres vivants dans leur milieu se divisent en facteurs abiotiques (lumière, température, eau, air, sol, etc.) et facteurs biotiques (les autres êtres vivants). Étude de la répartition des cloportes : on crée des conditions différentes dans les deux moitiés d'une boîte (par exemple clair et sombre), on place les cloportes au milieu et on compte ceux de chaque côté après un moment. Une expérience témoin ne doit avoir qu'une seule variable, toutes les autres conditions étant identiques ; utiliser plus de cloportes et répéter plusieurs fois réduit les effets du hasard."
+ ],
+ "地球上有森林、草原、湿地、海洋、农田和城市等生态系统。生态系统具有一定的自我调节能力：物种越多、营养结构越复杂，自我调节能力越强，越能从干扰中恢复；但这种能力有一定限度，超过限度就难以恢复。（第三种模式是教学模型：能恢复的最大干扰 = 80 × 物种数 ÷ (物种数 + 8) %。）": [
+  "The Earth has ecosystems such as forests, grasslands, wetlands, oceans, farmland and cities. An ecosystem has a certain capacity for self-regulation: the more species and the more complex the food structure, the stronger it is and the better the ecosystem recovers from disturbance; but this capacity has a limit, and beyond it recovery is difficult. (The third mode is a teaching model: the largest disturbance that can be recovered from = 80 × number of species ÷ (number of species + 8) %.)",
+  "La Terre comporte des écosystèmes tels que forêts, prairies, zones humides, océans, terres cultivées et villes. Un écosystème a une certaine capacité d'autorégulation : plus il y a d'espèces et plus la structure alimentaire est complexe, plus cette capacité est forte et mieux l'écosystème se rétablit après une perturbation ; mais cette capacité a une limite, au-delà de laquelle le rétablissement est difficile. (Le troisième mode est un modèle pédagogique : la plus forte perturbation dont l'écosystème se rétablit = 80 × nombre d'espèces ÷ (nombre d'espèces + 8) %.)"
+ ],
+ "食物中储存着能量，可以用燃烧的方法测定：把一定质量的食物点燃，放出的热量加热一定质量的水，根据水温的升高计算水吸收的热量 Q = c × m × ΔT（水的比热容 c = 4.2 J/(g·℃)，1 mL 水约重 1 g）。每克食物的能量 = Q ÷ 食物的质量。": [
+  "Food stores energy, which can be measured by burning: a known mass of food is ignited and the heat released warms a known mass of water; the heat absorbed by the water is calculated from the rise in temperature, Q = c × m × ΔT (specific heat of water c = 4.2 J/(g·℃), 1 mL of water weighs about 1 g). The energy per gram of food = Q ÷ mass of the food.",
+  "Les aliments stockent de l'énergie, que l'on peut mesurer par combustion : on enflamme une masse connue d'aliment et la chaleur dégagée chauffe une masse connue d'eau ; on calcule la chaleur absorbée par l'eau à partir de l'élévation de température, Q = c × m × ΔT (capacité thermique massique de l'eau c = 4,2 J/(g·℃), 1 mL d'eau pèse environ 1 g). L'énergie par gramme d'aliment = Q ÷ masse de l'aliment."
+ ],
+ "实验中燃烧放出的热量并没有全部被水吸收，所以测得的数值总是比食物实际含有的能量小。给火焰加上挡风罩（金属罩）能减少热量散失，使结果更接近真实值。水温升高到 100 ℃ 就会沸腾，数据无效。食物的能量值是取整的教学数据。": [
+  "In the experiment not all the heat released by burning is absorbed by the water, so the measured value is always lower than the energy the food really contains. A wind shield (a metal screen) round the flame reduces the loss of heat and brings the result closer to the true value. When the water reaches 100 ℃ it boils and the data are invalid. The energy values of the foods are rounded teaching data.",
+  "Dans l'expérience, toute la chaleur dégagée par la combustion n'est pas absorbée par l'eau ; la valeur mesurée est donc toujours inférieure à l'énergie réellement contenue dans l'aliment. Un pare-vent (un écran métallique) autour de la flamme réduit les pertes de chaleur et rapproche le résultat de la valeur réelle. Quand l'eau atteint 100 ℃, elle bout et les données ne sont plus valables. Les valeurs d'énergie des aliments sont des données pédagogiques arrondies."
+ ],
+ "大米": [
+  "Rice",
+  "Riz"
+ ],
+ "隐性遗传病只有当一个人从父母双方各得到一个致病基因（aa）时才会发病。携带者（Aa）本人表现正常，但会把致病基因传给后代。近亲（有共同祖先的亲属）带有同一致病基因的可能性大得多，所以近亲结婚的后代患隐性遗传病的机会大大增加。我国法律禁止直系血亲和三代以内的旁系血亲结婚。": [
+  "A recessive genetic disease appears only when a person receives a disease gene from each parent (aa). A carrier (Aa) is healthy but passes the disease gene to the offspring. Close relatives are much more likely to carry the same disease gene, so the chance that the children of close relatives who marry have a recessive genetic disease rises greatly. Chinese law forbids marriage between lineal relatives by blood and collateral relatives by blood within three generations.",
+  "Une maladie génétique récessive n'apparaît que lorsqu'une personne reçoit un gène de la maladie de chacun de ses parents (aa). Un porteur (Aa) est en bonne santé mais transmet le gène de la maladie à sa descendance. Des proches parents ont beaucoup plus de chances de porter le même gène de maladie ; le risque qu'un enfant de proches parents mariés ait une maladie génétique récessive augmente donc fortement. La loi chinoise interdit le mariage entre parents en ligne directe et entre parents collatéraux jusqu'au troisième degré."
+ ],
+ "优生优育的措施有：禁止近亲结婚、遗传咨询、产前诊断和适龄生育。本模型是简化的教学计算：设每 N 人中有 1 位携带者，无亲缘关系的夫妻双方都是携带者的概率约 1/N²；亲属中一方是携带者时，另一方带有同一基因的概率取共有基因的比例（表兄妹 1/8，同胞兄妹 1/2）；孩子患病的概率再乘 1/4。数值只用来说明道理。": [
+  "Measures of good birth and child-rearing (eugenics) are: forbidding marriage between close relatives, genetic counselling, prenatal diagnosis and having children at a suitable age. This model is a simplified teaching calculation: suppose 1 person in N is a carrier; for unrelated spouses the chance that both are carriers is about 1/N²; when one relative is a carrier, the chance that the other carries the same gene is taken as the share of genes the relatives have in common (cousins 1/8, brother and sister 1/2); the chance that a child is affected is then multiplied by 1/4. The numbers only illustrate the idea.",
+  "Les mesures d'eugénisme (bonne naissance et bonne éducation) sont : interdire le mariage entre proches parents, le conseil génétique, le diagnostic prénatal et avoir des enfants à un âge approprié. Ce modèle est un calcul pédagogique simplifié : supposons qu'une personne sur N soit porteuse ; pour des époux sans lien de parenté, la probabilité que les deux soient porteurs est d'environ 1/N² ; quand un parent est porteur, la probabilité que l'autre porte le même gène est prise égale à la part de gènes que les parents ont en commun (cousins germains 1/8, frère et sœur 1/2) ; la probabilité qu'un enfant soit atteint est ensuite multipliée par 1/4. Les nombres servent seulement à illustrer l'idée."
+ ],
+ "没有亲缘关系": [
+  "Not related",
+  "Sans lien de parenté"
+ ],
+ "除化石外，进化还有其他证据。比较解剖学：蝙蝠的翼、鲸的鳍和人的上肢，骨骼的结构基本相同（肱骨、尺骨和桡骨、腕骨、掌骨、指骨），功能却不同，这样的器官叫同源器官，说明它们起源于共同的祖先。胚胎学：脊椎动物的早期胚胎都有鳃裂和尾，越到后期差异越大，说明它们可能有共同的祖先。": [
+  "Besides fossils, evolution has other evidence. Comparative anatomy: the bat’s wing, the whale’s flipper and the human arm have basically the same bone structure (humerus, radius and ulna, carpals, metacarpals, phalanges) but different functions; such organs are called homologous organs and show that these animals share a common ancestor. Embryology: the early embryos of vertebrates all have gill slits and a tail and become more different later, which suggests a common ancestor.",
+  "Outre les fossiles, l'évolution a d'autres preuves. Anatomie comparée : l'aile de la chauve-souris, la nageoire de la baleine et le bras humain ont une structure osseuse presque identique (humérus, radius et cubitus, carpiens, métacarpiens, phalanges) mais des fonctions différentes ; de tels organes sont dits homologues et montrent que ces animaux ont un ancêtre commun. Embryologie : les premiers embryons de vertébrés ont tous des fentes branchiales et une queue et deviennent plus différents ensuite, ce qui suggère un ancêtre commun."
+ ],
+ "分子生物学：不同生物的同一种蛋白质（如细胞色素 c）氨基酸序列差异越小，亲缘关系越近（属于拓展内容，数据是取整的参考值）。进化树表示生物之间的亲缘关系：两条谱系分开得越晚，亲缘关系越近。把骨的名称拖到图中的标记处；调节胚胎的发育程度，选择生物比较分子差异，在进化树中选择两种生物，看它们的共同祖先。": [
+  "Molecular biology: the smaller the differences in the amino-acid sequence of the same protein (such as cytochrome c) in different organisms, the closer their relationship (an extension; the data are rounded reference values). An evolutionary tree shows the relationships between organisms: the later two lineages split, the closer they are related. Drag the names of the bones to the marks in the picture; change the stage of the embryo, choose an organism to compare molecular differences, and choose two organisms in the evolutionary tree to see their common ancestor.",
+  "Biologie moléculaire : plus les différences dans la séquence d'acides aminés d'une même protéine (comme le cytochrome c) sont petites entre deux organismes, plus ils sont apparentés (approfondissement ; les données sont des valeurs de référence arrondies). Un arbre évolutif montre les liens de parenté entre les organismes : plus deux lignées se séparent tard, plus elles sont proches. Faites glisser les noms des os vers les repères de l'image ; changez le stade de l'embryon, choisissez un organisme pour comparer les différences moléculaires, et choisissez deux organismes dans l'arbre évolutif pour voir leur ancêtre commun."
+ ],
+ "培养细菌和真菌时，把菌液逐级稀释（每次稀释 10 倍），取一定体积涂在培养基上，每个活的细菌或孢子会长成一个肉眼可见的菌落。数出菌落数，就能估算原菌液中的细菌数：每毫升的细菌数 = 菌落数 ÷ 涂布体积 × 稀释倍数。菌落数在 30–300 个之间的平板最适合计数。": [
+  "To culture bacteria and fungi, a suspension is diluted step by step (10 times each time) and a known volume is spread on the culture medium; each living bacterium or spore grows into a colony visible to the naked eye. Counting the colonies gives an estimate of the number of bacteria in the original suspension: bacteria per millilitre = colonies ÷ volume spread × dilution factor. Plates with 30–300 colonies are best for counting.",
+  "Pour cultiver des bactéries et des champignons, on dilue une suspension par étapes (10 fois à chaque fois) et on étale un volume connu sur le milieu de culture ; chaque bactérie ou spore vivante donne une colonie visible à l'œil nu. Le nombre de colonies permet d'estimer le nombre de bactéries de la suspension d'origine : bactéries par millilitre = colonies ÷ volume étalé × facteur de dilution. Les boîtes de 30 à 300 colonies sont les meilleures pour le comptage."
+ ],
+ "细菌没有成形的细胞核，只有 DNA 集中的区域，属于原核生物；酵母菌等真菌有成形的细胞核。抗生素只能杀死细菌，对病毒无效；不必要或不按疗程用药，会使耐药细菌在群体中的比例越来越大。（耐药模型是简化的教学模型。）": [
+  "Bacteria have no true nucleus, only a region where the DNA is concentrated, and are prokaryotes; fungi such as yeast have a true nucleus. Antibiotics kill only bacteria and are useless against viruses; using them when not needed, or not finishing the course, makes the share of resistant bacteria in the population grow. (The resistance model is a simplified teaching model.)",
+  "Les bactéries n'ont pas de vrai noyau, seulement une région où l'ADN est concentré, et sont des procaryotes ; les champignons comme la levure ont un vrai noyau. Les antibiotiques ne tuent que les bactéries et sont inutiles contre les virus ; les utiliser sans nécessité, ou ne pas aller au bout du traitement, fait croître la part de bactéries résistantes dans la population. (Le modèle de résistance est un modèle pédagogique simplifié.)"
+ ],
+ "腔肠动物": [
+  "Cnidarians",
+  "Cnidaires"
+ ],
+ "扁形动物": [
+  "Flatworms",
+  "Plathelminthes"
+ ],
+ "线形动物": [
+  "Roundworms",
+  "Nématodes"
+ ],
+ "环节动物": [
+  "Annelids",
+  "Annélides"
+ ],
+ "软体动物": [
+  "Molluscs",
+  "Mollusques"
+ ],
+ "节肢动物": [
+  "Arthropods",
+  "Arthropodes"
+ ],
+ "水螅": [
+  "Hydra",
+  "Hydre"
+ ],
+ "海蜇": [
+  "Jellyfish",
+  "Méduse"
+ ],
+ "涡虫": [
+  "Planarian",
+  "Planaire"
+ ],
+ "华枝睾吸虫": [
+  "Chinese liver fluke",
+  "Douve chinoise du foie"
+ ],
+ "蛔虫": [
+  "Ascaris (roundworm)",
+  "Ascaris (ver rond)"
+ ],
+ "河蚌": [
+  "River mussel",
+  "Moule d'eau douce"
+ ],
+ "身体呈辐射对称，体表有刺细胞": [
+  "Radial symmetry, stinging cells in the body surface",
+  "Symétrie radiaire, cellules urticantes sur le corps"
+ ],
+ "身体呈两侧对称，背腹扁平，有口无肛门": [
+  "Bilateral symmetry, body flat from back to belly, a mouth but no anus",
+  "Symétrie bilatérale, corps aplati dorso-ventralement, une bouche mais pas d'anus"
+ ],
+ "身体细长，呈圆柱形，体表有角质层": [
+  "Slender, cylindrical body with a cuticle on the surface",
+  "Corps allongé et cylindrique, avec une cuticule en surface"
+ ],
+ "身体由许多彼此相似的体节组成": [
+  "Body made of many similar segments",
+  "Corps formé de nombreux segments semblables"
+ ],
+ "身体柔软，体表有外套膜，多数有贝壳": [
+  "Soft body with a mantle, usually a shell",
+  "Corps mou avec un manteau, en général une coquille"
+ ],
+ "体表有坚韧的外骨骼，身体和附肢都分节": [
+  "Tough exoskeleton, body and limbs both segmented",
+  "Exosquelette résistant, corps et appendices segmentés"
+ ],
+ "靠刚毛辅助肌肉运动": [
+  "Bristles help the muscles to move the body",
+  "Des soies aident les muscles à déplacer le corps"
+ ],
+ "靠足运动，足有斧足、腹足等形状": [
+  "Moves with a foot, which may be a hatchet foot, a belly foot and so on",
+  "Se déplace avec un pied, de forme variée (pied en hache, pied ventral, etc.)"
+ ],
+ "两栖动物": [
+  "Amphibians",
+  "Amphibiens"
+ ],
+ "爬行动物": [
+  "Reptiles",
+  "Reptiles"
+ ],
+ "哺乳动物": [
+  "Mammals",
+  "Mammifères"
+ ],
+ "体表": [
+  "Body covering",
+  "Revêtement du corps"
+ ],
+ "呼吸器官": [
+  "Breathing organ",
+  "Organe respiratoire"
+ ],
+ "体温": [
+  "Body temperature",
+  "Température corporelle"
+ ],
+ "生殖方式": [
+  "Reproduction",
+  "Reproduction"
+ ],
+ "鳞片，有黏液": [
+  "Scales, with mucus",
+  "Écailles, avec du mucus"
+ ],
+ "鳃": [
+  "Gills",
+  "Branchies"
+ ],
+ "变温": [
+  "Variable",
+  "Variable"
+ ],
+ "卵生（体外受精）": [
+  "Egg-laying (external fertilisation)",
+  "Ovipare (fécondation externe)"
+ ],
+ "裸露、湿润": [
+  "Bare and moist",
+  "Peau nue et humide"
+ ],
+ "幼体用鳃，成体用肺，皮肤辅助": [
+  "Gills in the young, lungs in the adult, the skin helps",
+  "Branchies chez la larve, poumons chez l'adulte, la peau aide"
+ ],
+ "鳞片或甲": [
+  "Scales or a shell",
+  "Écailles ou carapace"
+ ],
+ "卵生（体内受精）": [
+  "Egg-laying (internal fertilisation)",
+  "Ovipare (fécondation interne)"
+ ],
+ "羽毛": [
+  "Feathers",
+  "Plumes"
+ ],
+ "肺，有气囊辅助": [
+  "Lungs, helped by air sacs",
+  "Poumons, aidés par des sacs aériens"
+ ],
+ "恒温": [
+  "Constant",
+  "Constante"
+ ],
+ "卵生": [
+  "Egg-laying",
+  "Ovipare"
+ ],
+ "体表被毛": [
+  "Hair",
+  "Poils"
+ ],
+ "胎生、哺乳": [
+  "Live birth and suckling",
+  "Vivipare et allaitement"
+ ],
+ "蝗虫（昆虫）": [
+  "Grasshopper (an insect)",
+  "Criquet (un insecte)"
+ ],
+ "无脊椎动物的主要类群有腔肠动物、扁形动物、线形动物、环节动物、软体动物和节肢动物。": [
+  "The main groups of invertebrates are cnidarians, flatworms, roundworms, annelids, molluscs and arthropods.",
+  "Les principaux groupes d'invertébrés sont les cnidaires, les plathelminthes, les nématodes, les annélides, les mollusques et les arthropodes."
+ ],
+ "“{0}”是下列哪一类动物的特征？": [
+  "“{0}” is a feature of which group of animals?",
+  "« {0} » est un caractère de quel groupe d'animaux ?"
+ ],
+ "每一类动物都有各自的主要特征。": [
+  "Each group of animals has its own main features.",
+  "Chaque groupe d'animaux a ses propres caractères principaux."
+ ],
+ "在脊椎动物的五个类群中，体温恒定的是：": [
+  "Among the five groups of vertebrates, those with a constant body temperature are:",
+  "Parmi les cinq groupes de vertébrés, ceux dont la température corporelle est constante sont :"
+ ],
+ "鸟类和哺乳动物": [
+  "Birds and mammals",
+  "Les oiseaux et les mammifères"
+ ],
+ "鱼类和两栖动物": [
+  "Fish and amphibians",
+  "Les poissons et les amphibiens"
+ ],
+ "两栖动物和爬行动物": [
+  "Amphibians and reptiles",
+  "Les amphibiens et les reptiles"
+ ],
+ "鱼类和鸟类": [
+  "Fish and birds",
+  "Les poissons et les oiseaux"
+ ],
+ "爬行动物和哺乳动物": [
+  "Reptiles and mammals",
+  "Les reptiles et les mammifères"
+ ],
+ "鸟类和哺乳动物是恒温动物，其余三类是变温动物。": [
+  "Birds and mammals are warm-blooded animals; the other three groups are cold-blooded.",
+  "Les oiseaux et les mammifères sont des animaux à sang chaud ; les trois autres groupes sont à sang froid."
+ ],
+ "{0}的体表特征是：": [
+  "The body covering of {0} is:",
+  "Le revêtement du corps de {0} est :"
+ ],
+ "体表有外骨骼": [
+  "An exoskeleton",
+  "Un exosquelette"
+ ],
+ "体表的覆盖物起保护作用，并与动物的生活环境相适应。": [
+  "The covering of the body protects it and suits the animal's habitat.",
+  "Le revêtement du corps le protège et est adapté au milieu de vie de l'animal."
+ ],
+ "{0}有几对足？": [
+  "How many pairs of legs does {0} have?",
+  "Combien de paires de pattes {0} a-t-il ?"
+ ],
+ "昆虫有三对足，蜘蛛有四对足。": [
+  "Insects have three pairs of legs, spiders have four pairs.",
+  "Les insectes ont trois paires de pattes, les araignées en ont quatre."
+ ],
+ "血压正常": [
+  "Normal blood pressure",
+  "Pression artérielle normale"
+ ],
+ "血压偏高（高血压）": [
+  "High blood pressure (hypertension)",
+  "Pression artérielle élevée (hypertension)"
+ ],
+ "血压偏低": [
+  "Low blood pressure",
+  "Pression artérielle basse"
+ ],
+ "甲（正常）": [
+  "A (normal)",
+  "A (normale)"
+ ],
+ "乙（偏高）": [
+  "B (high)",
+  "B (élevée)"
+ ],
+ "丙（偏低）": [
+  "C (low)",
+  "C (basse)"
+ ],
+ "袖带压力高于收缩压：血管被压扁，血流被阻断，听不到声音": [
+  "Cuff pressure above the systolic pressure: the artery is squeezed shut, the blood flow is blocked, no sound is heard",
+  "Pression du brassard supérieure à la pression systolique : l'artère est écrasée, le sang ne circule plus, aucun bruit n'est entendu"
+ ],
+ "袖带压力在收缩压和舒张压之间：血流时断时通，能听到脉搏声": [
+  "Cuff pressure between the systolic and diastolic pressure: the blood flows on and off, the pulse sound is heard",
+  "Pression du brassard entre la pression systolique et la pression diastolique : le sang circule par intermittence, le bruit du pouls est entendu"
+ ],
+ "袖带压力低于舒张压：血流通畅，声音消失": [
+  "Cuff pressure below the diastolic pressure: the blood flows freely, the sound disappears",
+  "Pression du brassard inférieure à la pression diastolique : le sang circule librement, le bruit disparaît"
+ ],
+ "每搏输出量为 {0} mL，心率为 {1} 次/分钟，心输出量约是多少升每分钟？": [
+  "The stroke volume is {0} mL and the heart rate {1} beats per minute. About how many litres per minute is the cardiac output?",
+  "Le volume d'éjection est de {0} mL et la fréquence cardiaque de {1} battements par minute. Quel est environ le débit cardiaque, en litres par minute ?"
+ ],
+ "某人收缩压为 {0} mmHg，舒张压为 {1} mmHg，脉压差是多少？": [
+  "A person's systolic pressure is {0} mmHg and diastolic pressure {1} mmHg. What is the pulse pressure?",
+  "La pression systolique d'une personne est de {0} mmHg et sa pression diastolique de {1} mmHg. Quelle est la pression différentielle ?"
+ ],
+ "脉压差 = 收缩压 − 舒张压。": [
+  "Pulse pressure = systolic pressure − diastolic pressure.",
+  "Pression différentielle = pression systolique − pression diastolique."
+ ],
+ "教科书用 kPa 表示血压。已知 1 kPa = 7.5 mmHg，{0} mmHg 约是多少 kPa？": [
+  "Textbooks give blood pressure in kPa. Given 1 kPa = 7.5 mmHg, about how many kPa is {0} mmHg?",
+  "Les manuels expriment la pression artérielle en kPa. Sachant que 1 kPa = 7,5 mmHg, à combien de kPa correspondent environ {0} mmHg ?"
+ ],
+ "kPa 数值 = mmHg 数值 ÷ 7.5。": [
+  "Value in kPa = value in mmHg ÷ 7.5.",
+  "Valeur en kPa = valeur en mmHg ÷ 7,5."
+ ],
+ "某人的血压为 {0} / {1} mmHg（收缩压 / 舒张压），属于：": [
+  "A person's blood pressure is {0} / {1} mmHg (systolic / diastolic). It is:",
+  "La pression artérielle d'une personne est de {0} / {1} mmHg (systolique / diastolique). Elle est :"
+ ],
+ "健康成年人的收缩压为 90–140 mmHg，舒张压为 60–90 mmHg；超过 140 / 90 mmHg 为偏高。": [
+  "In a healthy adult the systolic pressure is 90–140 mmHg and the diastolic pressure 60–90 mmHg; above 140 / 90 mmHg is high.",
+  "Chez un adulte en bonne santé, la pression systolique est de 90 à 140 mmHg et la pression diastolique de 60 à 90 mmHg ; au-delà de 140 / 90 mmHg, elle est élevée."
+ ],
+ "用袖带测血压时，袖带压力高于收缩压，听诊器里会：": [
+  "When measuring blood pressure with a cuff, if the cuff pressure is above the systolic pressure, in the stethoscope you will:",
+  "Quand on mesure la pression artérielle avec un brassard, si la pression du brassard est supérieure à la pression systolique, au stéthoscope on :"
+ ],
+ "听不到声音，因为血流被阻断": [
+  "Hear nothing, because the blood flow is blocked",
+  "N'entend rien, parce que la circulation du sang est bloquée"
+ ],
+ "听到清晰的脉搏声": [
+  "Hear a clear pulse sound",
+  "Entend un bruit de pouls net"
+ ],
+ "听到连续的声音": [
+  "Hear a continuous sound",
+  "Entend un bruit continu"
+ ],
+ "声音突然变大": [
+  "Hear the sound suddenly grow louder",
+  "Entend le bruit devenir soudain plus fort"
+ ],
+ "袖带压力降到收缩压时，血流冲开血管，开始听到脉搏声；降到舒张压时，声音消失。": [
+  "When the cuff pressure falls to the systolic pressure, the blood forces the artery open and the pulse sound begins; at the diastolic pressure the sound disappears.",
+  "Quand la pression du brassard descend jusqu'à la pression systolique, le sang force l'artère à s'ouvrir et le bruit du pouls commence ; à la pression diastolique, le bruit disparaît."
+ ],
+ "高产抗病（A_B_）": [
+  "High yield, resistant (A_B_)",
+  "Rendement élevé, résistante (A_B_)"
+ ],
+ "高产感病（A_bb）": [
+  "High yield, susceptible (A_bb)",
+  "Rendement élevé, sensible (A_bb)"
+ ],
+ "低产抗病（aaB_）": [
+  "Low yield, resistant (aaB_)",
+  "Rendement faible, résistante (aaB_)"
+ ],
+ "低产感病（aabb）": [
+  "Low yield, susceptible (aabb)",
+  "Rendement faible, sensible (aabb)"
+ ],
+ "诱变育种": [
+  "Mutation breeding",
+  "Sélection par mutation"
+ ],
+ "转基因技术": [
+  "Transgenic technology",
+  "Transgenèse"
+ ],
+ "克隆技术": [
+  "Cloning",
+  "Clonage"
+ ],
+ "让高产易倒伏的水稻与低产抗倒伏的水稻杂交，选育优良品种": [
+  "Cross a high-yield rice that falls over easily with a low-yield rice that resists falling, and select good varieties",
+  "Croiser un riz à rendement élevé qui verse facilement avec un riz à rendement faible résistant à la verse, et sélectionner de bonnes variétés"
+ ],
+ "让两个品种杂交，从后代中选出优良个体，培育杂交水稻": [
+  "Cross two varieties and select good individuals from the offspring to produce hybrid rice",
+  "Croiser deux variétés et sélectionner de bons individus dans la descendance pour obtenir du riz hybride"
+ ],
+ "用射线处理萌发的种子，从变异的后代中选育新品种": [
+  "Treat germinating seeds with radiation and select new varieties from the mutated offspring",
+  "Traiter des graines en germination avec des rayonnements et sélectionner de nouvelles variétés parmi les descendants mutants"
+ ],
+ "让种子搭载航天器在太空飞行，再选育新品种": [
+  "Send seeds into space on a spacecraft, then select new varieties",
+  "Envoyer des graines dans l'espace à bord d'un engin spatial, puis sélectionner de nouvelles variétés"
+ ],
+ "把苏云金杆菌的抗虫基因转入棉花，培育抗虫棉": [
+  "Put the insect-resistance gene of Bacillus thuringiensis into cotton to produce insect-resistant cotton",
+  "Introduire le gène de résistance aux insectes de Bacillus thuringiensis dans le coton pour obtenir du coton résistant aux insectes"
+ ],
+ "把人的胰岛素基因转入大肠杆菌，用来生产胰岛素": [
+  "Put the human insulin gene into Escherichia coli to produce insulin",
+  "Introduire le gène humain de l'insuline dans Escherichia coli pour produire de l'insuline"
+ ],
+ "用体细胞的细胞核培育出多莉羊": [
+  "Raise Dolly the sheep from the nucleus of a body cell",
+  "Obtenir la brebis Dolly à partir du noyau d'une cellule du corps"
+ ],
+ "由一个体细胞核发育成遗传物质与供核个体基本相同的个体": [
+  "An individual that develops from the nucleus of a body cell and has almost the same genetic material as the nucleus donor",
+  "Un individu qui se développe à partir du noyau d'une cellule du corps et a presque le même matériel génétique que le donneur du noyau"
+ ],
+ "甲羊": [
+  "Sheep A",
+  "Brebis A"
+ ],
+ "白脸": [
+  "white face",
+  "tête blanche"
+ ],
+ "乙羊": [
+  "Sheep B",
+  "Brebis B"
+ ],
+ "黑脸": [
+  "black face",
+  "tête noire"
+ ],
+ "丙羊": [
+  "Sheep C",
+  "Brebis C"
+ ],
+ "棕脸": [
+  "brown face",
+  "tête brune"
+ ],
+ "杂交育种是：": [
+  "Cross breeding is:",
+  "Le croisement (hybridation) consiste à :"
+ ],
+ "让不同品种杂交，从后代中选出具有优良性状的新品种": [
+  "Crossing different varieties and selecting from the offspring a new variety with good traits",
+  "Croiser des variétés différentes et sélectionner dans la descendance une nouvelle variété aux bonnes qualités"
+ ],
+ "让生物吸收宇宙射线": [
+  "Letting organisms absorb cosmic rays",
+  "Laisser les organismes absorber des rayons cosmiques"
+ ],
+ "把一个细胞核移入去核的卵细胞": [
+  "Moving a cell nucleus into an enucleated egg cell",
+  "Transférer un noyau de cellule dans une cellule-œuf énucléée"
+ ],
+ "把一种生物的基因转入另一种生物": [
+  "Putting a gene of one organism into another organism",
+  "Introduire un gène d'un organisme dans un autre organisme"
+ ],
+ "诱变育种（如太空育种）的原理是：": [
+  "The principle of mutation breeding (such as space breeding) is:",
+  "Le principe de la sélection par mutation (comme la sélection dans l'espace) est :"
+ ],
+ "诱发生物的遗传物质发生改变（变异），再选育": [
+  "To cause a change (variation) in the genetic material of organisms and then select",
+  "De provoquer un changement (variation) du matériel génétique des organismes, puis de sélectionner"
+ ],
+ "让生物的性状永远不变": [
+  "To make the traits of organisms never change",
+  "De faire en sorte que les caractères des organismes ne changent jamais"
+ ],
+ "让生物适应新的生活环境": [
+  "To make organisms adapt to a new habitat",
+  "De faire s'adapter les organismes à un nouveau milieu"
+ ],
+ "把两个品种的优点直接拼合": [
+  "To join the good points of two varieties directly",
+  "D'assembler directement les qualités de deux variétés"
+ ],
+ "用高产感病（AAbb）和低产抗病（aaBB）的纯种杂交，F1 自交得 {0} 株 F2，理论上高产抗病（A_B_）的约有多少株？": [
+  "Pure lines of high-yield, susceptible (AAbb) and low-yield, resistant (aaBB) plants are crossed and the F1 self-pollinates, giving {0} F2 plants. In theory about how many are high-yield and resistant (A_B_)?",
+  "On croise des lignées pures à rendement élevé et sensibles (AAbb) et à rendement faible et résistantes (aaBB), puis la F1 s'autoféconde et donne {0} plantes F2. En théorie, environ combien sont à rendement élevé et résistantes (A_B_) ?"
+ ],
+ "F2 的四种表现型比例约为 9 : 3 : 3 : 1。": [
+  "The four phenotypes of the F2 are in a ratio of about 9 : 3 : 3 : 1.",
+  "Les quatre phénotypes de la F2 sont dans un rapport d'environ 9 : 3 : 3 : 1."
+ ],
+ "同样的杂交，{0} 株 F2 中，理论上高产抗病且能稳定遗传的纯合子（AABB）约有多少株？": [
+  "Same cross: of {0} F2 plants, in theory about how many are high-yield, resistant homozygotes (AABB) that breed true?",
+  "Même croisement : sur {0} plantes F2, en théorie environ combien sont des homozygotes à rendement élevé et résistantes (AABB) qui se reproduisent fidèlement ?"
+ ],
+ "AABB 占 F2 的 1/16；高产抗病的其他植株自交后代还会出现性状分离。": [
+  "AABB makes up 1/16 of the F2; the offspring of the other high-yield, resistant plants would still segregate.",
+  "Les AABB représentent 1/16 de la F2 ; les descendants des autres plantes à rendement élevé et résistantes se sépareraient encore."
+ ],
+ "杂交育种、诱变育种、转基因技术和克隆技术是常见的育种与生物技术。": [
+  "Cross breeding, mutation breeding, transgenic technology and cloning are common breeding methods and biotechnologies.",
+  "Le croisement, la sélection par mutation, la transgenèse et le clonage sont des méthodes courantes de sélection et de biotechnologie."
+ ],
+ "多莉羊（克隆羊）的遗传物质主要来自：": [
+  "The genetic material of Dolly the sheep (the cloned sheep) comes mainly from:",
+  "Le matériel génétique de la brebis Dolly (la brebis clonée) provient surtout :"
+ ],
+ "代孕母羊": [
+  "The surrogate mother sheep",
+  "De la brebis mère porteuse"
+ ],
+ "三只羊各占三分之一": [
+  "One third from each of the three sheep",
+  "D'un tiers de chacune des trois brebis"
+ ],
+ "细胞核是遗传的控制中心，克隆个体的性状与供核个体基本相同。": [
+  "The nucleus is the control centre of heredity, so a clone has almost the same traits as the nucleus donor.",
+  "Le noyau est le centre de contrôle de l'hérédité ; un clone a donc presque les mêmes caractères que le donneur du noyau."
+ ],
+ "育种就是利用遗传和变异的原理培育新品种。": [
+  "Breeding uses the principles of heredity and variation to produce new varieties.",
+  "La sélection utilise les principes de l'hérédité et de la variation pour obtenir de nouvelles variétés."
+ ],
+ "数水蚤的心跳：10 s 内数到 {0} 次，每分钟约跳多少次？": [
+  "Counting the heartbeats of a water flea: you count {0} beats in 10 s. About how many beats per minute is that?",
+  "Comptage des battements de cœur d'une daphnie : on compte {0} battements en 10 s. Cela fait environ combien de battements par minute ?"
+ ],
+ "每分钟的心跳次数 = 10 s 的次数 × 6。": [
+  "Beats per minute = beats in 10 s × 6.",
+  "Battements par minute = battements en 10 s × 6."
+ ],
+ "清水中水蚤 10 s 心跳 {0} 次，在某浓度的酒精中心跳 {1} 次，心率比清水中减少了百分之几？": [
+  "In clear water a water flea has {0} heartbeats in 10 s; in alcohol of a certain concentration it has {1}. By what percentage is the heart rate lower than in clear water?",
+  "Dans l'eau claire, une daphnie a {0} battements en 10 s ; dans de l'alcool d'une certaine concentration, elle en a {1}. De quel pourcentage le rythme cardiaque est-il plus bas que dans l'eau claire ?"
+ ],
+ "减少的百分数 = (清水中的次数 − 酒精中的次数) ÷ 清水中的次数 × 100 %。": [
+  "Decrease in percent = (count in clear water − count in alcohol) ÷ count in clear water × 100 %.",
+  "Diminution en pourcentage = (comptage dans l'eau claire − comptage dans l'alcool) ÷ comptage dans l'eau claire × 100 %."
+ ],
+ "同一只水蚤三次计数的结果分别是 {0}、{1}、{2} 次（每次 10 s），平均每 10 s 心跳多少次？": [
+  "Three counts of the same water flea give {0}, {1} and {2} beats (10 s each). What is the average number of beats per 10 s?",
+  "Trois comptages de la même daphnie donnent {0}, {1} et {2} battements (10 s chacun). Quel est le nombre moyen de battements par 10 s ?"
+ ],
+ "重复计数取平均值，可以减小误差。": [
+  "Repeating the count and taking the average reduces the error.",
+  "Répéter le comptage et prendre la moyenne réduit l'erreur."
+ ],
+ "本实验中，在清水里观察水蚤的心率，其作用是：": [
+  "In this experiment, observing the heart rate of the water flea in clear water serves to:",
+  "Dans cette expérience, observer le rythme cardiaque de la daphnie dans l'eau claire sert à :"
+ ],
+ "作对照，与酒精中的心率比较": [
+  "Act as a control, to compare with the heart rate in alcohol",
+  "Servir de témoin, pour comparer avec le rythme cardiaque dans l'alcool"
+ ],
+ "作为实验变量": [
+  "Act as the experimental variable",
+  "Servir de variable expérimentale"
+ ],
+ "杀死水蚤": [
+  "Kill the water flea",
+  "Tuer la daphnie"
+ ],
+ "增加酒精的浓度": [
+  "Increase the alcohol concentration",
+  "Augmenter la concentration d'alcool"
+ ],
+ "使水蚤停止运动": [
+  "Make the water flea stop moving",
+  "Arrêter les mouvements de la daphnie"
+ ],
+ "对照实验中，只有酒精的浓度这一个条件不同。": [
+  "In a controlled experiment only one condition, the alcohol concentration, is different.",
+  "Dans une expérience témoin, une seule condition diffère : la concentration d'alcool."
+ ],
+ "酒精浓度较高（如 20 %）时，水蚤的心率会：": [
+  "At a high alcohol concentration (such as 20 %) the heart rate of the water flea will:",
+  "À une forte concentration d'alcool (comme 20 %), le rythme cardiaque de la daphnie :"
+ ],
+ "停止跳动，水蚤死亡": [
+  "Stop, and the water flea dies",
+  "S'arrête et la daphnie meurt"
+ ],
+ "明显加快": [
+  "Speed up clearly",
+  "Accélère nettement"
+ ],
+ "略微加快后恢复": [
+  "Speed up slightly and then recover",
+  "Accélère un peu puis se rétablit"
+ ],
+ "跳动得更有力": [
+  "Beat more strongly",
+  "Devient plus fort"
+ ],
+ "酒精对心脏有抑制作用，浓度越高，心率越慢；酒精浓度过高时，水蚤会死亡。": [
+  "Alcohol inhibits the heart: the higher the concentration, the slower the heart rate; at too high a concentration the water flea dies.",
+  "L'alcool inhibe le cœur : plus la concentration est élevée, plus le rythme est lent ; à une concentration trop élevée, la daphnie meurt."
+ ],
+ "遗传物质储存的主要场所": [
+  "The main place where genetic material is stored",
+  "Principal lieu de stockage du matériel génétique"
+ ],
+ "由 DNA 和蛋白质组成，容易被碱性染料染成深色": [
+  "Made of DNA and protein, easily stained dark by basic dyes",
+  "Formés d'ADN et de protéines, facilement colorés en sombre par les colorants basiques"
+ ],
+ "主要的遗传物质，呈规则的双螺旋结构": [
+  "The main genetic material, with a regular double-helix structure",
+  "Le principal matériel génétique, de structure régulière en double hélice"
+ ],
+ "基因": [
+  "Gene",
+  "Gène"
+ ],
+ "DNA 上具有特定遗传信息的片段，控制生物的性状": [
+  "A segment of DNA carrying specific genetic information that controls a trait",
+  "Segment d'ADN portant une information génétique précise qui commande un caractère"
+ ],
+ "与 DNA 一起组成染色体": [
+  "Together with DNA it makes up the chromosome",
+  "Forme le chromosome avec l'ADN"
+ ],
+ "果蝇": [
+  "Fruit fly",
+  "Drosophile"
+ ],
+ "豌豆": [
+  "Pea",
+  "Pois"
+ ],
+ "水稻": [
+  "Rice",
+  "Riz"
+ ],
+ "猫": [
+  "Cat",
+  "Chat"
+ ],
+ "体细胞": [
+  "Body cell",
+  "Cellule du corps"
+ ],
+ "生殖细胞（精子或卵细胞）": [
+  "Sex cell (sperm or egg cell)",
+  "Cellule sexuelle (spermatozoïde ou ovule)"
+ ],
+ "染色体主要由什么组成？": [
+  "What are chromosomes mainly made of?",
+  "De quoi les chromosomes sont-ils principalement formés ?"
+ ],
+ "DNA 和蛋白质": [
+  "DNA and protein",
+  "D'ADN et de protéines"
+ ],
+ "DNA 和脂肪": [
+  "DNA and fat",
+  "D'ADN et de graisse"
+ ],
+ "RNA 和糖类": [
+  "RNA and sugar",
+  "D'ARN et de glucides"
+ ],
+ "蛋白质和无机盐": [
+  "Protein and minerals",
+  "De protéines et de sels minéraux"
+ ],
+ "糖类和脂肪": [
+  "Sugar and fat",
+  "De glucides et de graisse"
+ ],
+ "染色体存在于细胞核中，DNA 是主要的遗传物质。": [
+  "Chromosomes are in the nucleus; DNA is the main genetic material.",
+  "Les chromosomes sont dans le noyau ; l'ADN est le principal matériel génétique."
+ ],
+ "基因是：": [
+  "A gene is:",
+  "Un gène est :"
+ ],
+ "DNA 上具有特定遗传信息的片段": [
+  "A segment of DNA carrying specific genetic information",
+  "Un segment d'ADN portant une information génétique précise"
+ ],
+ "细胞核中的一种细胞器": [
+  "An organelle in the nucleus",
+  "Un organite du noyau"
+ ],
+ "染色体上的蛋白质片段": [
+  "A piece of protein on a chromosome",
+  "Un morceau de protéine sur un chromosome"
+ ],
+ "一个完整的细胞": [
+  "A whole cell",
+  "Une cellule entière"
+ ],
+ "只存在于生殖细胞中的物质": [
+  "A substance found only in sex cells",
+  "Une substance présente seulement dans les cellules sexuelles"
+ ],
+ "一个 DNA 分子上有许多个基因，基因控制生物的性状。": [
+  "One DNA molecule carries many genes, and genes control the traits of the organism.",
+  "Une molécule d'ADN porte de nombreux gènes, et les gènes commandent les caractères de l'organisme."
+ ],
+ "{0}的体细胞中有 {1} 条染色体，它的{2}中有多少条染色体？": [
+  "The body cells of {0} have {1} chromosomes. How many chromosomes are there in its {2}?",
+  "Les cellules du corps de {0} ont {1} chromosomes. Combien de chromosomes y a-t-il dans {2} ?"
+ ],
+ "体细胞中的染色体成对存在；生殖细胞中的染色体数目减半；受精卵恢复到体细胞的数目。": [
+  "Chromosomes in body cells exist in pairs; in sex cells their number is halved; the zygote has the number of a body cell again.",
+  "Les chromosomes des cellules du corps existent par paires ; dans les cellules sexuelles, leur nombre est réduit de moitié ; l'œuf fécondé retrouve le nombre d'une cellule du corps."
+ ],
+ "DNA 的两条链之间，碱基 {0} 与哪个碱基配对？（拓展内容）": [
+  "Between the two strands of DNA, which base pairs with base {0}? (extension)",
+  "Entre les deux brins d'ADN, quelle base s'apparie avec la base {0} ? (approfondissement)"
+ ],
+ "碱基互补配对：A 与 T 配对，C 与 G 配对。": [
+  "Complementary base pairing: A pairs with T, C pairs with G.",
+  "Appariement complémentaire des bases : A s'apparie avec T, C s'apparie avec G."
+ ],
+ "人的精子中的性染色体可能是：": [
+  "The sex chromosome in a human sperm may be:",
+  "Le chromosome sexuel d'un spermatozoïde humain peut être :"
+ ],
+ "X 或 Y": [
+  "X or Y",
+  "X ou Y"
+ ],
+ "只有 X": [
+  "Only X",
+  "Seulement X"
+ ],
+ "只有 Y": [
+  "Only Y",
+  "Seulement Y"
+ ],
+ "卵细胞的性染色体只有 X；精子是 X 或 Y，所以生男生女的机会均等。": [
+  "The sex chromosome of an egg cell is always X; a sperm carries X or Y, so the chances of a boy or a girl are equal.",
+  "Le chromosome sexuel d'un ovule est toujours X ; un spermatozoïde porte X ou Y, donc les chances d'avoir un garçon ou une fille sont égales."
+ ],
+ "明亮": [
+  "Bright",
+  "Clair"
+ ],
+ "阴暗": [
+  "Dark",
+  "Sombre"
+ ],
+ "较热（30 ℃）": [
+  "Warmer (30 ℃)",
+  "Plus chaud (30 ℃)"
+ ],
+ "较凉（15 ℃）": [
+  "Cooler (15 ℃)",
+  "Plus frais (15 ℃)"
+ ],
+ "草原": [
+  "Grassland",
+  "Prairie"
+ ],
+ "湿地": [
+  "Wetland",
+  "Zone humide"
+ ],
+ "农田": [
+  "Farmland",
+  "Terres cultivées"
+ ],
+ "有“绿色水库”“地球之肺”之称": [
+  "Called the “green reservoir” and the “lungs of the Earth”",
+  "Appelée « château d'eau vert » et « poumon de la Terre »"
+ ],
+ "乔木高大，动植物的种类十分繁多": [
+  "Tall trees; a great variety of animals and plants",
+  "Grands arbres ; une très grande variété d'animaux et de plantes"
+ ],
+ "降水较少，以草本植物为主，适合放牧": [
+  "Little rainfall, mostly herbs, suitable for grazing",
+  "Peu de pluie, surtout des herbes, adaptée au pâturage"
+ ],
+ "有“地球之肾”之称，能净化水质": [
+  "Called the “kidneys of the Earth”; it purifies water",
+  "Appelée « rein de la Terre » ; elle purifie l'eau"
+ ],
+ "水陆之间的过渡地带，能蓄洪抗旱": [
+  "A transition zone between land and water that stores flood water and resists drought",
+  "Zone de transition entre terre et eau qui retient l'eau des crues et résiste à la sécheresse"
+ ],
+ "面积最大，浮游植物是主要的生产者": [
+  "The largest in area; phytoplankton are the main producers",
+  "La plus étendue ; le phytoplancton en est le principal producteur"
+ ],
+ "农作物是主要的生产者，需要人工管理": [
+  "Crops are the main producers and need to be managed by people",
+  "Les cultures sont les principaux producteurs et doivent être gérées par l'être humain"
+ ],
+ "人是主要的消费者，需要外界输入大量物质和能量": [
+  "People are the main consumers, and large amounts of matter and energy must be brought in from outside",
+  "Les êtres humains sont les principaux consommateurs, et de grandes quantités de matière et d'énergie doivent venir de l'extérieur"
+ ],
+ "阳光": [
+  "Sunlight",
+  "La lumière du soleil"
+ ],
+ "杂草": [
+  "Weeds",
+  "Les mauvaises herbes"
+ ],
+ "细菌": [
+  "Bacteria",
+  "Les bactéries"
+ ],
+ "鼠妇": [
+  "Woodlice",
+  "Les cloportes"
+ ],
+ "下列属于非生物因素的是：": [
+  "Which of the following is an abiotic factor?",
+  "Lequel des éléments suivants est un facteur abiotique ?"
+ ],
+ "生态系统中，影响生物生活的环境因素分为非生物因素（光、温度、水、空气、土壤等）和生物因素（其他生物）。": [
+  "In an ecosystem the environmental factors that affect organisms are divided into abiotic factors (light, temperature, water, air, soil and so on) and biotic factors (other organisms).",
+  "Dans un écosystème, les facteurs du milieu qui agissent sur les êtres vivants se divisent en facteurs abiotiques (lumière, température, eau, air, sol, etc.) et facteurs biotiques (les autres êtres vivants)."
+ ],
+ "“{0}”描述的是哪种生态系统？": [
+  "“{0}” describes which ecosystem?",
+  "« {0} » décrit quel écosystème ?"
+ ],
+ "{0}生态系统": [
+  "{0} ecosystem",
+  "Écosystème : {0}"
+ ],
+ "常见的生态系统有森林、草原、湿地、海洋、农田和城市生态系统。": [
+  "Common ecosystems are forest, grassland, wetland, ocean, farmland and urban ecosystems.",
+  "Les écosystèmes courants sont la forêt, la prairie, la zone humide, l'océan, les terres cultivées et la ville."
+ ],
+ "在本模型中，一个生态系统能承受并恢复的最大干扰是 80 × 物种数 ÷ (物种数 + 8) %。物种数为 {0} 时，约是多少？": [
+  "In this model the largest disturbance an ecosystem can bear and recover from is 80 × number of species ÷ (number of species + 8) %. With {0} species, about how much is it?",
+  "Dans ce modèle, la plus forte perturbation qu'un écosystème peut supporter et dont il se rétablit est de 80 × nombre d'espèces ÷ (nombre d'espèces + 8) %. Avec {0} espèces, combien cela fait-il environ ?"
+ ],
+ "物种越多，生态系统的自我调节能力越强，越稳定。": [
+  "The more species there are, the stronger the self-regulation of an ecosystem and the more stable it is.",
+  "Plus il y a d'espèces, plus l'autorégulation d'un écosystème est forte et plus il est stable."
+ ],
+ "探究“光对鼠妇分布的影响”时，除光以外的其他条件（温度、湿度等）应该：": [
+  "When investigating “the effect of light on the distribution of woodlice”, apart from light all the other conditions (temperature, humidity and so on) should be:",
+  "Quand on étudie « l'effet de la lumière sur la répartition des cloportes », toutes les autres conditions que la lumière (température, humidité, etc.) doivent être :"
+ ],
+ "保持相同": [
+  "Kept the same",
+  "Gardées identiques"
+ ],
+ "尽量不同": [
+  "As different as possible",
+  "Aussi différentes que possible"
+ ],
+ "越多越好": [
+  "The more the better",
+  "Les plus nombreuses possible"
+ ],
+ "每次都改变": [
+  "Changed every time",
+  "Changées à chaque fois"
+ ],
+ "不必考虑": [
+  "Ignored",
+  "Ignorées"
+ ],
+ "对照实验中只能有一个变量。": [
+  "In a controlled experiment there can be only one variable.",
+  "Dans une expérience témoin, il ne peut y avoir qu'une seule variable."
+ ],
+ "探究鼠妇的分布时，用 10 只鼠妇而不是 1 只，并重复几次，主要是为了：": [
+  "When investigating the distribution of woodlice, using 10 woodlice instead of 1 and repeating several times is mainly to:",
+  "Quand on étudie la répartition des cloportes, utiliser 10 cloportes au lieu d'un seul et répéter plusieurs fois sert surtout à :"
+ ],
+ "减少偶然性，使结论更可靠": [
+  "Reduce chance effects and make the conclusion more reliable",
+  "Réduire les effets du hasard et rendre la conclusion plus fiable"
+ ],
+ "使鼠妇长得更快": [
+  "Make the woodlice grow faster",
+  "Faire grandir les cloportes plus vite"
+ ],
+ "增加实验的变量": [
+  "Add more variables to the experiment",
+  "Ajouter des variables à l'expérience"
+ ],
+ "让鼠妇不再运动": [
+  "Stop the woodlice from moving",
+  "Empêcher les cloportes de bouger"
+ ],
+ "节约时间": [
+  "Save time",
+  "Gagner du temps"
+ ],
+ "只用 1 只鼠妇，结果可能是偶然的。": [
+  "With only 1 woodlouse the result could be by chance.",
+  "Avec un seul cloporte, le résultat pourrait être dû au hasard."
+ ],
+ "花生仁": [
+  "Peanut kernel",
+  "Cacahuète décortiquée"
+ ],
+ "核桃仁": [
+  "Walnut kernel",
+  "Noix décortiquée"
+ ],
+ "黄豆": [
+  "Soybean",
+  "Soja"
+ ],
+ "质量为 {0} g 的水（1 mL 水约重 1 g），温度升高了 {1} ℃。水吸收的热量是多少？（水的比热容 4.2 J/(g·℃)）": [
+  "Water of mass {0} g (1 mL of water weighs about 1 g) rises in temperature by {1} ℃. How much heat does the water absorb? (specific heat of water 4.2 J/(g·℃))",
+  "Une masse d'eau de {0} g (1 mL d'eau pèse environ 1 g) s'échauffe de {1} ℃. Quelle chaleur l'eau absorbe-t-elle ? (capacité thermique massique de l'eau 4,2 J/(g·℃))"
+ ],
+ "Q = c × m × ΔT。": [
+  "Q = c × m × ΔT.",
+  "Q = c × m × ΔT."
+ ],
+ "水吸收的热量为 {0} J，这些热量来自 {1} g 食物的燃烧，测得每克食物含能量多少千焦？": [
+  "The water absorbs {0} J of heat, which came from burning {1} g of food. How many kilojoules per gram of food does this measure?",
+  "L'eau absorbe {0} J de chaleur, provenant de la combustion de {1} g d'aliment. Cela mesure combien de kilojoules par gramme d'aliment ?"
+ ],
+ "每克食物的能量 = Q ÷ 食物的质量，再把焦耳换成千焦。": [
+  "Energy per gram of food = Q ÷ mass of the food, then change joules to kilojoules.",
+  "Énergie par gramme d'aliment = Q ÷ masse de l'aliment, puis convertir les joules en kilojoules."
+ ],
+ "{0} g 的水吸收了 {1} J 的热量，水温升高多少摄氏度？（水的比热容 4.2 J/(g·℃)）": [
+  "{0} g of water absorbs {1} J of heat. By how many degrees Celsius does its temperature rise? (specific heat of water 4.2 J/(g·℃))",
+  "{0} g d'eau absorbent {1} J de chaleur. De combien de degrés Celsius sa température s'élève-t-elle ? (capacité thermique massique de l'eau 4,2 J/(g·℃))"
+ ],
+ "ΔT = Q ÷ (c × m)。": [
+  "ΔT = Q ÷ (c × m).",
+  "ΔT = Q ÷ (c × m)."
+ ],
+ "{0}每克约含 {1} kJ 的能量，{2} g {3}完全燃烧，放出的能量约是多少千焦？": [
+  "{0} contains about {1} kJ of energy per gram. When {2} g of {3} burns completely, about how many kilojoules are released?",
+  "{0} contient environ {1} kJ d'énergie par gramme. Quand {2} g de {3} brûlent complètement, environ combien de kilojoules sont libérés ?"
+ ],
+ "能量 = 每克含有的能量 × 质量。": [
+  "Energy = energy per gram × mass.",
+  "Énergie = énergie par gramme × masse."
+ ],
+ "实验测得的数值通常比食物实际含有的能量小，主要原因是：": [
+  "The value measured in the experiment is usually lower than the energy the food really contains, mainly because:",
+  "La valeur mesurée dans l'expérience est en général inférieure à l'énergie réellement contenue dans l'aliment, surtout parce que :"
+ ],
+ "燃烧放出的热量没有全部被水吸收，有一部分散失到空气中": [
+  "Not all the heat released by burning is absorbed by the water; some is lost to the air",
+  "Toute la chaleur dégagée par la combustion n'est pas absorbée par l'eau ; une partie est perdue dans l'air"
+ ],
+ "食物没有燃烧": [
+  "The food did not burn",
+  "L'aliment n'a pas brûlé"
+ ],
+ "水的比热容太小": [
+  "The specific heat of water is too small",
+  "La capacité thermique massique de l'eau est trop petite"
+ ],
+ "水的质量测得太大": [
+  "The mass of water was measured too large",
+  "La masse d'eau a été mesurée trop grande"
+ ],
+ "食物中的能量会消失": [
+  "The energy in the food disappears",
+  "L'énergie de l'aliment disparaît"
+ ],
+ "加挡风罩、减小水与火焰的距离等办法可以减少热量散失。": [
+  "A wind shield and a smaller distance between the water and the flame reduce the loss of heat.",
+  "Un pare-vent et une distance plus petite entre l'eau et la flamme réduisent la perte de chaleur."
+ ],
+ "表兄妹（三代以内的旁系血亲）": [
+  "Cousins (collateral relatives within three generations)",
+  "Cousins germains (parents collatéraux jusqu'au troisième degré)"
+ ],
+ "同胞兄妹（亲兄妹）": [
+  "Brother and sister (full siblings)",
+  "Frère et sœur (germains)"
+ ],
+ "禁止近亲结婚": [
+  "Forbidding marriage between close relatives",
+  "Interdire le mariage entre proches parents"
+ ],
+ "遗传咨询": [
+  "Genetic counselling",
+  "Conseil génétique"
+ ],
+ "产前诊断": [
+  "Prenatal diagnosis",
+  "Diagnostic prénatal"
+ ],
+ "适龄生育": [
+  "Having children at a suitable age",
+  "Avoir des enfants à un âge approprié"
+ ],
+ "表兄妹结婚，后代患隐性遗传病的机会大大增加": [
+  "When cousins marry, the chance that their children have a recessive genetic disease rises greatly",
+  "Quand des cousins germains se marient, le risque que leurs enfants aient une maladie génétique récessive augmente fortement"
+ ],
+ "我国法律规定直系血亲和三代以内的旁系血亲不能结婚": [
+  "Chinese law does not allow lineal relatives by blood and collateral relatives by blood within three generations to marry",
+  "La loi chinoise n'autorise pas le mariage entre parents en ligne directe et entre parents collatéraux jusqu'au troisième degré"
+ ],
+ "医生根据家族病史，推算后代患某种遗传病的可能性": [
+  "A doctor uses the family history to work out the chance that the children have a certain genetic disease",
+  "Un médecin s'appuie sur les antécédents familiaux pour estimer le risque que les enfants aient une certaine maladie génétique"
+ ],
+ "了解双方家庭中的遗传病情况后，给出生育建议": [
+  "Giving advice about having children after finding out about genetic diseases in both families",
+  "Donner des conseils sur la procréation après avoir pris connaissance des maladies génétiques dans les deux familles"
+ ],
+ "怀孕后检查胎儿是否患有严重的遗传病": [
+  "After conception, checking whether the fetus has a serious genetic disease",
+  "Après la conception, vérifier si le fœtus a une maladie génétique grave"
+ ],
+ "通过羊水检查、B 超等方法了解胎儿的发育情况": [
+  "Finding out how the fetus is developing by amniotic fluid tests, ultrasound and other methods",
+  "Connaître le développement du fœtus par l'analyse du liquide amniotique, l'échographie et d'autres méthodes"
+ ],
+ "年龄过大生育，后代患某些遗传病的风险增加": [
+  "Having children at too advanced an age raises the risk of certain genetic diseases in the children",
+  "Avoir des enfants à un âge trop avancé augmente le risque de certaines maladies génétiques chez les enfants"
+ ],
+ "在适合的年龄生育，有利于母亲和孩子的健康": [
+  "Having children at a suitable age is good for the health of the mother and the child",
+  "Avoir des enfants à un âge approprié est bon pour la santé de la mère et de l'enfant"
+ ],
+ "每 {0} 人中有 1 位某隐性遗传病基因的携带者。夫妻{1}时，孩子患这种病的概率是每一万个孩子中约多少个？（携带者之间的孩子患病概率为 1/4）": [
+  "1 person in {0} carries the gene of a certain recessive genetic disease. When the couple is {1}, about how many in every ten thousand children have this disease? (the chance that a child of two carriers is affected is 1/4)",
+  "1 personne sur {0} porte le gène d'une certaine maladie génétique récessive. Quand le couple est « {1} », environ combien d'enfants sur dix mille ont cette maladie ? (la probabilité qu'un enfant de deux porteurs soit atteint est de 1/4)"
+ ],
+ "患病概率 = 双方都携带同一致病基因的概率 × 1/4。": [
+  "Chance of the disease = chance that both carry the same disease gene × 1/4.",
+  "Probabilité de la maladie = probabilité que les deux portent le même gène de maladie × 1/4."
+ ],
+ "每 {0} 人中有 1 位携带者。夫妻是{1}时，双方都携带同一致病基因的概率是无亲缘关系时的多少倍？": [
+  "1 person in {0} is a carrier. When the couple is {1}, how many times higher is the chance that both carry the same disease gene than for unrelated partners?",
+  "1 personne sur {0} est porteuse. Quand le couple est « {1} », la probabilité que les deux portent le même gène de maladie est combien de fois plus élevée que pour des époux sans lien de parenté ?"
+ ],
+ "亲缘关系越近，两人带有同一致病基因的可能性越大。": [
+  "The closer the relationship, the more likely two people carry the same disease gene.",
+  "Plus le lien de parenté est proche, plus il est probable que les deux personnes portent le même gène de maladie."
+ ],
+ "我国法律禁止下列哪些亲属之间结婚？": [
+  "Chinese law forbids marriage between which relatives?",
+  "La loi chinoise interdit le mariage entre quels parents ?"
+ ],
+ "直系血亲和三代以内的旁系血亲": [
+  "Lineal relatives by blood and collateral relatives by blood within three generations",
+  "Les parents en ligne directe et les parents collatéraux jusqu'au troisième degré"
+ ],
+ "所有亲戚": [
+  "All relatives",
+  "Tous les parents"
+ ],
+ "只有兄弟姐妹": [
+  "Only brothers and sisters",
+  "Seulement les frères et sœurs"
+ ],
+ "同姓的人": [
+  "People with the same family name",
+  "Les personnes qui portent le même nom de famille"
+ ],
+ "同一个村的人": [
+  "People from the same village",
+  "Les personnes du même village"
+ ],
+ "禁止近亲结婚可以大大降低后代患隐性遗传病的概率。": [
+  "Forbidding marriage between close relatives greatly lowers the chance of children with a recessive genetic disease.",
+  "Interdire le mariage entre proches parents réduit fortement la probabilité d'avoir des enfants atteints d'une maladie génétique récessive."
+ ],
+ "“{0}”属于优生措施中的：": [
+  "“{0}” is part of which eugenic measure?",
+  "« {0} » relève de quelle mesure d'eugénisme ?"
+ ],
+ "优生优育的措施包括禁止近亲结婚、遗传咨询、产前诊断和适龄生育。": [
+  "Measures of good birth and child-rearing include forbidding marriage between close relatives, genetic counselling, prenatal diagnosis and having children at a suitable age.",
+  "Les mesures d'eugénisme comprennent l'interdiction du mariage entre proches parents, le conseil génétique, le diagnostic prénatal et le fait d'avoir des enfants à un âge approprié."
+ ],
+ "某隐性遗传病基因的携带者（Aa）本人通常：": [
+  "A carrier (Aa) of the gene of a recessive genetic disease is usually:",
+  "Un porteur (Aa) du gène d'une maladie génétique récessive est en général :"
+ ],
+ "不患病，但会把致病基因传给后代": [
+  "Healthy, but passes the disease gene to the offspring",
+  "En bonne santé, mais transmet le gène de la maladie à sa descendance"
+ ],
+ "一定患病": [
+  "Certain to have the disease",
+  "Certainement malade"
+ ],
+ "不会把致病基因传给后代": [
+  "Unable to pass the disease gene to the offspring",
+  "Incapable de transmettre le gène de la maladie à sa descendance"
+ ],
+ "患病但症状很轻": [
+  "Ill, but with mild symptoms",
+  "Malade, mais avec des symptômes légers"
+ ],
+ "只传给女儿": [
+  "Passing it only to daughters",
+  "Le transmet seulement aux filles"
+ ],
+ "隐性基因 a 的作用被显性基因 A 掩盖，所以携带者表现正常。": [
+  "The effect of the recessive gene a is hidden by the dominant gene A, so a carrier looks normal.",
+  "L'effet du gène récessif a est masqué par le gène dominant A ; un porteur a donc l'air normal."
+ ],
+ "肱骨": [
+  "Humerus",
+  "Humérus"
+ ],
+ "尺骨和桡骨": [
+  "Radius and ulna",
+  "Radius et cubitus"
+ ],
+ "腕骨": [
+  "Carpals",
+  "Carpiens"
+ ],
+ "掌骨": [
+  "Metacarpals",
+  "Métacarpiens"
+ ],
+ "指骨": [
+  "Phalanges",
+  "Phalanges"
+ ],
+ "上臂的骨，连接肩部": [
+  "The bone of the upper arm, joined to the shoulder",
+  "L'os du bras, relié à l'épaule"
+ ],
+ "前臂的两根骨": [
+  "The two bones of the forearm",
+  "Les deux os de l'avant-bras"
+ ],
+ "手腕的许多小骨": [
+  "The many small bones of the wrist",
+  "Les nombreux petits os du poignet"
+ ],
+ "手掌部分的骨": [
+  "The bones of the palm",
+  "Les os de la paume"
+ ],
+ "手指（鳍、翼）末端的骨": [
+  "The bones at the end of the fingers (flipper, wing)",
+  "Les os à l'extrémité des doigts (nageoire, aile)"
+ ],
+ "人的上肢": [
+  "Human arm",
+  "Bras humain"
+ ],
+ "抓握、使用工具": [
+  "Grasping and using tools",
+  "Saisir et utiliser des outils"
+ ],
+ "蝙蝠的翼": [
+  "Bat's wing",
+  "Aile de chauve-souris"
+ ],
+ "飞行": [
+  "Flying",
+  "Voler"
+ ],
+ "鲸的鳍": [
+  "Whale's flipper",
+  "Nageoire de baleine"
+ ],
+ "游泳": [
+  "Swimming",
+  "Nager"
+ ],
+ "它们的骨骼结构基本相同，功能却不同，说明起源于共同的祖先。": [
+  "Their bones have basically the same structure but their functions differ, which shows that they come from a common ancestor.",
+  "Leurs os ont presque la même structure mais leurs fonctions diffèrent, ce qui montre qu'ils viennent d'un ancêtre commun."
+ ],
+ "龟": [
+  "Turtle",
+  "Tortue"
+ ],
+ "猪": [
+  "Pig",
+  "Porc"
+ ],
+ "恒河猴": [
+  "Rhesus monkey",
+  "Macaque rhésus"
+ ],
+ "狗": [
+  "Dog",
+  "Chien"
+ ],
+ "马": [
+  "Horse",
+  "Cheval"
+ ],
+ "海龟": [
+  "Sea turtle",
+  "Tortue de mer"
+ ],
+ "金枪鱼": [
+  "Tuna",
+  "Thon"
+ ],
+ "大猩猩": [
+  "Gorilla",
+  "Gorille"
+ ],
+ "猩猩": [
+  "Orangutan",
+  "Orang-outan"
+ ],
+ "猕猴": [
+  "Macaque",
+  "Macaque"
+ ],
+ "蝙蝠的翼、鲸的鳍和人的上肢，骨骼结构基本相同而功能不同，这说明它们：": [
+  "The bat's wing, the whale's flipper and the human arm have basically the same bone structure but different functions, which shows that they:",
+  "L'aile de la chauve-souris, la nageoire de la baleine et le bras humain ont presque la même structure osseuse mais des fonctions différentes, ce qui montre qu'ils :"
+ ],
+ "起源于共同的祖先": [
+  "Come from a common ancestor",
+  "Viennent d'un ancêtre commun"
+ ],
+ "功能完全相同": [
+  "Have exactly the same function",
+  "Ont exactement la même fonction"
+ ],
+ "是各自独立起源的": [
+  "Arose independently of each other",
+  "Sont apparus indépendamment les uns des autres"
+ ],
+ "生活环境完全相同": [
+  "Live in exactly the same environment",
+  "Vivent dans exactement le même milieu"
+ ],
+ "没有任何亲缘关系": [
+  "Are not related at all",
+  "N'ont aucun lien de parenté"
+ ],
+ "这样的器官叫同源器官，是比较解剖学提供的进化证据。": [
+  "Such organs are called homologous organs; they are evidence for evolution from comparative anatomy.",
+  "De tels organes sont dits homologues ; ils constituent une preuve de l'évolution fournie par l'anatomie comparée."
+ ],
+ "各种脊椎动物（鱼、龟、鸡、人）的早期胚胎都有鳃裂和尾，这说明：": [
+  "The early embryos of all vertebrates (fish, turtle, chicken, human) have gill slits and a tail, which shows that:",
+  "Les premiers embryons de tous les vertébrés (poisson, tortue, poulet, être humain) ont des fentes branchiales et une queue, ce qui montre que :"
+ ],
+ "它们可能有共同的祖先": [
+  "They may have a common ancestor",
+  "Ils ont peut-être un ancêtre commun"
+ ],
+ "它们长大后的形态相同": [
+  "They look the same when grown up",
+  "Ils ont la même forme à l'âge adulte"
+ ],
+ "人的胚胎会发育成鱼": [
+  "The human embryo turns into a fish",
+  "L'embryon humain se transforme en poisson"
+ ],
+ "鳃裂在发育中不会消失": [
+  "Gill slits never disappear during development",
+  "Les fentes branchiales ne disparaissent jamais au cours du développement"
+ ],
+ "它们的食物相同": [
+  "They eat the same food",
+  "Ils mangent la même nourriture"
+ ],
+ "胚胎早期相似，越到后期差异越大，是胚胎学提供的进化证据。": [
+  "Embryos look alike early on and become more different later; this is evidence for evolution from embryology.",
+  "Les embryons se ressemblent au début et deviennent plus différents ensuite ; c'est une preuve de l'évolution fournie par l'embryologie."
+ ],
+ "细胞色素 c 有 104 个氨基酸。{0}与人的有 {1} 个氨基酸不同，两者相同的氨基酸约占多少？（拓展内容）": [
+  "Cytochrome c has 104 amino acids. That of {0} differs from the human one in {1} amino acids. About what percentage of the amino acids are the same? (extension)",
+  "Le cytochrome c compte 104 acides aminés. Celui de {0} diffère de celui de l'être humain par {1} acides aminés. Environ quel pourcentage des acides aminés est identique ? (approfondissement)"
+ ],
+ "差异越小，说明亲缘关系越近。": [
+  "The smaller the difference, the closer the relationship.",
+  "Plus la différence est petite, plus la parenté est proche."
+ ],
+ "在进化树中，{0}与{1}的最近共同祖先大约生活在多少百万年前？（教学用的约数）": [
+  "In the evolutionary tree, about how many million years ago did the most recent common ancestor of {0} and {1} live? (rounded teaching values)",
+  "Dans l'arbre évolutif, il y a environ combien de millions d'années a vécu le dernier ancêtre commun de {0} et de {1} ? (valeurs pédagogiques arrondies)"
+ ],
+ "两条谱系分开得越晚，亲缘关系越近。": [
+  "The later two lineages split, the closer the relationship.",
+  "Plus deux lignées se séparent tard, plus la parenté est proche."
+ ],
+ "下列生物中，细胞色素 c 的氨基酸序列与人的差异最小、亲缘关系最近的是：（拓展内容）": [
+  "Which of these organisms has a cytochrome c amino-acid sequence that differs least from the human one and is therefore the closest relative? (extension)",
+  "Lequel de ces organismes a une séquence d'acides aminés du cytochrome c qui diffère le moins de celle de l'être humain et en est donc le plus proche parent ? (approfondissement)"
+ ],
+ "分子差异越小，亲缘关系越近。": [
+  "The smaller the molecular difference, the closer the relationship.",
+  "Plus la différence moléculaire est petite, plus la parenté est proche."
+ ],
+ "菌落太多，连成一片，无法计数": [
+  "Too many colonies: they merge and cannot be counted",
+  "Trop de colonies : elles se confondent et ne peuvent pas être comptées"
+ ],
+ "菌落数在 30–300 之间，适合计数": [
+  "Between 30 and 300 colonies: suitable for counting",
+  "Entre 30 et 300 colonies : adaptée au comptage"
+ ],
+ "菌落太少（少于 30），计数误差大": [
+  "Too few colonies (under 30): the counting error is large",
+  "Trop peu de colonies (moins de 30) : l'erreur de comptage est grande"
+ ],
+ "含有核糖体等，是生命活动的场所": [
+  "Contains ribosomes and so on; the place of the life activities",
+  "Contient des ribosomes, etc. ; lieu des activités vitales"
+ ],
+ "DNA 集中的区域": [
+  "Region where the DNA is concentrated",
+  "Région où l'ADN est concentré"
+ ],
+ "没有成形的细胞核，只有 DNA 集中的区域": [
+  "No true nucleus, only a region where the DNA is concentrated",
+  "Pas de vrai noyau, seulement une région où l'ADN est concentré"
+ ],
+ "荚膜": [
+  "Capsule",
+  "Capsule"
+ ],
+ "保护细菌，有的细菌才有": [
+  "Protects the bacterium; only some bacteria have it",
+  "Protège la bactérie ; seules certaines bactéries en ont une"
+ ],
+ "鞭毛": [
+  "Flagellum",
+  "Flagelle"
+ ],
+ "使细菌能够运动，有的细菌才有": [
+  "Lets the bacterium move; only some bacteria have it",
+  "Permet à la bactérie de se déplacer ; seules certaines bactéries en ont un"
+ ],
+ "有成形的细胞核，含遗传物质": [
+  "A true nucleus that holds the genetic material",
+  "Un vrai noyau qui contient le matériel génétique"
+ ],
+ "含有线粒体等，是生命活动的场所": [
+  "Contains mitochondria and so on; the place of the life activities",
+  "Contient des mitochondries, etc. ; lieu des activités vitales"
+ ],
+ "储存水分和营养物质": [
+  "Stores water and nutrients",
+  "Stocke de l'eau et des nutriments"
+ ],
+ "芽体": [
+  "Bud",
+  "Bourgeon"
+ ],
+ "酵母菌出芽生殖形成的新个体": [
+  "A new individual formed by budding of the yeast",
+  "Nouvel individu formé par bourgeonnement de la levure"
+ ],
+ "把菌液稀释 10{0} 倍，取 {1} mL 涂布，平板上长出 {2} 个菌落，原菌液每毫升约含多少个细菌？": [
+  "A suspension is diluted 10{0} times and {1} mL is spread; {2} colonies grow on the plate. About how many bacteria are there in each millilitre of the original suspension?",
+  "Une suspension est diluée 10{0} fois et {1} mL sont étalés ; {2} colonies poussent sur la boîte. Environ combien de bactéries y a-t-il dans chaque millilitre de la suspension d'origine ?"
+ ],
+ "菌落数 ÷ 涂布体积 × 稀释倍数 = 每毫升原菌液的细菌数。": [
+  "Colonies ÷ volume spread × dilution factor = bacteria per millilitre of the original suspension.",
+  "Colonies ÷ volume étalé × facteur de dilution = bactéries par millilitre de la suspension d'origine."
+ ],
+ "把 1 mL 菌液加入 9 mL 无菌水（稀释 10 倍），这样连续稀释 {0} 次，总稀释倍数是：": [
+  "1 mL of suspension is added to 9 mL of sterile water (a 10-fold dilution) and this is repeated {0} times in a row. The total dilution factor is:",
+  "On ajoute 1 mL de suspension à 9 mL d'eau stérile (dilution au dixième) et on répète {0} fois de suite. Le facteur de dilution total est :"
+ ],
+ "每稀释一次，浓度变为原来的十分之一。": [
+  "Each dilution makes the concentration one tenth of what it was.",
+  "Chaque dilution rend la concentration dix fois plus faible."
+ ],
+ "计数菌落时，通常选择菌落数在哪个范围内的平板？": [
+  "When counting colonies, plates with how many colonies are usually chosen?",
+  "Pour compter des colonies, on choisit en général des boîtes avec combien de colonies ?"
+ ],
+ "30–300 个": [
+  "30–300 colonies",
+  "30 à 300 colonies"
+ ],
+ "1–10 个": [
+  "1–10 colonies",
+  "1 à 10 colonies"
+ ],
+ "3–30 个": [
+  "3–30 colonies",
+  "3 à 30 colonies"
+ ],
+ "300–3000 个": [
+  "300–3000 colonies",
+  "300 à 3000 colonies"
+ ],
+ "菌落太多会连成一片，太少则误差大。": [
+  "Too many colonies merge, too few give a large error.",
+  "Trop de colonies se confondent, trop peu donnent une grande erreur."
+ ],
+ "开始时耐药菌占 {0} ‰，每次用药杀死 {1} % 的敏感菌，存活的细菌再繁殖回到原来的总数。连续用药 {2} 次后，耐药菌约占多少？": [
+  "At the start {0} ‰ of the bacteria are resistant. Each treatment kills {1} % of the susceptible bacteria, and the survivors multiply back to the original total. After {2} treatments in a row, about what share is resistant?",
+  "Au départ, {0} ‰ des bactéries sont résistantes. Chaque traitement tue {1} % des bactéries sensibles et les survivantes se multiplient jusqu'à retrouver le total d'origine. Après {2} traitements de suite, quelle part est résistante environ ?"
+ ],
+ "用药把敏感菌清除，耐药菌因此在群体中的比例越来越大。": [
+  "The treatment removes the susceptible bacteria, so the share of resistant bacteria in the population keeps growing.",
+  "Le traitement élimine les bactéries sensibles ; la part de bactéries résistantes dans la population ne cesse donc de croître."
+ ],
+ "细菌与酵母菌在结构上最主要的区别是：": [
+  "The main difference in structure between a bacterium and a yeast is:",
+  "La principale différence de structure entre une bactérie et une levure est :"
+ ],
+ "细菌没有成形的细胞核": [
+  "A bacterium has no true nucleus",
+  "Une bactérie n'a pas de vrai noyau"
+ ],
+ "细菌没有细胞壁": [
+  "A bacterium has no cell wall",
+  "Une bactérie n'a pas de paroi"
+ ],
+ "细菌没有细胞膜": [
+  "A bacterium has no cell membrane",
+  "Une bactérie n'a pas de membrane cellulaire"
+ ],
+ "细菌没有细胞质": [
+  "A bacterium has no cytoplasm",
+  "Une bactérie n'a pas de cytoplasme"
+ ],
+ "细菌没有遗传物质": [
+  "A bacterium has no genetic material",
+  "Une bactérie n'a pas de matériel génétique"
+ ],
+ "细菌属于原核生物，酵母菌属于真菌，有成形的细胞核。": [
+  "Bacteria are prokaryotes; yeast is a fungus and has a true nucleus.",
+  "Les bactéries sont des procaryotes ; la levure est un champignon et possède un vrai noyau."
+ ],
+ "红富士苹果": [
+  "Red Fuji apple",
+  "Pomme Fuji rouge"
+ ],
+ "鸭梨": [
+  "Ya pear",
+  "Poire Ya"
+ ],
+ "水蜜桃": [
+  "Juicy peach",
+  "Pêche juteuse"
+ ],
+ "野生山荆子（苹果的近缘植物）": [
+  "Wild Siberian crab apple (a close relative of the apple)",
+  "Pommier de Sibérie sauvage (proche parent du pommier)"
+ ],
+ "野生山荆子": [
+  "Wild Siberian crab apple",
+  "Pommier de Sibérie sauvage"
+ ],
+ "杜梨（梨的近缘植物）": [
+  "Birchleaf pear (a close relative of the pear)",
+  "Poirier à feuilles de bouleau (proche parent du poirier)"
+ ],
+ "杜梨": [
+  "Birchleaf pear",
+  "Poirier à feuilles de bouleau"
+ ],
+ "山桃（桃的近缘植物）": [
+  "Mountain peach (a close relative of the peach)",
+  "Pêcher de David (proche parent du pêcher)"
+ ],
+ "山桃": [
+  "Mountain peach",
+  "Pêcher de David"
+ ],
+ "成活：形成层紧密结合，接穗和砧木长在一起": [
+  "Takes: the cambium layers join closely and scion and stock grow together",
+  "Réussite : les cambiums se joignent étroitement et le greffon et le porte-greffe se soudent"
+ ],
+ "不成活：形成层没有对齐": [
+  "Fails: the cambium layers are not aligned",
+  "Échec : les cambiums ne sont pas alignés"
+ ],
+ "不成活：接穗和砧木亲缘关系太远，不亲和": [
+  "Fails: scion and stock are too distantly related and are not compatible",
+  "Échec : le greffon et le porte-greffe sont trop éloignés et ne sont pas compatibles"
+ ],
+ "扦插": [
+  "Cutting",
+  "Bouturage"
+ ],
+ "压条": [
+  "Layering",
+  "Marcottage"
+ ],
+ "组织培养": [
+  "Tissue culture",
+  "Culture de tissus"
+ ],
+ "把月季的枝条剪成段，插入土中，长成新植株": [
+  "Cut rose branches into pieces, put them into the soil and let them grow into new plants",
+  "Couper des branches de rosier en morceaux, les planter dans le sol et les laisser devenir de nouvelles plantes"
+ ],
+ "把优良苹果品种的枝条接到野生山荆子的树干上": [
+  "Join a branch of a good apple variety to the trunk of a wild crab apple",
+  "Joindre une branche d'une bonne variété de pommier au tronc d'un pommier sauvage"
+ ],
+ "把桂花的一段枝条埋入土中，生根后与母株分离": [
+  "Bury a length of osmanthus branch in the soil and separate it from the parent plant after it has rooted",
+  "Enterrer un morceau de branche d'osmanthe dans le sol et le séparer de la plante mère après l'enracinement"
+ ],
+ "取兰花的茎尖，在无菌条件下培养成新植株": [
+  "Take the stem tip of an orchid and grow it into a new plant under sterile conditions",
+  "Prélever l'extrémité d'une tige d'orchidée et la faire pousser en nouvelle plante dans des conditions stériles"
+ ],
+ "把葡萄的枝条插入湿润的土中，长出根": [
+  "Put grape branches into moist soil and let roots grow",
+  "Planter des sarments de vigne dans un sol humide et laisser les racines se former"
+ ],
+ "把一棵桃树的芽接到另一棵桃树上": [
+  "Join a bud of one peach tree to another peach tree",
+  "Joindre un bourgeon d'un pêcher à un autre pêcher"
+ ],
+ "由受精卵发育成新个体": [
+  "A new individual develops from a fertilised egg",
+  "Un nouvel individu se développe à partir d'un œuf fécondé"
+ ],
+ "不经过两性生殖细胞的结合": [
+  "No union of two kinds of sex cells takes place",
+  "Il n'y a pas d'union de deux sortes de cellules sexuelles"
+ ],
+ "后代具有双亲的遗传特性，变异较多": [
+  "The offspring have the traits of both parents and show more variation",
+  "Les descendants ont les caractères des deux parents et présentent plus de variations"
+ ],
+ "后代保持母体的优良性状，遗传稳定": [
+  "The offspring keep the good traits of the parent and heredity is stable",
+  "Les descendants gardent les bonnes qualités du parent et l'hérédité est stable"
+ ],
+ "能在较短时间内产生大量新个体": [
+  "Many new individuals can be produced in a fairly short time",
+  "De nombreux nouveaux individus peuvent être produits en assez peu de temps"
+ ],
+ "后代适应环境变化的能力较强，有利于生物进化": [
+  "The offspring adapt better to changes in the environment, which favours evolution",
+  "Les descendants s'adaptent mieux aux changements du milieu, ce qui favorise l'évolution"
+ ],
+ "用种子繁殖": [
+  "Reproduction by seeds",
+  "Reproduction par graines"
+ ],
+ "扦插、嫁接和组织培养": [
+  "Cutting, grafting and tissue culture",
+  "Bouturage, greffage et culture de tissus"
+ ],
+ "有性生殖": [
+  "Sexual reproduction",
+  "Reproduction sexuée"
+ ],
+ "无性生殖": [
+  "Asexual reproduction",
+  "Reproduction asexuée"
+ ],
+ "把{0}的枝条（接穗）嫁接到{1}（砧木）上，成活后接穗上结出的果实是：": [
+  "A branch of {0} (the scion) is grafted onto {1} (the stock). After it takes, the fruit on the scion is:",
+  "Une branche de {0} (le greffon) est greffée sur {1} (le porte-greffe). Après la reprise, le fruit porté par le greffon est :"
+ ],
+ "{0}的果实": [
+  "The fruit of {0}",
+  "Le fruit de {0}"
+ ],
+ "介于两者之间的果实": [
+  "A fruit between the two",
+  "Un fruit intermédiaire entre les deux"
+ ],
+ "嫁接属于无性生殖，接穗上结出的果实保持接穗的性状。": [
+  "Grafting is asexual reproduction, and the fruit on the scion keeps the traits of the scion.",
+  "Le greffage est une reproduction asexuée, et le fruit porté par le greffon garde les caractères du greffon."
+ ],
+ "嫁接成功的关键是：": [
+  "The key to a successful graft is:",
+  "La clé d'un greffage réussi est :"
+ ],
+ "接穗与砧木的形成层紧密结合": [
+  "The cambium layers of scion and stock are closely joined",
+  "Les cambiums du greffon et du porte-greffe sont étroitement joints"
+ ],
+ "接穗与砧木的叶片大小相同": [
+  "Scion and stock have leaves of the same size",
+  "Le greffon et le porte-greffe ont des feuilles de même taille"
+ ],
+ "接穗与砧木的粗细完全一样": [
+  "Scion and stock are exactly the same thickness",
+  "Le greffon et le porte-greffe ont exactement la même épaisseur"
+ ],
+ "接穗不带芽": [
+  "The scion has no buds",
+  "Le greffon n'a pas de bourgeons"
+ ],
+ "嫁接的时间在夜里": [
+  "Grafting is done at night",
+  "Le greffage est fait la nuit"
+ ],
+ "形成层细胞分裂能力强，两者的形成层紧贴，才能愈合、成活。": [
+  "Cambium cells divide actively; only when the two cambium layers touch can the parts heal together and take.",
+  "Les cellules du cambium se divisent activement ; ce n'est que lorsque les deux cambiums se touchent que les parties cicatrisent ensemble et que la greffe reprend."
+ ],
+ "“{0}”属于植物无性繁殖的哪一种方法？": [
+  "“{0}” is which method of vegetative propagation of plants?",
+  "« {0} » est quelle méthode de multiplication végétative des plantes ?"
+ ],
+ "种子繁殖": [
+  "Reproduction by seeds",
+  "Reproduction par graines"
+ ],
+ "常见的无性繁殖方法有扦插、嫁接、压条和组织培养。": [
+  "Common methods of vegetative propagation are cutting, grafting, layering and tissue culture.",
+  "Les méthodes courantes de multiplication végétative sont le bouturage, le greffage, le marcottage et la culture de tissus."
+ ],
+ "用扦插、嫁接等方法繁殖的后代，与母体相比：": [
+  "Compared with the parent plant, offspring raised by cutting, grafting and so on:",
+  "Par rapport à la plante mère, les descendants obtenus par bouturage, greffage, etc. :"
+ ],
+ "能保持母体的优良性状": [
+  "Keep the good traits of the parent",
+  "Gardent les bonnes qualités de la plante mère"
+ ],
+ "性状一定发生很大变异": [
+  "Always show great variation",
+  "Présentent toujours de grandes variations"
+ ],
+ "一定具有双亲的性状": [
+  "Always have the traits of both parents",
+  "Ont toujours les caractères des deux parents"
+ ],
+ "一定比母体差": [
+  "Are always worse than the parent",
+  "Sont toujours moins bons que la plante mère"
+ ],
+ "性状完全不能预测": [
+  "Cannot be predicted at all",
+  "Sont totalement imprévisibles"
+ ],
+ "没有经过两性生殖细胞的结合，后代的遗传物质来自母体。": [
+  "There is no union of sex cells, so the genetic material of the offspring comes from the parent plant.",
+  "Il n'y a pas d'union de cellules sexuelles ; le matériel génétique des descendants vient donc de la plante mère."
+ ],
+ "两种都不是": [
+  "Neither of the two",
+  "Aucune des deux"
+ ],
+ "两种都是": [
+  "Both of them",
+  "Les deux"
+ ],
+ "有性生殖经过两性生殖细胞的结合；无性生殖不经过两性生殖细胞的结合。": [
+  "Sexual reproduction involves the union of two kinds of sex cells; asexual reproduction does not.",
+  "La reproduction sexuée comporte l'union de deux sortes de cellules sexuelles ; la reproduction asexuée n'en comporte pas."
+ ],
+ "产生卵细胞，分泌雌性激素": [
+  "Produces egg cells and secretes female sex hormones",
+  "Produit les ovules et sécrète les hormones sexuelles féminines"
+ ],
+ "输送卵细胞，是受精的场所": [
+  "Carries the egg cell; the place where fertilisation happens",
+  "Conduit l'ovule ; lieu de la fécondation"
+ ],
+ "胚胎和胎儿发育的场所": [
+  "The place where the embryo and the fetus develop",
+  "Lieu du développement de l'embryon et du fœtus"
+ ],
+ "胎儿产出的通道，也是月经排出的通道": [
+  "The passage through which the fetus is born and menstrual blood leaves",
+  "Passage par lequel naît le fœtus et par lequel sortent les règles"
+ ],
+ "睾丸": [
+  "Testis",
+  "Testicule"
+ ],
+ "产生精子，分泌雄性激素": [
+  "Produces sperm and secretes male sex hormones",
+  "Produit les spermatozoïdes et sécrète les hormones sexuelles masculines"
+ ],
+ "附睾": [
+  "Epididymis",
+  "Épididyme"
+ ],
+ "储存精子，使精子成熟": [
+  "Stores sperm and lets them mature",
+  "Stocke les spermatozoïdes et les laisse mûrir"
+ ],
+ "输精管": [
+  "Vas deferens",
+  "Canal déférent"
+ ],
+ "输送精子": [
+  "Carries sperm",
+  "Conduit les spermatozoïdes"
+ ],
+ "精囊腺": [
+  "Seminal vesicle",
+  "Vésicule séminale"
+ ],
+ "分泌黏液，参与精液的形成": [
+  "Secretes mucus that is part of the semen",
+  "Sécrète un mucus qui fait partie du sperme"
+ ],
+ "产生卵细胞": [
+  "Producing egg cells",
+  "Production des ovules"
+ ],
+ "受精作用发生": [
+  "Fertilisation takes place",
+  "La fécondation a lieu"
+ ],
+ "胚胎和胎儿发育": [
+  "Embryo and fetus develop",
+  "L'embryon et le fœtus se développent"
+ ],
+ "胎儿产出（分娩）": [
+  "The fetus is born (childbirth)",
+  "Le fœtus naît (accouchement)"
+ ],
+ "精子与卵细胞结合，形成受精卵": [
+  "Sperm and egg cell unite to form a zygote",
+  "Le spermatozoïde et l'ovule s'unissent pour former un œuf fécondé"
+ ],
+ "受精卵分裂，形成胚泡": [
+  "The zygote divides and forms a blastocyst",
+  "L'œuf fécondé se divise et forme un blastocyste"
+ ],
+ "胚泡植入子宫内膜（怀孕）": [
+  "The blastocyst implants in the lining of the uterus (pregnancy)",
+  "Le blastocyste s'implante dans la muqueuse de l'utérus (début de la grossesse)"
+ ],
+ "胚胎发育，约 8 周发育成胎儿": [
+  "The embryo develops and becomes a fetus after about 8 weeks",
+  "L'embryon se développe et devient un fœtus après environ 8 semaines"
+ ],
+ "胎儿发育成熟，从母体产出（分娩）": [
+  "The fetus matures and is born from the mother (childbirth)",
+  "Le fœtus arrive à maturité et naît de la mère (accouchement)"
+ ],
+ "受精卵就是新生命的起点。": [
+  "The zygote is the start of a new life.",
+  "L'œuf fécondé est le point de départ d'une nouvelle vie."
+ ],
+ "分裂的同时，受精卵沿输卵管向子宫移动。": [
+  "While it divides, the zygote moves along the oviduct to the uterus.",
+  "Tout en se divisant, l'œuf fécondé se déplace le long de l'oviducte vers l'utérus."
+ ],
+ "胚泡的植入标志着怀孕的开始。": [
+  "The implantation of the blastocyst marks the beginning of pregnancy.",
+  "L'implantation du blastocyste marque le début de la grossesse."
+ ],
+ "胎儿通过胎盘和脐带从母体获得营养和氧。": [
+  "The fetus gets nutrients and oxygen from the mother through the placenta and the umbilical cord.",
+  "Le fœtus reçoit les nutriments et l'oxygène de la mère par le placenta et le cordon ombilical."
+ ],
+ "从受精到分娩约 38 周（约 266 天）。": [
+  "From fertilisation to birth takes about 38 weeks (about 266 days).",
+  "De la fécondation à la naissance, il faut environ 38 semaines (environ 266 jours)."
+ ],
+ "下列哪个器官的功能是“{0}”？": [
+  "Which organ has the function “{0}”?",
+  "Quel organe a pour fonction « {0} » ?"
+ ],
+ "人的生殖系统由生殖器官组成，各器官分工合作。": [
+  "The human reproductive system is made of reproductive organs that work together.",
+  "L'appareil reproducteur humain est formé d'organes reproducteurs qui travaillent ensemble."
+ ],
+ "受精作用发生的部位是：": [
+  "Fertilisation takes place in:",
+  "La fécondation a lieu dans :"
+ ],
+ "胎盘": [
+  "Placenta",
+  "Le placenta"
+ ],
+ "精子与卵细胞在输卵管内结合，形成受精卵。": [
+  "Sperm and egg cell meet in the oviduct and form a zygote.",
+  "Le spermatozoïde et l'ovule se rencontrent dans l'oviducte et forment un œuf fécondé."
+ ],
+ "男性产生生殖细胞的器官是：": [
+  "The organ in men that produces sex cells is:",
+  "L'organe qui produit les cellules sexuelles chez l'homme est :"
+ ],
+ "女性产生生殖细胞的器官是：": [
+  "The organ in women that produces sex cells is:",
+  "L'organe qui produit les cellules sexuelles chez la femme est :"
+ ],
+ "睾丸产生精子，卵巢产生卵细胞，它们同时也是分泌性激素的内分泌器官。": [
+  "The testes produce sperm and the ovaries produce egg cells; they are also the endocrine organs that secrete the sex hormones.",
+  "Les testicules produisent les spermatozoïdes et les ovaires produisent les ovules ; ce sont aussi les organes endocrines qui sécrètent les hormones sexuelles."
+ ],
+ "胎儿在子宫内通过什么从母体获得营养和氧？": [
+  "In the uterus, through what does the fetus get nutrients and oxygen from the mother?",
+  "Dans l'utérus, par quoi le fœtus reçoit-il les nutriments et l'oxygène de la mère ?"
+ ],
+ "子宫内膜的分泌物": [
+  "The secretions of the lining of the uterus",
+  "Les sécrétions de la muqueuse de l'utérus"
+ ],
+ "胎儿产生的废物也通过胎盘和脐带由母体排出。": [
+  "The wastes of the fetus also leave through the placenta and umbilical cord, carried away by the mother.",
+  "Les déchets du fœtus partent aussi par le placenta et le cordon ombilical, évacués par la mère."
+ ],
+ "下列哪一步紧接在“{0}”之后？": [
+  "Which step comes right after “{0}”?",
+  "Quelle étape vient juste après « {0} » ?"
+ ],
+ "顺序是：受精 → 胚泡 → 植入子宫内膜 → 胚胎和胎儿发育 → 分娩。": [
+  "The order is: fertilisation → blastocyst → implantation in the uterus → embryo and fetus develop → childbirth.",
+  "L'ordre est : fécondation → blastocyste → implantation dans l'utérus → développement de l'embryon et du fœtus → accouchement."
+ ],
+ "保护种子内部的结构": [
+  "Protects the structures inside the seed",
+  "Protège les structures à l'intérieur de la graine"
+ ],
+ "萌发时发育成根": [
+  "Becomes the root when the seed germinates",
+  "Devient la racine lors de la germination"
+ ],
+ "萌发时发育成连接根和茎的部分": [
+  "Becomes the part joining root and stem when the seed germinates",
+  "Devient la partie qui relie la racine et la tige lors de la germination"
+ ],
+ "萌发时发育成茎和叶": [
+  "Becomes the stem and leaves when the seed germinates",
+  "Devient la tige et les feuilles lors de la germination"
+ ],
+ "两片，储存营养物质": [
+  "Two of them, storing nutrients",
+  "Au nombre de deux, stockent les nutriments"
+ ],
+ "果皮和种皮": [
+  "Fruit coat and seed coat",
+  "Péricarpe et tégument"
+ ],
+ "胚乳": [
+  "Endosperm",
+  "Albumen"
+ ],
+ "储存营养物质": [
+  "Stores nutrients",
+  "Stocke les nutriments"
+ ],
+ "一片，把胚乳中的营养转运给胚": [
+  "One only; passes the nutrients of the endosperm on to the embryo",
+  "Un seul ; transmet à l'embryon les nutriments de l'albumen"
+ ],
+ "滴碘液后不变蓝：几乎不含淀粉": [
+  "No blue after the iodine drop: almost no starch",
+  "Pas de coloration bleue après la goutte d'iode : presque pas d'amidon"
+ ],
+ "滴碘液后变成蓝色：含有大量淀粉": [
+  "Turns blue after the iodine drop: much starch",
+  "Devient bleu après la goutte d'iode : beaucoup d'amidon"
+ ],
+ "保护种子内部结构的是": [
+  "protects the structures inside the seed",
+  "protège les structures à l'intérieur de la graine"
+ ],
+ "将来发育成根的是": [
+  "will become the root",
+  "deviendra la racine"
+ ],
+ "将来发育成连接根和茎的部分的是": [
+  "will become the part joining root and stem",
+  "deviendra la partie qui relie la racine et la tige"
+ ],
+ "将来发育成茎和叶的是": [
+  "will become the stem and leaves",
+  "deviendra la tige et les feuilles"
+ ],
+ "菜豆种子储存营养物质的是": [
+  "stores the nutrients of the bean seed",
+  "stocke les nutriments de la graine de haricot"
+ ],
+ "菜豆种子的结构中，{0}：": [
+  "Among the structures of a bean seed, the one that {0}:",
+  "Parmi les structures d'une graine de haricot, celle qui {0} :"
+ ],
+ "种皮保护种子；胚由胚根、胚轴、胚芽和子叶组成，是新植物的幼体。": [
+  "The seed coat protects the seed; the embryo is made of radicle, hypocotyl, plumule and cotyledons and is the young of the new plant.",
+  "Le tégument protège la graine ; l'embryon est formé de la radicule, de l'hypocotyle, de la gemmule et des cotylédons et constitue le jeune de la nouvelle plante."
+ ],
+ "玉米种子储存营养物质的结构是：": [
+  "The structure that stores the nutrients of a maize seed is:",
+  "La structure qui stocke les nutriments d'une graine de maïs est :"
+ ],
+ "玉米是单子叶植物，营养储存在胚乳中；菜豆是双子叶植物，营养储存在子叶中。": [
+  "Maize is a monocotyledon and stores its food in the endosperm; the bean is a dicotyledon and stores it in the cotyledons.",
+  "Le maïs est une monocotylédone et stocke ses réserves dans l'albumen ; le haricot est une dicotylédone et les stocke dans les cotylédons."
+ ],
+ "在玉米种子的纵切面上滴一滴碘液，变成蓝色的部分是：": [
+  "When a drop of iodine is put on a lengthwise section of a maize seed, the part that turns blue is:",
+  "Quand on met une goutte d'iode sur une coupe longitudinale d'une graine de maïs, la partie qui devient bleue est :"
+ ],
+ "淀粉遇碘变蓝，胚乳中含有大量淀粉。": [
+  "Starch turns blue with iodine, and the endosperm contains a lot of starch.",
+  "L'amidon devient bleu avec l'iode, et l'albumen contient beaucoup d'amidon."
+ ],
+ "测定种子的萌发率：每组 {0} 粒，共 3 组，萌发的种子分别为 {1} 粒、{2} 粒、{3} 粒。平均萌发率是多少？": [
+  "Measuring the germination rate: {0} seeds per group, 3 groups; {1}, {2} and {3} seeds germinated. What is the average germination rate?",
+  "Mesure du taux de germination : {0} graines par groupe, 3 groupes ; {1}, {2} et {3} graines ont germé. Quel est le taux moyen de germination ?"
+ ],
+ "平均萌发率 = 三组萌发的种子总数 ÷ 种子总数 × 100 %。": [
+  "Average germination rate = total of the germinated seeds of the three groups ÷ total number of seeds × 100 %.",
+  "Taux moyen de germination = total des graines germées des trois groupes ÷ nombre total de graines × 100 %."
+ ],
+ "测定种子的萌发率时，为了减小误差，应该：": [
+  "To reduce the error when measuring the germination rate of seeds, you should:",
+  "Pour réduire l'erreur lors de la mesure du taux de germination des graines, il faut :"
+ ],
+ "每组取数量较多的种子，并重复做几组取平均值": [
+  "Take a large number of seeds per group and repeat for several groups, then average",
+  "Prendre un grand nombre de graines par groupe et répéter pour plusieurs groupes, puis faire la moyenne"
+ ],
+ "只取 1 粒最饱满的种子": [
+  "Take only the 1 plumpest seed",
+  "Ne prendre que la graine la plus grosse"
+ ],
+ "只做一组，数量越少越好": [
+  "Do only one group, the fewer seeds the better",
+  "Ne faire qu'un seul groupe, avec le moins de graines possible"
+ ],
+ "挑选颜色最好的种子": [
+  "Pick the seeds with the best colour",
+  "Choisir les graines de plus belle couleur"
+ ],
+ "把萌发的种子扔掉不数": [
+  "Throw away the seeds that germinated without counting them",
+  "Jeter les graines qui ont germé sans les compter"
+ ],
+ "样本越大、重复越多，结果越接近整批种子的真实萌发率。": [
+  "The larger the sample and the more the repeats, the closer the result to the true germination rate of the whole lot.",
+  "Plus l'échantillon est grand et plus il y a de répétitions, plus le résultat est proche du vrai taux de germination de tout le lot."
+ ],
+ "擦拭载玻片和盖玻片": [
+  "Wipe the glass slide and the cover slip",
+  "Essuyer la lame et la lamelle"
+ ],
+ "在载玻片中央滴一滴清水": [
+  "Put a drop of clear water in the middle of the slide",
+  "Mettre une goutte d'eau claire au milieu de la lame"
+ ],
+ "撕取一小块洋葱鳞片叶内表皮": [
+  "Tear off a small piece of the inner epidermis of an onion scale leaf",
+  "Détacher un petit morceau de l'épiderme interne d'une écaille d'oignon"
+ ],
+ "把内表皮放入水滴中展平": [
+  "Spread the epidermis flat in the water drop",
+  "Étaler l'épiderme à plat dans la goutte d'eau"
+ ],
+ "盖上盖玻片（一侧先接触水滴，缓缓放平）": [
+  "Lower the cover slip (one side touches the drop first, then slowly flat)",
+  "Poser la lamelle (un côté touche d'abord la goutte, puis on la pose lentement à plat)"
+ ],
+ "在盖玻片一侧滴一滴碘液": [
+  "Put a drop of iodine on one side of the cover slip",
+  "Mettre une goutte d'iode sur un côté de la lamelle"
+ ],
+ "在盖玻片另一侧用吸水纸吸引碘液": [
+  "Draw the iodine through with absorbent paper on the other side of the cover slip",
+  "Faire passer l'iode avec du papier absorbant de l'autre côté de la lamelle"
+ ],
+ "在载玻片中央滴一滴生理盐水": [
+  "Put a drop of physiological saline in the middle of the slide",
+  "Mettre une goutte de sérum physiologique au milieu de la lame"
+ ],
+ "用消毒牙签的钝端在口腔内侧壁轻刮几下": [
+  "Scrape the inside of the cheek a few times with the blunt end of a sterilised toothpick",
+  "Racler quelques fois l'intérieur de la joue avec le bout arrondi d'un cure-dent stérilisé"
+ ],
+ "把刮取物涂抹在生理盐水中": [
+  "Smear the scrapings in the saline",
+  "Étaler le prélèvement dans le sérum physiologique"
+ ],
+ "在盖玻片一侧滴一滴稀碘液": [
+  "Put a drop of dilute iodine on one side of the cover slip",
+  "Mettre une goutte d'iode dilué sur un côté de la lamelle"
+ ],
+ "保持洁净，避免杂质影响观察。": [
+  "Keeps everything clean so that dirt does not disturb the observation.",
+  "Garde tout propre pour que les saletés ne gênent pas l'observation."
+ ],
+ "清水使植物细胞保持正常形态。": [
+  "Clear water keeps plant cells in their normal shape.",
+  "L'eau claire garde aux cellules végétales leur forme normale."
+ ],
+ "材料要薄而透明，光线才能透过。": [
+  "The material must be thin and transparent for the light to pass.",
+  "Le matériel doit être mince et transparent pour laisser passer la lumière."
+ ],
+ "展平后细胞不重叠，便于观察。": [
+  "Spread flat, the cells do not overlap, which makes them easy to observe.",
+  "Étalées à plat, les cellules ne se chevauchent pas, ce qui facilite l'observation."
+ ],
+ "这样可以避免产生气泡。": [
+  "This avoids air bubbles.",
+  "Cela évite les bulles d'air."
+ ],
+ "碘液使细胞核等结构着色，看得更清楚。": [
+  "Iodine colours the nucleus and other structures so that they are easier to see.",
+  "L'iode colore le noyau et d'autres structures pour qu'on les voie mieux."
+ ],
+ "染液从一侧渗入，把另一侧的碘液吸干，使标本染色。": [
+  "The stain enters from one side, and drawing off the iodine from the other side stains the specimen.",
+  "Le colorant entre par un côté et, en aspirant l'iode de l'autre côté, on colore le spécimen."
+ ],
+ "0.9 % 的生理盐水与人体细胞的渗透压相近，使细胞保持正常形态。": [
+  "Saline of 0.9 % has about the same osmotic pressure as human cells and keeps the cells in their normal shape.",
+  "Un sérum physiologique à 0,9 % a à peu près la même pression osmotique que les cellules humaines et garde aux cellules leur forme normale."
+ ],
+ "牙签要消毒，轻刮即可，取材太多会使细胞重叠。": [
+  "The toothpick must be sterilised and a gentle scrape is enough; too much material makes the cells overlap.",
+  "Le cure-dent doit être stérilisé et un raclage léger suffit ; trop de matériel fait se chevaucher les cellules."
+ ],
+ "涂抹均匀，细胞才不会重叠。": [
+  "Smeared evenly, the cells will not overlap.",
+  "Étalées uniformément, les cellules ne se chevauchent pas."
+ ],
+ "稀碘液使细胞核着色。": [
+  "Dilute iodine colours the nucleus.",
+  "L'iode dilué colore le noyau."
+ ],
+ "太少，盖玻片下会留有空气": [
+  "Too little: air stays under the cover slip",
+  "Trop peu : de l'air reste sous la lamelle"
+ ],
+ "偏少": [
+  "A little small",
+  "Un peu petite"
+ ],
+ "合适": [
+  "Right",
+  "Correcte"
+ ],
+ "偏多": [
+  "A little large",
+  "Un peu grande"
+ ],
+ "太多，水会溢出盖玻片": [
+  "Too much: the water overflows the cover slip",
+  "Trop : l'eau déborde de la lamelle"
+ ],
+ "制作洋葱鳞片叶表皮临时装片时，紧接在“{0}”之后的一步是：": [
+  "When making a temporary mount of onion epidermis, the step right after “{0}” is:",
+  "Quand on prépare une lame provisoire d'épiderme d'oignon, l'étape juste après « {0} » est :"
+ ],
+ "顺序可记为：擦、滴、撕、展、盖、染、吸。": [
+  "The order can be remembered as: wipe, drop, tear, spread, cover, stain, draw.",
+  "L'ordre peut se retenir ainsi : essuyer, déposer, détacher, étaler, couvrir, colorer, aspirer."
+ ],
+ "制作人的口腔上皮细胞临时装片时，应在载玻片中央滴一滴：": [
+  "When making a temporary mount of human cheek cells, put in the middle of the slide a drop of:",
+  "Quand on prépare une lame provisoire de cellules de la joue humaine, on met au milieu de la lame une goutte de :"
+ ],
+ "生理盐水": [
+  "Physiological saline",
+  "Sérum physiologique"
+ ],
+ "碘液": [
+  "Iodine",
+  "Iode"
+ ],
+ "蒸馏水": [
+  "Distilled water",
+  "Eau distillée"
+ ],
+ "生理盐水（0.9 %）使人体细胞保持正常形态；植物细胞有细胞壁，滴清水即可。": [
+  "Saline (0.9 %) keeps human cells in their normal shape; plant cells have a cell wall, so clear water is enough.",
+  "Le sérum physiologique (0,9 %) garde aux cellules humaines leur forme normale ; les cellules végétales ont une paroi, donc l'eau claire suffit."
+ ],
+ "用碘液给临时装片染色的目的是：": [
+  "The purpose of staining a temporary mount with iodine is:",
+  "Le but de la coloration d'une lame provisoire à l'iode est :"
+ ],
+ "使细胞核等结构着色，便于观察": [
+  "To colour the nucleus and other structures so that they are easier to observe",
+  "Colorer le noyau et d'autres structures pour les observer plus facilement"
+ ],
+ "杀死细胞，防止细胞分裂": [
+  "To kill the cells and stop them dividing",
+  "Tuer les cellules et empêcher leur division"
+ ],
+ "使细胞膨胀变大": [
+  "To make the cells swell and grow bigger",
+  "Faire gonfler les cellules et les agrandir"
+ ],
+ "增加盖玻片的透明度": [
+  "To make the cover slip more transparent",
+  "Rendre la lamelle plus transparente"
+ ],
+ "使细胞保持运动": [
+  "To keep the cells moving",
+  "Garder les cellules en mouvement"
+ ],
+ "细胞的有些结构几乎无色透明，染色后更清楚。": [
+  "Some structures of cells are almost colourless and transparent; after staining they can be seen better.",
+  "Certaines structures des cellules sont presque incolores et transparentes ; après coloration, on les voit mieux."
+ ],
+ "盖盖玻片时，为了避免产生气泡，正确的做法是：": [
+  "To avoid air bubbles when lowering the cover slip, the right way is:",
+  "Pour éviter les bulles d'air en posant la lamelle, la bonne méthode est :"
+ ],
+ "用镊子夹起盖玻片，使一侧先接触水滴，再缓缓放平": [
+  "Hold the cover slip with forceps, let one side touch the drop first, then lower it slowly flat",
+  "Tenir la lamelle avec une pince, laisser un côté toucher d'abord la goutte, puis la poser lentement à plat"
+ ],
+ "让盖玻片从高处直接落下": [
+  "Let the cover slip fall straight down from a height",
+  "Laisser tomber la lamelle d'en haut"
+ ],
+ "先把盖玻片放平，再往下按": [
+  "Lay the cover slip flat first, then press down",
+  "Poser d'abord la lamelle à plat, puis appuyer"
+ ],
+ "先盖上盖玻片，再滴水": [
+  "Put the cover slip on first, then add the water",
+  "Mettre d'abord la lamelle, puis ajouter l'eau"
+ ],
+ "用手指压紧盖玻片": [
+  "Press the cover slip down firmly with a finger",
+  "Appuyer fermement sur la lamelle avec un doigt"
+ ],
+ "缓缓放平，空气可以被赶出。": [
+  "Lowered slowly, the air can be driven out.",
+  "Posée lentement, la lamelle permet de chasser l'air."
+ ],
+ "洋葱鳞片叶表皮临时装片的制作步骤（擦、滴、撕、展、盖、染、吸）共有几步？": [
+  "How many steps are there in making a temporary mount of onion epidermis (wipe, drop, tear, spread, cover, stain, draw)?",
+  "Combien d'étapes comporte la préparation d'une lame provisoire d'épiderme d'oignon (essuyer, déposer, détacher, étaler, couvrir, colorer, aspirer) ?"
+ ],
+ "擦、滴、撕、展、盖、染、吸，共 7 步。": [
+  "Wipe, drop, tear, spread, cover, stain, draw: 7 steps in all.",
+  "Essuyer, déposer, détacher, étaler, couvrir, colorer, aspirer : 7 étapes en tout."
+ ],
+ "没有经过两性生殖细胞的结合，由母体的一部分直接产生新个体的生殖方式叫无性生殖。植物常见的无性繁殖方法有扦插、嫁接、压条和组织培养。后代只具有母体的遗传特性，能保持优良性状，繁殖速度较快；而有性生殖的后代具有双亲的遗传特性，变异较多，适应环境变化的能力较强。": [
+  "Reproduction in which a new individual arises directly from part of the parent, without the union of two kinds of sex cells, is called asexual reproduction. Common methods of vegetative propagation in plants are cutting, grafting, layering and tissue culture. The offspring have only the traits of the parent, keep its good traits and are produced quickly; the offspring of sexual reproduction have the traits of both parents, show more variation and adapt better to changes in the environment.",
+  "La reproduction dans laquelle un nouvel individu naît directement d'une partie du parent, sans union de deux sortes de cellules sexuelles, s'appelle reproduction asexuée. Les méthodes courantes de multiplication végétative des plantes sont le bouturage, le greffage, le marcottage et la culture de tissus. Les descendants n'ont que les caractères du parent, gardent ses bonnes qualités et sont produits rapidement ; les descendants de la reproduction sexuée ont les caractères des deux parents, présentent plus de variations et s'adaptent mieux aux changements du milieu."
+ ],
+ "嫁接是把一种植物的枝条或芽（接穗）接到另一种植物的茎（砧木）上，使它们愈合成一个完整的植株。嫁接成活的关键是接穗和砧木的形成层紧密结合，而且两者亲缘关系要近；接穗上结出的果实保持接穗的性状，根系则是砧木的。（形成层对齐 70 % 以上才能成活，是教学模型的设定。）": [
+  "Grafting joins a branch or bud of one plant (the scion) to the stem of another plant (the stock) so that they grow together into one whole plant. The key to a successful graft is that the cambium layers of scion and stock are closely joined and that the two are closely related; the fruit on the scion keeps the traits of the scion, while the roots are the stock’s. (A cambium alignment of 70 % or more is needed to take: a setting of the teaching model.)",
+  "Le greffage consiste à joindre une branche ou un bourgeon d'une plante (le greffon) à la tige d'une autre plante (le porte-greffe) pour qu'ils se soudent en une seule plante entière. La clé d'un greffage réussi est que les cambiums du greffon et du porte-greffe soient étroitement joints et que les deux plantes soient proches parentes ; le fruit porté par le greffon garde les caractères du greffon, tandis que les racines sont celles du porte-greffe. (Un alignement des cambiums de 70 % ou plus est nécessaire pour que la greffe prenne : c'est un réglage du modèle pédagogique.)"
+ ],
+ "这是教科书中的内容（七年级下册“人的由来”），只用简图说明器官的名称和功能。男性的睾丸产生精子并分泌雄性激素，女性的卵巢产生卵细胞并分泌雌性激素；输卵管是受精的场所，子宫是胚胎和胎儿发育的场所，阴道是胎儿产出的通道。": [
+  "This is textbook content (Grade 7, term 2, “Origin of humans”); only simple diagrams are used to show the names and functions of the organs. The testes of a man produce sperm and secrete male sex hormones, and the ovaries of a woman produce egg cells and secrete female sex hormones; the oviduct is where fertilisation takes place, the uterus is where the embryo and fetus develop, and the vagina is the passage through which the fetus is born.",
+  "Ce contenu figure dans le manuel (7e, 2e semestre, « Origine de l'être humain ») ; seuls des schémas simples servent à montrer les noms et les fonctions des organes. Les testicules de l'homme produisent les spermatozoïdes et sécrètent les hormones sexuelles masculines, et les ovaires de la femme produisent les ovules et sécrètent les hormones sexuelles féminines ; l'oviducte est le lieu de la fécondation, l'utérus est le lieu du développement de l'embryon et du fœtus, et le vagin est le passage par lequel naît le fœtus."
+ ],
+ "受精卵形成后一边分裂一边移动，形成胚泡，植入子宫内膜后怀孕；约 8 周发育成胎儿，胎儿通过胎盘和脐带从母体获得营养和氧，约 38 周后分娩。把名称或事件拖到图中的标记（或编号位置）上，也可以先点名称再点标记。": [
+  "After the zygote forms, it divides and moves at the same time and forms a blastocyst; pregnancy begins when it implants in the lining of the uterus; after about 8 weeks it has developed into a fetus, which gets nutrients and oxygen from the mother through the placenta and the umbilical cord, and is born after about 38 weeks. Drag the names or events to the marks (or numbered places) in the picture; you can also tap a name first and then a mark.",
+  "Après la formation de l'œuf fécondé, celui-ci se divise tout en se déplaçant et forme un blastocyste ; la grossesse commence quand il s'implante dans la muqueuse de l'utérus ; après environ 8 semaines, il est devenu un fœtus, qui reçoit les nutriments et l'oxygène de la mère par le placenta et le cordon ombilical, et naît après environ 38 semaines. Faites glisser les noms ou les événements vers les repères (ou les places numérotées) de l'image ; on peut aussi toucher d'abord un nom, puis un repère."
+ ],
+ "菜豆种子（双子叶植物）由种皮和胚组成，胚包括胚芽、胚轴、胚根和两片子叶，营养物质储存在子叶里；玉米种子（单子叶植物）由果皮和种皮、胚和胚乳组成，胚中只有一片子叶，营养物质储存在胚乳里。淀粉遇碘变成蓝色，可以检验营养物质的储存部位。": [
+  "A bean seed (a dicotyledon) is made of the seed coat and the embryo; the embryo has a plumule, a hypocotyl, a radicle and two cotyledons, and the nutrients are stored in the cotyledons. A maize seed (a monocotyledon) is made of the fruit coat and seed coat, the embryo and the endosperm; the embryo has only one cotyledon, and the nutrients are stored in the endosperm. Starch turns blue with iodine, which shows where the nutrients are stored.",
+  "Une graine de haricot (dicotylédone) est formée du tégument et de l'embryon ; l'embryon comprend une gemmule, un hypocotyle, une radicule et deux cotylédons, et les nutriments sont stockés dans les cotylédons. Une graine de maïs (monocotylédone) est formée du péricarpe et du tégument, de l'embryon et de l'albumen ; l'embryon n'a qu'un cotylédon, et les nutriments sont stockés dans l'albumen. L'amidon devient bleu avec l'iode, ce qui montre où sont stockés les nutriments."
+ ],
+ "种子的萌发率 = 萌发的种子数 ÷ 供试种子数 × 100 %。测定时要随机取样，每组种子数量要足够多，并重复做几组取平均值，才能减小误差。本模型每组种子是否萌发由这批种子的真实萌发率决定。（以 90 % 作为合格线，是教学假设。）": [
+  "Germination rate of seeds = number of germinated seeds ÷ number of seeds tested × 100 %. The seeds must be taken at random, each group must have enough seeds and several groups must be repeated and averaged to reduce the error. In this model whether each seed germinates depends on the true germination rate of the lot. (Taking 90 % as the passing line is a teaching assumption.)",
+  "Taux de germination des graines = nombre de graines germées ÷ nombre de graines testées × 100 %. Les graines doivent être prises au hasard, chaque groupe doit avoir assez de graines et plusieurs groupes doivent être répétés et moyennés pour réduire l'erreur. Dans ce modèle, la germination de chaque graine dépend du taux réel de germination du lot. (Prendre 90 % comme seuil d'acceptation est une hypothèse pédagogique.)"
+ ],
+ "临时装片的制作步骤可以记作“擦、滴、撕（刮）、展（涂）、盖、染、吸”。制作洋葱鳞片叶内表皮装片时滴清水；制作人的口腔上皮细胞装片时滴 0.9 % 的生理盐水，使细胞保持正常形态。盖盖玻片时，用镊子夹起盖玻片，使一侧先接触水滴，再缓缓放平，可避免产生气泡。": [
+  "The steps of making a temporary mount can be remembered as “wipe, drop, tear (scrape), spread (smear), cover, stain, draw”. For onion epidermis a drop of clear water is used; for human cheek cells a drop of 0.9 % physiological saline, which keeps the cells in their normal shape. To lower the cover slip, hold it with forceps, let one side touch the drop first and then lower it slowly flat; this avoids air bubbles.",
+  "Les étapes de la préparation d'une lame provisoire peuvent se retenir ainsi : « essuyer, déposer, détacher (racler), étaler (frotter), couvrir, colorer, aspirer ». Pour l'épiderme d'oignon, on utilise une goutte d'eau claire ; pour les cellules de la joue humaine, une goutte de sérum physiologique à 0,9 %, qui garde aux cellules leur forme normale. Pour poser la lamelle, on la tient avec une pince, on laisse un côté toucher d'abord la goutte, puis on la pose lentement à plat ; cela évite les bulles d'air."
+ ],
+ "把操作步骤拖到按顺序编号的位置上（也可以先点步骤，再点编号）。在“盖盖玻片”中，调整盖玻片放下时的角度和水滴的大小，看看气泡怎样变化。（气泡数是教学模型。）": [
+  "Drag the steps to the numbered places in order (or tap a step first and then a number). Under “Lowering the cover slip” change the angle at which the cover slip is let go and the size of the water drop and see how the bubbles change. (The number of bubbles is a teaching model.)",
+  "Faites glisser les étapes vers les places numérotées dans l'ordre (ou touchez d'abord une étape, puis un numéro). Dans « Poser la lamelle », changez l'angle auquel on lâche la lamelle et la taille de la goutte d'eau, et voyez comment changent les bulles. (Le nombre de bulles est un modèle pédagogique.)"
  ]
 }

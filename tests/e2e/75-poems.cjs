@@ -11,7 +11,7 @@ fs.mkdirSync(OUT, { recursive: true });
 const TODAY = '2026-11-13';
 const SPEECH = () => {   // a pretend speechSynthesis that records what would be said
   window.__spoke = [];
-  const stub = { speak(u) { window.__spoke.push({ text: u.text, lang: u.lang, rate: u.rate }); }, cancel() {}, getVoices() { return []; } };
+  const stub = { speak(u) { window.__spoke.push({ text: u.text, lang: u.lang, rate: u.rate }); }, cancel() {}, getVoices() { return [{ lang: 'zh-CN' }]; } };
   Object.defineProperty(window, 'speechSynthesis', { value: stub, configurable: true });
 };
 // a FIXED list of poets (the test does not trust the data to say who the allowed poets are)

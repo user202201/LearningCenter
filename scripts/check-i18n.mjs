@@ -57,7 +57,7 @@ const table = (name) => {
 const LANGS = ["EN", "FR"];
 const tables = Object.fromEntries(LANGS.map((l) => [l, table(l)]));
 // the translations written in src/i18n-extra/<lab>.json and <lab>content.json (merged into i18n-data.ts by the person who integrates the change); until then their keys count as translated
-for (const f of fs.readdirSync(path.join(dir, "i18n-extra")).filter((x) => /^(geolab|backup|physcontent|biocontent|geocontent|chemcontent|spacecontent)\.json$/.test(x))) {
+for (const f of fs.readdirSync(path.join(dir, "i18n-extra")).filter((x) => /^(pk|geolab|backup|physcontent|biolab|biocontent|geocontent|chemcontent|spacecontent)\.json$/.test(x))) {
   try { const x = JSON.parse(fs.readFileSync(path.join(dir, "i18n-extra", f), "utf8")); for (const [k, v] of Object.entries(x)) if (Array.isArray(v) && v.length === 2 && v[0] && v[1]) for (const l of LANGS) tables[l].add(k.trim()); } catch { /* none yet */ }
 }
 // texts that are only used as a language's own name, or are part of an HTML fragment / not shown as such

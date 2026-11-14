@@ -11,7 +11,7 @@ import * as G from "./game";
 import * as D from "./dictlogic";
 import * as W from "./words";
 import { sfx } from "./games/sfx";
-import { X, errText, frame, icon, say, stopSpeech } from "./dwshell";
+import { X, errText, frame, icon, say, stopSpeech, unlockSpeech } from "./dwshell";
 
 const dictPath = (id: string) => `${W.wordsDir()}/${id}.dictation.json`;
 const lang = () => (W.studyLang() === "fr" ? "fr-FR" : "en-US");
@@ -47,7 +47,7 @@ function newRound(k: M.Kid, thisWeek: string[], lastWeek: string[], map: Map<str
 
   const progress = h("div", { class: "dw-progress", id: "sp-progress" });
   const roundTag = h("div", { class: "groundtag", id: "sp-round" });
-  const hearBtn = h("button", { class: "dw-hearbtn", id: "sp-hear", title: "再听一遍", "aria-label": "再听一遍", onclick: () => hear() }, icon("speaker"));
+  const hearBtn = h("button", { class: "dw-hearbtn", id: "sp-hear", title: "再听一遍", "aria-label": "再听一遍", onclick: () => { unlockSpeech(); hear(); } }, icon("speaker"));
   const input = h("input", { class: "sp-input", id: "sp-input", type: "text", autocomplete: "off", autocapitalize: "none", spellcheck: false, "aria-label": "拼写", lang: W.studyLang() === "fr" ? "fr" : "en" }) as HTMLInputElement;
   input.setAttribute("autocorrect", "off");
   const hintLine = h("div", { class: "sp-hintline", id: "sp-hintline" });

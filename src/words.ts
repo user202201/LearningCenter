@@ -5,6 +5,7 @@
  */
 import type { KidData } from "./model";
 import { getLang } from "./i18n";
+import { speakText } from "./speech";
 
 export interface Word { w: string; zh: string; ph: string; pos: string; g: number; t?: string; /** the French meaning (English words, French UI) */ fr?: string; /** the English meaning (French words, English UI) */ en?: string }
 /**
@@ -74,13 +75,5 @@ export const wordsReviewPath = (kidId: string): string => `${wordsDir()}/${kidId
 
 /** says a word aloud with the device's own voice (offline; silently nothing where the device has no speech) */
 export function speak(w: string): void {
-  try {
-    const s = window.speechSynthesis;
-    if (!s) return;
-    s.cancel();
-    const u = new SpeechSynthesisUtterance(w);
-    u.lang = studyLang() === "fr" ? "fr-FR" : "en-US";
-    u.rate = 0.85;
-    s.speak(u);
-  } catch { /* no speech on this device */ }
+  speakText(w, studyLang() === "fr" ? "fr-FR" : "en-US", { rate: 0.85 });
 }

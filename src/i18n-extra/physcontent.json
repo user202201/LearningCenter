@@ -2038,5 +2038,1561 @@
  "残留使测得的质量偏小，体积不变，所以密度偏小。": [
   "The liquid left behind makes the measured mass too small while the volume is unchanged; therefore the density is too small.",
   "Le liquide resté sur la paroi rend la masse mesurée trop petite alors que le volume ne change pas ; la masse volumique est donc trop petite."
+ ],
+ "电话把声音变成变化的电流，再把电流还原成声音。随声音的强弱和高低连续变化的电信号叫模拟信号；用不连续变化的“0”和“1”两种状态的组合表示的信号叫数字信号。信号在传输中会混进噪声：模拟信号的波形会被改变，噪声越大失真越大，而且无法消除；数字信号只要噪声不使“0”和“1”判断错误，接收端就能完全恢复原来的信号，所以抗干扰能力强，便于加工、存储和处理。": [
+  "A telephone changes sound into a varying current and the current back into sound. An electrical signal that varies continuously with the loudness and pitch of the sound is an analogue signal; a signal made of combinations of two states, \"0\" and \"1\", that do not change continuously is a digital signal. Noise mixes into a signal during transmission: it changes the waveform of an analogue signal, the more noise the greater the distortion, and it cannot be removed; a digital signal can be restored completely by the receiver as long as the noise does not make a \"0\" or a \"1\" be misjudged, so it resists interference well and is easy to process, store and handle.",
+  "Un téléphone transforme le son en un courant variable, puis le courant en son. Un signal électrique qui varie de façon continue avec l'intensité et la hauteur du son est un signal analogique ; un signal formé de combinaisons de deux états, « 0 » et « 1 », qui ne varient pas de façon continue, est un signal numérique. Du bruit se mêle au signal pendant la transmission : il déforme le signal analogique, d'autant plus que le bruit est grand, et on ne peut pas l'éliminer ; un signal numérique est restitué intégralement par le récepteur tant que le bruit ne fait pas confondre un « 0 » et un « 1 », il résiste donc bien aux perturbations et se traite, se stocke et se manipule facilement."
+ ],
+ "无线电广播把声音信号加载到高频的载波上（调制），用电磁波发射出去，收音机的调谐器选出与电台频率相同的电磁波，再把声音信号取出来。电磁波在真空中的速度是 c = 3×10⁸ m/s，波长、频率和波速的关系是 c = λf。中波广播的频率约为 540 kHz ~ 1600 kHz，调频（FM）广播约为 88 MHz ~ 108 MHz。": [
+  "Radio broadcasting loads the sound signal onto a high-frequency carrier wave (modulation) and sends it out as an electromagnetic wave; the tuner of a radio selects the electromagnetic wave whose frequency equals that of the station and then takes the sound signal out of it. The speed of electromagnetic waves in a vacuum is c = 3×10⁸ m/s, and wavelength, frequency and wave speed are related by c = λf. Medium-wave broadcasting uses frequencies of about 540 kHz to 1600 kHz, FM broadcasting about 88 MHz to 108 MHz.",
+  "La radiodiffusion place le signal sonore sur une onde porteuse de haute fréquence (modulation) et l'émet sous forme d'onde électromagnétique ; le circuit d'accord d'un poste de radio sélectionne l'onde dont la fréquence est celle de la station, puis en extrait le signal sonore. La vitesse des ondes électromagnétiques dans le vide est c = 3×10⁸ m/s, et la longueur d'onde, la fréquence et la vitesse sont liées par c = λf. Les ondes moyennes ont des fréquences d'environ 540 kHz à 1600 kHz, la modulation de fréquence (FM) d'environ 88 MHz à 108 MHz."
+ ],
+ "光纤通信利用激光在光导纤维中的全反射传递信息。光纤的芯比外层的折射率大，光射到芯与外层的分界面上的入射角大于临界角时发生全反射，光就沿着光纤一直传下去，几乎没有损耗。光纤通信的容量大、损耗小、不受电磁干扰。": [
+  "Optical-fibre communication uses total internal reflection of laser light in optical fibres to carry information. The core of the fibre has a greater refractive index than its outer layer; when light meets the boundary between the core and the outer layer at an angle of incidence greater than the critical angle it is totally reflected, and the light travels on along the fibre with almost no loss. Optical-fibre communication has a large capacity, a small loss and is not disturbed by electromagnetic interference.",
+  "La communication par fibre optique utilise la réflexion totale de la lumière laser dans des fibres optiques pour transporter l'information. Le cœur de la fibre a un indice de réfraction plus grand que sa gaine ; lorsque la lumière arrive à la limite entre le cœur et la gaine sous un angle d'incidence supérieur à l'angle limite, elle est totalement réfléchie et se propage le long de la fibre presque sans perte. La communication par fibre optique a une grande capacité, de faibles pertes et n'est pas perturbée par les interférences électromagnétiques."
+ ],
+ "平行光射到光滑的表面（如平面镜、平静的水面）上，反射光仍然是平行的，只射向一个方向，这叫镜面反射。只有在反射光的方向上，才能看到明亮的光，在其他方向上看不到。": [
+  "Parallel light that falls on a smooth surface (such as a plane mirror or calm water) is still parallel after reflection and goes in one direction only; this is specular reflection. Bright light is seen only in the direction of the reflected light, and none in other directions.",
+  "Un faisceau de lumière parallèle qui tombe sur une surface lisse (miroir plan, eau calme) reste parallèle après la réflexion et ne part que dans une seule direction : c'est la réflexion spéculaire. On ne voit de la lumière vive que dans la direction de la lumière réfléchie, et aucune dans les autres directions."
+ ],
+ "平行光射到粗糙的表面（如纸、墙壁、衣服）上，表面上许多小平面的方向各不相同，反射光射向各个方向，这叫漫反射。漫反射使我们从各个方向都能看到不发光的物体。": [
+  "Parallel light that falls on a rough surface (such as paper, a wall or clothes) meets many small facets that face in different directions, so the reflected light goes in all directions; this is diffuse reflection. Diffuse reflection lets us see objects that do not give out light from every direction.",
+  "Un faisceau de lumière parallèle qui tombe sur une surface rugueuse (papier, mur, vêtement) rencontre de nombreuses petites facettes d'orientations différentes ; la lumière réfléchie part donc dans toutes les directions : c'est la réflexion diffuse. La réflexion diffuse permet de voir sous tous les angles les objets qui n'émettent pas de lumière."
+ ],
+ "无论镜面反射还是漫反射，每一条光线都遵守光的反射定律：反射角等于入射角。镜面反射也会造成“光污染”，例如玻璃幕墙耀眼的反光。拖动滑块改变表面的粗糙程度，观察反射光的方向有什么变化。": [
+  "Both in specular and in diffuse reflection every ray obeys the law of reflection: the angle of reflection equals the angle of incidence. Specular reflection can also cause \"light pollution\", for example the dazzling glare of a glass curtain wall. Drag the slider to change how rough the surface is and see how the direction of the reflected light changes.",
+  "Dans la réflexion spéculaire comme dans la réflexion diffuse, chaque rayon obéit à la loi de la réflexion : l'angle de réflexion est égal à l'angle d'incidence. La réflexion spéculaire peut aussi provoquer une « pollution lumineuse », par exemple l'éblouissement d'un mur-rideau en verre. Faites glisser le curseur pour changer la rugosité de la surface et observez comment change la direction de la lumière réfléchie."
+ ],
+ "镜面反射": [
+  "Specular reflection",
+  "Réflexion spéculaire"
+ ],
+ "漫反射": [
+  "Diffuse reflection",
+  "Réflexion diffuse"
+ ],
+ "电磁继电器是由电磁铁控制的开关。电磁铁通电时吸引衔铁，使工作电路的触点接通；断电时弹簧把衔铁拉回，触点断开。这样用低电压、弱电流的控制电路，就可以控制高电压、强电流的工作电路，还能实现远距离操作和自动控制（如温度自动报警器：温度升高到设定值时，水银柱把控制电路接通，电铃响起来）。": [
+  "An electromagnetic relay is a switch controlled by an electromagnet. When the electromagnet carries a current it attracts the armature and the contacts of the working circuit close; when the current stops, a spring pulls the armature back and the contacts open. In this way a low-voltage, weak-current control circuit can switch a high-voltage, strong-current working circuit, and it also allows remote operation and automatic control (as in a temperature alarm: when the temperature rises to the set value, the mercury column closes the control circuit and the bell rings).",
+  "Un relais électromagnétique est un interrupteur commandé par un électroaimant. Quand l'électroaimant est parcouru par un courant, il attire l'armature et les contacts du circuit de travail se ferment ; quand le courant s'arrête, un ressort ramène l'armature et les contacts s'ouvrent. Un circuit de commande à basse tension et à faible courant peut ainsi commander un circuit de travail à haute tension et à fort courant, ce qui permet aussi la commande à distance et la commande automatique (comme dans une alarme de température : quand la température atteint la valeur réglée, la colonne de mercure ferme le circuit de commande et la sonnerie retentit)."
+ ],
+ "扬声器把变化的电流变成声音：线圈中通过随声音变化的电流，通电线圈在永磁体的磁场中受力，受力的方向随电流方向改变，带动纸盆来回振动，发出声音。电流越大，纸盆振幅越大，声音越响；电流变化越快，声音的音调越高。": [
+  "A loudspeaker changes a varying current into sound: a current that varies with the sound flows through the coil; a coil carrying a current feels a force in the magnetic field of the permanent magnet, the direction of the force changes with the direction of the current, and the cone is made to vibrate back and forth and gives out sound. The larger the current, the larger the amplitude of the cone and the louder the sound; the faster the current changes, the higher the pitch.",
+  "Un haut-parleur transforme un courant variable en son : un courant qui varie avec le son parcourt la bobine ; une bobine parcourue par un courant subit une force dans le champ magnétique de l'aimant permanent, le sens de la force change avec le sens du courant, et la membrane est mise en vibration d'avant en arrière et émet un son. Plus le courant est grand, plus l'amplitude de la membrane est grande et plus le son est fort ; plus le courant change vite, plus le son est aigu."
+ ],
+ "话筒把声音变成变化的电流：声波使膜片和线圈一起振动，线圈在磁场中做切割磁感线的运动，产生感应电流（电磁感应现象）。声音越响、音调越高，线圈运动越快，感应电流越大。扬声器与话筒的作用相反，原理也不同。": [
+  "A microphone changes sound into a varying current: sound waves make the diaphragm and the coil vibrate together, the coil moves across magnetic field lines in the magnetic field and an induced current is produced (electromagnetic induction). The louder and the higher the sound, the faster the coil moves and the larger the induced current. A loudspeaker and a microphone do opposite jobs and work on different principles.",
+  "Un microphone transforme le son en un courant variable : les ondes sonores font vibrer ensemble la membrane et la bobine, la bobine se déplace en coupant les lignes de champ magnétique et un courant induit apparaît (induction électromagnétique). Plus le son est fort et aigu, plus la bobine se déplace vite et plus le courant induit est grand. Un haut-parleur et un microphone ont des rôles opposés et fonctionnent selon des principes différents."
+ ],
+ "汽化是物质从液态变为气态的过程，吸热，有蒸发和沸腾两种方式。蒸发在任何温度下都能在液体表面发生。液体的温度越高、液体的表面积越大、液体表面上方的空气流动越快，蒸发就越快。蒸发要从液体或周围物体吸收热量，所以蒸发有致冷作用。": [
+  "Vaporisation is the change of a substance from the liquid to the gaseous state; it absorbs heat and takes place in two ways, evaporation and boiling. Evaporation takes place at the surface of a liquid at any temperature. The higher the temperature of the liquid, the larger its surface area and the faster the air moves above its surface, the faster it evaporates. Evaporation takes heat from the liquid or from the objects around it, so evaporation has a cooling effect.",
+  "La vaporisation est le passage d'une substance de l'état liquide à l'état gazeux ; elle absorbe de la chaleur et se fait de deux façons, l'évaporation et l'ébullition. L'évaporation se produit à la surface d'un liquide à n'importe quelle température. Plus la température du liquide est élevée, plus sa surface est grande et plus l'air bouge vite au-dessus de sa surface, plus il s'évapore vite. L'évaporation prend de la chaleur au liquide ou aux objets environnants : elle a donc un effet refroidissant."
+ ],
+ "液化是物质从气态变为液态的过程，放热。使气体液化的方法有两种：降低温度和压缩体积。在一定温度下，压缩体积可以使某些气体液化（如石油气）；但气体的温度高于它的临界温度时，只压缩体积不能使它液化，必须先降低温度。": [
+  "Liquefaction is the change of a substance from the gaseous to the liquid state; it gives out heat. There are two ways to liquefy a gas: lower its temperature and compress its volume. At a given temperature, compressing the volume can liquefy certain gases (such as petroleum gas); but when the temperature of a gas is above its critical temperature, compressing the volume alone cannot liquefy it, and it has to be cooled first.",
+  "La liquéfaction est le passage d'une substance de l'état gazeux à l'état liquide ; elle libère de la chaleur. Il y a deux façons de liquéfier un gaz : abaisser sa température et comprimer son volume. À une température donnée, comprimer le volume peut liquéfier certains gaz (comme le gaz de pétrole) ; mais quand la température d'un gaz est supérieure à sa température critique, la compression seule ne le liquéfie pas : il faut d'abord le refroidir."
+ ],
+ "升华是物质从固态直接变为气态的过程，吸热；凝华是物质从气态直接变为固态的过程，放热。碘、干冰、樟脑都容易升华；霜、冰花和雾凇是水蒸气遇冷凝华形成的。熔化、汽化、升华吸热，凝固、液化、凝华放热。": [
+  "Sublimation is the change of a substance directly from the solid to the gaseous state; it absorbs heat. Deposition (solid condensation) is the change directly from the gaseous to the solid state; it gives out heat. Iodine, dry ice and camphor sublime easily; frost, ice flowers and rime are formed when water vapour deposits as ice on a cold surface. Melting, vaporisation and sublimation absorb heat; freezing, liquefaction and deposition give out heat.",
+  "La sublimation est le passage direct d'une substance de l'état solide à l'état gazeux ; elle absorbe de la chaleur. La condensation solide est le passage direct de l'état gazeux à l'état solide ; elle libère de la chaleur. L'iode, la carboglace et le camphre se subliment facilement ; le givre, les fleurs de glace et le givre blanc se forment quand la vapeur d'eau se dépose sous forme de glace sur une surface froide. La fusion, la vaporisation et la sublimation absorbent de la chaleur ; la solidification, la liquéfaction et la condensation solide en libèrent."
+ ],
+ "液化": [
+  "Liquefaction",
+  "Liquéfaction"
+ ],
+ "物体内部所有分子热运动的动能和分子势能的总和叫内能。一切物体都有内能。物体的温度升高，内能增大；温度降低，内能减小。改变物体内能的方式有两种：做功和热传递，它们对改变物体的内能是等效的。": [
+  "The sum of the kinetic energy of the thermal motion of all the molecules inside an object and their potential energy is called its internal energy. All objects have internal energy. When the temperature of an object rises, its internal energy increases; when the temperature falls, its internal energy decreases. There are two ways of changing the internal energy of an object, doing work and heat transfer, and they are equivalent in changing it.",
+  "La somme de l'énergie cinétique d'agitation thermique de toutes les molécules d'un objet et de leur énergie potentielle s'appelle son énergie interne. Tous les objets ont une énergie interne. Quand la température d'un objet s'élève, son énergie interne augmente ; quand elle baisse, son énergie interne diminue. Il y a deux façons de modifier l'énergie interne d'un objet, le travail et le transfert thermique, et elles sont équivalentes pour la modifier."
+ ],
+ "做功：对物体做功，物体的内能增大（如搓手取暖、压缩气体、钻木取火）；物体对外做功，物体的内能减小（如气体膨胀推动活塞、瓶塞冲出时瓶内出现白雾）。做功改变内能的实质是其他形式的能与内能的相互转化。热传递：热量从高温物体传到低温物体（或从物体的高温部分传到低温部分），实质是内能的转移。": [
+  "Doing work: when work is done on an object its internal energy increases (rubbing the hands to get warm, compressing a gas, drilling wood to make fire); when an object does work on its surroundings its internal energy decreases (a gas expanding and pushing a piston, white mist appearing in a bottle when the stopper shoots out). Changing internal energy by work is really a conversion between other forms of energy and internal energy. Heat transfer: heat passes from a hotter object to a colder one (or from the hotter part of an object to its colder part); in essence internal energy is moved from one place to another.",
+  "Le travail : quand on fournit du travail à un objet, son énergie interne augmente (se frotter les mains pour se réchauffer, comprimer un gaz, percer du bois pour faire du feu) ; quand un objet fournit du travail à l'extérieur, son énergie interne diminue (un gaz qui se détend et pousse un piston, de la buée blanche dans une bouteille quand le bouchon saute). Modifier l'énergie interne par le travail, c'est en réalité convertir d'autres formes d'énergie en énergie interne ou l'inverse. Le transfert thermique : la chaleur passe d'un objet plus chaud à un objet plus froid (ou de la partie chaude d'un objet à sa partie froide) ; en fait, l'énergie interne est transférée d'un endroit à un autre."
+ ],
+ "要分清三个量：温度表示物体的冷热程度；热量是热传递过程中传递的内能的多少，是过程量，只能说“吸收”或“放出”，不能说“含有”；内能是物体具有的能，是状态量。热量总是从温度高的物体传向温度低的物体，与哪个物体的内能多无关。": [
+  "Three quantities have to be kept apart: temperature tells how hot or cold an object is; heat is the amount of internal energy transferred during heat transfer, it is a process quantity and one can only say it is \"absorbed\" or \"given out\", never \"contained\"; internal energy is the energy an object has, it is a state quantity. Heat always passes from the object at the higher temperature to the one at the lower temperature, whichever of them has more internal energy.",
+  "Il faut distinguer trois grandeurs : la température indique si un objet est chaud ou froid ; la chaleur est la quantité d'énergie interne transférée lors d'un transfert thermique, c'est une grandeur de processus et on peut seulement dire qu'elle est « absorbée » ou « libérée », jamais « contenue » ; l'énergie interne est l'énergie que possède un objet, c'est une grandeur d'état. La chaleur passe toujours de l'objet à la température la plus élevée vers celui qui est à la température la plus basse, quel que soit celui qui a le plus d'énergie interne."
+ ],
+ "实验器材：光具座、凸透镜、蜡烛、光屏。先让平行光（如太阳光）通过凸透镜，移动光屏，当光屏上的光斑最小最亮时，光屏到透镜的距离就是焦距 f。实验时要调整烛焰、透镜和光屏的中心大致在同一高度，使像成在光屏的中央。": [
+  "Apparatus: an optical bench, a convex lens, a candle and a screen. First let parallel light (such as sunlight) pass through the convex lens and move the screen; when the bright spot on the screen is smallest and brightest, the distance from the screen to the lens is the focal length f. During the experiment adjust the centres of the flame, the lens and the screen to about the same height, so that the image falls in the middle of the screen.",
+  "Matériel : un banc d'optique, une lentille convergente, une bougie et un écran. On fait d'abord traverser la lentille par de la lumière parallèle (par exemple celle du Soleil) et on déplace l'écran ; quand la tache lumineuse sur l'écran est la plus petite et la plus brillante, la distance de l'écran à la lentille est la distance focale f. Pendant l'expérience, on règle le centre de la flamme, de la lentille et de l'écran à peu près à la même hauteur, pour que l'image se forme au milieu de l'écran."
+ ],
+ "把蜡烛放在不同的位置（物距 u），移动光屏，直到光屏上的像最清晰，记下物距和像距。u > 2f，成倒立、缩小的实像，f < v < 2f；u = 2f，成倒立、等大的实像，v = 2f；f < u < 2f，成倒立、放大的实像，v > 2f；u = f，不成像；u < f，成正立、放大的虚像，光屏上接收不到。": [
+  "Put the candle at different positions (object distance u) and move the screen until the image on it is sharpest; note the object distance and the image distance. For u > 2f the image is a real, inverted, smaller image with f < v < 2f; for u = 2f it is a real, inverted image of the same size with v = 2f; for f < u < 2f it is a real, inverted, larger image with v > 2f; for u = f there is no image; for u < f it is a virtual, upright, larger image that cannot be received on the screen.",
+  "Placez la bougie à différentes positions (distance objet u) et déplacez l'écran jusqu'à ce que l'image soit la plus nette ; notez la distance objet et la distance image. Pour u > 2f l'image est réelle, renversée et plus petite, avec f < v < 2f ; pour u = 2f elle est réelle, renversée et de même taille, avec v = 2f ; pour f < u < 2f elle est réelle, renversée et plus grande, avec v > 2f ; pour u = f il n'y a pas d'image ; pour u < f l'image est virtuelle, droite et plus grande, et elle ne peut pas être recueillie sur l'écran."
+ ],
+ "成实像时，物距减小，像距增大，像变大（物近像远像变大）。换一个焦距不同的凸透镜，各个位置也随之改变。记录的数据越多，规律就越明显。": [
+  "For a real image, when the object distance decreases the image distance increases and the image gets larger (the nearer the object, the farther and larger the image). With a convex lens of a different focal length all the positions change as well. The more data are recorded, the clearer the rule becomes.",
+  "Pour une image réelle, quand la distance objet diminue, la distance image augmente et l'image grandit (plus l'objet est proche, plus l'image est éloignée et grande). Avec une lentille de distance focale différente, toutes les positions changent aussi. Plus on enregistre de données, plus la loi apparaît clairement."
+ ],
+ "电流做功的过程，就是电能转化为其他形式能的过程。电流做的功叫电功，用 W 表示。电流在某段电路上做的功，等于这段电路两端的电压 U、电路中的电流 I 和通电时间 t 的乘积：W = UIt。电功的单位是焦耳（J），生活中常用千瓦时（kW·h，俗称“度”）：1 kW·h = 3.6×10⁶ J。": [
+  "The process of an electric current doing work is the process of electrical energy changing into other forms of energy. The work done by an electric current is called electrical work and is written W. The work done by a current in a part of a circuit equals the product of the voltage U across that part, the current I in it and the time t it flows: W = UIt. The unit of electrical work is the joule (J); in daily life the kilowatt-hour (kW·h, commonly called a \"unit\" of electricity) is used: 1 kW·h = 3.6×10⁶ J.",
+  "Quand un courant électrique fournit du travail, de l'énergie électrique est convertie en d'autres formes d'énergie. Le travail fourni par un courant électrique s'appelle le travail électrique et se note W. Le travail fourni par un courant dans une portion de circuit est égal au produit de la tension U aux bornes de cette portion, de l'intensité I du courant qui la traverse et de la durée t : W = UIt. L'unité du travail électrique est le joule (J) ; dans la vie courante on utilise le kilowattheure (kW·h) : 1 kW·h = 3,6×10⁶ J."
+ ],
+ "电能表是测量一段时间内消耗电能的仪表。它的计数器最后一位是小数位，前后两次示数之差就是这段时间用的电能。铭牌上的“220 V”是额定电压，“10(20) A”表示标定电流是 10 A、额定最大电流是 20 A，“3000 r/(kW·h)”表示每消耗 1 kW·h 的电能，转盘转 3000 转。": [
+  "An energy meter measures the electrical energy used over a period of time. The last digit of its counter is a decimal, and the difference between two readings is the energy used in that time. On the plate \"220 V\" is the rated voltage, \"10(20) A\" means that the rated current is 10 A and the largest permitted current is 20 A, and \"3000 r/(kW·h)\" means that for every 1 kW·h of electrical energy used the disc turns 3000 times.",
+  "Un compteur d'énergie mesure l'énergie électrique consommée pendant une durée donnée. Le dernier chiffre de son compteur est une décimale, et la différence entre deux relevés est l'énergie consommée pendant ce temps. Sur la plaque, « 220 V » est la tension nominale, « 10(20) A » signifie que l'intensité nominale est de 10 A et l'intensité maximale permise de 20 A, et « 3000 r/(kW·h) » signifie que, pour chaque kW·h d'énergie électrique consommée, le disque fait 3000 tours."
+ ],
+ "用电能表测用电器的功率：只让这一个用电器工作，数出 t 秒内转盘转过的转数 n，则消耗的电能 W = n / N（kW·h，N 是每千瓦时的转数），功率 P = W / t。": [
+  "Measuring the power of an appliance with an energy meter: let only this appliance work and count the number n of turns of the disc in t seconds; the energy used is W = n / N (in kW·h, N being the number of turns per kilowatt-hour) and the power is P = W / t.",
+  "Mesurer la puissance d'un appareil avec un compteur d'énergie : on ne laisse fonctionner que cet appareil et on compte le nombre n de tours du disque en t secondes ; l'énergie consommée est W = n / N (en kW·h, N étant le nombre de tours par kilowattheure) et la puissance est P = W / t."
+ ],
+ "{0} 元": [
+  "{0} yuan",
+  "{0} yuans"
+ ],
+ "与模拟信号相比，数字信号的优点是：": [
+  "Compared with an analogue signal, an advantage of a digital signal is that:",
+  "Par rapport à un signal analogique, un avantage du signal numérique est que :"
+ ],
+ "抗干扰能力强，便于加工和存储": [
+  "It resists interference well and is easy to process and store",
+  "Il résiste bien aux perturbations et se traite et se stocke facilement"
+ ],
+ "传输速度比光速还快": [
+  "It travels faster than light",
+  "Il se propage plus vite que la lumière"
+ ],
+ "不需要电磁波就能传播": [
+  "It can travel without electromagnetic waves",
+  "Il peut se propager sans ondes électromagnétiques"
+ ],
+ "波形与声音的波形完全相同": [
+  "Its waveform is exactly the same as the waveform of the sound",
+  "Sa forme d'onde est exactement celle du son"
+ ],
+ "数字信号是用什么来表示信息的？": [
+  "What does a digital signal use to represent information?",
+  "Que utilise un signal numérique pour représenter l'information ?"
+ ],
+ "不连续变化的“0”和“1”的组合": [
+  "Combinations of \"0\" and \"1\" that do not change continuously",
+  "Des combinaisons de « 0 » et de « 1 » qui ne varient pas de façon continue"
+ ],
+ "连续变化的电流": [
+  "A continuously varying current",
+  "Un courant qui varie de façon continue"
+ ],
+ "连续变化的声波": [
+  "A continuously varying sound wave",
+  "Une onde sonore qui varie de façon continue"
+ ],
+ "光的颜色": [
+  "The colour of light",
+  "La couleur de la lumière"
+ ],
+ "光纤通信是利用光在光导纤维中不断发生什么来传递信息的？": [
+  "Optical-fibre communication carries information by making light undergo what, again and again, inside the optical fibre?",
+  "La communication par fibre optique transmet l'information grâce à quel phénomène que subit la lumière, encore et encore, à l'intérieur de la fibre optique ?"
+ ],
+ "色散": [
+  "Dispersion",
+  "Dispersion"
+ ],
+ "光纤通信的优点是：": [
+  "An advantage of optical-fibre communication is that it has:",
+  "Un avantage de la communication par fibre optique est qu'elle présente :"
+ ],
+ "容量大、损耗小、不受电磁干扰": [
+  "A large capacity, small loss and no electromagnetic interference",
+  "Une grande capacité, de faibles pertes et aucune perturbation électromagnétique"
+ ],
+ "容量小、损耗大": [
+  "A small capacity and a large loss",
+  "Une faible capacité et de grandes pertes"
+ ],
+ "只能传输模拟信号": [
+  "It can carry only analogue signals",
+  "Elle ne peut transporter que des signaux analogiques"
+ ],
+ "必须靠无线电波传播": [
+  "It has to rely on radio waves",
+  "Elle doit s'appuyer sur des ondes radio"
+ ],
+ "某广播电台的发射频率是 {0} MHz，电磁波在真空中的传播速度取 3×10⁸ m/s，它的波长是多少米？": [
+  "The transmitting frequency of a radio station is {0} MHz. Taking the speed of electromagnetic waves in a vacuum as 3×10⁸ m/s, what is its wavelength in metres?",
+  "La fréquence d'émission d'une station de radio est de {0} MHz. En prenant 3×10⁸ m/s pour la vitesse des ondes électromagnétiques dans le vide, quelle est sa longueur d'onde en mètres ?"
+ ],
+ "c = λf，λ = c / f；1 MHz = 10⁶ Hz。": [
+  "c = λf, so λ = c / f; 1 MHz = 10⁶ Hz.",
+  "c = λf, donc λ = c / f ; 1 MHz = 10⁶ Hz."
+ ],
+ "一束电磁波的波长是 {0} m，它的频率是多少兆赫？（电磁波在真空中的传播速度取 3×10⁸ m/s）": [
+  "An electromagnetic wave has a wavelength of {0} m. What is its frequency in megahertz? (Take the speed of electromagnetic waves in a vacuum as 3×10⁸ m/s.)",
+  "Une onde électromagnétique a une longueur d'onde de {0} m. Quelle est sa fréquence en mégahertz ? (On prend 3×10⁸ m/s pour la vitesse des ondes électromagnétiques dans le vide.)"
+ ],
+ "用网络下载一个 {0} MB 的文件，网速是 {1} Mbit/s（1 字节 = 8 位），下载需要多少秒？": [
+  "A file of {0} MB is downloaded over a network at {1} Mbit/s (1 byte = 8 bits). How many seconds does the download take?",
+  "Un fichier de {0} Mo est téléchargé sur un réseau à {1} Mbit/s (1 octet = 8 bits). Combien de secondes dure le téléchargement ?"
+ ],
+ "文件的位数 = 字节数 × 8，时间 = 位数 ÷ 速率。": [
+  "Number of bits in the file = number of bytes × 8; time = number of bits ÷ rate.",
+  "Nombre de bits du fichier = nombre d'octets × 8 ; durée = nombre de bits ÷ débit."
+ ],
+ "数字信号只有“有”和“无”两种状态，噪声不太大时接收端仍能完全恢复，所以抗干扰能力强。": [
+  "A digital signal has only two states, \"present\" and \"absent\"; as long as the noise is not too large the receiver can still restore it completely, so it resists interference well.",
+  "Un signal numérique n'a que deux états, « présent » et « absent » ; tant que le bruit n'est pas trop grand, le récepteur peut encore le restituer intégralement : il résiste donc bien aux perturbations."
+ ],
+ "光信号在光导纤维中发生全反射，沿着光纤传到远处，几乎没有损耗，容量很大。": [
+  "The light signal is totally reflected in the optical fibre and travels along it to a distant place with almost no loss, and the capacity is very large.",
+  "Le signal lumineux subit une réflexion totale dans la fibre optique et se propage le long de celle-ci jusqu'à un endroit éloigné presque sans perte, et la capacité est très grande."
+ ],
+ "教室里不同位置的同学都能看到黑板上的字": [
+  "Students at different places in the classroom can all see the words on the blackboard",
+  "Les élèves placés à différents endroits de la classe peuvent tous voir les mots écrits au tableau"
+ ],
+ "从各个方向都能看到屏幕上的画面": [
+  "The picture on a screen can be seen from every direction",
+  "L'image d'un écran peut être vue de toutes les directions"
+ ],
+ "能从不同方向看到桌上的书": [
+  "A book on a desk can be seen from different directions",
+  "Un livre posé sur un bureau peut être vu de différentes directions"
+ ],
+ "平静的水面映出岸边的树": [
+  "Trees on the bank are mirrored in calm water",
+  "Les arbres de la rive se reflètent dans l'eau calme"
+ ],
+ "玻璃幕墙把阳光强烈地反射到街上": [
+  "A glass curtain wall reflects sunlight strongly onto the street",
+  "Un mur-rideau en verre renvoie fortement la lumière du Soleil sur la rue"
+ ],
+ "在镜子里看到自己的像": [
+  "You see your own image in a mirror",
+  "On voit sa propre image dans un miroir"
+ ],
+ "光滑的黑板反光，某个位置的同学看不清字": [
+  "A smooth blackboard reflects light so that a student at one place cannot read the writing",
+  "Un tableau lisse réfléchit la lumière et un élève placé à un certain endroit ne peut pas lire l'écriture"
+ ],
+ "一束光竖直射向一个与水平面成 {0}° 角的小平面（可以看成小镜面），反射光线与竖直方向的夹角是多少度？": [
+  "A ray of light falls vertically on a small plane surface (it can be treated as a small mirror) that makes an angle of {0}° with the horizontal. What is the angle between the reflected ray and the vertical, in degrees?",
+  "Un rayon lumineux arrive verticalement sur une petite surface plane (on peut la considérer comme un petit miroir) qui fait un angle de {0}° avec l'horizontale. Quel est l'angle, en degrés, entre le rayon réfléchi et la verticale ?"
+ ],
+ "小平面的法线与竖直方向成 t 角，入射角是 t，反射角也是 t，所以反射光线与入射光线的方向相差 2t。": [
+  "The normal of the small surface makes an angle t with the vertical, so the angle of incidence is t and the angle of reflection is also t; the direction of the reflected ray therefore differs from that of the incident ray by 2t.",
+  "La normale à la petite surface fait un angle t avec la verticale ; l'angle d'incidence est donc t et l'angle de réflexion est aussi t : la direction du rayon réfléchi diffère donc de celle du rayon incident de 2t."
+ ],
+ "一束光射到平面镜上，入射光线与镜面的夹角是 {0}°，反射角是多少度？": [
+  "A ray of light falls on a plane mirror; the angle between the incident ray and the mirror surface is {0}°. What is the angle of reflection, in degrees?",
+  "Un rayon lumineux arrive sur un miroir plan ; l'angle entre le rayon incident et la surface du miroir est de {0}°. Quel est l'angle de réflexion, en degrés ?"
+ ],
+ "入射角是入射光线与法线的夹角，等于 90° 减去它与镜面的夹角；反射角等于入射角。": [
+  "The angle of incidence is the angle between the incident ray and the normal, which equals 90° minus its angle with the mirror surface; the angle of reflection equals the angle of incidence.",
+  "L'angle d'incidence est l'angle entre le rayon incident et la normale ; il vaut 90° moins l'angle du rayon avec la surface du miroir ; l'angle de réflexion est égal à l'angle d'incidence."
+ ],
+ "下列现象中，属于漫反射的是：": [
+  "Which of the following phenomena is diffuse reflection?",
+  "Lequel des phénomènes suivants est une réflexion diffuse ?"
+ ],
+ "漫反射使反射光射向各个方向，所以从不同位置都能看到物体；镜面反射的光只射向一个方向。": [
+  "Diffuse reflection sends the reflected light in all directions, so an object can be seen from different positions; the light of specular reflection goes in one direction only.",
+  "La réflexion diffuse renvoie la lumière dans toutes les directions : on peut donc voir l'objet depuis différentes positions ; la lumière de la réflexion spéculaire ne part que dans une seule direction."
+ ],
+ "我们能看见不发光的物体，是因为：": [
+  "We can see an object that does not give out light because:",
+  "On peut voir un objet qui n'émet pas de lumière parce que :"
+ ],
+ "物体表面发生漫反射，反射光进入了眼睛": [
+  "Its surface reflects light diffusely and the reflected light enters the eye",
+  "sa surface réfléchit la lumière de façon diffuse et la lumière réfléchie entre dans l'œil"
+ ],
+ "物体自己发出了光": [
+  "The object gives out light itself",
+  "l'objet émet de la lumière lui-même"
+ ],
+ "眼睛发出的光照到了物体上": [
+  "Light given out by the eye falls on the object",
+  "la lumière émise par l'œil tombe sur l'objet"
+ ],
+ "物体表面发生镜面反射，反射光射向各个方向": [
+  "Its surface reflects light specularly and the reflected light goes in all directions",
+  "sa surface réfléchit la lumière de façon spéculaire et la lumière réfléchie part dans toutes les directions"
+ ],
+ "不发光的物体被光照亮后，向各个方向漫反射，反射光进入眼睛，我们就看见它了。": [
+  "An object that gives out no light is lit up and reflects light diffusely in all directions; the reflected light enters the eye and we see the object.",
+  "Un objet qui n'émet pas de lumière est éclairé et réfléchit la lumière de façon diffuse dans toutes les directions ; la lumière réfléchie entre dans l'œil et on voit l'objet."
+ ],
+ "玻璃幕墙会造成“光污染”，是因为光射到它的表面时发生了：": [
+  "A glass curtain wall can cause \"light pollution\" because when light falls on its surface:",
+  "Un mur-rideau en verre peut provoquer une « pollution lumineuse » parce que, lorsque la lumière arrive sur sa surface, il se produit :"
+ ],
+ "光滑的幕墙表面发生镜面反射，反射光集中射向同一方向，十分耀眼。": [
+  "The smooth surface of the wall reflects light specularly, and the reflected light is sent in one direction and is dazzling.",
+  "La surface lisse du mur provoque une réflexion spéculaire ; la lumière réfléchie est renvoyée dans une seule direction et est éblouissante."
+ ],
+ "台灯": [
+  "Desk lamp",
+  "Lampe de bureau"
+ ],
+ "水泵的电动机": [
+  "Motor of a water pump",
+  "Moteur d'une pompe à eau"
+ ],
+ "电磁继电器的主要作用是：": [
+  "The main job of an electromagnetic relay is:",
+  "Le rôle principal d'un relais électromagnétique est :"
+ ],
+ "用低电压、弱电流的控制电路，控制高电压、强电流的工作电路": [
+  "To use a low-voltage, weak-current control circuit to control a high-voltage, strong-current working circuit",
+  "de commander un circuit de travail à haute tension et à fort courant au moyen d'un circuit de commande à basse tension et à faible courant"
+ ],
+ "把交流电变成直流电": [
+  "To change alternating current into direct current",
+  "de transformer le courant alternatif en courant continu"
+ ],
+ "升高电路的电压": [
+  "To raise the voltage of a circuit",
+  "d'élever la tension d'un circuit"
+ ],
+ "把电能转化为机械能": [
+  "To change electrical energy into mechanical energy",
+  "de convertir l'énergie électrique en énergie mécanique"
+ ],
+ "电磁继电器的核心部分是：": [
+  "The key part of an electromagnetic relay is:",
+  "La pièce essentielle d'un relais électromagnétique est :"
+ ],
+ "永磁体": [
+  "A permanent magnet",
+  "un aimant permanent"
+ ],
+ "变压器": [
+  "A transformer",
+  "un transformateur"
+ ],
+ "扬声器的工作原理是：": [
+  "A loudspeaker works on the principle that:",
+  "Un haut-parleur fonctionne selon le principe suivant :"
+ ],
+ "通电线圈在磁场中受力运动": [
+  "A coil carrying a current moves because of the force it feels in a magnetic field",
+  "une bobine parcourue par un courant se met en mouvement sous l'effet de la force qu'elle subit dans un champ magnétique"
+ ],
+ "电磁感应": [
+  "Electromagnetic induction",
+  "l'induction électromagnétique"
+ ],
+ "电流的磁效应": [
+  "The magnetic effect of a current",
+  "l'effet magnétique du courant"
+ ],
+ "摩擦起电": [
+  "Electrification by friction",
+  "l'électrisation par frottement"
+ ],
+ "动圈式话筒的工作原理是：": [
+  "A moving-coil microphone works on the principle of:",
+  "Un microphone à bobine mobile fonctionne selon le principe de :"
+ ],
+ "电流的热效应": [
+  "The heating effect of a current",
+  "l'effet thermique du courant"
+ ],
+ "电磁继电器线圈的电阻是 {0} Ω，控制电路的电压是 {1} V，线圈中的电流是多少毫安？": [
+  "The coil of an electromagnetic relay has a resistance of {0} Ω and the voltage of the control circuit is {1} V. What is the current in the coil, in milliamperes?",
+  "La bobine d'un relais électromagnétique a une résistance de {0} Ω et la tension du circuit de commande est de {1} V. Quelle est l'intensité du courant dans la bobine, en milliampères ?"
+ ],
+ "I = U / R，注意 1 A = 1000 mA。": [
+  "I = U / R; note that 1 A = 1000 mA.",
+  "I = U / R ; remarquez que 1 A = 1000 mA."
+ ],
+ "电磁继电器的衔铁在线圈电流达到 {0} mA 时被吸合，线圈电阻是 {1} Ω，控制电路的电源电压至少是多少伏？": [
+  "The armature of an electromagnetic relay is pulled in when the current in the coil reaches {0} mA, and the coil has a resistance of {1} Ω. What is the smallest supply voltage of the control circuit, in volts?",
+  "L'armature d'un relais électromagnétique est attirée quand l'intensité du courant dans la bobine atteint {0} mA, et la bobine a une résistance de {1} Ω. Quelle est la plus petite tension d'alimentation du circuit de commande, en volts ?"
+ ],
+ "U = IR。": [
+  "U = IR.",
+  "U = IR."
+ ],
+ "继电器控制的工作电路电压是 220 V，接入的用电器功率是 {0} W，它正常工作时的电流是多少安？": [
+  "The working circuit controlled by a relay has a voltage of 220 V and contains an appliance of power {0} W. What is the current when it works normally, in amperes?",
+  "Le circuit de travail commandé par un relais a une tension de 220 V et contient un appareil de puissance {0} W. Quelle est l'intensité du courant quand il fonctionne normalement, en ampères ?"
+ ],
+ "电磁继电器实质是一个由电磁铁控制的开关，用安全的低压电路控制危险的高压电路，还能实现远距离操纵和自动控制。": [
+  "A relay is in essence a switch controlled by an electromagnet: a safe low-voltage circuit controls a dangerous high-voltage circuit, and remote operation and automatic control become possible.",
+  "Un relais est en fait un interrupteur commandé par un électroaimant : un circuit basse tension sûr commande un circuit haute tension dangereux, ce qui rend possibles la commande à distance et la commande automatique."
+ ],
+ "扬声器是把变化的电流变成声音，线圈受力带动纸盆振动；话筒是把声音变成变化的电流，线圈振动切割磁感线产生感应电流。": [
+  "A loudspeaker changes a varying current into sound, the force on the coil making the cone vibrate; a microphone changes sound into a varying current, the vibrating coil cutting magnetic field lines and producing an induced current.",
+  "Un haut-parleur transforme un courant variable en son, la force sur la bobine faisant vibrer la membrane ; un microphone transforme le son en un courant variable, la bobine qui vibre coupant les lignes de champ magnétique et produisant un courant induit."
+ ],
+ "无风": [
+  "No wind",
+  "Pas de vent"
+ ],
+ "微风": [
+  "A light breeze",
+  "Une légère brise"
+ ],
+ "强风": [
+  "A strong wind",
+  "Un vent fort"
+ ],
+ "石油气（丁烷）": [
+  "Petroleum gas (butane)",
+  "Gaz de pétrole (butane)"
+ ],
+ "熔化": [
+  "Melting",
+  "Fusion"
+ ],
+ "凝固": [
+  "Freezing",
+  "Solidification"
+ ],
+ "汽化": [
+  "Vaporisation",
+  "Vaporisation"
+ ],
+ "升华": [
+  "Sublimation",
+  "Sublimation"
+ ],
+ "凝华": [
+  "Deposition",
+  "Condensation solide"
+ ],
+ "熔化吸热。": [
+  "Melting absorbs heat.",
+  "La fusion absorbe de la chaleur."
+ ],
+ "凝固放热。": [
+  "Freezing gives out heat.",
+  "La solidification libère de la chaleur."
+ ],
+ "汽化吸热。": [
+  "Vaporisation absorbs heat.",
+  "La vaporisation absorbe de la chaleur."
+ ],
+ "液化放热。": [
+  "Liquefaction gives out heat.",
+  "La liquéfaction libère de la chaleur."
+ ],
+ "升华吸热。": [
+  "Sublimation absorbs heat.",
+  "La sublimation absorbe de la chaleur."
+ ],
+ "凝华放热。": [
+  "Deposition gives out heat.",
+  "La condensation solide libère de la chaleur."
+ ],
+ "冰雪消融": [
+  "Ice and snow melt away",
+  "La glace et la neige fondent"
+ ],
+ "河水结冰": [
+  "River water freezes",
+  "L'eau de la rivière gèle"
+ ],
+ "湿衣服晾干": [
+  "Wet clothes dry in the air",
+  "Le linge mouillé sèche à l'air"
+ ],
+ "锅里的水被烧干": [
+  "The water in a pan boils dry",
+  "L'eau d'une casserole s'évapore entièrement à l'ébullition"
+ ],
+ "草叶上的露珠": [
+  "Dewdrops on blades of grass",
+  "Des gouttes de rosée sur les brins d'herbe"
+ ],
+ "烧开水时壶嘴冒出的白气": [
+  "\"White gas\" coming out of the spout of a kettle of boiling water",
+  "La « fumée blanche » qui sort du bec d'une bouilloire d'eau bouillante"
+ ],
+ "樟脑丸越来越小": [
+  "Mothballs get smaller and smaller",
+  "Les boules de naphtaline rapetissent peu à peu"
+ ],
+ "冰冻的衣服变干": [
+  "Frozen clothes become dry",
+  "Des vêtements gelés sèchent"
+ ],
+ "冰箱冷冻室内壁的白霜": [
+  "White frost on the inner wall of a freezer",
+  "Du givre blanc sur la paroi intérieure d'un congélateur"
+ ],
+ "窗玻璃内侧的冰花": [
+  "Ice flowers on the inside of a window pane",
+  "Des fleurs de glace sur la face intérieure d'une vitre"
+ ],
+ "铁水浇铸成铁锭": [
+  "Molten iron is cast into an ingot",
+  "Du fer en fusion est coulé en lingot"
+ ],
+ "冰块在手中变成水": [
+  "An ice cube turns into water in the hand",
+  "Un glaçon se transforme en eau dans la main"
+ ],
+ "下列做法中，能减慢蒸发的是：": [
+  "Which of the following slows down evaporation?",
+  "Laquelle des actions suivantes ralentit l'évaporation ?"
+ ],
+ "把盛有酒精的瓶子盖紧": [
+  "Screwing the cap tightly on a bottle of alcohol",
+  "Visser fermement le bouchon d'une bouteille d'alcool"
+ ],
+ "把湿衣服摊开晾晒": [
+  "Spreading wet clothes out to dry",
+  "Étendre du linge mouillé pour le faire sécher"
+ ],
+ "用电吹风吹湿头发": [
+  "Drying wet hair with a hair dryer",
+  "Sécher des cheveux mouillés avec un sèche-cheveux"
+ ],
+ "把洒在地面的水扫开": [
+  "Sweeping water spilt on the ground over a wider area",
+  "Étaler sur une plus grande surface de l'eau renversée sur le sol"
+ ],
+ "减小液体的表面积、降低温度、减弱液面上方的空气流动，都能减慢蒸发。": [
+  "Reducing the surface area of the liquid, lowering its temperature and weakening the air movement above its surface all slow down evaporation.",
+  "Réduire la surface du liquide, abaisser sa température et affaiblir le mouvement de l'air au-dessus de sa surface ralentissent tous l'évaporation."
+ ],
+ "下列做法中，能加快蒸发的是：": [
+  "Which of the following speeds up evaporation?",
+  "Laquelle des actions suivantes accélère l'évaporation ?"
+ ],
+ "把湿衣服摊开放在通风处": [
+  "Spreading wet clothes out in a place with a draught",
+  "Étendre du linge mouillé à un endroit où il y a du courant d'air"
+ ],
+ "用保鲜膜把水果包起来": [
+  "Wrapping fruit in cling film",
+  "Envelopper des fruits dans du film alimentaire"
+ ],
+ "把酒精装在密封的瓶中": [
+  "Keeping alcohol in a sealed bottle",
+  "Garder de l'alcool dans une bouteille fermée"
+ ],
+ "把湿衣服叠在一起放进塑料袋": [
+  "Piling wet clothes up and putting them into a plastic bag",
+  "Empiler du linge mouillé et le mettre dans un sac en plastique"
+ ],
+ "增大液体的表面积、提高温度、加快液面上方的空气流动，都能加快蒸发。": [
+  "Increasing the surface area of the liquid, raising its temperature and speeding up the air movement above its surface all speed up evaporation.",
+  "Augmenter la surface du liquide, élever sa température et accélérer le mouvement de l'air au-dessus de sa surface accélèrent tous l'évaporation."
+ ],
+ "使气体液化的两种方法是：": [
+  "The two ways of liquefying a gas are:",
+  "Les deux façons de liquéfier un gaz sont :"
+ ],
+ "降低温度和压缩体积": [
+  "Lowering the temperature and compressing the volume",
+  "abaisser la température et comprimer le volume"
+ ],
+ "升高温度和增大体积": [
+  "Raising the temperature and increasing the volume",
+  "élever la température et augmenter le volume"
+ ],
+ "降低温度和增大体积": [
+  "Lowering the temperature and increasing the volume",
+  "abaisser la température et augmenter le volume"
+ ],
+ "升高温度和压缩体积": [
+  "Raising the temperature and compressing the volume",
+  "élever la température et comprimer le volume"
+ ],
+ "所有气体在温度降到足够低时都可以液化；在一定温度下压缩体积也可以使气体液化。": [
+  "Every gas can be liquefied when its temperature is lowered enough; at a given temperature, compressing the volume can also liquefy a gas.",
+  "Tout gaz peut être liquéfié quand on abaisse assez sa température ; à une température donnée, comprimer le volume peut aussi liquéfier un gaz."
+ ],
+ "家用液化石油气是用什么方法装进钢瓶的？": [
+  "How is household liquefied petroleum gas put into steel cylinders?",
+  "De quelle façon le gaz de pétrole liquéfié domestique est-il mis dans les bouteilles d'acier ?"
+ ],
+ "在常温下压缩体积": [
+  "By compressing its volume at ordinary temperature",
+  "En comprimant son volume à température ordinaire"
+ ],
+ "降低到很低的温度": [
+  "By cooling it to a very low temperature",
+  "En le refroidissant à une très basse température"
+ ],
+ "增大体积": [
+  "By increasing its volume",
+  "En augmentant son volume"
+ ],
+ "常温下用压缩体积的方法使石油气液化，便于储存和运输。": [
+  "At ordinary temperature petroleum gas is liquefied by compressing its volume, which makes it easy to store and transport.",
+  "À température ordinaire, le gaz de pétrole est liquéfié en comprimant son volume, ce qui le rend facile à stocker et à transporter."
+ ],
+ "一杯水 {0} g，每分钟蒸发 {1} g，{2} min 后还剩多少克？": [
+  "A cup holds {0} g of water and {1} g of it evaporates every minute. How many grams are left after {2} min?",
+  "Une tasse contient {0} g d'eau et {1} g s'évaporent chaque minute. Combien de grammes reste-t-il après {2} min ?"
+ ],
+ "剩余的水 = 原来的水 − 每分钟蒸发的质量 × 时间。": [
+  "Water left = the original water − the mass evaporating each minute × the time.",
+  "Eau restante = eau initiale − masse évaporée par minute × durée."
+ ],
+ "{0} g 水在 {1} min 内全部蒸发，平均每分钟蒸发多少克？": [
+  "{0} g of water evaporates completely in {1} min. On average, how many grams evaporate every minute?",
+  "{0} g d'eau s'évaporent entièrement en {1} min. En moyenne, combien de grammes s'évaporent chaque minute ?"
+ ],
+ "平均速度 = 蒸发的质量 ÷ 时间。": [
+  "Average rate = mass evaporated ÷ time.",
+  "Vitesse moyenne = masse évaporée ÷ durée."
+ ],
+ "“{0}”发生的物态变化是：": [
+  "The change of state in \"{0}\" is:",
+  "Le changement d'état dans « {0} » est :"
+ ],
+ "搓手（克服摩擦做功）": [
+  "Rubbing the hands (work against friction)",
+  "Se frotter les mains (travail contre le frottement)"
+ ],
+ "压缩气体（对气体做功）": [
+  "Compressing a gas (work done on the gas)",
+  "Comprimer un gaz (travail fourni au gaz)"
+ ],
+ "气体膨胀（气体对外做功）": [
+  "A gas expanding (the gas does work)",
+  "Un gaz qui se détend (le gaz fournit du travail)"
+ ],
+ "下列现象中，通过做功的方式改变物体内能的是：": [
+  "In which of the following is the internal energy of an object changed by doing work?",
+  "Dans lequel des cas suivants l'énergie interne d'un objet est-elle modifiée par du travail ?"
+ ],
+ "搓手取暖": [
+  "Rubbing the hands to get warm",
+  "Se frotter les mains pour se réchauffer"
+ ],
+ "用打气筒打气时筒壁发热": [
+  "The wall of a pump getting hot when it pumps up a tyre",
+  "La paroi d'une pompe qui chauffe quand on gonfle un pneu"
+ ],
+ "钻木取火": [
+  "Drilling wood to make fire",
+  "Percer du bois pour faire du feu"
+ ],
+ "把手放在热水袋上取暖": [
+  "Warming the hands on a hot-water bottle",
+  "Se réchauffer les mains sur une bouillotte"
+ ],
+ "用炉火烧水": [
+  "Boiling water on a stove",
+  "Faire bouillir de l'eau sur un réchaud"
+ ],
+ "太阳晒热地面": [
+  "The Sun warming the ground",
+  "Le Soleil qui réchauffe le sol"
+ ],
+ "做功是其他形式的能与内能之间的转化。": [
+  "Doing work is a conversion between other forms of energy and internal energy.",
+  "Le travail est une conversion entre d'autres formes d'énergie et l'énergie interne."
+ ],
+ "下列现象中，通过热传递的方式改变物体内能的是：": [
+  "In which of the following is the internal energy of an object changed by heat transfer?",
+  "Dans lequel des cas suivants l'énergie interne d'un objet est-elle modifiée par transfert thermique ?"
+ ],
+ "热传递是内能从高温物体转移到低温物体（或物体的高温部分转移到低温部分）。": [
+  "In heat transfer, internal energy moves from a hotter object to a colder one (or from the hotter part of an object to its colder part).",
+  "Dans un transfert thermique, l'énergie interne passe d'un objet chaud à un objet plus froid (ou de la partie chaude d'un objet à sa partie froide)."
+ ],
+ "一大桶 20 ℃ 的水和一小杯 80 ℃ 的水接触，热量的传递方向是：": [
+  "A large bucket of water at 20 ℃ touches a small cup of water at 80 ℃. The direction of heat transfer is:",
+  "Un grand seau d'eau à 20 ℃ est en contact avec une petite tasse d'eau à 80 ℃. Le sens du transfert thermique est :"
+ ],
+ "从小杯 80 ℃ 的水传向大桶 20 ℃ 的水": [
+  "From the small cup of water at 80 ℃ to the large bucket of water at 20 ℃",
+  "De la petite tasse d'eau à 80 ℃ vers le grand seau d'eau à 20 ℃"
+ ],
+ "从大桶水传向小杯水，因为大桶水的内能多": [
+  "From the bucket to the cup, because the bucket has more internal energy",
+  "Du seau vers la tasse, parce que le seau a plus d'énergie interne"
+ ],
+ "没有热传递，因为大桶水的内能比小杯水多": [
+  "There is no heat transfer, because the bucket has more internal energy than the cup",
+  "Il n'y a pas de transfert thermique, parce que le seau a plus d'énergie interne que la tasse"
+ ],
+ "两者互相传递相同的热量": [
+  "The two pass the same amount of heat to each other",
+  "Les deux se transfèrent la même quantité de chaleur"
+ ],
+ "两个物体接触时，热量总是从：": [
+  "When two objects touch, heat always passes from:",
+  "Quand deux objets sont en contact, la chaleur passe toujours :"
+ ],
+ "温度高的物体传向温度低的物体": [
+  "The object at the higher temperature to the object at the lower temperature",
+  "de l'objet à la température la plus élevée vers l'objet à la température la plus basse"
+ ],
+ "内能多的物体传向内能少的物体": [
+  "The object with more internal energy to the one with less",
+  "de l'objet qui a le plus d'énergie interne vers celui qui en a le moins"
+ ],
+ "质量大的物体传向质量小的物体": [
+  "The object of greater mass to the one of smaller mass",
+  "de l'objet de plus grande masse vers celui de plus petite masse"
+ ],
+ "比热容大的物体传向比热容小的物体": [
+  "The object of greater specific heat capacity to the one of smaller",
+  "de l'objet de plus grande capacité thermique massique vers celui de plus petite"
+ ],
+ "对 {0} g 的{1}做了 {2} J 的功，功全部变成它的内能（{3}的比热容取 {4} J/(kg·℃)），它的温度升高多少摄氏度？": [
+  "Work of {2} J is done on {0} g of {1} and all of it becomes internal energy (take the specific heat capacity of {3} as {4} J/(kg·℃)). By how many degrees Celsius does its temperature rise?",
+  "On fournit un travail de {2} J à {0} g de {1} et tout se transforme en énergie interne (on prend pour capacité thermique massique de {3} la valeur {4} J/(kg·℃)). De combien de degrés Celsius sa température s'élève-t-elle ?"
+ ],
+ "Δt = W / (cm)。": [
+  "Δt = W / (cm).",
+  "Δt = W / (cm)."
+ ],
+ "质量相等的两杯水，温度分别是 {0} ℃ 和 {1} ℃，混合后（不计热量损失）的温度是多少？": [
+  "Two cups of water of equal mass are at {0} ℃ and {1} ℃. What is the temperature after they are mixed (ignoring heat losses)?",
+  "Deux tasses d'eau de même masse sont à {0} ℃ et {1} ℃. Quelle est la température après leur mélange (en négligeant les pertes de chaleur) ?"
+ ],
+ "质量相等的同种物质混合，放出的热量等于吸收的热量，末温是两个温度的平均值。": [
+  "When equal masses of the same substance are mixed, the heat given out equals the heat absorbed and the final temperature is the average of the two temperatures.",
+  "Quand on mélange des masses égales d'une même substance, la chaleur cédée est égale à la chaleur reçue et la température finale est la moyenne des deux températures."
+ ],
+ "{0} kg 的水从 {1} ℃ 降低到 {2} ℃，放出多少焦的热量？（水的比热容取 4.2×10³ J/(kg·℃)）": [
+  "{0} kg of water cools from {1} ℃ to {2} ℃. How many joules of heat does it give out? (Take the specific heat capacity of water as 4.2×10³ J/(kg·℃).)",
+  "{0} kg d'eau refroidissent de {1} ℃ à {2} ℃. Combien de joules de chaleur cèdent-ils ? (On prend 4,2×10³ J/(kg·℃) pour la capacité thermique massique de l'eau.)"
+ ],
+ "Q = cm(t₀ − t)。": [
+  "Q = cm(t₀ − t).",
+  "Q = cm(t₀ − t)."
+ ],
+ "热量总是从高温物体传向低温物体，是否传递热量与物体的温度有关，与内能的多少、质量大小无关。": [
+  "Heat always passes from the hotter object to the colder one; whether heat is transferred depends on the temperatures of the objects and not on how much internal energy or how much mass they have.",
+  "La chaleur passe toujours de l'objet le plus chaud vers le plus froid ; qu'il y ait transfert de chaleur dépend des températures des objets, et non de leur quantité d'énergie interne ni de leur masse."
+ ],
+ "倒立、缩小的实像": [
+  "A real, inverted, reduced image",
+  "Une image réelle, renversée et réduite"
+ ],
+ "倒立、放大的实像": [
+  "A real, inverted, enlarged image",
+  "Une image réelle, renversée et agrandie"
+ ],
+ "在光具座上，蜡烛和光屏到凸透镜的距离相等，都是 {0} cm 时，光屏上得到倒立、等大的实像，这个凸透镜的焦距是多少厘米？": [
+  "On an optical bench the candle and the screen are at equal distances of {0} cm from a convex lens and a real, inverted image of the same size appears on the screen. What is the focal length of the lens, in centimetres?",
+  "Sur un banc d'optique, la bougie et l'écran sont à des distances égales de {0} cm d'une lentille convergente et une image réelle, renversée et de même taille se forme sur l'écran. Quelle est la distance focale de la lentille, en centimètres ?"
+ ],
+ "倒立、等大的实像出现在 u = v = 2f 处，所以 f = u / 2。": [
+  "The real, inverted image of the same size appears at u = v = 2f, so f = u / 2.",
+  "L'image réelle, renversée et de même taille se forme pour u = v = 2f, donc f = u / 2."
+ ],
+ "凸透镜的焦距是 {0} cm，蜡烛到凸透镜的距离是 {1} cm，光屏上成清晰的像时，光屏到凸透镜的距离是多少厘米？": [
+  "The focal length of a convex lens is {0} cm and the candle is {1} cm from the lens. When a sharp image forms on the screen, how far is the screen from the lens, in centimetres?",
+  "La distance focale d'une lentille convergente est de {0} cm et la bougie est à {1} cm de la lentille. Quand une image nette se forme sur l'écran, à quelle distance de la lentille se trouve l'écran, en centimètres ?"
+ ],
+ "由 1/u + 1/v = 1/f 得 v = uf / (u − f)。": [
+  "From 1/u + 1/v = 1/f we get v = uf / (u − f).",
+  "De 1/u + 1/v = 1/f on tire v = uf / (u − f)."
+ ],
+ "蜡烛火焰高 {0} cm，物距是 {1} cm，像距是 {2} cm，光屏上像的高度是多少厘米？": [
+  "The candle flame is {0} cm high, the object distance is {1} cm and the image distance is {2} cm. How high is the image on the screen, in centimetres?",
+  "La flamme de la bougie mesure {0} cm de haut, la distance objet est de {1} cm et la distance image de {2} cm. Quelle est la hauteur de l'image sur l'écran, en centimètres ?"
+ ],
+ "像高 ÷ 物高 = 像距 ÷ 物距。": [
+  "Height of the image ÷ height of the object = image distance ÷ object distance.",
+  "Hauteur de l'image ÷ hauteur de l'objet = distance image ÷ distance objet."
+ ],
+ "蜡烛到凸透镜的距离小于焦距时，在光屏上找不到像，原因是：": [
+  "When the candle is closer to a convex lens than its focal length, no image can be found on the screen, because:",
+  "Quand la bougie est plus proche d'une lentille convergente que sa distance focale, on ne trouve pas d'image sur l'écran, parce que :"
+ ],
+ "成的是正立、放大的虚像，虚像不能呈现在光屏上": [
+  "The image is virtual, upright and enlarged, and a virtual image cannot be shown on a screen",
+  "l'image est virtuelle, droite et agrandie, et une image virtuelle ne peut pas être recueillie sur un écran"
+ ],
+ "不成像": [
+  "No image is formed",
+  "aucune image ne se forme"
+ ],
+ "成的是倒立、缩小的实像": [
+  "The image is real, inverted and reduced",
+  "l'image est réelle, renversée et réduite"
+ ],
+ "光屏太小了": [
+  "The screen is too small",
+  "l'écran est trop petit"
+ ],
+ "实像是光线实际会聚成的，可以呈现在光屏上；虚像是折射光线反向延长线相交成的，不能。": [
+  "A real image is formed by rays that actually meet and can be shown on a screen; a virtual image is formed where the extensions of the refracted rays backwards meet and cannot.",
+  "Une image réelle est formée par des rayons qui se rejoignent réellement et peut être recueillie sur un écran ; une image virtuelle est formée là où se coupent les prolongements des rayons réfractés vers l'arrière et ne le peut pas."
+ ],
+ "蜡烛从离凸透镜 3 倍焦距处向透镜移动到 1.5 倍焦距处（光屏随之移动，仍能得到清晰的像），像的大小和像距的变化是：": [
+  "A candle is moved towards the lens from 3 focal lengths to 1.5 focal lengths away (the screen is moved to follow and a sharp image is still obtained). How do the size of the image and the image distance change?",
+  "Une bougie est rapprochée de la lentille, de 3 distances focales à 1,5 distance focale (l'écran est déplacé en conséquence et on obtient toujours une image nette). Comment varient la taille de l'image et la distance image ?"
+ ],
+ "像变大，像距变大": [
+  "The image gets larger and the image distance gets larger",
+  "L'image grandit et la distance image augmente"
+ ],
+ "像变小，像距变小": [
+  "The image gets smaller and the image distance gets smaller",
+  "L'image rapetisse et la distance image diminue"
+ ],
+ "像变大，像距变小": [
+  "The image gets larger and the image distance gets smaller",
+  "L'image grandit et la distance image diminue"
+ ],
+ "像变小，像距变大": [
+  "The image gets smaller and the image distance gets larger",
+  "L'image rapetisse et la distance image augmente"
+ ],
+ "物距减小，像距增大，像变大（成实像时：物近像远像变大）。": [
+  "When the object distance decreases the image distance increases and the image gets larger (for a real image: the nearer the object, the farther and larger the image).",
+  "Quand la distance objet diminue, la distance image augmente et l'image grandit (pour une image réelle : plus l'objet est proche, plus l'image est éloignée et grande)."
+ ],
+ "电能表铭牌上的“220 V”表示：": [
+  "The \"220 V\" on the plate of an energy meter means:",
+  "« 220 V » sur la plaque d'un compteur d'énergie signifie :"
+ ],
+ "电能表应该在 220 V 的电路中使用": [
+  "The meter should be used in a 220 V circuit",
+  "le compteur doit être utilisé dans un circuit de 220 V"
+ ],
+ "电能表允许通过的最大电压是 220 V": [
+  "The largest voltage the meter permits is 220 V",
+  "la tension maximale permise par le compteur est de 220 V"
+ ],
+ "电能表的功率是 220 W": [
+  "The power of the meter is 220 W",
+  "la puissance du compteur est de 220 W"
+ ],
+ "每小时消耗 220 度电": [
+  "220 units of electricity are used every hour",
+  "220 unités d'électricité sont consommées chaque heure"
+ ],
+ "电能表铭牌上的“10(20) A”表示：": [
+  "The \"10(20) A\" on the plate of an energy meter means:",
+  "« 10(20) A » sur la plaque d'un compteur d'énergie signifie :"
+ ],
+ "标定电流是 10 A，额定最大电流是 20 A": [
+  "The rated current is 10 A and the largest permitted current is 20 A",
+  "l'intensité nominale est de 10 A et l'intensité maximale permise est de 20 A"
+ ],
+ "额定电压是 10 V，最大电压是 20 V": [
+  "The rated voltage is 10 V and the largest voltage is 20 V",
+  "la tension nominale est de 10 V et la tension maximale de 20 V"
+ ],
+ "每分钟允许通过 10 A 的电流": [
+  "A current of 10 A is permitted to pass every minute",
+  "un courant de 10 A peut passer chaque minute"
+ ],
+ "额定功率是 10 W，最大功率是 20 W": [
+  "The rated power is 10 W and the largest power is 20 W",
+  "la puissance nominale est de 10 W et la puissance maximale de 20 W"
+ ],
+ "电能表铭牌上的“3000 r/(kW·h)”表示：": [
+  "The \"3000 r/(kW·h)\" on the plate of an energy meter means:",
+  "« 3000 r/(kW·h) » sur la plaque d'un compteur d'énergie signifie :"
+ ],
+ "每消耗 1 kW·h 的电能，电能表的转盘转 3000 转": [
+  "For every 1 kW·h of electrical energy used, the disc of the meter turns 3000 times",
+  "pour chaque kW·h d'énergie électrique consommé, le disque du compteur fait 3000 tours"
+ ],
+ "电能表的转盘每秒转 3000 转": [
+  "The disc of the meter turns 3000 times every second",
+  "le disque du compteur fait 3000 tours par seconde"
+ ],
+ "用电器的功率是 3000 W": [
+  "The power of the appliance is 3000 W",
+  "la puissance de l'appareil est de 3000 W"
+ ],
+ "电能表最多能记录 3000 kW·h": [
+  "The meter can record at most 3000 kW·h",
+  "le compteur peut enregistrer au plus 3000 kW·h"
+ ],
+ "一个用电器两端的电压是 {0} V，通过的电流是 {1} A，通电 {2} s，电流做的功是多少焦？": [
+  "The voltage across an appliance is {0} V and the current through it is {1} A. It is switched on for {2} s. How many joules of work does the current do?",
+  "La tension aux bornes d'un appareil est de {0} V et l'intensité du courant qui le traverse est de {1} A. Il fonctionne pendant {2} s. Quel travail, en joules, le courant fournit-il ?"
+ ],
+ "W = UIt。": [
+  "W = UIt.",
+  "W = UIt."
+ ],
+ "一台功率为 {0} W 的用电器连续工作 {1} h，消耗的电能是多少千瓦时？": [
+  "An appliance of power {0} W works continuously for {1} h. How many kilowatt-hours of electrical energy does it use?",
+  "Un appareil de puissance {0} W fonctionne sans interruption pendant {1} h. Combien de kilowattheures d'énergie électrique consomme-t-il ?"
+ ],
+ "W = Pt，功率用 kW、时间用 h，得到的电能单位就是 kW·h。": [
+  "W = Pt; with the power in kW and the time in h, the unit of the energy is the kW·h.",
+  "W = Pt ; avec la puissance en kW et la durée en h, l'unité de l'énergie est le kW·h."
+ ],
+ "某用户一个月用电 {0} kW·h，电价是 {1} 元/(kW·h)，应交电费多少元？": [
+  "A household uses {0} kW·h in a month and the price is {1} yuan/(kW·h). How many yuan must it pay?",
+  "Un foyer consomme {0} kW·h en un mois et le prix est de {1} yuans/(kW·h). Combien de yuans doit-il payer ?"
+ ],
+ "电费 = 电能 × 电价。": [
+  "Bill = energy × price.",
+  "Facture = énergie × prix."
+ ],
+ "电能表上标有“{0} r/(kW·h)”，某用电器单独工作时消耗了 {1} kW·h 的电能，电能表的转盘转了多少转？": [
+  "The plate of an energy meter says \"{0} r/(kW·h)\". An appliance working alone uses {1} kW·h of electrical energy. How many times does the disc of the meter turn?",
+  "La plaque d'un compteur d'énergie indique « {0} r/(kW·h) ». Un appareil qui fonctionne seul consomme {1} kW·h d'énergie électrique. Combien de tours le disque du compteur fait-il ?"
+ ],
+ "{0} 转": [
+  "{0} turns",
+  "{0} tours"
+ ],
+ "转数 = 电能 × 每千瓦时的转数。": [
+  "Number of turns = energy × turns per kilowatt-hour.",
+  "Nombre de tours = énergie × nombre de tours par kilowattheure."
+ ],
+ "220 V 是电能表的额定电压；10(20) A 中，10 A 是标定电流，20 A 是额定最大电流；3000 r/(kW·h) 是每消耗 1 kW·h 的电能转盘转 3000 转。": [
+  "220 V is the rated voltage of the meter; in 10(20) A, 10 A is the rated current and 20 A is the largest permitted current; 3000 r/(kW·h) means that the disc turns 3000 times for every 1 kW·h of electrical energy used.",
+  "220 V est la tension nominale du compteur ; dans 10(20) A, 10 A est l'intensité nominale et 20 A l'intensité maximale permise ; 3000 r/(kW·h) signifie que le disque fait 3000 tours pour chaque kW·h d'énergie électrique consommé."
+ ],
+ "耳语、树叶的沙沙声": [
+  "Whispering, rustling leaves",
+  "Un chuchotement, le bruissement des feuilles"
+ ],
+ "安静的房间、图书馆": [
+  "A quiet room, a library",
+  "Une pièce calme, une bibliothèque"
+ ],
+ "一般交谈、办公室": [
+  "Ordinary conversation, an office",
+  "Une conversation ordinaire, un bureau"
+ ],
+ "繁忙的街道、嘈杂的车间": [
+  "A busy street, a noisy workshop",
+  "Une rue animée, un atelier bruyant"
+ ],
+ "摇滚音乐会、电锯": [
+  "A rock concert, a chain saw",
+  "Un concert de rock, une tronçonneuse"
+ ],
+ "飞机起飞、近处的雷声": [
+  "An aircraft taking off, thunder close by",
+  "Un avion au décollage, un coup de tonnerre tout proche"
+ ],
+ "适合休息和睡眠": [
+  "Suitable for rest and sleep",
+  "Convient au repos et au sommeil"
+ ],
+ "适合工作和学习，但会影响休息": [
+  "Suitable for work and study, but disturbs rest",
+  "Convient au travail et à l'étude, mais gêne le repos"
+ ],
+ "影响工作和学习，长时间会使人烦躁": [
+  "Disturbs work and study; over a long time it makes people irritable",
+  "Gêne le travail et l'étude ; à la longue, il rend irritable"
+ ],
+ "长时间会损害听力": [
+  "Over a long time it damages hearing",
+  "À la longue, il abîme l'ouïe"
+ ],
+ "在声源处减弱（安装消声器）": [
+  "Reduce it at the source (fit a silencer)",
+  "Le réduire à la source (installer un silencieux)"
+ ],
+ "在传播过程中减弱（设置隔声板）": [
+  "Reduce it on the way (put up sound-insulating panels)",
+  "Le réduire pendant la propagation (installer des panneaux isolants)"
+ ],
+ "在人耳处减弱（戴防噪声耳罩）": [
+  "Reduce it at the ear (wear ear defenders)",
+  "Le réduire au niveau de l'oreille (porter un casque antibruit)"
+ ],
+ "空气（15 ℃）": [
+  "Air (15 ℃)",
+  "Air (15 ℃)"
+ ],
+ "给摩托车装上消声器，属于：": [
+  "Fitting a silencer to a motorcycle is:",
+  "Installer un silencieux sur une moto, c'est :"
+ ],
+ "在声源处减弱噪声": [
+  "Reducing noise at the source",
+  "réduire le bruit à la source"
+ ],
+ "在传播过程中减弱噪声": [
+  "Reducing noise on the way",
+  "réduire le bruit pendant sa propagation"
+ ],
+ "在人耳处减弱噪声": [
+  "Reducing noise at the ear",
+  "réduire le bruit au niveau de l'oreille"
+ ],
+ "不能减弱噪声": [
+  "Not a way of reducing noise",
+  "ne pas réduire le bruit"
+ ],
+ "在马路两旁设置隔声板，属于：": [
+  "Putting up sound-insulating panels beside a road is:",
+  "Installer des panneaux isolants le long d'une route, c'est :"
+ ],
+ "在嘈杂的环境中戴防噪声耳罩，属于：": [
+  "Wearing ear defenders in a noisy place is:",
+  "Porter un casque antibruit dans un endroit bruyant, c'est :"
+ ],
+ "为了保护听力，应把噪声控制在不超过：": [
+  "To protect hearing, the noise should be kept to no more than:",
+  "Pour protéger l'ouïe, il faut limiter le bruit à pas plus de :"
+ ],
+ "为了保证工作和学习，应把噪声控制在不超过：": [
+  "To make work and study possible, the noise should be kept to no more than:",
+  "Pour permettre le travail et l'étude, il faut limiter le bruit à pas plus de :"
+ ],
+ "为了保证休息和睡眠，应把噪声控制在不超过：": [
+  "To make rest and sleep possible, the noise should be kept to no more than:",
+  "Pour permettre le repos et le sommeil, il faut limiter le bruit à pas plus de :"
+ ],
+ "对着远处的山崖大喊一声，经过 {0} s 听到回声，声音在空气中的速度取 340 m/s，人到山崖的距离是多少米？": [
+  "A person shouts towards a distant cliff and hears the echo after {0} s. Taking the speed of sound in air as 340 m/s, how far is the person from the cliff, in metres?",
+  "Une personne crie en direction d'une falaise lointaine et entend l'écho après {0} s. En prenant 340 m/s pour la vitesse du son dans l'air, à quelle distance de la falaise se trouve-t-elle, en mètres ?"
+ ],
+ "声音传到山崖再传回来，走过的路程是距离的 2 倍：s = vt / 2。": [
+  "The sound travels to the cliff and back, a path twice the distance: s = vt / 2.",
+  "Le son va jusqu'à la falaise et revient : le trajet est le double de la distance, s = vt / 2."
+ ],
+ "人耳能把回声和原声区分开，要求两者至少相隔 0.1 s。在声速是 {0} m/s 的介质中，障碍物到人的距离至少是多少米？": [
+  "The ear can tell an echo from the original sound only if they are at least 0.1 s apart. In a medium in which the speed of sound is {0} m/s, what is the least distance from the person to the obstacle, in metres?",
+  "L'oreille ne distingue un écho du son d'origine que si les deux sont séparés d'au moins 0,1 s. Dans un milieu où la vitesse du son est de {0} m/s, quelle est la plus petite distance entre la personne et l'obstacle, en mètres ?"
+ ],
+ "最短距离 s = vt / 2，其中 t = 0.1 s。": [
+  "The least distance is s = vt / 2, where t = 0.1 s.",
+  "La plus petite distance est s = vt / 2, avec t = 0,1 s."
+ ],
+ "海洋探测船向海底发出超声波，经过 {0} s 收到回声，声音在海水中的速度取 1500 m/s，海水的深度是多少米？": [
+  "A survey ship sends ultrasound towards the sea bed and receives the echo after {0} s. Taking the speed of sound in sea water as 1500 m/s, how deep is the water, in metres?",
+  "Un navire d'exploration envoie des ultrasons vers le fond de la mer et reçoit l'écho après {0} s. En prenant 1500 m/s pour la vitesse du son dans l'eau de mer, quelle est la profondeur de l'eau, en mètres ?"
+ ],
+ "超声波往返的路程是深度的 2 倍：s = vt / 2。": [
+  "The ultrasound travels down and back, a path twice the depth: s = vt / 2.",
+  "Les ultrasons descendent puis remontent : le trajet est le double de la profondeur, s = vt / 2."
+ ],
+ "控制噪声有三条途径：在声源处、在传播过程中、在人耳处。": [
+  "There are three ways of controlling noise: at the source, on the way, and at the ear.",
+  "Il y a trois façons de limiter le bruit : à la source, pendant la propagation, et au niveau de l'oreille."
+ ],
+ "保护听力不超过 90 dB，保证工作学习不超过 70 dB，保证休息睡眠不超过 50 dB。": [
+  "To protect hearing the noise should not exceed 90 dB, to make work and study possible not 70 dB, and to make rest and sleep possible not 50 dB.",
+  "Pour protéger l'ouïe, le bruit ne doit pas dépasser 90 dB ; pour permettre le travail et l'étude, 70 dB ; pour permettre le repos et le sommeil, 50 dB."
+ ],
+ "探究电流与电压的关系，得到的结论是：": [
+  "The conclusion of the investigation of how current depends on voltage is:",
+  "La conclusion de l'étude de la relation entre l'intensité et la tension est :"
+ ],
+ "电阻一定时，通过导体的电流与导体两端的电压成正比": [
+  "For a given resistance, the current through a conductor is proportional to the voltage across it",
+  "pour une résistance donnée, l'intensité du courant dans un conducteur est proportionnelle à la tension à ses bornes"
+ ],
+ "电压一定时，通过导体的电流与导体的电阻成正比": [
+  "For a given voltage, the current through a conductor is proportional to its resistance",
+  "pour une tension donnée, l'intensité du courant dans un conducteur est proportionnelle à sa résistance"
+ ],
+ "电阻一定时，导体两端的电压与通过导体的电流成正比": [
+  "For a given resistance, the voltage across a conductor is proportional to the current through it",
+  "pour une résistance donnée, la tension aux bornes d'un conducteur est proportionnelle à l'intensité du courant qui le traverse"
+ ],
+ "电流一定时，导体的电阻与导体两端的电压成正比": [
+  "For a given current, the resistance of a conductor is proportional to the voltage across it",
+  "pour une intensité donnée, la résistance d'un conducteur est proportionnelle à la tension à ses bornes"
+ ],
+ "探究电流与电阻的关系，得到的结论是：": [
+  "The conclusion of the investigation of how current depends on resistance is:",
+  "La conclusion de l'étude de la relation entre l'intensité et la résistance est :"
+ ],
+ "电压一定时，通过导体的电流与导体的电阻成反比": [
+  "For a given voltage, the current through a conductor is inversely proportional to its resistance",
+  "pour une tension donnée, l'intensité du courant dans un conducteur est inversement proportionnelle à sa résistance"
+ ],
+ "电阻一定时，通过导体的电流与导体两端的电压成反比": [
+  "For a given resistance, the current through a conductor is inversely proportional to the voltage across it",
+  "pour une résistance donnée, l'intensité du courant dans un conducteur est inversement proportionnelle à la tension à ses bornes"
+ ],
+ "电流一定时，导体两端的电压与导体的电阻成反比": [
+  "For a given current, the voltage across a conductor is inversely proportional to its resistance",
+  "pour une intensité donnée, la tension aux bornes d'un conducteur est inversement proportionnelle à sa résistance"
+ ],
+ "探究电流与电阻的关系时，换用不同阻值的定值电阻后，应调节滑动变阻器，使：": [
+  "When investigating how current depends on resistance, after a fixed resistor of a different value is fitted, the rheostat must be adjusted so that:",
+  "Dans l'étude de la relation entre l'intensité et la résistance, après avoir mis une résistance fixe de valeur différente, il faut régler le rhéostat de sorte que :"
+ ],
+ "定值电阻两端的电压保持不变": [
+  "The voltage across the fixed resistor stays the same",
+  "la tension aux bornes de la résistance fixe reste la même"
+ ],
+ "通过定值电阻的电流保持不变": [
+  "The current through the fixed resistor stays the same",
+  "l'intensité du courant dans la résistance fixe reste la même"
+ ],
+ "滑动变阻器接入的电阻保持不变": [
+  "The resistance of the rheostat in the circuit stays the same",
+  "la résistance du rhéostat dans le circuit reste la même"
+ ],
+ "电源电压保持不变": [
+  "The voltage of the supply stays the same",
+  "la tension de l'alimentation reste la même"
+ ],
+ "探究电流与电压的关系时，滑动变阻器的主要作用是：": [
+  "When investigating how current depends on voltage, the main job of the rheostat is to:",
+  "Dans l'étude de la relation entre l'intensité et la tension, le rôle principal du rhéostat est de :"
+ ],
+ "改变定值电阻两端的电压和通过它的电流": [
+  "Change the voltage across the fixed resistor and the current through it",
+  "modifier la tension aux bornes de la résistance fixe et l'intensité du courant qui la traverse"
+ ],
+ "保持定值电阻两端的电压不变": [
+  "Keep the voltage across the fixed resistor unchanged",
+  "maintenir inchangée la tension aux bornes de la résistance fixe"
+ ],
+ "保持电路中的电流不变": [
+  "Keep the current in the circuit unchanged",
+  "maintenir inchangée l'intensité du courant dans le circuit"
+ ],
+ "改变定值电阻的阻值": [
+  "Change the value of the fixed resistor",
+  "modifier la valeur de la résistance fixe"
+ ],
+ "定值电阻的阻值是 {0} Ω，两端的电压是 {1} V，通过它的电流是多少安？": [
+  "A fixed resistor has a resistance of {0} Ω and the voltage across it is {1} V. What is the current through it, in amperes?",
+  "Une résistance fixe a une résistance de {0} Ω et la tension à ses bornes est de {1} V. Quelle est l'intensité du courant qui la traverse, en ampères ?"
+ ],
+ "I = U / R。": [
+  "I = U / R.",
+  "I = U / R."
+ ],
+ "某电阻的 I-U 图线是过原点的直线，图线上有一点：电压 {0} V，电流 {1} A，这个电阻是多少欧？": [
+  "The I-U graph of a resistor is a straight line through the origin, and one point on the graph has a voltage of {0} V and a current of {1} A. What is the resistance, in ohms?",
+  "Le graphique I-U d'une résistance est une droite passant par l'origine, et un point du graphique a une tension de {0} V et une intensité de {1} A. Quelle est la résistance, en ohms ?"
+ ],
+ "R = U / I，也等于图线斜率的倒数。": [
+  "R = U / I; it is also the reciprocal of the slope of the graph.",
+  "R = U / I ; c'est aussi l'inverse de la pente du graphique."
+ ],
+ "保持定值电阻两端的电压 {0} V 不变，把电阻由 {1} Ω 换成 {2} Ω，电路中的电流变为多少安？": [
+  "The voltage across a fixed resistor is kept at {0} V and the resistor is changed from {1} Ω to {2} Ω. What does the current in the circuit become, in amperes?",
+  "La tension aux bornes d'une résistance fixe est maintenue à {0} V et la résistance passe de {1} Ω à {2} Ω. Quelle devient l'intensité du courant dans le circuit, en ampères ?"
+ ],
+ "电压一定时，电流与电阻成反比：I = U / R。": [
+  "For a given voltage, the current is inversely proportional to the resistance: I = U / R.",
+  "Pour une tension donnée, l'intensité est inversement proportionnelle à la résistance : I = U / R."
+ ],
+ "这两个关系合起来，就是欧姆定律 I = U / R。": [
+  "Together these two relations are Ohm's law, I = U / R.",
+  "Ensemble, ces deux relations forment la loi d'Ohm, I = U / R."
+ ],
+ "探究电流与多个因素的关系时用控制变量法：每次只改变一个量，其他的量保持不变。": [
+  "When investigating how a quantity depends on several factors the control-variable method is used: change only one quantity at a time and keep the others unchanged.",
+  "Pour étudier la dépendance d'une grandeur par rapport à plusieurs facteurs, on utilise la méthode de la variable contrôlée : on ne modifie qu'une grandeur à la fois et on garde les autres inchangées."
+ ],
+ "康铜": [
+  "Constantan",
+  "Constantan"
+ ],
+ "镍铬合金": [
+  "Nichrome",
+  "Nichrome"
+ ],
+ "导体两端的电压": [
+  "The voltage across the conductor",
+  "La tension aux bornes du conducteur"
+ ],
+ "通过导体的电流": [
+  "The current through the conductor",
+  "L'intensité du courant dans le conducteur"
+ ],
+ "长度和横截面积都相同的铜丝、铁丝、镍铬合金丝，在室温下电阻最大的是：": [
+  "Copper, iron and nichrome wires have the same length and the same cross-section. At room temperature the one with the greatest resistance is:",
+  "Des fils de cuivre, de fer et de nichrome ont la même longueur et la même section. À température ambiante, celui qui a la plus grande résistance est :"
+ ],
+ "镍铬合金丝": [
+  "The nichrome wire",
+  "le fil de nichrome"
+ ],
+ "铜丝": [
+  "The copper wire",
+  "le fil de cuivre"
+ ],
+ "铁丝": [
+  "The iron wire",
+  "le fil de fer"
+ ],
+ "三者一样大": [
+  "All three are the same",
+  "les trois ont la même résistance"
+ ],
+ "长度和横截面积都相同的铜丝、铁丝、镍铬合金丝，在室温下电阻最小的是：": [
+  "Copper, iron and nichrome wires have the same length and the same cross-section. At room temperature the one with the smallest resistance is:",
+  "Des fils de cuivre, de fer et de nichrome ont la même longueur et la même section. À température ambiante, celui qui a la plus petite résistance est :"
+ ],
+ "把一根电阻是 {0} Ω 的均匀电阻丝截成长度相等的 {1} 段，每一段的电阻是多少？": [
+  "A uniform resistance wire of {0} Ω is cut into {1} pieces of equal length. What is the resistance of each piece, in ohms?",
+  "Un fil résistant homogène de {0} Ω est coupé en {1} morceaux de même longueur. Quelle est la résistance de chaque morceau, en ohms ?"
+ ],
+ "材料、横截面积不变时，导体的电阻与长度成正比。": [
+  "For the same material and cross-section, the resistance of a conductor is proportional to its length.",
+  "Pour un même matériau et une même section, la résistance d'un conducteur est proportionnelle à sa longueur."
+ ],
+ "把一根电阻是 {0} Ω 的均匀金属丝拉长到原来的 {1} 倍（体积不变，粗细仍然均匀），它的电阻变为多少？": [
+  "A uniform metal wire of {0} Ω is stretched to {1} times its original length (its volume stays the same and it remains uniformly thick). What does its resistance become, in ohms?",
+  "Un fil métallique homogène de {0} Ω est étiré jusqu'à {1} fois sa longueur initiale (son volume reste le même et il garde une épaisseur uniforme). Que devient sa résistance, en ohms ?"
+ ],
+ "长度变为 k 倍，横截面积变为 1/k，电阻变为原来的 k × k 倍。": [
+  "The length becomes k times as great and the cross-section becomes 1/k, so the resistance becomes k × k times as great.",
+  "La longueur devient k fois plus grande et la section devient 1/k : la résistance devient donc k × k fois plus grande."
+ ],
+ "长度和材料都相同的两根导线，横截面积是 {0} mm² 的那根电阻为 {1} Ω，横截面积是 {2} mm² 的那根电阻是多少？": [
+  "Two wires have the same length and are made of the same material. The one with a cross-section of {0} mm² has a resistance of {1} Ω. What is the resistance of the one with a cross-section of {2} mm², in ohms?",
+  "Deux fils ont la même longueur et sont faits du même matériau. Celui dont la section est de {0} mm² a une résistance de {1} Ω. Quelle est la résistance de celui dont la section est de {2} mm², en ohms ?"
+ ],
+ "长度、材料不变时，导体的电阻与横截面积成反比。": [
+  "For the same length and material, the resistance of a conductor is inversely proportional to its cross-section.",
+  "Pour une même longueur et un même matériau, la résistance d'un conducteur est inversement proportionnelle à sa section."
+ ],
+ "下列因素中，不影响导体电阻大小的是：": [
+  "Which of the following does not affect the resistance of a conductor?",
+  "Lequel des facteurs suivants n'influe pas sur la résistance d'un conducteur ?"
+ ],
+ "导体的长度": [
+  "The length of the conductor",
+  "La longueur du conducteur"
+ ],
+ "导体的横截面积": [
+  "The cross-section of the conductor",
+  "La section du conducteur"
+ ],
+ "导体的材料": [
+  "The material of the conductor",
+  "Le matériau du conducteur"
+ ],
+ "导体的电阻是导体本身的性质，与它的材料、长度、横截面积和温度有关，与电压、电流无关。": [
+  "The resistance of a conductor is a property of the conductor itself: it depends on its material, length, cross-section and temperature, and not on the voltage or the current.",
+  "La résistance d'un conducteur est une propriété du conducteur lui-même : elle dépend de son matériau, de sa longueur, de sa section et de sa température, et non de la tension ni de l'intensité."
+ ],
+ "在长度、横截面积相同时，镍铬合金的电阻比铁、铜大得多，铜的电阻很小。": [
+  "For the same length and cross-section the resistance of nichrome is much greater than that of iron or copper, and that of copper is very small.",
+  "Pour une même longueur et une même section, la résistance du nichrome est bien plus grande que celle du fer ou du cuivre, et celle du cuivre est très petite."
+ ],
+ "伏安法测电阻：电压表的示数是 {0} V，电流表的示数是 {1} A，被测电阻的阻值是多少欧？": [
+  "Measuring resistance with an ammeter and a voltmeter: the voltmeter reads {0} V and the ammeter reads {1} A. What is the resistance of the resistor being measured, in ohms?",
+  "Mesure d'une résistance avec un ampèremètre et un voltmètre : le voltmètre indique {0} V et l'ampèremètre {1} A. Quelle est la valeur de la résistance mesurée, en ohms ?"
+ ],
+ "电源电压是 {0} V，被测电阻是 {1} Ω，要使电路中的电流是 {2} A，滑动变阻器接入电路的电阻应是多少欧？（忽略电源内阻）": [
+  "The supply voltage is {0} V and the resistor being measured is {1} Ω. What resistance must the rheostat have in the circuit so that the current is {2} A, in ohms? (Ignore the internal resistance of the supply.)",
+  "La tension d'alimentation est de {0} V et la résistance mesurée est de {1} Ω. Quelle résistance doit avoir le rhéostat dans le circuit pour que l'intensité soit de {2} A, en ohms ? (On néglige la résistance interne de l'alimentation.)"
+ ],
+ "总电阻 = U / I，减去被测电阻就是滑动变阻器的电阻。": [
+  "Total resistance = U / I; subtracting the resistor being measured leaves the resistance of the rheostat.",
+  "Résistance totale = U / I ; en retranchant la résistance mesurée, on obtient la résistance du rhéostat."
+ ],
+ "三次测得定值电阻的阻值分别是 {0} Ω、{1} Ω、{2} Ω，它的阻值应记为多少欧？": [
+  "Three measurements of a fixed resistor give {0} Ω, {1} Ω and {2} Ω. What should be recorded as its resistance, in ohms?",
+  "Trois mesures d'une résistance fixe donnent {0} Ω, {1} Ω et {2} Ω. Quelle valeur faut-il noter pour sa résistance, en ohms ?"
+ ],
+ "测定值电阻时多次测量取平均值，可以减小误差。": [
+  "When measuring a fixed resistor, taking the average of several measurements reduces the error.",
+  "Pour mesurer une résistance fixe, la moyenne de plusieurs mesures réduit l'erreur."
+ ],
+ "用伏安法测小灯泡在不同电压下的电阻，发现电阻不相等，原因是：": [
+  "Measuring the resistance of a small bulb at different voltages with an ammeter and a voltmeter, the resistances are found to be unequal. The reason is that:",
+  "En mesurant la résistance d'une petite ampoule sous différentes tensions avec un ampèremètre et un voltmètre, on trouve des résistances inégales. La raison est que :"
+ ],
+ "灯丝的电阻随温度升高而增大": [
+  "The resistance of the filament increases as its temperature rises",
+  "la résistance du filament augmente quand sa température s'élève"
+ ],
+ "测量时读数有误差": [
+  "There are errors in reading the meters",
+  "il y a des erreurs de lecture des appareils"
+ ],
+ "电流表本身有电阻": [
+  "The ammeter itself has resistance",
+  "l'ampèremètre lui-même a une résistance"
+ ],
+ "灯丝的长度发生了变化": [
+  "The length of the filament has changed",
+  "la longueur du filament a changé"
+ ],
+ "电压越大，灯丝温度越高，电阻越大，所以不能把不同电压下的灯丝电阻求平均值。": [
+  "The larger the voltage, the hotter the filament and the greater its resistance, so the filament resistances at different voltages must not be averaged.",
+  "Plus la tension est grande, plus le filament est chaud et plus sa résistance est grande ; on ne doit donc pas faire la moyenne des résistances du filament sous différentes tensions."
+ ],
+ "伏安法测电阻时，电流表和电压表的连接方法是：": [
+  "When measuring a resistance with an ammeter and a voltmeter, the ammeter and the voltmeter are connected:",
+  "Pour mesurer une résistance avec un ampèremètre et un voltmètre, l'ampèremètre et le voltmètre sont branchés :"
+ ],
+ "电流表与待测电阻串联，电压表与待测电阻并联": [
+  "The ammeter in series with the resistor and the voltmeter in parallel with it",
+  "l'ampèremètre en série avec la résistance et le voltmètre en dérivation à ses bornes"
+ ],
+ "电流表与待测电阻并联，电压表与待测电阻串联": [
+  "The ammeter in parallel with the resistor and the voltmeter in series with it",
+  "l'ampèremètre en dérivation à ses bornes et le voltmètre en série avec la résistance"
+ ],
+ "两个表都与待测电阻串联": [
+  "Both meters in series with the resistor",
+  "les deux appareils en série avec la résistance"
+ ],
+ "两个表都与待测电阻并联": [
+  "Both meters in parallel with the resistor",
+  "les deux appareils en dérivation aux bornes de la résistance"
+ ],
+ "电流表要测通过电阻的电流，所以串联；电压表要测电阻两端的电压，所以并联。": [
+  "The ammeter has to measure the current through the resistor, so it is in series; the voltmeter has to measure the voltage across the resistor, so it is in parallel.",
+  "L'ampèremètre doit mesurer l'intensité du courant dans la résistance : il est donc en série ; le voltmètre doit mesurer la tension aux bornes de la résistance : il est donc en dérivation."
+ ],
+ "新月的位置（月球在太阳和地球之间）": [
+  "The position of the new moon (the Moon is between the Sun and the Earth)",
+  "La position de la nouvelle lune (la Lune est entre le Soleil et la Terre)"
+ ],
+ "满月的位置（地球在太阳和月球之间）": [
+  "The position of the full moon (the Earth is between the Sun and the Moon)",
+  "La position de la pleine lune (la Terre est entre le Soleil et la Lune)"
+ ],
+ "其他位置": [
+  "Another position",
+  "Une autre position"
+ ],
+ "影子的形成": [
+  "The formation of shadows",
+  "La formation des ombres"
+ ],
+ "激光准直（开凿隧道时用来指向）": [
+  "Laser alignment (used to give direction when digging a tunnel)",
+  "L'alignement au laser (utilisé pour donner la direction lors du percement d'un tunnel)"
+ ],
+ "排队时向前看齐": [
+  "Lining up by looking straight ahead",
+  "S'aligner en regardant droit devant soi"
+ ],
+ "平静的水面上出现岸边的倒影": [
+  "The reflection of the bank in calm water",
+  "Le reflet de la rive dans l'eau calme"
+ ],
+ "雨后天空出现彩虹": [
+  "A rainbow in the sky after rain",
+  "Un arc-en-ciel dans le ciel après la pluie"
+ ],
+ "插入水中的筷子看起来向上弯折": [
+  "A chopstick put into water looks bent upwards",
+  "Une baguette plongée dans l'eau paraît cassée vers le haut"
+ ],
+ "用放大镜看到放大的字": [
+  "Words look larger through a magnifying glass",
+  "Les mots paraissent plus grands à travers une loupe"
+ ],
+ "汽车的后视镜里看到后面的车": [
+  "Seeing the car behind in a car's rear-view mirror",
+  "Voir la voiture qui est derrière dans le rétroviseur d'une voiture"
+ ],
+ "小孔成像：蜡烛高 {0} cm，蜡烛到小孔 {1} cm，小孔到光屏 {2} cm，光屏上像的高度是多少？": [
+  "Pinhole imaging: the candle is {0} cm high, {1} cm from the pinhole, and the screen is {2} cm from the pinhole. How high is the image on the screen?",
+  "Image par un trou d'épingle : la bougie mesure {0} cm de haut, elle est à {1} cm du trou et l'écran est à {2} cm du trou. Quelle est la hauteur de l'image sur l'écran ?"
+ ],
+ "像高 ÷ 物高 = 像到小孔的距离 ÷ 物到小孔的距离（相似三角形）。": [
+  "Height of the image ÷ height of the object = distance of the image from the pinhole ÷ distance of the object from the pinhole (similar triangles).",
+  "Hauteur de l'image ÷ hauteur de l'objet = distance de l'image au trou ÷ distance de l'objet au trou (triangles semblables)."
+ ],
+ "点光源到宽 {0} cm 的挡板的距离是 {1} cm，挡板到光屏的距离是 {2} cm，光屏上影的宽度是多少？": [
+  "A point source is {1} cm from a board {0} cm wide and the screen is {2} cm behind the board. How wide is the shadow on the screen?",
+  "Une source ponctuelle est à {1} cm d'un panneau large de {0} cm et l'écran est à {2} cm derrière le panneau. Quelle est la largeur de l'ombre sur l'écran ?"
+ ],
+ "光沿直线传播，影的宽度 ÷ 挡板宽度 = 光源到屏的距离 ÷ 光源到挡板的距离。": [
+  "Light travels in straight lines: width of the shadow ÷ width of the board = distance from the source to the screen ÷ distance from the source to the board.",
+  "La lumière se propage en ligne droite : largeur de l'ombre ÷ largeur du panneau = distance de la source à l'écran ÷ distance de la source au panneau."
+ ],
+ "某天体离地球约 {0}×10⁶ km，光在真空中的速度取 3×10⁵ km/s，光从那里传到地球需要多长时间？": [
+  "A heavenly body is about {0}×10⁶ km from the Earth. Taking the speed of light in a vacuum as 3×10⁵ km/s, how long does light take to travel from there to the Earth?",
+  "Un astre est à environ {0}×10⁶ km de la Terre. En prenant 3×10⁵ km/s pour la vitesse de la lumière dans le vide, combien de temps la lumière met-elle à aller de là jusqu'à la Terre ?"
+ ],
+ "下列现象中，由光的直线传播形成的是：": [
+  "Which of the following phenomena is caused by the rectilinear propagation of light?",
+  "Lequel des phénomènes suivants est dû à la propagation rectiligne de la lumière ?"
+ ],
+ "影子、小孔成像、日食和月食都是光沿直线传播形成的；倒影是反射，彩虹和筷子“弯折”是折射。": [
+  "Shadows, pinhole imaging and solar and lunar eclipses are all formed because light travels in straight lines; reflections in water are reflection, and rainbows and the \"bent\" chopstick are refraction.",
+  "Les ombres, l'image d'un trou d'épingle et les éclipses de Soleil et de Lune se forment toutes parce que la lumière se propage en ligne droite ; les reflets dans l'eau relèvent de la réflexion, et l'arc-en-ciel et la baguette « cassée » de la réfraction."
+ ],
+ "发生日食时，太阳、月球、地球三者的位置关系是：": [
+  "When there is a solar eclipse, the positions of the Sun, the Moon and the Earth are:",
+  "Lors d'une éclipse de Soleil, les positions du Soleil, de la Lune et de la Terre sont :"
+ ],
+ "月球在太阳和地球之间，三者几乎在同一条直线上": [
+  "The Moon is between the Sun and the Earth, and the three are almost in a straight line",
+  "la Lune est entre le Soleil et la Terre, et les trois sont presque alignés"
+ ],
+ "地球在太阳和月球之间，三者几乎在同一条直线上": [
+  "The Earth is between the Sun and the Moon, and the three are almost in a straight line",
+  "la Terre est entre le Soleil et la Lune, et les trois sont presque alignés"
+ ],
+ "太阳在月球和地球之间，三者几乎在同一条直线上": [
+  "The Sun is between the Moon and the Earth, and the three are almost in a straight line",
+  "le Soleil est entre la Lune et la Terre, et les trois sont presque alignés"
+ ],
+ "月球挡住射向地球的太阳光，月球的影子落在地球上，形成日食。": [
+  "The Moon blocks the sunlight going to the Earth and its shadow falls on the Earth, which makes a solar eclipse.",
+  "La Lune arrête la lumière du Soleil qui va vers la Terre et son ombre tombe sur la Terre : c'est une éclipse de Soleil."
+ ],
+ "发生月食时，太阳、地球、月球三者的位置关系是：": [
+  "When there is a lunar eclipse, the positions of the Sun, the Earth and the Moon are:",
+  "Lors d'une éclipse de Lune, les positions du Soleil, de la Terre et de la Lune sont :"
+ ],
+ "太阳在地球和月球之间，三者几乎在同一条直线上": [
+  "The Sun is between the Earth and the Moon, and the three are almost in a straight line",
+  "le Soleil est entre la Terre et la Lune, et les trois sont presque alignés"
+ ],
+ "地球挡住射向月球的太阳光，月球进入地球的影子，形成月食。": [
+  "The Earth blocks the sunlight going to the Moon and the Moon enters the Earth's shadow, which makes a lunar eclipse.",
+  "La Terre arrête la lumière du Soleil qui va vers la Lune et la Lune entre dans l'ombre de la Terre : c'est une éclipse de Lune."
+ ],
+ "玻璃泡全部浸没在水中，不碰容器底和壁": [
+  "The bulb is completely under the water and does not touch the bottom or the wall of the container",
+  "Le réservoir est entièrement plongé dans l'eau et ne touche ni le fond ni la paroi du récipient"
+ ],
+ "玻璃泡碰到正在加热的容器底": [
+  "The bulb touches the bottom of the container, which is being heated",
+  "Le réservoir touche le fond du récipient, qui est en train d'être chauffé"
+ ],
+ "玻璃泡只有一部分浸在水中": [
+  "Only part of the bulb is in the water",
+  "Une partie seulement du réservoir est dans l'eau"
+ ],
+ "把温度计拿出水面再读数": [
+  "The thermometer is taken out of the water before it is read",
+  "Le thermomètre est sorti de l'eau avant d'être lu"
+ ],
+ "准确": [
+  "Accurate",
+  "Exacte"
+ ],
+ "偏高": [
+  "Too high",
+  "Trop élevée"
+ ],
+ "偏低": [
+  "Too low",
+  "Trop basse"
+ ],
+ "温度计的分度值是 {0} ℃，液面在 0 ℃ 刻度线下方第 {1} 格处，读数是多少？": [
+  "The value of a division of a thermometer is {0} ℃ and the liquid surface is {1} divisions below the 0 ℃ mark. What is the reading?",
+  "La graduation d'un thermomètre vaut {0} ℃ et la surface du liquide est à {1} graduations au-dessous du trait de 0 ℃. Quelle est la lecture ?"
+ ],
+ "0 ℃ 以下的温度是负值：读数 = −（格数 × 分度值）。": [
+  "A temperature below 0 ℃ is negative: reading = −(number of marks × value of a division).",
+  "Une température au-dessous de 0 ℃ est négative : lecture = −(nombre de traits × valeur d'une graduation)."
+ ],
+ "一支温度计的 0 ℃ 刻度线和 100 ℃ 刻度线之间共有 {0} 格，它的分度值是多少？": [
+  "Between the 0 ℃ mark and the 100 ℃ mark of a thermometer there are {0} divisions. What is the value of one division?",
+  "Entre le trait de 0 ℃ et le trait de 100 ℃ d'un thermomètre, il y a {0} graduations. Quelle est la valeur d'une graduation ?"
+ ],
+ "分度值 = 量程 ÷ 格数。": [
+  "Value of a division = range ÷ number of divisions.",
+  "Valeur d'une graduation = étendue ÷ nombre de graduations."
+ ],
+ "体温计的示数停在 {0} ℃，没有甩就去测一位体温为 {1} ℃ 的同学，示数是多少？": [
+  "The mercury of a clinical thermometer stands at {0} ℃. Without shaking it, it is used on a student whose temperature is {1} ℃. What does it read?",
+  "Le mercure d'un thermomètre médical indique {0} ℃. Sans le secouer, on l'utilise sur un élève dont la température est de {1} ℃. Que lit-on ?"
+ ],
+ "体温计有缩口，水银柱只升不降，所以示数是较高的那个温度。": [
+  "A clinical thermometer has a narrow neck, so the mercury column only rises and never falls by itself, and the reading is the higher of the two temperatures.",
+  "Un thermomètre médical a un étranglement : la colonne de mercure ne fait que monter et ne redescend pas d'elle-même ; la lecture est donc la plus élevée des deux températures."
+ ],
+ "体温计可以离开人体读数，是因为它的玻璃泡上方有：": [
+  "A clinical thermometer can be read after it has left the body because above its bulb it has:",
+  "Un thermomètre médical peut être lu après avoir quitté le corps parce qu'il a, au-dessus de son réservoir :"
+ ],
+ "一段很细的缩口": [
+  "A very narrow neck",
+  "un étranglement très étroit"
+ ],
+ "很粗的管子": [
+  "A very wide tube",
+  "un tube très large"
+ ],
+ "一层真空": [
+  "A layer of vacuum",
+  "une couche de vide"
+ ],
+ "一个小气泡": [
+  "A small bubble",
+  "une petite bulle"
+ ],
+ "水银遇冷收缩时在缩口处断开，水银柱不会自己退回玻璃泡。": [
+  "When the mercury cools and contracts it breaks at the narrow neck, and the mercury column does not go back into the bulb by itself.",
+  "Quand le mercure se refroidit et se contracte, il se sépare au niveau de l'étranglement et la colonne ne redescend pas d'elle-même dans le réservoir."
+ ],
+ "用温度计测量烧杯中热水的温度，下列做法正确的是：": [
+  "Which of the following is the correct way of measuring the temperature of hot water in a beaker with a thermometer?",
+  "Laquelle des façons suivantes est la bonne pour mesurer avec un thermomètre la température de l'eau chaude d'un bécher ?"
+ ],
+ "玻璃泡全部浸没在水中，不碰容器底和壁，稍候再读数": [
+  "The bulb is completely under the water and does not touch the bottom or the wall of the container; wait a moment and then read",
+  "Le réservoir est entièrement plongé dans l'eau et ne touche ni le fond ni la paroi du récipient ; attendre un instant, puis lire"
+ ],
+ "玻璃泡碰到烧杯底部": [
+  "The bulb touches the bottom of the beaker",
+  "Le réservoir touche le fond du bécher"
+ ],
+ "玻璃泡只浸入一半": [
+  "Only half of the bulb is put into the water",
+  "Seule la moitié du réservoir est plongée dans l'eau"
+ ],
+ "玻璃泡要浸没在被测液体中，不碰容器；等示数稳定后，在温度计仍留在液体中时读数。": [
+  "The bulb must be completely in the liquid being measured and must not touch the container; read it when the reading is steady and while the thermometer is still in the liquid.",
+  "Le réservoir doit être entièrement dans le liquide mesuré sans toucher le récipient ; on lit quand l'indication est stable et pendant que le thermomètre est encore dans le liquide."
+ ],
+ "声音的强弱用分贝（dB）表示。0 dB 是人刚能听到的最微弱的声音。从物理学角度看，噪声是发声体做无规则振动时发出的声音；从环境保护角度看，凡是妨碍人们正常休息、学习和工作的声音，以及对人们要听的声音产生干扰的声音，都属于噪声。为了保护听力，应控制噪声不超过 90 dB；为了保证工作和学习，应控制噪声不超过 70 dB；为了保证休息和睡眠，应控制噪声不超过 50 dB。": [
+  "The loudness of a sound is measured in decibels (dB). 0 dB is the faintest sound a person can just hear. In physics, noise is the sound made by an object vibrating irregularly; for the protection of the environment, any sound that disturbs people's normal rest, study and work, or interferes with the sounds people want to hear, is noise. To protect hearing the noise should not exceed 90 dB, to make work and study possible not 70 dB, and to make rest and sleep possible not 50 dB.",
+  "L'intensité d'un son se mesure en décibels (dB). 0 dB est le son le plus faible que l'on puisse tout juste entendre. En physique, le bruit est le son émis par un corps qui vibre de façon irrégulière ; du point de vue de la protection de l'environnement, tout son qui gêne le repos, l'étude et le travail normaux des gens, ou qui perturbe les sons qu'ils veulent entendre, est un bruit. Pour protéger l'ouïe, le bruit ne doit pas dépasser 90 dB ; pour permettre le travail et l'étude, 70 dB ; pour permettre le repos et le sommeil, 50 dB."
+ ],
+ "控制噪声有三条途径：在声源处减弱（如安装消声器、禁止鸣笛），在传播过程中减弱（如设置隔声板、植树造林），在人耳处减弱（如戴防噪声耳罩、耳塞）。本实验里各种措施减弱的分贝数只是示例。": [
+  "There are three ways of controlling noise: reduce it at the source (fitting a silencer, forbidding horns), on the way (putting up sound-insulating panels, planting trees) and at the ear (wearing ear defenders or ear plugs). The number of decibels each measure removes in this experiment is only an example.",
+  "Il y a trois façons de limiter le bruit : le réduire à la source (installer un silencieux, interdire les klaxons), pendant la propagation (installer des panneaux isolants, planter des arbres) et au niveau de l'oreille (porter un casque antibruit ou des bouchons d'oreilles). Le nombre de décibels que chaque mesure retranche dans cette expérience n'est qu'un exemple."
+ ],
+ "声音遇到障碍物会被反射回来，反射回来的声音叫回声。回声到达人耳比原声晚 0.1 s 以上，人才能把回声和原声区分开；在空气中（340 m/s）障碍物至少要在 17 m 以外。利用回声可以测距：s = vt / 2，其中 t 是声音往返的时间。声呐利用超声波在海水中的回声测量海水的深度。": [
+  "When sound meets an obstacle it is reflected back; the sound that comes back is called an echo. Only if the echo reaches the ear more than 0.1 s after the original sound can a person tell the echo from the original sound; in air (340 m/s) the obstacle must be at least 17 m away. Echoes can be used to measure distances: s = vt / 2, where t is the time the sound takes to go and return. Sonar uses the echo of ultrasound in sea water to measure its depth.",
+  "Quand le son rencontre un obstacle, il est réfléchi ; le son qui revient s'appelle un écho. Ce n'est que si l'écho atteint l'oreille plus de 0,1 s après le son d'origine qu'on peut distinguer l'écho du son d'origine ; dans l'air (340 m/s), l'obstacle doit être à au moins 17 m. Les échos permettent de mesurer des distances : s = vt / 2, où t est la durée de l'aller-retour du son. Le sonar utilise l'écho des ultrasons dans l'eau de mer pour mesurer sa profondeur."
+ ],
+ "探究电流与电压的关系：保持电阻不变，用滑动变阻器改变定值电阻两端的电压，记下每次电压表和电流表的示数。画出电流 I 随电压 U 变化的图线，是一条过原点的直线，说明：电阻一定时，通过导体的电流与导体两端的电压成正比。": [
+  "Investigating how current depends on voltage: keep the resistance unchanged and use the rheostat to change the voltage across the fixed resistor; note the readings of the voltmeter and the ammeter each time. The graph of the current I against the voltage U is a straight line through the origin, which shows that for a given resistance the current through a conductor is proportional to the voltage across it.",
+  "Étude de la relation entre l'intensité et la tension : on garde la résistance inchangée et on utilise le rhéostat pour modifier la tension aux bornes de la résistance fixe ; on note à chaque fois les indications du voltmètre et de l'ampèremètre. Le graphique de l'intensité I en fonction de la tension U est une droite passant par l'origine, ce qui montre que, pour une résistance donnée, l'intensité du courant dans un conducteur est proportionnelle à la tension à ses bornes."
+ ],
+ "探究电流与电阻的关系：保持定值电阻两端的电压不变（每换一个电阻，都要调节滑动变阻器），记下电阻和电流。电流 I 随电阻 R 增大而减小，I 与 R 的乘积不变，说明：电压一定时，通过导体的电流与导体的电阻成反比。": [
+  "Investigating how current depends on resistance: keep the voltage across the fixed resistor unchanged (adjust the rheostat every time the resistor is changed) and note the resistance and the current. The current I decreases as the resistance R increases and the product of I and R stays the same, which shows that for a given voltage the current through a conductor is inversely proportional to its resistance.",
+  "Étude de la relation entre l'intensité et la résistance : on garde inchangée la tension aux bornes de la résistance fixe (on règle le rhéostat à chaque changement de résistance) et on note la résistance et l'intensité. L'intensité I diminue quand la résistance R augmente et le produit de I par R reste le même, ce qui montre que, pour une tension donnée, l'intensité du courant dans un conducteur est inversement proportionnelle à sa résistance."
+ ],
+ "两个实验都用到控制变量法。把这两个关系合起来，就是欧姆定律：I = U / R。实验时要多测几组数据，数据多了，规律才可靠。点“记录这组数据”把现在的读数记进表中，最多记 6 组。": [
+  "Both experiments use the control-variable method. Together the two relations are Ohm's law: I = U / R. Several sets of data should be taken, because the more data there are, the more reliable the rule. Press \"Record this set of data\" to enter the present readings in the table; at most 6 sets can be recorded.",
+  "Les deux expériences utilisent la méthode de la variable contrôlée. Ensemble, les deux relations forment la loi d'Ohm : I = U / R. Il faut prendre plusieurs séries de mesures, car plus il y a de données, plus la loi est fiable. Appuyez sur « Enregistrer cette série de mesures » pour inscrire les indications actuelles dans le tableau ; on peut en enregistrer 6 au plus."
+ ],
+ "电阻表示导体对电流阻碍作用的大小。导体的电阻是导体本身的一种性质，它的大小跟导体的材料、长度、横截面积有关，还跟温度有关，与导体两端的电压、通过的电流无关。": [
+  "Resistance tells how strongly a conductor opposes a current. The resistance of a conductor is a property of the conductor itself: it depends on the material, the length and the cross-section of the conductor and also on its temperature, but not on the voltage across it or the current through it.",
+  "La résistance indique à quel point un conducteur s'oppose au passage du courant. La résistance d'un conducteur est une propriété du conducteur lui-même : elle dépend de son matériau, de sa longueur, de sa section et aussi de sa température, mais non de la tension à ses bornes ni de l'intensité du courant qui le traverse."
+ ],
+ "用控制变量法探究：把两根导线先后接入同一个电路，电源电压和另一个电阻不变，电流表的示数越小，说明接入的导线电阻越大。材料、横截面积相同时，导线越长，电阻越大；材料、长度相同时，导线越粗（横截面积越大），电阻越小；长度和横截面积相同时，不同材料的导线电阻不同；大多数金属的电阻随温度升高而增大。": [
+  "Investigate with the control-variable method: put two wires one after the other into the same circuit, keeping the supply voltage and the other resistor unchanged; the smaller the reading of the ammeter, the greater the resistance of the wire in the circuit. For the same material and cross-section, the longer the wire, the greater its resistance; for the same material and length, the thicker the wire (the larger its cross-section), the smaller its resistance; for the same length and cross-section, wires of different materials have different resistances; the resistance of most metals increases as the temperature rises.",
+  "On étudie avec la méthode de la variable contrôlée : on place deux fils l'un après l'autre dans le même circuit, en gardant inchangés la tension d'alimentation et l'autre résistance ; plus l'indication de l'ampèremètre est petite, plus la résistance du fil placé dans le circuit est grande. Pour un même matériau et une même section, plus le fil est long, plus sa résistance est grande ; pour un même matériau et une même longueur, plus le fil est épais (plus sa section est grande), plus sa résistance est petite ; pour une même longueur et une même section, des fils de matériaux différents ont des résistances différentes ; la résistance de la plupart des métaux augmente quand la température s'élève."
+ ],
+ "在这个实验中，A 是参照的导线，B 每次只改变一个因素。注意：电流表的示数与电阻的关系是反的：电阻越大，电流越小。": [
+  "In this experiment A is the reference wire and B changes only one factor each time. Note that the reading of the ammeter goes the opposite way to the resistance: the greater the resistance, the smaller the current.",
+  "Dans cette expérience, A est le fil de référence et B ne change qu'un seul facteur à chaque fois. Remarquez que l'indication de l'ampèremètre varie en sens inverse de la résistance : plus la résistance est grande, plus l'intensité est petite."
+ ],
+ "伏安法测电阻的原理是 R = U / I：用电压表测出电阻两端的电压 U，用电流表测出通过它的电流 I，就可以算出电阻。电流表与待测电阻串联，电压表与待测电阻并联；滑动变阻器与待测电阻串联，用来改变电路中的电流，多测几组数据。连接电路时开关要断开，滑片放在阻值最大处。": [
+  "The principle of measuring resistance with an ammeter and a voltmeter is R = U / I: measure the voltage U across the resistor with the voltmeter and the current I through it with the ammeter, and the resistance can be calculated. The ammeter is connected in series with the resistor and the voltmeter in parallel with it; the rheostat is connected in series with the resistor to change the current in the circuit so that several sets of data can be taken. When connecting the circuit the switch must be open and the slider set at the greatest resistance.",
+  "Le principe de la mesure d'une résistance avec un ampèremètre et un voltmètre est R = U / I : on mesure la tension U aux bornes de la résistance avec le voltmètre et l'intensité I du courant qui la traverse avec l'ampèremètre, et on peut calculer la résistance. L'ampèremètre est branché en série avec la résistance et le voltmètre en dérivation à ses bornes ; le rhéostat est branché en série avec la résistance pour modifier l'intensité dans le circuit et prendre plusieurs séries de mesures. Pour réaliser le montage, l'interrupteur doit être ouvert et le curseur placé à la plus grande résistance."
+ ],
+ "测定值电阻时，多次测量求平均值可以减小误差。测小灯泡的电阻时，不同电压下灯丝的温度不同，电阻也不同：电压越大，灯丝越热，电阻越大，所以不能求平均值。本实验里电流表按 0.02 A 读数，电压表按 0.1 V 读数，读数和真实值有微小的差别，这是正常的。": [
+  "When measuring a fixed resistor, averaging several measurements reduces the error. When measuring the resistance of a small bulb, the temperature of the filament is different at different voltages and so is its resistance: the larger the voltage, the hotter the filament and the greater its resistance, so the values must not be averaged. In this experiment the ammeter is read to 0.02 A and the voltmeter to 0.1 V, and the readings differ slightly from the true values; this is normal.",
+  "Pour mesurer une résistance fixe, la moyenne de plusieurs mesures réduit l'erreur. Pour mesurer la résistance d'une petite ampoule, la température du filament est différente selon la tension, et sa résistance aussi : plus la tension est grande, plus le filament est chaud et plus sa résistance est grande ; on ne doit donc pas faire de moyenne. Dans cette expérience, l'ampèremètre se lit à 0,02 A près et le voltmètre à 0,1 V près, et les lectures diffèrent légèrement des valeurs vraies ; c'est normal."
+ ],
+ "光在同种均匀介质中沿直线传播。影子、小孔成像、日食和月食都是光的直线传播形成的；激光准直、排队看齐也利用了光的直线传播。光在真空中的传播速度最大，c = 3×10⁸ m/s；光在空气中的速度几乎与它相同，在水和玻璃中比较小。": [
+  "Light travels in straight lines in a uniform medium of one kind. Shadows, pinhole imaging and solar and lunar eclipses are all formed because light travels in straight lines; laser alignment and lining up by looking straight ahead also use it. The speed of light is greatest in a vacuum, c = 3×10⁸ m/s; in air it is almost the same, and in water and glass it is smaller.",
+  "La lumière se propage en ligne droite dans un milieu homogène d'une seule nature. Les ombres, l'image d'un trou d'épingle et les éclipses de Soleil et de Lune se forment toutes parce que la lumière se propage en ligne droite ; l'alignement au laser et le fait de s'aligner en regardant droit devant soi l'utilisent aussi. La vitesse de la lumière est la plus grande dans le vide, c = 3×10⁸ m/s ; dans l'air elle est presque la même, et dans l'eau et le verre elle est plus petite."
+ ],
+ "小孔成像：物体上每一点发出的光，沿直线穿过小孔，在光屏上形成倒立的实像。像的大小由物到小孔的距离和屏到小孔的距离决定：像高 ÷ 物高 = 像距 ÷ 物距；这个像与小孔的形状无关，孔太大时，像就变得模糊。": [
+  "Pinhole imaging: the light from each point of an object passes in a straight line through the pinhole and forms a real, inverted image on the screen. The size of the image is fixed by the distance of the object from the pinhole and of the screen from the pinhole: height of the image ÷ height of the object = image distance ÷ object distance; the image does not depend on the shape of the hole, and when the hole is too large the image becomes blurred.",
+  "Image par un trou d'épingle : la lumière issue de chaque point d'un objet traverse le trou en ligne droite et forme sur l'écran une image réelle et renversée. La taille de l'image est fixée par la distance de l'objet au trou et celle de l'écran au trou : hauteur de l'image ÷ hauteur de l'objet = distance image ÷ distance objet ; l'image ne dépend pas de la forme du trou, et quand le trou est trop grand, l'image devient floue."
+ ],
+ "光源很小（点光源）时，物体后面只有一片黑暗的影；光源较大时，影的中间是完全没有光的本影，周围是只有一部分光的半影。日食是月球挡住太阳光，月球的影落在地球上；月食是地球挡住太阳光，月球进入地球的影。因为月球的轨道面与地球的轨道面有夹角，所以并不是每个月都发生日食或月食。": [
+  "When the source is very small (a point source) there is only a dark shadow behind the object; when the source is larger, the middle of the shadow is the umbra, which gets no light at all, and round it is the penumbra, which gets only part of the light. A solar eclipse is when the Moon blocks the sunlight and its shadow falls on the Earth; a lunar eclipse is when the Earth blocks the sunlight and the Moon enters the Earth's shadow. Because the plane of the Moon's orbit makes an angle with the plane of the Earth's orbit, there is not a solar or lunar eclipse every month.",
+  "Quand la source est très petite (source ponctuelle), il n'y a derrière l'objet qu'une ombre sombre ; quand la source est plus grande, le milieu de l'ombre est l'ombre propre, qui ne reçoit aucune lumière, et autour d'elle se trouve la pénombre, qui ne reçoit qu'une partie de la lumière. Une éclipse de Soleil se produit quand la Lune arrête la lumière du Soleil et que son ombre tombe sur la Terre ; une éclipse de Lune, quand la Terre arrête la lumière du Soleil et que la Lune entre dans l'ombre de la Terre. Comme le plan de l'orbite de la Lune fait un angle avec celui de l'orbite de la Terre, il n'y a pas d'éclipse de Soleil ou de Lune chaque mois."
+ ],
+ "温度表示物体的冷热程度。常用温度计是根据液体热胀冷缩的性质制成的。摄氏温度规定：在标准大气压下，冰水混合物的温度为 0 ℃，沸水的温度为 100 ℃，在 0 ℃ 和 100 ℃ 之间分成 100 等份，每一份叫做 1 摄氏度。0 ℃ 以下的温度读作“零下”或在数字前加“−”。": [
+  "Temperature tells how hot or cold an object is. Ordinary thermometers are made on the principle that liquids expand when heated and contract when cooled. The Celsius scale is defined like this: at standard atmospheric pressure the temperature of a mixture of ice and water is 0 ℃ and that of boiling water is 100 ℃; the interval between 0 ℃ and 100 ℃ is divided into 100 equal parts and each part is called 1 degree Celsius. A temperature below 0 ℃ is read \"minus\" or written with a \"−\" before the number.",
+  "La température indique si un objet est chaud ou froid. Les thermomètres usuels sont fondés sur la dilatation des liquides quand on les chauffe et leur contraction quand on les refroidit. L'échelle Celsius est définie ainsi : à la pression atmosphérique normale, la température d'un mélange de glace et d'eau est de 0 ℃ et celle de l'eau bouillante de 100 ℃ ; l'intervalle entre 0 ℃ et 100 ℃ est divisé en 100 parties égales, et chaque partie s'appelle 1 degré Celsius. Une température au-dessous de 0 ℃ se lit « moins » ou s'écrit avec un « − » devant le nombre."
+ ],
+ "使用温度计时：先看清量程和分度值；玻璃泡要全部浸入被测液体中，不要碰到容器底或容器壁；浸入后要稍等一会儿，待示数稳定后再读数；读数时，玻璃泡要继续留在被测液体中，视线与温度计中液柱的上表面相平。": [
+  "Using a thermometer: first read the range and the value of a division; the bulb must be completely in the liquid being measured and must not touch the bottom or the wall of the container; after putting it in, wait a moment until the reading is steady and then read it; when reading, the bulb must stay in the liquid and the line of sight must be level with the top of the liquid column in the thermometer.",
+  "Utilisation d'un thermomètre : on commence par lire l'étendue et la valeur d'une graduation ; le réservoir doit être entièrement dans le liquide mesuré sans toucher le fond ni la paroi du récipient ; après l'avoir plongé, on attend un instant que l'indication soit stable, puis on lit ; pour lire, le réservoir doit rester dans le liquide et la ligne de visée doit être à la hauteur de la surface supérieure de la colonne de liquide."
+ ],
+ "体温计的量程是 35 ℃~42 ℃，分度值是 0.1 ℃。它的玻璃泡和直玻璃管之间有一段很细的缩口，水银柱上升后遇冷收缩时在缩口处断开，水银柱不会自己退回玻璃泡，所以体温计可以离开人体读数。每次使用前要用力甩几下，把水银甩回玻璃泡。": [
+  "The range of a clinical thermometer is 35 ℃ to 42 ℃ and the value of a division is 0.1 ℃. Between its bulb and the straight glass tube there is a very narrow neck; when the mercury column has risen and then cools and contracts, it breaks at the neck and does not go back into the bulb by itself, so a clinical thermometer can be read after it has left the body. Before each use it must be shaken hard a few times to shake the mercury back into the bulb.",
+  "L'étendue d'un thermomètre médical va de 35 ℃ à 42 ℃ et la valeur d'une graduation est de 0,1 ℃. Entre son réservoir et le tube de verre droit se trouve un étranglement très étroit ; quand la colonne de mercure a monté puis se refroidit et se contracte, elle se sépare à l'étranglement et ne redescend pas d'elle-même dans le réservoir : un thermomètre médical peut donc être lu après avoir quitté le corps. Avant chaque usage, il faut le secouer fortement plusieurs fois pour faire redescendre le mercure dans le réservoir."
  ]
 }

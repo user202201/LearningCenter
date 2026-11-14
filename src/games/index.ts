@@ -12,6 +12,7 @@ export const GAMES: GameInfo[] = [
   { id: "xiangqi", name: "中国象棋", sub: "中国象棋，含吃子与将军动画", load: () => import("./xiangqi") },
   { id: "spider", name: "蜘蛛纸牌", sub: "按顺序收齐全部牌，可选一、二或四种花色", load: () => import("./spider") },
   { id: "freecell", name: "空当接龙", sub: "四个空当，几乎每局都有解", load: () => import("./freecell") },
+  { id: "klondike", name: "经典纸牌", sub: "按花色从 A 到 K 收齐，可选翻一张或三张", load: () => import("./klondike") },
   { id: "g2048", name: "2048", sub: "滑动合并方块，合成 2048", load: () => import("./g2048") },
   { id: "memory", name: "记忆翻牌", sub: "找出相同的动物", load: () => import("./memory") },
   { id: "minesweeper", name: "扫雷", sub: "长按可插旗，避开地雷", load: () => import("./minesweeper") },
@@ -31,4 +32,6 @@ export const GAMES: GameInfo[] = [
   { id: "hanoi", name: "汉诺塔", sub: "把圆盘从左柱按规则全部移到右柱", load: () => import("./hanoi") },
   { id: "shooter", name: "太空射击", sub: "拖动飞船自动开火，击落陨石和敌机", load: () => import("./shooter") },
   { id: "lightsout", name: "关灯游戏", sub: "点击一格，翻转它和上下左右四格，把全部灯关掉", load: () => import("./lightsout") },
+  { id: "paodekuai", name: "跑得快", sub: "三人出牌，先出完手牌者获胜", load: () => import("./paodekuai") },
+  { id: "doudizhu", name: "斗地主", sub: "三人对局，叫分决定地主，先出完手牌的一方获胜", load: () => import("./doudizhu") },
 ];

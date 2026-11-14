@@ -252,17 +252,15 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await p.click('#pk-slot-2'); await p.click('.pk-pick-kid[data-kid=k2]'); await p.waitForSelector('#pk-pick', { state: 'detached' });
   ok(!(await p.isDisabled('#pk-start')) && (await p.textContent('#pk-msgs')).trim() === '', 'two children with 10 characters: no message');
   ok((await p.locator('#pk-lay-tb, #pk-lay-lr').count()) === 0 && !(await p.evaluate(() => JSON.stringify(localStorage.getItem('learn.pk.v1') || '')).then((s) => /layout/.test(s))), 'there is no layout choice (one layout only)');
-  // the hint for a landscape screen is shown on a landscape screen only
   // the label of the start button is centred exactly (text box centre = button centre), no letter-spacing, no stray spaces
   const measureStart = async (tag) => {
     const m = await p.evaluate(() => { const b = document.querySelector('#pk-start'), tx = document.querySelector('.pk-start-t'), r = document.createRange(); r.selectNodeContents(tx); const a = r.getBoundingClientRect(), c = b.getBoundingClientRect(), cs = getComputedStyle(b); return { dx: a.left + a.width / 2 - (c.left + c.width / 2), dy: a.top + a.height / 2 - (c.top + c.height / 2), ls: cs.letterSpacing, ti: cs.textIndent, txt: tx.textContent, disp: cs.display, jc: cs.justifyContent, w: c.width, h: c.height }; });
     ok(Math.abs(m.dx) <= 1 && Math.abs(m.dy) <= 2.5 && (m.ls === 'normal' || m.ls === '0px') && m.ti === '0px' && m.txt === m.txt.trim() && m.disp === 'flex' && m.jc === 'center' && m.h >= 60, `${tag}: the start button's "${m.txt}" is exactly centred (dx ${m.dx.toFixed(2)}, dy ${m.dy.toFixed(2)}), no letter-spacing / indent, no stray spaces`);
   };
   await measureStart('zh');
-  const hint = () => p.evaluate(() => getComputedStyle(document.querySelector('#pk-hint-land')).display);
-  ok((await hint()) === 'none', 'portrait screen: no hint line on the setup page');
+  ok((await p.locator('#pk-hint-land').count()) === 0 && !(await p.textContent('body')).includes('竖放设备'), 'portrait: there is no "hold the device upright" hint line on the setup page');
   await p.setViewportSize({ width: 1180, height: 820 });
-  ok((await hint()) === 'block' && (await p.textContent('#pk-hint-land')).includes('竖放设备可获得更大的答题区。'), 'landscape screen: the setup page says that holding the device upright gives a larger answer area');
+  ok((await p.locator('#pk-hint-land').count()) === 0 && !(await p.textContent('body')).includes('竖放设备'), 'landscape: no such hint line either (the players never have to turn the device)');
   await p.screenshot({ path: OUT + 'pk-setup-landscape.png' });
   await p.setViewportSize({ width: 390, height: 844 });
   await p.screenshot({ path: OUT + 'pk-setup.png' });
@@ -271,7 +269,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   const P = (a, b, wa, wb, ties) => ({ a, b, wins: { [a]: wa, [b]: wb }, ties });
   const allPairs = { 'k1|k2': P('k1', 'k2', 2, 5, 2), 'k3|k4': P('k3', 'k4', 1, 1, 0), 'k1|k4': P('k1', 'k4', 4, 0, 0), 'k2|k3': P('k2', 'k3', 3, 1, 0), 'k2|k4': P('k2', 'k4', 0, 2, 0), 'k1|k3': P('k1', 'k3', 6, 6, 0) };
   await setPairs(allPairs);
-  let rows = await p.evaluate(() => [...document.querySelectorAll('.pk-match')].map((r) => ({ pair: r.dataset.pair, text: r.textContent.replace(/\s+/g, ' ').trim(), aria: r.getAttribute('aria-label'), lead: [...r.querySelectorAll('.pk-tile.lead')].map((x) => x.textContent), tiles: [...r.querySelectorAll('.pk-tile')].map((x) => x.textContent), vs: r.querySelectorAll('.pk-vsb svg').length, draws: r.querySelector('.pk-draws')?.textContent || '' })));
+  let rows = await p.evaluate(() => [...document.querySelectorAll('.pk-match')].map((r) => ({ pair: r.dataset.pair, text: r.textContent.replace(/\s+/g, ' ').replace('继续对战', '').trim(), aria: r.getAttribute('aria-label'), lead: [...r.querySelectorAll('.pk-tile.lead')].map((x) => x.textContent), tiles: [...r.querySelectorAll('.pk-tile')].map((x) => x.textContent), vs: r.querySelectorAll('.pk-vsb svg').length, draws: r.querySelector('.pk-draws')?.textContent || '' })));
   ok(rows.length === 5 && rows[0].pair === 'k1|k2', 'at most 5 rows, the pair of the current choice first (' + rows.map((r) => r.pair).join(' ') + ')');
   ok(rows[0].text === 'Anna VS Ben 2:5 平 2' && rows[0].aria === 'Anna 对 Ben，2 比 5', 'the first row reads "Anna VS Ben 2:5" in the order of the names (' + rows[0].text + ' / ' + rows[0].aria + ')');
   ok(rows[0].lead.join() === '5' && rows[0].draws === '平 2', 'the leader\'s digit is highlighted, the draws are noted after the score');
@@ -281,6 +279,23 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await setPairs({ ...allPairs, 'k1|k3': { a: 'k1', b: 'k3', wins: {}, ties: 0 } });
   rows = await p.evaluate(() => [...document.querySelectorAll('.pk-match')].map((r) => r.dataset.pair));
   ok(rows.length === 5 && !rows.includes('k1|k3'), 'a pair that never played is not listed');
+  {
+    // (B) a recorded pair is tapped to play again: both players are selected, nothing is deleted
+    const slots = () => p.evaluate(() => [document.querySelector('#pk-slot-1').dataset.kid, document.querySelector('#pk-slot-2').dataset.kid]);
+    const histKey = () => p.evaluate(() => localStorage.getItem('learn.pk.v1'));
+    const before = await histKey();
+    const cont = p.locator('.pk-match[data-pair="k2|k4"] .pk-continue');
+    ok((await cont.textContent()).trim() === '继续对战' && (await cont.boundingBox()).height >= 43.5, 'every record row has a "继续对战" button (>= 44 px high)');
+    await cont.click();
+    ok((await slots()).join() === 'k2,k4' && !(await p.isDisabled('#pk-start')), 'tapping a recorded pair selects both players again (Ben, Dee), Start is on');
+    ok((await p.locator('.pk-match').count()) === 5 && (await p.locator('.pk-match').first().getAttribute('data-pair')) === 'k2|k4', 'the record keeps every pair; the chosen pair is listed first');
+    await p.click('.pk-match[data-pair="k3|k4"] .pk-continue');
+    ok((await slots()).join() === 'k3,k4', 'another recorded pair replaces both players');
+    await p.click('#pk-slot-1'); await p.click('.pk-pick-kid[data-kid=k1]'); await p.waitForSelector('#pk-pick', { state: 'detached' });
+    ok((await slots()).join() === 'k1,k4' && (await p.locator('.pk-match').count()) === 5, 'player 1 can still be changed after that (Anna, Dee); the record is untouched');
+    ok(JSON.stringify(JSON.parse(await histKey()).pairs) === JSON.stringify(JSON.parse(before).pairs), 'no score was changed or deleted by choosing again');
+    await p.click('.pk-match[data-pair="k1|k2"] .pk-continue');
+  }
   for (const [w, h] of [[390, 844], [320, 568], [1180, 820]]) {
     await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(100);
     const m = await p.evaluate(() => { const r = document.querySelector('.pk-match').getBoundingClientRect(), st = document.querySelector('#pk-start').getBoundingClientRect(), pn = document.querySelector('.pk-pn'), vw = innerWidth; return { l: r.left, r: vw - r.right, sw: document.documentElement.scrollWidth, vw, ell: getComputedStyle(pn).textOverflow, col: getComputedStyle(pn).color, sl: st.left, sr: vw - st.right, bad: [...document.querySelectorAll('.pk-match *')].some((e) => e.getBoundingClientRect().right > r.right + 1 || e.getBoundingClientRect().left < r.left - 1) }; });
@@ -315,9 +330,12 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   const toPhase = async (ph) => { for (let i = 0; i < 80; i++) { const s = await S(); if (s.phase === ph) return s; await p.evaluate(() => { const s = window.__pk.state(); window.__pk.step(Math.max(1, s.phaseEnd - window.__pk.T())); }); } throw new Error('never reached ' + ph); };
   const tap = (side, i) => p.evaluate(([a, b]) => window.__pk.tap(a, b), [side, i]);
   const geo = () => p.evaluate(() => {
-    const r = (e) => { const b = e.getBoundingClientRect(); return { l: b.left, t: b.top, r: b.right, b: b.bottom, w: b.width, h: b.height }; };
+    // every rectangle is reported in the INNER coordinates of the stage (a landscape screen turns the stage by 90 degrees: viewport (X, Y) -> inner (Y, innerWidth - X)), so the portrait checks hold at every size
+    const stg = document.querySelector('#pk-stage'), rotd = stg.classList.contains('rot');
+    const r = (e) => { const b = e.getBoundingClientRect(); if (!rotd) return { l: b.left, t: b.top, r: b.right, b: b.bottom, w: b.width, h: b.height }; const l = b.top, rr = b.bottom, t = innerWidth - b.right, bb = innerWidth - b.left; return { l, t, r: rr, b: bb, w: rr - l, h: bb - t }; };
     const frame = document.querySelector('#pk-frame');
-    const out = { vw: innerWidth, vh: innerHeight, sw: document.documentElement.scrollWidth, sh: document.documentElement.scrollHeight, frame: r(frame), mid: r(document.querySelector('#pk-mid')), panels: [] };
+    const sb = stg.getBoundingClientRect();
+    const out = { rotd, rvw: innerWidth, rvh: innerHeight, raw: { l: sb.left, t: sb.top, w: sb.width, h: sb.height }, stageTf: getComputedStyle(stg).transform, vw: rotd ? innerHeight : innerWidth, vh: rotd ? innerWidth : innerHeight, fit: document.documentElement.scrollWidth <= innerWidth && document.documentElement.scrollHeight <= innerHeight, frame: r(frame), mid: r(document.querySelector('#pk-mid')), panels: [] };
     for (const side of [0, 1]) {
       const el = document.querySelector(`.pk-panel[data-side="${side}"]`), cs = getComputedStyle(el);
       const opts = [...el.querySelectorAll('.pk-opt')];
@@ -372,7 +390,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   ok(l0.rows === 2 && l0.cols === 2 && l1.rows === 2 && l1.cols === 2, 'four choices in a 2 x 2 grid on each half');
   ok(l0.above && l1.above, 'the character is above the choices in each player\'s own view (the top half is the mirror image)');
   ok(g.panels.every((q) => q.opts.every((b) => b.h >= 56 && b.w >= 56)) && g.panels.every((q) => q.choices.h / q.box.h >= 0.4), `choice buttons >= 56 px and the grid is ${(100 * g.panels[0].choices.h / g.panels[0].box.h).toFixed(0)} % of the half's height`);
-  ok(Math.abs(g.frame.l - (g.vw - g.frame.r)) < 1.5 && g.sw <= g.vw && g.sh <= g.vh, 'the stage is centred with equal space left and right; no scrolling');
+  ok(Math.abs(g.frame.l - (g.vw - g.frame.r)) < 1.5 && Math.abs(g.frame.w - g.vw) <= 1 && Math.abs(g.frame.h - g.vh) <= 1 && g.fit, 'the stage fills the whole screen (width and height = the viewport); no scrolling');
   await p.screenshot({ path: OUT + 'pk-question.png' });
   // keys are not shown without a keyboard; shown after one was used
   ok(await p.evaluate(() => getComputedStyle(document.querySelector('.pk-kb')).display === 'none'), 'no key hints before a key was pressed');
@@ -460,7 +478,7 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   ok((await p.evaluate(() => location.hash)) === '#/chinese/pk' && !(await p.evaluate(() => !!window.__pk)), 'Escape asks too; confirming returns to the setup page');
   const histAfter = await p.evaluate(() => JSON.parse(localStorage.getItem('learn.pk.v1')).rec.chinese);
   ok(JSON.stringify(histAfter) === JSON.stringify(hist), 'a game that was left is not recorded');
-  const rowText = async () => (await p.textContent('.pk-match')).replace(/\s+/g, ' ').trim();
+  const rowText = async () => (await p.textContent('.pk-match')).replace(/\s+/g, ' ').replace('继续对战', '').trim();
   ok((await rowText()) === 'Anna VS Ben 1:0', 'the record reads like a match: "' + (await rowText()) + '"');
   ok(await p.evaluate(() => document.querySelector('#pk-slot-1 .kname').textContent === 'Anna'), 'the last pick (Anna, Ben) is remembered');
   // reset of the record
@@ -491,20 +509,27 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   // =====================================================================================================================================
   await p.click('#pk-start'); await p.waitForSelector('#pk-stage'); await p.evaluate(() => window.__pk.manual(true));
   await toPhase('question');
-  for (const [w, h] of SIZES) {
+  const lay2 = {};
+  for (const [w, h] of SIZES.concat([[1366, 1024]])) {
     await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(120);
     const gg = await geo(), land = w > h;
     const tag = `${w}x${h}`;
     const pn = gg.panels;
     ok(rot(pn[1].transform) === 180 && rot(pn[0].transform) === 0, `${tag}: top half 180 degrees, bottom half 0`);
     const inside = pn.every((q2) => q2.box.l >= gg.frame.l - 1 && q2.box.r <= gg.frame.r + 1 && q2.box.t >= gg.frame.t - 1 && q2.box.b <= gg.frame.b + 1 && q2.opts.every((b) => b.l >= q2.box.l - 1 && b.r <= q2.box.r + 1 && b.t >= q2.box.t - 1 && b.b <= q2.box.b + 1) && q2.ch.t >= q2.box.t - 1 && q2.ch.b <= q2.box.b + 1 && q2.ch.l >= q2.box.l - 1 && q2.ch.r <= q2.box.r + 1);
-    ok(inside && gg.sw <= gg.vw && gg.sh <= gg.vh && pn.every((q2) => !q2.chOver && q2.optOver.every((x) => !x)), `${tag}: every half, character and button inside the screen, no overflow, no clipped label`);
+    ok(inside && gg.fit && pn.every((q2) => !q2.chOver && q2.optOver.every((x) => !x)), `${tag}: every half, character and button inside the screen, no overflow, no clipped label`);
     ok(pn.every((q2) => q2.opts.every((b) => b.h >= 55.5)), `${tag}: choice buttons >= 56 px high (${Math.min(...pn.flatMap((q2) => q2.opts.map((b) => Math.round(b.h))))} px)`);
     const lr = pn.map((q2, i) => lay(q2, i === 1));
-    ok(land || (lr.every((x) => x.rows === 2 && x.cols === 2 && x.above) && pn.every((q2) => q2.choices.h / q2.box.h >= 0.4)), `${tag}: ${land ? 'landscape screen (the same stage, see below)' : 'portrait halves: character above a 2 x 2 grid that takes >= 40 % of the half'}`);
+    ok(lr.every((x) => x.rows === 2 && x.cols === 2 && x.above) && pn.every((q2) => q2.choices.h / q2.box.h >= 0.4), `${tag}: ONE layout (the portrait one, inner size ${gg.vw} x ${gg.vh}): character above a 2 x 2 grid that takes >= 40 % of the half`);
     ok(Math.abs(gg.frame.l - (gg.vw - gg.frame.r)) < 1.5, `${tag}: equal space left and right (${Math.round(gg.frame.l)} / ${Math.round(gg.vw - gg.frame.r)} px)`);
-    if (land) ok(gg.frame.w / gg.frame.h <= 0.76 && gg.frame.w / gg.frame.h >= 0.7 && (await p.evaluate(() => getComputedStyle(document.querySelector('#pk-hint')).display !== 'none')), `${tag}: landscape shows the same 3:4 stage in the middle and the hint line`);
-    else ok(Math.abs(gg.frame.w - gg.vw) <= 1 && (await p.evaluate(() => getComputedStyle(document.querySelector('#pk-hint')).display === 'none')), `${tag}: portrait fills the width, no hint line`);
+    ok(Math.abs(gg.frame.w - gg.vw) <= 1 && Math.abs(gg.frame.h - gg.vh) <= 1 && gg.frame.l <= 1 && gg.frame.t <= 1 && (await p.locator('#pk-hint').count()) === 0, `${tag}: the stage fills the whole viewport (${Math.round(gg.frame.w)} x ${Math.round(gg.frame.h)} of ${gg.vw} x ${gg.vh}), whatever the orientation, and there is no hint line`);
+    ok(Math.abs(gg.raw.l) <= 1 && Math.abs(gg.raw.t) <= 1 && Math.abs(gg.raw.w - gg.rvw) <= 1 && Math.abs(gg.raw.h - gg.rvh) <= 1, `${tag}: the stage wrapper covers the viewport exactly (${Math.round(gg.raw.w)} x ${Math.round(gg.raw.h)})`);
+    ok(land ? rot(gg.stageTf) === 90 && gg.rotd : gg.stageTf === 'none' && !gg.rotd, `${tag}: ${land ? 'landscape: the stage is turned by 90 degrees' : 'portrait: no transform'}`);
+    const sig = JSON.stringify(pn.map((q2) => [q2.opts.map((b) => [b.l, b.t, b.w, b.h].map(Math.round)), [q2.ch.l, q2.ch.t, q2.ch.w, q2.ch.h].map(Math.round)]));
+    if (lay2[`${gg.vw}x${gg.vh}`]) ok(lay2[`${gg.vw}x${gg.vh}`] === sig, `${tag}: the inner layout is the very same as the one of a portrait screen ${gg.vw} x ${gg.vh}`); else lay2[`${gg.vw}x${gg.vh}`] = sig;
+    if (land) { await p.click('#pk-exit'); await p.waitForSelector('dialog[open]'); const dl = await p.evaluate(() => { const d = document.querySelector('dialog[open]'), b = d.getBoundingClientRect(), m = /matrix\(([^)]+)\)/.exec(getComputedStyle(d).transform), [a, c] = m ? m[1].split(',').map(Number) : [1, 0]; return { rot: Math.round(Math.atan2(c, a) * 180 / Math.PI), inside: b.left >= -1 && b.top >= -1 && b.right <= innerWidth + 1 && b.bottom <= innerHeight + 1 }; });
+      ok(dl.rot === 90 && dl.inside, `${tag}: the exit question is turned with the stage and fits the screen`);
+      await p.click('dialog[open] button:has-text("取消")'); await p.waitForSelector('dialog', { state: 'detached' }); }
     ok(pn[0].choices.h > 0 && Math.abs(pn[0].box.h - pn[1].box.h) <= 1, `${tag}: both halves have the same size`);
     await p.screenshot({ path: OUT + `pk-q-${tag}.png` });
   }
@@ -513,12 +538,12 @@ const SIZES = [[390, 844], [844, 390], [320, 568], [568, 320], [820, 1180], [118
   await playout(() => 0);
   for (const [w, h] of SIZES) {
     await p.setViewportSize({ width: w, height: h }); await p.waitForTimeout(120);
-    const fit = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`), pb = e.getBoundingClientRect(); return [...e.querySelectorAll('.pk-stage2, .pk-verdict, .pk-fscore, .pk-again')].every((x) => { const r = x.getBoundingClientRect(); return r.left >= pb.left - 1 && r.right <= pb.right + 1 && r.top >= pb.top - 1 && r.bottom <= pb.bottom + 1; }) && e.querySelector('.pk-again').getBoundingClientRect().height >= 55.5; }));
+    const fit = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`), pb = e.getBoundingClientRect(); return [...e.querySelectorAll('.pk-stage2, .pk-verdict, .pk-fscore, .pk-again')].every((x) => { const r = x.getBoundingClientRect(); return r.left >= pb.left - 1 && r.right <= pb.right + 1 && r.top >= pb.top - 1 && r.bottom <= pb.bottom + 1; }) && e.querySelector('.pk-again').offsetHeight >= 55.5; }));
     ok(fit.every(Boolean), `${w}x${h}: final screen: pictures, words, score and the "play again" button (>= 56 px) fit inside each half`);
     await p.screenshot({ path: OUT + `pk-f-${w}x${h}.png` });
   }
   // the exit button of the final screen sits at the centre line
-  const mid = await p.evaluate(() => { const b = document.querySelector('#pk-exit').getBoundingClientRect(), m = document.querySelector('#pk-mid').getBoundingClientRect(); return { cy: b.top + b.height / 2, my: m.top + m.height / 2, text: document.querySelector('#pk-exit').getAttribute('aria-label') }; });
+  const mid = await p.evaluate(() => { const b = document.querySelector('#pk-exit').getBoundingClientRect(), m = document.querySelector('#pk-mid').getBoundingClientRect(); const rt = document.querySelector('#pk-stage').classList.contains('rot'); return { cy: rt ? b.left + b.width / 2 : b.top + b.height / 2, my: rt ? m.left + m.width / 2 : m.top + m.height / 2, text: document.querySelector('#pk-exit').getAttribute('aria-label') }; });
   ok(Math.abs(mid.cy - mid.my) < 7 && mid.text === '返回', 'the shared "返回" button is on the centre line');
 
   // =====================================================================================================================================

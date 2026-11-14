@@ -15,6 +15,7 @@ import { mascot } from "./art";
 import { subjectArt, shortcuts, subjectById } from "./hub";
 import * as R from "./readings";
 import { getLang } from "./i18n";
+import { speakText, type SpeakHandle } from "./speech";
 import * as PK from "./pk";
 import { spellButton } from "./dictwrite";
 
@@ -226,15 +227,12 @@ async function renderReading(k: M.Kid) {
     }
     return p;
   });
-  let speaking = false;
+  let speaking: SpeakHandle | null = null;
   const speakBtn = h("button", { class: "sheet-btn", id: "rd-speak", onclick: () => {
-    try {
-      const s = window.speechSynthesis; if (!s) return;
-      if (speaking) { s.cancel(); speaking = false; speakBtn.textContent = "朗读全文"; return; }
-      s.cancel(); const u = new SpeechSynthesisUtterance(r.text.replace(/\n+/g, " ")); u.lang = "en-US"; u.rate = 0.85;
-      u.onend = () => { speaking = false; speakBtn.textContent = "朗读全文"; };
-      speaking = true; speakBtn.textContent = "停止朗读"; s.speak(u);
-    } catch { /* no speech on this device */ }
+    if (speaking) { speaking.stop(); speaking = null; speakBtn.textContent = "朗读全文"; return; }
+    const hd = speakText(r.text.replace(/\n+/g, " "), "en-US", { rate: 0.85, onend: () => { if (speaking === hd) { speaking = null; speakBtn.textContent = "朗读全文"; } } });
+    if (hd.ended) return;   // (no speech on this device)
+    speaking = hd; speakBtn.textContent = "停止朗读";
   } }, "朗读全文");
   let right = 0, done = 0;
   const score = h("p", { class: "rd-score", id: "rd-score" });

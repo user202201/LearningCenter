@@ -177,7 +177,7 @@ const plen = (m) => m.slice(1).reduce((s, p, i) => s + Math.hypot(p[0] - m[i][0]
     localStorage.setItem('learn.settings.v1', JSON.stringify({ lang: lang || 'auto' }));
     // the voice: a stub that records what is said (a test can also make it finish a speech)
     window.__spoken = []; window.__cancels = 0;
-    const synth = { speak(u) { window.__spoken.push({ text: u.text, lang: u.lang }); if (!window.__noEnd) setTimeout(() => u.onend && u.onend({}), 300); }, cancel() { window.__cancels++; }, getVoices() { return []; }, speaking: false };
+    const synth = { speak(u) { window.__spoken.push({ text: u.text, lang: u.lang }); if (!window.__noEnd) setTimeout(() => u.onend && u.onend({}), 300); }, cancel() { window.__cancels++; }, getVoices() { return [{ lang: 'zh-CN' }, { lang: 'en-US' }, { lang: 'fr-FR' }]; }, speaking: false };
     Object.defineProperty(window, 'speechSynthesis', { value: synth, configurable: true });
     window.SpeechSynthesisUtterance = function (t) { this.text = t; };
   };

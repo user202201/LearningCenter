@@ -59,7 +59,7 @@ const draws: Record<string, (c: C, col: string) => void> = {
   phage: (c, col) => { Poly(c, [[0, -44], [20, -32], [20, -10], [0, 2], [-20, -10], [-20, -32]], col); L(c, [[0, 2], [0, 30]], K, 6); L(c, [[0, 30], [-24, 44]], K, 3); L(c, [[0, 30], [24, 44]], K, 3); L(c, [[0, 30], [-8, 46]], K, 3); L(c, [[0, 30], [8, 46]], K, 3); },
   tmv: (c, col) => { c.save(); c.rotate(-0.5); c.beginPath(); c.roundRect(-46, -11, 92, 22, 11); c.fillStyle = col; c.fill(); c.strokeStyle = K; c.lineWidth = 2.5; c.stroke(); for (let x = -38; x < 40; x += 8) L(c, [[x, -10], [x + 5, 10]], "#fff", 2); c.restore(); },
 };
-const BY_NAME: Record<string, string> = { "鲨鱼": "shark", "海马": "seahorse", "大鲵": "salamander", "蟾蜍": "toad", "鸡": "chicken", "企鹅": "penguin", "鹰": "eagle", "兔": "rabbit", "鲸": "whale", "蝙蝠": "bat", "老虎": "tiger", "猴": "monkey", "大象": "elephant", "蝗虫": "grasshopper", "蝴蝶": "butterfly", "虾": "shrimp" };
+const BY_NAME: Record<string, string> = { "鲨鱼": "shark", "海马": "seahorse", "大鲵": "salamander", "蟾蜍": "toad", "鸡": "chicken", "企鹅": "penguin", "鹰": "eagle", "兔": "rabbit", "鲸": "whale", "蝙蝠": "bat", "老虎": "tiger", "猴": "monkey", "大象": "elephant", "蝗虫": "grasshopper", "蝴蝶": "butterfly", "虾": "shrimp", "蛇": "snake", "乌龟": "turtle", "蜥蜴": "lizard", "鳄鱼": "croc", "蜈蚣": "centipede" };
 /** draw organism `i` of ORGS centred at (x, y), `size` drawing units wide */
 export function drawOrganism(c: C, i: number, x: number, y: number, size: number) {
   const o = ORGS[i], fn = draws[BY_NAME[o.name] ?? o.group] ?? draws.frog;

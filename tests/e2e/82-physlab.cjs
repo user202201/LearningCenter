@@ -11,7 +11,8 @@ const path = require('path');
 const OUT = process.env.D || 'tests/out/physlab/';
 fs.mkdirSync(OUT, { recursive: true });
 
-const IDS = ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc', 'density'];
+const IDS = ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc', 'density', 'evap', 'thermo', 'straight', 'diffuse', 'noise', 'lensexp', 'internal', 'resistance', 'ohmlaw', 'rmeasure', 'meter', 'emdev', 'comms'];
+const NEW4 = ['evap', 'thermo', 'straight', 'diffuse', 'noise', 'lensexp', 'internal', 'resistance', 'ohmlaw', 'rmeasure', 'meter', 'emdev', 'comms'];   // the fourth pass (13 simulations)
 const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
 const rel = (a, b, tol = 1e-3) => Math.abs(a - b) <= tol * Math.max(1, Math.abs(b));
 
@@ -55,6 +56,20 @@ const SOLVE = {
   emwave: { visible: { mode: 0, lf: 14.7 }, fm: { mode: 0, lf: 8 }, moon: { mode: 1, dest: 3, med: 0 }, fiber: { mode: 1, dest: 1, med: 1 } },
   density: { copper: { mode: 0, mat: 2, order: 0, V: 20 }, wrongorder: { mode: 0, mat: 0, order: 1, V: 10 }, alcohol: { mode: 1, liq: 0, order: 0, VL: 40 }, wax: { mode: 0, mat: 5 } },
   energysrc: { wind: { mode: 0, src: 5, guess: 1 }, nuclear: { mode: 0, src: 3, guess: 2 }, improve: { mode: 1, plant: 0, boost: 10 }, mix: { mode: 2, coal: 30, hydro: 20, nuc: 10 } },
+  // ---- fourth pass: an array = steps (an object sets the state, a string presses that action button) ----
+  evap: { dry: { mode: 0, T: 40, A: 30, wind: 0, t: 30 }, lpg: { mode: 1, gas: 1, TG: 20, pG: 3 }, frost: { mode: 2, bath: 60, ti: 10, cold: 1 }, deposit: { mode: 3, ph: 9 } },
+  thermo: { cold: { mode: 0, T: -10 }, stay: { mode: 1, prev: 38.5, now: 36.8, shaken: 0 }, shake: { mode: 1, prev: 38.5, now: 36.8, shaken: 1 }, right: { mode: 2, place: 0, Tw: 80 } },
+  straight: { equal: { mode: 0, u: 30, v: 30 }, sharp: { mode: 0, d: 1, u: 30, v: 20 }, point: { mode: 1, src: 0 }, eclipse: { mode: 2, phase: 0, beta: 0 } },
+  diffuse: { mirror: { r: 0, theta: 30, alpha: 30 }, dark: { r: 0, theta: 30, alpha: -30 }, diffuse: { r: 1, theta: 30, alpha: 0 } },
+  noise: { loud: { mode: 0, L: 100 }, quiet: { mode: 1, L0: 85, m0: 1, m1: 1, m2: 1 }, echo: { mode: 2, med: 0, d: 20 }, sonar: { mode: 3, ts: 4 } },
+  lensexp: { focus: { mode: 0, lens: 0, v: 10 }, big: { mode: 1, lens: 0, u: 15, v: 30 }, small: { mode: 1, lens: 0, u: 30, v: 15 }, rows: [{ mode: 1, lens: 0, u: 15, v: 30 }, 'rec', { u: 20, v: 20 }, 'rec', { u: 30, v: 15 }, 'rec'] },
+  internal: { compress: { mode: 0, action: 1, sub: 3, mg: 10, W: 300 }, expand: { mode: 0, action: 2, sub: 3, mg: 10, W: 300 }, reverse: { mode: 1, TA: 20, TB: 80 }, none: { mode: 1, TA: 50, TB: 50 } },
+  resistance: { len: { mode: 0, LB: 2 }, area: { mode: 1, SB: 1 }, mat: { mode: 2, matB: 0 }, temp: { mode: 3, TB: 60 } },
+  ohmlaw: { dataU: [{ mode: 0, r: 1, U: 1 }, 'rec', { U: 2 }, 'rec', { U: 3 }, 'rec', { U: 4 }, 'rec'], dataR: [{ mode: 1, r: 0 }, 'rec', { r: 1 }, 'rec', { r: 2 }, 'rec', { r: 3 }, 'rec'], five: [{ mode: 0, r: 0, U: 3 }, 'rec'] },
+  rmeasure: { rec3: [{ target: 0, rx: 1, Rp: 0 }, 'rec', { Rp: 5 }, 'rec', { Rp: 10 }, 'rec'], avg: [{ target: 0, rx: 1, Rp: 0 }, 'rec', { Rp: 2 }, 'rec', { Rp: 4 }, 'rec'], bulb: [{ target: 1, Rp: 0 }, 'rec', { Rp: 10 }, 'rec'], normal: { target: 1, Rp: 1 } },
+  meter: { kwh: { mode: 0, U: 220, I: 10, t: 7200 }, three: { mode: 1, P: 1000, th: 3 }, power: { mode: 2, rate: 3, n: 50, tt: 60 } },
+  emdev: { relay: { mode: 0, s1: 1, U1: 6 }, alarm: { mode: 1, T: 80, Tset: 60 }, speaker: { mode: 2, A: 1 }, mic: { mode: 3, A: 1, f: 1000 } },
+  comms: { bad: { mode: 0, noise: 1.5 }, clean: { mode: 0, noise: 0.7 }, tune: { mode: 1, band: 0, ftA: 900 }, fiber: { mode: 2, th: 80 } },
 };
 // the quiz kinds: the right answer recomputed from the parameters `p` by a formula written here (not the one in the model); numbers only, the text kinds are listed below
 const g = 10, deg = (r) => (r * 180) / Math.PI, rad = (d) => (d * Math.PI) / 180;
@@ -90,8 +105,24 @@ const EXPECT = {
   emwave: { wavelength: ([f]) => 300 / f, freq: ([w]) => 300 / w, delay: ([d]) => (d * 1000) / 3e8 },
   density: { rho: ([m, V]) => m / V, displace: ([a, b]) => b - a },
   energysrc: { chain: ([a, b]) => (a * b) / 100, kwh: ([MJ]) => MJ / 3.6, co2: ([N]) => 0.9 * N },
+  // ---- fourth pass ----
+  evap: { remain: ([m0, r, t]) => m0 - r * t, avgrate: ([m, t]) => m / t },
+  thermo: { read: ([d, k]) => -d * k, division: ([n]) => 100 / n, clinical: ([a, b]) => Math.max(a, b) },
+  straight: { img_h: ([h, u, v]) => (h * v) / u, shadow: ([D, a, b]) => (D * (a + b)) / a, lighttime: ([x]) => (x * 1e6) / 3e5 },
+  diffuse: { facet: ([t]) => 2 * t, outang: ([b]) => 90 - b },
+  noise: { echo: ([t]) => (340 * t) / 2, mindist: ([v]) => (v * 0.1) / 2, depth: ([t]) => (1500 * t) / 2 },
+  lensexp: { focal: ([d]) => d / 2, vdist: ([f, u]) => (u * f) / (u - f), size: ([h, u, v]) => (h * v) / u },
+  internal: { dT: ([c, m, W]) => W / ((c * m) / 1000), final: ([a, b]) => (a + b) / 2, Qflow: ([m, a, b]) => 4200 * m * (a - b) },
+  resistance: { cut: ([R, n]) => R / n, stretch: ([R, k]) => R * k * k, area: ([a, b, R]) => (R * a) / b },
+  ohmlaw: { I: ([R, U]) => U / R, Rgraph: ([U, I]) => U / I, Inew: ([U, , R2]) => U / R2 },
+  rmeasure: { R: ([U, I]) => U / I, Rp: ([E, Rx, I]) => E / I - Rx, avg: ([a, b, c]) => (a + b + c) / 3 },
+  meter: { work: ([U, I, t]) => U * I * t, energy: ([P, h]) => (P * h) / 1000, cost: ([k, p]) => k * p, revs: ([r, e]) => r * e },
+  emdev: { coilI: ([R, U]) => (U / R) * 1000, minU: ([I, R]) => (I / 1000) * R, loadI: ([P]) => P / 220 },
+  comms: { lambda: ([f]) => 300 / f, freq: ([l]) => 300 / l, rate: ([S, R]) => (8 * S) / R },
 };
 const TEXT_KINDS = {
+  evap: ['factor', 'liquefy', 'process'], thermo: ['neck', 'method'], straight: ['straight', 'eclipse'], diffuse: ['type', 'see', 'glare'], noise: ['ways', 'limit'], lensexp: ['screen', 'move'],
+  internal: ['way', 'direction'], resistance: ['factor', 'table'], ohmlaw: ['conclusion', 'control'], rmeasure: ['bulbR', 'meters'], meter: ['param'], emdev: ['relay', 'principle'], comms: ['digital', 'fiber'],
   sound: ['concept'], heating: ['concept'], refraction: ['toward', 'tir'], lens: ['nature', 'tool'], newton: ['first'], pressure: ['pratio'], buoyancy: ['state'], lever: ['kind', 'tilt'], specificheat: ['which', 'property'], em: ['core', 'motor_rev', 'induction', 'turns'],
   dispersion: ['faster', 'mix', 'obj', 'primary'], eye: ['myopia'], fluid: ['bern', 'connected'], molecule: ['gap', 'force_kind', 'state', 'diffusion'], engine: ['stroke', 'conv'], circuit: ['home'], bulbpower: ['bright'], home: ['fuse', 'safe'], magfield: ['oersted', 'lines', 'earth'], emwave: ['vac', 'band'], energysrc: ['renew', 'primary'], density: ['ident', 'float', 'order'],
 };
@@ -392,15 +423,15 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
 
   // ---- the quiz generators ----
   {
-    const r = await page.evaluate(async () => {
+    const r = await page.evaluate(async (nw) => {
       const out = {}; const mulberry32 = (await import('/src/phys/qtools.ts')).mulberry32;
-      for (const n of ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc', 'density']) {
+      for (const n of ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc', 'density', ...nw]) {
         const M = await import(`/src/phys/model-${n}.ts`); const list = []; const errors = [];
         for (let seed = 1; seed <= 300; seed++) { try { list.push(M.quiz(mulberry32(seed))); } catch (e) { errors.push(String(e)); } }
         out[n] = { list, errors };
       }
       return out;
-    });
+    }, NEW4);
     const chk = (id, qs, expected, wrongToo) => {
       let bad = 0, n = 0; const msgs = [];
       for (const quiz of qs) {
@@ -498,6 +529,180 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     ok(r.prim.join() === '一次能源|false,二次能源|true' && r.renew.join() === '不可再生能源,可再生能源', 'A energysrc quiz: primary / secondary (电能 / 氢能 are asked and are 二次能源) and renewable / not renewable both occur');
   }
 
+  // ---- fourth pass (rule 57): the 13 new models against independent calculations ----
+  {
+    const r = await page.evaluate(async () => {
+      const L = {}; for (const n of ['evap', 'thermo', 'straight', 'diffuse', 'noise', 'lensexp', 'internal', 'resistance', 'ohmlaw', 'rmeasure', 'meter', 'emdev', 'comms']) L[n] = await import(`/src/phys/model-${n}.ts`);
+      const mulberry32 = (await import('/src/phys/qtools.ts')).mulberry32;
+      const o = { bad: [] }; const bad = (m) => { if (o.bad.length < 40) o.bad.push(m); };
+      const near = (a, b, t = 1e-9) => Math.abs(a - b) <= t * Math.max(1, Math.abs(b));
+      // ---- evap: monotone in every factor, the exact formula, Clausius-Clapeyron written again here, the six changes of state
+      { const M = L.evap; const WF = [1, 1.6, 2.4];
+        for (const T of [10, 25, 40, 80]) for (const A of [5, 20, 50]) for (const w of [0, 1, 2]) { const v = M.evapRate(T, A, w); if (!near(v, 0.0005 * A * (T + 20) * WF[w])) bad('evap rate formula'); if (T < 80 && !(M.evapRate(T + 5, A, w) > v)) bad('evap not rising with T'); if (A < 50 && !(M.evapRate(T, A + 5, w) > v)) bad('evap not rising with A'); if (w < 2 && !(M.evapRate(T, A, w + 1) > v)) bad('evap not rising with wind'); }
+        if (M.waterLeft(0.5, 30) !== 5 || M.waterLeft(5, 30) !== 0 || M.waterLeft(0, 60) !== 20) bad('waterLeft'); if (!(M.coolDrop(1) > M.coolDrop(0.2) && M.coolDrop(100) <= 10 && M.coolDrop(0) === 0)) bad('coolDrop');
+        const G = [{ Tb: 373.15, L: 40700, Tc: 647.1 }, { Tb: 272.65, L: 22400, Tc: 425.1 }, { Tb: 90.2, L: 6800, Tc: 154.6 }], R = 8.314;
+        const psat = (g, T) => Math.exp((G[g].L / R) * (1 / G[g].Tb - 1 / (T + 273.15)));
+        for (let g = 0; g < 3; g++) { if (!near(M.satPressure(g, G[g].Tb - 273.15), 1, 1e-6)) bad('psat at the normal boiling point ' + g); if (!near(M.boilingAt(g, 1), G[g].Tb - 273.15, 1e-6)) bad('boilingAt 1 atm ' + g); for (let T = -190; T <= 140; T += 17) { if (!near(M.satPressure(g, T), psat(g, T), 1e-9)) bad('psat ' + g + ' ' + T); if (!near(M.boilingAt(g, M.satPressure(g, T)), T, 1e-6)) bad('boiling / psat do not invert ' + g + ' ' + T); } for (let p = 1; p < 20; p += 0.5) if (!(M.boilingAt(g, p + 0.5) > M.boilingAt(g, p))) bad('boiling point must rise with the pressure'); }
+        o.evap = { water: [M.gasState(0, 120, 1), M.gasState(0, 120, 2.5), M.gasState(0, 90, 1), M.gasState(0, 100, 1)], butane: [M.gasState(1, 20, 1), M.gasState(1, 20, 2.5), M.gasState(1, 20, 1.9), M.gasState(1, -20, 1), psat(1, 20)], oxygen: [M.gasState(2, 20, 1), M.gasState(2, -183, 1), M.gasState(2, -150, 1), M.gasState(2, -100, 20), M.gasState(2, -140, 20)], oxHot: Array.from({ length: 20 }, (_, i) => M.gasState(2, -100, 1 + i)).every((x) => x === 'hot') };
+        let ib = 0; for (const b of [20, 60, 100]) for (const t of [0, 5, 30]) { const v = M.vapour(b, t); if (v < 0 || v > M.M_IODINE || (t > 0 && !(v > 0)) || M.crystals(b, t, 0) !== 0 || !near(M.crystals(b, t, 1), 0.8 * v)) ib++; if (b < 100 && M.vapour(b + 20, t) < v) ib++; }
+        o.evap.ib = ib; o.evap.melt = M.IODINE_MELT;
+        o.evap.phen = M.PHEN.map((x) => x[1]).join(','); o.evap.proc = M.PROC.join(','); o.evap.abs = M.ABSORB.join(',');
+      }
+      // ---- thermo
+      { const M = L.thermo; let b = 0;
+        for (let i = 0; i < 400; i++) { const prev = 35 + Math.floor(Math.random() * 71) / 10, now = 35 + Math.floor(Math.random() * 71) / 10; const want = (sh) => Math.round((sh ? now : Math.max(prev, now)) * 10) / 10; if (M.clinical(prev, now, 0) !== want(0) || M.clinical(prev, now, 1) !== want(1)) b++; }
+        for (const [T, w] of [[-20, -20], [-10.4, -10], [-10.6, -11], [36.5, 37], [100, 100], [110, 110], [150, 110], [-50, -20]]) if (M.readLab(T) !== w && !(T === 36.5 && M.readLab(T) === 37)) b++;
+        for (let T = 30; T <= 100; T += 5) { if (M.placed(T, 0) !== T || !(M.placed(T, 1) > T) || !(M.placed(T, 2) < T) || !(M.placed(T, 3) < T && M.placed(T, 3) > 20) || M.verdict(T, 0) !== '准确' || M.verdict(T, 1) !== '偏高' || M.verdict(T, 2) !== '偏低' || M.verdict(T, 3) !== '偏低') b++; }
+        o.thermo = { b, range: [M.LAB_MIN, M.LAB_MAX, M.CLIN_MIN, M.CLIN_MAX] };
+      }
+      // ---- straight: similar triangles, and the shadow traced ray by ray from many points of the source
+      { const M = L.straight; let b = 0;
+        for (const [h, u, v] of [[8, 30, 20], [10, 20, 40], [4, 16, 24], [12, 24, 12]]) if (!near(M.pinholeHeight(h, u, v), h * v / u)) b++;
+        if (!near(M.blurMm(2, 30, 30), 4) || M.blurMm(1, 30, 20) > M.SHARP_MM || M.blurMm(6, 30, 20) <= M.SHARP_MM) b++;
+        let sb = 0;
+        for (const D of [4, 10, 20]) for (const s of [0, 3, 10, 30]) for (const a of [20, 40, 100]) for (const bb of [10, 40, 100]) {
+          // a source point at height ys sends a ray past each edge of the object (at x = a) to the screen (x = a + bb)
+          let lo = Infinity, hi = -Infinity, ilo = -Infinity, ihi = Infinity; const N = 400;
+          for (let k = 0; k <= N; k++) { const ys = s === 0 ? 0 : -s / 2 + (s * k) / N; const proj = (yo) => ys + (yo - ys) * (a + bb) / a; const e1 = proj(-D / 2), e2 = proj(D / 2); lo = Math.min(lo, e1); hi = Math.max(hi, e2); ilo = Math.max(ilo, e1); ihi = Math.min(ihi, e2); if (s === 0) break; }
+          const outer = hi - lo, umbra = Math.max(0, ihi - ilo); const r = M.shadow(D, s, a, bb);
+          if (!near(r.whole, outer, 1e-9) || !near(r.umbra, umbra, 1e-9) || r.penumbra !== (s > 0 && outer > umbra + 1e-9)) sb++;
+        }
+        o.straight = { b, sb, ecl: [M.eclipse(0, 0), M.eclipse(180, 0), M.eclipse(90, 0), M.eclipse(0, 3), M.eclipse(180, 1.2), M.eclipse(2, 1.4), M.eclipse(178, 0.9), M.eclipse(356, 0), M.eclipse(6, 0), M.eclipse(186, 0)] };
+        let both = 0, n = 0; for (let p = 0; p <= 360; p++) for (let be = -6; be <= 6; be += 0.1) { const e = M.eclipse(p, be); if (e !== 'none') n++; if (e === 'solar' && Math.abs(((p + 180) % 360) - 180) > 5) both++; if (e === 'lunar' && Math.abs(p - 180) > 5) both++; }
+        o.straight.eclGrid = [both, n];
+      }
+      // ---- diffuse: the law of reflection at every tilted facet by vector reflection; the light is only spread, never created
+      { const M = L.diffuse; let b = 0;
+        for (const r of [0, 0.2, 0.5, 1]) for (const th of [0, 15, 30, 60, 70]) for (let i = 0; i < M.TILTS.length; i++) {
+          const t = (25 * r * M.TILTS[i] * Math.PI) / 180, T = (th * Math.PI) / 180;
+          const d = [Math.sin(T), -Math.cos(T)], n = [-Math.sin(t), Math.cos(t)], dn = d[0] * n[0] + d[1] * n[1], rr = [d[0] - 2 * dn * n[0], d[1] - 2 * dn * n[1]];
+          const ang = (Math.atan2(rr[0], rr[1]) * 180) / Math.PI; if (Math.abs(ang - M.outAngle(r, th, i)) > 1e-9) b++;
+          if (Math.abs(M.outAngle(r, th, i) - th) > 2 * 25 * r + 1e-9) b++;
+        }
+        let E = [];
+        for (const r of [0.05, 0.1, 0.3, 0.6, 1]) for (const th of [10, 40]) { let sum = 0; for (let a = -90; a <= 90; a += 0.01) sum += M.brightness(r, th, a) * 0.01; E.push(sum); }
+        o.diffuse = { b, E, mirror: [M.isMirror(0), M.isMirror(0.1), M.isMirror(0.12), M.isMirror(1)], br: [M.brightness(0, 30, 30), M.brightness(0, 30, 31), M.brightness(0, 30, -30), M.brightness(1, 30, 0), M.brightness(1, 30, 30), M.brightness(1, 30, -30)], spread: [M.spread(0), M.spread(0.5), M.spread(1)] };
+      }
+      // ---- noise
+      { const M = L.noise; let b = 0;
+        for (const [L0, c] of [[30, '耳语、树叶的沙沙声'], [31, '安静的房间、图书馆'], [50, '安静的房间、图书馆'], [70, '一般交谈、办公室'], [90, '繁忙的街道、嘈杂的车间'], [110, '摇滚音乐会、电锯'], [130, '飞机起飞、近处的雷声']]) if (M.example(L0) !== c) b++;
+        const ef = (x) => (x <= 50 ? '适合休息和睡眠' : x <= 70 ? '适合工作和学习，但会影响休息' : x <= 90 ? '影响工作和学习，长时间会使人烦躁' : '长时间会损害听力');
+        for (let x = 0; x <= 140; x += 5) if (M.effect(x) !== ef(x)) b++;
+        for (let m = 0; m < 8; m++) { const on = [m & 1, (m >> 1) & 1, (m >> 2) & 1]; const want = Math.max(0, 85 - 20 * on[0] - 15 * on[1] - 15 * on[2]); if (M.controlled(85, on) !== want) b++; }
+        if (!near(M.echoDelay(17, 340), 0.1) || !near(M.minDistance(340), 17) || !near(M.minDistance(1500), 75) || !near(M.minDistance(5200), 260) || !near(M.depth(4), 3000) || !near(M.echoDelay(M.minDistance(1500), 1500), 0.1)) b++;
+        for (const [, v] of M.MEDIA) for (let d = 1; d <= 400; d += 33) if (!near(M.echoDelay(d, v) * v / 2, d)) b++;
+        o.noise = { b, media: M.MEDIA.map((x) => x.join(':')).join(','), measures: M.MEASURES.map((x) => x[1]).join(',') };
+      }
+      // ---- lensexp: against the lens equation and a search for the sharpest screen position
+      { const M = L.lensexp; let b = 0, cases = 0;
+        for (const f of M.FS) for (let u = 5; u <= 45; u += 0.5) {
+          let best = null; for (let v = 5; v <= 70; v += 0.5) { const e = Math.abs(1 / u + 1 / v - 1 / f); if (!best || e < best[1]) best = [v, e]; }
+          for (let v = 5; v <= 70; v += 0.5) {
+            cases++; const o2 = M.onScreen(f, u, v);
+            if (u <= f) { if (!o2.none || o2.sharp) b++; continue; }
+            const v0 = 1 / (1 / f - 1 / u), blur = 4 * Math.abs(v - v0) / v0;
+            if (!near(o2.v0, v0, 1e-9) || !near(o2.blur, blur, 1e-9) || o2.sharp !== (blur <= 0.25) || !near(1 / u + 1 / o2.v0, 1 / f, 1e-9)) b++;
+            const kind = Math.abs(u - 2 * f) < 1e-9 ? 1 : u > 2 * f ? 0 : 2; if (o2.kind !== kind || !near(o2.m, v0 / u, 1e-9)) b++;
+          }
+          if (u > f && Math.abs(best[0] - 1 / (1 / f - 1 / u)) <= 0.25 && !M.onScreen(f, u, best[0]).sharp && 1 / (1 / f - 1 / u) <= 70) b++;
+        }
+        o.lensexp = { b, cases, spot: [M.spot(10, 10), M.spot(10, 20), M.spot(10, 5), M.spot(10, 12)], sharpAt: M.onScreen(10, 30, 15).sharp, kinds: [M.onScreen(10, 30, 15).kind, M.onScreen(10, 20, 20).kind, M.onScreen(10, 15, 30).kind] };
+      }
+      // ---- internal: energy conservation in the exchange; the sign of the work
+      { const M = L.internal; let b = 0;
+        for (const [, cA] of M.SUBS) for (const [, cB] of M.SUBS) for (const mA of [50, 400, 1000]) for (const mB of [50, 400, 1000]) for (const TA of [0, 30, 100]) for (const TB of [0, 50, 100]) {
+          const f = M.exchange(cA, mA, TA, cB, mB, TB), lost = (cA * mA / 1000) * (TA - f.Tf), gained = (cB * mB / 1000) * (f.Tf - TB);
+          if (!near(lost, gained, 1e-9) || !near(f.Q, lost, 1e-9) || f.Tf < Math.min(TA, TB) - 1e-9 || f.Tf > Math.max(TA, TB) + 1e-9 || f.dir !== (TA > TB ? 'AB' : TA < TB ? 'BA' : 'none')) b++;
+          if (cA === cB && mA === mB && !near(f.Tf, (TA + TB) / 2)) b++;
+        }
+        for (const [, c] of M.SUBS) for (const W of [0, 100, 500]) for (const mg of [10, 500]) { const up = M.dT(0, W, mg, c), comp = M.dT(1, W, mg, c), ex = M.dT(2, W, mg, c); if (!near(up, W / (c * mg / 1000)) || !near(comp, up) || !near(ex, -up)) b++; }
+        o.internal = { b, rel: M.relEnergy(4200, 200, 80), subs: M.SUBS.map((x) => x.join(':')).join(',') };
+      }
+      // ---- resistance: the proportionalities
+      { const M = L.resistance; let b = 0;
+        for (let m = 0; m < 5; m++) { const R0 = M.resistance(m, 1, 1); for (const k of [2, 3, 5]) { if (!near(M.resistance(m, k, 1), k * R0) || !near(M.resistance(m, 1, k), R0 / k) || !near(M.resistance(m, k, 1 / k), k * k * R0)) b++; } if (!near(M.resistance(m, 1, 1, 20), M.resistance(m, 1, 1)) || !(M.resistance(m, 1, 1, 200) > R0)) b++; }
+        for (let m = 1; m < 5; m++) if (!(M.resistance(m, 1, 1) > M.resistance(m - 1, 1, 1))) b++;
+        for (let R = 0; R < 50; R += 3) if (!(M.current(R + 3) < M.current(R))) b++;
+        const dflt = [0, 1, 2, 3].map((m) => M.pair(m, 1, 0.5, 4, 20)); for (const p of dflt) if (!near(p.RA, p.RB)) b++;
+        const lenx = M.pair(0, 3, 0.5, 4, 20), sx = M.pair(1, 1, 0.25, 4, 20), tx = M.pair(3, 1, 0.5, 4, 120);
+        o.resistance = { b, len: lenx.RB / lenx.RA, area: sx.RB / sx.RA, temp: tx.RB / tx.RA, cu: M.pair(2, 1, 0.5, 0, 20).RB < M.pair(2, 1, 0.5, 0, 20).RA, ref: M.REF.join(';'), I: [M.current(0), M.current(5), M.current(15)] };
+      }
+      // ---- ohmlaw
+      { const M = L.ohmlaw; let b = 0;
+        for (const R of M.RS) for (let U = 0.5; U <= 6; U += 0.5) { const I = M.ammeter(U, R); if (Math.abs(I - U / R) > 0.005 + 1e-9) b++; }
+        const us = [1, 2, 3, 4], ideal = us.map((u) => M.ammeter(u, 10)), square = us.map((u) => Math.round((u * u / 10) * 100) / 100), rs = [5, 10, 15, 20, 25], inv = rs.map((r) => M.ammeter(3, r)), lin = rs.map((r) => Math.round(0.6 * (1 + r / 25) * 100) / 100);
+        o.ohmlaw = { b, prop: [M.proportional(us, ideal), M.proportional(us, square), M.proportional([1], [0.1]), M.proportional([0.5, 1, 1.5], [M.ammeter(0.5, 5), M.ammeter(1, 5), M.ammeter(1.5, 5)])], inv: [M.inverse(rs, inv), M.inverse(rs, lin), M.inverse([5], [0.6])], maxrows: M.MAXROWS };
+      }
+      // ---- rmeasure: Kirchhoff's voltage law for the bulb (written here), the resistor reads its own value
+      { const M = L.rmeasure; let b = 0;
+        for (let i = 0; i < 4; i++) for (let Rp = 0; Rp <= 20; Rp += 0.5) { const l = M.lab(0, i, Rp); if (!near(l.I, 3 / (Rp + M.RX[i]), 1e-12) || !near(l.U, l.I * M.RX[i], 1e-12)) b++; if (Math.abs(l.Iread - l.I) > 0.0101 || Math.abs(l.Uread - l.U) > 0.0501) b++; }
+        let prevI = Infinity, prevR = Infinity; const bulbRows = [];
+        for (let Rp = 0; Rp <= 20; Rp += 0.5) { const l = M.lab(1, 0, Rp); const res = 3 - l.U - l.I * (Rp + 0.6); if (Math.abs(res) > 1e-6 || Math.abs(l.U - 2.5 * (l.I / 0.3) ** (5 / 3)) > 1e-6) b++; if (l.I > prevI + 1e-12) b++; prevI = l.I; if (l.U / l.I > prevR + 1e-9) b++; prevR = l.U / l.I; bulbRows.push(l.U / l.I); }
+        o.rmeasure = { b, bulb: [bulbRows[0], bulbRows[bulbRows.length - 1]], r0: M.lab(0, 1, 0), mean: M.mean([1, 2, 6]) };
+      }
+      // ---- meter
+      { const M = L.meter; let b = 0;
+        for (const P of [100, 500, 1000, 3000]) for (const t of [10, 60, 3600]) for (const rate of M.RATES) { const kwh = P * t / 3.6e6, n = M.revs(kwh, rate); if (!near(M.powerFromRevs(n, t, rate), P, 1e-9)) b++; if (!near(M.toKwh(M.work(220, P / 220, t)), kwh, 1e-9)) b++; }
+        o.meter = { b, j: [M.toKwh(3.6e6), M.energyKwh(1000, 3), M.cost(100, 0.6)], dial: [M.dialText(M.dial(1234, 0.56)), M.dialText(M.dial(99999, 0.5)), M.dialText(M.dial(0, 0)), M.dialText(M.dial(9999, 1.04))], rates: M.RATES.join() };
+      }
+      // ---- emdev
+      { const M = L.emdev; let b = 0;
+        if (!near(M.U_PULL, 3) || M.engaged(M.coilCurrent(2.9, 1)) || !M.engaged(M.coilCurrent(3, 1)) || !M.engaged(M.coilCurrent(12, 1)) || M.engaged(M.coilCurrent(12, 0)) || M.coilCurrent(0, 1) !== 0) b++;
+        for (const f of [100, 300, 1000]) for (const A of [0.2, 1]) for (const t of [0, 0.7, 3.3]) { if (!near(M.wave(A, f, t), M.wave(A, f, t + 1000 / f), 1e-9) || Math.abs(M.wave(A, f, t)) > A + 1e-12 || !near(M.wave(A, f, t), -M.wave(A, f, t + 500 / f), 1e-9)) b++; }
+        if (!(M.emfPercent(1, 1000) === 100 && M.emfPercent(0.5, 1000) === 50 && M.emfPercent(1, 500) === 50 && M.emfPercent(0.5, 500) < M.emfPercent(1, 500))) b++;
+        o.emdev = { b, dir: [M.direction(0.3), M.direction(-0.3), M.direction(0)], loads: M.LOADS.map((x) => x.join(':')).join(','), alarm: [M.alarmOn(59, 60), M.alarmOn(60, 60), M.alarmOn(80, 60)] };
+      }
+      // ---- comms: bit errors by brute force
+      { const M = L.comms; let b = 0;
+        const S = [0.4, -0.9, 0.6, -0.7, 0.8, 0.5, -0.95, 0.3], B = [1, 0, 1, 1, 0, 0, 1, 0];
+        for (let nz = 0; nz <= 1.5001; nz += 0.05) { let e = 0; B.forEach((bit, i) => { const sent = bit ? 1 : -1, got = sent + nz * S[i]; if ((got > 0 ? 1 : -1) !== sent) e++; }); if (M.bitErrors(nz) !== e) b++; if (nz <= 1 && e !== 0) b++; const rms = Math.sqrt(S.reduce((a, x) => a + (nz * x) ** 2, 0) / 8) * 100; if (!near(M.analogDistortion(nz), rms, 1e-9)) b++; }
+        const crit = (Math.asin(1.46 / 1.5) * 180) / Math.PI;
+        o.comms = { b, crit: [M.critical(), crit], tir: [M.totalReflection(76), M.totalReflection(77), M.totalReflection(89)], lam: [M.wavelength(900e3), M.wavelength(100e6), M.wavelength(3e8)], errs: [M.bitErrors(1), M.bitErrors(1.1), M.bitErrors(1.5)] };
+      }
+      return o;
+    });
+    ok(r.bad.length === 0, 'A4 the 13 models: ' + (r.bad.join('; ') || 'no internal inconsistency'));
+    // evap
+    ok(r.evap.water.join() === 'gas,liquid,liquid,liquid', 'A4 evap: steam at 120 °C is a gas at 1 atm and a liquid at 2.5 atm (pressure cooker); water at 90 °C and at 100 °C under 1 atm is liquid: ' + r.evap.water.join());
+    ok(r.evap.butane[0] === 'gas' && r.evap.butane[1] === 'liquid' && r.evap.butane[2] === 'gas' && r.evap.butane[3] === 'liquid' && r.evap.butane[4] > 1.9 && r.evap.butane[4] < 2.1, `A4 evap: butane is a gas at 20 °C / 1 atm and liquid once it is squeezed past its vapour pressure (${r.evap.butane[4].toFixed(2)} atm, the real value is about 2.1 bar); and a liquid below -0.5 °C at 1 atm`);
+    ok(r.evap.oxygen.join() === 'hot,liquid,gas,hot,liquid' && r.evap.oxHot, 'A4 evap: oxygen above its critical temperature (-118.6 °C) cannot be liquefied by pressure at any pressure of the slider; below it (-140 °C, 20 atm) it can; at -183 °C it is liquid at 1 atm, at -150 °C and 1 atm still a gas: ' + r.evap.oxygen.join());
+    ok(r.evap.ib === 0 && r.evap.melt === 113.7, 'A4 evap: iodine vapour grows with the time and the bath temperature, never exceeds the 2 g of iodine; crystals appear only on the cooled glass; the water bath (<= 100 °C) is below the melting point 113.7 °C');
+    ok(r.evap.phen === '0,1,2,2,3,3,4,4,5,5,1,0' && r.evap.proc === '熔化,凝固,汽化,液化,升华,凝华' && r.evap.abs === 'true,false,true,false,true,false', 'A4 evap: the 12 phenomena map to their processes (ice melts, rivers freeze, wet clothes dry, dew liquefies, mothballs sublime, frost deposits) and melting / vaporisation / sublimation absorb heat');
+    ok(r.thermo.b === 0 && r.thermo.range.join() === '-20,110,35,42', 'A4 thermo: clinical thermometer = max(previous, now) unless shaken (400 random cases), lab thermometer rounds to 1 °C and stops at its ends, a thermometer touching the heated bottom reads high, half-immersed or taken out reads low');
+    ok(r.straight.b === 0 && r.straight.sb === 0, 'A4 straight: similar triangles for the pinhole image and the blur; umbra and the whole shadow equal what a ray trace from 400 points of the source gives (108 geometries), penumbra only for an extended source');
+    ok(r.straight.ecl.join() === 'solar,lunar,none,none,none,solar,lunar,solar,none,none' && r.straight.eclGrid[0] === 0 && r.straight.eclGrid[1] > 100, 'A4 straight: solar eclipse only near the new moon, lunar only near the full moon, both need the Moon close to the plane of the orbit: ' + r.straight.ecl.join());
+    ok(r.diffuse.b === 0, 'A4 diffuse: for every facet tilt the reflected direction equals the vector reflection about the tilted normal, within ±2 x 25 r degrees of the mirror direction');
+    ok(r.diffuse.E.every((e) => Math.abs(e - 4) < 0.05) && r.diffuse.mirror.join() === 'true,true,false,false' && r.diffuse.br.join() === '1,1,0,0.04,0.04,0' && r.diffuse.spread.join() === '2,25,50', 'A4 diffuse: the same light is spread over a wider angle (the area under the brightness curve is 4 for every roughness: no light is created), a mirror is bright only within 2°: ' + r.diffuse.E.map((e) => e.toFixed(2)).join(' ') + ' | ' + r.diffuse.br.join());
+    ok(r.noise.b === 0 && r.noise.media === '空气（15 ℃）:340,水:1500,铁:5200' && r.noise.measures === '20,15,15', 'A4 noise: the examples / effects follow the 50 / 70 / 90 dB limits, the three measures subtract their dB (8 combinations), echo delay 0.1 s at 17 m (air), 75 m (water), 260 m (iron), sonar depth vt/2');
+    ok(r.lensexp.b === 0 && r.lensexp.cases > 3000, `A4 lensexp: sharp image exactly where the lens equation says (3 lenses x 81 object distances x 132 screen positions = ${r.lensexp.cases} cases), blur width = aperture x |v - v0| / v0, no real image for u <= f, the sharpest screen position found by search is the image position`);
+    ok(r.lensexp.spot.join() === '0,4,2,0.8' && r.lensexp.sharpAt && r.lensexp.kinds.join() === '0,1,2', 'A4 lensexp: parallel light: spot 0 at the focus, 4 cm at 2f, 2 cm at f/2, 0.8 cm at 1.2 f; the kinds are smaller / same / larger: ' + r.lensexp.spot.join());
+    ok(r.internal.b === 0 && r.internal.rel === 67200, 'A4 internal: heat lost by the hotter body = heat gained by the colder (2916 cases), the common temperature lies between the two and is the mean for equal masses and substances, work in / out changes the temperature by ± W / (c m); relative internal energy c m t');
+    ok(r.resistance.b === 0 && r.resistance.len === 3 && r.resistance.area === 2 && Math.abs(r.resistance.temp - 1.5) < 1e-9 && r.resistance.cu && r.resistance.I.join() === '0.6,0.3,0.15', 'A4 resistance: R ∝ L, R ∝ 1/S, stretching to k x gives k² R, the materials are ordered copper < aluminium < iron < constantan < nichrome, resistance rises with the temperature of a metal; wire B equals wire A at the starting values; ammeter 3 V / (5 Ω + R)');
+    ok(r.ohmlaw.b === 0 && r.ohmlaw.prop.join() === 'true,false,false,true' && r.ohmlaw.inv.join() === 'true,false,false' && r.ohmlaw.maxrows === 6, 'A4 ohmlaw: the ammeter reads U / R to 0.01 A (160 cases); the checks accept I ∝ U and I ∝ 1/R, refuse I ∝ U² and a straight line that does not go through the origin, and need at least 3 points');
+    ok(r.rmeasure.b === 0 && r.rmeasure.bulb[0] > r.rmeasure.bulb[1] + 1 && r.rmeasure.r0.Uread === 3 && r.rmeasure.r0.Iread === 0.3 && r.rmeasure.mean === 3, 'A4 rmeasure: a resistor measures U = I R with the meters\' resolution (0.02 A / 0.1 V); the bulb obeys Kirchhoff\'s voltage law E = U + I (Rp + r) and its resistance falls as the rheostat grows (the filament cools): ' + r.rmeasure.bulb.map((x) => x.toFixed(2)).join(' -> '));
+    ok(r.meter.b === 0, 'A4 meter: P t / 3.6e6 turns x rate and back to P (36 cases), W = U I t in kW·h');
+    ok(r.meter.j[0] === 1 && r.meter.j[1] === 3 && Math.abs(r.meter.j[2] - 60) < 1e-9 && r.meter.dial.join() === '01234.6,00000.5,00000.0,10000.0' && r.meter.rates === '600,1200,2500,3000', 'A4 meter: 3.6e6 J = 1 kW·h, 1000 W for 3 h = 3 kW·h, 100 kW·h at 0.6 = 60, the dial wraps at 100000 and has five digits and a red tenth: ' + r.meter.dial.join(' '));
+    ok(r.emdev.b === 0 && r.emdev.dir.join() === '1,-1,0' && r.emdev.alarm.join() === 'false,true,true', 'A4 emdev: the armature is pulled in exactly from 20 mA (3 V across 150 Ω) and only with the switch closed; the signal is periodic and odd; the induced voltage grows with loudness and frequency');
+    ok(r.comms.b === 0 && Math.abs(r.comms.crit[0] - r.comms.crit[1]) < 1e-9 && !r.comms.tir[0] && r.comms.tir[1] && r.comms.tir[2] && Math.abs(r.comms.lam[0] - 333.333) < 0.01 && r.comms.lam[1] === 3 && r.comms.lam[2] === 1 && r.comms.errs.join() === '0,1,3', 'A4 comms: bit errors by brute force for 31 noise levels (none up to a noise equal to the signal), analogue distortion = rms of the noise, critical angle asin(1.46/1.5) = 76.7°, λ = c / f (333 m at 900 kHz, 3 m at 100 MHz); errors 0 / 1 / 3 at noise 1 / 1.1 / 1.5: ' + r.comms.errs.join());
+    // the text answers follow independent tables
+    const tx = await page.evaluate(async () => {
+      const mulberry32 = (await import('/src/phys/qtools.ts')).mulberry32; const E = await import('/src/phys/model-evap.ts'), S = await import('/src/phys/model-straight.ts'), N = await import('/src/phys/model-noise.ts'), I = await import('/src/phys/model-internal.ts'), D = await import('/src/phys/model-diffuse.ts'), Em = await import('/src/phys/model-emdev.ts');
+      let bad = 0, n = 0; const PH = { 冰雪消融: '熔化', 河水结冰: '凝固', 湿衣服晾干: '汽化', 锅里的水被烧干: '汽化', 草叶上的露珠: '液化', 烧开水时壶嘴冒出的白气: '液化', 樟脑丸越来越小: '升华', 冰冻的衣服变干: '升华', 冰箱冷冻室内壁的白霜: '凝华', 窗玻璃内侧的冰花: '凝华', 铁水浇铸成铁锭: '凝固', 冰块在手中变成水: '熔化' };
+      const WAY = { 给摩托车装上消声器: '声源', 在马路两旁设置隔声板: '传播', 在嘈杂的环境中戴防噪声耳罩: '人耳' }, LIM = { 为了保护听力: '90 dB', 为了保证工作和学习: '70 dB', 为了保证休息和睡眠: '50 dB' };
+      const WORK = ['搓手取暖', '用打气筒打气时筒壁发热', '钻木取火'], HEAT = ['把手放在热水袋上取暖', '用炉火烧水', '太阳晒热地面'];
+      for (let sd = 1; sd <= 300; sd++) {
+        for (const q of E.quiz(mulberry32(sd))) if (q.kind === 'process') { n++; const ph = /“(.*)”/.exec(q.q)[1]; if (q.ans !== PH[ph]) bad++; }
+        for (const q of S.quiz(mulberry32(sd))) if (q.kind === 'eclipse') { n++; if ((q.p[0] === 0) !== q.q.includes('日食') || (q.p[0] === 0 ? !q.ans.startsWith('月球在太阳和地球之间') : !q.ans.startsWith('地球在太阳和月球之间'))) bad++; }
+        for (const q of N.quiz(mulberry32(sd))) { if (q.kind === 'ways') { n++; const k = Object.keys(WAY).find((x) => q.q.includes(x)); if (!q.ans.includes(WAY[k])) bad++; } if (q.kind === 'limit') { n++; const k = Object.keys(LIM).find((x) => q.q.includes(x)); if (q.ans !== LIM[k]) bad++; } }
+        for (const q of I.quiz(mulberry32(sd))) if (q.kind === 'way') { n++; const work = q.q.includes('做功'); if (work ? !WORK.includes(q.ans) : !HEAT.includes(q.ans)) bad++; }
+        for (const q of D.quiz(mulberry32(sd))) if (q.kind === 'type') { n++; if (!['教室里不同位置的同学都能看到黑板上的字', '从各个方向都能看到屏幕上的画面', '能从不同方向看到桌上的书'].includes(q.ans)) bad++; }
+        for (const q of Em.quiz(mulberry32(sd))) if (q.kind === 'principle') { n++; const sp = q.q.includes('扬声器'); if (q.ans !== (sp ? '通电线圈在磁场中受力运动' : '电磁感应')) bad++; }
+      }
+      return { bad, n };
+    });
+    ok(tx.bad === 0 && tx.n > 1500, `A4 quiz: the process of a phenomenon, solar / lunar eclipse positions, noise measures and limits, work vs heat transfer, diffuse examples and the speaker / microphone principle agree with independent tables (${tx.n} questions)`);
+  }
+
   // =====================================================================================  B. THE PAGES
   const consoleErrors = [];
   page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text()); });
@@ -511,7 +716,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     const groups = await page.evaluate(() => [...document.querySelectorAll('.pl-home > h2, .pl-home .pl-sc')].map((e) => (e.tagName === 'H2' ? 'H:' + e.textContent : e.dataset.chapter)));
     const g9 = groups.indexOf('H:九年级');
     ok(groups[0] === '八年级' || groups[0] === 'H:八年级', 'B the lab starts with the grade 8 heading');
-    ok(g9 > 0 && groups.slice(1, g9).every((c) => /^第(一|二|三|四|五|六|七|八|九|十|十一|十二)章/.test(c)) && groups.slice(g9 + 1).every((c) => /^第(十三|十四|十五|十七|十八|十九|二十|二十一|二十二)章/.test(c)), 'B cards sit under their grade, in chapter order: ' + groups.join(' | '));
+    ok(g9 > 0 && groups.slice(1, g9).every((c) => /^第(一|二|三|四|五|六|七|八|九|十|十一|十二)章/.test(c)) && groups.slice(g9 + 1).every((c) => /^第(十三|十四|十五|十六|十七|十八|十九|二十|二十一|二十二)章/.test(c)), 'B cards sit under their grade, in chapter order: ' + groups.join(' | '));
     const CH = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十', '二十一', '二十二']; const chn = groups.filter((c) => c.startsWith('第')).map((c) => CH.indexOf(/^第(.+?)章/.exec(c)[1]));
     ok(chn.every((v, i) => i === 0 || v >= chn[i - 1]), 'B within each grade the chapters follow the book order');
     ok(groups.includes('第四章 光现象') && groups.includes('第二十章 电与磁') && groups.includes('第十二章 简单机械'), 'B each card names its chapter');
@@ -573,7 +778,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
         }
         if (!setting) { ok(false, `B ${id}: no solution for task ${tid}`); continue; }
         await page.evaluate(() => window.__phys.reset());
-        await set(setting);
+        if (Array.isArray(setting)) { for (const step of setting) { if (typeof step === 'string') await page.click(`#pl-act-${step}`); else await set(step); } } else await set(setting);
         const d = await page.evaluate(() => window.__phys.done());
         ok(d.includes(tid), `B ${id}: task "${tid}" completes when the state is ${JSON.stringify(setting)}`);
       }

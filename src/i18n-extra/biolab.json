@@ -4158,5 +4158,1269 @@
 "累计排放的碳": [
 "Total carbon emitted",
 "Carbone total émis"
+],
+"探究的因素": [
+"Factor investigated",
+"Facteur étudié"
+],
+"相关：生物的分类": [
+"Related: Classification of living things",
+"À voir aussi : classification des êtres vivants"
+],
+"动物所属的类群": [
+"Group of an animal",
+"Groupe d'un animal"
+],
+"类群的特征": [
+"Features of the groups",
+"Caractères des groupes"
+],
+"脊椎动物的五类": [
+"The five classes of vertebrates",
+"Les cinq classes de vertébrés"
+],
+"脊椎动物的类群": [
+"Group of vertebrates",
+"Groupe de vertébrés"
+],
+"把 8 种动物放进它们所属的无脊椎动物类群": [
+"Put the 8 animals into the invertebrate groups they belong to",
+"Placez les 8 animaux dans les groupes d'invertébrés auxquels ils appartiennent"
+],
+"把 8 条特征放进对应的类群": [
+"Put the 8 features into the matching groups",
+"Placez les 8 caractères dans les groupes correspondants"
+],
+"在脊椎动物中找出体温恒定、体表有羽毛的类群（鸟类）": [
+"Under vertebrates, find the group with a constant body temperature and feathers (birds)",
+"Parmi les vertébrés, trouvez le groupe à température constante et à plumes (les oiseaux)"
+],
+"相关：血液循环": [
+"Related: Blood circulation",
+"À voir aussi : circulation sanguine"
+],
+"相关：血管与血液": [
+"Related: Blood vessels and blood",
+"À voir aussi : vaisseaux sanguins et sang"
+],
+"每搏输出量": [
+"Stroke volume",
+"Volume d'éjection systolique"
+],
+"血管阻力（变窄为大）": [
+"Vessel resistance (higher = narrower)",
+"Résistance des vaisseaux (plus élevée = plus étroits)"
+],
+"动脉壁弹性": [
+"Elasticity of the arterial wall",
+"Élasticité de la paroi artérielle"
+],
+"袖带压力": [
+"Cuff pressure",
+"Pression du brassard"
+],
+"血压的模型": [
+"Model of blood pressure",
+"Modèle de la pression artérielle"
+],
+"用袖带测血压": [
+"Measuring with a cuff",
+"Mesure avec un brassard"
+],
+"脉搏": [
+"Pulse",
+"Pouls"
+],
+"受测者": [
+"Person measured",
+"Personne mesurée"
+],
+"数脉搏的时间": [
+"Time for counting the pulse",
+"Durée du comptage du pouls"
+],
+"收缩压": [
+"Systolic pressure",
+"Pression systolique"
+],
+"舒张压": [
+"Diastolic pressure",
+"Pression diastolique"
+],
+"脉压差": [
+"Pulse pressure",
+"Pression différentielle"
+],
+"血压（kPa）": [
+"Blood pressure (kPa)",
+"Pression artérielle (kPa)"
+],
+"听诊": [
+"Listening",
+"Auscultation"
+],
+"数到的次数": [
+"Beats counted",
+"Battements comptés"
+],
+"换算成每分钟": [
+"Converted to one minute",
+"Converti en une minute"
+],
+"袖带": [
+"Cuff",
+"Brassard"
+],
+"听诊器": [
+"Stethoscope",
+"Stéthoscope"
+],
+"手腕": [
+"Wrist",
+"Poignet"
+],
+"使血压偏高：收缩压超过 140 mmHg 或舒张压超过 90 mmHg": [
+"Make the blood pressure high: systolic pressure above 140 mmHg or diastolic pressure above 90 mmHg",
+"Rendre la pression artérielle élevée : pression systolique supérieure à 140 mmHg ou pression diastolique supérieure à 90 mmHg"
+],
+"为受测者甲读出收缩压：袖带压力正好等于听到第一声脉搏声时的压力": [
+"Read the systolic pressure of person A: the cuff pressure equals the pressure at which the first pulse sound is heard",
+"Lire la pression systolique de la personne A : la pression du brassard est égale à la pression à laquelle on entend le premier bruit du pouls"
+],
+"为受测者甲读出舒张压：袖带压力正好等于声音消失时的压力": [
+"Read the diastolic pressure of person A: the cuff pressure equals the pressure at which the sound disappears",
+"Lire la pression diastolique de la personne A : la pression du brassard est égale à la pression à laquelle le bruit disparaît"
+],
+"用 15 s 数脉搏，心率 120 次/分钟时数到 30 次": [
+"Count the pulse for 15 s: at a heart rate of 120 beats per minute you count 30 beats",
+"Compter le pouls pendant 15 s : à une fréquence cardiaque de 120 battements par minute, on compte 30 battements"
+],
+"相关：遗传": [
+"Related: Heredity",
+"À voir aussi : hérédité"
+],
+"相关：遗传病与优生": [
+"Related: Genetic diseases and eugenics",
+"À voir aussi : maladies génétiques et eugénisme"
+],
+"F2 的植株数": [
+"Number of F2 plants",
+"Nombre de plantes F2"
+],
+"株": [
+"plants",
+"plantes"
+],
+"育种与生物技术分类": [
+"Sorting breeding and biotechnology",
+"Classement des techniques de sélection et de biotechnologie"
+],
+"克隆羊": [
+"Cloned sheep",
+"Brebis clonée"
+],
+"子代": [
+"Generation",
+"Génération"
+],
+"F1（子一代）": [
+"F1 (first generation)",
+"F1 (première génération)"
+],
+"F2（子二代）": [
+"F2 (second generation)",
+"F2 (deuxième génération)"
+],
+"代孕的羊": [
+"Surrogate sheep",
+"Brebis porteuse"
+],
+"克隆羊的脸色": [
+"Face colour of the clone",
+"Couleur de la tête du clone"
+],
+"遗传物质主要来自": [
+"Genetic material comes mainly from",
+"Le matériel génétique provient surtout de"
+],
+"胚胎发育的场所": [
+"Place of embryo development",
+"Lieu du développement de l'embryon"
+],
+"{0}的子宫": [
+"Uterus of {0}",
+"Utérus de {0}"
+],
+"亲本": [
+"Parents",
+"Parents"
+],
+"F1 的基因型": [
+"Genotype of F1",
+"Génotype de la F1"
+],
+"F1 的表现型": [
+"Phenotype of F1",
+"Phénotype de la F1"
+],
+"全部高产抗病": [
+"All high-yield and resistant",
+"Tous à rendement élevé et résistants"
+],
+"F1 的植株数": [
+"Number of F1 plants",
+"Nombre de plantes F1"
+],
+"能稳定遗传的 AABB": [
+"AABB, which breed true",
+"AABB, qui se reproduisent fidèlement"
+],
+"去核的卵细胞": [
+"Enucleated egg cell",
+"Cellule-œuf énucléée"
+],
+"代孕": [
+"Surrogate",
+"Porteuse"
+],
+"高产感病": [
+"High yield, susceptible",
+"Rendement élevé, sensible"
+],
+"低产抗病": [
+"Low yield, resistant",
+"Rendement faible, résistante"
+],
+"F1 高产抗病": [
+"F1 high yield, resistant",
+"F1 rendement élevé, résistante"
+],
+"F2 的植株数达到 160 株以上，看到能稳定遗传的 AABB 至少有 10 株": [
+"Reach 160 or more F2 plants and see at least 10 AABB plants that breed true",
+"Atteindre 160 plantes F2 ou plus et voir au moins 10 plantes AABB qui se reproduisent fidèlement"
+],
+"把 8 种做法放进正确的育种或生物技术": [
+"Put the 8 practices into the right breeding method or biotechnology",
+"Placez les 8 pratiques dans la bonne méthode de sélection ou de biotechnologie"
+],
+"让克隆羊长成白脸：提供细胞核的是白脸的甲羊": [
+"Let the cloned sheep have a white face: the nucleus comes from the white-faced sheep A",
+"Obtenir une brebis clonée à tête blanche : le noyau vient de la brebis A à tête blanche"
+],
+"人的生殖系统": [
+"The human reproductive system",
+"L'appareil reproducteur humain"
+],
+"血压与脉搏": [
+"Blood pressure and pulse",
+"Pression artérielle et pouls"
+],
+"细菌与真菌的培养": [
+"Culturing bacteria and fungi",
+"Culture de bactéries et de champignons"
+],
+"制作临时装片": [
+"Making a temporary mount",
+"Préparer une lame provisoire"
+],
+"种子的结构与发芽率": [
+"Seed structure and germination rate",
+"Structure de la graine et taux de germination"
+],
+"测定食物中的能量": [
+"Measuring the energy in food",
+"Mesurer l'énergie contenue dans un aliment"
+],
+"水蚤的心率": [
+"Heart rate of the water flea",
+"Rythme cardiaque de la daphnie"
+],
+"DNA、染色体和基因": [
+"DNA, chromosomes and genes",
+"ADN, chromosomes et gènes"
+],
+"植物的无性繁殖": [
+"Vegetative propagation of plants",
+"Multiplication végétative des plantes"
+],
+"进化的其他证据": [
+"Other evidence for evolution",
+"Autres preuves de l'évolution"
+],
+"育种与生物技术": [
+"Breeding and biotechnology",
+"Sélection et biotechnologie"
+],
+"八下 · 遗传和变异（育种与生物技术）": [
+"Grade 8, term 2 · Heredity and variation (breeding and biotechnology)",
+"8e, 2e semestre · Hérédité et variation (sélection et biotechnologie)"
+],
+"遗传病与优生": [
+"Genetic diseases and eugenics",
+"Maladies génétiques et eugénisme"
+],
+"动物的主要类群": [
+"The main groups of animals",
+"Les principaux groupes d'animaux"
+],
+"八上 · 动物的主要类群": [
+"Grade 8, term 1 · The main groups of animals",
+"8e, 1er semestre · Les principaux groupes d'animaux"
+],
+"生物与环境": [
+"Organisms and the environment",
+"Les êtres vivants et l'environnement"
+],
+"相关：显微镜": [
+"Related: The microscope",
+"À voir aussi : le microscope"
+],
+"酒精的浓度": [
+"Alcohol concentration",
+"Concentration d'alcool"
+],
+"清水（对照）": [
+"Clear water (control)",
+"Eau claire (témoin)"
+],
+"重新计数": [
+"Count again",
+"Recompter"
+],
+"三次计数（每次 10 s）": [
+"Three counts (10 s each)",
+"Trois comptages (10 s chacun)"
+],
+"平均每 10 s": [
+"Average per 10 s",
+"Moyenne par 10 s"
+],
+"与清水相比": [
+"Compared with clear water",
+"Par rapport à l'eau claire"
+],
+"水蚤死亡": [
+"The water flea has died",
+"La daphnie est morte"
+],
+"存活": [
+"Alive",
+"Vivante"
+],
+"观察 1 % 的酒精中水蚤的心率": [
+"Observe the heart rate of the water flea in 1 % alcohol",
+"Observer le rythme cardiaque de la daphnie dans de l'alcool à 1 %"
+],
+"酒精浓度达到 10 % 以上，看到心率明显减慢": [
+"Reach an alcohol concentration of 10 % or more and see the heart rate slow down clearly",
+"Atteindre une concentration d'alcool de 10 % ou plus et voir le rythme cardiaque ralentir nettement"
+],
+"酒精浓度为 20 % 时，水蚤死亡": [
+"At an alcohol concentration of 20 % the water flea dies",
+"À une concentration d'alcool de 20 %, la daphnie meurt"
+],
+"相关：细胞分裂": [
+"Related: Cell division",
+"À voir aussi : division cellulaire"
+],
+"抽样的新生儿数": [
+"Number of newborns sampled",
+"Nombre de nouveau-nés échantillonnés"
+],
+"染色体、DNA 和基因": [
+"Chromosomes, DNA and genes",
+"Chromosomes, ADN et gènes"
+],
+"碱基配对（拓展）": [
+"Base pairing (extension)",
+"Appariement des bases (approfondissement)"
+],
+"染色体的数目": [
+"Number of chromosomes",
+"Nombre de chromosomes"
+],
+"性别与性染色体": [
+"Sex and sex chromosomes",
+"Sexe et chromosomes sexuels"
+],
+"选择下一个碱基": [
+"Choose the next base",
+"Choisir la base suivante"
+],
+"已配对": [
+"Paired",
+"Appariées"
+],
+"A 与 T，C 与 G": [
+"A with T, C with G",
+"A avec T, C avec G"
+],
+"染色体数目": [
+"Number of chromosomes",
+"Nombre de chromosomes"
+],
+"染色体对数": [
+"Number of chromosome pairs",
+"Nombre de paires de chromosomes"
+],
+"0（不成对）": [
+"0 (not in pairs)",
+"0 (pas de paires)"
+],
+"对": [
+"pairs",
+"paires"
+],
+"男孩所占比例": [
+"Share of boys",
+"Part de garçons"
+],
+"理论比例": [
+"Expected share",
+"Part attendue"
+],
+"细胞（示意图）": [
+"Cell (diagram)",
+"Cellule (schéma)"
+],
+"DNA 的一条链（已知）": [
+"One strand of DNA (given)",
+"Un brin d'ADN (donné)"
+],
+"要配上的另一条链": [
+"The other strand to be completed",
+"L'autre brin à compléter"
+],
+"配对完成": [
+"Pairing complete",
+"Appariement terminé"
+],
+"下一个：与 {0} 配对的是？": [
+"Next: what pairs with {0}?",
+"Suivant : avec quelle base {0} s'apparie-t-elle ?"
+],
+"精子": [
+"Sperm",
+"Spermatozoïde"
+],
+"卵细胞": [
+"Egg cell",
+"Ovule"
+],
+"给细胞核、染色体、DNA、基因和蛋白质全部放对位置": [
+"Put the nucleus, chromosome, DNA, gene and protein in their right places",
+"Placer le noyau, le chromosome, l'ADN, le gène et la protéine à leur bonne place"
+],
+"为 DNA 的一条链配上互补的另一条链（8 个碱基）": [
+"Complete the other strand for one strand of DNA (8 bases)",
+"Compléter l'autre brin pour un brin d'ADN (8 bases)"
+],
+"找出人的生殖细胞中的染色体数目（23 条）": [
+"Find the number of chromosomes in a human sex cell (23)",
+"Trouver le nombre de chromosomes dans une cellule sexuelle humaine (23)"
+],
+"抽样 500 人以上，男女比例接近 1:1（相差不到 10 %）": [
+"Sample 500 or more births and see the ratio of boys to girls close to 1:1 (less than 10 % apart)",
+"Échantillonner 500 naissances ou plus et voir le rapport garçons-filles proche de 1:1 (écart inférieur à 10 %)"
+],
+"相关：食物链与食物网": [
+"Related: Food chains and food webs",
+"À voir aussi : chaînes et réseaux alimentaires"
+],
+"相关：种群与生态平衡": [
+"Related: Populations and ecological balance",
+"À voir aussi : populations et équilibre écologique"
+],
+"鼠妇的数量": [
+"Number of woodlice",
+"Nombre de cloportes"
+],
+"物种数": [
+"Number of species",
+"Nombre d'espèces"
+],
+"干扰的强度（失去的生物量）": [
+"Strength of the disturbance (biomass lost)",
+"Intensité de la perturbation (biomasse perdue)"
+],
+"干扰后的时间": [
+"Time after the disturbance",
+"Temps après la perturbation"
+],
+"鼠妇的分布": [
+"Distribution of woodlice",
+"Répartition des cloportes"
+],
+"生态系统的类型": [
+"Types of ecosystems",
+"Types d'écosystèmes"
+],
+"生态系统的稳定性": [
+"Stability of an ecosystem",
+"Stabilité d'un écosystème"
+],
+"重新放入鼠妇": [
+"Place the woodlice again",
+"Replacer les cloportes"
+],
+"能恢复的最大干扰": [
+"Largest disturbance it recovers from",
+"Plus forte perturbation dont il se rétablit"
+],
+"这次干扰": [
+"This disturbance",
+"Cette perturbation"
+],
+"能够恢复": [
+"Recovers",
+"Se rétablit"
+],
+"难以恢复，生态系统退化": [
+"Hard to recover: the ecosystem degrades",
+"Rétablissement difficile : l'écosystème se dégrade"
+],
+"此刻的生物量": [
+"Biomass now",
+"Biomasse à cet instant"
+],
+"结论": [
+"Conclusion",
+"Conclusion"
+],
+"多数鼠妇聚集在“{0}”的一侧": [
+"Most woodlice gather on the “{0}” side",
+"La plupart des cloportes se rassemblent du côté « {0} »"
+],
+"两侧一样多": [
+"Equal numbers on both sides",
+"Autant des deux côtés"
+],
+"用 20 只以上的鼠妇探究光的影响，看到多数鼠妇聚集在阴暗处": [
+"Investigate the effect of light with 20 or more woodlice and see most of them gather in the dark",
+"Étudier l'effet de la lumière avec 20 cloportes ou plus et voir la plupart se rassembler dans l'obscurité"
+],
+"把 8 条描述放进正确的生态系统类型": [
+"Put the 8 descriptions into the right type of ecosystem",
+"Placez les 8 descriptions dans le bon type d'écosystème"
+],
+"物种数 30 以上、干扰 60 % 以上，生态系统仍能恢复": [
+"With 30 or more species and a disturbance of 60 % or more, the ecosystem still recovers",
+"Avec 30 espèces ou plus et une perturbation de 60 % ou plus, l'écosystème se rétablit encore"
+],
+"物种数不超过 4、干扰 30 % 以上，生态系统难以恢复": [
+"With at most 4 species and a disturbance of 30 % or more, the ecosystem does not recover",
+"Avec au plus 4 espèces et une perturbation de 30 % ou plus, l'écosystème ne se rétablit pas"
+],
+"相关：合理营养": [
+"Related: A balanced diet",
+"À voir aussi : alimentation équilibrée"
+],
+"食物的质量": [
+"Mass of food",
+"Masse de l'aliment"
+],
+"水的体积": [
+"Volume of water",
+"Volume d'eau"
+],
+"挡风罩": [
+"Wind shield",
+"Pare-vent"
+],
+"水温升高": [
+"Rise in water temperature",
+"Élévation de la température de l'eau"
+],
+"水吸收的热量": [
+"Heat absorbed by the water",
+"Chaleur absorbée par l'eau"
+],
+"测得的能量": [
+"Energy measured",
+"Énergie mesurée"
+],
+"标准值": [
+"Standard value",
+"Valeur de référence"
+],
+"测得值占标准值": [
+"Measured value as a share of the standard",
+"Valeur mesurée en part de la valeur de référence"
+],
+"水已沸腾，数据无效": [
+"The water is boiling: the data are invalid",
+"L'eau bout : les données ne sont pas valables"
+],
+"加上挡风罩，使测得值达到标准值的 70 % 以上": [
+"Add the wind shield so that the measured value reaches 70 % or more of the standard value",
+"Ajouter le pare-vent pour que la valeur mesurée atteigne 70 % ou plus de la valeur de référence"
+],
+"加上挡风罩，测定大米的能量": [
+"Add the wind shield and measure the energy of rice",
+"Ajouter le pare-vent et mesurer l'énergie du riz"
+],
+"使水温升高 50 ℃ 以上，但水不沸腾": [
+"Make the water 50 ℃ warmer or more, without boiling",
+"Réchauffer l'eau de 50 ℃ ou plus, sans qu'elle bouille"
+],
+"相关：人的由来与青春期": [
+"Related: Origin of humans and puberty",
+"À voir aussi : origine de l'être humain et puberté"
+],
+"携带者约占：每 N 人中有 1 位": [
+"Carriers: 1 person in every N",
+"Porteurs : 1 personne sur N"
+],
+"近亲结婚的风险": [
+"Risk of marriage between close relatives",
+"Risque du mariage entre proches parents"
+],
+"优生措施": [
+"Eugenic measures",
+"Mesures d'eugénisme"
+],
+"夫妻的关系": [
+"Relationship of the couple",
+"Lien entre les époux"
+],
+"携带者所占比例": [
+"Share of carriers",
+"Proportion de porteurs"
+],
+"双方携带同一致病基因的概率": [
+"Chance that both carry the same disease gene",
+"Probabilité que les deux portent le même gène de maladie"
+],
+"孩子患病的概率": [
+"Chance that a child is affected",
+"Probabilité qu'un enfant soit atteint"
+],
+"是无亲缘关系的": [
+"Compared with unrelated partners",
+"Par rapport à des époux sans lien de parenté"
+],
+"孩子患病的概率（每一万个孩子）": [
+"Chance that a child is affected (per 10,000 children)",
+"Probabilité qu'un enfant soit atteint (pour 10 000 enfants)"
+],
+"所选关系": [
+"Chosen relationship",
+"Lien choisi"
+],
+"夫妻": [
+"Couple",
+"Couple"
+],
+"选择表兄妹：双方带有同一致病基因的概率是无亲缘关系时的 5 倍以上": [
+"Choose cousins: the chance that both carry the same disease gene is 5 times or more that of unrelated partners",
+"Choisir des cousins germains : la probabilité que les deux portent le même gène de maladie est 5 fois ou plus celle d'époux sans lien de parenté"
+],
+"选择同胞兄妹：双方带有同一致病基因的概率是无亲缘关系时的 20 倍以上": [
+"Choose brother and sister: the chance that both carry the same disease gene is 20 times or more that of unrelated partners",
+"Choisir un frère et une sœur : la probabilité que les deux portent le même gène de maladie est 20 fois ou plus celle d'époux sans lien de parenté"
+],
+"把 8 条说明放进正确的优生措施": [
+"Put the 8 statements into the right eugenic measure",
+"Placez les 8 énoncés dans la bonne mesure d'eugénisme"
+],
+"相关：化石与进化的证据": [
+"Related: Fossils and evidence for evolution",
+"À voir aussi : fossiles et preuves de l'évolution"
+],
+"相关：自然选择": [
+"Related: Natural selection",
+"À voir aussi : sélection naturelle"
+],
+"胚胎的发育程度": [
+"Stage of development of the embryo",
+"Stade de développement de l'embryon"
+],
+"比较解剖学": [
+"Comparative anatomy",
+"Anatomie comparée"
+],
+"胚胎的比较": [
+"Comparing embryos",
+"Comparaison d'embryons"
+],
+"分子证据（拓展）": [
+"Molecular evidence (extension)",
+"Preuve moléculaire (approfondissement)"
+],
+"进化树": [
+"Evolutionary tree",
+"Arbre évolutif"
+],
+"肢体": [
+"Limb",
+"Membre"
+],
+"与人的胚胎比较的生物": [
+"Organism whose embryo is compared with the human one",
+"Organisme dont l'embryon est comparé à l'embryon humain"
+],
+"与人比较的生物": [
+"Organism compared with humans",
+"Organisme comparé à l'être humain"
+],
+"生物甲": [
+"Organism A",
+"Organisme A"
+],
+"生物乙": [
+"Organism B",
+"Organisme B"
+],
+"这个肢体的功能": [
+"Function of this limb",
+"Fonction de ce membre"
+],
+"发育程度": [
+"Stage of development",
+"Stade de développement"
+],
+"与人的胚胎的相似程度": [
+"Resemblance to the human embryo",
+"Ressemblance avec l'embryon humain"
+],
+"鳃裂和尾": [
+"Gill slits and tail",
+"Fentes branchiales et queue"
+],
+"明显": [
+"Clear",
+"Nettes"
+],
+"逐渐消失": [
+"Disappearing gradually",
+"Disparaissent peu à peu"
+],
+"基本消失": [
+"Almost gone",
+"Presque disparues"
+],
+"与人不同的氨基酸": [
+"Amino acids different from the human",
+"Acides aminés différents de ceux de l'être humain"
+],
+"相同的氨基酸": [
+"Amino acids that are the same",
+"Acides aminés identiques"
+],
+"亲缘关系": [
+"Relationship",
+"Parenté"
+],
+"最近": [
+"Closest",
+"La plus proche"
+],
+"较近": [
+"Fairly close",
+"Assez proche"
+],
+"较远": [
+"Fairly distant",
+"Assez éloignée"
+],
+"最近共同祖先": [
+"Most recent common ancestor",
+"Dernier ancêtre commun"
+],
+"（同一种生物）": [
+"(the same organism)",
+"(le même organisme)"
+],
+"约 {0}": [
+"about {0}",
+"environ {0}"
+],
+"百万年前": [
+"million years ago",
+"millions d'années"
+],
+"给蝙蝠的翼的 5 组骨全部放对位置": [
+"Put all 5 groups of bones of the bat’s wing in their right places",
+"Placer les 5 groupes d'os de l'aile de la chauve-souris à leur bonne place"
+],
+"在发育早期（发育程度不超过 20 %），看到各种脊椎动物的胚胎相似度达到 90 % 以上": [
+"Early in development (not more than 20 % of the development), see the embryos of all the vertebrates 90 % or more alike",
+"Au début du développement (pas plus de 20 % du développement), voir les embryons de tous les vertébrés ressemblants à 90 % ou plus"
+],
+"找出与人的细胞色素 c 完全相同的生物": [
+"Find the organism whose cytochrome c is identical to the human one",
+"Trouver l'organisme dont le cytochrome c est identique à celui de l'être humain"
+],
+"在进化树中找出与人亲缘关系最近的生物（黑猩猩）": [
+"In the evolutionary tree find the organism most closely related to humans (the chimpanzee)",
+"Dans l'arbre évolutif, trouver l'organisme le plus apparenté à l'être humain (le chimpanzé)"
+],
+"再点图中的标记": [
+"Now tap a mark in the picture",
+"Touchez maintenant un repère dans l'image"
+],
+"再点上方的类别": [
+"Now tap a group above",
+"Touchez maintenant un groupe au-dessus"
+],
+"相关：微生物与发酵": [
+"Related: Microorganisms and fermentation",
+"À voir aussi : micro-organismes et fermentation"
+],
+"原菌液浓度（10 的次方，个/mL）": [
+"Concentration of the original suspension (power of 10, per mL)",
+"Concentration de la suspension d'origine (puissance de 10, par mL)"
+],
+"稀释次数（每次 10 倍）": [
+"Number of dilutions (10 times each)",
+"Nombre de dilutions (10 fois chacune)"
+],
+"用药次数": [
+"Number of courses of treatment",
+"Nombre de traitements"
+],
+"每次杀死的敏感菌": [
+"Share of susceptible bacteria killed each time",
+"Part des bactéries sensibles tuées à chaque fois"
+],
+"开始时耐药菌所占比例": [
+"Share of resistant bacteria at the start",
+"Part de bactéries résistantes au départ"
+],
+"菌落计数": [
+"Counting colonies",
+"Comptage des colonies"
+],
+"细菌的结构": [
+"Structure of a bacterium",
+"Structure d'une bactérie"
+],
+"酵母菌的结构": [
+"Structure of yeast",
+"Structure de la levure"
+],
+"抗生素与耐药": [
+"Antibiotics and resistance",
+"Antibiotiques et résistance"
+],
+"涂布体积": [
+"Volume spread",
+"Volume étalé"
+],
+"感染类型": [
+"Type of infection",
+"Type d'infection"
+],
+"细菌感染": [
+"Bacterial infection",
+"Infection bactérienne"
+],
+"病毒感染（流感）": [
+"Viral infection (influenza)",
+"Infection virale (grippe)"
+],
+"重新涂布": [
+"Spread again",
+"Étaler de nouveau"
+],
+"总稀释倍数": [
+"Total dilution",
+"Dilution totale"
+],
+"平板上的菌落数": [
+"Colonies on the plate",
+"Colonies sur la boîte"
+],
+"计数结论": [
+"Counting result",
+"Résultat du comptage"
+],
+"估算原菌液浓度": [
+"Estimated concentration of the original suspension",
+"Concentration estimée de la suspension d'origine"
+],
+"设定的实际浓度": [
+"Actual concentration (set)",
+"Concentration réelle (réglée)"
+],
+"耐药菌所占比例": [
+"Share of resistant bacteria",
+"Part de bactéries résistantes"
+],
+"敏感菌所占比例": [
+"Share of susceptible bacteria",
+"Part de bactéries sensibles"
+],
+"抗生素对病原体": [
+"Antibiotic against the pathogen",
+"Antibiotique contre l'agent pathogène"
+],
+"无效（病毒没有细胞结构）": [
+"No effect (a virus has no cells)",
+"Sans effet (un virus n'a pas de cellules)"
+],
+"有效（杀死敏感菌）": [
+"Effective (kills susceptible bacteria)",
+"Efficace (tue les bactéries sensibles)"
+],
+"无法计数": [
+"Cannot be counted",
+"Comptage impossible"
+],
+"培养皿": [
+"Petri dish",
+"Boîte de Petri"
+],
+"逐级稀释": [
+"Serial dilution",
+"Dilution en série"
+],
+"细菌（示意图）": [
+"Bacterium (diagram)",
+"Bactérie (schéma)"
+],
+"酵母菌（示意图）": [
+"Yeast (diagram)",
+"Levure (schéma)"
+],
+"敏感菌": [
+"Susceptible bacteria",
+"Bactéries sensibles"
+],
+"耐药菌": [
+"Resistant bacteria",
+"Bactéries résistantes"
+],
+"稀释并涂布，使平板上的菌落数在 30–300 个之间（适合计数）": [
+"Dilute and spread so that the plate has 30–300 colonies (suitable for counting)",
+"Diluer et étaler pour que la boîte ait de 30 à 300 colonies (adaptée au comptage)"
+],
+"给细菌的 6 个结构全部放对位置": [
+"Put all 6 structures of the bacterium in their right places",
+"Placer les 6 structures de la bactérie à leur bonne place"
+],
+"给酵母菌的 6 个结构全部放对位置": [
+"Put all 6 structures of the yeast in their right places",
+"Placer les 6 structures de la levure à leur bonne place"
+],
+"用 90 % 的杀菌效果连续用药 4 次，使耐药菌占 50 % 以上": [
+"Use a treatment that kills 90 % four times in a row so that resistant bacteria make up 50 % or more",
+"Utiliser quatre fois de suite un traitement tuant 90 % pour que les bactéries résistantes représentent 50 % ou plus"
+],
+"嫁接": [
+"Grafting",
+"Greffage"
+],
+"菜豆种子": [
+"Bean seed",
+"Graine de haricot"
+],
+"玉米种子": [
+"Maize seed",
+"Graine de maïs"
+],
+"相关：花与果实": [
+"Related: Flowers and fruits",
+"À voir aussi : fleurs et fruits"
+],
+"相关：动物的生殖和发育": [
+"Related: Reproduction and development of animals",
+"À voir aussi : reproduction et développement des animaux"
+],
+"形成层对齐的程度": [
+"Alignment of the cambium layers",
+"Alignement des cambiums"
+],
+"无性繁殖的方法": [
+"Methods of vegetative propagation",
+"Méthodes de multiplication végétative"
+],
+"有性生殖与无性生殖": [
+"Sexual and asexual reproduction",
+"Reproduction sexuée et asexuée"
+],
+"接穗（上面的枝条）": [
+"Scion (the branch on top)",
+"Greffon (la branche du dessus)"
+],
+"砧木（下面的植株）": [
+"Stock (the plant below)",
+"Porte-greffe (la plante du dessous)"
+],
+"接穗": [
+"Scion",
+"Greffon"
+],
+"砧木": [
+"Stock",
+"Porte-greffe"
+],
+"近（亲和）": [
+"Close (compatible)",
+"Proche (compatible)"
+],
+"远（不亲和）": [
+"Distant (not compatible)",
+"Éloignée (non compatible)"
+],
+"形成层对齐": [
+"Cambium alignment",
+"Alignement des cambiums"
+],
+"接穗上结出的果实": [
+"Fruit on the scion",
+"Fruit porté par le greffon"
+],
+"根系属于砧木": [
+"The roots belong to the stock",
+"Les racines appartiennent au porte-greffe"
+],
+"形成层": [
+"Cambium",
+"Cambium"
+],
+"成活": [
+"Takes",
+"Reprise"
+],
+"不成活": [
+"Fails",
+"Échec"
+],
+"果实：{0}": [
+"Fruit: {0}",
+"Fruit : {0}"
+],
+"把红富士苹果接到野生山荆子上，并使它成活": [
+"Graft the Red Fuji apple onto the wild crab apple and make it take",
+"Greffer la pomme Fuji rouge sur le pommier sauvage et la faire reprendre"
+],
+"把红富士苹果接到杜梨上：即使形成层对齐，也不成活": [
+"Graft the Red Fuji apple onto the birchleaf pear: even with the cambium layers aligned it does not take",
+"Greffer la pomme Fuji rouge sur le poirier à feuilles de bouleau : même avec les cambiums alignés, la greffe ne prend pas"
+],
+"把 6 种做法放进正确的无性繁殖方法": [
+"Put the 6 practices into the right method of vegetative propagation",
+"Placez les 6 pratiques dans la bonne méthode de multiplication végétative"
+],
+"把 8 条描述放进有性生殖或无性生殖": [
+"Put the 8 descriptions into sexual or asexual reproduction",
+"Placez les 8 descriptions dans la reproduction sexuée ou asexuée"
+],
+"女性生殖系统": [
+"The female reproductive system",
+"L'appareil reproducteur féminin"
+],
+"男性生殖系统": [
+"The male reproductive system",
+"L'appareil reproducteur masculin"
+],
+"什么发生在哪里": [
+"What happens where",
+"Ce qui se passe où"
+],
+"从受精到分娩": [
+"From fertilisation to birth",
+"De la fécondation à la naissance"
+],
+"女性生殖系统（示意图）": [
+"Female reproductive system (diagram)",
+"Appareil reproducteur féminin (schéma)"
+],
+"男性生殖系统（示意图）": [
+"Male reproductive system (diagram)",
+"Appareil reproducteur masculin (schéma)"
+],
+"给女性生殖系统的 4 个器官全部放对位置": [
+"Put all 4 organs of the female reproductive system in their right places",
+"Placer les 4 organes de l'appareil reproducteur féminin à leur bonne place"
+],
+"给男性生殖系统的 4 个器官全部放对位置": [
+"Put all 4 organs of the male reproductive system in their right places",
+"Placer les 4 organes de l'appareil reproducteur masculin à leur bonne place"
+],
+"把 4 个事件放到发生它们的器官上": [
+"Put the 4 events on the organs where they happen",
+"Placer les 4 événements sur les organes où ils se produisent"
+],
+"把受精到分娩的 5 个阶段按顺序放好，没有失误": [
+"Put the 5 stages from fertilisation to birth in order, without a mistake",
+"Placer dans l'ordre les 5 étapes de la fécondation à la naissance, sans erreur"
+],
+"相关：种子萌发的条件": [
+"Related: Conditions for seed germination",
+"À voir aussi : conditions de la germination des graines"
+],
+"每组种子数": [
+"Seeds per group",
+"Graines par groupe"
+],
+"这批种子的真实萌发率": [
+"True germination rate of the lot",
+"Taux réel de germination du lot"
+],
+"菜豆种子的结构": [
+"Structure of a bean seed",
+"Structure d'une graine de haricot"
+],
+"玉米种子的结构": [
+"Structure of a maize seed",
+"Structure d'une graine de maïs"
+],
+"碘液检验淀粉": [
+"Testing for starch with iodine",
+"Recherche de l'amidon avec de l'iode"
+],
+"测定萌发率": [
+"Measuring the germination rate",
+"Mesure du taux de germination"
+],
+"滴碘液的部位": [
+"Part where the iodine is dropped",
+"Partie où l'on met l'iode"
+],
+"外面的种皮": [
+"The outer seed coat",
+"Le tégument extérieur"
+],
+"储存营养的部分": [
+"The part that stores food",
+"La partie qui stocke les réserves"
+],
+"重新取样": [
+"Take a new sample",
+"Prendre un nouvel échantillon"
+],
+"三组萌发的种子数": [
+"Seeds germinated in the three groups",
+"Graines germées dans les trois groupes"
+],
+"平均萌发率": [
+"Average germination rate",
+"Taux moyen de germination"
+],
+"误差": [
+"Error",
+"Erreur"
+],
+"合格（不低于 90 %）": [
+"Passes (not below 90 %)",
+"Acceptable (pas en dessous de 90 %)"
+],
+"不合格（低于 90 %）": [
+"Fails (below 90 %)",
+"Non acceptable (en dessous de 90 %)"
+],
+"菜豆种子（打开）": [
+"Bean seed (opened)",
+"Graine de haricot (ouverte)"
+],
+"玉米种子（纵切面）": [
+"Maize seed (lengthwise section)",
+"Graine de maïs (coupe longitudinale)"
+],
+"不变蓝": [
+"No blue",
+"Pas de bleu"
+],
+"已萌发": [
+"Germinated",
+"Germées"
+],
+"未萌发": [
+"Not germinated",
+"Non germées"
+],
+"给菜豆种子的 5 个结构全部放对位置": [
+"Put all 5 structures of the bean seed in their right places",
+"Placer les 5 structures de la graine de haricot à leur bonne place"
+],
+"给玉米种子的 6 个结构全部放对位置": [
+"Put all 6 structures of the maize seed in their right places",
+"Placer les 6 structures de la graine de maïs à leur bonne place"
+],
+"在玉米种子的胚乳上滴碘液，看到变蓝": [
+"Put iodine on the endosperm of a maize seed and see it turn blue",
+"Mettre de l'iode sur l'albumen d'une graine de maïs et le voir devenir bleu"
+],
+"每组取 100 粒以上的种子测定萌发率": [
+"Measure the germination rate with 100 or more seeds per group",
+"Mesurer le taux de germination avec 100 graines ou plus par groupe"
+],
+"相关：植物细胞与动物细胞": [
+"Related: Plant cells and animal cells",
+"À voir aussi : cellules végétales et cellules animales"
+],
+"盖玻片放下时与载玻片的夹角": [
+"Angle between the cover slip and the slide when it is let go",
+"Angle entre la lamelle et la lame quand on la lâche"
+],
+"水滴的大小（1 太少，5 太多）": [
+"Size of the water drop (1 too small, 5 too big)",
+"Taille de la goutte d'eau (1 trop petite, 5 trop grande)"
+],
+"洋葱表皮装片": [
+"Onion epidermis mount",
+"Lame d'épiderme d'oignon"
+],
+"口腔上皮细胞装片": [
+"Cheek cell mount",
+"Lame de cellules de la joue"
+],
+"盖盖玻片": [
+"Lowering the cover slip",
+"Poser la lamelle"
+],
+"气泡数": [
+"Number of bubbles",
+"Nombre de bulles"
+],
+"水滴": [
+"Water drop",
+"Goutte d'eau"
+],
+"没有气泡，可以观察": [
+"No bubbles: ready to observe",
+"Pas de bulles : on peut observer"
+],
+"有气泡，会干扰观察": [
+"Bubbles: they disturb the observation",
+"Des bulles : elles gênent l'observation"
+],
+"洋葱表皮临时装片": [
+"Temporary mount of onion epidermis",
+"Lame provisoire d'épiderme d'oignon"
+],
+"口腔上皮细胞临时装片": [
+"Temporary mount of cheek cells",
+"Lame provisoire de cellules de la joue"
+],
+"载玻片": [
+"Glass slide",
+"Lame de verre"
+],
+"盖玻片": [
+"Cover slip",
+"Lamelle"
+],
+"水溢出": [
+"Water overflows",
+"L'eau déborde"
+],
+"盖盖玻片（侧面示意图）": [
+"Lowering the cover slip (side view)",
+"Poser la lamelle (vue de côté)"
+],
+"把洋葱表皮装片的 7 个步骤按顺序放好，没有失误": [
+"Put the 7 steps of the onion epidermis mount in order, without a mistake",
+"Placer dans l'ordre les 7 étapes de la lame d'épiderme d'oignon, sans erreur"
+],
+"把口腔上皮细胞装片的 7 个步骤按顺序放好": [
+"Put the 7 steps of the cheek cell mount in order",
+"Placer dans l'ordre les 7 étapes de la lame de cellules de la joue"
+],
+"盖盖玻片时不产生气泡": [
+"Lower the cover slip without any bubbles",
+"Poser la lamelle sans aucune bulle"
 ]
 }

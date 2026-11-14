@@ -3450,5 +3450,1265 @@
  "蜂蜜": [
   "Honey",
   "Miel"
+ ],
+ "汽化、液化与升华、凝华": [
+  "Vaporisation, liquefaction, sublimation and deposition",
+  "Vaporisation, liquéfaction, sublimation et condensation solide"
+ ],
+ "温度计与体温计": [
+  "Thermometers and the clinical thermometer",
+  "Thermomètres et thermomètre médical"
+ ],
+ "光的直线传播": [
+  "Rectilinear propagation of light",
+  "Propagation rectiligne de la lumière"
+ ],
+ "镜面反射与漫反射": [
+  "Specular and diffuse reflection",
+  "Réflexion spéculaire et réflexion diffuse"
+ ],
+ "噪声与回声": [
+  "Noise and echoes",
+  "Bruit et échos"
+ ],
+ "探究凸透镜成像规律": [
+  "Investigating the images of a convex lens",
+  "Étude des images d'une lentille convergente"
+ ],
+ "改变内能的两种方式": [
+  "Two ways of changing internal energy",
+  "Deux façons de modifier l'énergie interne"
+ ],
+ "影响电阻大小的因素": [
+  "What affects resistance",
+  "Ce qui influence la résistance"
+ ],
+ "第十六章 电压 电阻": [
+  "Chapter 16 Voltage and resistance",
+  "Chapitre 16 Tension et résistance"
+ ],
+ "探究电流与电压、电阻的关系": [
+  "Investigating how current depends on voltage and resistance",
+  "Étude de la relation entre l'intensité, la tension et la résistance"
+ ],
+ "伏安法测电阻": [
+  "Measuring resistance with an ammeter and a voltmeter",
+  "Mesure d'une résistance avec un ampèremètre et un voltmètre"
+ ],
+ "电功与电能表": [
+  "Electrical work and the energy meter",
+  "Travail électrique et compteur d'énergie"
+ ],
+ "继电器、扬声器与话筒": [
+  "Relays, loudspeakers and microphones",
+  "Relais, haut-parleurs et microphones"
+ ],
+ "信息的传递": [
+  "Transmitting information",
+  "Transmission de l'information"
+ ],
+ "噪声的大小（与信号相比）": [
+  "Size of the noise (compared with the signal)",
+  "Importance du bruit (par rapport au signal)"
+ ],
+ "电台的频率": [
+  "Frequency of the station",
+  "Fréquence de la station"
+ ],
+ "收音机调到的频率": [
+  "Frequency the radio is tuned to",
+  "Fréquence sur laquelle la radio est réglée"
+ ],
+ "光射到光纤管壁的入射角": [
+  "Angle of incidence on the wall of the fibre",
+  "Angle d'incidence sur la paroi de la fibre"
+ ],
+ "模拟信号与数字信号": [
+  "Analogue and digital signals",
+  "Signaux analogiques et numériques"
+ ],
+ "收音机的调谐": [
+  "Tuning a radio",
+  "Réglage d'une radio"
+ ],
+ "光纤通信": [
+  "Optical-fibre communication",
+  "Communication par fibre optique"
+ ],
+ "中波（kHz）": [
+  "Medium wave (kHz)",
+  "Ondes moyennes (kHz)"
+ ],
+ "调频 FM（MHz）": [
+  "FM (MHz)",
+  "FM (MHz)"
+ ],
+ "数字信号判断错的位数": [
+  "Number of bits the digital signal gets wrong",
+  "Nombre de bits erronés du signal numérique"
+ ],
+ "模拟信号的失真（噪声的有效值）": [
+  "Distortion of the analogue signal (r.m.s. of the noise)",
+  "Déformation du signal analogique (valeur efficace du bruit)"
+ ],
+ "数字信号": [
+  "Digital signal",
+  "Signal numérique"
+ ],
+ "完全恢复": [
+  "Restored completely",
+  "Restitué intégralement"
+ ],
+ "有错误": [
+  "Has errors",
+  "Comporte des erreurs"
+ ],
+ "电磁波的波长": [
+  "Wavelength of the wave",
+  "Longueur d'onde de l'onde"
+ ],
+ "收音机": [
+  "Radio",
+  "Radio"
+ ],
+ "收到这个电台（频率相同）": [
+  "Receives this station (same frequency)",
+  "Reçoit cette station (même fréquence)"
+ ],
+ "没有收到（频率不同）": [
+  "Does not receive it (different frequency)",
+  "Ne la reçoit pas (fréquence différente)"
+ ],
+ "光射到管壁的入射角": [
+  "Angle of incidence on the wall",
+  "Angle d'incidence sur la paroi"
+ ],
+ "发生全反射，光沿光纤传下去": [
+  "Total internal reflection occurs: the light travels on along the fibre",
+  "Il y a réflexion totale : la lumière se propage le long de la fibre"
+ ],
+ "不发生全反射，有一部分光折射出管壁": [
+  "No total internal reflection: part of the light is refracted out through the wall",
+  "Pas de réflexion totale : une partie de la lumière est réfractée hors de la paroi"
+ ],
+ "模拟信号与数字信号：使噪声大到让数字信号也出现错误": [
+  "Analogue and digital signals: make the noise so large that even the digital signal has errors",
+  "Signaux analogiques et numériques : rendez le bruit assez grand pour que même le signal numérique comporte des erreurs"
+ ],
+ "模拟信号与数字信号：使数字信号完全正确，而模拟信号失真达到 40 % 以上": [
+  "Analogue and digital signals: make the digital signal completely correct while the analogue signal is distorted by 40 % or more",
+  "Signaux analogiques et numériques : obtenez un signal numérique totalement correct alors que le signal analogique est déformé de 40 % ou plus"
+ ],
+ "收音机的调谐：把收音机调到与电台相同的频率，收到这个电台": [
+  "Tuning a radio: tune the radio to the same frequency as the station and receive it",
+  "Réglage d'une radio : réglez la radio sur la fréquence de la station pour la recevoir"
+ ],
+ "光纤通信：使光在光纤管壁上发生全反射": [
+  "Optical-fibre communication: make the light totally reflected at the wall of the fibre",
+  "Communication par fibre optique : faites subir à la lumière une réflexion totale sur la paroi de la fibre"
+ ],
+ "表面的粗糙程度（0 为镜面）": [
+  "Roughness of the surface (0 = mirror)",
+  "Rugosité de la surface (0 = miroir)"
+ ],
+ "眼睛的位置（与法线的夹角）": [
+  "Position of the eye (angle with the normal)",
+  "Position de l'œil (angle avec la normale)"
+ ],
+ "反射的类型": [
+  "Type of reflection",
+  "Type de réflexion"
+ ],
+ "反射光的范围": [
+  "Range of the reflected light",
+  "Étendue de la lumière réfléchie"
+ ],
+ "眼睛看到的亮度": [
+  "Brightness seen by the eye",
+  "Luminosité perçue par l'œil"
+ ],
+ "每条光线": [
+  "Each ray",
+  "Chaque rayon"
+ ],
+ "反射角等于入射角": [
+  "the angle of reflection equals the angle of incidence",
+  "l'angle de réflexion est égal à l'angle d'incidence"
+ ],
+ "镜面反射：用平面镜，使眼睛恰好在反射光的方向上，看到明亮的光": [
+  "Specular reflection: with a plane mirror, put the eye exactly in the direction of the reflected light and see bright light",
+  "Réflexion spéculaire : avec un miroir plan, placez l'œil exactement dans la direction de la lumière réfléchie pour voir une lumière vive"
+ ],
+ "镜面反射：用平面镜，使眼睛离开反射光的方向（相差 20° 以上），看不到光": [
+  "Specular reflection: with a plane mirror, move the eye away from the direction of the reflected light (by more than 20°) and see no light",
+  "Réflexion spéculaire : avec un miroir plan, écartez l'œil de la direction de la lumière réfléchie (de plus de 20°) pour ne voir aucune lumière"
+ ],
+ "漫反射：用粗糙的表面，使眼睛离开镜面反射的方向 20° 以上，仍然能看到光": [
+  "Diffuse reflection: with a rough surface, put the eye more than 20° away from the direction of specular reflection and still see light",
+  "Réflexion diffuse : avec une surface rugueuse, placez l'œil à plus de 20° de la direction de la réflexion spéculaire et voyez tout de même de la lumière"
+ ],
+ "控制电路的电源电压": [
+  "Supply voltage of the control circuit",
+  "Tension d'alimentation du circuit de commande"
+ ],
+ "环境温度": [
+  "Surrounding temperature",
+  "Température ambiante"
+ ],
+ "报警温度（金属丝的位置）": [
+  "Alarm temperature (position of the metal wire)",
+  "Température d'alarme (position du fil métallique)"
+ ],
+ "电流（声音）的大小": [
+  "Size of the current (of the sound)",
+  "Intensité du courant (du son)"
+ ],
+ "电磁继电器": [
+  "Electromagnetic relay",
+  "Relais électromagnétique"
+ ],
+ "温度自动报警器": [
+  "Temperature alarm",
+  "Alarme de température"
+ ],
+ "扬声器": [
+  "Loudspeaker",
+  "Haut-parleur"
+ ],
+ "话筒": [
+  "Microphone",
+  "Microphone"
+ ],
+ "控制电路的开关": [
+  "Switch of the control circuit",
+  "Interrupteur du circuit de commande"
+ ],
+ "工作电路中的用电器": [
+  "Appliance in the working circuit",
+  "Appareil du circuit de travail"
+ ],
+ "控制电路的电流": [
+  "Current in the control circuit",
+  "Courant dans le circuit de commande"
+ ],
+ "吸合所需的电流": [
+  "Current needed to pull the armature in",
+  "Courant nécessaire pour attirer l'armature"
+ ],
+ "衔铁": [
+  "Armature",
+  "Armature"
+ ],
+ "被吸下（吸合）": [
+  "Pulled down (attracted)",
+  "Attirée vers le bas (attirée)"
+ ],
+ "被弹簧拉起（释放）": [
+  "Pulled up by the spring (released)",
+  "Ramenée vers le haut par le ressort (relâchée)"
+ ],
+ "工作电路（220 V）": [
+  "Working circuit (220 V)",
+  "Circuit de travail (220 V)"
+ ],
+ "接通": [
+  "Closed",
+  "Fermé"
+ ],
+ "工作电路的电流": [
+  "Current in the working circuit",
+  "Courant dans le circuit de travail"
+ ],
+ "控制电路": [
+  "Control circuit",
+  "Circuit de commande"
+ ],
+ "水银柱接通了金属丝": [
+  "The mercury column has reached the metal wire",
+  "La colonne de mercure a touché le fil métallique"
+ ],
+ "没有接通": [
+  "Not closed",
+  "Non fermé"
+ ],
+ "电铃": [
+  "Bell",
+  "Sonnerie"
+ ],
+ "响（报警）": [
+  "Rings (alarm)",
+  "Sonne (alarme)"
+ ],
+ "不响": [
+  "Silent",
+  "Silencieuse"
+ ],
+ "线圈中电流的方向": [
+  "Direction of the current in the coil",
+  "Sens du courant dans la bobine"
+ ],
+ "向左": [
+  "To the left",
+  "Vers la gauche"
+ ],
+ "没有电流": [
+  "No current",
+  "Pas de courant"
+ ],
+ "向右": [
+  "To the right",
+  "Vers la droite"
+ ],
+ "线圈受力的方向": [
+  "Direction of the force on the coil",
+  "Sens de la force sur la bobine"
+ ],
+ "不受力": [
+  "No force",
+  "Aucune force"
+ ],
+ "纸盆偏离中间的位置": [
+  "Position of the cone away from the middle",
+  "Position de la membrane par rapport au milieu"
+ ],
+ "声音": [
+  "Sound",
+  "Son"
+ ],
+ "音调：{0} Hz；响度由电流大小决定": [
+  "Pitch: {0} Hz; loudness is set by the size of the current",
+  "Hauteur : {0} Hz ; l'intensité sonore dépend de l'intensité du courant"
+ ],
+ "线圈的运动": [
+  "Movement of the coil",
+  "Mouvement de la bobine"
+ ],
+ "在最远处，瞬间不动": [
+  "At its farthest point, still for an instant",
+  "Au point le plus éloigné, immobile un instant"
+ ],
+ "切割磁感线": [
+  "Cutting magnetic field lines",
+  "Coupe les lignes de champ magnétique"
+ ],
+ "感应电流的大小（相对值）": [
+  "Size of the induced current (relative value)",
+  "Intensité du courant induit (valeur relative)"
+ ],
+ "电流的频率": [
+  "Frequency of the current",
+  "Fréquence du courant"
+ ],
+ "与声音的频率相同，{0} Hz": [
+  "The same as the frequency of the sound, {0} Hz",
+  "La même que celle du son, {0} Hz"
+ ],
+ "电磁继电器：闭合控制电路的开关，使衔铁被吸下，接通工作电路": [
+  "Electromagnetic relay: close the switch of the control circuit so that the armature is pulled down and the working circuit is closed",
+  "Relais électromagnétique : fermez l'interrupteur du circuit de commande pour que l'armature soit attirée et que le circuit de travail soit fermé"
+ ],
+ "温度自动报警器：使温度升高到报警温度，电铃响起来": [
+  "Temperature alarm: raise the temperature to the alarm temperature so that the bell rings",
+  "Alarme de température : amenez la température à la température d'alarme pour que la sonnerie retentisse"
+ ],
+ "扬声器：使线圈中电流的最大值达到最大，纸盆的振幅最大": [
+  "Loudspeaker: make the largest value of the current in the coil as large as possible, so that the cone has its largest amplitude",
+  "Haut-parleur : donnez à la valeur maximale du courant dans la bobine sa plus grande valeur, pour que la membrane ait sa plus grande amplitude"
+ ],
+ "话筒：使声音更响、音调更高，使感应电流达到最大值的一半以上": [
+  "Microphone: make the sound louder and higher so that the induced current reaches more than half of its largest value",
+  "Microphone : rendez le son plus fort et plus aigu pour que le courant induit dépasse la moitié de sa valeur maximale"
+ ],
+ "温度高于临界温度，压缩体积也不能使它液化": [
+  "The temperature is above the critical temperature: even compressing the gas cannot make it liquefy",
+  "La température est supérieure à la température critique : même en comprimant le gaz, on ne peut pas le liquéfier"
+ ],
+ "水的温度（与周围相同）": [
+  "Temperature of the water (the same as the surroundings)",
+  "Température de l'eau (la même que celle de l'environnement)"
+ ],
+ "水面的面积": [
+  "Area of the water surface",
+  "Aire de la surface de l'eau"
+ ],
+ "个标准大气压": [
+  "standard atmospheres",
+  "atmosphères normales"
+ ],
+ "水浴的温度": [
+  "Temperature of the water bath",
+  "Température du bain-marie"
+ ],
+ "加热的时间": [
+  "Heating time",
+  "Durée du chauffage"
+ ],
+ "现象的编号": [
+  "Number of the phenomenon",
+  "Numéro du phénomène"
+ ],
+ "升华与凝华": [
+  "Sublimation and deposition",
+  "Sublimation et condensation solide"
+ ],
+ "六种物态变化": [
+  "The six changes of state",
+  "Les six changements d'état"
+ ],
+ "空气的流动": [
+  "Air movement",
+  "Mouvement de l'air"
+ ],
+ "气体": [
+  "Gas",
+  "Gaz"
+ ],
+ "烧瓶上方的玻璃": [
+  "Glass above the flask",
+  "Verre au-dessus du ballon"
+ ],
+ "不冷却": [
+  "Not cooled",
+  "Non refroidi"
+ ],
+ "用冰水冷却": [
+  "Cooled with ice water",
+  "Refroidi à l'eau glacée"
+ ],
+ "蒸发的速度": [
+  "Rate of evaporation",
+  "Vitesse d'évaporation"
+ ],
+ "剩下的水": [
+  "Water left",
+  "Eau restante"
+ ],
+ "剩下的水比周围低": [
+  "Water left is colder than the surroundings by",
+  "L'eau restante est plus froide que l'environnement de"
+ ],
+ "这个压强下的沸点": [
+  "Boiling point at this pressure",
+  "Température d'ébullition à cette pression"
+ ],
+ "物态变化": [
+  "Change of state",
+  "Changement d'état"
+ ],
+ "液化（放热）": [
+  "Liquefaction (gives out heat)",
+  "Liquéfaction (libère de la chaleur)"
+ ],
+ "没有液化": [
+  "No liquefaction",
+  "Pas de liquéfaction"
+ ],
+ "碘蒸气的质量": [
+  "Mass of iodine vapour",
+  "Masse de vapeur d'iode"
+ ],
+ "冷玻璃上的碘晶体": [
+  "Iodine crystals on the cold glass",
+  "Cristaux d'iode sur le verre froid"
+ ],
+ "碘有没有熔化": [
+  "Has the iodine melted?",
+  "L'iode a-t-il fondu ?"
+ ],
+ "没有（水浴的温度低于碘的熔点 113.7 ℃）": [
+  "No (the temperature of the water bath is below the melting point of iodine, 113.7 ℃)",
+  "Non (la température du bain est inférieure au point de fusion de l'iode, 113,7 ℃)"
+ ],
+ "升华（吸热）和凝华（放热）": [
+  "Sublimation (absorbs heat) and deposition (gives out heat)",
+  "Sublimation (absorbe de la chaleur) et condensation solide (libère de la chaleur)"
+ ],
+ "升华（吸热）": [
+  "Sublimation (absorbs heat)",
+  "Sublimation (absorbe de la chaleur)"
+ ],
+ "还不明显": [
+  "Not yet noticeable",
+  "Pas encore visible"
+ ],
+ "吸热还是放热": [
+  "Absorbs or gives out heat",
+  "Absorbe ou libère de la chaleur"
+ ],
+ "吸热": [
+  "Absorbs heat",
+  "Absorbe de la chaleur"
+ ],
+ "放热": [
+  "Gives out heat",
+  "Libère de la chaleur"
+ ],
+ "图中的箭头": [
+  "Arrow in the picture",
+  "Flèche du schéma"
+ ],
+ "蒸发：使杯里的水在规定的时间内全部蒸发": [
+  "Evaporation: make all the water in the dish evaporate within the given time",
+  "Évaporation : faites s'évaporer toute l'eau de la coupelle dans le temps donné"
+ ],
+ "液化：在 20 ℃ 的常温下，只靠压缩体积使石油气液化": [
+  "Liquefaction: at an ordinary temperature of 20 ℃, liquefy petroleum gas by compression alone",
+  "Liquéfaction : à la température ordinaire de 20 ℃, liquéfiez le gaz de pétrole par la seule compression"
+ ],
+ "升华与凝华：用冰水冷却玻璃，使它上面出现碘晶体": [
+  "Sublimation and deposition: cool the glass with ice water so that iodine crystals appear on it",
+  "Sublimation et condensation solide : refroidissez le verre à l'eau glacée pour que des cristaux d'iode s'y forment"
+ ],
+ "六种物态变化：找出一个属于凝华的现象": [
+  "The six changes of state: find a phenomenon that is deposition",
+  "Les six changements d'état : trouvez un phénomène qui est une condensation solide"
+ ],
+ "做功的多少": [
+  "Amount of work done",
+  "Quantité de travail fourni"
+ ],
+ "物体 A 的质量": [
+  "Mass of object A",
+  "Masse de l'objet A"
+ ],
+ "物体 A 的温度": [
+  "Temperature of object A",
+  "Température de l'objet A"
+ ],
+ "物体 B 的质量": [
+  "Mass of object B",
+  "Masse de l'objet B"
+ ],
+ "物体 B 的温度": [
+  "Temperature of object B",
+  "Température de l'objet B"
+ ],
+ "做功": [
+  "Doing work",
+  "Travail"
+ ],
+ "热传递": [
+  "Heat transfer",
+  "Transfert thermique"
+ ],
+ "做功的方式": [
+  "Way of doing work",
+  "Façon de fournir du travail"
+ ],
+ "物体 A 的物质": [
+  "Substance of object A",
+  "Matière de l'objet A"
+ ],
+ "物体 B 的物质": [
+  "Substance of object B",
+  "Matière de l'objet B"
+ ],
+ "内能的变化": [
+  "Change in internal energy",
+  "Variation de l'énergie interne"
+ ],
+ "温度的变化": [
+  "Change in temperature",
+  "Variation de température"
+ ],
+ "末温": [
+  "Final temperature",
+  "Température finale"
+ ],
+ "热量传递的方向": [
+  "Direction of heat transfer",
+  "Sens du transfert thermique"
+ ],
+ "从 A 传向 B": [
+  "From A to B",
+  "De A vers B"
+ ],
+ "从 B 传向 A": [
+  "From B to A",
+  "De B vers A"
+ ],
+ "没有热传递（温度相同）": [
+  "No heat transfer (same temperature)",
+  "Pas de transfert thermique (même température)"
+ ],
+ "达到的共同温度": [
+  "Common temperature reached",
+  "Température commune atteinte"
+ ],
+ "传递的热量": [
+  "Heat transferred",
+  "Chaleur transférée"
+ ],
+ "A 的内能（相对于 0 ℃）": [
+  "Internal energy of A (relative to 0 ℃)",
+  "Énergie interne de A (par rapport à 0 ℃)"
+ ],
+ "B 的内能（相对于 0 ℃）": [
+  "Internal energy of B (relative to 0 ℃)",
+  "Énergie interne de B (par rapport à 0 ℃)"
+ ],
+ "做功：压缩气体，使气体的温度升高 20 ℃ 以上": [
+  "Doing work: compress the gas so that its temperature rises by 20 ℃ or more",
+  "Travail : comprimez le gaz pour que sa température s'élève de 20 ℃ ou plus"
+ ],
+ "做功：气体膨胀对外做功，使气体的温度降低 5 ℃ 以上": [
+  "Doing work: let the gas expand and do work on its surroundings so that its temperature falls by 5 ℃ or more",
+  "Travail : laissez le gaz se détendre et fournir du travail à l'extérieur pour que sa température baisse de 5 ℃ ou plus"
+ ],
+ "热传递：使热量从 B 传向 A": [
+  "Heat transfer: make heat pass from B to A",
+  "Transfert thermique : faites passer la chaleur de B vers A"
+ ],
+ "热传递：使两个物体之间没有热传递": [
+  "Heat transfer: make there be no heat transfer between the two objects",
+  "Transfert thermique : faites en sorte qu'il n'y ait aucun transfert thermique entre les deux objets"
+ ],
+ "蜡烛到透镜的距离（物距）": [
+  "Distance from the candle to the lens (object distance)",
+  "Distance de la bougie à la lentille (distance objet)"
+ ],
+ "光屏到透镜的距离": [
+  "Distance from the screen to the lens",
+  "Distance de l'écran à la lentille"
+ ],
+ "测量焦距": [
+  "Measuring the focal length",
+  "Mesure de la distance focale"
+ ],
+ "探究成像规律": [
+  "Investigating the images",
+  "Étude des images"
+ ],
+ "透镜甲": [
+  "Lens A",
+  "Lentille A"
+ ],
+ "透镜乙": [
+  "Lens B",
+  "Lentille B"
+ ],
+ "透镜丙": [
+  "Lens C",
+  "Lentille C"
+ ],
+ "记录这组数据": [
+  "Record this set of data",
+  "Enregistrer cette série de mesures"
+ ],
+ "光斑的宽度": [
+  "Width of the bright spot",
+  "Largeur de la tache lumineuse"
+ ],
+ "光斑": [
+  "Bright spot",
+  "Tache lumineuse"
+ ],
+ "最小最亮：光屏在焦点上": [
+  "Smallest and brightest: the screen is at the focus",
+  "La plus petite et la plus brillante : l'écran est au foyer"
+ ],
+ "还不是最小": [
+  "Not the smallest yet",
+  "Pas encore la plus petite"
+ ],
+ "屏上的像": [
+  "Image on the screen",
+  "Image sur l'écran"
+ ],
+ "光屏上没有像": [
+  "No image on the screen",
+  "Pas d'image sur l'écran"
+ ],
+ "清晰": [
+  "Sharp",
+  "Nette"
+ ],
+ "模糊": [
+  "Blurred",
+  "Floue"
+ ],
+ "第 {0} 组": [
+  "Set {0}",
+  "Série {0}"
+ ],
+ "u = {0} cm，v = {1} cm，{2}": [
+  "u = {0} cm, v = {1} cm, {2}",
+  "u = {0} cm, v = {1} cm, {2}"
+ ],
+ "测量焦距：移动光屏，使平行光的光斑最小最亮": [
+  "Measuring the focal length: move the screen so that the bright spot of parallel light is smallest and brightest",
+  "Mesure de la distance focale : déplacez l'écran pour que la tache de lumière parallèle soit la plus petite et la plus brillante"
+ ],
+ "成像规律：在光屏上得到倒立、放大的清晰实像": [
+  "Images: obtain a sharp, real, inverted, enlarged image on the screen",
+  "Images : obtenez sur l'écran une image nette, réelle, renversée et agrandie"
+ ],
+ "成像规律：在光屏上得到倒立、缩小的清晰实像": [
+  "Images: obtain a sharp, real, inverted, reduced image on the screen",
+  "Images : obtenez sur l'écran une image nette, réelle, renversée et réduite"
+ ],
+ "记录数据：记下至少 3 组清晰成像时的物距和像距": [
+  "Recording data: note the object distance and image distance of at least 3 sharp images",
+  "Enregistrement des données : notez la distance objet et la distance image d'au moins 3 images nettes"
+ ],
+ "电压": [
+  "Voltage",
+  "Tension"
+ ],
+ "用电器的功率": [
+  "Power of the appliance",
+  "Puissance de l'appareil"
+ ],
+ "工作的时间": [
+  "Working time",
+  "Durée de fonctionnement"
+ ],
+ "电能表原来的示数": [
+  "Earlier reading of the energy meter",
+  "Ancien relevé du compteur d'énergie"
+ ],
+ "电价（示例）": [
+  "Price of electricity (example)",
+  "Prix de l'électricité (exemple)"
+ ],
+ "元/(kW·h)": [
+  "yuan/(kW·h)",
+  "yuans/(kW·h)"
+ ],
+ "转盘转过的转数": [
+  "Number of turns of the disc",
+  "Nombre de tours du disque"
+ ],
+ "所用的时间": [
+  "Time taken",
+  "Durée"
+ ],
+ "电功 W = UIt": [
+  "Electrical work W = UIt",
+  "Travail électrique W = UIt"
+ ],
+ "读电能表": [
+  "Reading an energy meter",
+  "Lecture d'un compteur d'énergie"
+ ],
+ "用电能表测功率": [
+  "Measuring power with an energy meter",
+  "Mesure d'une puissance avec un compteur d'énergie"
+ ],
+ "电能表的参数": [
+  "Parameter of the energy meter",
+  "Caractéristique du compteur d'énergie"
+ ],
+ "电流做的功": [
+  "Work done by the current",
+  "Travail fourni par le courant"
+ ],
+ "这段时间用的电能": [
+  "Electrical energy used in this time",
+  "Énergie électrique consommée pendant ce temps"
+ ],
+ "电能表现在的示数": [
+  "Present reading of the energy meter",
+  "Relevé actuel du compteur d'énergie"
+ ],
+ "电费": [
+  "Electricity bill",
+  "Facture d'électricité"
+ ],
+ "消耗的电能": [
+  "Electrical energy used",
+  "Énergie électrique consommée"
+ ],
+ "电功：使电流做的功不少于 1 kW·h": [
+  "Electrical work: make the work done by the current at least 1 kW·h",
+  "Travail électrique : faites en sorte que le travail fourni par le courant soit d'au moins 1 kW·h"
+ ],
+ "读电能表：使这段时间用的电能恰好是 3 kW·h": [
+  "Reading an energy meter: make the electrical energy used in this time exactly 3 kW·h",
+  "Lecture d'un compteur d'énergie : faites en sorte que l'énergie électrique consommée pendant ce temps soit exactement de 3 kW·h"
+ ],
+ "测功率：使测得的用电器功率恰好是 1000 W": [
+  "Measuring power: make the measured power of the appliance exactly 1000 W",
+  "Mesure de puissance : faites en sorte que la puissance mesurée de l'appareil soit exactement de 1000 W"
+ ],
+ "小孔成像": [
+  "Pinhole imaging",
+  "L'image d'un trou d'épingle"
+ ],
+ "声音的强弱": [
+  "Loudness of the sound",
+  "Intensité du son"
+ ],
+ "原来的噪声": [
+  "The original noise",
+  "Le bruit d'origine"
+ ],
+ "人到障碍物的距离": [
+  "Distance from the person to the obstacle",
+  "Distance de la personne à l'obstacle"
+ ],
+ "超声波往返的时间": [
+  "Time for the ultrasound to go and return",
+  "Durée de l'aller-retour des ultrasons"
+ ],
+ "控制噪声": [
+  "Controlling noise",
+  "Limiter le bruit"
+ ],
+ "声呐测深": [
+  "Sounding the sea with sonar",
+  "Sondage de la mer au sonar"
+ ],
+ "不采取": [
+  "Not taken",
+  "Non adoptée"
+ ],
+ "采取": [
+  "Taken",
+  "Adoptée"
+ ],
+ "声音传播的介质": [
+  "Medium the sound travels in",
+  "Milieu dans lequel le son se propage"
+ ],
+ "相当于": [
+  "Equivalent to",
+  "Équivalent à"
+ ],
+ "对人的影响": [
+  "Effect on people",
+  "Effet sur les personnes"
+ ],
+ "采取措施后的噪声": [
+  "Noise after the measures",
+  "Bruit après les mesures"
+ ],
+ "是否适合休息和睡眠": [
+  "Suitable for rest and sleep?",
+  "Convient au repos et au sommeil ?"
+ ],
+ "声速": [
+  "Speed of sound",
+  "Vitesse du son"
+ ],
+ "回声比原声晚": [
+  "The echo comes later than the original sound by",
+  "L'écho arrive après le son d'origine avec un retard de"
+ ],
+ "能否区分回声和原声": [
+  "Can the echo be told from the original sound?",
+  "Peut-on distinguer l'écho du son d'origine ?"
+ ],
+ "能（相隔 0.1 s 以上）": [
+  "Yes (0.1 s or more apart)",
+  "Oui (écart de 0,1 s ou plus)"
+ ],
+ "不能（相隔不到 0.1 s）": [
+  "No (less than 0.1 s apart)",
+  "Non (écart de moins de 0,1 s)"
+ ],
+ "至少需要的距离": [
+  "Least distance needed",
+  "Plus petite distance nécessaire"
+ ],
+ "海水中的声速": [
+  "Speed of sound in sea water",
+  "Vitesse du son dans l'eau de mer"
+ ],
+ "海水的深度": [
+  "Depth of the sea water",
+  "Profondeur de l'eau de mer"
+ ],
+ "声音的强弱：找一个会损害听力的声音（90 dB 以上）": [
+  "Loudness of sound: find a sound that damages hearing (90 dB or more)",
+  "Intensité sonore : trouvez un son qui abîme l'ouïe (90 dB ou plus)"
+ ],
+ "控制噪声：采取措施，使噪声降到适合休息和睡眠的 50 dB 以下": [
+  "Controlling noise: take measures to bring the noise below 50 dB, suitable for rest and sleep",
+  "Limiter le bruit : prenez des mesures pour ramener le bruit au-dessous de 50 dB, niveau qui convient au repos et au sommeil"
+ ],
+ "回声：在空气中，使人能把回声和原声区分开": [
+  "Echo: in air, make it possible to tell the echo from the original sound",
+  "Écho : dans l'air, faites en sorte qu'on puisse distinguer l'écho du son d'origine"
+ ],
+ "声呐测深：使测得的海水深度恰好是 3000 m": [
+  "Sonar sounding: make the measured depth of the sea water exactly 3000 m",
+  "Sondage au sonar : faites en sorte que la profondeur mesurée de l'eau de mer soit exactement de 3000 m"
+ ],
+ "定值电阻两端的电压": [
+  "Voltage across the fixed resistor",
+  "Tension aux bornes de la résistance fixe"
+ ],
+ "探究": [
+  "Investigation",
+  "Étude"
+ ],
+ "电流与电压的关系": [
+  "Current and voltage",
+  "Intensité et tension"
+ ],
+ "电流与电阻的关系": [
+  "Current and resistance",
+  "Intensité et résistance"
+ ],
+ "电压表的示数（保持不变）": [
+  "Reading of the voltmeter (kept unchanged)",
+  "Indication du voltmètre (maintenue inchangée)"
+ ],
+ "U = {0} V，I = {1} A": [
+  "U = {0} V, I = {1} A",
+  "U = {0} V, I = {1} A"
+ ],
+ "R = {0} Ω，I = {1} A": [
+  "R = {0} Ω, I = {1} A",
+  "R = {0} Ω, I = {1} A"
+ ],
+ "数据的结论": [
+  "Conclusion from the data",
+  "Conclusion tirée des données"
+ ],
+ "电阻一定时，电流与电压成正比": [
+  "For a given resistance, the current is proportional to the voltage",
+  "Pour une résistance donnée, l'intensité est proportionnelle à la tension"
+ ],
+ "电压一定时，电流与电阻成反比": [
+  "For a given voltage, the current is inversely proportional to the resistance",
+  "Pour une tension donnée, l'intensité est inversement proportionnelle à la résistance"
+ ],
+ "数据不符合规律": [
+  "The data do not fit the rule",
+  "Les données ne suivent pas la loi"
+ ],
+ "电流与电压：用同一个电阻，记录至少 4 组不同电压的数据": [
+  "Current and voltage: with the same resistor, record at least 4 sets of data at different voltages",
+  "Intensité et tension : avec la même résistance, enregistrez au moins 4 séries de mesures à des tensions différentes"
+ ],
+ "电流与电阻：保持电压不变，换用不同的电阻，记录至少 4 组数据": [
+  "Current and resistance: keep the voltage unchanged, use different resistors and record at least 4 sets of data",
+  "Intensité et résistance : gardez la tension inchangée, utilisez des résistances différentes et enregistrez au moins 4 séries de mesures"
+ ],
+ "电流与电压：用 5 Ω 的电阻，记录下电压 3 V 时电流 0.6 A 这一组": [
+  "Current and voltage: with the 5 Ω resistor, record the set with a voltage of 3 V and a current of 0.6 A",
+  "Intensité et tension : avec la résistance de 5 Ω, enregistrez la série où la tension est de 3 V et l'intensité de 0,6 A"
+ ],
+ "两根导线的电阻相等": [
+  "The two wires have equal resistance",
+  "Les deux fils ont la même résistance"
+ ],
+ "B 的电阻比 A 大": [
+  "B has a greater resistance than A",
+  "B a une résistance plus grande que A"
+ ],
+ "A 的电阻比 B 大": [
+  "A has a greater resistance than B",
+  "A a une résistance plus grande que B"
+ ],
+ "导线 B 的长度": [
+  "Length of wire B",
+  "Longueur du fil B"
+ ],
+ "导线 B 的横截面积": [
+  "Cross-section of wire B",
+  "Section du fil B"
+ ],
+ "导线 B 的温度": [
+  "Temperature of wire B",
+  "Température du fil B"
+ ],
+ "横截面积": [
+  "Cross-section",
+  "Section"
+ ],
+ "材料": [
+  "Material",
+  "Matériau"
+ ],
+ "导线 B 的材料": [
+  "Material of wire B",
+  "Matériau du fil B"
+ ],
+ "导线 A 的电阻": [
+  "Resistance of wire A",
+  "Résistance du fil A"
+ ],
+ "导线 B 的电阻": [
+  "Resistance of wire B",
+  "Résistance du fil B"
+ ],
+ "接 A 时电流表的示数": [
+  "Reading of the ammeter with A",
+  "Indication de l'ampèremètre avec A"
+ ],
+ "接 B 时电流表的示数": [
+  "Reading of the ammeter with B",
+  "Indication de l'ampèremètre avec B"
+ ],
+ "比较": [
+  "Comparison",
+  "Comparaison"
+ ],
+ "长度：使导线 B 的电阻是导线 A 的 2 倍": [
+  "Length: make the resistance of wire B twice that of wire A",
+  "Longueur : donnez au fil B une résistance double de celle du fil A"
+ ],
+ "横截面积：使导线 B 的电阻是导线 A 的一半": [
+  "Cross-section: make the resistance of wire B half that of wire A",
+  "Section : donnez au fil B une résistance moitié de celle du fil A"
+ ],
+ "材料：选一种电阻比导线 A（镍铬合金）小的材料": [
+  "Material: choose a material of smaller resistance than wire A (nichrome)",
+  "Matériau : choisissez un matériau de résistance plus petite que celle du fil A (nichrome)"
+ ],
+ "温度：加热导线 B，使它的电阻增大到原来的 1.2 倍以上": [
+  "Temperature: heat wire B so that its resistance increases to more than 1.2 times the original",
+  "Température : chauffez le fil B pour que sa résistance dépasse 1,2 fois la résistance initiale"
+ ],
+ "滑动变阻器接入电路的电阻": [
+  "Resistance of the rheostat in the circuit",
+  "Résistance du rhéostat dans le circuit"
+ ],
+ "被测的对象": [
+  "What is measured",
+  "Élément mesuré"
+ ],
+ "小灯泡（2.5 V）": [
+  "Small bulb (2.5 V)",
+  "Petite ampoule (2,5 V)"
+ ],
+ "U = {0} V，I = {1} A，R = {2} Ω": [
+  "U = {0} V, I = {1} A, R = {2} Ω",
+  "U = {0} V, I = {1} A, R = {2} Ω"
+ ],
+ "电阻的平均值": [
+  "Average resistance",
+  "Résistance moyenne"
+ ],
+ "随电压增大而增大，不能求平均值": [
+  "Increases as the voltage increases; must not be averaged",
+  "Augmente avec la tension ; on ne doit pas en faire la moyenne"
+ ],
+ "记录至少 3 组读数": [
+  "Record at least 3 sets of readings",
+  "Enregistrez au moins 3 séries de lectures"
+ ],
+ "测定值电阻：记录 3 组读数，算出的平均值与它的阻值相差不超过 10 %": [
+  "Measuring a fixed resistor: record 3 sets of readings so that their average differs from its value by no more than 10 %",
+  "Mesure d'une résistance fixe : enregistrez 3 séries de lectures dont la moyenne diffère de sa valeur de 10 % au plus"
+ ],
+ "测小灯泡的电阻：记录两组读数，电压较大的一组电阻也较大": [
+  "Measuring the resistance of a small bulb: record two sets of readings such that the set with the larger voltage also has the larger resistance",
+  "Mesure de la résistance d'une petite ampoule : enregistrez deux séries de lectures telles que celle qui a la plus grande tension a aussi la plus grande résistance"
+ ],
+ "测小灯泡的电阻：使小灯泡两端的电压是 2.5 V（正常发光）": [
+  "Measuring the resistance of a small bulb: make the voltage across the bulb 2.5 V (normal brightness)",
+  "Mesure de la résistance d'une petite ampoule : donnez à la tension aux bornes de l'ampoule la valeur 2,5 V (éclat normal)"
+ ],
+ "蜡烛的高度": [
+  "Height of the candle",
+  "Hauteur de la bougie"
+ ],
+ "蜡烛到小孔的距离": [
+  "Distance from the candle to the pinhole",
+  "Distance de la bougie au trou"
+ ],
+ "小孔到光屏的距离": [
+  "Distance from the pinhole to the screen",
+  "Distance du trou à l'écran"
+ ],
+ "小孔的直径": [
+  "Diameter of the pinhole",
+  "Diamètre du trou"
+ ],
+ "挡板的宽度": [
+  "Width of the board",
+  "Largeur du panneau"
+ ],
+ "光源的宽度（0 为点光源）": [
+  "Width of the source (0 = point source)",
+  "Largeur de la source (0 = source ponctuelle)"
+ ],
+ "光源到挡板的距离": [
+  "Distance from the source to the board",
+  "Distance de la source au panneau"
+ ],
+ "挡板到光屏的距离": [
+  "Distance from the board to the screen",
+  "Distance du panneau à l'écran"
+ ],
+ "月球的位置（0° 为新月）": [
+  "Position of the Moon (0° = new moon)",
+  "Position de la Lune (0° = nouvelle lune)"
+ ],
+ "月球偏离地球轨道面的角度": [
+  "Angle of the Moon away from the plane of the Earth's orbit",
+  "Angle de la Lune par rapport au plan de l'orbite de la Terre"
+ ],
+ "影与半影": [
+  "Shadow and penumbra",
+  "Ombre et pénombre"
+ ],
+ "日食与月食": [
+  "Solar and lunar eclipses",
+  "Éclipses de Soleil et de Lune"
+ ],
+ "像的高度": [
+  "Height of the image",
+  "Hauteur de l'image"
+ ],
+ "倒立的实像": [
+  "A real, inverted image",
+  "Une image réelle et renversée"
+ ],
+ "像是否清晰": [
+  "Is the image sharp?",
+  "L'image est-elle nette ?"
+ ],
+ "模糊（孔太大）": [
+  "Blurred (the hole is too large)",
+  "Floue (le trou est trop grand)"
+ ],
+ "本影的宽度": [
+  "Width of the umbra",
+  "Largeur de l'ombre propre"
+ ],
+ "没有本影": [
+  "No umbra",
+  "Pas d'ombre propre"
+ ],
+ "影的总宽度": [
+  "Total width of the shadow",
+  "Largeur totale de l'ombre"
+ ],
+ "没有（点光源）": [
+  "None (point source)",
+  "Aucune (source ponctuelle)"
+ ],
+ "月球的位置": [
+  "Position of the Moon",
+  "Position de la Lune"
+ ],
+ "是否发生": [
+  "Does one occur?",
+  "Y a-t-il une éclipse ?"
+ ],
+ "没有日食或月食": [
+  "No solar or lunar eclipse",
+  "Pas d'éclipse de Soleil ni de Lune"
+ ],
+ "小孔成像：使光屏上的像和蜡烛一样高": [
+  "Pinhole imaging: make the image on the screen as high as the candle",
+  "Image par un trou d'épingle : donnez à l'image sur l'écran la même hauteur que la bougie"
+ ],
+ "小孔成像：使光斑的宽度不超过 2 mm，像清晰": [
+  "Pinhole imaging: make the width of the bright spot at most 2 mm so that the image is sharp",
+  "Image par un trou d'épingle : donnez à la tache lumineuse une largeur d'au plus 2 mm pour que l'image soit nette"
+ ],
+ "影：换成点光源，使影只有本影、没有半影": [
+  "Shadow: change to a point source so that the shadow has only an umbra and no penumbra",
+  "Ombre : passez à une source ponctuelle pour que l'ombre n'ait qu'une ombre propre et pas de pénombre"
+ ],
+ "日食与月食：使月球的位置和高度恰好发生一次日食或月食": [
+  "Solar and lunar eclipses: set the position and the height of the Moon so that exactly one solar or lunar eclipse occurs",
+  "Éclipses de Soleil et de Lune : réglez la position et la hauteur de la Lune pour qu'il se produise une éclipse de Soleil ou de Lune"
+ ],
+ "被测物体的温度": [
+  "Temperature of the object being measured",
+  "Température de l'objet mesuré"
+ ],
+ "体温计原来的示数": [
+  "Earlier reading of the clinical thermometer",
+  "Ancienne indication du thermomètre médical"
+ ],
+ "这次测量的人的体温": [
+  "Temperature of the person measured this time",
+  "Température de la personne mesurée cette fois"
+ ],
+ "烧杯中水的温度": [
+  "Temperature of the water in the beaker",
+  "Température de l'eau dans le bécher"
+ ],
+ "实验室温度计": [
+  "Laboratory thermometer",
+  "Thermomètre de laboratoire"
+ ],
+ "体温计": [
+  "Clinical thermometer",
+  "Thermomètre médical"
+ ],
+ "测量水温的方法": [
+  "Taking the temperature of water",
+  "Mesure de la température de l'eau"
+ ],
+ "使用前": [
+  "Before use",
+  "Avant l'emploi"
+ ],
+ "没有甩": [
+  "Not shaken",
+  "Non secoué"
+ ],
+ "用力甩过": [
+  "Shaken hard",
+  "Secoué fortement"
+ ],
+ "温度计的放法": [
+  "How the thermometer is held",
+  "Façon de tenir le thermomètre"
+ ],
+ "量程": [
+  "Range",
+  "Étendue de mesure"
+ ],
+ "分度值": [
+  "Value of a division",
+  "Valeur d'une graduation"
+ ],
+ "读数": [
+  "Reading",
+  "Lecture"
+ ],
+ "示数": [
+  "Reading shown",
+  "Indication affichée"
+ ],
+ "示数与这次体温相比": [
+  "Reading compared with this person's temperature",
+  "Indication comparée à la température de cette personne"
+ ],
+ "相同": [
+  "The same",
+  "La même"
+ ],
+ "偏高（缩口使水银柱没有退回）": [
+  "Too high (the narrow neck stopped the mercury from falling back)",
+  "Trop élevée (l'étranglement a empêché le mercure de redescendre)"
+ ],
+ "水的实际温度": [
+  "Actual temperature of the water",
+  "Température réelle de l'eau"
+ ],
+ "温度计的示数": [
+  "Reading of the thermometer",
+  "Indication du thermomètre"
+ ],
+ "这种放法的结果": [
+  "Result of this way of holding it",
+  "Résultat de cette façon de le tenir"
+ ],
+ "实验室温度计：使读数为 −10 ℃（零下 10 摄氏度）": [
+  "Laboratory thermometer: make the reading −10 ℃ (ten degrees below zero)",
+  "Thermomètre de laboratoire : faites en sorte que la lecture soit de −10 ℃ (dix degrés au-dessous de zéro)"
+ ],
+ "体温计：不甩，使示数仍是原来的较高示数（比这次体温高）": [
+  "Clinical thermometer: without shaking it, keep the reading at the earlier, higher value (higher than this person's temperature)",
+  "Thermomètre médical : sans le secouer, gardez l'indication à l'ancienne valeur plus élevée (plus élevée que la température de cette personne)"
+ ],
+ "体温计：用力甩过以后，使示数等于这次测量的体温": [
+  "Clinical thermometer: after shaking it hard, make the reading equal to the temperature measured this time",
+  "Thermomètre médical : après l'avoir secoué fortement, faites en sorte que l'indication soit égale à la température mesurée cette fois"
+ ],
+ "测量水温：用正确的放法测量 60 ℃ 以上的热水，使示数准确": [
+  "Measuring the temperature of water: with the correct way of holding the thermometer, measure hot water above 60 ℃ so that the reading is accurate",
+  "Mesure de la température de l'eau : en tenant le thermomètre de la bonne façon, mesurez de l'eau chaude à plus de 60 ℃ pour que l'indication soit exacte"
  ]
 }

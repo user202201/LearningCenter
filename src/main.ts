@@ -27,6 +27,7 @@ import * as CO from "./coding";
 import * as PO from "./poems";
 import { pickKidGrade } from "./gradeui";
 import * as DW from "./dictwrite";
+import { ensureUnlockedOnFirstGesture } from "./speech";
 import * as PK from "./pk";
 
 const app = document.getElementById("app")!;
@@ -1586,6 +1587,7 @@ SC.initScience(shell);
 CO.initCoding(shell);
 PO.initPoems(shell);
 PK.initPk(shell);
+ensureUnlockedOnFirstGesture();   // (iOS: the voice is silent until it was used once inside a tap; see speech.ts)
 MU.initMusic(shell);
 GM.initGames(shell);
 // the web version keeps itself in the browser, so it opens without network (sw.js is made by the build; the packaged app and the dev server have none)

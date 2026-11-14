@@ -1,0 +1,79 @@
+.pdk-wrap { flex: 1; width: 100%; min-height: 0; display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: "hud" "field" "btns"; justify-items: center; user-select: none; -webkit-user-select: none; }
+.pdk-hud { grid-area: hud; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 8px; }
+.pdk-stat { background: #fff; border: 3px solid #96f2d7; border-radius: 16px; padding: 2px 12px; font-weight: 900; color: #087f5b; font-size: 17px; box-shadow: 0 3px 0 #96f2d7; white-space: nowrap; }
+.pdk-stat.best { color: #e8590c; border-color: #ffd8a8; box-shadow: 0 3px 0 #ffd8a8; }
+.pdk-hud .mopt { background: #fff; border: 3px solid #96f2d7; box-shadow: 0 3px 0 #96f2d7; color: #087f5b; font-weight: 800; }
+.pdk-field { grid-area: field; position: relative; width: 100%; max-width: 980px; height: 100%; min-height: 0; box-sizing: border-box; display: grid; grid-template-rows: auto minmax(0, 1fr) auto var(--hh, 100px); gap: 4px; padding: 6px 8px 4px; background: #e6fcf5; border: 4px solid #0ca678; border-radius: 18px; box-shadow: 0 5px 0 #0ca678; overflow: hidden; touch-action: manipulation; }
+.pdk-badges { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.pdk-badge { display: flex; align-items: center; gap: 8px; min-width: 0; color: #087f5b; font-weight: 900; }
+.pdk-badge.s1 { flex-direction: row-reverse; text-align: right; }
+.pdk-face { flex: none; width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 3px solid #96f2d7; box-shadow: 0 3px 0 #96f2d7; display: block; overflow: hidden; }
+.pdk-face svg { display: block; width: 100%; height: 100%; }
+.pdk-badge.turn .pdk-face { border-color: #fcc419; box-shadow: 0 0 0 3px #fff3bf, 0 0 14px 3px rgba(252, 196, 25, .85); }
+.pdk-who { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; font-size: 15px; }
+.pdk-name { white-space: nowrap; }
+.pdk-count { display: flex; align-items: center; gap: 4px; font-size: 14px; color: #3a2e39; white-space: nowrap; }
+.pdk-badge.s1 .pdk-count { flex-direction: row-reverse; }
+.pdk-backcard { flex: none; width: 12px; height: 16px; border-radius: 3px; border: 2px solid #3b2f2f; background: repeating-linear-gradient(45deg, #12b886 0 3px, #96f2d7 3px 6px); }
+.pdk-badge.one .pdk-count { color: #e03131; animation: pdk-pulse .6s ease-in-out infinite alternate; }
+.pdk-table { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; }
+.pdk-lane { position: relative; min-width: 0; min-height: 0; box-sizing: border-box; border: 2.5px dashed #96d9c4; border-radius: 14px; background: rgba(255, 255, 255, .55); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.pdk-lane.s0 { grid-column: 1 / 3; }
+.pdk-pass { font-weight: 800; color: #868e96; background: #fff; border: 2px solid #ced4da; border-radius: 999px; padding: 1px 12px; font-size: 14px; }
+.pdk-tag { position: absolute; left: 6px; top: 4px; z-index: 50; padding: 0 8px; border-radius: 999px; background: #12b886; color: #fff; font-weight: 900; font-size: 12px; line-height: 18px; border: 2px solid #0ca678; }
+.pdk-tag.mid { top: 50%; transform: translateY(-50%); }
+.pdk-tag.bomb { background: #fa5252; border-color: #c92a2a; }
+.pdk-msg { min-height: 20px; font-weight: 800; font-size: 14px; color: #087f5b; text-align: center; line-height: 20px; }
+.pdk-msg.bad { color: #e03131; }
+.pdk-field.mine .pdk-msg:not(.bad) { color: #e8590c; }
+.pdk-hand { position: relative; touch-action: none; min-width: 0; cursor: pointer; }
+.pdk-card { position: absolute; left: 0; top: 0; width: var(--cw); height: calc(var(--cw) * 1.4); transition: transform .16s cubic-bezier(.3, .8, .35, 1); will-change: transform; touch-action: none; }
+.pdk-card.mini { transition: none; animation: pdk-pop .22s ease-out both; }
+.pdk-in { position: absolute; inset: 0; box-sizing: border-box; background: #fff8e1; border: 2.5px solid #3b2f2f; border-radius: calc(var(--cw) * .14); box-shadow: 0 calc(var(--cw) * .04) 0 #b99a5b, 0 2px 4px rgba(0, 0, 0, .25); overflow: hidden; }
+.pdk-top { position: absolute; left: 5%; top: 2%; display: flex; flex-direction: column; align-items: center; line-height: 1; font-weight: 900; font-family: "Arial Rounded MT Bold", "Nunito", "Varela Round", system-ui, -apple-system, sans-serif; font-size: calc(var(--cw) * .32); letter-spacing: -1px; }
+.pdk-top svg { width: calc(var(--cw) * .27); height: calc(var(--cw) * .27); display: block; margin-top: 1px; }
+.pdk-card.red .pdk-top { color: #e03131; }
+.pdk-card.blk .pdk-top { color: #343a40; }
+.pdk-big { position: absolute; left: 50%; bottom: 5%; width: 58%; transform: translateX(-50%); }
+.pdk-big svg { display: block; width: 100%; height: auto; }
+.pdk-card.sel .pdk-in { border-color: #f08c00; box-shadow: 0 0 0 3px #fcc419, 0 0 14px 3px rgba(252, 196, 25, .9); background: #fff3bf; }
+.pdk-field.kb .pdk-card.cur .pdk-in { outline: 3px dashed #1971c2; outline-offset: 1px; }
+.pdk-card.shake .pdk-in { animation: pdk-shake .4s; }
+.pdk-hand.deal .pdk-in { animation: pdk-deal .4s ease-out both; }
+.pdk-field.boom { animation: pdk-boom .45s; }
+.pdk-btns { grid-area: btns; display: flex; justify-content: center; gap: 8px; width: 100%; max-width: 560px; }
+.pdk-act { flex: 1 1 0; min-height: 48px; padding: 6px 10px; font-size: 18px; font-weight: 900; border-radius: 999px; white-space: nowrap; font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.pdk-act.main { flex: 1.5 1 0; color: #fff; background: #12b886; border: 3px solid #0ca678; box-shadow: 0 4px 0 #087f5b; text-shadow: 0 1px 0 rgba(0, 0, 0, .15); }
+.pdk-act.alt { color: #087f5b; background: #fff; border: 3px solid #96f2d7; box-shadow: 0 4px 0 #96f2d7; }
+.pdk-act:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #087f5b; }
+.pdk-act.alt:active:not(:disabled) { box-shadow: 0 1px 0 #96f2d7; }
+.pdk-act:disabled { opacity: .45; cursor: default; }
+.pdk-ovl { position: absolute; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 10px; background: rgba(255, 246, 229, .88); color: #3a2e39; }
+.pdk-ovl[hidden] { display: none; }
+.pdk-ovl h2 { margin: 0; font-size: 26px; color: #087f5b; }
+.pdk-ovl p { margin: 0; font-weight: 700; }
+.pdk-ovl button { min-height: 48px; padding: 6px 26px; font-size: 20px; border-radius: 999px; }
+.pdk-ovl.win h2 { animation: pdk-bounce .8s ease-out; }
+.pdk-ovl.rules { gap: 6px; }
+.pdk-rulesbox { width: 100%; max-width: 560px; min-height: 0; overflow-y: auto; text-align: left; }
+.pdk-rulesbox p { font-size: 13.5px; line-height: 1.35; margin: 0 0 5px; }
+@keyframes pdk-pop { from { opacity: 0; scale: .6; } to { opacity: 1; scale: 1; } }
+@keyframes pdk-deal { from { opacity: 0; translate: 0 -30px; } to { opacity: 1; translate: 0 0; } }
+@keyframes pdk-shake { 0%, 100% { transform: none; } 20% { transform: translateX(-6px) rotate(-3deg); } 40% { transform: translateX(6px) rotate(3deg); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } }
+@keyframes pdk-boom { 0%, 100% { transform: none; } 20% { transform: translate(-5px, 3px); } 40% { transform: translate(5px, -3px); } 60% { transform: translate(-3px, -2px); } 80% { transform: translate(3px, 2px); } }
+@keyframes pdk-pulse { from { opacity: 1; } to { opacity: .55; } }
+@keyframes pdk-bounce { 0% { transform: scale(.5); } 60% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .pdk-card.mini, .pdk-hand.deal .pdk-in, .pdk-field.boom, .pdk-ovl.win h2, .pdk-badge.one .pdk-count, .pdk-card.shake .pdk-in { animation: none; } .pdk-card { transition: none; } }
+@media (min-aspect-ratio: 5/4) and (max-height: 700px) {
+  .pdk-wrap { grid-template-columns: 150px minmax(0, 1fr) 150px; grid-template-rows: minmax(0, 1fr); grid-template-areas: "hud field btns"; align-items: center; gap: 8px; }
+  .pdk-hud { max-width: 150px; gap: 4px; }
+  .pdk-stat { font-size: 14px; padding: 0 8px; }
+  .pdk-hud .mopt { min-height: 32px; font-size: 13px; padding: 2px 8px; }
+  .pdk-field { align-self: stretch; }
+  .pdk-btns { flex-direction: column; max-width: 150px; gap: 8px; }
+  .pdk-act, .pdk-act.main { flex: none; min-height: 44px; font-size: 16px; }
+  .pdk-face { width: 36px; height: 36px; }
+  .pdk-ovl h2 { font-size: 22px; }
+  .pdk-rulesbox p { font-size: 12px; margin-bottom: 3px; }
+}
+@media (max-width: 360px) { .pdk-act { font-size: 16px; padding: 6px 4px; } .pdk-stat { font-size: 15px; padding: 2px 9px; } .pdk-face { width: 38px; height: 38px; } .pdk-who { font-size: 14px; } }

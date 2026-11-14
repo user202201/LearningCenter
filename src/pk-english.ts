@@ -10,6 +10,7 @@ import * as api from "./api";
 import * as M from "./model";
 import * as W from "./words";
 import { getLang } from "./i18n";
+import { canSpeakNow } from "./speech";
 import { subjectArt } from "./hub";
 import { rng, shuffled, type Item } from "./pklogic";
 import type { PkAdapter } from "./pkadapter";
@@ -142,14 +143,7 @@ export function makeEnglishGame(recA: readonly string[], recB: readonly string[]
 // ---------- voice ----------
 export const voiceLang = (): string => (W.studyLang() === "fr" ? "fr-FR" : "en-US");
 /** can this device say the words? (no speech API, or voices that are all of another language = no) */
-export function voiceAvailable(lang: string = voiceLang()): boolean {
-  try {
-    const sp = window.speechSynthesis;
-    if (!sp || typeof SpeechSynthesisUtterance === "undefined") return false;
-    const v = sp.getVoices?.() ?? [];
-    return v.length === 0 ? true : v.some((x) => x.lang.toLowerCase().replace("_", "-").startsWith(lang.slice(0, 2).toLowerCase()));
-  } catch { return false; }
-}
+export function voiceAvailable(lang: string = voiceLang()): boolean { return canSpeakNow(lang); }
 
 // ---------- the adapter ----------
 interface EData { lib: W.Word[]; rec: Map<string, string[]> }

@@ -1,8 +1,9 @@
 /**
  * What the dictation (听写) and finger writing (写字) screens share (rule 51): the hooks into the app shell (main.ts gives them in `initDictWrite`), the
- * settings of this device, the page frame with the hero band, the icons and the voice (the device's own `speechSynthesis`, offline).
+ * settings of this device, the page frame with the hero band, the icons and the voice (`speech.ts`: the device's own voices, offline).
  */
 import { h } from "./ui";
+import { speakText, speechSupported, stopSpeech, unlockSpeech, type SpeakHandle } from "./speech";
 import type * as M from "./model";
 import type { Ctx } from "./english";
 
@@ -45,19 +46,15 @@ export const reduced = (): boolean => !!window.matchMedia?.("(prefers-reduced-mo
 export function say(text: string, lang: string, done: () => void, rate = 0.8): () => void {
   let called = false, fallback = 0;
   const finish = () => { if (called) return; called = true; window.clearTimeout(fallback); done(); };
+  if (!speechSupported()) { fallback = window.setTimeout(finish, 1200); return () => { called = true; window.clearTimeout(fallback); }; }
+  let handle: SpeakHandle | null = null;
   try {
-    const s = window.speechSynthesis;
-    if (!s) { fallback = window.setTimeout(finish, 1200); return () => { called = true; window.clearTimeout(fallback); }; }
-    s.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang; u.rate = rate;
-    u.onend = finish; u.onerror = finish;
-    s.speak(u);
+    handle = speakText(text, lang, { rate, onend: finish });
     fallback = window.setTimeout(finish, 12000);
   } catch { fallback = window.setTimeout(finish, 1200); }
-  return () => { called = true; window.clearTimeout(fallback); try { window.speechSynthesis?.cancel(); } catch { /* nothing to cancel */ } };
+  return () => { called = true; window.clearTimeout(fallback); handle?.stop(); };
 }
-export const stopSpeech = (): void => { try { window.speechSynthesis?.cancel(); } catch { /* no speech here */ } };
+export { stopSpeech, unlockSpeech };
 
 // ---------- icons ----------
 const SVG = "http://www.w3.org/2000/svg";

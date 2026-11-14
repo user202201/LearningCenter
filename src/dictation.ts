@@ -13,7 +13,7 @@ import * as D from "./dictlogic";
 import { loadPinyin, pinyinOf } from "./pinyin";
 import { createPad, type Pad } from "./scratchpad";
 import { sfx } from "./games/sfx";
-import { X, errText, frame, icon, ring, say, stopSpeech, loadSettings, saveSettings, weekOr } from "./dwshell";
+import { X, errText, frame, icon, ring, say, stopSpeech, unlockSpeech, loadSettings, saveSettings, weekOr } from "./dwshell";
 
 const dictPath = (id: string) => `dictation/${id}.json`;
 const reviewPath = (id: string) => `kids/${id}.review.json`;
@@ -71,6 +71,7 @@ export async function renderDictation(id: string): Promise<void> {
       pauses.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b === e.currentTarget));
     } }, `${p} 秒`)));
   go.addEventListener("click", () => {
+    unlockSpeech();   // (iOS: the voice must be unlocked inside this tap; every later word is spoken from a timer)
     const items = D.buildItems(src, opt);
     if (items.length) void startDictation(k, items, start, words, false);
   });

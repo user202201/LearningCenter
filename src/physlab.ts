@@ -17,6 +17,8 @@ const LOADERS: Record<SimId, () => Promise<{ mount: (root: HTMLElement, ctx: Phy
   lever: () => import("./phys/lever"), pulley: () => import("./phys/pulley"), specificheat: () => import("./phys/specificheat"), ohm: () => import("./phys/ohm"), em: () => import("./phys/em"),
   dispersion: () => import("./phys/dispersion"), eye: () => import("./phys/eye"), fluid: () => import("./phys/fluid"), molecule: () => import("./phys/molecule"), engine: () => import("./phys/engine"), circuit: () => import("./phys/circuit"),
   bulbpower: () => import("./phys/bulbpower"), home: () => import("./phys/home"), magfield: () => import("./phys/magfield"), emwave: () => import("./phys/emwave"), energysrc: () => import("./phys/energysrc"), density: () => import("./phys/density"),
+  evap: () => import("./phys/evap"), thermo: () => import("./phys/thermo"), straight: () => import("./phys/straight"), diffuse: () => import("./phys/diffuse"), noise: () => import("./phys/noise"), lensexp: () => import("./phys/lensexp"),
+  internal: () => import("./phys/internal"), resistance: () => import("./phys/resistance"), ohmlaw: () => import("./phys/ohmlaw"), rmeasure: () => import("./phys/rmeasure"), meter: () => import("./phys/meter"), emdev: () => import("./phys/emdev"), comms: () => import("./phys/comms"),
 };
 const hero = (X: Ctx, title: string, back: string, backLabel: string, self: string) =>
   h("header", { class: "top hero home-hero subj-hero" }, X.back(back, backLabel), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, title)), X.gear(self));

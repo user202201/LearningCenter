@@ -8,6 +8,7 @@ import { h, toast } from "./ui";
 import * as M from "./model";
 import * as api from "./api";
 import { kj, kjHead } from "./mathcn";
+import { speakText } from "./speech";
 import type { Ctx } from "./english";
 
 export interface CellStat { right: number; wrong: number; last?: string }
@@ -55,15 +56,7 @@ let X!: Ctx;
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 /** says a text with the device's own Chinese voice (offline; nothing where the device has no voice) */
 export function sayZh(text: string): void {
-  try {
-    const s = window.speechSynthesis;
-    if (!s) return;
-    s.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "zh-CN";
-    u.rate = 0.8;
-    s.speak(u);
-  } catch { /* no speech on this device */ }
+  speakText(text, "zh-CN", { rate: 0.8 });
 }
 const hue = (a: number) => Math.round(((a - 1) * 360) / 9 + 8);
 let offKey: (() => void) | null = null;

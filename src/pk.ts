@@ -14,6 +14,7 @@ import * as L from "./pklogic";
 import type { PkAdapter } from "./pkadapter";
 import { chineseAdapter } from "./pk-chinese";
 import { englishAdapter } from "./pk-english";
+import { speakText, stopSpeech, unlockSpeech, whenVoices, type SpeakHandle } from "./speech";
 import { TROPHY, CROWN, CLOUD, FACES, PK_MARK, BOLT, startFx, countUp, fanfare, trombone, jingle, openingSound, countTick, goHit } from "./pkfx";
 
 let X!: Ctx;
@@ -117,7 +118,6 @@ export async function renderSetup(id = "chinese") {
         X.avatarEl(k), h("span", { class: "kname user" }, k.name), other === k.id ? h("span", { class: "muted small" }, "已被选择") : null))),
       h("div", { class: "row end" }, h("button", { onclick: () => close(null) }, "取消")));
   });
-
   /** one row of the record: [A] VS [B], then the score as a scoreboard (A's wins on A's side) */
   const matchRow = (p: Pair) => {
     const a = kidOf(p.a)!, b = kidOf(p.b)!, wa = p.wins[p.a] ?? 0, wb = p.wins[p.b] ?? 0;
@@ -125,7 +125,8 @@ export async function renderSetup(id = "chinese") {
     const side = (k: M.Kid) => h("span", { class: "pk-pl", style: `--kid:${k.color}` }, X.avatarEl(k), h("span", { class: "pk-pn user" }, k.name));
     return h("div", { class: "pk-match", "data-pair": pairKey(p.a, p.b), role: "group", "aria-label": `${a.name} 对 ${b.name}，${wa} 比 ${wb}` },
       h("div", { class: "pk-mrow" }, side(a), " ", vsBadge("small"), " ", side(b)), " ",
-      h("div", { class: "pk-score-row" }, tile(wa, wa > wb), ":", tile(wb, wb > wa), p.ties ? " " : null, p.ties ? h("span", { class: "pk-draws" }, `平 ${p.ties}`) : null));
+      h("div", { class: "pk-score-row" }, tile(wa, wa > wb), ":", tile(wb, wb > wa), p.ties ? " " : null, p.ties ? h("span", { class: "pk-draws" }, `平 ${p.ties}`) : null),
+      h("button", { class: "pk-continue", type: "button", "data-pair": pairKey(p.a, p.b), onclick: () => { sel[0] = p.a; sel[1] = p.b; draw(); window.scrollTo?.({ top: 0 }); body.scrollIntoView?.({ block: "start" }); } }, "继续对战"));
   };
 
   const draw = () => {
@@ -137,8 +138,7 @@ export async function renderSetup(id = "chinese") {
     body.append(h("div", { class: "pk-lobby", id: "pk-lobby" }, bolt(), h("b", {}, "对战大厅"), bolt()));
     const slot = (i: 0 | 1) => {
       const k = kidOf(sel[i]);
-      return h("button", { class: "pk-slot" + (k ? " set" : ""), id: `pk-slot-${i + 1}`, style: `--kid:${k?.color ?? "#adb5bd"}`, "data-kid": k?.id,
-        onclick: async () => { const kid = await pick(i); if (kid) { sel[i] = kid; draw(); } } },
+      return h("button", { class: "pk-slot" + (k ? " set" : ""), id: `pk-slot-${i + 1}`, style: `--kid:${k?.color ?? "#adb5bd"}`, "data-kid": k?.id, onclick: async () => { const kid = await pick(i); if (kid) { sel[i] = kid; draw(); } } },
         h("span", { class: "pk-slot-cap" }, `选手 ${i + 1}`),
         k ? X.avatarEl(k) : h("span", { class: "avatar pk-empty" }, "?"),
         k ? h("span", { class: "kname user pk-slot-name" }, k.name) : h("span", { class: "muted" }, "点击选择"));
@@ -156,9 +156,8 @@ export async function renderSetup(id = "chinese") {
     body.append(msgs);
     const info = A.info?.(data, kidOf(sel[0]), kidOf(sel[1]), mode()) ?? [];
     if (info.length) body.append(h("div", { class: "pk-msgs", id: "pk-info" }, ...info));
-    body.append(h("p", { class: "pk-hint-land muted small", id: "pk-hint-land" }, "竖放设备可获得更大的答题区。"));
     body.append(h("button", { class: "primary pk-start", id: "pk-start", disabled: !ok, onclick: () => {
-      store.last[A.id] = [sel[0]!, sel[1]!]; save(); fsOn(); location.hash = A.playRoute;
+      store.last[A.id] = [sel[0]!, sel[1]!]; save(); if (A.present === "speech") unlockSpeech(); fsOn(); location.hash = A.playRoute;
     } }, h("span", { class: "pk-start-t" }, "开始")));
 
     // the record: the pair of the current choice first, then the others (at most 5), pairs that never played are left out
@@ -185,18 +184,6 @@ const SPK = (off: boolean) => `<svg viewBox="0 0 24 24" aria-hidden="true"><path
 const SPK_BIG = `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 24h12l16-14v44L20 40H8z" fill="currentColor"/><path d="M44 22q10 10 0 20M50 14q18 18 0 36" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>`;
 const MID = 44;
 const KEYS: [string[], string[]] = [["1", "2", "3", "4"], ["7", "8", "9", "0"]];
-/** says a word with the device's voice (one utterance at a time; nothing where there is no voice) */
-function say(text: string, lang: string) {
-  try {
-    const sp = window.speechSynthesis;
-    if (!sp) return;
-    sp.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang; u.rate = 0.85;
-    sp.speak(u);
-  } catch { /* no voice */ }
-}
-
 interface PkHook {
   seed: number;
   state(): ReturnType<typeof L.snapshot> & { items: [L.Item, L.Item]; seed: number };
@@ -225,6 +212,7 @@ export async function renderPlay(id = "chinese") {
     if (!k0 || !k1 || k0.id === k1.id) return my === X.epoch() ? toSetup() : undefined;
     kids = [k0, k1];
     data = await A.load(kids);
+    if (A.present === "speech") await whenVoices(1200);   // (the voice list of iOS is empty for a moment after the page opened)
   } catch (e) {
     return my === X.epoch() ? X.showError(e, () => void renderPlay(id)) : undefined;
   }
@@ -233,10 +221,10 @@ export async function renderPlay(id = "chinese") {
   const seed = Number.isFinite(window.__pkSeed) ? (window.__pkSeed as number) : (Date.now() % 2147483000);
   const first = A.make(data, kids[0], kids[1], seed, mode);
   if (!first) return toSetup();
-  mountGame(A, kids, (sd) => A.make(data, kids[0], kids[1], sd, mode), seed, first);
+  mountGame(A, kids, (sd) => A.make(data, kids[0], kids[1], sd, mode), seed, first, mode);
 }
 
-function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number) => [L.Item[], L.Item[]] | null, seed0: number, firstItems: [L.Item[], L.Item[]]) {
+function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number) => [L.Item[], L.Item[]] | null, seed0: number, firstItems: [L.Item[], L.Item[]], mode: string) {
   let seed = seed0;
   const cfg = { rounds: A.rounds };
   const speechOn = A.present === "speech" && !!A.speech?.available();
@@ -254,6 +242,15 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
     return Number.isFinite(at) && at > s.now - 2000 ? Math.min(at, now) : now;
   };
 
+  // ----- the voice: the word is spoken once per round; when no sound is heard to start the halves say so (and, where the options are meanings, show the word) -----
+  let silent = false, word: SpeakHandle | null = null, heardTimer = 0;
+  const heard = (yes: boolean) => { if (silent === !yes) return; silent = !yes; panels.forEach((p) => { p.el.classList.toggle("nosound", silent && mode !== "meaning"); p.replay.classList.toggle("attn", silent); }); lastSig = ""; render(); };
+  const speakWord = () => {
+    window.clearTimeout(heardTimer);
+    const hd = speakText(L.current(s, 0).prompt, lang, { rate: 0.85, onstart: () => { if (word === hd) heard(true); } });
+    word = hd;
+    heardTimer = window.setTimeout(() => { if (word === hd && !hd.started) heard(false); }, 1200);
+  };
   let s = L.create(firstItems, T(), cfg);
   let recorded = false;
   const lastTap: [number, number] = [0, 0];
@@ -270,8 +267,11 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
     const spk = h("span", { class: "pk-spkbig", "aria-hidden": "true" }); spk.innerHTML = SPK_BIG;
     const replay = h("button", { class: "pk-replay", type: "button", title: "再听一次", "aria-label": "再听一次" });
     replay.innerHTML = SPK(false);
-    replay.addEventListener("pointerdown", (e) => { e.preventDefault(); e.stopPropagation(); say(L.current(s, 0).prompt, lang); });
-    replay.addEventListener("click", (e) => { if (e.detail === 0) say(L.current(s, 0).prompt, lang); });
+    // (a tap is the user gesture iOS wants: it unlocks the voice and speaks; the finger's own `pointerup` is the activation)
+    replay.addEventListener("pointerdown", (e) => { e.preventDefault(); e.stopPropagation(); unlockSpeech(); });
+    replay.addEventListener("pointerup", (e) => { e.preventDefault(); e.stopPropagation(); speakWord(); });
+    replay.addEventListener("click", (e) => { if (e.detail === 0) speakWord(); });
+    const nosnd = h("span", { class: "pk-nosnd", role: "status" }, "没有声音。请点喇叭重听。");
     const labels = [0, 1, 2, 3].map(() => h("span", { class: "pk-lab user" }));
     const opts = labels.map((lab, i) => {
       const b = h("button", { class: "pk-opt", "data-i": String(i), "data-side": String(side), type: "button" }, h("span", { class: "pk-kb" }, KEYS[side][i]), lab);
@@ -285,7 +285,7 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
     const deco = h("div", { class: "pk-deco", "aria-hidden": "true" }, ...[0, 1, 2, 3, 4, 5, 6].map((i) => h("i", { class: `d${i % 3}`, style: `--x:${(i * 15 + 6) % 92}%;--s:${14 + (i * 7) % 22}px;--t:${9 + (i * 3) % 7}s;--d:${-(i * 2.3)}s` })));
     const box = h("div", { class: "pk-box" },
       h("div", { class: "pk-top" }, X.avatarEl(k), h("span", { class: "pk-name kname user" }, k.name), streak, round, score),
-      h("div", { class: "pk-main" }, h("div", { class: "pk-char" }, ch, spk, speechOn ? replay : null), h("div", { class: "pk-choices" }, ...opts)));
+      h("div", { class: "pk-main" }, h("div", { class: "pk-char" }, ch, spk, speechOn ? nosnd : null, speechOn ? replay : null), h("div", { class: "pk-choices" }, ...opts)));
     const el = h("div", { class: "pk-panel", "data-side": String(side), style: `--kid:${k.color}` }, deco, h("div", { class: "pk-timer" }, bar), box, over);
     return { side, el, round, score, streak, ch, spk, replay, opts, labels, over, bar, stops: [], finalBuilt: false, lastScore: "", lastStreak: 0, againBtn: null };
   };
@@ -304,20 +304,32 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
   const drawMute = () => { muteBtn.innerHTML = SPK(store.mute); const t = store.mute ? "打开声音" : "关闭声音"; muteBtn.title = t; muteBtn.setAttribute("aria-label", t); };
   drawMute();
   const frame = h("div", { class: "pk-frame", id: "pk-frame" }, panels[1].el, panels[0].el, mid);
-  const hint = h("div", { class: "pk-hint", id: "pk-hint" }, "竖放设备可获得更大的答题区。");
-  stage.append(frame, hint);
+  stage.append(frame);
 
   // ----- places each half by LAYOUT size (never by measuring a turned element) -----
-  /** The stage is ONE portrait stage (3:4 at the widest). On a portrait screen it fills the screen; on a landscape screen the same stage stands in the middle, as high as fits. */
+  /** ONE layout: the PORTRAIT stage, always, filling the whole screen. On a landscape screen the stage is turned by 90 degrees (like an app locked to portrait and held sideways):
+   *  its box gets the swapped size (viewport height x viewport width) and is rotated about its top left corner, so it covers the viewport exactly. Everything of the game lives inside
+   *  this element, so it turns with it; the layout below only ever reads the UNTURNED size (`clientWidth` / `clientHeight`). */
+  let rotated = false;
+  function orient() {
+    const vv = window.visualViewport;
+    const vw = Math.round(vv?.width || window.innerWidth), vh = Math.round(vv?.height || window.innerHeight);
+    rotated = vw > vh;
+    stage.classList.toggle("rot", rotated);
+    document.documentElement.classList.toggle("pk-rot", rotated);   // (the top-layer dialogs are turned the same way, see style.css)
+    const st = stage.style;
+    st.left = "0px"; st.top = "0px"; st.transformOrigin = "top left";
+    if (rotated) { st.width = `${vh}px`; st.height = `${vw}px`; st.transform = `translate(${vw}px, 0) rotate(90deg)`; }
+    else { st.width = `${vw}px`; st.height = `${vh}px`; st.transform = ""; }
+  }
   function place() {
-    const W = stage.offsetWidth, H = stage.offsetHeight;
-    const land = W > H;
-    hint.style.display = land ? "" : "none";
-    stage.classList.toggle("land", land);
-    const fh = land ? H - 20 : H;
-    const fw = Math.min(W, Math.floor(fh * 0.75));
+    orient();
+    const cs = getComputedStyle(stage);
+    const pl = parseFloat(cs.paddingLeft) || 0, pt = parseFloat(cs.paddingTop) || 0;
+    const W = Math.max(0, stage.clientWidth - pl - (parseFloat(cs.paddingRight) || 0)), H = Math.max(0, stage.clientHeight - pt - (parseFloat(cs.paddingBottom) || 0));
+    const fh = H, fw = W;
     const mid_ = H < 460 ? 36 : MID;
-    frame.style.cssText = `left:${Math.floor((W - fw) / 2)}px;top:0;width:${fw}px;height:${fh}px`;
+    frame.style.cssText = `left:${pl}px;top:${pt}px;width:${fw}px;height:${fh}px`;
     const hh = Math.floor((fh - mid_) / 2);
     const put = (p: Panel, top: number, rot: number) => {
       p.el.style.cssText = `--kid:${kids[p.side].color};left:0;top:${top}px;width:${fw}px;height:${hh}px;transform:rotate(${rot}deg)`;
@@ -330,14 +342,16 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
   function fit(p: Panel, w: number, hh: number) {
     const padT = 14, padB = 6, padX = 6, band = hh < 190 ? 24 : 28, gap = 6;
     const mainW = w - 2 * padX, mainH = hh - padT - padB - band - gap;
-    const row4 = mainH - 2 * 56 - 4 < 70;
+    const row4 = mainH - 2 * 56 - 4 < 70;   // (a very short half: the four choices in one row)
     p.el.classList.toggle("row4", row4);
     p.el.style.setProperty("--pk-band", `${band}px`);
     const chh = row4 ? 56 : Math.max(116, Math.round(mainH * 0.54));
     p.el.style.setProperty("--pk-choicesh", `${chh}px`);
     const px = Math.min((mainH - chh - gap) * 0.8, mainW * 0.5, 220);
     p.el.style.setProperty("--pk-chsize", `${Math.max(26, Math.round(px))}px`);
-    p.el.style.setProperty("--pk-cardw", `${Math.min(mainW, Math.round(Math.max(26, px) * 2))}px`);
+    const cardW = Math.round(Math.max(26, px) * 2);
+    p.el.style.setProperty("--pk-cardw", `${Math.min(mainW, A.present === "char" ? cardW : Math.max(cardW, 200))}px`);   // (a voice / word card also holds the speaker button and the "no sound" line)
+    p.el.style.setProperty("--pk-ns", `${Math.max(10, Math.min(14, Math.floor((mainH - chh - gap) / 6.5)))}px`);
     const bw = row4 ? (mainW - 3 * 6) / 4 : (mainW - 8) / 2, bh = row4 ? 56 : (chh - 8) / 2;
     p.el.style.setProperty("--pk-lab", `${Math.max(13, Math.min(34, Math.floor(bh * 0.42), Math.floor(bw / 5.2)))}px`);
     p.el.style.setProperty("--pk-bd", `${Math.max(hh < 190 ? 30 : 40, Math.min(130, Math.floor(hh * 0.22), Math.floor(w * 0.2)))}px`);
@@ -445,7 +459,7 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
         p.score.textContent = sc;
         const st = L.streakOf(s, side);
         if (st !== p.lastStreak) { p.streak.textContent = st >= 2 ? `连胜 ×${st}` : ""; p.streak.classList.toggle("on", st >= 2); if (st >= 2) { p.streak.classList.remove("pop"); void p.streak.offsetWidth; p.streak.classList.add("pop"); } p.lastStreak = st; }
-        const hidePrompt = speechOn && s.phase !== "final";
+        const hidePrompt = speechOn && s.phase !== "final" && !(silent && mode === "meaning");   // (options that are meanings: the word as text gives nothing away; options that are words: it would)
         p.ch.textContent = hidePrompt ? "" : q || s.phase === "prep" ? item.prompt : "";
         p.ch.classList.toggle("hide", s.phase === "prep");
         p.spk.classList.toggle("on", hidePrompt && (s.phase === "question" || s.phase === "result"));
@@ -502,7 +516,7 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
     if (to === "intro") return openingSound();
     if (to === "countdown") return countTick(3);
     if (to === "prep") return;
-    if (to === "question") { sfx("pop"); if (speechOn) say(cur(0).prompt, lang); return; }   // (one voice, one word: both players hear it at the same instant)
+    if (to === "question") { sfx("pop"); if (speechOn) speakWord(); return; }   // (one voice, one word: both players hear it at the same instant)
     if (to === "result") return sfx(s.winner === -1 ? "bad" : "good");
     if (to === "final") { if (s.outcome![0] === "tie") jingle(); else { fanfare(); trombone(1.3); } }
   };
@@ -534,9 +548,9 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
   const dispose = () => {
     if (disposed) return;
     disposed = true;
-    clearInterval(timer); document.removeEventListener("keydown", onKey, true); document.removeEventListener("fullscreenchange", onFs); window.removeEventListener("resize", place); ro.disconnect(); watch.disconnect();
+    clearInterval(timer); document.removeEventListener("keydown", onKey, true); document.removeEventListener("fullscreenchange", onFs); window.removeEventListener("resize", place); window.removeEventListener("orientationchange", place); window.visualViewport?.removeEventListener("resize", place); document.documentElement.classList.remove("pk-rot"); ro.disconnect(); watch.disconnect();
     panels.forEach(clearFx);
-    try { window.speechSynthesis?.cancel(); } catch { /* no voice */ }
+    window.clearTimeout(heardTimer); word = null; stopSpeech();
     delete window.__pk; fsOff();
   };
   let asking = false;
@@ -563,7 +577,7 @@ function mountGame(A: PkAdapter, kids: [M.Kid, M.Kid], makeItems: (seed: number)
   const onFs = () => { if (wasFs && !document.fullscreenElement && stage.isConnected) void leave(); };
   document.addEventListener("keydown", onKey, true);
   document.addEventListener("fullscreenchange", onFs);
-  window.addEventListener("resize", place);
+  window.addEventListener("resize", place); window.addEventListener("orientationchange", place); window.visualViewport?.addEventListener("resize", place);
   const ro = new ResizeObserver(() => place());
   const timer = setInterval(() => { if (!manual && pausedAt === null) tick(); }, 40);
   const watch = new MutationObserver(() => { if (!stage.isConnected) dispose(); });
