@@ -290,5 +290,29 @@
  "点选地图上的省区，看它的简称、省会和特色；也可以按四大区域着色。（四大区域按省区近似着色，边界省区只作示意。）": [
   "Tap a province on the map to see its abbreviation, its capital and its characteristics; the map can also be coloured by the four major regions. (The four regions are coloured approximately by province, and border provinces are only shown schematically.)",
   "Touchez une province sur la carte pour voir son abréviation, son chef-lieu et ses particularités ; la carte peut aussi être colorée selon les quatre grandes régions. (Les quatre régions sont colorées approximativement par province, et les provinces limitrophes ne sont indiquées qu'à titre schématique.)"
+ ],
+ "常见的气候类型：热带雨林气候、热带季风气候、热带草原气候、热带沙漠气候、亚热带季风气候、温带季风气候、温带大陆性气候、温带海洋性气候、地中海气候、极地气候和高原山地气候。": [
+  "Common climate types: tropical rainforest, tropical monsoon, tropical savanna, tropical desert, subtropical monsoon, temperate monsoon, temperate continental, temperate maritime, Mediterranean, polar, and plateau mountain climates.",
+  "Types de climat courants : forêt tropicale humide, mousson tropicale, savane tropicale, désert tropical, mousson subtropicale, mousson tempérée, continental tempéré, océanique tempéré, méditerranéen, polaire, et climats de montagne et de plateau."
+ ],
+ "人口自然增长率 = 出生率 − 死亡率（出生率、死亡率常以‰表示，自然增长率常以 % 表示，1 % = 10 ‰）。自然增长率高的地区，人口增长快，人口金字塔底宽顶尖，称增长型；增长缓慢的为稳定型；出现负增长的为衰退型。": [
+  "Natural population growth rate = birth rate − death rate (birth and death rates are often given in ‰ and the natural growth rate in %; 1 % = 10 ‰). Where the natural growth rate is high, the population grows fast and the population pyramid has a wide base and a narrow top, called an expanding type; slow growth is a stable type; negative growth is a declining type.",
+  "Taux d'accroissement naturel de la population = taux de natalité − taux de mortalité (les taux de natalité et de mortalité s'expriment souvent en ‰ et le taux d'accroissement naturel en % ; 1 % = 10 ‰). Là où le taux d'accroissement naturel est élevé, la population croît vite et la pyramide des âges a une base large et un sommet étroit : c'est le type en expansion ; une croissance lente est le type stable ; une croissance négative est le type en déclin."
+ ],
+ "地球内部分为地壳、地幔和地核三层。地壳最薄，全球平均厚度约 17 千米（大陆地壳平均约 33 千米，海洋地壳平均约 6～7 千米）；地幔下界约在 2900 千米深处；地核又分为外核（液态）和内核（固态）。": [
+  "The inside of the Earth is divided into three layers: crust, mantle and core. The crust is the thinnest, with a global mean thickness of about 17 km (continental crust about 33 km on average, oceanic crust about 6–7 km); the lower boundary of the mantle is at a depth of about 2900 km; the core is divided into the outer core (liquid) and the inner core (solid).",
+  "L'intérieur de la Terre est divisé en trois couches : la croûte, le manteau et le noyau. La croûte est la plus mince, avec une épaisseur moyenne mondiale d'environ 17 km (croûte continentale d'environ 33 km en moyenne, croûte océanique d'environ 6 à 7 km) ; la limite inférieure du manteau se situe à environ 2900 km de profondeur ; le noyau se divise en noyau externe (liquide) et noyau interne (solide)."
+ ],
+ "一、二级阶梯的分界线是昆仑山—阿尔金山—祁连山—横断山；二、三级阶梯的分界线是大兴安岭—太行山—巫山—雪峰山。": [
+  "The boundary between the first and second steps is the Kunlun Mountains–Altun Mountains–Qilian Mountains–Hengduan Mountains; the boundary between the second and third steps is the Greater Khingan Range–Taihang Mountains–Wu Mountains–Xuefeng Mountains.",
+  "La limite entre le premier et le deuxième palier est formée par les monts Kunlun, les monts Altun, les monts Qilian et les monts Hengduan ; la limite entre le deuxième et le troisième palier est formée par le Grand Khingan, les monts Taihang, les monts Wu et les monts Xuefeng."
+ ],
+ "我国的农业因地制宜：东部季风区以种植业为主，北方以旱作农业为主，南方以水田农业为主；西北地区以牧业和灌溉农业为主；青藏地区以高寒牧业为主。": [
+  "China's agriculture suits local conditions: the eastern monsoon region is mainly crop farming, with dry farming mainly in the north and paddy-field farming mainly in the south; the northwest is mainly animal husbandry and irrigated agriculture; the Qinghai–Tibet region is mainly high-cold pastoral farming.",
+  "L'agriculture chinoise s'adapte aux conditions locales : la région de la mousson de l'est pratique surtout les cultures, avec une agriculture sèche surtout au nord et une riziculture surtout au sud ; le nord-ouest pratique surtout l'élevage et l'agriculture irriguée ; la région Qinghai–Tibet pratique surtout l'élevage d'altitude et de froid."
+ ],
+ "北方地区以旱地为主，南方地区以水田为主；西北地区干旱，畜牧业为主；青藏地区高寒，是“世界屋脊”。东部沿海地区经济较发达，西部地区经济发展水平相对较低，区域之间通过交通、通信和西气东输、南水北调等工程联系起来。": [
+  "The Northern region has mainly dry land and the Southern region mainly paddy fields; the Northwest region is arid and mainly pastoral; the Qinghai–Tibet region is high and cold, and is the “roof of the world”. The eastern coastal region has a fairly developed economy and the western region a relatively lower level of economic development; the regions are linked by transport, communications and projects such as the West–East Gas Pipeline and the South–North Water Transfer.",
+  "La région du Nord a surtout des terres sèches et la région du Sud surtout des rizières ; la région du Nord-Ouest est aride et surtout pastorale ; la région Qinghai–Tibet est haute et froide, et c'est le « toit du monde ». La région côtière de l'est a une économie assez développée et la région de l'ouest un niveau de développement économique relativement plus faible ; les régions sont reliées par les transports, les communications et des projets comme le gazoduc Ouest–Est et le transfert d'eau Sud–Nord."
  ]
 }

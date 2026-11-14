@@ -1424,8 +1424,8 @@
   "La force reste la même et la surface devient 1/{0} de ce qu'elle était. La pression devient :"
  ],
  "{0} 倍": [
-  "{0} times as great",
-  "{0} fois plus grande"
+  "{0} times",
+  "{0} fois"
  ],
  "1/{0} 倍": [
   "1/{0} as great",
