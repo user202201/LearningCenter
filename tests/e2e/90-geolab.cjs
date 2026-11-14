@@ -356,7 +356,12 @@ const SOLVE = () => ({
     await dragMouse([[b.l + 100 * b.k, b.t + 100 * b.k], [b.l + xth * b.k, b.t + 100 * b.k]]);
     let [thr] = await st(['thr']); ok(Math.abs(thr - 10) <= 1.5, `C development: dragging the line sets the threshold (${thr})`);
     await sim('chinabasic'); b = await canvasBox();
-    await dragMouse([[b.l + 300 * b.k, b.t + 200 * b.k], [b.l + (60 + (30 / 70) * 480) * b.k, b.t + (14 + (26 / 56) * 384) * b.k]]);
+    { // the map is an Albers projection (parallels 25 / 47, central meridian 105 E) fitted to the province map: the same maths, written here again
+      const rad = Math.PI / 180, n = (Math.sin(25 * rad) + Math.sin(47 * rad)) / 2, Cc = Math.cos(25 * rad) ** 2 + 2 * n * Math.sin(25 * rad), rho = (la) => Math.sqrt(Cc - 2 * n * Math.sin(la * rad)) / n, r0 = rho(0);
+      const fwd = (la, lo) => { const th = n * (lo - 105) * rad, r = rho(la); return [2453.7 * r * Math.sin(th) + 1081.1, 2453.7 * (r * Math.cos(th) - r0) + 2359.7]; };
+      const [tx, ty] = fwd(30, 100), S = 640 / 2000;
+      await dragMouse([[b.l + 300 * b.k, b.t + 200 * b.k], [b.l + tx * S * b.k, b.t + ty * S * b.k]]);
+    }
     [la, lo] = await st(['lat', 'lon']); const city = (await st(['city']))[0]; ok(Math.abs(la - 30) <= 1.5 && Math.abs(lo - 100) <= 1.5 && city === 0, `C China extent: dragging the pin (${la}, ${lo}), the city choice goes to custom`);
     await sim('chinaterrain'); b = await canvasBox();
     await dragMouse([[b.l + 100 * b.k, b.t + 200 * b.k], [b.l + (40 + ((116 - 73) / 49) * 560) * b.k, b.t + 200 * b.k]]);
