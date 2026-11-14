@@ -276,7 +276,7 @@
   "Le timbre est déterminé par la forme de l'onde : des sons de même hauteur et de même intensité mais de formes d'onde différentes sonnent différemment. L'oscilloscope à l'écran et le son joué proviennent de la même formule."
  ],
  "人耳能听到的频率大约是 20 Hz 到 20000 Hz；声音在 15 °C 空气中的速度约为 340 m/s，不能在真空中传播。": [
-  "The human ear can hear frequencies from about 20 Hz to 20 000 Hz; the speed of sound in air at 15 °C is about 340 m/s, and sound cannot travel through a vacuum.",
+  "The human ear can hear frequencies from about 20 Hz to 20,000 Hz; the speed of sound in air at 15 °C is about 340 m/s, and sound cannot travel through a vacuum.",
   "L'oreille humaine perçoit les fréquences d'environ 20 Hz à 20 000 Hz ; la vitesse du son dans l'air à 15 °C est d'environ 340 m/s, et le son ne se propage pas dans le vide."
  ],
  "比热容表示物质吸热（放热）能力的强弱：单位质量的某种物质温度升高 1 °C 所吸收的热量，叫做这种物质的比热容。水的比热容较大，为 4.2×10³ J/(kg·°C)。": [
@@ -2040,7 +2040,7 @@
   "Le liquide resté sur la paroi rend la masse mesurée trop petite alors que le volume ne change pas ; la masse volumique est donc trop petite."
  ],
  "电话把声音变成变化的电流，再把电流还原成声音。随声音的强弱和高低连续变化的电信号叫模拟信号；用不连续变化的“0”和“1”两种状态的组合表示的信号叫数字信号。信号在传输中会混进噪声：模拟信号的波形会被改变，噪声越大失真越大，而且无法消除；数字信号只要噪声不使“0”和“1”判断错误，接收端就能完全恢复原来的信号，所以抗干扰能力强，便于加工、存储和处理。": [
-  "A telephone changes sound into a varying current and the current back into sound. An electrical signal that varies continuously with the loudness and pitch of the sound is an analogue signal; a signal made of combinations of two states, \"0\" and \"1\", that do not change continuously is a digital signal. Noise mixes into a signal during transmission: it changes the waveform of an analogue signal, the more noise the greater the distortion, and it cannot be removed; a digital signal can be restored completely by the receiver as long as the noise does not make a \"0\" or a \"1\" be misjudged, so it resists interference well and is easy to process, store and handle.",
+  "A telephone changes sound into a varying current and the current back into sound. An electrical signal that varies continuously with the loudness and pitch of the sound is an analogue signal; a signal made of combinations of two states, “0” and “1”, that do not change continuously is a digital signal. Noise mixes into a signal during transmission: it changes the waveform of an analogue signal, the more noise the greater the distortion, and it cannot be removed; a digital signal can be restored completely by the receiver as long as the noise does not make a “0” or a “1” be misjudged, so it resists interference well and is easy to process, store and handle.",
   "Un téléphone transforme le son en un courant variable, puis le courant en son. Un signal électrique qui varie de façon continue avec l'intensité et la hauteur du son est un signal analogique ; un signal formé de combinaisons de deux états, « 0 » et « 1 », qui ne varient pas de façon continue, est un signal numérique. Du bruit se mêle au signal pendant la transmission : il déforme le signal analogique, d'autant plus que le bruit est grand, et on ne peut pas l'éliminer ; un signal numérique est restitué intégralement par le récepteur tant que le bruit ne fait pas confondre un « 0 » et un « 1 », il résiste donc bien aux perturbations et se traite, se stocke et se manipule facilement."
  ],
  "无线电广播把声音信号加载到高频的载波上（调制），用电磁波发射出去，收音机的调谐器选出与电台频率相同的电磁波，再把声音信号取出来。电磁波在真空中的速度是 c = 3×10⁸ m/s，波长、频率和波速的关系是 c = λf。中波广播的频率约为 540 kHz ~ 1600 kHz，调频（FM）广播约为 88 MHz ~ 108 MHz。": [
@@ -2060,7 +2060,7 @@
   "Un faisceau de lumière parallèle qui tombe sur une surface rugueuse (papier, mur, vêtement) rencontre de nombreuses petites facettes d'orientations différentes ; la lumière réfléchie part donc dans toutes les directions : c'est la réflexion diffuse. La réflexion diffuse permet de voir sous tous les angles les objets qui n'émettent pas de lumière."
  ],
  "无论镜面反射还是漫反射，每一条光线都遵守光的反射定律：反射角等于入射角。镜面反射也会造成“光污染”，例如玻璃幕墙耀眼的反光。拖动滑块改变表面的粗糙程度，观察反射光的方向有什么变化。": [
-  "Both in specular and in diffuse reflection every ray obeys the law of reflection: the angle of reflection equals the angle of incidence. Specular reflection can also cause \"light pollution\", for example the dazzling glare of a glass curtain wall. Drag the slider to change how rough the surface is and see how the direction of the reflected light changes.",
+  "Both in specular and in diffuse reflection every ray obeys the law of reflection: the angle of reflection equals the angle of incidence. Specular reflection can also cause “light pollution”, for example the dazzling glare of a glass curtain wall. Drag the slider to change how rough the surface is and see how the direction of the reflected light changes.",
   "Dans la réflexion spéculaire comme dans la réflexion diffuse, chaque rayon obéit à la loi de la réflexion : l'angle de réflexion est égal à l'angle d'incidence. La réflexion spéculaire peut aussi provoquer une « pollution lumineuse », par exemple l'éblouissement d'un mur-rideau en verre. Faites glisser le curseur pour changer la rugosité de la surface et observez comment change la direction de la lumière réfléchie."
  ],
  "镜面反射": [
@@ -2108,7 +2108,7 @@
   "Le travail : quand on fournit du travail à un objet, son énergie interne augmente (se frotter les mains pour se réchauffer, comprimer un gaz, percer du bois pour faire du feu) ; quand un objet fournit du travail à l'extérieur, son énergie interne diminue (un gaz qui se détend et pousse un piston, de la buée blanche dans une bouteille quand le bouchon saute). Modifier l'énergie interne par le travail, c'est en réalité convertir d'autres formes d'énergie en énergie interne ou l'inverse. Le transfert thermique : la chaleur passe d'un objet plus chaud à un objet plus froid (ou de la partie chaude d'un objet à sa partie froide) ; en fait, l'énergie interne est transférée d'un endroit à un autre."
  ],
  "要分清三个量：温度表示物体的冷热程度；热量是热传递过程中传递的内能的多少，是过程量，只能说“吸收”或“放出”，不能说“含有”；内能是物体具有的能，是状态量。热量总是从温度高的物体传向温度低的物体，与哪个物体的内能多无关。": [
-  "Three quantities have to be kept apart: temperature tells how hot or cold an object is; heat is the amount of internal energy transferred during heat transfer, it is a process quantity and one can only say it is \"absorbed\" or \"given out\", never \"contained\"; internal energy is the energy an object has, it is a state quantity. Heat always passes from the object at the higher temperature to the one at the lower temperature, whichever of them has more internal energy.",
+  "Three quantities have to be kept apart: temperature tells how hot or cold an object is; heat is the amount of internal energy transferred during heat transfer, it is a process quantity and one can only say it is “absorbed” or “given out”, never “contained”; internal energy is the energy an object has, it is a state quantity. Heat always passes from the object at the higher temperature to the one at the lower temperature, whichever of them has more internal energy.",
   "Il faut distinguer trois grandeurs : la température indique si un objet est chaud ou froid ; la chaleur est la quantité d'énergie interne transférée lors d'un transfert thermique, c'est une grandeur de processus et on peut seulement dire qu'elle est « absorbée » ou « libérée », jamais « contenue » ; l'énergie interne est l'énergie que possède un objet, c'est une grandeur d'état. La chaleur passe toujours de l'objet à la température la plus élevée vers celui qui est à la température la plus basse, quel que soit celui qui a le plus d'énergie interne."
  ],
  "实验器材：光具座、凸透镜、蜡烛、光屏。先让平行光（如太阳光）通过凸透镜，移动光屏，当光屏上的光斑最小最亮时，光屏到透镜的距离就是焦距 f。实验时要调整烛焰、透镜和光屏的中心大致在同一高度，使像成在光屏的中央。": [
@@ -2124,11 +2124,11 @@
   "Pour une image réelle, quand la distance objet diminue, la distance image augmente et l'image grandit (plus l'objet est proche, plus l'image est éloignée et grande). Avec une lentille de distance focale différente, toutes les positions changent aussi. Plus on enregistre de données, plus la loi apparaît clairement."
  ],
  "电流做功的过程，就是电能转化为其他形式能的过程。电流做的功叫电功，用 W 表示。电流在某段电路上做的功，等于这段电路两端的电压 U、电路中的电流 I 和通电时间 t 的乘积：W = UIt。电功的单位是焦耳（J），生活中常用千瓦时（kW·h，俗称“度”）：1 kW·h = 3.6×10⁶ J。": [
-  "The process of an electric current doing work is the process of electrical energy changing into other forms of energy. The work done by an electric current is called electrical work and is written W. The work done by a current in a part of a circuit equals the product of the voltage U across that part, the current I in it and the time t it flows: W = UIt. The unit of electrical work is the joule (J); in daily life the kilowatt-hour (kW·h, commonly called a \"unit\" of electricity) is used: 1 kW·h = 3.6×10⁶ J.",
+  "The process of an electric current doing work is the process of electrical energy changing into other forms of energy. The work done by an electric current is called electrical work and is written W. The work done by a current in a part of a circuit equals the product of the voltage U across that part, the current I in it and the time t it flows: W = UIt. The unit of electrical work is the joule (J); in daily life the kilowatt-hour (kW·h, commonly called a “unit” of electricity) is used: 1 kW·h = 3.6×10⁶ J.",
   "Quand un courant électrique fournit du travail, de l'énergie électrique est convertie en d'autres formes d'énergie. Le travail fourni par un courant électrique s'appelle le travail électrique et se note W. Le travail fourni par un courant dans une portion de circuit est égal au produit de la tension U aux bornes de cette portion, de l'intensité I du courant qui la traverse et de la durée t : W = UIt. L'unité du travail électrique est le joule (J) ; dans la vie courante on utilise le kilowattheure (kW·h) : 1 kW·h = 3,6×10⁶ J."
  ],
  "电能表是测量一段时间内消耗电能的仪表。它的计数器最后一位是小数位，前后两次示数之差就是这段时间用的电能。铭牌上的“220 V”是额定电压，“10(20) A”表示标定电流是 10 A、额定最大电流是 20 A，“3000 r/(kW·h)”表示每消耗 1 kW·h 的电能，转盘转 3000 转。": [
-  "An energy meter measures the electrical energy used over a period of time. The last digit of its counter is a decimal, and the difference between two readings is the energy used in that time. On the plate \"220 V\" is the rated voltage, \"10(20) A\" means that the rated current is 10 A and the largest permitted current is 20 A, and \"3000 r/(kW·h)\" means that for every 1 kW·h of electrical energy used the disc turns 3000 times.",
+  "An energy meter measures the electrical energy used over a period of time. The last digit of its counter is a decimal, and the difference between two readings is the energy used in that time. On the plate “220 V” is the rated voltage, “10(20) A” means that the rated current is 10 A and the largest permitted current is 20 A, and “3000 r/(kW·h)” means that for every 1 kW·h of electrical energy used the disc turns 3000 times.",
   "Un compteur d'énergie mesure l'énergie électrique consommée pendant une durée donnée. Le dernier chiffre de son compteur est une décimale, et la différence entre deux relevés est l'énergie consommée pendant ce temps. Sur la plaque, « 220 V » est la tension nominale, « 10(20) A » signifie que l'intensité nominale est de 10 A et l'intensité maximale permise de 20 A, et « 3000 r/(kW·h) » signifie que, pour chaque kW·h d'énergie électrique consommée, le disque fait 3000 tours."
  ],
  "用电能表测用电器的功率：只让这一个用电器工作，数出 t 秒内转盘转过的转数 n，则消耗的电能 W = n / N（kW·h，N 是每千瓦时的转数），功率 P = W / t。": [
@@ -2164,7 +2164,7 @@
   "Que utilise un signal numérique pour représenter l'information ?"
  ],
  "不连续变化的“0”和“1”的组合": [
-  "Combinations of \"0\" and \"1\" that do not change continuously",
+  "Combinations of “0” and “1” that do not change continuously",
   "Des combinaisons de « 0 » et de « 1 » qui ne varient pas de façon continue"
  ],
  "连续变化的电流": [
@@ -2228,7 +2228,7 @@
   "Nombre de bits du fichier = nombre d'octets × 8 ; durée = nombre de bits ÷ débit."
  ],
  "数字信号只有“有”和“无”两种状态，噪声不太大时接收端仍能完全恢复，所以抗干扰能力强。": [
-  "A digital signal has only two states, \"present\" and \"absent\"; as long as the noise is not too large the receiver can still restore it completely, so it resists interference well.",
+  "A digital signal has only two states, “present” and “absent”; as long as the noise is not too large the receiver can still restore it completely, so it resists interference well.",
   "Un signal numérique n'a que deux états, « présent » et « absent » ; tant que le bruit n'est pas trop grand, le récepteur peut encore le restituer intégralement : il résiste donc bien aux perturbations."
  ],
  "光信号在光导纤维中发生全反射，沿着光纤传到远处，几乎没有损耗，容量很大。": [
@@ -2312,7 +2312,7 @@
   "Un objet qui n'émet pas de lumière est éclairé et réfléchit la lumière de façon diffuse dans toutes les directions ; la lumière réfléchie entre dans l'œil et on voit l'objet."
  ],
  "玻璃幕墙会造成“光污染”，是因为光射到它的表面时发生了：": [
-  "A glass curtain wall can cause \"light pollution\" because when light falls on its surface:",
+  "A glass curtain wall can cause “light pollution” because when light falls on its surface:",
   "Un mur-rideau en verre peut provoquer une « pollution lumineuse » parce que, lorsque la lumière arrive sur sa surface, il se produit :"
  ],
  "光滑的幕墙表面发生镜面反射，反射光集中射向同一方向，十分耀眼。": [
@@ -2496,7 +2496,7 @@
   "Des gouttes de rosée sur les brins d'herbe"
  ],
  "烧开水时壶嘴冒出的白气": [
-  "\"White gas\" coming out of the spout of a kettle of boiling water",
+  "“White gas” coming out of the spout of a kettle of boiling water",
   "La « fumée blanche » qui sort du bec d'une bouilloire d'eau bouillante"
  ],
  "樟脑丸越来越小": [
@@ -2632,7 +2632,7 @@
   "Vitesse moyenne = masse évaporée ÷ durée."
  ],
  "“{0}”发生的物态变化是：": [
-  "The change of state in \"{0}\" is:",
+  "The change of state in “{0}” is:",
   "Le changement d'état dans « {0} » est :"
  ],
  "搓手（克服摩擦做功）": [
@@ -2688,12 +2688,12 @@
   "Dans un transfert thermique, l'énergie interne passe d'un objet chaud à un objet plus froid (ou de la partie chaude d'un objet à sa partie froide)."
  ],
  "一大桶 20 ℃ 的水和一小杯 80 ℃ 的水接触，热量的传递方向是：": [
-  "A large bucket of water at 20 ℃ touches a small cup of water at 80 ℃. The direction of heat transfer is:",
-  "Un grand seau d'eau à 20 ℃ est en contact avec une petite tasse d'eau à 80 ℃. Le sens du transfert thermique est :"
+  "A large bucket of water at 20 °C touches a small cup of water at 80 °C. The direction of heat transfer is:",
+  "Un grand seau d'eau à 20 °C est en contact avec une petite tasse d'eau à 80 °C. Le sens du transfert thermique est :"
  ],
  "从小杯 80 ℃ 的水传向大桶 20 ℃ 的水": [
-  "From the small cup of water at 80 ℃ to the large bucket of water at 20 ℃",
-  "De la petite tasse d'eau à 80 ℃ vers le grand seau d'eau à 20 ℃"
+  "From the small cup of water at 80 °C to the large bucket of water at 20 °C",
+  "De la petite tasse d'eau à 80 °C vers le grand seau d'eau à 20 °C"
  ],
  "从大桶水传向小杯水，因为大桶水的内能多": [
   "From the bucket to the cup, because the bucket has more internal energy",
@@ -2836,7 +2836,7 @@
   "Quand la distance objet diminue, la distance image augmente et l'image grandit (pour une image réelle : plus l'objet est proche, plus l'image est éloignée et grande)."
  ],
  "电能表铭牌上的“220 V”表示：": [
-  "The \"220 V\" on the plate of an energy meter means:",
+  "The “220 V” on the plate of an energy meter means:",
   "« 220 V » sur la plaque d'un compteur d'énergie signifie :"
  ],
  "电能表应该在 220 V 的电路中使用": [
@@ -2856,7 +2856,7 @@
   "220 unités d'électricité sont consommées chaque heure"
  ],
  "电能表铭牌上的“10(20) A”表示：": [
-  "The \"10(20) A\" on the plate of an energy meter means:",
+  "The “10(20) A” on the plate of an energy meter means:",
   "« 10(20) A » sur la plaque d'un compteur d'énergie signifie :"
  ],
  "标定电流是 10 A，额定最大电流是 20 A": [
@@ -2876,7 +2876,7 @@
   "la puissance nominale est de 10 W et la puissance maximale de 20 W"
  ],
  "电能表铭牌上的“3000 r/(kW·h)”表示：": [
-  "The \"3000 r/(kW·h)\" on the plate of an energy meter means:",
+  "The “3000 r/(kW·h)” on the plate of an energy meter means:",
   "« 3000 r/(kW·h) » sur la plaque d'un compteur d'énergie signifie :"
  ],
  "每消耗 1 kW·h 的电能，电能表的转盘转 3000 转": [
@@ -2920,7 +2920,7 @@
   "Facture = énergie × prix."
  ],
  "电能表上标有“{0} r/(kW·h)”，某用电器单独工作时消耗了 {1} kW·h 的电能，电能表的转盘转了多少转？": [
-  "The plate of an energy meter says \"{0} r/(kW·h)\". An appliance working alone uses {1} kW·h of electrical energy. How many times does the disc of the meter turn?",
+  "The plate of an energy meter says “{0} r/(kW·h)”. An appliance working alone uses {1} kW·h of electrical energy. How many times does the disc of the meter turn?",
   "La plaque d'un compteur d'énergie indique « {0} r/(kW·h) ». Un appareil qui fonctionne seul consomme {1} kW·h d'énergie électrique. Combien de tours le disque du compteur fait-il ?"
  ],
  "{0} 转": [
@@ -2988,8 +2988,8 @@
   "Le réduire au niveau de l'oreille (porter un casque antibruit)"
  ],
  "空气（15 ℃）": [
-  "Air (15 ℃)",
-  "Air (15 ℃)"
+  "Air (15 °C)",
+  "Air (15 °C)"
  ],
  "给摩托车装上消声器，属于：": [
   "Fitting a silencer to a motorcycle is:",
@@ -3396,7 +3396,7 @@
   "Lequel des phénomènes suivants est dû à la propagation rectiligne de la lumière ?"
  ],
  "影子、小孔成像、日食和月食都是光沿直线传播形成的；倒影是反射，彩虹和筷子“弯折”是折射。": [
-  "Shadows, pinhole imaging and solar and lunar eclipses are all formed because light travels in straight lines; reflections in water are reflection, and rainbows and the \"bent\" chopstick are refraction.",
+  "Shadows, pinhole imaging and solar and lunar eclipses are all formed because light travels in straight lines; reflections in water are reflection, and rainbows and the “bent” chopstick are refraction.",
   "Les ombres, l'image d'un trou d'épingle et les éclipses de Soleil et de Lune se forment toutes parce que la lumière se propage en ligne droite ; les reflets dans l'eau relèvent de la réflexion, et l'arc-en-ciel et la baguette « cassée » de la réfraction."
  ],
  "发生日食时，太阳、月球、地球三者的位置关系是：": [
@@ -3460,16 +3460,16 @@
   "Trop basse"
  ],
  "温度计的分度值是 {0} ℃，液面在 0 ℃ 刻度线下方第 {1} 格处，读数是多少？": [
-  "The value of a division of a thermometer is {0} ℃ and the liquid surface is {1} divisions below the 0 ℃ mark. What is the reading?",
-  "La graduation d'un thermomètre vaut {0} ℃ et la surface du liquide est à {1} graduations au-dessous du trait de 0 ℃. Quelle est la lecture ?"
+  "The value of a division of a thermometer is {0} ℃ and the liquid surface is {1} divisions below the 0 °C mark. What is the reading?",
+  "La graduation d'un thermomètre vaut {0} ℃ et la surface du liquide est à {1} graduations au-dessous du trait de 0 °C. Quelle est la lecture ?"
  ],
  "0 ℃ 以下的温度是负值：读数 = −（格数 × 分度值）。": [
-  "A temperature below 0 ℃ is negative: reading = −(number of marks × value of a division).",
-  "Une température au-dessous de 0 ℃ est négative : lecture = −(nombre de traits × valeur d'une graduation)."
+  "A temperature below 0 °C is negative: reading = −(number of marks × value of a division).",
+  "Une température au-dessous de 0 °C est négative : lecture = −(nombre de traits × valeur d'une graduation)."
  ],
  "一支温度计的 0 ℃ 刻度线和 100 ℃ 刻度线之间共有 {0} 格，它的分度值是多少？": [
-  "Between the 0 ℃ mark and the 100 ℃ mark of a thermometer there are {0} divisions. What is the value of one division?",
-  "Entre le trait de 0 ℃ et le trait de 100 ℃ d'un thermomètre, il y a {0} graduations. Quelle est la valeur d'une graduation ?"
+  "Between the 0 °C mark and the 100 °C mark of a thermometer there are {0} divisions. What is the value of one division?",
+  "Entre le trait de 0 °C et le trait de 100 °C d'un thermomètre, il y a {0} graduations. Quelle est la valeur d'une graduation ?"
  ],
  "分度值 = 量程 ÷ 格数。": [
   "Value of a division = range ÷ number of divisions.",
@@ -3548,7 +3548,7 @@
   "Étude de la relation entre l'intensité et la résistance : on garde inchangée la tension aux bornes de la résistance fixe (on règle le rhéostat à chaque changement de résistance) et on note la résistance et l'intensité. L'intensité I diminue quand la résistance R augmente et le produit de I par R reste le même, ce qui montre que, pour une tension donnée, l'intensité du courant dans un conducteur est inversement proportionnelle à sa résistance."
  ],
  "两个实验都用到控制变量法。把这两个关系合起来，就是欧姆定律：I = U / R。实验时要多测几组数据，数据多了，规律才可靠。点“记录这组数据”把现在的读数记进表中，最多记 6 组。": [
-  "Both experiments use the control-variable method. Together the two relations are Ohm's law: I = U / R. Several sets of data should be taken, because the more data there are, the more reliable the rule. Press \"Record this set of data\" to enter the present readings in the table; at most 6 sets can be recorded.",
+  "Both experiments use the control-variable method. Together the two relations are Ohm's law: I = U / R. Several sets of data should be taken, because the more data there are, the more reliable the rule. Press “Record this set of data” to enter the present readings in the table; at most 6 sets can be recorded.",
   "Les deux expériences utilisent la méthode de la variable contrôlée. Ensemble, les deux relations forment la loi d'Ohm : I = U / R. Il faut prendre plusieurs séries de mesures, car plus il y a de données, plus la loi est fiable. Appuyez sur « Enregistrer cette série de mesures » pour inscrire les indications actuelles dans le tableau ; on peut en enregistrer 6 au plus."
  ],
  "电阻表示导体对电流阻碍作用的大小。导体的电阻是导体本身的一种性质，它的大小跟导体的材料、长度、横截面积有关，还跟温度有关，与导体两端的电压、通过的电流无关。": [
@@ -3584,24 +3584,24 @@
   "Quand la source est très petite (source ponctuelle), il n'y a derrière l'objet qu'une ombre sombre ; quand la source est plus grande, le milieu de l'ombre est l'ombre propre, qui ne reçoit aucune lumière, et autour d'elle se trouve la pénombre, qui ne reçoit qu'une partie de la lumière. Une éclipse de Soleil se produit quand la Lune arrête la lumière du Soleil et que son ombre tombe sur la Terre ; une éclipse de Lune, quand la Terre arrête la lumière du Soleil et que la Lune entre dans l'ombre de la Terre. Comme le plan de l'orbite de la Lune fait un angle avec celui de l'orbite de la Terre, il n'y a pas d'éclipse de Soleil ou de Lune chaque mois."
  ],
  "温度表示物体的冷热程度。常用温度计是根据液体热胀冷缩的性质制成的。摄氏温度规定：在标准大气压下，冰水混合物的温度为 0 ℃，沸水的温度为 100 ℃，在 0 ℃ 和 100 ℃ 之间分成 100 等份，每一份叫做 1 摄氏度。0 ℃ 以下的温度读作“零下”或在数字前加“−”。": [
-  "Temperature tells how hot or cold an object is. Ordinary thermometers are made on the principle that liquids expand when heated and contract when cooled. The Celsius scale is defined like this: at standard atmospheric pressure the temperature of a mixture of ice and water is 0 ℃ and that of boiling water is 100 ℃; the interval between 0 ℃ and 100 ℃ is divided into 100 equal parts and each part is called 1 degree Celsius. A temperature below 0 ℃ is read \"minus\" or written with a \"−\" before the number.",
-  "La température indique si un objet est chaud ou froid. Les thermomètres usuels sont fondés sur la dilatation des liquides quand on les chauffe et leur contraction quand on les refroidit. L'échelle Celsius est définie ainsi : à la pression atmosphérique normale, la température d'un mélange de glace et d'eau est de 0 ℃ et celle de l'eau bouillante de 100 ℃ ; l'intervalle entre 0 ℃ et 100 ℃ est divisé en 100 parties égales, et chaque partie s'appelle 1 degré Celsius. Une température au-dessous de 0 ℃ se lit « moins » ou s'écrit avec un « − » devant le nombre."
+  "Temperature tells how hot or cold an object is. Ordinary thermometers are made on the principle that liquids expand when heated and contract when cooled. The Celsius scale is defined like this: at standard atmospheric pressure the temperature of a mixture of ice and water is 0 °C and that of boiling water is 100 °C; the interval between 0 °C and 100 °C is divided into 100 equal parts and each part is called 1 degree Celsius. A temperature below 0 °C is read “minus” or written with a “−” before the number.",
+  "La température indique si un objet est chaud ou froid. Les thermomètres usuels sont fondés sur la dilatation des liquides quand on les chauffe et leur contraction quand on les refroidit. L'échelle Celsius est définie ainsi : à la pression atmosphérique normale, la température d'un mélange de glace et d'eau est de 0 °C et celle de l'eau bouillante de 100 °C ; l'intervalle entre 0 °C et 100 °C est divisé en 100 parties égales, et chaque partie s'appelle 1 degré Celsius. Une température au-dessous de 0 °C se lit « moins » ou s'écrit avec un « − » devant le nombre."
  ],
  "使用温度计时：先看清量程和分度值；玻璃泡要全部浸入被测液体中，不要碰到容器底或容器壁；浸入后要稍等一会儿，待示数稳定后再读数；读数时，玻璃泡要继续留在被测液体中，视线与温度计中液柱的上表面相平。": [
   "Using a thermometer: first read the range and the value of a division; the bulb must be completely in the liquid being measured and must not touch the bottom or the wall of the container; after putting it in, wait a moment until the reading is steady and then read it; when reading, the bulb must stay in the liquid and the line of sight must be level with the top of the liquid column in the thermometer.",
   "Utilisation d'un thermomètre : on commence par lire l'étendue et la valeur d'une graduation ; le réservoir doit être entièrement dans le liquide mesuré sans toucher le fond ni la paroi du récipient ; après l'avoir plongé, on attend un instant que l'indication soit stable, puis on lit ; pour lire, le réservoir doit rester dans le liquide et la ligne de visée doit être à la hauteur de la surface supérieure de la colonne de liquide."
  ],
  "体温计的量程是 35 ℃~42 ℃，分度值是 0.1 ℃。它的玻璃泡和直玻璃管之间有一段很细的缩口，水银柱上升后遇冷收缩时在缩口处断开，水银柱不会自己退回玻璃泡，所以体温计可以离开人体读数。每次使用前要用力甩几下，把水银甩回玻璃泡。": [
-  "The range of a clinical thermometer is 35 ℃ to 42 ℃ and the value of a division is 0.1 ℃. Between its bulb and the straight glass tube there is a very narrow neck; when the mercury column has risen and then cools and contracts, it breaks at the neck and does not go back into the bulb by itself, so a clinical thermometer can be read after it has left the body. Before each use it must be shaken hard a few times to shake the mercury back into the bulb.",
-  "L'étendue d'un thermomètre médical va de 35 ℃ à 42 ℃ et la valeur d'une graduation est de 0,1 ℃. Entre son réservoir et le tube de verre droit se trouve un étranglement très étroit ; quand la colonne de mercure a monté puis se refroidit et se contracte, elle se sépare à l'étranglement et ne redescend pas d'elle-même dans le réservoir : un thermomètre médical peut donc être lu après avoir quitté le corps. Avant chaque usage, il faut le secouer fortement plusieurs fois pour faire redescendre le mercure dans le réservoir."
+  "The range of a clinical thermometer is 35 °C to 42 °C and the value of a division is 0.1 °C. Between its bulb and the straight glass tube there is a very narrow neck; when the mercury column has risen and then cools and contracts, it breaks at the neck and does not go back into the bulb by itself, so a clinical thermometer can be read after it has left the body. Before each use it must be shaken hard a few times to shake the mercury back into the bulb.",
+  "L'étendue d'un thermomètre médical va de 35 °C à 42 °C et la valeur d'une graduation est de 0,1 °C. Entre son réservoir et le tube de verre droit se trouve un étranglement très étroit ; quand la colonne de mercure a monté puis se refroidit et se contracte, elle se sépare à l'étranglement et ne redescend pas d'elle-même dans le réservoir : un thermomètre médical peut donc être lu après avoir quitté le corps. Avant chaque usage, il faut le secouer fortement plusieurs fois pour faire redescendre le mercure dans le réservoir."
  ],
  "平均每分钟蒸发的质量 = 蒸发的质量 ÷ 时间。": [
   "Mass evaporated per minute on average = mass evaporated ÷ time.",
   "Masse évaporée par minute en moyenne = masse évaporée ÷ durée."
  ],
  "分度值 = 温度差 ÷ 格数，这里的温度差是 100 ℃。": [
-  "Value of a division = temperature difference ÷ number of divisions; here the difference is 100 ℃.",
-  "Valeur d'une graduation = écart de température ÷ nombre de graduations ; ici l'écart est de 100 ℃."
+  "Value of a division = temperature difference ÷ number of divisions; here the difference is 100 °C.",
+  "Valeur d'une graduation = écart de température ÷ nombre de graduations ; ici l'écart est de 100 °C."
  ],
  "光源很小（点光源）时，物体后面只有一片黑暗的影；光源较大时，影的中间是完全没有光的本影，周围是只有一部分光的半影。日食是月球挡住太阳光，月球的影落在地球上；月食是地球挡住太阳光，月球进入地球的影。因为月球的轨道面与地球的轨道面约有 5° 的夹角，只有在新月（日食）或满月（月食）时，月球恰好又在地球轨道面附近，才会发生日食或月食，所以并不是每个月都发生。": [
   "When the source is very small (a point source) there is only a dark shadow behind the object; when the source is larger, the middle of the shadow is the umbra, which gets no light at all, and round it is the penumbra, which gets only part of the light. A solar eclipse is when the Moon blocks the sunlight and its shadow falls on the Earth; a lunar eclipse is when the Earth blocks the sunlight and the Moon enters the Earth's shadow. The plane of the Moon's orbit makes an angle of about 5° with the plane of the Earth's orbit; an eclipse happens only at new Moon (solar) or full Moon (lunar) when the Moon is also close to the plane of the Earth's orbit, so there is not an eclipse every month.",
@@ -3624,12 +3624,12 @@
   "Éclipses de Soleil et de Lune : réglez la position de la Lune et son écart angulaire avec le plan de l'orbite de la Terre pour que les conditions d'une éclipse de Soleil ou de Lune soient réunies"
  ],
  "A 比 0 ℃ 时多的内能": [
-  "Internal energy of A above its value at 0 ℃",
-  "Énergie interne de A en plus de sa valeur à 0 ℃"
+  "Internal energy of A above its value at 0 °C",
+  "Énergie interne de A en plus de sa valeur à 0 °C"
  ],
  "B 比 0 ℃ 时多的内能": [
-  "Internal energy of B above its value at 0 ℃",
-  "Énergie interne de B en plus de sa valeur à 0 ℃"
+  "Internal energy of B above its value at 0 °C",
+  "Énergie interne de B en plus de sa valeur à 0 °C"
  ],
  "电流的方向（取某一方向为正）": [
   "Direction of the current (one direction taken as positive)",

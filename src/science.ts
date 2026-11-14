@@ -16,7 +16,7 @@ import { renderRich, renderTeX } from "./mathtext";
 import { SYMBOLS, CIRCUITS, RULES } from "./diagrams";
 import { figure } from "./figures";
 import { ct, cct, loadContentTr, loadCardTr } from "./contenttr";
-import { tr } from "./i18n";
+import { tr, getLang } from "./i18n";
 import { mascot } from "./art";
 import { subjectArt, shortcuts } from "./hub";
 import { spaceIcon } from "./spaceart";
@@ -285,12 +285,15 @@ const PHYS_ICON = `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="fals
 // ---------- the periodic table ----------
 const CATS: Record<string, string> = { alkali: "碱金属", alkaline: "碱土金属", transition: "过渡金属", post: "后过渡金属", metalloid: "类金属", nonmetal: "非金属", halogen: "卤素", noble: "稀有气体", lanthanide: "镧系", actinide: "锕系" };
 
+/** the name of an element for a tooltip: the Chinese name on the Chinese screen, otherwise "Scandium (钪)" (the Chinese name in brackets is the Chinese cell's own text) */
+const ptName = (e: SM.Element): string => (getLang() === "zh" ? e.zh : `${e.en} (${e.zh})`);
+
 export async function renderPeriodic() {
   const lib = await SM.loadScience();
   let juniorOnly = false;
   const grid = h("div", { class: "pt-grid", id: "pt-grid" });
   const draw = () => {
-    grid.replaceChildren(...lib.elements.map((e) => h("button", { class: `pt-cell cat-${e.cat}` + (juniorOnly && !e.junior ? " dim" : ""), "data-n": String(e.n), style: `grid-row:${e.row >= 8 ? e.row + 1 : e.row};grid-column:${e.col}`, title: e.zh, "aria-label": e.zh, onclick: () => void details(e) },
+    grid.replaceChildren(...lib.elements.map((e) => h("button", { class: `pt-cell cat-${e.cat}` + (juniorOnly && !e.junior ? " dim" : ""), "data-n": String(e.n), style: `grid-row:${e.row >= 8 ? e.row + 1 : e.row};grid-column:${e.col}`, title: ptName(e), "aria-label": ptName(e), onclick: () => void details(e) },
       h("small", {}, String(e.n)), h("b", {}, e.sym), h("span", { class: "user" }, e.zh))));
   };
   const chip = (label: string, id: string, on: () => void, active: () => boolean) => { const b = h("button", { class: "mopt" + (active() ? " on" : ""), id, onclick: () => { on(); chips.forEach((c) => c.refresh()); } }, label); return { el: b, refresh: () => b.classList.toggle("on", active()) }; };

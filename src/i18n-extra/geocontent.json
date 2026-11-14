@@ -1,6 +1,6 @@
 {
  "地球是一个两极稍扁、赤道略鼓的不规则球体，平均半径约 6371 千米，赤道周长约 4 万千米。地球仪是地球的模型。": [
-  "The Earth is an irregular sphere, slightly flattened at the poles and slightly bulging at the equator, with a mean radius of about 6371 km and an equatorial circumference of about 40 000 km. A globe is a model of the Earth.",
+  "The Earth is an irregular sphere, slightly flattened at the poles and slightly bulging at the equator, with a mean radius of about 6371 km and an equatorial circumference of about 40,000 km. A globe is a model of the Earth.",
   "La Terre est une sphère irrégulière, légèrement aplatie aux pôles et légèrement renflée à l'équateur, de rayon moyen d'environ 6371 km et de circonférence équatoriale d'environ 40 000 km. Un globe est un modèle de la Terre."
  ],
  "经线（子午线）连接南北两极，指示南北方向，长度都相等；纬线是与赤道平行的圆圈，指示东西方向，赤道最长，越向两极越短。0°经线叫本初子午线，0°纬线叫赤道。": [
@@ -144,8 +144,8 @@
   "Densité de population = population totale ∕ superficie (habitants par kilomètre carré). La population mondiale est répartie de façon inégale : l'Asie de l'Est, l'Asie du Sud, l'Europe occidentale et l'est de l'Amérique du Nord sont densément peuplés, tandis que les pôles, les déserts, les hautes montagnes et les forêts tropicales humides sont peu peuplés."
  ],
  "世界三大人种：黄种人、白种人、黑种人。联合国的六种工作语言：汉语、英语、法语、俄语、西班牙语和阿拉伯语。三大宗教：基督教、伊斯兰教、佛教。": [
-  "The world's three main races: Mongoloid, Caucasian and Negroid. The six working languages of the United Nations: Chinese, English, French, Russian, Spanish and Arabic. The three main religions: Christianity, Islam and Buddhism.",
-  "Les trois grandes races du monde : mongoloïde, caucasoïde et négroïde. Les six langues de travail des Nations unies : le chinois, l'anglais, le français, le russe, l'espagnol et l'arabe. Les trois grandes religions : le christianisme, l'islam et le bouddhisme."
+  "The world's three main races (as classified in the textbook): the yellow, white and black races. The six working languages of the United Nations: Chinese, English, French, Russian, Spanish and Arabic. The three main religions: Christianity, Islam and Buddhism.",
+  "Les trois grandes races du monde (selon la classification du manuel) : les races jaune, blanche et noire. Les six langues de travail des Nations unies : le chinois, l'anglais, le français, le russe, l'espagnol et l'arabe. Les trois grandes religions : le christianisme, l'islam et le bouddhisme."
  ],
  "聚落分为乡村和城市。调整出生率、死亡率和年数，看人口如何变化。": [
   "Settlements are divided into rural and urban settlements. Adjust the birth rate, the death rate and the number of years to see how the population changes.",
@@ -244,8 +244,8 @@
   "La Chine s'étend sur environ 60° de longitude d'est en ouest ; l'heure locale de l'est et de l'ouest diffère donc d'environ 4 heures, mais tout le pays utilise l'heure de Pékin (l'heure du fuseau Est 8). Touchez une ville pour voir sa position sur le quadrillage de latitudes et de longitudes de la Chine."
  ],
  "我国地势西高东低，呈阶梯状分布，大致分为三级阶梯：第一级是青藏高原（平均海拔 4000 米以上）；第二级是内蒙古高原、黄土高原、云贵高原以及塔里木盆地、准噶尔盆地、四川盆地（海拔 1000～2000 米）；第三级是东北平原、华北平原、长江中下游平原和丘陵（海拔多在 500 米以下）。": [
-  "The terrain of China is high in the west and low in the east and descends in steps, roughly divided into three steps: the first step is the Qinghai–Tibet Plateau (average altitude above 4000 m); the second step is the Inner Mongolia Plateau, the Loess Plateau, the Yunnan–Guizhou Plateau and the Tarim, Junggar and Sichuan Basins (altitude 1000–2000 m); the third step is the Northeast Plain, the North China Plain, the plains of the middle and lower Yangtze and the hills (altitude mostly below 500 m).",
-  "Le relief de la Chine est élevé à l'ouest et bas à l'est et descend en gradins, divisés en gros en trois paliers : le premier palier est le plateau Qinghai–Tibet (altitude moyenne supérieure à 4000 m) ; le deuxième palier comprend le plateau de Mongolie-Intérieure, le plateau de lœss, le plateau Yunnan–Guizhou et les bassins du Tarim, de Dzoungarie et du Sichuan (altitude de 1000 à 2000 m) ; le troisième palier comprend la plaine du Nord-Est, la plaine de Chine du Nord, les plaines du moyen et du bas Yangzi et les collines (altitude le plus souvent inférieure à 500 m)."
+  "The terrain of China is high in the west and low in the east and descends in steps, roughly divided into three steps: the first step is the Qinghai-Tibet Plateau (average altitude above 4000 m); the second step is the Inner Mongolia Plateau, the Loess Plateau, the Yunnan–Guizhou Plateau and the Tarim, Junggar and Sichuan Basins (altitude 1000–2000 m); the third step is the Northeast Plain, the North China Plain, the plains of the middle and lower Yangtze and the hills (altitude mostly below 500 m).",
+  "Le relief de la Chine est élevé à l'ouest et bas à l'est et descend en gradins, divisés en gros en trois paliers : le premier palier est le plateau du Qinghai–Tibet (altitude moyenne supérieure à 4000 m) ; le deuxième palier comprend le plateau de Mongolie-Intérieure, le plateau de lœss, le plateau Yunnan–Guizhou et les bassins du Tarim, du Junggar et du Sichuan (altitude de 1000 à 2000 m) ; le troisième palier comprend la plaine du Nord-Est, la plaine de Chine du Nord, les plaines du moyen et du bas Yangzi et les collines (altitude le plus souvent inférieure à 500 m)."
  ],
  "一、二级阶梯的分界线是昆仑山—祁连山—横断山；二、三级阶梯的分界线是大兴安岭—太行山—巫山—雪峰山。": [
   "The boundary between the first and second steps is the Kunlun Mountains–Qilian Mountains–Hengduan Mountains; the boundary between the second and third steps is the Greater Khingan Range–Taihang Mountains–Wu Mountains–Xuefeng Mountains.",
@@ -268,7 +268,7 @@
   "Touchez un élément géographique, voyez son étendue approximative sur le quadrillage de latitudes et de longitudes, et lisez les points essentiels."
  ],
  "我国的农业因地制宜：东部季风区以种植业为主，北方旱作、南方水田；西北牧业和灌溉农业；青藏高寒牧业。": [
-  "China's agriculture suits local conditions: the eastern monsoon region is mainly crop farming, with dry farming in the north and paddy fields in the south; the northwest has animal husbandry and irrigated agriculture; the Qinghai–Tibet region has high-cold pastoral farming.",
+  "China's agriculture suits local conditions: the eastern monsoon region is mainly crop farming, with dry farming in the north and paddy fields in the south; the northwest has animal husbandry and irrigated agriculture; the Qinghai-Tibet region has high-cold pastoral farming.",
   "L'agriculture chinoise s'adapte aux conditions locales : la région de la mousson de l'est pratique surtout les cultures, avec des cultures sèches au nord et des rizières au sud ; le nord-ouest a l'élevage et l'agriculture irriguée ; la région Qinghai–Tibet pratique l'élevage d'altitude et de froid."
  ],
  "主要工业基地有辽中南、京津唐、沪宁杭、珠江三角洲等；矿产与能源基地有山西煤炭、大庆石油、攀枝花钢铁等。": [
@@ -280,11 +280,11 @@
   "Les modes de transport sont le chemin de fer, la route, le transport par voie d'eau, le transport aérien et les pipelines. Le chemin de fer est l'épine dorsale des transports intégrés, et les principales lignes comprennent Pékin–Shanghai, Pékin–Canton, Pékin–Harbin, Longhai et Lanxin."
  ],
  "我国分为北方地区、南方地区、西北地区和青藏地区四大地理区域；香港、澳门、台湾是三个特殊的区域。划分的依据是自然和人文差异。": [
-  "China is divided into four major geographical regions: the Northern region, the Southern region, the Northwest region and the Qinghai–Tibet region; Hong Kong, Macao and Taiwan are three special regions. The division is based on natural and human differences.",
+  "China is divided into four major geographical regions: the Northern region, the Southern region, the Northwest region and the Qinghai-Tibet region; Hong Kong, Macao and Taiwan are three special regions. The division is based on natural and human differences.",
   "La Chine est divisée en quatre grandes régions géographiques : la région du Nord, la région du Sud, la région du Nord-Ouest et la région Qinghai–Tibet ; Hong Kong, Macao et Taïwan sont trois régions particulières. La division repose sur des différences naturelles et humaines."
  ],
  "北方地区以旱地为主，南方地区以水田为主；西北地区干旱，畜牧业为主；青藏地区高寒，是“世界屋脊”。东部沿海地区经济较发达，西部地区相对落后，区域之间通过交通、通信和西气东输、南水北调等工程联系起来。": [
-  "The Northern region has mainly dry land and the Southern region mainly paddy fields; the Northwest region is arid and mainly pastoral; the Qinghai–Tibet region is high and cold, and is the “roof of the world”. The eastern coastal region has a fairly developed economy and the western region is relatively backward; the regions are linked by transport, communications and projects such as the West–East Gas Pipeline and the South–North Water Transfer.",
+  "The Northern region has mainly dry land and the Southern region mainly paddy fields; the Northwest region is arid and mainly pastoral; the Qinghai-Tibet region is high and cold, and is the “roof of the world”. The eastern coastal region has a fairly developed economy and the western region is relatively backward; the regions are linked by transport, communications and projects such as the West–East Gas Pipeline and the South–North Water Transfer.",
   "La région du Nord a surtout des terres sèches et la région du Sud surtout des rizières ; la région du Nord-Ouest est aride et surtout pastorale ; la région Qinghai–Tibet est haute et froide, et c'est le « toit du monde ». La région côtière de l'est a une économie assez développée et la région de l'ouest est relativement en retard ; les régions sont reliées par les transports, les communications et des projets comme le gazoduc Ouest–Est et le transfert d'eau Sud–Nord."
  ],
  "点选地图上的省区，看它的简称、省会和特色；也可以按四大区域着色。（四大区域按省区近似着色，边界省区只作示意。）": [
@@ -296,7 +296,7 @@
   "Types de climat courants : forêt tropicale humide, mousson tropicale, savane tropicale, désert tropical, mousson subtropicale, mousson tempérée, continental tempéré, océanique tempéré, méditerranéen, polaire, et climats de montagne et de plateau."
  ],
  "人口自然增长率 = 出生率 − 死亡率（出生率、死亡率常以‰表示，自然增长率常以 % 表示，1 % = 10 ‰）。自然增长率高的地区，人口增长快，人口金字塔底宽顶尖，称增长型；增长缓慢的为稳定型；出现负增长的为衰退型。": [
-  "Natural population growth rate = birth rate − death rate (birth and death rates are often given in ‰ and the natural growth rate in %; 1 % = 10 ‰). Where the natural growth rate is high, the population grows fast and the population pyramid has a wide base and a narrow top, called an expanding type; slow growth is a stable type; negative growth is a declining type.",
+  "Natural population growth rate = birth rate − death rate (birth and death rates are often given in ‰ and the natural growth rate in %; 1% = 10 ‰). Where the natural growth rate is high, the population grows fast and the population pyramid has a wide base and a narrow top, called an expanding type; slow growth is a stable type; negative growth is a declining type.",
   "Taux d'accroissement naturel de la population = taux de natalité − taux de mortalité (les taux de natalité et de mortalité s'expriment souvent en ‰ et le taux d'accroissement naturel en % ; 1 % = 10 ‰). Là où le taux d'accroissement naturel est élevé, la population croît vite et la pyramide des âges a une base large et un sommet étroit : c'est le type en expansion ; une croissance lente est le type stable ; une croissance négative est le type en déclin."
  ],
  "地球内部分为地壳、地幔和地核三层。地壳最薄，全球平均厚度约 17 千米（大陆地壳平均约 33 千米，海洋地壳平均约 6～7 千米）；地幔下界约在 2900 千米深处；地核又分为外核（液态）和内核（固态）。": [
@@ -308,11 +308,11 @@
   "La limite entre le premier et le deuxième palier est formée par les monts Kunlun, les monts Altun, les monts Qilian et les monts Hengduan ; la limite entre le deuxième et le troisième palier est formée par le Grand Khingan, les monts Taihang, les monts Wu et les monts Xuefeng."
  ],
  "我国的农业因地制宜：东部季风区以种植业为主，北方以旱作农业为主，南方以水田农业为主；西北地区以牧业和灌溉农业为主；青藏地区以高寒牧业为主。": [
-  "China's agriculture suits local conditions: the eastern monsoon region is mainly crop farming, with dry farming mainly in the north and paddy-field farming mainly in the south; the northwest is mainly animal husbandry and irrigated agriculture; the Qinghai–Tibet region is mainly high-cold pastoral farming.",
+  "China's agriculture suits local conditions: the eastern monsoon region is mainly crop farming, with dry farming mainly in the north and paddy-field farming mainly in the south; the northwest is mainly animal husbandry and irrigated agriculture; the Qinghai-Tibet region is mainly high-cold pastoral farming.",
   "L'agriculture chinoise s'adapte aux conditions locales : la région de la mousson de l'est pratique surtout les cultures, avec une agriculture sèche surtout au nord et une riziculture surtout au sud ; le nord-ouest pratique surtout l'élevage et l'agriculture irriguée ; la région Qinghai–Tibet pratique surtout l'élevage d'altitude et de froid."
  ],
  "北方地区以旱地为主，南方地区以水田为主；西北地区干旱，畜牧业为主；青藏地区高寒，是“世界屋脊”。东部沿海地区经济较发达，西部地区经济发展水平相对较低，区域之间通过交通、通信和西气东输、南水北调等工程联系起来。": [
-  "The Northern region has mainly dry land and the Southern region mainly paddy fields; the Northwest region is arid and mainly pastoral; the Qinghai–Tibet region is high and cold, and is the “roof of the world”. The eastern coastal region has a fairly developed economy and the western region a relatively lower level of economic development; the regions are linked by transport, communications and projects such as the West–East Gas Pipeline and the South–North Water Transfer.",
+  "The Northern region has mainly dry land and the Southern region mainly paddy fields; the Northwest region is arid and mainly pastoral; the Qinghai-Tibet region is high and cold, and is the “roof of the world”. The eastern coastal region has a fairly developed economy and the western region a relatively lower level of economic development; the regions are linked by transport, communications and projects such as the West–East Gas Pipeline and the South–North Water Transfer.",
   "La région du Nord a surtout des terres sèches et la région du Sud surtout des rizières ; la région du Nord-Ouest est aride et surtout pastorale ; la région Qinghai–Tibet est haute et froide, et c'est le « toit du monde ». La région côtière de l'est a une économie assez développée et la région de l'ouest un niveau de développement économique relativement plus faible ; les régions sont reliées par les transports, les communications et des projets comme le gazoduc Ouest–Est et le transfert d'eau Sud–Nord."
  ],
  "中时区": [
@@ -444,8 +444,8 @@
   "En un lieu, la température moyenne du mois le plus froid est {0}℃ et celle du mois le plus chaud {1}℃, les précipitations annuelles sont de {2} mm, le mois le plus sec reçoit {3} mm, les précipitations de {4} représentent {5} % de l'année et l'altitude est de {6} m. Quel est le type de climat de ce lieu ?"
  ],
  "按各项数字对照：海拔 3000 米以上为高原山地；最热月低于 10℃ 为极地；最冷月 18℃ 以上为热带（降水少为沙漠，各月多雨为雨林，有旱季时年降水约 1900 毫米以上为季风、否则为草原）；冬季温和而夏季少雨为地中海；温和而夏季不热为海洋性，否则亚热带季风；冬冷则降水少为大陆性，降水多为季风。": [
-  "Compare the figures: altitude above 3000 m is plateau mountain climate; hottest month below 10℃ is polar; coldest month above 18℃ is tropical (little precipitation: desert; rain in every month: rainforest; with a dry season, annual precipitation of about 1900 mm or more: monsoon, otherwise savanna); mild winter and dry summer: Mediterranean; mild and not hot in summer: maritime, otherwise subtropical monsoon; cold winter with little precipitation: continental, with much precipitation: monsoon.",
-  "Comparez les chiffres : une altitude supérieure à 3000 m correspond au climat de montagne et de plateau ; un mois le plus chaud inférieur à 10℃ correspond au climat polaire ; un mois le plus froid supérieur à 18℃ correspond au climat tropical (peu de précipitations : désert ; pluie tous les mois : forêt humide ; avec une saison sèche, précipitations annuelles d'environ 1900 mm ou plus : mousson, sinon savane) ; hiver doux et été sec : méditerranéen ; été doux et peu chaud : océanique, sinon mousson subtropicale ; hiver froid avec peu de précipitations : continental, avec beaucoup de précipitations : mousson."
+  "Compare the figures: altitude above 3000 m is plateau mountain climate; hottest month below 10 °C is polar; coldest month above 18 °C is tropical (little precipitation: desert; rain in every month: rainforest; with a dry season, annual precipitation of about 1900 mm or more: monsoon, otherwise savanna); mild winter and dry summer: Mediterranean; mild and not hot in summer: maritime, otherwise subtropical monsoon; cold winter with little precipitation: continental, with much precipitation: monsoon.",
+  "Comparez les chiffres : une altitude supérieure à 3000 m correspond au climat de montagne et de plateau ; un mois le plus chaud inférieur à 10 °C correspond au climat polaire ; un mois le plus froid supérieur à 18 °C correspond au climat tropical (peu de précipitations : désert ; pluie tous les mois : forêt humide ; avec une saison sèche, précipitations annuelles d'environ 1900 mm ou plus : mousson, sinon savane) ; hiver doux et été sec : méditerranéen ; été doux et peu chaud : océanique, sinon mousson subtropicale ; hiver froid avec peu de précipitations : continental, avec beaucoup de précipitations : mousson."
  ],
  "平均海拔 4000 米以上": [
   "mean altitude above 4000 m",
@@ -461,7 +461,7 @@
  ],
  "内蒙古高原、黄土高原、云贵高原；塔里木、准噶尔、四川盆地": [
   "Inner Mongolia Plateau, Loess Plateau, Yunnan–Guizhou Plateau; Tarim, Junggar and Sichuan Basins",
-  "plateau de Mongolie-Intérieure, plateau de lœss, plateau Yunnan–Guizhou ; bassins du Tarim, de Dzoungarie et du Sichuan"
+  "plateau de Mongolie-Intérieure, plateau de lœss, plateau Yunnan–Guizhou ; bassins du Tarim, du Junggar et du Sichuan"
  ],
  "介于两条分界线之间": [
   "between the two boundary lines",
@@ -616,8 +616,8 @@
   "1 cm sur la carte représente {0} km sur le terrain. Quelle est l'échelle de cette carte ?"
  ],
  "1 千米 = 100000 厘米，1 厘米代表 k 千米，则分母 = k × 100000。": [
-  "1 km = 100000 cm; if 1 cm stands for k km, the denominator = k × 100000.",
-  "1 km = 100000 cm ; si 1 cm représente k km, le dénominateur = k × 100000."
+  "1 km = 100,000 cm; if 1 cm stands for k km, the denominator = k × 100000.",
+  "1 km = 100 000 cm ; si 1 cm représente k km, le dénominateur = k × 100000."
  ],
  "某山顶的海拔是 {0} 米，山脚的海拔是 {1} 米，两地的相对高度是多少米？": [
   "The altitude of a hilltop is {0} m and the altitude of the foot of the hill is {1} m. What is the relative height between the two places, in metres?",
@@ -636,12 +636,12 @@
   "Distance horizontale = {0} × {1} ÷ 100 = {2} m, pente = {3} ÷ {4}."
  ],
  "山脚的气温是 {0}℃，海拔每升高 100 米，气温下降 0.6℃。山顶比山脚高 {1} 米，山顶的气温约是多少℃？": [
-  "The temperature at the foot of a mountain is {0}℃, and it falls by 0.6℃ for every 100 m of height. The summit is {1} m higher than the foot. About what is the temperature at the summit, in ℃?",
-  "La température au pied d'une montagne est de {0}℃, et elle baisse de 0,6℃ tous les 100 m d'altitude. Le sommet est {1} m plus haut que le pied. Quelle est environ la température au sommet, en ℃ ?"
+  "The temperature at the foot of a mountain is {0}℃, and it falls by 0.6 °C for every 100 m of height. The summit is {1} m higher than the foot. About what is the temperature at the summit, in ℃?",
+  "La température au pied d'une montagne est de {0}℃, et elle baisse de 0,6 °C tous les 100 m d'altitude. Le sommet est {1} m plus haut que le pied. Quelle est environ la température au sommet, en ℃ ?"
  ],
  "气温递减率约 0.6℃∕100 米。": [
-  "The lapse rate of temperature is about 0.6℃ per 100 m.",
-  "Le gradient thermique vertical est d'environ 0,6℃ par 100 m."
+  "The lapse rate of temperature is about 0.6 °C per 100 m.",
+  "Le gradient thermique vertical est d'environ 0,6 °C par 100 m."
  ],
  "某地海拔约 {0} 米，相对高度约 {1} 米，{2}。这种地形属于哪一类？": [
   "A place has an altitude of about {0} m and a relative height of about {1} m, {2}. Which kind of landform is it?",
@@ -812,8 +812,8 @@
   "Croûte d'environ 0 à 33 km, manteau jusqu'à environ 2900 km, noyau externe jusqu'à environ 5100 km, puis noyau interne en dessous."
  ],
  "地表温度约 15℃，地温梯度约每深 100 米升高 3℃。地下 {0} 千米深处的温度约是多少℃？": [
-  "The surface temperature is about 15℃ and the geothermal gradient is about 3℃ for every 100 m of depth. About what is the temperature {0} km below the surface, in ℃?",
-  "La température de surface est d'environ 15℃ et le gradient géothermique est d'environ 3℃ par 100 m de profondeur. Quelle est environ la température à {0} km sous la surface, en ℃ ?"
+  "The surface temperature is about 15 °C and the geothermal gradient is about 3 °C for every 100 m of depth. About what is the temperature {0} km below the surface, in ℃?",
+  "La température de surface est d'environ 15 °C et le gradient géothermique est d'environ 3 °C par 100 m de profondeur. Quelle est environ la température à {0} km sous la surface, en ℃ ?"
  ],
  "15 + 30 × 深度（千米）。": [
   "15 + 30 × depth (km).",
@@ -1012,7 +1012,7 @@
   "Quelle est environ la circonférence de la Terre à l'équateur ?"
  ],
  "4 万千米": [
-  "40 000 km",
+  "40,000 km",
   "40 000 km"
  ],
  "4000 千米": [
@@ -1020,7 +1020,7 @@
   "4000 km"
  ],
  "40 万千米": [
-  "400 000 km",
+  "400,000 km",
   "400 000 km"
  ],
  "6371 千米": [
@@ -1028,7 +1028,7 @@
   "6371 km"
  ],
  "赤道周长约 4 万千米，平均半径约 6371 千米。": [
-  "The equatorial circumference is about 40 000 km and the mean radius about 6371 km.",
+  "The equatorial circumference is about 40,000 km and the mean radius about 6371 km.",
   "La circonférence équatoriale est d'environ 40 000 km et le rayon moyen d'environ 6371 km."
  ],
  "关于经线的叙述，正确的是？": [
@@ -2132,20 +2132,20 @@
   "Quelles sont les trois grandes races du monde ?"
  ],
  "黄种人、白种人、黑种人": [
-  "Mongoloid, Caucasian, Negroid",
-  "mongoloïde, caucasoïde, négroïde"
+  "the yellow, white and black races",
+  "les races jaune, blanche et noire"
  ],
  "红种人、白种人、黄种人": [
-  "Native American, Caucasian, Mongoloid",
-  "amérindienne, caucasoïde, mongoloïde"
+  "the red, white and yellow races",
+  "les races rouge, blanche et jaune"
  ],
  "黑种人、蓝种人、白种人": [
-  "Negroid, “blue”, Caucasian",
-  "négroïde, « bleue », caucasoïde"
+  "the black, blue and white races",
+  "les races noire, bleue et blanche"
  ],
  "黄种人、棕种人、红种人": [
-  "Mongoloid, brown, Native American",
-  "mongoloïde, brune, amérindienne"
+  "the yellow, brown and red races",
+  "les races jaune, brune et rouge"
  ],
  "按肤色等特征分为黄、白、黑三大人种。": [
   "By skin colour and other features, people are divided into the yellow, white and black races.",
@@ -3116,8 +3116,8 @@
   "le plateau de lœss"
  ],
  "青藏高原平均海拔 4000 米以上。": [
-  "The Qinghai–Tibet Plateau has a mean altitude above 4000 m.",
-  "Le plateau Qinghai–Tibet a une altitude moyenne supérieure à 4000 m."
+  "The Qinghai-Tibet Plateau has a mean altitude above 4000 m.",
+  "Le plateau du Qinghai–Tibet a une altitude moyenne supérieure à 4000 m."
  ],
  "第二级阶梯的海拔大致是？": [
   "Roughly what is the altitude of the second step?",
@@ -3324,8 +3324,8 @@
   "région humide et région aride"
  ],
  "秦岭—淮河是南北方分界线，也是 1 月 0℃等温线和 800 毫米等降水量线的大致位置。": [
-  "The Qinling–Huaihe line is the boundary of north and south and also roughly the position of the January 0℃ isotherm and the 800 mm isohyet.",
-  "La ligne Qinling–Huai est la limite entre le nord et le sud et correspond aussi à peu près à l'isotherme de 0℃ de janvier et à l'isohyète de 800 mm."
+  "The Qinling–Huaihe line is the boundary of north and south and also roughly the position of the January 0 °C isotherm and the 800 mm isohyet.",
+  "La ligne Qinling–Huai est la limite entre le nord et le sud et correspond aussi à peu près à l'isotherme de 0 °C de janvier et à l'isohyète de 800 mm."
  ],
  "我国季风气候最显著的特点是？": [
   "What is the most striking feature of China's monsoon climate?",
@@ -3392,7 +3392,7 @@
   "le chemin de fer Lanzhou–Xinjiang"
  ],
  "青藏铁路从西宁到拉萨。": [
-  "The Qinghai–Tibet Railway runs from Xining to Lhasa.",
+  "The Qinghai-Tibet Railway runs from Xining to Lhasa.",
   "Le chemin de fer Qinghai–Tibet va de Xining à Lhassa."
  ],
  "我国最大的商品粮基地之一是？": [
@@ -3552,7 +3552,7 @@
   "la région du Nord-Est"
  ],
  "四大区域：北方、南方、西北、青藏。": [
-  "The four regions: North, South, Northwest and Qinghai–Tibet.",
+  "The four regions: North, South, Northwest and Qinghai-Tibet.",
   "Les quatre régions : Nord, Sud, Nord-Ouest et Qinghai–Tibet."
  ],
  "被称为“世界屋脊”的区域是？": [
@@ -4180,8 +4180,8 @@
   "Quelle est l'orientation de {0} ?"
  ],
  "发源于青藏高原，自西向东流经三级阶梯": [
-  "rises on the Qinghai–Tibet Plateau and flows from west to east across the three steps",
-  "prend sa source sur le plateau Qinghai–Tibet et coule d'ouest en est à travers les trois paliers"
+  "rises on the Qinghai-Tibet Plateau and flows from west to east across the three steps",
+  "prend sa source sur le plateau du Qinghai–Tibet et coule d'ouest en est à travers les trois paliers"
  ],
  "中国第一长河，全长约 6300 千米，水能和航运资源丰富": [
   "the longest river of China, about 6300 km long, rich in water-power and shipping resources",
@@ -4192,8 +4192,8 @@
   "la mer de Chine orientale"
  ],
  "发源于青藏高原巴颜喀拉山，流经黄土高原": [
-  "rises in the Bayan Har Mountains of the Qinghai–Tibet Plateau and flows through the Loess Plateau",
-  "prend sa source dans les monts Bayan Har du plateau Qinghai–Tibet et traverse le plateau de lœss"
+  "rises in the Bayan Har Mountains of the Qinghai-Tibet Plateau and flows through the Loess Plateau",
+  "prend sa source dans les monts Bayan Har du plateau du Qinghai–Tibet et traverse le plateau de lœss"
  ],
  "中国第二长河，含沙量大，下游是“地上河”": [
   "the second longest river of China, carrying much silt, with a “suspended river” in its lower reaches",
@@ -4260,8 +4260,8 @@
   "La ligne Qinling–Huai est l'une des lignes de séparation entre le sud et le nord de la Chine."
  ],
  "位于青藏高原东北部，青海省境内": [
-  "in the northeast of the Qinghai–Tibet Plateau, within Qinghai Province",
-  "au nord-est du plateau Qinghai–Tibet, dans la province du Qinghai"
+  "in the northeast of the Qinghai-Tibet Plateau, within Qinghai Province",
+  "au nord-est du plateau du Qinghai–Tibet, dans la province du Qinghai"
  ],
  "我国最大的湖泊，咸水湖": [
   "the largest lake in China, a salt lake",
@@ -4296,8 +4296,8 @@
   "l'Himalaya"
  ],
  "位于青藏高原南缘，是中国与尼泊尔等国的边界": [
-  "on the southern edge of the Qinghai–Tibet Plateau, the border between China and Nepal and other countries",
-  "sur le bord sud du plateau Qinghai–Tibet, la frontière entre la Chine et le Népal et d'autres pays"
+  "on the southern edge of the Qinghai-Tibet Plateau, the border between China and Nepal and other countries",
+  "sur le bord sud du plateau du Qinghai–Tibet, la frontière entre la Chine et le Népal et d'autres pays"
  ],
  "世界上最高大的山脉，有世界最高峰珠穆朗玛峰": [
   "the highest mountain range in the world, with the highest peak, Mount Qomolangma",
@@ -4312,8 +4312,8 @@
   "les monts Kunlun"
  ],
  "位于青藏高原北部": [
-  "in the north of the Qinghai–Tibet Plateau",
-  "dans le nord du plateau Qinghai–Tibet"
+  "in the north of the Qinghai-Tibet Plateau",
+  "dans le nord du plateau du Qinghai–Tibet"
  ],
  "被称为“亚洲脊柱”，是第一、二级阶梯的界线之一": [
   "called the “backbone of Asia”, one of the boundaries of the first and second steps",
@@ -4344,8 +4344,8 @@
   "les monts Hengduan"
  ],
  "位于青藏高原东南部，多条大河并行": [
-  "in the southeast of the Qinghai–Tibet Plateau, with several big rivers running side by side",
-  "dans le sud-est du plateau Qinghai–Tibet, avec plusieurs grands fleuves qui coulent côte à côte"
+  "in the southeast of the Qinghai-Tibet Plateau, with several big rivers running side by side",
+  "dans le sud-est du plateau du Qinghai–Tibet, avec plusieurs grands fleuves qui coulent côte à côte"
  ],
  "山高谷深，南北向山脉与河流相间": [
   "high mountains and deep valleys, with north–south mountain ranges alternating with rivers",
@@ -4428,8 +4428,8 @@
   "le bassin du Qaidam"
  ],
  "位于青海省西北部，青藏高原上": [
-  "in the northwest of Qinghai, on the Qinghai–Tibet Plateau",
-  "dans le nord-ouest du Qinghai, sur le plateau Qinghai–Tibet"
+  "in the northwest of Qinghai, on the Qinghai-Tibet Plateau",
+  "dans le nord-ouest du Qinghai, sur le plateau du Qinghai–Tibet"
  ],
  "盐湖多，矿产资源丰富，有“聚宝盆”之称": [
   "many salt lakes and rich mineral resources, called the “treasure bowl”",
@@ -4544,8 +4544,8 @@
   "de vastes pâturages naturels, avec l'élevage pour principale activité"
  ],
  "青藏高原河谷": [
-  "the river valleys of the Qinghai–Tibet Plateau",
-  "les vallées de fleuves du plateau Qinghai–Tibet"
+  "the river valleys of the Qinghai-Tibet Plateau",
+  "les vallées de fleuves du plateau du Qinghai–Tibet"
  ],
  "青稞、牦牛": [
   "highland barley and yaks",
@@ -5076,8 +5076,8 @@
   "Zang (藏)"
  ],
  "青藏高原，有布达拉宫和珠穆朗玛峰": [
-  "the Qinghai–Tibet Plateau, with the Potala Palace and Mount Qomolangma",
-  "le plateau Qinghai–Tibet, avec le palais du Potala et le mont Qomolangma"
+  "the Qinghai-Tibet Plateau, with the Potala Palace and Mount Qomolangma",
+  "le plateau du Qinghai–Tibet, avec le palais du Potala et le mont Qomolangma"
  ],
  "陕西": [
   "Shaanxi",
@@ -5192,8 +5192,8 @@
   "Taipei"
  ],
  "大兴安岭以东、青藏高原以东、秦岭—淮河以北": [
-  "east of the Greater Khingan Range and the Qinghai–Tibet Plateau, north of the Qinling–Huaihe line",
-  "à l'est du Grand Khingan et du plateau Qinghai–Tibet, au nord de la ligne Qinling–Huai"
+  "east of the Greater Khingan Range and the Qinghai-Tibet Plateau, north of the Qinling–Huaihe line",
+  "à l'est du Grand Khingan et du plateau du Qinghai–Tibet, au nord de la ligne Qinling–Huai"
  ],
  "温带季风气候，冬冷夏热，降水较少": [
   "a temperate monsoon climate, cold winters, hot summers and little precipitation",
@@ -5208,8 +5208,8 @@
   "surtout des terres sèches, où l'on cultive le blé et le maïs"
  ],
  "秦岭—淮河以南，青藏高原以东": [
-  "south of the Qinling–Huaihe line and east of the Qinghai–Tibet Plateau",
-  "au sud de la ligne Qinling–Huai et à l'est du plateau Qinghai–Tibet"
+  "south of the Qinling–Huaihe line and east of the Qinghai-Tibet Plateau",
+  "au sud de la ligne Qinling–Huai et à l'est du plateau du Qinghai–Tibet"
  ],
  "亚热带和热带季风气候，温暖湿润": [
   "subtropical and tropical monsoon climates, warm and moist",
@@ -5236,8 +5236,8 @@
   "des plateaux, des bassins et des déserts très répandus"
  ],
  "位于我国西南部，青藏高原为主体": [
-  "in the southwest of China, with the Qinghai–Tibet Plateau as its main body",
-  "dans le sud-ouest de la Chine, avec le plateau Qinghai–Tibet pour corps principal"
+  "in the southwest of China, with the Qinghai-Tibet Plateau as its main body",
+  "dans le sud-ouest de la Chine, avec le plateau du Qinghai–Tibet pour corps principal"
  ],
  "高原山地气候，高寒": [
   "a plateau mountain climate, high and cold",
@@ -5372,16 +5372,16 @@
   "À quel palier du relief de la Chine appartient {0} ?"
  ],
  "第一级：青藏高原；第二级：内蒙古高原、黄土高原、云贵高原、塔里木盆地、准噶尔盆地、四川盆地；第三级：东北平原、华北平原、长江中下游平原、东南丘陵。": [
-  "First step: the Qinghai–Tibet Plateau; second step: the Inner Mongolia Plateau, the Loess Plateau, the Yunnan–Guizhou Plateau, the Tarim Basin, the Junggar Basin and the Sichuan Basin; third step: the Northeast Plain, the North China Plain, the Middle and Lower Yangtze Plain and the Southeast Hills.",
-  "Premier palier : le plateau Qinghai–Tibet ; deuxième palier : le plateau de Mongolie-Intérieure, le plateau de lœss, le plateau Yunnan–Guizhou, le bassin du Tarim, le bassin de Dzoungarie et le bassin du Sichuan ; troisième palier : la plaine du Nord-Est, la plaine de Chine du Nord, la plaine du moyen et du bas Yangzi et les collines du Sud-Est."
+  "First step: the Qinghai-Tibet Plateau; second step: the Inner Mongolia Plateau, the Loess Plateau, the Yunnan–Guizhou Plateau, the Tarim Basin, the Junggar Basin and the Sichuan Basin; third step: the Northeast Plain, the North China Plain, the Middle and Lower Yangtze Plain and the Southeast Hills.",
+  "Premier palier : le plateau du Qinghai–Tibet ; deuxième palier : le plateau de Mongolie-Intérieure, le plateau de lœss, le plateau Yunnan–Guizhou, le bassin du Tarim, le bassin du Junggar et le bassin du Sichuan ; troisième palier : la plaine du Nord-Est, la plaine de Chine du Nord, la plaine du moyen et du bas Yangzi et les collines du Sud-Est."
  ],
  "青藏高原": [
-  "the Qinghai–Tibet Plateau",
-  "le plateau Qinghai–Tibet"
+  "the Qinghai-Tibet Plateau",
+  "le plateau du Qinghai–Tibet"
  ],
  "准噶尔盆地": [
   "the Junggar Basin",
-  "le bassin de Dzoungarie"
+  "le bassin du Junggar"
  ],
  "东北平原": [
   "the Northeast Plain",
@@ -5396,7 +5396,7 @@
   "impossible à déterminer"
  ],
  "自然增长率 ≥ 1% 为增长型；接近 0 为稳定型；为较明显的负增长为衰退型。": [
-  "Natural growth rate ≥ 1 %: expanding type; close to 0: stable type; clearly negative: declining type.",
+  "Natural growth rate ≥ 1%: expanding type; close to 0: stable type; clearly negative: declining type.",
   "Taux d'accroissement naturel ≥ 1 % : type en expansion ; proche de 0 : type stable ; nettement négatif : type en déclin."
  ],
  "在大陆上某地，地下 {0} 千米深处属于地球内部的哪一层？": [
@@ -5417,7 +5417,7 @@
  ],
  "内蒙古高原、黄土高原、云贵高原；塔里木盆地、准噶尔盆地、四川盆地": [
   "the Inner Mongolia, Loess and Yunnan–Guizhou Plateaus; the Tarim, Junggar and Sichuan Basins",
-  "les plateaux de Mongolie-Intérieure, de lœss et du Yunnan–Guizhou ; les bassins du Tarim, de Dzoungarie et du Sichuan"
+  "les plateaux de Mongolie-Intérieure, de lœss et du Yunnan–Guizhou ; les bassins du Tarim, du Junggar et du Sichuan"
  ],
  "东北平原、华北平原、长江中下游平原、东南丘陵": [
   "the Northeast Plain, the North China Plain, the Middle and Lower Yangtze Plain and the Southeast Hills",

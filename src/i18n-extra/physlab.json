@@ -3408,15 +3408,15 @@
   "Lecture de l'éprouvette V"
  ],
  "固体：选择铜块、正确的顺序、体积不小于 10 cm³，测得的密度与 8.9 g/cm³ 相差不超过 5 %": [
-  "Solid: choose the copper block and the correct order, with a volume of at least 10 cm³; the measured density differs from 8.9 g/cm³ by no more than 5 %.",
+  "Solid: choose the copper block and the correct order, with a volume of at least 10 cm³; the measured density differs from 8.9 g/cm³ by no more than 5%.",
   "Solide : choisissez le bloc de cuivre et l'ordre correct, avec un volume d'au moins 10 cm³ ; la masse volumique mesurée diffère de 8,9 g/cm³ de 5 % au plus."
  ],
  "固体：选择错误的顺序（先测体积、后测质量），使测得的密度比真实值大 2 % 以上": [
-  "Solid: choose the wrong order (volume first, mass afterwards) so that the measured density is more than 2 % above the true value.",
+  "Solid: choose the wrong order (volume first, mass afterwards) so that the measured density is more than 2% above the true value.",
   "Solide : choisissez l'ordre incorrect (volume d'abord, masse ensuite) de sorte que la masse volumique mesurée dépasse de plus de 2 % la valeur réelle."
  ],
  "液体：选择酒精、正确的顺序，测得的密度与 0.8 g/cm³ 相差不超过 5 %": [
-  "Liquid: choose alcohol and the correct order; the measured density differs from 0.8 g/cm³ by no more than 5 %.",
+  "Liquid: choose alcohol and the correct order; the measured density differs from 0.8 g/cm³ by no more than 5%.",
   "Liquide : choisissez l'alcool et l'ordre correct ; la masse volumique mesurée diffère de 0,8 g/cm³ de 5 % au plus."
  ],
  "固体：选择石蜡块，观察它的密度小于水，放入水中会漂浮": [
@@ -3596,7 +3596,7 @@
   "Signaux analogiques et numériques : rendez le bruit assez grand pour que même le signal numérique comporte des erreurs"
  ],
  "模拟信号与数字信号：使数字信号完全正确，而模拟信号失真达到 40 % 以上": [
-  "Analogue and digital signals: make the digital signal completely correct while the analogue signal is distorted by 40 % or more",
+  "Analogue and digital signals: make the digital signal completely correct while the analogue signal is distorted by 40% or more",
   "Signaux analogiques et numériques : obtenez un signal numérique totalement correct alors que le signal analogique est déformé de 40 % ou plus"
  ],
  "收音机的调谐：把收音机调到与电台相同的频率，收到这个电台": [
@@ -3916,8 +3916,8 @@
   "L'iode a-t-il fondu ?"
  ],
  "没有（水浴的温度低于碘的熔点 113.7 ℃）": [
-  "No (the temperature of the water bath is below the melting point of iodine, 113.7 ℃)",
-  "Non (la température du bain est inférieure au point de fusion de l'iode, 113,7 ℃)"
+  "No (the temperature of the water bath is below the melting point of iodine, 113.7 °C)",
+  "Non (la température du bain est inférieure au point de fusion de l'iode, 113,7 °C)"
  ],
  "升华（吸热）和凝华（放热）": [
   "Sublimation (absorbs heat) and deposition (gives out heat)",
@@ -3952,8 +3952,8 @@
   "Évaporation : faites s'évaporer toute l'eau de la coupelle dans le temps donné"
  ],
  "液化：在 20 ℃ 的常温下，只靠压缩体积使石油气液化": [
-  "Liquefaction: at an ordinary temperature of 20 ℃, liquefy petroleum gas by compression alone",
-  "Liquéfaction : à la température ordinaire de 20 ℃, liquéfiez le gaz de pétrole par la seule compression"
+  "Liquefaction: at an ordinary temperature of 20 °C, liquefy petroleum gas by compression alone",
+  "Liquéfaction : à la température ordinaire de 20 °C, liquéfiez le gaz de pétrole par la seule compression"
  ],
  "升华与凝华：用冰水冷却玻璃，使它上面出现碘晶体": [
   "Sublimation and deposition: cool the glass with ice water so that iodine crystals appear on it",
@@ -4040,20 +4040,20 @@
   "Chaleur transférée"
  ],
  "A 的内能（相对于 0 ℃）": [
-  "Internal energy of A (relative to 0 ℃)",
-  "Énergie interne de A (par rapport à 0 ℃)"
+  "Internal energy of A (relative to 0 °C)",
+  "Énergie interne de A (par rapport à 0 °C)"
  ],
  "B 的内能（相对于 0 ℃）": [
-  "Internal energy of B (relative to 0 ℃)",
-  "Énergie interne de B (par rapport à 0 ℃)"
+  "Internal energy of B (relative to 0 °C)",
+  "Énergie interne de B (par rapport à 0 °C)"
  ],
  "做功：压缩气体，使气体的温度升高 20 ℃ 以上": [
-  "Doing work: compress the gas so that its temperature rises by 20 ℃ or more",
-  "Travail : comprimez le gaz pour que sa température s'élève de 20 ℃ ou plus"
+  "Doing work: compress the gas so that its temperature rises by 20 °C or more",
+  "Travail : comprimez le gaz pour que sa température s'élève de 20 °C ou plus"
  ],
  "做功：气体膨胀对外做功，使气体的温度降低 5 ℃ 以上": [
-  "Doing work: let the gas expand and do work on its surroundings so that its temperature falls by 5 ℃ or more",
-  "Travail : laissez le gaz se détendre et fournir du travail à l'extérieur pour que sa température baisse de 5 ℃ ou plus"
+  "Doing work: let the gas expand and do work on its surroundings so that its temperature falls by 5 °C or more",
+  "Travail : laissez le gaz se détendre et fournir du travail à l'extérieur pour que sa température baisse de 5 °C ou plus"
  ],
  "热传递：使热量从 B 传向 A": [
   "Heat transfer: make heat pass from B to A",
@@ -4492,7 +4492,7 @@
   "Enregistrez au moins 3 séries de lectures"
  ],
  "测定值电阻：记录 3 组读数，算出的平均值与它的阻值相差不超过 10 %": [
-  "Measuring a fixed resistor: record 3 sets of readings so that their average differs from its value by no more than 10 %",
+  "Measuring a fixed resistor: record 3 sets of readings so that their average differs from its value by no more than 10%",
   "Mesure d'une résistance fixe : enregistrez 3 séries de lectures dont la moyenne diffère de sa valeur de 10 % au plus"
  ],
  "测小灯泡的电阻：记录两组读数，电压较大的一组电阻也较大": [
@@ -4696,8 +4696,8 @@
   "Résultat de cette façon de le tenir"
  ],
  "实验室温度计：使读数为 −10 ℃（零下 10 摄氏度）": [
-  "Laboratory thermometer: make the reading −10 ℃ (ten degrees below zero)",
-  "Thermomètre de laboratoire : faites en sorte que la lecture soit de −10 ℃ (dix degrés au-dessous de zéro)"
+  "Laboratory thermometer: make the reading −10 °C (ten degrees below zero)",
+  "Thermomètre de laboratoire : faites en sorte que la lecture soit de −10 °C (dix degrés au-dessous de zéro)"
  ],
  "体温计：不甩，使示数仍是原来的较高示数（比这次体温高）": [
   "Clinical thermometer: without shaking it, keep the reading at the earlier, higher value (higher than this person's temperature)",
@@ -4708,8 +4708,8 @@
   "Thermomètre médical : après l'avoir secoué fortement, faites en sorte que l'indication soit égale à la température mesurée cette fois"
  ],
  "测量水温：用正确的放法测量 60 ℃ 以上的热水，使示数准确": [
-  "Measuring the temperature of water: with the correct way of holding the thermometer, measure hot water above 60 ℃ so that the reading is accurate",
-  "Mesure de la température de l'eau : en tenant le thermomètre de la bonne façon, mesurez de l'eau chaude à plus de 60 ℃ pour que l'indication soit exacte"
+  "Measuring the temperature of water: with the correct way of holding the thermometer, measure hot water above 60 °C so that the reading is accurate",
+  "Mesure de la température de l'eau : en tenant le thermomètre de la bonne façon, mesurez de l'eau chaude à plus de 60 °C pour que l'indication soit exacte"
  ],
  "声音的强弱：找一个会损害听力的声音（超过 90 dB）": [
   "Loudness of sound: find a sound that damages hearing (above 90 dB)",
@@ -4720,12 +4720,12 @@
   "Éclipses de Soleil et de Lune : réglez la position de la Lune et son écart angulaire avec le plan de l'orbite de la Terre pour que les conditions d'une éclipse de Soleil ou de Lune soient réunies"
  ],
  "A 比 0 ℃ 时多的内能": [
-  "Internal energy of A above its value at 0 ℃",
-  "Énergie interne de A en plus de sa valeur à 0 ℃"
+  "Internal energy of A above its value at 0 °C",
+  "Énergie interne de A en plus de sa valeur à 0 °C"
  ],
  "B 比 0 ℃ 时多的内能": [
-  "Internal energy of B above its value at 0 ℃",
-  "Énergie interne de B en plus de sa valeur à 0 ℃"
+  "Internal energy of B above its value at 0 °C",
+  "Énergie interne de B en plus de sa valeur à 0 °C"
  ],
  "电流的方向（取某一方向为正）": [
   "Direction of the current (one direction taken as positive)",

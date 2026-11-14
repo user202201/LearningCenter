@@ -420,7 +420,7 @@
   "Les valves ne laissent circuler le sang que dans un seul sens : oreillette → ventricule → artère."
  ],
  "按模型：12 岁以前骨中有机物约占 50 %，12 岁到 40 岁线性降到 1/3，之后继续下降，80 岁时约占 20 %。{0} 岁时有机物约占百分之几？": [
-  "According to the model, before the age of 12 about 50 % of bone is organic matter, between 12 and 40 it falls linearly to 1/3, and it keeps falling after that, to about 20 % at 80. About what percentage is organic matter at the age of {0}?",
+  "According to the model, before the age of 12 about 50% of bone is organic matter, between 12 and 40 it falls linearly to 1/3, and it keeps falling after that, to about 20% at 80. About what percentage is organic matter at the age of {0}?",
   "D'après le modèle, avant 12 ans environ 50 % de l'os est de la matière organique, entre 12 et 40 ans cette part diminue linéairement jusqu'à 1/3, puis continue de diminuer, jusqu'à environ 20 % à 80 ans. Quel pourcentage de matière organique y a-t-il environ à l'âge de {0} ans ?"
  ],
  "儿童的骨有机物多，柔韧；老人的骨无机物多，脆。": [
@@ -780,7 +780,7 @@
   "Protéines = masse / 100 × protéines pour 100 g."
  ],
  "每克脂肪约提供 9 kcal 的能量。{0} g 食用油（脂肪含量 100 %）约提供多少 kcal？": [
-  "Each gram of fat provides about 9 kcal of energy. About how many kcal do {0} g of cooking oil (fat content 100 %) provide?",
+  "Each gram of fat provides about 9 kcal of energy. About how many kcal do {0} g of cooking oil (fat content 100%) provide?",
   "Chaque gramme de lipides fournit environ 9 kcal d'énergie. Combien de kcal {0} g d'huile de cuisine (teneur en lipides 100 %) fournissent-ils environ ?"
  ],
  "能量 = 脂肪质量 × 9。": [
@@ -944,8 +944,8 @@
   "Le nombre de molécules d'ADN double après la copie."
  ],
  "按模型，听到的最高频率为 20000 − 300 ×（年龄 − 10）Hz，且不低于 8000 Hz。{0} 岁时最高约是多少 Hz？": [
-  "According to the model, the highest frequency heard is 20000 − 300 × (age − 10) Hz, and not below 8000 Hz. What is the highest at the age of {0}, approximately, in Hz?",
-  "D'après le modèle, la fréquence la plus élevée perçue est 20000 − 300 × (âge − 10) Hz, et pas moins de 8000 Hz. Quelle est-elle approximativement, en Hz, à l'âge de {0} ans ?"
+  "According to the model, the highest frequency heard is 20,000 − 300 × (age − 10) Hz, and not below 8000 Hz. What is the highest at the age of {0}, approximately, in Hz?",
+  "D'après le modèle, la fréquence la plus élevée perçue est 20 000 − 300 × (âge − 10) Hz, et pas moins de 8000 Hz. Quelle est-elle approximativement, en Hz, à l'âge de {0} ans ?"
  ],
  "随着年龄增长，高频听力下降。": [
   "High-frequency hearing declines with age.",
@@ -1560,7 +1560,7 @@
   "Ce n'est qu'une estimation et elle varie d'une personne à l'autre."
  ],
  "有氧锻炼的目标心率是最大心率的 70 %–85 %。{0} 岁时下限约是多少次/分钟？（取整数）": [
-  "The target heart rate for aerobic exercise is 70 %–85 % of the maximum heart rate. What is the lower limit at the age of {0}, in beats/minute? (Round to a whole number.)",
+  "The target heart rate for aerobic exercise is 70%–85% of the maximum heart rate. What is the lower limit at the age of {0}, in beats/minute? (Round to a whole number.)",
   "La fréquence cardiaque cible d'un exercice aérobie est de 70 % à 85 % de la fréquence cardiaque maximale. Quelle est la limite inférieure à {0} ans, en battements/minute ? (Arrondissez à l'entier.)"
  ],
  "下限 = 0.7 ×（220 − 年龄）。": [
@@ -1568,7 +1568,7 @@
   "Limite inférieure = 0,7 × (220 − âge)."
  ],
  "{0} 岁时有氧锻炼目标心率的上限（85 %）约是多少次/分钟？（取整数）": [
-  "What is the upper limit (85 %) of the target heart rate for aerobic exercise at the age of {0}, in beats/minute? (Round to a whole number.)",
+  "What is the upper limit (85%) of the target heart rate for aerobic exercise at the age of {0}, in beats/minute? (Round to a whole number.)",
   "Quelle est la limite supérieure (85 %) de la fréquence cardiaque cible d'un exercice aérobie à {0} ans, en battements/minute ? (Arrondissez à l'entier.)"
  ],
  "上限 = 0.85 ×（220 − 年龄）。": [
@@ -1728,7 +1728,7 @@
   "La perte d'habitat est la principale cause du déclin de la biodiversité."
  ],
  "大气 CO₂ 现为 420 ppm，每年排放 {0} GtC，其中 45 % 留在大气中，每 2.13 GtC 使浓度升高 1 ppm。{1} 年后 CO₂ 浓度约是多少 ppm？": [
-  "Atmospheric CO₂ is now 420 ppm; {0} GtC are emitted each year, 45 % of which stays in the atmosphere, and every 2.13 GtC raises the concentration by 1 ppm. About what is the CO₂ concentration after {1} years, in ppm?",
+  "Atmospheric CO₂ is now 420 ppm; {0} GtC are emitted each year, 45% of which stays in the atmosphere, and every 2.13 GtC raises the concentration by 1 ppm. About what is the CO₂ concentration after {1} years, in ppm?",
   "Le CO₂ atmosphérique est actuellement de 420 ppm ; {0} GtC sont émises chaque année, dont 45 % restent dans l'atmosphère, et chaque tranche de 2,13 GtC fait augmenter la concentration de 1 ppm. Quelle est approximativement la concentration de CO₂ après {1} ans, en ppm ?"
  ],
  "浓度 = 420 + 0.45 × 排放量 × 年数 / 2.13。": [
@@ -2604,7 +2604,7 @@
   "Les stomates sont les « portes » de la perte d'eau de la plante par transpiration et aussi les « fenêtres » des échanges gazeux."
  ],
  "人体血液约占体重的 7.5 %（约 75 mL/kg）。体重 {0} kg 的人血液约有多少升？": [
-  "Human blood makes up about 7.5 % of body weight (about 75 mL/kg). About how many litres of blood does a person of body weight {0} kg have?",
+  "Human blood makes up about 7.5% of body weight (about 75 mL/kg). About how many litres of blood does a person of body weight {0} kg have?",
   "Le sang humain représente environ 7,5 % du poids corporel (environ 75 mL/kg). Combien de litres de sang une personne de {0} kg a-t-elle environ ?"
  ],
  "血量 = 体重 × 75 mL/kg。": [
@@ -3080,7 +3080,7 @@
   "Trouvez un cas où le total d'une journée dépasse la dose maximale quotidienne d'exemple (une vraie prise doit suivre la notice, ou l'avis d'un médecin ou d'un pharmacien)"
  ],
  "健康的生活方式：合理营养、适度运动、规律作息、不吸烟、不酗酒、拒绝毒品、保持心理健康、积极参加集体活动。运动时心率随强度增加；常用估算（成人）最大心率 = 220 − 年龄，对儿童只是粗略的参考；中等强度运动的心率约为最大心率的 50 %–70 %，较高强度约为 70 %–85 %，过高不宜持续。": [
-  "A healthy way of life: balanced nutrition, moderate exercise, regular hours, no smoking, no heavy drinking, refusing drugs, mental health and taking part in group activities. The heart rate rises with the intensity of exercise. The common estimate (for adults) of the maximum heart rate is 220 − age; for children it is only a rough guide. The heart rate of moderate exercise is about 50 %–70 % of the maximum, of vigorous exercise about 70 %–85 %; a higher rate should not be kept up.",
+  "A healthy way of life: balanced nutrition, moderate exercise, regular hours, no smoking, no heavy drinking, refusing drugs, mental health and taking part in group activities. The heart rate rises with the intensity of exercise. The common estimate (for adults) of the maximum heart rate is 220 − age; for children it is only a rough guide. The heart rate of moderate exercise is about 50%–70% of the maximum, of vigorous exercise about 70%–85%; a higher rate should not be kept up.",
   "Un mode de vie sain : alimentation équilibrée, exercice modéré, horaires réguliers, pas de tabac, pas d'alcool en excès, refus des drogues, santé mentale et participation aux activités collectives. La fréquence cardiaque augmente avec l'intensité de l'effort. L'estimation courante (pour les adultes) de la fréquence cardiaque maximale est 220 − âge ; pour les enfants, ce n'est qu'un repère approximatif. La fréquence d'un effort modéré est d'environ 50 % à 70 % du maximum, celle d'un effort soutenu d'environ 70 % à 85 % ; une fréquence plus élevée ne doit pas être maintenue."
  ],
  "睡眠对生长发育很重要：教育部要求保证每天的睡眠时间：小学生 10 小时、初中生 9 小时、高中生 8 小时（本模型据此给出参考范围，具体请以医生和学校的建议为准）。": [
@@ -3152,15 +3152,15 @@
   "C'est l'estimation courante pour les adultes ; pour les enfants ce n'est qu'un repère approximatif, qui varie d'une personne à l'autre."
  ],
  "较高强度运动的心率约为最大心率的 70 %–85 %（粗略估算）。按 220 − 年龄 计算，{0} 岁时下限约是多少次/分钟？（取整数）": [
-  "The heart rate of vigorous exercise is about 70 %–85 % of the maximum (rough estimate). Calculated as 220 − age, what is the lower limit at {0} years, in beats per minute? (whole number)",
+  "The heart rate of vigorous exercise is about 70%–85% of the maximum (rough estimate). Calculated as 220 − age, what is the lower limit at {0} years, in beats per minute? (whole number)",
   "La fréquence cardiaque d'un effort soutenu est d'environ 70 % à 85 % du maximum (estimation approximative). Calculée comme 220 − âge, quelle est la limite inférieure à {0} ans, en battements par minute ? (nombre entier)"
  ],
  "下限 = 0.7 ×（220 − 年龄）；中等强度约为 50 %–70 %。": [
-  "Lower limit = 0.7 × (220 − age); moderate exercise is about 50 %–70 %.",
+  "Lower limit = 0.7 × (220 − age); moderate exercise is about 50%–70%.",
   "Limite inférieure = 0,7 × (220 − âge) ; un effort modéré correspond à environ 50 % à 70 %."
  ],
  "{0} 岁时较高强度运动心率的上限（85 %）约是多少次/分钟？（取整数）": [
-  "At {0} years, what is the upper limit (85 %) of the heart rate of vigorous exercise, in beats per minute? (whole number)",
+  "At {0} years, what is the upper limit (85%) of the heart rate of vigorous exercise, in beats per minute? (whole number)",
   "À {0} ans, quelle est la limite supérieure (85 %) de la fréquence cardiaque d'un effort soutenu, en battements par minute ? (nombre entier)"
  ],
  "按模型（教育部的要求：小学生 10 小时，初中生 9 小时，高中生 8 小时），{0} 岁的人每天推荐睡眠约多少小时？": [
@@ -3280,8 +3280,8 @@
   "Les aliments stockent de l'énergie, que l'on peut mesurer par combustion : on enflamme une masse connue d'aliment et la chaleur dégagée chauffe une masse connue d'eau ; on calcule la chaleur absorbée par l'eau à partir de l'élévation de température, Q = c × m × ΔT (capacité thermique massique de l'eau c = 4,2 J/(g·℃), 1 mL d'eau pèse environ 1 g). L'énergie par gramme d'aliment = Q ÷ masse de l'aliment."
  ],
  "实验中燃烧放出的热量并没有全部被水吸收，所以测得的数值总是比食物实际含有的能量小。给火焰加上挡风罩（金属罩）能减少热量散失，使结果更接近真实值。水温升高到 100 ℃ 就会沸腾，数据无效。食物的能量值是取整的教学数据。": [
-  "In the experiment not all the heat released by burning is absorbed by the water, so the measured value is always lower than the energy the food really contains. A wind shield (a metal screen) round the flame reduces the loss of heat and brings the result closer to the true value. When the water reaches 100 ℃ it boils and the data are invalid. The energy values of the foods are rounded teaching data.",
-  "Dans l'expérience, toute la chaleur dégagée par la combustion n'est pas absorbée par l'eau ; la valeur mesurée est donc toujours inférieure à l'énergie réellement contenue dans l'aliment. Un pare-vent (un écran métallique) autour de la flamme réduit les pertes de chaleur et rapproche le résultat de la valeur réelle. Quand l'eau atteint 100 ℃, elle bout et les données ne sont plus valables. Les valeurs d'énergie des aliments sont des données pédagogiques arrondies."
+  "In the experiment not all the heat released by burning is absorbed by the water, so the measured value is always lower than the energy the food really contains. A wind shield (a metal screen) round the flame reduces the loss of heat and brings the result closer to the true value. When the water reaches 100 °C it boils and the data are invalid. The energy values of the foods are rounded teaching data.",
+  "Dans l'expérience, toute la chaleur dégagée par la combustion n'est pas absorbée par l'eau ; la valeur mesurée est donc toujours inférieure à l'énergie réellement contenue dans l'aliment. Un pare-vent (un écran métallique) autour de la flamme réduit les pertes de chaleur et rapproche le résultat de la valeur réelle. Quand l'eau atteint 100 °C, elle bout et les données ne sont plus valables. Les valeurs d'énergie des aliments sont des données pédagogiques arrondies."
  ],
  "大米": [
   "Rice",
@@ -3808,7 +3808,7 @@
   "Dans l'eau claire, une daphnie a {0} battements en 10 s ; dans de l'alcool d'une certaine concentration, elle en a {1}. De quel pourcentage le rythme cardiaque est-il plus bas que dans l'eau claire ?"
  ],
  "减少的百分数 = (清水中的次数 − 酒精中的次数) ÷ 清水中的次数 × 100 %。": [
-  "Decrease in percent = (count in clear water − count in alcohol) ÷ count in clear water × 100 %.",
+  "Decrease in percent = (count in clear water − count in alcohol) ÷ count in clear water × 100%.",
   "Diminution en pourcentage = (comptage dans l'eau claire − comptage dans l'alcool) ÷ comptage dans l'eau claire × 100 %."
  ],
  "同一只水蚤三次计数的结果分别是 {0}、{1}、{2} 次（每次 10 s），平均每 10 s 心跳多少次？": [
@@ -3848,7 +3848,7 @@
   "Dans une expérience témoin, une seule condition diffère : la concentration d'alcool."
  ],
  "酒精浓度较高（如 20 %）时，水蚤的心率会：": [
-  "At a high alcohol concentration (such as 20 %) the heart rate of the water flea will:",
+  "At a high alcohol concentration (such as 20%) the heart rate of the water flea will:",
   "À une forte concentration d'alcool (comme 20 %), le rythme cardiaque de la daphnie :"
  ],
  "停止跳动，水蚤死亡": [
@@ -4020,12 +4020,12 @@
   "Sombre"
  ],
  "较热（30 ℃）": [
-  "Warmer (30 ℃)",
-  "Plus chaud (30 ℃)"
+  "Warmer (30 °C)",
+  "Plus chaud (30 °C)"
  ],
  "较凉（15 ℃）": [
-  "Cooler (15 ℃)",
-  "Plus frais (15 ℃)"
+  "Cooler (15 °C)",
+  "Plus frais (15 °C)"
  ],
  "草原": [
   "Grassland",
@@ -5172,7 +5172,7 @@
   "Mesure du taux de germination : {0} graines par groupe, 3 groupes ; {1}, {2} et {3} graines ont germé. Quel est le taux moyen de germination ?"
  ],
  "平均萌发率 = 三组萌发的种子总数 ÷ 种子总数 × 100 %。": [
-  "Average germination rate = total of the germinated seeds of the three groups ÷ total number of seeds × 100 %.",
+  "Average germination rate = total of the germinated seeds of the three groups ÷ total number of seeds × 100%.",
   "Taux moyen de germination = total des graines germées des trois groupes ÷ nombre total de graines × 100 %."
  ],
  "测定种子的萌发率时，为了减小误差，应该：": [
@@ -5276,7 +5276,7 @@
   "Le colorant entre par un côté et, en aspirant l'iode de l'autre côté, on colore le spécimen."
  ],
  "0.9 % 的生理盐水与人体细胞的渗透压相近，使细胞保持正常形态。": [
-  "Saline of 0.9 % has about the same osmotic pressure as human cells and keeps the cells in their normal shape.",
+  "Saline of 0.9% has about the same osmotic pressure as human cells and keeps the cells in their normal shape.",
   "Un sérum physiologique à 0,9 % a à peu près la même pression osmotique que les cellules humaines et garde aux cellules leur forme normale."
  ],
  "牙签要消毒，轻刮即可，取材太多会使细胞重叠。": [
@@ -5336,7 +5336,7 @@
   "Eau distillée"
  ],
  "生理盐水（0.9 %）使人体细胞保持正常形态；植物细胞有细胞壁，滴清水即可。": [
-  "Saline (0.9 %) keeps human cells in their normal shape; plant cells have a cell wall, so clear water is enough.",
+  "Saline (0.9%) keeps human cells in their normal shape; plant cells have a cell wall, so clear water is enough.",
   "Le sérum physiologique (0,9 %) garde aux cellules humaines leur forme normale ; les cellules végétales ont une paroi, donc l'eau claire suffit."
  ],
  "用碘液给临时装片染色的目的是：": [
@@ -5408,7 +5408,7 @@
   "La reproduction dans laquelle un nouvel individu naît directement d'une partie du parent, sans union de deux sortes de cellules sexuelles, s'appelle reproduction asexuée. Les méthodes courantes de multiplication végétative des plantes sont le bouturage, le greffage, le marcottage et la culture de tissus. Les descendants n'ont que les caractères du parent, gardent ses bonnes qualités et sont produits rapidement ; les descendants de la reproduction sexuée ont les caractères des deux parents, présentent plus de variations et s'adaptent mieux aux changements du milieu."
  ],
  "嫁接是把一种植物的枝条或芽（接穗）接到另一种植物的茎（砧木）上，使它们愈合成一个完整的植株。嫁接成活的关键是接穗和砧木的形成层紧密结合，而且两者亲缘关系要近；接穗上结出的果实保持接穗的性状，根系则是砧木的。（形成层对齐 70 % 以上才能成活，是教学模型的设定。）": [
-  "Grafting joins a branch or bud of one plant (the scion) to the stem of another plant (the stock) so that they grow together into one whole plant. The key to a successful graft is that the cambium layers of scion and stock are closely joined and that the two are closely related; the fruit on the scion keeps the traits of the scion, while the roots are the stock’s. (A cambium alignment of 70 % or more is needed to take: a setting of the teaching model.)",
+  "Grafting joins a branch or bud of one plant (the scion) to the stem of another plant (the stock) so that they grow together into one whole plant. The key to a successful graft is that the cambium layers of scion and stock are closely joined and that the two are closely related; the fruit on the scion keeps the traits of the scion, while the roots are the stock’s. (A cambium alignment of 70% or more is needed to take: a setting of the teaching model.)",
   "Le greffage consiste à joindre une branche ou un bourgeon d'une plante (le greffon) à la tige d'une autre plante (le porte-greffe) pour qu'ils se soudent en une seule plante entière. La clé d'un greffage réussi est que les cambiums du greffon et du porte-greffe soient étroitement joints et que les deux plantes soient proches parentes ; le fruit porté par le greffon garde les caractères du greffon, tandis que les racines sont celles du porte-greffe. (Un alignement des cambiums de 70 % ou plus est nécessaire pour que la greffe prenne : c'est un réglage du modèle pédagogique.)"
  ],
  "这是教科书中的内容（七年级下册“人的由来”），只用简图说明器官的名称和功能。男性的睾丸产生精子并分泌雄性激素，女性的卵巢产生卵细胞并分泌雌性激素；输卵管是受精的场所，子宫是胚胎和胎儿发育的场所，阴道是胎儿产出的通道。": [
@@ -5424,11 +5424,11 @@
   "Une graine de haricot (dicotylédone) est formée du tégument et de l'embryon ; l'embryon comprend une gemmule, un hypocotyle, une radicule et deux cotylédons, et les nutriments sont stockés dans les cotylédons. Une graine de maïs (monocotylédone) est formée du péricarpe et du tégument, de l'embryon et de l'albumen ; l'embryon n'a qu'un cotylédon, et les nutriments sont stockés dans l'albumen. L'amidon devient bleu avec l'iode, ce qui montre où sont stockés les nutriments."
  ],
  "种子的萌发率 = 萌发的种子数 ÷ 供试种子数 × 100 %。测定时要随机取样，每组种子数量要足够多，并重复做几组取平均值，才能减小误差。本模型每组种子是否萌发由这批种子的真实萌发率决定。（以 90 % 作为合格线，是教学假设。）": [
-  "Germination rate of seeds = number of germinated seeds ÷ number of seeds tested × 100 %. The seeds must be taken at random, each group must have enough seeds and several groups must be repeated and averaged to reduce the error. In this model whether each seed germinates depends on the true germination rate of the lot. (Taking 90 % as the passing line is a teaching assumption.)",
+  "Germination rate of seeds = number of germinated seeds ÷ number of seeds tested × 100%. The seeds must be taken at random, each group must have enough seeds and several groups must be repeated and averaged to reduce the error. In this model whether each seed germinates depends on the true germination rate of the lot. (Taking 90% as the passing line is a teaching assumption.)",
   "Taux de germination des graines = nombre de graines germées ÷ nombre de graines testées × 100 %. Les graines doivent être prises au hasard, chaque groupe doit avoir assez de graines et plusieurs groupes doivent être répétés et moyennés pour réduire l'erreur. Dans ce modèle, la germination de chaque graine dépend du taux réel de germination du lot. (Prendre 90 % comme seuil d'acceptation est une hypothèse pédagogique.)"
  ],
  "临时装片的制作步骤可以记作“擦、滴、撕（刮）、展（涂）、盖、染、吸”。制作洋葱鳞片叶内表皮装片时滴清水；制作人的口腔上皮细胞装片时滴 0.9 % 的生理盐水，使细胞保持正常形态。盖盖玻片时，用镊子夹起盖玻片，使一侧先接触水滴，再缓缓放平，可避免产生气泡。": [
-  "The steps of making a temporary mount can be remembered as “wipe, drop, tear (scrape), spread (smear), cover, stain, draw”. For onion epidermis a drop of clear water is used; for human cheek cells a drop of 0.9 % physiological saline, which keeps the cells in their normal shape. To lower the cover slip, hold it with forceps, let one side touch the drop first and then lower it slowly flat; this avoids air bubbles.",
+  "The steps of making a temporary mount can be remembered as “wipe, drop, tear (scrape), spread (smear), cover, stain, draw”. For onion epidermis a drop of clear water is used; for human cheek cells a drop of 0.9% physiological saline, which keeps the cells in their normal shape. To lower the cover slip, hold it with forceps, let one side touch the drop first and then lower it slowly flat; this avoids air bubbles.",
   "Les étapes de la préparation d'une lame provisoire peuvent se retenir ainsi : « essuyer, déposer, détacher (racler), étaler (frotter), couvrir, colorer, aspirer ». Pour l'épiderme d'oignon, on utilise une goutte d'eau claire ; pour les cellules de la joue humaine, une goutte de sérum physiologique à 0,9 %, qui garde aux cellules leur forme normale. Pour poser la lamelle, on la tient avec une pince, on laisse un côté toucher d'abord la goutte, puis on la pose lentement à plat ; cela évite les bulles d'air."
  ],
  "把操作步骤拖到按顺序编号的位置上（也可以先点步骤，再点编号）。在“盖盖玻片”中，调整盖玻片放下时的角度和水滴的大小，看看气泡怎样变化。（气泡数是教学模型。）": [
@@ -5468,7 +5468,7 @@
   "Mesure du taux de germination : {0} graines par groupe, 3 groupes ; {1}, {2} et {3} graines ont germé. Quel est le taux moyen de germination ?"
  ],
  "平均发芽率 = 三组发芽的种子总数 ÷ 种子总数 × 100 %。": [
-  "Average germination rate = total of the germinated seeds of the three groups ÷ total number of seeds × 100 %.",
+  "Average germination rate = total of the germinated seeds of the three groups ÷ total number of seeds × 100%.",
   "Taux moyen de germination = total des graines germées des trois groupes ÷ nombre total de graines × 100 %."
  ],
  "测定种子的发芽率时，为了减小误差，应该：": [
@@ -5484,7 +5484,7 @@
   "Plus l'échantillon est grand et plus il y a de répétitions, plus le résultat est proche du vrai taux de germination de tout le lot."
  ],
  "种子的发芽率 = 发芽的种子数 ÷ 供检测的种子数 × 100 %。测定时要随机取样，每组种子数量要足够多，并重复做几组取平均值，才能减小误差。本模型每组种子是否发芽由这批种子的真实发芽率决定。（以 90 % 作为合格线，是教学假设。）": [
-  "Germination rate of seeds = number of germinated seeds ÷ number of seeds tested × 100 %. The seeds must be taken at random, each group must have enough seeds and several groups must be repeated and averaged to reduce the error. In this model whether each seed germinates depends on the true germination rate of the lot. (Taking 90 % as the passing line is a teaching assumption.)",
+  "Germination rate of seeds = number of germinated seeds ÷ number of seeds tested × 100%. The seeds must be taken at random, each group must have enough seeds and several groups must be repeated and averaged to reduce the error. In this model whether each seed germinates depends on the true germination rate of the lot. (Taking 90% as the passing line is a teaching assumption.)",
   "Taux de germination des graines = nombre de graines germées ÷ nombre de graines testées × 100 %. Les graines doivent être prises au hasard, chaque groupe doit avoir assez de graines et plusieurs groupes doivent être répétés et moyennés pour réduire l'erreur. Dans ce modèle, la germination de chaque graine dépend du taux réel de germination du lot. (Prendre 90 % comme seuil d'acceptation est une hypothèse pédagogique.)"
  ],
  "环境中影响生物生活的因素分为非生物因素（光、温度、水、空气、土壤等）和生物因素（其他生物）。探究鼠妇的分布：在一个盒子的两半设置不同的条件（如明亮与阴暗），把鼠妇放在中间，过一段时间数各侧的数量。对照实验只能有一个变量，其他条件相同；教科书的做法是用 10 只鼠妇，每隔 1 min 统计一次，共统计 10 次，再取平均值；用较多的鼠妇并重复几次，可以减少偶然性。研究水分的影响时，用湿土和干土做对照。": [

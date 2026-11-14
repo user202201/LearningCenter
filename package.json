@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run check:i18n && tsc --noEmit && vite build",
-    "check:i18n": "node scripts/check-i18n.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs && node scripts/check-i18n-contexts.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test:e2e": "bash tests/run-all.sh",
