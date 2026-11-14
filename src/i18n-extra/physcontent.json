@@ -1694,5 +1694,53 @@
  "弹簧受 {0} N 的拉力时伸长 {1} m，弹簧的劲度系数是多少？": [
   "A spring extends by {1} m under a pull of {0} N. What is the spring constant?",
   "Un ressort s'allonge de {1} m sous une force de traction de {0} N. Quelle est la constante de raideur du ressort ?"
+ ],
+ "F_{\\text{浮}}=G_{\\text{排}}=\\rho_{\\text{液}}gV_{\\text{排}}": [
+  "F_{\\text{b}}=G_{\\text{disp}}=\\rho_{\\text{liq}}gV_{\\text{disp}}",
+  "F_{\\text{A}}=P_{\\text{dép}}=\\rho_{\\text{liq}}gV_{\\text{dép}}"
+ ],
+ "F_{\\text{浮}}=G-F": [
+  "F_{\\text{b}}=G-F",
+  "F_{\\text{A}}=P-F"
+ ],
+ "n_{\\text{紫}}>n_{\\text{红}}": [
+  "n_{\\text{violet}}>n_{\\text{red}}",
+  "n_{\\text{violet}}>n_{\\text{rouge}}"
+ ],
+ "\\eta=\\dfrac{W_{\\text{有}}}{Q_{\\text{放}}}\\times100\\%": [
+  "\\eta=\\dfrac{W_{\\text{useful}}}{Q_{\\text{released}}}\\times100\\%",
+  "\\eta=\\dfrac{W_{\\text{utile}}}{Q_{\\text{dégagée}}}\\times100\\%"
+ ],
+ "M_{\\text{显微镜}}=M_{\\text{物}}\\times M_{\\text{目}}": [
+  "M_{\\text{microscope}}=M_{\\text{obj}}\\times M_{\\text{eye}}",
+  "M_{\\text{microscope}}=M_{\\text{obj}}\\times M_{\\text{oc}}"
+ ],
+ "M_{\\text{望远镜}}=\\dfrac{f_{\\text{物}}}{f_{\\text{目}}}": [
+  "M_{\\text{telescope}}=\\dfrac{f_{\\text{obj}}}{f_{\\text{eye}}}",
+  "M_{\\text{lunette}}=\\dfrac{f_{\\text{obj}}}{f_{\\text{oc}}}"
+ ],
+ "p+\\tfrac12\\rho v^2=\\text{常数}": [
+  "p+\\tfrac12\\rho v^2=\\text{constant}",
+  "p+\\tfrac12\\rho v^2=\\text{constante}"
+ ],
+ "\\tan\\varphi=\\dfrac{B_{\\text{线}}}{B_{\\text{地}}}": [
+  "\\tan\\varphi=\\dfrac{B_{\\text{wire}}}{B_{\\text{Earth}}}",
+  "\\tan\\varphi=\\dfrac{B_{\\text{fil}}}{B_{\\text{Terre}}}"
+ ],
+ "F=\\dfrac{G+G_{\\text{动}}}{n}": [
+  "F=\\dfrac{G+G_{\\text{pulley}}}{n}",
+  "F=\\dfrac{P+P_{\\text{poulie}}}{n}"
+ ],
+ "\\eta=\\dfrac{W_{\\text{有}}}{W_{\\text{总}}}": [
+  "\\eta=\\dfrac{W_{\\text{useful}}}{W_{\\text{total}}}",
+  "\\eta=\\dfrac{W_{\\text{utile}}}{W_{\\text{total}}}"
+ ],
+ "{0} 个": [
+  "{0}",
+  "{0}"
+ ],
+ "{0} 次": [
+  "{0} times",
+  "{0} fois"
  ]
 }

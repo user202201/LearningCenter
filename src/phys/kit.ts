@@ -232,7 +232,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
 
   // ----- the page
   const lesson = h("div", { class: "pl-lesson", id: "pl-lesson" }, ...def.lesson.map((t) => { const p = h("p", {}); renderRich(p, tr(t), false); return p; }));
-  const formulas = def.formulas?.length ? h("div", { class: "pl-formulas", id: "pl-formulas" }, ...def.formulas.map((f) => { const d = h("div", { class: "pl-formula" }); renderTeX(d, f, f); return d; })) : null;
+  const formulas = def.formulas?.length ? h("div", { class: "pl-formulas", id: "pl-formulas" }, ...def.formulas.map((f) => { const d = h("div", { class: "pl-formula" }); renderTeX(d, tr(f), tr(f)); return d; })) : null;
   const resetBtn = h("button", { class: "mopt pl-btn", id: "pl-reset", onclick: () => { stopPlay(); reset(); update(false, false); toast("已重置", 1500); } }, "重置");
   const actBtns = (def.actions ?? []).map((a) => h("button", { class: "mopt pl-btn pl-act", id: `pl-act-${a.id}`, onclick: () => { const ch = a.run(st); if (ch) for (const [k, v] of Object.entries(ch)) st[k] = v as number; def.derive?.(st, a.id); update(); } }, a.label));
   const stage = h("div", { class: "pl-stage" }, canvas, readBox);
