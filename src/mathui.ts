@@ -130,6 +130,15 @@ export function openMathGame(o: MathGameOpts): void {
     }, 100);
   };
 
+  /** the relaxed (science) game: a long English / French question gets smaller until the question, the four choices and the topic fit on the screen without scrolling (a short phone), but never below 14 px */
+  function fitBody() {
+    const body = root.querySelector<HTMLElement>(".mbody");
+    if (!body) return;
+    let size = parseFloat(getComputedStyle(qText).fontSize);
+    for (let i = 0; i < 16 && body.scrollHeight > body.clientHeight + 1 && size > 14; i++) { size *= 0.94; qText.style.fontSize = `${size}px`; }
+  }
+  const refit = () => { fitQuestion(qText, qBox); if (o.relaxed) fitBody(); };
+
   function ask() {
     if (idx >= total) return finish(false);
     phase = "ask";
@@ -160,6 +169,7 @@ export function openMathGame(o: MathGameOpts): void {
     }
     root.classList.remove("ok", "bad");
     if (q.fig) fitQuestion(qText, qBox);                         // (fitted again now that the choices are there: a figure shrinks until everything is on the screen)
+    if (o.relaxed) fitBody();
   }
   /** a key of the keypad */
   function press(k: string) {
@@ -196,6 +206,7 @@ export function openMathGame(o: MathGameOpts): void {
       const text = o.explain?.(q) ?? "";
       grid.append(h("div", { class: "mexplain", id: "math-explain" }, h("b", { class: right ? "yes" : "no" }, right ? "回答正确。" : "回答有误。请查看这条知识。"), !right ? h("p", {}, "正确答案：", ((): HTMLElement => { const b = h("b", { class: "user" }); renderRich(b, T(q.a), !HAS_CJK.test(q.a)); return b; })()) : null, text ? ((): HTMLElement => { const p = h("p", { class: "user" }); renderRich(p, T(text)); return p; })() : null,
         h("button", { class: "primary", id: "math-next", onclick: goNext }, idx + 1 < total ? "下一题" : "完成")));
+      grid.querySelector("#math-explain")?.scrollIntoView({ block: "nearest" });   // (a short phone: the sentence and the Next button come into view)
       return;
     }
     next = setTimeout(() => { idx++; ask(); }, right ? 450 : 1400);
@@ -251,9 +262,9 @@ export function openMathGame(o: MathGameOpts): void {
       else if (e.key === "-") press("−");
     } else if (phase === "ask" && /^[1-4]$/.test(e.key)) grid.querySelectorAll<HTMLElement>(".mchoice")[Number(e.key) - 1]?.click();
   }
-  const onResize = () => { if (phase !== "end") fitQuestion(qText, qBox); };
-  qText.addEventListener("mx-rendered", () => { if (phase !== "end") fitQuestion(qText, qBox); });
-  grid.addEventListener("mx-rendered", () => { if (phase !== "end") fitQuestion(qText, qBox); });   // (stacked fractions in the choices change the room the card has)   // (a stacked fraction is taller than the plain text)
+  const onResize = () => { if (phase !== "end") refit(); };
+  qText.addEventListener("mx-rendered", () => { if (phase !== "end") refit(); });
+  grid.addEventListener("mx-rendered", () => { if (phase !== "end") refit(); });   // (stacked fractions in the choices change the room the card has)   // (a stacked fraction is taller than the plain text)
   quit.addEventListener("click", () => void leave());
   document.addEventListener("keydown", onKey);
   window.addEventListener("resize", onResize);
