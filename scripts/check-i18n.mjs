@@ -16,7 +16,10 @@ const texts = new Map();
 // the physics lab (src/phys) and the biology lab (src/bio) too: their UI texts (labels, tasks, readouts, canvas labels) are translated; their CONTENT (lessons, quiz questions and the tables only the quizzes use) is not, it is shown in `user` boxes
 const files = [...fs.readdirSync(dir), ...["games", "phys", "bio"].flatMap((d) => (fs.existsSync(path.join(dir, d)) ? fs.readdirSync(path.join(dir, d)).map((x) => `${d}/${x}`) : []))];
 const CONTENT_TABLES = new Set(["ROLES", "DEV", "GLANDS", "LACK", "EXAMPLES", "PRODUCTS", "LINKS", "GENO", "defs", "VALVE_TEXT_QUIZ"]);
+// rule 66: the lessons, quiz texts and tables of the labs are translated now (src/i18n-extra/*content.json), so nothing in phys / bio is skipped any more
 const isContent = (n, f) => {
+  return false;
+  // eslint-disable-next-line no-unreachable
   if (!/^(phys|bio)\//.test(f)) return false;
   for (let p = n.parent; p; p = p.parent) {
     if (ts.isCallExpression(p) && ts.isIdentifier(p.expression) && /^(makeQ|numQ)$/.test(p.expression.text)) return true;
@@ -53,8 +56,10 @@ const table = (name) => {
 };
 const LANGS = ["EN", "FR"];
 const tables = Object.fromEntries(LANGS.map((l) => [l, table(l)]));
-// the geography lab's translations are written in src/i18n-extra/geolab.json (merged into i18n-data.ts by the person who integrates the change); until then their keys count as translated
-for (const extraName of ["geolab", "backup"]) try { const x = JSON.parse(fs.readFileSync(path.join(dir, `i18n-extra/${extraName}.json`), "utf8")); for (const [k, v] of Object.entries(x)) if (Array.isArray(v) && v.length === 2 && v[0] && v[1]) for (const l of LANGS) tables[l].add(k.trim()); } catch { /* none yet */ }
+// the translations written in src/i18n-extra/<lab>.json and <lab>content.json (merged into i18n-data.ts by the person who integrates the change); until then their keys count as translated
+for (const f of fs.readdirSync(path.join(dir, "i18n-extra")).filter((x) => /^(geolab|backup|physcontent|biocontent|geocontent|chemcontent|spacecontent)\.json$/.test(x))) {
+  try { const x = JSON.parse(fs.readFileSync(path.join(dir, "i18n-extra", f), "utf8")); for (const [k, v] of Object.entries(x)) if (Array.isArray(v) && v.length === 2 && v[0] && v[1]) for (const l of LANGS) tables[l].add(k.trim()); } catch { /* none yet */ }
+}
 // texts that are only used as a language's own name, or are part of an HTML fragment / not shown as such
 const ALLOW = new Set(["中文", "语言 / Language"]);
 let bad = 0;

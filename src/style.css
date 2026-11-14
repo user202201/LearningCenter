@@ -2859,3 +2859,9 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 
 /* a long translated title (English / French) wraps and shrinks inside the hero instead of being cut off */
 .subj-hero h1.fit-title { white-space: normal; font-size: min(26px, 5.8vw); line-height: 1.12; overflow-wrap: anywhere; }
+
+/* Science home: every card icon sits at the right, vertically centred, same size */
+.sci-refs .sci-ref:has(> .sci-ref-ico, > .sp-ico, > .sci-ico) { position: relative; padding-right: 66px; }
+.sci-refs .sci-ref.sp-card > .sp-ico, .sci-refs .sci-ref.chem-homecard > .sci-ico, .sci-refs .sci-ref > .sci-ref-ico, .sci-refs .sci-ref > .sp-ico, .sci-refs .sci-ref > .sci-ico { position: absolute; right: 12px; top: 50%; left: auto; width: 44px; height: 44px; transform: translateY(-50%); display: block; }
+.sci-refs .sci-ref > .sci-ref-ico svg, .sci-refs .sci-ref > .sp-ico svg, .sci-refs .sci-ref > .sci-ico svg { width: 100%; height: 100%; display: block; }
+.sci-refs .sci-ref > b { font-size: 18px; line-height: 1.3; }

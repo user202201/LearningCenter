@@ -1,0 +1,3026 @@
+{
+ "动物的行为按获得的途径分为先天性行为（生来就有，由遗传物质决定，如蜘蛛结网）和学习行为（在遗传因素的基础上，通过生活经验和学习获得，如黑猩猩钓白蚁）。学习行为需要大脑皮层的参与，动物越高等，学习能力越强。": [
+  "By the way they are acquired, animal behaviours are divided into innate behaviour (present from birth, determined by genetic material, such as a spider spinning a web) and learned behaviour (acquired through life experience and learning on a genetic basis, such as a chimpanzee fishing for termites). Learned behaviour needs the cerebral cortex: the more highly developed the animal, the stronger its ability to learn.",
+  "Selon la manière dont ils sont acquis, les comportements des animaux se divisent en comportements innés (présents dès la naissance, déterminés par le matériel génétique, comme une araignée qui tisse sa toile) et comportements appris (acquis par l'expérience et l'apprentissage sur une base génétique, comme un chimpanzé qui pêche les termites). Le comportement appris nécessite le cortex cérébral : plus l'animal est évolué, plus sa capacité d'apprentissage est grande."
+ ],
+ "社会行为：群体内形成一定的组织，成员间有明确分工，有的有等级次序（如蚂蚁、蜜蜂、狒狒），常靠动作、声音、气味等传递信息。把行为拖到所属的类别，再比较不同动物的学习曲线。": [
+  "Social behaviour: a group forms a certain organisation, members have a clear division of labour, and some have a rank order (such as ants, bees and baboons); information is often passed on by movements, sounds and smells. Drag the behaviours to their categories, then compare the learning curves of different animals.",
+  "Comportement social : un groupe forme une certaine organisation, les membres ont une division du travail précise et certains ont une hiérarchie (fourmis, abeilles, babouins) ; l'information est souvent transmise par des mouvements, des sons et des odeurs. Faites glisser les comportements vers leur catégorie, puis comparez les courbes d'apprentissage de différents animaux."
+ ],
+ "心脏有四个腔：左、右心房和左、右心室。心房与心室之间有房室瓣，心室与动脉之间有动脉瓣，使血液只能从心房流向心室、再流向动脉。心房收缩 → 心室收缩 → 全部舒张，构成一个心动周期。": [
+  "The heart has four chambers: the left and right atria and the left and right ventricles. Between atrium and ventricle there is an atrioventricular valve, and between ventricle and artery there is an arterial valve, so blood can only flow from atrium to ventricle and then to the artery. Atria contract → ventricles contract → all relax: this makes one cardiac cycle.",
+  "Le cœur a quatre cavités : les oreillettes gauche et droite et les ventricules gauche et droit. Entre l'oreillette et le ventricule se trouve une valve auriculo-ventriculaire, et entre le ventricule et l'artère une valve artérielle, de sorte que le sang ne peut aller que de l'oreillette au ventricule, puis à l'artère. Contraction des oreillettes → contraction des ventricules → relâchement de l'ensemble : cela forme un cycle cardiaque."
+ ],
+ "体循环：左心室 → 主动脉 → 各级动脉 → 毛细血管 → 各级静脉 → 上、下腔静脉 → 右心房，血液由动脉血变成静脉血；肺循环：右心室 → 肺动脉 → 肺部毛细血管 → 肺静脉 → 左心房，血液由静脉血变成动脉血。": [
+  "Systemic circulation: left ventricle → aorta → arteries → capillaries → veins → superior and inferior vena cava → right atrium; the blood changes from arterial to venous blood. Pulmonary circulation: right ventricle → pulmonary artery → capillaries of the lungs → pulmonary veins → left atrium; the blood changes from venous to arterial blood.",
+  "Grande circulation : ventricule gauche → aorte → artères → capillaires → veines → veines caves supérieure et inférieure → oreillette droite ; le sang passe de sang artériel à sang veineux. Petite circulation : ventricule droit → artère pulmonaire → capillaires des poumons → veines pulmonaires → oreillette gauche ; le sang passe de sang veineux à sang artériel."
+ ],
+ "ABO 血型：红细胞表面有 A 或 B 抗原，血浆中有针对自己所缺抗原的抗体。输血时应输同型血；供血者红细胞上的抗原遇到受血者血浆中相应的抗体，红细胞会凝集。": [
+  "ABO blood groups: red blood cells carry antigen A or B on their surface, and the plasma contains antibodies against the antigens the person lacks. In a transfusion the same blood group should be given; if the antigens on the donor's red cells meet the matching antibodies in the recipient's plasma, the red cells clump together.",
+  "Groupes sanguins ABO : les globules rouges portent à leur surface l'antigène A ou B, et le plasma contient des anticorps dirigés contre les antigènes que la personne n'a pas. Lors d'une transfusion, on doit donner du sang du même groupe ; si les antigènes des globules rouges du donneur rencontrent les anticorps correspondants du plasma du receveur, les globules rouges s'agglutinent."
+ ],
+ "骨由骨膜、骨质和骨髓组成；骨的成分有有机物（使骨有弹性）和无机物（使骨坚硬）。儿童的骨有机物多，柔韧、易变形；成年人的有机物和无机物约 1 : 2，既坚硬又有弹性；老年人的骨无机物多，脆、易骨折。": [
+  "A bone is made up of periosteum, bone tissue and bone marrow; its components are organic matter (which makes the bone elastic) and inorganic matter (which makes it hard). Children's bones have more organic matter and are flexible and easily deformed; in adults the organic and inorganic matter are in a ratio of about 1 : 2, so the bone is both hard and elastic; the bones of old people have more inorganic matter and are brittle and easily broken.",
+  "Un os est formé du périoste, du tissu osseux et de la moelle osseuse ; ses composants sont la matière organique (qui rend l'os élastique) et la matière minérale (qui le rend dur). Les os des enfants contiennent plus de matière organique, ils sont souples et se déforment facilement ; chez l'adulte, matière organique et matière minérale sont dans un rapport d'environ 1 : 2, l'os est donc à la fois dur et élastique ; les os des personnes âgées contiennent plus de matière minérale, ils sont fragiles et se cassent facilement."
+ ],
+ "实验：把骨放在酒精灯上煅烧，有机物被烧掉，骨变脆、一碰就碎；把骨浸在稀盐酸中，无机盐被溶解，骨变软、可以弯曲。关节由关节面、关节囊和关节腔组成。": [
+  "Experiment: when a bone is heated over an alcohol burner, the organic matter burns away and the bone becomes brittle and crumbles at a touch; when a bone is soaked in dilute hydrochloric acid, the mineral salts dissolve and the bone becomes soft and can be bent. A joint is made up of joint surfaces, a joint capsule and a joint cavity.",
+  "Expérience : lorsqu'on chauffe un os sur une lampe à alcool, la matière organique brûle et l'os devient cassant et s'effrite au toucher ; lorsqu'on plonge un os dans de l'acide chlorhydrique dilué, les sels minéraux se dissolvent et l'os devient mou et peut être plié. Une articulation est formée de surfaces articulaires, d'une capsule articulaire et d'une cavité articulaire."
+ ],
+ "呼吸运动由膈肌和肋间肌的收缩、舒张引起。吸气时，膈肌收缩（顶部下降），肋骨上升，胸廓容积扩大，肺随之扩张，肺内气压低于外界气压，外界空气进入肺；呼气时相反，胸廓容积缩小，肺内气压高于外界气压，气体排出。": [
+  "Breathing movements are caused by the contraction and relaxation of the diaphragm and the intercostal muscles. When breathing in, the diaphragm contracts (its top moves down), the ribs rise, the volume of the chest cavity increases, the lungs expand, the air pressure in the lungs falls below the outside pressure, and outside air enters the lungs; when breathing out it is the opposite: the volume of the chest cavity decreases, the pressure in the lungs rises above the outside pressure, and the gas leaves.",
+  "Les mouvements respiratoires sont provoqués par la contraction et le relâchement du diaphragme et des muscles intercostaux. À l'inspiration, le diaphragme se contracte (son sommet s'abaisse), les côtes se soulèvent, le volume de la cage thoracique augmente, les poumons se dilatent, la pression de l'air dans les poumons devient inférieure à la pression extérieure et l'air extérieur entre dans les poumons ; à l'expiration, c'est l'inverse : le volume de la cage thoracique diminue, la pression dans les poumons devient supérieure à la pression extérieure et le gaz est expulsé."
+ ],
+ "把气管堵住，胸廓扩大时肺内气体的体积增大、气压减小（波义耳定律：温度不变时 P V = 常数）。呼吸频率与每次呼吸量决定每分钟通气量。": [
+  "If the windpipe is blocked, when the chest expands the volume of gas in the lungs increases and its pressure falls (Boyle's law: at constant temperature P V = constant). The breathing rate and the volume of each breath determine the ventilation per minute.",
+  "Si l'on bouche la trachée, lorsque la cage thoracique se dilate, le volume de gaz dans les poumons augmente et sa pression diminue (loi de Boyle : à température constante, P V = constante). La fréquence respiratoire et le volume de chaque respiration déterminent la ventilation par minute."
+ ],
+ "植物细胞和动物细胞都有细胞膜、细胞质、细胞核和线粒体。植物细胞还有细胞壁、叶绿体和液泡。叶绿体只存在于植物的绿色部分，根的细胞没有叶绿体。": [
+  "Plant cells and animal cells both have a cell membrane, cytoplasm, a nucleus and mitochondria. Plant cells also have a cell wall, chloroplasts and a vacuole. Chloroplasts exist only in the green parts of a plant; root cells have no chloroplasts.",
+  "Les cellules végétales et les cellules animales ont toutes une membrane cellulaire, un cytoplasme, un noyau et des mitochondries. Les cellules végétales ont en plus une paroi cellulaire, des chloroplastes et une vacuole. Les chloroplastes n'existent que dans les parties vertes de la plante ; les cellules de la racine n'ont pas de chloroplastes."
+ ],
+ "把右侧的名称拖到细胞上的标记处（也可以先点名称，再点标记）。放对后会显示该结构的功能；放错会计一次失误。": [
+  "Drag the names on the right to the marks on the cell (or tap a name first and then a mark). When it is placed correctly, the function of that structure is shown; a wrong placement counts as one mistake.",
+  "Faites glisser les noms de droite vers les repères de la cellule (ou touchez d'abord un nom, puis un repère). Quand le nom est bien placé, la fonction de la structure s'affiche ; un mauvais placement compte comme une erreur."
+ ],
+ "生物分类是研究生物的一种基本方法：把形态结构、生理功能等方面相似程度高的生物归为一类。分类的基本单位从大到小：界、门、纲、目、科、属、种，种是最基本的单位。生物分为动物、植物、真菌、细菌等界，病毒没有细胞结构。": [
+  "Classification of organisms is a basic method of studying them: organisms with a high degree of similarity in form, structure and function are put into one group. The basic units of classification, from largest to smallest, are kingdom, phylum, class, order, family, genus and species; the species is the most basic unit. Organisms are divided into the kingdoms of animals, plants, fungi, bacteria and so on; viruses have no cellular structure.",
+  "La classification des êtres vivants est une méthode fondamentale pour les étudier : on regroupe les êtres vivants qui se ressemblent beaucoup par leur forme, leur structure et leur fonction. Les unités de base de la classification, de la plus grande à la plus petite, sont le règne, l'embranchement, la classe, l'ordre, la famille, le genre et l'espèce ; l'espèce est l'unité la plus fondamentale. Les êtres vivants se répartissent en règnes : animaux, végétaux, champignons, bactéries, etc. ; les virus n'ont pas de structure cellulaire."
+ ],
+ "检索表：每一步根据一个特征回答“是”或“否”，一步步缩小范围，直到只剩一种生物。分类游戏：把生物拖到所属的类群中（也可以先点生物，再点类群）。脊椎动物分为鱼类、两栖类、爬行类、鸟类和哺乳类；植物分为藻类、苔藓、蕨类、裸子和被子植物。": [
+  "Identification key: at each step, answer “yes” or “no” according to one feature, narrowing the choice step by step until only one organism is left. Classification game: drag organisms into the group they belong to (or tap an organism first and then a group). Vertebrates are divided into fish, amphibians, reptiles, birds and mammals; plants are divided into algae, mosses, ferns, gymnosperms and angiosperms.",
+  "Clé de détermination : à chaque étape, on répond « oui » ou « non » selon un caractère, ce qui réduit le choix pas à pas jusqu'à ce qu'il ne reste qu'un seul être vivant. Jeu de classification : faites glisser les êtres vivants vers le groupe auquel ils appartiennent (ou touchez d'abord un être vivant, puis un groupe). Les vertébrés se divisent en poissons, amphibiens, reptiles, oiseaux et mammifères ; les végétaux se divisent en algues, mousses, fougères, gymnospermes et angiospermes."
+ ],
+ "人的生命从受精卵开始：精子与卵细胞在输卵管内结合形成受精卵，受精卵分裂形成胚泡，移动到子宫内壁着床；约 8 周后称为胎儿。胎儿通过胎盘和脐带从母体获得营养物质和氧气，并排出废物。怀孕约 40 周（280 天），胎儿从母体产出，叫分娩。": [
+  "Human life begins with the fertilised egg: a sperm and an egg cell join in the fallopian tube to form a fertilised egg; the fertilised egg divides to form a blastocyst, which moves to the wall of the uterus and implants. After about 8 weeks it is called a fetus. The fetus obtains nutrients and oxygen from the mother through the placenta and umbilical cord and gets rid of wastes. After a pregnancy of about 40 weeks (280 days) the fetus is born from the mother; this is called childbirth.",
+  "La vie humaine commence par l'œuf fécondé : un spermatozoïde et un ovule s'unissent dans la trompe de Fallope pour former un œuf fécondé ; celui-ci se divise pour former un blastocyste, qui se déplace jusqu'à la paroi de l'utérus et s'y implante. Après environ 8 semaines, on l'appelle fœtus. Le fœtus reçoit de la mère des nutriments et de l'oxygène par le placenta et le cordon ombilical et élimine ses déchets. Après une grossesse d'environ 40 semaines (280 jours), le fœtus naît de la mère : c'est l'accouchement."
+ ],
+ "青春期是身体发育的重要时期：身高和体重迅速增加，神经系统、心脏和肺等器官的功能明显增强，出现第二性征，性器官迅速发育。要保持健康的心态，正确对待身体和心理的变化，合理营养、规律作息。": [
+  "Puberty is an important period of physical development: height and weight increase rapidly, the functions of organs such as the nervous system, heart and lungs clearly strengthen, secondary sexual characteristics appear and the sex organs develop quickly. Keep a healthy state of mind, treat the changes of body and mind correctly, eat a balanced diet and keep regular hours.",
+  "La puberté est une période importante du développement du corps : la taille et le poids augmentent rapidement, les fonctions d'organes comme le système nerveux, le cœur et les poumons se renforcent nettement, les caractères sexuels secondaires apparaissent et les organes sexuels se développent rapidement. Il faut garder un état d'esprit sain, bien accueillir les changements du corps et de l'esprit, manger de façon équilibrée et avoir des horaires réguliers."
+ ],
+ "合理营养是指全面而平衡的营养：营养物质的种类齐全、数量合适、比例合适。糖类是主要的供能物质，脂肪是备用能源，蛋白质是细胞生长和修复的基本物质，还需要水、无机盐和维生素。食物多样，谷类为主，多吃蔬菜水果，适量吃肉、蛋、鱼、奶，少油少盐。": [
+  "A balanced diet means complete and balanced nutrition: all kinds of nutrients, in suitable amounts and suitable proportions. Carbohydrates are the main energy supply, fat is the reserve of energy, protein is the basic material for cell growth and repair, and water, minerals and vitamins are also needed. Eat a variety of foods, mainly cereals, plenty of vegetables and fruit, moderate amounts of meat, eggs, fish and milk, and little oil and salt.",
+  "Une alimentation équilibrée est une alimentation complète et équilibrée : tous les types de nutriments, en quantité et en proportion convenables. Les glucides sont la principale source d'énergie, les lipides sont la réserve d'énergie, les protéines sont la matière de base pour la croissance et la réparation des cellules, et il faut aussi de l'eau, des sels minéraux et des vitamines. Mangez des aliments variés, surtout des céréales, beaucoup de légumes et de fruits, des quantités modérées de viande, d'œufs, de poisson et de lait, et peu d'huile et de sel."
+ ],
+ "按“平衡膳食宝塔”调节每类食物的量：使六类食物都在推荐范围内，总能量接近自己的需要（约 2000 kcal）。缺乏某种营养物质会引起相应的疾病，如夜盲症、坏血病、佝偻病、脚气病、贫血、地方性甲状腺肿。": [
+  "Adjust the amount of each kind of food according to the “balanced diet pagoda”: keep all six kinds of food within the recommended range, with a total energy close to your own need (about 2000 kcal). Lack of a nutrient causes the corresponding disease, such as night blindness, scurvy, rickets, beriberi, anaemia and endemic goitre.",
+  "Ajustez la quantité de chaque type d'aliment d'après la « pagode de l'alimentation équilibrée » : gardez les six types d'aliments dans la fourchette recommandée, avec une énergie totale proche de votre besoin (environ 2000 kcal). Le manque d'un nutriment provoque la maladie correspondante, comme la cécité nocturne, le scorbut, le rachitisme, le béribéri, l'anémie et le goitre endémique."
+ ],
+ "食物中的淀粉、蛋白质、脂肪是大分子，要消化成小分子才能被吸收：淀粉 → 葡萄糖，蛋白质 → 氨基酸，脂肪 → 甘油和脂肪酸。消化酶的活性受温度和 pH 影响，有各自的最适温度和最适 pH。": [
+  "Starch, protein and fat in food are large molecules and must be digested into small molecules before they can be absorbed: starch → glucose, protein → amino acids, fat → glycerol and fatty acids. The activity of digestive enzymes is affected by temperature and pH, and each has its own optimum temperature and optimum pH.",
+  "L'amidon, les protéines et les lipides des aliments sont de grosses molécules et doivent être digérés en petites molécules pour pouvoir être absorbés : amidon → glucose, protéines → acides aminés, lipides → glycérol et acides gras. L'activité des enzymes digestives dépend de la température et du pH, et chacune a sa température optimale et son pH optimal."
+ ],
+ "口腔消化淀粉，胃初步消化蛋白质，小肠是消化和吸收的主要场所（肠液、胰液和胆汁）。滴碘液检验：淀粉遇碘变蓝，蓝色消失说明淀粉已被水解。": [
+  "Starch is digested in the mouth, protein begins to be digested in the stomach, and the small intestine is the main place of digestion and absorption (intestinal juice, pancreatic juice and bile). Test with iodine solution: starch turns blue with iodine, and when the blue colour disappears the starch has been broken down.",
+  "L'amidon est digéré dans la bouche, les protéines commencent à être digérées dans l'estomac, et l'intestin grêle est le principal lieu de la digestion et de l'absorption (suc intestinal, suc pancréatique et bile). Test à la solution d'iode : l'amidon devient bleu avec l'iode, et quand la couleur bleue disparaît, l'amidon a été dégradé."
+ ],
+ "细胞分裂使细胞数目增多。分裂前，细胞核中的染色体先复制（间期），每条染色体含有两条相同的染色单体；分裂时，染色体平均分配到两个新细胞中，所以子细胞与母细胞的染色体数目相同。": [
+  "Cell division increases the number of cells. Before division, the chromosomes in the nucleus are copied first (interphase), and each chromosome has two identical chromatids; during division the chromosomes are shared equally between the two new cells, so the daughter cells have the same number of chromosomes as the mother cell.",
+  "La division cellulaire augmente le nombre de cellules. Avant la division, les chromosomes du noyau sont d'abord copiés (interphase), et chaque chromosome comporte deux chromatides identiques ; pendant la division, les chromosomes sont répartis également entre les deux nouvelles cellules, de sorte que les cellules filles ont le même nombre de chromosomes que la cellule mère."
+ ],
+ "各时期：前期染色体变得清晰；中期染色体排列在细胞中央；后期每条染色体分成两条，分别移向两极，染色体数目暂时加倍；末期形成两个新细胞（植物细胞中央形成新的细胞壁）。": [
+  "The stages: in prophase the chromosomes become clear; in metaphase the chromosomes line up in the middle of the cell; in anaphase each chromosome splits into two, which move to opposite poles, and the number of chromosomes doubles for a while; in telophase two new cells form (in a plant cell a new cell wall forms in the middle).",
+  "Les phases : en prophase, les chromosomes deviennent nets ; en métaphase, les chromosomes s'alignent au milieu de la cellule ; en anaphase, chaque chromosome se sépare en deux, qui migrent vers les deux pôles, et le nombre de chromosomes double temporairement ; en télophase, deux nouvelles cellules se forment (dans une cellule végétale, une nouvelle paroi se forme au milieu)."
+ ],
+ "声波经外耳道传到鼓膜，引起鼓膜振动；振动通过听小骨传到内耳，刺激耳蜗内的听觉感受器，产生神经冲动；神经冲动经听神经传到大脑皮层的听觉中枢，形成听觉。前庭和半规管与身体平衡有关；咽鼓管连通鼓室和咽部。": [
+  "Sound waves travel through the ear canal to the eardrum and make it vibrate; the vibration passes through the ossicles to the inner ear and stimulates the hearing receptors in the cochlea, producing nerve impulses; the impulses pass along the auditory nerve to the hearing centre of the cerebral cortex, where hearing is formed. The vestibule and semicircular canals are related to balance; the Eustachian tube connects the middle ear and the throat.",
+  "Les ondes sonores parviennent par le conduit auditif à la membrane du tympan et la font vibrer ; la vibration est transmise par les osselets à l'oreille interne et stimule les récepteurs auditifs de la cochlée, ce qui produit des influx nerveux ; ceux-ci sont transmis par le nerf auditif jusqu'au centre auditif du cortex cérébral, où se forme l'audition. Le vestibule et les canaux semi-circulaires interviennent dans l'équilibre ; la trompe d'Eustache relie l'oreille moyenne et la gorge."
+ ],
+ "人耳能听到约 20 Hz–20 kHz 的声音，随年龄增长高频听力会下降。长时间接触过强的声音会损伤听觉：声音每增加 3 dB，安全的聆听时间减半。保护听力：不长时间戴耳机、音量不要过大、不用尖锐的东西掏耳朵。": [
+  "The human ear can hear sounds of about 20 Hz–20 kHz, and high-frequency hearing declines with age. Long exposure to very loud sound damages hearing: every 3 dB increase halves the safe listening time. To protect hearing: do not wear headphones for long, do not set the volume too high, and do not poke the ear with sharp things.",
+  "L'oreille humaine perçoit les sons d'environ 20 Hz à 20 kHz, et l'audition des hautes fréquences diminue avec l'âge. Une exposition prolongée à des sons trop forts abîme l'audition : chaque augmentation de 3 dB divise par deux la durée d'écoute sans danger. Pour protéger l'audition : ne portez pas d'écouteurs longtemps, ne réglez pas le volume trop haut et ne vous curez pas l'oreille avec des objets pointus."
+ ],
+ "传染病由病原体引起，能在人与人之间或人与动物之间传播。流行的三个基本环节：传染源（能散播病原体的人或动物）、传播途径（空气、飞沫、饮水、食物、接触、媒介生物等）、易感人群。预防措施相应有三类：控制传染源、切断传播途径、保护易感人群。": [
+  "Infectious diseases are caused by pathogens and can spread between people or between animals and people. The three basic links of an epidemic are the source of infection (a person or animal that can spread the pathogen), the route of transmission (air, droplets, drinking water, food, contact, vector organisms and so on) and the susceptible population. There are three corresponding kinds of preventive measures: controlling the source of infection, cutting off the route of transmission and protecting the susceptible population.",
+  "Les maladies infectieuses sont causées par des agents pathogènes et peuvent se transmettre d'une personne à l'autre ou entre animaux et personnes. Les trois maillons d'une épidémie sont la source d'infection (une personne ou un animal pouvant disséminer l'agent pathogène), la voie de transmission (air, gouttelettes, eau, aliments, contact, organismes vecteurs, etc.) et la population sensible. Il y a trois types de mesures de prévention correspondants : maîtriser la source d'infection, couper la voie de transmission et protéger la population sensible."
+ ],
+ "人体的免疫：病原体进入后，淋巴细胞产生抗体，抗体与抗原（病原体）特异性结合；之后保留记忆细胞，再次接触同一病原体时，产生抗体又快又多。接种疫苗就是让人在不得病的情况下获得这种免疫力。图中是一个简化的传播模型（S 易感者、I 感染者、R 康复或免疫者）。": [
+  "Immunity of the human body: after a pathogen enters, lymphocytes produce antibodies, and the antibodies bind specifically to the antigen (the pathogen); memory cells are then kept, so that on meeting the same pathogen again the antibodies are produced faster and in larger amounts. Vaccination lets a person gain this immunity without falling ill. The picture is a simplified transmission model (S susceptible, I infected, R recovered or immune).",
+  "Immunité du corps humain : après l'entrée d'un agent pathogène, les lymphocytes produisent des anticorps, qui se lient spécifiquement à l'antigène (l'agent pathogène) ; des cellules mémoire sont ensuite conservées, de sorte que, lorsque la personne rencontre de nouveau le même agent pathogène, les anticorps sont produits plus vite et en plus grande quantité. La vaccination permet d'acquérir cette immunité sans tomber malade. L'image montre un modèle de transmission simplifié (S sensibles, I infectés, R guéris ou immunisés)."
+ ],
+ "人体排出废物的途径：呼吸（二氧化碳和少量水）、排汗（水、无机盐和尿素）、排尿（水、无机盐、尿素）。排尿是最主要的途径。泌尿系统由肾脏、输尿管、膀胱和尿道组成，肾脏是形成尿液的器官。": [
+  "The ways the human body gets rid of waste: breathing (carbon dioxide and a little water), sweating (water, mineral salts and urea), and urination (water, mineral salts, urea). Urination is the most important way. The urinary system consists of the kidneys, ureters, bladder and urethra, and the kidney is the organ that forms urine.",
+  "Les voies d'élimination des déchets du corps humain : la respiration (dioxyde de carbone et un peu d'eau), la transpiration (eau, sels minéraux et urée) et la miction (eau, sels minéraux, urée). La miction est la voie la plus importante. L'appareil urinaire comprend les reins, les uretères, la vessie et l'urètre, et le rein est l'organe qui forme l'urine."
+ ],
+ "每个肾单位由肾小球、肾小囊和肾小管组成。血液流经肾小球时，除血细胞和大分子蛋白质外，水、无机盐、葡萄糖、尿素等滤过到肾小囊中形成原尿；原尿流经肾小管时，全部葡萄糖、大部分水和部分无机盐被重吸收，剩下的形成尿液。一天形成原尿约 180 L，排出尿约 1.5 L。": [
+  "Each nephron consists of a glomerulus, a Bowman's capsule and a renal tubule. When blood flows through the glomerulus, water, mineral salts, glucose, urea and so on, but not blood cells and large protein molecules, are filtered into the capsule to form primary urine; as primary urine flows through the tubule, all the glucose, most of the water and some of the mineral salts are reabsorbed, and what is left forms urine. About 180 L of primary urine are formed a day, and about 1.5 L of urine is passed.",
+  "Chaque néphron est formé d'un glomérule, d'une capsule de Bowman et d'un tubule rénal. Quand le sang passe dans le glomérule, l'eau, les sels minéraux, le glucose, l'urée, etc., mais pas les cellules sanguines ni les grosses molécules de protéines, sont filtrés dans la capsule et forment l'urine primitive ; quand l'urine primitive passe dans le tubule, tout le glucose, la plus grande partie de l'eau et une partie des sels minéraux sont réabsorbés, et ce qui reste forme l'urine. Il se forme environ 180 L d'urine primitive par jour, et environ 1,5 L d'urine est éliminé."
+ ],
+ "眼球的晶状体相当于凸透镜，把物体的像成在视网膜上。看远处时睫状肌舒张，晶状体变薄；看近处时睫状肌收缩，晶状体变厚，屈光力增大。调节有一定的范围，所以有远点和近点。": [
+  "The lens of the eye acts as a convex lens and forms the image of an object on the retina. When looking at something far away, the ciliary muscle relaxes and the lens becomes thinner; when looking at something near, the ciliary muscle contracts and the lens becomes thicker, increasing its refractive power. Accommodation has a limited range, so there is a far point and a near point.",
+  "Le cristallin de l'œil joue le rôle d'une lentille convergente et forme l'image d'un objet sur la rétine. Quand on regarde au loin, le muscle ciliaire se relâche et le cristallin s'amincit ; quand on regarde de près, le muscle ciliaire se contracte et le cristallin s'épaissit, ce qui augmente sa vergence. L'accommodation a une étendue limitée, d'où l'existence d'un punctum remotum et d'un punctum proximum."
+ ],
+ "近视眼的眼球前后径过长，或晶状体曲度过大，远处物体的像落在视网膜前方，看不清远处；应配戴凹透镜矫正。成像规律与物理实验室的凸透镜相同：1/u + 1/v = 1/f（屈光力 = 1/f）。": [
+  "In short sight the eyeball is too long from front to back, or the lens is too curved, so the image of a distant object falls in front of the retina and distant things cannot be seen clearly; it is corrected with a concave lens. The rules of image formation are the same as for the convex lens in the physics lab: 1/u + 1/v = 1/f (power = 1/f).",
+  "Dans la myopie, l'œil est trop long d'avant en arrière, ou le cristallin est trop bombé, de sorte que l'image d'un objet éloigné se forme devant la rétine et que l'on ne voit pas nettement au loin ; on la corrige avec une lentille divergente. Les règles de formation des images sont les mêmes que pour la lentille convergente du laboratoire de physique : 1/u + 1/v = 1/f (vergence = 1/f)."
+ ],
+ "微生物包括细菌、真菌和病毒。酵母菌是单细胞真菌，在无氧条件下分解葡萄糖，产生酒精和二氧化碳，用于酿酒和蒸馒头；乳酸菌产生乳酸，用于制酸奶和泡菜；醋酸菌产生醋酸。发酵需要适宜的温度：温度过高会杀死微生物。": [
+  "Micro-organisms include bacteria, fungi and viruses. Yeast is a single-celled fungus that breaks down glucose without oxygen, producing alcohol and carbon dioxide, and is used to make wine and steamed bread; lactic acid bacteria produce lactic acid and are used to make yoghurt and pickles; acetic acid bacteria produce acetic acid. Fermentation needs a suitable temperature: too high a temperature kills the micro-organisms.",
+  "Les micro-organismes comprennent les bactéries, les champignons et les virus. La levure est un champignon unicellulaire qui décompose le glucose en l'absence d'oxygène et produit de l'alcool et du dioxyde de carbone ; on l'utilise pour faire le vin et le pain cuit à la vapeur ; les bactéries lactiques produisent de l'acide lactique et servent à faire le yaourt et les légumes lactofermentés ; les bactéries acétiques produisent de l'acide acétique. La fermentation exige une température convenable : une température trop élevée tue les micro-organismes."
+ ],
+ "细菌通过分裂繁殖，生长曲线有延缓期、对数期、稳定期和衰亡期四个时期。在适宜条件下，大肠杆菌约 20 分钟分裂一次。": [
+  "Bacteria reproduce by division, and their growth curve has four phases: lag phase, exponential phase, stationary phase and decline phase. Under suitable conditions Escherichia coli divides about once every 20 minutes.",
+  "Les bactéries se multiplient par division, et leur courbe de croissance comporte quatre phases : phase de latence, phase exponentielle, phase stationnaire et phase de déclin. Dans des conditions favorables, Escherichia coli se divise environ toutes les 20 minutes."
+ ],
+ "心肺复苏（CPR）：发现无反应、无呼吸的人，先呼救并拨打 120，让人取来自动体外除颤器（AED）；成人按压部位在胸骨下半部，深度约 5–6 cm，频率每分钟 100–120 次，按压 30 次、吹气 2 次为一个循环。": [
+  "Cardiopulmonary resuscitation (CPR): when you find a person who does not respond and is not breathing, first call for help and dial 120, and have someone fetch an automated external defibrillator (AED); for an adult, compress the lower half of the sternum, about 5–6 cm deep at a rate of 100–120 a minute; 30 compressions and 2 breaths make one cycle.",
+  "Réanimation cardio-pulmonaire (RCP) : lorsque vous trouvez une personne qui ne réagit pas et ne respire pas, appelez d'abord à l'aide et composez le 120, et faites apporter un défibrillateur automatisé externe (DAE) ; chez l'adulte, comprimez la moitié inférieure du sternum, sur environ 5 à 6 cm de profondeur, à une fréquence de 100 à 120 par minute ; 30 compressions et 2 insufflations forment un cycle."
+ ],
+ "安全用药：服药前阅读说明书，按剂量（常按体重计算）和时间服用，不随意加量；过期的药不能吃；非处方药（OTC）也要谨慎；药物有副作用。烧烫伤的处理：冲、脱、泡、盖、送。": [
+  "Safe use of medicines: read the instructions before taking a medicine, take it in the right dose (often calculated by body weight) and at the right time, and never increase the dose on your own; out-of-date medicines must not be taken; over-the-counter (OTC) medicines must also be used with care; medicines have side effects. First aid for burns and scalds: rinse, remove, soak, cover, send to hospital.",
+  "Bon usage des médicaments : lisez la notice avant de prendre un médicament, prenez-le à la bonne dose (souvent calculée selon le poids) et au bon moment, et n'augmentez jamais la dose de votre propre chef ; les médicaments périmés ne doivent pas être pris ; les médicaments sans ordonnance doivent aussi être utilisés avec prudence ; les médicaments ont des effets secondaires. Premiers secours pour les brûlures : refroidir à l'eau, retirer les vêtements, immerger, couvrir, conduire à l'hôpital."
+ ],
+ "一朵花的主要结构是雄蕊（花药和花丝）和雌蕊（柱头、花柱、子房）。花药里的花粉落到柱头上叫传粉（可借助风或昆虫）；花粉萌发出花粉管，精子与胚珠里的卵细胞结合形成受精卵，叫受精。": [
+  "The main structures of a flower are the stamens (anther and filament) and the pistil (stigma, style and ovary). The pollen from the anther landing on the stigma is called pollination (which may be helped by wind or insects); the pollen grain grows a pollen tube, and a sperm joins the egg cell in the ovule to form a fertilised egg; this is called fertilisation.",
+  "Les principales structures d'une fleur sont les étamines (anthère et filet) et le pistil (stigmate, style et ovaire). Le dépôt du pollen de l'anthère sur le stigmate s'appelle la pollinisation (qui peut se faire par le vent ou par les insectes) ; le grain de pollen forme un tube pollinique, et un spermatozoïde s'unit à la cellule-œuf de l'ovule pour former un œuf fécondé : c'est la fécondation."
+ ],
+ "受精后，花瓣、雄蕊等凋落，子房发育成果实，子房壁发育成果皮，胚珠发育成种子，珠被发育成种皮，受精卵发育成胚。没有传粉就不会结果；落在柱头上的花粉少于胚珠数，就会缺粒。": [
+  "After fertilisation the petals, stamens and so on wither, the ovary develops into the fruit, the ovary wall into the pericarp, the ovule into the seed, the integument into the seed coat and the fertilised egg into the embryo. Without pollination there is no fruit; if fewer pollen grains land on the stigma than there are ovules, seeds will be missing.",
+  "Après la fécondation, les pétales, les étamines, etc. se flétrissent, l'ovaire devient le fruit, la paroi de l'ovaire devient le péricarpe, l'ovule devient la graine, les téguments de l'ovule deviennent le tégument de la graine et l'œuf fécondé devient l'embryon. Sans pollinisation, il n'y a pas de fruit ; si moins de grains de pollen tombent sur le stigmate qu'il n'y a d'ovules, il manquera des graines."
+ ],
+ "生态系统由非生物部分（阳光、空气、水、土壤等）和生物部分组成。生物部分包括生产者（绿色植物）、消费者（动物）和分解者（细菌、真菌）。食物链从生产者开始，箭头指向捕食者；多条食物链交错成食物网。": [
+  "An ecosystem consists of a non-living part (sunlight, air, water, soil and so on) and a living part. The living part includes producers (green plants), consumers (animals) and decomposers (bacteria and fungi). A food chain begins with a producer, and the arrows point to the predator; several food chains cross to form a food web.",
+  "Un écosystème est formé d'une partie non vivante (lumière du soleil, air, eau, sol, etc.) et d'une partie vivante. La partie vivante comprend les producteurs (plantes vertes), les consommateurs (animaux) et les décomposeurs (bactéries et champignons). Une chaîne alimentaire commence par un producteur, et les flèches pointent vers le prédateur ; plusieurs chaînes alimentaires qui se croisent forment un réseau trophique."
+ ],
+ "能量沿食物链单向流动、逐级递减，传递效率约为 10%–20%，所以食物链一般不超过 5 个营养级。有毒物质（如 DDT）在生物体内难以分解，会沿食物链逐级积累，营养级越高，浓度越大。物质循环则是反复利用的。": [
+  "Energy flows one way along a food chain and decreases at each level; the transfer efficiency is about 10%–20%, so a food chain generally has no more than 5 trophic levels. Poisonous substances (such as DDT) are hard to break down in living things and build up level by level along the food chain: the higher the trophic level, the greater the concentration. Matter, in contrast, is recycled and used again and again.",
+  "L'énergie circule dans un seul sens le long d'une chaîne alimentaire et diminue à chaque niveau ; le rendement de transfert est d'environ 10 % à 20 %, c'est pourquoi une chaîne alimentaire ne dépasse généralement pas 5 niveaux trophiques. Les substances toxiques (comme le DDT) sont difficiles à dégrader dans les êtres vivants et s'accumulent niveau après niveau le long de la chaîne alimentaire : plus le niveau trophique est élevé, plus la concentration est grande. La matière, en revanche, est recyclée et réutilisée sans cesse."
+ ],
+ "“食物网”：从被吃的生物拖到吃它的生物，连上箭头；点一下某个生物，把它从网中移走，看哪些生物受到影响。": [
+  "“Food web”: drag from the organism that is eaten to the organism that eats it to draw an arrow; tap an organism to remove it from the web and see which organisms are affected.",
+  "« Réseau trophique » : faites glisser depuis l'être vivant qui est mangé vers celui qui le mange pour tracer une flèche ; touchez un être vivant pour le retirer du réseau et voir lesquels sont touchés."
+ ],
+ "化石是保存在岩层中的古生物遗体、遗物或生活痕迹，是研究生物进化最直接、最重要的证据。越古老的地层中化石越简单、越低等，越新的地层中化石越复杂、越高等，说明生物是由简单到复杂、由低等到高等、由水生到陆生逐渐进化的。始祖鸟化石兼有爬行类和鸟类的特征。": [
+  "Fossils are the remains, relics or traces of ancient organisms preserved in rock layers, and are the most direct and most important evidence for the study of evolution. The older the rock layer, the simpler and more primitive the fossils in it; the newer the layer, the more complex and advanced the fossils. This shows that organisms evolved gradually from simple to complex, from lower to higher and from aquatic to land forms. The fossil of Archaeopteryx has the features of both reptiles and birds.",
+  "Les fossiles sont des restes, des vestiges ou des traces de vie d'organismes anciens conservés dans les couches de roche ; ils sont la preuve la plus directe et la plus importante pour l'étude de l'évolution. Plus la couche est ancienne, plus les fossiles qu'elle contient sont simples et primitifs ; plus la couche est récente, plus les fossiles sont complexes et évolués. Cela montre que les êtres vivants ont évolué peu à peu du simple au complexe, des formes inférieures aux formes supérieures et des formes aquatiques aux formes terrestres. Le fossile d'Archaeopteryx présente à la fois des caractères de reptile et d'oiseau."
+ ],
+ "放射性同位素每过一个半衰期，剩下的量就减半，由此可以推算岩石和化石的年龄：年龄 = 半衰期 × log₂(1 / 剩余比例)。": [
+  "For a radioactive isotope, the amount left halves with every half-life, which lets us work out the age of rocks and fossils: age = half-life × log₂(1 / fraction remaining).",
+  "Pour un isotope radioactif, la quantité restante est divisée par deux à chaque demi-vie, ce qui permet de calculer l'âge des roches et des fossiles : âge = demi-vie × log₂(1 / fraction restante)."
+ ],
+ "性状由基因控制，基因在染色体上成对存在。显性基因（A）控制显性性状，隐性基因（a）控制隐性性状；只有 aa 才表现隐性性状，AA 和 Aa 都表现显性性状。亲代形成生殖细胞时成对的基因分开，各进入一个生殖细胞；受精时雌雄配子随机结合。": [
+  "Traits are controlled by genes, which exist in pairs on chromosomes. A dominant gene (A) controls the dominant trait and a recessive gene (a) controls the recessive trait; only aa shows the recessive trait, while AA and Aa both show the dominant trait. When parents form reproductive cells, the paired genes separate and each goes into one reproductive cell; at fertilisation the male and female gametes combine at random.",
+  "Les caractères sont contrôlés par des gènes, qui existent par paires sur les chromosomes. Un gène dominant (A) contrôle le caractère dominant et un gène récessif (a) contrôle le caractère récessif ; seul aa exprime le caractère récessif, tandis que AA et Aa expriment tous deux le caractère dominant. Quand les parents forment leurs cellules reproductrices, les gènes de chaque paire se séparent et chacun va dans une cellule reproductrice ; à la fécondation, les gamètes mâles et femelles s'associent au hasard."
+ ],
+ "用遗传图解（棋盘）列出 4 种组合：Aa × Aa 的后代基因型比为 1AA : 2Aa : 1aa，表现型比为显性 : 隐性 = 3 : 1。样本越大，实际比例越接近理论比例。人的性别由性染色体决定：女性 XX，男性 XY，生男生女的机会均等。ABO 血型由 I^A、I^B、i 三个基因决定。": [
+  "Use a genetic diagram (a grid) to list the 4 combinations: the offspring of Aa × Aa have genotypes in the ratio 1AA : 2Aa : 1aa and phenotypes in the ratio dominant : recessive = 3 : 1. The larger the sample, the closer the actual ratio is to the theoretical ratio. A person's sex is decided by the sex chromosomes: women XX, men XY, and the chances of a boy or a girl are equal. The ABO blood group is decided by three genes, I^A, I^B and i.",
+  "Utilisez un diagramme génétique (un échiquier) pour lister les 4 combinaisons : la descendance de Aa × Aa a des génotypes dans le rapport 1AA : 2Aa : 1aa et des phénotypes dans le rapport dominant : récessif = 3 : 1. Plus l'échantillon est grand, plus le rapport réel se rapproche du rapport théorique. Le sexe d'une personne est déterminé par les chromosomes sexuels : XX pour les femmes, XY pour les hommes, et les chances d'avoir un garçon ou une fille sont égales. Le groupe sanguin ABO est déterminé par trois gènes, I^A, I^B et i."
+ ],
+ "健康的生活方式：合理营养、适度运动、规律作息、不吸烟、不酗酒、拒绝毒品、保持心理健康、积极参加集体活动。运动时心率随强度增加；估算最大心率 = 220 − 年龄，有氧锻炼的目标心率约为最大心率的 70 %–85 %，过高不宜持续。": [
+  "A healthy way of life: a balanced diet, moderate exercise, regular hours, no smoking, no heavy drinking, saying no to drugs, a healthy state of mind and active participation in group activities. Heart rate rises with the intensity of exercise; the estimated maximum heart rate = 220 − age, and the target heart rate for aerobic exercise is about 70%–85% of the maximum; a rate that is too high should not be kept up.",
+  "Un mode de vie sain : une alimentation équilibrée, une activité physique modérée, des horaires réguliers, ne pas fumer, ne pas boire d'alcool avec excès, refuser les drogues, garder un état d'esprit sain et participer activement aux activités de groupe. La fréquence cardiaque augmente avec l'intensité de l'effort ; fréquence cardiaque maximale estimée = 220 − âge, et la fréquence cible d'un exercice aérobie est d'environ 70 % à 85 % du maximum ; une fréquence trop élevée ne doit pas être maintenue."
+ ],
+ "睡眠对生长发育很重要：学龄儿童每天宜睡 9–12 小时，青少年 8–10 小时（本模型的参考范围，具体请以医生和学校的建议为准）。": [
+  "Sleep is very important for growth and development: school-age children should sleep 9–12 hours a day and teenagers 8–10 hours (reference ranges of this model; please follow the advice of a doctor and the school for the details).",
+  "Le sommeil est très important pour la croissance et le développement : les enfants d'âge scolaire devraient dormir de 9 à 12 heures par jour et les adolescents de 8 à 10 heures (plages de référence de ce modèle ; pour les détails, suivez l'avis d'un médecin et de l'école)."
+ ],
+ "人体的激素由内分泌腺分泌，直接进入血液，含量很少，作用很大。胰岛分泌的胰岛素能调节糖的吸收、利用和转化，使血糖浓度降低并保持稳定（正常空腹约 3.9–6.1 mmol/L）。": [
+  "Hormones of the human body are secreted by endocrine glands and go directly into the blood; they are present in very small amounts but have great effects. The insulin secreted by the islets of the pancreas regulates the absorption, use and conversion of sugar, lowering the blood sugar concentration and keeping it stable (normally about 3.9–6.1 mmol/L when fasting).",
+  "Les hormones du corps humain sont sécrétées par les glandes endocrines et passent directement dans le sang ; elles sont présentes en très petite quantité mais ont de grands effets. L'insuline sécrétée par les îlots du pancréas règle l'absorption, l'utilisation et la transformation du sucre, abaisse la concentration de sucre dans le sang et la maintient stable (normalement environ 3,9 à 6,1 mmol/L à jeun)."
+ ],
+ "胰岛素分泌不足会患糖尿病：餐后血糖明显升高，超过肾脏的限度时尿中会出现葡萄糖，可以注射胰岛素治疗。图中为简化的模型，仅用于理解变化趋势。": [
+  "Too little insulin secretion causes diabetes: blood sugar rises clearly after meals, and when it goes above the limit of the kidney, glucose appears in the urine; it can be treated by injecting insulin. The picture is a simplified model, only for understanding the trend of the changes.",
+  "Une sécrétion insuffisante d'insuline provoque le diabète : la glycémie augmente nettement après les repas, et quand elle dépasse la limite du rein, du glucose apparaît dans l'urine ; on peut le traiter par des injections d'insuline. L'image est un modèle simplifié, destiné seulement à comprendre la tendance des variations."
+ ],
+ "生物多样性包括物种多样性、遗传多样性和生态系统多样性。威胁生物多样性的主要原因：栖息地的破坏和丧失、过度利用、外来物种入侵、环境污染和气候变化。保护措施：就地保护（建立自然保护区，最有效）、迁地保护（动物园、植物园）、建立濒危物种的基因库、加强法制管理和宣传教育。": [
+  "Biodiversity includes species diversity, genetic diversity and ecosystem diversity. The main causes that threaten biodiversity are the destruction and loss of habitats, over-exploitation, invasion by alien species, pollution and climate change. Protective measures: in-situ protection (setting up nature reserves, the most effective), ex-situ protection (zoos, botanical gardens), setting up gene banks for endangered species, and strengthening legal control, publicity and education.",
+  "La biodiversité comprend la diversité des espèces, la diversité génétique et la diversité des écosystèmes. Les principales causes qui menacent la biodiversité sont la destruction et la perte des habitats, la surexploitation, l'invasion d'espèces exotiques, la pollution et le changement climatique. Mesures de protection : protection in situ (créer des réserves naturelles, la plus efficace), protection ex situ (zoos, jardins botaniques), création de banques de gènes pour les espèces menacées, renforcement de la réglementation, de l'information et de l'éducation."
+ ],
+ "人类活动改变环境：燃烧化石燃料排放二氧化碳，使大气中的温室气体增多，全球变暖；砍伐森林使栖息地缩小，物种减少。保护环境要从节约资源、减少污染、植树造林做起。模型为简化的教学模型。": [
+  "Human activities change the environment: burning fossil fuels releases carbon dioxide, which increases the greenhouse gases in the atmosphere and causes global warming; cutting down forests shrinks habitats and reduces species. Protecting the environment starts with saving resources, reducing pollution and planting trees. The model is a simplified teaching model.",
+  "Les activités humaines modifient l'environnement : la combustion des combustibles fossiles rejette du dioxyde de carbone, ce qui augmente les gaz à effet de serre dans l'atmosphère et provoque le réchauffement climatique ; l'abattage des forêts réduit les habitats et le nombre d'espèces. Protéger l'environnement commence par économiser les ressources, réduire la pollution et planter des arbres. Ce modèle est un modèle pédagogique simplifié."
+ ],
+ "多细胞生物体的结构层次：细胞是基本的结构和功能单位；形态、结构、功能相似的细胞联合形成组织；几种组织构成器官；动物的几个器官构成系统，系统构成动物体。植物体没有“系统”这一层次：细胞 → 组织 → 器官 → 植物体。": [
+  "Levels of organisation of a multicellular organism: the cell is the basic unit of structure and function; cells of similar form, structure and function join to form a tissue; several tissues make an organ; several organs of an animal make a system, and the systems make the animal. A plant has no “system” level: cell → tissue → organ → plant.",
+  "Niveaux d'organisation d'un être vivant pluricellulaire : la cellule est l'unité de base de structure et de fonction ; des cellules de forme, de structure et de fonction semblables s'associent pour former un tissu ; plusieurs tissus forment un organe ; chez l'animal, plusieurs organes forment un système, et les systèmes forment l'animal. Une plante n'a pas de niveau « système » : cellule → tissu → organe → plante."
+ ],
+ "把下方的名称拖到它所属的层次中，也可以先点名称再点层次。": [
+  "Drag the names below into the level they belong to, or tap a name first and then a level.",
+  "Faites glisser les noms ci-dessous vers le niveau auquel ils appartiennent, ou touchez d'abord un nom, puis un niveau."
+ ],
+ "昆虫的发育：完全变态经过受精卵、幼虫、蛹、成虫四个时期，幼虫与成虫的形态差别很大（如家蚕、蝴蝶）；不完全变态经过受精卵、若虫、成虫三个时期，若虫与成虫相似（如蝗虫）。": [
+  "Development of insects: complete metamorphosis has four stages, fertilised egg, larva, pupa and adult, and the larva differs greatly in form from the adult (such as the silkworm and butterfly); incomplete metamorphosis has three stages, fertilised egg, nymph and adult, and the nymph resembles the adult (such as the locust).",
+  "Développement des insectes : la métamorphose complète comporte quatre stades, œuf fécondé, larve, nymphe et adulte, et la larve diffère beaucoup de l'adulte par sa forme (ver à soie, papillon) ; la métamorphose incomplète comporte trois stades, œuf fécondé, nymphe et adulte, et la nymphe ressemble à l'adulte (criquet)."
+ ],
+ "青蛙在水中体外受精，幼体蝌蚪用鳃呼吸，经过变态发育成用肺呼吸的成蛙；鸟类体内受精，卵外有卵壳，胚盘发育成雏鸟，属于不变态。": [
+  "Frogs are fertilised outside the body in water; the young tadpole breathes with gills and grows through metamorphosis into an adult frog that breathes with lungs. Birds are fertilised inside the body, and the egg has a shell; the germinal disc develops into a chick, with no metamorphosis.",
+  "Les grenouilles sont fécondées à l'extérieur du corps, dans l'eau ; le jeune têtard respire par des branchies et, par métamorphose, devient une grenouille adulte qui respire par des poumons. Les oiseaux sont fécondés à l'intérieur du corps, et l'œuf a une coquille ; le disque germinatif se développe en poussin, sans métamorphose."
+ ],
+ "显微镜的总放大倍数 = 目镜倍数 × 物镜倍数。放大倍数越大，看到的视野越小、细胞越大、数量越少，视野也越暗。": [
+  "Total magnification of a microscope = eyepiece magnification × objective magnification. The greater the magnification, the smaller the field of view, the larger the cells, the fewer of them you see, and the darker the field.",
+  "Grossissement total d'un microscope = grossissement de l'oculaire × grossissement de l'objectif. Plus le grossissement est grand, plus le champ de vision est petit, plus les cellules sont grandes, moins on en voit, et plus le champ est sombre."
+ ],
+ "转动粗准焦螺旋使镜筒下降（眼睛看着物镜，避免压坏玻片），再向上慢慢调节，直到物像清晰；高倍镜下只用细准焦螺旋。显微镜成倒立的像：玻片向左移动，物像向右移动；物像偏哪里，就向哪里移动玻片。": [
+  "Turn the coarse focusing knob to lower the tube (watch the objective from the side to avoid crushing the slide), then raise it slowly until the image is clear; under high power use only the fine focusing knob. A microscope gives an inverted image: when the slide moves left, the image moves right; move the slide towards the side where the image is.",
+  "Tournez la vis macrométrique pour abaisser le tube (regardez l'objectif de côté pour ne pas écraser la lame), puis remontez-le lentement jusqu'à ce que l'image soit nette ; avec un fort grossissement, n'utilisez que la vis micrométrique. Un microscope donne une image renversée : quand la lame va vers la gauche, l'image va vers la droite ; déplacez la lame du côté où se trouve l'image."
+ ],
+ "动物的运动系统由骨、骨连结（主要是关节）和骨骼肌组成。运动时，骨骼肌受到神经传来的刺激而收缩，牵动骨绕关节转动：骨起杠杆作用，关节起支点作用，骨骼肌起动力作用。": [
+  "The locomotor system of an animal consists of bones, bone connections (mainly joints) and skeletal muscles. During movement the skeletal muscle is stimulated by nerves and contracts, pulling the bone to turn about the joint: the bone acts as a lever, the joint as the fulcrum and the skeletal muscle as the source of force.",
+  "L'appareil locomoteur d'un animal est formé des os, des liaisons entre les os (surtout les articulations) et des muscles squelettiques. Pendant le mouvement, le muscle squelettique est stimulé par les nerfs et se contracte, ce qui entraîne l'os en rotation autour de l'articulation : l'os joue le rôle de levier, l'articulation celui de point d'appui et le muscle squelettique celui de force motrice."
+ ],
+ "一个动作需要多组肌肉相互配合：屈肘时肱二头肌收缩、肱三头肌舒张；伸肘时相反。前臂是费力杠杆（动力臂小于阻力臂），费力但可以省距离、动作灵活。": [
+  "One movement needs several groups of muscles working together: when the elbow bends the biceps contracts and the triceps relaxes; when the elbow straightens it is the opposite. The forearm is a lever that needs more effort (the effort arm is shorter than the load arm): it costs effort but saves distance and makes movements flexible.",
+  "Un mouvement nécessite la coopération de plusieurs groupes de muscles : quand le coude se plie, le biceps se contracte et le triceps se relâche ; quand le coude se tend, c'est l'inverse. L'avant-bras est un levier qui demande plus de force (le bras moteur est plus court que le bras résistant) : il demande de la force mais économise du déplacement et rend les mouvements souples."
+ ],
+ "神经调节的基本方式是反射，完成反射的结构是反射弧：感受器 → 传入神经 → 神经中枢 → 传出神经 → 效应器。反射弧不完整（任何一个环节受损），反射就不能完成。": [
+  "The basic form of nervous regulation is the reflex, and the structure that carries out a reflex is the reflex arc: receptor → sensory nerve → nerve centre → motor nerve → effector. If the reflex arc is incomplete (any link is damaged), the reflex cannot be carried out.",
+  "La forme de base de la régulation nerveuse est le réflexe, et la structure qui l'accomplit est l'arc réflexe : récepteur → nerf sensitif → centre nerveux → nerf moteur → effecteur. Si l'arc réflexe est incomplet (un maillon quelconque est endommagé), le réflexe ne peut pas s'accomplir."
+ ],
+ "非条件反射（如膝跳反射、缩手反射）是生来就有的，神经中枢在脊髓等低级部位；条件反射（如谈虎色变）是后天学习得到的，需要大脑皮层参与，所以更慢。用尺子下落测反应时间：下落距离 d 与时间 t 的关系为 d = ½ g t²。": [
+  "An unconditioned reflex (such as the knee-jerk reflex or the hand-withdrawal reflex) is present from birth, and its nerve centre is in lower parts such as the spinal cord; a conditioned reflex (such as turning pale at the mention of a tiger) is learned later in life and needs the cerebral cortex, so it is slower. Measuring reaction time with a falling ruler: the relation between the distance fallen d and the time t is d = ½ g t².",
+  "Un réflexe inconditionnel (comme le réflexe rotulien ou le réflexe de retrait de la main) existe dès la naissance, et son centre nerveux se trouve dans des parties inférieures comme la moelle épinière ; un réflexe conditionnel (comme pâlir à la seule mention d'un tigre) s'acquiert au cours de la vie et nécessite le cortex cérébral, il est donc plus lent. Mesure du temps de réaction avec une règle qui tombe : la relation entre la distance de chute d et le temps t est d = ½ g t²."
+ ],
+ "光合作用：绿色植物利用光能，在叶绿体中把二氧化碳和水转化成储存能量的有机物（淀粉等），并释放氧气。水草放出氧气的气泡越多，光合作用越强。": [
+  "Photosynthesis: green plants use light energy to turn carbon dioxide and water, in the chloroplasts, into organic matter that stores energy (starch and so on) and release oxygen. The more oxygen bubbles a water plant gives off, the stronger the photosynthesis.",
+  "Photosynthèse : les plantes vertes utilisent l'énergie lumineuse pour transformer, dans les chloroplastes, le dioxyde de carbone et l'eau en matière organique qui stocke de l'énergie (amidon, etc.) et libèrent de l'oxygène. Plus une plante aquatique dégage de bulles d'oxygène, plus la photosynthèse est intense."
+ ],
+ "光照越强速率越大，但到一定程度后不再增加（饱和）；这时二氧化碳浓度或温度成为限制因素。温度太高或太低，酶的活性都会降低。淀粉遇碘液变成蓝黑色，可用来检验叶片是否进行了光合作用。": [
+  "The stronger the light, the greater the rate, but beyond a certain point it no longer increases (saturation); then the carbon dioxide concentration or the temperature becomes the limiting factor. Too high or too low a temperature lowers the activity of enzymes. Starch turns blue-black with iodine solution, which can be used to test whether a leaf has carried out photosynthesis.",
+  "Plus la lumière est forte, plus la vitesse est grande, mais au-delà d'un certain point elle n'augmente plus (saturation) ; la concentration en dioxyde de carbone ou la température devient alors le facteur limitant. Une température trop élevée ou trop basse diminue l'activité des enzymes. L'amidon devient bleu-noir avec la solution d'iode, ce qui permet de vérifier si une feuille a réalisé la photosynthèse."
+ ],
+ "在一个生态系统中，捕食者和猎物的数量相互制约，呈周期性波动：猎物增多 → 捕食者增多 → 猎物减少 → 捕食者减少 → 猎物又增多。生态系统具有一定的自我调节能力，保持相对稳定的状态——生态平衡；但这种调节能力有限，过度捕杀或破坏会打破平衡。": [
+  "In an ecosystem the numbers of predators and prey limit each other and fluctuate in cycles: more prey → more predators → less prey → fewer predators → more prey again. An ecosystem has a certain ability to regulate itself and stay in a relatively stable state, the ecological balance; but this ability is limited, and excessive hunting or damage will upset the balance.",
+  "Dans un écosystème, les effectifs des prédateurs et des proies se limitent mutuellement et fluctuent de façon cyclique : plus de proies → plus de prédateurs → moins de proies → moins de prédateurs → de nouveau plus de proies. Un écosystème a une certaine capacité d'autorégulation et reste dans un état relativement stable, l'équilibre écologique ; mais cette capacité est limitée, et une chasse excessive ou des destructions rompent l'équilibre."
+ ],
+ "种群在资源有限的环境中呈“S”形增长，最终稳定在环境容纳量（K）附近；种群数量为 K/2 时增长最快。": [
+  "In an environment with limited resources a population grows in an “S” shape and finally settles near the carrying capacity (K); growth is fastest when the population is K/2.",
+  "Dans un milieu aux ressources limitées, une population croît selon une courbe en « S » et se stabilise finalement près de la capacité de charge (K) ; la croissance est la plus rapide quand l'effectif est K/2."
+ ],
+ "呼吸作用：活细胞在线粒体中利用氧，把有机物分解成二氧化碳和水，并释放能量，白天和夜晚都在进行。光合作用只在有光时进行。白天光合作用强于呼吸作用，植物释放氧气；夜晚只有呼吸作用，植物吸收氧气、放出二氧化碳。": [
+  "Respiration: living cells use oxygen in the mitochondria to break down organic matter into carbon dioxide and water and release energy, by day and by night. Photosynthesis takes place only in the light. By day photosynthesis is stronger than respiration and the plant releases oxygen; at night there is only respiration, and the plant takes in oxygen and gives out carbon dioxide.",
+  "Respiration : les cellules vivantes utilisent l'oxygène dans les mitochondries pour décomposer la matière organique en dioxyde de carbone et en eau et libérer de l'énergie, de jour comme de nuit. La photosynthèse n'a lieu qu'à la lumière. De jour, la photosynthèse est plus forte que la respiration et la plante libère de l'oxygène ; la nuit, il n'y a que la respiration, et la plante absorbe de l'oxygène et rejette du dioxyde de carbone."
+ ],
+ "温度升高，酶的活性增大，呼吸作用增强（模型：温度每升高 10 °C，速率约为原来的 2 倍）。萌发的种子呼吸旺盛，放出的二氧化碳使澄清石灰水变浑浊。": [
+  "When the temperature rises, enzyme activity increases and respiration gets stronger (model: for every 10 °C rise the rate is about 2 times as great). Germinating seeds respire vigorously, and the carbon dioxide they give out makes clear limewater turn cloudy.",
+  "Quand la température s'élève, l'activité des enzymes augmente et la respiration s'intensifie (modèle : pour chaque élévation de 10 °C, la vitesse est environ multipliée par 2). Les graines qui germent respirent intensément, et le dioxyde de carbone qu'elles dégagent trouble l'eau de chaux limpide."
+ ],
+ "种子萌发需要的外界条件：适宜的温度、一定的水分和充足的空气；自身条件：胚是完整的、有活力的，并且已度过休眠期。光照对大多数种子的萌发没有影响。": [
+  "External conditions needed for seeds to germinate: a suitable temperature, some water and enough air; conditions of the seed itself: the embryo is complete and alive, and the dormancy period is over. Light has no effect on the germination of most seeds.",
+  "Conditions extérieures nécessaires à la germination des graines : une température convenable, un peu d'eau et suffisamment d'air ; conditions propres à la graine : l'embryon est complet et vivant, et la période de dormance est terminée. La lumière n'a pas d'effet sur la germination de la plupart des graines."
+ ],
+ "对照实验只改变一个条件（变量），其他条件相同。A 皿的条件都适宜，作为对照；B、C、D 各缺一个条件；E 皿由你设置。每皿 20 粒种子，用萌发的粒数比较。": [
+  "A controlled experiment changes only one condition (the variable) and keeps all the others the same. In dish A all the conditions are suitable, and it serves as the control; B, C and D each lack one condition; dish E is set by you. There are 20 seeds in each dish, and they are compared by the number that germinate.",
+  "Une expérience témoin ne modifie qu'une seule condition (la variable) et garde toutes les autres identiques. Dans la boîte A, toutes les conditions sont convenables et elle sert de témoin ; B, C et D manquent chacune d'une condition ; la boîte E est réglée par vous. Chaque boîte contient 20 graines, et on les compare au nombre de graines qui germent."
+ ],
+ "生物普遍具有变异，变异是不定向的；在生存斗争中，具有有利变异的个体容易生存并留下后代，不利变异的个体被淘汰，这就是自然选择，结果是适者生存。桦尺蛾的体色就是一个例子：树干被煤烟熏黑后，深色蛾不易被鸟发现，数量增多。": [
+  "Variation is common among living things and is not directed; in the struggle for existence, individuals with favourable variations survive more easily and leave offspring, while individuals with unfavourable variations are eliminated: this is natural selection, and its result is survival of the fittest. The body colour of the peppered moth is an example: after tree trunks were blackened by soot, dark moths were less easily seen by birds and increased in number.",
+  "La variation est générale chez les êtres vivants et n'est pas orientée ; dans la lutte pour l'existence, les individus qui ont des variations favorables survivent plus facilement et laissent une descendance, tandis que ceux qui ont des variations défavorables sont éliminés : c'est la sélection naturelle, dont le résultat est la survie des mieux adaptés. La couleur du corps de la phalène du bouleau en est un exemple : après le noircissement des troncs par la suie, les phalènes sombres étaient moins facilement repérées par les oiseaux et sont devenues plus nombreuses."
+ ],
+ "拖动“世代”滑块观察深色蛾的比例；调节树皮的污染程度和捕食压力。这是一个简化模型：存活率不同 → 下一代比例改变。": [
+  "Drag the “generation” slider to watch the proportion of dark moths; adjust the amount of pollution on the bark and the predation pressure. This is a simplified model: different survival rates → the proportion changes in the next generation.",
+  "Faites glisser le curseur « génération » pour observer la proportion de phalènes sombres ; réglez le degré de pollution de l'écorce et la pression de prédation. C'est un modèle simplifié : des taux de survie différents → la proportion change à la génération suivante."
+ ],
+ "皮肤由表皮、真皮和皮下组织构成，具有保护、排泄（汗液）、调节体温和感受外界刺激的功能。人体产热与散热保持平衡，体温维持在约 37 °C：热的时候皮肤血管舒张、汗腺分泌汗液，汗液蒸发带走热量；冷的时候皮肤血管收缩、减少散热，必要时战栗产热。": [
+  "The skin consists of the epidermis, the dermis and the subcutaneous tissue, and has the functions of protection, excretion (sweat), regulating body temperature and sensing the outside world. Heat production and heat loss of the body are in balance, keeping the body temperature at about 37 °C: when it is hot the blood vessels of the skin dilate and the sweat glands secrete sweat, and the evaporation of sweat carries heat away; when it is cold the blood vessels of the skin contract to reduce heat loss, and if necessary shivering produces heat.",
+  "La peau est formée de l'épiderme, du derme et de l'hypoderme, et elle assure les fonctions de protection, d'excrétion (la sueur), de régulation de la température du corps et de perception du monde extérieur. La production et la perte de chaleur du corps s'équilibrent, ce qui maintient la température du corps à environ 37 °C : quand il fait chaud, les vaisseaux sanguins de la peau se dilatent et les glandes sudoripares sécrètent de la sueur, dont l'évaporation emporte de la chaleur ; quand il fait froid, les vaisseaux sanguins de la peau se contractent pour réduire la perte de chaleur, et au besoin les frissons produisent de la chaleur."
+ ],
+ "模型：产热取决于活动，皮肤散热 = 8 ×（1 − 0.1 × 衣服层数）×（34 − 气温）W，汗液蒸发每毫升带走 2.43 kJ。": [
+  "Model: heat production depends on activity; heat loss through the skin = 8 × (1 − 0.1 × layers of clothes) × (34 − air temperature) W, and every millilitre of sweat that evaporates carries away 2.43 kJ.",
+  "Modèle : la production de chaleur dépend de l'activité ; la perte de chaleur par la peau = 8 × (1 − 0,1 × nombre de couches de vêtements) × (34 − température de l'air) W, et chaque millilitre de sueur qui s'évapore emporte 2,43 kJ."
+ ],
+ "蒸腾作用：水分以水蒸气的形式从叶片的气孔散失到空气中。蒸腾拉动水分和无机盐在植物体内向上运输，还能降低叶片温度、增加空气湿度。": [
+  "Transpiration: water is lost as water vapour from the stomata of the leaves into the air. Transpiration pulls water and mineral salts upward through the plant, and also lowers the temperature of the leaves and raises the humidity of the air.",
+  "Transpiration : l'eau est perdue sous forme de vapeur d'eau par les stomates des feuilles vers l'air. La transpiration tire l'eau et les sels minéraux vers le haut dans la plante, abaisse aussi la température des feuilles et augmente l'humidité de l'air."
+ ],
+ "保卫细胞吸水膨胀，气孔张开；失水收缩，气孔关闭。光照强、空气干燥、温度高、有风，蒸腾作用增强；叶面积越大，失水越多。气孔多分布在叶的下表皮。": [
+  "When the guard cells take up water they swell and the stomata open; when they lose water they shrink and the stomata close. Strong light, dry air, high temperature and wind increase transpiration; the larger the leaf area, the more water is lost. Stomata are mostly on the lower epidermis of the leaf.",
+  "Quand les cellules de garde absorbent de l'eau, elles gonflent et les stomates s'ouvrent ; quand elles perdent de l'eau, elles se rétractent et les stomates se ferment. Une forte lumière, un air sec, une température élevée et du vent intensifient la transpiration ; plus la surface de la feuille est grande, plus la perte d'eau est grande. Les stomates se trouvent surtout dans l'épiderme inférieur de la feuille."
+ ],
+ "血液由血浆和血细胞组成：血浆约占 55 %，运载血细胞、运输养料和废物；红细胞运输氧气（含血红蛋白，缺铁会贫血）；白细胞吞噬病菌、防御保护；血小板止血、凝血。": [
+  "Blood consists of plasma and blood cells: plasma makes up about 55%, and carries the blood cells, nutrients and wastes; red blood cells carry oxygen (they contain haemoglobin, and lack of iron causes anaemia); white blood cells engulf germs and protect the body; platelets stop bleeding and help clotting.",
+  "Le sang est formé du plasma et des cellules sanguines : le plasma représente environ 55 % et transporte les cellules sanguines, les nutriments et les déchets ; les globules rouges transportent l'oxygène (ils contiennent de l'hémoglobine, et le manque de fer provoque l'anémie) ; les globules blancs phagocytent les germes et protègent l'organisme ; les plaquettes arrêtent les saignements et favorisent la coagulation."
+ ],
+ "血管分为动脉（把血液送出心脏，管壁厚、弹性大、血流快）、静脉（把血液送回心脏，管壁较薄，四肢静脉有瓣膜）和毛细血管（连通动脉和静脉，管壁极薄、数量多、血流最慢，利于物质交换）。血流速度 = 流量 / 总横截面积。脉搏的次数等于心率。": [
+  "Blood vessels are divided into arteries (they carry blood away from the heart; thick walls, very elastic, fast blood flow), veins (they carry blood back to the heart; thinner walls, and valves in the veins of the limbs) and capillaries (they connect arteries and veins; extremely thin walls, very numerous, the slowest blood flow, which helps the exchange of substances). Blood speed = flow / total cross-sectional area. The pulse rate equals the heart rate.",
+  "Les vaisseaux sanguins se divisent en artères (elles éloignent le sang du cœur ; parois épaisses, très élastiques, écoulement rapide), veines (elles ramènent le sang au cœur ; parois plus minces, avec des valvules dans les veines des membres) et capillaires (ils relient les artères et les veines ; parois extrêmement minces, très nombreux, écoulement le plus lent, ce qui favorise les échanges de substances). Vitesse du sang = débit / section totale. La fréquence du pouls est égale à la fréquence cardiaque."
+ ],
+ "“{0}”属于：": [
+  "“{0}” belongs to:",
+  "« {0} » appartient à :"
+ ],
+ "繁殖行为": [
+  "reproductive behaviour",
+  "comportement de reproduction"
+ ],
+ "先天性行为生来就有，学习行为是后天通过生活经验和学习获得的，社会行为的群体内有明确分工或等级。": [
+  "Innate behaviour is present from birth, learned behaviour is acquired later through life experience and learning, and social behaviour involves a clear division of labour or rank within the group.",
+  "Le comportement inné existe dès la naissance, le comportement appris est acquis plus tard par l'expérience et l'apprentissage, et le comportement social suppose une division du travail ou une hiérarchie précise dans le groupe."
+ ],
+ "判断行为是否由遗传物质决定。": [
+  "Decide whether the behaviour is determined by genetic material.",
+  "Déterminez si le comportement est déterminé par le matériel génétique."
+ ],
+ "按模型，错误率 = 5 + 95 × e^(−k n)（%）。{0}的 k = {1}，练习 {2} 次后错误率约是多少？": [
+  "According to the model, error rate = 5 + 95 × e^(−k n) (%). For {0}, k = {1}. What is the error rate after {2} practices, approximately?",
+  "D'après le modèle, taux d'erreur = 5 + 95 × e^(−k n) (%). Pour {0}, k = {1}. Quel est approximativement le taux d'erreur après {2} essais ?"
+ ],
+ "学习能力强的动物，错误率下降得更快。": [
+  "In animals with a strong ability to learn, the error rate falls faster.",
+  "Chez les animaux qui ont une forte capacité d'apprentissage, le taux d'erreur diminue plus vite."
+ ],
+ "{0}的 k = {1}，错误率降到 {2} % 以下至少需要练习几次？": [
+  "For {0}, k = {1}. At least how many practices are needed for the error rate to fall below {2} %?",
+  "Pour {0}, k = {1}. Combien d'essais faut-il au minimum pour que le taux d'erreur descende sous {2} % ?"
+ ],
+ "解 5 + 95 e^(−k n) < 限值，向上取整。": [
+  "Solve 5 + 95 e^(−k n) < limit and round up.",
+  "Résolvez 5 + 95 e^(−k n) < limite et arrondissez à l'entier supérieur."
+ ],
+ "动物越高等，学习能力越强，原因是：": [
+  "The more highly developed an animal, the stronger its ability to learn, because:",
+  "Plus un animal est évolué, plus sa capacité d'apprentissage est grande, parce que :"
+ ],
+ "神经系统和大脑越发达，学习行为越复杂": [
+  "the more developed the nervous system and brain, the more complex the learned behaviour",
+  "plus le système nerveux et le cerveau sont développés, plus le comportement appris est complexe"
+ ],
+ "体形越大": [
+  "the body is larger",
+  "le corps est plus grand"
+ ],
+ "寿命越长": [
+  "the life span is longer",
+  "la durée de vie est plus longue"
+ ],
+ "皮肤越厚": [
+  "the skin is thicker",
+  "la peau est plus épaisse"
+ ],
+ "运动越快": [
+  "it moves faster",
+  "il se déplace plus vite"
+ ],
+ "学习行为需要大脑皮层的参与。": [
+  "Learned behaviour needs the cerebral cortex.",
+  "Le comportement appris nécessite le cortex cérébral."
+ ],
+ "{0} 型血的人给 {1} 型血的人输血（只考虑 ABO 血型），可以吗？": [
+  "Can a person of blood group {0} give blood to a person of blood group {1} (considering only the ABO groups)?",
+  "Une personne du groupe sanguin {0} peut-elle donner du sang à une personne du groupe {1} (en ne tenant compte que du système ABO) ?"
+ ],
+ "可以，红细胞不会凝集": [
+  "yes, the red blood cells will not clump",
+  "oui, les globules rouges ne s'agglutineront pas"
+ ],
+ "不可以，红细胞会发生凝集": [
+  "no, the red blood cells will clump",
+  "non, les globules rouges s'agglutineront"
+ ],
+ "只有输入少量血才可以": [
+  "only if a small amount of blood is given",
+  "seulement si l'on donne une petite quantité de sang"
+ ],
+ "必须先加热": [
+  "it must be heated first",
+  "il faut d'abord le chauffer"
+ ],
+ "供血者的红细胞抗原不能遇到受血者血浆中相应的抗体。": [
+  "The antigens on the donor's red cells must not meet the matching antibodies in the recipient's plasma.",
+  "Les antigènes des globules rouges du donneur ne doivent pas rencontrer les anticorps correspondants du plasma du receveur."
+ ],
+ "每搏输出量约 70 mL，心率为每分钟 {0} 次，每分钟心脏输出的血量是多少升？": [
+  "The stroke volume is about 70 mL and the heart rate is {0} beats a minute. How many litres of blood does the heart pump each minute?",
+  "Le volume d'éjection systolique est d'environ 70 mL et la fréquence cardiaque est de {0} battements par minute. Combien de litres de sang le cœur pompe-t-il par minute ?"
+ ],
+ "心输出量 = 每搏输出量 × 心率。": [
+  "Cardiac output = stroke volume × heart rate.",
+  "Débit cardiaque = volume d'éjection systolique × fréquence cardiaque."
+ ],
+ "心率为每分钟 {0} 次，心脏跳动一次（一个心动周期）约需多少秒？": [
+  "The heart rate is {0} beats a minute. About how many seconds does one heartbeat (one cardiac cycle) take?",
+  "La fréquence cardiaque est de {0} battements par minute. Combien de secondes dure environ un battement du cœur (un cycle cardiaque) ?"
+ ],
+ "周期 = 60 秒 / 心率。": [
+  "Period = 60 seconds / heart rate.",
+  "Période = 60 secondes / fréquence cardiaque."
+ ],
+ "ABO 血型有 O、A、B、AB 四种。供血者和受血者的血型共有 16 种搭配，其中红细胞不会凝集的搭配有几种？": [
+  "There are four ABO blood groups, O, A, B and AB. Donors and recipients can be paired in 16 ways; in how many of them do the red blood cells not clump?",
+  "Il y a quatre groupes sanguins ABO : O, A, B et AB. Donneurs et receveurs peuvent être associés de 16 façons ; dans combien d'entre elles les globules rouges ne s'agglutinent-ils pas ?"
+ ],
+ "O 型血可以输给所有人，AB 型血可以接受所有人。": [
+  "Blood group O can be given to everyone, and blood group AB can receive from everyone.",
+  "Le sang du groupe O peut être donné à tout le monde, et le groupe AB peut recevoir de tout le monde."
+ ],
+ "心脏处于“{0}”时，房室瓣和动脉瓣的状态是：": [
+  "When the heart is in “{0}”, the state of the atrioventricular valve and the arterial valve is:",
+  "Quand le cœur est dans la phase « {0} », l'état de la valve auriculo-ventriculaire et de la valve artérielle est :"
+ ],
+ "两种瓣膜都打开": [
+  "both valves are open",
+  "les deux valves sont ouvertes"
+ ],
+ "两种瓣膜都关闭": [
+  "both valves are closed",
+  "les deux valves sont fermées"
+ ],
+ "瓣膜使血液只能朝一个方向流动：心房 → 心室 → 动脉。": [
+  "The valves let blood flow in only one direction: atrium → ventricle → artery.",
+  "Les valves ne laissent circuler le sang que dans un seul sens : oreillette → ventricule → artère."
+ ],
+ "按模型：12 岁以前骨中有机物约占 50 %，12 岁到 40 岁线性降到 1/3，之后继续下降，80 岁时约占 20 %。{0} 岁时有机物约占百分之几？": [
+  "According to the model, before the age of 12 about 50 % of bone is organic matter, between 12 and 40 it falls linearly to 1/3, and it keeps falling after that, to about 20 % at 80. About what percentage is organic matter at the age of {0}?",
+  "D'après le modèle, avant 12 ans environ 50 % de l'os est de la matière organique, entre 12 et 40 ans cette part diminue linéairement jusqu'à 1/3, puis continue de diminuer, jusqu'à environ 20 % à 80 ans. Quel pourcentage de matière organique y a-t-il environ à l'âge de {0} ans ?"
+ ],
+ "儿童的骨有机物多，柔韧；老人的骨无机物多，脆。": [
+  "Children's bones have more organic matter and are flexible; old people's bones have more inorganic matter and are brittle.",
+  "Les os des enfants contiennent plus de matière organique et sont souples ; les os des personnes âgées contiennent plus de matière minérale et sont fragiles."
+ ],
+ "骨经过“{0}”后的变化是：": [
+  "After “{0}” the change in a bone is:",
+  "Après « {0} », la modification d'un os est :"
+ ],
+ "完全溶解": [
+  "it dissolves completely",
+  "il se dissout complètement"
+ ],
+ "变成黑色": [
+  "it turns black",
+  "il devient noir"
+ ],
+ "煅烧去掉有机物，骨变脆；盐酸溶去无机盐，骨变软。": [
+  "Heating burns off the organic matter and the bone becomes brittle; hydrochloric acid dissolves the mineral salts and the bone becomes soft.",
+  "La calcination détruit la matière organique et l'os devient cassant ; l'acide chlorhydrique dissout les sels minéraux et l'os devient mou."
+ ],
+ "儿童的骨比老年人的骨更容易发生弯曲变形而不易骨折，是因为儿童的骨：": [
+  "Children's bones bend and deform more easily than old people's bones and are less likely to break, because children's bones:",
+  "Les os des enfants se plient et se déforment plus facilement que ceux des personnes âgées et se cassent moins facilement, parce que les os des enfants :"
+ ],
+ "有机物含量较多，弹性大": [
+  "contain more organic matter and are very elastic",
+  "contiennent plus de matière organique et sont très élastiques"
+ ],
+ "无机物含量较多": [
+  "contain more inorganic matter",
+  "contiennent plus de matière minérale"
+ ],
+ "没有有机物": [
+  "have no organic matter",
+  "n'ont pas de matière organique"
+ ],
+ "比较厚": [
+  "are thicker",
+  "sont plus épais"
+ ],
+ "有机物使骨柔韧，无机物使骨坚硬。": [
+  "Organic matter makes bone flexible and inorganic matter makes it hard.",
+  "La matière organique rend l'os souple et la matière minérale le rend dur."
+ ],
+ "骨中使骨坚硬的成分是：": [
+  "The component of bone that makes it hard is:",
+  "Le composant de l'os qui le rend dur est :"
+ ],
+ "无机盐": [
+  "mineral salts",
+  "les sels minéraux"
+ ],
+ "血液": [
+  "blood",
+  "le sang"
+ ],
+ "无机盐主要是钙盐和磷酸盐。": [
+  "The mineral salts are mainly calcium salts and phosphates.",
+  "Les sels minéraux sont principalement des sels de calcium et des phosphates."
+ ],
+ "关节的基本结构包括：": [
+  "The basic structure of a joint includes:",
+  "La structure de base d'une articulation comprend :"
+ ],
+ "关节面（关节头和关节窝）、关节囊和关节腔": [
+  "joint surfaces (joint head and socket), joint capsule and joint cavity",
+  "des surfaces articulaires (tête et cavité articulaires), une capsule articulaire et une cavité articulaire"
+ ],
+ "骨膜、骨髓和骨质": [
+  "periosteum, bone marrow and bone tissue",
+  "le périoste, la moelle osseuse et le tissu osseux"
+ ],
+ "肌腱和肌腹": [
+  "tendon and muscle belly",
+  "le tendon et le ventre du muscle"
+ ],
+ "关节头和骨松质": [
+  "joint head and spongy bone",
+  "la tête articulaire et l'os spongieux"
+ ],
+ "关节腔内的滑液和关节软骨使关节灵活。": [
+  "The synovial fluid in the joint cavity and the joint cartilage make the joint move smoothly.",
+  "Le liquide synovial dans la cavité articulaire et le cartilage articulaire rendent l'articulation souple."
+ ],
+ "密闭的容器中气体的体积从 {0} mL 增大到 {1} mL，温度不变。原来的气压为 {2} kPa，现在的气压是多少？": [
+  "The volume of gas in a closed container increases from {0} mL to {1} mL at constant temperature. The original pressure was {2} kPa. What is the pressure now?",
+  "Le volume de gaz dans un récipient fermé passe de {0} mL à {1} mL à température constante. La pression initiale était {2} kPa. Quelle est la pression maintenant ?"
+ ],
+ "一定质量的气体，温度不变时，压强与体积成反比。": [
+  "For a fixed mass of gas at constant temperature, the pressure is inversely proportional to the volume.",
+  "Pour une masse de gaz donnée à température constante, la pression est inversement proportionnelle au volume."
+ ],
+ "平静呼吸时每次吸入 {0} mL 空气，每分钟呼吸 {1} 次，每分钟通气量是多少？": [
+  "In quiet breathing {0} mL of air is breathed in each time and the breathing rate is {1} a minute. What is the ventilation per minute?",
+  "En respiration calme, {0} mL d'air sont inspirés à chaque fois et la fréquence respiratoire est de {1} par minute. Quelle est la ventilation par minute ?"
+ ],
+ "每分钟通气量 = 每次呼吸量 × 呼吸频率。": [
+  "Ventilation per minute = volume of each breath × breathing rate.",
+  "Ventilation par minute = volume de chaque respiration × fréquence respiratoire."
+ ],
+ "模型：胸廓容积 = 2400 + 14 × 膈肌收缩% + 6 × 肋骨上升% (mL)。膈肌收缩 {0}%、肋骨上升 {1}% 时，胸廓容积是多少？": [
+  "Model: chest volume = 2400 + 14 × diaphragm contraction % + 6 × rib rise % (mL). With the diaphragm contracted {0}% and the ribs raised {1}%, what is the chest volume?",
+  "Modèle : volume thoracique = 2400 + 14 × % de contraction du diaphragme + 6 × % de soulèvement des côtes (mL). Avec le diaphragme contracté de {0} % et les côtes soulevées de {1} %, quel est le volume thoracique ?"
+ ],
+ "膈肌下降使胸廓上下径增大，肋骨上升使前后径、左右径增大。": [
+  "The lowering of the diaphragm increases the top-to-bottom diameter of the chest, and the rising of the ribs increases the front-to-back and side-to-side diameters.",
+  "L'abaissement du diaphragme augmente le diamètre vertical du thorax, et le soulèvement des côtes augmente les diamètres antéro-postérieur et transversal."
+ ],
+ "吸气时，下列各项变化正确的是：": [
+  "Which of the following changes during breathing in is correct?",
+  "Parmi les changements suivants à l'inspiration, lequel est correct ?"
+ ],
+ "膈肌收缩，胸廓容积扩大，肺内气压低于外界气压": [
+  "the diaphragm contracts, the volume of the chest increases and the pressure in the lungs is lower than the outside pressure",
+  "le diaphragme se contracte, le volume du thorax augmente et la pression dans les poumons est inférieure à la pression extérieure"
+ ],
+ "膈肌舒张，胸廓容积扩大，肺内气压低于外界气压": [
+  "the diaphragm relaxes, the volume of the chest increases and the pressure in the lungs is lower than the outside pressure",
+  "le diaphragme se relâche, le volume du thorax augmente et la pression dans les poumons est inférieure à la pression extérieure"
+ ],
+ "膈肌收缩，胸廓容积缩小，肺内气压高于外界气压": [
+  "the diaphragm contracts, the volume of the chest decreases and the pressure in the lungs is higher than the outside pressure",
+  "le diaphragme se contracte, le volume du thorax diminue et la pression dans les poumons est supérieure à la pression extérieure"
+ ],
+ "膈肌舒张，胸廓容积缩小，肺内气压低于外界气压": [
+  "the diaphragm relaxes, the volume of the chest decreases and the pressure in the lungs is lower than the outside pressure",
+  "le diaphragme se relâche, le volume du thorax diminue et la pression dans les poumons est inférieure à la pression extérieure"
+ ],
+ "气体总是从气压高处流向气压低处。": [
+  "Gas always flows from where the pressure is higher to where it is lower.",
+  "Le gaz s'écoule toujours de l'endroit où la pression est la plus haute vers celui où elle est la plus basse."
+ ],
+ "与吸入的气体相比，呼出的气体中：": [
+  "Compared with the air breathed in, the air breathed out has:",
+  "Par rapport à l'air inspiré, l'air expiré contient :"
+ ],
+ "氧气减少，二氧化碳增多": [
+  "less oxygen and more carbon dioxide",
+  "moins d'oxygène et plus de dioxyde de carbone"
+ ],
+ "氧气增多，二氧化碳减少": [
+  "more oxygen and less carbon dioxide",
+  "plus d'oxygène et moins de dioxyde de carbone"
+ ],
+ "氧气和二氧化碳都不变": [
+  "the same oxygen and carbon dioxide",
+  "autant d'oxygène et de dioxyde de carbone"
+ ],
+ "氧气和二氧化碳都增多": [
+  "more oxygen and more carbon dioxide",
+  "plus d'oxygène et plus de dioxyde de carbone"
+ ],
+ "吸入气体约含 21% 氧气、0.04% 二氧化碳；呼出气体约含 16% 氧气、4% 二氧化碳。": [
+  "The air breathed in contains about 21% oxygen and 0.04% carbon dioxide; the air breathed out contains about 16% oxygen and 4% carbon dioxide.",
+  "L'air inspiré contient environ 21 % d'oxygène et 0,04 % de dioxyde de carbone ; l'air expiré contient environ 16 % d'oxygène et 4 % de dioxyde de carbone."
+ ],
+ "下列哪个结构的功能是“{0}”？": [
+  "Which structure has the function “{0}”?",
+  "Quelle structure a pour fonction « {0} » ?"
+ ],
+ "把结构的名称与功能对应起来。": [
+  "Match the names of the structures with their functions.",
+  "Associez les noms des structures à leurs fonctions."
+ ],
+ "{0}的功能是：": [
+  "The function of {0} is:",
+  "La fonction de {0} est :"
+ ],
+ "细胞的各个结构分工合作。": [
+  "The structures of a cell share the work and cooperate.",
+  "Les structures d'une cellule se partagent le travail et coopèrent."
+ ],
+ "植物细胞有、动物细胞没有的结构共有几种？": [
+  "How many structures do plant cells have that animal cells do not?",
+  "Combien de structures les cellules végétales ont-elles que les cellules animales n'ont pas ?"
+ ],
+ "细胞壁、叶绿体、液泡。": [
+  "Cell wall, chloroplasts, vacuole.",
+  "Paroi cellulaire, chloroplastes, vacuole."
+ ],
+ "{0}细胞有{1}吗？": [
+  "Does a {0} cell have a {1}?",
+  "Une cellule {0} a-t-elle {1} ?"
+ ],
+ "不一定": [
+  "not necessarily",
+  "pas nécessairement"
+ ],
+ "只在某些时候有": [
+  "only at some times",
+  "seulement à certains moments"
+ ],
+ "植物细胞比动物细胞多细胞壁、叶绿体和液泡。": [
+  "Plant cells have a cell wall, chloroplasts and a vacuole in addition to what animal cells have.",
+  "Les cellules végétales ont en plus une paroi cellulaire, des chloroplastes et une vacuole par rapport aux cellules animales."
+ ],
+ "细胞中的遗传物质主要存在于：": [
+  "The genetic material of a cell is mainly found in:",
+  "Le matériel génétique d'une cellule se trouve principalement dans :"
+ ],
+ "细胞核内有染色体，染色体由 DNA 和蛋白质组成。": [
+  "The nucleus contains chromosomes, which consist of DNA and protein.",
+  "Le noyau contient des chromosomes, formés d'ADN et de protéines."
+ ],
+ "“{0}”属于脊椎动物中的：": [
+  "“{0}” belongs to which group of vertebrates?",
+  "« {0} » appartient à quel groupe de vertébrés ?"
+ ],
+ "脊椎动物分为鱼类、两栖类、爬行类、鸟类、哺乳类。": [
+  "Vertebrates are divided into fish, amphibians, reptiles, birds and mammals.",
+  "Les vertébrés se divisent en poissons, amphibiens, reptiles, oiseaux et mammifères."
+ ],
+ "“{0}”的体温是否恒定？": [
+  "Is the body temperature of “{0}” constant?",
+  "La température du corps de « {0} » est-elle constante ?"
+ ],
+ "恒定（恒温动物）": [
+  "constant (warm-blooded animal)",
+  "constante (animal à sang chaud)"
+ ],
+ "不恒定（变温动物）": [
+  "not constant (cold-blooded animal)",
+  "non constante (animal à sang froid)"
+ ],
+ "随季节变化的恒温动物": [
+  "a warm-blooded animal that changes with the season",
+  "un animal à sang chaud dont la température change avec la saison"
+ ],
+ "只有鸟类和哺乳类是恒温动物。": [
+  "Only birds and mammals are warm-blooded.",
+  "Seuls les oiseaux et les mammifères sont des animaux à sang chaud."
+ ],
+ "藻类、苔藓、蕨类用孢子繁殖；裸子植物和被子植物用种子繁殖。": [
+  "Algae, mosses and ferns reproduce by spores; gymnosperms and angiosperms reproduce by seeds.",
+  "Les algues, les mousses et les fougères se reproduisent par spores ; les gymnospermes et les angiospermes se reproduisent par graines."
+ ],
+ "生物分类的基本单位从大到小依次是界、门、纲、目、科、属、种，共有几级？": [
+  "The basic units of classification, from largest to smallest, are kingdom, phylum, class, order, family, genus and species. How many levels are there?",
+  "Les unités de base de la classification, de la plus grande à la plus petite, sont le règne, l'embranchement, la classe, l'ordre, la famille, le genre et l'espèce. Combien y a-t-il de niveaux ?"
+ ],
+ "级": [
+  "levels",
+  "niveaux"
+ ],
+ "最基本的分类单位是种。": [
+  "The most basic unit of classification is the species.",
+  "L'unité de classification la plus fondamentale est l'espèce."
+ ],
+ "生物分为哪几个界（本模型）？": [
+  "Into which kingdoms are organisms divided (in this model)?",
+  "En quels règnes les êtres vivants sont-ils répartis (dans ce modèle) ?"
+ ],
+ "动物界、植物界、真菌界、细菌界、病毒（非细胞生物）": [
+  "animal kingdom, plant kingdom, fungus kingdom, bacteria kingdom, viruses (non-cellular organisms)",
+  "règne animal, règne végétal, règne des champignons, règne des bactéries, virus (êtres non cellulaires)"
+ ],
+ "动物界、植物界、真菌界": [
+  "animal kingdom, plant kingdom, fungus kingdom",
+  "règne animal, règne végétal, règne des champignons"
+ ],
+ "动物界、植物界、细菌界、病毒": [
+  "animal kingdom, plant kingdom, bacteria kingdom, viruses",
+  "règne animal, règne végétal, règne des bactéries, virus"
+ ],
+ "动物界、植物界、真菌界、细菌界": [
+  "animal kingdom, plant kingdom, fungus kingdom, bacteria kingdom",
+  "règne animal, règne végétal, règne des champignons, règne des bactéries"
+ ],
+ "动物界、植物界": [
+  "animal kingdom, plant kingdom",
+  "règne animal, règne végétal"
+ ],
+ "病毒没有细胞结构。": [
+  "Viruses have no cellular structure.",
+  "Les virus n'ont pas de structure cellulaire."
+ ],
+ "按模型，怀孕第 {0} 周时胎儿的身长约为多少毫米？（8 周 30，12 周 60，20 周 250，28 周 370，36 周 470，40 周 500）": [
+  "According to the model, about how many millimetres long is the fetus in week {0} of pregnancy? (week 8: 30, week 12: 60, week 20: 250, week 28: 370, week 36: 470, week 40: 500)",
+  "D'après le modèle, quelle est approximativement la longueur du fœtus, en millimètres, à la semaine {0} de grossesse ? (semaine 8 : 30, semaine 12 : 60, semaine 20 : 250, semaine 28 : 370, semaine 36 : 470, semaine 40 : 500)"
+ ],
+ "按表格读数。": [
+  "Read the value from the table.",
+  "Lisez la valeur dans le tableau."
+ ],
+ "按模型，怀孕第 {0} 周时胎儿的质量约为多少克？（8 周 4，12 周 14，20 周 300，28 周 1000，36 周 2600，40 周 3400）": [
+  "According to the model, about how many grams does the fetus weigh in week {0} of pregnancy? (week 8: 4, week 12: 14, week 20: 300, week 28: 1000, week 36: 2600, week 40: 3400)",
+  "D'après le modèle, quelle est approximativement la masse du fœtus, en grammes, à la semaine {0} de grossesse ? (semaine 8 : 4, semaine 12 : 14, semaine 20 : 300, semaine 28 : 1000, semaine 36 : 2600, semaine 40 : 3400)"
+ ],
+ "按模型，{0}青春期身高突增最快的年龄约是多少岁？": [
+  "According to the model, at about what age is the growth spurt in height fastest during puberty for {0}?",
+  "D'après le modèle, à quel âge environ la poussée de croissance en taille est-elle la plus rapide à la puberté pour {0} ?"
+ ],
+ "女孩的身高突增一般比男孩早约两年。": [
+  "The growth spurt in height of girls generally comes about two years earlier than that of boys.",
+  "La poussée de croissance en taille des filles survient en général environ deux ans plus tôt que celle des garçons."
+ ],
+ "精子和卵细胞结合形成受精卵的部位是：": [
+  "The place where a sperm and an egg cell join to form a fertilised egg is the:",
+  "L'endroit où un spermatozoïde et un ovule s'unissent pour former un œuf fécondé est :"
+ ],
+ "输卵管": [
+  "fallopian tube",
+  "la trompe de Fallope"
+ ],
+ "卵巢": [
+  "ovary",
+  "l'ovaire"
+ ],
+ "阴道": [
+  "vagina",
+  "le vagin"
+ ],
+ "受精卵在输卵管内形成，并移动到子宫内着床。": [
+  "The fertilised egg forms in the fallopian tube and moves into the uterus, where it implants.",
+  "L'œuf fécondé se forme dans la trompe de Fallope et se déplace jusqu'à l'utérus, où il s'implante."
+ ],
+ "胎儿在母体内通过什么获得营养物质和氧气？": [
+  "Through what does the fetus get nutrients and oxygen in the mother's body?",
+  "Par quoi le fœtus reçoit-il des nutriments et de l'oxygène dans le corps de la mère ?"
+ ],
+ "胎盘和脐带": [
+  "the placenta and umbilical cord",
+  "le placenta et le cordon ombilical"
+ ],
+ "羊水": [
+  "the amniotic fluid",
+  "le liquide amniotique"
+ ],
+ "卵黄": [
+  "the yolk",
+  "le vitellus"
+ ],
+ "肺": [
+  "the lungs",
+  "les poumons"
+ ],
+ "胎儿与母体的物质交换在胎盘处进行。": [
+  "The exchange of substances between the fetus and the mother takes place at the placenta.",
+  "Les échanges de substances entre le fœtus et la mère ont lieu au niveau du placenta."
+ ],
+ "按表中数据（谷类 350 kcal / 100 g，蔬菜 25 kcal / 100 g）：{0} g 谷类加 {1} g 蔬菜共提供多少 kcal 的能量？": [
+  "According to the table (cereals 350 kcal / 100 g, vegetables 25 kcal / 100 g): how many kcal of energy do {0} g of cereals and {1} g of vegetables provide together?",
+  "D'après le tableau (céréales 350 kcal / 100 g, légumes 25 kcal / 100 g) : combien de kcal d'énergie {0} g de céréales et {1} g de légumes fournissent-ils ensemble ?"
+ ],
+ "能量 = 质量 / 100 × 每 100 g 的能量。": [
+  "Energy = mass / 100 × energy per 100 g.",
+  "Énergie = masse / 100 × énergie pour 100 g."
+ ],
+ "按表中数据（谷类蛋白质 10 g / 100 g，肉蛋鱼 18 g / 100 g，奶和豆制品 3 g / 100 g）：{0} g {1}含蛋白质多少克？": [
+  "According to the table (cereal protein 10 g / 100 g, meat, eggs and fish 18 g / 100 g, milk and soya products 3 g / 100 g): how many grams of protein are in {0} g of {1}?",
+  "D'après le tableau (protéines des céréales 10 g / 100 g, viande, œufs et poisson 18 g / 100 g, lait et produits à base de soja 3 g / 100 g) : combien de grammes de protéines y a-t-il dans {0} g de {1} ?"
+ ],
+ "蛋白质 = 质量 / 100 × 每 100 g 的蛋白质。": [
+  "Protein = mass / 100 × protein per 100 g.",
+  "Protéines = masse / 100 × protéines pour 100 g."
+ ],
+ "每克脂肪约提供 9 kcal 的能量。{0} g 食用油（脂肪含量 100 %）约提供多少 kcal？": [
+  "Each gram of fat provides about 9 kcal of energy. About how many kcal do {0} g of cooking oil (fat content 100 %) provide?",
+  "Chaque gramme de lipides fournit environ 9 kcal d'énergie. Combien de kcal {0} g d'huile de cuisine (teneur en lipides 100 %) fournissent-ils environ ?"
+ ],
+ "能量 = 脂肪质量 × 9。": [
+  "Energy = mass of fat × 9.",
+  "Énergie = masse de lipides × 9."
+ ],
+ "缺乏{0}，容易引起：": [
+  "Lack of {0} easily causes:",
+  "Le manque de {0} provoque facilement :"
+ ],
+ "食物多样、荤素搭配可以避免营养缺乏。": [
+  "A varied diet with both meat and vegetables can prevent nutritional deficiencies.",
+  "Une alimentation variée, avec de la viande et des légumes, permet d'éviter les carences."
+ ],
+ "人体生命活动所需能量的主要来源是：": [
+  "The main source of the energy needed for the body's life activities is:",
+  "La principale source de l'énergie nécessaire aux activités vitales du corps est :"
+ ],
+ "糖类": [
+  "carbohydrates",
+  "les glucides"
+ ],
+ "维生素": [
+  "vitamins",
+  "les vitamines"
+ ],
+ "糖类是主要供能物质，脂肪是备用能源，蛋白质是构成细胞的基本物质。": [
+  "Carbohydrates are the main energy supply, fat is the reserve of energy, and protein is the basic material that builds cells.",
+  "Les glucides sont la principale source d'énergie, les lipides sont la réserve d'énergie et les protéines sont la matière de base qui construit les cellules."
+ ],
+ "唾液淀粉酶的活性模型：最适温度 37 °C、最适 pH 6.8，两侧近似钟形（温度高于 37 °C 时下降更快）。在 {0} °C、pH {1} 时，酶活性约为最大值的百分之几？": [
+  "Model of the activity of salivary amylase: optimum temperature 37 °C, optimum pH 6.8, roughly bell-shaped on both sides (it falls faster above 37 °C). At {0} °C and pH {1}, about what percentage of its maximum is the enzyme activity?",
+  "Modèle de l'activité de l'amylase salivaire : température optimale 37 °C, pH optimal 6,8, courbe à peu près en cloche de part et d'autre (elle baisse plus vite au-dessus de 37 °C). À {0} °C et pH {1}, quel pourcentage de son maximum l'activité de l'enzyme représente-t-elle environ ?"
+ ],
+ "温度或 pH 偏离最适值，酶的活性都下降。": [
+  "If the temperature or the pH moves away from the optimum, enzyme activity falls.",
+  "Si la température ou le pH s'écarte de l'optimum, l'activité de l'enzyme diminue."
+ ],
+ "蛋白质开始被消化的器官是：": [
+  "The organ in which protein begins to be digested is the:",
+  "L'organe dans lequel les protéines commencent à être digérées est :"
+ ],
+ "胃液中的胃蛋白酶初步消化蛋白质。": [
+  "The pepsin in gastric juice begins the digestion of protein.",
+  "La pepsine du suc gastrique commence la digestion des protéines."
+ ],
+ "淀粉最终被消化成：": [
+  "Starch is finally digested into:",
+  "L'amidon est finalement digéré en :"
+ ],
+ "麦芽糖": [
+  "maltose",
+  "maltose"
+ ],
+ "甘油": [
+  "glycerol",
+  "glycérol"
+ ],
+ "脂肪酸": [
+  "fatty acids",
+  "acides gras"
+ ],
+ "淀粉在口腔中先变成麦芽糖，在小肠中变成葡萄糖。": [
+  "Starch first becomes maltose in the mouth and becomes glucose in the small intestine.",
+  "L'amidon devient d'abord du maltose dans la bouche, puis du glucose dans l'intestin grêle."
+ ],
+ "胆汁不含消化酶，它的作用是：": [
+  "Bile contains no digestive enzymes; its function is to:",
+  "La bile ne contient pas d'enzymes digestives ; sa fonction est de :"
+ ],
+ "把脂肪乳化成小颗粒，便于消化": [
+  "emulsify fat into small droplets to make it easier to digest",
+  "émulsionner les lipides en petites gouttelettes pour faciliter leur digestion"
+ ],
+ "把蛋白质分解成氨基酸": [
+  "break protein down into amino acids",
+  "décomposer les protéines en acides aminés"
+ ],
+ "把淀粉分解成葡萄糖": [
+  "break starch down into glucose",
+  "décomposer l'amidon en glucose"
+ ],
+ "杀死食物中的细菌": [
+  "kill the bacteria in food",
+  "tuer les bactéries des aliments"
+ ],
+ "吸收水分": [
+  "absorb water",
+  "absorber l'eau"
+ ],
+ "胆汁由肝脏分泌，储存在胆囊中。": [
+  "Bile is secreted by the liver and stored in the gall bladder.",
+  "La bile est sécrétée par le foie et stockée dans la vésicule biliaire."
+ ],
+ "唾液淀粉酶在 0 °C 时活性很低，在 100 °C 时：": [
+  "The activity of salivary amylase is very low at 0 °C; at 100 °C it:",
+  "L'activité de l'amylase salivaire est très faible à 0 °C ; à 100 °C, elle :"
+ ],
+ "已被破坏，降温后也不能恢复": [
+  "has been destroyed and cannot be restored by cooling",
+  "est détruite et ne peut pas être restaurée par refroidissement"
+ ],
+ "活性最高": [
+  "is at its highest",
+  "est à son maximum"
+ ],
+ "活性与 37 °C 时相同": [
+  "is the same as at 37 °C",
+  "est la même qu'à 37 °C"
+ ],
+ "降温后能完全恢复": [
+  "can be fully restored by cooling",
+  "peut être entièrement restaurée par refroidissement"
+ ],
+ "变成另一种酶": [
+  "becomes another enzyme",
+  "devient une autre enzyme"
+ ],
+ "低温抑制酶的活性，高温破坏酶的结构。": [
+  "Low temperature inhibits enzyme activity; high temperature destroys the structure of the enzyme.",
+  "Une basse température inhibe l'activité de l'enzyme ; une haute température détruit sa structure."
+ ],
+ "某生物的体细胞中有 {0} 条染色体。有丝分裂后期，一个细胞中有多少条染色体？": [
+  "The body cells of an organism have {0} chromosomes. How many chromosomes are there in one cell in anaphase of mitosis?",
+  "Les cellules du corps d'un être vivant ont {0} chromosomes. Combien y a-t-il de chromosomes dans une cellule en anaphase de la mitose ?"
+ ],
+ "后期着丝点分裂，染色体数目暂时加倍。": [
+  "In anaphase the centromeres split and the number of chromosomes doubles for a while.",
+  "En anaphase, les centromères se divisent et le nombre de chromosomes double temporairement."
+ ],
+ "某生物的体细胞中有 {0} 条染色体。有丝分裂中期，一个细胞中有多少条染色单体？": [
+  "The body cells of an organism have {0} chromosomes. How many chromatids are there in one cell in metaphase of mitosis?",
+  "Les cellules du corps d'un être vivant ont {0} chromosomes. Combien y a-t-il de chromatides dans une cellule en métaphase de la mitose ?"
+ ],
+ "复制后每条染色体含有两条染色单体。": [
+  "After copying, each chromosome has two chromatids.",
+  "Après la copie, chaque chromosome comporte deux chromatides."
+ ],
+ "某生物的体细胞中有 {0} 条染色体。有丝分裂完成后，每个子细胞中有多少条染色体？": [
+  "The body cells of an organism have {0} chromosomes. After mitosis is complete, how many chromosomes does each daughter cell have?",
+  "Les cellules du corps d'un être vivant ont {0} chromosomes. Une fois la mitose terminée, combien de chromosomes chaque cellule fille a-t-elle ?"
+ ],
+ "子细胞与母细胞的染色体数目相同。": [
+  "The daughter cells have the same number of chromosomes as the mother cell.",
+  "Les cellules filles ont le même nombre de chromosomes que la cellule mère."
+ ],
+ "人的体细胞中有 {0} 条染色体时（以此类推），生殖细胞（精子或卵细胞）中有多少条染色体？": [
+  "If the body cells of a person have {0} chromosomes (and so on for other cases), how many chromosomes are there in a reproductive cell (a sperm or an egg cell)?",
+  "Si les cellules du corps d'une personne ont {0} chromosomes (et ainsi de suite pour les autres cas), combien y a-t-il de chromosomes dans une cellule reproductrice (un spermatozoïde ou un ovule) ?"
+ ],
+ "生殖细胞中的染色体数目是体细胞的一半。": [
+  "The number of chromosomes in a reproductive cell is half that of a body cell.",
+  "Le nombre de chromosomes d'une cellule reproductrice est la moitié de celui d'une cellule du corps."
+ ],
+ "某生物的体细胞核中有 {0} 个 DNA 分子。分裂间期 DNA 复制后，细胞核中有多少个 DNA 分子？": [
+  "The nucleus of a body cell of an organism has {0} DNA molecules. After DNA is copied in interphase, how many DNA molecules are there in the nucleus?",
+  "Le noyau d'une cellule du corps d'un être vivant contient {0} molécules d'ADN. Après la copie de l'ADN en interphase, combien y a-t-il de molécules d'ADN dans le noyau ?"
+ ],
+ "DNA 复制后数目加倍。": [
+  "The number of DNA molecules doubles after copying.",
+  "Le nombre de molécules d'ADN double après la copie."
+ ],
+ "按模型，听到的最高频率为 20000 − 300 ×（年龄 − 10）Hz，且不低于 8000 Hz。{0} 岁时最高约是多少 Hz？": [
+  "According to the model, the highest frequency heard is 20000 − 300 × (age − 10) Hz, and not below 8000 Hz. What is the highest at the age of {0}, approximately, in Hz?",
+  "D'après le modèle, la fréquence la plus élevée perçue est 20000 − 300 × (âge − 10) Hz, et pas moins de 8000 Hz. Quelle est-elle approximativement, en Hz, à l'âge de {0} ans ?"
+ ],
+ "随着年龄增长，高频听力下降。": [
+  "High-frequency hearing declines with age.",
+  "L'audition des hautes fréquences diminue avec l'âge."
+ ],
+ "按模型，85 dB 时每天安全聆听 8 小时，声音每增加 3 dB，安全时间减半。{0} dB 时安全聆听约多少小时？": [
+  "According to the model, at 85 dB the safe listening time is 8 hours a day, and every 3 dB increase halves the safe time. About how many hours a day is it safe to listen at {0} dB?",
+  "D'après le modèle, à 85 dB la durée d'écoute sans danger est de 8 heures par jour, et chaque augmentation de 3 dB divise cette durée par deux. Pendant combien d'heures par jour peut-on écouter sans danger à {0} dB environ ?"
+ ],
+ "安全时间 = 8 × 2^(−(dB − 85)/3)。": [
+  "Safe time = 8 × 2^(−(dB − 85)/3).",
+  "Durée sans danger = 8 × 2^(−(dB − 85)/3)."
+ ],
+ "同样按模型，{0} dB 时每天安全聆听约多少小时？": [
+  "Using the same model, about how many hours a day is it safe to listen at {0} dB?",
+  "Avec le même modèle, pendant combien d'heures par jour peut-on écouter sans danger à {0} dB environ ?"
+ ],
+ "声音更小，安全时间更长。": [
+  "The sound is quieter, so the safe time is longer.",
+  "Le son est plus faible, donc la durée sans danger est plus longue."
+ ],
+ "听觉感受器位于：": [
+  "The hearing receptors are located in the:",
+  "Les récepteurs auditifs sont situés dans :"
+ ],
+ "半规管": [
+  "semicircular canals",
+  "les canaux semi-circulaires"
+ ],
+ "咽鼓管": [
+  "Eustachian tube",
+  "la trompe d'Eustache"
+ ],
+ "耳蜗内有听觉感受器，把振动转变成神经冲动。": [
+  "The cochlea contains the hearing receptors, which turn vibrations into nerve impulses.",
+  "La cochlée contient les récepteurs auditifs, qui transforment les vibrations en influx nerveux."
+ ],
+ "与身体平衡有关的结构是：": [
+  "The structures related to balance of the body are the:",
+  "Les structures liées à l'équilibre du corps sont :"
+ ],
+ "前庭和半规管": [
+  "vestibule and semicircular canals",
+  "le vestibule et les canaux semi-circulaires"
+ ],
+ "前庭和半规管内有感受头部位置变动的感受器。": [
+  "The vestibule and semicircular canals contain receptors that sense changes of head position.",
+  "Le vestibule et les canaux semi-circulaires contiennent des récepteurs qui détectent les changements de position de la tête."
+ ],
+ "一种传染病的基本传染数 R0 = {0}。至少需要多大比例的人有免疫力，疫情才不会扩大？（群体免疫阈值 = 1 − 1/R0）": [
+  "The basic reproduction number of an infectious disease is R0 = {0}. At least what proportion of people must be immune so that the epidemic does not grow? (Herd immunity threshold = 1 − 1/R0)",
+  "Le nombre de reproduction de base d'une maladie infectieuse est R0 = {0}. Quelle proportion minimale de personnes doit être immunisée pour que l'épidémie ne s'étende pas ? (Seuil d'immunité collective = 1 − 1/R0)"
+ ],
+ "R0 越大，需要的免疫比例越高。": [
+  "The greater R0 is, the higher the proportion of immune people needed.",
+  "Plus R0 est grand, plus la proportion de personnes immunisées nécessaire est élevée."
+ ],
+ "基本传染数 R0 = {0}，隔离使传播减少 {1}%，切断途径使传播再减少 {2}%，人群中 {3}% 已接种（免疫）。有效传染数 Reff = R0 × (1 − 隔离) × (1 − 途径) × 易感者比例，约为多少？": [
+  "The basic reproduction number is R0 = {0}; isolation reduces transmission by {1}%, cutting off the route reduces it by a further {2}%, and {3}% of the population is already vaccinated (immune). Effective reproduction number Reff = R0 × (1 − isolation) × (1 − route) × share of susceptible people; what is it, approximately?",
+  "Le nombre de reproduction de base est R0 = {0} ; l'isolement réduit la transmission de {1} %, la coupure de la voie de transmission la réduit encore de {2} %, et {3} % de la population est déjà vaccinée (immunisée). Nombre de reproduction effectif Reff = R0 × (1 − isolement) × (1 − voie) × proportion de personnes sensibles ; quelle est sa valeur approximative ?"
+ ],
+ "Reff < 1 时疫情会逐渐消退。": [
+  "When Reff < 1 the epidemic gradually dies out.",
+  "Quand Reff < 1, l'épidémie s'éteint peu à peu."
+ ],
+ "一个 {0} 人的社区中，{1}% 的人已接种疫苗并产生免疫力，其余人为易感人群，易感人群约有多少人？": [
+  "In a community of {0} people, {1}% have been vaccinated and are immune, and the rest are susceptible. About how many susceptible people are there?",
+  "Dans une communauté de {0} personnes, {1} % ont été vaccinées et sont immunisées, et les autres sont sensibles. Combien y a-t-il environ de personnes sensibles ?"
+ ],
+ "接种疫苗是保护易感人群的措施。": [
+  "Vaccination is a measure that protects the susceptible population.",
+  "La vaccination est une mesure qui protège la population sensible."
+ ],
+ "“{0}”属于预防传染病的哪一类措施？": [
+  "Which kind of measure for preventing infectious diseases does “{0}” belong to?",
+  "À quel type de mesure de prévention des maladies infectieuses « {0} » appartient-il ?"
+ ],
+ "控制传染源": [
+  "controlling the source of infection",
+  "maîtriser la source d'infection"
+ ],
+ "切断传播途径": [
+  "cutting off the route of transmission",
+  "couper la voie de transmission"
+ ],
+ "保护易感人群": [
+  "protecting the susceptible population",
+  "protéger la population sensible"
+ ],
+ "消灭病原体的天敌": [
+  "destroying the natural enemies of the pathogen",
+  "détruire les ennemis naturels de l'agent pathogène"
+ ],
+ "传染病的三个基本环节：传染源、传播途径、易感人群。": [
+  "The three basic links of infectious diseases: source of infection, route of transmission, susceptible population.",
+  "Les trois maillons des maladies infectieuses : source d'infection, voie de transmission, population sensible."
+ ],
+ "再次接触同一种病原体时，抗体产生得更快、更多，主要是因为体内有：": [
+  "On meeting the same pathogen again, antibodies are produced faster and in larger amounts, mainly because the body has:",
+  "Quand on rencontre de nouveau le même agent pathogène, les anticorps sont produits plus vite et en plus grande quantité, principalement parce que l'organisme possède :"
+ ],
+ "记忆细胞": [
+  "memory cells",
+  "des cellules mémoire"
+ ],
+ "血小板": [
+  "platelets",
+  "des plaquettes"
+ ],
+ "更多的病原体": [
+  "more pathogens",
+  "plus d'agents pathogènes"
+ ],
+ "第一次感染后，淋巴细胞保留了“记忆”。": [
+  "After the first infection, lymphocytes keep a “memory”.",
+  "Après la première infection, les lymphocytes gardent une « mémoire »."
+ ],
+ "两肾每分钟滤过形成原尿 {0} mL。一天（1440 分钟）形成原尿多少升？": [
+  "The two kidneys filter {0} mL of primary urine every minute. How many litres of primary urine are formed in a day (1440 minutes)?",
+  "Les deux reins filtrent {0} mL d'urine primitive par minute. Combien de litres d'urine primitive se forment en un jour (1440 minutes) ?"
+ ],
+ "原尿量 = 每分钟滤过量 × 1440。": [
+  "Primary urine = filtration per minute × 1440.",
+  "Urine primitive = filtration par minute × 1440."
+ ],
+ "某人一天喝水 {0} L，出汗 {1} L，代谢产生水 0.3 L，呼吸和粪便带走 0.6 L（尿量不少于 0.5 L）。一天尿量约多少升？": [
+  "A person drinks {0} L of water in a day and sweats {1} L; metabolism produces 0.3 L of water, and 0.6 L is lost in breathing and faeces (the urine is not less than 0.5 L). About how many litres of urine are produced in a day?",
+  "Une personne boit {0} L d'eau par jour et transpire {1} L ; le métabolisme produit 0,3 L d'eau, et 0,6 L sont perdus par la respiration et les selles (l'urine n'est pas inférieure à 0,5 L). Combien de litres d'urine sont produits environ en un jour ?"
+ ],
+ "尿量 = 饮水 + 代谢水 − 汗 − 呼吸和粪便丢失。": [
+  "Urine = water drunk + metabolic water − sweat − loss in breathing and faeces.",
+  "Urine = eau bue + eau métabolique − sueur − pertes par la respiration et les selles."
+ ],
+ "一天形成原尿 180 L，排出尿 {0} L。肾小管重吸收了原尿中的百分之几？": [
+  "180 L of primary urine are formed in a day and {0} L of urine is passed. What percentage of the primary urine is reabsorbed by the tubules?",
+  "180 L d'urine primitive se forment en un jour et {0} L d'urine sont éliminés. Quel pourcentage de l'urine primitive est réabsorbé par les tubules ?"
+ ],
+ "重吸收的比例 = 1 −（尿量 / 原尿量）。": [
+  "Proportion reabsorbed = 1 − (urine / primary urine).",
+  "Proportion réabsorbée = 1 − (urine / urine primitive)."
+ ],
+ "尿液形成的两个主要过程是：": [
+  "The two main processes in the formation of urine are:",
+  "Les deux principaux processus de la formation de l'urine sont :"
+ ],
+ "肾小球的滤过作用和肾小管的重吸收作用": [
+  "filtration by the glomerulus and reabsorption by the renal tubule",
+  "la filtration par le glomérule et la réabsorption par le tubule rénal"
+ ],
+ "肾小球的重吸收和肾小管的滤过": [
+  "reabsorption by the glomerulus and filtration by the tubule",
+  "la réabsorption par le glomérule et la filtration par le tubule"
+ ],
+ "只有肾小管的分泌": [
+  "secretion by the tubule only",
+  "la sécrétion par le tubule seulement"
+ ],
+ "膀胱的滤过和重吸收": [
+  "filtration and reabsorption by the bladder",
+  "la filtration et la réabsorption par la vessie"
+ ],
+ "血液流经肾小球时，血细胞和大分子蛋白质不能滤过。": [
+  "When blood flows through the glomerulus, blood cells and large protein molecules cannot be filtered.",
+  "Quand le sang passe dans le glomérule, les cellules sanguines et les grosses molécules de protéines ne peuvent pas être filtrées."
+ ],
+ "健康人的尿中一般不含葡萄糖，因为葡萄糖：": [
+  "The urine of a healthy person generally contains no glucose, because the glucose:",
+  "L'urine d'une personne en bonne santé ne contient en général pas de glucose, parce que le glucose :"
+ ],
+ "被肾小管全部重吸收回血液": [
+  "is completely reabsorbed into the blood by the renal tubule",
+  "est entièrement réabsorbé dans le sang par le tubule rénal"
+ ],
+ "不能被肾小球滤过": [
+  "cannot be filtered by the glomerulus",
+  "ne peut pas être filtré par le glomérule"
+ ],
+ "在膀胱中被分解": [
+  "is broken down in the bladder",
+  "est décomposé dans la vessie"
+ ],
+ "在肝脏中被排出": [
+  "is excreted in the liver",
+  "est éliminé dans le foie"
+ ],
+ "随汗液排出": [
+  "is lost in sweat",
+  "est éliminé dans la sueur"
+ ],
+ "血糖过高超过重吸收限度时，尿中才出现葡萄糖。": [
+  "Glucose appears in the urine only when the blood sugar is above the limit of reabsorption.",
+  "Du glucose n'apparaît dans l'urine que lorsque la glycémie dépasse la limite de réabsorption."
+ ],
+ "近视眼的度数是 {0} 度（即 {1} D），他不戴眼镜时能看清的最远距离（远点）是多少厘米？": [
+  "The power of a short-sighted eye is {0} “degrees” (that is {1} D). What is the farthest distance he can see clearly without glasses (the far point), in centimetres?",
+  "La myopie d'un œil est de {0} « degrés » (soit {1} δ). Quelle est la plus grande distance à laquelle il voit nettement sans lunettes (le punctum remotum), en centimètres ?"
+ ],
+ "远点 = 1 / 近视度数（D），单位为米。": [
+  "Far point = 1 / short-sightedness (D), in metres.",
+  "Punctum remotum = 1 / myopie (δ), en mètres."
+ ],
+ "一位近视者的远点为 {0} cm，要看清无穷远处，应配戴焦度为多少 D 的镜片？（凹透镜为负）": [
+  "The far point of a short-sighted person is {0} cm. To see clearly at infinity, what power in D must the lenses of his glasses have? (A concave lens is negative.)",
+  "Le punctum remotum d'une personne myope est {0} cm. Pour voir nettement à l'infini, quelle vergence en δ ses verres doivent-ils avoir ? (Une lentille divergente est négative.)"
+ ],
+ "凹透镜使光线发散，镜片的焦度 = −1 / 远点（m）。": [
+  "A concave lens makes light diverge; the power of the lens = −1 / far point (m).",
+  "Une lentille divergente fait diverger la lumière ; vergence de la lentille = −1 / punctum remotum (m)."
+ ],
+ "正常眼要看清 {0} cm 处的物体，晶状体要比看远处时多增加多少 D 的屈光力？": [
+  "For a normal eye to see an object {0} cm away clearly, by how many more D must the power of the lens increase compared with looking far away?",
+  "Pour qu'un œil normal voie nettement un objet situé à {0} cm, de combien de δ la vergence du cristallin doit-elle augmenter par rapport à la vision de loin ?"
+ ],
+ "需要增加的屈光力 = 1 / 物距（m）。": [
+  "Power to be added = 1 / object distance (m).",
+  "Vergence à ajouter = 1 / distance de l'objet (m)."
+ ],
+ "模型：眼的调节能力为 {0} D。近视 {1} D 的人，近点（能看清的最近距离）是多少厘米？": [
+  "Model: the accommodation of the eye is {0} D. For a person who is {1} D short-sighted, what is the near point (the nearest distance he can see clearly), in centimetres?",
+  "Modèle : l'accommodation de l'œil est de {0} δ. Pour une personne myope de {1} δ, quel est le punctum proximum (la plus courte distance à laquelle elle voit nettement), en centimètres ?"
+ ],
+ "近点 = 1 / (调节能力 + 近视度数)（m）。": [
+  "Near point = 1 / (accommodation + short-sightedness) (m).",
+  "Punctum proximum = 1 / (accommodation + myopie) (m)."
+ ],
+ "近视眼看远处的物体时，物像落在视网膜的：": [
+  "When a short-sighted eye looks at a distant object, the image falls on the retina:",
+  "Quand un œil myope regarde un objet éloigné, l'image se forme sur la rétine :"
+ ],
+ "前方": [
+  "in front",
+  "en avant"
+ ],
+ "后方": [
+  "behind",
+  "en arrière"
+ ],
+ "正上方": [
+  "directly above",
+  "juste au-dessus"
+ ],
+ "正中央": [
+  "at the centre",
+  "au centre"
+ ],
+ "眼球前后径过长或晶状体曲度过大。": [
+  "The eyeball is too long from front to back, or the lens is too curved.",
+  "L'œil est trop long d'avant en arrière, ou le cristallin est trop bombé."
+ ],
+ "一个细菌每 20 分钟分裂一次。培养液中最初有 {0} 个细菌，经过 {1} 次分裂后（忽略死亡）共有多少个？": [
+  "One bacterium divides once every 20 minutes. There are {0} bacteria in the culture at the start. How many are there after {1} divisions (ignoring deaths)?",
+  "Une bactérie se divise une fois toutes les 20 minutes. Il y a {0} bactéries dans le milieu de culture au départ. Combien y en a-t-il après {1} divisions (en ne tenant pas compte des morts) ?"
+ ],
+ "细菌以二分裂的方式繁殖：N = N₀ × 2ⁿ。": [
+  "Bacteria reproduce by binary fission: N = N₀ × 2ⁿ.",
+  "Les bactéries se multiplient par scissiparité : N = N₀ × 2ⁿ."
+ ],
+ "酵母菌无氧呼吸：C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂。{0} g 葡萄糖完全发酵，最多产生多少克二氧化碳？（相对分子质量：葡萄糖 180，二氧化碳 44）": [
+  "Yeast respires without oxygen: C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂. When {0} g of glucose ferments completely, at most how many grams of carbon dioxide are produced? (Relative molecular masses: glucose 180, carbon dioxide 44)",
+  "La levure respire sans oxygène : C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂. Quand {0} g de glucose fermentent complètement, combien de grammes de dioxyde de carbone sont produits au maximum ? (Masses moléculaires relatives : glucose 180, dioxyde de carbone 44)"
+ ],
+ "180 g 葡萄糖产生 88 g 二氧化碳。": [
+  "180 g of glucose produce 88 g of carbon dioxide.",
+  "180 g de glucose produisent 88 g de dioxyde de carbone."
+ ],
+ "{0}发酵的产物主要是：": [
+  "The main products of {0} fermentation are:",
+  "Les principaux produits de la fermentation {0} sont :"
+ ],
+ "酒精和乳酸": [
+  "alcohol and lactic acid",
+  "de l'alcool et de l'acide lactique"
+ ],
+ "醋酸和氧气": [
+  "acetic acid and oxygen",
+  "de l'acide acétique et de l'oxygène"
+ ],
+ "酿酒用酵母菌，制酸奶、泡菜用乳酸菌，制醋用醋酸菌。": [
+  "Yeast is used to make wine, lactic acid bacteria to make yoghurt and pickles, and acetic acid bacteria to make vinegar.",
+  "On utilise la levure pour faire le vin, les bactéries lactiques pour faire le yaourt et les légumes lactofermentés, et les bactéries acétiques pour faire le vinaigre."
+ ],
+ "细菌生长曲线中，细菌数量按指数方式增长最快的时期是：": [
+  "In the growth curve of bacteria, the phase in which the number of bacteria grows fastest, exponentially, is:",
+  "Dans la courbe de croissance des bactéries, la phase pendant laquelle le nombre de bactéries augmente le plus vite, de façon exponentielle, est :"
+ ],
+ "对数期营养充足、环境适宜，繁殖速度最快。": [
+  "In the exponential phase there are plenty of nutrients and the environment is suitable, so reproduction is fastest.",
+  "En phase exponentielle, les nutriments sont abondants et le milieu est favorable, donc la multiplication est la plus rapide."
+ ],
+ "酵母菌酿酒（产生酒精）需要的条件是：": [
+  "The conditions needed for yeast to make wine (produce alcohol) are:",
+  "Les conditions nécessaires pour que la levure fasse le vin (produise de l'alcool) sont :"
+ ],
+ "无氧（密封）": [
+  "no oxygen (sealed)",
+  "absence d'oxygène (milieu fermé)"
+ ],
+ "充足的氧气": [
+  "plenty of oxygen",
+  "beaucoup d'oxygène"
+ ],
+ "强光照": [
+  "strong light",
+  "une forte lumière"
+ ],
+ "低于 0 °C": [
+  "below 0 °C",
+  "moins de 0 °C"
+ ],
+ "高于 100 °C": [
+  "above 100 °C",
+  "plus de 100 °C"
+ ],
+ "有氧时酵母菌大量繁殖，无氧时发酵产生酒精。": [
+  "With oxygen, yeast multiplies in large numbers; without oxygen, fermentation produces alcohol.",
+  "En présence d'oxygène, la levure se multiplie en grand nombre ; sans oxygène, la fermentation produit de l'alcool."
+ ],
+ "心肺复苏时按压频率为每分钟 {0} 次，{1} 分钟共按压多少次？": [
+  "During CPR the compression rate is {0} a minute. How many compressions are there in {1} minutes?",
+  "Pendant la RCP, la fréquence des compressions est de {0} par minute. Combien de compressions fait-on en {1} minutes ?"
+ ],
+ "按压频率应为每分钟 100–120 次。": [
+  "The compression rate should be 100–120 a minute.",
+  "La fréquence des compressions doit être de 100 à 120 par minute."
+ ],
+ "某药的剂量为每次每千克体重 {0} mg。体重 {1} kg，每次应服多少毫克？": [
+  "The dose of a medicine is {0} mg per kilogram of body weight each time. For a body weight of {1} kg, how many milligrams should be taken each time?",
+  "La dose d'un médicament est de {0} mg par kilogramme de poids corporel à chaque prise. Pour un poids de {1} kg, combien de milligrammes faut-il prendre à chaque fois ?"
+ ],
+ "剂量 = 体重 × 每千克剂量。必须按说明书或医生的建议。": [
+  "Dose = body weight × dose per kilogram. The instructions or a doctor's advice must be followed.",
+  "Dose = poids corporel × dose par kilogramme. Il faut suivre la notice ou l'avis d'un médecin."
+ ],
+ "体重 {0} kg，每次每千克 {1} mg，一天服 {2} 次，一天共多少毫克？": [
+  "Body weight {0} kg, {1} mg per kilogram each time, taken {2} times a day. How many milligrams is that in a day?",
+  "Poids corporel {0} kg, {1} mg par kilogramme à chaque prise, {2} prises par jour. Combien de milligrammes cela fait-il par jour ?"
+ ],
+ "一天的总量不能超过每日最大剂量。": [
+  "The total for a day must not exceed the maximum daily dose.",
+  "La quantité totale pour une journée ne doit pas dépasser la dose maximale quotidienne."
+ ],
+ "发现有人突然倒地、没有呼吸和心跳，应先：": [
+  "When you find someone who suddenly falls down and is not breathing and has no heartbeat, you should first:",
+  "Lorsque vous trouvez quelqu'un qui tombe soudainement, ne respire pas et n'a pas de battements de cœur, vous devez d'abord :"
+ ],
+ "立即拨打 120 并开始心肺复苏": [
+  "call 120 at once and start CPR",
+  "appeler aussitôt le 120 et commencer la RCP"
+ ],
+ "先喂水": [
+  "give the person water",
+  "lui donner de l'eau"
+ ],
+ "把人扶起来行走": [
+  "help the person up and walk",
+  "le relever et le faire marcher"
+ ],
+ "等待其他人来处理": [
+  "wait for others to deal with it",
+  "attendre que d'autres s'en occupent"
+ ],
+ "用冷水泼醒": [
+  "throw cold water on the person to wake him",
+  "lui jeter de l'eau froide pour le réveiller"
+ ],
+ "急救电话 120；成人按压深度约 5–6 cm，按压与吹气的比例为 30 : 2。": [
+  "Emergency number 120; for an adult the compression depth is about 5–6 cm, and the ratio of compressions to breaths is 30 : 2.",
+  "Numéro d'urgence 120 ; chez l'adulte, la profondeur des compressions est d'environ 5 à 6 cm, et le rapport compressions-insufflations est de 30 : 2."
+ ],
+ "关于药品的使用，下列做法正确的是：": [
+  "Which of the following is the correct way to use medicines?",
+  "Parmi les pratiques suivantes concernant les médicaments, laquelle est correcte ?"
+ ],
+ "服药前阅读说明书，按量按时服用": [
+  "read the instructions before taking and take the right dose at the right time",
+  "lire la notice avant de prendre le médicament et le prendre à la bonne dose, au bon moment"
+ ],
+ "症状好转后随意加量": [
+  "increase the dose at will once the symptoms get better",
+  "augmenter la dose à volonté quand les symptômes s'améliorent"
+ ],
+ "不同的药一起大量服用": [
+  "take large amounts of different medicines together",
+  "prendre ensemble de grandes quantités de médicaments différents"
+ ],
+ "过期的药减半服用": [
+  "take half the dose of an out-of-date medicine",
+  "prendre la moitié de la dose d'un médicament périmé"
+ ],
+ "按别人的经验服药": [
+  "take medicines according to other people's experience",
+  "prendre des médicaments d'après l'expérience d'autres personnes"
+ ],
+ "非处方药（OTC）也要看说明书；处方药凭医生处方购买。": [
+  "Over-the-counter (OTC) medicines also need their instructions read; prescription medicines are bought with a doctor's prescription.",
+  "Les médicaments sans ordonnance doivent aussi être pris après lecture de la notice ; les médicaments sur ordonnance s'achètent avec une prescription médicale."
+ ],
+ "一朵花的子房中有 {0} 个胚珠，有 {1} 粒花粉落到柱头上并各自萌发花粉管（已传粉）。这朵花最多结出几粒种子？": [
+  "The ovary of a flower has {0} ovules, and {1} pollen grains land on the stigma and each grows a pollen tube (pollination has taken place). At most how many seeds can this flower produce?",
+  "L'ovaire d'une fleur contient {0} ovules, et {1} grains de pollen se déposent sur le stigmate et forment chacun un tube pollinique (la pollinisation a eu lieu). Combien de graines cette fleur peut-elle produire au maximum ?"
+ ],
+ "每个胚珠需要一个花粉管到达，才能受精发育成种子。": [
+  "Each ovule needs one pollen tube to reach it before it can be fertilised and develop into a seed.",
+  "Chaque ovule a besoin qu'un tube pollinique l'atteigne pour être fécondé et devenir une graine."
+ ],
+ "一个子房里有 {0} 个胚珠，要使它们全部发育成种子，至少需要几粒花粉萌发？": [
+  "An ovary has {0} ovules. At least how many pollen grains must germinate for all of them to develop into seeds?",
+  "Un ovaire contient {0} ovules. Combien de grains de pollen doivent germer au minimum pour que tous deviennent des graines ?"
+ ],
+ "一个胚珠受精需要一个花粉管。": [
+  "Fertilising one ovule needs one pollen tube.",
+  "La fécondation d'un ovule nécessite un tube pollinique."
+ ],
+ "花经过传粉和受精后，{0}发育成：": [
+  "After a flower has been pollinated and fertilised, the {0} develops into the:",
+  "Une fois la fleur pollinisée et fécondée, {0} devient :"
+ ],
+ "子房 → 果实；胚珠 → 种子；受精卵 → 胚；子房壁 → 果皮；珠被 → 种皮。": [
+  "ovary → fruit; ovule → seed; fertilised egg → embryo; ovary wall → pericarp; integument → seed coat.",
+  "ovaire → fruit ; ovule → graine ; œuf fécondé → embryon ; paroi de l'ovaire → péricarpe ; téguments de l'ovule → tégument de la graine."
+ ],
+ "下面哪一项是“{0}”的意思？": [
+  "Which of the following is the meaning of “{0}”?",
+  "Parmi les propositions suivantes, laquelle est le sens de « {0} » ?"
+ ],
+ "种子萌发形成幼苗": [
+  "a seed germinating into a seedling",
+  "une graine qui germe pour former une plantule"
+ ],
+ "花瓣凋落": [
+  "the petals falling",
+  "la chute des pétales"
+ ],
+ "果实成熟": [
+  "the fruit ripening",
+  "la maturation du fruit"
+ ],
+ "传粉在先，受精在后。": [
+  "Pollination comes first and fertilisation afterwards.",
+  "La pollinisation vient en premier et la fécondation ensuite."
+ ],
+ "下列顺序正确的是：": [
+  "Which of the following sequences is correct?",
+  "Parmi les suites suivantes, laquelle est correcte ?"
+ ],
+ "开花 → 传粉 → 受精 → 果实和种子形成": [
+  "flowering → pollination → fertilisation → formation of fruit and seeds",
+  "floraison → pollinisation → fécondation → formation du fruit et des graines"
+ ],
+ "开花 → 受精 → 传粉 → 果实和种子形成": [
+  "flowering → fertilisation → pollination → formation of fruit and seeds",
+  "floraison → fécondation → pollinisation → formation du fruit et des graines"
+ ],
+ "传粉 → 开花 → 受精 → 果实和种子形成": [
+  "pollination → flowering → fertilisation → formation of fruit and seeds",
+  "pollinisation → floraison → fécondation → formation du fruit et des graines"
+ ],
+ "受精 → 开花 → 传粉 → 果实和种子形成": [
+  "fertilisation → flowering → pollination → formation of fruit and seeds",
+  "fécondation → floraison → pollinisation → formation du fruit et des graines"
+ ],
+ "先传粉，再受精。": [
+  "Pollination first, then fertilisation.",
+  "D'abord la pollinisation, puis la fécondation."
+ ],
+ "生产者固定的能量为 {0} kJ，能量传递效率为 10%。第 {1} 营养级最多获得多少 kJ？": [
+  "The energy fixed by the producers is {0} kJ and the energy transfer efficiency is 10%. At most how many kJ does trophic level {1} receive?",
+  "L'énergie fixée par les producteurs est {0} kJ et le rendement de transfert d'énergie est 10 %. Combien de kJ le niveau trophique {1} reçoit-il au maximum ?"
+ ],
+ "每升高一个营养级，能量约减少为原来的 10%。": [
+  "With each step up a trophic level the energy falls to about 10% of what it was.",
+  "À chaque niveau trophique supplémentaire, l'énergie tombe à environ 10 % de ce qu'elle était."
+ ],
+ "一个营养级同化了 {0} kJ 的能量，按能量传递效率最高 20% 计算，下一营养级最多获得多少 kJ？": [
+  "A trophic level has assimilated {0} kJ of energy. With a transfer efficiency of at most 20%, at most how many kJ does the next trophic level receive?",
+  "Un niveau trophique a assimilé {0} kJ d'énergie. Avec un rendement de transfert d'au plus 20 %, combien de kJ le niveau trophique suivant reçoit-il au maximum ?"
+ ],
+ "能量传递效率约为 10%–20%。": [
+  "The energy transfer efficiency is about 10%–20%.",
+  "Le rendement de transfert d'énergie est d'environ 10 % à 20 %."
+ ],
+ "图中的草原食物网（草、蝗虫、兔、鼠、蛙、蛇、狐、鹰 共 11 条捕食关系）一共有几条食物链？": [
+  "How many food chains are there in the grassland food web in the picture (grass, grasshopper, rabbit, mouse, frog, snake, fox, eagle: 11 predation relationships in all)?",
+  "Combien y a-t-il de chaînes alimentaires dans le réseau trophique de prairie de l'image (herbe, sauterelle, lapin, souris, grenouille, serpent, renard, aigle : 11 relations de prédation au total) ?"
+ ],
+ "食物链从生产者开始，到不被其他生物捕食的消费者结束。": [
+  "A food chain starts with a producer and ends with a consumer that is not preyed on by other organisms.",
+  "Une chaîne alimentaire commence par un producteur et se termine par un consommateur qui n'est la proie d'aucun autre être vivant."
+ ],
+ "某种有毒物质在生产者体内的浓度为 {0} ppm，沿食物链每升高一个营养级浓度增大为原来的 {1} 倍。第 {2} 营养级的生物体内浓度是多少 ppm？": [
+  "The concentration of a poisonous substance in the producers is {0} ppm, and it increases {1} times with each step up the food chain. What is the concentration in organisms of trophic level {2}, in ppm?",
+  "La concentration d'une substance toxique chez les producteurs est de {0} ppm, et elle est multipliée par {1} à chaque niveau de la chaîne alimentaire. Quelle est la concentration, en ppm, chez les êtres vivants du niveau trophique {2} ?"
+ ],
+ "有毒物质难以分解，沿食物链逐级积累。": [
+  "Poisonous substances are hard to break down and build up level by level along the food chain.",
+  "Les substances toxiques sont difficiles à dégrader et s'accumulent niveau après niveau le long de la chaîne alimentaire."
+ ],
+ "在生态系统中，“{0}”属于：": [
+  "In an ecosystem, “{0}” belongs to:",
+  "Dans un écosystème, « {0} » appartient à :"
+ ],
+ "生态系统由非生物部分和生物部分（生产者、消费者、分解者）组成。": [
+  "An ecosystem consists of a non-living part and a living part (producers, consumers, decomposers).",
+  "Un écosystème est formé d'une partie non vivante et d'une partie vivante (producteurs, consommateurs, décomposeurs)."
+ ],
+ "一种放射性同位素每过一个半衰期，剩下的量减半。经过 {0} 个半衰期，剩下原来的百分之几？": [
+  "The amount of a radioactive isotope halves with every half-life. After {0} half-lives, what percentage of the original is left?",
+  "La quantité d'un isotope radioactif est divisée par deux à chaque demi-vie. Après {0} demi-vies, quel pourcentage de la quantité initiale reste-t-il ?"
+ ],
+ "每个半衰期减半。": [
+  "It halves with every half-life.",
+  "Elle est divisée par deux à chaque demi-vie."
+ ],
+ "碳-14 的半衰期是 5730 年。测得某化石中碳-14 只剩 {0} %，它的年龄约多少年？": [
+  "The half-life of carbon-14 is 5730 years. Only {0} % of the carbon-14 is left in a fossil. About how old is it, in years?",
+  "La demi-vie du carbone 14 est de 5730 ans. Il ne reste que {0} % du carbone 14 dans un fossile. Quel âge a-t-il environ, en années ?"
+ ],
+ "年龄 = 半衰期 × 经过的半衰期数。": [
+  "Age = half-life × number of half-lives passed.",
+  "Âge = demi-vie × nombre de demi-vies écoulées."
+ ],
+ "{0}的半衰期约 {1} 年。测得一块岩石中它只剩一半，岩石的年龄约是多少年？": [
+  "The half-life of {0} is about {1} years. Only half of it is left in a rock. About how old is the rock, in years?",
+  "La demi-vie de {0} est d'environ {1} ans. Il n'en reste que la moitié dans une roche. Quel âge a la roche environ, en années ?"
+ ],
+ "剩一半说明恰好过了一个半衰期。": [
+  "Half left means exactly one half-life has passed.",
+  "Il en reste la moitié : une demi-vie exactement s'est écoulée."
+ ],
+ "“{0}”化石最早大量出现在：": [
+  "Fossils of “{0}” first appear in large numbers in:",
+  "Les fossiles de « {0} » apparaissent pour la première fois en grand nombre dans :"
+ ],
+ "越古老的地层，埋藏的化石越简单、越低等。": [
+  "The older the rock layer, the simpler and more primitive the fossils buried in it.",
+  "Plus la couche de roche est ancienne, plus les fossiles qui y sont enfouis sont simples et primitifs."
+ ],
+ "在未经扰动的地层中，下面的地层与上面的地层相比：": [
+  "In an undisturbed series of rock layers, compared with the layer above, the layer below is:",
+  "Dans une série de couches de roche non perturbée, par rapport à la couche du dessus, la couche du dessous est :"
+ ],
+ "更古老，化石更简单、低等": [
+  "older, with simpler and more primitive fossils",
+  "plus ancienne, avec des fossiles plus simples et plus primitifs"
+ ],
+ "更年轻，化石更复杂": [
+  "younger, with more complex fossils",
+  "plus récente, avec des fossiles plus complexes"
+ ],
+ "年代相同": [
+  "of the same age",
+  "du même âge"
+ ],
+ "没有化石": [
+  "without fossils",
+  "sans fossiles"
+ ],
+ "化石是研究生物进化最直接、最重要的证据。": [
+  "Fossils are the most direct and most important evidence for the study of evolution.",
+  "Les fossiles sont la preuve la plus directe et la plus importante pour l'étude de l'évolution."
+ ],
+ "全部为 $1": [
+  "all $1",
+  "tous $1"
+ ],
+ "豌豆的一对基因（A 显性，a 隐性）：亲代为 {0} × {1}，子代表现为{2}性状的概率是多少？": [
+  "One pair of genes in peas (A dominant, a recessive): the parents are {0} × {1}. What is the probability that an offspring shows the {2} trait?",
+  "Une paire de gènes chez le pois (A dominant, a récessif) : les parents sont {0} × {1}. Quelle est la probabilité qu'un descendant présente le caractère {2} ?"
+ ],
+ "用遗传图解（棋盘）列出 4 种组合。": [
+  "Use a genetic diagram (a grid) to list the 4 combinations.",
+  "Utilisez un diagramme génétique (un échiquier) pour lister les 4 combinaisons."
+ ],
+ "亲代为 {0} × {1}，共得到 {2} 个后代，预期有多少个表现为隐性性状？": [
+  "The parents are {0} × {1} and {2} offspring are obtained. How many are expected to show the recessive trait?",
+  "Les parents sont {0} × {1} et l'on obtient {2} descendants. Combien devraient présenter le caractère récessif ?"
+ ],
+ "预期数 = 总数 × 概率。": [
+  "Expected number = total × probability.",
+  "Nombre attendu = total × probabilité."
+ ],
+ "父母的 ABO 基因型分别是 {0} 和 {1}，他们的孩子可能有几种血型？": [
+  "The ABO genotypes of the parents are {0} and {1}. How many blood groups could their child have?",
+  "Les génotypes ABO des parents sont {0} et {1}. Combien de groupes sanguins leur enfant peut-il avoir ?"
+ ],
+ "I^A、I^B 对 i 为显性，I^A 与 I^B 共显性。": [
+  "I^A and I^B are dominant over i, and I^A and I^B are codominant.",
+  "I^A et I^B sont dominants sur i, et I^A et I^B sont codominants."
+ ],
+ "人的性别由性染色体决定：女性 XX，男性 XY。生一个男孩的概率是多少？": [
+  "A person's sex is decided by the sex chromosomes: women XX, men XY. What is the probability of having a boy?",
+  "Le sexe d'une personne est déterminé par les chromosomes sexuels : XX pour les femmes, XY pour les hommes. Quelle est la probabilité d'avoir un garçon ?"
+ ],
+ "精子有 X 和 Y 两种，卵细胞都是 X。": [
+  "There are two kinds of sperm, X and Y, and the egg cells are all X.",
+  "Il y a deux sortes de spermatozoïdes, X et Y, et tous les ovules sont X."
+ ],
+ "亲代基因型为 {0} × {1}，子代基因型的比为：": [
+  "The genotypes of the parents are {0} × {1}. The ratio of genotypes in the offspring is:",
+  "Les génotypes des parents sont {0} × {1}. Le rapport des génotypes chez les descendants est :"
+ ],
+ "先写出两个亲本产生的配子，再组合。": [
+  "First write down the gametes produced by the two parents, then combine them.",
+  "Écrivez d'abord les gamètes produits par les deux parents, puis combinez-les."
+ ],
+ "估算最大心率 = 220 − 年龄（次/分钟）。{0} 岁时最大心率约是多少？": [
+  "Estimated maximum heart rate = 220 − age (beats/minute). What is the maximum heart rate at the age of {0}, approximately?",
+  "Fréquence cardiaque maximale estimée = 220 − âge (battements/minute). Quelle est approximativement la fréquence cardiaque maximale à {0} ans ?"
+ ],
+ "只是估算，因人而异。": [
+  "It is only an estimate and differs from person to person.",
+  "Ce n'est qu'une estimation et elle varie d'une personne à l'autre."
+ ],
+ "有氧锻炼的目标心率是最大心率的 70 %–85 %。{0} 岁时下限约是多少次/分钟？（取整数）": [
+  "The target heart rate for aerobic exercise is 70 %–85 % of the maximum heart rate. What is the lower limit at the age of {0}, in beats/minute? (Round to a whole number.)",
+  "La fréquence cardiaque cible d'un exercice aérobie est de 70 % à 85 % de la fréquence cardiaque maximale. Quelle est la limite inférieure à {0} ans, en battements/minute ? (Arrondissez à l'entier.)"
+ ],
+ "下限 = 0.7 ×（220 − 年龄）。": [
+  "Lower limit = 0.7 × (220 − age).",
+  "Limite inférieure = 0,7 × (220 − âge)."
+ ],
+ "{0} 岁时有氧锻炼目标心率的上限（85 %）约是多少次/分钟？（取整数）": [
+  "What is the upper limit (85 %) of the target heart rate for aerobic exercise at the age of {0}, in beats/minute? (Round to a whole number.)",
+  "Quelle est la limite supérieure (85 %) de la fréquence cardiaque cible d'un exercice aérobie à {0} ans, en battements/minute ? (Arrondissez à l'entier.)"
+ ],
+ "上限 = 0.85 ×（220 − 年龄）。": [
+  "Upper limit = 0.85 × (220 − age).",
+  "Limite supérieure = 0,85 × (220 − âge)."
+ ],
+ "按模型，{0} 岁的人每天推荐睡眠约多少小时？": [
+  "According to the model, how many hours of sleep a day are recommended for a person aged {0}?",
+  "D'après le modèle, combien d'heures de sommeil par jour sont recommandées pour une personne de {0} ans ?"
+ ],
+ "{0}–{1} 小时": [
+  "{0}–{1} hours",
+  "{0} à {1} heures"
+ ],
+ "6–7 小时": [
+  "6–7 hours",
+  "6 à 7 heures"
+ ],
+ "7–8 小时": [
+  "7–8 hours",
+  "7 à 8 heures"
+ ],
+ "8–10 小时": [
+  "8–10 hours",
+  "8 à 10 heures"
+ ],
+ "9–12 小时": [
+  "9–12 hours",
+  "9 à 12 heures"
+ ],
+ "10–13 小时": [
+  "10–13 hours",
+  "10 à 13 heures"
+ ],
+ "睡眠不足会影响生长发育、注意力和免疫力。": [
+  "Lack of sleep affects growth and development, attention and immunity.",
+  "Le manque de sommeil nuit à la croissance et au développement, à l'attention et à l'immunité."
+ ],
+ "下列属于健康生活方式的是：": [
+  "Which of the following is a healthy way of life?",
+  "Parmi les éléments suivants, lequel fait partie d'un mode de vie sain ?"
+ ],
+ "合理饮食、适度运动、规律作息": [
+  "a balanced diet, moderate exercise and regular hours",
+  "une alimentation équilibrée, une activité physique modérée et des horaires réguliers"
+ ],
+ "长时间使用电子屏幕": [
+  "using electronic screens for long periods",
+  "utiliser longtemps des écrans électroniques"
+ ],
+ "吸烟喝酒": [
+  "smoking and drinking alcohol",
+  "fumer et boire de l'alcool"
+ ],
+ "经常熬夜": [
+  "often staying up late",
+  "se coucher souvent tard"
+ ],
+ "不吃早餐": [
+  "not eating breakfast",
+  "ne pas prendre de petit-déjeuner"
+ ],
+ "不吸烟、不喝酒、拒绝毒品，保持心理健康。": [
+  "Not smoking, not drinking, saying no to drugs and keeping a healthy state of mind.",
+  "Ne pas fumer, ne pas boire, refuser les drogues et garder un état d'esprit sain."
+ ],
+ "血糖浓度 {0} mmol/L，按 1 mmol/L = 18 mg/dL 换算，是多少 mg/dL？": [
+  "The blood sugar concentration is {0} mmol/L. Using 1 mmol/L = 18 mg/dL, how many mg/dL is that?",
+  "La glycémie est de {0} mmol/L. Avec 1 mmol/L = 18 mg/dL, combien cela fait-il en mg/dL ?"
+ ],
+ "葡萄糖的摩尔质量为 180 g/mol。": [
+  "The molar mass of glucose is 180 g/mol.",
+  "La masse molaire du glucose est de 180 g/mol."
+ ],
+ "{0}由哪个内分泌腺分泌？": [
+  "Which endocrine gland secretes {0}?",
+  "Quelle glande endocrine sécrète {0} ?"
+ ],
+ "肝脏": [
+  "the liver",
+  "le foie"
+ ],
+ "内分泌腺没有导管，激素直接进入血液。": [
+  "Endocrine glands have no ducts, and hormones go directly into the blood.",
+  "Les glandes endocrines n'ont pas de canal excréteur, et les hormones passent directement dans le sang."
+ ],
+ "{0}，会患：": [
+  "{0}, a person will suffer from:",
+  "{0}, la personne souffrira de :"
+ ],
+ "激素在血液中含量很少，但作用很大。": [
+  "Hormones are present in the blood in very small amounts but have great effects.",
+  "Les hormones sont présentes dans le sang en très petite quantité mais ont de grands effets."
+ ],
+ "胰岛素的作用是：": [
+  "The function of insulin is to:",
+  "La fonction de l'insuline est de :"
+ ],
+ "促进血糖合成糖原、加速血糖分解，使血糖浓度降低": [
+  "promote the conversion of blood sugar into glycogen and speed up its breakdown, lowering the blood sugar concentration",
+  "favoriser la transformation du sucre sanguin en glycogène et accélérer sa dégradation, ce qui abaisse la glycémie"
+ ],
+ "使血糖浓度升高": [
+  "raise the blood sugar concentration",
+  "augmenter la glycémie"
+ ],
+ "促进脂肪的消化": [
+  "promote the digestion of fat",
+  "favoriser la digestion des lipides"
+ ],
+ "促进骨的生长": [
+  "promote the growth of bone",
+  "favoriser la croissance des os"
+ ],
+ "加快心跳": [
+  "speed up the heartbeat",
+  "accélérer les battements du cœur"
+ ],
+ "胰岛素分泌不足会引起糖尿病。": [
+  "Too little insulin secretion causes diabetes.",
+  "Une sécrétion insuffisante d'insuline provoque le diabète."
+ ],
+ "糖尿病患者的尿液中会出现葡萄糖，主要原因是：": [
+  "Glucose appears in the urine of a diabetic patient, mainly because:",
+  "Du glucose apparaît dans l'urine d'un diabétique, principalement parce que :"
+ ],
+ "血糖浓度过高，超过了肾脏重吸收的限度": [
+  "the blood sugar concentration is too high and exceeds the limit of reabsorption by the kidney",
+  "la glycémie est trop élevée et dépasse la limite de réabsorption du rein"
+ ],
+ "吃的糖太多直接进入尿液": [
+  "too much sugar eaten goes directly into the urine",
+  "trop de sucre mangé passe directement dans l'urine"
+ ],
+ "胰岛素直接排入尿液": [
+  "insulin is discharged directly into the urine",
+  "l'insuline est éliminée directement dans l'urine"
+ ],
+ "肾脏制造了葡萄糖": [
+  "the kidney makes glucose",
+  "le rein fabrique du glucose"
+ ],
+ "膀胱吸收了葡萄糖": [
+  "the bladder absorbs glucose",
+  "la vessie absorbe le glucose"
+ ],
+ "正常人的血糖浓度约为 3.9–6.1 mmol/L。": [
+  "The blood sugar concentration of a normal person is about 3.9–6.1 mmol/L.",
+  "La glycémie d'une personne normale est d'environ 3,9 à 6,1 mmol/L."
+ ],
+ "按“物种—面积关系” S = c·A^0.25：栖息地被破坏 {0} % 后，剩下的物种约占原来的百分之几？": [
+  "Using the species–area relation S = c·A^0.25: after {0} % of a habitat is destroyed, about what percentage of the original species is left?",
+  "D'après la relation espèces–surface S = c·A^0,25 : après la destruction de {0} % d'un habitat, quel pourcentage des espèces initiales reste-t-il environ ?"
+ ],
+ "栖息地丧失是生物多样性下降的主要原因。": [
+  "Loss of habitat is the main cause of the decline of biodiversity.",
+  "La perte d'habitat est la principale cause du déclin de la biodiversité."
+ ],
+ "大气 CO₂ 现为 420 ppm，每年排放 {0} GtC，其中 45 % 留在大气中，每 2.13 GtC 使浓度升高 1 ppm。{1} 年后 CO₂ 浓度约是多少 ppm？": [
+  "Atmospheric CO₂ is now 420 ppm; {0} GtC are emitted each year, 45 % of which stays in the atmosphere, and every 2.13 GtC raises the concentration by 1 ppm. About what is the CO₂ concentration after {1} years, in ppm?",
+  "Le CO₂ atmosphérique est actuellement de 420 ppm ; {0} GtC sont émises chaque année, dont 45 % restent dans l'atmosphère, et chaque tranche de 2,13 GtC fait augmenter la concentration de 1 ppm. Quelle est approximativement la concentration de CO₂ après {1} ans, en ppm ?"
+ ],
+ "浓度 = 420 + 0.45 × 排放量 × 年数 / 2.13。": [
+  "Concentration = 420 + 0.45 × emission × years / 2.13.",
+  "Concentration = 420 + 0,45 × émissions × années / 2,13."
+ ],
+ "按模型，比工业化前（280 ppm）每升高一倍 CO₂ 浓度，气温约升高 2 °C。浓度为 {0} ppm 时，比工业化前约升高多少 °C？": [
+  "According to the model, every doubling of the CO₂ concentration compared with before industrialisation (280 ppm) raises the temperature by about 2 °C. When the concentration is {0} ppm, by about how many °C is it higher than before industrialisation?",
+  "D'après le modèle, chaque doublement de la concentration de CO₂ par rapport à l'époque préindustrielle (280 ppm) fait monter la température d'environ 2 °C. Quand la concentration est de {0} ppm, de combien de °C la température est-elle environ plus élevée qu'avant l'industrialisation ?"
+ ],
+ "升温 = 2 × log₂(浓度 / 280)。": [
+  "Warming = 2 × log₂(concentration / 280).",
+  "Réchauffement = 2 × log₂(concentration / 280)."
+ ],
+ "迁出保护": [
+  "ex-situ protection",
+  "protection ex situ"
+ ],
+ "保护生物多样性最有效的措施是就地保护。": [
+  "The most effective measure to protect biodiversity is in-situ protection.",
+  "La mesure la plus efficace pour protéger la biodiversité est la protection in situ."
+ ],
+ "造成生物多样性面临威胁的主要原因不包括：": [
+  "The main causes that threaten biodiversity do NOT include:",
+  "Parmi les principales causes qui menacent la biodiversité, on ne trouve PAS :"
+ ],
+ "光合作用增强": [
+  "stronger photosynthesis",
+  "une photosynthèse plus intense"
+ ],
+ "栖息地的破坏和丧失": [
+  "destruction and loss of habitat",
+  "la destruction et la perte des habitats"
+ ],
+ "过度捕猎和采集": [
+  "over-hunting and over-collecting",
+  "la chasse et la cueillette excessives"
+ ],
+ "外来物种入侵": [
+  "invasion by alien species",
+  "l'invasion d'espèces exotiques"
+ ],
+ "环境污染": [
+  "environmental pollution",
+  "la pollution de l'environnement"
+ ],
+ "此外还有气候变化等。": [
+  "There are also climate change and so on.",
+  "Il y a aussi le changement climatique, etc."
+ ],
+ "“{0}”属于{1}的哪个结构层次？": [
+  "To which level of organisation of {1} does “{0}” belong?",
+  "À quel niveau d'organisation de {1} « {0} » appartient-il ?"
+ ],
+ "细胞 → 组织 → 器官 →（系统）→ 个体。": [
+  "cell → tissue → organ → (system) → individual.",
+  "cellule → tissu → organe → (système) → individu."
+ ],
+ "{0}的结构层次从小到大排列，“{1}”的上一级是：": [
+  "Arrange the levels of organisation of {0} from small to large; the level above “{1}” is:",
+  "Rangez les niveaux d'organisation de {0} du plus petit au plus grand ; le niveau au-dessus de « {1} » est :"
+ ],
+ "植物体没有系统这一层次。": [
+  "A plant has no system level.",
+  "Une plante n'a pas de niveau « système »."
+ ],
+ "动物体有系统这一层次。": [
+  "An animal has a system level.",
+  "Un animal a un niveau « système »."
+ ],
+ "{0}的结构层次共有几级？": [
+  "How many levels of organisation does {0} have?",
+  "Combien de niveaux d'organisation {0} a-t-il ?"
+ ],
+ "植物体没有系统。": [
+  "A plant has no systems.",
+  "Une plante n'a pas de systèmes."
+ ],
+ "人体的基本组织（上皮组织、结缔组织、肌肉组织、神经组织）共有几类？": [
+  "How many kinds of basic tissue are there in the human body (epithelial, connective, muscle and nervous tissue)?",
+  "Combien y a-t-il de types de tissus de base dans le corps humain (tissu épithélial, tissu conjonctif, tissu musculaire et tissu nerveux) ?"
+ ],
+ "类": [
+  "kinds",
+  "types"
+ ],
+ "四大基本组织。": [
+  "The four basic tissues.",
+  "Les quatre tissus de base."
+ ],
+ "人体共有几个系统（运动、消化、呼吸、循环、泌尿、神经、内分泌、生殖）？": [
+  "How many systems does the human body have (locomotor, digestive, respiratory, circulatory, urinary, nervous, endocrine, reproductive)?",
+  "Combien de systèmes le corps humain compte-t-il (locomoteur, digestif, respiratoire, circulatoire, urinaire, nerveux, endocrinien, reproducteur) ?"
+ ],
+ "八大系统协调配合。": [
+  "The eight systems work together in coordination.",
+  "Les huit systèmes travaillent ensemble de façon coordonnée."
+ ],
+ "按模型，{0}从受精卵到成体各阶段共需约多少天？（{1}）": [
+  "According to the model, about how many days does {0} need for all the stages from fertilised egg to adult? ({1})",
+  "D'après le modèle, combien de jours {0} a-t-il besoin environ pour tous les stades, de l'œuf fécondé à l'adulte ? ({1})"
+ ],
+ "{0} {1} 天": [
+  "{0} {1} days",
+  "{0} {1} jours"
+ ],
+ "把各阶段的天数相加。": [
+  "Add up the days of the stages.",
+  "Additionnez les jours des différents stades."
+ ],
+ "{0}的发育一共分为几个阶段？（{1}）": [
+  "Into how many stages is the development of {0} divided? ({1})",
+  "En combien de stades le développement de {0} se divise-t-il ? ({1})"
+ ],
+ "数一数阶段名称。": [
+  "Count the names of the stages.",
+  "Comptez les noms des stades."
+ ],
+ "{0}的发育方式属于：": [
+  "The type of development of {0} is:",
+  "Le type de développement de {0} est :"
+ ],
+ "家蚕有蛹期，是完全变态；蝗虫没有蛹期，是不完全变态。": [
+  "The silkworm has a pupal stage and has complete metamorphosis; the locust has no pupal stage and has incomplete metamorphosis.",
+  "Le ver à soie a un stade de nymphe et une métamorphose complète ; le criquet n'a pas de stade de nymphe et a une métamorphose incomplète."
+ ],
+ "{0}的受精方式是：": [
+  "The way {0} is fertilised is:",
+  "Le mode de fécondation de {0} est :"
+ ],
+ "孤雌生殖": [
+  "parthenogenesis",
+  "la parthénogenèse"
+ ],
+ "出芽生殖": [
+  "budding",
+  "le bourgeonnement"
+ ],
+ "两栖动物在水中体外受精，昆虫和鸟类体内受精。": [
+  "Amphibians are fertilised outside the body in water; insects and birds are fertilised inside the body.",
+  "Les amphibiens sont fécondés à l'extérieur du corps, dans l'eau ; les insectes et les oiseaux sont fécondés à l'intérieur du corps."
+ ],
+ "家蚕的发育过程中，不吃不动的阶段是：": [
+  "In the development of the silkworm, the stage in which it neither eats nor moves is:",
+  "Dans le développement du ver à soie, le stade pendant lequel il ne mange pas et ne bouge pas est :"
+ ],
+ "完全变态的幼虫要经过蛹期才变成成虫。": [
+  "The larva of an insect with complete metamorphosis must go through a pupal stage before it becomes an adult.",
+  "La larve d'un insecte à métamorphose complète doit passer par un stade de nymphe avant de devenir adulte."
+ ],
+ "目镜是 {0}×，物镜是 {1}×，显微镜的总放大倍数是多少？": [
+  "The eyepiece is {0}× and the objective is {1}×. What is the total magnification of the microscope?",
+  "L'oculaire est {0}× et l'objectif est {1}×. Quel est le grossissement total du microscope ?"
+ ],
+ "总放大倍数 = 目镜倍数 × 物镜倍数。": [
+  "Total magnification = eyepiece magnification × objective magnification.",
+  "Grossissement total = grossissement de l'oculaire × grossissement de l'objectif."
+ ],
+ "某显微镜的视野直径与总放大倍数成反比。放大 100 倍时视野直径为 1.8 mm，放大 {0} 倍时视野直径是多少？": [
+  "The diameter of the field of view of a microscope is inversely proportional to the total magnification. At 100× the field of view is 1.8 mm across. What is the diameter of the field at {0}×?",
+  "Le diamètre du champ de vision d'un microscope est inversement proportionnel au grossissement total. À 100×, le champ de vision mesure 1,8 mm de diamètre. Quel est le diamètre du champ à {0}× ?"
+ ],
+ "放大倍数越大，视野越小。": [
+  "The greater the magnification, the smaller the field of view.",
+  "Plus le grossissement est grand, plus le champ de vision est petit."
+ ],
+ "在 {0}× 的总放大倍数下，视野中一行有 {1} 个细胞。换成 {2}× 后，这一行大约有几个细胞？": [
+  "At a total magnification of {0}× there are {1} cells in a row across the field of view. After changing to {2}×, about how many cells are there in the row?",
+  "Avec un grossissement total de {0}×, il y a {1} cellules sur une ligne du champ de vision. Après passage à {2}×, combien y a-t-il environ de cellules sur cette ligne ?"
+ ],
+ "视野直径缩小为原来的 1/{0}。": [
+  "The diameter of the field of view becomes 1/{0} of what it was.",
+  "Le diamètre du champ de vision devient 1/{0} de ce qu'il était."
+ ],
+ "载玻片上写着字母“{0}”，在显微镜视野中看到的物像是：": [
+  "The letter “{0}” is written on a slide. The image seen in the field of view of the microscope is:",
+  "La lettre « {0} » est écrite sur une lame. L'image que l'on voit dans le champ de vision du microscope est :"
+ ],
+ "显微镜成倒立的像：上下、左右都相反（旋转 180°）。": [
+  "A microscope gives an inverted image: reversed both up–down and left–right (turned through 180°).",
+  "Un microscope donne une image renversée : inversée à la fois de haut en bas et de gauche à droite (tournée de 180°)."
+ ],
+ "物像在视野的{0}方，要把它移到视野中央，应把玻片向哪个方向移动？": [
+  "The image is in the {0} of the field of view. In which direction should the slide be moved to bring it to the centre?",
+  "L'image se trouve {0} du champ de vision. Dans quelle direction faut-il déplacer la lame pour l'amener au centre ?"
+ ],
+ "物像偏哪个方向，就把玻片向哪个方向移动。": [
+  "Move the slide in the same direction in which the image lies.",
+  "Déplacez la lame dans la direction où se trouve l'image."
+ ],
+ "肱二头肌收缩，肱三头肌舒张": [
+  "the biceps contracts and the triceps relaxes",
+  "le biceps se contracte et le triceps se relâche"
+ ],
+ "肱二头肌舒张，肱三头肌收缩": [
+  "the biceps relaxes and the triceps contracts",
+  "le biceps se relâche et le triceps se contracte"
+ ],
+ "前臂水平（肘 90°），手中握着 {0} kg 的重物（距肘 {1} cm），肱二头肌附着点距肘 {2} cm，前臂自重 1.5 kg（重心距肘 15 cm）。肱二头肌的拉力约为多少牛？（g = 9.8 N/kg）": [
+  "The forearm is horizontal (elbow at 90°) and the hand holds a weight of {0} kg ({1} cm from the elbow); the biceps attaches {2} cm from the elbow, and the forearm itself weighs 1.5 kg (its centre of mass is 15 cm from the elbow). About what is the pull of the biceps, in newtons? (g = 9.8 N/kg)",
+  "L'avant-bras est horizontal (coude à 90°) et la main tient une masse de {0} kg (à {1} cm du coude) ; le biceps s'attache à {2} cm du coude, et l'avant-bras pèse lui-même 1,5 kg (son centre de gravité est à 15 cm du coude). Quelle est approximativement la force exercée par le biceps, en newtons ? (g = 9,8 N/kg)"
+ ],
+ "力矩平衡：拉力 × 动力臂 = 总阻力矩。": [
+  "Balance of moments: pull × effort arm = total moment of the load.",
+  "Équilibre des moments : force × bras moteur = moment résistant total."
+ ],
+ "杠杆的动力臂 {0} cm，阻力臂 {1} cm，这是：": [
+  "The effort arm of a lever is {0} cm and the load arm is {1} cm. This is:",
+  "Le bras moteur d'un levier est {0} cm et le bras résistant est {1} cm. C'est :"
+ ],
+ "不是杠杆": [
+  "not a lever",
+  "pas un levier"
+ ],
+ "动力臂小于阻力臂的是费力杠杆。": [
+  "A lever whose effort arm is shorter than its load arm needs more effort.",
+  "Un levier dont le bras moteur est plus court que le bras résistant demande plus de force."
+ ],
+ "{0}时，骨骼肌的状态是：": [
+  "When {0}, the state of the skeletal muscles is:",
+  "Quand {0}, l'état des muscles squelettiques est :"
+ ],
+ "屈肘": [
+  "the elbow bends",
+  "le coude se plie"
+ ],
+ "伸肘": [
+  "the elbow straightens",
+  "le coude se tend"
+ ],
+ "肱二头肌和肱三头肌同时收缩": [
+  "the biceps and triceps both contract",
+  "le biceps et le triceps se contractent tous les deux"
+ ],
+ "肱二头肌和肱三头肌同时舒张": [
+  "the biceps and triceps both relax",
+  "le biceps et le triceps se relâchent tous les deux"
+ ],
+ "一个动作至少由两组肌肉相互配合完成。": [
+  "One movement is carried out by at least two groups of muscles working together.",
+  "Un mouvement est accompli par au moins deux groupes de muscles qui coopèrent."
+ ],
+ "哺乳动物的运动系统由下列哪几部分组成？": [
+  "Which parts does the locomotor system of a mammal consist of?",
+  "De quelles parties l'appareil locomoteur d'un mammifère est-il formé ?"
+ ],
+ "骨、骨连结（关节）和骨骼肌": [
+  "bones, bone connections (joints) and skeletal muscles",
+  "des os, des liaisons entre les os (articulations) et des muscles squelettiques"
+ ],
+ "骨、神经和血管": [
+  "bones, nerves and blood vessels",
+  "des os, des nerfs et des vaisseaux sanguins"
+ ],
+ "肌肉、皮肤和骨": [
+  "muscles, skin and bones",
+  "des muscles, de la peau et des os"
+ ],
+ "骨、关节和神经": [
+  "bones, joints and nerves",
+  "des os, des articulations et des nerfs"
+ ],
+ "骨骼肌、脂肪和骨": [
+  "skeletal muscles, fat and bones",
+  "des muscles squelettiques, de la graisse et des os"
+ ],
+ "关节是骨连结的主要形式。": [
+  "The joint is the main form of bone connection.",
+  "L'articulation est la principale forme de liaison entre les os."
+ ],
+ "在运动中，骨骼肌起的作用是：": [
+  "During movement the role of the skeletal muscle is to:",
+  "Pendant le mouvement, le rôle du muscle squelettique est de :"
+ ],
+ "收缩产生动力，牵动骨绕关节转动": [
+  "contract to produce force and pull the bone to turn about the joint",
+  "se contracter pour produire une force et entraîner l'os en rotation autour de l'articulation"
+ ],
+ "作为支点": [
+  "act as the fulcrum",
+  "jouer le rôle de point d'appui"
+ ],
+ "作为杠杆": [
+  "act as the lever",
+  "jouer le rôle de levier"
+ ],
+ "只起保护作用": [
+  "serve only for protection",
+  "servir seulement à la protection"
+ ],
+ "运输血液": [
+  "transport blood",
+  "transporter le sang"
+ ],
+ "骨起杠杆作用，关节起支点作用，骨骼肌起动力作用。": [
+  "The bone acts as a lever, the joint as the fulcrum and the skeletal muscle as the source of force.",
+  "L'os joue le rôle de levier, l'articulation celui de point d'appui et le muscle squelettique celui de force motrice."
+ ],
+ "反射弧的传入神经长 {0} m，传出神经长 {1} m，传导速度为 {2} m/s，经过 {3} 个突触（每个延搁 1 ms），效应器需 10 ms 开始反应。从刺激到反应约需多少毫秒？": [
+  "The sensory nerve of a reflex arc is {0} m long and the motor nerve is {1} m long; the conduction speed is {2} m/s, there are {3} synapses (each delays 1 ms), and the effector needs 10 ms to start to respond. About how many milliseconds pass from stimulus to response?",
+  "Le nerf sensitif d'un arc réflexe mesure {0} m et le nerf moteur mesure {1} m ; la vitesse de conduction est {2} m/s, il y a {3} synapses (chacune retarde de 1 ms) et l'effecteur met 10 ms à commencer à réagir. Combien de millisecondes s'écoulent environ entre le stimulus et la réponse ?"
+ ],
+ "时间 = 路程 / 速度 + 突触延搁 + 效应器反应时间。": [
+  "Time = distance / speed + synaptic delays + effector response time.",
+  "Temps = distance / vitesse + retards synaptiques + temps de réponse de l'effecteur."
+ ],
+ "用尺子测反应时间：尺子从静止下落，被抓住时下落了 {0} cm（g = 9.8 m/s²）。反应时间约是多少毫秒？": [
+  "Measuring reaction time with a ruler: the ruler falls from rest and has fallen {0} cm when it is caught (g = 9.8 m/s²). About what is the reaction time, in milliseconds?",
+  "Mesure du temps de réaction avec une règle : la règle tombe à partir du repos et est tombée de {0} cm quand elle est attrapée (g = 9,8 m/s²). Quel est approximativement le temps de réaction, en millisecondes ?"
+ ],
+ "d = ½ g t²，所以 t = √(2d/g)。": [
+  "d = ½ g t², so t = √(2d/g).",
+  "d = ½ g t², donc t = √(2d/g)."
+ ],
+ "某人反射弧的“{0}”受到损伤，其他部分正常，刺激感受器后，反射还能发生吗？": [
+  "In a person's reflex arc the “{0}” is damaged and the other parts are normal. After the receptor is stimulated, can the reflex still take place?",
+  "Dans l'arc réflexe d'une personne, « {0} » est endommagé et les autres parties sont normales. Après la stimulation du récepteur, le réflexe peut-il encore avoir lieu ?"
+ ],
+ "不能，反射弧必须完整": [
+  "no, the reflex arc must be complete",
+  "non, l'arc réflexe doit être complet"
+ ],
+ "能，但反应变慢": [
+  "yes, but the response is slower",
+  "oui, mais la réponse est plus lente"
+ ],
+ "能，反应完全正常": [
+  "yes, and the response is quite normal",
+  "oui, et la réponse est tout à fait normale"
+ ],
+ "只能发生一半": [
+  "only half of it can take place",
+  "seule la moitié peut avoir lieu"
+ ],
+ "反射弧由感受器、传入神经、神经中枢、传出神经、效应器组成，缺一不可。": [
+  "A reflex arc consists of the receptor, sensory nerve, nerve centre, motor nerve and effector, and none can be missing.",
+  "Un arc réflexe est formé du récepteur, du nerf sensitif, du centre nerveux, du nerf moteur et de l'effecteur, et aucun ne peut manquer."
+ ],
+ "反射弧的第一个环节是：": [
+  "The first link of a reflex arc is the:",
+  "Le premier maillon d'un arc réflexe est :"
+ ],
+ "感受器接受刺激并产生神经冲动。": [
+  "The receptor receives the stimulus and produces nerve impulses.",
+  "Le récepteur reçoit le stimulus et produit des influx nerveux."
+ ],
+ "激素调节": [
+  "hormonal regulation",
+  "la régulation hormonale"
+ ],
+ "免疫反应": [
+  "immune response",
+  "la réponse immunitaire"
+ ],
+ "条件反射是后天学习获得的，需要大脑皮层参与。": [
+  "A conditioned reflex is learned later in life and needs the cerebral cortex.",
+  "Un réflexe conditionnel est acquis au cours de la vie et nécessite le cortex cérébral."
+ ],
+ "某水草在光照 {0} klx、二氧化碳浓度 {1}%、温度 {2} °C 时，每分钟放出的氧气气泡数约为（模型：最大 40 个，半饱和光强 8 klx，半饱和 CO₂ 0.03%，最适温度 30 °C）：": [
+  "At a light intensity of {0} klx, a carbon dioxide concentration of {1}% and a temperature of {2} °C, about how many oxygen bubbles a minute does a water plant give off? (Model: maximum 40, half-saturation light intensity 8 klx, half-saturation CO₂ 0.03%, optimum temperature 30 °C)",
+  "À une intensité lumineuse de {0} klx, une concentration de dioxyde de carbone de {1} % et une température de {2} °C, combien de bulles d'oxygène par minute une plante aquatique dégage-t-elle environ ? (Modèle : maximum 40, intensité lumineuse de demi-saturation 8 klx, CO₂ de demi-saturation 0,03 %, température optimale 30 °C)"
+ ],
+ "速率 = 40 × I/(I+8) × C/(C+0.03) × 温度因子。": [
+  "Rate = 40 × I/(I+8) × C/(C+0.03) × temperature factor.",
+  "Vitesse = 40 × I/(I+8) × C/(C+0,03) × facteur de température."
+ ],
+ "光照 {0} klx、二氧化碳浓度 {1}%、温度 {2} °C 时，限制光合速率的主要因素是：": [
+  "At a light intensity of {0} klx, a carbon dioxide concentration of {1}% and a temperature of {2} °C, the main factor limiting the rate of photosynthesis is:",
+  "À une intensité lumineuse de {0} klx, une concentration de dioxyde de carbone de {1} % et une température de {2} °C, le principal facteur qui limite la vitesse de la photosynthèse est :"
+ ],
+ "水分": [
+  "water",
+  "l'eau"
+ ],
+ "最不足的那个因素限制速率。": [
+  "The factor that is most lacking limits the rate.",
+  "Le facteur le plus insuffisant limite la vitesse."
+ ],
+ "二氧化碳浓度 {0}%、温度 {1} °C 时，光照再强，每分钟放出的氧气气泡数最多约为：": [
+  "At a carbon dioxide concentration of {0}% and a temperature of {1} °C, however strong the light, the number of oxygen bubbles a minute is at most about:",
+  "À une concentration de dioxyde de carbone de {0} % et une température de {1} °C, quelle que soit la force de la lumière, le nombre de bulles d'oxygène par minute est au maximum d'environ :"
+ ],
+ "光照饱和后速率趋于上限。": [
+  "After light saturation the rate approaches an upper limit.",
+  "Après la saturation en lumière, la vitesse tend vers une limite supérieure."
+ ],
+ "二氧化碳浓度 {0}%、温度 {1} °C 时，光照强度等于半饱和光强（8 klx）时，速率约为上限的一半，是多少个/分钟？": [
+  "At a carbon dioxide concentration of {0}% and a temperature of {1} °C, when the light intensity equals the half-saturation intensity (8 klx) the rate is about half the upper limit. How many per minute is that?",
+  "À une concentration de dioxyde de carbone de {0} % et une température de {1} °C, quand l'intensité lumineuse est égale à l'intensité de demi-saturation (8 klx), la vitesse est environ la moitié de la limite supérieure. Combien cela fait-il par minute ?"
+ ],
+ "I = 15 klx 时 I/(I+8) = 1/2。": [
+  "When I = 15 klx, I/(I+8) = 1/2.",
+  "Quand I = 15 klx, I/(I+8) = 1/2."
+ ],
+ "把一片叶子的一半用锡箔遮光，光照数小时后用碘液检验，变成蓝黑色的是：": [
+  "Half of a leaf is covered with tin foil to keep out the light; after several hours in the light it is tested with iodine solution. The part that turns blue-black is:",
+  "La moitié d'une feuille est recouverte de papier d'aluminium pour la priver de lumière ; après plusieurs heures à la lumière, on la teste avec la solution d'iode. La partie qui devient bleu-noir est :"
+ ],
+ "没有遮光的部分": [
+  "the part that was not covered",
+  "la partie qui n'était pas recouverte"
+ ],
+ "遮光的部分": [
+  "the part that was covered",
+  "la partie qui était recouverte"
+ ],
+ "整片叶子": [
+  "the whole leaf",
+  "toute la feuille"
+ ],
+ "叶脉以外的部分": [
+  "the part outside the veins",
+  "la partie en dehors des nervures"
+ ],
+ "两部分都不变色": [
+  "neither part changes colour",
+  "aucune des deux parties ne change de couleur"
+ ],
+ "光合作用制造淀粉，淀粉遇碘变蓝。": [
+  "Photosynthesis makes starch, and starch turns blue with iodine.",
+  "La photosynthèse fabrique de l'amidon, et l'amidon devient bleu avec l'iode."
+ ],
+ "捕食者—猎物模型中，捕食者的死亡率 c = {0}，转化率 d = {1}。猎物数量的平衡值 x* = c/d 是多少？": [
+  "In a predator–prey model, the death rate of the predator is c = {0} and the conversion rate is d = {1}. What is the equilibrium value of the prey population, x* = c/d?",
+  "Dans un modèle prédateur–proie, le taux de mortalité du prédateur est c = {0} et le taux de conversion est d = {1}. Quelle est la valeur d'équilibre de la population de proies, x* = c/d ?"
+ ],
+ "在平衡点，两个种群的数量都不变。": [
+  "At the equilibrium point the numbers of both populations do not change.",
+  "Au point d'équilibre, les effectifs des deux populations ne changent pas."
+ ],
+ "猎物的增长率 a = {0}，被捕食系数 b = {1}。捕食者数量的平衡值 y* = a/b 是多少？": [
+  "The growth rate of the prey is a = {0} and the predation coefficient is b = {1}. What is the equilibrium value of the predator population, y* = a/b?",
+  "Le taux de croissance des proies est a = {0} et le coefficient de prédation est b = {1}. Quelle est la valeur d'équilibre de la population de prédateurs, y* = a/b ?"
+ ],
+ "在平衡点，猎物的增加量恰好等于被捕食的量。": [
+  "At the equilibrium point the increase of the prey exactly equals the number eaten.",
+  "Au point d'équilibre, l'augmentation des proies est exactement égale au nombre de proies mangées."
+ ],
+ "种群按逻辑斯谛增长：N(t) = K / (1 + (K/N₀ − 1)e^(−rt))。N₀ = {0}，r = {1}，K = {2}，t = {3} 时，种群数量约为多少？": [
+  "A population grows logistically: N(t) = K / (1 + (K/N₀ − 1)e^(−rt)). With N₀ = {0}, r = {1}, K = {2} and t = {3}, about how large is the population?",
+  "Une population croît de façon logistique : N(t) = K / (1 + (K/N₀ − 1)e^(−rt)). Avec N₀ = {0}, r = {1}, K = {2} et t = {3}, quel est approximativement l'effectif de la population ?"
+ ],
+ "数量先快后慢，趋近环境容纳量 K。": [
+  "The number grows fast at first and then slowly, approaching the carrying capacity K.",
+  "L'effectif croît vite au début, puis lentement, et se rapproche de la capacité de charge K."
+ ],
+ "环境容纳量为 {0} 只的种群，种群数量为多少时增长最快（用于合理捕捞的“最大持续产量”）？": [
+  "For a population with a carrying capacity of {0} animals, at what population size is growth fastest (used for the “maximum sustainable yield” in sensible fishing)?",
+  "Pour une population dont la capacité de charge est de {0} individus, à quel effectif la croissance est-elle la plus rapide (utilisé pour le « rendement maximal durable » d'une pêche raisonnée) ?"
+ ],
+ "逻辑斯谛增长在 K/2 时增长最快。": [
+  "Logistic growth is fastest at K/2.",
+  "La croissance logistique est la plus rapide à K/2."
+ ],
+ "捕食者—猎物振荡在小幅度时的周期约为 2π/√(ac)。a = {0}，c = {1}，周期约是多少个时间单位？": [
+  "For small oscillations of the predator–prey system the period is about 2π/√(ac). With a = {0} and c = {1}, about how many time units is the period?",
+  "Pour de petites oscillations du système prédateur–proie, la période est d'environ 2π/√(ac). Avec a = {0} et c = {1}, combien d'unités de temps la période fait-elle environ ?"
+ ],
+ "周期与种群的增长率、死亡率有关。": [
+  "The period depends on the growth rate and death rate of the populations.",
+  "La période dépend du taux de croissance et du taux de mortalité des populations."
+ ],
+ "某植物在 20 °C 时的呼吸速率为 10 个单位，温度每升高 10 °C，速率约增大为原来的 2 倍。{0} °C 时的呼吸速率是多少？": [
+  "The respiration rate of a plant at 20 °C is 10 units, and for every 10 °C rise the rate becomes about 2 times as great. What is the respiration rate at {0} °C?",
+  "La vitesse de respiration d'une plante à 20 °C est de 10 unités, et pour chaque élévation de 10 °C la vitesse est environ multipliée par 2. Quelle est la vitesse de respiration à {0} °C ?"
+ ],
+ "呼吸作用受酶活性影响，温度升高，速率增大。": [
+  "Respiration is affected by enzyme activity: the higher the temperature, the greater the rate.",
+  "La respiration dépend de l'activité des enzymes : plus la température est élevée, plus la vitesse est grande."
+ ],
+ "某植物在 {0} 时的光合速率为 30 × sin(π(t−6)/12)，呼吸速率在 {1} °C 时为 10 × 2^((T−20)/10)。{2} 时，净氧气释放速率是多少？": [
+  "The photosynthesis rate of a plant at {0} o'clock is 30 × sin(π(t−6)/12), and its respiration rate at {1} °C is 10 × 2^((T−20)/10). At {2} o'clock, what is the net rate of oxygen release?",
+  "La vitesse de photosynthèse d'une plante à {0} h est 30 × sin(π(t−6)/12), et sa vitesse de respiration à {1} °C est 10 × 2^((T−20)/10). À {2} h, quelle est la vitesse nette de dégagement d'oxygène ?"
+ ],
+ "净释放 = 光合 − 呼吸。": [
+  "Net release = photosynthesis − respiration.",
+  "Dégagement net = photosynthèse − respiration."
+ ],
+ "{0} °C 时，上午光合速率第一次等于呼吸速率的时刻是几点？（光合速率 = 30 × sin(π(t−6)/12)，日出 6 时）": [
+  "At {0} °C, at what time in the morning does the rate of photosynthesis first equal the rate of respiration? (Photosynthesis rate = 30 × sin(π(t−6)/12), sunrise at 6 o'clock)",
+  "À {0} °C, à quelle heure du matin la vitesse de photosynthèse devient-elle égale pour la première fois à la vitesse de respiration ? (Vitesse de photosynthèse = 30 × sin(π(t−6)/12), lever du soleil à 6 h)"
+ ],
+ "此时光合速率 = 呼吸速率（补偿点）。": [
+  "At this point the rate of photosynthesis = the rate of respiration (the compensation point).",
+  "À ce moment, la vitesse de photosynthèse = la vitesse de respiration (le point de compensation)."
+ ],
+ "夜间，绿色植物（无光照）的气体交换是：": [
+  "At night (without light), the gas exchange of a green plant is:",
+  "La nuit (sans lumière), les échanges gazeux d'une plante verte sont :"
+ ],
+ "吸收氧气，释放二氧化碳": [
+  "it takes in oxygen and gives out carbon dioxide",
+  "elle absorbe de l'oxygène et rejette du dioxyde de carbone"
+ ],
+ "吸收二氧化碳，释放氧气": [
+  "it takes in carbon dioxide and gives out oxygen",
+  "elle absorbe du dioxyde de carbone et rejette de l'oxygène"
+ ],
+ "不进行气体交换": [
+  "there is no gas exchange",
+  "il n'y a pas d'échanges gazeux"
+ ],
+ "只释放氧气": [
+  "it only gives out oxygen",
+  "elle rejette seulement de l'oxygène"
+ ],
+ "只吸收二氧化碳": [
+  "it only takes in carbon dioxide",
+  "elle absorbe seulement du dioxyde de carbone"
+ ],
+ "夜间只进行呼吸作用。": [
+  "At night there is only respiration.",
+  "La nuit, il n'y a que de la respiration."
+ ],
+ "把萌发的种子放在密闭的瓶中，一段时间后澄清石灰水变浑浊，说明种子呼吸时产生了：": [
+  "Germinating seeds are put in a closed bottle, and after some time clear limewater turns cloudy. This shows that the seeds produced which gas when they respired?",
+  "Des graines qui germent sont placées dans un flacon fermé, et au bout d'un certain temps l'eau de chaux limpide se trouble. Cela montre que les graines ont produit, en respirant :"
+ ],
+ "氧气": [
+  "oxygen",
+  "de l'oxygène"
+ ],
+ "氮气": [
+  "nitrogen",
+  "de l'azote"
+ ],
+ "水蒸气": [
+  "water vapour",
+  "de la vapeur d'eau"
+ ],
+ "淀粉": [
+  "starch",
+  "de l'amidon"
+ ],
+ "二氧化碳使澄清石灰水变浑浊。": [
+  "Carbon dioxide makes clear limewater turn cloudy.",
+  "Le dioxyde de carbone trouble l'eau de chaux limpide."
+ ],
+ "没有{0}": [
+  "no {0}",
+  "pas de {0}"
+ ],
+ "把种子放在下面的条件中：{0}、{1}、温度 {2} °C、{3}。种子会萌发吗？": [
+  "Seeds are placed in the following conditions: {0}, {1}, temperature {2} °C, {3}. Will the seeds germinate?",
+  "Des graines sont placées dans les conditions suivantes : {0}, {1}, température {2} °C, {3}. Les graines germeront-elles ?"
+ ],
+ "种子完整且有活力": [
+  "the seed is intact and alive",
+  "la graine est intacte et vivante"
+ ],
+ "种子已煮熟": [
+  "the seed has been boiled",
+  "la graine a été cuite"
+ ],
+ "萌发": [
+  "germinate",
+  "elles germeront"
+ ],
+ "不萌发": [
+  "do not germinate",
+  "elles ne germeront pas"
+ ],
+ "只长出胚芽": [
+  "only the plumule grows",
+  "seule la gemmule se développe"
+ ],
+ "种子萌发需要适宜的温度、一定的水分和充足的空气，并且胚是完整的、有活力的。": [
+  "Seeds need a suitable temperature, some water and enough air to germinate, and the embryo must be intact and alive.",
+  "Les graines ont besoin d'une température convenable, d'un peu d'eau et de suffisamment d'air pour germer, et l'embryon doit être intact et vivant."
+ ],
+ "{0} 粒种子中有 {1} 粒萌发，种子的萌发率是多少？": [
+  "Of {0} seeds, {1} germinate. What is the germination rate of the seeds?",
+  "Sur {0} graines, {1} germent. Quel est le taux de germination des graines ?"
+ ],
+ "萌发率 = 萌发的种子数 / 供试种子数 × 100%。": [
+  "Germination rate = number of seeds germinated / number of seeds tested × 100%.",
+  "Taux de germination = nombre de graines germées / nombre de graines testées × 100 %."
+ ],
+ "播种 {0} 粒种子，萌发率为 {1}%，萌发的种子大约有多少粒？": [
+  "{0} seeds are sown and the germination rate is {1}%. About how many seeds germinate?",
+  "On sème {0} graines et le taux de germination est {1} %. Environ combien de graines germent ?"
+ ],
+ "萌发的种子数 = 种子数 × 萌发率。": [
+  "Number germinated = number of seeds × germination rate.",
+  "Nombre de graines germées = nombre de graines × taux de germination."
+ ],
+ "种子萌发的自身条件是：": [
+  "The conditions of the seed itself needed for germination are:",
+  "Les conditions propres à la graine nécessaires à la germination sont :"
+ ],
+ "胚是完整的、有活力的，并且已度过休眠期": [
+  "the embryo is intact and alive, and the dormancy period is over",
+  "l'embryon est intact et vivant, et la période de dormance est terminée"
+ ],
+ "种子越大越好": [
+  "the bigger the seed the better",
+  "plus la graine est grosse, mieux c'est"
+ ],
+ "种子的颜色必须为白色": [
+  "the seed must be white in colour",
+  "la graine doit être de couleur blanche"
+ ],
+ "种子必须有光照": [
+  "the seed must have light",
+  "la graine doit avoir de la lumière"
+ ],
+ "种子表面必须有水膜": [
+  "the seed must have a film of water on its surface",
+  "la graine doit avoir un film d'eau à sa surface"
+ ],
+ "还要有适宜的外界条件：温度、水分、空气。": [
+  "Suitable external conditions are also needed: temperature, water and air.",
+  "Il faut aussi des conditions extérieures convenables : température, eau et air."
+ ],
+ "种子萌发时，最先突破种皮的结构是：": [
+  "When a seed germinates, the structure that first breaks through the seed coat is the:",
+  "Quand une graine germe, la structure qui perce la première le tégument est :"
+ ],
+ "胚根": [
+  "radicle",
+  "la radicule"
+ ],
+ "胚芽": [
+  "plumule",
+  "la gemmule"
+ ],
+ "子叶": [
+  "cotyledon",
+  "le cotylédon"
+ ],
+ "胚轴": [
+  "hypocotyl",
+  "l'hypocotyle"
+ ],
+ "种皮": [
+  "seed coat",
+  "le tégument de la graine"
+ ],
+ "胚根发育成根，胚芽发育成茎和叶。": [
+  "The radicle develops into the root, and the plumule develops into the stem and leaves.",
+  "La radicule devient la racine, et la gemmule devient la tige et les feuilles."
+ ],
+ "某蛾类深色型占 {0}%。污染程度 s = {1}，捕食压力 e = {2}。按模型 深色型存活率 = 1 − e(0.8 − 0.6s)，浅色型存活率 = 1 − e(0.2 + 0.6s)，下一代深色型占多少？（%）": [
+  "In a species of moth the dark form makes up {0}%. The degree of pollution is s = {1} and the predation pressure is e = {2}. By the model, survival of the dark form = 1 − e(0.8 − 0.6s) and survival of the light form = 1 − e(0.2 + 0.6s). What percentage of the next generation is the dark form? (%)",
+  "Chez une espèce de papillons de nuit, la forme sombre représente {0} %. Le degré de pollution est s = {1} et la pression de prédation est e = {2}. D'après le modèle, survie de la forme sombre = 1 − e(0,8 − 0,6s) et survie de la forme claire = 1 − e(0,2 + 0,6s). Quel pourcentage de la génération suivante la forme sombre représente-t-elle ? (%)"
+ ],
+ "下一代比例 = p·wD /(p·wD + (1−p)·wL)。": [
+  "Proportion in the next generation = p·wD /(p·wD + (1−p)·wL).",
+  "Proportion à la génération suivante = p·wD /(p·wD + (1−p)·wL)."
+ ],
+ "捕食压力 e = {0}，树皮的污染程度 s = {1}。按模型，深色型的存活率（%）是多少？（存活率 = 1 − e(0.8 − 0.6s)）": [
+  "The predation pressure is e = {0} and the degree of pollution of the bark is s = {1}. According to the model, what is the survival rate of the dark form (%)? (Survival = 1 − e(0.8 − 0.6s))",
+  "La pression de prédation est e = {0} et le degré de pollution de l'écorce est s = {1}. D'après le modèle, quel est le taux de survie de la forme sombre (%) ? (Survie = 1 − e(0,8 − 0,6s))"
+ ],
+ "树皮越黑，深色蛾越不容易被发现。": [
+  "The blacker the bark, the less easily dark moths are seen.",
+  "Plus l'écorce est noire, moins les phalènes sombres sont faciles à repérer."
+ ],
+ "起初深色型占 {0}%，e = {1}，s = {2}。深色型的比例超过 50% 至少需要几代？": [
+  "At the start the dark form is {0}%, e = {1} and s = {2}. At least how many generations are needed for the dark form to exceed 50%?",
+  "Au départ, la forme sombre représente {0} %, e = {1} et s = {2}. Combien de générations faut-il au minimum pour que la forme sombre dépasse 50 % ?"
+ ],
+ "代": [
+  "generations",
+  "générations"
+ ],
+ "逐代按模型计算。": [
+  "Calculate generation by generation with the model.",
+  "Calculez génération par génération avec le modèle."
+ ],
+ "桦尺蛾在污染的环境中深色型增多，说明：": [
+  "That dark forms of the peppered moth increase in a polluted environment shows that:",
+  "Le fait que les formes sombres de la phalène du bouleau augmentent dans un environnement pollué montre que :"
+ ],
+ "环境对生物的变异起选择作用，适者生存": [
+  "the environment selects among the variations of organisms, and the fittest survive",
+  "l'environnement sélectionne parmi les variations des êtres vivants, et les mieux adaptés survivent"
+ ],
+ "环境使浅色蛾突然变黑": [
+  "the environment suddenly turns light moths black",
+  "l'environnement noircit soudainement les phalènes claires"
+ ],
+ "深色蛾故意躲避捕食者": [
+  "dark moths deliberately avoid predators",
+  "les phalènes sombres évitent volontairement les prédateurs"
+ ],
+ "所有蛾都发生了相同的变异": [
+  "all the moths underwent the same variation",
+  "toutes les phalènes ont subi la même variation"
+ ],
+ "浅色蛾全部迁出了该地区": [
+  "all the light moths moved out of the area",
+  "toutes les phalènes claires ont quitté la région"
+ ],
+ "变异是不定向的，自然选择是定向的。": [
+  "Variation is not directed, natural selection is directed.",
+  "La variation n'est pas orientée, la sélection naturelle l'est."
+ ],
+ "如果没有捕食者（e = 0），两种体色蛾的比例会：": [
+  "If there are no predators (e = 0), the proportion of the two colour forms of the moth will:",
+  "S'il n'y a pas de prédateurs (e = 0), la proportion des deux formes de couleur de la phalène :"
+ ],
+ "保持不变": [
+  "stay the same",
+  "restera la même"
+ ],
+ "浅色型增多": [
+  "the light form will increase",
+  "la forme claire augmentera"
+ ],
+ "深色型增多": [
+  "the dark form will increase",
+  "la forme sombre augmentera"
+ ],
+ "深色型消失": [
+  "the dark form will disappear",
+  "la forme sombre disparaîtra"
+ ],
+ "两种体色都消失": [
+  "both forms will disappear",
+  "les deux formes disparaîtront"
+ ],
+ "没有选择压力，比例不变（本模型不含迁入、迁出与随机变化）。": [
+  "With no selection pressure the proportion does not change (this model has no immigration, emigration or random change).",
+  "Sans pression de sélection, la proportion ne change pas (ce modèle ne comporte ni immigration, ni émigration, ni variation aléatoire)."
+ ],
+ "按模型，皮肤向外散失的热量 = 8 ×（1 − 0.1 × 衣服层数）×（34 − 气温）W。气温 {0} °C，穿 {1} 层衣服时约散失多少 W？": [
+  "According to the model, the heat lost from the skin to the outside = 8 × (1 − 0.1 × layers of clothes) × (34 − air temperature) W. At an air temperature of {0} °C and with {1} layers of clothes, about how many W are lost?",
+  "D'après le modèle, la chaleur perdue par la peau vers l'extérieur = 8 × (1 − 0,1 × nombre de couches de vêtements) × (34 − température de l'air) W. À une température de l'air de {0} °C avec {1} couches de vêtements, combien de W sont perdus environ ?"
+ ],
+ "气温越低、衣服越少，散热越多。": [
+  "The lower the air temperature and the fewer the clothes, the more heat is lost.",
+  "Plus la température de l'air est basse et moins il y a de vêtements, plus la perte de chaleur est grande."
+ ],
+ "产热 {0} W（{1}），气温 {2} °C，不穿多余衣服（0 层）。蒸发每毫升汗水带走 2.43 kJ。每小时至少要排汗约多少毫升？": [
+  "Heat production is {0} W ({1}), the air temperature is {2} °C, and no extra clothes are worn (0 layers). Each millilitre of sweat that evaporates carries away 2.43 kJ. At least about how many millilitres of sweat must be produced every hour?",
+  "La production de chaleur est de {0} W ({1}), la température de l'air est de {2} °C et on ne porte pas de vêtements supplémentaires (0 couche). Chaque millilitre de sueur qui s'évapore emporte 2,43 kJ. Combien de millilitres de sueur faut-il produire au minimum environ chaque heure ?"
+ ],
+ "排汗量 =（产热 − 皮肤散热）× 3600 / 2430。": [
+  "Amount of sweat = (heat production − heat loss through the skin) × 3600 / 2430.",
+  "Quantité de sueur = (production de chaleur − perte de chaleur par la peau) × 3600 / 2430."
+ ],
+ "{0}时产热约 {1} W。一小时产生多少千焦的热量？（1 W = 1 J/s）": [
+  "When {0}, heat production is about {1} W. How many kilojoules of heat are produced in an hour? (1 W = 1 J/s)",
+  "Quand {0}, la production de chaleur est d'environ {1} W. Combien de kilojoules de chaleur sont produits en une heure ? (1 W = 1 J/s)"
+ ],
+ "热量 = 功率 × 时间。": [
+  "Heat = power × time.",
+  "Chaleur = puissance × temps."
+ ],
+ "天气炎热时，人体维持体温恒定的主要方式是：": [
+  "When the weather is hot, the main way the human body keeps its temperature constant is:",
+  "Quand il fait chaud, le principal moyen par lequel le corps humain maintient sa température constante est :"
+ ],
+ "皮肤血管舒张、汗液蒸发散热": [
+  "the blood vessels of the skin dilate and the evaporation of sweat carries heat away",
+  "les vaisseaux sanguins de la peau se dilatent et l'évaporation de la sueur emporte de la chaleur"
+ ],
+ "皮肤血管收缩、减少排汗": [
+  "the blood vessels of the skin contract and sweating is reduced",
+  "les vaisseaux sanguins de la peau se contractent et la transpiration diminue"
+ ],
+ "战栗产热": [
+  "shivering produces heat",
+  "les frissons produisent de la chaleur"
+ ],
+ "停止呼吸": [
+  "stopping breathing",
+  "l'arrêt de la respiration"
+ ],
+ "减少饮水": [
+  "drinking less",
+  "boire moins"
+ ],
+ "汗液蒸发要吸收热量。": [
+  "The evaporation of sweat absorbs heat.",
+  "L'évaporation de la sueur absorbe de la chaleur."
+ ],
+ "皮肤的功能不包括：": [
+  "The functions of the skin do NOT include:",
+  "Les fonctions de la peau ne comprennent PAS :"
+ ],
+ "进行光合作用": [
+  "carrying out photosynthesis",
+  "la photosynthèse"
+ ],
+ "保护身体": [
+  "protecting the body",
+  "la protection du corps"
+ ],
+ "排出汗液": [
+  "discharging sweat",
+  "l'élimination de la sueur"
+ ],
+ "调节体温": [
+  "regulating body temperature",
+  "la régulation de la température du corps"
+ ],
+ "感受外界刺激": [
+  "sensing stimuli from the outside",
+  "la perception des stimulus extérieurs"
+ ],
+ "皮肤由表皮、真皮和皮下组织构成。": [
+  "The skin consists of the epidermis, the dermis and the subcutaneous tissue.",
+  "La peau est formée de l'épiderme, du derme et de l'hypoderme."
+ ],
+ "空气温度 {0} °C 时饱和水汽压为 0.611 × exp(17.27T/(T+237.3)) kPa。相对湿度 {1}% 时，空气的饱和差（饱和水汽压 × (1 − 相对湿度)）是多少？": [
+  "At an air temperature of {0} °C the saturation vapour pressure is 0.611 × exp(17.27T/(T+237.3)) kPa. At a relative humidity of {1}%, what is the saturation deficit of the air (saturation vapour pressure × (1 − relative humidity))?",
+  "À une température de l'air de {0} °C, la pression de vapeur saturante est 0,611 × exp(17,27T/(T+237,3)) kPa. À une humidité relative de {1} %, quel est le déficit de saturation de l'air (pression de vapeur saturante × (1 − humidité relative)) ?"
+ ],
+ "空气越干燥，饱和差越大，蒸腾越强。": [
+  "The drier the air, the greater the saturation deficit and the stronger the transpiration.",
+  "Plus l'air est sec, plus le déficit de saturation est grand et plus la transpiration est intense."
+ ],
+ "叶面积 {0} cm²、气孔开度 {1}%、饱和差 {2} kPa、风速 {3} m/s。按模型 失水量 = 0.5 × (叶面积/100) × 开度 × 饱和差 × (1 + 0.12 × 风速)，每小时失水多少克？": [
+  "Leaf area {0} cm², stomatal opening {1}%, saturation deficit {2} kPa, wind speed {3} m/s. By the model, water loss = 0.5 × (leaf area/100) × opening × saturation deficit × (1 + 0.12 × wind speed). How many grams of water are lost per hour?",
+  "Surface de la feuille {0} cm², ouverture des stomates {1} %, déficit de saturation {2} kPa, vitesse du vent {3} m/s. D'après le modèle, perte d'eau = 0,5 × (surface de la feuille/100) × ouverture × déficit de saturation × (1 + 0,12 × vitesse du vent). Combien de grammes d'eau sont perdus par heure ?"
+ ],
+ "其他条件不变，失水量与叶面积成正比。": [
+  "With the other conditions unchanged, water loss is proportional to leaf area.",
+  "Les autres conditions restant inchangées, la perte d'eau est proportionnelle à la surface de la feuille."
+ ],
+ "其他条件不变，叶面积增大到原来的 {0} 倍，蒸腾失水量是原来的几倍？": [
+  "With the other conditions unchanged, the leaf area becomes {0} times as great. How many times as great is the water lost by transpiration?",
+  "Les autres conditions restant inchangées, la surface de la feuille devient {0} fois plus grande. Combien de fois plus grande devient la perte d'eau par transpiration ?"
+ ],
+ "失水量与叶面积成正比。": [
+  "Water loss is proportional to leaf area.",
+  "La perte d'eau est proportionnelle à la surface de la feuille."
+ ],
+ "气孔张开时，保卫细胞的状态是：": [
+  "When the stomata are open, the state of the guard cells is:",
+  "Quand les stomates sont ouverts, l'état des cellules de garde est :"
+ ],
+ "吸水膨胀": [
+  "they have taken up water and swollen",
+  "elles ont absorbé de l'eau et gonflé"
+ ],
+ "失水收缩": [
+  "they have lost water and shrunk",
+  "elles ont perdu de l'eau et se sont rétractées"
+ ],
+ "细胞死亡": [
+  "the cells are dead",
+  "les cellules sont mortes"
+ ],
+ "细胞壁消失": [
+  "the cell wall has disappeared",
+  "la paroi cellulaire a disparu"
+ ],
+ "保卫细胞吸水膨胀，气孔张开；失水收缩，气孔关闭。": [
+  "The guard cells take up water and swell, and the stomata open; they lose water and shrink, and the stomata close.",
+  "Les cellules de garde absorbent de l'eau et gonflent, et les stomates s'ouvrent ; elles perdent de l'eau et se rétractent, et les stomates se ferment."
+ ],
+ "植物体内的水分主要以水蒸气的形式通过哪个结构散失到空气中？": [
+  "Through which structure is the water in a plant mainly lost to the air as water vapour?",
+  "Par quelle structure l'eau de la plante est-elle principalement perdue vers l'air sous forme de vapeur d'eau ?"
+ ],
+ "导管": [
+  "vessel",
+  "le vaisseau conducteur"
+ ],
+ "筛管": [
+  "sieve tube",
+  "le tube criblé"
+ ],
+ "根毛": [
+  "root hair",
+  "le poil absorbant"
+ ],
+ "气孔是植物蒸腾失水的“门户”，也是气体交换的“窗口”。": [
+  "The stomata are the “gateways” of a plant's loss of water by transpiration and also the “windows” for gas exchange.",
+  "Les stomates sont les « portes » de la perte d'eau de la plante par transpiration et aussi les « fenêtres » des échanges gazeux."
+ ],
+ "人体血液约占体重的 7.5 %（约 75 mL/kg）。体重 {0} kg 的人血液约有多少升？": [
+  "Human blood makes up about 7.5 % of body weight (about 75 mL/kg). About how many litres of blood does a person of body weight {0} kg have?",
+  "Le sang humain représente environ 7,5 % du poids corporel (environ 75 mL/kg). Combien de litres de sang une personne de {0} kg a-t-elle environ ?"
+ ],
+ "血量 = 体重 × 75 mL/kg。": [
+  "Blood volume = body weight × 75 mL/kg.",
+  "Volume sanguin = poids corporel × 75 mL/kg."
+ ],
+ "体重 {0} kg，血细胞容积（红细胞等占血液的体积百分比）为 {1} %，血浆约有多少升？（血量 75 mL/kg）": [
+  "Body weight {0} kg, packed cell volume (the percentage of the blood volume taken up by red cells and so on) {1} %. About how many litres of plasma are there? (Blood volume 75 mL/kg)",
+  "Poids corporel {0} kg, hématocrite (le pourcentage du volume sanguin occupé par les globules rouges, etc.) {1} %. Combien de litres de plasma y a-t-il environ ? (Volume sanguin 75 mL/kg)"
+ ],
+ "血浆 = 血量 ×（1 − 血细胞容积比）。": [
+  "Plasma = blood volume × (1 − packed cell volume fraction).",
+  "Plasma = volume sanguin × (1 − fraction d'hématocrite)."
+ ],
+ "每搏输出量 70 mL，心率 {0} 次/分钟；{1}的总横截面积约 {2} cm²。血流速度 = 流量 / 横截面积，约是多少厘米每秒？": [
+  "The stroke volume is 70 mL and the heart rate {0} beats/minute; the total cross-sectional area of the {1} is about {2} cm². Blood speed = flow / cross-sectional area. About how many centimetres a second is it?",
+  "Le volume d'éjection systolique est 70 mL et la fréquence cardiaque {0} battements/minute ; la section totale des {1} est d'environ {2} cm². Vitesse du sang = débit / section. À peu près combien de centimètres par seconde cela fait-il ?"
+ ],
+ "总横截面积越大，血流越慢。": [
+  "The greater the total cross-sectional area, the slower the blood flows.",
+  "Plus la section totale est grande, plus le sang s'écoule lentement."
+ ],
+ "四肢的静脉内有瓣膜，作用是：": [
+  "The veins of the limbs have valves; their function is to:",
+  "Les veines des membres ont des valvules ; leur fonction est de :"
+ ],
+ "防止血液倒流": [
+  "prevent the blood flowing back",
+  "empêcher le sang de refluer"
+ ],
+ "增加血压": [
+  "increase blood pressure",
+  "augmenter la tension artérielle"
+ ],
+ "增加血流速度": [
+  "increase the speed of blood flow",
+  "augmenter la vitesse du sang"
+ ],
+ "运输氧气": [
+  "carry oxygen",
+  "transporter l'oxygène"
+ ],
+ "动脉和毛细血管没有瓣膜。": [
+  "Arteries and capillaries have no valves.",
+  "Les artères et les capillaires n'ont pas de valvules."
+ ],
+ "{0}（{1}）时，应在伤口的哪里按压止血？": [
+  "For {0} ({1}), where should pressure be applied to stop the bleeding?",
+  "Pour {0} ({1}), à quel endroit faut-il appuyer pour arrêter le saignement ?"
+ ],
+ "伤口正上方用力揉": [
+  "rub hard directly above the wound",
+  "frotter fort juste au-dessus de la plaie"
+ ],
+ "动脉血从心脏流向伤口，所以按压近心端；静脉血流回心脏，所以按压远心端。": [
+  "Arterial blood flows from the heart to the wound, so press on the end nearer the heart; venous blood flows back to the heart, so press on the end farther from the heart.",
+  "Le sang artériel va du cœur vers la plaie, donc on appuie du côté du cœur ; le sang veineux retourne au cœur, donc on appuie du côté éloigné du cœur."
+ ],
+ "维生素 A": [
+  "vitamin A",
+  "la vitamine A"
+ ],
+ "夜盲症": [
+  "night blindness",
+  "la cécité nocturne"
+ ],
+ "维生素 C": [
+  "vitamin C",
+  "la vitamine C"
+ ],
+ "坏血病": [
+  "scurvy",
+  "le scorbut"
+ ],
+ "维生素 D 或钙": [
+  "vitamin D or calcium",
+  "la vitamine D ou le calcium"
+ ],
+ "佝偻病（儿童）": [
+  "rickets (in children)",
+  "le rachitisme (chez l'enfant)"
+ ],
+ "维生素 B₁": [
+  "vitamin B₁",
+  "la vitamine B₁"
+ ],
+ "脚气病": [
+  "beriberi",
+  "le béribéri"
+ ],
+ "铁": [
+  "iron",
+  "le fer"
+ ],
+ "缺铁性贫血": [
+  "iron-deficiency anaemia",
+  "l'anémie ferriprive"
+ ],
+ "碘": [
+  "iodine",
+  "l'iode"
+ ],
+ "地方性甲状腺肿（大脖子病）": [
+  "endemic goitre (swollen neck)",
+  "le goitre endémique (cou gonflé)"
+ ],
+ "隔离患者": [
+  "isolating patients",
+  "isoler les malades"
+ ],
+ "戴口罩、勤洗手": [
+  "wearing masks and washing hands often",
+  "porter un masque et se laver souvent les mains"
+ ],
+ "接种疫苗": [
+  "vaccination",
+  "la vaccination"
+ ],
+ "消毒、杀灭蚊蝇": [
+  "disinfection and killing mosquitoes and flies",
+  "désinfecter et détruire les moustiques et les mouches"
+ ],
+ "对密切接触者进行医学观察": [
+  "medical observation of close contacts",
+  "surveiller médicalement les contacts étroits"
+ ],
+ "锻炼身体、增强抵抗力": [
+  "exercising and strengthening resistance",
+  "faire de l'exercice et renforcer la résistance"
+ ],
+ "酒精和二氧化碳": [
+  "alcohol and carbon dioxide",
+  "de l'alcool et du dioxyde de carbone"
+ ],
+ "乳酸": [
+  "lactic acid",
+  "de l'acide lactique"
+ ],
+ "醋酸菌": [
+  "acetic acid bacteria",
+  "bactéries acétiques"
+ ],
+ "醋酸": [
+  "acetic acid",
+  "acide acétique"
+ ],
+ "胚": [
+  "embryo",
+  "l'embryon"
+ ],
+ "子房壁": [
+  "ovary wall",
+  "la paroi de l'ovaire"
+ ],
+ "果皮": [
+  "pericarp",
+  "le péricarpe"
+ ],
+ "珠被": [
+  "integument",
+  "les téguments de l'ovule"
+ ],
+ "花粉从花药落到柱头上": [
+  "pollen falling from the anther onto the stigma",
+  "le dépôt du pollen de l'anthère sur le stigmate"
+ ],
+ "精子与卵细胞结合形成受精卵": [
+  "a sperm joining an egg cell to form a fertilised egg",
+  "l'union d'un spermatozoïde et d'une cellule-œuf pour former un œuf fécondé"
+ ],
+ "青草": [
+  "grass",
+  "l'herbe"
+ ],
+ "生产者": [
+  "producer",
+  "producteur"
+ ],
+ "初级消费者": [
+  "primary consumer",
+  "consommateur primaire"
+ ],
+ "吃蝗虫的蛙": [
+  "a frog that eats grasshoppers",
+  "une grenouille qui mange des sauterelles"
+ ],
+ "次级消费者": [
+  "secondary consumer",
+  "consommateur secondaire"
+ ],
+ "吃蛙的蛇": [
+  "a snake that eats frogs",
+  "un serpent qui mange des grenouilles"
+ ],
+ "三级消费者": [
+  "tertiary consumer",
+  "consommateur tertiaire"
+ ],
+ "腐生细菌": [
+  "saprophytic bacteria",
+  "bactéries saprophytes"
+ ],
+ "分解者": [
+  "decomposer",
+  "décomposeur"
+ ],
+ "阳光和空气": [
+  "sunlight and air",
+  "la lumière du soleil et l'air"
+ ],
+ "非生物部分": [
+  "non-living part",
+  "partie non vivante"
+ ],
+ "全部为 Aa": [
+  "all Aa",
+  "tous Aa"
+ ],
+ "全部为 aa": [
+  "all aa",
+  "tous aa"
+ ],
+ "全部为 AA": [
+  "all AA",
+  "tous AA"
+ ],
+ "生长激素": [
+  "growth hormone",
+  "l'hormone de croissance"
+ ],
+ "垂体": [
+  "pituitary gland",
+  "l'hypophyse"
+ ],
+ "甲状腺激素": [
+  "thyroid hormone",
+  "l'hormone thyroïdienne"
+ ],
+ "甲状腺": [
+  "thyroid gland",
+  "la thyroïde"
+ ],
+ "胰岛": [
+  "islets of the pancreas",
+  "les îlots du pancréas"
+ ],
+ "肾上腺素": [
+  "adrenaline",
+  "l'adrénaline"
+ ],
+ "肾上腺": [
+  "adrenal gland",
+  "la glande surrénale"
+ ],
+ "性激素": [
+  "sex hormones",
+  "les hormones sexuelles"
+ ],
+ "性腺": [
+  "gonads",
+  "les gonades"
+ ],
+ "幼年时生长激素分泌不足": [
+  "too little growth hormone secreted in childhood",
+  "une sécrétion insuffisante d'hormone de croissance pendant l'enfance"
+ ],
+ "侏儒症": [
+  "dwarfism",
+  "le nanisme"
+ ],
+ "幼年时生长激素分泌过多": [
+  "too much growth hormone secreted in childhood",
+  "une sécrétion excessive d'hormone de croissance pendant l'enfance"
+ ],
+ "巨人症": [
+  "gigantism",
+  "le gigantisme"
+ ],
+ "成年时生长激素分泌过多": [
+  "too much growth hormone secreted in adulthood",
+  "une sécrétion excessive d'hormone de croissance à l'âge adulte"
+ ],
+ "肢端肥大症": [
+  "acromegaly",
+  "l'acromégalie"
+ ],
+ "幼年时甲状腺激素分泌不足": [
+  "too little thyroid hormone secreted in childhood",
+  "une sécrétion insuffisante d'hormone thyroïdienne pendant l'enfance"
+ ],
+ "呆小症": [
+  "cretinism",
+  "le crétinisme"
+ ],
+ "甲状腺激素分泌过多": [
+  "too much thyroid hormone secreted",
+  "une sécrétion excessive d'hormone thyroïdienne"
+ ],
+ "甲亢": [
+  "hyperthyroidism",
+  "l'hyperthyroïdie"
+ ],
+ "胰岛素分泌不足": [
+  "too little insulin secreted",
+  "une sécrétion insuffisante d'insuline"
+ ],
+ "糖尿病": [
+  "diabetes",
+  "le diabète"
+ ],
+ "眨眼反射": [
+  "the blink reflex",
+  "le réflexe de clignement"
+ ],
+ "吃到酸梅分泌唾液": [
+  "secreting saliva on eating a sour plum",
+  "sécréter de la salive en mangeant une prune acide"
+ ],
+ "望梅止渴": [
+  "thinking of plums to quench thirst (salivating at the thought of plums)",
+  "saliver à la pensée de prunes pour étancher la soif"
+ ],
+ "谈虎色变": [
+  "turning pale at the mention of a tiger",
+  "pâlir à la seule mention d'un tigre"
+ ],
+ "看见红灯停车": [
+  "stopping the car at a red light",
+  "s'arrêter en voiture à un feu rouge"
+ ],
+ "N \\to \\tfrac{N}{2}\\ \\text{(生殖细胞)}": [
+  "N \\to \\tfrac{N}{2}\\ \\text{(reproductive cell)}",
+  "N \\to \\tfrac{N}{2}\\ \\text{(cellule reproductrice)}"
+ ],
+ "M = M_{\\text{目镜}} \\times M_{\\text{物镜}}": [
+  "M = M_{\\text{eyepiece}} \\times M_{\\text{objective}}",
+  "M = M_{\\text{oculaire}} \\times M_{\\text{objectif}}"
+ ],
+ "\\text{二氧化碳 + 水} \\xrightarrow[\\text{叶绿体}]{\\text{光}} \\text{有机物 + 氧气}": [
+  "\\text{carbon dioxide + water} \\xrightarrow[\\text{chloroplast}]{\\text{light}} \\text{organic matter + oxygen}",
+  "\\text{dioxyde de carbone + eau} \\xrightarrow[\\text{chloroplaste}]{\\text{lumière}} \\text{matière organique + dioxygène}"
+ ],
+ "\\text{有机物 + 氧气} \\to \\text{二氧化碳 + 水 + 能量}": [
+  "\\text{organic matter + oxygen} \\to \\text{carbon dioxide + water + energy}",
+  "\\text{matière organique + dioxygène} \\to \\text{dioxyde de carbone + eau + énergie}"
+ ],
+ "{0} 条": [
+  "{0}",
+  "{0}"
+ ],
+ "{0} 只": [
+  "{0}",
+  "{0}"
+ ],
+ "{0} 个": [
+  "{0}",
+  "{0}"
+ ],
+ "{0} 种": [
+  "{0}",
+  "{0}"
+ ],
+ "{0} 类": [
+  "{0}",
+  "{0}"
+ ],
+ "{0} 粒": [
+  "{0}",
+  "{0}"
+ ],
+ "{0} 代": [
+  "{0}",
+  "{0}"
+ ],
+ "{0} 级": [
+  "{0}",
+  "{0}"
+ ],
+ "{0} 倍": [
+  "{0}×",
+  "{0}×"
+ ],
+ "{0} 个单位": [
+  "{0} units",
+  "{0} unités"
+ ],
+ "{0} 年": [
+  "{0} years",
+  "{0} ans"
+ ],
+ "{0} 次": [
+  "{0} times",
+  "{0} fois"
+ ],
+ "{0} 次/分钟": [
+  "{0} beats/min",
+  "{0} battements/min"
+ ],
+ "{0} 人": [
+  "{0} people",
+  "{0} personnes"
+ ],
+ "受精卵 {0} 天，蝌蚪 {1} 天，幼蛙 {2} 天，成蛙 {3} 天": [
+  "egg {0} days, tadpole {1} days, froglet {2} days, adult frog {3} days",
+  "œuf {0} jours, têtard {1} jours, jeune grenouille {2} jours, grenouille adulte {3} jours"
+ ],
+ "受精卵 {0} 天，雏鸡 {1} 天，成鸡 {2} 天": [
+  "egg {0} days, chick {1} days, adult hen {2} days",
+  "œuf {0} jours, poussin {1} jours, poule adulte {2} jours"
+ ],
+ "受精卵 {0} 天，若虫 {1} 天，成虫 {2} 天": [
+  "egg {0} days, nymph {1} days, adult {2} days",
+  "œuf {0} jours, nymphe {1} jours, adulte {2} jours"
+ ],
+ "受精卵 {0} 天，幼虫 {1} 天，蛹 {2} 天，成虫 {3} 天": [
+  "egg {0} days, larva {1} days, pupa {2} days, adult {3} days",
+  "œuf {0} jours, larve {1} jours, nymphe {2} jours, adulte {3} jours"
+ ]
+}

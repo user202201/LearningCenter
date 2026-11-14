@@ -37,6 +37,7 @@ Browser tests (Playwright + Chromium, touch-sized windows) against the app runni
 | 09-update | Settings -> check for updates / force refresh (cache cleared, still signed in), the new-version bar, on a real production build; the iOS build has none of it |
 | 08-import-excel | import from Excel / Google Sheets: real .xlsx files, the user's layout, preview, duplicates, paste, bad files, cancel writes nothing |
 | 07-scan-login | the login screen scans a QR code with the camera (pretend camera): good code, other code, refused camera, bad token, camera switched off, en / fr |
+| 92-backup | backup / restore of the device-only data (Settings -> 备份与恢复): export has every learn.* key and never the token / admin hash / offline copies, import with preview + confirmation (cancel changes nothing, no "done" message), wrong / hostile files refused or stripped, the native bridge (pretend HarmonyBridge receives print + file, back-key steps, web unchanged), EN / FR, 3 screen sizes |
 | 06-look | an animal + colour per child (stable, different), mascot, readable white text on every colour, animations off with "reduce motion" |
 | 05-languages-and-layout | zh / en / fr: no Chinese UI text left, nothing cut off on a phone and two tablets; screenshots `tests/out/work/layout-*.png` — **look at them** when a screen is new |
 

@@ -16,9 +16,11 @@ fs.mkdirSync(OUT, { recursive: true });
 
 const IDS = ['foodweb', 'population', 'microscope', 'cells', 'division', 'levels', 'seed', 'photo', 'respiration', 'transpiration', 'flower', 'digest', 'breathing', 'blood', 'nerve', 'hormone', 'eye', 'motion', 'ferment', 'classify', 'genetics', 'selection', 'epidemic', 'lifecycle', 'development', 'vessels', 'excretion', 'ear', 'behaviour', 'fossils', 'diet', 'firstaid', 'skin', 'bones', 'impact', 'health'];
 const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
-const extra = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/biolab.json'), 'utf8'));
+const extraOf = (f) => JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/' + f), 'utf8'));
+const extra = extraOf('biolab.json');
+const extraAll = Object.assign({}, extra, extraOf('biocontent.json'));   // (biocontent.json: lessons, quiz questions, explanations: rule 66)
 const withExtra = async (t) => {
-  const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[1]]))) + ');';
+  const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extraAll).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extraAll).map(([k, v]) => [k, v[1]]))) + ');';
   await t.ctx.route('**/src/i18n-data.ts*', async (route) => { const r = await route.fetch(); await route.fulfill({ response: r, body: (await r.text()) + '\n' + add }); });
   await t.page.reload(); await t.page.waitForSelector('.hub-grid, .kids, .empty-home');
 };
@@ -730,8 +732,24 @@ const TEXT = {
     ok(fwT.length === 0, `E ${label}: the eight species of the food web are translated`);
     const uniq = [...new Set(left)];
     ok(uniq.length === 0, `E ${label}: no Chinese left outside content boxes (${uniq.length})${uniq.length ? '\n   ' + uniq.slice(0, 25).join('\n   ') : ''}`);
+    // the lessons and the quiz texts are translated too (rule 66): 200 generated questions per simulation (40 seeds x 5) and every lesson paragraph and formula contain no Chinese
+    {
+      const bad = await p.evaluate(async (ids) => {
+        const { tr } = await import('/src/i18n.ts');
+        const cjk = /[一-鿿]/; const out = [];
+        const rng = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+        for (const id of ids) {
+          location.hash = '#/science/bio/' + id; await new Promise((r) => setTimeout(r, 120));
+          const def = window.__bio.def;
+          for (const t of [...def.lesson, ...(def.formulas || [])]) if (cjk.test(tr(t))) out.push(id + ' lesson: ' + tr(t).slice(0, 50));
+          for (let sd = 1; sd <= 40; sd++) for (const q of def.quiz(rng(sd * 7919))) for (const t of [q.q, q.why ?? '', ...q.choices]) if (cjk.test(tr(t))) out.push(id + ': ' + t.replace(/-?[0-9.]+/g, 'N').slice(0, 60));
+        }
+        return [...new Set(out)];
+      }, IDS);
+      ok(bad.length === 0, `E ${label}: all simulations x 200 generated quiz questions + lessons: no Chinese left (${bad.length})${bad.length ? '\n   ' + bad.slice(0, 25).join('\n   ') : ''}`);
+    }
     await p.evaluate(() => (location.hash = '#/science/bio/cells')); await p.waitForSelector('.pl-sim');
-    ok(/[一-鿿]/.test(await p.textContent('#pl-lesson')) && (await p.evaluate(() => !!document.querySelector('#pl-lesson.user'))), `E ${label}: the lesson text is content: it stays Chinese in a user box`);
+    ok(!/[一-鿿]/.test(await p.textContent('#pl-lesson')), `E ${label}: the lesson text is translated (no user box)`);
     let probs = [];
     for (const [w, hh] of [[390, 844], [320, 568], [820, 1180]]) { await p.setViewportSize({ width: w, height: hh }); for (const id of IDS) { await p.evaluate((id) => (location.hash = '#/science/bio/' + id), id); await p.waitForSelector('.pl-sim'); await p.waitForTimeout(40); const m = await p.evaluate(() => { const vis = (e) => !e.closest('[hidden]') && e.offsetParent !== null; return { over: document.documentElement.scrollWidth - innerWidth, clip: [...document.querySelectorAll('.pl-rl, .pl-rv, .pl-lab, .pl-tt, .pl-opt, .pl-btn, .pl-link')].filter((e) => vis(e) && e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflowX !== 'auto').map((e) => e.textContent.slice(0, 14)) }; }); if (m.over > 0 || m.clip.length) probs.push(`${id}@${w}: ${m.over} ${m.clip.join('/')}`); } }
     ok(probs.length === 0, `E ${label}: all simulations on 390 / 320 / 820 px wide: no overflow, no clipped label${probs.length ? ' ' + probs.slice(0, 6).join('; ') : ''}`);
