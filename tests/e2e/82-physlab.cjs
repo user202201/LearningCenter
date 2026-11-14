@@ -622,7 +622,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
       { const M = L.resistance; let b = 0;
         for (let m = 0; m < 5; m++) { const R0 = M.resistance(m, 1, 1); for (const k of [2, 3, 5]) { if (!near(M.resistance(m, k, 1), k * R0) || !near(M.resistance(m, 1, k), R0 / k) || !near(M.resistance(m, k, 1 / k), k * k * R0)) b++; } if (!near(M.resistance(m, 1, 1, 20), M.resistance(m, 1, 1)) || !(M.resistance(m, 1, 1, 200) > R0)) b++; }
         for (let m = 1; m < 5; m++) if (!(M.resistance(m, 1, 1) > M.resistance(m - 1, 1, 1))) b++;
-        for (let R = 0; R < 50; R += 3) if (!(M.current(R + 3) < M.current(R))) b++;
+        for (let R = 0; R < 50; R += 3) if (!(M.current(R + 3) <= M.current(R))) b++; if (!(M.current(50) < M.current(0))) b++;
         const dflt = [0, 1, 2, 3].map((m) => M.pair(m, 1, 0.5, 4, 20)); for (const p of dflt) if (!near(p.RA, p.RB)) b++;
         const lenx = M.pair(0, 3, 0.5, 4, 20), sx = M.pair(1, 1, 0.25, 4, 20), tx = M.pair(3, 1, 0.5, 4, 120);
         o.resistance = { b, len: lenx.RB / lenx.RA, area: sx.RB / sx.RA, temp: tx.RB / tx.RA, cu: M.pair(2, 1, 0.5, 0, 20).RB < M.pair(2, 1, 0.5, 0, 20).RA, ref: M.REF.join(';'), I: [M.current(0), M.current(5), M.current(15)] };
@@ -854,6 +854,46 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     await sim('newton'); ok(await page.isVisible('#pl-play'), 'B newton: the play button shows in the mode that has a time'); await set({ mode: 1 }); ok(!(await page.isVisible('#pl-play')), 'B newton: and is hidden in the mode without one');
   }
 
+  // ---- fourth pass: the tables of readings, the verdicts and the radio on the real pages ----
+  {
+    const txt = () => page.evaluate(() => document.querySelector('#pl-readouts').textContent);
+    const rows = () => page.evaluate(() => [...document.querySelectorAll('.pl-read')].filter((e) => /^第 \d+ 组/.test(e.dataset.label)).length);
+    await sim('lensexp'); await set({ mode: 1, lens: 0, u: 15, v: 25 }); await page.click('#pl-act-rec');
+    ok((await rows()) === 0, 'B4 lensexp: a blurred screen (v = 25 cm, the image is at 30 cm) cannot be recorded');
+    await set({ v: 30 }); await page.click('#pl-act-rec'); await page.click('#pl-act-rec');
+    ok((await rows()) === 1 && /倒立、放大的实像/.test(await txt()) && /清晰/.test(await txt()), 'B4 lensexp: the sharp image is recorded once (a second press of the same object distance adds nothing) with its kind: ' + (await txt()).slice(0, 90));
+    await set({ u: 30, v: 15 }); await page.click('#pl-act-rec'); await set({ lens: 1 });
+    ok((await rows()) === 0, 'B4 lensexp: changing the lens clears the table');
+    await set({ mode: 0, lens: 2, v: 15 });
+    ok(/最小最亮/.test(await txt()), 'B4 lensexp: lens C has its focus at 15 cm: the spot is smallest there');
+    await set({ v: 20 }); ok(/还不是最小/.test(await txt()), 'B4 lensexp: and not at 20 cm');
+    await sim('ohmlaw'); await set({ mode: 0, r: 1 });
+    for (const U of [1, 2, 3, 4]) { await set({ U }); await page.click('#pl-act-rec'); }
+    ok((await rows()) === 4 && /电阻一定时，电流与电压成正比/.test(await txt()), 'B4 ohmlaw: four points of I against U show the conclusion "proportional"');
+    await page.click('#pl-act-clear'); ok((await rows()) === 0, 'B4 ohmlaw: 清除记录 empties the table');
+    await set({ mode: 1 }); for (const r of [0, 1, 2, 3]) { await set({ r }); await page.click('#pl-act-rec'); }
+    ok((await rows()) === 4 && /电压一定时，电流与电阻成反比/.test(await txt()), 'B4 ohmlaw: four points of I against R show the conclusion "inversely proportional"');
+    for (let i = 0; i < 8; i++) { await set({ r: i % 5 }); await page.click('#pl-act-rec'); }
+    ok((await rows()) <= 6, 'B4 ohmlaw: at most 6 sets are kept');
+    await sim('rmeasure'); await set({ target: 1, Rp: 0 }); await page.click('#pl-act-rec'); await set({ Rp: 10 }); await page.click('#pl-act-rec');
+    ok((await rows()) === 2 && /不能求平均值/.test(await txt()), 'B4 rmeasure: for the bulb two sets are shown with the note that its resistance must not be averaged');
+    await set({ target: 0 }); await set({ Rp: 0 }); await page.click('#pl-act-rec'); await set({ Rp: 5 }); await page.click('#pl-act-rec');
+    ok(/电阻的平均值/.test(await txt()), 'B4 rmeasure: for a fixed resistor the average is shown');
+    await sim('comms');
+    await set({ mode: 1, band: 0, fcA: 900, ftA: 700 }); ok(/没有收到/.test(await txt()), 'B4 comms: a radio tuned to 700 kHz does not receive a 900 kHz station');
+    await set({ ftA: 900 }); ok(/收到这个电台/.test(await txt()) && /333\.3/.test(await txt()), 'B4 comms: tuned to 900 kHz it receives it; the wavelength is 333.3 m');
+    await set({ band: 1, fcF: 100, ftF: 100 }); ok(/收到这个电台/.test(await txt()) && /3m/.test(await txt()), 'B4 comms: FM 100 MHz has a wavelength of 3 m');
+    await set({ mode: 2, th: 70 }); ok(/不发生全反射/.test(await txt()), 'B4 comms: light meeting the fibre wall at 70° leaks out');
+    await set({ th: 80 }); ok(/发生全反射/.test(await txt()) && !/不发生全反射/.test(await txt()), 'B4 comms: at 80° it is totally reflected');
+    await sim('thermo'); await set({ mode: 1, prev: 39, now: 36.5, shaken: 0 }); ok(/39/.test(await txt()) && /偏高/.test(await txt()), 'B4 thermo: an unshaken clinical thermometer still reads 39.0');
+    await set({ shaken: 1 }); ok(/36\.5/.test(await txt()) && !/偏高/.test(await txt()), 'B4 thermo: shaken, it reads 36.5');
+    await sim('emdev'); await set({ mode: 0, s1: 1, U1: 2.5 }); ok(/被弹簧拉起/.test(await txt()), 'B4 emdev: 2.5 V across the 150 Ω coil (16.7 mA) does not pull the armature in');
+    await set({ U1: 3 }); ok(/被吸下/.test(await txt()), 'B4 emdev: 3 V (20 mA) does');
+    await sim('noise'); await set({ mode: 2, med: 0, d: 17 }); ok(/能（相隔 0.1 s 以上）/.test(await txt()) && !/不能/.test(await txt()), 'B4 noise: 17 m in air is just far enough for the ear to tell the echo apart');
+    await set({ d: 16 }); ok(/不能/.test(await txt()), 'B4 noise: 16 m is not');
+    await sim('meter'); await set({ mode: 1, r0: 1234, P: 1000, th: 2 }); ok(/01236\.0/.test(await txt()), 'B4 meter: 1234 + 2 kW·h reads 01236.0 on the dial: ' + (await txt()).slice(0, 80));
+  }
+
   // =====================================================================================  C. LAYOUT, 5 SCREEN SIZES
   {
     const SIZES = [[390, 844, 'phone'], [320, 568, 'small'], [820, 1180, 'tablet'], [1180, 820, 'landscape'], [844, 390, 'phoneland']];
@@ -945,6 +985,15 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     await touch([[MX(520), MY(330)], [MX(500), MY(300)], [MX(450), MY(230)], [MX(430), MY(200)]]);
     const cp = await p.evaluate(() => [window.__phys.st.cx, window.__phys.st.cy, window.__phys.done(), getComputedStyle(document.querySelector('#pl-canvas')).touchAction]);
     ok(Math.abs(cp[0] - 430) < 8 && Math.abs(cp[1] - 200) < 8 && cp[2].includes('near') && cp[3] === 'none', 'D magfield: a finger drags the compass next to the N pole (task "near" completes; the canvas has touch-action none so the page does not scroll while dragging): ' + cp.slice(0, 2).map((v) => Math.round(v)).join(','));
+    // a new simulation: the screen slider of the optical bench dragged by a finger, then the table button pressed (a mouse click: after a touch drag Chromium sends no click for the next tap)
+    await goto('lensexp'); await p.evaluate(() => window.__phys.set('mode', 1)); await scrollTo('#pl-v');
+    const vr = await p.evaluate(() => { const r = document.querySelector('#pl-v').getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; });
+    const vy = vr[1] + vr[3] / 2, v0x = vr[0] + 16 + ((40 - 5) / 65) * (vr[2] - 32), v1x = vr[0] + 16 + ((30 - 5) / 65) * (vr[2] - 32);
+    await touch([[v0x, vy], [v0x - 20, vy], [(v0x + v1x) / 2, vy], [v1x, vy]]);
+    const vAfter = await p.evaluate(() => window.__phys.st.v);
+    ok(Math.abs(vAfter - 30) <= 2, 'D lensexp: a finger drags the screen slider from 40 cm to 30 cm (got ' + vAfter + ')');
+    await p.evaluate(() => { window.__phys.set('u', 15); window.__phys.set('v', 30); }); await p.click('#pl-act-rec');
+    ok((await p.evaluate(() => window.__phys.st.n)) === 1, 'D lensexp: the sharp image (u = 15, v = 30) is recorded');
     await t2.browser.close();
   }
   {

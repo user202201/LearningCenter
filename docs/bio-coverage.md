@@ -42,16 +42,32 @@ A simulation = `src/bio/<id>.ts` (screen) + `src/bio/model-<id>.ts` (pure model,
 | 八下 健康地生活 | 心肺复苏、安全用药（剂量）、烧烫伤的处理 | `firstaid` | built |
 | 八下 健康地生活 | 运动强度（心率区间）、睡眠 | `health` | built |
 | 八上 第六单元 生物的多样性及其保护 | 栖息地丧失与物种、CO₂ 与气温、保护措施 | `impact` | built |
+| 七下 人的由来 | 人的生殖系统：女性 / 男性生殖器官的名称和功能（简图）、事件发生的部位、从受精到分娩的顺序 | `reproduction` | built (textbook content only; schematic, formal, no sexual-behaviour content) |
+| 七下 物质的运输 | 血压（收缩压 / 舒张压、kPa 与 mmHg）、袖带测血压的原理、脉搏 | `bloodpressure` | built (teaching model, not a diagnostic tool) |
+| 七下 物质的运输 | 探究酒精对水蚤心率的影响 | `daphnia` | built (teaching data, counting error ±1) |
+| 七下 人体的营养 | 测定某种食物中的能量（Q = c m ΔT，热量散失） | `energy` | built (rounded teaching energy values) |
+| 七上 细胞 | 制作临时装片（洋葱表皮、口腔上皮细胞）、盖盖玻片避免气泡 | `slide` | built (step order tasks; bubble count is a teaching model) |
+| 七上 绿色植物 | 观察种子的结构（菜豆、玉米）、碘液检验淀粉、测定种子的发芽率（取样与重复） | `seedlab` | built |
+| 七上 生物与环境 | 非生物因素对鼠妇分布的影响（对照实验）、生态系统的类型、生态系统的稳定性 | `ecology` | built (stability formula is a teaching model; bioaccumulation stays in `foodweb`) |
+| 八上 动物的主要类群 | 无脊椎动物六大类群与典型动物 / 特征、脊椎动物五类的体表 / 呼吸 / 体温 / 生殖 | `animalgroups` | built |
+| 八上 细菌、真菌和病毒 | 菌落计数与稀释、细菌与酵母菌的结构、抗生素与耐药性 | `microbe` | built (resistance model is simplified) |
+| 八下 遗传和变异 | 染色体 - DNA - 基因的关系、染色体数目（体细胞 / 生殖细胞 / 受精卵）、性别决定与 1 : 1、碱基配对（拓展） | `dna` | built (base pairing is an extension) |
+| 八下 遗传和变异 | 遗传病与近亲结婚的风险、优生措施 | `eugenics` | built (simplified teaching calculation, informational) |
+| 八下 遗传和变异 / 生物技术 | 杂交育种（9 : 3 : 3 : 1）、诱变育种、转基因、克隆（多莉羊） | `breeding` | built (textbook-level, informational) |
+| 八下 生殖和发育 | 植物的无性繁殖（扦插、嫁接、压条、组织培养）、有性生殖与无性生殖 | `propagation` | built |
+| 八下 生物的进化 | 进化的其他证据：比较解剖学、胚胎学、分子证据（拓展）、进化树 | `evidence` | built (cytochrome c differences and divergence times are rounded reference values) |
 
 ## NOT covered (honest list)
 
-- 人的生殖器官的结构和图示、避孕与性教育（需要教师与家长按年龄决定，本实验室不包含）; 动物生殖的其他类型（无性生殖、克隆、植物的无性繁殖：嫁接、扦插）.
-- 心脏疾病、血压的测量、血型以外的凝血机制; 尿的形成中的肾小管分泌、人工肾; 皮肤的结构细节（汗腺、毛囊）.
-- 细菌与真菌的结构图、病毒的结构（只在分类游戏中出现）; 食品的保存与发酵食品的制作步骤.
-- 变异的类型（可遗传 / 不可遗传）、DNA 双螺旋、转基因、Hardy-Weinberg; 生物进化的其他证据（比较解剖、胚胎学、分子证据）、地球上生命的起源.
-- 实验操作技能（制作临时装片、解剖）、真实标本与照片; 毒品、吸烟的危害的模拟（有意不做）.
+- 避孕、性教育、月经周期的细节（青春期和人的生殖系统只按教科书的简图和名称，需要教师与家长按年龄决定，本实验室不包含）; 动物生殖的其他类型（出芽生殖、分裂生殖）与动物的克隆只在 `breeding` 中作为简单模型.
+- 心脏疾病、血压以外的循环系统疾病、血型以外的凝血机制; 尿的形成中的肾小管分泌、人工肾; 皮肤的结构细节（汗腺、毛囊）.
+- 病毒的结构（只在分类游戏中出现）、食品的保存与发酵食品的制作步骤; 细菌和真菌在自然界中的作用（分解者、共生）只在测验中出现.
+- 变异的类型（可遗传 / 不可遗传）、Hardy-Weinberg、DNA 的复制与蛋白质合成; 地球上生命的起源（米勒实验）；`evidence` 的分子数据和进化树的年代是取整的参考值.
+- 植物的结构：根尖的结构与吸水、茎的导管和筛管（输导）、叶片的结构（横切面）、光合作用的场所（叶绿体）只在课文和测验中提到，没有单独的图; 观察草履虫、观察蚯蚓、鸡卵的结构、解剖实验（需要真实标本）没有做.
+- 脊椎动物五类只有表格，没有各类的详细结构图; 昆虫的发育与鸟的繁殖在 `lifecycle`; 动物在自然界中的作用（促进物质循环、帮助植物传粉）没有单独的模拟.
+- 实验操作技能中的显微镜使用（`microscope`）、临时装片（`slide`）、种子的结构和发芽率（`seedlab`）、水蚤心率（`daphnia`）、食物能量（`energy`）、鼠妇（`ecology`）已做；探究唾液淀粉酶（`digest`）、探究光合作用（`photo`）已做; 其他必做实验（如观察花的结构的解剖、制作酸奶、探究食物腐败）没有做. 真实标本、照片、毒品和吸烟的危害的模拟（有意不做）.
 
 ## What a teacher must proofread
 
 
-All lessons, task and quiz wording, the numeric constants of the models (they are simplified teaching models, not data: the enzyme optimum 37 °C / pH 6.8, photosynthesis half-saturation 8 klx, the blood-sugar model, the SIR parameters, the moth survival rates, the latency of reflexes, the eye accommodation 10 D), the 42 organisms and the features used by the key, the drug-dose and CPR numbers, the geological ages, the nutrient table, the heart-rate zones and sleep ranges, the classification groups, the French and English translations (model-written).
+All lessons, task and quiz wording, the numeric constants of the models (they are simplified teaching models, not data: the enzyme optimum 37 °C / pH 6.8, photosynthesis half-saturation 8 klx, the blood-sugar model, the SIR parameters, the moth survival rates, the latency of reflexes, the eye accommodation 10 D), the 42 organisms and the features used by the key, the drug-dose and CPR numbers, the geological ages, the nutrient table, the heart-rate zones and sleep ranges, the classification groups, the French and English translations (model-written); third pass: the teaching constants of the new simulations (peanut / walnut / soybean / rice energy 24 / 28 / 16 / 15 kJ/g, the water-flea heart rates per 10 s 33 / 32 / 28 / 25 / 22 / 15 / 0, the cambium alignment of 70 %, the cytochrome c differences 0 / 1 / 10 / 12 / 13 / 15 / 21 / 44 of 104, the divergence times 7 / 9 / 14 / 28 / 90 million years, the pillbug choice shares, the stability formula, the blood-pressure model constants (resistance 17, compliance 1.75), the antibiotic resistance model, the relationship shares 1/8 and 1/2), the textbook scope of the reproductive-system diagrams (organ names, the epididymis and the seminal vesicle) and every text about genetic disease and close relatives.

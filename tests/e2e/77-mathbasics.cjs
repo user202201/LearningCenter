@@ -456,7 +456,7 @@ async function generatorChecks(ids, N) {
     window.__said = [];
     const U = function (t) { this.text = t; };
     window.SpeechSynthesisUtterance = U;
-    Object.defineProperty(window, 'speechSynthesis', { value: { cancel() {}, speak(u) { window.__said.push([u.text, u.lang]); } }, configurable: true });
+    Object.defineProperty(window, 'speechSynthesis', { value: { cancel() {}, speak(u) { if (!String(u.text).trim() || u.volume === 0) return; window.__said.push([u.text, u.lang]); } }, configurable: true });
   };
   const recordMade = (pg) => pg.evaluate(async () => {
     const G = await import('/src/mathgen.ts');

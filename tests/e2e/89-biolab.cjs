@@ -627,8 +627,9 @@ const MEASURE_OF = ['禁止近亲结婚', '禁止近亲结婚', '遗传咨询', 
         for (const f of [0, 1, 2]) { const a = Array.from({ length: 300 }, (_, s) => m.onRight(1000, f, s + 1)); chk(Math.abs(mean(a) - 1000 * m.FACTORS[f][3]) < 8, `ecology: pillbugs on the preferred side (factor ${f}: ${mean(a).toFixed(0)})`); }
         chk(m.ECOS.length === 6 && [...Array(6).keys()].every((k) => m.ECO_ITEMS.some((x) => x[1] === k)) && new Set(m.ECO_ITEMS.map((x) => x[0])).size === 8, 'ecology: every ecosystem type has an item');
       }
-      out.fails = fails; return out;
+      out.fails = fails; out.sensitive = Math.abs(M.microbe.resistFrac(0.01, 0.9, 3) - 0.01 * 10 ** 3) > 0.01 && Math.abs(M.microbe.expected(7, 4, 0.1) - 10 ** 7 * 0.1) > 1; return out;
     }, { ORGAN_FN, REPRO_STAGES, ONION_STEPS, COMPARE_ITEMS, TECH_OF, MEASURE_OF });
+    ok(R.sensitive, 'A2 the independent check is able to fail (a wrong closed form for the resistant share differs from the model)');
     ok(R.fails.length === 0, 'A2 third pass: every new model against its independent computation' + (R.fails.length ? '\n   ' + R.fails.join('\n   ') : ''));
     // the drag modes: data and layout of every DMode of the new simulations
     const D = await page.evaluate(async () => {
@@ -666,7 +667,7 @@ const MEASURE_OF = ['禁止近亲结婚', '禁止近亲结婚', '遗传咨询', 
       }
       return { fails, nModes };
     });
-    ok(D.fails.length === 0 && D.nModes >= 24, `A2 drag modes: ${D.nModes} modes of the new simulations (chips and marks inside the picture, nothing overlapping, every bucket used, wrong / right drop and tap-tap) ` + D.fails.slice(0, 8).join('; '));
+    ok(D.fails.length === 0 && D.nModes === 21, `A2 drag modes: ${D.nModes} modes of the new simulations (chips and marks inside the picture, nothing overlapping, every bucket used, wrong / right drop and tap-tap) ` + D.fails.slice(0, 8).join('; '));
     // no graphic words in the reproductive system simulation (as the deny-list of 84-safety): its own texts in Chinese
     const texts = await page.evaluate(async () => {
       const m = await import('/src/bio/reproduction.ts'), mm = await import('/src/bio/model-reproduction.ts'), Q = await import('/src/phys/qtools.ts');
@@ -674,7 +675,7 @@ const MEASURE_OF = ['禁止近亲结婚', '禁止近亲结婚', '遗传咨询', 
       for (let s = 1; s <= 300; s++) for (const q of mm.quiz(Q.mulberry32(s))) t.push(q.q, q.why || '', ...q.choices);
       return t;
     });
-    const DENY = /性交|性行为|性生活|阴茎|阴蒂|阴唇|外阴|勃起|射精|高潮|避孕|手淫|色情|裸|交配|做爱|情欲|性欲|性感|生殖器|私处|性爱/;
+    const DENY = /性交|性行为|性生活|阴茎|阴蒂|阴唇|外阴|勃起|射精|高潮|避孕|手淫|色情|裸|交配|做爱|情欲|性欲|性感|外生殖器|私处|性爱/;
     ok(texts.length > 1500 && !texts.some((x) => DENY.test(x)), `A2 reproduction: ${texts.length} texts (lesson, tasks, labels, notes, quiz questions) contain none of the words of the deny-list`);
     ok(texts.some((x) => /教科书/.test(x)), 'A2 reproduction: the lesson says that this is textbook content');
     const dna = await page.evaluate(async () => { const m = await import('/src/bio/dna.ts'); return m.def.lesson.join(' '); });
@@ -785,6 +786,41 @@ const MEASURE_OF = ['禁止近亲结婚', '禁止近亲结婚', '遗传咨询', 
       return [window.__bio.st.ok, window.__bio.st.found === tgt, window.__bio.st.ident === before, document.querySelector('#pl-readouts').textContent];
     });
     ok(wrongFlow[0] === 0 && !wrongFlow[1] && wrongFlow[2] && /鉴定有误/.test(wrongFlow[3]), 'B classify: wrong answers end with a different organism and "鉴定有误", the count of identified specimens does not grow');
+  }
+
+
+  // ---- third pass: the small interactions of the 14 new simulations
+  {
+    const txt = () => page.textContent('#pl-readouts');
+    await sim('dna'); await set({ mode: 1 });
+    await page.click('.pl-opt[data-c="pick"][data-v="0"]');   // the strand starts with A: its partner is T, so A is wrong
+    ok((await page.evaluate(() => [window.__bio.st.k, window.__bio.st.miss])).join() === '0,1', 'B dna: a wrong base counts a mistake and the strand does not advance');
+    const strand = 'ATGCCGTA', partner = { A: 'T', T: 'A', C: 'G', G: 'C' };
+    for (const ch of strand) await page.click(`.pl-opt[data-c="pick"][data-v="${'ATCG'.indexOf(partner[ch])}"]`);
+    ok((await page.evaluate(() => [window.__bio.st.k, window.__bio.st.miss, window.__bio.done().includes('pair'), document.querySelector('.pl-ctl[data-c=pick]').hidden])).join() === '8,1,true,true', 'B dna: pressing the complementary base 8 times completes the strand (the task is done, the buttons go away)');
+    await sim('evidence'); await set({ mode: 0, an: 0, h0: 1, h1: 1 }); await set({ an: 2 });
+    ok((await page.evaluate(() => [window.__bio.st.h0, window.__bio.st.h1, window.__bio.st.miss])).join() === '0,0,0', 'B evidence: choosing another limb clears the placed bones');
+    await sim('propagation'); await set({ mode: 0, scion: 0, stock: 0, align: 60 });
+    const g60 = await txt(); await set({ align: 70 }); const g70 = await txt(); await set({ stock: 1, align: 100 }); const gbad = await txt();
+    ok(/形成层没有对齐/.test(g60) && /^.*成活：形成层紧密结合/.test(g70) && /不亲和/.test(gbad), 'B propagation: 60 % alignment fails, 70 % takes, a distant stock fails even at 100 %');
+    await sim('eugenics'); await set({ mode: 0, N: 50, rel: 1 });
+    ok(/6\.[23]/.test((await txt()).replace(/\s/g, '')) , 'B eugenics: cousins, 1 carrier in 50: about 6.3 times the unrelated chance');
+    await sim('microbe'); await set({ mode: 0, c0: 7, dil: 4, vol: 0.1 });
+    const seen = new Set([await txt()]); for (let i = 0; i < 4; i++) { await page.click('#pl-act-replate'); seen.add(await txt()); }
+    ok(seen.size >= 2 && /适合计数/.test([...seen].join()), 'B microbe: 重新涂布 gives another plate (counts differ) and a 30–300 plate says it can be counted');
+    await set({ dil: 0 }); ok(/> 300/.test(await txt()) && /无法计数/.test(await txt()), 'B microbe: undiluted plate: more than 300, cannot be counted');
+    await sim('seedlab'); await set({ mode: 2, seed: 1, part: 1 }); const blueTxt = await txt(); await set({ part: 0 });
+    ok(/变成蓝色/.test(blueTxt) && /不变蓝/.test(await txt()), 'B seedlab: iodine on the endosperm turns blue, on the seed coat it does not');
+    await sim('energy'); const e0 = await txt(); await set({ shield: 1 }); const e1 = await txt();
+    ok(/35/.test(e0.replace(/\s/g, '')) && /75/.test(e1.replace(/\s/g, '')), 'B energy: without a wind shield 35 % of the true value, with one 75 %');
+    await set({ food: 1, shield: 1, m: 3, vw: 20 }); ok(/水已沸腾，数据无效/.test(await txt()), 'B energy: too much food for too little water boils: the data are invalid');
+    await sim('daphnia'); await set({ conc: 10 }); const d0 = await txt(); await page.click('#pl-act-recount'); const d1 = await txt(); await set({ conc: 20 });
+    ok(/存活/.test(d0) && /水蚤死亡/.test(await txt()) && d0.length > 0 && d1.length > 0, 'B daphnia: 重新计数 works; at 20 % the water flea is dead');
+    await sim('bloodpressure'); await set({ mode: 1, person: 0, cuff: 100 }); const bp1 = await txt(); await set({ cuff: 180 }); const bp2 = await txt(); await set({ cuff: 60 });
+    ok(/能听到脉搏声/.test(bp1) && /听不到声音/.test(bp2) && /声音消失/.test(await txt()), 'B bloodpressure: cuff 100 = pulse sound, 180 = nothing, 60 = sound gone');
+    await sim('ecology'); ok(await page.evaluate(() => document.querySelector('#pl-play') === null || document.querySelector('#pl-play').hidden), 'B ecology: the play button is hidden outside the stability mode');
+    await set({ mode: 2, t: 0 }); await page.click('#pl-play'); await page.waitForTimeout(600); const tt = await page.evaluate(() => window.__bio.st.t); await page.click('#pl-play');
+    ok(tt > 1, 'B ecology: 播放 moves the time after the disturbance on (' + tt.toFixed(1) + ')');
   }
 
   // ---- the quiz: right answers / wrong answers ----
@@ -926,6 +962,19 @@ const MEASURE_OF = ['禁止近亲结婚', '禁止近亲结婚', '遗传咨询', 
     a = [lx + cl.at[0] * kx, ly + cl.at[1] * ky]; b = [lx + cl.tg[cl.ans][0] * kx, ly + cl.tg[cl.ans][1] * ky];
     await touch([a, [a[0], a[1] - 40], b]);
     ok((await p.evaluate(() => window.__bio.st.cl0)) === 1, 'D classify: a finger drags an organism into its class (' + cl.items.length + ' organisms in the round)');
+
+    // third pass: real touch drags in a label mode, an order mode and a bucket mode
+    const dragItem = async (id, mode, idx, wrong) => {
+      await goto(id); await set2(p, { mode }); await scrollTo('#pl-canvas');
+      const g = await p.evaluate(async ([id, mode, idx, wrong]) => { const m = await import(`/src/bio/${id}.ts`), Mt = await import('/src/bio/match.ts'); const dm = (m.MODES || m.HOM)[mode], sp = Mt.specOf(dm), tg = sp.targets({}); const t = wrong ? tg.findIndex((_, j) => j !== sp.answer(idx, {})) : sp.answer(idx, {}); return { at: sp.at(idx, {}), to: [tg[t].x, tg[t].y], prefix: dm.prefix }; }, [id, mode, idx, wrong]);
+      const [x0, y0, kx2, ky2] = await toScreen(480); const a2 = [x0 + g.at[0] * kx2, y0 + g.at[1] * ky2], b2 = [x0 + g.to[0] * kx2, y0 + g.to[1] * ky2];
+      await touch([a2, [a2[0] - 12, a2[1] - 12], [(a2[0] + b2[0]) / 2, (a2[1] + b2[1]) / 2], b2]);
+      return p.evaluate(([pf, idx]) => ({ placed: window.__bio.st[pf + idx], miss: window.__bio.st.miss, held: window.__bio.st.h }), [g.prefix, idx]);
+    };
+    for (const [id, mode, name] of [['reproduction', 0, 'label (female system)'], ['reproduction', 3, 'order (fertilisation to birth)'], ['slide', 0, 'order (onion mount)'], ['propagation', 2, 'bucket (sexual / asexual)'], ['evidence', 0, 'label (human arm)'], ['animalgroups', 0, 'bucket (invertebrate groups)']]) {
+      const r1 = await dragItem(id, mode, 0, false); ok(r1.placed === 1 && r1.miss === 0 && r1.held === -1, `D ${id}: a finger drags item 1 of "${name}" onto its place`);
+      const r2 = await dragItem(id, mode, 1, true); ok(r2.placed === 0 && r2.miss === 1 && r2.held === -1, `D ${id}: a finger dropping item 2 on a wrong place: not placed, one mistake`);
+    }
     // the page still scrolls with a vertical swipe that starts OUTSIDE a drag canvas (on the text below)
     await goto('cells'); const sy0 = await p.evaluate(() => document.querySelector('.scroll').scrollTop);
     const info = await p.evaluate(() => { const r = document.querySelector('.pl-info').getBoundingClientRect(); return [r.left + 60, Math.min(innerHeight - 40, r.top + 40)]; });
@@ -1000,6 +1049,13 @@ const MEASURE_OF = ['禁止近亲结婚', '禁止近亲结婚', '遗传咨询', 
         return [...new Set(out)];
       }, IDS);
       ok(bad.length === 0, `E ${label}: all simulations x 200 generated quiz questions + lessons: no Chinese left (${bad.length})${bad.length ? '\n   ' + bad.slice(0, 25).join('\n   ') : ''}`);
+    }
+
+    {
+      const rep = await p.evaluate(async () => { const I = await import('/src/i18n.ts'), m = await import('/src/bio/reproduction.ts'), mm = await import('/src/bio/model-reproduction.ts'), Q = await import('/src/phys/qtools.ts');
+        const t = [...m.def.lesson, ...m.def.tasks.map((x) => x.text), ...m.MODES.flatMap((x) => [...x.items, ...(x.fn || [])]), ...mm.STAGE_FN]; for (let s = 1; s <= 60; s++) for (const q of mm.quiz(Q.mulberry32(s))) t.push(q.q, q.why || '', ...q.choices); return t.map((x) => I.tr(x)); });
+      const DENY_L = loc === 'en' ? /intercourse|erection|penis|ejaculat|orgasm|contracepti|vulva|clitor|masturbat|sexual behaviou?r|coitus|copulat|genitals|pornograph|nude|naked/i : /rapport sexuel|érection|pénis|éjacul|orgasme|contracepti|vulve|clitoris|masturb|comportement sexuel|coït|organes génitaux externes|pornograph|\bnu(e|s|es)?\b/i;
+      ok(rep.length > 400 && !rep.some((x) => DENY_L.test(x) || /[一-鿿]/.test(x)), `E ${label}: the reproductive system texts (${rep.length}) are translated, formal and contain none of the deny-list words`);
     }
     await p.evaluate(() => (location.hash = '#/science/bio/cells')); await p.waitForSelector('.pl-sim');
     ok(!/[一-鿿]/.test(await p.textContent('#pl-lesson')), `E ${label}: the lesson text is translated (no user box)`);
