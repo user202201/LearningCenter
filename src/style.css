@@ -2876,3 +2876,22 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 /* the stage is turned by 90 degrees on a landscape screen (pk.ts `orient`): its padding follows (inner top = the right edge of the screen, inner left = the top edge ...), and the top-layer dialogs turn with it */
 .pk-stage.rot { padding: env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) env(safe-area-inset-top); }
 html.pk-rot dialog.center { width: min(92dvh, 430px); max-height: 92vw; transform: rotate(90deg); }
+
+.rd-speed { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.rd-speed-b { min-height: 40px; padding: 6px 16px; border-radius: 999px; border: 2px solid #d8d0c2; background: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+.rd-speed-b[aria-pressed="true"] { background: #2f9e44; border-color: #2b8a3e; color: #fff; }
+
+.rd-p { font-size: 20px; line-height: 1.75; }
+.rd-s { cursor: pointer; border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background .2s; }
+.rd-s.now { background: #ffe066; box-shadow: 0 0 0 3px #ffe066; }
+.rd-reader.rd-fs { position: fixed; inset: 0; z-index: 60; overflow: auto; padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background: #fff8e7; -webkit-overflow-scrolling: touch; }
+.rd-reader.rd-fs .rd-tools { position: sticky; top: 0; z-index: 2; padding: 6px 0; background: #fff8e7; justify-content: center; gap: 12px; }
+.rd-reader.rd-fs .rd-speed { justify-content: center; }
+.rd-reader.rd-fs .rd-text { max-width: 900px; margin: 0 auto; padding: 22px 26px; }
+.rd-reader.rd-fs .rd-p { font-size: clamp(26px, 4.4vw, 46px); line-height: 1.7; }
+.rd-reader.rd-fs .rd-bubble { position: sticky; bottom: 0; max-width: 900px; margin: 10px auto 0; font-size: 20px; }
+html.rd-fs-on, html.rd-fs-on body { overflow: hidden; }
+
+.rd-ctrl { position: sticky; top: 0; z-index: 3; padding: 6px 0 2px; background: #fff8e7; }
+.rd-reader.rd-fs .rd-ctrl { padding-top: 6px; }
+.rd-reader.rd-fs .rd-tools { position: static; padding: 0; }

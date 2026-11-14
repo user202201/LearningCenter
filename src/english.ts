@@ -217,23 +217,65 @@ async function renderReading(k: M.Kid) {
   const lang = getLang();
   if (!r || lang === "en") return void (location.hash = `#/english/${k.id}`);   // (the passages are English with Chinese / French word meanings: on the English screen, where the Languages subject teaches French, there are none)
   const meaning = (g: R.Gloss) => (lang === "fr" ? g.fr : g.zh);
-  const bubble = h("div", { class: "rd-bubble", id: "rd-gloss", role: "status" }, "点击带下划线的单词可查看释义");
+  const bubble = h("div", { class: "rd-bubble", id: "rd-gloss", role: "status" }, "点击带下划线的单词可查看释义；点击句子可从这一句开始朗读");
+  // the text is cut into sentences: each is a span, so the one being read aloud can be lit and a tap on a sentence starts the reading there
+  const sents: string[] = [];
+  const sentRe = /[^.!?…]+(?:[.!?…]+["'”’)]*)?\s*/g;
   const paras = r.text.split(/\n+/).map((para) => {
     const p = h("p", { class: "rd-p user" });
-    for (const part of para.split(/([A-Za-z][A-Za-z'’-]*)/)) {
-      const g = /^[A-Za-z]/.test(part) ? R.glossOf(r.gl, part) : undefined;
-      if (g) p.append(h("span", { class: "rw-gl", role: "button", tabindex: "0", "data-w": g.w, onclick: () => { bubble.textContent = `${part} — ${meaning(g)}`; bubble.classList.add("on"); } }, part));
-      else p.append(part);
+    for (const sent of para.match(sentRe) ?? [para]) {
+      const idx = sents.length; sents.push(sent.trim());
+      const sp = h("span", { class: "rd-s", "data-s": String(idx), onclick: () => playFrom(idx) });
+      for (const part of sent.split(/([A-Za-z][A-Za-z'’-]*)/)) {
+        const g = /^[A-Za-z]/.test(part) ? R.glossOf(r.gl, part) : undefined;
+        if (g) sp.append(h("span", { class: "rw-gl", role: "button", tabindex: "0", "data-w": g.w, onclick: (e: Event) => { e.stopPropagation(); bubble.textContent = `${part} — ${meaning(g)}`; bubble.classList.add("on"); } }, part));
+        else sp.append(part);
+      }
+      p.append(sp);
     }
     return p;
   });
-  let speaking: SpeakHandle | null = null;
-  const speakBtn = h("button", { class: "sheet-btn", id: "rd-speak", onclick: () => {
-    if (speaking) { speaking.stop(); speaking = null; speakBtn.textContent = "朗读全文"; return; }
-    const hd = speakText(r.text.replace(/\n+/g, " "), "en-US", { rate: 0.85, onend: () => { if (speaking === hd) { speaking = null; speakBtn.textContent = "朗读全文"; } } });
-    if (hd.ended) return;   // (no speech on this device)
-    speaking = hd; speakBtn.textContent = "停止朗读";
-  } }, "朗读全文");
+  const textBox = h("div", { class: "rd-text", id: "rd-text" }, ...paras);
+  // reading speed (a child can only follow along when it is slow enough): kept on this device
+  const RATES: [string, number][] = [["很慢", 0.5], ["较慢", 0.68], ["正常", 0.85]];
+  let rate = 0.68;
+  try { const v = Number(localStorage.getItem("learn.reading.rate")); if (RATES.some((x) => x[1] === v)) rate = v; } catch { /* storage unavailable */ }
+  let speaking: SpeakHandle | null = null, chain = 0, cur = 0, playing = false;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const clearHi = () => textBox.querySelectorAll(".rd-s.now").forEach((e) => e.classList.remove("now"));
+  const idle = () => { playing = false; speaking = null; clearTimeout(timer); clearHi(); speakBtn.textContent = "朗读全文"; };
+  const stopAll = () => { chain++; speaking?.stop(); idle(); };
+  const play = (i: number, my: number) => {
+    if (my !== chain) return;
+    if (i >= sents.length) { idle(); cur = 0; return; }
+    cur = i; clearHi();
+    const el = textBox.querySelectorAll<HTMLElement>(".rd-s")[i];
+    el.classList.add("now"); el.scrollIntoView?.({ block: "center", behavior: "smooth" });
+    playing = true; speakBtn.textContent = "停止朗读";
+    const text = sents[i];
+    const next = () => { clearTimeout(timer); speaking = null; play(i + 1, my); };
+    const hd = speakText(text, "en-US", { rate, onend: () => { if (my === chain && speaking === hd) next(); } });
+    if (hd.ended) { stopAll(); return; }   // (no speech on this device)
+    speaking = hd;
+    // the voice may never report its end (some devices): go on after the time the sentence needs
+    timer = setTimeout(() => { if (my === chain && speaking === hd) { hd.stop(); next(); } }, Math.round((text.length * 90) / rate) + 4000);
+  };
+  const playFrom = (i: number) => { stopAll(); play(i, chain); };
+  const speakBtn = h("button", { class: "sheet-btn", id: "rd-speak", onclick: () => { if (playing) stopAll(); else playFrom(0); } }, "朗读全文");
+  const speedBtns = RATES.map(([label, v]) => h("button", { class: "rd-speed-b", "data-rate": String(v), "aria-pressed": v === rate ? "true" : "false", onclick: () => {
+    rate = v; try { localStorage.setItem("learn.reading.rate", String(v)); } catch { /* storage unavailable */ }
+    speedBtns.forEach((b) => b.setAttribute("aria-pressed", b.dataset.rate === String(v) ? "true" : "false"));
+    if (playing) playFrom(cur);   // the new speed applies at once, from the sentence being read
+  } }, label));
+  const speedRow = h("div", { class: "rd-speed", id: "rd-speed", role: "group", "aria-label": "语速" }, h("span", { class: "muted small" }, "语速"), ...speedBtns);
+  // a big, full-screen reading view (the same elements, so the lit sentence and the word meanings keep working)
+  const fullBtn = h("button", { class: "sheet-btn", id: "rd-full", "aria-pressed": "false" }, "全屏阅读");
+  const reader = h("div", { class: "rd-reader", id: "rd-reader" });
+  const setFull = (on: boolean) => { reader.classList.toggle("rd-fs", on); fullBtn.setAttribute("aria-pressed", on ? "true" : "false"); fullBtn.textContent = on ? "退出全屏" : "全屏阅读"; document.documentElement.classList.toggle("rd-fs-on", on); };
+  fullBtn.addEventListener("click", () => setFull(!reader.classList.contains("rd-fs")));
+  const onKey = (e: KeyboardEvent) => { if (!reader.isConnected) { document.removeEventListener("keydown", onKey); document.documentElement.classList.remove("rd-fs-on"); return; } if (e.key === "Escape" && reader.classList.contains("rd-fs")) setFull(false); };
+  document.addEventListener("keydown", onKey);
+  window.addEventListener("hashchange", () => { chain++; speaking?.stop(); document.documentElement.classList.remove("rd-fs-on"); }, { once: true });
   let right = 0, done = 0;
   const score = h("p", { class: "rd-score", id: "rd-score" });
   const quiz = r.q.map((q, i) => {
@@ -254,8 +296,7 @@ async function renderReading(k: M.Kid) {
     h("header", { class: "top hero kid-hero" }, X.back(`#/english/${k.id}`, "返回"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), shortcuts(k.id, "english")),
     h("main", { class: "scroll" }, h("div", { class: "narrow rd-narrow" },
       h("h2", { class: "rd-h user", id: "rd-title" }, r.t),
-      h("div", { class: "rd-tools" }, speakBtn, h("span", { class: "muted small" }, `来源：${r.src === "original" ? "原创" : r.src}`)),
-      h("div", { class: "rd-text", id: "rd-text" }, ...paras), bubble,
+      (reader.append(h("div", { class: "rd-ctrl" }, h("div", { class: "rd-tools" }, speakBtn, fullBtn), speedRow), textBox, bubble, h("p", { class: "muted small" }, `来源：${r.src === "original" ? "原创" : r.src}`)), reader),
       h("div", { class: "sec-row" }, h("h2", { class: "sec" }, "生词")),
       h("div", { class: "rd-words" }, ...r.gl.map((g) => h("span", { class: "rd-w user" }, h("b", {}, g.w), ` ${meaning(g)}`))),
       h("div", { class: "sec-row" }, h("h2", { class: "sec" }, "读后小测")), ...quiz, score))));
