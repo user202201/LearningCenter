@@ -15,7 +15,7 @@ import { openMathGame } from "./mathui";
 import { renderRich, renderTeX } from "./mathtext";
 import { SYMBOLS, CIRCUITS, RULES } from "./diagrams";
 import { figure } from "./figures";
-import { ct, loadContentTr } from "./contenttr";
+import { ct, cct, loadContentTr, loadCardTr } from "./contenttr";
 import { tr } from "./i18n";
 import { mascot } from "./art";
 import { subjectArt, shortcuts } from "./hub";
@@ -110,7 +110,7 @@ export async function renderKid(id: string, tab: Tab) {
   let lib: SM.Library;
   try {
     if (!X.kids().kids.length) await X.loadShared();
-    lib = await SM.loadScience();
+    [lib] = await Promise.all([SM.loadScience(), loadCardTr()]);   // (the card texts are translated when drawn: wait for the table of the screen language)
     await loadKid(id);
   } catch (e) {
     return my === X.epoch() ? X.showError(e, () => void renderKid(id, tab)) : undefined;
@@ -152,16 +152,19 @@ async function changeGrade(k: M.Kid) {
 }
 
 const hash = (t: string): number => { let h = 2166136261; for (const ch of t) h = Math.imul(h ^ ch.charCodeAt(0), 16777619); return h >>> 0; };
-/** a card: the topic, the question and its four choices; a tap shows / hides the answer */
+/**
+ * a card: the topic, the question and its four choices; a tap shows / hides the answer. Every text is drawn through `cct` (the translation in en / fr);
+ * the Chinese original stays in `data-k` and decides which choice is right (never compare translations).
+ */
 function cardEl(c: SM.Card, lib: SM.Library): HTMLElement {
-  const aEl = h("b", {}), eEl = h("span", { class: "sfun" }), qEl = h("b", { class: "sq user" });
-  renderRich(aEl, c.a); renderRich(eEl, c.e); renderRich(qEl, c.q);   // (formulas written as $...$ are typeset)
+  const aEl = h("b", { "data-k": c.a }), eEl = h("span", { class: "sfun" }), qEl = h("b", { class: "sq user" });
+  renderRich(aEl, cct(c.a)); renderRich(eEl, cct(c.e)); renderRich(qEl, cct(c.q));   // (formulas written as $...$ are typeset)
   const ans = h("div", { class: "sans user" }, aEl, eEl);
   // the four choices are on the card (always in the same order for a card); a tap shows which one is right and the "did you know" sentence
   const order = [c.a, ...c.w].map((x) => ({ x, k: hash(`${c.id}:${x}`) })).sort((p, q) => p.k - q.k).map((o) => o.x);
-  const opts = h("div", { class: "sopts" }, ...order.map((x, i) => { const o = h("span", { class: "sopt user", "data-right": x === c.a ? "1" : "0" }, h("i", {}, "ABCD"[i]), h("span", { class: "sopt-t" })); renderRich(o.querySelector(".sopt-t") as HTMLElement, x); return o; }));
+  const opts = h("div", { class: "sopts" }, ...order.map((x, i) => { const o = h("span", { class: "sopt user", "data-right": x === c.a ? "1" : "0", "data-k": x }, h("i", {}, "ABCD"[i]), h("span", { class: "sopt-t" })); renderRich(o.querySelector(".sopt-t") as HTMLElement, cct(x)); return o; }));
   const el = h("div", { class: "scard tappable", "data-card": c.id, role: "button", tabindex: "0" },
-    h("span", { class: "stopic" }, lib.topics[c.t] ?? c.t), qEl, opts, ans);
+    h("span", { class: "stopic" }, cct(lib.topics[c.t] ?? c.t)), qEl, opts, ans);
   const flip = () => el.classList.toggle("open");
   el.addEventListener("click", flip);
   el.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), flip()));
@@ -205,7 +208,7 @@ async function renderLearned(body: HTMLElement, k: M.Kid, kid: M.KidData, lib: S
     const book = h("div", { class: "mmistakes", id: "mistakes" },
       h("div", { class: "sec-row" }, h("h2", { class: "sec", id: "mistakes-title" }, `错题本（${mistakes.length}）`),
         mistakes.length ? h("button", { class: "sheet-btn", id: "redo-mistakes", onclick: () => playQuestions(k, mistakes.slice(0, 20).map((q) => ({ ...q, choices: [...q.choices].sort(() => Math.random() - 0.5) })), lib, () => X.route()) }, "重做错题") : null),
-      mistakes.length ? h("div", {}, ...mistakes.slice(0, 20).map((m) => { const q = h("span", { class: "user" }), a = h("b", { class: "user" }); renderRich(q, m.q); renderRich(a, m.a); return h("div", { class: "mmis", "data-topic": m.topic }, q, a); })) : h("p", { class: "muted small" }, "还没有错题。"));
+      mistakes.length ? h("div", {}, ...mistakes.slice(0, 20).map((m) => { const q = h("span", { class: "user" }), a = h("b", { class: "user", "data-k": m.a }); renderRich(q, cct(m.q)); renderRich(a, cct(m.a)); return h("div", { class: "mmis", "data-topic": m.topic }, q, a); })) : h("p", { class: "muted small" }, "还没有错题。"));
     body.replaceChildren(h("div", { class: "narrow" }, book,
       all.length
         ? h("div", {},
@@ -222,8 +225,8 @@ function playQuestions(k: M.Kid, questions: ReturnType<typeof SM.cardToQ>[], lib
   const byQ = new Map(lib.cards.map((c) => [c.q, c]));
   openMathGame({
     color: k.color, questions, seconds: questions.length * 20,
-    relaxed: true, explain: (q) => byQ.get(q.q)?.e ?? "",
-    topicName: (id) => lib.topics[id] ?? id,
+    relaxed: true, explain: (q) => byQ.get(q.q)?.e ?? "", show: cct,
+    topicName: (id) => cct(lib.topics[id] ?? id),
     onSave: async (answers, score, total, used, finished) => {
       const done = toast("正在保存…", 0, true);
       try {

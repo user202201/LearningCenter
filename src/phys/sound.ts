@@ -44,7 +44,7 @@ export const def: SimDef = {
   readouts: (s) => [
     { label: "频率", value: fmt(s.f, 0), unit: "Hz" },
     { label: "周期", value: fmt(1000 * Mo.period(s.f), 2), unit: "ms" },
-    { label: "响度级", value: fmt(Mo.levelDb(s.A), 0), unit: "dB" },
+    { label: "声音强弱（分贝）", value: fmt(Mo.levelDb(s.A), 0), unit: "dB" },
     { label: "最接近的音名", value: `${Mo.nearestNote(s.f).name} (${Mo.nearestNote(s.f).cents >= 0 ? "+" : "−"}${Math.abs(Mo.nearestNote(s.f).cents)})`, unit: "" },
     { label: "空气中的波长", value: fmt(Mo.wavelength(s.f), 2), unit: "m" },
   ],
@@ -63,7 +63,7 @@ export const def: SimDef = {
   },
   tasks: [
     { id: "a4", text: "把频率调到 440 Hz（标准音 A4），使用纯音", check: (s) => s.f === 440 && s.timbre === 0 },
-    { id: "loud", text: "增大振幅，使响度级不低于 58 dB", check: (s) => Mo.levelDb(s.A) >= 58 },
+    { id: "loud", text: "增大振幅，使声音强弱不低于 58 dB", check: (s) => Mo.levelDb(s.A) >= 58 },
     { id: "timbre", text: "选择方波，并把频率调到 880 Hz（比 A4 高一个八度）", check: (s) => s.timbre === 1 && s.f === 880 },
   ],
   sound,

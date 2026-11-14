@@ -30,6 +30,8 @@ export interface MathGameOpts {
   /** a scratch paper (演草纸) beside the question: the child writes a sum out with a finger or a pencil (the math game; not the science cards) */
   pad?: boolean;
   explain?: (q: Q) => string;
+  /** how a TEXT of a question is drawn (the science cards: the translation of the Chinese text). The logic - the right choice, the answer check, `data-v` - always uses the original `q` / `a` / choices. */
+  show?: (text: string) => string;
   onSave: (answers: Answer[], score: number, total: number, usedSeconds: number, finished: boolean) => Promise<void>;
   onAgain: () => void;
   onClose: () => void;
@@ -79,6 +81,7 @@ export function fitQuestion(el: HTMLElement, box: HTMLElement): void {
 }
 
 export function openMathGame(o: MathGameOpts): void {
+  const T = o.show ?? ((s: string) => s);
   const total = o.questions.length;
   const answers: Answer[] = [];
   let idx = 0, score = 0;
@@ -101,7 +104,7 @@ export function openMathGame(o: MathGameOpts): void {
   let typing = false;   // the question on screen is answered on the keypad
   const pad = o.pad ? createPad() : null;
   const padBtn = o.pad ? h("button", { class: "gpadbtn", id: "game-pad", onclick: () => { const on = !root.classList.contains("with-pad"); root.classList.toggle("with-pad", on); saveMathSettings({ ...loadMathSettings(), pad: on }); padBtn!.classList.toggle("on", on); } }, "✎ 演草纸") : null;
-  const root = h("div", { class: "game mathgame" + (pad && loadMathSettings().pad ? " with-pad" : ""), id: "game", role: "dialog", "aria-modal": "true", style: `--kid:${o.color}` },
+  const root = h("div", { class: "game mathgame" + (o.relaxed ? " relaxed" : "") + (pad && loadMathSettings().pad ? " with-pad" : ""), id: "game", role: "dialog", "aria-modal": "true", style: `--kid:${o.color}` },
     h("div", { class: "gtop" }, quit, h("div", { class: "gmid" }, progress), padBtn, scoreEl),
     o.relaxed ? null : h("div", { class: "mtime" }, h("div", { class: "mbar" }, bar), timeText),
     h("div", { class: "mwrap" }, h("div", { class: "mbody" }, topic, qBox, grid), pad?.el ?? null));
@@ -134,7 +137,7 @@ export function openMathGame(o: MathGameOpts): void {
     const q = o.questions[idx];
     progress.textContent = `${idx + 1} / ${total}`;
     topic.textContent = o.topicName(q.topic);
-    qText.textContent = q.q;
+    qText.textContent = T(q.q);
     if (q.fig) mountFig(figBox, q.fig); else figBox.replaceChildren();   // (a figure of the question, above its text)
     qBox.classList.toggle("has-fig", !!q.fig);
     fitQuestion(qText, qBox);                                    // (translated and sized as plain text first ...)
@@ -150,10 +153,10 @@ export function openMathGame(o: MathGameOpts): void {
         h("button", { class: "mkey" + (k === "✓" ? " ok" : k === "⌫" ? " del" : ""), "data-k": k, title: k === "✓" ? "确定" : k === "⌫" ? "删除" : k, "aria-label": k === "✓" ? "确定" : k === "⌫" ? "删除" : k, onclick: () => press(k) }, k));
       grid.replaceChildren(input, hint, h("div", { class: "mkeys", id: "math-keys" }, ...keys));
     } else {
-      const longest = Math.max(...q.choices.map((c) => [...c].length));
+      const longest = Math.max(...q.choices.map((c) => [...T(c)].length));
       grid.classList.toggle("long", longest > 14);
       grid.classList.toggle("mid", longest > 7 && longest <= 14);
-      grid.replaceChildren(...q.choices.map((c) => { const b = h("button", { class: HAS_CJK.test(c) && !o.relaxed ? "mchoice" : "mchoice user", "data-v": c, onclick: () => answer(c) }); renderRich(b, c, !HAS_CJK.test(c)); return b; }));
+      grid.replaceChildren(...q.choices.map((c) => { const b = h("button", { class: HAS_CJK.test(c) && !o.relaxed ? "mchoice" : "mchoice user", "data-v": c, onclick: () => answer(c) }); renderRich(b, T(c), !HAS_CJK.test(c)); return b; }));
     }
     root.classList.remove("ok", "bad");
     if (q.fig) fitQuestion(qText, qBox);                         // (fitted again now that the choices are there: a figure shrinks until everything is on the screen)
@@ -170,7 +173,8 @@ export function openMathGame(o: MathGameOpts): void {
     if (phase !== "ask") return;
     phase = "feedback";
     const q = o.questions[idx];
-    const right = c.replace(/-/g, "−").replace(/\s+/g, "") === q.a;
+    // (a typed answer is normalised: minus sign, no spaces; a CHOSEN text is one of the choices and is compared as it is: a card answer such as "成年人有 206 块骨头" has spaces)
+    const right = typing ? c.replace(/-/g, "−").replace(/\s+/g, "") === q.a : c === q.a;
     answers.push({ topic: q.topic, right, q });
     if (right) score++;
     scoreEl.textContent = `★ ${score}`;
@@ -190,7 +194,7 @@ export function openMathGame(o: MathGameOpts): void {
     if (o.relaxed) {
       const goNext = () => { clearTimeout(next); idx++; ask(); };
       const text = o.explain?.(q) ?? "";
-      grid.append(h("div", { class: "mexplain", id: "math-explain" }, h("b", { class: right ? "yes" : "no" }, right ? "回答正确。" : "回答有误。请查看这条知识。"), !right ? h("p", {}, "正确答案：", ((): HTMLElement => { const b = h("b", { class: "user" }); renderRich(b, q.a, !HAS_CJK.test(q.a)); return b; })()) : null, text ? ((): HTMLElement => { const p = h("p", { class: "user" }); renderRich(p, text); return p; })() : null,
+      grid.append(h("div", { class: "mexplain", id: "math-explain" }, h("b", { class: right ? "yes" : "no" }, right ? "回答正确。" : "回答有误。请查看这条知识。"), !right ? h("p", {}, "正确答案：", ((): HTMLElement => { const b = h("b", { class: "user" }); renderRich(b, T(q.a), !HAS_CJK.test(q.a)); return b; })()) : null, text ? ((): HTMLElement => { const p = h("p", { class: "user" }); renderRich(p, T(text)); return p; })() : null,
         h("button", { class: "primary", id: "math-next", onclick: goNext }, idx + 1 < total ? "下一题" : "完成")));
       return;
     }

@@ -42,8 +42,11 @@ const layerI = (d) => (d < 33 ? '地壳' : d < 2900 ? '地幔' : d < 5100 ? '外
 const cnum = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
 const zname = (z) => (z === 0 ? '中时区' : z > 0 ? `东${cnum[z]}区` : `西${cnum[-z]}区`);
 const compass = (a, b) => { const ns = b[0] > a[0] ? '北' : '南', ew = b[1] > a[1] ? '东' : '西'; return ns + ew === '北东' ? '东北' : ns + ew === '北西' ? '西北' : ns + ew === '南东' ? '东南' : '西南'; };
-const terrI = (alt, rel, f) => { if (f === 3) return '盆地'; if (f === 0) return alt >= 500 ? '高原' : '平原'; if (f === 1) return alt >= 500 ? '高原' : '丘陵'; return alt >= 500 || rel >= 200 ? '山地' : '丘陵'; };
+const LOWL = '海拔 200～500 米的平坦地（教材不单列）';
+const terrI = (alt, rel, f) => { if (f === 3) return '盆地'; if (f === 0) return alt >= 500 ? '高原' : alt < 200 ? '平原' : LOWL; if (f === 1) return alt >= 500 ? '高原' : rel <= 200 ? '丘陵' : '山地'; return alt >= 500 || rel >= 200 ? '山地' : '丘陵'; };
 const clk = (m) => { m = ((m % 1440) + 1440) % 1440; return `${Math.floor(m / 60)}:${String(Math.round(m % 60)).padStart(2, '0')}`; };
+// the named places of the three steps (人教版), written here once more; the index is the one the app puts in `p`
+const PLACE_STEP = [['青藏高原', 1], ['内蒙古高原', 2], ['黄土高原', 2], ['云贵高原', 2], ['塔里木盆地', 2], ['准噶尔盆地', 2], ['四川盆地', 2], ['东北平原', 3], ['华北平原', 3], ['长江中下游平原', 3], ['东南丘陵', 3]];
 const stepI = (lon) => (lon < 102.5 ? '第一级阶梯' : lon < 111 ? '第二级阶梯' : '第三级阶梯');
 // numeric kinds: { 'module:kind': p => value }
 const NUM = {
@@ -69,10 +72,11 @@ const TXT = {
   'terrain:type': ([a, r, f]) => terrI(a, r, f),
   'climate:type': ([tmin, tmax, ptot, pmin, share, alt]) => ZH[climI({ tmin, tmax, ptot, pmin, share, alt })],
   'weather:beaufort': ([n]) => `${BF[n][0].toFixed(1)}～${BF[n][1].toFixed(1)} 米∕秒`, 'weather:rain': ([mm]) => rainI(mm), 'weather:wind': ([i]) => WIND[i],
-  'population:pyramid': ([b, d]) => { const r = (b - d) / 10; return r >= 1 ? '增长型' : r >= -0.1 && r < 0.5 ? '稳定型' : r < -0.1 ? '衰退型' : '过渡型'; },
+  'population:pyramid': ([b, d]) => { const r = (b - d) / 10; return r >= 1 ? '增长型' : r <= -0.5 ? '衰退型' : '稳定型'; },
   'plates:energy': ([dm]) => `${Math.round(10 ** (1.5 * dm))} 倍`,
   'rocks:layer': ([d]) => layerI(d),
   'chinabasic:solar': ([lon, h]) => clk(h * 60 + (lon - 120) * 4), 'chinaterrain:step': ([lon]) => stepI(lon),
+  'chinaterrain:place': ([i]) => `第${['一', '二', '三'][PLACE_STEP[i][1] - 1]}级阶梯`,
 };
 const TEMPQ = ([t0, dh]) => t0 - (0.6 * dh) / 100;
 
@@ -168,6 +172,36 @@ const SOLVE = () => ({
   ok(nq === keys.length * 300, `A generators: ${nq} questions made`);
   ok(structBad.length === 0, `A generators: four different choices, the right one among them exactly once${structBad.length ? ' ' + structBad.slice(0, 4).join(' | ') : ''}`);
   ok(valueBad.length === 0, `A generators: every right answer agrees with the independent recomputation${valueBad.length ? ' ' + valueBad.slice(0, 5).join(' | ') : ''}`);
+  // verification fixes (docs/verify/bio-geo.md 1, 4, 6, 16): named places for the steps, three population types only, the crust depth, the plain / hills rules
+  {
+    const fx = await page.evaluate(async () => {
+      const M = await import('/src/geolab-model.ts'); await M.loadGeo(); const mulberry32 = (await import('/src/phys/qtools.ts')).mulberry32;
+      const out = { place: [], step: [], pyr: [], layer: [], terr: [] };
+      for (let s = 1; s <= 3000; s++) {
+        const rng = (k) => mulberry32(s * 31 + k);
+        const a = M.genQ('chinaterrain', 'place', rng(1)); out.place.push({ q: a.q, ans: a.ans, c: a.choices, p: a.p });
+        const b = M.genQ('chinaterrain', 'step', rng(2)); out.step.push({ q: b.q, ans: b.ans, p: b.p });
+        const c = M.genQ('population', 'pyramid', rng(3)); out.pyr.push({ q: c.q, ans: c.ans, c: c.choices, p: c.p });
+        const d = M.genQ('rocks', 'layer', rng(4)); out.layer.push({ q: d.q, ans: d.ans, p: d.p });
+        const e = M.genQ('terrain', 'type', rng(5)); out.terr.push({ q: e.q, ans: e.ans, p: e.p });
+      }
+      return out;
+    });
+    const bad = [];
+    for (const q of fx.place) { const [name, n] = PLACE_STEP[q.p[0]]; if (!q.q.startsWith(name) || q.ans !== `第${['一', '二', '三'][n - 1]}级阶梯` || q.c.filter((x) => x === q.ans).length !== 1) bad.push(q.q); }
+    ok(bad.length === 0 && new Set(fx.place.map((q) => q.q)).size === PLACE_STEP.length, `A the step quiz asks about the ${PLACE_STEP.length} NAMED places (3000 questions), one right answer each ${bad.slice(0, 2)}`);
+    ok(fx.step.every((q) => /北纬 35°/.test(q.q)) && fx.step.every((q) => q.ans === stepI(q.p[0])), 'A the longitude question states its latitude (35 degrees north: the profile) and the answer follows the profile');
+    ok(fx.pyr.every((q) => q.c.slice().sort().join() === ['增长型', '稳定型', '衰退型', '无法判断'].sort().join() && !q.c.includes('过渡型')) && fx.pyr.every((q) => ['增长型', '稳定型', '衰退型'].includes(q.ans)), 'A population types: only 增长型 / 稳定型 / 衰退型 are ever right, no 过渡型');
+    const wrongKind = fx.pyr.filter((q) => { const [b, d] = q.p; const r = (b - d) / 10; const want = r >= 1 ? '增长型' : r <= -0.5 ? '衰退型' : '稳定型'; const stated = /出生率/.test(q.q); return !stated || q.ans !== want; });
+    const margin = fx.pyr.filter((q) => { const [b, d] = q.p; const r = (b - d) / 10; return (q.ans === '稳定型' && Math.abs(r) > 0.3 + 1e-9) || (q.ans === '增长型' && r < 1.5) || (q.ans === '衰退型' && r > -0.5 - 1e-9 && false); });
+    ok(wrongKind.length === 0 && margin.length === 0, 'A population generator: each type is made well inside its range (stable |r| <= 0.3 %), the answer is consistent');
+    ok(fx.pyr.filter((q) => q.ans === '稳定型').length > 500 && fx.pyr.filter((q) => q.ans === '衰退型').length > 500, 'A population: stable and declining questions both occur');
+    const lbad = fx.layer.filter((q) => { const d = q.p[0]; return (d > 6 && d < 33 && !/大陆/.test(q.q)) || (d > 33 && d < 100) || (d <= 6 && /大陆/.test(q.q) && false) || q.ans !== layerI(d); });
+    ok(lbad.length === 0 && fx.layer.some((q) => q.p[0] > 6 && q.p[0] < 33) && fx.layer.some((q) => q.p[0] <= 6), `A crust: a depth of 7-32 km is asked only for a place on land (大陆), never 34-99 km (${lbad.length} bad)`);
+    ok(fx.terr.every((q) => q.ans === terrI(...q.p) && ['平原', '高原', '山地', '丘陵', '盆地'].includes(q.ans)), 'A terrain: flat land is a 平原 only below 200 m (lesson), hills need a relative height of at most 200 m');
+    const T = await page.evaluate(async () => { const M = await import('/src/geolab-model.ts'); return [M.terrainType(300, 20, 0), M.terrainType(150, 20, 0), M.terrainType(300, 250, 1), M.terrainType(300, 150, 1)]; });
+    ok(T[0] !== '平原' && T[1] === '平原' && T[2] === '山地' && T[3] === '丘陵', 'A terrain rules: 300 m flat is not 平原; 150 m flat is; gentle slope with relief 250 m is not 丘陵');
+  }
   const devQ = await page.evaluate(async () => { const M = await import('/src/geolab-model.ts'); const D = await M.loadGeo(); const mulberry32 = (await import('/src/phys/qtools.ts')).mulberry32; let bad = 0; for (let s = 1; s <= 300; s++) { const q = M.genQ('development', 'max', mulberry32(s)); const c = q.p.map((i) => D.development.countries[i]); const best = c.reduce((a, b) => (b.gdp > a.gdp ? b : a)); if (q.ans !== best.n || c.filter((x) => x.gdp === best.gdp).length !== 1 || !c.every((x) => q.choices.includes(x.n))) bad++; } return bad; });
   ok(devQ === 0, 'A development question: the country with the highest GDP per person among the four (300 seeds)');
   // the fact and bank questions against the data

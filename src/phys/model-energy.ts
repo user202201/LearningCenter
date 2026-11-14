@@ -1,6 +1,6 @@
 /** 功、功率与机械能 (pure): work and power, the pendulum (integrated, not the small-angle formula) and a roller-coaster track. */
 import { numQ, pick, type Q } from "./qtools";
-export const g = 9.8;
+export const g = 10;
 export const work = (F: number, s: number) => F * s;
 export const power = (W: number, t: number) => W / t;
 /** pendulum: theta'' = -(g/L) sin theta, RK4 with a fixed small step; angles in radians */
@@ -44,8 +44,8 @@ export function quiz(rng: () => number): Q[] {
   return [
     numQ(rng, "W=Fs", [F, s], `用 ${F} N 的力沿力的方向推动物体前进 ${s} m，做的功是多少？`, work(F, s), "J", 0, "W = Fs。"),
     numQ(rng, "P=W/t", [W, t], `在 ${t} s 内做了 ${W} J 的功，功率是多少？`, power(W, t), "W", 0, "P = W / t。"),
-    numQ(rng, "Ep", [m3, h3], `质量 ${m3} kg 的物体被举高 ${h3} m，增加的重力势能是多少？（g = 9.8 N/kg）`, m3 * g * h3, "J", 1, "Ep = mgh。"),
+    numQ(rng, "Ep", [m3, h3], `质量 ${m3} kg 的物体被举高 ${h3} m，增加的重力势能是多少？（g = 10 N/kg）`, m3 * g * h3, "J", 1, "Ep = mgh。"),
     numQ(rng, "Ek", [m4, v4], `质量 ${m4} kg 的物体以 ${v4} m/s 运动，动能是多少？`, 0.5 * m4 * v4 * v4, "J", 0, "Ek = ½mv²。"),
-    numQ(rng, "vfall", [h5], `不计空气阻力，物体从 ${h5} m 高处自由下落，落地时的速度是多少？（g = 9.8 m/s²）`, Math.sqrt(2 * g * h5), "m/s", 1, "机械能守恒：mgh = ½mv²。"),
+    numQ(rng, "vfall", [h5], `不计空气阻力，物体从 ${h5} m 高处自由下落，落地时的速度是多少？（g = 10 m/s²）`, Math.sqrt(2 * g * h5), "m/s", 1, "机械能守恒：mgh = ½mv²。"),
   ];
 }

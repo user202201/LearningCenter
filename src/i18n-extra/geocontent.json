@@ -4452,8 +4452,8 @@
   "formée par les alluvions du fleuve Jaune, du Hai et du Huai, au sol plat"
  ],
  "长江中下游平原": [
-  "the plains of the middle and lower Yangtze",
-  "les plaines du moyen et du bas Yangzi"
+  "the Middle and Lower Yangtze Plain",
+  "la plaine du moyen et du bas Yangzi"
  ],
  "位于长江中下游沿岸": [
   "along the middle and lower reaches of the Yangtze",
@@ -5342,5 +5342,89 @@
  "{0}月{1}日 {2}:{3}": [
   "{0}/{1}, {2}:{3}",
   "{1}/{0}, {2}:{3}"
+ ],
+ "说明": [
+  "Note",
+  "Remarque"
+ ],
+ "大陆地壳（海洋地壳只有约 6～7 千米厚）": [
+  "Continental crust (oceanic crust is only about 6–7 km thick)",
+  "Croûte continentale (la croûte océanique n'a qu'environ 6 à 7 km d'épaisseur)"
+ ],
+ "示意剖面": [
+  "Schematic profile",
+  "Profil schématique"
+ ],
+ "沿北纬 35° 附近": [
+  "along about 35° N",
+  "le long de 35° N environ"
+ ],
+ "按图中沿北纬 35° 附近的示意剖面，东经 {0}° 附近大致处在我国地势的哪一级阶梯？": [
+  "According to the schematic profile in the picture along about 35° N, which step of China's terrain is the area near {0}° E roughly on?",
+  "D'après le profil schématique de l'image le long de 35° N environ, sur quel palier du relief de la Chine la zone proche de {0}° E se trouve-t-elle à peu près ?"
+ ],
+ "沿北纬 35° 附近，第一、二级以约 102°E 为界，第二、三级以约 111°E 为界（示意）。": [
+  "Along about 35° N, the first and second steps meet at about 102° E and the second and third steps at about 111° E (schematic).",
+  "Le long de 35° N environ, les premier et deuxième paliers se rejoignent vers 102° E et les deuxième et troisième vers 111° E (schématique)."
+ ],
+ "{0}属于我国地势的哪一级阶梯？": [
+  "Which step of China's terrain does {0} belong to?",
+  "À quel palier du relief de la Chine appartient {0} ?"
+ ],
+ "第一级：青藏高原；第二级：内蒙古高原、黄土高原、云贵高原、塔里木盆地、准噶尔盆地、四川盆地；第三级：东北平原、华北平原、长江中下游平原、东南丘陵。": [
+  "First step: the Qinghai–Tibet Plateau; second step: the Inner Mongolia Plateau, the Loess Plateau, the Yunnan–Guizhou Plateau, the Tarim Basin, the Junggar Basin and the Sichuan Basin; third step: the Northeast Plain, the North China Plain, the Middle and Lower Yangtze Plain and the Southeast Hills.",
+  "Premier palier : le plateau Qinghai–Tibet ; deuxième palier : le plateau de Mongolie-Intérieure, le plateau de lœss, le plateau Yunnan–Guizhou, le bassin du Tarim, le bassin de Dzoungarie et le bassin du Sichuan ; troisième palier : la plaine du Nord-Est, la plaine de Chine du Nord, la plaine du moyen et du bas Yangzi et les collines du Sud-Est."
+ ],
+ "青藏高原": [
+  "the Qinghai–Tibet Plateau",
+  "le plateau Qinghai–Tibet"
+ ],
+ "准噶尔盆地": [
+  "the Junggar Basin",
+  "le bassin de Dzoungarie"
+ ],
+ "东北平原": [
+  "the Northeast Plain",
+  "la plaine du Nord-Est"
+ ],
+ "东南丘陵": [
+  "the Southeast Hills",
+  "les collines du Sud-Est"
+ ],
+ "无法判断": [
+  "cannot be decided",
+  "impossible à déterminer"
+ ],
+ "自然增长率 ≥ 1% 为增长型；接近 0 为稳定型；为较明显的负增长为衰退型。": [
+  "Natural growth rate ≥ 1 %: expanding type; close to 0: stable type; clearly negative: declining type.",
+  "Taux d'accroissement naturel ≥ 1 % : type en expansion ; proche de 0 : type stable ; nettement négatif : type en déclin."
+ ],
+ "在大陆上某地，地下 {0} 千米深处属于地球内部的哪一层？": [
+  "At a place on a continent, which layer of the Earth's interior lies {0} km below the surface?",
+  "En un point situé sur un continent, quelle couche de l'intérieur de la Terre se trouve à {0} km sous la surface ?"
+ ],
+ "地壳全球平均厚度约 17 千米（大陆约 33 千米，海洋约 6～7 千米）；地幔至约 2900 千米，外核至约 5100 千米，以下是内核。": [
+  "The crust is about 17 km thick on average worldwide (about 33 km under the continents, about 6–7 km under the oceans); the mantle goes down to about 2900 km, the outer core to about 5100 km, and below that is the inner core.",
+  "La croûte a une épaisseur moyenne mondiale d'environ 17 km (environ 33 km sous les continents, environ 6 à 7 km sous les océans) ; le manteau descend jusqu'à environ 2900 km, le noyau externe jusqu'à environ 5100 km, et en dessous se trouve le noyau interne."
+ ],
+ "海拔 200～500 米的平坦地（教材不单列）": [
+  "flat land at 200–500 m (not listed separately in textbooks)",
+  "terrain plat entre 200 et 500 m (non distingué dans les manuels)"
+ ],
+ "昆仑山—阿尔金山—祁连山—横断山以西": [
+  "west of the Kunlun–Altun–Qilian–Hengduan Mountains",
+  "à l'ouest des monts Kunlun, Altun, Qilian et Hengduan"
+ ],
+ "内蒙古高原、黄土高原、云贵高原；塔里木盆地、准噶尔盆地、四川盆地": [
+  "the Inner Mongolia, Loess and Yunnan–Guizhou Plateaus; the Tarim, Junggar and Sichuan Basins",
+  "les plateaux de Mongolie-Intérieure, de lœss et du Yunnan–Guizhou ; les bassins du Tarim, de Dzoungarie et du Sichuan"
+ ],
+ "东北平原、华北平原、长江中下游平原、东南丘陵": [
+  "the Northeast Plain, the North China Plain, the Middle and Lower Yangtze Plain and the Southeast Hills",
+  "la plaine du Nord-Est, la plaine de Chine du Nord, la plaine du moyen et du bas Yangzi et les collines du Sud-Est"
+ ],
+ "无法比较": [
+  "cannot be compared",
+  "impossible à comparer"
  ]
 }

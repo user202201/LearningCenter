@@ -80,6 +80,10 @@ const hand = () =>
   + [74, 89, 104, 119].map((y, i) => `<rect x="${140}" y="${y}" width="${[58, 66, 62, 50][i]}" height="12" rx="6" fill="${SKIN}"/>`).join("")
   + `<rect x="78" y="26" width="16" height="56" rx="8" fill="${SKIN}" transform="rotate(-8 86 80)"/>`
   + `</g>`;
+/** the same hand seen from the palm side, mirrored: a RIGHT hand with the fingers to the left, thumb up (the drawing above is a LEFT hand: palm to the viewer, fingers right, thumb up) */
+const handRight = () => `<g transform="translate(300 0) scale(-1 1)">${hand()}</g>`;
+/** B pointing INTO the page (the palm faces the viewer, so the field lines enter it): crossed circles, as in a school figure */
+const into = (pts: [number, number][]) => pts.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="9" fill="#fff" stroke="${GREEN}" stroke-width="2.2"/><path d="M${x - 6.4} ${y - 6.4}L${x + 6.4} ${y + 6.4}M${x + 6.4} ${y - 6.4}L${x - 6.4} ${y + 6.4}" stroke="${GREEN}" stroke-width="2.2" stroke-linecap="round"/>`).join("");
 export const RULES: { title: string; svg: string; steps: string[]; note: string }[] = [
   {
     title: "安培定则（右手螺旋定则）",
@@ -95,19 +99,19 @@ export const RULES: { title: string; svg: string; steps: string[]; note: string 
   {
     title: "左手定则（磁场对通电导体的作用力）",
     svg: svg(300, 170,
-      hand() + [88, 104, 120].map((y) => arrow(14, y, 66, y, GREEN, 2.5, "5 4")).join("")
+      into([[26, 36], [26, 150], [126, 156], [274, 36], [274, 150]]) + hand()
       + arrow(150, 100, 270, 100, BLUE, 4.5) + arrow(84, 64, 84, 12, RED, 4.5)
-      + label(24, 76, "B", 18, GREEN) + label(272, 88, "I", 18, BLUE) + label(98, 20, "F", 18, RED)),
-    steps: ["伸出左手，让磁感线（B）垂直穿过手心。", "四指指向电流（I）的方向。", "大拇指所指的方向，就是通电导体受到的力（F）的方向。"],
+      + label(46, 42, "B", 18, GREEN, "start") + label(272, 88, "I", 18, BLUE) + label(98, 20, "F", 18, RED)),
+    steps: ["伸出左手，让磁感线（B，图中 ⊗ 表示垂直指向纸面里）垂直穿过手心。", "四指指向电流（I）的方向。", "大拇指所指的方向，就是通电导体受到的力（F）的方向。"],
     note: "电动机的工作原理：通电线圈在磁场中受力转动。电流方向或磁场方向改变，受力方向也随之改变。",
   },
   {
     title: "右手定则（电磁感应）",
     svg: svg(300, 170,
-      hand() + [88, 104, 120].map((y) => arrow(14, y, 66, y, GREEN, 2.5, "5 4")).join("")
-      + arrow(150, 100, 270, 100, BLUE, 4.5) + arrow(84, 64, 84, 12, ORANGE, 4.5)
-      + label(24, 76, "B", 18, GREEN) + label(272, 88, "I", 18, BLUE) + label(98, 20, "v", 18, ORANGE)),
-    steps: ["伸出右手，让磁感线（B）垂直穿过手心。", "大拇指指向导体运动的方向（v）。", "四指所指的方向，就是导体中感应电流（I）的方向。"],
+      into([[274, 36], [274, 150], [174, 156], [26, 36], [26, 150]]) + handRight()
+      + arrow(150, 100, 30, 100, BLUE, 4.5) + arrow(216, 64, 216, 12, ORANGE, 4.5)
+      + label(254, 42, "B", 18, GREEN, "end") + label(28, 88, "I", 18, BLUE) + label(202, 20, "v", 18, ORANGE)),
+    steps: ["伸出右手，让磁感线（B，图中 ⊗ 表示垂直指向纸面里）垂直穿过手心。", "大拇指指向导体运动的方向（v）。", "四指所指的方向，就是导体中感应电流（I）的方向。"],
     note: "发电机的工作原理：闭合电路的一部分导体在磁场中做切割磁感线运动，就会产生感应电流（电磁感应）。",
   },
 ];

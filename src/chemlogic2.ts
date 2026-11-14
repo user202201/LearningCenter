@@ -160,7 +160,7 @@ let POOLS: { gas: Rx[]; heat: Rx[]; carb: Rx[]; two: Rx[]; all: Rx[] } | null = 
 const pools = () => POOLS ??= (() => {
   const R = L.data().reactions;
   const gas = R.filter((x) => gasTerm(x) && x.l.every(solid));
-  const heat = R.filter((x) => gasTerm(x) && x.l.length === 1 && x.r.length === 2 && x.cond.some((c) => ["加热", "高温", "催化剂"].includes(c)) && x.cond.every((c) => c !== "催化剂" || x.l[0].f === "KClO3") && !x.r.some((t) => t.f === "H2O"));
+  const heat = R.filter((x) => gasTerm(x) && x.l.length === 1 && x.r.length === 2 && x.cond.some((c) => ["加热", "高温", "催化剂"].includes(c)) && x.cond.every((c) => c !== "催化剂" || x.l[0].f === "KClO3") && !x.r.some((t) => t.f === "H2O") && x.r.every((t) => t.mark === "↑" || !GASLIQ.has(t.f)));   // the residue must be a SOLID (not liquid mercury)
   const carb = R.filter((x) => x.l.length === 2 && x.r.length === 3 && gasTerm(x)?.f === "CO2" && x.r.some((t) => t.f === "H2O") && /^[A-Z][a-z]?\d*CO3$/.test(x.l[0].f) && ["HCl", "H2SO4"].includes(x.l[1].f));
   const two = R.filter((x) => x.l.length === 2 && x.l.every((t) => !t.f.includes("·") && L.mr(t.f) < 200) && x.r.length >= 1 && !x.cond.includes("光照"));
   return { gas, heat, carb, two, all: R.filter((x) => x.l.concat(x.r).every(solid)) };

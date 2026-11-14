@@ -11,9 +11,9 @@
   "From R = U / I the resistance of the filament can be found for each measurement: the greater the voltage, the hotter the filament and the greater its resistance. The resistance of a bulb is therefore not constant, and averaging several measurements must not be used to find the power.",
   "La relation R = U / I permet de calculer la résistance du filament pour chaque mesure : plus la tension est grande, plus le filament est chaud et plus sa résistance est grande. La résistance d'une ampoule n'est donc pas constante et l'on ne doit pas faire la moyenne de plusieurs mesures pour trouver la puissance."
  ],
- "浸在液体（或气体）中的物体受到向上的浮力。阿基米德原理：浸在液体中的物体受到的浮力，大小等于它排开的液体所受的重力：F浮 = G排 = ρ液 g V排。": [
-  "An object immersed in a liquid (or a gas) experiences an upward buoyant force. Archimedes' principle: the buoyant force on an object immersed in a liquid equals the weight of the liquid it displaces: F_buoyancy = G_displaced = ρ_liquid g V_displaced.",
-  "Un objet plongé dans un liquide (ou un gaz) subit une force d'Archimède dirigée vers le haut. Principe d'Archimède : la poussée exercée sur un objet immergé dans un liquide est égale au poids du liquide déplacé : F = P_déplacé = ρ_liquide g V_déplacé."
+ "浸在液体（或气体）中的物体受到向上的浮力。阿基米德原理：浸在液体中的物体受到的浮力，大小等于它排开的液体所受的重力：F浮 = G排 = ρ液 g V排。本实验室取 g = 10 N/kg。": [
+  "An object immersed in a liquid (or a gas) experiences an upward buoyant force. Archimedes' principle: the buoyant force on an object immersed in a liquid equals the weight of the liquid it displaces: F_buoyancy = G_displaced = ρ_liquid g V_displaced. This lab takes g = 10 N/kg.",
+  "Un objet plongé dans un liquide (ou un gaz) subit une force d'Archimède dirigée vers le haut. Principe d'Archimède : la poussée exercée sur un objet immergé dans un liquide est égale au poids du liquide déplacé : F = P_déplacé = ρ_liquide g V_déplacé. Ce laboratoire prend g = 10 N/kg."
  ],
  "称重法：F浮 = G − F示。浮沉条件：物体浸没时，F浮 > G（ρ液 > ρ物）上浮，最后漂浮，漂浮时 F浮 = G；F浮 = G（ρ液 = ρ物）悬浮；F浮 < G（ρ液 < ρ物）下沉。": [
   "Weighing method: F_buoyancy = G − F_reading. Conditions for floating and sinking: when the object is fully immersed, F_buoyancy > G (ρ_liquid > ρ_object) means it rises and finally floats, with F_buoyancy = G when floating; F_buoyancy = G (ρ_liquid = ρ_object) means it is suspended; F_buoyancy < G (ρ_liquid < ρ_object) means it sinks.",
@@ -35,9 +35,9 @@
   "When white light passes through a prism it splits into seven colours: red, orange, yellow, green, blue, indigo and violet. This phenomenon is called dispersion of light. Light of different colours has different refractive indices in the same glass: red the smallest, violet the greatest, so violet is deviated most and red least. To make this easy to see, the experiment uses a glass with strong dispersion (real glass disperses much less).",
   "Lorsque la lumière blanche traverse un prisme, elle se décompose en sept couleurs : rouge, orange, jaune, vert, bleu, indigo et violet. Ce phénomène s'appelle la dispersion de la lumière. Dans un même verre, les lumières de couleurs différentes ont des indices de réfraction différents : le plus petit pour le rouge, le plus grand pour le violet, de sorte que le violet est le plus dévié et le rouge le moins dévié. Pour que l'on voie bien, l'expérience utilise un verre à forte dispersion (le verre réel disperse beaucoup moins)."
  ],
- "色光的三原色是红、绿、蓝：红加绿得黄，绿加蓝得青，红加蓝得品红，三种色光等量混合得白光。不透明物体的颜色由它反射的色光决定：红色物体只反射红光，在绿光下看起来是黑色的。注意：色光的混合与颜料的混合不同。": [
-  "The three primary colours of light are red, green and blue: red plus green gives yellow, green plus blue gives cyan, red plus blue gives magenta, and equal amounts of all three give white light. The colour of an opaque object is determined by the light it reflects: a red object reflects only red light and looks black in green light. Note: mixing coloured lights is different from mixing paints.",
-  "Les trois couleurs primaires de la lumière sont le rouge, le vert et le bleu : rouge plus vert donne du jaune, vert plus bleu donne du cyan, rouge plus bleu donne du magenta, et les trois en quantités égales donnent de la lumière blanche. La couleur d'un objet opaque est déterminée par la lumière qu'il réfléchit : un objet rouge ne réfléchit que la lumière rouge et paraît noir sous une lumière verte. Attention : le mélange de lumières colorées est différent du mélange de peintures."
+ "色光的三原色是红、绿、蓝：红加绿得黄，绿加蓝得青，红加蓝得品红，三种色光等量混合得白光。不透明物体的颜色由它反射的色光决定：红色物体只反射红光，在绿光下看起来是黑色的。注意：色光的混合与颜料的混合不同。颜料的三原色是品红、黄、青（美术中常说红、黄、蓝）。": [
+  "The three primary colours of light are red, green and blue: red plus green gives yellow, green plus blue gives cyan, red plus blue gives magenta, and equal amounts of all three give white light. The colour of an opaque object is determined by the light it reflects: a red object reflects only red light and looks black in green light. Note: mixing coloured lights is different from mixing paints. The primary colours of paint are magenta, yellow and cyan (in art classes red, yellow and blue are often named).",
+  "Les trois couleurs primaires de la lumière sont le rouge, le vert et le bleu : rouge plus vert donne du jaune, vert plus bleu donne du cyan, rouge plus bleu donne du magenta, et les trois en quantités égales donnent de la lumière blanche. La couleur d'un objet opaque est déterminée par la lumière qu'il réfléchit : un objet rouge ne réfléchit que la lumière rouge et paraît noir sous une lumière verte. Attention : le mélange de lumières colorées est différent du mélange de peintures. Les couleurs primaires de la peinture sont le magenta, le jaune et le cyan (en cours d'arts plastiques, on cite souvent le rouge, le jaune et le bleu)."
  ],
  "电磁铁：通电螺线管插入铁芯后磁性大大增强。电磁铁的磁性强弱与电流大小、线圈匝数、有无铁芯有关：电流越大、匝数越多、有铁芯，磁性越强。电流方向改变，磁极也改变（右手螺旋定则）。": [
   "Electromagnet: when an iron core is inserted into a current-carrying solenoid, its magnetism becomes much stronger. The strength of an electromagnet depends on the current, the number of turns and the presence of an iron core: the greater the current, the more turns and with an iron core, the stronger the magnetism. If the current direction is reversed, the poles are reversed too (right-hand grip rule).",
@@ -63,9 +63,9 @@
   "Two necessary factors for a force to do work on an object: a force acting on the object, and a distance moved by the object in the direction of the force. W = Fs, with the joule (J) as the unit. Power expresses how fast work is done: P = W / t = Fv, with the watt (W) as the unit.",
   "Deux facteurs sont nécessaires pour qu'une force travaille : une force qui s'exerce sur l'objet et un déplacement de l'objet dans la direction de la force. W = Fs, l'unité est le joule (J). La puissance exprime la rapidité avec laquelle le travail est effectué : P = W / t = Fv, l'unité est le watt (W)."
  ],
- "动能与质量和速度有关：Ek = ½mv²；重力势能与质量和高度有关：Ep = mgh。动能和势能统称机械能。只有重力做功时，动能和势能相互转化，机械能守恒；有摩擦时，一部分机械能变成内能，总能量仍然守恒。": [
-  "Kinetic energy depends on mass and speed: Ek = ½mv²; gravitational potential energy depends on mass and height: Ep = mgh. Kinetic energy and potential energy together are called mechanical energy. When only gravity does work, kinetic and potential energy change into each other and mechanical energy is conserved; with friction, part of the mechanical energy becomes internal energy, but the total energy is still conserved.",
-  "L'énergie cinétique dépend de la masse et de la vitesse : Ec = ½mv² ; l'énergie potentielle de pesanteur dépend de la masse et de la hauteur : Ep = mgh. L'énergie cinétique et l'énergie potentielle forment ensemble l'énergie mécanique. Lorsque seul le poids travaille, l'énergie cinétique et l'énergie potentielle se transforment l'une en l'autre et l'énergie mécanique se conserve ; avec des frottements, une partie de l'énergie mécanique devient de l'énergie interne, mais l'énergie totale se conserve toujours."
+ "动能与质量和速度有关：Ek = ½mv²；重力势能与质量和高度有关：Ep = mgh。动能和势能统称机械能。只有重力做功时，动能和势能相互转化，机械能守恒；有摩擦时，一部分机械能变成内能，总能量仍然守恒。本实验室取 g = 10 N/kg。": [
+  "Kinetic energy depends on mass and speed: Ek = ½mv²; gravitational potential energy depends on mass and height: Ep = mgh. Kinetic energy and potential energy together are called mechanical energy. When only gravity does work, kinetic and potential energy change into each other and mechanical energy is conserved; with friction, part of the mechanical energy becomes internal energy, but the total energy is still conserved. This lab takes g = 10 N/kg.",
+  "L'énergie cinétique dépend de la masse et de la vitesse : Ec = ½mv² ; l'énergie potentielle de pesanteur dépend de la masse et de la hauteur : Ep = mgh. L'énergie cinétique et l'énergie potentielle forment ensemble l'énergie mécanique. Lorsque seul le poids travaille, l'énergie cinétique et l'énergie potentielle se transforment l'une en l'autre et l'énergie mécanique se conserve ; avec des frottements, une partie de l'énergie mécanique devient de l'énergie interne, mais l'énergie totale se conserve toujours. Ce laboratoire prend g = 10 N/kg."
  ],
  "单摆和过山车：在最高点势能最大、动能为 0；在最低点势能最小、动能最大。条形图中，动能与势能之和（加上损失的内能）总是一样长。": [
   "Pendulum and roller coaster: at the highest point the potential energy is greatest and the kinetic energy is 0; at the lowest point the potential energy is least and the kinetic energy is greatest. In the bar chart, the sum of kinetic and potential energy (plus the internal energy lost) is always the same length.",
@@ -107,17 +107,17 @@
   "A microscope consists of two convex lenses, the objective and the eyepiece: the objective forms an enlarged real image, and the eyepiece acts as a magnifying glass that enlarges this image again into a virtual image; total magnification = objective magnification × eyepiece magnification, and the greater the magnification, the smaller the field of view. A telescope has an objective of long focal length and an eyepiece of short focal length; its angular magnification is M = f_objective / f_eyepiece, and the length of the tube is about the sum of the two focal lengths.",
   "Un microscope est formé de deux lentilles convergentes, l'objectif et l'oculaire : l'objectif donne une image réelle agrandie, et l'oculaire, qui joue le rôle de loupe, agrandit encore cette image en une image virtuelle ; grossissement total = grossissement de l'objectif × grossissement de l'oculaire, et plus le grossissement est grand, plus le champ de vision est petit. Une lunette astronomique a un objectif de grande distance focale et un oculaire de courte distance focale ; son grossissement angulaire est M = f_objectif / f_oculaire, et la longueur du tube est à peu près égale à la somme des deux distances focales."
  ],
- "连通器：上端开口、下端相连通的容器。连通器里装同一种液体，液体不流动时，各容器中的液面保持相平，与容器的粗细、形状无关（茶壶、锅炉水位计、船闸）。若装两种不同的液体，交界面处两边压强相等：ρ₁h₁ = ρ₂h₂，密度小的液体柱更高。": [
-  "Communicating vessels: containers open at the top and connected at the bottom. When the same liquid fills communicating vessels and does not flow, the liquid surfaces in all the vessels stay level, whatever the width or shape of the vessels (teapots, boiler water-level gauges, ship locks). If two different liquids are used, the pressures on the two sides at the interface are equal: ρ₁h₁ = ρ₂h₂, and the column of the less dense liquid is higher.",
-  "Vases communicants : récipients ouverts en haut et reliés entre eux en bas. Lorsqu'un même liquide remplit des vases communicants et ne s'écoule pas, les surfaces libres du liquide restent au même niveau dans tous les récipients, quelles que soient leur largeur et leur forme (théières, indicateurs de niveau de chaudière, écluses). Si l'on utilise deux liquides différents, les pressions des deux côtés de la surface de séparation sont égales : ρ₁h₁ = ρ₂h₂, et la colonne du liquide le moins dense est la plus haute."
+ "连通器：上端开口、下端相连通的容器。连通器里装同一种液体，液体不流动时，各容器中的液面保持相平，与容器的粗细、形状无关（茶壶、锅炉水位计、船闸）。若装两种不同的液体，交界面处两边压强相等：ρ₁h₁ = ρ₂h₂，密度小的液体柱更高。本实验室取 g = 10 N/kg。": [
+  "Communicating vessels: containers open at the top and connected at the bottom. When the same liquid fills communicating vessels and does not flow, the liquid surfaces in all the vessels stay level, whatever the width or shape of the vessels (teapots, boiler water-level gauges, ship locks). If two different liquids are used, the pressures on the two sides at the interface are equal: ρ₁h₁ = ρ₂h₂, and the column of the less dense liquid is higher. This lab takes g = 10 N/kg.",
+  "Vases communicants : récipients ouverts en haut et reliés entre eux en bas. Lorsqu'un même liquide remplit des vases communicants et ne s'écoule pas, les surfaces libres du liquide restent au même niveau dans tous les récipients, quelles que soient leur largeur et leur forme (théières, indicateurs de niveau de chaudière, écluses). Si l'on utilise deux liquides différents, les pressions des deux côtés de la surface de séparation sont égales : ρ₁h₁ = ρ₂h₂, et la colonne du liquide le moins dense est la plus haute. Ce laboratoire prend g = 10 N/kg."
  ],
  "流体压强与流速：在流动的液体或气体中，流速越大的地方压强越小（伯努利原理，p + ½ρv² = 常数）。水平管子变窄处，水流变快，压强变小；两张纸中间吹气，中间空气流速大、压强小，纸被外面的大气压压到一起；飞机的机翼上凸下平，上方空气流速大，压强小，产生升力。": [
   "Fluid pressure and flow speed: in a flowing liquid or gas, the pressure is lower where the speed is greater (Bernoulli's principle, p + ½ρv² = constant). Where a horizontal pipe narrows, the water flows faster and the pressure falls; when air is blown between two sheets of paper, the air between them moves fast and has low pressure, and the outside atmospheric pressure presses the sheets together; the wing of an aeroplane is curved on top and flat underneath, so the air above moves faster with lower pressure, which produces lift.",
   "Pression et vitesse d'écoulement d'un fluide : dans un liquide ou un gaz en mouvement, la pression est plus faible là où la vitesse est plus grande (principe de Bernoulli, p + ½ρv² = constante). Là où un tuyau horizontal se rétrécit, l'eau coule plus vite et la pression diminue ; lorsqu'on souffle entre deux feuilles de papier, l'air entre elles va vite et sa pression est basse, et la pression atmosphérique extérieure appuie les feuilles l'une contre l'autre ; l'aile d'un avion est bombée dessus et plate dessous, de sorte que l'air passe plus vite au-dessus, avec une pression plus basse, ce qui produit la portance."
  ],
- "两个相互接触的物体，有相对运动或相对运动趋势时，接触面上会产生阻碍相对运动的力，叫摩擦力。滑动摩擦力的大小与压力的大小和接触面的粗糙程度有关：f = μN，与接触面积、速度无关。": [
-  "When two objects in contact move, or tend to move, relative to each other, a force that opposes the relative motion appears at the contact surface; it is called friction. The sliding friction depends on the pressing force and on how rough the surfaces are: f = μN, and not on the contact area or the speed.",
-  "Lorsque deux objets en contact se déplacent, ou tendent à se déplacer, l'un par rapport à l'autre, une force qui s'oppose au mouvement relatif apparaît sur la surface de contact : c'est le frottement. Le frottement de glissement dépend de la force pressante et de la rugosité des surfaces : f = μN, et non de l'aire de contact ni de la vitesse."
+ "两个相互接触的物体，有相对运动或相对运动趋势时，接触面上会产生阻碍相对运动的力，叫摩擦力。滑动摩擦力的大小与压力的大小和接触面的粗糙程度有关：f = μN，与接触面积、速度无关。本实验室取 g = 10 N/kg。": [
+  "When two objects in contact move, or tend to move, relative to each other, a force that opposes the relative motion appears at the contact surface; it is called friction. The sliding friction depends on the pressing force and on how rough the surfaces are: f = μN, and not on the contact area or the speed. This lab takes g = 10 N/kg.",
+  "Lorsque deux objets en contact se déplacent, ou tendent à se déplacer, l'un par rapport à l'autre, une force qui s'oppose au mouvement relatif apparaît sur la surface de contact : c'est le frottement. Le frottement de glissement dépend de la force pressante et de la rugosité des surfaces : f = μN, et non de l'aire de contact ni de la vitesse. Ce laboratoire prend g = 10 N/kg."
  ],
  "物体没有被拉动时，受到的是静摩擦力，大小等于拉力，最大静摩擦力略大于滑动摩擦力。物体做匀速直线运动时，拉力等于滑动摩擦力。在斜面上，压力 N = mg cos α，重力沿斜面向下的分力是 mg sin α。": [
   "When an object is not pulled along, static friction acts on it, equal to the pull; the maximum static friction is slightly larger than the sliding friction. When an object moves in a straight line at constant speed, the pull equals the sliding friction. On an incline, the normal force is N = mg cos α, and the component of the weight down the slope is mg sin α.",
@@ -203,9 +203,9 @@
   "In uniformly accelerated motion the speed increases steadily; the v–t graph is a sloping line and the s–t graph is a curve. A ticker timer makes a dot at equal intervals of time: equal spacing between dots means constant speed, and spacing that grows means acceleration.",
   "Dans un mouvement uniformément accéléré, la vitesse augmente régulièrement ; le graphique v–t est une droite oblique et le graphique s–t est une courbe. Un chronomètre à étincelles fait un point à intervalles de temps égaux : des points régulièrement espacés indiquent une vitesse constante, et des points de plus en plus espacés indiquent une accélération."
  ],
- "斜面实验：让同一辆小车从斜面同一高度滑下，到达水平面时速度相同。水平面越光滑，小车受到的阻力越小，速度减小得越慢，滑行得越远。推理：如果水平面绝对光滑，小车将一直做匀速直线运动。": [
-  "Incline experiment: let the same trolley slide down the same height of an incline, so it has the same speed on reaching the horizontal surface. The smoother the horizontal surface, the smaller the resistance on the trolley, the more slowly its speed falls and the farther it slides. Inference: if the horizontal surface were perfectly smooth, the trolley would move at constant speed in a straight line for ever.",
-  "Expérience du plan incliné : on laisse le même chariot descendre de la même hauteur sur un plan incliné ; il arrive donc avec la même vitesse sur la surface horizontale. Plus la surface horizontale est lisse, plus la résistance qui s'exerce sur le chariot est faible, plus sa vitesse diminue lentement et plus il glisse loin. Déduction : si la surface horizontale était parfaitement lisse, le chariot se déplacerait indéfiniment en ligne droite à vitesse constante."
+ "斜面实验：让同一辆小车从斜面同一高度滑下，到达水平面时速度相同。水平面越光滑，小车受到的阻力越小，速度减小得越慢，滑行得越远。推理：如果水平面绝对光滑，小车将一直做匀速直线运动。本实验室取 g = 10 N/kg。": [
+  "Incline experiment: let the same trolley slide down the same height of an incline, so it has the same speed on reaching the horizontal surface. The smoother the horizontal surface, the smaller the resistance on the trolley, the more slowly its speed falls and the farther it slides. Inference: if the horizontal surface were perfectly smooth, the trolley would move at constant speed in a straight line for ever. This lab takes g = 10 N/kg.",
+  "Expérience du plan incliné : on laisse le même chariot descendre de la même hauteur sur un plan incliné ; il arrive donc avec la même vitesse sur la surface horizontale. Plus la surface horizontale est lisse, plus la résistance qui s'exerce sur le chariot est faible, plus sa vitesse diminue lentement et plus il glisse loin. Déduction : si la surface horizontale était parfaitement lisse, le chariot se déplacerait indéfiniment en ligne droite à vitesse constante. Ce laboratoire prend g = 10 N/kg."
  ],
  "牛顿第一定律：一切物体在没有受到力的作用时，总保持静止状态或匀速直线运动状态。物体保持原来运动状态不变的性质叫惯性。": [
   "Newton's first law: every object, when no force acts on it, always stays at rest or in uniform motion in a straight line. The property of an object to keep its original state of motion is called inertia.",
@@ -231,13 +231,13 @@
   "Pressure expresses the effect of a force: p = F / S. With the force unchanged, the smaller the area, the greater the pressure (needle point, knife edge); with the area unchanged, the greater the force, the greater the pressure. Unit: the pascal (Pa), 1 Pa = 1 N/m².",
   "La pression exprime l'effet d'une force : p = F / S. À force constante, plus la surface est petite, plus la pression est grande (pointe d'aiguille, lame de couteau) ; à surface constante, plus la force est grande, plus la pression est grande. Unité : le pascal (Pa), 1 Pa = 1 N/m²."
  ],
- "液体内部向各个方向都有压强，同一深度各个方向的压强相等；深度越大，压强越大；深度相同时，液体密度越大，压强越大：p = ρgh。": [
-  "Inside a liquid there is pressure in all directions, and at the same depth the pressure is the same in every direction; the greater the depth, the greater the pressure; at the same depth, the denser the liquid, the greater the pressure: p = ρgh.",
-  "À l'intérieur d'un liquide, il existe une pression dans toutes les directions, et à une même profondeur la pression est la même dans toutes les directions ; plus la profondeur est grande, plus la pression est grande ; à une même profondeur, plus le liquide est dense, plus la pression est grande : p = ρgh."
+ "液体内部向各个方向都有压强，同一深度各个方向的压强相等；深度越大，压强越大；深度相同时，液体密度越大，压强越大：p = ρgh。本实验室取 g = 10 N/kg。": [
+  "Inside a liquid there is pressure in all directions, and at the same depth the pressure is the same in every direction; the greater the depth, the greater the pressure; at the same depth, the denser the liquid, the greater the pressure: p = ρgh. This lab takes g = 10 N/kg.",
+  "À l'intérieur d'un liquide, il existe une pression dans toutes les directions, et à une même profondeur la pression est la même dans toutes les directions ; plus la profondeur est grande, plus la pression est grande ; à une même profondeur, plus le liquide est dense, plus la pression est grande : p = ρgh. Ce laboratoire prend g = 10 N/kg."
  ],
- "大气也有压强。托里拆利实验测出标准大气压约等于 760 mm 高水银柱产生的压强（约 1.013×10⁵ Pa）。管子倾斜，水银柱的竖直高度不变；海拔越高，大气压越小。": [
-  "The atmosphere also exerts pressure. Torricelli's experiment showed that standard atmospheric pressure is about equal to the pressure of a column of mercury 760 mm high (about 1.013×10⁵ Pa). If the tube is tilted, the vertical height of the mercury column does not change; the higher the altitude, the lower the atmospheric pressure.",
-  "L'atmosphère exerce aussi une pression. L'expérience de Torricelli a montré que la pression atmosphérique normale est à peu près égale à la pression d'une colonne de mercure de 760 mm de haut (environ 1,013×10⁵ Pa). Si le tube est incliné, la hauteur verticale de la colonne de mercure ne change pas ; plus l'altitude est grande, plus la pression atmosphérique est faible."
+ "大气也有压强。托里拆利实验测出标准大气压约等于 760 mm 高水银柱产生的压强（约 1.013×10⁵ Pa；这个数值按 g = 9.8 N/kg 计算，不取 10 N/kg）。管子倾斜，水银柱的竖直高度不变；海拔越高，大气压越小。": [
+  "The atmosphere also exerts pressure. Torricelli's experiment showed that standard atmospheric pressure is about equal to the pressure of a column of mercury 760 mm high (about 1.013×10⁵ Pa; this value is calculated with g = 9.8 N/kg, not 10 N/kg). If the tube is tilted, the vertical height of the mercury column does not change; the higher the altitude, the lower the atmospheric pressure.",
+  "L'atmosphère exerce aussi une pression. L'expérience de Torricelli a montré que la pression atmosphérique normale est à peu près égale à la pression d'une colonne de mercure de 760 mm de haut (environ 1,013×10⁵ Pa ; cette valeur est calculée avec g = 9,8 N/kg et non 10 N/kg). Si le tube est incliné, la hauteur verticale de la colonne de mercure ne change pas ; plus l'altitude est grande, plus la pression atmosphérique est faible."
  ],
  "滑轮组由定滑轮和动滑轮组成：承担重物的绳子段数为 n，不计摩擦时 F = (G + G动) / n，绳子自由端移动的距离 s = nh。省力的同时要多移动距离，使用任何机械都不省功。": [
   "A pulley system consists of fixed and movable pulleys: if n sections of rope support the load, then with no friction F = (G + G_pulley) / n and the distance moved by the free end of the rope is s = nh. Saving force means moving over a greater distance, and no machine saves work.",
@@ -295,9 +295,9 @@
   "The force produced when an object is elastically deformed is called the elastic force. Within the elastic limit, the extension of a spring is proportional to the pulling force: F = kx. The spring balance is made on this principle; beyond the elastic limit, the spring cannot return to its original length.",
   "La force produite lorsqu'un objet subit une déformation élastique s'appelle la force élastique. Dans la limite d'élasticité, l'allongement d'un ressort est proportionnel à la force de traction : F = kx. Le dynamomètre est fondé sur ce principe ; au-delà de la limite d'élasticité, le ressort ne peut plus reprendre sa longueur initiale."
  ],
- "重力是由于地球的吸引而使物体受到的力，方向竖直向下，大小 G = mg。g 约为 9.8 N/kg，在月球上约为地球的六分之一。质量是物体所含物质的多少，不随位置改变；重力会随位置改变。": [
-  "Weight is the force on an object caused by the Earth's attraction; its direction is vertically downward and its size is G = mg. g is about 9.8 N/kg, and on the Moon it is about one sixth of that on the Earth. Mass is the amount of matter in an object and does not change with position; weight changes with position.",
-  "Le poids est la force exercée sur un objet du fait de l'attraction de la Terre ; sa direction est verticale, vers le bas, et sa valeur est P = mg. g vaut environ 9,8 N/kg, et sur la Lune environ un sixième de cette valeur. La masse est la quantité de matière d'un objet et ne change pas avec le lieu ; le poids change avec le lieu."
+ "重力是由于地球的吸引而使物体受到的力，方向竖直向下，大小 G = mg。地球上 g = 9.8 N/kg，粗略计算时取 10 N/kg，本实验室取 g = 10 N/kg；月球上的 g 约为地球上的六分之一。质量是物体所含物质的多少，不随位置改变；重力会随位置改变。": [
+  "Weight is the force on an object caused by the Earth's attraction; its direction is vertically downward and its size is G = mg. On the Earth g = 9.8 N/kg, and 10 N/kg is used for rough calculations; this lab takes g = 10 N/kg. On the Moon g is about one sixth of that on the Earth. Mass is the amount of matter in an object and does not change with position; weight changes with position.",
+  "Le poids est la force exercée sur un objet du fait de l'attraction de la Terre ; sa direction est verticale, vers le bas, et sa valeur est P = mg. Sur la Terre g = 9,8 N/kg, et l'on prend 10 N/kg pour les calculs approchés ; ce laboratoire prend g = 10 N/kg. Sur la Lune, g vaut environ un sixième de cette valeur. La masse est la quantité de matière d'un objet et ne change pas avec le lieu ; le poids change avec le lieu."
  ],
  "测小灯泡的电功率：电压表示数 {0} V，电流表示数 {1} A，小灯泡的实际功率是多少？": [
   "Measuring the electric power of a small bulb: the voltmeter reads {0} V and the ammeter reads {1} A. What is the actual power of the bulb?",
@@ -359,8 +359,8 @@
   "It sinks to the bottom of the container",
   "Il coule au fond du récipient"
  ],
- "体积 {0} cm³ 的物体浸没在水中（密度 1000 kg/m³），受到的浮力是多少？（g = 9.8 N/kg）": [
-  "An object of volume {0} cm³ is fully immersed in water (density 1000 kg/m³). What is the buoyant force on it? (g = 9.8 N/kg)",
+ "体积 {0} cm³ 的物体浸没在水中（密度 1000 kg/m³），受到的浮力是多少？（g = 10 N/kg）": [
+  "An object of volume {0} cm³ is fully immersed in water (density 1000 kg/m³). What is the buoyant force on it? (g = 10 N/kg)",
   "Un objet de volume {0} cm³ est complètement immergé dans l'eau (masse volumique 1000 kg/m³). Quelle est la poussée qu'il subit ? (g = 9,8 N/kg)"
  ],
  "F浮 = ρ液gV排。": [
@@ -383,8 +383,8 @@
   "When floating, F_buoyancy = G, ρ_liquid V_displaced = ρ_object V_object.",
   "À la flottaison, F = P, ρ_liquide V_déplacé = ρ_objet V_objet."
  ],
- "质量 {0} kg 的物体漂浮在水面上，受到的浮力是多少？（g = 9.8 N/kg）": [
-  "An object of mass {0} kg floats on water. What is the buoyant force on it? (g = 9.8 N/kg)",
+ "质量 {0} kg 的物体漂浮在水面上，受到的浮力是多少？（g = 10 N/kg）": [
+  "An object of mass {0} kg floats on water. What is the buoyant force on it? (g = 10 N/kg)",
   "Un objet de masse {0} kg flotte sur l'eau. Quelle est la poussée qu'il subit ? (g = 9,8 N/kg)"
  ],
  "漂浮时 F浮 = G = mg。": [
@@ -515,9 +515,9 @@
   "orange, yellow, violet",
   "orange, jaune, violet"
  ],
- "色光的三原色是红、绿、蓝；颜料的三原色才是红、黄、蓝（品红、黄、青）。": [
-  "The primary colours of light are red, green and blue; it is the primary colours of paint that are red, yellow and blue (magenta, yellow, cyan).",
-  "Les couleurs primaires de la lumière sont le rouge, le vert et le bleu ; ce sont les couleurs primaires de la peinture qui sont le rouge, le jaune et le bleu (magenta, jaune, cyan)."
+ "色光的三原色是红、绿、蓝；颜料的三原色是品红、黄、青（美术中常说红、黄、蓝）。": [
+  "The primary colours of light are red, green and blue; the primary colours of paint are magenta, yellow and cyan (in art classes red, yellow and blue are often named).",
+  "Les couleurs primaires de la lumière sont le rouge, le vert et le bleu ; les couleurs primaires de la peinture sont le magenta, le jaune et le cyan (en cours d'arts plastiques, on cite souvent le rouge, le jaune et le bleu)."
  ],
  "磁感应强度 {0} T 的磁场中，长 {1} m 的导线通过 {2} A 的电流（电流与磁场垂直），受到的力是多少？": [
   "In a magnetic field of flux density {0} T, a wire {1} m long carries a current of {2} A (the current is perpendicular to the field). What is the force on it?",
@@ -659,16 +659,16 @@
   "Work of {1} J is done in {0} s. What is the power?",
   "Un travail de {1} J est effectué en {0} s. Quelle est la puissance ?"
  ],
- "质量 {0} kg 的物体被举高 {1} m，增加的重力势能是多少？（g = 9.8 N/kg）": [
-  "An object of mass {0} kg is lifted {1} m. By how much does its gravitational potential energy increase? (g = 9.8 N/kg)",
+ "质量 {0} kg 的物体被举高 {1} m，增加的重力势能是多少？（g = 10 N/kg）": [
+  "An object of mass {0} kg is lifted {1} m. By how much does its gravitational potential energy increase? (g = 10 N/kg)",
   "Un objet de masse {0} kg est soulevé de {1} m. De combien augmente son énergie potentielle de pesanteur ? (g = 9,8 N/kg)"
  ],
  "质量 {0} kg 的物体以 {1} m/s 运动，动能是多少？": [
   "An object of mass {0} kg moves at {1} m/s. What is its kinetic energy?",
   "Un objet de masse {0} kg se déplace à {1} m/s. Quelle est son énergie cinétique ?"
  ],
- "不计空气阻力，物体从 {0} m 高处自由下落，落地时的速度是多少？（g = 9.8 m/s²）": [
-  "Ignoring air resistance, an object falls freely from a height of {0} m. What is its speed when it reaches the ground? (g = 9.8 m/s²)",
+ "不计空气阻力，物体从 {0} m 高处自由下落，落地时的速度是多少？（g = 10 m/s²）": [
+  "Ignoring air resistance, an object falls freely from a height of {0} m. What is its speed when it reaches the ground? (g = 10 m/s²)",
   "En négligeant la résistance de l'air, un objet tombe en chute libre d'une hauteur de {0} m. Quelle est sa vitesse en arrivant au sol ? (g = 9,8 m/s²)"
  ],
  "机械能守恒：mgh = ½mv²。": [
@@ -859,6 +859,10 @@
   "where the speed is greater the pressure is lower, so when air is blown between two sheets of paper the sheets move apart",
   "là où la vitesse est plus grande la pression est plus basse, donc quand on souffle entre deux feuilles de papier, les feuilles s'écartent"
  ],
+ "流速大的地方压强大，所以两张纸中间吹气时纸会分开": [
+  "where the speed is greater the pressure is higher, so when air is blown between two sheets of paper the sheets move apart",
+  "là où la vitesse est plus grande la pression est plus élevée, donc quand on souffle entre deux feuilles de papier, les feuilles s'écartent"
+ ],
  "两张纸中间的空气流速大、压强小，纸被外面较大的气压压向中间。": [
   "The air between the two sheets moves fast and has low pressure, and the greater outside pressure pushes the sheets together.",
   "L'air entre les deux feuilles va vite et sa pression est basse, et la pression extérieure plus grande pousse les feuilles l'une vers l'autre."
@@ -887,8 +891,8 @@
   "Ship locks, teapots and boiler water-level gauges are all communicating vessels, open at the top and connected at the bottom.",
   "Les écluses, les théières et les indicateurs de niveau de chaudière sont tous des vases communicants, ouverts en haut et reliés en bas."
  ],
- "水平地面上质量 {0} kg 的物体，与地面的动摩擦因数为 {1}，滑动时受到的摩擦力是多少？（g = 9.8 N/kg）": [
-  "An object of mass {0} kg lies on level ground, and the coefficient of kinetic friction with the ground is {1}. What is the friction when it slides? (g = 9.8 N/kg)",
+ "水平地面上质量 {0} kg 的物体，与地面的动摩擦因数为 {1}，滑动时受到的摩擦力是多少？（g = 10 N/kg）": [
+  "An object of mass {0} kg lies on level ground, and the coefficient of kinetic friction with the ground is {1}. What is the friction when it slides? (g = 10 N/kg)",
   "Un objet de masse {0} kg repose sur un sol horizontal, et le coefficient de frottement dynamique avec le sol est {1}. Quel est le frottement lorsqu'il glisse ? (g = 9,8 N/kg)"
  ],
  "f = μN，水平面上 N = mg。": [
@@ -907,12 +911,12 @@
   "The coefficient of static friction between an object and an incline is {0}. With no pulling force, what is the greatest angle of the incline at which the object just does not slide down, approximately?",
   "Le coefficient de frottement statique entre un objet et un plan incliné est {0}. Sans force de traction, quel est approximativement l'angle d'inclinaison maximal du plan pour lequel l'objet ne glisse juste pas ?"
  ],
- "质量 {0} kg 的物体放在倾角为 {1}° 的斜面上，斜面对它的支持力是多少？（g = 9.8 N/kg）": [
-  "An object of mass {0} kg lies on an incline of angle {1}°. What is the normal force of the incline on it? (g = 9.8 N/kg)",
+ "质量 {0} kg 的物体放在倾角为 {1}° 的斜面上，斜面对它的支持力是多少？（g = 10 N/kg）": [
+  "An object of mass {0} kg lies on an incline of angle {1}°. What is the normal force of the incline on it? (g = 10 N/kg)",
   "Un objet de masse {0} kg repose sur un plan incliné d'angle {1}°. Quelle est la réaction normale du plan sur l'objet ? (g = 9,8 N/kg)"
  ],
- "要使质量 {0} kg 的物体在水平面上做匀速直线运动（动摩擦因数 {1}），水平拉力应为多少？（g = 9.8 N/kg）": [
-  "What horizontal pull makes an object of mass {0} kg move in a straight line at constant speed on a level surface (coefficient of kinetic friction {1})? (g = 9.8 N/kg)",
+ "要使质量 {0} kg 的物体在水平面上做匀速直线运动（动摩擦因数 {1}），水平拉力应为多少？（g = 10 N/kg）": [
+  "What horizontal pull makes an object of mass {0} kg move in a straight line at constant speed on a level surface (coefficient of kinetic friction {1})? (g = 10 N/kg)",
   "Quelle force de traction horizontale faut-il pour qu'un objet de masse {0} kg se déplace en ligne droite à vitesse constante sur une surface horizontale (coefficient de frottement dynamique {1}) ? (g = 9,8 N/kg)"
  ],
  "匀速时，拉力等于滑动摩擦力。": [
@@ -1319,12 +1323,12 @@
   "Moving forward at a constant {0} m/s, how long does it take to cover {1} m?",
   "Avançant à la vitesse constante de {0} m/s, combien de temps faut-il pour parcourir {1} m ?"
  ],
- "小车以 {0} m/s 的速度冲上粗糙水平面（动摩擦因数 {1}），滑行多远才停下？（g = 9.8 m/s²）": [
-  "A trolley runs onto a rough horizontal surface at {0} m/s (coefficient of kinetic friction {1}). How far does it slide before stopping? (g = 9.8 m/s²)",
+ "小车以 {0} m/s 的速度冲上粗糙水平面（动摩擦因数 {1}），滑行多远才停下？（g = 10 m/s²）": [
+  "A trolley runs onto a rough horizontal surface at {0} m/s (coefficient of kinetic friction {1}). How far does it slide before stopping? (g = 10 m/s²)",
   "Un chariot arrive à {0} m/s sur une surface horizontale rugueuse (coefficient de frottement dynamique {1}). Sur quelle distance glisse-t-il avant de s'arrêter ? (g = 9,8 m/s²)"
  ],
- "小车以 {0} m/s 的速度冲上粗糙水平面（动摩擦因数 {1}），经过多少秒停下？（g = 9.8 m/s²）": [
-  "A trolley runs onto a rough horizontal surface at {0} m/s (coefficient of kinetic friction {1}). After how many seconds does it stop? (g = 9.8 m/s²)",
+ "小车以 {0} m/s 的速度冲上粗糙水平面（动摩擦因数 {1}），经过多少秒停下？（g = 10 m/s²）": [
+  "A trolley runs onto a rough horizontal surface at {0} m/s (coefficient of kinetic friction {1}). After how many seconds does it stop? (g = 10 m/s²)",
   "Un chariot arrive à {0} m/s sur une surface horizontale rugueuse (coefficient de frottement dynamique {1}). Au bout de combien de secondes s'arrête-t-il ? (g = 9,8 m/s²)"
  ],
  "一个物体受到两个力而处于平衡状态，其中一个力是 {0} N，另一个力的大小是多少？": [
@@ -1395,8 +1399,8 @@
   "A current of {1} A passes through a resistance wire of {0} Ω. How much heat is produced in {2} s?",
   "Un courant de {1} A traverse un fil résistant de {0} Ω. Quelle quantité de chaleur est dégagée en {2} s ?"
  ],
- "水（密度 1000 kg/m³）中深度 {0} m 处，液体产生的压强是多少？（g = 9.8 N/kg）": [
-  "In water (density 1000 kg/m³) at a depth of {0} m, what is the pressure produced by the liquid? (g = 9.8 N/kg)",
+ "水（密度 1000 kg/m³）中深度 {0} m 处，液体产生的压强是多少？（g = 10 N/kg）": [
+  "In water (density 1000 kg/m³) at a depth of {0} m, what is the pressure produced by the liquid? (g = 10 N/kg)",
   "Dans l'eau (masse volumique 1000 kg/m³), à une profondeur de {0} m, quelle est la pression due au liquide ? (g = 9,8 N/kg)"
  ],
  "{0} N 的压力作用在 {1} cm² 的面积上，压强是多少？": [
@@ -1407,16 +1411,16 @@
   "p = F / S (note that 1 cm² = 10⁻⁴ m²).",
   "p = F / S (attention : 1 cm² = 10⁻⁴ m²)."
  ],
- "标准大气压约为 1.013×10⁵ Pa，它能支持多高的水柱？（水的密度 1000 kg/m³，g = 9.8 N/kg）": [
-  "Standard atmospheric pressure is about 1.013×10⁵ Pa. How high a column of water can it support? (Density of water 1000 kg/m³, g = 9.8 N/kg)",
+ "标准大气压约为 1.013×10⁵ Pa，它能支持多高的水柱？（水的密度 1000 kg/m³，g = 10 N/kg）": [
+  "Standard atmospheric pressure is about 1.013×10⁵ Pa. How high a column of water can it support? (Density of water 1000 kg/m³, g = 10 N/kg)",
   "La pression atmosphérique normale est d'environ 1,013×10⁵ Pa. Quelle hauteur de colonne d'eau peut-elle soutenir ? (Masse volumique de l'eau 1000 kg/m³, g = 9,8 N/kg)"
  ],
  "h = p / (ρg)，水柱约 10 m 高。": [
   "h = p / (ρg); the water column is about 10 m high.",
   "h = p / (ρg) ; la colonne d'eau fait environ 10 m de haut."
  ],
- "水中某处液体压强为 {0} kPa，该处的深度是多少？（g = 9.8 N/kg）": [
-  "The pressure of the liquid at a point in water is {0} kPa. What is the depth of that point? (g = 9.8 N/kg)",
+ "水中某处液体压强为 {0} kPa，该处的深度是多少？（g = 10 N/kg）": [
+  "The pressure of the liquid at a point in water is {0} kPa. What is the depth of that point? (g = 10 N/kg)",
   "La pression du liquide en un point de l'eau est {0} kPa. Quelle est la profondeur de ce point ? (g = 9,8 N/kg)"
  ],
  "压力不变，受力面积变为原来的 1/{0}，压强变为原来的：": [
@@ -1575,9 +1579,9 @@
   "Take the speed of sound in air as 340 m/s. What is the wavelength of a sound of frequency {0} Hz?",
   "Prenons 340 m/s pour la vitesse du son dans l'air. Quelle est la longueur d'onde d'un son de fréquence {0} Hz ?"
  ],
- "其他条件不变，声源的振幅变为原来的 {0} 倍，响度级大约增加多少 dB？": [
+ "其他条件不变，声源的振幅变为原来的 {0} 倍，声音强弱大约增加多少 dB？": [
   "With everything else unchanged, the amplitude of the source becomes {0} times as great. By about how many dB does the sound level increase?",
-  "Toutes choses égales par ailleurs, l'amplitude de la source devient {0} fois plus grande. De combien de dB le niveau sonore augmente-t-il environ ?"
+  "Toutes choses égales par ailleurs, l'amplitude de la source devient {0} fois plus grande. De combien de dB l'intensité sonore augmente-t-elle environ ?"
  ],
  "每 10 倍的振幅增加 20 dB。": [
   "Each factor of 10 in amplitude adds 20 dB.",
@@ -1667,8 +1671,8 @@
   "Specific heat capacity is a property of a substance and does not depend on mass or change of temperature.",
   "La capacité thermique massique est une propriété d'une substance et ne dépend ni de la masse ni de la variation de température."
  ],
- "质量 {0} kg 的物体在地球上受到的重力是多少？（g = 9.8 N/kg）": [
-  "What is the weight of an object of mass {0} kg on the Earth? (g = 9.8 N/kg)",
+ "质量 {0} kg 的物体在地球上受到的重力是多少？（g = 10 N/kg）": [
+  "What is the weight of an object of mass {0} kg on the Earth? (g = 10 N/kg)",
   "Quel est le poids d'un objet de masse {0} kg sur la Terre ? (g = 9,8 N/kg)"
  ],
  "质量 {0} kg 的宇航员在月球上受到的重力是多少？（月球上 g = 1.6 N/kg）": [
@@ -1687,8 +1691,8 @@
   "Within the elastic limit, the extension is proportional to the pull.",
   "Dans la limite d'élasticité, l'allongement est proportionnel à la force de traction."
  ],
- "物体在地球上受到的重力是 {0} N，它的质量是多少？（g = 9.8 N/kg）": [
-  "The weight of an object on the Earth is {0} N. What is its mass? (g = 9.8 N/kg)",
+ "物体在地球上受到的重力是 {0} N，它的质量是多少？（g = 10 N/kg）": [
+  "The weight of an object on the Earth is {0} N. What is its mass? (g = 10 N/kg)",
   "Le poids d'un objet sur la Terre est {0} N. Quelle est sa masse ? (g = 9,8 N/kg)"
  ],
  "弹簧受 {0} N 的拉力时伸长 {1} m，弹簧的劲度系数是多少？": [
@@ -1950,5 +1954,89 @@
  "，": [
   ",",
   ","
+ ],
+ "质量是物体所含物质的多少，不随物体的形状、状态和位置而改变。实验室里用天平测质量：物体放在左盘，砝码放在右盘，用镊子加减砝码并移动游码，天平平衡时，物体的质量等于砝码的总质量加游码在标尺上所对的刻度值。": [
+  "Mass is the amount of matter in an object and does not change with its shape, state or position. In the laboratory, mass is measured with a balance: the object goes on the left pan and the weights on the right pan; weights are added or removed with tweezers and the rider is moved. When the balance is level, the mass of the object equals the total mass of the weights plus the value that the rider shows on the scale.",
+  "La masse est la quantité de matière d'un objet ; elle ne change ni avec la forme, ni avec l'état, ni avec le lieu. Au laboratoire, on mesure la masse avec une balance : l'objet est placé sur le plateau de gauche et les masses marquées sur celui de droite ; on ajoute ou retire les masses avec une pince et l'on déplace le curseur. Quand la balance est en équilibre, la masse de l'objet est égale à la somme des masses marquées plus la valeur indiquée par le curseur sur la règle."
+ ],
+ "某种物质组成的物体的质量与它的体积之比叫做这种物质的密度：ρ = m / V。密度是物质的一种特性，与物体的质量和体积的大小无关。国际单位是 kg/m³，常用单位是 g/cm³，1 g/cm³ = 1×10³ kg/m³；水的密度是 1.0×10³ kg/m³。": [
+  "The ratio of the mass of an object made of a substance to its volume is called the density of that substance: ρ = m / V. Density is a property of the substance and does not depend on how large the mass or the volume of the object is. The SI unit is kg/m³ and a common unit is g/cm³, with 1 g/cm³ = 1×10³ kg/m³; the density of water is 1.0×10³ kg/m³.",
+  "Le rapport entre la masse d'un objet constitué d'une substance et son volume s'appelle la masse volumique de cette substance : ρ = m / V. La masse volumique est une propriété de la substance ; elle ne dépend pas de la masse ni du volume de l'objet. L'unité du Système international est le kg/m³ et une unité courante est le g/cm³, avec 1 g/cm³ = 1×10³ kg/m³ ; la masse volumique de l'eau est de 1,0×10³ kg/m³."
+ ],
+ "测量固体的密度：用天平测出固体的质量 m；在量筒里装适量的水，读出体积 V₁；用细线系住固体，使它浸没在水中，读出总体积 V₂；固体的体积 V = V₂ − V₁，密度 ρ = m / (V₂ − V₁)。要先测质量、后测体积：先放入水中再称，固体沾水，质量测得偏大。密度比水小的固体（如石蜡）会漂浮，可用细针把它压入水中。": [
+  "Measuring the density of a solid: measure the mass m of the solid with a balance; pour a suitable amount of water into a measuring cylinder and read the volume V₁; tie the solid to a thread and immerse it completely in the water, then read the total volume V₂. The volume of the solid is V = V₂ − V₁ and its density is ρ = m / (V₂ − V₁). Measure the mass first and the volume afterwards: if the solid is put into water before it is weighed, water sticks to it and the mass is measured too large. A solid less dense than water (such as paraffin wax) floats; it can be pressed under the water with a thin needle.",
+  "Mesurer la masse volumique d'un solide : mesurez la masse m du solide avec une balance ; versez une quantité d'eau convenable dans une éprouvette graduée et lisez le volume V₁ ; attachez le solide à un fil et plongez-le entièrement dans l'eau, puis lisez le volume total V₂. Le volume du solide est V = V₂ − V₁ et sa masse volumique est ρ = m / (V₂ − V₁). Mesurez d'abord la masse, puis le volume : si le solide est plongé dans l'eau avant d'être pesé, de l'eau y reste collée et la masse est mesurée trop grande. Un solide moins dense que l'eau (comme la paraffine) flotte ; on peut l'enfoncer sous l'eau avec une fine aiguille."
+ ],
+ "测量液体的密度：先称出烧杯和液体的总质量 m₁；把一部分液体倒入量筒，读出体积 V；再称出烧杯和剩余液体的质量 m₂；ρ = (m₁ − m₂) / V。这样量筒里的液体全部是被称过质量的液体，烧杯壁上的残留液体不影响结果。若把液体全部倒入量筒，烧杯壁上的残留会使体积测得偏小，密度偏大。": [
+  "Measuring the density of a liquid: first weigh the beaker with the liquid, giving the mass m₁; pour part of the liquid into a measuring cylinder and read its volume V; then weigh the beaker with the remaining liquid, giving the mass m₂; ρ = (m₁ − m₂) / V. In this way all the liquid in the cylinder is liquid whose mass has been found, and the liquid left on the wall of the beaker does not affect the result. If all the liquid is poured into the cylinder instead, the liquid left on the wall makes the measured volume too small and the density too large.",
+  "Mesurer la masse volumique d'un liquide : pesez d'abord le bécher contenant le liquide, ce qui donne la masse m₁ ; versez une partie du liquide dans une éprouvette graduée et lisez son volume V ; pesez ensuite le bécher avec le liquide restant, ce qui donne la masse m₂ ; ρ = (m₁ − m₂) / V. Ainsi, tout le liquide de l'éprouvette est un liquide dont la masse a été déterminée, et le liquide resté sur la paroi du bécher n'influe pas sur le résultat. Si l'on verse au contraire tout le liquide dans l'éprouvette, le liquide resté sur la paroi rend le volume mesuré trop petit et la masse volumique trop grande."
+ ],
+ "一块物质的质量是 {0} g，体积是 {1} cm³，它的密度是多少？": [
+  "The mass of a piece of material is {0} g and its volume is {1} cm³. What is its density?",
+  "La masse d'un morceau de matière est de {0} g et son volume de {1} cm³. Quelle est sa masse volumique ?"
+ ],
+ "ρ = m / V。": [
+  "ρ = m / V.",
+  "ρ = m / V."
+ ],
+ "量筒中盛有 {0} mL 的水，放入一块石块（完全浸没）后，水面升到 {1} mL，石块的体积是多少？": [
+  "A measuring cylinder holds {0} mL of water. After a stone is put in (completely immersed), the water level rises to {1} mL. What is the volume of the stone?",
+  "Une éprouvette graduée contient {0} mL d'eau. Après qu'on y a placé une pierre (entièrement immergée), le niveau de l'eau monte à {1} mL. Quel est le volume de la pierre ?"
+ ],
+ "石块的体积 V = V₂ − V₁（1 mL = 1 cm³）。": [
+  "The volume of the stone is V = V₂ − V₁ (1 mL = 1 cm³).",
+  "Le volume de la pierre est V = V₂ − V₁ (1 mL = 1 cm³)."
+ ],
+ "用天平和量筒测得一个金属块的质量是 {0} g，体积是 {1} cm³。对照密度表（铝 2.7、铁 7.9、铜 8.9、银 10.5、铅 11.3，单位 g/cm³），它最可能是：": [
+  "The mass of a metal block, measured with a balance and a measuring cylinder, is {0} g and its volume is {1} cm³. Compared with the density table (aluminium 2.7, iron 7.9, copper 8.9, silver 10.5, lead 11.3, in g/cm³), it is most likely:",
+  "La masse d'un bloc de métal, mesurée avec une balance et une éprouvette graduée, est de {0} g et son volume de {1} cm³. D'après le tableau des masses volumiques (aluminium 2,7 ; fer 7,9 ; cuivre 8,9 ; argent 10,5 ; plomb 11,3, en g/cm³), il s'agit très probablement de :"
+ ],
+ "先由 ρ = m / V 算出密度，再与密度表比较。": [
+  "First calculate the density from ρ = m / V, then compare it with the density table.",
+  "Calculez d'abord la masse volumique avec ρ = m / V, puis comparez-la avec le tableau."
+ ],
+ "实心物体的密度是 {0} g/cm³，把它浸没在密度是 {1} g/cm³ 的液体中后松手，静止时它将：": [
+  "A solid object has a density of {0} g/cm³. It is immersed in a liquid of density {1} g/cm³ and let go. When it comes to rest it will:",
+  "La masse volumique d'un objet plein est de {0} g/cm³. On l'immerge dans un liquide de masse volumique {1} g/cm³ puis on le lâche. Au repos, il :"
+ ],
+ "先下沉再上浮": [
+  "first sink and then rise",
+  "d'abord coule puis remonte"
+ ],
+ "ρ物 < ρ液 上浮并漂浮；ρ物 = ρ液 悬浮；ρ物 > ρ液 下沉。": [
+  "If ρ(object) < ρ(liquid) it rises and floats; if ρ(object) = ρ(liquid) it is suspended; if ρ(object) > ρ(liquid) it sinks.",
+  "Si ρ(objet) < ρ(liquide), il monte et flotte ; si ρ(objet) = ρ(liquide), il reste en suspension ; si ρ(objet) > ρ(liquide), il coule."
+ ],
+ "测量固体的密度时，先把石块放入量筒测体积，再用天平称它的质量，测得的密度比真实值：": [
+  "When measuring the density of a solid, the stone is first put into the measuring cylinder to find its volume and is then weighed on the balance. The measured density compared with the true value is:",
+  "Pour mesurer la masse volumique d'un solide, on place d'abord la pierre dans l'éprouvette pour trouver son volume, puis on la pèse avec la balance. La masse volumique mesurée, comparée à la valeur réelle, est :"
+ ],
+ "测量液体的密度时，先称空烧杯的质量，再倒入液体称总质量，最后把液体全部倒入量筒读体积（烧杯壁上有残留），测得的密度比真实值：": [
+  "When measuring the density of a liquid, the empty beaker is weighed first, then the liquid is poured in and the total is weighed, and finally all the liquid is poured into the measuring cylinder to read its volume (some liquid stays on the wall of the beaker). The measured density compared with the true value is:",
+  "Pour mesurer la masse volumique d'un liquide, on pèse d'abord le bécher vide, puis on y verse le liquide et l'on pèse l'ensemble, enfin on verse tout le liquide dans l'éprouvette pour lire son volume (du liquide reste sur la paroi du bécher). La masse volumique mesurée, comparée à la valeur réelle, est :"
+ ],
+ "测量液体的密度时，先用量筒量出液体的体积，再把它全部倒入烧杯称质量（量筒壁上有残留），测得的密度比真实值：": [
+  "When measuring the density of a liquid, its volume is first measured with the measuring cylinder and all of it is then poured into the beaker to be weighed (some liquid stays on the wall of the cylinder). The measured density compared with the true value is:",
+  "Pour mesurer la masse volumique d'un liquide, on mesure d'abord son volume avec l'éprouvette, puis on le verse entièrement dans le bécher pour le peser (du liquide reste sur la paroi de l'éprouvette). La masse volumique mesurée, comparée à la valeur réelle, est :"
+ ],
+ "没有影响": [
+  "not affected",
+  "non modifiée"
+ ],
+ "无法判断": [
+  "impossible to tell",
+  "impossible à dire"
+ ],
+ "石块沾了水，测得的质量偏大，体积不变，所以密度偏大。": [
+  "The stone is wet, so its measured mass is too large while the volume is unchanged; therefore the density is too large.",
+  "La pierre est mouillée : sa masse mesurée est trop grande alors que le volume ne change pas ; la masse volumique est donc trop grande."
+ ],
+ "残留使测得的体积偏小，质量不变，所以密度偏大。": [
+  "The liquid left behind makes the measured volume too small while the mass is unchanged; therefore the density is too large.",
+  "Le liquide resté sur la paroi rend le volume mesuré trop petit alors que la masse ne change pas ; la masse volumique est donc trop grande."
+ ],
+ "残留使测得的质量偏小，体积不变，所以密度偏小。": [
+  "The liquid left behind makes the measured mass too small while the volume is unchanged; therefore the density is too small.",
+  "Le liquide resté sur la paroi rend la masse mesurée trop petite alors que le volume ne change pas ; la masse volumique est donc trop petite."
  ]
 }

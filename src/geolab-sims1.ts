@@ -55,7 +55,7 @@ const feat = ["地面平坦", "坡度和缓", "起伏很大", "四周高中间�
 export function terrain(D: M.GeoData): SimDef {
   return {
     ...base(D, "terrain"), aspect: 0.55,
-    params: [{ id: "alt", label: "海拔", min: 0, max: 6000, step: 100, value: 300, unit: "m" }, { id: "rel", label: "相对高度", min: 0, max: 3000, step: 50, value: 100, unit: "m" }],
+    params: [{ id: "alt", label: "海拔", min: 0, max: 6000, step: 100, value: 100, unit: "m" }, { id: "rel", label: "相对高度", min: 0, max: 3000, step: 50, value: 100, unit: "m" }],
     choices: [{ id: "feat", label: "地表特征", options: feat.map((f, i) => [i, f] as [number, string]), value: 0 }],
     readouts: (s) => [{ label: "海拔", value: fmt(s.alt, 0), unit: "m" }, { label: "相对高度", value: fmt(s.rel, 0), unit: "m" }, { label: "地形类型", value: M.terrainType(s.alt, s.rel, s.feat) }],
     draw(c, w, h, s: St) {
@@ -70,8 +70,8 @@ export function terrain(D: M.GeoData): SimDef {
       else if (s.feat === 1) { for (let i = 0; i <= 40; i++) pts.push([X0 + (i * (X1 - X0)) / 40, Y(s.alt + (s.rel / 2) * Math.sin(i * 0.9))]); }
       else if (s.alt >= 500) pts.push([X0, Y(Math.max(0, s.alt - s.rel))], [150, Y(s.alt)], [490, Y(s.alt)], [X1, Y(Math.max(0, s.alt - s.rel))]);
       else pts.push([X0, Y(s.alt)], [X1, Y(s.alt)]);
-      poly(c, [[X0, y0], ...pts, [X1, y0]], t === "平原" ? "#b2f2bb" : t === "丘陵" ? "#d8f5a2" : t === "高原" ? "#ffe066" : t === "盆地" ? "#ffd8a8" : "#d9a066", COL.ink, 4);
-      txt(c, t === "平原" ? "PLAIN" : t === "丘陵" ? "HILLS" : t === "高原" ? "PLATEAU" : t === "盆地" ? "BASIN" : "MOUNTAINS", w / 2, 40, 24, COL.ink);
+      poly(c, [[X0, y0], ...pts, [X1, y0]], t === "平原" || t === M.LOWLAND ? "#b2f2bb" : t === "丘陵" ? "#d8f5a2" : t === "高原" ? "#ffe066" : t === "盆地" ? "#ffd8a8" : "#d9a066", COL.ink, 4);
+      txt(c, t === "平原" ? "PLAIN" : t === M.LOWLAND ? "LOWLAND" : t === "丘陵" ? "HILLS" : t === "高原" ? "PLATEAU" : t === "盆地" ? "BASIN" : "MOUNTAINS", w / 2, 40, 24, COL.ink);
     },
     tasks: [
       { id: "plateau", text: "做出一个高原：海拔 500 米以上、顶面平坦", check: (s) => M.terrainType(s.alt, s.rel, s.feat) === "高原" },

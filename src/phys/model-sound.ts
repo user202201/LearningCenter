@@ -44,7 +44,7 @@ export function quiz(rng: () => number): Q[] {
   return [
     numQ(rng, "period", [f1], `一个声源每秒振动 ${f1} 次，它的周期是多少？`, 1000 / f1, "ms", 1, "T = 1 / f。"),
     numQ(rng, "wavelength", [f2], `声音在空气中的速度取 340 m/s，频率 ${f2} Hz 的声音波长是多少？`, SOUND_SPEED / f2, "m", 2, "λ = v / f。"),
-    numQ(rng, "db", [k], `其他条件不变，声源的振幅变为原来的 ${k} 倍，响度级大约增加多少 dB？`, Math.round(20 * Math.log10(k)), "dB", 0, "每 10 倍的振幅增加 20 dB。"),
+    numQ(rng, "db", [k], `其他条件不变，声源的振幅变为原来的 ${k} 倍，声音强弱大约增加多少 dB？`, Math.round(20 * Math.log10(k)), "dB", 0, "每 10 倍的振幅增加 20 dB。"),
     numQ(rng, "octave", [f3, n], `比 ${f3} Hz 高 ${n} 个八度的声音，频率是多少？`, f3 * 2 ** n, "Hz", 0, "高一个八度，频率变为原来的 2 倍。"),
     makeQ(rng, "concept", [], "声音的音调高低由什么决定？", "声源振动的频率", ["声源振动的振幅", "声源离听者的距离", "声音传播的速度", "声源的材料"], "频率越高，音调越高。"),
   ];

@@ -516,10 +516,12 @@ export function metathesis(a: Cmp, b: Cmp): Meta {
   const ka = cmpKind(a), kb = cmpKind(b);
   const sa = solOf(a.cat, a.an), sb = solOf(b.cat, b.an);
   const ambiguousIn = (sa === "m" && ka === "salt") || (sb === "m" && kb === "salt");
-  const out = (happens: boolean, reasons: string[], products: string[], ambiguous: boolean, why: string): Meta => ({ happens, reasons, ambiguous: ambiguous || ambiguousIn, products, why });
   const p1: Cmp = { cat: a.cat, an: b.an }, p2: Cmp = { cat: b.cat, an: a.an };
   const cell = (c: Cmp) => solOf(c.cat, c.an);
   const c1 = cell(p1), c2 = cell(p2);
+  // a slightly soluble PRODUCT (a "m" cell: CaSO4, Ag2SO4, MgCO3, Ca(OH)2) makes the answer unclear in the textbooks: such a pair is never asked
+  const slightProduct = c1 === "m" || c2 === "m";
+  const out = (happens: boolean, reasons: string[], products: string[], ambiguous: boolean, why: string): Meta => ({ happens, reasons, ambiguous: ambiguous || ambiguousIn || slightProduct, products, why });
   const form = (c: Cmp) => (c.cat === "H" && c.an === "OH" ? "H2O" : c.cat === "NH4" && c.an === "OH" ? "NH3" : c.cat === "H" && c.an === "CO3" ? "H2CO3" : cmpFormula(c));
   const prod = [form(p1), form(p2)];
   const amb = [c1, c2].includes("-") && !(c1 === "-" && (p1.cat === "H" && p1.an === "OH")) && !(c2 === "-" && (p2.cat === "H" && p2.an === "OH"));

@@ -15,7 +15,7 @@ export const def: SimDef = {
   meta,
   lesson: [
     "心肺复苏（CPR）：发现无反应、无呼吸的人，先呼救并拨打 120，让人取来自动体外除颤器（AED）；成人按压部位在胸骨下半部，深度约 5–6 cm，频率每分钟 100–120 次，按压 30 次、吹气 2 次为一个循环。",
-    "安全用药：服药前阅读说明书，按剂量（常按体重计算）和时间服用，不随意加量；过期的药不能吃；非处方药（OTC）也要谨慎；药物有副作用。烧烫伤的处理：冲、脱、泡、盖、送。",
+    "安全用药：服药前阅读说明书，按剂量（常按体重计算）和时间服用，不随意加量，有疑问时咨询医生或药师；本页的“示例药”和它的最大日剂量是为计算练习假设的，每种药的限量都不同，不能当作真实用药的依据；过期的药不能吃；非处方药（OTC）也要谨慎；药物有副作用。烧烫伤的处理：冲、脱、泡、盖、送。",
   ],
   links: [{ text: "相关：知识总结（安全 · 急救）", href: "#/science/notes" }],
   params: [
@@ -33,8 +33,8 @@ export const def: SimDef = {
   derive: (s, ch) => { if (ch === "mode") { s.h = -1; s.sel = -1; } },
   readouts: (s) => s.mode === 0 ? [
     { label: "评价", value: Mo.cprText(s.rate, s.depth) }, { label: "2 分钟的按压次数", value: String(Mo.compressions(s.rate, 2)), unit: "次" }, { label: "按压深度", value: fmt(s.depth, 1), unit: "cm" }] : s.mode === 1 ? [
-    { label: "每次的剂量", value: fmt(Mo.dose(s.kg, s.mgkg), 1), unit: "mg" }, { label: "一天的总量", value: fmt(Mo.daily(s.kg, s.mgkg, s.times), 1), unit: "mg" }, { label: "最大日剂量（模型）", value: fmt(s.kg * Mo.MAX_MGKG, 0), unit: "mg" },
-    { label: "是否安全", value: Mo.safeDaily(s.kg, s.mgkg, s.times, Mo.MAX_MGKG) ? "在安全范围内" : "超过最大日剂量" }] : [
+    { label: "每次的剂量", value: fmt(Mo.dose(s.kg, s.mgkg), 1), unit: "mg" }, { label: "一天的总量", value: fmt(Mo.daily(s.kg, s.mgkg, s.times), 1), unit: "mg" }, { label: "示例药的最大日剂量（假设值）", value: fmt(s.kg * Mo.MAX_MGKG, 0), unit: "mg" },
+    { label: "与示例值比较", value: Mo.safeDaily(s.kg, s.mgkg, s.times, Mo.MAX_MGKG) ? "未超过示例值" : "超过示例值" }, { label: "真实用药", value: "按说明书，或咨询医生、药师" }] : [
     { label: "已放对", value: `${placedCount(s, 5, "ba")} / 5` }, { label: "失误", value: String(s.miss), unit: "次" }, { label: "步骤数", value: "5" }],
   draw(c, w, h, s) {
     if (s.mode === 0) {
@@ -45,8 +45,8 @@ export const def: SimDef = {
       lab(c, Mo.cprText(s.rate, s.depth), 480, 250, 30, ok ? COL.green : COL.red); txt(c, "30 : 2", 480, 320, 28, COL.purple);
     } else if (s.mode === 1) {
       const safe = Mo.safeDaily(s.kg, s.mgkg, s.times, Mo.MAX_MGKG), mx = s.kg * Mo.MAX_MGKG * 1.6;
-      rect(c, 60, 140, 520, 40, "#f1f3f5", COL.grey, 2, 12); rect(c, 62, 142, Math.min(516, (Mo.daily(s.kg, s.mgkg, s.times) / mx) * 516), 36, safe ? COL.green : COL.red, null, 0, 10);
-      line(c, 60 + (s.kg * Mo.MAX_MGKG / mx) * 520, 120, 60 + (s.kg * Mo.MAX_MGKG / mx) * 520, 200, COL.ink, 4); lab(c, safe ? "在安全范围内" : "超过最大日剂量", 320, 260, 26, safe ? COL.green : COL.red);
+      rect(c, 60, 140, 520, 40, "#f1f3f5", COL.grey, 2, 12); rect(c, 62, 142, Math.min(516, (Mo.daily(s.kg, s.mgkg, s.times) / mx) * 516), 36, safe ? COL.blue : COL.red, null, 0, 10);
+      line(c, 60 + (s.kg * Mo.MAX_MGKG / mx) * 520, 120, 60 + (s.kg * Mo.MAX_MGKG / mx) * 520, 200, COL.ink, 4); lab(c, safe ? "未超过示例值" : "超过示例值", 320, 240, 26, safe ? COL.ink : COL.red); lab(c, "示例药：真实用药按说明书或咨询医生、药师", 320, 290, 16, COL.grey);
     } else {
       SLOTS.forEach(([x, y], i) => { rect(c, x - 200, y - 24, 200, 48, s[`ba${i}`] ? "#d3f9d8" : "#f8f9fa", COL.grey, 2, 10); txt(c, String(i + 1), x - 216, y, 18, COL.grey); if (s[`ba${i}`]) lab(c, Mo.BURN[i], x - 100, y, 14, "#1b7a32"); });
       for (let i = 0; i < 5; i++) { if (s[`ba${i}`] || s.h === i) continue; const [x, y] = ITEM_AT(i, s); rect(c, x - 110, y - 24, 220, 48, s.sel === i ? "#fff3bf" : "#fff", s.sel === i ? COL.orange : COL.nucleus, 3, 12); lab(c, Mo.BURN[i], x, y, 14); }
@@ -55,7 +55,7 @@ export const def: SimDef = {
   },
   tasks: [
     { id: "cpr", text: "调到有效的心肺复苏：每分钟 100–120 次，深度 5–6 cm", check: (s) => s.mode === 0 && Mo.effectiveCpr(s.rate, s.depth) },
-    { id: "overdose", text: "找到一天总量超过最大日剂量的情况（并认识到这是不安全的）", check: (s) => s.mode === 1 && !Mo.safeDaily(s.kg, s.mgkg, s.times, Mo.MAX_MGKG) },
+    { id: "overdose", text: "找到一天总量超过示例最大日剂量的情况（真实用药必须按说明书，或咨询医生、药师）", check: (s) => s.mode === 1 && !Mo.safeDaily(s.kg, s.mgkg, s.times, Mo.MAX_MGKG) },
     { id: "burn", text: "把烧烫伤处理的五个步骤按“冲、脱、泡、盖、送”的顺序放好", check: (s) => s.mode === 2 && placedCount(s, 5, "ba") === 5 },
   ],
   quiz: Mo.quiz,

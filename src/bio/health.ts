@@ -6,8 +6,8 @@ export const meta = CATALOG.health;
 export const def: SimDef = {
   meta,
   lesson: [
-    "健康的生活方式：合理营养、适度运动、规律作息、不吸烟、不酗酒、拒绝毒品、保持心理健康、积极参加集体活动。运动时心率随强度增加；估算最大心率 = 220 − 年龄，有氧锻炼的目标心率约为最大心率的 70 %–85 %，过高不宜持续。",
-    "睡眠对生长发育很重要：学龄儿童每天宜睡 9–12 小时，青少年 8–10 小时（本模型的参考范围，具体请以医生和学校的建议为准）。",
+    "健康的生活方式：合理营养、适度运动、规律作息、不吸烟、不酗酒、拒绝毒品、保持心理健康、积极参加集体活动。运动时心率随强度增加；常用估算（成人）最大心率 = 220 − 年龄，对儿童只是粗略的参考；中等强度运动的心率约为最大心率的 50 %–70 %，较高强度约为 70 %–85 %，过高不宜持续。",
+    "睡眠对生长发育很重要：教育部要求保证每天的睡眠时间：小学生 10 小时、初中生 9 小时、高中生 8 小时（本模型据此给出参考范围，具体请以医生和学校的建议为准）。",
   ],
   links: [{ text: "相关：知识总结（安全 · 健康）", href: "#/science/notes" }],
   params: [
@@ -18,8 +18,8 @@ export const def: SimDef = {
   choices: [{ id: "mode", label: "内容", value: 0, options: [[0, "运动强度"], [1, "睡眠"]] }],
   aspect: 0.5,
   readouts: (s) => s.mode === 0 ? [
-    { label: "最大心率（估算）", value: String(Mo.maxHr(s.age)), unit: "次/分钟" }, { label: "占最大心率", value: fmt(Mo.intensity(s.hr, s.age) * 100, 0), unit: "%" }, { label: "强度", value: Mo.zone(s.hr, s.age) },
-    { label: "有氧锻炼的目标心率", value: `${Mo.target(s.age)[0]} – ${Mo.target(s.age)[1]}`, unit: "次/分钟" }] : [
+    { label: "最大心率（成人常用估算）", value: String(Mo.maxHr(s.age)), unit: "次/分钟" }, { label: "占最大心率", value: fmt(Mo.intensity(s.hr, s.age) * 100, 0), unit: "%" }, { label: "强度", value: Mo.zone(s.hr, s.age) },
+    { label: "中等强度的心率范围（粗略）", value: `${Mo.moderate(s.age)[0]} – ${Mo.moderate(s.age)[1]}`, unit: "次/分钟" }, { label: "较高强度的心率范围（粗略）", value: `${Mo.target(s.age)[0]} – ${Mo.target(s.age)[1]}`, unit: "次/分钟" }] : [
     { label: "推荐的睡眠", value: `${Mo.sleepRange(s.age)[0]} – ${Mo.sleepRange(s.age)[1]}`, unit: "小时" }, { label: "评价", value: Mo.sleepOk(s.age, s.sleep) ? "睡眠充足" : s.sleep < Mo.sleepRange(s.age)[0] ? "睡眠不足" : "睡眠偏多" }],
   draw(c, w, h, s) {
     if (s.mode === 0) {
@@ -33,9 +33,9 @@ export const def: SimDef = {
     }
   },
   tasks: [
-    { id: "aerobic", text: "14 岁：把心率调到有氧锻炼的目标范围内（约 144–175 次/分钟）", check: (s) => s.mode === 0 && s.age === 14 && s.hr >= Mo.target(14)[0] && s.hr <= Mo.target(14)[1] },
+    { id: "aerobic", text: "14 岁：把心率调到较高强度运动的范围内（约 144–175 次/分钟，粗略估算）", check: (s) => s.mode === 0 && s.age === 14 && s.hr >= Mo.target(14)[0] && s.hr <= Mo.target(14)[1] },
     { id: "hard", text: "把心率调到最大心率的 85 % 以上：强度过高，不宜持续", check: (s) => s.mode === 0 && Mo.intensity(s.hr, s.age) >= 0.85 },
-    { id: "sleep", text: "年龄 12 岁：把睡眠时间调到推荐范围（9–12 小时）", check: (s) => s.mode === 1 && s.age === 12 && Mo.sleepOk(12, s.sleep) },
+    { id: "sleep", text: "年龄 12 岁：把睡眠时间调到推荐范围（10–12 小时）", check: (s) => s.mode === 1 && s.age === 12 && Mo.sleepOk(12, s.sleep) },
   ],
   quiz: Mo.quiz,
 };

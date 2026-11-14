@@ -1,7 +1,7 @@
 # Physics lab (物理实验室) — coverage of the junior-high physics course
 
 Page `#/science/physics` (under 科学). Scope guide: 人教版 八年级上 / 下 and 九年级全一册, 2022 课程标准. The texts and numbers are written from memory (no textbook text is copied) and must be proofread by a teacher.
-A simulation = `src/phys/<id>.ts` (screen) + `src/phys/model-<id>.ts` (pure physics, tested alone). Each has a lesson, 2-3 checked tasks (实验任务) and a 5-question quiz made from the model.
+A simulation = `src/phys/<id>.ts` (screen) + `src/phys/model-<id>.ts` (pure physics, tested alone). Every chapter of 人教版 八上 (1-6), 八下 (7-12) and 九年级 (13-22) now has at least one simulation (the topics inside a chapter that are still missing are listed below: the claim is about chapters, not about every section). Each has a lesson, 2-4 checked tasks (实验任务) and a 5-question quiz made from the model.
 
 | Chapter (人教版) | Grade | Topic | Simulation | Status |
 |---|---|---|---|---|
@@ -13,6 +13,7 @@ A simulation = `src/phys/<id>.ts` (screen) + `src/phys/model-<id>.ts` (pure phys
 | 第四章 光现象 | 8上 | 光的色散、色光的混合、不透明物体的颜色 | `dispersion` | built (prism with an exaggerated teaching glass, three lights, object colour) |
 | 第五章 透镜及其应用 | 8上 | 凸透镜 / 凹透镜成像规律、物距像距、照相机 / 投影仪 / 放大镜 | `lens` | built |
 | 第五章 透镜及其应用 | 8上 | 眼睛与眼镜、显微镜与望远镜 | `eye` | built (thin-lens eye with accommodation, myopia / hyperopia and the glasses, microscope magnification and field, Kepler telescope) |
+| 第六章 质量与密度 | 8上 | 质量与天平、密度 ρ = m/V、测量固体和液体的密度（必做实验）、操作顺序造成的误差、密度表、浮沉比较 | `density` | built (balance + water displacement for a solid, beaker + measuring cylinder for a liquid, a wrong order of steps gives a too large density, metals named from the table) |
 | 第七章 力 | 8下 | 弹力、胡克定律、弹簧测力计、重力（g 与星球） | `spring` | built |
 | 第七章 力 | 8下 | 摩擦力（静 / 滑动，压力、粗糙程度）、斜面上的受力 | `friction` | built |
 | 第八章 运动和力 | 8下 | 牛顿第一定律（阻力对运动的影响）、二力平衡的条件 | `newton` | built |
@@ -42,5 +43,7 @@ A simulation = `src/phys/<id>.ts` (screen) + `src/phys/model-<id>.ts` (pure phys
 3. The simulations are 1-D / 2-D idealisations with one slider set; no free-body-diagram editor, no collisions, no random measurement error (a real lab has some; this lab does not).
 4. Circuits: `ohm` solves series, parallel and the rheostat circuit in closed form (the drawing is fixed, only the values are dragged). `circuit` goes one step further: three resistors of 10, 20 and 30 ohm are each left out, put in the series chain or in the parallel group (series chain + one parallel group). Arbitrary networks (bridges, two parallel groups in series, wires dragged from terminal to terminal) are NOT built.
 5. The progress (tasks done, quiz best) is kept on this device only (`learn.phys.v1`), not per child and not synced.
-6. All content (lessons, quiz wording, numbers such as 声速 340 m/s, g = 9.8 N/kg, the filament law of the bulb, the efficiencies of the plants, the carbon figures per kWh, the dip formula of a dipole) is written from memory: a teacher must proofread. The efficiencies, emissions and boundaries of the spectrum bands are school-level round numbers, not reference data.
+6. All content (lessons, quiz wording, numbers such as 声速 340 m/s, g = 10 N/kg (the value used in the 中考 papers; the book gives 9.8 N/kg and says 10 for rough calculation; the lessons say "本实验室取 g = 10 N/kg"; only the Torricelli column uses the standard 9.80665 because 760 mm Hg is defined with it), the filament law of the bulb, the efficiencies of the plants, the carbon figures per kWh, the dip formula of a dipole) is written from memory: a teacher must proofread. The efficiencies, emissions and boundaries of the spectrum bands are school-level round numbers, not reference data.
 7. Real fingers / Apple Pencil on a real iPad (in particular dragging the compass over the field lines of `magfield`, where the canvas stops the page from scrolling), the real sound of the sound lab on a device speaker, and the look on a real screen were not tested.
+8. **Topics of the verification report (`docs/verify/physics.md`) that are still missing** (the sections of a chapter that have no simulation): 第三章 汽化（蒸发及影响蒸发快慢的因素）、液化、升华和凝华、水循环、温度计与摄氏度; 第二章 声音的传播（介质、真空不能传声）、回声与测距、超声波 / 次声波、噪声的控制、声与信息 / 能量; 第四章 光的直线传播（影、小孔成像、光速）、镜面反射与漫反射; 第十五章 摩擦起电、两种电荷、导体与绝缘体; 第十六章 电阻与长度 / 横截面积 / 材料 / 温度的关系、半导体 / 超导; 第十八章 电功与电能表（W = UIt、读电能表）、电热的探究实验; 第十三章 改变内能的两种方式（做功与热传递、内能 / 热量 / 温度的区别）; 第二十章 电磁继电器、扬声器和话筒、交流与直流; 第二十一章 电话、模拟信号与数字信号、卫星和移动通信; 第七章 力的三要素与示意图、力的作用是相互的; 第八章 惯性现象; 长度、时间的测量与误差; the 跨学科实践 tasks. The required experiments of the 课标 that are only partly covered: 凸透镜成像 (no screen to move), 串并联电路中电流 / 电压的规律 (values only), 测量电阻, 动能 / 势能的影响因素 (as a guided experiment), 电热 (the Joule law experiment). Whether an item belongs to the 2022 课标 or to the textbook edition of the user's children was NOT verified against the source documents.
+9. Topics the verification report marks as beyond 初中 (动摩擦因数, 加速度, 劲度系数, Snell's law, thin-lens formula, E_k = mv²/2 ...) are kept as 拓展 content; their grade placement was not changed in this pass (decision of the user: grade placement is out of scope).

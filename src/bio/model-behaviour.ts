@@ -2,7 +2,7 @@
 import { makeQ, numQ, pick, type Q } from "../phys/qtools";
 export const CLASSES = ["先天性行为", "学习行为", "社会行为"];
 /** [behaviour, class index] */
-export const ITEMS: [string, number][] = [["蜘蛛结网", 0], ["母鸡孵卵", 0], ["蜜蜂采蜜", 0], ["黑猩猩用树枝钓白蚁", 1], ["小狗学算算术", 1], ["鹦鹉学舌", 1], ["蚂蚁分工合作", 2], ["狒狒的首领与等级", 2], ["蜜蜂跳舞传递信息", 2], ["大山雀偷喝牛奶", 1]];
+export const ITEMS: [string, number][] = [["蜘蛛结网", 0], ["母鸡孵卵", 0], ["蜜蜂采蜜", 0], ["黑猩猩用树枝钓白蚁", 1], ["小狗算算术", 1], ["鹦鹉学舌", 1], ["蚂蚁分工合作", 2], ["狒狒的首领与等级", 2], ["蜜蜂跳舞传递信息", 2], ["大山雀偷喝牛奶", 1]];
 export const ANIMALS: [string, number][] = [["蚯蚓", 0.01], ["小鼠", 0.05], ["黑猩猩", 0.2]];
 /** error rate (%) after n trials */
 export const errors = (n: number, k: number) => 5 + 95 * Math.exp(-k * n);

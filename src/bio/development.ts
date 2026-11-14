@@ -6,8 +6,8 @@ export const meta = CATALOG.development;
 export const def: SimDef = {
   meta,
   lesson: [
-    "人的生命从受精卵开始：精子与卵细胞在输卵管内结合形成受精卵，受精卵分裂形成胚泡，移动到子宫内壁着床；约 8 周后称为胎儿。胎儿通过胎盘和脐带从母体获得营养物质和氧气，并排出废物。怀孕约 40 周（280 天），胎儿从母体产出，叫分娩。",
-    "青春期是身体发育的重要时期：身高和体重迅速增加，神经系统、心脏和肺等器官的功能明显增强，出现第二性征，性器官迅速发育。要保持健康的心态，正确对待身体和心理的变化，合理营养、规律作息。",
+    "人的生命从受精卵开始：精子与卵细胞在输卵管内结合形成受精卵，受精卵分裂形成胚泡，移动到子宫内壁着床；约 8 周后称为胎儿。胎儿通过胎盘和脐带从母体获得营养物质和氧气，并排出废物。怀孕约 40 周（280 天，孕周从末次月经算起），胎儿从母体产出，叫分娩。图表中 12 周以前的身长是头臀长，之后是身长（头到脚跟）。",
+    "青春期是身体发育的重要时期：身高和体重迅速增加，神经系统、心脏和肺等器官的功能明显增强，出现第二性征，性器官迅速发育。身高突增是青春期最明显的特点：女孩一般约从 9～10 岁开始，男孩约从 11～12 岁开始，男孩比女孩晚约两年，每年可长高 6～8 厘米。图中的身高是按各年龄的平均值画出的示意曲线，每个人的情况不同。要保持健康的心态，正确对待身体和心理的变化，合理营养、规律作息。",
   ],
   links: [{ text: "相关：知识总结（生物）", href: "#/science/notes" }],
   params: [
@@ -19,7 +19,7 @@ export const def: SimDef = {
   aspect: 0.6,
   readouts: (s) => s.mode === 0 ? [
     { label: "阶段", value: Mo.phase(s.week) }, { label: "身长", value: fmt(Mo.lengthAt(s.week), 0), unit: "mm" }, { label: "质量", value: fmt(Mo.massAt(s.week), 0), unit: "g" }] : [
-    { label: "身高", value: fmt(Mo.height(s.age, s.sex), 0), unit: "cm" }, { label: "每年长高", value: fmt(Mo.velocity(s.age, s.sex), 1), unit: "cm" }, { label: "是否处于突增期", value: Mo.velocity(s.age, s.sex) > 9 ? "是" : "否" }],
+    { label: "身高", value: fmt(Mo.height(s.age, s.sex), 0), unit: "cm" }, { label: "每年长高", value: fmt(Mo.velocity(s.age, s.sex), 1), unit: "cm" }, { label: "是否处于突增期", value: Mo.inSpurt(s.age, s.sex) ? "是" : "否" }],
   draw(c, w, h, s) {
     if (s.mode === 0) {
       const r = 8 + Math.cbrt(Mo.massAt(s.week)) * 9;
@@ -37,7 +37,7 @@ export const def: SimDef = {
   tasks: [
     { id: "birth", text: "怀孕满 40 周：胎儿的质量达到 3000 g 以上", check: (s) => s.mode === 0 && Mo.massAt(s.week) >= 3000 },
     { id: "fetus", text: "找到胚胎发育为胎儿的时间（怀孕第 8 周）", check: (s) => s.mode === 0 && s.week === 8 },
-    { id: "spurt", text: "选择女孩，找到身高突增最快的年龄（约 12 岁）", check: (s) => s.mode === 1 && s.sex === 0 && Math.abs(s.age - 12) <= 0.5 },
+    { id: "spurt", text: "选择女孩，找到身高突增最快的年龄（约 11 岁）", check: (s) => s.mode === 1 && s.sex === 0 && Math.abs(s.age - 11) <= 0.5 },
   ],
   quiz: Mo.quiz,
 };

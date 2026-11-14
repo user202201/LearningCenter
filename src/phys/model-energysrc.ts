@@ -32,14 +32,15 @@ export const total = (plant: number, boost: number) => steps(plant, boost).reduc
 export const weakest = (plant: number) => { const e = PLANTS[plant].steps.map((s) => s[1]); return PLANTS[plant].steps[e.indexOf(Math.min(...e))][0]; };
 export const MJ_PER_KWH = 3.6;
 /** the electricity mix: shares in percent of coal, hydro, nuclear (the rest is wind + solar; if they add up to more than 100 they are scaled down) */
-export const CO2 = { coal: 0.9, hydro: 0.02, nuclear: 0.015, wind: 0.03 };   // kg CO2 per kWh over the whole life cycle (rounded)
+export const CO2 = { coal: 0.9, hydro: 0.02, nuclear: 0.015, wind: 0.03 };   // (the last one stands for wind + solar together: 示意值)   // kg CO2 per kWh over the whole life cycle (rounded)
 export function mix(coal: number, hydro: number, nuclear: number) {
   const sum = coal + hydro + nuclear, k = sum > 100 ? 100 / sum : 1;
   const c = coal * k, h = hydro * k, n = nuclear * k, w = Math.max(0, 100 - c - h - n);
   return { coal: c, hydro: h, nuclear: n, wind: w, renew: h + w, co2: (c * CO2.coal + h * CO2.hydro + n * CO2.nuclear + w * CO2.wind) / 100 };
 }
 export function quiz(rng: () => number): Q[] {
-  const ri = Math.floor(rng() * 9), pi = Math.floor(rng() * 9);
+  const withRenew = SOURCES.map((x, i) => (x.renew === null ? -1 : i)).filter((i) => i >= 0);   // 电能 / 氢能 are neither renewable nor not: not asked
+  const ri = withRenew[Math.floor(rng() * withRenew.length)], pi = Math.floor(rng() * SOURCES.length);
   const [a, b] = pick(rng, [[40, 90], [45, 98], [35, 95], [20, 97], [90, 98]]);
   const MJ = pick(rng, [36, 72, 18, 7.2, 108]), N = pick(rng, [10, 100, 250, 1000]);
   return [

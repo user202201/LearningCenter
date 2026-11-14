@@ -8,7 +8,7 @@ export const def: SimDef = {
   meta,
   lesson: [
     "物体发生弹性形变时产生的力叫弹力。在弹性限度内，弹簧的伸长量与所受的拉力成正比：F = kx。弹簧测力计就是根据这一原理制成的；超过弹性限度，弹簧不能恢复原长。",
-    "重力是由于地球的吸引而使物体受到的力，方向竖直向下，大小 G = mg。g 约为 9.8 N/kg，在月球上约为地球的六分之一。质量是物体所含物质的多少，不随位置改变；重力会随位置改变。",
+    "重力是由于地球的吸引而使物体受到的力，方向竖直向下，大小 G = mg。地球上 g = 9.8 N/kg，粗略计算时取 10 N/kg，本实验室取 g = 10 N/kg；月球上的 g 约为地球上的六分之一。质量是物体所含物质的多少，不随位置改变；重力会随位置改变。",
   ],
   formulas: ["F=kx", "G=mg"],
   params: [
@@ -46,7 +46,7 @@ export const def: SimDef = {
     if (Mo.beyondLimit(x)) txt(c, "x > limit", 200, hh - 8, 20, COL.red);
   },
   tasks: [
-    { id: "newton10", text: "在地球上使弹簧测力计的示数约为 5 N（4.9 N）", check: (s) => s.planet === 0 && Math.abs(Mo.weight(s.m, 9.8) - 4.9) < 0.01 },
+    { id: "newton10", text: "在地球上使弹簧测力计的示数约为 5 N", check: (s) => s.planet === 0 && Math.abs(Mo.weight(s.m, 10) - 5) < 0.01 },
     { id: "moon", text: "把同样质量的物体放到月球上：先在地球上选质量 1 kg，再选月球，读出示数约为 1.6 N", check: (s) => s.planet === 1 && s.m === 1 },
     { id: "limit", text: "使弹簧的伸长量超过弹性限度（0.3 m），观察提示", check: (s) => Mo.beyondLimit(Mo.extension(Mo.weight(s.m, Mo.GRAV[s.planet]), s.k)) },
   ],

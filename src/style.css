@@ -2865,3 +2865,7 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .sci-refs .sci-ref.sp-card > .sp-ico, .sci-refs .sci-ref.chem-homecard > .sci-ico, .sci-refs .sci-ref > .sci-ref-ico, .sci-refs .sci-ref > .sp-ico, .sci-refs .sci-ref > .sci-ico { position: absolute; right: 12px; top: 50%; left: auto; width: 44px; height: 44px; transform: translateY(-50%); display: block; }
 .sci-refs .sci-ref > .sci-ref-ico svg, .sci-refs .sci-ref > .sp-ico svg, .sci-refs .sci-ref > .sci-ico svg { width: 100%; height: 100%; display: block; }
 .sci-refs .sci-ref > b { font-size: 18px; line-height: 1.3; }
+
+/* the relaxed game (science cards): the question card, the choices and the explanation keep their size (the card is not squeezed over its text when the
+   explanation appears: a long English / French question stayed at full size inside a shrunken card); a tall page scrolls inside .mbody */
+.mathgame.relaxed .mq, .mathgame.relaxed .mchoices { flex: none; }

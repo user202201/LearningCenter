@@ -11,7 +11,7 @@ const path = require('path');
 const OUT = process.env.D || 'tests/out/physlab/';
 fs.mkdirSync(OUT, { recursive: true });
 
-const IDS = ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc'];
+const IDS = ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc', 'density'];
 const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
 const rel = (a, b, tol = 1e-3) => Math.abs(a - b) <= tol * Math.max(1, Math.abs(b));
 
@@ -33,7 +33,7 @@ const SOLVE = {
   refraction: { aw45: { pair: 0, ti: 45 }, tir: { pair: 2, ti: 60 }, normal: { ti: 0 } },
   lens: { camera: { type: 0, f: 10, u: 30 }, projector: { u: 15 }, magnifier: { u: 5 }, nofocus: { u: 10 } },
   spring: { newton10: { planet: 0, m: 0.5 }, moon: { planet: 1, m: 1 }, limit: { planet: 0, m: 1.5, k: 10 } },
-  friction: { uniform: { alpha: 0, moving: 1, surface: 1, m: 10, F: 29 }, static: { alpha: 0, moving: 0, surface: 1, m: 5, F: 10 }, slide: { surface: 0, alpha: 30, F: 0, moving: 0 } },
+  friction: { uniform: { alpha: 0, moving: 1, surface: 1, m: 10, F: 30 }, static: { alpha: 0, moving: 0, surface: 1, m: 5, F: 10 }, slide: { surface: 0, alpha: 30, F: 0, moving: 0 } },
   newton: { smooth: { mode: 0, surf: 4, t: 6 }, towel: { mode: 0, surf: 0, v0: 2 }, balance: { mode: 1, F1: 5, F2: 5, dir: 180, off: 0 }, turn: { mode: 1, F1: 5, F2: 5, dir: 180, off: 2 } },
   pressure: { water1: { mode: 0, liq: 0, h: 20 }, mercury: { mode: 1, alt: 0, tilt: 30 }, nail: { mode: 2, F: 100, S: 5 } },
   buoyancy: { suspend: { mode: 1, liq: 1, rb: 1 }, half: { mode: 0, frac: 0.5 }, float: { mode: 1, liq: 1, rb: 0.4 }, sink: { mode: 1, liq: 1, rb: 2 } },
@@ -53,10 +53,11 @@ const SOLVE = {
   home: { blow: { mode: 0, a3: 1, a4: 1 }, big: { mode: 0, a3: 1, a4: 1, fuse: 3 }, mat: { mode: 1, touch: 0, stand: 1 }, pen: { mode: 2, hole: 1, hold: 1 } },
   magfield: { near: { mode: 0, src: 0, pol: 1, cx: 430, cy: 200 }, solenoid: { mode: 0, src: 1, cur: 1 }, oersted: { mode: 1, dirI: -1, I: 5, d: 2 }, dip: { mode: 2, lat: 85 } },
   emwave: { visible: { mode: 0, lf: 14.7 }, fm: { mode: 0, lf: 8 }, moon: { mode: 1, dest: 3, med: 0 }, fiber: { mode: 1, dest: 1, med: 1 } },
+  density: { copper: { mode: 0, mat: 2, order: 0, V: 20 }, wrongorder: { mode: 0, mat: 0, order: 1, V: 10 }, alcohol: { mode: 1, liq: 0, order: 0, VL: 40 }, wax: { mode: 0, mat: 5 } },
   energysrc: { wind: { mode: 0, src: 5, guess: 1 }, nuclear: { mode: 0, src: 3, guess: 2 }, improve: { mode: 1, plant: 0, boost: 10 }, mix: { mode: 2, coal: 30, hydro: 20, nuc: 10 } },
 };
 // the quiz kinds: the right answer recomputed from the parameters `p` by a formula written here (not the one in the model); numbers only, the text kinds are listed below
-const g = 9.8, deg = (r) => (r * 180) / Math.PI, rad = (d) => (d * Math.PI) / 180;
+const g = 10, deg = (r) => (r * 180) / Math.PI, rad = (d) => (d * Math.PI) / 180;
 const lensNature = (f, u) => (u < f ? '正立、放大的虚像（放大镜）' : u === f ? '不成像（折射光线平行射出）' : u === 2 * f ? '倒立、等大的实像' : u < 2 * f ? '倒立、放大的实像（投影仪）' : '倒立、缩小的实像（照相机）');
 const lensTool = (f, u) => (u < f ? '放大镜' : u < 2 * f ? '投影仪' : '照相机');
 const EXPECT = {
@@ -66,7 +67,7 @@ const EXPECT = {
   reflection: { theta_r: ([a]) => a, from_mirror: ([b]) => 90 - b, between: ([c]) => 2 * c, img_sep: ([d]) => 2 * d, img_speed: ([v]) => 2 * v },
   refraction: { snell: ([ti, n]) => deg(Math.asin(Math.sin(rad(ti)) / n)), critical: ([n]) => deg(Math.asin(1 / n)), speed: ([n]) => 3 / n },
   lens: { v: ([f, u]) => (u * f) / (u - f), magnif: ([f, u]) => Math.abs((u * f) / (u - f) / u), f_from_2f: ([u]) => u / 2 },
-  spring: { G: ([m]) => 9.8 * m, moon: ([m]) => 1.6 * m, hooke: ([F, x, F2]) => (F2 * x) / F, mass: ([G]) => G / 9.8, k: ([F, x]) => F / x },
+  spring: { G: ([m]) => 10 * m, moon: ([m]) => 1.6 * m, hooke: ([F, x, F2]) => (F2 * x) / F, mass: ([G]) => G / 10, k: ([F, x]) => F / x },
   friction: { fk: ([m, mu]) => mu * m * g, static: ([F]) => F, angle: ([mu]) => deg(Math.atan(mu)), normal: ([m, a]) => m * g * Math.cos(rad(a)), uniform: ([m, mu]) => mu * m * g },
   newton: { dist: ([mu, v]) => (v * v) / (2 * mu * g), time: ([mu, v]) => v / (mu * g), balance: ([F]) => F, net: ([a, b]) => a - b },
   pressure: { liquid: ([h]) => (1000 * g * h) / 1000, solid: ([F, S]) => F / (S * 1e-4) / 1000, water_col: () => 101325 / (1000 * g), depth: ([h]) => h },
@@ -87,11 +88,12 @@ const EXPECT = {
   home: { I: ([P]) => P / 220, Ptot: ([a, b]) => a + b, body: ([R]) => (220 / (R * 1000)) * 1000 },
   magfield: { Bwire: ([I, d]) => ((2e-7 * I) / (d / 100)) * 1e6, dip: ([l]) => deg(Math.atan(2 * Math.tan(rad(l)))) },
   emwave: { wavelength: ([f]) => 300 / f, freq: ([w]) => 300 / w, delay: ([d]) => (d * 1000) / 3e8 },
+  density: { rho: ([m, V]) => m / V, displace: ([a, b]) => b - a },
   energysrc: { chain: ([a, b]) => (a * b) / 100, kwh: ([MJ]) => MJ / 3.6, co2: ([N]) => 0.9 * N },
 };
 const TEXT_KINDS = {
   sound: ['concept'], heating: ['concept'], refraction: ['toward', 'tir'], lens: ['nature', 'tool'], newton: ['first'], pressure: ['pratio'], buoyancy: ['state'], lever: ['kind', 'tilt'], specificheat: ['which', 'property'], em: ['core', 'motor_rev', 'induction', 'turns'],
-  dispersion: ['faster', 'mix', 'obj', 'primary'], eye: ['myopia'], fluid: ['bern', 'connected'], molecule: ['gap', 'force_kind', 'state', 'diffusion'], engine: ['stroke', 'conv'], circuit: ['home'], bulbpower: ['bright'], home: ['fuse', 'safe'], magfield: ['oersted', 'lines', 'earth'], emwave: ['vac', 'band'], energysrc: ['renew', 'primary'],
+  dispersion: ['faster', 'mix', 'obj', 'primary'], eye: ['myopia'], fluid: ['bern', 'connected'], molecule: ['gap', 'force_kind', 'state', 'diffusion'], engine: ['stroke', 'conv'], circuit: ['home'], bulbpower: ['bright'], home: ['fuse', 'safe'], magfield: ['oersted', 'lines', 'earth'], emwave: ['vac', 'band'], energysrc: ['renew', 'primary'], density: ['ident', 'float', 'order'],
 };
 const numOf = (s) => parseFloat(String(s).replace('−', '-'));
 const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim()); return m ? m[1].length : 0; };
@@ -106,7 +108,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
   // =====================================================================================  A. THE MODELS
   {
     const r = await page.evaluate(async () => {
-      const L = {}; for (const n of ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc']) L[n] = await import(`/src/phys/model-${n}.ts`);
+      const L = {}; for (const n of ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc', 'density']) L[n] = await import(`/src/phys/model-${n}.ts`);
       const rnd = (a, b) => a + Math.random() * (b - a), pick = (a) => a[Math.floor(Math.random() * a.length)];
       const o = {}; const M = L;
       // motion
@@ -142,23 +144,23 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
       o.heating.monoBad = mono; o.heating.flatBad = flatBad;
       let sf = 0; for (let k = 0; k < 100; k++) { const P = rnd(100, 1000), m = rnd(0.1, 0.5), tt = rnd(0, 1200), mode = Math.floor(rnd(0, 3)); const f = H.solidFraction(mode, P, m, tt); if (!(f >= -1e-9 && f <= 1 + 1e-9)) sf++; } o.heating.sfBad = sf;
       // spring
-      const Sp = M.spring; o.spring = { G: Sp.weight(1, 9.8), moon: Sp.weight(1, 1.6), x: Sp.extension(4.9, 40), lim: [Sp.beyondLimit(0.3), Sp.beyondLimit(0.31)], grav: Sp.GRAV };
+      const Sp = M.spring; o.spring = { G: Sp.weight(1, 10), moon: Sp.weight(1, 1.6), x: Sp.extension(5, 40), lim: [Sp.beyondLimit(0.3), Sp.beyondLimit(0.31)], grav: Sp.GRAV };
       // friction
       const Fr = M.friction; let frb = 0;
-      for (let i = 0; i < 800; i++) { const m = Math.floor(rnd(1, 21)), Fp = rnd(0, 100), al = pick([0, 5, 10, 15, 20, 30, 45]), su = pick([0, 1, 2]), mv = pick([0, 1]); const r = Fr.solve(m, Fp, al, su, mv); const N = m * 9.8 * Math.cos(al * Math.PI / 180), gd = m * 9.8 * Math.sin(al * Math.PI / 180), mk = [0.05, 0.3, 0.8][su];
+      for (let i = 0; i < 800; i++) { const m = Math.floor(rnd(1, 21)), Fp = rnd(0, 100), al = pick([0, 5, 10, 15, 20, 30, 45]), su = pick([0, 1, 2]), mv = pick([0, 1]); const r = Fr.solve(m, Fp, al, su, mv); const N = m * 10 * Math.cos(al * Math.PI / 180), gd = m * 10 * Math.sin(al * Math.PI / 180), mk = [0.05, 0.3, 0.8][su];
         if (Math.abs(r.N - N) > 1e-9 || Math.abs(r.gDown - gd) > 1e-9) frb++;
         const net = Fp - gd + r.f; if (r.kind === 'static') { if (Math.abs(net) > 1e-9 || Math.abs(r.f) > 1.25 * mk * N + 1e-9 || r.a !== 0) frb++; } else { if (Math.abs(Math.abs(r.f) - mk * N) > 1e-9 || Math.abs(m * r.a - net) > 1e-9) frb++; } }
-      o.friction = { bad: frb, h: [Fr.solve(5, 10, 0, 1, 0), Fr.solve(5, 30, 0, 1, 0), Fr.solve(10, 29.4, 0, 1, 1), Fr.solve(5, 0, 30, 0, 0)], maxAngle: Fr.maxAngle(1) };
+      o.friction = { bad: frb, h: [Fr.solve(5, 10, 0, 1, 0), Fr.solve(5, 30, 0, 1, 0), Fr.solve(10, 30, 0, 1, 1), Fr.solve(5, 0, 30, 0, 0)], maxAngle: Fr.maxAngle(1) };
       // newton
       const Nw = M.newton; let nb = 0;
-      for (let i = 0; i < 200; i++) { const v0 = rnd(1, 3), mu = pick([0.5, 0.25, 0.1, 0.04]); let x = 0, v = v0, tt = 0; const dt = 1e-4; while (v > 0) { v -= mu * 9.8 * dt; x += v * dt; tt += dt; } if (Math.abs(x - Nw.stopDistance(v0, mu)) > 2e-3 || Math.abs(tt - Nw.stopTime(v0, mu)) > 2e-3) nb++; const a = Nw.car(v0, mu, Nw.stopTime(v0, mu) * 0.5); if (Math.abs(a.s - (v0 * Nw.stopTime(v0, mu) * 0.5 - 0.5 * mu * 9.8 * (Nw.stopTime(v0, mu) * 0.5) ** 2)) > 1e-9) nb++; }
+      for (let i = 0; i < 200; i++) { const v0 = rnd(1, 3), mu = pick([0.5, 0.25, 0.1, 0.04]); let x = 0, v = v0, tt = 0; const dt = 1e-4; while (v > 0) { v -= mu * 10 * dt; x += v * dt; tt += dt; } if (Math.abs(x - Nw.stopDistance(v0, mu)) > 2e-3 || Math.abs(tt - Nw.stopTime(v0, mu)) > 2e-3) nb++; const a = Nw.car(v0, mu, Nw.stopTime(v0, mu) * 0.5); if (Math.abs(a.s - (v0 * Nw.stopTime(v0, mu) * 0.5 - 0.5 * mu * 10 * (Nw.stopTime(v0, mu) * 0.5) ** 2)) > 1e-9) nb++; }
       o.newton = { bad: nb, inf: [Nw.stopDistance(2, 0), Nw.car(2, 0, 50)], bal: [Nw.twoForces(5, 5, 180, 0), Nw.twoForces(5, 5, 180, 2), Nw.twoForces(5, 3, 180, 0), Nw.twoForces(3, 4, 90, 0), Nw.twoForces(5, 5, 0, 0)] };
       // pressure
       const Pr = M.pressure; o.pressure = { l: Pr.liquidP(1000, 0.2), hg: Pr.liquidP(13600, 0.76), solid: [Pr.solidP(100, 50), Pr.solidP(100, 5)], atm: [Pr.atmAt(0), Pr.atmAt(5500) / Pr.atmAt(0), Pr.atmAt(8000) / Pr.atmAt(0)], hgmm: Pr.mercuryMm(101325) };
       // buoyancy
       const Bu = M.buoyancy; let bb = 0;
       for (let i = 0; i < 1000; i++) { const rb = rnd(200, 3000), rl = pick([800, 1000, 1200, 1400]), V = Math.floor(rnd(50, 200)), mode = pick([0, 1]), fr = pick([0, 0.25, 0.5, 0.75, 1]); const r = Bu.solve(rb, rl, V, mode, fr); const Vm = V * 1e-6;
-        if (Math.abs(r.F - rl * 9.8 * Vm * r.frac) > 1e-12 || Math.abs(r.Gdisp - r.F) > 1e-12 || r.frac < 0 || r.frac > 1) bb++;
+        if (Math.abs(r.F - rl * 10 * Vm * r.frac) > 1e-12 || Math.abs(r.Gdisp - r.F) > 1e-12 || r.frac < 0 || r.frac > 1) bb++;
         if (mode === 1) { if (r.state === 'float' && (rb >= rl || Math.abs(r.F - r.G) > 1e-9)) bb++; if (r.state === 'sink' && (rb <= rl || r.F >= r.G || Math.abs(r.bottomN - (r.G - r.F)) > 1e-9)) bb++; if (r.state === 'suspend' && Math.abs(r.F - r.G) > 0.5 * 9.8 * Vm + 1e-9) bb++; }
         else if (Math.abs(r.Tscale - (r.G - r.F)) > 1e-12) bb++; }
       o.buoyancy = { bad: bb, a: Bu.solve(600, 1000, 100, 1, 0), b: Bu.solve(1000, 1000, 100, 1, 0), c: Bu.solve(2700, 1000, 100, 1, 0), d: Bu.solve(600, 1000, 100, 0, 0.5) };
@@ -167,7 +169,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
       for (let i = 0; i < 40; i++) { const L = rnd(0.5, 2), th = rnd(5, 80), m = rnd(0.5, 5), tt = rnd(0, 10); const e = En.pendulumEnergy(m, L, th, tt); const drift = Math.abs(e.Ek + e.Ep - e.E0) / e.E0; maxDrift = Math.max(maxDrift, drift); if (drift > 5e-5) eb++; }
       o.energy = { eb, maxDrift, work: [En.work(50, 4), En.power(200, 5)] };
       // pendulum period for a small angle: first time omega changes sign = half period
-      { let t0 = 0, prev = En.pendulum(5, 1, 0.5).omega; for (let tt = 0.5; tt < 3; tt += 0.01) { const w = En.pendulum(5, 1, tt).omega; if (prev < 0 && w >= 0) { t0 = tt; break; } prev = w; } o.energy.halfPeriod = t0; o.energy.expect = Math.PI * Math.sqrt(1 / 9.8); }
+      { let t0 = 0, prev = En.pendulum(5, 1, 0.5).omega; for (let tt = 0.5; tt < 3; tt += 0.01) { const w = En.pendulum(5, 1, tt).omega; if (prev < 0 && w >= 0) { t0 = tt; break; } prev = w; } o.energy.halfPeriod = t0; o.energy.expect = Math.PI * Math.sqrt(1 / 10); }
       let tb = 0; for (let i = 0; i < 200; i++) { const H0 = Math.floor(rnd(2, 11)), m = rnd(0.5, 5), x = rnd(0, 1); const e = En.trackEnergy(m, H0, x, 0); if (Math.abs(e.Ek + e.Ep - e.E0) > 1e-9 || Math.abs(0.5 * m * e.v * e.v - e.Ek) > 1e-9 || e.h > H0 + 1e-9 || !e.reached) tb++; const l = En.trackEnergy(m, H0, x, 0.2); if (l.reached && Math.abs(l.Ek + l.Ep + l.Eloss - l.E0) > 1e-9) tb++; }
       o.energy.trackBad = tb; o.energy.track = [En.trackH(8, 0), En.trackH(8, 1 / 3), En.trackH(8, 2 / 3), En.trackH(8, 1)];
       // lever
@@ -231,16 +233,16 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     ok(he.start.T === -20 && he.meltEnd[0].phase === 0 && he.meltEnd[1].T === 0 && he.meltEnd[1].phase === 1 && he.meltEnd[2].phase === 2 && he.boil[0].phase === 2 && he.boil[1].T === 100 && he.boil[1].phase === 3 && he.boil[2].phase === 3 && he.boil[3].phase === 4 && he.boil[3].T > 100, 'A heating: 0.1 kg ice at 400 W: solid until 10.5 s, melting to 94 s at 0 degrees, water, boiling from 199 s to 764 s at 100 degrees, steam');
     ok(near(he.plateau[0], 83.5) && near(he.plateau[1], 83.5) && he.plateau[2] === 0 && he.wax[0].phase === 0 && he.wax[1].phase === 1 && he.wax[2].phase === 2 && he.monoBad === 0 && he.flatBad === 0 && he.sfBad === 0 && near(he.heat, 42000) && he.cool[0].phase === 2 && he.cool[1].T === 0 && he.cool[2].phase === 0 && he.cool[2].T < 0, 'A heating: plateau length = lambda m / P, wax has no plateau (strictly rising), curves monotonic (rising / cooling), flat part exactly 0 degrees (120 random)');
     const sp = r.spring;
-    ok(near(sp.G, 9.8) && near(sp.moon, 1.6) && near(sp.x, 0.1225) && sp.lim[0] === false && sp.lim[1] === true && sp.grav.join() === '9.8,1.6,3.7,24.8', 'A spring: G = m g (earth, moon), Hooke x = F / k, elastic limit');
+    ok(near(sp.G, 10) && near(sp.moon, 1.6) && near(sp.x, 0.125) && sp.lim[0] === false && sp.lim[1] === true && sp.grav.join() === '10,1.6,3.7,24.8', 'A spring: G = m g (earth, moon), Hooke x = F / k, elastic limit');
     const fr = r.friction;
-    ok(fr.bad === 0 && fr.h[0].kind === 'static' && near(fr.h[0].f, -10) && fr.h[1].kind === 'kinetic' && near(fr.h[1].f, -14.7) && near(fr.h[1].a, (30 - 14.7) / 5) && near(fr.h[2].a, 0, 1e-9) && fr.h[3].state === 'down' && near(fr.maxAngle, 45), 'A friction: force balance, |static f| <= 1.25 mu N, kinetic f = mu N, m a = net force, slides down on ice at 30 deg, max angle atan(mu) (800 random)');
+    ok(fr.bad === 0 && fr.h[0].kind === 'static' && near(fr.h[0].f, -10) && fr.h[1].kind === 'kinetic' && near(fr.h[1].f, -15) && near(fr.h[1].a, (30 - 15) / 5) && near(fr.h[2].a, 0, 1e-9) && fr.h[3].state === 'down' && near(fr.maxAngle, 45), 'A friction: force balance, |static f| <= 1.25 mu N, kinetic f = mu N, m a = net force, slides down on ice at 30 deg, max angle atan(mu) (800 random)');
     const nw = r.newton;
     ok(nw.bad === 0 && nw.inf[0] === Infinity && nw.inf[1].v === 2 && !nw.inf[1].stopped, 'A newton: stopping distance and time agree with a numeric integration (200 random); smooth surface never stops');
     ok(nw.bal[0].balanced && !nw.bal[1].balanced && nw.bal[1].couple > 0 && !nw.bal[2].balanced && near(nw.bal[2].mag, 2) && near(nw.bal[3].mag, 5) && !nw.bal[4].balanced && near(nw.bal[4].mag, 10), 'A newton: two forces balanced only when equal, opposite and on the same line; 3-4-5; couple when the lines are apart');
     const pr = r.pressure;
-    ok(near(pr.l, 1960) && near(pr.hg, 101292.8, 0.1) && near(pr.solid[0], 20000) && near(pr.solid[1], 200000) && near(pr.atm[0], 101325) && near(pr.atm[1], 0.521, 0.01) && pr.atm[2] < 0.4 && near(pr.hgmm, 760.2, 0.2), 'A pressure: p = rho g h (1960 Pa), p = F/S, 760 mm of mercury, pressure falls with altitude');
+    ok(near(pr.l, 2000) && near(pr.hg, 103360, 0.1) && near(pr.solid[0], 20000) && near(pr.solid[1], 200000) && near(pr.atm[0], 101325) && near(pr.atm[1], 0.521, 0.01) && pr.atm[2] < 0.4 && near(pr.hgmm, 760, 0.3), 'A pressure: p = rho g h (2000 Pa, g = 10 N/kg), p = F/S, 760 mm of mercury, pressure falls with altitude');
     const bu = r.buoyancy;
-    ok(bu.bad === 0 && bu.a.state === 'float' && near(bu.a.frac, 0.6) && near(bu.a.F, bu.a.G) && bu.b.state === 'suspend' && bu.c.state === 'sink' && bu.c.bottomN > 0 && near(bu.d.Tscale, bu.d.G - bu.d.F) && near(bu.d.F, 1000 * 9.8 * 100e-6 * 0.5), 'A buoyancy: Archimedes F = rho g V displaced = G displaced; float F = G, suspend, sink (1000 random combinations)');
+    ok(bu.bad === 0 && bu.a.state === 'float' && near(bu.a.frac, 0.6) && near(bu.a.F, bu.a.G) && bu.b.state === 'suspend' && bu.c.state === 'sink' && bu.c.bottomN > 0 && near(bu.d.Tscale, bu.d.G - bu.d.F) && near(bu.d.F, 1000 * 10 * 100e-6 * 0.5), 'A buoyancy: Archimedes F = rho g V displaced = G displaced; float F = G, suspend, sink (1000 random combinations)');
     const en = r.energy;
     ok(en.eb === 0 && en.maxDrift < 5e-5 && near(en.halfPeriod, en.expect, 0.02) && en.trackBad === 0 && near(en.work[0], 200) && near(en.work[1], 40), 'A energy: pendulum Ek + Ep = E0 within 5e-5 (40 random, max drift ' + en.maxDrift.toExponential(1) + '), half period = pi sqrt(L/g), track Ek + Ep (+ loss) = E0');
     ok(near(en.track[0], 8) && near(en.track[1], 0, 1e-9) && en.track[2] < 8 && near(en.track[3], 0, 1e-9), 'A energy: the track starts at H0, has a valley and a lower hill');
@@ -260,7 +262,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
   // ---- the eleven models added later (rule 57 second pass): hand values and independent calculations ----
   {
     const r = await page.evaluate(async () => {
-      const M = {}; for (const n of ['dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc']) M[n] = await import(`/src/phys/model-${n}.ts`);
+      const M = {}; for (const n of ['dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc', 'density']) M[n] = await import(`/src/phys/model-${n}.ts`);
       const rnd = (a, b) => a + Math.random() * (b - a), pick = (a) => a[Math.floor(Math.random() * a.length)];
       const o = {};
       // dispersion: samples of the prism, the mixing names
@@ -392,7 +394,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
   {
     const r = await page.evaluate(async () => {
       const out = {}; const mulberry32 = (await import('/src/phys/qtools.ts')).mulberry32;
-      for (const n of ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc']) {
+      for (const n of ['motion', 'sound', 'heating', 'reflection', 'refraction', 'lens', 'spring', 'friction', 'newton', 'pressure', 'buoyancy', 'energy', 'lever', 'pulley', 'specificheat', 'ohm', 'em', 'dispersion', 'eye', 'fluid', 'molecule', 'engine', 'circuit', 'bulbpower', 'home', 'magfield', 'emwave', 'energysrc', 'density']) {
         const M = await import(`/src/phys/model-${n}.ts`); const list = []; const errors = [];
         for (let seed = 1; seed <= 300; seed++) { try { list.push(M.quiz(mulberry32(seed))); } catch (e) { errors.push(String(e)); } }
         out[n] = { list, errors };
@@ -455,6 +457,47 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     ok(tx2.bad === 0 && tx2.n > 1000, `A quiz: colour mixing / object colour, molecular force, engine stroke, highest-frequency band, renewable / primary answers agree with independent lists (${tx2.n} questions)`);
   }
 
+
+  // ---- density (rule 57): the model against independent arithmetic; the quizzes of energysrc / lever no longer have one constant answer; g = 10 N/kg everywhere ----
+  {
+    const r = await page.evaluate(async () => {
+      const mulberry32 = (await import('/src/phys/qtools.ts')).mulberry32; const D = await import('/src/phys/model-density.ts'), S = await import('/src/phys/model-energysrc.ts'), Lv = await import('/src/phys/model-lever.ts');
+      const o = { bad: 0, n: 0, msgs: [] }; const NAMES = ['铝块', '铁块', '铜块', '银块', '铅块'], RHO = [2.7, 7.9, 8.9, 10.5, 11.3];
+      const bad = (m) => { o.bad++; if (o.msgs.length < 4) o.msgs.push(m); };
+      for (const [, , rho] of D.SOLIDS) for (const V of [5, 12, 20, 33, 50]) for (const V1 of [30, 40, 50]) for (const order of [0, 1]) {
+        o.n++; const r = D.solid(rho, V, V1, order); const mTrue = rho * V / 1e6 * 1000, mRead = Math.round((mTrue + (order ? 1.5 : 0)) * 10) / 10;   // kg/m3 x cm3 -> g
+        if (Math.abs(r.m - mRead) > 1e-9 || r.V !== V || r.V2 !== V1 + V || Math.abs(r.rho - mRead / V) > 1e-12) bad('solid ' + rho + ' ' + V + ' ' + order);
+        if (order === 0 && Math.abs(r.rho - rho / 1000) > 0.0501 / V + 1e-9) bad('right order not exact ' + rho + ' ' + V);
+        if (order === 1 && !(r.rho > rho / 1000)) bad('wet solid must give a too large density');
+      }
+      for (const [, , rho] of D.LIQUIDS) for (const V of [20, 40, 60, 80]) for (const order of [0, 1]) {
+        o.n++; const r = D.liquid(rho, V, order);
+        if (order === 0) { const a = Math.round((50 + rho / 1000 * 100) * 10) / 10, b = Math.round((50 + rho / 1000 * (100 - V)) * 10) / 10; if (Math.abs(r.a - a) > 1e-9 || Math.abs(r.b - b) > 1e-9 || r.V !== V || Math.abs(r.rho - (a - b) / V) > 1e-9 || Math.abs(r.rho - rho / 1000) > 0.1 / V + 1e-9) bad('liquid order0 ' + rho + ' ' + V); }
+        else { if (r.V !== V - 2 || !(r.rho > rho / 1000)) bad('liquid order1 ' + rho + ' ' + V); }
+      }
+      for (let i = 0; i < NAMES.length; i++) if (D.nameMetal(RHO[i] * 1.02) !== NAMES[i] || D.nameMetal(RHO[i] * 0.98) !== NAMES[i]) bad('nameMetal ' + NAMES[i]);
+      if (D.nameMetal(5) !== null || D.nameMetal(0.9) !== null) bad('nameMetal must say none');
+      if (D.behaviour(0.6, 1) !== 'float' || D.behaviour(1, 1) !== 'suspend' || D.behaviour(2.7, 1) !== 'sink') bad('behaviour');
+      // quiz kinds recomputed here
+      const ORD = { 0: '偏大', 1: '偏大', 2: '偏小' }; const seenAns = new Set(), seenLever = new Set(), seenPrim = new Set(), seenRenew = new Set();
+      for (let s = 1; s <= 300; s++) {
+        for (const q of D.quiz(mulberry32(s))) {
+          o.n++;
+          if (q.kind === 'ident') { const [mi, V] = q.p; const m = parseFloat(/质量是 ([\d.]+) g/.exec(q.q)[1]); const idx = RHO.reduce((b, d, i) => (Math.abs(d - m / V) < Math.abs(RHO[b] - m / V) ? i : b), 0); if (q.ans !== NAMES[idx] || idx !== mi || Math.abs(m / V - RHO[mi]) > 0.06) bad('ident'); }
+          if (q.kind === 'float') { const [a, b] = q.p; const st = a < b ? '上浮' : a === b ? '悬浮' : '下沉'; if (!q.ans.startsWith(st)) bad('float'); }
+          if (q.kind === 'order') { if (q.ans !== ORD[q.p[0]]) bad('order'); }
+        }
+        for (const q of Lv.quiz(mulberry32(s))) if (q.kind === 'tilt') seenLever.add(q.ans);
+        for (const q of S.quiz(mulberry32(s))) { const nm = q.q.replace('是：', ''); if (q.kind === 'primary') seenPrim.add(q.ans + '|' + (nm === '电能' || nm === '氢能')); if (q.kind === 'renew') seenRenew.add(q.ans); }
+      }
+      o.lever = [...seenLever].sort(); o.prim = [...seenPrim].sort(); o.renew = [...seenRenew].sort();
+      return o;
+    });
+    ok(r.bad === 0 && r.n > 1500, `A density: the solid (balance + displacement) and liquid (cylinder + balance) measurements equal independent arithmetic, a wrong order gives a too large density, metals are named from the table, quiz answers agree (${r.n} cases)${r.msgs.length ? ' ' + r.msgs.join('; ') : ''}`);
+    ok(r.lever.join() === '保持水平平衡,右端下沉,左端下沉', 'A lever quiz: the tilt answer varies (left down / right down / balanced all occur in 300 seeds)');
+    ok(r.prim.join() === '一次能源|false,二次能源|true' && r.renew.join() === '不可再生能源,可再生能源', 'A energysrc quiz: primary / secondary (电能 / 氢能 are asked and are 二次能源) and renewable / not renewable both occur');
+  }
+
   // =====================================================================================  B. THE PAGES
   const consoleErrors = [];
   page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text()); });
@@ -468,7 +511,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     const groups = await page.evaluate(() => [...document.querySelectorAll('.pl-home > h2, .pl-home .pl-sc')].map((e) => (e.tagName === 'H2' ? 'H:' + e.textContent : e.dataset.chapter)));
     const g9 = groups.indexOf('H:九年级');
     ok(groups[0] === '八年级' || groups[0] === 'H:八年级', 'B the lab starts with the grade 8 heading');
-    ok(g9 > 0 && groups.slice(1, g9).every((c) => /^第(一|二|三|四|五|七|八|九|十|十一|十二)章/.test(c)) && groups.slice(g9 + 1).every((c) => /^第(十三|十四|十五|十七|十八|十九|二十|二十一|二十二)章/.test(c)), 'B cards sit under their grade, in chapter order: ' + groups.join(' | '));
+    ok(g9 > 0 && groups.slice(1, g9).every((c) => /^第(一|二|三|四|五|六|七|八|九|十|十一|十二)章/.test(c)) && groups.slice(g9 + 1).every((c) => /^第(十三|十四|十五|十七|十八|十九|二十|二十一|二十二)章/.test(c)), 'B cards sit under their grade, in chapter order: ' + groups.join(' | '));
     const CH = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十', '二十一', '二十二']; const chn = groups.filter((c) => c.startsWith('第')).map((c) => CH.indexOf(/^第(.+?)章/.exec(c)[1]));
     ok(chn.every((v, i) => i === 0 || v >= chn[i - 1]), 'B within each grade the chapters follow the book order');
     ok(groups.includes('第四章 光现象') && groups.includes('第二十章 电与磁') && groups.includes('第十二章 简单机械'), 'B each card names its chapter');

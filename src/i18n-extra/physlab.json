@@ -783,6 +783,10 @@
   "Loudness level",
   "Niveau sonore"
  ],
+ "声音强弱（分贝）": [
+  "Sound level (decibels)",
+  "Niveau sonore (décibels)"
+ ],
  "最接近的音名": [
   "Nearest note",
   "Note la plus proche"
@@ -1375,9 +1379,9 @@
   "Set the frequency to 440 Hz (standard pitch A4) with the pure tone.",
   "Réglez la fréquence à 440 Hz (La 440, A4) avec le son pur."
  ],
- "增大振幅，使响度级不低于 58 dB": [
-  "Increase the amplitude until the loudness level is at least 58 dB.",
-  "Augmentez l'amplitude jusqu'à un niveau sonore d'au moins 58 dB."
+ "增大振幅，使声音强弱不低于 58 dB": [
+  "Increase the amplitude until the sound level is at least 58 dB.",
+  "Augmentez l'amplitude jusqu'à une intensité sonore d'au moins 58 dB."
  ],
  "选择方波，并把频率调到 880 Hz（比 A4 高一个八度）": [
   "Choose the square wave and set 880 Hz (one octave above A4).",
@@ -1435,9 +1439,9 @@
   "Make the object distance equal to the focal length: no image forms.",
   "Placez l'objet à la distance focale : aucune image ne se forme."
  ],
- "在地球上使弹簧测力计的示数约为 5 N（4.9 N）": [
-  "On Earth, make the spring scale read about 5 N (4.9 N).",
-  "Sur Terre, faites afficher environ 5 N (4,9 N) au dynamomètre."
+ "在地球上使弹簧测力计的示数约为 5 N": [
+  "On Earth, make the spring scale read about 5 N.",
+  "Sur Terre, faites afficher environ 5 N au dynamomètre."
  ],
  "把同样质量的物体放到月球上：先在地球上选质量 1 kg，再选月球，读出示数约为 1.6 N": [
   "Take the same mass to the Moon: choose 1 kg, then the Moon, and read about 1.6 N.",
@@ -1475,9 +1479,9 @@
   "Make the two forces equal and opposite but not on the same line: the object rotates.",
   "Rendez les deux forces égales et opposées mais pas sur la même droite : l'objet tourne."
  ],
- "清水中（液体选“清水”）：使探头所在的深度为 20 cm，读出液体压强约 1960 Pa": [
-  "In fresh water (choose “Fresh water”): set the probe depth to 20 cm and read a pressure of about 1960 Pa.",
-  "Dans l'eau douce (choisissez « Eau douce ») : réglez la profondeur de la sonde à 20 cm et lisez une pression d'environ 1960 Pa."
+ "清水中（液体选“清水”）：使探头所在的深度为 20 cm，读出液体压强约 2000 Pa": [
+  "In fresh water (choose “Fresh water”): set the probe depth to 20 cm and read a pressure of about 2000 Pa.",
+  "Dans l'eau douce (choisissez « Eau douce ») : réglez la profondeur de la sonde à 20 cm et lisez une pression d'environ 2000 Pa."
  ],
  "托里拆利实验：海拔 0 m 时，把玻璃管倾斜 30°，观察水银柱的竖直高度不变（760 mm 左右）": [
   "Torricelli experiment: at 0 m altitude, tilt the glass tube by 30° and see that the vertical height stays about 760 mm.",
@@ -3286,5 +3290,165 @@
  "{0}（{1} W）": [
   "{0} ({1} W)",
   "{0} ({1} W)"
+ ],
+ "质量与密度": [
+  "Mass and density",
+  "Masse et masse volumique"
+ ],
+ "第六章 质量与密度": [
+  "Chapter 6 Mass and Density",
+  "Chapitre 6 Masse et masse volumique"
+ ],
+ "基本准确": [
+  "About right",
+  "À peu près exact"
+ ],
+ "偏大": [
+  "Too large",
+  "Trop grand"
+ ],
+ "偏小": [
+  "Too small",
+  "Trop petit"
+ ],
+ "量筒中原有水的体积": [
+  "Initial volume of water in the cylinder",
+  "Volume d'eau initial dans l'éprouvette"
+ ],
+ "液体的体积": [
+  "Volume of the liquid",
+  "Volume du liquide"
+ ],
+ "被测的物质": [
+  "Substance measured",
+  "Substance mesurée"
+ ],
+ "固体": [
+  "Solid",
+  "Solide"
+ ],
+ "操作的顺序": [
+  "Order of the steps",
+  "Ordre des opérations"
+ ],
+ "正确的顺序": [
+  "Correct order",
+  "Ordre correct"
+ ],
+ "错误的顺序": [
+  "Wrong order",
+  "Ordre incorrect"
+ ],
+ "天平的读数（质量 m）": [
+  "Balance reading (mass m)",
+  "Lecture de la balance (masse m)"
+ ],
+ "量筒的读数 V₁": [
+  "Cylinder reading V₁",
+  "Lecture de l'éprouvette V₁"
+ ],
+ "量筒的读数 V₂": [
+  "Cylinder reading V₂",
+  "Lecture de l'éprouvette V₂"
+ ],
+ "物体的体积 V = V₂ − V₁": [
+  "Volume of the object V = V₂ − V₁",
+  "Volume de l'objet V = V₂ − V₁"
+ ],
+ "测得的密度 ρ = m / V": [
+  "Measured density ρ = m / V",
+  "Masse volumique mesurée ρ = m / V"
+ ],
+ "合": [
+  "Equal to",
+  "Soit"
+ ],
+ "对照密度表": [
+  "Compared with the density table",
+  "D'après le tableau des masses volumiques"
+ ],
+ "表中没有相近的金属": [
+  "No similar metal in the table",
+  "Aucun métal proche dans le tableau"
+ ],
+ "放入水中": [
+  "Placed in water",
+  "Placé dans l'eau"
+ ],
+ "漂浮（要用细针压入水中）": [
+  "Floats (press it under with a thin needle)",
+  "Flotte (l'enfoncer avec une fine aiguille)"
+ ],
+ "下沉": [
+  "Sinks",
+  "Coule"
+ ],
+ "测量结果与真实值相比": [
+  "Result compared with the true value",
+  "Résultat comparé à la valeur réelle"
+ ],
+ "烧杯和液体的总质量 m₁": [
+  "Mass of beaker and liquid m₁",
+  "Masse du bécher et du liquide m₁"
+ ],
+ "空烧杯的质量 m₀": [
+  "Mass of the empty beaker m₀",
+  "Masse du bécher vide m₀"
+ ],
+ "烧杯和剩余液体的质量 m₂": [
+  "Mass of beaker and remaining liquid m₂",
+  "Masse du bécher et du liquide restant m₂"
+ ],
+ "液体的质量 m": [
+  "Mass of the liquid m",
+  "Masse du liquide m"
+ ],
+ "量筒的读数 V": [
+  "Cylinder reading V",
+  "Lecture de l'éprouvette V"
+ ],
+ "固体：选择铜块、正确的顺序、体积不小于 10 cm³，测得的密度与 8.9 g/cm³ 相差不超过 5 %": [
+  "Solid: choose the copper block and the correct order, with a volume of at least 10 cm³; the measured density differs from 8.9 g/cm³ by no more than 5 %.",
+  "Solide : choisissez le bloc de cuivre et l'ordre correct, avec un volume d'au moins 10 cm³ ; la masse volumique mesurée diffère de 8,9 g/cm³ de 5 % au plus."
+ ],
+ "固体：选择错误的顺序（先测体积、后测质量），使测得的密度比真实值大 2 % 以上": [
+  "Solid: choose the wrong order (volume first, mass afterwards) so that the measured density is more than 2 % above the true value.",
+  "Solide : choisissez l'ordre incorrect (volume d'abord, masse ensuite) de sorte que la masse volumique mesurée dépasse de plus de 2 % la valeur réelle."
+ ],
+ "液体：选择酒精、正确的顺序，测得的密度与 0.8 g/cm³ 相差不超过 5 %": [
+  "Liquid: choose alcohol and the correct order; the measured density differs from 0.8 g/cm³ by no more than 5 %.",
+  "Liquide : choisissez l'alcool et l'ordre correct ; la masse volumique mesurée diffère de 0,8 g/cm³ de 5 % au plus."
+ ],
+ "固体：选择石蜡块，观察它的密度小于水，放入水中会漂浮": [
+  "Solid: choose the paraffin wax block and observe that its density is lower than that of water, so it floats in water.",
+  "Solide : choisissez le bloc de paraffine et constatez que sa masse volumique est inférieure à celle de l'eau : il flotte dans l'eau."
+ ],
+ "铝块": [
+  "Aluminium block",
+  "Bloc d'aluminium"
+ ],
+ "铁块": [
+  "Iron block",
+  "Bloc de fer"
+ ],
+ "玻璃块": [
+  "Glass block",
+  "Bloc de verre"
+ ],
+ "铅块": [
+  "Lead block",
+  "Bloc de plomb"
+ ],
+ "石蜡块": [
+  "Paraffin wax block",
+  "Bloc de paraffine"
+ ],
+ "银块": [
+  "Silver block",
+  "Bloc d'argent"
+ ],
+ "蜂蜜": [
+  "Honey",
+  "Miel"
  ]
 }

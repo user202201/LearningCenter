@@ -87,10 +87,11 @@ export function contours(f: (x: number, y: number) => number, levels: number[], 
   return out;
 }
 export const tempAt = (t0: number, dh: number): number => t0 - (0.6 * dh) / 100;
+export const LOWLAND = "海拔 200～500 米的平坦地（教材不单列）";
 export function terrainType(alt: number, relief: number, feat: number): string {
   if (feat === 3) return "盆地";
-  if (feat === 0) return alt >= 500 ? "高原" : "平原";
-  if (feat === 1) return alt >= 500 ? "高原" : "丘陵";
+  if (feat === 0) return alt >= 500 ? "高原" : alt < 200 ? "平原" : LOWLAND;   // plain: below about 200 m (as the lesson says); flat land at 200-500 m has no textbook name
+  if (feat === 1) return alt >= 500 ? "高原" : relief <= 200 ? "丘陵" : "山地";   // hills: below 500 m AND a relative height of at most 200 m
   return alt >= 500 || relief >= 200 ? "山地" : "丘陵";
 }
 export const FEATS = ["地面平坦", "坡度和缓", "起伏很大、坡度陡", "四周高、中间低"];
@@ -152,7 +153,8 @@ export const WINDS = ["北风", "东北风", "东风", "东南风", "南风", "�
 export const growthRate = (b: number, d: number): number => (b - d) / 10;
 export const popAfter = (p0: number, r: number, years: number): number => p0 * Math.pow(1 + r / 100, years);
 export const doubling = (r: number): number => 70 / r;
-export const pyramidOf = (r: number): string => (r >= 1 ? "增长型" : r >= -0.1 && r < 0.5 ? "稳定型" : r < -0.1 ? "衰退型" : "过渡型");
+/** the three textbook types of the age structure (this exercise's dividing lines: growth >= 1 % expanding, <= -0.5 % declining, in between stable) */
+export const pyramidOf = (r: number): string => (r >= 1 ? "增长型" : r <= -0.5 ? "衰退型" : "稳定型");
 
 // ---------- plates, quakes ----------
 export const VP = 6, VS = 3.5;
@@ -180,11 +182,15 @@ export function altAt(lon: number): number {
   for (let i = 1; i < p.length; i++) if (lon <= p[i][0]) { const [x0, y0] = p[i - 1], [x1, y1] = p[i]; return y0 + ((y1 - y0) * (lon - x0)) / (x1 - x0); }
   return p[p.length - 1][1];
 }
+/** the step of the schematic profile along about 35 degrees north (a longitude alone has no step: at 80 degrees east the Tibetan plateau is the first step, but the Tarim basin, farther north, is the second) */
 export const stepOf = (lon: number): number => (lon < 102.5 ? 1 : lon < 111 ? 2 : 3);
+export const PROFILE_LAT = 35;
 export const STEPS = [
-  { n: 1, alt: "平均海拔 4000 米以上", form: "青藏高原", range: "昆仑山—祁连山—横断山以西" },
-  { n: 2, alt: "海拔 1000～2000 米", form: "内蒙古高原、黄土高原、云贵高原；塔里木、准噶尔、四川盆地", range: "介于两条分界线之间" },
-  { n: 3, alt: "海拔多在 500 米以下", form: "东北平原、华北平原、长江中下游平原，丘陵", range: "大兴安岭—太行山—巫山—雪峰山以东" }];
+  { n: 1, alt: "平均海拔 4000 米以上", form: "青藏高原", range: "昆仑山—阿尔金山—祁连山—横断山以西" },
+  { n: 2, alt: "海拔 1000～2000 米", form: "内蒙古高原、黄土高原、云贵高原；塔里木盆地、准噶尔盆地、四川盆地", range: "介于两条分界线之间" },
+  { n: 3, alt: "海拔多在 500 米以下", form: "东北平原、华北平原、长江中下游平原、东南丘陵", range: "大兴安岭—太行山—巫山—雪峰山以东" }];
+/** named places and their step (人教版 / 湘教版) */
+export const STEP_PLACES: [string, number][] = [["青藏高原", 1], ["内蒙古高原", 2], ["黄土高原", 2], ["云贵高原", 2], ["塔里木盆地", 2], ["准噶尔盆地", 2], ["四川盆地", 2], ["东北平原", 3], ["华北平原", 3], ["长江中下游平原", 3], ["东南丘陵", 3]];
 
 // ---------- the dates and the question helpers ----------
 export const monthOfStart = (doy: number): number => { let d = doy, m = 0; while (d > MDAYS[m]) { d -= MDAYS[m]; m++; } return m + 1; };
@@ -260,8 +266,8 @@ GEN.population = {
   rate: (r) => { const b = intIn(r, 12, 40), d = intIn(r, 4, 11); return numQ(r, "rate", [b, d], `某国出生率 ${b}‰，死亡率 ${d}‰，人口自然增长率是多少？`, growthRate(b, d), "%", 1, "自然增长率 = 出生率 − 死亡率，‰ 换成 % 要除以 10。"); },
   after: (r) => { const p0 = intIn(r, 10, 100, 10), rt = pick(r, [1, 2, 3]), y = pick(r, [10, 20, 30]); return numQ(r, "after", [p0, rt, y], `某地人口 ${p0} 万人，年增长率 ${rt}%，按此速度，${y} 年后人口约是多少万人（保留一位小数）？`, popAfter(p0, rt, y), "万人", 1, "按复利计算：P × (1 + r)ⁿ。"); },
   density: (r) => { const a = pick(r, [10, 20, 40, 50, 80]), p = pick(r, [200, 500, 1000, 2000, 4000]); return numQ(r, "density", [a, p], `某地面积 ${a} 万平方千米，人口 ${p} 万人，人口密度约是多少人∕平方千米？`, p / a, "人∕平方千米", 1, "人口密度 = 人口 ÷ 面积。"); },
-  pyramid: (r) => { const kind = pick(r, ["增长型", "稳定型", "衰退型"]); const [b, d] = kind === "增长型" ? [intIn(r, 28, 40), intIn(r, 5, 12)] : kind === "稳定型" ? [intIn(r, 9, 14), intIn(r, 9, 13)] : [intIn(r, 6, 9), intIn(r, 11, 14)];
-    const rt = growthRate(b, d); const ans = pyramidOf(rt); return makeQ(r, "pyramid", [b, d], `某国出生率 ${b}‰，死亡率 ${d}‰，其人口结构最可能属于哪一类型？`, ans, ["增长型", "稳定型", "衰退型", "过渡型"], "自然增长率 ≥ 1% 为增长型；接近 0 为稳定型；为负为衰退型。"); },
+  pyramid: (r) => { const kind = pick(r, ["增长型", "稳定型", "衰退型"]); const [b, d] = kind === "增长型" ? [intIn(r, 28, 40), intIn(r, 5, 12)] : kind === "稳定型" ? (() => { const b = intIn(r, 9, 14); return [b, b + intIn(r, -3, 3)]; })() : (() => { const b = intIn(r, 6, 8); return [b, intIn(r, b + 6, 14)]; })();
+    const rt = growthRate(b, d); const ans = pyramidOf(rt); return makeQ(r, "pyramid", [b, d], `某国出生率 ${b}‰，死亡率 ${d}‰，其人口结构最可能属于哪一类型？`, ans, ["增长型", "稳定型", "衰退型", "无法判断"], "自然增长率 ≥ 1% 为增长型；接近 0 为稳定型；为较明显的负增长为衰退型。"); },
 };
 GEN.plates = {
   move: (r) => { const v = pick(r, [2, 3, 5, 8]), t = pick(r, [5, 10, 20, 50]); return numQ(r, "move", [v, t], `一块板块每年移动 ${v} 厘米，${t} 百万年约移动多少千米？`, kmMoved(v, t), "千米", 0, "1 厘米∕年 = 10 千米∕百万年。"); },
@@ -273,7 +279,10 @@ GEN.watercycle = {
   balance: (r) => { const p = intIn(r, 6, 20, 1) * 100, e = intIn(r, 2, 5, 1) * 100; return numQ(r, "balance", [p, e], `某封闭流域一年的降水量 ${p} 毫米，蒸发量 ${e} 毫米，若地下水储量不变，径流量约是多少毫米？`, runoff(p, e), "毫米", 0, "水量平衡：降水 = 蒸发 + 径流。"); },
 };
 GEN.rocks = {
-  layer: (r) => { const depth = pick(r, [intIn(r, 5, 25), intIn(r, 100, 2500, 100), intIn(r, 3000, 5000, 100), intIn(r, 5200, 6300, 100)]); return makeQ(r, "layer", [depth], `地下 ${depth} 千米深处属于地球内部的哪一层？`, layerOf(depth), ["地壳", "地幔", "外核", "内核"], "地壳约 0～33 千米，地幔至约 2900 千米，外核至约 5100 千米，以下是内核。"); },
+  layer: (r) => { const depth = pick(r, [intIn(r, 2, 6), intIn(r, 8, 30), intIn(r, 100, 2500, 100), intIn(r, 3000, 5000, 100), intIn(r, 5200, 6300, 100)]);
+    // the crust is about 33 km thick under the continents but only 6-7 km under the oceans: a depth between 7 and 32 km is only asked for a place on land
+    const land = depth > 6 && depth < 33;
+    return makeQ(r, "layer", [depth], land ? `在大陆上某地，地下 ${depth} 千米深处属于地球内部的哪一层？` : `地下 ${depth} 千米深处属于地球内部的哪一层？`, layerOf(depth), ["地壳", "地幔", "外核", "内核"], "地壳全球平均厚度约 17 千米（大陆约 33 千米，海洋约 6～7 千米）；地幔至约 2900 千米，外核至约 5100 千米，以下是内核。"); },
   heat: (r) => { const z = intIn(r, 1, 5); return numQ(r, "heat", [z], `地表温度约 15℃，地温梯度约每深 100 米升高 3℃。地下 ${z} 千米深处的温度约是多少℃？`, groundTemp(z), "℃", 0, "15 + 30 × 深度（千米）。"); },
 };
 GEN.sustain = {
@@ -288,7 +297,8 @@ GEN.chinabasic = {
   span: (r) => { const a = pick(r, [75, 80, 90]), b = pick(r, [120, 135]); return numQ(r, "span", [a, b], `我国最西端约 ${a}°E，某地约 ${b}°E，两地地方时相差约多少小时？`, (b - a) / 15, "小时", 1, "时差 = 经度差 ÷ 15。"); },
 };
 GEN.chinaterrain = {
-  step: (r) => { const lon = intIn(r, 75, 120, 5); const ans = `第${["一", "二", "三"][stepOf(lon) - 1]}级阶梯`; return makeQ(r, "step", [lon], `按图中示意的剖面，东经 ${lon}° 附近大致处在我国地势的哪一级阶梯？`, ans, ["第一级阶梯", "第二级阶梯", "第三级阶梯", "第四级阶梯"], "第一、二级以约 102°E 为界，第二、三级以约 111°E 为界（示意）。"); },
+  step: (r) => { const lon = intIn(r, 75, 120, 5); const ans = `第${["一", "二", "三"][stepOf(lon) - 1]}级阶梯`; return makeQ(r, "step", [lon], `按图中沿北纬 35° 附近的示意剖面，东经 ${lon}° 附近大致处在我国地势的哪一级阶梯？`, ans, ["第一级阶梯", "第二级阶梯", "第三级阶梯", "第四级阶梯"], "沿北纬 35° 附近，第一、二级以约 102°E 为界，第二、三级以约 111°E 为界（示意）。"); },
+  place: (r) => { const i = Math.floor(r() * STEP_PLACES.length); const [name, n] = STEP_PLACES[i]; const ans = `第${["一", "二", "三"][n - 1]}级阶梯`; return makeQ(r, "place", [i], `${name}属于我国地势的哪一级阶梯？`, ans, ["第一级阶梯", "第二级阶梯", "第三级阶梯", "第四级阶梯"], "第一级：青藏高原；第二级：内蒙古高原、黄土高原、云贵高原、塔里木盆地、准噶尔盆地、四川盆地；第三级：东北平原、华北平原、长江中下游平原、东南丘陵。"); },
 };
 GEN.development = {
   max: (r) => { const D = DEV_CACHE; const four = shuffle(r, D).slice(0, 4); const best = four.reduce((a, b) => (b.gdp > a.gdp ? b : a)); const names = four.map((c) => c.n); if (new Set(four.map((c) => c.gdp)).size < 4) return GEN.development.max(r);

@@ -44,8 +44,8 @@ export const CATALOG = {
   diet: m("diet", "合理营养", 7, "七下 · 人体的营养", 3, bg("#ebfbee") + `<path d="M60 20L100 96H20Z" fill="#fff3bf" stroke="${K}" stroke-width="4" stroke-linejoin="round"/><path d="M40 62H80M32 78H88" ${st(`stroke-width="3"`)}/>` + dot(60, 44, 7, "#ff8787")),
   firstaid: m("firstaid", "急救与安全用药", 8, "八下 · 健康地生活", 3, bg("#ffe3e3") + `<rect x="40" y="22" width="40" height="76" rx="8" fill="#fff" stroke="${K}" stroke-width="4"/><path d="M60 38V82M40 60H80" ${st(`stroke="#e03131" stroke-width="9"`)}/>`),
   skin: m("skin", "皮肤与体温调节", 7, "七下 · 废物的排出", 3, bg("#ffe8cc") + `<rect x="22" y="34" width="76" height="52" rx="10" fill="#ffc9a0" stroke="${K}" stroke-width="4"/><path d="M38 24C34 16 44 14 40 6M60 24C56 16 66 14 62 6M82 24C78 16 88 14 84 6" ${st(`stroke="#4dabf7"`)}/>`),
-  bones: m("bones", "骨的成分与特性", 7, "七下 · 人体的运动", 3, bg("#f1f3f5") + `<rect x="30" y="52" width="60" height="16" rx="8" fill="#fff" stroke="${K}" stroke-width="4" transform="rotate(-25 60 60)"/>` + dot(28, 80, 10, "#fff") + dot(92, 40, 10, "#fff")),
-  impact: m("impact", "人类活动与生物多样性", 8, "八下 · 保护生物多样性", 3, bg("#e6fcf5") + `<path d="M20 90H100" ${st()}/><path d="M40 90V56M30 64L40 40L50 64Z" fill="#51cf66" stroke="${K}" stroke-width="3.5"/><path d="M70 90V50M62 58L70 30L78 58Z" fill="#2f9e44" stroke="${K}" stroke-width="3.5"/>`),
+  bones: m("bones", "骨的成分与特性", 8, "八上 · 动物的运动", 3, bg("#f1f3f5") + `<rect x="30" y="52" width="60" height="16" rx="8" fill="#fff" stroke="${K}" stroke-width="4" transform="rotate(-25 60 60)"/>` + dot(28, 80, 10, "#fff") + dot(92, 40, 10, "#fff")),
+  impact: m("impact", "人类活动与生物多样性", 8, "八上 · 第六单元 生物的多样性及其保护", 3, bg("#e6fcf5") + `<path d="M20 90H100" ${st()}/><path d="M40 90V56M30 64L40 40L50 64Z" fill="#51cf66" stroke="${K}" stroke-width="3.5"/><path d="M70 90V50M62 58L70 30L78 58Z" fill="#2f9e44" stroke="${K}" stroke-width="3.5"/>`),
   health: m("health", "健康的生活方式", 8, "八下 · 健康地生活", 3, bg("#fff3bf") + `<path d="M16 64H38L48 36L62 90L74 54H104" ${st(`stroke="#e03131"`)}/>`),
 } satisfies Record<string, Meta>;
 export type BioId = keyof typeof CATALOG;

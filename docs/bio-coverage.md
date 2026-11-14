@@ -35,13 +35,13 @@ A simulation = `src/bio/<id>.ts` (screen) + `src/bio/model-<id>.ts` (pure model,
 | 七下 废物的排出 | 肾单位、滤过与重吸收、水盐平衡、尿糖 | `excretion` | built |
 | 七下 废物的排出 | 皮肤的功能、体温调节（产热与散热） | `skin` | built |
 | 七下 感觉器官 | 耳的结构、听觉的形成、听力范围与听力保护 | `ear` | built |
-| 七下 人体的运动 | 骨的成分与特性（煅烧 / 盐酸实验）| `bones` | built |
+| 八上 动物的运动 | 骨的成分与特性（煅烧 / 盐酸实验）| `bones` | built |
 | 八上 动物的行为 | 先天性行为、学习行为、社会行为、学习曲线 | `behaviour` | built |
 | 八下 生物的进化 | 化石、地层顺序、放射性测定年龄 | `fossils` | built |
 | 七下 人体的营养 | 平衡膳食、能量与营养素、营养缺乏病 | `diet` | built |
 | 八下 健康地生活 | 心肺复苏、安全用药（剂量）、烧烫伤的处理 | `firstaid` | built |
 | 八下 健康地生活 | 运动强度（心率区间）、睡眠 | `health` | built |
-| 八下 保护生物多样性 | 栖息地丧失与物种、CO₂ 与气温、保护措施 | `impact` | built |
+| 八上 第六单元 生物的多样性及其保护 | 栖息地丧失与物种、CO₂ 与气温、保护措施 | `impact` | built |
 
 ## NOT covered (honest list)
 

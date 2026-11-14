@@ -111,7 +111,7 @@ export function rocks(D: M.GeoData): SimDef {
     ...base(D, "rocks"), aspect: 0.6,
     choices: [{ id: "mode", label: "内容", options: [[0, "地球的圈层"], [1, "岩石循环"]], value: 0 }, { id: "proc", label: "过程", options: PROC.map(([n], i) => [i, n] as [number, string]), value: 0, when: is1 }],
     params: [{ id: "depth", label: "深度", min: 0, max: 6370, step: 10, value: 1000, unit: "km", when: is0 }],
-    readouts: (s) => s.mode === 0 ? [{ label: "圈层", value: M.layerOf(s.depth) }, { label: "物质状态", value: M.LAYERS.find((l) => l[0] === M.layerOf(s.depth))![3] }, { label: "距地心", value: fmt(6371 - s.depth, 0), unit: "km" }]
+    readouts: (s) => s.mode === 0 ? [{ label: "圈层", value: M.layerOf(s.depth) }, ...(s.depth > 6 && s.depth < 33 ? [{ label: "说明", value: "大陆地壳（海洋地壳只有约 6～7 千米厚）" }] : []), { label: "物质状态", value: M.LAYERS.find((l) => l[0] === M.layerOf(s.depth))![3] }, { label: "距地心", value: fmt(6371 - s.depth, 0), unit: "km" }]
       : [{ label: "过程", value: PROC[s.proc][0] }, { label: "形成", value: PROC[s.proc][1] }, { label: "动力", value: PROC[s.proc][2] }],
     draw(c, w, hh, s: St) {
       rect(c, 0, 0, w, hh, "#fff", null, 0, 0);
@@ -202,7 +202,7 @@ export function chinaterrain(D: M.GeoData): SimDef {
     ...base(D, "chinaterrain"), aspect: 0.6,
     params: [{ id: "lon", label: "经度（东经）", min: 73, max: 122, step: 1, value: 76, unit: "°" }],
     pointer: (kind, x) => ({ lon: Math.max(73, Math.min(122, Math.round(73 + ((x - 40) / 560) * 49))) }),
-    readouts: (s) => [{ label: "经度", value: M.lonStr(s.lon) }, { label: "海拔（示意）", value: fmt(Math.round(M.altAt(s.lon) / 50) * 50, 0), unit: "m" }, { label: "所在阶梯", value: ["第一级阶梯", "第二级阶梯", "第三级阶梯"][M.stepOf(s.lon) - 1] }],
+    readouts: (s) => [{ label: "示意剖面", value: "沿北纬 35° 附近" }, { label: "经度", value: M.lonStr(s.lon) }, { label: "海拔（示意）", value: fmt(Math.round(M.altAt(s.lon) / 50) * 50, 0), unit: "m" }, { label: "所在阶梯", value: ["第一级阶梯", "第二级阶梯", "第三级阶梯"][M.stepOf(s.lon) - 1] }],
     draw(c, w, hh, s: St) {
       rect(c, 0, 0, w, hh, "#f1fbff", null, 0, 0);
       const cols = ["#ffe066", "#d8f5a2", "#b2f2bb"], bounds = [73, 102.5, 111, 122];

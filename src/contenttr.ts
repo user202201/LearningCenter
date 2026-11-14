@@ -4,6 +4,10 @@
  * `scripts/make-trans.mjs` from the part files in `data/trans/parts/`), imported lazily (compiled into the build, so they work offline).
  * `ct(text)` returns the translation for the screen language (Chinese: the text itself; a text without a translation: the text itself).
  * A screen awaits `loadContentTr()` before it draws such content.
+ * The science quiz cards (`data/science-cards.json`: question, answer, "did you know" sentence, wrong choices, topic labels) have their OWN tables
+ * `data/trans/cards.<lang>.json` (a card answer is a context text such as "The ears", so it must not leak into the summaries / drawings), loaded only when a card
+ * is shown: `loadCardTr()` then `cct(text)` (cards table first, then the main table). The Chinese original always stays the KEY of the logic (right answer,
+ * memory boxes, errors book are compared by the Chinese text; only what is DRAWN is translated).
  */
 import { getLang, type Lang } from "./i18n";
 
@@ -16,6 +20,22 @@ export async function loadContentTr(lang: Lang = getLang()): Promise<void> {
   try {
     maps[lang] = ((lang === "en" ? await import("./data/trans/en.json") : await import("./data/trans/fr.json")) as { default: Record<string, string> }).default;
   } catch { maps[lang] = {}; }
+}
+
+const cardMaps: Partial<Record<Lang, Record<string, string>>> = {};
+/** load the card table of a language (and the main table, which `cct` falls back to); nothing to load for Chinese */
+export async function loadCardTr(lang: Lang = getLang()): Promise<void> {
+  if (lang === "zh") return;
+  await loadContentTr(lang);
+  if (cardMaps[lang]) return;
+  try {
+    cardMaps[lang] = ((lang === "en" ? await import("./data/trans/cards.en.json") : await import("./data/trans/cards.fr.json")) as { default: Record<string, string> }).default;
+  } catch { cardMaps[lang] = {}; }
+}
+/** a text of a science card in the language of the screen (Chinese source text in; a text without a translation: unchanged) */
+export function cct(text: string, lang: Lang = getLang()): string {
+  if (lang === "zh" || !text || !cjk.test(text)) return text;
+  return cardMaps[lang]?.[text] ?? maps[lang]?.[text] ?? text;
 }
 
 /** the text in the language of the screen (Chinese source text in, unknown text unchanged) */

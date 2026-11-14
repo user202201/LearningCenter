@@ -51,7 +51,7 @@ const SOLVE = {
   foodweb: { web: { mode: 0, ...L(11, 'l') }, snake: { mode: 0, ...L(11, 'l'), rm5: 1 }, pyr: { mode: 1, lv: 5, eta: 10 }, ddt: { mode: 2, f: 6, lv: 5 } },
   population: { eq: { mode: 0, x0: 25, y0: 10 }, crash: { mode: 0, y0: 40 }, k90: { mode: 1, N0: 20, r: 0.5, K: 1000, T: 20 } },
   lifecycle: { pupa: { c: 1, stage: 2 }, nymph: { c: 0, stage: 1 }, tadpole: { c: 2, stage: 1 } },
-  development: { birth: { mode: 0, week: 40 }, fetus: { mode: 0, week: 8 }, spurt: { mode: 1, sex: 0, age: 12 } },
+  development: { birth: { mode: 0, week: 40 }, fetus: { mode: 0, week: 8 }, spurt: { mode: 1, sex: 0, age: 11 } },
   vessels: { capillary: { mode: 1, v: 1, hr: 75 }, anaemia: { mode: 0, hct: 30 }, artery: { mode: 2, b: 0 } },
   excretion: { normal: { water: 3 }, dehyd: { water: 0.5, sweat: 2 }, glu: { glu: 12 } },
   ear: { mosquito: { mode: 0, age: 50, f: 17000 }, loud: { mode: 0, db: 100 }, cochlea: { mode: 1, part: 3 } },
@@ -112,7 +112,7 @@ const EXPECT = {
   foodweb: { energy: ([E, n]) => E * 0.1 ** (n - 1), maxget: ([E]) => E * 0.2, chains: () => chainsN(), conc: ([c, f, n]) => c * f ** (n - 1) },
   population: { eqx: ([c, d]) => c / d, eqy: ([a, b]) => a / b, logN: ([N0, r, K, t]) => K / (1 + (K / N0 - 1) * Math.exp(-r * t)), halfK: ([K]) => K / 2, period: ([a, c]) => (2 * Math.PI) / Math.sqrt(a * c) },
   lifecycle: { total: ([c]) => [130, 54, 400, 506][c], stages: ([c]) => [3, 4, 4, 3][c] },
-  development: { len: ([w]) => ({ 8: 30, 12: 60, 20: 250, 28: 370, 36: 470, 40: 500 })[w], mass: ([w]) => ({ 8: 4, 12: 14, 20: 300, 28: 1000, 36: 2600, 40: 3400 })[w], spurt: ([x]) => [12, 14][x] },
+  development: { len: ([w]) => ({ 8: 16, 12: 60, 20: 250, 28: 370, 36: 470, 40: 500 })[w], mass: ([w]) => ({ 8: 1, 12: 14, 20: 300, 28: 1000, 36: 2600, 40: 3400 })[w], spurt: ([x]) => [11, 13][x] },
   vessels: { vol: ([kg]) => (kg * 75) / 1000, plasma: ([kg, h]) => ((kg * 75) / 1000) * (1 - h / 100), speed: ([hr, v]) => ((70 * hr) / 60) / [3, 4500, 18][v] },
   excretion: { filtered: ([g]) => (g * 1440) / 1000, urine: ([w, sw]) => Math.max(0.5, w + 0.3 - sw - 0.6), reabs: ([u]) => (1 - u / 180) * 100 },
   ear: { limit: ([a]) => Math.max(8000, 20000 - 300 * Math.max(0, a - 10)), safe: ([d]) => 8 * 2 ** (-(d - 85) / 3), safe2: ([d]) => 8 * 2 ** (-(d - 85) / 3) },
@@ -140,7 +140,7 @@ const ROLE = [['青草', '生产者'], ['蝗虫', '初级消费者'], ['吃蝗�
 const LINK = [['隔离患者', '控制传染源'], ['戴口罩、勤洗手', '切断传播途径'], ['接种疫苗', '保护易感人群'], ['消毒、杀灭蚊蝇', '切断传播途径'], ['对密切接触者进行医学观察', '控制传染源'], ['锻炼身体、增强抵抗力', '保护易感人群']];
 const PROD = [['酵母菌', '酒精和二氧化碳'], ['乳酸菌', '乳酸'], ['醋酸菌', '醋酸']];
 const DEVS = [['子房', '果实'], ['胚珠', '种子'], ['受精卵', '胚'], ['子房壁', '果皮'], ['珠被', '种皮']];
-const BEH = { 蜘蛛结网: '先天性行为', 母鸡孵卵: '先天性行为', 蜜蜂采蜜: '先天性行为', 黑猩猩用树枝钓白蚁: '学习行为', 小狗学算算术: '学习行为', 鹦鹉学舌: '学习行为', 蚂蚁分工合作: '社会行为', 狒狒的首领与等级: '社会行为', 蜜蜂跳舞传递信息: '社会行为', 大山雀偷喝牛奶: '学习行为' };
+const BEH = { 蜘蛛结网: '先天性行为', 母鸡孵卵: '先天性行为', 蜜蜂采蜜: '先天性行为', 黑猩猩用树枝钓白蚁: '学习行为', 小狗算算术: '学习行为', 鹦鹉学舌: '学习行为', 蚂蚁分工合作: '社会行为', 狒狒的首领与等级: '社会行为', 蜜蜂跳舞传递信息: '社会行为', 大山雀偷喝牛奶: '学习行为' };
 const FOS = { 三叶虫: '寒武纪（约 5.4 亿年前）', 早期鱼类: '泥盆纪（约 4 亿年前）', 两栖类: '石炭纪（约 3.5 亿年前）', 巨型蕨类: '石炭纪（约 3.5 亿年前）', 恐龙: '中生代（约 2.5 亿 – 6600 万年前）', 始祖鸟: '中生代（约 2.5 亿 – 6600 万年前）', 哺乳动物繁盛: '新生代（6600 万年前至今）', 人类化石: '新生代（6600 万年前至今）' };
 const LACKD = [['维生素 A', '夜盲症'], ['维生素 C', '坏血病'], ['维生素 D 或钙', '佝偻病（儿童）'], ['维生素 B₁', '脚气病'], ['铁', '缺铁性贫血'], ['碘', '地方性甲状腺肿（大脖子病）']];
 const PROT = [['建立自然保护区', '就地保护'], ['建立动物园和植物园', '迁地保护'], ['建立濒危物种的基因库', '离体保护'], ['颁布《野生动物保护法》', '法制管理']];
@@ -169,7 +169,7 @@ const TEXT = {
   foodweb: { role: (p, a, q) => a === ROLE.find((x) => q.includes(`“${x[0]}”`))[1] },
   epidemic: { link: (p, a, q) => a === LINK.find((x) => q.includes(`“${x[0]}”`))[1], memory: (p, a) => a === '记忆细胞' },
   population: {},
-  lifecycle: { kind: ([c], a) => a === ['不完全变态', '完全变态', '变态发育', '不变态'][c], fert: ([c], a) => a === ['体内受精', '体内受精', '体外受精', '体内受精'][c], pupa: (p, a) => a === '蛹' },
+  lifecycle: { kind: ([c], a) => a === ['不完全变态发育', '完全变态发育', '变态发育', '没有变态，属于卵生、直接发育'][c], fert: ([c], a) => a === ['体内受精', '体内受精', '体外受精', '体内受精'][c], pupa: (p, a) => a === '蛹' },
   development: { fert: (p, a) => a === '输卵管', nutri: (p, a) => a === '胎盘和脐带' },
   vessels: { valve: (p, a) => a === '防止血液倒流', bleed: ([b], a) => a === ['近心端', '远心端', '自然止血或消毒包扎'][b] },
   excretion: { step: (p, a) => a.startsWith('肾小球的滤过'), gluc: (p, a) => a.startsWith('被肾小管全部重吸收') },
@@ -181,7 +181,7 @@ const TEXT = {
   skin: { hot: (p, a) => a.startsWith('皮肤血管舒张'), skin: (p, a) => a === '进行光合作用' },
   bones: { treat: ([t], a) => a === ['有弹性又坚硬', '变脆，易碎（只剩无机盐）', '变软，可以弯曲（只剩有机物）'][t], child: (p, a) => a.startsWith('有机物含量较多'), inorganic: (p, a) => a === '无机盐', joint: (p, a) => a.startsWith('关节面') },
   impact: { protect: (p, a, q) => a === PROT.find((x) => q.includes(`“${x[0]}”`))[1], cause: (p, a) => a === '光合作用增强' },
-  health: { sleep: ([age], a) => a === (age < 13 ? '9–12 小时' : '8–10 小时'), habit: (p, a) => a.startsWith('合理饮食') },
+  health: { sleep: ([age], a) => a === (age <= 12 ? '10–12 小时' : age <= 15 ? '9–11 小时' : '8–10 小时'), habit: (p, a) => a.startsWith('合理饮食') },
 };
 
 (async () => {
@@ -358,9 +358,10 @@ const TEXT = {
       const o = {}; const mono = (a, d = 1) => a.every((x, i) => i === 0 || (d > 0 ? x >= a[i - 1] - 1e-12 : x <= a[i - 1] + 1e-12));
       const L = M.lifecycle; o.life = { n: L.CYCLES.length, tot: [0, 1, 2, 3].map(L.total), pupa: [0, 1, 2, 3].map(L.hasPupa), kinds: L.CYCLES.map((c) => c.kind) };
       const D = M.development; const wk = Array.from({ length: 41 }, (_, i) => i);
-      let dd = 0; for (let a = 1; a < 17; a += 0.37) for (const sx of [0, 1]) { const h = 1e-3; const num = (D.height(a + h, sx) - D.height(a - h, sx)) / (2 * h); dd = Math.max(dd, Math.abs(num - D.velocity(a, sx))); }
+      let dd = 0; for (let a = 1.13; a < 17; a += 0.37) for (const sx of [0, 1]) { const h = 1e-3; const num = (D.height(a + h, sx) - D.height(a - h, sx)) / (2 * h); dd = Math.max(dd, Math.abs(num - D.velocity(a, sx))); }
       const vel = (sx) => { const a = Array.from({ length: 121 }, (_, i) => 6 + i / 10); const v = a.map((x) => D.velocity(x, sx)); return a[v.indexOf(Math.max(...v))]; };
       o.dev = { len: mono(wk.map(D.lengthAt)), mass: mono(wk.map(D.massAt)), nodes: D.FETUS.map(([w, l, m]) => [D.lengthAt(w) === l, D.massAt(w) === m]).flat(), phase: [0.5, 3, 8, 30].map(D.phase), dd, peaks: [vel(0), vel(1)], h18: [D.height(18, 0), D.height(18, 1)], h0: D.height(0, 0) };
+      const hh = (a, sx) => D.height(a, sx); o.heights = { g: [0, 2, 10, 18].map((a) => hh(a, 0)), b: [0, 2, 10, 18].map((a) => hh(a, 1)), spurt: [1, 2, 6, 10, 12].map((a) => [D.inSpurt(a, 0), D.inSpurt(a, 1)]), spurtB: [10, 12, 14, 16].map((a) => D.inSpurt(a, 1)), spurtG: [8, 10, 11, 12, 14].map((a) => D.inSpurt(a, 0)), fast: D.velocity(0.5, 0), mono: Array.from({ length: 181 }, (_, i) => i / 10).every((a) => hh(a + 0.1, 0) >= hh(a, 0) - 1e-9 && hh(a + 0.1, 1) >= hh(a, 1) - 1e-9), week8: [D.lengthAt(8), D.massAt(8), D.lengthAt(10), D.massAt(10)] };
       const V = M.vessels; o.ves = { prod: [0, 1, 2].map((v) => V.speed(75, v) * V.VESSELS[v][1] - V.flow(75)), order: [V.speed(75, 0), V.speed(75, 2), V.speed(75, 1)], vol: V.plasmaVolume(50, 45) + (V.bloodVolume(50) * 45) / 100 - V.bloodVolume(50), an: [V.anaemic(35), V.anaemic(36)], rbc: V.rbcPerUl(45), valves: V.VESSELS.map((x) => x[3]) };
       const X = M.excretion; o.exc = { f: X.filtered(), u: [X.urine(0.5, 3), X.urine(2, 0.5), X.urine(3, 0.5), X.urine(4, 0)], reabs: X.reabsorbed(1.5), glu: [X.glucoseInUrine(10), X.glucoseInUrine(15)], monoW: mono(Array.from({ length: 15 }, (_, i) => X.urine(0.5 + i * 0.25, 0.5))), factor: X.ureaFactor(1.5) };
       const E = M.ear; o.ear = { lim: [10, 30, 50, 70].map(E.upperLimit), monoLim: mono([5, 10, 20, 40, 60, 70].map(E.upperLimit), -1), aud: [E.audible(10, 10), E.audible(20, 10), E.audible(20000, 10), E.audible(20001, 10), E.audible(17000, 60)], safe: [E.safeHours(85), E.safeHours(88), E.safeHours(100)], path: E.PATH.length };
@@ -373,12 +374,21 @@ const TEXT = {
       o.skin = { bal, d: [Sk.dryLoss(34, 0), Sk.dryLoss(20, 0), Sk.dryLoss(20, 5)], st: [Sk.state(80, 0, 1), Sk.state(600, 30, 2), Sk.state(80, 20, 2)] };
       const Bo = M.bones; const ag = Array.from({ length: 76 }, (_, i) => 5 + i); o.bone = { mono: mono(ag.map(Bo.organic), -1), range: [Bo.organic(5), Bo.organic(12), Bo.organic(40), Bo.organic(80)], bend: [Bo.bend(20, 1), Bo.bend(20, 2), Bo.bend(8, 0) > Bo.bend(70, 0)], hard: Bo.hardness(20, 2) < Bo.hardness(20, 0) };
       const Im = M.impact; o.imp = { s: [Im.speciesLeft(0), Im.speciesLeft(0.9), Im.speciesLeft(1 - 0.5 ** 4)], mono: mono(Array.from({ length: 20 }, (_, i) => Im.speciesLeft(i / 20)), -1), c: [Im.co2(0, 50), Im.co2(10, 20) - Im.co2(10, 10) - (Im.co2(10, 10) - Im.co2(10, 0))], w: [Im.warming(560), Im.warming(280), Im.warming(1120)] };
-      const H = M.health; o.hl = { max: H.maxHr(14), z: [H.zone(90, 14), H.zone(130, 14), H.zone(160, 14), H.zone(190, 14)], t: H.target(14), sl: [H.sleepOk(12, 10), H.sleepOk(12, 7), H.sleepOk(15, 9), H.sleepOk(15, 11)] };
+      const H = M.health; o.hl = { max: H.maxHr(14), z: [H.zone(90, 14), H.zone(130, 14), H.zone(160, 14), H.zone(190, 14)], t: H.target(14), sl: [H.sleepOk(12, 10), H.sleepOk(12, 7), H.sleepOk(15, 9), H.sleepOk(15, 12)] };
       return o;
     });
     const near2 = (a, b, t = 1e-9) => Math.abs(a - b) <= t;
-    ok(r.life.n === 4 && r.life.tot.join() === '130,54,400,506' && r.life.pupa.join() === 'false,true,false,false' && r.life.kinds.join() === '不完全变态,完全变态,变态发育,不变态', 'A lifecycle: four life cycles with their total days; only the silkworm has a pupa; incomplete / complete metamorphosis');
-    ok(r.dev.len && r.dev.mass && r.dev.nodes.every(Boolean) && r.dev.phase.join() === '受精卵,胚胎,胎儿,胎儿' && r.dev.dd < 1e-4 && Math.abs(r.dev.peaks[0] - 12) <= 0.5 && Math.abs(r.dev.peaks[1] - 14) <= 0.5 && r.dev.h18[0] > 140 && r.dev.h18[0] < 200 && r.dev.h0 === 50, 'A development: fetal length and mass grow with the week and equal the table at its nodes, height is the integral of the growth speed (derivative check ' + r.dev.dd.toExponential(1) + '), the spurt peaks at 12 (girls) and 14 (boys)');
+    ok(r.life.n === 4 && r.life.tot.join() === '130,54,400,506' && r.life.pupa.join() === 'false,true,false,false' && r.life.kinds.join() === '不完全变态发育,完全变态发育,变态发育,没有变态，属于卵生、直接发育', 'A lifecycle: four life cycles with their total days; only the silkworm has a pupa; incomplete / complete metamorphosis');
+    ok(r.dev.len && r.dev.mass && r.dev.nodes.every(Boolean) && r.dev.phase.join() === '受精卵,胚胎,胎儿,胎儿' && r.dev.dd < 1e-4 && Math.abs(r.dev.peaks[0] - 11) <= 0.6 && Math.abs(r.dev.peaks[1] - 13) <= 0.6 && r.dev.peaks[0] < r.dev.peaks[1] && r.dev.h0 === 50, 'A development: fetal length and mass grow with the week and equal the table at its nodes, height is the integral of the growth speed (derivative check ' + r.dev.dd.toExponential(1) + '), the spurt peaks at about 11 (girls) and 13 (boys)');
+    { // verification finding 5 + 13: realistic heights (WHO / China medians) and the growth spurt only in puberty; the 8th week of the fetus
+      const H = r.heights, within = (x, lo, hi) => x >= lo && x <= hi;
+      ok(within(H.g[0], 48, 52) && within(H.b[0], 48, 52) && within(H.g[1], 84, 90) && within(H.b[1], 84, 90) && within(H.g[2], 134, 142) && within(H.b[2], 134, 142) && within(H.g[3], 156, 164) && within(H.b[3], 168, 176), `A development heights are realistic: birth ~50, 2 y ~87, 10 y ~138, 18 y girls ~160 / boys ~172 cm (${H.g.map((x) => x.toFixed(0))} / ${H.b.map((x) => x.toFixed(0))})`);
+      ok(H.spurt.slice(0, 3).every((x) => !x[0] && !x[1]) && !H.spurt[3][1], 'A development: no growth spurt at 1, 2 or 6 years (the quick growth of the first years is not the puberty spurt), and a 10-year-old boy is not in it yet');
+      ok(H.spurtG.join() === 'false,true,true,true,false' && H.spurtB.join() === 'false,true,true,false', 'A development: the spurt window of girls (about 10-12) comes earlier than that of boys (about 12-14): ' + H.spurtG + ' / ' + H.spurtB);
+      ok(H.fast > 10 && !H.spurt[0][0] && !H.spurt[0][1], 'A development: a baby grows fast (more than 10 cm a year) but that is not the spurt');
+      ok(H.mono, 'A development: the height never goes down');
+      ok(Math.abs(H.week8[0] - 16) <= 1 && Math.abs(H.week8[1] - 1) <= 0.5 && H.week8[2] > 25 && H.week8[2] < 45 && H.week8[3] > 3 && H.week8[3] < 7, 'A fetus: week 8 about 16 mm / 1 g, week 10 about 30 mm / 4 g (the old row of week 8 belongs to week 10)');
+    }
     ok(r.ves.prod.every((x) => near2(x, 0, 1e-9)) && r.ves.order[0] > r.ves.order[1] && r.ves.order[1] > r.ves.order[2] && near2(r.ves.vol, 0, 1e-9) && r.ves.an.join() === 'true,false' && near2(r.ves.rbc, 5e6) && r.ves.valves.join() === 'false,false,true', 'A vessels: blood speed x cross-section = flow (continuity), artery > vein > capillary, plasma + cells = blood volume, anaemia below 36 %, only veins have valves');
     ok(near2(r.exc.f, 180) && near2(r.exc.u[0], 0.5) && near2(r.exc.u[1], 1.2) && near2(r.exc.u[2], 2.2) && near2(r.exc.u[3], 3.7) && r.exc.reabs > 0.99 && r.exc.glu[0] === 0 && r.exc.glu[1] > 0 && r.exc.monoW && near2(r.exc.factor, 25 / 1.5 / 0.3, 1e-9), 'A excretion: 180 L of primary urine a day, urine volume from the water balance (never below 0.5 L) rising with drinking, over 99 % of the water reabsorbed, sugar in the urine only above 10 mmol/L');
     ok(r.ear.lim.join() === '20000,14000,8000,8000' && r.ear.monoLim && r.ear.aud.join() === 'false,true,true,false,false' && near2(r.ear.safe[0], 8) && near2(r.ear.safe[1], 4) && near2(r.ear.safe[2], 0.25) && r.ear.path === 6, 'A ear: the upper limit of hearing falls with age, 20 Hz - 20 kHz audible, 85 dB = 8 h and every 3 dB halves it, six parts on the sound path');
@@ -389,7 +399,7 @@ const TEXT = {
     ok(r.skin.bal === 0 && near2(r.skin.d[0], 0) && near2(r.skin.d[1], 8 * 14) && near2(r.skin.d[2], 8 * 0.5 * 14) && r.skin.st[0].startsWith('战栗') && r.skin.st[1].startsWith('排汗') && r.skin.st[2] === '体温平衡', 'A skin: heat made - heat lost through the skin = heat carried away by sweat (2.43 kJ/mL) in 150 settings, no sweat when the skin alone is enough');
     ok(r.bone.mono && near2(r.bone.range[0], 0.5) && near2(r.bone.range[1], 0.5) && near2(r.bone.range[2], 1 / 3, 1e-9) && near2(r.bone.range[3], 0.2, 1e-9) && r.bone.bend[0] === 0 && r.bone.bend[1] === 1 && r.bone.bend[2] && r.bone.hard, 'A bones: the organic share never rises with age (50 % at 12, 1/3 at 40, 20 % at 80), burned bone is brittle, acid-soaked bone bends, young bone bends more');
     ok(near2(r.imp.s[0], 1) && near2(r.imp.s[1], 0.1 ** 0.25) && near2(r.imp.s[2], 0.5, 1e-9) && r.imp.mono && r.imp.c[0] === 420 && near2(r.imp.c[1], 0, 1e-9) && near2(r.imp.w[0], 2) && r.imp.w[1] === 0 && near2(r.imp.w[2], 4), 'A impact: species left = (1 - lost)^0.25 (losing 15/16 of the area halves them), CO2 grows linearly with the years, 2 degrees for every doubling');
-    ok(r.hl.max === 206 && r.hl.z.join() === '热身（轻松）,中等强度,有氧锻炼,高强度（不宜持续）' && r.hl.t.join() === '144,175' && r.hl.sl.join() === 'true,false,true,false', 'A health: maximum heart rate 220 - age, four zones, target range 144-175 at 14, sleep ranges');
+    ok(r.hl.max === 206 && r.hl.z.join() === '热身（轻松）,中等强度,较高强度,高强度（不宜持续）' && r.hl.t.join() === '144,175' && r.hl.sl.join() === 'true,false,true,false', 'A health: maximum heart rate 220 - age, four zones, target range 144-175 at 14, sleep ranges');
   }
 
   // ---- the quiz generators ----
@@ -426,6 +436,23 @@ const TEXT = {
     // a text check that is wrong must be caught too
     const wt = chk('blood', r.blood.list.map((qz) => qz.map((q) => (q.kind === 'abo' ? { ...q, ans: q.choices[(q.a + 1) % 4], a: (q.a + 1) % 4 } : q))), false);
     ok(wt.bad > 0, 'A quiz: a deliberately wrong text answer (ABO) is caught by the independent table');
+    // verification finding 3: both 完全变态发育 and 不完全变态发育 ARE 变态发育; every development question must have exactly ONE true choice
+    {
+      const TRUTH = { 蝗虫: ['不完全变态发育', '变态发育'], 家蚕: ['完全变态发育', '变态发育'], 青蛙: ['变态发育'], 鸡: ['没有变态，属于卵生、直接发育', '直接发育（没有变态）'] };
+      // the statements that are true for an organism, written without the app: insects: their kind and the plain "变态发育" (which would make a second right choice); frog: 变态发育; chicken: no metamorphosis
+      let n = 0; const bad = [];
+      for (const qz of r.lifecycle.list) for (const q of qz) if (q.kind === 'kind') {
+        n++; const name = Object.keys(TRUTH).find((k) => q.q.startsWith(k));
+        const trueOnes = q.choices.filter((c) => TRUTH[name].includes(c) && !(name === '青蛙' && c === '直接发育（没有变态）'));
+        const wrongSemantics = name === '鸡' ? q.choices.filter((c) => c === '直接发育（没有变态）') : [];
+        const pool = name === '蝗虫' || name === '家蚕' ? q.choices.filter((c) => TRUTH[name].includes(c)) : trueOnes;
+        if (pool.length !== 1 || pool[0] !== q.ans || wrongSemantics.length) bad.push(name + ': ' + q.choices.join('/'));
+      }
+      ok(n >= 250 && bad.length === 0, `A lifecycle quiz: exactly one right choice for every organism over 300 seeds (${n} questions of the development kind) ${bad.slice(0, 2)}`);
+      const old = r.lifecycle.list.flat().filter((q) => q.kind === 'kind' && /^(蝗虫|家蚕)/.test(q.q) && q.choices.includes('变态发育'));
+      ok(old.length === 0, 'A lifecycle quiz: for the silkworm and the locust the bare 变态发育 is never offered as a wrong choice');
+      const names = new Set(r.lifecycle.list.flat().filter((q) => q.kind === 'kind').map((q) => Object.keys(TRUTH).find((k) => q.q.startsWith(k)))); ok(names.size === 4, 'A lifecycle quiz: all four organisms are asked');
+    }
   }
 
   // =====================================================================================  B. THE PAGES
@@ -441,7 +468,7 @@ const TEXT = {
     ok(cards.length === IDS.length && IDS.every((id) => cards.some((c) => c.id === id)) && cards.every((c) => c.icon && /实验任务 0 \/ \d/.test(c.text)), `B ${IDS.length} cards, each with its drawn icon and "实验任务 0 / n"`);
     const groups = await page.evaluate(() => [...document.querySelectorAll('#bl-home > h2, #bl-home .pl-sc')].map((e) => (e.tagName === 'H2' ? 'H:' + e.textContent : e.dataset.sim)));
     const g8 = groups.indexOf('H:八年级');
-    ok(groups[0] === 'H:七年级' && g8 === 25 && groups.slice(1, g8).length === 24 && groups.slice(g8 + 1).length === 12 && groups[g8 + 1] === 'motion' && groups[1] === 'foodweb', 'B the lab starts with 七年级 (17 cards), then 八年级 (6): ' + groups.join(' '));
+    ok(groups[0] === 'H:七年级' && g8 === 24 && groups.slice(1, g8).length === 23 && groups.slice(g8 + 1).length === 13 && groups[g8 + 1] === 'bones' && groups[1] === 'foodweb', 'B the lab starts with 七年级 (17 cards), then 八年级 (the bones of 八上 · 动物的运动 now stand with the other 八年级 cards): ' + groups.join(' '));
     const chs = await page.evaluate(() => [...document.querySelectorAll('.pl-sc')].map((c) => c.dataset.chapter));
     ok(chs.every((c) => /^(七|八)(上|下) · /.test(c)) && new Set(chs).size >= 12, 'B each card names its textbook part (七上 / 七下 / 八上 / 八下) and chapter');
     ok(await page.isVisible('#bl-notes') && (await page.getAttribute('#bl-notes', 'href')) === '#/science/notes', 'B the lab links to the 知识总结 page');

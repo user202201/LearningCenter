@@ -97,6 +97,7 @@ function refMeta(a, b) {
     if (!usable(a) || !usable(b)) happens = false;
     else { happens = prodCells.some(isPpt); reasons = happens ? ['precipitate'] : []; if (prodCells.includes('-')) amb = true; }
   }
+  if (prodCells.includes('m')) amb = true;   // a slightly soluble PRODUCT (CaSO4, Ag2SO4, MgCO3, Ca(OH)2): never asked
   return { happens, reasons, ambiguous: amb };
 }
 const allCmps = () => { const out = []; for (const an of data.ions.an) for (const cat of data.ions.cat) { const s = data.ions.sol[an][data.ions.cat.indexOf(cat)]; if (s === '-' || (cat === 'H' && an === 'CO3') || (cat === 'NH4' && an === 'OH')) continue; out.push({ cat, an }); } return out; };
@@ -429,6 +430,13 @@ async function checkSpec(page, q) {
       if (e.happens ? decKinds[right] !== e.reasons[0] : right !== '不能反应') bad2.push('answer ' + q.key);
       void key;
     }
+    { // verification E1: a slightly soluble product (CaSO4, Ag2SO4, MgCO3, Ca(OH)2) is never asked: the stem pair, read from the solubility table, must not make one
+      const SLIGHT = ['CaSO4', 'Ag2SO4', 'MgCO3', 'Ca(OH)2']; let n = 0;
+      for (const q of dec) { const fm = /^(\S+) \+ (\S+)$/.exec(q.stem[1].f); if (!fm) continue; const pr = (q.expl.find((e) => e && e.f && /\+|→/.test(e.f)) || { f: '' }).f; if (q.choices[q.right][0] !== '不能反应' && SLIGHT.some((x) => pr.split(' + ').includes(x))) n++; }
+      ok(n === 0 && dec.length > 2900, `no generated 复分解 question has a slightly soluble product (${dec.length} questions, ${n} bad)`);
+      const kn2 = (a, b) => res[cm.findIndex((c) => c.cat === a[0] && c.an === a[1]) * cm.length + cm.findIndex((c) => c.cat === b[0] && c.an === b[1])];
+      ok([[['Na', 'OH'], ['Ca', 'Cl']], [['Ca', 'OH'], ['Na', 'SO4']], [['Ca', 'Cl'], ['Na', 'SO4']], [['Ag', 'NO3'], ['Na', 'SO4']], [['Mg', 'Cl'], ['Na', 'CO3']], [['H', 'SO4'], ['Ca', 'NO3']]].every(([a, b]) => kn2(a, b)[2] === true), 'the judge marks the 46-pair family of the report (NaOH+CaCl2, Ca(OH)2+Na2SO4, CaCl2+Na2SO4, AgNO3+Na2SO4, MgCl2+Na2CO3, H2SO4+Ca(NO3)2) as ambiguous');
+    }
     ok(dec.length > 2900 && bad2.length === 0, `generated 复分解 questions: answer = independent rule, no ambiguous pair asked (${dec.length}) ${bad2.slice(0, 3)}`);
     const yesShare = dec.filter((q) => q.choices[q.right][0] !== '不能反应').length / dec.length; ok(yesShare > 0.35 && yesShare < 0.65, `about half of the questions are "yes" (${(yesShare * 100).toFixed(0)} %)`);
     function formulaOfCmp(c) { const ch = CHARGE[c.cat], ac = -CHARGE[c.an]; const cf = { Fe2: 'Fe', Fe3: 'Fe' }[c.cat] || c.cat; return crossF(cf, ch, c.an, ac); }
@@ -626,7 +634,7 @@ async function checkSpec(page, q) {
       else if (m.kind === 'pure') { const bm = m.w * m.p / 100 * W(m.b) / W(m.a); if (!near(q.steps[0].answer, m.w * m.p / 100) || !near(q.steps[1].answer, bm) || !l.some((t) => t.f === m.a) || !rr.some((t) => t.f === m.b)) bad.push('pure ' + m.rx); const st = unsub(q.stem[2]); if (!st.includes(`${+m.w.toFixed(2)} g`) || !st.includes(`${m.p}%`)) bad.push('pure stem'); }
       else if (m.kind === 'yield') { const th = m.given * W(m.b) / W(m.a); if (!near(q.steps[0].answer, th) || !near(q.steps[1].answer, th * m.y / 100) || !rr.some((t) => t.f === m.b) || !l.some((t) => t.f === m.a)) bad.push('yield ' + m.rx); }
       else if (m.kind === 'excess') { const need = m.given * W(m.b) / W(m.a); if (!near(q.steps[0].answer, need) || !near(q.steps[1].answer, m.B - need) || !(m.B > need) || !l.some((t) => t.f === m.a) || !l.some((t) => t.f === m.b) || m.a === m.b) bad.push('excess ' + m.rx); }
-      else if (m.kind === 'loss') { const gm = m.w - m.w2; const reactant = m.given; if (!near(q.steps[0].answer, gm) || !near(gm, m.given * W(m.g) / W(m.a)) || !near(q.steps[1].answer, reactant) || !near(q.steps[2].answer, reactant / m.w * 100) || l.length !== 1 || !(m.w2 < m.w) || !(m.p > 0 && m.p < 100)) bad.push('loss ' + m.rx); }
+      else if (m.kind === 'loss') { if (/Hg/.test(m.a + m.rx) || m.rx === 'r010' || m.rx === 'r021') bad.push('loss residue is not a solid ' + m.rx); const gm = m.w - m.w2; const reactant = m.given; if (!near(q.steps[0].answer, gm) || !near(gm, m.given * W(m.g) / W(m.a)) || !near(q.steps[1].answer, reactant) || !near(q.steps[2].answer, reactant / m.w * 100) || l.length !== 1 || !(m.w2 < m.w) || !(m.p > 0 && m.p < 100)) bad.push('loss ' + m.rx); }
       else if (m.kind === 'sollast') { const sm = m.given * m.sc * mass(m.salt) / W(m.a); const cm2 = m.given * m.cc * 44 / W(m.a); const tot = m.given + m.W - cm2; if (!near(q.steps[0].answer, sm) || !near(q.steps[1].answer, cm2) || !near(q.steps[2].answer, sm / tot * 100) || !(m.W > m.given * T(m.acid).c * mass(m.acid) / W(m.a))) bad.push('sollast ' + m.rx); }
       for (const s of q.steps) if (!Number.isFinite(s.answer) || s.answer <= 0) bad.push('answer ' + m.kind);
       const dec = (x) => Math.abs(x * 100 - Math.round(x * 100)) < 1e-6;

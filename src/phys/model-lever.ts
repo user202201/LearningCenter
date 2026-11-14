@@ -16,7 +16,7 @@ export function quiz(rng: () => number): Q[] {
   const F1b = pick(rng, [2, 3, 4, 6]), L1b = pick(rng, [10, 20, 30]), F2b = pick(rng, [1, 2, 3]);
   const a = pick(rng, [[30, 10], [10, 30], [20, 20]]);
   const Fl = pick(rng, [300, 600, 900]), la = pick(rng, [1.2, 1.5, 2]), lb = pick(rng, [0.3, 0.5, 0.4]);
-  const pair = pick(rng, [[3, 20, 2, 25], [4, 30, 5, 20], [2, 40, 3, 20]]);
+  const pair = pick(rng, [[3, 20, 2, 25], [4, 30, 5, 20], [2, 40, 3, 20], [2, 30, 3, 20], [2, 20, 3, 25], [1, 40, 2, 30], [3, 20, 4, 15], [5, 10, 2, 25]]);
   const [n1, d1, n2, d2] = pair;
   const state = n1 * d1 > n2 * d2 ? "左端下沉" : n1 * d1 < n2 * d2 ? "右端下沉" : "保持水平平衡";
   const kind = a[0] > a[1] ? "省力杠杆" : a[0] < a[1] ? "费力杠杆" : "等臂杠杆";

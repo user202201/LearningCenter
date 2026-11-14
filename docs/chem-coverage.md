@@ -39,7 +39,7 @@ Written question banks (lab safety, life, uses, atoms, gas drying ...) are **con
   especially every phenomenon sentence, the conditions of each reaction, the solubility table cells (microsoluble CaSO4, Ag2SO4, MgCO3 are treated as "precipitate" when produced
   and as "not a reactant" when used, except Ca(OH)2), the solubility numbers, the grade placement of reactions and questions, and the usual-ion list of the atoms.
 - The 复分解 judge is a teaching rule (precipitate, gas or water; reactants soluble). Pairs that textbooks treat differently (a "-" cell of the table, a slightly soluble reactant OR product) are
-  never asked: this includes every question of 推断 / 除杂 / 酸碱盐的通性 that would involve CaSO4, Ag2SO4, MgCO3 or Ca(OH)2 as a product.
+  never asked. `metathesis()` itself marks a pair `ambiguous` when a product cell of the table is "m" (CaSO4, Ag2SO4, MgCO3, Ca(OH)2 as a PRODUCT; about 46 reactant pairs such as NaOH + CaCl2, CaCl2 + Na2SO4, AgNO3 + Na2SO4), so the 复分解 mode, 推断, 除杂 and 酸碱盐的通性 never ask them (81-chem checks 3000 generated 复分解 questions). In 根据方程式计算 "mass loss" the residue must be a solid (HgO, whose mercury is liquid, is not used).
 - 推断 and 除杂 answers are unique **among the choices shown / for the assumptions stated** (reagents "in the right amount", flowchart reagents "in excess", slightly soluble = soluble in the
   flow simulator). A clever student may know a second possible reagent that is not offered; that is not an error of the question.
 - The ion simulator of the flowcharts knows precipitation of "insoluble" cells, gas and water formation and metal displacement; it does not know complexes, amphoteric hydroxides
