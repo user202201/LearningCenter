@@ -12,17 +12,27 @@
  */
 
 interface CapGlobal { isNativePlatform?: () => boolean; getPlatform?: () => string }
+/** the HarmonyOS NEXT shell (harmony/, ArkWeb) hands the page this object (javaScriptProxy): every method returns "ok" or "error: ..." */
+interface HarmonyGlobal { printPage(name: string): string; saveFile(name: string, mime: string, base64: string): string; exitApp(): string }
 const cap = (): CapGlobal | undefined => (window as unknown as { Capacitor?: CapGlobal }).Capacitor;
+const harmony = (): HarmonyGlobal | undefined => { try { return (window as unknown as { HarmonyBridge?: HarmonyGlobal }).HarmonyBridge; } catch { return undefined; } };
 
 /** true only inside the iOS / Android app (Capacitor injects window.Capacitor before the page loads) */
-export const isNative = (): boolean => { try { return !!cap()?.isNativePlatform?.(); } catch { return false; } };
-export const platform = (): "ios" | "android" | "web" => { try { const p = cap()?.getPlatform?.(); return p === "ios" || p === "android" ? p : "web"; } catch { return "web"; } };
+export const isCapacitor = (): boolean => { try { return !!cap()?.isNativePlatform?.(); } catch { return false; } };
+export const isHarmony = (): boolean => typeof harmony()?.printPage === "function";
+/** inside any native shell (iOS, Android, HarmonyOS) */
+export const isNative = (): boolean => isCapacitor() || isHarmony();
+export const platform = (): "ios" | "android" | "harmony" | "web" => {
+  if (isHarmony()) return "harmony";
+  try { const p = cap()?.getPlatform?.(); return p === "ios" || p === "android" ? p : "web"; } catch { return "web"; }
+};
 
 export type SaveResult = "shared" | "downloaded" | "cancelled" | "error";
 
 /** Prints the page that is shown (the practice sheet, the story sheets, the certificate: their @media print rules decide what comes out). */
 export async function printPage(name = "学习乐园"): Promise<void> {
-  if (isNative()) {
+  if (isHarmony()) { harmony()?.printPage(name); return; }
+  if (isCapacitor()) {
     try {
       const { registerPlugin } = await import("@capacitor/core");
       const P = registerPlugin<{ print(o: { name: string }): Promise<void> }>("PrintPage");
@@ -42,7 +52,10 @@ const toBase64 = (bytes: Uint8Array): string => {
 /** Gives the person a file: a download on the web, the system share sheet in the app. */
 export async function saveFile(data: Uint8Array | Blob, filename: string, mime = "application/octet-stream"): Promise<SaveResult> {
   const bytes = data instanceof Blob ? new Uint8Array(await data.arrayBuffer()) : data;
-  if (isNative()) {
+  if (isHarmony()) {
+    try { return harmony()!.saveFile(filename, mime, toBase64(bytes)) === "ok" ? "shared" : "error"; } catch { return "error"; }
+  }
+  if (isCapacitor()) {
     try {
       const [{ Filesystem, Directory }, { Share }] = await Promise.all([import("@capacitor/filesystem"), import("@capacitor/share")]);
       const w = await Filesystem.writeFile({ path: filename, data: toBase64(bytes), directory: Directory.Cache, recursive: true });
@@ -90,6 +103,10 @@ export async function initNative(): Promise<void> {
   if (started || !isNative()) return;
   started = true;
   document.documentElement.classList.add("native", `native-${platform()}`);
+  if (isHarmony()) {   // the shell's back key asks the page what to do (Index.ets onBackPress)
+    (window as unknown as { __nativeBack?: () => void }).__nativeBack = () => backStep({ exit: () => void harmony()?.exitApp() });
+    return;
+  }
   try {
     const { App } = await import("@capacitor/app");
     await App.addListener("backButton", () => backStep({ exit: () => void App.exitApp() }));

@@ -1,0 +1,8 @@
+{
+  "string": [
+    { "name": "module_desc", "value": "学习乐园" },
+    { "name": "EntryAbility_desc", "value": "学习乐园" },
+    { "name": "EntryAbility_label", "value": "学习乐园" },
+    { "name": "camera_reason", "value": "用相机扫描登录二维码，或为孩子拍摄头像。照片只保存在本设备上。" }
+  ]
+}

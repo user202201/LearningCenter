@@ -1,0 +1,662 @@
+{
+ "长江": {
+  "en": "Yangtze River",
+  "fr": "Yangzi Jiang (Yangtsé)"
+ },
+ "黄河": {
+  "en": "Yellow River",
+  "fr": "fleuve Jaune"
+ },
+ "珠江": {
+  "en": "Pearl River",
+  "fr": "fleuve des Perles"
+ },
+ "黑龙江": {
+  "en": "Heilongjiang (Amur)",
+  "fr": "Heilongjiang (Amour)"
+ },
+ "塔里木河": {
+  "en": "Tarim River",
+  "fr": "Tarim"
+ },
+ "京杭大运河": {
+  "en": "Beijing-Hangzhou Grand Canal",
+  "fr": "Grand Canal Pékin-Hangzhou"
+ },
+ "珠穆朗玛峰": {
+  "en": "Mount Everest (Qomolangma)",
+  "fr": "Everest (Qomolangma)"
+ },
+ "青藏高原": {
+  "en": "Qinghai-Tibet Plateau",
+  "fr": "plateau Qinghai-Tibet"
+ },
+ "黄土高原": {
+  "en": "Loess Plateau",
+  "fr": "plateau de lœss"
+ },
+ "内蒙古高原": {
+  "en": "Inner Mongolia Plateau",
+  "fr": "plateau de Mongolie intérieure"
+ },
+ "云贵高原": {
+  "en": "Yunnan-Guizhou Plateau",
+  "fr": "plateau Yunnan-Guizhou"
+ },
+ "塔里木盆地": {
+  "en": "Tarim Basin",
+  "fr": "bassin du Tarim"
+ },
+ "准噶尔盆地": {
+  "en": "Junggar Basin",
+  "fr": "bassin du Junggar"
+ },
+ "柴达木盆地": {
+  "en": "Qaidam Basin",
+  "fr": "bassin du Qaidam"
+ },
+ "四川盆地": {
+  "en": "Sichuan Basin",
+  "fr": "bassin du Sichuan"
+ },
+ "东北平原": {
+  "en": "Northeast Plain",
+  "fr": "plaine du Nord-Est"
+ },
+ "华北平原": {
+  "en": "North China Plain",
+  "fr": "plaine de Chine du Nord"
+ },
+ "长江中下游平原": {
+  "en": "middle and lower Yangtze Plain",
+  "fr": "plaine du moyen et bas Yangzi"
+ },
+ "秦岭": {
+  "en": "Qinling",
+  "fr": "Qinling"
+ },
+ "淮河": {
+  "en": "Huaihe",
+  "fr": "Huaihe"
+ },
+ "天山": {
+  "en": "Tianshan",
+  "fr": "Tianshan"
+ },
+ "昆仑山": {
+  "en": "Kunlun Mountains",
+  "fr": "monts Kunlun"
+ },
+ "南岭": {
+  "en": "Nanling",
+  "fr": "Nanling"
+ },
+ "祁连山": {
+  "en": "Qilian Mountains",
+  "fr": "monts Qilian"
+ },
+ "横断山": {
+  "en": "Hengduan Mountains",
+  "fr": "monts Hengduan"
+ },
+ "大兴安岭": {
+  "en": "Greater Khingan Range",
+  "fr": "Grand Khingan"
+ },
+ "太行山": {
+  "en": "Taihang Mountains",
+  "fr": "monts Taihang"
+ },
+ "巫山": {
+  "en": "Wu Mountains",
+  "fr": "monts Wu"
+ },
+ "雪峰山": {
+  "en": "Xuefeng Mountains",
+  "fr": "monts Xuefeng"
+ },
+ "泰山": {
+  "en": "Mount Tai",
+  "fr": "mont Tai"
+ },
+ "华山": {
+  "en": "Mount Hua",
+  "fr": "mont Hua"
+ },
+ "嵩山": {
+  "en": "Mount Song",
+  "fr": "mont Song"
+ },
+ "鄱阳湖": {
+  "en": "Poyang Lake",
+  "fr": "lac Poyang"
+ },
+ "青海湖": {
+  "en": "Qinghai Lake",
+  "fr": "lac Qinghai"
+ },
+ "渤海": {
+  "en": "Bohai Sea",
+  "fr": "mer de Bohai"
+ },
+ "黄海": {
+  "en": "Yellow Sea",
+  "fr": "mer Jaune"
+ },
+ "东海": {
+  "en": "East China Sea",
+  "fr": "mer de Chine orientale"
+ },
+ "南海": {
+  "en": "South China Sea",
+  "fr": "mer de Chine méridionale"
+ },
+ "北京": {
+  "en": "Beijing",
+  "fr": "Pékin"
+ },
+ "天津": {
+  "en": "Tianjin",
+  "fr": "Tianjin"
+ },
+ "上海": {
+  "en": "Shanghai",
+  "fr": "Shanghai"
+ },
+ "重庆": {
+  "en": "Chongqing",
+  "fr": "Chongqing"
+ },
+ "香港": {
+  "en": "Hong Kong",
+  "fr": "Hong Kong"
+ },
+ "澳门": {
+  "en": "Macao",
+  "fr": "Macao"
+ },
+ "台湾": {
+  "en": "Taiwan",
+  "fr": "Taïwan"
+ },
+ "内蒙古": {
+  "en": "Inner Mongolia",
+  "fr": "Mongolie intérieure"
+ },
+ "广西": {
+  "en": "Guangxi",
+  "fr": "Guangxi"
+ },
+ "西藏": {
+  "en": "Tibet",
+  "fr": "Tibet"
+ },
+ "宁夏": {
+  "en": "Ningxia",
+  "fr": "Ningxia"
+ },
+ "新疆": {
+  "en": "Xinjiang",
+  "fr": "Xinjiang"
+ },
+ "海南岛": {
+  "en": "Hainan Island",
+  "fr": "île de Hainan"
+ },
+ "台湾岛": {
+  "en": "Taiwan Island",
+  "fr": "île de Taïwan"
+ },
+ "钓鱼岛": {
+  "en": "Diaoyu Islands",
+  "fr": "îles Diaoyu"
+ },
+ "南海诸岛": {
+  "en": "South China Sea Islands",
+  "fr": "îles de la mer de Chine méridionale"
+ },
+ "漠河": {
+  "en": "Mohe",
+  "fr": "Mohe"
+ },
+ "曾母暗沙": {
+  "en": "Zengmu Ansha",
+  "fr": "Zengmu Ansha"
+ },
+ "三江源": {
+  "en": "Sanjiangyuan (Three-River Source Region)",
+  "fr": "Sanjiangyuan (région des sources des Trois Fleuves)"
+ },
+ "长三角": {
+  "en": "Yangtze River Delta",
+  "fr": "delta du Yangzi"
+ },
+ "珠三角": {
+  "en": "Pearl River Delta",
+  "fr": "delta de la rivière des Perles"
+ },
+ "京津冀": {
+  "en": "Beijing-Tianjin-Hebei",
+  "fr": "Pékin-Tianjin-Hebei"
+ },
+ "热带雨林气候": {
+  "en": "tropical rainforest climate",
+  "fr": "climat équatorial (forêt tropicale humide)"
+ },
+ "热带草原气候": {
+  "en": "tropical savanna climate",
+  "fr": "climat de savane tropicale"
+ },
+ "热带沙漠气候": {
+  "en": "tropical desert climate",
+  "fr": "climat désertique tropical"
+ },
+ "地中海气候": {
+  "en": "Mediterranean climate",
+  "fr": "climat méditerranéen"
+ },
+ "温带海洋性气候": {
+  "en": "temperate maritime climate",
+  "fr": "climat tempéré océanique"
+ },
+ "温带大陆性气候": {
+  "en": "temperate continental climate",
+  "fr": "climat tempéré continental"
+ },
+ "季风气候": {
+  "en": "monsoon climate",
+  "fr": "climat de mousson"
+ },
+ "本初子午线": {
+  "en": "prime meridian",
+  "fr": "méridien d'origine"
+ },
+ "回归线": {
+  "en": "tropic",
+  "fr": "tropique"
+ },
+ "极圈": {
+  "en": "polar circle",
+  "fr": "cercle polaire"
+ },
+ "等高线": {
+  "en": "contour line",
+  "fr": "courbe de niveau"
+ },
+ "比例尺": {
+  "en": "scale",
+  "fr": "échelle"
+ },
+ "海拔": {
+  "en": "altitude",
+  "fr": "altitude"
+ },
+ "板块": {
+  "en": "plate",
+  "fr": "plaque"
+ },
+ "水循环": {
+  "en": "water cycle",
+  "fr": "cycle de l'eau"
+ },
+ "生产者": {
+  "en": "producer",
+  "fr": "producteur"
+ },
+ "消费者": {
+  "en": "consumer",
+  "fr": "consommateur"
+ },
+ "分解者": {
+  "en": "decomposer",
+  "fr": "décomposeur"
+ },
+ "食物链": {
+  "en": "food chain",
+  "fr": "chaîne alimentaire"
+ },
+ "食物网": {
+  "en": "food web",
+  "fr": "réseau trophique"
+ },
+ "生态系统": {
+  "en": "ecosystem",
+  "fr": "écosystème"
+ },
+ "生物圈": {
+  "en": "biosphere",
+  "fr": "biosphère"
+ },
+ "细胞": {
+  "en": "cell",
+  "fr": "cellule"
+ },
+ "细胞膜": {
+  "en": "cell membrane",
+  "fr": "membrane cellulaire"
+ },
+ "细胞质": {
+  "en": "cytoplasm",
+  "fr": "cytoplasme"
+ },
+ "细胞核": {
+  "en": "nucleus",
+  "fr": "noyau"
+ },
+ "细胞壁": {
+  "en": "cell wall",
+  "fr": "paroi cellulaire"
+ },
+ "液泡": {
+  "en": "vacuole",
+  "fr": "vacuole"
+ },
+ "叶绿体": {
+  "en": "chloroplast",
+  "fr": "chloroplaste"
+ },
+ "线粒体": {
+  "en": "mitochondrion",
+  "fr": "mitochondrie"
+ },
+ "染色体": {
+  "en": "chromosome",
+  "fr": "chromosome"
+ },
+ "基因": {
+  "en": "gene",
+  "fr": "gène"
+ },
+ "光合作用": {
+  "en": "photosynthesis",
+  "fr": "photosynthèse"
+ },
+ "呼吸作用": {
+  "en": "respiration",
+  "fr": "respiration cellulaire"
+ },
+ "蒸腾作用": {
+  "en": "transpiration",
+  "fr": "transpiration"
+ },
+ "气孔": {
+  "en": "stoma",
+  "fr": "stomate"
+ },
+ "导管": {
+  "en": "vessel",
+  "fr": "vaisseau"
+ },
+ "筛管": {
+  "en": "sieve tube",
+  "fr": "tube criblé"
+ },
+ "雄蕊": {
+  "en": "stamen",
+  "fr": "étamine"
+ },
+ "雌蕊": {
+  "en": "pistil",
+  "fr": "pistil"
+ },
+ "子房": {
+  "en": "ovary",
+  "fr": "ovaire"
+ },
+ "胚珠": {
+  "en": "ovule",
+  "fr": "ovule"
+ },
+ "传粉": {
+  "en": "pollination",
+  "fr": "pollinisation"
+ },
+ "受精": {
+  "en": "fertilisation",
+  "fr": "fécondation"
+ },
+ "心脏": {
+  "en": "heart",
+  "fr": "cœur"
+ },
+ "心房": {
+  "en": "atrium",
+  "fr": "oreillette"
+ },
+ "心室": {
+  "en": "ventricle",
+  "fr": "ventricule"
+ },
+ "动脉": {
+  "en": "artery",
+  "fr": "artère"
+ },
+ "静脉": {
+  "en": "vein",
+  "fr": "veine"
+ },
+ "毛细血管": {
+  "en": "capillary",
+  "fr": "capillaire"
+ },
+ "红细胞": {
+  "en": "red blood cell",
+  "fr": "globule rouge"
+ },
+ "白细胞": {
+  "en": "white blood cell",
+  "fr": "globule blanc"
+ },
+ "血小板": {
+  "en": "platelet",
+  "fr": "plaquette"
+ },
+ "肾单位": {
+  "en": "nephron",
+  "fr": "néphron"
+ },
+ "肾小球": {
+  "en": "glomerulus",
+  "fr": "glomérule"
+ },
+ "反射弧": {
+  "en": "reflex arc",
+  "fr": "arc réflexe"
+ },
+ "大脑": {
+  "en": "cerebrum",
+  "fr": "cerveau"
+ },
+ "小脑": {
+  "en": "cerebellum",
+  "fr": "cervelet"
+ },
+ "脑干": {
+  "en": "brain stem",
+  "fr": "tronc cérébral"
+ },
+ "视网膜": {
+  "en": "retina",
+  "fr": "rétine"
+ },
+ "晶状体": {
+  "en": "lens",
+  "fr": "cristallin"
+ },
+ "耳蜗": {
+  "en": "cochlea",
+  "fr": "cochlée"
+ },
+ "激素": {
+  "en": "hormone",
+  "fr": "hormone"
+ },
+ "胰岛素": {
+  "en": "insulin",
+  "fr": "insuline"
+ },
+ "腔肠动物": {
+  "en": "coelenterate",
+  "fr": "cnidaire (cœlentéré)"
+ },
+ "扁形动物": {
+  "en": "flatworm",
+  "fr": "plathelminthe (ver plat)"
+ },
+ "线形动物": {
+  "en": "roundworm",
+  "fr": "nématode (ver rond)"
+ },
+ "环节动物": {
+  "en": "annelid",
+  "fr": "annélide"
+ },
+ "软体动物": {
+  "en": "mollusc",
+  "fr": "mollusque"
+ },
+ "节肢动物": {
+  "en": "arthropod",
+  "fr": "arthropode"
+ },
+ "脊椎动物": {
+  "en": "vertebrate",
+  "fr": "vertébré"
+ },
+ "无脊椎动物": {
+  "en": "invertebrate",
+  "fr": "invertébré"
+ },
+ "两栖动物": {
+  "en": "amphibian",
+  "fr": "amphibien"
+ },
+ "爬行动物": {
+  "en": "reptile",
+  "fr": "reptile"
+ },
+ "鸟类": {
+  "en": "bird",
+  "fr": "oiseau"
+ },
+ "哺乳动物": {
+  "en": "mammal",
+  "fr": "mammifère"
+ },
+ "裸子植物": {
+  "en": "gymnosperm",
+  "fr": "gymnosperme"
+ },
+ "被子植物": {
+  "en": "angiosperm",
+  "fr": "angiosperme"
+ },
+ "单子叶植物": {
+  "en": "monocotyledon",
+  "fr": "monocotylédone"
+ },
+ "双子叶植物": {
+  "en": "dicotyledon",
+  "fr": "dicotylédone"
+ },
+ "孢子": {
+  "en": "spore",
+  "fr": "spore"
+ },
+ "遗传": {
+  "en": "heredity",
+  "fr": "hérédité"
+ },
+ "变异": {
+  "en": "variation",
+  "fr": "variation"
+ },
+ "显性": {
+  "en": "dominant",
+  "fr": "dominant"
+ },
+ "隐性": {
+  "en": "recessive",
+  "fr": "récessif"
+ },
+ "化石": {
+  "en": "fossil",
+  "fr": "fossile"
+ },
+ "自然选择": {
+  "en": "natural selection",
+  "fr": "sélection naturelle"
+ },
+ "传染源": {
+  "en": "source of infection",
+  "fr": "source d'infection"
+ },
+ "免疫": {
+  "en": "immunity",
+  "fr": "immunité"
+ },
+ "抗体": {
+  "en": "antibody",
+  "fr": "anticorps"
+ },
+ "显微镜": {
+  "en": "microscope",
+  "fr": "microscope"
+ },
+ "对照实验": {
+  "en": "controlled experiment",
+  "fr": "expérience témoin"
+ },
+ "大熊猫": {
+  "en": "giant panda",
+  "fr": "grand panda"
+ },
+ "朱鹮": {
+  "en": "crested ibis",
+  "fr": "ibis huppé"
+ },
+ "扬子鳄": {
+  "en": "Chinese alligator",
+  "fr": "alligator de Chine"
+ },
+ "东北虎": {
+  "en": "Siberian tiger",
+  "fr": "tigre de Sibérie"
+ },
+ "蚯蚓": {
+  "en": "earthworm",
+  "fr": "ver de terre"
+ },
+ "酵母菌": {
+  "en": "yeast",
+  "fr": "levure"
+ },
+ "乳酸菌": {
+  "en": "lactic acid bacteria",
+  "fr": "bactéries lactiques"
+ },
+ "霉菌": {
+  "en": "mould",
+  "fr": "moisissure"
+ },
+ "鼠妇": {
+  "en": "woodlouse",
+  "fr": "cloporte"
+ },
+ "水蚤": {
+  "en": "water flea (Daphnia)",
+  "fr": "daphnie"
+ },
+ "一国两制": {
+  "en": "one country, two systems",
+  "fr": "un pays, deux systèmes"
+ },
+ "一带一路": {
+  "en": "Belt and Road Initiative",
+  "fr": "initiative « la Ceinture et la Route »"
+ },
+ "西部大开发": {
+  "en": "Western Development Strategy",
+  "fr": "stratégie de développement de l'Ouest"
+ }
+}

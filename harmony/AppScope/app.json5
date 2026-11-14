@@ -1,0 +1,11 @@
+{
+  "app": {
+    // CHANGE the bundle name before the first AppGallery upload (it can not be changed afterwards): harmony/README.md, step 1
+    "bundleName": "com.example.learningcenter",
+    "vendor": "example",
+    "versionCode": 1,
+    "versionName": "1.0.0",
+    "icon": "$media:app_icon",
+    "label": "$string:app_name"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "app": {
+    "signingConfigs": [
+      // Signing material is NEVER committed (harmony/signing/ is in .gitignore). Create the files in DevEco Studio:
+      // File > Project Structure > Signing Configs > "Automatically generate signature" (debug, needs a Huawei ID, free)
+      // or the release certificate / profile from AppGallery Connect (harmony/README.md, step 5). DevEco fills this block in for you.
+      // {
+      //   "name": "default",
+      //   "type": "HarmonyOS",
+      //   "material": {
+      //     "certpath": "signing/learning-center.cer",
+      //     "storeFile": "signing/learning-center.p12",
+      //     "storePassword": "<ENCRYPTED BY DEVECO>",
+      //     "keyAlias": "debugKey",
+      //     "keyPassword": "<ENCRYPTED BY DEVECO>",
+      //     "profile": "signing/learning-center.p7b",
+      //     "signAlg": "SHA256withECDSA"
+      //   }
+      // }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS"
+      }
+    ],
+    "buildModeSet": [ { "name": "debug" }, { "name": "release" } ]
+  },
+  "modules": [
+    { "name": "entry", "srcPath": "./entry", "targets": [ { "name": "default", "applyToProducts": [ "default" ] } ] }
+  ]
+}

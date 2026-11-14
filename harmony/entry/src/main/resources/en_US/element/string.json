@@ -1,0 +1,8 @@
+{
+  "string": [
+    { "name": "module_desc", "value": "Learning Center" },
+    { "name": "EntryAbility_desc", "value": "Learning Center" },
+    { "name": "EntryAbility_label", "value": "Learning Center" },
+    { "name": "camera_reason", "value": "The camera scans the sign-in QR code or takes a picture for a child. Pictures stay on this device." }
+  ]
+}
