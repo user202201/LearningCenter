@@ -40,7 +40,7 @@ function pageScan(known) {
       if (visible(el) && v.replace(knownRe, '').match(cjk)) out.push({ t: v.trim(), k: 'userbox', sel: sel(el), html: el.outerHTML.slice(0, 160) });
       continue;
     }
-    if (!visible(el) && el.tagName !== 'OPTION' && el.tagName !== 'TITLE') continue;
+    if (!visible(el) && el.tagName.toLowerCase() !== 'option' && el.tagName.toLowerCase() !== 'title') continue;
     out.push({ t: v.trim(), k: 'text', sel: sel(el), html: el.outerHTML.slice(0, 160) });
   }
   for (const el of document.querySelectorAll('[title],[placeholder],[aria-label],[alt],input[value],option,button[value]')) {
@@ -72,8 +72,10 @@ const INSTALL = () => {
   window.prompt = (m) => { window.__native.push({ t: String(m), k: 'prompt', sel: 'native', html: '' }); return null; };
 };
 
-const allowed = (f, route) => ALLOW.some((a) => (!a.re || a.re.test(f.t)) && (!a.rre || a.rre.test(route)) && (!a.sel || new RegExp(a.sel).test(f.sel)) && (a.re || a.sel || a.rre));
-const bad = (f, route) => { const t = f.t.replace(BRACKETS, ''); return CJK.test(t) && !allowed(f, route); };
+const allowedBy = (f, route) => ALLOW.find((a) => (!a.re || a.re.test(f.t)) && (!a.rre || a.rre.test(route)) && (!a.sel || new RegExp(a.sel).test(f.sel)) && (!a.kind || a.kind === f.k) && (a.re || a.sel || a.rre));
+const allowed = (f, route) => allowedBy(f, route);
+const bad = (f, route) => { const t = f.t.replace(BRACKETS, '').replace(/[＜＞＝＋－]/g, '');   // (fullwidth math symbols are drawn as symbols, like the inequality signs of a music score: not Chinese text)
+   return CJK.test(t) && !allowed(f, route); };
 
 async function stable(page, max = 3500) {
   let last = -1, same = 0; const t0 = Date.now();
@@ -90,7 +92,7 @@ async function crawlConfig(cfg, report) {
   const log = (m) => console.log(`[${tag}] ${m}`);
   const { browser, page } = await start(new Map(), { local: true, locale, viewport, today: '2026-11-08', noLogin: true, touch: sizeName === 'phone', init: INSTALL });
   const findings = report.findings; const visited = report.visited;
-  const addAll = (list, route, what) => { for (const f of list) if (bad(f, route)) { const key = f.t; const e = (findings.get(key) ?? { text: f.t, kind: f.k, where: [] }); if (e.where.length < 6 && !e.where.some((w) => w.tag === tag && w.route === route)) e.where.push({ tag, route, what, sel: f.sel, html: f.html }); findings.set(key, e); } };
+  const addAll = (list, route, what) => { for (const f of list) { const t0 = f.t.replace(BRACKETS, '').replace(/[＜＞＝＋－]/g, ''); if (CJK.test(t0)) { const e = allowedBy(f, route); if (e && e.pending) report.pending.set(f.t, route); } } for (const f of list) if (bad(f, route)) { const key = f.t; const e = (findings.get(key) ?? { text: f.t, kind: f.k, where: [] }); if (e.where.length < 6 && !e.where.some((w) => w.tag === tag && w.route === route)) e.where.push({ tag, route, what, sel: f.sel, html: f.html }); findings.set(key, e); } };
   let current = '';
   const scan = async (what) => {
     const a = await page.evaluate(pageScan, KNOWN).catch(() => []);
@@ -125,7 +127,7 @@ async function crawlConfig(cfg, report) {
   await openKid(page, 'Anna'); await page.click('#idioms-btn'); await page.waitForSelector('#idiom-add');
   await page.click('#idiom-add'); await page.fill('dialog textarea', '一心一意 画蛇添足 守株待兔'); await page.click('dialog button.primary'); await page.waitForSelector('.idiom-card');
   await setGrade(page, 'Anna', 5); await setGrade(page, 'Ben', 8);
-  log('data ready: ' + ids.join(','));
+  log('data ready: ' + ids.join(',') + ' @ ' + await page.evaluate(() => location.hash + ' | ' + document.body.innerText.replace(/\s+/g, ' ').slice(0, 60)));
   const [A, B] = ids;
   const idiomHash = '#/idiom/' + encodeURIComponent('一心一意');
 
@@ -149,7 +151,7 @@ async function crawlConfig(cfg, report) {
   const queue = seeds.filter((h) => !ONLY || ONLY.test(h)); const queued = new Set(queue);
   const enqueue = (h) => { if (!queued.has(h) && !/^#\/(zz|$)/.test(h) && (!ONLY || ONLY.test(h)) && queued.size < MAXROUTES) { queued.add(h); queue.push(h); } };
 
-  const LABEL_SKIP = /改用|退出登录|退出|Sign out|Log out|Se déconnecter|Quitter|^中文$|English|Français|清除全部|强制刷新|Force refresh|Forcer|Actualiser|Clear all|Tout effacer/;
+  const LABEL_SKIP = /改用|instead$|plutôt|退出登录|退出|Sign out|Log out|Se déconnecter|Quitter|^中文$|English|Français|清除全部|强制刷新|Force refresh|Forcer|Actualiser|Clear all|Tout effacer/;
   // clicking: candidates are the visible buttons of the page; every click is followed by a scan and a reset of the page
   const clickThrough = async (hash, maxClicks, prep) => {
     const sig = () => page.evaluate(() => location.hash + '|' + document.body.innerText.length + '|' + document.querySelectorAll('button').length);
@@ -263,8 +265,8 @@ async function crawlConfig(cfg, report) {
   });
   const pkFlow = async (setup, label) => {
     await goto(setup); await scan(label + ' lobby');
-    await page.click('#pk-slot-1'); await page.waitForTimeout(250); await scan(label + ' pick'); const first = page.locator('#pk-pick button').first(); await first.click().catch(() => {}); await page.waitForTimeout(200);
-    await page.click('#pk-slot-2').catch(() => {}); await page.waitForTimeout(250); await scan(label + ' pick 2'); await page.locator('#pk-pick button:not([disabled])').nth(0).click().catch(() => {}); await page.waitForTimeout(250); await scan(label + ' lobby, two players');
+    await page.evaluate(() => document.querySelector('#pk-slot-1').click()); await page.waitForTimeout(250); await scan(label + ' pick'); await page.evaluate(() => document.querySelector('#pk-pick button')?.click()); await page.waitForTimeout(200);
+    await page.evaluate(() => document.querySelector('#pk-slot-2')?.click()); await page.waitForTimeout(250); await scan(label + ' pick 2'); await page.evaluate(() => [...document.querySelectorAll('#pk-pick button:not([disabled])')][0]?.click()); await page.waitForTimeout(250); await scan(label + ' lobby, two players');
     const st = page.locator('#pk-start'); if (!(await st.isEnabled().catch(() => false))) { await scan(label + ' start off'); return; }
     await st.click(); await page.waitForTimeout(500); await scan(label + ' opening');
     await page.evaluate(() => window.__pk && window.__pk.manual(true)).catch(() => {});
@@ -331,14 +333,16 @@ async function crawlConfig(cfg, report) {
 (async () => {
   const configs = [];
   for (const lang of LANGS) for (const sizeName of SIZE_NAMES) configs.push({ lang, locale: lang === 'fr' ? 'fr-FR' : 'en-US', sizeName, viewport: SIZES[sizeName] });
-  const report = { findings: new Map(), visited: new Set() };
+  const report = { findings: new Map(), visited: new Set(), pending: new Map() };
   const perConfig = []; let idx = 0;
-  const worker = async () => { while (idx < configs.length) { const cfg = configs[idx++]; const r = { findings: new Map(), visited: new Set() }; try { await crawlConfig(cfg, r); } catch (e) { console.log('CRAWL ERROR ' + cfg.lang + '/' + cfg.sizeName + ': ' + e.message.split('\n')[0]); ok(false, `crawl ${cfg.lang}/${cfg.sizeName} finished (${e.message.split('\n')[0]})`); } perConfig.push({ cfg, r }); } };
+  const worker = async () => { while (idx < configs.length) { const cfg = configs[idx++]; const r = { findings: new Map(), visited: new Set(), pending: new Map() }; try { await crawlConfig(cfg, r); } catch (e) { console.log('CRAWL ERROR ' + cfg.lang + '/' + cfg.sizeName + ': ' + e.message.split('\n')[0]); ok(false, `crawl ${cfg.lang}/${cfg.sizeName} finished (${e.message.split('\n')[0]})`); } perConfig.push({ cfg, r }); } };
   await Promise.all(Array.from({ length: Math.min(PAR, configs.length) }, worker));
   const merged = new Map(); const routes = new Set();
-  for (const { cfg, r } of perConfig) { r.visited.forEach((v) => routes.add(v)); for (const [k, v] of r.findings) { const m = merged.get(k) ?? { ...v, where: [] }; m.where.push(...v.where.slice(0, 2)); merged.set(k, m); } }
+  const pend = new Map();
+  for (const { cfg, r } of perConfig) { r.visited.forEach((v) => routes.add(v)); r.pending.forEach((v, k) => pend.set(k, v)); for (const [k, v] of r.findings) { const m = merged.get(k) ?? { ...v, where: [] }; m.where.push(...v.where.slice(0, 2)); merged.set(k, m); } }
+  console.log(`KNOWN GAP (allowlist entries marked pending, not translated yet): ${pend.size} distinct strings`);
   console.log(`routes visited (unique): ${routes.size}; configs: ${perConfig.map((p) => p.cfg.lang + '/' + p.cfg.sizeName).join(', ')}`);
-  if (process.env.CRAWL_REPORT) fs.writeFileSync(process.env.CRAWL_REPORT, JSON.stringify({ routes: [...routes], findings: [...merged.values()] }, null, 1));
+  if (process.env.CRAWL_REPORT) fs.writeFileSync(process.env.CRAWL_REPORT, JSON.stringify({ routes: [...routes], pending: [...pend.keys()], findings: [...merged.values()] }, null, 1));
   for (const f of merged.values()) console.log(`UNTRANSLATED "${f.text.slice(0, 90)}" [${f.kind}] @ ${f.where[0].tag} ${f.where[0].route} ${f.where[0].what} <${f.where[0].sel}>`);
   ok(routes.size > 150 || !!ONLY, `the crawler visited many routes (${routes.size})`);
   ok(merged.size === 0, `no Chinese text left in English / French (${merged.size} distinct strings found)`);

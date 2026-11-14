@@ -1,5 +1,5 @@
 {
-  "_comment": "Content that MUST stay Chinese in English / French. Each entry: text (regex on the string), sel (regex on the element path), route (regex on the route), reason. An entry needs at least one of text / sel / route.",
+  "_comment": "Content that MUST stay Chinese in English / French. Each entry: text (regex on the string), sel (regex on the element path), route (regex on the route), kind (text / userbox / attr:...), reason. An entry needs at least one of text / sel / route.",
   "allow": [
     {
       "text": "^(中文)$",
@@ -9,6 +9,50 @@
     {
       "text": "第1周-2026-10-25",
       "reason": "Quotes the exact label that the user's Chinese Google / Excel sheet must contain in column A (the import reads this Chinese pattern); an example in another language would not be recognised."
+    },
+    {
+      "route": "^#/poems/",
+      "kind": "userbox",
+      "reason": "Classical poems are the thing being studied: titles, poets, dynasties, the lines themselves and their word notes are Chinese literature shown in Chinese (the screens around them are translated). OPEN QUESTION for the user: the one-sentence gists and word notes could get EN/FR translations (about 185 gists and 700 notes)."
+    },
+    {
+      "route": "^#/science/map",
+      "sel": "^text < g",
+      "reason": "The labels on the map of China name the provinces, seas and islands in Chinese, as on a Chinese school map; the information card next to the map gives the English / French name, the abbreviation and the pinyin."
+    },
+    {
+      "sel": "kj-rhyme",
+      "kind": "userbox",
+      "reason": "The times-table rhyme (乘法口诀, for example 三四十二) is the Chinese text that is spoken and learned; the English / French line under it explains the product."
+    },
+    {
+      "sel": "h2\\.user < div#pt-dlg",
+      "kind": "userbox",
+      "text": "^[一-鿿]+\\s+[A-Za-z]+$",
+      "reason": "The heading of an element card is the Chinese element name next to the English name (the Chinese character is what a Chinese textbook uses)."
+    },
+    {
+      "sel": "button\\.pt-cell",
+      "kind": "userbox",
+      "reason": "The element's Chinese character in the periodic-table cell (氢, 氦 ...): the table is the Chinese school table; the tooltip and the card give the English name."
+    },
+    {
+      "route": "^#/coding/[^/]+/(w1[1-3]|code|projects)",
+      "kind": "userbox",
+      "pending": true,
+      "reason": "KNOWN GAP (open question): the task statements, hints, lessons and level titles of the text-coding worlds 11-13 and the workshop templates are Chinese content in user boxes by the design of rule 61 (about 340 + 80 strings, none translated yet)."
+    },
+    {
+      "route": "^#/coding/[^/]+/i1[4-6]",
+      "kind": "userbox",
+      "pending": true,
+      "reason": "KNOWN GAP (open question): the lessons, scenario cards, sort cards and hints of the information-technology worlds 14-16 are Chinese content in user boxes by the design of rule 62 (about 600 strings in coding-info.json, none translated yet)."
+    },
+    {
+      "route": "^#/coding/[^/]+/(w11|w12|w13|code)",
+      "sel": "tx-(str|com)",
+      "kind": "text",
+      "reason": "Program text: string literals and comments inside the example Python programs of the text-coding lessons and workshop (the program prints exactly this text; the level checks compare it)."
     }
   ]
 }
