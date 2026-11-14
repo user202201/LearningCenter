@@ -17,7 +17,7 @@ const rel = (a, b, tol = 1e-3) => Math.abs(a - b) <= tol * Math.max(1, Math.abs(
 
 // The translations of this page are written in src/i18n-extra/physlab.json and merged into src/i18n-data.ts by the person who integrates the change; until then (and
 // harmlessly afterwards) the test puts them into the page's translation tables itself.
-const extra = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/physlab.json'), 'utf8'));
+const extra = Object.assign({}, ...['physlab.json', 'physcontent.json'].map((f) => JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/' + f), 'utf8'))));   // (physcontent.json: the lessons, quiz questions and explanations, rule 66)
 const withExtra = async (t) => {
   const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[1]]))) + ');\n';
   await t.ctx.route('**/src/i18n-data.ts*', async (route) => { const r = await route.fetch(); await route.fulfill({ response: r, body: (await r.text()) + '\n' + add }); });
@@ -744,9 +744,24 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     }
     const uniq = [...new Set(left)];
     ok(uniq.length === 0, `E ${label}: no Chinese left outside content boxes (${uniq.length})${uniq.length ? '\n   ' + uniq.slice(0, 25).join('\n   ') : ''}`);
-    // a content box stays Chinese
+    // the lessons and the quiz texts are translated too (rule 66): 200 generated questions per simulation (40 seeds x 5) and every lesson paragraph contain no Chinese
+    {
+      const bad = await p.evaluate(async (ids) => {
+        const { tr } = await import('/src/i18n.ts');
+        const cjk = /[一-鿿]/; const out = [];
+        const rng = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+        for (const id of ids) {
+          location.hash = '#/science/physics/' + id; await new Promise((r) => setTimeout(r, 120));
+          const def = window.__phys.def;
+          for (const t of def.lesson) if (cjk.test(tr(t))) out.push(id + ' lesson: ' + tr(t).slice(0, 50));
+          for (let sd = 1; sd <= 40; sd++) for (const q of def.quiz(rng(sd * 7919))) for (const t of [q.q, q.why ?? '', ...q.choices]) if (cjk.test(tr(t))) out.push(id + ': ' + t.slice(0, 60) + ' => ' + tr(t).slice(0, 60));
+        }
+        return [...new Set(out)];
+      }, IDS);
+      ok(bad.length === 0, `E ${label}: 28 simulations x 200 generated quiz questions + lessons: no Chinese left (${bad.length})${bad.length ? '\n   ' + bad.slice(0, 25).join('\n   ') : ''}`);
+    }
     await p.evaluate(() => (location.hash = '#/science/physics/lens')); await p.waitForSelector('.pl-sim');
-    ok(/[一-鿿]/.test(await p.textContent('#pl-lesson')) && (await p.evaluate(() => !!document.querySelector('#pl-lesson.user'))), `E ${label}: the lesson text is content: it stays Chinese in a user box`);
+    ok(!/[一-鿿]/.test(await p.textContent('#pl-lesson')), `E ${label}: the lesson text is translated (no user box)`);
     // layout in this language on a phone and a tablet: nothing clipped
     let probs = [];
     for (const [w, hh] of [[390, 844], [320, 568], [820, 1180]]) { await p.setViewportSize({ width: w, height: hh }); for (const id of IDS) { await p.evaluate((id) => (location.hash = '#/science/physics/' + id), id); await p.waitForSelector('.pl-sim'); await p.waitForTimeout(40); const m = await p.evaluate(() => { const vis = (e) => !e.closest('[hidden]') && e.offsetParent !== null; return { over: document.documentElement.scrollWidth - innerWidth, clip: [...document.querySelectorAll('.pl-rl, .pl-lab, .pl-tt, .pl-opt, .pl-btn, .pl-card h3')].filter((e) => vis(e) && e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent.slice(0, 20)) }; }); if (m.over > 0 || m.clip.length) probs.push(`${id}@${w}: ${m.over} ${m.clip.join(',')}`); } }

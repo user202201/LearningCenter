@@ -215,24 +215,24 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
       return;
     }
     const q = qs[qi];
-    const qEl = h("p", { class: "pl-q user", id: "quiz-q" });
-    renderRich(qEl, q.q, false);
-    const why = h("p", { class: "pl-why user", id: "quiz-why", hidden: true });
+    const qEl = h("p", { class: "pl-q", id: "quiz-q" });
+    renderRich(qEl, tr(q.q), false);   // (content is translated, rule 66: the question text is a template, tr() fills the numbers back in)
+    const why = h("p", { class: "pl-why", id: "quiz-why", hidden: true });
     const next = h("button", { class: "primary", id: "quiz-next", hidden: true, onclick: () => { qi++; answered = false; drawQuiz(); } }, qi + 1 >= qs.length ? "查看得分" : "下一题");
-    const opts = q.choices.map((c, i) => h("button", { class: "mopt pl-qopt user", "data-i": String(i), onclick: () => {
+    const opts = q.choices.map((c, i) => h("button", { class: "mopt pl-qopt", "data-i": String(i), onclick: () => {
       if (answered) return;
       answered = true;
       if (i === q.a) score++;
       opts.forEach((b, j) => { b.classList.toggle("right", j === q.a); b.classList.toggle("wrong", j === i && i !== q.a); b.disabled = true; });
-      if (q.why) { renderRich(why, q.why, false); why.hidden = false; }
+      if (q.why) { renderRich(why, tr(q.why), false); why.hidden = false; }
       next.hidden = false;
-    } }, c));
+    } }, tr(c)));
     quizBox.append(h("p", { class: "muted small", id: "quiz-no" }, `第 ${qi + 1} / ${qs.length} 题`), qEl, h("div", { class: "pl-qopts" }, ...opts), why, next);
   };
 
   // ----- the page
-  const lesson = h("div", { class: "pl-lesson user", id: "pl-lesson" }, ...def.lesson.map((t) => { const p = h("p", {}); renderRich(p, t, false); return p; }));
-  const formulas = def.formulas?.length ? h("div", { class: "pl-formulas user", id: "pl-formulas" }, ...def.formulas.map((f) => { const d = h("div", { class: "pl-formula" }); renderTeX(d, f, f); return d; })) : null;
+  const lesson = h("div", { class: "pl-lesson", id: "pl-lesson" }, ...def.lesson.map((t) => { const p = h("p", {}); renderRich(p, tr(t), false); return p; }));
+  const formulas = def.formulas?.length ? h("div", { class: "pl-formulas", id: "pl-formulas" }, ...def.formulas.map((f) => { const d = h("div", { class: "pl-formula" }); renderTeX(d, f, f); return d; })) : null;
   const resetBtn = h("button", { class: "mopt pl-btn", id: "pl-reset", onclick: () => { stopPlay(); reset(); update(false, false); toast("已重置", 1500); } }, "重置");
   const actBtns = (def.actions ?? []).map((a) => h("button", { class: "mopt pl-btn pl-act", id: `pl-act-${a.id}`, onclick: () => { const ch = a.run(st); if (ch) for (const [k, v] of Object.entries(ch)) st[k] = v as number; def.derive?.(st, a.id); update(); } }, a.label));
   const stage = h("div", { class: "pl-stage" }, canvas, readBox);

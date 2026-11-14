@@ -7,8 +7,9 @@ android {
         applicationId "com.example.learningcenter"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        // set by the CI (VERSION_CODE = the run number, VERSION_NAME = the tag without "v"); packaging/README.md, "Version numbers"
+        versionCode (System.getenv("VERSION_CODE") ?: "1").toInteger()
+        versionName System.getenv("VERSION_NAME") ?: "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -16,8 +17,25 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    // Release signing: ONLY when the four values exist (CI secrets as environment variables, or android/key.properties on your own computer).
+    // Without them the release build is unsigned (the CI still makes an unsigned AAB). The keystore is never committed (.gitignore).
+    signingConfigs {
+        release {
+            def props = new Properties()
+            def pf = rootProject.file("key.properties")
+            if (pf.exists()) pf.withInputStream { props.load(it) }
+            def storeFilePath = System.getenv("ANDROID_KEYSTORE_FILE") ?: props["storeFile"]
+            if (storeFilePath) {
+                storeFile file(storeFilePath)
+                storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD") ?: props["storePassword"]
+                keyAlias System.getenv("ANDROID_KEY_ALIAS") ?: props["keyAlias"]
+                keyPassword System.getenv("ANDROID_KEY_PASSWORD") ?: props["keyPassword"]
+            }
+        }
+    }
     buildTypes {
         release {
+            if (signingConfigs.release.storeFile != null) signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

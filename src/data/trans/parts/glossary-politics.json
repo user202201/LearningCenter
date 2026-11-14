@@ -1,0 +1,262 @@
+{
+ "社会主义核心价值观": {
+  "en": "Core Socialist Values",
+  "fr": "valeurs fondamentales du socialisme"
+ },
+ "全国人民代表大会": {
+  "en": "National People's Congress (NPC)",
+  "fr": "Assemblée populaire nationale (APN)"
+ },
+ "全国人大": {
+  "en": "NPC",
+  "fr": "APN"
+ },
+ "全国人大常委会": {
+  "en": "NPC Standing Committee",
+  "fr": "Comité permanent de l'APN"
+ },
+ "宪法": {
+  "en": "Constitution",
+  "fr": "Constitution"
+ },
+ "未成年人保护法": {
+  "en": "Law on the Protection of Minors",
+  "fr": "Loi sur la protection des mineurs"
+ },
+ "预防未成年人犯罪法": {
+  "en": "Law on the Prevention of Juvenile Delinquency",
+  "fr": "Loi sur la prévention de la délinquance des mineurs"
+ },
+ "义务教育法": {
+  "en": "Compulsory Education Law",
+  "fr": "Loi sur l'enseignement obligatoire"
+ },
+ "国务院": {
+  "en": "State Council",
+  "fr": "Conseil des affaires d'État"
+ },
+ "中央军事委员会": {
+  "en": "Central Military Commission",
+  "fr": "Commission militaire centrale"
+ },
+ "国家监察委员会": {
+  "en": "National Supervisory Commission",
+  "fr": "Commission nationale de supervision"
+ },
+ "人民法院": {
+  "en": "people's courts",
+  "fr": "tribunaux populaires"
+ },
+ "人民检察院": {
+  "en": "people's procuratorates",
+  "fr": "parquets populaires"
+ },
+ "国家主席": {
+  "en": "President of the State",
+  "fr": "président de l'État"
+ },
+ "中国共产党": {
+  "en": "Communist Party of China (CPC)",
+  "fr": "Parti communiste chinois (PCC)"
+ },
+ "依法治国": {
+  "en": "law-based governance (governing the country by law)",
+  "fr": "gouvernance conforme à la loi (État de droit)"
+ },
+ "法治": {
+  "en": "rule of law",
+  "fr": "État de droit"
+ },
+ "中华民族伟大复兴": {
+  "en": "great rejuvenation of the Chinese nation",
+  "fr": "grand renouveau de la nation chinoise"
+ },
+ "中国梦": {
+  "en": "Chinese Dream",
+  "fr": "rêve chinois"
+ },
+ "人民代表大会制度": {
+  "en": "system of people's congresses",
+  "fr": "système des assemblées populaires"
+ },
+ "人民民主专政": {
+  "en": "people's democratic dictatorship",
+  "fr": "dictature démocratique populaire"
+ },
+ "国体": {
+  "en": "state system",
+  "fr": "système d'État"
+ },
+ "政体": {
+  "en": "system of government",
+  "fr": "système de gouvernement"
+ },
+ "政治协商制度": {
+  "en": "system of political consultation",
+  "fr": "système de consultation politique"
+ },
+ "民族区域自治制度": {
+  "en": "system of regional ethnic autonomy",
+  "fr": "système d'autonomie régionale ethnique"
+ },
+ "基层群众自治制度": {
+  "en": "system of grassroots self-governance",
+  "fr": "système d'autonomie des masses à la base"
+ },
+ "社会主义初级阶段": {
+  "en": "primary stage of socialism",
+  "fr": "stade primaire du socialisme"
+ },
+ "改革开放": {
+  "en": "reform and opening up",
+  "fr": "réforme et ouverture"
+ },
+ "新发展理念": {
+  "en": "new development philosophy (innovative, coordinated, green, open, shared)",
+  "fr": "nouvelle philosophie du développement (innovant, coordonné, vert, ouvert, partagé)"
+ },
+ "总体国家安全观": {
+  "en": "holistic view of national security",
+  "fr": "conception globale de la sécurité nationale"
+ },
+ "人类命运共同体": {
+  "en": "community with a shared future for humanity",
+  "fr": "communauté de destin pour l'humanité"
+ },
+ "一带一路": {
+  "en": "Belt and Road Initiative",
+  "fr": "Initiative la Ceinture et la Route"
+ },
+ "共商共建共享": {
+  "en": "extensive consultation, joint contribution and shared benefits",
+  "fr": "concertation, contribution et partage"
+ },
+ "和平共处五项原则": {
+  "en": "Five Principles of Peaceful Coexistence",
+  "fr": "cinq principes de la coexistence pacifique"
+ },
+ "全过程人民民主": {
+  "en": "whole-process people's democracy",
+  "fr": "démocratie populaire de processus intégral"
+ },
+ "以人民为中心": {
+  "en": "people-centred",
+  "fr": "centré sur le peuple"
+ },
+ "乡村振兴": {
+  "en": "rural revitalisation",
+  "fr": "revitalisation rurale"
+ },
+ "共同富裕": {
+  "en": "common prosperity",
+  "fr": "prospérité commune"
+ },
+ "高质量发展": {
+  "en": "high-quality development",
+  "fr": "développement de haute qualité"
+ },
+ "科教兴国": {
+  "en": "invigorating the country through science and education",
+  "fr": "revitalisation du pays par la science et l'éducation"
+ },
+ "人才强国": {
+  "en": "strengthening the country through talent",
+  "fr": "renforcement du pays par les talents"
+ },
+ "创新驱动发展": {
+  "en": "innovation-driven development",
+  "fr": "développement tiré par l'innovation"
+ },
+ "碳达峰碳中和": {
+  "en": "carbon peaking and carbon neutrality",
+  "fr": "pic des émissions de carbone et neutralité carbone"
+ },
+ "绿水青山就是金山银山": {
+  "en": "Lucid waters and lush mountains are invaluable assets",
+  "fr": "Les eaux limpides et les montagnes verdoyantes sont des atouts inestimables"
+ },
+ "生态文明": {
+  "en": "ecological civilisation",
+  "fr": "civilisation écologique"
+ },
+ "基本国策": {
+  "en": "basic national policy",
+  "fr": "politique nationale fondamentale"
+ },
+ "联合国安理会": {
+  "en": "UN Security Council",
+  "fr": "Conseil de sécurité de l'ONU"
+ },
+ "社会主义市场经济": {
+  "en": "socialist market economy",
+  "fr": "économie socialiste de marché"
+ },
+ "公有制": {
+  "en": "public ownership",
+  "fr": "propriété publique"
+ },
+ "按劳分配": {
+  "en": "distribution according to work",
+  "fr": "répartition selon le travail"
+ },
+ "法律责任": {
+  "en": "legal liability",
+  "fr": "responsabilité juridique"
+ },
+ "违法/犯罪": {
+  "en": "illegal act / crime",
+  "fr": "infraction / crime"
+ },
+ "110": {
+  "en": "110 police",
+  "fr": "110 police"
+ },
+ "119": {
+  "en": "119 fire",
+  "fr": "119 pompiers"
+ },
+ "120": {
+  "en": "120 ambulance",
+  "fr": "120 SAMU (ambulance)"
+ },
+ "122": {
+  "en": "122 traffic accidents",
+  "fr": "122 accidents de la route"
+ },
+ "12355": {
+  "en": "12355 youth service hotline",
+  "fr": "12355 ligne d'assistance pour la jeunesse"
+ },
+ "12345": {
+  "en": "12345 government service hotline",
+  "fr": "12345 ligne d'assistance des services publics"
+ },
+ "12315": {
+  "en": "12315 consumer complaints hotline",
+  "fr": "12315 ligne des litiges de consommation"
+ },
+ "96110": {
+  "en": "96110 anti-fraud hotline",
+  "fr": "96110 ligne antifraude"
+ },
+ "AED": {
+  "en": "AED (automated external defibrillator)",
+  "fr": "DAE (défibrillateur automatisé externe)"
+ },
+ "心肺复苏": {
+  "en": "cardiopulmonary resuscitation (CPR)",
+  "fr": "réanimation cardio-pulmonaire (RCP)"
+ },
+ "海姆立克急救法": {
+  "en": "Heimlich manoeuvre",
+  "fr": "manœuvre de Heimlich"
+ },
+ "国旗/国歌/国徽": {
+  "en": "national flag / anthem / emblem",
+  "fr": "drapeau / hymne / armoiries nationaux"
+ },
+ "义勇军进行曲": {
+  "en": "March of the Volunteers",
+  "fr": "Marche des volontaires"
+ }
+}

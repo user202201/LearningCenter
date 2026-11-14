@@ -1,0 +1,1698 @@
+{
+ "测量小灯泡的电功率：用电压表测小灯泡两端的电压 U，用电流表测通过它的电流 I，由 P = UI 算出电功率。滑动变阻器与小灯泡串联，用来改变小灯泡两端的电压（连接时滑片放在阻值最大处，闭合开关后再慢慢减小电阻）。": [
+  "Measuring the electric power of a small bulb: measure the voltage U across the bulb with a voltmeter and the current I through it with an ammeter, then calculate the power from P = UI. The rheostat is connected in series with the bulb to change the voltage across it (when connecting, set the slider at maximum resistance, close the switch, then reduce the resistance slowly).",
+  "Mesure de la puissance électrique d'une petite ampoule : mesurez la tension U aux bornes de l'ampoule avec un voltmètre et l'intensité I qui la traverse avec un ampèremètre, puis calculez la puissance avec P = UI. Le rhéostat est monté en série avec l'ampoule pour modifier la tension à ses bornes (au branchement, placez le curseur à la résistance maximale, fermez l'interrupteur, puis diminuez lentement la résistance)."
+ ],
+ "小灯泡两端电压等于额定电压时正常发光，这时的电功率就是额定功率；电压低于额定电压时功率较小，灯较暗；电压高于额定电压时功率较大，灯较亮，但太高会烧坏灯丝（实验中电压不能超过额定电压的 1.2 倍）。小灯泡的亮暗取决于它的实际功率。": [
+  "When the voltage across the bulb equals its rated voltage, it glows normally and its power is the rated power. Below the rated voltage the power is smaller and the bulb is dimmer; above it the power is larger and the bulb is brighter, but too high a voltage burns out the filament (in the experiment the voltage must not exceed 1.2 times the rated voltage). The brightness of a bulb depends on its actual power.",
+  "Lorsque la tension aux bornes de l'ampoule est égale à sa tension nominale, elle brille normalement et sa puissance est la puissance nominale. En dessous de la tension nominale, la puissance est plus faible et l'ampoule éclaire moins ; au-dessus, la puissance est plus grande et l'ampoule éclaire davantage, mais une tension trop élevée grille le filament (dans l'expérience, la tension ne doit pas dépasser 1,2 fois la tension nominale). L'éclat d'une ampoule dépend de sa puissance réelle."
+ ],
+ "由 R = U / I 可以算出各次的灯丝电阻：电压越大，灯丝温度越高，电阻越大，所以小灯泡的电阻不是定值，不能用多次测量取平均值的方法求功率。": [
+  "From R = U / I the resistance of the filament can be found for each measurement: the greater the voltage, the hotter the filament and the greater its resistance. The resistance of a bulb is therefore not constant, and averaging several measurements must not be used to find the power.",
+  "La relation R = U / I permet de calculer la résistance du filament pour chaque mesure : plus la tension est grande, plus le filament est chaud et plus sa résistance est grande. La résistance d'une ampoule n'est donc pas constante et l'on ne doit pas faire la moyenne de plusieurs mesures pour trouver la puissance."
+ ],
+ "浸在液体（或气体）中的物体受到向上的浮力。阿基米德原理：浸在液体中的物体受到的浮力，大小等于它排开的液体所受的重力：F浮 = G排 = ρ液 g V排。": [
+  "An object immersed in a liquid (or a gas) experiences an upward buoyant force. Archimedes' principle: the buoyant force on an object immersed in a liquid equals the weight of the liquid it displaces: F_buoyancy = G_displaced = ρ_liquid g V_displaced.",
+  "Un objet plongé dans un liquide (ou un gaz) subit une force d'Archimède dirigée vers le haut. Principe d'Archimède : la poussée exercée sur un objet immergé dans un liquide est égale au poids du liquide déplacé : F = P_déplacé = ρ_liquide g V_déplacé."
+ ],
+ "称重法：F浮 = G − F示。浮沉条件：物体浸没时，F浮 > G（ρ液 > ρ物）上浮，最后漂浮，漂浮时 F浮 = G；F浮 = G（ρ液 = ρ物）悬浮；F浮 < G（ρ液 < ρ物）下沉。": [
+  "Weighing method: F_buoyancy = G − F_reading. Conditions for floating and sinking: when the object is fully immersed, F_buoyancy > G (ρ_liquid > ρ_object) means it rises and finally floats, with F_buoyancy = G when floating; F_buoyancy = G (ρ_liquid = ρ_object) means it is suspended; F_buoyancy < G (ρ_liquid < ρ_object) means it sinks.",
+  "Méthode de la pesée : F = P − F_lue. Conditions de flottaison : lorsque l'objet est totalement immergé, F > P (ρ_liquide > ρ_objet) : il monte puis flotte, avec F = P à la surface ; F = P (ρ_liquide = ρ_objet) : il reste en équilibre dans le liquide ; F < P (ρ_liquide < ρ_objet) : il coule."
+ ],
+ "用“手动浸入”慢慢放下物体，观察浮力和排开液体的重力总是相等；用“自由释放”观察物体最后的状态。": [
+  "Lower the object slowly with “manual immersion” and observe that the buoyant force and the weight of the displaced liquid are always equal; use “free release” to see the final state of the object.",
+  "Avec « immersion manuelle », descendez lentement l'objet et observez que la poussée et le poids du liquide déplacé sont toujours égaux ; avec « lâcher libre », observez l'état final de l'objet."
+ ],
+ "自己搭电路：三个电阻 A（10 Ω）、B（20 Ω）、C（30 Ω）可以不接入，或接入串联的一路，或接入并联的一组；并联的一组再与串联的部分首尾相接，这样可以搭出串联、并联和混联电路（只有一个电阻选“并联”时，它和串联的电阻没有区别）。": [
+  "Build your own circuit: the three resistors A (10 Ω), B (20 Ω) and C (30 Ω) can be left out, put in the series branch or put in the parallel group; the parallel group is then joined end to end with the series part, so series, parallel and mixed circuits can all be built (when only one resistor is set to “parallel”, it is no different from a series resistor).",
+  "Construisez votre propre circuit : les trois résistances A (10 Ω), B (20 Ω) et C (30 Ω) peuvent être laissées de côté, placées dans la branche en série ou dans le groupe en parallèle ; le groupe en parallèle est ensuite relié bout à bout avec la partie en série, ce qui permet de réaliser des circuits en série, en parallèle ou mixtes (lorsqu'une seule résistance est réglée sur « parallèle », elle ne diffère pas d'une résistance en série)."
+ ],
+ "串联电路：电流处处相等，总电阻等于各电阻之和，电压与电阻成正比。并联电路：各支路两端的电压相等，干路电流等于各支路电流之和，总电阻的倒数等于各电阻倒数之和，总电阻比任何一个支路的电阻都小，电流与电阻成反比。混联电路先化简并联部分，再按串联计算。": [
+  "Series circuit: the current is the same everywhere, the total resistance is the sum of the resistances, and the voltage is proportional to the resistance. Parallel circuit: the voltage across every branch is the same, the main current equals the sum of the branch currents, the reciprocal of the total resistance equals the sum of the reciprocals of the resistances, the total resistance is smaller than any branch resistance, and the current is inversely proportional to the resistance. For a mixed circuit, simplify the parallel part first, then calculate as for a series circuit.",
+  "Circuit en série : l'intensité est la même partout, la résistance totale est la somme des résistances et la tension est proportionnelle à la résistance. Circuit en parallèle : la tension aux bornes de chaque branche est la même, l'intensité dans la branche principale est la somme des intensités dans les branches, l'inverse de la résistance totale est la somme des inverses des résistances, la résistance totale est inférieure à celle de chaque branche et l'intensité est inversement proportionnelle à la résistance. Pour un circuit mixte, on simplifie d'abord la partie en parallèle, puis on calcule comme pour un circuit en série."
+ ],
+ "白光通过三棱镜，会分解成红、橙、黄、绿、蓝、靛、紫七种色光，这种现象叫光的色散。不同颜色的光通过同一种玻璃时折射率不同：红光最小，紫光最大，所以紫光偏折得最多，红光偏折得最少。为了看得清楚，本实验使用色散较强的玻璃（真实的玻璃色散要弱得多）。": [
+  "When white light passes through a prism it splits into seven colours: red, orange, yellow, green, blue, indigo and violet. This phenomenon is called dispersion of light. Light of different colours has different refractive indices in the same glass: red the smallest, violet the greatest, so violet is deviated most and red least. To make this easy to see, the experiment uses a glass with strong dispersion (real glass disperses much less).",
+  "Lorsque la lumière blanche traverse un prisme, elle se décompose en sept couleurs : rouge, orange, jaune, vert, bleu, indigo et violet. Ce phénomène s'appelle la dispersion de la lumière. Dans un même verre, les lumières de couleurs différentes ont des indices de réfraction différents : le plus petit pour le rouge, le plus grand pour le violet, de sorte que le violet est le plus dévié et le rouge le moins dévié. Pour que l'on voie bien, l'expérience utilise un verre à forte dispersion (le verre réel disperse beaucoup moins)."
+ ],
+ "色光的三原色是红、绿、蓝：红加绿得黄，绿加蓝得青，红加蓝得品红，三种色光等量混合得白光。不透明物体的颜色由它反射的色光决定：红色物体只反射红光，在绿光下看起来是黑色的。注意：色光的混合与颜料的混合不同。": [
+  "The three primary colours of light are red, green and blue: red plus green gives yellow, green plus blue gives cyan, red plus blue gives magenta, and equal amounts of all three give white light. The colour of an opaque object is determined by the light it reflects: a red object reflects only red light and looks black in green light. Note: mixing coloured lights is different from mixing paints.",
+  "Les trois couleurs primaires de la lumière sont le rouge, le vert et le bleu : rouge plus vert donne du jaune, vert plus bleu donne du cyan, rouge plus bleu donne du magenta, et les trois en quantités égales donnent de la lumière blanche. La couleur d'un objet opaque est déterminée par la lumière qu'il réfléchit : un objet rouge ne réfléchit que la lumière rouge et paraît noir sous une lumière verte. Attention : le mélange de lumières colorées est différent du mélange de peintures."
+ ],
+ "电磁铁：通电螺线管插入铁芯后磁性大大增强。电磁铁的磁性强弱与电流大小、线圈匝数、有无铁芯有关：电流越大、匝数越多、有铁芯，磁性越强。电流方向改变，磁极也改变（右手螺旋定则）。": [
+  "Electromagnet: when an iron core is inserted into a current-carrying solenoid, its magnetism becomes much stronger. The strength of an electromagnet depends on the current, the number of turns and the presence of an iron core: the greater the current, the more turns and with an iron core, the stronger the magnetism. If the current direction is reversed, the poles are reversed too (right-hand grip rule).",
+  "Électroaimant : lorsqu'on introduit un noyau de fer dans une bobine parcourue par un courant, son magnétisme devient beaucoup plus fort. La force d'un électroaimant dépend de l'intensité du courant, du nombre de spires et de la présence d'un noyau de fer : plus l'intensité est grande, plus il y a de spires et avec un noyau de fer, plus le magnétisme est fort. Si le sens du courant est inversé, les pôles le sont aussi (règle de la main droite)."
+ ],
+ "电动机：通电导线在磁场中受到力的作用，受力方向与电流方向和磁场方向有关（左手定则）；换向器使线圈持续转动，改变电流方向或对调磁极，转动方向改变。F = BIL。": [
+  "Electric motor: a current-carrying wire in a magnetic field experiences a force, whose direction depends on the current direction and the field direction (left-hand rule); the commutator keeps the coil turning, and changing the current direction or swapping the poles reverses the rotation. F = BIL.",
+  "Moteur électrique : un fil parcouru par un courant et placé dans un champ magnétique subit une force dont le sens dépend du sens du courant et du sens du champ (règle de la main gauche) ; le collecteur permet à la bobine de tourner sans cesse, et le changement du sens du courant ou l'inversion des pôles change le sens de rotation. F = BIL."
+ ],
+ "电磁感应：闭合电路的一部分导体在磁场中做切割磁感线运动，或穿过线圈的磁通量变化时，电路中产生感应电流（发电机的原理）。磁铁移动越快、线圈匝数越多，感应电动势越大；磁铁不动时没有感应电流；插入与拔出时电流方向相反。": [
+  "Electromagnetic induction: when part of a conductor of a closed circuit moves across magnetic field lines, or when the magnetic flux through a coil changes, an induced current appears in the circuit (the principle of the generator). The faster the magnet moves and the more turns the coil has, the greater the induced voltage; when the magnet is still there is no induced current; the current directions are opposite when the magnet is inserted and when it is pulled out.",
+  "Induction électromagnétique : lorsqu'une partie d'un conducteur appartenant à un circuit fermé se déplace en coupant les lignes de champ magnétique, ou lorsque le flux magnétique à travers une bobine varie, un courant induit apparaît dans le circuit (principe de l'alternateur). Plus l'aimant se déplace vite et plus la bobine a de spires, plus la tension induite est grande ; lorsque l'aimant est immobile, il n'y a pas de courant induit ; les sens du courant sont opposés quand on enfonce l'aimant et quand on le retire."
+ ],
+ "电磁波：变化的电流（迅速变化的电流）会在周围空间产生电磁波，无线电波、红外线、可见光、紫外线、X 射线、γ 射线都是电磁波，它们按频率由低到高排成电磁波谱。电磁波可以在真空中传播，在真空中的速度 c = 3×10⁸ m/s（也是光速）；波速、波长和频率的关系：c = λf，频率越高，波长越短。": [
+  "Electromagnetic waves: a changing current (a rapidly changing current) produces electromagnetic waves in the surrounding space. Radio waves, infrared, visible light, ultraviolet, X-rays and gamma rays are all electromagnetic waves, arranged by increasing frequency in the electromagnetic spectrum. They can travel through a vacuum, where their speed is c = 3×10⁸ m/s (the speed of light); the relation between wave speed, wavelength and frequency is c = λf: the higher the frequency, the shorter the wavelength.",
+  "Ondes électromagnétiques : un courant variable (un courant qui varie rapidement) produit des ondes électromagnétiques dans l'espace environnant. Les ondes radio, les infrarouges, la lumière visible, les ultraviolets, les rayons X et les rayons gamma sont tous des ondes électromagnétiques, classées par fréquence croissante dans le spectre électromagnétique. Elles se propagent dans le vide, où leur vitesse est c = 3×10⁸ m/s (la vitesse de la lumière) ; la relation entre la vitesse, la longueur d'onde et la fréquence est c = λf : plus la fréquence est élevée, plus la longueur d'onde est courte."
+ ],
+ "无线电波用于广播、电视和移动通信，手机用微波传递信息；红外线用于遥控和红外测温；紫外线能杀菌；X 射线用于医学透视；γ 射线用于治疗和探伤。光纤通信用激光在光纤中传递信息，光信号在光纤里的速度约为真空中的三分之二。声波不是电磁波，不能在真空中传播，速度也比电磁波小得多。": [
+  "Radio waves are used for broadcasting, television and mobile communication, and mobile phones use microwaves to carry information; infrared is used for remote controls and infrared thermometers; ultraviolet kills germs; X-rays are used in medical imaging; gamma rays are used in treatment and flaw detection. Optical-fibre communication uses laser light in optical fibres, and the speed of the light signal in the fibre is about two thirds of that in a vacuum. Sound waves are not electromagnetic waves: they cannot travel through a vacuum, and their speed is much smaller than that of electromagnetic waves.",
+  "Les ondes radio servent à la radiodiffusion, à la télévision et aux communications mobiles, et les téléphones portables transmettent l'information par micro-ondes ; les infrarouges servent aux télécommandes et aux thermomètres infrarouges ; les ultraviolets tuent les germes ; les rayons X servent à l'imagerie médicale ; les rayons gamma servent aux traitements et à la détection de défauts. La communication par fibre optique utilise la lumière laser dans des fibres optiques, et la vitesse du signal lumineux dans la fibre est d'environ deux tiers de celle dans le vide. Les ondes sonores ne sont pas des ondes électromagnétiques : elles ne se propagent pas dans le vide et leur vitesse est beaucoup plus faible."
+ ],
+ "力对物体做功的两个必要因素：作用在物体上的力，和物体在力的方向上移动的距离。W = Fs，单位焦耳（J）。功率表示做功的快慢：P = W / t = Fv，单位瓦特（W）。": [
+  "Two necessary factors for a force to do work on an object: a force acting on the object, and a distance moved by the object in the direction of the force. W = Fs, with the joule (J) as the unit. Power expresses how fast work is done: P = W / t = Fv, with the watt (W) as the unit.",
+  "Deux facteurs sont nécessaires pour qu'une force travaille : une force qui s'exerce sur l'objet et un déplacement de l'objet dans la direction de la force. W = Fs, l'unité est le joule (J). La puissance exprime la rapidité avec laquelle le travail est effectué : P = W / t = Fv, l'unité est le watt (W)."
+ ],
+ "动能与质量和速度有关：Ek = ½mv²；重力势能与质量和高度有关：Ep = mgh。动能和势能统称机械能。只有重力做功时，动能和势能相互转化，机械能守恒；有摩擦时，一部分机械能变成内能，总能量仍然守恒。": [
+  "Kinetic energy depends on mass and speed: Ek = ½mv²; gravitational potential energy depends on mass and height: Ep = mgh. Kinetic energy and potential energy together are called mechanical energy. When only gravity does work, kinetic and potential energy change into each other and mechanical energy is conserved; with friction, part of the mechanical energy becomes internal energy, but the total energy is still conserved.",
+  "L'énergie cinétique dépend de la masse et de la vitesse : Ec = ½mv² ; l'énergie potentielle de pesanteur dépend de la masse et de la hauteur : Ep = mgh. L'énergie cinétique et l'énergie potentielle forment ensemble l'énergie mécanique. Lorsque seul le poids travaille, l'énergie cinétique et l'énergie potentielle se transforment l'une en l'autre et l'énergie mécanique se conserve ; avec des frottements, une partie de l'énergie mécanique devient de l'énergie interne, mais l'énergie totale se conserve toujours."
+ ],
+ "单摆和过山车：在最高点势能最大、动能为 0；在最低点势能最小、动能最大。条形图中，动能与势能之和（加上损失的内能）总是一样长。": [
+  "Pendulum and roller coaster: at the highest point the potential energy is greatest and the kinetic energy is 0; at the lowest point the potential energy is least and the kinetic energy is greatest. In the bar chart, the sum of kinetic and potential energy (plus the internal energy lost) is always the same length.",
+  "Pendule et montagnes russes : au point le plus haut, l'énergie potentielle est maximale et l'énergie cinétique est nulle ; au point le plus bas, l'énergie potentielle est minimale et l'énergie cinétique est maximale. Dans le diagramme en barres, la somme de l'énergie cinétique et de l'énergie potentielle (plus l'énergie interne perdue) a toujours la même longueur."
+ ],
+ "能源是能够提供能量的物质或资源。按能否直接从自然界获得分为一次能源（煤、石油、天然气、风能、水能、太阳能、核能等）和二次能源（电能、氢能等）；按能否在短期内从自然界得到补充分为可再生能源（太阳能、风能、水能、生物质能、地热能）和不可再生能源（煤、石油、天然气、核能）。化石能源的使用会排放二氧化碳等，造成环境污染和气候变暖。": [
+  "An energy source is a substance or resource that can supply energy. By whether it can be obtained directly from nature, energy is divided into primary energy (coal, oil, natural gas, wind, water, solar, nuclear and so on) and secondary energy (electricity, hydrogen and so on); by whether it is replenished from nature within a short time, it is divided into renewable energy (solar, wind, water, biomass, geothermal) and non-renewable energy (coal, oil, natural gas, nuclear). Using fossil fuels releases carbon dioxide and other substances, causing pollution and global warming.",
+  "Une source d'énergie est une substance ou une ressource capable de fournir de l'énergie. Selon qu'elle peut être obtenue directement dans la nature ou non, on distingue les énergies primaires (charbon, pétrole, gaz naturel, vent, eau, soleil, nucléaire, etc.) et les énergies secondaires (électricité, hydrogène, etc.) ; selon qu'elle se renouvelle ou non en peu de temps dans la nature, on distingue les énergies renouvelables (solaire, éolienne, hydraulique, biomasse, géothermique) et les énergies non renouvelables (charbon, pétrole, gaz naturel, nucléaire). L'utilisation des combustibles fossiles rejette du dioxyde de carbone et d'autres substances, ce qui provoque de la pollution et le réchauffement climatique."
+ ],
+ "能量的转化有方向性：发电就是把其他形式的能转化为电能。火力发电要经过化学能→内能→机械能→电能三次转化，每一步都有损失，总效率等于各步效率的乘积，只有三分之一到五分之二；水力发电环节少，效率高；太阳能电池板把光能直接转化为电能。能量虽然守恒，但转化为内能散失到环境中的能量不能再被利用，所以要节约能源、提高效率、开发新能源。": [
+  "The conversion of energy has a direction: generating electricity means turning other forms of energy into electrical energy. A thermal power plant needs three conversions: chemical energy → internal energy → mechanical energy → electrical energy, each with losses, so the total efficiency, the product of the efficiencies of the steps, is only one third to two fifths; hydroelectric generation has fewer steps and a higher efficiency; solar panels turn light energy directly into electrical energy. Energy is conserved, but energy that has turned into internal energy and spread into the environment cannot be used again, so we must save energy, raise efficiency and develop new energy sources.",
+  "La conversion de l'énergie a un sens : produire de l'électricité consiste à transformer d'autres formes d'énergie en énergie électrique. Une centrale thermique nécessite trois conversions : énergie chimique → énergie interne → énergie mécanique → énergie électrique, chacune avec des pertes, de sorte que le rendement total, produit des rendements des étapes, n'est que d'un tiers à deux cinquièmes ; la production hydroélectrique comporte moins d'étapes et un meilleur rendement ; les panneaux solaires transforment directement l'énergie lumineuse en énergie électrique. L'énergie se conserve, mais l'énergie transformée en énergie interne et dispersée dans l'environnement ne peut plus être utilisée ; il faut donc économiser l'énergie, améliorer le rendement et développer de nouvelles sources d'énergie."
+ ],
+ "可持续发展：既满足当代人的需要，又不损害后代人满足其需要的能力。调整电力结构，减少煤的比例，增加水能、风能、太阳能和核能的比例，可以明显降低每度电的碳排放。1 kW·h = 3.6×10⁶ J = 3.6 MJ。": [
+  "Sustainable development: meeting the needs of the present generation without harming the ability of future generations to meet their own needs. Changing the electricity mix, reducing the share of coal and increasing the share of water, wind, solar and nuclear power, can clearly lower the carbon emissions per kilowatt-hour. 1 kW·h = 3.6×10⁶ J = 3.6 MJ.",
+  "Développement durable : répondre aux besoins de la génération actuelle sans nuire à la capacité des générations futures de répondre aux leurs. Modifier le mix électrique, en réduisant la part du charbon et en augmentant celle de l'hydraulique, de l'éolien, du solaire et du nucléaire, peut nettement réduire les émissions de carbone par kilowattheure. 1 kW·h = 3,6×10⁶ J = 3,6 MJ."
+ ],
+ "热机是把内能转化为机械能的机器。四冲程内燃机（汽油机、柴油机）的一个工作循环有四个冲程，曲轴转 2 圈，活塞往复 2 次，只有做功冲程对外做功：吸气冲程（进气门开）、压缩冲程（机械能转化为内能，气体温度升高）、做功冲程（点火后高温高压燃气推动活塞，内能转化为机械能）、排气冲程（排气门开）。汽油机用火花塞点火，柴油机靠压缩使空气升温后喷油自燃。": [
+  "A heat engine is a machine that turns internal energy into mechanical energy. One working cycle of a four-stroke internal combustion engine (petrol or diesel engine) has four strokes: the crankshaft turns 2 times, the piston moves up and down 2 times, and only the power stroke does work on the outside: intake stroke (inlet valve open), compression stroke (mechanical energy turns into internal energy and the gas temperature rises), power stroke (after ignition, the hot high-pressure gas pushes the piston and internal energy turns into mechanical energy) and exhaust stroke (exhaust valve open). A petrol engine ignites with a spark plug; a diesel engine compresses the air to heat it and the injected fuel ignites by itself.",
+  "Un moteur thermique est une machine qui transforme de l'énergie interne en énergie mécanique. Un cycle de fonctionnement d'un moteur à combustion interne à quatre temps (moteur à essence ou diesel) comprend quatre temps : le vilebrequin fait 2 tours, le piston fait 2 allers-retours et seul le temps moteur fournit du travail à l'extérieur : admission (soupape d'admission ouverte), compression (l'énergie mécanique se transforme en énergie interne et la température du gaz s'élève), combustion-détente (après l'allumage, le gaz chaud sous haute pression pousse le piston et l'énergie interne se transforme en énergie mécanique) et échappement (soupape d'échappement ouverte). Le moteur à essence s'allume avec une bougie ; dans le moteur diesel, la compression échauffe l'air et le carburant injecté s'enflamme de lui-même."
+ ],
+ "热机的效率：用来做有用功的那部分能量与燃料完全燃烧放出的热量之比，η = W有 / Q放。燃料燃烧放出的能量中，废气带走一大部分，还有冷却水带走的热量和摩擦损失，所以热机的效率总小于 100%（汽油机约 25% 到 30%，柴油机约 30% 到 40%）。燃料放出的热量 Q = qm。": [
+  "Efficiency of a heat engine: the ratio of the energy used to do useful work to the heat released by complete combustion of the fuel, η = W_useful / Q_released. Much of the energy released by the burning fuel is carried away by the exhaust gas, and more is lost as heat in the cooling water and as friction, so the efficiency of a heat engine is always below 100% (about 25% to 30% for a petrol engine, about 30% to 40% for a diesel engine). The heat released by a fuel is Q = qm.",
+  "Rendement d'un moteur thermique : rapport entre l'énergie utilisée pour fournir un travail utile et la chaleur dégagée par la combustion complète du carburant, η = W_utile / Q_dégagée. Une grande partie de l'énergie dégagée par le carburant est emportée par les gaz d'échappement, et il y a encore la chaleur emportée par l'eau de refroidissement et les pertes par frottement ; le rendement d'un moteur thermique est donc toujours inférieur à 100 % (environ 25 % à 30 % pour un moteur à essence, environ 30 % à 40 % pour un moteur diesel). La chaleur dégagée par un carburant est Q = qm."
+ ],
+ "能量守恒定律：能量既不会凭空消灭，也不会凭空产生，它只会从一种形式转化为其他形式，或者从一个物体转移到别的物体，在转化和转移的过程中，能量的总量保持不变。所以永动机是不可能制成的。": [
+  "Law of conservation of energy: energy is neither created nor destroyed out of nothing; it only changes from one form to another, or is transferred from one object to another, and the total amount of energy stays the same in the process of conversion and transfer. So a perpetual motion machine cannot be built.",
+  "Loi de conservation de l'énergie : l'énergie ne se crée pas à partir de rien et ne disparaît pas ; elle ne fait que passer d'une forme à une autre ou d'un objet à un autre, et la quantité totale d'énergie reste la même au cours des transformations et des transferts. C'est pourquoi un mouvement perpétuel est impossible."
+ ],
+ "眼睛的晶状体相当于一个凸透镜，视网膜相当于光屏，物体在视网膜上成倒立、缩小的实像。睫状肌改变晶状体的凸起程度（调节），使远近不同的物体都能在视网膜上成清晰的像。看清物体的最近距离叫近点，最远距离叫远点（正常眼的近点约 10 到 25 cm，远点在无穷远）。": [
+  "The lens of the eye acts like a convex lens and the retina like a screen: an inverted, reduced real image of the object forms on the retina. The ciliary muscle changes how convex the lens is (accommodation), so that objects at different distances all form a clear image on the retina. The nearest distance at which an object can be seen clearly is the near point, the farthest distance the far point (for a normal eye the near point is about 10 to 25 cm and the far point is at infinity).",
+  "Le cristallin de l'œil joue le rôle d'une lentille convergente et la rétine celui d'un écran : l'objet forme sur la rétine une image réelle, renversée et réduite. Le muscle ciliaire modifie la courbure du cristallin (accommodation), de sorte que des objets situés à des distances différentes donnent tous une image nette sur la rétine. La plus courte distance à laquelle on voit nettement un objet est le punctum proximum, la plus grande est le punctum remotum (pour un œil normal, le punctum proximum est d'environ 10 à 25 cm et le punctum remotum est à l'infini)."
+ ],
+ "近视眼：晶状体太凸（或眼球太长），像成在视网膜前，远点变近，要配戴凹透镜（发散）矫正；远视眼：晶状体太薄（或眼球太短），像成在视网膜后，近点变远，要配戴凸透镜（会聚）矫正。眼镜的焦度 P = 1 / f（单位 D），100 度 = 1 D，凹透镜为负。": [
+  "Short sight (myopia): the lens is too convex (or the eyeball too long), the image forms in front of the retina and the far point comes nearer, so it is corrected with a concave (diverging) lens; long sight (hyperopia): the lens is too flat (or the eyeball too short), the image forms behind the retina and the near point moves farther, so it is corrected with a convex (converging) lens. The power of a lens is P = 1 / f (in dioptres, D); 100 “degrees” = 1 D, and a concave lens has a negative power.",
+  "Myopie : le cristallin est trop bombé (ou l'œil trop long), l'image se forme devant la rétine et le punctum remotum se rapproche ; on la corrige avec une lentille divergente (concave). Hypermétropie : le cristallin est trop plat (ou l'œil trop court), l'image se forme derrière la rétine et le punctum proximum s'éloigne ; on la corrige avec une lentille convergente (convexe). La vergence d'une lentille est P = 1 / f (en dioptries, δ) ; 100 « degrés » = 1 δ, et une lentille divergente a une vergence négative."
+ ],
+ "显微镜由物镜和目镜两个凸透镜组成：物镜成放大的实像，目镜相当于放大镜，把这个像再放大成虚像，总放大倍数 = 物镜倍数 × 目镜倍数，倍数越大，视野越小。望远镜的物镜焦距长、目镜焦距短，角放大率 M = f物 / f目，镜筒长度约等于两个焦距之和。": [
+  "A microscope consists of two convex lenses, the objective and the eyepiece: the objective forms an enlarged real image, and the eyepiece acts as a magnifying glass that enlarges this image again into a virtual image; total magnification = objective magnification × eyepiece magnification, and the greater the magnification, the smaller the field of view. A telescope has an objective of long focal length and an eyepiece of short focal length; its angular magnification is M = f_objective / f_eyepiece, and the length of the tube is about the sum of the two focal lengths.",
+  "Un microscope est formé de deux lentilles convergentes, l'objectif et l'oculaire : l'objectif donne une image réelle agrandie, et l'oculaire, qui joue le rôle de loupe, agrandit encore cette image en une image virtuelle ; grossissement total = grossissement de l'objectif × grossissement de l'oculaire, et plus le grossissement est grand, plus le champ de vision est petit. Une lunette astronomique a un objectif de grande distance focale et un oculaire de courte distance focale ; son grossissement angulaire est M = f_objectif / f_oculaire, et la longueur du tube est à peu près égale à la somme des deux distances focales."
+ ],
+ "连通器：上端开口、下端相连通的容器。连通器里装同一种液体，液体不流动时，各容器中的液面保持相平，与容器的粗细、形状无关（茶壶、锅炉水位计、船闸）。若装两种不同的液体，交界面处两边压强相等：ρ₁h₁ = ρ₂h₂，密度小的液体柱更高。": [
+  "Communicating vessels: containers open at the top and connected at the bottom. When the same liquid fills communicating vessels and does not flow, the liquid surfaces in all the vessels stay level, whatever the width or shape of the vessels (teapots, boiler water-level gauges, ship locks). If two different liquids are used, the pressures on the two sides at the interface are equal: ρ₁h₁ = ρ₂h₂, and the column of the less dense liquid is higher.",
+  "Vases communicants : récipients ouverts en haut et reliés entre eux en bas. Lorsqu'un même liquide remplit des vases communicants et ne s'écoule pas, les surfaces libres du liquide restent au même niveau dans tous les récipients, quelles que soient leur largeur et leur forme (théières, indicateurs de niveau de chaudière, écluses). Si l'on utilise deux liquides différents, les pressions des deux côtés de la surface de séparation sont égales : ρ₁h₁ = ρ₂h₂, et la colonne du liquide le moins dense est la plus haute."
+ ],
+ "流体压强与流速：在流动的液体或气体中，流速越大的地方压强越小（伯努利原理，p + ½ρv² = 常数）。水平管子变窄处，水流变快，压强变小；两张纸中间吹气，中间空气流速大、压强小，纸被外面的大气压压到一起；飞机的机翼上凸下平，上方空气流速大，压强小，产生升力。": [
+  "Fluid pressure and flow speed: in a flowing liquid or gas, the pressure is lower where the speed is greater (Bernoulli's principle, p + ½ρv² = constant). Where a horizontal pipe narrows, the water flows faster and the pressure falls; when air is blown between two sheets of paper, the air between them moves fast and has low pressure, and the outside atmospheric pressure presses the sheets together; the wing of an aeroplane is curved on top and flat underneath, so the air above moves faster with lower pressure, which produces lift.",
+  "Pression et vitesse d'écoulement d'un fluide : dans un liquide ou un gaz en mouvement, la pression est plus faible là où la vitesse est plus grande (principe de Bernoulli, p + ½ρv² = constante). Là où un tuyau horizontal se rétrécit, l'eau coule plus vite et la pression diminue ; lorsqu'on souffle entre deux feuilles de papier, l'air entre elles va vite et sa pression est basse, et la pression atmosphérique extérieure appuie les feuilles l'une contre l'autre ; l'aile d'un avion est bombée dessus et plate dessous, de sorte que l'air passe plus vite au-dessus, avec une pression plus basse, ce qui produit la portance."
+ ],
+ "两个相互接触的物体，有相对运动或相对运动趋势时，接触面上会产生阻碍相对运动的力，叫摩擦力。滑动摩擦力的大小与压力的大小和接触面的粗糙程度有关：f = μN，与接触面积、速度无关。": [
+  "When two objects in contact move, or tend to move, relative to each other, a force that opposes the relative motion appears at the contact surface; it is called friction. The sliding friction depends on the pressing force and on how rough the surfaces are: f = μN, and not on the contact area or the speed.",
+  "Lorsque deux objets en contact se déplacent, ou tendent à se déplacer, l'un par rapport à l'autre, une force qui s'oppose au mouvement relatif apparaît sur la surface de contact : c'est le frottement. Le frottement de glissement dépend de la force pressante et de la rugosité des surfaces : f = μN, et non de l'aire de contact ni de la vitesse."
+ ],
+ "物体没有被拉动时，受到的是静摩擦力，大小等于拉力，最大静摩擦力略大于滑动摩擦力。物体做匀速直线运动时，拉力等于滑动摩擦力。在斜面上，压力 N = mg cos α，重力沿斜面向下的分力是 mg sin α。": [
+  "When an object is not pulled along, static friction acts on it, equal to the pull; the maximum static friction is slightly larger than the sliding friction. When an object moves in a straight line at constant speed, the pull equals the sliding friction. On an incline, the normal force is N = mg cos α, and the component of the weight down the slope is mg sin α.",
+  "Tant qu'un objet n'est pas mis en mouvement, il subit un frottement statique, égal à la force de traction ; le frottement statique maximal est un peu plus grand que le frottement de glissement. Quand un objet se déplace en ligne droite à vitesse constante, la force de traction est égale au frottement de glissement. Sur un plan incliné, la réaction normale est N = mg cos α, et la composante du poids le long de la pente est mg sin α."
+ ],
+ "晶体（如冰）有固定的熔点：熔化时持续吸热，但温度保持不变，图像上有一段水平线；凝固时放热，温度也保持不变。非晶体（如石蜡）没有固定的熔点，边吸热边变软，温度一直上升。": [
+  "A crystal (such as ice) has a fixed melting point: while melting it keeps absorbing heat but its temperature stays constant, and the graph has a horizontal section; while freezing it gives out heat and its temperature again stays constant. An amorphous solid (such as wax) has no fixed melting point: it softens as it absorbs heat and its temperature keeps rising.",
+  "Un cristal (la glace, par exemple) a un point de fusion fixe : pendant la fusion, il absorbe de la chaleur en continu mais sa température reste constante, et le graphique présente un palier horizontal ; pendant la solidification, il cède de la chaleur et sa température reste là aussi constante. Un solide amorphe (la cire, par exemple) n'a pas de point de fusion fixe : il se ramollit en absorbant de la chaleur et sa température ne cesse de monter."
+ ],
+ "液体沸腾时持续吸热，温度保持在沸点不变（标准大气压下水的沸点是 100 °C）。图像的水平部分越长，说明吸收的热量越多，加热功率越小或质量越大都会使它变长。": [
+  "When a liquid boils it keeps absorbing heat and its temperature stays at the boiling point (the boiling point of water at standard atmospheric pressure is 100 °C). The longer the horizontal part of the graph, the more heat has been absorbed; a smaller heating power or a larger mass makes it longer.",
+  "Lorsqu'un liquide bout, il absorbe de la chaleur en continu et sa température reste à la température d'ébullition (celle de l'eau à la pression atmosphérique normale est de 100 °C). Plus le palier horizontal du graphique est long, plus la chaleur absorbée est grande ; une puissance de chauffage plus faible ou une masse plus grande l'allongent."
+ ],
+ "家庭电路的电压是 220 V。进户线有火线和零线，火线与零线之间有 220 V 的电压，零线与大地之间几乎没有电压。各用电器并联，互不影响；开关接在火线上，并与它控制的用电器串联；三孔插座左零右火上接地，地线把金属外壳与大地相连，防止漏电时触电。": [
+  "The voltage of the household circuit is 220 V. The incoming wires are the live wire and the neutral wire; there is 220 V between them, and almost no voltage between the neutral wire and the ground. The appliances are connected in parallel and do not affect each other; a switch is connected in the live wire and in series with the appliance it controls; in a three-hole socket the neutral is on the left, the live on the right and the earth on top; the earth wire connects the metal case to the ground to prevent electric shock when there is leakage.",
+  "La tension du circuit domestique est de 220 V. Les fils d'arrivée sont la phase et le neutre ; il y a 220 V entre eux, et presque aucune tension entre le neutre et la terre. Les appareils sont montés en parallèle et ne s'influencent pas ; l'interrupteur est placé sur la phase et en série avec l'appareil qu'il commande ; dans une prise à trois trous, le neutre est à gauche, la phase à droite et la terre en haut ; le fil de terre relie le boîtier métallique au sol pour éviter l'électrocution en cas de fuite."
+ ],
+ "家庭电路中电流过大的原因有两个：短路（火线与零线直接相连，电阻极小，电流极大）和用电器的总功率过大。电流过大时，导线发热，容易引起火灾。保险丝（或空气开关）串联在火线上，电流超过它的额定电流时熔断（或跳闸），切断电路，保护电路。保险丝要用电阻较大、熔点较低的铅锑合金，不能用铜丝代替。": [
+  "There are two causes of excessive current in a household circuit: a short circuit (the live and neutral wires connected directly, with very small resistance and very large current) and a total power of appliances that is too high. When the current is too large the wires heat up and may cause a fire. A fuse (or circuit breaker) is connected in series in the live wire; when the current exceeds its rated current it melts (or trips), cutting the circuit and protecting it. A fuse must be made of a lead-antimony alloy with fairly high resistance and low melting point, and must not be replaced by a copper wire.",
+  "Il y a deux causes d'une intensité trop forte dans un circuit domestique : le court-circuit (la phase et le neutre directement reliés, résistance très faible, intensité très forte) et une puissance totale des appareils trop élevée. Quand l'intensité est trop forte, les fils chauffent et peuvent provoquer un incendie. Un fusible (ou un disjoncteur) est monté en série sur la phase ; lorsque l'intensité dépasse son intensité nominale, il fond (ou déclenche), coupe le circuit et le protège. Un fusible doit être fait d'un alliage plomb-antimoine, de résistance assez élevée et de bas point de fusion, et ne doit pas être remplacé par un fil de cuivre."
+ ],
+ "安全用电：不接触低压带电体，不靠近高压带电体；潮湿的手和站在潮湿地面上触电更危险；人体的安全电压不高于 36 V；发生触电时，先切断电源再救人；漏电保护器在漏电电流达到约 30 mA 时迅速断电。测电笔用来辨别火线和零线，使用时手要接触笔尾的金属体，笔尖接触被测的导线，氖管发光的是火线。": [
+  "Safe use of electricity: do not touch low-voltage live parts and do not go near high-voltage live parts; an electric shock is more dangerous with wet hands or when standing on a wet floor; the safe voltage for the human body is not higher than 36 V; when someone gets an electric shock, cut the power first and then help the person; a residual-current device cuts the power quickly when the leakage current reaches about 30 mA. A test pen is used to tell the live wire from the neutral wire: the hand must touch the metal at the end of the pen and the tip touches the wire being tested; if the neon lamp lights, it is the live wire.",
+  "Utilisation de l'électricité en sécurité : ne touchez pas les parties sous tension à basse tension et ne vous approchez pas de celles à haute tension ; l'électrocution est plus dangereuse avec les mains mouillées ou debout sur un sol mouillé ; la tension de sécurité pour le corps humain n'est pas supérieure à 36 V ; en cas d'électrocution, coupez d'abord le courant, puis secourez la personne ; un disjoncteur différentiel coupe rapidement le courant lorsque le courant de fuite atteint environ 30 mA. Un testeur de tension sert à distinguer la phase du neutre : la main doit toucher la partie métallique à l'extrémité du testeur et la pointe touche le fil à tester ; si la lampe au néon s'allume, c'est la phase."
+ ],
+ "凸透镜对光有会聚作用：平行于主光轴的光会聚于焦点；通过光心的光传播方向不变；经过焦点的光折射后平行于主光轴。": [
+  "A convex lens converges light: rays parallel to the principal axis converge at the focus; a ray through the optical centre keeps its direction; a ray passing through the focus is refracted parallel to the principal axis.",
+  "Une lentille convergente fait converger la lumière : les rayons parallèles à l'axe optique convergent au foyer ; un rayon passant par le centre optique ne change pas de direction ; un rayon passant par le foyer ressort parallèle à l'axe optique."
+ ],
+ "成像规律：u > 2f，成倒立、缩小的实像（照相机）；u = 2f，成倒立、等大的实像；f < u < 2f，成倒立、放大的实像（投影仪），像距 v > 2f；u = f，不成像；u < f，成正立、放大的虚像（放大镜）。实像可以用光屏接收，虚像不能。": [
+  "Rules of image formation: u > 2f gives an inverted, reduced real image (camera); u = 2f gives an inverted real image of the same size; f < u < 2f gives an inverted, enlarged real image (projector), with image distance v > 2f; u = f gives no image; u < f gives an upright, enlarged virtual image (magnifying glass). A real image can be received on a screen, a virtual image cannot.",
+  "Règles de formation des images : u > 2f donne une image réelle renversée et réduite (appareil photo) ; u = 2f donne une image réelle renversée de même taille ; f < u < 2f donne une image réelle renversée et agrandie (projecteur), avec une distance image v > 2f ; u = f ne donne pas d'image ; u < f donne une image virtuelle droite et agrandie (loupe). Une image réelle peut être reçue sur un écran, une image virtuelle ne le peut pas."
+ ],
+ "凹透镜对光有发散作用，总是成正立、缩小的虚像。拖动画面中的蜡烛也可以改变物距。": [
+  "A concave lens diverges light and always forms an upright, reduced virtual image. Dragging the candle in the picture also changes the object distance.",
+  "Une lentille divergente fait diverger la lumière et donne toujours une image virtuelle droite et réduite. Faire glisser la bougie dans l'image modifie aussi la distance de l'objet."
+ ],
+ "在力的作用下能绕固定点转动的硬棒叫杠杆。支点、动力、阻力、动力臂、阻力臂是杠杆的五要素；力臂是支点到力的作用线的距离。": [
+  "A rigid bar that can turn about a fixed point under a force is called a lever. The fulcrum, the effort, the load, the effort arm and the load arm are the five elements of a lever; a lever arm is the distance from the fulcrum to the line of action of the force.",
+  "Une barre rigide qui peut tourner autour d'un point fixe sous l'action d'une force est un levier. Le point d'appui, la force motrice, la force résistante, le bras de levier moteur et le bras de levier résistant sont les cinq éléments d'un levier ; le bras de levier est la distance entre le point d'appui et la ligne d'action de la force."
+ ],
+ "杠杆的平衡条件：动力 × 动力臂 = 阻力 × 阻力臂，即 F₁L₁ = F₂L₂。动力臂大于阻力臂的杠杆省力但费距离（撬棍、羊角锤）；动力臂小于阻力臂的杠杆费力但省距离（镊子、钓鱼竿）；两臂相等的是等臂杠杆（天平）。": [
+  "Condition of balance of a lever: effort × effort arm = load × load arm, that is F₁L₁ = F₂L₂. A lever whose effort arm is longer than its load arm saves effort but costs distance (crowbar, claw hammer); a lever whose effort arm is shorter than its load arm costs effort but saves distance (tweezers, fishing rod); a lever with equal arms neither saves effort nor costs it (balance scale).",
+  "Condition d'équilibre d'un levier : force motrice × bras moteur = force résistante × bras résistant, soit F₁L₁ = F₂L₂. Un levier dont le bras moteur est plus long que le bras résistant économise de la force mais demande un déplacement plus grand (pied-de-biche, marteau à arrache-clou) ; un levier dont le bras moteur est plus court que le bras résistant demande plus de force mais économise du déplacement (pince à épiler, canne à pêche) ; un levier à bras égaux ne fait ni gagner ni perdre de force (balance)."
+ ],
+ "拖动画面中的钩码，或用滑块改变它们的位置和个数。左边为动力，右边为阻力。": [
+  "Drag the weights in the picture, or use the sliders to change their positions and number. The left side is the effort, the right side is the load.",
+  "Faites glisser les masses dans l'image, ou utilisez les curseurs pour modifier leur position et leur nombre. Le côté gauche est la force motrice, le côté droit la force résistante."
+ ],
+ "磁体周围存在磁场，磁场对放入其中的磁体有力的作用。小磁针静止时 N 极所指的方向就是该点的磁场方向。为了形象地描述磁场，画出磁感线：在磁体外部，磁感线从 N 极出发回到 S 极；磁感线越密的地方磁场越强（两极附近最强）；磁感线不会相交，它不是真实存在的线。把画面里的小磁针拖到不同的位置，看它怎样指向。": [
+  "A magnet is surrounded by a magnetic field, which exerts a force on a magnet placed in it. The direction in which the N pole of a small compass needle points at rest is the direction of the field at that point. To describe the field clearly, magnetic field lines are drawn: outside the magnet they go from the N pole to the S pole; where the lines are denser the field is stronger (strongest near the poles); field lines never cross, and they are not real lines. Drag the small needle in the picture to different places and see how it points.",
+  "Un aimant est entouré d'un champ magnétique, qui exerce une force sur un aimant placé dans ce champ. Le sens dans lequel pointe le pôle nord d'une petite aiguille aimantée au repos est le sens du champ en ce point. Pour décrire le champ de façon claire, on trace des lignes de champ magnétique : à l'extérieur de l'aimant, elles vont du pôle nord au pôle sud ; là où les lignes sont plus serrées, le champ est plus fort (le plus fort près des pôles) ; les lignes de champ ne se croisent jamais et ne sont pas de vraies lignes. Faites glisser la petite aiguille dans l'image à différents endroits et regardez comment elle s'oriente."
+ ],
+ "奥斯特实验：把通电直导线放在小磁针上方（导线沿南北方向），小磁针发生偏转，说明电流周围存在磁场；改变电流方向，小磁针偏转的方向也改变；电流越大、离导线越近，磁场越强，偏转越大（小磁针同时受到地磁场的作用）。通电螺线管外部的磁场与条形磁铁相似，极性由右手螺旋定则判断：用右手握住螺线管，四指弯曲的方向是电流的方向，大拇指所指的那端是 N 极。": [
+  "Oersted's experiment: a straight current-carrying wire placed above a small compass needle (the wire running north-south) makes the needle deflect, which shows there is a magnetic field around a current; reversing the current also reverses the deflection; the greater the current and the closer to the wire, the stronger the field and the greater the deflection (the needle is also acted on by the Earth's field). The field outside a current-carrying solenoid is like that of a bar magnet, and its poles are found by the right-hand grip rule: grip the solenoid with the right hand with the fingers curling in the direction of the current, and the end the thumb points to is the N pole.",
+  "Expérience d'Œrsted : un fil rectiligne parcouru par un courant, placé au-dessus d'une petite aiguille aimantée (le fil orienté nord-sud), fait dévier l'aiguille, ce qui montre qu'il existe un champ magnétique autour d'un courant ; si l'on inverse le courant, la déviation s'inverse aussi ; plus le courant est grand et plus on est près du fil, plus le champ est fort et plus la déviation est grande (l'aiguille subit aussi l'action du champ magnétique terrestre). Le champ à l'extérieur d'une bobine parcourue par un courant ressemble à celui d'un barreau aimanté, et ses pôles se trouvent par la règle de la main droite : on saisit la bobine avec la main droite, les doigts courbés dans le sens du courant, et l'extrémité vers laquelle pointe le pouce est le pôle nord."
+ ],
+ "地球是一个巨大的磁体，周围存在地磁场：地磁的两极在地理两极附近，但并不重合（存在磁偏角，沈括最早记载）。地磁的北极在地理南极附近，地磁的南极在地理北极附近，所以小磁针的 N 极总指向地理的北方。地磁场磁感线与地面的夹角叫磁倾角：赤道附近磁针水平，磁极附近磁针接近竖直。": [
+  "The Earth is a huge magnet surrounded by a geomagnetic field: its magnetic poles are near the geographic poles but do not coincide with them (there is a magnetic declination, first recorded by Shen Kuo). The Earth's magnetic north pole is near the geographic south pole, and its magnetic south pole is near the geographic north pole, so the N pole of a compass needle always points to geographic north. The angle between the field lines and the ground is the magnetic dip: near the equator a needle is horizontal, near the magnetic poles it is almost vertical.",
+  "La Terre est un énorme aimant entouré d'un champ magnétique terrestre : ses pôles magnétiques sont proches des pôles géographiques mais ne coïncident pas avec eux (il existe une déclinaison magnétique, que Shen Kuo a décrite le premier). Le pôle nord magnétique de la Terre est proche du pôle sud géographique, et son pôle sud magnétique est proche du pôle nord géographique, de sorte que le pôle nord d'une aiguille aimantée pointe toujours vers le nord géographique. L'angle entre les lignes de champ et le sol est l'inclinaison magnétique : près de l'équateur, l'aiguille est horizontale, près des pôles magnétiques elle est presque verticale."
+ ],
+ "物质是由分子（或原子）组成的，分子很小，直径约 10⁻¹⁰ m 的数量级。一切物质的分子都在不停地做无规则运动，这种运动叫热运动：温度越高，分子的热运动越剧烈。扩散现象（墨水在水中散开、闻到气味）是分子运动的证据，温度越高，扩散越快。": [
+  "Matter is made up of molecules (or atoms). Molecules are very small, with a diameter of the order of 10⁻¹⁰ m. The molecules of all substances are in constant random motion, called thermal motion: the higher the temperature, the more violent the thermal motion. Diffusion (ink spreading in water, smelling an odour) is evidence of molecular motion, and the higher the temperature, the faster the diffusion.",
+  "La matière est constituée de molécules (ou d'atomes). Les molécules sont très petites, d'un diamètre de l'ordre de 10⁻¹⁰ m. Les molécules de toutes les substances sont en mouvement désordonné permanent, appelé agitation thermique : plus la température est élevée, plus l'agitation thermique est vive. La diffusion (l'encre qui se répand dans l'eau, une odeur que l'on sent) prouve le mouvement des molécules, et plus la température est élevée, plus la diffusion est rapide."
+ ],
+ "分子之间同时存在相互作用的引力和斥力。距离等于 r₀ 时引力和斥力相等；距离小于 r₀ 时斥力占主要，距离大于 r₀ 时引力占主要，距离超过分子直径的约 10 倍时，作用力可以忽略（气体容易被压缩、固体难以被拉断都与此有关）。": [
+  "Between molecules there are both attractive and repulsive forces. At the distance r₀ the attraction and the repulsion are equal; at distances less than r₀ repulsion prevails, at distances greater than r₀ attraction prevails, and when the distance exceeds about 10 times the diameter of a molecule the forces can be ignored (a gas is easy to compress and a solid is hard to pull apart for this reason).",
+  "Entre les molécules, il existe à la fois une force d'attraction et une force de répulsion. À la distance r₀, l'attraction et la répulsion sont égales ; à une distance inférieure à r₀, la répulsion domine, à une distance supérieure à r₀, l'attraction domine, et lorsque la distance dépasse environ 10 fois le diamètre d'une molécule, les forces sont négligeables (c'est pourquoi un gaz se comprime facilement et un solide se rompt difficilement)."
+ ],
+ "固体分子排列整齐，在平衡位置附近振动；液体分子排列较紧密、无规则，可以移动；气体分子间距很大，作用力极小，可以自由运动。本实验的扩散画面是模型：为了看得清楚，用的温度范围较大，分子数较少。": [
+  "The molecules of a solid are arranged in order and vibrate about their equilibrium positions; the molecules of a liquid are fairly close together but arranged irregularly, and can move; the molecules of a gas are far apart, exert very little force on each other and move freely. The diffusion picture in this experiment is a model: so that it can be seen clearly, it uses a wide temperature range and few molecules.",
+  "Les molécules d'un solide sont rangées de façon ordonnée et vibrent autour de leur position d'équilibre ; les molécules d'un liquide sont assez proches mais disposées de façon désordonnée et peuvent se déplacer ; les molécules d'un gaz sont très éloignées, agissent très peu les unes sur les autres et se déplacent librement. L'image de diffusion de cette expérience est un modèle : pour que l'on voie bien, on utilise un grand intervalle de températures et peu de molécules."
+ ],
+ "物体的位置随时间的变化叫机械运动。快慢用速度表示：速度等于路程与时间的比，v = s / t。": [
+  "The change of an object's position with time is called mechanical motion. How fast it is is expressed by speed: speed is the ratio of distance to time, v = s / t.",
+  "Le changement de position d'un objet au cours du temps s'appelle le mouvement mécanique. Sa rapidité s'exprime par la vitesse : la vitesse est le rapport de la distance au temps, v = s / t."
+ ],
+ "匀速直线运动的 s-t 图是一条过原点的直线，直线越陡，速度越大；v-t 图是一条水平线，图线与时间轴围成的面积等于路程。": [
+  "The s–t graph of uniform motion in a straight line is a straight line through the origin: the steeper the line, the greater the speed; the v–t graph is a horizontal line, and the area between the graph and the time axis equals the distance.",
+  "Le graphique s–t d'un mouvement rectiligne uniforme est une droite passant par l'origine : plus la droite est raide, plus la vitesse est grande ; le graphique v–t est une droite horizontale, et l'aire comprise entre le graphique et l'axe du temps est égale à la distance."
+ ],
+ "匀加速运动的速度均匀增大，v-t 图是一条斜线，s-t 图是一条曲线。打点计时器每隔相等的时间打一个点：点间距相等是匀速，点间距越来越大是加速。": [
+  "In uniformly accelerated motion the speed increases steadily; the v–t graph is a sloping line and the s–t graph is a curve. A ticker timer makes a dot at equal intervals of time: equal spacing between dots means constant speed, and spacing that grows means acceleration.",
+  "Dans un mouvement uniformément accéléré, la vitesse augmente régulièrement ; le graphique v–t est une droite oblique et le graphique s–t est une courbe. Un chronomètre à étincelles fait un point à intervalles de temps égaux : des points régulièrement espacés indiquent une vitesse constante, et des points de plus en plus espacés indiquent une accélération."
+ ],
+ "斜面实验：让同一辆小车从斜面同一高度滑下，到达水平面时速度相同。水平面越光滑，小车受到的阻力越小，速度减小得越慢，滑行得越远。推理：如果水平面绝对光滑，小车将一直做匀速直线运动。": [
+  "Incline experiment: let the same trolley slide down the same height of an incline, so it has the same speed on reaching the horizontal surface. The smoother the horizontal surface, the smaller the resistance on the trolley, the more slowly its speed falls and the farther it slides. Inference: if the horizontal surface were perfectly smooth, the trolley would move at constant speed in a straight line for ever.",
+  "Expérience du plan incliné : on laisse le même chariot descendre de la même hauteur sur un plan incliné ; il arrive donc avec la même vitesse sur la surface horizontale. Plus la surface horizontale est lisse, plus la résistance qui s'exerce sur le chariot est faible, plus sa vitesse diminue lentement et plus il glisse loin. Déduction : si la surface horizontale était parfaitement lisse, le chariot se déplacerait indéfiniment en ligne droite à vitesse constante."
+ ],
+ "牛顿第一定律：一切物体在没有受到力的作用时，总保持静止状态或匀速直线运动状态。物体保持原来运动状态不变的性质叫惯性。": [
+  "Newton's first law: every object, when no force acts on it, always stays at rest or in uniform motion in a straight line. The property of an object to keep its original state of motion is called inertia.",
+  "Première loi de Newton : tout objet qui ne subit aucune force reste toujours au repos ou en mouvement rectiligne uniforme. La propriété d'un objet de conserver son état de mouvement s'appelle l'inertie."
+ ],
+ "二力平衡的条件：作用在同一个物体上的两个力，大小相等、方向相反，并且在同一条直线上。物体受平衡力时，保持静止或匀速直线运动状态。": [
+  "Condition for two balanced forces: two forces acting on the same object that are equal in size, opposite in direction and along the same straight line. An object acted on by balanced forces stays at rest or moves in a straight line at constant speed.",
+  "Condition d'équilibre de deux forces : deux forces appliquées au même objet, de même valeur, de sens opposés et de même droite d'action. Un objet soumis à des forces qui s'équilibrent reste au repos ou se déplace en ligne droite à vitesse constante."
+ ],
+ "欧姆定律：导体中的电流跟导体两端的电压成正比，跟导体的电阻成反比：I = U / R。串联电路：电流处处相等，总电压等于各部分电压之和，总电阻 R = R₁ + R₂，电压与电阻成正比（分压）。并联电路：各支路两端电压相等，干路电流等于各支路电流之和，1/R = 1/R₁ + 1/R₂，电流与电阻成反比（分流）。": [
+  "Ohm's law: the current in a conductor is proportional to the voltage across it and inversely proportional to its resistance: I = U / R. Series circuit: the current is the same everywhere, the total voltage is the sum of the voltages of the parts, the total resistance is R = R₁ + R₂, and the voltage is proportional to the resistance (voltage division). Parallel circuit: the voltage across every branch is the same, the main current is the sum of the branch currents, 1/R = 1/R₁ + 1/R₂, and the current is inversely proportional to the resistance (current division).",
+  "Loi d'Ohm : l'intensité du courant dans un conducteur est proportionnelle à la tension à ses bornes et inversement proportionnelle à sa résistance : I = U / R. Circuit en série : l'intensité est la même partout, la tension totale est la somme des tensions des parties, la résistance totale est R = R₁ + R₂ et la tension est proportionnelle à la résistance (diviseur de tension). Circuit en parallèle : la tension aux bornes de chaque branche est la même, l'intensité principale est la somme des intensités des branches, 1/R = 1/R₁ + 1/R₂ et l'intensité est inversement proportionnelle à la résistance (diviseur de courant)."
+ ],
+ "滑动变阻器通过改变接入电路的电阻丝长度改变电阻，从而改变电路中的电流和电压。电功率 P = UI = I²R = U²/R；电流通过导体产生的热量 Q = I²Rt（焦耳定律）。": [
+  "A rheostat changes its resistance by changing the length of resistance wire in the circuit, and so changes the current and voltage in the circuit. Electric power P = UI = I²R = U²/R; the heat produced by a current in a conductor is Q = I²Rt (Joule's law).",
+  "Un rhéostat modifie sa résistance en changeant la longueur de fil résistant placée dans le circuit, et modifie ainsi l'intensité et la tension du circuit. Puissance électrique P = UI = I²R = U²/R ; la chaleur dégagée par un courant dans un conducteur est Q = I²Rt (loi de Joule)."
+ ],
+ "拖动画面中的电阻（或滑动变阻器的滑片），也可以改变它们的阻值。": [
+  "Drag the resistors (or the slider of the rheostat) in the picture to change their values as well.",
+  "Faites glisser les résistances (ou le curseur du rhéostat) dans l'image pour modifier aussi leurs valeurs."
+ ],
+ "压强表示压力的作用效果：p = F / S。压力一定时，受力面积越小，压强越大（针尖、刀刃）；受力面积一定时，压力越大，压强越大。单位：帕斯卡（Pa），1 Pa = 1 N/m²。": [
+  "Pressure expresses the effect of a force: p = F / S. With the force unchanged, the smaller the area, the greater the pressure (needle point, knife edge); with the area unchanged, the greater the force, the greater the pressure. Unit: the pascal (Pa), 1 Pa = 1 N/m².",
+  "La pression exprime l'effet d'une force : p = F / S. À force constante, plus la surface est petite, plus la pression est grande (pointe d'aiguille, lame de couteau) ; à surface constante, plus la force est grande, plus la pression est grande. Unité : le pascal (Pa), 1 Pa = 1 N/m²."
+ ],
+ "液体内部向各个方向都有压强，同一深度各个方向的压强相等；深度越大，压强越大；深度相同时，液体密度越大，压强越大：p = ρgh。": [
+  "Inside a liquid there is pressure in all directions, and at the same depth the pressure is the same in every direction; the greater the depth, the greater the pressure; at the same depth, the denser the liquid, the greater the pressure: p = ρgh.",
+  "À l'intérieur d'un liquide, il existe une pression dans toutes les directions, et à une même profondeur la pression est la même dans toutes les directions ; plus la profondeur est grande, plus la pression est grande ; à une même profondeur, plus le liquide est dense, plus la pression est grande : p = ρgh."
+ ],
+ "大气也有压强。托里拆利实验测出标准大气压约等于 760 mm 高水银柱产生的压强（约 1.013×10⁵ Pa）。管子倾斜，水银柱的竖直高度不变；海拔越高，大气压越小。": [
+  "The atmosphere also exerts pressure. Torricelli's experiment showed that standard atmospheric pressure is about equal to the pressure of a column of mercury 760 mm high (about 1.013×10⁵ Pa). If the tube is tilted, the vertical height of the mercury column does not change; the higher the altitude, the lower the atmospheric pressure.",
+  "L'atmosphère exerce aussi une pression. L'expérience de Torricelli a montré que la pression atmosphérique normale est à peu près égale à la pression d'une colonne de mercure de 760 mm de haut (environ 1,013×10⁵ Pa). Si le tube est incliné, la hauteur verticale de la colonne de mercure ne change pas ; plus l'altitude est grande, plus la pression atmosphérique est faible."
+ ],
+ "滑轮组由定滑轮和动滑轮组成：承担重物的绳子段数为 n，不计摩擦时 F = (G + G动) / n，绳子自由端移动的距离 s = nh。省力的同时要多移动距离，使用任何机械都不省功。": [
+  "A pulley system consists of fixed and movable pulleys: if n sections of rope support the load, then with no friction F = (G + G_pulley) / n and the distance moved by the free end of the rope is s = nh. Saving force means moving over a greater distance, and no machine saves work.",
+  "Un palan est formé de poulies fixes et de poulies mobiles : si n brins de corde supportent la charge, alors, sans frottement, F = (P + P_poulie) / n et la distance parcourue par l'extrémité libre de la corde est s = nh. Gagner en force oblige à parcourir une plus grande distance, et aucune machine ne fait économiser du travail."
+ ],
+ "有用功 W有 = Gh，总功 W总 = Fs，机械效率 η = W有 / W总，总小于 1。增大物重、减小动滑轮重和摩擦，可以提高滑轮组的机械效率。斜面：倾角越大越费力，斜面越粗糙，机械效率越低。": [
+  "Useful work W_useful = Gh, total work W_total = Fs, mechanical efficiency η = W_useful / W_total, always less than 1. Increasing the weight lifted and reducing the weight of the movable pulley and the friction raise the efficiency of a pulley system. Incline: the larger the angle, the greater the effort needed, and the rougher the incline, the lower the efficiency.",
+  "Travail utile W_utile = Ph, travail total W_total = Fs, rendement mécanique η = W_utile / W_total, toujours inférieur à 1. Augmenter le poids soulevé et réduire le poids de la poulie mobile et les frottements améliore le rendement d'un palan. Plan incliné : plus l'angle est grand, plus la force nécessaire est grande, et plus le plan est rugueux, plus le rendement est faible."
+ ],
+ "光的反射定律：反射光线、入射光线和法线在同一平面内；反射光线和入射光线分别位于法线两侧；反射角等于入射角。光路是可逆的。": [
+  "Law of reflection of light: the reflected ray, the incident ray and the normal lie in the same plane; the reflected ray and the incident ray are on opposite sides of the normal; the angle of reflection equals the angle of incidence. The path of light is reversible.",
+  "Loi de la réflexion de la lumière : le rayon réfléchi, le rayon incident et la normale sont dans un même plan ; le rayon réfléchi et le rayon incident sont de part et d'autre de la normale ; l'angle de réflexion est égal à l'angle d'incidence. Le trajet de la lumière est réversible."
+ ],
+ "平面镜成像：像和物的大小相等；像到镜面的距离等于物到镜面的距离；像和物的连线与镜面垂直；平面镜成的是正立的虚像（不能用光屏接收）。": [
+  "Image in a plane mirror: the image is the same size as the object; its distance to the mirror equals the distance of the object to the mirror; the line joining image and object is perpendicular to the mirror; a plane mirror forms an upright virtual image (it cannot be received on a screen).",
+  "Image donnée par un miroir plan : l'image a la même taille que l'objet ; sa distance au miroir est égale à celle de l'objet au miroir ; la droite joignant l'image et l'objet est perpendiculaire au miroir ; un miroir plan donne une image virtuelle droite (on ne peut pas la recevoir sur un écran)."
+ ],
+ "镜面转过 α 角，入射光线不动，反射光线转过 2α 角。": [
+  "When the mirror turns through an angle α while the incident ray stays fixed, the reflected ray turns through 2α.",
+  "Quand le miroir tourne d'un angle α alors que le rayon incident reste fixe, le rayon réfléchi tourne de 2α."
+ ],
+ "光从一种介质斜射入另一种介质时，传播方向一般会发生偏折，这叫光的折射。光从空气斜射入水或玻璃中，折射角小于入射角；从水或玻璃斜射入空气中，折射角大于入射角；垂直入射时，传播方向不变。": [
+  "When light passes obliquely from one medium into another, its direction of travel generally bends; this is called refraction of light. When light passes obliquely from air into water or glass, the angle of refraction is smaller than the angle of incidence; from water or glass obliquely into air, the angle of refraction is larger than the angle of incidence; at normal incidence the direction does not change.",
+  "Lorsque la lumière passe obliquement d'un milieu dans un autre, sa direction de propagation change en général ; c'est la réfraction de la lumière. Quand la lumière passe obliquement de l'air dans l'eau ou dans le verre, l'angle de réfraction est plus petit que l'angle d'incidence ; de l'eau ou du verre vers l'air, l'angle de réfraction est plus grand que l'angle d'incidence ; sous incidence normale, la direction ne change pas."
+ ],
+ "折射定律：n₁ sin θ₁ = n₂ sin θ₂。光从光密介质射向光疏介质，入射角增大到某一角度（临界角）时，折射角达到 90°；入射角再增大，折射光线消失，光全部被反射回来，这叫全反射。": [
+  "Law of refraction: n₁ sin θ₁ = n₂ sin θ₂. When light goes from a denser medium to a less dense one and the angle of incidence increases to a certain angle (the critical angle), the angle of refraction reaches 90°; if the angle of incidence increases further, the refracted ray disappears and all the light is reflected back; this is called total internal reflection.",
+  "Loi de la réfraction : n₁ sin θ₁ = n₂ sin θ₂. Quand la lumière passe d'un milieu plus réfringent à un milieu moins réfringent et que l'angle d'incidence augmente jusqu'à une certaine valeur (l'angle critique), l'angle de réfraction atteint 90° ; si l'angle d'incidence augmente encore, le rayon réfracté disparaît et toute la lumière est réfléchie : c'est la réflexion totale."
+ ],
+ "声音由物体的振动产生。音调（高低）由频率决定：频率越高，音调越高；响度（大小）由振幅决定：振幅越大，响度越大。": [
+  "Sound is produced by vibrating objects. Pitch (high or low) is determined by frequency: the higher the frequency, the higher the pitch; loudness is determined by amplitude: the greater the amplitude, the louder the sound.",
+  "Le son est produit par la vibration des objets. La hauteur (aiguë ou grave) est déterminée par la fréquence : plus la fréquence est élevée, plus le son est aigu ; l'intensité sonore (fort ou faible) est déterminée par l'amplitude : plus l'amplitude est grande, plus le son est fort."
+ ],
+ "音色（品质）由波形决定：相同音调和响度的声音，波形不同，听起来也不同。屏幕上的示波器和播放的声音来自同一个公式。": [
+  "Timbre (quality) is determined by the waveform: sounds with the same pitch and loudness but different waveforms still sound different. The oscilloscope on the screen and the sound that is played come from the same formula.",
+  "Le timbre est déterminé par la forme de l'onde : des sons de même hauteur et de même intensité mais de formes d'onde différentes sonnent différemment. L'oscilloscope à l'écran et le son joué proviennent de la même formule."
+ ],
+ "人耳能听到的频率大约是 20 Hz 到 20000 Hz；声音在 15 °C 空气中的速度约为 340 m/s，不能在真空中传播。": [
+  "The human ear can hear frequencies from about 20 Hz to 20 000 Hz; the speed of sound in air at 15 °C is about 340 m/s, and sound cannot travel through a vacuum.",
+  "L'oreille humaine perçoit les fréquences d'environ 20 Hz à 20 000 Hz ; la vitesse du son dans l'air à 15 °C est d'environ 340 m/s, et le son ne se propage pas dans le vide."
+ ],
+ "比热容表示物质吸热（放热）能力的强弱：单位质量的某种物质温度升高 1 °C 所吸收的热量，叫做这种物质的比热容。水的比热容较大，为 4.2×10³ J/(kg·°C)。": [
+  "Specific heat capacity expresses how strongly a substance absorbs (or releases) heat: the heat absorbed by a unit mass of a substance when its temperature rises by 1 °C is called the specific heat capacity of that substance. Water has a large specific heat capacity, 4.2×10³ J/(kg·°C).",
+  "La capacité thermique massique exprime l'aptitude d'une substance à absorber (ou à céder) de la chaleur : la chaleur absorbée par une unité de masse d'une substance lorsque sa température s'élève de 1 °C s'appelle la capacité thermique massique de cette substance. L'eau a une grande capacité thermique massique, 4,2×10³ J/(kg·°C)."
+ ],
+ "Q = cmΔt。质量相等、吸收热量相同时，比热容大的物质温度升高得少。比热容是物质的一种特性，与质量、体积、温度的变化无关。水的比热容大，所以用水做冷却剂、暖气的传热物质，沿海地区的昼夜温差小。": [
+  "Q = cmΔt. For equal masses absorbing the same amount of heat, the substance with the larger specific heat capacity warms up less. Specific heat capacity is a property of a substance and does not depend on mass, volume or change of temperature. Water's large specific heat capacity is why water is used as a coolant and as the heat-carrying substance in radiators, and why the temperature difference between day and night is small in coastal regions.",
+  "Q = cmΔt. Pour des masses égales absorbant la même quantité de chaleur, la substance dont la capacité thermique massique est la plus grande s'échauffe le moins. La capacité thermique massique est une propriété d'une substance et ne dépend ni de la masse, ni du volume, ni de la variation de température. C'est la grande capacité thermique massique de l'eau qui explique qu'on l'utilise comme liquide de refroidissement et comme fluide caloporteur dans les radiateurs, et que l'écart de température entre le jour et la nuit soit faible dans les régions côtières."
+ ],
+ "本实验用两个相同的加热器同时加热水和另一种物质，加热器功率相同，吸收的热量相同。水温升到 100 °C 后保持不变（沸腾）。": [
+  "In this experiment two identical heaters heat water and another substance at the same time; the heaters have the same power, so the heat absorbed is the same. After the water temperature reaches 100 °C it stays constant (boiling).",
+  "Dans cette expérience, deux appareils de chauffage identiques chauffent en même temps de l'eau et une autre substance ; les appareils ont la même puissance, donc la chaleur absorbée est la même. Quand la température de l'eau atteint 100 °C, elle reste constante (ébullition)."
+ ],
+ "物体发生弹性形变时产生的力叫弹力。在弹性限度内，弹簧的伸长量与所受的拉力成正比：F = kx。弹簧测力计就是根据这一原理制成的；超过弹性限度，弹簧不能恢复原长。": [
+  "The force produced when an object is elastically deformed is called the elastic force. Within the elastic limit, the extension of a spring is proportional to the pulling force: F = kx. The spring balance is made on this principle; beyond the elastic limit, the spring cannot return to its original length.",
+  "La force produite lorsqu'un objet subit une déformation élastique s'appelle la force élastique. Dans la limite d'élasticité, l'allongement d'un ressort est proportionnel à la force de traction : F = kx. Le dynamomètre est fondé sur ce principe ; au-delà de la limite d'élasticité, le ressort ne peut plus reprendre sa longueur initiale."
+ ],
+ "重力是由于地球的吸引而使物体受到的力，方向竖直向下，大小 G = mg。g 约为 9.8 N/kg，在月球上约为地球的六分之一。质量是物体所含物质的多少，不随位置改变；重力会随位置改变。": [
+  "Weight is the force on an object caused by the Earth's attraction; its direction is vertically downward and its size is G = mg. g is about 9.8 N/kg, and on the Moon it is about one sixth of that on the Earth. Mass is the amount of matter in an object and does not change with position; weight changes with position.",
+  "Le poids est la force exercée sur un objet du fait de l'attraction de la Terre ; sa direction est verticale, vers le bas, et sa valeur est P = mg. g vaut environ 9,8 N/kg, et sur la Lune environ un sixième de cette valeur. La masse est la quantité de matière d'un objet et ne change pas avec le lieu ; le poids change avec le lieu."
+ ],
+ "测小灯泡的电功率：电压表示数 {0} V，电流表示数 {1} A，小灯泡的实际功率是多少？": [
+  "Measuring the electric power of a small bulb: the voltmeter reads {0} V and the ammeter reads {1} A. What is the actual power of the bulb?",
+  "Mesure de la puissance d'une petite ampoule : le voltmètre indique {0} V et l'ampèremètre indique {1} A. Quelle est la puissance réelle de l'ampoule ?"
+ ],
+ "电压表示数 {0} V，电流表示数 {1} A，此时灯丝的电阻是多少？": [
+  "The voltmeter reads {0} V and the ammeter reads {1} A. What is the resistance of the filament now?",
+  "Le voltmètre indique {0} V et l'ampèremètre indique {1} A. Quelle est alors la résistance du filament ?"
+ ],
+ "小灯泡的额定电压是 {0} V，正常发光时电流是 {1} A，电源电压 {2} V。要使它正常发光，应使滑动变阻器接入的电阻是多少？（忽略电源内阻）": [
+  "The rated voltage of a small bulb is {0} V, the current when it glows normally is {1} A, and the supply voltage is {2} V. What resistance must the rheostat have in the circuit for the bulb to glow normally? (Ignore the internal resistance of the supply.)",
+  "La tension nominale d'une petite ampoule est {0} V, l'intensité lorsqu'elle brille normalement est {1} A et la tension de l'alimentation est {2} V. Quelle résistance le rhéostat doit-il avoir dans le circuit pour que l'ampoule brille normalement ? (On néglige la résistance interne de l'alimentation.)"
+ ],
+ "串联分压：U滑 = E − U额，R滑 = U滑 / I。": [
+  "Voltage division in series: U_rheostat = E − U_rated, R_rheostat = U_rheostat / I.",
+  "Diviseur de tension en série : U_rhéostat = E − U_nominale, R_rhéostat = U_rhéostat / I."
+ ],
+ "一个灯泡标有“{0} V {1} W”，接在 {2} V 的电路中（灯丝电阻不变），实际功率是多少？": [
+  "A bulb is marked “{0} V {1} W” and is connected to a circuit of {2} V (the filament resistance is unchanged). What is its actual power?",
+  "Une ampoule porte l'inscription « {0} V {1} W » et est branchée sur un circuit de {2} V (la résistance du filament ne change pas). Quelle est sa puissance réelle ?"
+ ],
+ "P实 = P额 (U实 / U额)²。": [
+  "P_actual = P_rated (U_actual / U_rated)².",
+  "P_réelle = P_nominale (U_réelle / U_nominale)²."
+ ],
+ "灯泡的亮暗程度取决于：": [
+  "The brightness of a bulb depends on:",
+  "L'éclat d'une ampoule dépend de :"
+ ],
+ "灯泡的实际功率": [
+  "the actual power of the bulb",
+  "la puissance réelle de l'ampoule"
+ ],
+ "灯泡的额定功率": [
+  "the rated power of the bulb",
+  "la puissance nominale de l'ampoule"
+ ],
+ "通过灯泡的电流": [
+  "the current through the bulb",
+  "l'intensité du courant qui traverse l'ampoule"
+ ],
+ "灯泡两端的电压": [
+  "the voltage across the bulb",
+  "la tension aux bornes de l'ampoule"
+ ],
+ "灯泡越亮，说明实际功率越大；额定功率只是灯泡正常工作时的功率。": [
+  "The brighter the bulb, the greater its actual power; the rated power is only the power when the bulb works normally.",
+  "Plus l'ampoule éclaire, plus sa puissance réelle est grande ; la puissance nominale n'est que la puissance de l'ampoule en fonctionnement normal."
+ ],
+ "上浮，最后漂浮在液面上": [
+  "It rises and finally floats on the surface of the liquid",
+  "Il monte et finit par flotter à la surface du liquide"
+ ],
+ "悬浮在液体中": [
+  "It is suspended in the liquid",
+  "Il reste en équilibre dans le liquide"
+ ],
+ "下沉到容器底部": [
+  "It sinks to the bottom of the container",
+  "Il coule au fond du récipient"
+ ],
+ "体积 {0} cm³ 的物体浸没在水中（密度 1000 kg/m³），受到的浮力是多少？（g = 9.8 N/kg）": [
+  "An object of volume {0} cm³ is fully immersed in water (density 1000 kg/m³). What is the buoyant force on it? (g = 9.8 N/kg)",
+  "Un objet de volume {0} cm³ est complètement immergé dans l'eau (masse volumique 1000 kg/m³). Quelle est la poussée qu'il subit ? (g = 9,8 N/kg)"
+ ],
+ "F浮 = ρ液gV排。": [
+  "F_buoyancy = ρ_liquid g V_displaced.",
+  "F = ρ_liquide g V_déplacé."
+ ],
+ "物体挂在弹簧测力计下，示数是 {0} N；浸没在水中后示数变为 {1} N，物体受到的浮力是多少？": [
+  "An object hangs from a spring balance, which reads {0} N; when it is fully immersed in water the reading becomes {1} N. What is the buoyant force on the object?",
+  "Un objet est suspendu à un dynamomètre qui indique {0} N ; une fois complètement immergé dans l'eau, l'indication devient {1} N. Quelle est la poussée subie par l'objet ?"
+ ],
+ "称重法：F浮 = G − F示。": [
+  "Weighing method: F_buoyancy = G − F_reading.",
+  "Méthode de la pesée : F = P − F_lue."
+ ],
+ "密度为 {0} g/cm³ 的木块漂浮在水面上，木块浸入水中的体积占它总体积的百分之几？": [
+  "A block of wood of density {0} g/cm³ floats on water. What percentage of its volume is below the water?",
+  "Un bloc de bois de masse volumique {0} g/cm³ flotte sur l'eau. Quel pourcentage de son volume est sous l'eau ?"
+ ],
+ "漂浮时 F浮 = G，ρ液 V排 = ρ物 V物。": [
+  "When floating, F_buoyancy = G, ρ_liquid V_displaced = ρ_object V_object.",
+  "À la flottaison, F = P, ρ_liquide V_déplacé = ρ_objet V_objet."
+ ],
+ "质量 {0} kg 的物体漂浮在水面上，受到的浮力是多少？（g = 9.8 N/kg）": [
+  "An object of mass {0} kg floats on water. What is the buoyant force on it? (g = 9.8 N/kg)",
+  "Un objet de masse {0} kg flotte sur l'eau. Quelle est la poussée qu'il subit ? (g = 9,8 N/kg)"
+ ],
+ "漂浮时 F浮 = G = mg。": [
+  "When floating, F_buoyancy = G = mg.",
+  "À la flottaison, F = P = mg."
+ ],
+ "物体的密度是 {0} g/cm³，放入密度为 {1} g/cm³ 的液体中（浸没后松手），物体将：": [
+  "The density of an object is {0} g/cm³, and it is put into a liquid of density {1} g/cm³ (and let go after being fully immersed). The object will:",
+  "La masse volumique d'un objet est {0} g/cm³, et on le place dans un liquide de masse volumique {1} g/cm³ (en le lâchant une fois complètement immergé). L'objet va :"
+ ],
+ "先上浮再下沉": [
+  "rise first and then sink",
+  "monter d'abord, puis couler"
+ ],
+ "ρ物 < ρ液 漂浮；ρ物 = ρ液 悬浮；ρ物 > ρ液 下沉。": [
+  "ρ_object < ρ_liquid: floats; ρ_object = ρ_liquid: suspended; ρ_object > ρ_liquid: sinks.",
+  "ρ_objet < ρ_liquide : flotte ; ρ_objet = ρ_liquide : reste en équilibre dans le liquide ; ρ_objet > ρ_liquide : coule."
+ ],
+ "把 {0} Ω 和 {1} Ω 的电阻串联，总电阻是多少？": [
+  "Resistors of {0} Ω and {1} Ω are connected in series. What is the total resistance?",
+  "Des résistances de {0} Ω et {1} Ω sont montées en série. Quelle est la résistance totale ?"
+ ],
+ "串联：R = R₁ + R₂。": [
+  "Series: R = R₁ + R₂.",
+  "En série : R = R₁ + R₂."
+ ],
+ "把 {0} Ω 和 {1} Ω 的电阻并联，总电阻是多少？": [
+  "Resistors of {0} Ω and {1} Ω are connected in parallel. What is the total resistance?",
+  "Des résistances de {0} Ω et {1} Ω sont montées en parallèle. Quelle est la résistance totale ?"
+ ],
+ "并联：1/R = 1/R₁ + 1/R₂。": [
+  "Parallel: 1/R = 1/R₁ + 1/R₂.",
+  "En parallèle : 1/R = 1/R₁ + 1/R₂."
+ ],
+ "{0} Ω 的电阻与 {1} Ω、{2} Ω 两个电阻的并联组合串联，总电阻是多少？": [
+  "A resistor of {0} Ω is connected in series with a parallel combination of resistors of {1} Ω and {2} Ω. What is the total resistance?",
+  "Une résistance de {0} Ω est montée en série avec l'association en parallèle de deux résistances de {1} Ω et {2} Ω. Quelle est la résistance totale ?"
+ ],
+ "先求并联部分的等效电阻，再与串联部分相加。": [
+  "First find the equivalent resistance of the parallel part, then add the series part.",
+  "Calculez d'abord la résistance équivalente de la partie en parallèle, puis ajoutez la partie en série."
+ ],
+ "{0} Ω 与 {1} Ω 的电阻并联在 {2} V 的电源两端，通过 {3} Ω 电阻的电流是多少？": [
+  "Resistors of {0} Ω and {1} Ω are connected in parallel across a supply of {2} V. What is the current through the {3} Ω resistor?",
+  "Des résistances de {0} Ω et {1} Ω sont montées en parallèle aux bornes d'une alimentation de {2} V. Quelle est l'intensité du courant dans la résistance de {3} Ω ?"
+ ],
+ "并联电路各支路两端的电压都等于电源电压：I = U / R。": [
+  "In a parallel circuit the voltage across each branch equals the supply voltage: I = U / R.",
+  "Dans un circuit en parallèle, la tension aux bornes de chaque branche est égale à la tension de l'alimentation : I = U / R."
+ ],
+ "家庭电路中各用电器之间是并联的，这是因为：": [
+  "In a household circuit the appliances are connected in parallel because:",
+  "Dans un circuit domestique, les appareils sont montés en parallèle parce que :"
+ ],
+ "并联时各用电器互不影响，都能在额定电压下工作": [
+  "in parallel the appliances do not affect each other and all work at their rated voltage",
+  "en parallèle, les appareils ne s'influencent pas et fonctionnent tous à leur tension nominale"
+ ],
+ "并联时总电阻最大": [
+  "in parallel the total resistance is greatest",
+  "en parallèle, la résistance totale est la plus grande"
+ ],
+ "并联时通过各用电器的电流相等": [
+  "in parallel the current through all appliances is equal",
+  "en parallèle, l'intensité du courant est la même dans tous les appareils"
+ ],
+ "串联时用电器的电压都是 220 V": [
+  "in series the voltage across the appliances is always 220 V",
+  "en série, la tension aux bornes des appareils est toujours de 220 V"
+ ],
+ "并联的各支路两端电压相等，一个用电器断开，其他用电器仍能工作。": [
+  "The voltage across all parallel branches is equal, and if one appliance is switched off the others still work.",
+  "La tension aux bornes de toutes les branches en parallèle est la même, et si un appareil est coupé, les autres continuent de fonctionner."
+ ],
+ "白光通过三棱镜后分解成七色光，其中偏折程度最大的是：": [
+  "After white light passes through a prism it splits into seven colours; the colour deviated most is:",
+  "Après avoir traversé un prisme, la lumière blanche se décompose en sept couleurs ; la couleur la plus déviée est :"
+ ],
+ "黄光": [
+  "yellow light",
+  "la lumière jaune"
+ ],
+ "同一种玻璃对紫光的折射率最大，所以紫光偏折得最厉害，红光最小。": [
+  "The refractive index of one kind of glass is greatest for violet light, so violet is deviated most and red least.",
+  "L'indice de réfraction d'un même verre est le plus grand pour la lumière violette ; le violet est donc le plus dévié et le rouge le moins dévié."
+ ],
+ "{0}混合后，得到的光是什么颜色？": [
+  "What colour of light is obtained after mixing {0}?",
+  "Quelle est la couleur de la lumière obtenue en mélangeant {0} ?"
+ ],
+ "红、绿、蓝是色光的三原色；红加绿得黄，绿加蓝得青，红加蓝得品红，三种合在一起得白光。": [
+  "Red, green and blue are the three primary colours of light: red plus green gives yellow, green plus blue gives cyan, red plus blue gives magenta, and all three together give white light.",
+  "Le rouge, le vert et le bleu sont les trois couleurs primaires de la lumière : rouge plus vert donne du jaune, vert plus bleu donne du cyan, rouge plus bleu donne du magenta, et les trois ensemble donnent de la lumière blanche."
+ ],
+ "在{0}下，看{1}的不透明物体，它呈现的颜色是：": [
+  "Under {0}, what colour does an opaque {1} object appear?",
+  "Sous {0}, de quelle couleur apparaît un objet opaque {1} ?"
+ ],
+ "不透明物体的颜色由它反射的色光决定：它只反射与自己颜色相同的光，吸收其他色光。": [
+  "The colour of an opaque object is determined by the coloured light it reflects: it reflects only light of its own colour and absorbs the other colours.",
+  "La couleur d'un objet opaque est déterminée par la lumière colorée qu'il réfléchit : il ne réfléchit que la lumière de sa propre couleur et absorbe les autres couleurs."
+ ],
+ "折射率为 {0} 的三棱镜，顶角 {1}°，光线的最小偏向角约是多少？": [
+  "For a prism of refractive index {0} and apex angle {1}°, what is the approximate minimum deviation of a ray?",
+  "Pour un prisme d'indice de réfraction {0} et d'angle au sommet {1}°, quelle est approximativement la déviation minimale d'un rayon ?"
+ ],
+ "光的三原色是：": [
+  "The three primary colours of light are:",
+  "Les trois couleurs primaires de la lumière sont :"
+ ],
+ "红、绿、蓝": [
+  "red, green, blue",
+  "rouge, vert, bleu"
+ ],
+ "红、黄、蓝": [
+  "red, yellow, blue",
+  "rouge, jaune, bleu"
+ ],
+ "红、黄、绿": [
+  "red, yellow, green",
+  "rouge, jaune, vert"
+ ],
+ "黄、绿、蓝": [
+  "yellow, green, blue",
+  "jaune, vert, bleu"
+ ],
+ "橙、黄、紫": [
+  "orange, yellow, violet",
+  "orange, jaune, violet"
+ ],
+ "色光的三原色是红、绿、蓝；颜料的三原色才是红、黄、蓝（品红、黄、青）。": [
+  "The primary colours of light are red, green and blue; it is the primary colours of paint that are red, yellow and blue (magenta, yellow, cyan).",
+  "Les couleurs primaires de la lumière sont le rouge, le vert et le bleu ; ce sont les couleurs primaires de la peinture qui sont le rouge, le jaune et le bleu (magenta, jaune, cyan)."
+ ],
+ "磁感应强度 {0} T 的磁场中，长 {1} m 的导线通过 {2} A 的电流（电流与磁场垂直），受到的力是多少？": [
+  "In a magnetic field of flux density {0} T, a wire {1} m long carries a current of {2} A (the current is perpendicular to the field). What is the force on it?",
+  "Dans un champ magnétique d'intensité {0} T, un fil de {1} m de long est parcouru par un courant de {2} A (le courant est perpendiculaire au champ). Quelle est la force qu'il subit ?"
+ ],
+ "在通电螺线管中插入铁芯，电磁铁的磁性：": [
+  "When an iron core is inserted into a current-carrying solenoid, the magnetism of the electromagnet:",
+  "Lorsqu'on introduit un noyau de fer dans une bobine parcourue par un courant, le magnétisme de l'électroaimant :"
+ ],
+ "增强": [
+  "becomes stronger",
+  "devient plus fort"
+ ],
+ "减弱": [
+  "becomes weaker",
+  "devient plus faible"
+ ],
+ "消失": [
+  "disappears",
+  "disparaît"
+ ],
+ "铁芯被磁化，磁性大大增强。": [
+  "The iron core is magnetised, and the magnetism becomes much stronger.",
+  "Le noyau de fer est aimanté et le magnétisme devient beaucoup plus fort."
+ ],
+ "要使直流电动机的转动方向相反，可以：": [
+  "To make a DC motor turn the other way, one can:",
+  "Pour faire tourner un moteur à courant continu dans l'autre sens, on peut :"
+ ],
+ "只改变电流方向（或只对调磁极）": [
+  "change only the current direction (or swap only the poles)",
+  "changer seulement le sens du courant (ou inverser seulement les pôles)"
+ ],
+ "同时改变电流方向和对调磁极": [
+  "change the current direction and swap the poles at the same time",
+  "changer en même temps le sens du courant et inverser les pôles"
+ ],
+ "增大电源电压": [
+  "increase the supply voltage",
+  "augmenter la tension de l'alimentation"
+ ],
+ "增加线圈匝数": [
+  "add more turns to the coil",
+  "ajouter des spires à la bobine"
+ ],
+ "换用更强的磁铁": [
+  "use a stronger magnet",
+  "utiliser un aimant plus puissant"
+ ],
+ "转动方向由电流方向和磁场方向共同决定，只改变其中一个会反向。": [
+  "The direction of rotation is determined by both the current direction and the field direction; changing only one of them reverses it.",
+  "Le sens de rotation est déterminé à la fois par le sens du courant et par le sens du champ ; en changer un seul l'inverse."
+ ],
+ "闭合电路的一部分导体在磁场中做切割磁感线运动时：": [
+  "When part of a conductor of a closed circuit moves across magnetic field lines in a magnetic field:",
+  "Lorsqu'une partie d'un conducteur appartenant à un circuit fermé se déplace dans un champ magnétique en coupant les lignes de champ :"
+ ],
+ "电路中产生感应电流": [
+  "an induced current is produced in the circuit",
+  "un courant induit apparaît dans le circuit"
+ ],
+ "电路中没有电流": [
+  "there is no current in the circuit",
+  "il n'y a pas de courant dans le circuit"
+ ],
+ "导体一定会发热而没有电流": [
+  "the conductor certainly heats up but there is no current",
+  "le conducteur chauffe certainement mais il n'y a pas de courant"
+ ],
+ "电路中产生恒定的电流，与运动无关": [
+  "a constant current is produced in the circuit, whatever the motion",
+  "un courant constant apparaît dans le circuit, quel que soit le mouvement"
+ ],
+ "这是电磁感应现象，发电机就是根据它制成的。": [
+  "This is electromagnetic induction, and the generator is made on this principle.",
+  "C'est le phénomène d'induction électromagnétique, et l'alternateur est construit selon ce principe."
+ ],
+ "电磁铁的匝数 {0}、电流 {1} A；若匝数不变，电流增大为原来的 2 倍，磁性：": [
+  "An electromagnet has {0} turns and a current of {1} A; if the number of turns stays the same and the current is doubled, the magnetism:",
+  "Un électroaimant a {0} spires et un courant de {1} A ; si le nombre de spires reste le même et que l'intensité est doublée, le magnétisme :"
+ ],
+ "先增强后减弱": [
+  "first becomes stronger and then weaker",
+  "devient d'abord plus fort, puis plus faible"
+ ],
+ "匝数一定时，电流越大，磁性越强。": [
+  "For a given number of turns, the greater the current, the stronger the magnetism.",
+  "Pour un nombre de spires donné, plus l'intensité est grande, plus le magnétisme est fort."
+ ],
+ "一个无线电台的频率是 {0} MHz，它发射的电磁波的波长是多少？（电磁波的速度 3×10⁸ m/s）": [
+  "A radio station has a frequency of {0} MHz. What is the wavelength of the electromagnetic waves it emits? (Speed of electromagnetic waves 3×10⁸ m/s)",
+  "La fréquence d'une station de radio est {0} MHz. Quelle est la longueur d'onde des ondes électromagnétiques qu'elle émet ? (Vitesse des ondes électromagnétiques 3×10⁸ m/s)"
+ ],
+ "电磁波的波长是 {0} m，它的频率是多少？（电磁波的速度 3×10⁸ m/s）": [
+  "The wavelength of an electromagnetic wave is {0} m. What is its frequency? (Speed of electromagnetic waves 3×10⁸ m/s)",
+  "La longueur d'onde d'une onde électromagnétique est {0} m. Quelle est sa fréquence ? (Vitesse des ondes électromagnétiques 3×10⁸ m/s)"
+ ],
+ "无线电信号从发射到接收经过 {0} km，传播时间约是多少？（速度 3×10⁸ m/s）": [
+  "A radio signal travels {0} km from transmission to reception. About how long does it take? (Speed 3×10⁸ m/s)",
+  "Un signal radio parcourt {0} km de l'émission à la réception. Quelle est à peu près la durée du trajet ? (Vitesse 3×10⁸ m/s)"
+ ],
+ "电磁波的传播：": [
+  "The propagation of electromagnetic waves:",
+  "La propagation des ondes électromagnétiques :"
+ ],
+ "不需要介质，可以在真空中传播": [
+  "needs no medium and can travel through a vacuum",
+  "ne nécessite pas de milieu et peut se faire dans le vide"
+ ],
+ "需要介质，不能在真空中传播": [
+  "needs a medium and cannot travel through a vacuum",
+  "nécessite un milieu et ne peut pas se faire dans le vide"
+ ],
+ "在真空中的速度比在空气中的小得多": [
+  "speed in a vacuum is much smaller than in air",
+  "la vitesse dans le vide est beaucoup plus petite que dans l'air"
+ ],
+ "只能在空气中传播": [
+  "can only take place in air",
+  "ne peut se faire que dans l'air"
+ ],
+ "电磁波在真空中的速度是 3×10⁸ m/s，声波则不能在真空中传播。": [
+  "The speed of electromagnetic waves in a vacuum is 3×10⁸ m/s, whereas sound waves cannot travel through a vacuum.",
+  "La vitesse des ondes électromagnétiques dans le vide est de 3×10⁸ m/s, alors que les ondes sonores ne se propagent pas dans le vide."
+ ],
+ "下列电磁波中，频率最高的是：": [
+  "Which of the following electromagnetic waves has the highest frequency?",
+  "Parmi les ondes électromagnétiques suivantes, laquelle a la fréquence la plus élevée ?"
+ ],
+ "频率从低到高：无线电波、红外线、可见光、紫外线、X 射线、γ 射线。": [
+  "From low to high frequency: radio waves, infrared, visible light, ultraviolet, X-rays, gamma rays.",
+  "De la fréquence la plus basse à la plus haute : ondes radio, infrarouges, lumière visible, ultraviolets, rayons X, rayons gamma."
+ ],
+ "用 {0} N 的力沿力的方向推动物体前进 {1} m，做的功是多少？": [
+  "A force of {0} N pushes an object forward {1} m in the direction of the force. How much work is done?",
+  "Une force de {0} N pousse un objet sur {1} m dans la direction de la force. Quel est le travail effectué ?"
+ ],
+ "在 {0} s 内做了 {1} J 的功，功率是多少？": [
+  "Work of {1} J is done in {0} s. What is the power?",
+  "Un travail de {1} J est effectué en {0} s. Quelle est la puissance ?"
+ ],
+ "质量 {0} kg 的物体被举高 {1} m，增加的重力势能是多少？（g = 9.8 N/kg）": [
+  "An object of mass {0} kg is lifted {1} m. By how much does its gravitational potential energy increase? (g = 9.8 N/kg)",
+  "Un objet de masse {0} kg est soulevé de {1} m. De combien augmente son énergie potentielle de pesanteur ? (g = 9,8 N/kg)"
+ ],
+ "质量 {0} kg 的物体以 {1} m/s 运动，动能是多少？": [
+  "An object of mass {0} kg moves at {1} m/s. What is its kinetic energy?",
+  "Un objet de masse {0} kg se déplace à {1} m/s. Quelle est son énergie cinétique ?"
+ ],
+ "不计空气阻力，物体从 {0} m 高处自由下落，落地时的速度是多少？（g = 9.8 m/s²）": [
+  "Ignoring air resistance, an object falls freely from a height of {0} m. What is its speed when it reaches the ground? (g = 9.8 m/s²)",
+  "En négligeant la résistance de l'air, un objet tombe en chute libre d'une hauteur de {0} m. Quelle est sa vitesse en arrivant au sol ? (g = 9,8 m/s²)"
+ ],
+ "机械能守恒：mgh = ½mv²。": [
+  "Conservation of mechanical energy: mgh = ½mv².",
+  "Conservation de l'énergie mécanique : mgh = ½mv²."
+ ],
+ "{0}是：": [
+  "{0} is:",
+  "{0} est :"
+ ],
+ "既是可再生能源，又是不可再生能源": [
+  "both a renewable and a non-renewable energy source",
+  "à la fois une source d'énergie renouvelable et non renouvelable"
+ ],
+ "不是能源": [
+  "not an energy source",
+  "pas une source d'énergie"
+ ],
+ "可以从自然界源源不断地得到的是可再生能源，如太阳能、风能、水能；化石能源和核燃料用了就少，是不可再生能源。": [
+  "Energy that can be obtained from nature without end is renewable, such as solar, wind and water; fossil fuels and nuclear fuel run out as they are used and are non-renewable.",
+  "L'énergie que l'on peut obtenir de la nature sans fin est renouvelable, comme l'énergie solaire, éolienne ou hydraulique ; les combustibles fossiles et nucléaires s'épuisent en étant utilisés et sont non renouvelables."
+ ],
+ "既是一次能源，又是二次能源": [
+  "both a primary and a secondary energy source",
+  "à la fois une source d'énergie primaire et secondaire"
+ ],
+ "可以直接从自然界获得的是一次能源；由一次能源加工转化得到的（如电能、氢能）是二次能源。": [
+  "Energy that can be obtained directly from nature is primary; energy obtained by processing and converting primary energy (such as electricity and hydrogen) is secondary.",
+  "L'énergie que l'on peut obtenir directement dans la nature est primaire ; l'énergie obtenue en transformant une énergie primaire (comme l'électricité ou l'hydrogène) est secondaire."
+ ],
+ "某装置分两步转化能量，第一步的效率是 {0}%，第二步的效率是 {1}%，整个装置的效率是多少？": [
+  "A device converts energy in two steps; the efficiency of the first step is {0}% and that of the second step is {1}%. What is the efficiency of the whole device?",
+  "Un dispositif transforme l'énergie en deux étapes ; le rendement de la première est {0} % et celui de la seconde est {1} %. Quel est le rendement de l'ensemble ?"
+ ],
+ "总效率等于各步效率的乘积。": [
+  "The total efficiency equals the product of the efficiencies of the steps.",
+  "Le rendement total est égal au produit des rendements des étapes."
+ ],
+ "{0} MJ 的电能合多少千瓦时（度）？（1 kW·h = 3.6 MJ）": [
+  "How many kilowatt-hours (units) is {0} MJ of electrical energy? (1 kW·h = 3.6 MJ)",
+  "Combien de kilowattheures vaut {0} MJ d'énergie électrique ? (1 kW·h = 3,6 MJ)"
+ ],
+ "用煤发电，每发 1 kW·h 的电约排放 {0} kg 二氧化碳，发 {1} kW·h 的电约排放多少千克？": [
+  "Generating 1 kW·h of electricity from coal emits about {0} kg of carbon dioxide. About how many kilograms are emitted when {1} kW·h is generated?",
+  "La production de 1 kW·h d'électricité à partir du charbon émet environ {0} kg de dioxyde de carbone. Combien de kilogrammes sont émis environ pour produire {1} kW·h ?"
+ ],
+ "排放量 = 每度电的排放量 × 电量。": [
+  "Emission = emission per kilowatt-hour × amount of electricity.",
+  "Émission = émission par kilowattheure × quantité d'électricité."
+ ],
+ "完全燃烧 {0} kg {1}（热值 {2}×10⁷ J/kg）放出的热量是多少？": [
+  "How much heat is released by the complete combustion of {0} kg of {1} (calorific value {2}×10⁷ J/kg)?",
+  "Quelle quantité de chaleur dégage la combustion complète de {0} kg de {1} (pouvoir calorifique {2}×10⁷ J/kg) ?"
+ ],
+ "一台热机燃料完全燃烧放出 {0} MJ 的热量，其中 {1} MJ 转化为有用的机械能，热机的效率是多少？": [
+  "The complete combustion of the fuel in a heat engine releases {0} MJ of heat, of which {1} MJ is turned into useful mechanical energy. What is the efficiency of the engine?",
+  "La combustion complète du carburant d'un moteur thermique dégage {0} MJ de chaleur, dont {1} MJ sont transformés en énergie mécanique utile. Quel est le rendement du moteur ?"
+ ],
+ "η = W有 / Q放。": [
+  "η = W_useful / Q_released.",
+  "η = W_utile / Q_dégagée."
+ ],
+ "一台四冲程汽油机的飞轮转速是 {0} r/min，它每秒钟做功多少次？": [
+  "The flywheel of a four-stroke petrol engine turns at {0} r/min. How many power strokes does it make each second?",
+  "Le volant d'un moteur à essence à quatre temps tourne à {0} tr/min. Combien de temps moteur effectue-t-il par seconde ?"
+ ],
+ "四个冲程飞轮转 2 圈，做功 1 次。": [
+  "In four strokes the flywheel turns 2 times and there is 1 power stroke.",
+  "En quatre temps, le volant fait 2 tours et il y a 1 temps moteur."
+ ],
+ "四冲程内燃机的曲轴转到 {0}°（从吸气冲程开始时算起，转两圈共 720°），此时是哪个冲程？": [
+  "The crankshaft of a four-stroke engine has turned to {0}° (counted from the start of the intake stroke; two turns make 720°). Which stroke is it?",
+  "Le vilebrequin d'un moteur à quatre temps a tourné de {0}° (à partir du début de l'admission ; deux tours font 720°). De quel temps s'agit-il ?"
+ ],
+ "每 180° 一个冲程：吸气 0–180°，压缩 180–360°，做功 360–540°，排气 540–720°。": [
+  "Each stroke takes 180°: intake 0–180°, compression 180–360°, power 360–540°, exhaust 540–720°.",
+  "Chaque temps dure 180° : admission 0–180°, compression 180–360°, combustion-détente 360–540°, échappement 540–720°."
+ ],
+ "在四冲程内燃机的压缩冲程中，能量的转化是：": [
+  "In the compression stroke of a four-stroke engine, the energy conversion is:",
+  "Pendant la compression d'un moteur à quatre temps, la transformation d'énergie est :"
+ ],
+ "化学能转化为电能": [
+  "chemical energy into electrical energy",
+  "de l'énergie chimique en énergie électrique"
+ ],
+ "没有能量的转化": [
+  "no conversion of energy",
+  "aucune transformation d'énergie"
+ ],
+ "活塞压缩气体做功，气体的内能增加，温度升高；做功冲程才是内能转化为机械能。": [
+  "The piston does work compressing the gas, so the internal energy of the gas increases and its temperature rises; only in the power stroke does internal energy turn into mechanical energy.",
+  "Le piston effectue un travail en comprimant le gaz, donc l'énergie interne du gaz augmente et sa température s'élève ; ce n'est que pendant le temps moteur que l'énergie interne se transforme en énergie mécanique."
+ ],
+ "一位近视的同学，最远只能看清 {0} cm 处的物体。他应该配戴焦度为多少的眼镜（单位 D，1 D = 100 度）？": [
+  "A short-sighted student can see clearly only objects up to {0} cm away. What power of glasses (in dioptres D, 1 D = 100 “degrees”) should he wear?",
+  "Un élève myope ne voit nettement que les objets situés au plus à {0} cm. Quelle vergence doivent avoir ses lunettes (en dioptries δ, 1 δ = 100 « degrés ») ?"
+ ],
+ "凹透镜使远处物体成像在近视眼的远点：P = −1 / 远点距离（米）。": [
+  "A concave lens makes a distant object form its image at the far point of the short-sighted eye: P = −1 / far-point distance (in metres).",
+  "Une lentille divergente fait que l'image d'un objet éloigné se forme au punctum remotum de l'œil myope : P = −1 / distance du punctum remotum (en mètres)."
+ ],
+ "显微镜的物镜是 {0}×，目镜是 {1}×，总放大倍数是多少？": [
+  "The objective of a microscope is {0}× and the eyepiece is {1}×. What is the total magnification?",
+  "L'objectif d'un microscope est {0}× et l'oculaire est {1}×. Quel est le grossissement total ?"
+ ],
+ "总放大倍数 = 物镜放大倍数 × 目镜放大倍数。": [
+  "Total magnification = objective magnification × eyepiece magnification.",
+  "Grossissement total = grossissement de l'objectif × grossissement de l'oculaire."
+ ],
+ "开普勒望远镜的物镜焦距 {0} cm，目镜焦距 {1} cm，它的角放大率约是多少？": [
+  "A Keplerian telescope has an objective of focal length {0} cm and an eyepiece of focal length {1} cm. What is its angular magnification, approximately?",
+  "Une lunette de Kepler a un objectif de distance focale {0} cm et un oculaire de distance focale {1} cm. Quel est approximativement son grossissement angulaire ?"
+ ],
+ "M = f物 / f目。": [
+  "M = f_objective / f_eyepiece.",
+  "M = f_objectif / f_oculaire."
+ ],
+ "开普勒望远镜的物镜焦距 {0} cm，目镜焦距 {1} cm，调好焦后镜筒的长度约是多少？": [
+  "A Keplerian telescope has an objective of focal length {0} cm and an eyepiece of focal length {1} cm. About how long is the tube when it is in focus?",
+  "Une lunette de Kepler a un objectif de distance focale {0} cm et un oculaire de distance focale {1} cm. Quelle est à peu près la longueur du tube une fois la mise au point faite ?"
+ ],
+ "两个凸透镜的焦点重合，筒长 ≈ f物 + f目。": [
+  "The foci of the two convex lenses coincide: tube length ≈ f_objective + f_eyepiece.",
+  "Les foyers des deux lentilles convergentes coïncident : longueur du tube ≈ f_objectif + f_oculaire."
+ ],
+ "近视眼的成像情况和矫正方法是：": [
+  "How the image forms in short sight and how it is corrected:",
+  "Formation de l'image dans la myopie et sa correction :"
+ ],
+ "像成在视网膜前，配戴凹透镜": [
+  "the image forms in front of the retina; wear a concave lens",
+  "l'image se forme devant la rétine ; on porte une lentille divergente"
+ ],
+ "像成在视网膜后，配戴凸透镜": [
+  "the image forms behind the retina; wear a convex lens",
+  "l'image se forme derrière la rétine ; on porte une lentille convergente"
+ ],
+ "像成在视网膜前，配戴凸透镜": [
+  "the image forms in front of the retina; wear a convex lens",
+  "l'image se forme devant la rétine ; on porte une lentille convergente"
+ ],
+ "像成在视网膜后，配戴凹透镜": [
+  "the image forms behind the retina; wear a concave lens",
+  "l'image se forme derrière la rétine ; on porte une lentille divergente"
+ ],
+ "近视眼的晶状体太凸（或眼球太长），像落在视网膜前面；凹透镜使光线发散，把像推后到视网膜上。": [
+  "In short sight the lens is too convex (or the eyeball too long), so the image falls in front of the retina; a concave lens diverges the light and pushes the image back onto the retina.",
+  "Dans la myopie, le cristallin est trop bombé (ou l'œil trop long), de sorte que l'image se forme devant la rétine ; une lentille divergente fait diverger la lumière et repousse l'image sur la rétine."
+ ],
+ "U 形管左管是水，右管倒入{0}（密度 {1} kg/m³），静止时左管的水柱比两液体交界面高 {2} cm，右管的{3}柱比交界面高多少？": [
+  "In a U-tube the left arm holds water and {0} (density {1} kg/m³) is poured into the right arm. At rest the water column in the left arm is {2} cm higher than the interface. How much higher than the interface is the {3} column in the right arm?",
+  "Dans un tube en U, le bras gauche contient de l'eau et l'on verse {0} (masse volumique {1} kg/m³) dans le bras droit. Au repos, la colonne d'eau du bras gauche dépasse de {2} cm la surface de séparation. De combien la colonne de {3} du bras droit dépasse-t-elle la surface de séparation ?"
+ ],
+ "交界面处两边压强相等：ρ水 h水 = ρ液 h液。": [
+  "The pressures on the two sides of the interface are equal: ρ_water h_water = ρ_liquid h_liquid.",
+  "Les pressions de part et d'autre de la surface de séparation sont égales : ρ_eau h_eau = ρ_liquide h_liquide."
+ ],
+ "流量为 {0} L/s 的水通过横截面积 {1} cm² 的管子，水的流速是多少？": [
+  "Water flows at {0} L/s through a pipe of cross-sectional area {1} cm². What is the speed of the water?",
+  "De l'eau s'écoule à {0} L/s dans un tuyau de section {1} cm². Quelle est la vitesse de l'eau ?"
+ ],
+ "水平管里的水，宽处流速 {0} m/s，窄处流速 {1} m/s，窄处的压强比宽处低多少？（水的密度 1000 kg/m³）": [
+  "In a horizontal pipe the water moves at {0} m/s where it is wide and {1} m/s where it is narrow. By how much is the pressure lower at the narrow part than at the wide part? (Density of water 1000 kg/m³)",
+  "Dans un tuyau horizontal, l'eau a une vitesse de {0} m/s dans la partie large et de {1} m/s dans la partie étroite. De combien la pression est-elle plus basse dans la partie étroite que dans la partie large ? (Masse volumique de l'eau 1000 kg/m³)"
+ ],
+ "p + ½ρv² 不变，Δp = ½ρ(v₂² − v₁²)。": [
+  "p + ½ρv² stays constant, Δp = ½ρ(v₂² − v₁²).",
+  "p + ½ρv² reste constant, Δp = ½ρ(v₂² − v₁²)."
+ ],
+ "对于流动的液体或气体，下列说法正确的是：": [
+  "Which statement about a flowing liquid or gas is correct?",
+  "Quelle affirmation sur un liquide ou un gaz en mouvement est correcte ?"
+ ],
+ "流速大的地方压强小，流速小的地方压强大": [
+  "where the speed is greater the pressure is lower, where the speed is smaller the pressure is higher",
+  "là où la vitesse est plus grande la pression est plus basse, là où la vitesse est plus petite la pression est plus haute"
+ ],
+ "流速大的地方压强大": [
+  "where the speed is greater the pressure is greater",
+  "là où la vitesse est plus grande la pression est plus grande"
+ ],
+ "流速不影响压强": [
+  "speed does not affect pressure",
+  "la vitesse n'a aucune influence sur la pression"
+ ],
+ "流速大的地方压强小，所以两张纸中间吹气时纸会分开": [
+  "where the speed is greater the pressure is lower, so when air is blown between two sheets of paper the sheets move apart",
+  "là où la vitesse est plus grande la pression est plus basse, donc quand on souffle entre deux feuilles de papier, les feuilles s'écartent"
+ ],
+ "两张纸中间的空气流速大、压强小，纸被外面较大的气压压向中间。": [
+  "The air between the two sheets moves fast and has low pressure, and the greater outside pressure pushes the sheets together.",
+  "L'air entre les deux feuilles va vite et sa pression est basse, et la pression extérieure plus grande pousse les feuilles l'une vers l'autre."
+ ],
+ "下列哪一个是利用连通器原理工作的？": [
+  "Which of the following works on the principle of communicating vessels?",
+  "Lequel des appareils suivants fonctionne selon le principe des vases communicants ?"
+ ],
+ "船闸": [
+  "a ship lock",
+  "une écluse"
+ ],
+ "注射器": [
+  "a syringe",
+  "une seringue"
+ ],
+ "吸盘挂钩": [
+  "a suction hook",
+  "un crochet à ventouse"
+ ],
+ "飞机的机翼": [
+  "the wing of an aeroplane",
+  "l'aile d'un avion"
+ ],
+ "船闸、茶壶、锅炉水位计都是上端开口、下端连通的连通器。": [
+  "Ship locks, teapots and boiler water-level gauges are all communicating vessels, open at the top and connected at the bottom.",
+  "Les écluses, les théières et les indicateurs de niveau de chaudière sont tous des vases communicants, ouverts en haut et reliés en bas."
+ ],
+ "水平地面上质量 {0} kg 的物体，与地面的动摩擦因数为 {1}，滑动时受到的摩擦力是多少？（g = 9.8 N/kg）": [
+  "An object of mass {0} kg lies on level ground, and the coefficient of kinetic friction with the ground is {1}. What is the friction when it slides? (g = 9.8 N/kg)",
+  "Un objet de masse {0} kg repose sur un sol horizontal, et le coefficient de frottement dynamique avec le sol est {1}. Quel est le frottement lorsqu'il glisse ? (g = 9,8 N/kg)"
+ ],
+ "f = μN，水平面上 N = mg。": [
+  "f = μN, and on a level surface N = mg.",
+  "f = μN, et sur une surface horizontale N = mg."
+ ],
+ "用 {0} N 的水平力推一个静止的箱子，箱子没有被推动（还没到最大静摩擦力），箱子受到的摩擦力是多少？": [
+  "A horizontal force of {0} N pushes a stationary box, which does not move (the maximum static friction has not been reached). What is the friction on the box?",
+  "Une force horizontale de {0} N pousse une caisse immobile, qui ne bouge pas (le frottement statique maximal n'est pas atteint). Quel est le frottement qui s'exerce sur la caisse ?"
+ ],
+ "静止时，摩擦力与推力平衡。": [
+  "At rest, the friction balances the push.",
+  "Au repos, le frottement équilibre la poussée."
+ ],
+ "物体与斜面的静摩擦因数为 {0}，不加拉力时，物体恰好不下滑的最大斜面倾角约是多少？": [
+  "The coefficient of static friction between an object and an incline is {0}. With no pulling force, what is the greatest angle of the incline at which the object just does not slide down, approximately?",
+  "Le coefficient de frottement statique entre un objet et un plan incliné est {0}. Sans force de traction, quel est approximativement l'angle d'inclinaison maximal du plan pour lequel l'objet ne glisse juste pas ?"
+ ],
+ "质量 {0} kg 的物体放在倾角为 {1}° 的斜面上，斜面对它的支持力是多少？（g = 9.8 N/kg）": [
+  "An object of mass {0} kg lies on an incline of angle {1}°. What is the normal force of the incline on it? (g = 9.8 N/kg)",
+  "Un objet de masse {0} kg repose sur un plan incliné d'angle {1}°. Quelle est la réaction normale du plan sur l'objet ? (g = 9,8 N/kg)"
+ ],
+ "要使质量 {0} kg 的物体在水平面上做匀速直线运动（动摩擦因数 {1}），水平拉力应为多少？（g = 9.8 N/kg）": [
+  "What horizontal pull makes an object of mass {0} kg move in a straight line at constant speed on a level surface (coefficient of kinetic friction {1})? (g = 9.8 N/kg)",
+  "Quelle force de traction horizontale faut-il pour qu'un objet de masse {0} kg se déplace en ligne droite à vitesse constante sur une surface horizontale (coefficient de frottement dynamique {1}) ? (g = 9,8 N/kg)"
+ ],
+ "匀速时，拉力等于滑动摩擦力。": [
+  "At constant speed, the pull equals the sliding friction.",
+  "À vitesse constante, la force de traction est égale au frottement de glissement."
+ ],
+ "质量 {0} kg 的水温度升高 {1} °C，吸收的热量是多少？（水的比热容 4200 J/(kg·°C)）": [
+  "Water of mass {0} kg warms up by {1} °C. How much heat does it absorb? (Specific heat capacity of water 4200 J/(kg·°C))",
+  "De l'eau de masse {0} kg s'échauffe de {1} °C. Quelle quantité de chaleur absorbe-t-elle ? (Capacité thermique massique de l'eau 4200 J/(kg·°C))"
+ ],
+ "熔化 {0} kg 的冰（已在 0 °C），需要吸收多少热量？（冰的熔化热 3.34×10⁵ J/kg）": [
+  "How much heat must be absorbed to melt {0} kg of ice (already at 0 °C)? (Latent heat of fusion of ice 3.34×10⁵ J/kg)",
+  "Quelle quantité de chaleur faut-il absorber pour faire fondre {0} kg de glace (déjà à 0 °C) ? (Chaleur latente de fusion de la glace 3,34×10⁵ J/kg)"
+ ],
+ "用 {0} W 的恒定功率加热 {1} kg 的冰（已在 0 °C，热量全部被吸收），熔化完需要多少秒？": [
+  "{1} kg of ice (already at 0 °C) is heated with a constant power of {0} W (all the heat is absorbed). How many seconds does it take to melt completely?",
+  "{1} kg de glace (déjà à 0 °C) est chauffé avec une puissance constante de {0} W (toute la chaleur est absorbée). Combien de secondes faut-il pour qu'il fonde complètement ?"
+ ],
+ "用 {0} W 的恒定功率把 {1} kg 的水从 20 °C 加热到 100 °C，需要多少秒？": [
+  "{1} kg of water is heated from 20 °C to 100 °C with a constant power of {0} W. How many seconds does it take?",
+  "{1} kg d'eau est chauffé de 20 °C à 100 °C avec une puissance constante de {0} W. Combien de secondes faut-il ?"
+ ],
+ "晶体（如冰）在熔化过程中，温度怎样变化？": [
+  "How does the temperature of a crystal (such as ice) change while it melts?",
+  "Comment la température d'un cristal (la glace, par exemple) évolue-t-elle pendant la fusion ?"
+ ],
+ "吸热，温度保持不变": [
+  "it absorbs heat and the temperature stays constant",
+  "il absorbe de la chaleur et la température reste constante"
+ ],
+ "吸热，温度不断升高": [
+  "it absorbs heat and the temperature keeps rising",
+  "il absorbe de la chaleur et la température ne cesse de monter"
+ ],
+ "放热，温度不断降低": [
+  "it gives out heat and the temperature keeps falling",
+  "il cède de la chaleur et la température ne cesse de baisser"
+ ],
+ "放热，温度保持不变": [
+  "it gives out heat and the temperature stays constant",
+  "il cède de la chaleur et la température reste constante"
+ ],
+ "不吸热也不放热": [
+  "it neither absorbs nor gives out heat",
+  "il n'absorbe ni ne cède de chaleur"
+ ],
+ "晶体有固定的熔点，熔化时吸收热量，温度不变。": [
+  "A crystal has a fixed melting point: it absorbs heat while melting and its temperature does not change.",
+  "Un cristal a un point de fusion fixe : il absorbe de la chaleur pendant la fusion et sa température ne change pas."
+ ],
+ "一台{0}的额定功率是 {1} W，接在 220 V 的家庭电路中，正常工作的电流是多少？": [
+  "The rated power of a {0} is {1} W. What is the current when it works normally on the 220 V household circuit?",
+  "La puissance nominale d'un(e) {0} est de {1} W. Quelle est l'intensité du courant lorsqu'il (elle) fonctionne normalement sur le circuit domestique de 220 V ?"
+ ],
+ "同时使用{0}（{1} W）和{2}（{3} W），电路的总功率是多少？": [
+  "A {0} ({1} W) and a {2} ({3} W) are used at the same time. What is the total power of the circuit?",
+  "Un(e) {0} ({1} W) et un(e) {2} ({3} W) sont utilisés en même temps. Quelle est la puissance totale du circuit ?"
+ ],
+ "并联电路的总功率等于各用电器功率之和。": [
+  "The total power of a parallel circuit equals the sum of the powers of the appliances.",
+  "La puissance totale d'un circuit en parallèle est égale à la somme des puissances des appareils."
+ ],
+ "人体的电阻按 {0} kΩ 计算，接触 220 V 的火线（站在大地上，不计其他电阻），通过人体的电流是多少？": [
+  "Take the resistance of the human body as {0} kΩ. What current passes through a person who touches the 220 V live wire (standing on the ground, ignoring all other resistance)?",
+  "On prend pour résistance du corps humain {0} kΩ. Quelle intensité traverse une personne qui touche la phase de 220 V (debout sur le sol, sans tenir compte des autres résistances) ?"
+ ],
+ "I = U / R；超过 30 mA 就很危险。": [
+  "I = U / R; more than 30 mA is very dangerous.",
+  "I = U / R ; plus de 30 mA est très dangereux."
+ ],
+ "保险丝在家庭电路中的连接方法和特点是：": [
+  "How is a fuse connected in a household circuit, and what are its characteristics?",
+  "Comment un fusible est-il monté dans un circuit domestique et quelles sont ses caractéristiques ?"
+ ],
+ "串联在火线上，熔点较低、电阻较大": [
+  "in series in the live wire, with a low melting point and fairly large resistance",
+  "en série sur la phase, avec un bas point de fusion et une résistance assez grande"
+ ],
+ "并联在火线上，熔点较高": [
+  "in parallel in the live wire, with a high melting point",
+  "en parallèle sur la phase, avec un point de fusion élevé"
+ ],
+ "串联在零线上，熔点较高、电阻较小": [
+  "in series in the neutral wire, with a high melting point and small resistance",
+  "en série sur le neutre, avec un point de fusion élevé et une petite résistance"
+ ],
+ "并联在用电器两端，电阻很小": [
+  "in parallel across the appliance, with very small resistance",
+  "en parallèle aux bornes de l'appareil, avec une très petite résistance"
+ ],
+ "电流过大时保险丝产生的热量多，因熔点低而熔断，切断电路。": [
+  "When the current is too large the fuse produces more heat and melts because of its low melting point, cutting the circuit.",
+  "Quand l'intensité est trop forte, le fusible dégage plus de chaleur et fond à cause de son bas point de fusion, ce qui coupe le circuit."
+ ],
+ "对人体安全的电压是：": [
+  "The voltage that is safe for the human body is:",
+  "La tension sans danger pour le corps humain est :"
+ ],
+ "不高于 36 V": [
+  "not higher than 36 V",
+  "au plus 36 V"
+ ],
+ "不高于 220 V": [
+  "not higher than 220 V",
+  "au plus 220 V"
+ ],
+ "不高于 380 V": [
+  "not higher than 380 V",
+  "au plus 380 V"
+ ],
+ "不高于 36 V 的电压对人体是安全的；家庭电路的 220 V 对人体有危险。": [
+  "A voltage not higher than 36 V is safe for the human body; the 220 V of the household circuit is dangerous.",
+  "Une tension d'au plus 36 V est sans danger pour le corps humain ; les 220 V du circuit domestique sont dangereux."
+ ],
+ "凸透镜的焦距是 {0} cm，物体放在距透镜 {1} cm 处，像距是多少？": [
+  "The focal length of a convex lens is {0} cm and the object is {1} cm from the lens. What is the image distance?",
+  "La distance focale d'une lentille convergente est {0} cm et l'objet est placé à {1} cm de la lentille. Quelle est la distance de l'image ?"
+ ],
+ "凸透镜的焦距是 {0} cm，物距是 {1} cm，成什么像？": [
+  "The focal length of a convex lens is {0} cm and the object distance is {1} cm. What kind of image is formed?",
+  "La distance focale d'une lentille convergente est {0} cm et la distance de l'objet est {1} cm. Quelle image obtient-on ?"
+ ],
+ "根据物距与焦距的关系判断。": [
+  "Decide from the relation between object distance and focal length.",
+  "On le détermine à partir de la relation entre la distance de l'objet et la distance focale."
+ ],
+ "凸透镜的焦距是 {0} cm，物距 {1} cm，像的大小是物体的多少倍？": [
+  "The focal length of a convex lens is {0} cm and the object distance is {1} cm. How many times is the image the size of the object?",
+  "La distance focale d'une lentille convergente est {0} cm et la distance de l'objet est {1} cm. Combien de fois l'image est-elle plus grande que l'objet ?"
+ ],
+ "放大倍数 = 像距 / 物距。": [
+  "Magnification = image distance / object distance.",
+  "Grandissement = distance de l'image / distance de l'objet."
+ ],
+ "物体放在凸透镜前 {0} cm 处，恰好成倒立、等大的实像，透镜的焦距是多少？": [
+  "An object placed {0} cm in front of a convex lens forms an inverted real image of the same size. What is the focal length of the lens?",
+  "Un objet placé à {0} cm devant une lentille convergente donne une image réelle renversée de même taille. Quelle est la distance focale de la lentille ?"
+ ],
+ "u = 2f 时成等大的实像。": [
+  "When u = 2f the real image has the same size.",
+  "Quand u = 2f, l'image réelle a la même taille que l'objet."
+ ],
+ "凸透镜的焦距是 {0} cm，物距是 {1} cm，这样的成像规律应用于：": [
+  "The focal length of a convex lens is {0} cm and the object distance is {1} cm. This image formation is used in:",
+  "La distance focale d'une lentille convergente est {0} cm et la distance de l'objet est {1} cm. Cette formation d'image est utilisée dans :"
+ ],
+ "潜望镜": [
+  "a periscope",
+  "un périscope"
+ ],
+ "平面镜": [
+  "a plane mirror",
+  "un miroir plan"
+ ],
+ "u > 2f 照相机；f < u < 2f 投影仪；u < f 放大镜。": [
+  "u > 2f camera; f < u < 2f projector; u < f magnifying glass.",
+  "u > 2f appareil photo ; f < u < 2f projecteur ; u < f loupe."
+ ],
+ "保持水平平衡": [
+  "it stays balanced horizontally",
+  "il reste en équilibre horizontal"
+ ],
+ "杠杆平衡时，左边动力 {0} N，动力臂 {1} cm，阻力臂 {2} cm，阻力是多少？": [
+  "A lever is balanced; the effort on the left is {0} N, the effort arm is {1} cm and the load arm is {2} cm. What is the load?",
+  "Un levier est en équilibre ; la force motrice à gauche est {0} N, le bras moteur est {1} cm et le bras résistant est {2} cm. Quelle est la force résistante ?"
+ ],
+ "杠杆平衡时，动力 {0} N，动力臂 {1} cm，阻力 {2} N，阻力臂是多少？": [
+  "A lever is balanced; the effort is {0} N, the effort arm is {1} cm and the load is {2} N. What is the load arm?",
+  "Un levier est en équilibre ; la force motrice est {0} N, le bras moteur est {1} cm et la force résistante est {2} N. Quel est le bras résistant ?"
+ ],
+ "一个杠杆的动力臂是 {0} cm，阻力臂是 {1} cm，它是：": [
+  "The effort arm of a lever is {0} cm and its load arm is {1} cm. It is:",
+  "Le bras moteur d'un levier est {0} cm et son bras résistant est {1} cm. C'est :"
+ ],
+ "既省力又省距离的杠杆": [
+  "a lever that saves both effort and distance",
+  "un levier qui économise à la fois de la force et du déplacement"
+ ],
+ "没有支点的杠杆": [
+  "a lever without a fulcrum",
+  "un levier sans point d'appui"
+ ],
+ "动力臂大于阻力臂省力，小于阻力臂费力。": [
+  "If the effort arm is longer than the load arm it saves effort; if shorter, it costs effort.",
+  "Si le bras moteur est plus long que le bras résistant, on économise de la force ; s'il est plus court, on en dépense davantage."
+ ],
+ "用撬棍撬起 {0} N 的重物，阻力臂 {1} m，动力臂 {2} m，所需的动力至少是多少？": [
+  "A crowbar lifts a load of {0} N; the load arm is {1} m and the effort arm is {2} m. What is the least effort needed?",
+  "Un pied-de-biche soulève une charge de {0} N ; le bras résistant est {1} m et le bras moteur est {2} m. Quelle est la force motrice minimale nécessaire ?"
+ ],
+ "杠杆左边挂 {0} 个钩码，距支点 {1} cm；右边挂 {2} 个钩码，距支点 {3} cm（钩码相同），松手后：": [
+  "{0} weights hang on the left of a lever at {1} cm from the fulcrum; {2} weights hang on the right at {3} cm from the fulcrum (the weights are identical). When let go:",
+  "{0} masses sont suspendues à gauche d'un levier, à {1} cm du point d'appui ; {2} masses sont suspendues à droite, à {3} cm du point d'appui (les masses sont identiques). Une fois lâché :"
+ ],
+ "两端都下沉": [
+  "both ends go down",
+  "les deux extrémités descendent"
+ ],
+ "比较两边的 F×L。": [
+  "Compare F×L on the two sides.",
+  "Comparez F×L des deux côtés."
+ ],
+ "奥斯特实验中，通电直导线下方的小磁针发生偏转，这说明：": [
+  "In Oersted's experiment the small compass needle below the straight current-carrying wire is deflected. This shows that:",
+  "Dans l'expérience d'Œrsted, la petite aiguille aimantée placée sous le fil rectiligne parcouru par un courant est déviée. Cela montre que :"
+ ],
+ "电流周围存在磁场": [
+  "there is a magnetic field around a current",
+  "il existe un champ magnétique autour d'un courant"
+ ],
+ "磁铁周围存在电流": [
+  "there is a current around a magnet",
+  "il existe un courant autour d'un aimant"
+ ],
+ "小磁针本身带电": [
+  "the needle itself is electrically charged",
+  "l'aiguille est elle-même chargée électriquement"
+ ],
+ "导线被磁化了": [
+  "the wire has been magnetised",
+  "le fil a été aimanté"
+ ],
+ "1820 年奥斯特发现电流的磁效应；改变电流方向，小磁针偏转的方向也相反。": [
+  "In 1820 Oersted discovered the magnetic effect of a current; if the current direction is reversed, the needle deflects the opposite way.",
+  "En 1820, Œrsted a découvert l'effet magnétique du courant ; si l'on inverse le sens du courant, l'aiguille dévie dans l'autre sens."
+ ],
+ "关于磁体外部的磁感线，下列说法正确的是：": [
+  "Which statement about the magnetic field lines outside a magnet is correct?",
+  "Quelle affirmation sur les lignes de champ magnétique à l'extérieur d'un aimant est correcte ?"
+ ],
+ "从 N 极出发，回到 S 极": [
+  "they start at the N pole and return to the S pole",
+  "elles partent du pôle nord et reviennent au pôle sud"
+ ],
+ "从 S 极出发，回到 N 极": [
+  "they start at the S pole and return to the N pole",
+  "elles partent du pôle sud et reviennent au pôle nord"
+ ],
+ "从 N 极出发，到无穷远处终止": [
+  "they start at the N pole and end at infinity",
+  "elles partent du pôle nord et se terminent à l'infini"
+ ],
+ "磁感线可以相交": [
+  "field lines can cross",
+  "les lignes de champ peuvent se croiser"
+ ],
+ "磁感线是为了描述磁场而画的曲线，磁体外部从 N 极到 S 极，磁感线不相交，也不是真实存在的线。": [
+  "Field lines are curves drawn to describe a magnetic field; outside a magnet they go from the N pole to the S pole, they do not cross, and they are not real lines.",
+  "Les lignes de champ sont des courbes tracées pour décrire un champ magnétique ; à l'extérieur d'un aimant, elles vont du pôle nord au pôle sud, ne se croisent pas et ne sont pas de vraies lignes."
+ ],
+ "关于地磁场，下列说法正确的是：": [
+  "Which statement about the Earth's magnetic field is correct?",
+  "Quelle affirmation sur le champ magnétique terrestre est correcte ?"
+ ],
+ "地磁的南极在地理北极附近，地磁的北极在地理南极附近": [
+  "the Earth's magnetic south pole is near the geographic north pole, and its magnetic north pole is near the geographic south pole",
+  "le pôle sud magnétique de la Terre est proche du pôle nord géographique, et son pôle nord magnétique est proche du pôle sud géographique"
+ ],
+ "地磁的北极在地理北极附近": [
+  "the Earth's magnetic north pole is near the geographic north pole",
+  "le pôle nord magnétique de la Terre est proche du pôle nord géographique"
+ ],
+ "地磁场的南北极与地理南北极完全重合": [
+  "the magnetic poles of the Earth coincide exactly with the geographic poles",
+  "les pôles magnétiques de la Terre coïncident exactement avec les pôles géographiques"
+ ],
+ "地球周围没有磁场": [
+  "there is no magnetic field around the Earth",
+  "il n'y a pas de champ magnétique autour de la Terre"
+ ],
+ "小磁针静止时 N 极指向地理北方，因为地理北极附近是地磁的 S 极；地磁两极与地理两极并不重合，存在磁偏角。": [
+  "At rest the N pole of a compass needle points to geographic north because the S pole of the Earth's magnetism is near the geographic north pole; the magnetic poles and the geographic poles do not coincide, and there is a magnetic declination.",
+  "Au repos, le pôle nord d'une aiguille aimantée pointe vers le nord géographique parce que le pôle sud magnétique de la Terre est proche du pôle nord géographique ; les pôles magnétiques et les pôles géographiques ne coïncident pas, et il existe une déclinaison magnétique."
+ ],
+ "长直导线中的电流是 {0} A，距导线 {1} cm 处，电流产生的磁场的磁感应强度是多少？（B = μ₀I / 2πd，μ₀ = 4π×10⁻⁷ T·m/A）": [
+  "The current in a long straight wire is {0} A. What is the magnetic flux density produced by the current at {1} cm from the wire? (B = μ₀I / 2πd, μ₀ = 4π×10⁻⁷ T·m/A)",
+  "L'intensité du courant dans un long fil rectiligne est {0} A. Quelle est l'intensité du champ magnétique produit par le courant à {1} cm du fil ? (B = μ₀I / 2πd, μ₀ = 4π×10⁻⁷ T·m/A)"
+ ],
+ "用偶极子模型估算：地球上纬度 {0}° 处，地磁场的磁倾角（tan 磁倾角 = 2 tan 纬度）约是多少？": [
+  "Estimate with the dipole model: at latitude {0}° on the Earth, what is the magnetic dip (tan dip = 2 tan latitude), approximately?",
+  "Estimation avec le modèle du dipôle : à la latitude {0}° sur la Terre, quelle est approximativement l'inclinaison magnétique (tan inclinaison = 2 tan latitude) ?"
+ ],
+ "tan I = 2 tan φ：赤道处为 0°，磁极处为 90°。": [
+  "tan I = 2 tan φ: 0° at the equator, 90° at the magnetic poles.",
+  "tan I = 2 tan φ : 0° à l'équateur, 90° aux pôles magnétiques."
+ ],
+ "斥力占主要，表现为互相排斥": [
+  "repulsion prevails and the molecules repel each other",
+  "la répulsion domine et les molécules se repoussent"
+ ],
+ "引力占主要，表现为互相吸引": [
+  "attraction prevails and the molecules attract each other",
+  "l'attraction domine et les molécules s'attirent"
+ ],
+ "引力和斥力相等，合力为零": [
+  "attraction and repulsion are equal and the resultant is zero",
+  "l'attraction et la répulsion sont égales et la résultante est nulle"
+ ],
+ "分子的直径约 {0} nm（1 nm = 10⁻⁹ m）。把分子一个挨一个排成一条线，{1} μm（1 μm = 10⁻⁶ m）长的线上能排多少个分子？": [
+  "The diameter of a molecule is about {0} nm (1 nm = 10⁻⁹ m). If molecules are lined up one next to another, how many molecules fit in a line {1} μm long (1 μm = 10⁻⁶ m)?",
+  "Le diamètre d'une molécule est d'environ {0} nm (1 nm = 10⁻⁹ m). Si l'on aligne des molécules les unes à côté des autres, combien de molécules tiennent sur une ligne de {1} μm de long (1 μm = 10⁻⁶ m) ?"
+ ],
+ "把 50 mL 的水和 50 mL 的酒精混合，总体积小于 100 mL，这说明：": [
+  "When 50 mL of water and 50 mL of alcohol are mixed, the total volume is less than 100 mL. This shows that:",
+  "Quand on mélange 50 mL d'eau et 50 mL d'alcool, le volume total est inférieur à 100 mL. Cela montre que :"
+ ],
+ "分子之间有间隙": [
+  "there are gaps between molecules",
+  "il y a des espaces entre les molécules"
+ ],
+ "分子在不停地运动": [
+  "molecules are in constant motion",
+  "les molécules sont en mouvement permanent"
+ ],
+ "分子之间有引力": [
+  "there is attraction between molecules",
+  "il y a de l'attraction entre les molécules"
+ ],
+ "分子很小": [
+  "molecules are very small",
+  "les molécules sont très petites"
+ ],
+ "酒精分子和水分子彼此进入对方的间隙，所以总体积变小。": [
+  "Alcohol molecules and water molecules enter the gaps between each other, so the total volume becomes smaller.",
+  "Les molécules d'alcool et les molécules d'eau pénètrent dans les espaces qui séparent les autres, de sorte que le volume total diminue."
+ ],
+ "两个分子之间的距离是 r₀ 的 {0} 倍（r₀ 是引力与斥力相等时的距离），它们之间的作用力：": [
+  "The distance between two molecules is {0} times r₀ (r₀ is the distance at which attraction and repulsion are equal). The force between them:",
+  "La distance entre deux molécules est {0} fois r₀ (r₀ est la distance pour laquelle l'attraction et la répulsion sont égales). La force entre elles :"
+ ],
+ "分子之间没有相互作用力": [
+  "there is no force between the molecules",
+  "il n'y a aucune force entre les molécules"
+ ],
+ "距离小于 r₀ 时斥力占主要，大于 r₀ 时引力占主要，等于 r₀ 时合力为零。": [
+  "At distances less than r₀ repulsion prevails, at distances greater than r₀ attraction prevails, and at r₀ the resultant is zero.",
+  "À une distance inférieure à r₀, la répulsion domine ; à une distance supérieure à r₀, l'attraction domine ; à r₀, la résultante est nulle."
+ ],
+ "下列关于物质三态中分子排列的说法，正确的是：": [
+  "Which statement about the arrangement of molecules in the three states of matter is correct?",
+  "Quelle affirmation sur la disposition des molécules dans les trois états de la matière est correcte ?"
+ ],
+ "气体的分子间距最大，分子间的作用力极小": [
+  "the molecules of a gas are farthest apart and exert very little force on each other",
+  "les molécules d'un gaz sont les plus éloignées et agissent très peu les unes sur les autres"
+ ],
+ "固体的分子可以自由移动": [
+  "the molecules of a solid can move freely",
+  "les molécules d'un solide peuvent se déplacer librement"
+ ],
+ "液体的分子排列整齐，位置固定": [
+  "the molecules of a liquid are arranged in order and fixed in position",
+  "les molécules d'un liquide sont rangées de façon ordonnée et fixes"
+ ],
+ "气体的分子之间存在很大的引力": [
+  "there is a large attraction between the molecules of a gas",
+  "il y a une grande attraction entre les molécules d'un gaz"
+ ],
+ "固体分子排列整齐，在平衡位置附近振动；液体分子排列较紧密而无规则；气体分子间距很大，作用力极小。": [
+  "The molecules of a solid are arranged in order and vibrate about their equilibrium positions; the molecules of a liquid are fairly close together but irregular; the molecules of a gas are far apart and exert very little force on each other.",
+  "Les molécules d'un solide sont rangées de façon ordonnée et vibrent autour de leur position d'équilibre ; celles d'un liquide sont assez proches mais désordonnées ; celles d'un gaz sont très éloignées et agissent très peu les unes sur les autres."
+ ],
+ "往一杯清水中滴一滴红墨水，整杯水逐渐变红，这是：": [
+  "A drop of red ink is dropped into a glass of clear water and the whole glass gradually turns red. This is:",
+  "On laisse tomber une goutte d'encre rouge dans un verre d'eau claire et toute l'eau devient peu à peu rouge. Il s'agit :"
+ ],
+ "扩散现象，温度越高越快": [
+  "diffusion, faster at higher temperature",
+  "d'une diffusion, plus rapide à température plus élevée"
+ ],
+ "对流现象，与温度无关": [
+  "convection, independent of temperature",
+  "d'une convection, indépendante de la température"
+ ],
+ "扩散现象，与温度无关": [
+  "diffusion, independent of temperature",
+  "d'une diffusion, indépendante de la température"
+ ],
+ "水的流动，与分子运动无关": [
+  "flow of the water, unrelated to molecular motion",
+  "d'un écoulement de l'eau, sans rapport avec le mouvement des molécules"
+ ],
+ "扩散说明分子在不停地做无规则运动；温度越高，分子运动越剧烈，扩散越快。": [
+  "Diffusion shows that molecules are in constant random motion; the higher the temperature, the more violent the molecular motion and the faster the diffusion.",
+  "La diffusion montre que les molécules sont en mouvement désordonné permanent ; plus la température est élevée, plus le mouvement des molécules est vif et plus la diffusion est rapide."
+ ],
+ "一辆小车以 {0} m/s 的速度做匀速直线运动，{1} s 内通过的路程是多少？": [
+  "A trolley moves in a straight line at a constant speed of {0} m/s. What distance does it cover in {1} s?",
+  "Un chariot se déplace en ligne droite à la vitesse constante de {0} m/s. Quelle distance parcourt-il en {1} s ?"
+ ],
+ "物体在 {0} s 内通过了 {1} m，平均速度是多少？": [
+  "An object covers {1} m in {0} s. What is its average speed?",
+  "Un objet parcourt {1} m en {0} s. Quelle est sa vitesse moyenne ?"
+ ],
+ "{0} km/h 等于多少 m/s？": [
+  "How many m/s is {0} km/h?",
+  "Combien de m/s valent {0} km/h ?"
+ ],
+ "物体的初速度为 {0} m/s，以 {1} m/s² 的加速度做匀加速直线运动，{2} s 末的速度是多少？": [
+  "An object with initial speed {0} m/s moves in a straight line with a uniform acceleration of {1} m/s². What is its speed at the end of {2} s?",
+  "Un objet de vitesse initiale {0} m/s se déplace en ligne droite avec une accélération constante de {1} m/s². Quelle est sa vitesse au bout de {2} s ?"
+ ],
+ "以 {0} m/s 的速度匀速前进，通过 {1} m 需要多少时间？": [
+  "Moving forward at a constant {0} m/s, how long does it take to cover {1} m?",
+  "Avançant à la vitesse constante de {0} m/s, combien de temps faut-il pour parcourir {1} m ?"
+ ],
+ "小车以 {0} m/s 的速度冲上粗糙水平面（动摩擦因数 {1}），滑行多远才停下？（g = 9.8 m/s²）": [
+  "A trolley runs onto a rough horizontal surface at {0} m/s (coefficient of kinetic friction {1}). How far does it slide before stopping? (g = 9.8 m/s²)",
+  "Un chariot arrive à {0} m/s sur une surface horizontale rugueuse (coefficient de frottement dynamique {1}). Sur quelle distance glisse-t-il avant de s'arrêter ? (g = 9,8 m/s²)"
+ ],
+ "小车以 {0} m/s 的速度冲上粗糙水平面（动摩擦因数 {1}），经过多少秒停下？（g = 9.8 m/s²）": [
+  "A trolley runs onto a rough horizontal surface at {0} m/s (coefficient of kinetic friction {1}). After how many seconds does it stop? (g = 9.8 m/s²)",
+  "Un chariot arrive à {0} m/s sur une surface horizontale rugueuse (coefficient de frottement dynamique {1}). Au bout de combien de secondes s'arrête-t-il ? (g = 9,8 m/s²)"
+ ],
+ "一个物体受到两个力而处于平衡状态，其中一个力是 {0} N，另一个力的大小是多少？": [
+  "An object acted on by two forces is in equilibrium, and one of the forces is {0} N. What is the size of the other force?",
+  "Un objet soumis à deux forces est en équilibre, et l'une des forces vaut {0} N. Quelle est la valeur de l'autre force ?"
+ ],
+ "二力平衡：大小相等、方向相反、作用在同一直线上、作用在同一物体上。": [
+  "Two balanced forces: equal in size, opposite in direction, along the same straight line and acting on the same object.",
+  "Deux forces qui s'équilibrent : de même valeur, de sens opposés, de même droite d'action et appliquées au même objet."
+ ],
+ "根据牛顿第一定律，一切物体在不受力的时候：": [
+  "According to Newton's first law, every object that is not acted on by a force:",
+  "D'après la première loi de Newton, tout objet qui ne subit aucune force :"
+ ],
+ "总保持静止状态或匀速直线运动状态": [
+  "always stays at rest or in uniform motion in a straight line",
+  "reste toujours au repos ou en mouvement rectiligne uniforme"
+ ],
+ "速度越来越小，最后停下": [
+  "goes slower and slower and finally stops",
+  "va de plus en plus lentement et finit par s'arrêter"
+ ],
+ "速度越来越大": [
+  "goes faster and faster",
+  "va de plus en plus vite"
+ ],
+ "总保持静止状态": [
+  "always stays at rest",
+  "reste toujours au repos"
+ ],
+ "一定做曲线运动": [
+  "certainly moves along a curve",
+  "se déplace nécessairement sur une courbe"
+ ],
+ "牛顿第一定律：一切物体在没有受到力的作用时，总保持静止状态或匀速直线运动状态。": [
+  "Newton's first law: every object, when no force acts on it, always stays at rest or in uniform motion in a straight line.",
+  "Première loi de Newton : tout objet qui ne subit aucune force reste toujours au repos ou en mouvement rectiligne uniforme."
+ ],
+ "一个物体受到同一直线上相反方向的两个力，大小分别为 {0} N 和 {1} N，合力是多少？": [
+  "An object is acted on by two forces of {0} N and {1} N along the same straight line in opposite directions. What is the resultant force?",
+  "Un objet subit deux forces de {0} N et {1} N de même droite d'action et de sens opposés. Quelle est la force résultante ?"
+ ],
+ "同一直线上方向相反的两个力，合力等于两力之差。": [
+  "For two forces along the same line in opposite directions, the resultant equals the difference of the two forces.",
+  "Pour deux forces de même droite d'action et de sens opposés, la résultante est égale à la différence des deux forces."
+ ],
+ "电阻 {0} Ω 与 {1} Ω 串联后接在 {2} V 的电源上，电路中的电流是多少？": [
+  "Resistors of {0} Ω and {1} Ω are connected in series across a supply of {2} V. What is the current in the circuit?",
+  "Des résistances de {0} Ω et {1} Ω sont montées en série aux bornes d'une alimentation de {2} V. Quelle est l'intensité du courant dans le circuit ?"
+ ],
+ "电阻 {0} Ω 与 {1} Ω 并联，总电阻是多少？": [
+  "Resistors of {0} Ω and {1} Ω are connected in parallel. What is the total resistance?",
+  "Des résistances de {0} Ω et {1} Ω sont montées en parallèle. Quelle est la résistance totale ?"
+ ],
+ "{0} Ω 和 {1} Ω 的电阻串联在 {2} V 的电源上，{3} Ω 电阻两端的电压是多少？": [
+  "Resistors of {0} Ω and {1} Ω are connected in series across a supply of {2} V. What is the voltage across the {3} Ω resistor?",
+  "Des résistances de {0} Ω et {1} Ω sont montées en série aux bornes d'une alimentation de {2} V. Quelle est la tension aux bornes de la résistance de {3} Ω ?"
+ ],
+ "串联电路电压与电阻成正比。": [
+  "In a series circuit the voltage is proportional to the resistance.",
+  "Dans un circuit en série, la tension est proportionnelle à la résistance."
+ ],
+ "用电器两端的电压是 {0} V，通过的电流是 {1} A，电功率是多少？": [
+  "The voltage across an appliance is {0} V and the current through it is {1} A. What is the electric power?",
+  "La tension aux bornes d'un appareil est {0} V et l'intensité qui le traverse est {1} A. Quelle est la puissance électrique ?"
+ ],
+ "电阻 {0} Ω 的电阻丝通过 {1} A 的电流，{2} s 内产生的热量是多少？": [
+  "A current of {1} A passes through a resistance wire of {0} Ω. How much heat is produced in {2} s?",
+  "Un courant de {1} A traverse un fil résistant de {0} Ω. Quelle quantité de chaleur est dégagée en {2} s ?"
+ ],
+ "水（密度 1000 kg/m³）中深度 {0} m 处，液体产生的压强是多少？（g = 9.8 N/kg）": [
+  "In water (density 1000 kg/m³) at a depth of {0} m, what is the pressure produced by the liquid? (g = 9.8 N/kg)",
+  "Dans l'eau (masse volumique 1000 kg/m³), à une profondeur de {0} m, quelle est la pression due au liquide ? (g = 9,8 N/kg)"
+ ],
+ "{0} N 的压力作用在 {1} cm² 的面积上，压强是多少？": [
+  "A force of {0} N acts on an area of {1} cm². What is the pressure?",
+  "Une force de {0} N s'exerce sur une surface de {1} cm². Quelle est la pression ?"
+ ],
+ "p = F / S（注意 1 cm² = 10⁻⁴ m²）。": [
+  "p = F / S (note that 1 cm² = 10⁻⁴ m²).",
+  "p = F / S (attention : 1 cm² = 10⁻⁴ m²)."
+ ],
+ "标准大气压约为 1.013×10⁵ Pa，它能支持多高的水柱？（水的密度 1000 kg/m³，g = 9.8 N/kg）": [
+  "Standard atmospheric pressure is about 1.013×10⁵ Pa. How high a column of water can it support? (Density of water 1000 kg/m³, g = 9.8 N/kg)",
+  "La pression atmosphérique normale est d'environ 1,013×10⁵ Pa. Quelle hauteur de colonne d'eau peut-elle soutenir ? (Masse volumique de l'eau 1000 kg/m³, g = 9,8 N/kg)"
+ ],
+ "h = p / (ρg)，水柱约 10 m 高。": [
+  "h = p / (ρg); the water column is about 10 m high.",
+  "h = p / (ρg) ; la colonne d'eau fait environ 10 m de haut."
+ ],
+ "水中某处液体压强为 {0} kPa，该处的深度是多少？（g = 9.8 N/kg）": [
+  "The pressure of the liquid at a point in water is {0} kPa. What is the depth of that point? (g = 9.8 N/kg)",
+  "La pression du liquide en un point de l'eau est {0} kPa. Quelle est la profondeur de ce point ? (g = 9,8 N/kg)"
+ ],
+ "压力不变，受力面积变为原来的 1/{0}，压强变为原来的：": [
+  "The force stays the same and the area becomes 1/{0} of what it was. The pressure becomes:",
+  "La force reste la même et la surface devient 1/{0} de ce qu'elle était. La pression devient :"
+ ],
+ "{0} 倍": [
+  "{0} times as great",
+  "{0} fois plus grande"
+ ],
+ "1/{0} 倍": [
+  "1/{0} as great",
+  "1/{0} de ce qu'elle était"
+ ],
+ "p = F / S，压力不变时压强与受力面积成反比。": [
+  "p = F / S: for a constant force the pressure is inversely proportional to the area.",
+  "p = F / S : à force constante, la pression est inversement proportionnelle à la surface."
+ ],
+ "用 {0} 段绳子承担重物的滑轮组提起 {1} N 的重物，动滑轮重 {2} N，不计绳重和摩擦，拉力是多少？": [
+  "A pulley system with {0} sections of rope supporting the load lifts a load of {1} N; the movable pulley weighs {2} N. Ignoring the weight of the rope and friction, what is the pull?",
+  "Un palan dont {0} brins de corde supportent la charge soulève une charge de {1} N ; la poulie mobile pèse {2} N. En négligeant le poids de la corde et les frottements, quelle est la force de traction ?"
+ ],
+ "F = (G + G动) / n。": [
+  "F = (G + G_pulley) / n.",
+  "F = (P + P_poulie) / n."
+ ],
+ "用 {0} 段绳子承担重物的滑轮组把重物提高 {1} m，绳子自由端移动的距离是多少？": [
+  "A pulley system with {0} sections of rope supporting the load raises the load by {1} m. What distance does the free end of the rope move?",
+  "Un palan dont {0} brins de corde supportent la charge soulève la charge de {1} m. Quelle distance l'extrémité libre de la corde parcourt-elle ?"
+ ],
+ "使用机械做的有用功是 {0} J，总功是 {1} J，机械效率是多少？": [
+  "The useful work done with a machine is {0} J and the total work is {1} J. What is the mechanical efficiency?",
+  "Le travail utile effectué avec une machine est {0} J et le travail total est {1} J. Quel est le rendement mécanique ?"
+ ],
+ "η = W有 / W总。": [
+  "η = W_useful / W_total.",
+  "η = W_utile / W_total."
+ ],
+ "不计摩擦，用斜面把 {0} N 的重物匀速推上 {1} m 高处，斜面长 {2} m，推力是多少？": [
+  "Ignoring friction, an incline is used to push a load of {0} N at constant speed up to a height of {1} m; the incline is {2} m long. What is the push?",
+  "En négligeant les frottements, on utilise un plan incliné pour pousser à vitesse constante une charge de {0} N jusqu'à une hauteur de {1} m ; le plan incliné mesure {2} m de long. Quelle est la force de poussée ?"
+ ],
+ "用滑轮组提升 {0} N 的重物，动滑轮重 {1} N，不计绳重和摩擦，机械效率是多少？": [
+  "A pulley system lifts a load of {0} N; the movable pulley weighs {1} N. Ignoring the weight of the rope and friction, what is the efficiency?",
+  "Un palan soulève une charge de {0} N ; la poulie mobile pèse {1} N. En négligeant le poids de la corde et les frottements, quel est le rendement ?"
+ ],
+ "η = G / (G + G动)。": [
+  "η = G / (G + G_pulley).",
+  "η = P / (P + P_poulie)."
+ ],
+ "入射角是 {0}°，反射角是多少？": [
+  "The angle of incidence is {0}°. What is the angle of reflection?",
+  "L'angle d'incidence est {0}°. Quel est l'angle de réflexion ?"
+ ],
+ "反射角等于入射角。": [
+  "The angle of reflection equals the angle of incidence.",
+  "L'angle de réflexion est égal à l'angle d'incidence."
+ ],
+ "入射光线与镜面的夹角是 {0}°，反射角是多少？": [
+  "The angle between the incident ray and the mirror surface is {0}°. What is the angle of reflection?",
+  "L'angle entre le rayon incident et la surface du miroir est {0}°. Quel est l'angle de réflexion ?"
+ ],
+ "入射角是入射光线与法线的夹角：90° − 夹角。": [
+  "The angle of incidence is the angle between the incident ray and the normal: 90° − that angle.",
+  "L'angle d'incidence est l'angle entre le rayon incident et la normale : 90° − cet angle."
+ ],
+ "入射角为 {0}°，入射光线与反射光线的夹角是多少？": [
+  "The angle of incidence is {0}°. What is the angle between the incident ray and the reflected ray?",
+  "L'angle d'incidence est {0}°. Quel est l'angle entre le rayon incident et le rayon réfléchi ?"
+ ],
+ "夹角 = 入射角 + 反射角 = 2 × 入射角。": [
+  "Angle = angle of incidence + angle of reflection = 2 × angle of incidence.",
+  "Angle = angle d'incidence + angle de réflexion = 2 × angle d'incidence."
+ ],
+ "一个人站在平面镜前 {0} cm 处，他与自己的像相距多少？": [
+  "A person stands {0} cm in front of a plane mirror. How far is he from his image?",
+  "Une personne se tient à {0} cm devant un miroir plan. À quelle distance est-elle de son image ?"
+ ],
+ "像到镜面的距离等于物到镜面的距离。": [
+  "The distance of the image to the mirror equals the distance of the object to the mirror.",
+  "La distance de l'image au miroir est égale à celle de l'objet au miroir."
+ ],
+ "一个人以 {0} m/s 的速度走向平面镜，他的像相对于他的速度是多少？": [
+  "A person walks towards a plane mirror at {0} m/s. What is the speed of his image relative to him?",
+  "Une personne marche vers un miroir plan à {0} m/s. Quelle est la vitesse de son image par rapport à elle ?"
+ ],
+ "像也以 v 的速度走向镜面，相对速度是 2v。": [
+  "The image also moves towards the mirror at speed v, so the relative speed is 2v.",
+  "L'image se déplace elle aussi vers le miroir à la vitesse v, donc la vitesse relative est 2v."
+ ],
+ "光从空气斜射入{0}（折射率 {1}），入射角 {2}°，折射角约是多少？": [
+  "Light passes obliquely from air into {0} (refractive index {1}) with an angle of incidence of {2}°. What is the angle of refraction, approximately?",
+  "La lumière passe obliquement de l'air dans {0} (indice de réfraction {1}) avec un angle d'incidence de {2}°. Quel est approximativement l'angle de réfraction ?"
+ ],
+ "光从{0}（折射率 {1}）射入空气，临界角约是多少？": [
+  "Light passes from {0} (refractive index {1}) into air. What is the critical angle, approximately?",
+  "La lumière passe de {0} (indice de réfraction {1}) dans l'air. Quel est approximativement l'angle critique ?"
+ ],
+ "光在{0}（折射率 {1}）中的速度约是多少？（真空中为 3×10⁸ m/s）": [
+  "What is the speed of light in {0} (refractive index {1}), approximately? (In a vacuum it is 3×10⁸ m/s)",
+  "Quelle est approximativement la vitesse de la lumière dans {0} (indice de réfraction {1}) ? (Dans le vide, elle vaut 3×10⁸ m/s)"
+ ],
+ "光从空气斜射入水中时，折射角与入射角相比：": [
+  "When light passes obliquely from air into water, compared with the angle of incidence the angle of refraction is:",
+  "Quand la lumière passe obliquement de l'air dans l'eau, l'angle de réfraction par rapport à l'angle d'incidence est :"
+ ],
+ "折射角小于入射角": [
+  "smaller than the angle of incidence",
+  "plus petit que l'angle d'incidence"
+ ],
+ "折射角大于入射角": [
+  "larger than the angle of incidence",
+  "plus grand que l'angle d'incidence"
+ ],
+ "折射角等于入射角": [
+  "equal to the angle of incidence",
+  "égal à l'angle d'incidence"
+ ],
+ "折射光线不偏折，方向不变（斜射时也如此）": [
+  "the refracted ray is not bent and its direction does not change (even for oblique incidence)",
+  "le rayon réfracté n'est pas dévié et sa direction ne change pas (même sous incidence oblique)"
+ ],
+ "光线被全部反射": [
+  "the light is all reflected",
+  "la lumière est entièrement réfléchie"
+ ],
+ "光从空气进入水，折射光线向法线偏折。": [
+  "When light goes from air into water, the refracted ray bends towards the normal.",
+  "Quand la lumière passe de l'air dans l'eau, le rayon réfracté se rapproche de la normale."
+ ],
+ "光从水（折射率 1.33）斜射向空气，入射角 {0}°（水的临界角约 48.8°），会发生什么？": [
+  "Light passes obliquely from water (refractive index 1.33) into air with an angle of incidence of {0}° (the critical angle of water is about 48.8°). What happens?",
+  "La lumière passe obliquement de l'eau (indice de réfraction 1,33) dans l'air avec un angle d'incidence de {0}° (l'angle critique de l'eau est d'environ 48,8°). Que se passe-t-il ?"
+ ],
+ "发生全反射，没有折射光线": [
+  "total internal reflection takes place and there is no refracted ray",
+  "il y a réflexion totale et aucun rayon réfracté"
+ ],
+ "有折射光线，折射角大于入射角": [
+  "there is a refracted ray and the angle of refraction is larger than the angle of incidence",
+  "il y a un rayon réfracté et l'angle de réfraction est plus grand que l'angle d'incidence"
+ ],
+ "有折射光线，折射角小于入射角": [
+  "there is a refracted ray and the angle of refraction is smaller than the angle of incidence",
+  "il y a un rayon réfracté et l'angle de réfraction est plus petit que l'angle d'incidence"
+ ],
+ "入射角超过临界角时发生全反射。": [
+  "Total internal reflection occurs when the angle of incidence exceeds the critical angle.",
+  "La réflexion totale se produit quand l'angle d'incidence dépasse l'angle critique."
+ ],
+ "一个声源每秒振动 {0} 次，它的周期是多少？": [
+  "A sound source vibrates {0} times a second. What is its period?",
+  "Une source sonore vibre {0} fois par seconde. Quelle est sa période ?"
+ ],
+ "声音在空气中的速度取 340 m/s，频率 {0} Hz 的声音波长是多少？": [
+  "Take the speed of sound in air as 340 m/s. What is the wavelength of a sound of frequency {0} Hz?",
+  "Prenons 340 m/s pour la vitesse du son dans l'air. Quelle est la longueur d'onde d'un son de fréquence {0} Hz ?"
+ ],
+ "其他条件不变，声源的振幅变为原来的 {0} 倍，响度级大约增加多少 dB？": [
+  "With everything else unchanged, the amplitude of the source becomes {0} times as great. By about how many dB does the sound level increase?",
+  "Toutes choses égales par ailleurs, l'amplitude de la source devient {0} fois plus grande. De combien de dB le niveau sonore augmente-t-il environ ?"
+ ],
+ "每 10 倍的振幅增加 20 dB。": [
+  "Each factor of 10 in amplitude adds 20 dB.",
+  "Chaque facteur 10 sur l'amplitude ajoute 20 dB."
+ ],
+ "比 {0} Hz 高 {1} 个八度的声音，频率是多少？": [
+  "What is the frequency of a sound {1} octaves higher than {0} Hz?",
+  "Quelle est la fréquence d'un son situé {1} octaves au-dessus de {0} Hz ?"
+ ],
+ "高一个八度，频率变为原来的 2 倍。": [
+  "One octave higher means the frequency is doubled.",
+  "Une octave plus haut signifie que la fréquence est doublée."
+ ],
+ "声音的音调高低由什么决定？": [
+  "What determines the pitch of a sound?",
+  "Qu'est-ce qui détermine la hauteur d'un son ?"
+ ],
+ "声源振动的频率": [
+  "the frequency of vibration of the source",
+  "la fréquence de vibration de la source"
+ ],
+ "声源振动的振幅": [
+  "the amplitude of vibration of the source",
+  "l'amplitude de vibration de la source"
+ ],
+ "声源离听者的距离": [
+  "the distance from the source to the listener",
+  "la distance entre la source et l'auditeur"
+ ],
+ "声音传播的速度": [
+  "the speed at which the sound travels",
+  "la vitesse de propagation du son"
+ ],
+ "声源的材料": [
+  "the material of the source",
+  "la matière de la source"
+ ],
+ "频率越高，音调越高。": [
+  "The higher the frequency, the higher the pitch.",
+  "Plus la fréquence est élevée, plus le son est aigu."
+ ],
+ "质量 {0} kg 的水温度升高 {1} °C，吸收的热量是多少？（c水 = 4200 J/(kg·°C)）": [
+  "Water of mass {0} kg warms up by {1} °C. How much heat does it absorb? (c_water = 4200 J/(kg·°C))",
+  "De l'eau de masse {0} kg s'échauffe de {1} °C. Quelle quantité de chaleur absorbe-t-elle ? (c_eau = 4200 J/(kg·°C))"
+ ],
+ "质量 {0} kg 的某种物质温度升高 {1} °C 吸收了 {2} J 的热量，它的比热容是多少？": [
+  "A substance of mass {0} kg absorbs {2} J of heat when its temperature rises by {1} °C. What is its specific heat capacity?",
+  "Une substance de masse {0} kg absorbe {2} J de chaleur lorsque sa température s'élève de {1} °C. Quelle est sa capacité thermique massique ?"
+ ],
+ "质量 {0} kg、温度 20 °C 的水吸收 {1} kJ 的热量（未沸腾），末温是多少？": [
+  "Water of mass {0} kg at 20 °C absorbs {1} kJ of heat (without boiling). What is the final temperature?",
+  "De l'eau de masse {0} kg à 20 °C absorbe {1} kJ de chaleur (sans bouillir). Quelle est la température finale ?"
+ ],
+ "质量相等的水和煤油吸收相同的热量，温度升高较多的是：": [
+  "Water and kerosene of equal mass absorb the same amount of heat. Which one warms up more?",
+  "De l'eau et du kérosène de même masse absorbent la même quantité de chaleur. Lequel s'échauffe davantage ?"
+ ],
+ "两者升高的温度相同": [
+  "they warm up by the same amount",
+  "ils s'échauffent de la même valeur"
+ ],
+ "无法比较": [
+  "it cannot be compared",
+  "on ne peut pas le comparer"
+ ],
+ "水的比热容较大，升温较慢。": [
+  "Water has the larger specific heat capacity and warms up more slowly.",
+  "L'eau a la plus grande capacité thermique massique et s'échauffe plus lentement."
+ ],
+ "把一杯水倒掉 1/{0}，剩下的水的比热容：": [
+  "1/{0} of a glass of water is poured away. The specific heat capacity of the remaining water:",
+  "On verse 1/{0} d'un verre d'eau. La capacité thermique massique de l'eau restante :"
+ ],
+ "变为原来的一半": [
+  "becomes half of what it was",
+  "devient la moitié de ce qu'elle était"
+ ],
+ "变为原来的 {0} 倍": [
+  "becomes {0} times what it was",
+  "devient {0} fois ce qu'elle était"
+ ],
+ "变为原来的 1/4": [
+  "becomes 1/4 of what it was",
+  "devient 1/4 de ce qu'elle était"
+ ],
+ "比热容是物质的一种特性，与质量、温度变化无关。": [
+  "Specific heat capacity is a property of a substance and does not depend on mass or change of temperature.",
+  "La capacité thermique massique est une propriété d'une substance et ne dépend ni de la masse ni de la variation de température."
+ ],
+ "质量 {0} kg 的物体在地球上受到的重力是多少？（g = 9.8 N/kg）": [
+  "What is the weight of an object of mass {0} kg on the Earth? (g = 9.8 N/kg)",
+  "Quel est le poids d'un objet de masse {0} kg sur la Terre ? (g = 9,8 N/kg)"
+ ],
+ "质量 {0} kg 的宇航员在月球上受到的重力是多少？（月球上 g = 1.6 N/kg）": [
+  "What is the weight of an astronaut of mass {0} kg on the Moon? (On the Moon g = 1.6 N/kg)",
+  "Quel est le poids d'un astronaute de masse {0} kg sur la Lune ? (Sur la Lune, g = 1,6 N/kg)"
+ ],
+ "质量不变，g 变小，重力变小。": [
+  "The mass stays the same, g becomes smaller, so the weight becomes smaller.",
+  "La masse reste la même, g devient plus petit, donc le poids devient plus petit."
+ ],
+ "弹簧受 {0} N 的拉力时伸长 {1} cm（在弹性限度内），受 {2} N 的拉力时伸长多少？": [
+  "A spring extends by {1} cm under a pull of {0} N (within the elastic limit). How much does it extend under a pull of {2} N?",
+  "Un ressort s'allonge de {1} cm sous une force de traction de {0} N (dans la limite d'élasticité). De combien s'allonge-t-il sous une force de traction de {2} N ?"
+ ],
+ "在弹性限度内，伸长量与拉力成正比。": [
+  "Within the elastic limit, the extension is proportional to the pull.",
+  "Dans la limite d'élasticité, l'allongement est proportionnel à la force de traction."
+ ],
+ "物体在地球上受到的重力是 {0} N，它的质量是多少？（g = 9.8 N/kg）": [
+  "The weight of an object on the Earth is {0} N. What is its mass? (g = 9.8 N/kg)",
+  "Le poids d'un objet sur la Terre est {0} N. Quelle est sa masse ? (g = 9,8 N/kg)"
+ ],
+ "弹簧受 {0} N 的拉力时伸长 {1} m，弹簧的劲度系数是多少？": [
+  "A spring extends by {1} m under a pull of {0} N. What is the spring constant?",
+  "Un ressort s'allonge de {1} m sous une force de traction de {0} N. Quelle est la constante de raideur du ressort ?"
+ ]
+}
