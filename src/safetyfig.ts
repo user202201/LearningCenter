@@ -1,7 +1,7 @@
 /**
  * Drawings of the safety summaries (安全与生活常识, tab 安全 of #/science/notes): traffic signs, signal light, fire, extinguisher, earthquake,
  * seven-step hand washing, 20-20-20, waste bins, warning colours, CPR, burns, emergency numbers, body safety. Inline SVG made in code, 240 x 150,
- * no images. Like figures.ts this file is Chinese content shown in a `user` box (labels are never translated; check-i18n skips it).
+ * no images. Like figures.ts its labels are translated when drawn (rule 65); check-i18n skips the file.
  * The traffic signs are also exported one by one (TRAFFIC_SIGNS: 100 x 100, `data-cls` = ban / warn / info): prohibition = red ring, warning = yellow
  * triangle, mandatory / information = blue circle.
  */

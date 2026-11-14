@@ -15,6 +15,7 @@ import { openMathGame } from "./mathui";
 import { renderRich, renderTeX } from "./mathtext";
 import { SYMBOLS, CIRCUITS, RULES } from "./diagrams";
 import { figure } from "./figures";
+import { ct, loadContentTr } from "./contenttr";
 import { mascot } from "./art";
 import { subjectArt, shortcuts } from "./hub";
 import { spaceIcon } from "./spaceart";
@@ -318,21 +319,23 @@ async function details(e: SM.Element) {
 interface Formula { g: number; k: string; s: string; n: string; t: string; x?: string; ex?: string; fig?: string }
 /** one formula: the name and the formula; a tap opens what it means, a worked example and a drawing (when there is one) */
 function formulaRow(x: Formula): HTMLElement {
-  const f = h("div", { class: "fm-formula user" });
-  renderTeX(f, x.t, x.t.replace(/\\[a-z]+|[{}]/g, ""));
+  const f = h("div", { class: "fm-formula" });
+  const tex = ct(x.t);
+  renderTeX(f, tex, tex.replace(/\\[a-z]+|[{}]/g, ""));
   const more = h("div", { class: "fm-more" });
-  if (x.x) { const e = h("p", { class: "fm-x user" }); renderRich(e, x.x); more.append(h("b", { class: "fm-lab" }, "含义"), e); }
-  if (x.ex) { const e = h("p", { class: "fm-ex user" }); renderRich(e, x.ex); more.append(h("b", { class: "fm-lab" }, "例子"), e); }
+  if (x.x) { const e = h("p", { class: "fm-x" }); renderRich(e, ct(x.x)); more.append(h("b", { class: "fm-lab" }, "含义"), e); }
+  if (x.ex) { const e = h("p", { class: "fm-ex" }); renderRich(e, ct(x.ex)); more.append(h("b", { class: "fm-lab" }, "例子"), e); }
   const fig = x.fig ? figure(x.fig) : null;
   if (fig) more.append(fig);
   const row = h("div", { class: "fm-row tappable", "data-k": x.k, "data-g": String(x.g), role: "button", tabindex: "0", "aria-expanded": "false" },
-    h("div", { class: "fm-head" }, h("span", { class: "fm-name user" }, x.n), h("span", { class: "muted small" }, P.gradeName(x.g)), h("i", { class: "fm-chev" }, "›")), f, more);
+    h("div", { class: "fm-head" }, h("span", { class: "fm-name" }, ct(x.n)), h("span", { class: "muted small" }, P.gradeName(x.g)), h("i", { class: "fm-chev" }, "›")), f, more);
   const flip = () => { const o = row.classList.toggle("open"); row.setAttribute("aria-expanded", String(o)); };
   row.addEventListener("click", flip);
   row.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), flip()));
   return row;
 }
 export async function renderFormulas() {
+  await loadContentTr();
   const list = (await import("./data/formulas.json")).default.formulas as Formula[];
   let kind = "", level = "";
   const body = h("div", { id: "fm-body" });
@@ -343,7 +346,7 @@ export async function renderFormulas() {
     body.replaceChildren(...[...groups.entries()].map(([key, rows]) => {
       const [k, s] = key.split("|");
       return h("section", { class: "fm-group", "data-k": k },
-        h("h3", { class: "fm-title" }, h("span", { class: "stopic" }, k), s),
+        h("h3", { class: "fm-title" }, h("span", { class: "stopic" }, ct(k)), ct(s)),
         ...rows.map((x) => formulaRow(x)));
     }), ...(items.length ? [] : [h("p", { class: "empty" }, "没有符合条件的公式。")]));
   };
@@ -385,18 +388,19 @@ const spanText = (a: number, b: number | null) => (a < -100000 ? "远古" : `${y
 function sectionCard(sec: Section, no: number, open = false): HTMLElement {
   const body = h("div", { class: "nt-body" },
     sec.fig ? figure(sec.fig) : null,
-    sec.must?.length ? h("div", { class: "nt-must" }, h("b", {}, "必背考点"), h("ul", { class: "user" }, ...sec.must.map((p) => h("li", {}, p)))) : null,
-    h("ul", { class: "nt-points user" }, ...sec.points.map((p) => h("li", {}, p))),
-    sec.tip ? h("p", { class: "nt-tip" }, h("b", {}, "记忆小窍门："), h("span", { class: "user" }, sec.tip)) : null,
+    sec.must?.length ? h("div", { class: "nt-must" }, h("b", {}, "必背考点"), h("ul", {}, ...sec.must.map((p) => h("li", {}, ct(p))))) : null,
+    h("ul", { class: "nt-points" }, ...sec.points.map((p) => h("li", {}, ct(p)))),
+    sec.tip ? h("p", { class: "nt-tip" }, h("b", {}, "记忆小窍门："), h("span", {}, ct(sec.tip))) : null,
     sec.check ? h("p", { class: "nt-check muted small" }, "此节的数字和规定请对照最新的官方说明核对。") : null);
   const card = h("section", { class: "nt-card" + (open ? " open" : ""), "data-h": sec.h },
     h("button", { class: "nt-head", "aria-expanded": String(open), onclick: () => { const o = card.classList.toggle("open"); (card.firstElementChild as HTMLElement).setAttribute("aria-expanded", String(o)); } },
-      h("span", { class: "nt-no" }, String(no)), h("span", { class: "nt-title user" }, sec.h), sec.must?.length ? h("span", { class: "nt-star", title: "必背考点" }, "★") : null, h("i", { class: "fm-chev" }, "›")),
+      h("span", { class: "nt-no" }, String(no)), h("span", { class: "nt-title" }, ct(sec.h)), sec.must?.length ? h("span", { class: "nt-star", title: "必背考点" }, "★") : null, h("i", { class: "fm-chev" }, "›")),
     body);
   return card;
 }
 
 export async function renderNotes() {
+  await loadContentTr();
   const notes = (await import("./data/notes.json")).default as unknown as Notes;
   type Tab = "history" | "geo" | "bio" | "politics" | "safety";
   let tab: Tab = "history", evFilter: "all" | "cn" | "world" = "all";
@@ -407,18 +411,18 @@ export async function renderNotes() {
   const stages = (b: Block) => {
     const gs = groupsOf(b), at = Math.min(pick[tab], gs.length - 1);
     const list = h("div", { id: "nt-list" }, ...gs[at].sections.map((s, i) => sectionCard(s, i + 1)));
-    const chips = gs.length < 2 ? null : h("div", { class: "nt-stages", id: "nt-stages" }, ...gs.map((g, i) => h("button", { class: "mopt" + (i === at ? " on" : ""), id: `grp-${i}`, "data-i": String(i), onclick: () => { pick[tab] = i; draw(); } }, g.name)));
+    const chips = gs.length < 2 ? null : h("div", { class: "nt-stages", id: "nt-stages" }, ...gs.map((g, i) => h("button", { class: "mopt" + (i === at ? " on" : ""), id: `grp-${i}`, "data-i": String(i), onclick: () => { pick[tab] = i; draw(); } }, ct(g.name))));
     return [chips, h("p", { class: "muted small center nt-hint" }, `${gs[at].sections.length} 节 · 点击标题展开，带 ★ 的含必背考点。`), list].filter((x): x is NonNullable<typeof x> => !!x) as HTMLElement[];
   };
   const draw = () => {
     if (tab === "history") {
       const hs = notes.history;
       const dyn = h("div", { class: "nt-dyn", id: "nt-dynasties" }, ...hs.dynasties.map((d) => h("div", { class: "nt-d", "data-n": d.n },
-        h("div", { class: "nt-d-top" }, h("b", { class: "user" }, d.n), h("span", { class: "nt-d-yr user" }, spanText(d.from, d.to))),
-        h("div", { class: "nt-d-gist user" }, `${d.cap} · ${d.who}`), h("div", { class: "nt-d-gist user" }, d.gist))));
+        h("div", { class: "nt-d-top" }, h("b", {}, ct(d.n)), h("span", { class: "nt-d-yr" }, spanText(d.from, d.to))),
+        h("div", { class: "nt-d-gist" }, `${ct(d.cap)} · ${ct(d.who)}`), h("div", { class: "nt-d-gist" }, ct(d.gist)))));
       const evs = hs.events.filter((e) => evFilter === "all" || (evFilter === "world") === !!e.w);
       const ev = h("div", { class: "nt-events", id: "nt-events" }, ...evs.map((e) => h("div", { class: "nt-ev" + (e.w ? " world" : ""), "data-y": String(e.y) },
-        h("span", { class: "nt-ev-y user" }, yearText(e.y)), h("span", { class: "nt-ev-t user" }, h("b", {}, e.t), h("small", {}, e.d)))));
+        h("span", { class: "nt-ev-y" }, yearText(e.y)), h("span", { class: "nt-ev-t" }, h("b", {}, ct(e.t)), h("small", {}, ct(e.d))))));
       const evChips = h("div", { class: "mset-opts pt-filter" }, ...([["全部", "all"], ["中国", "cn"], ["世界", "world"]] as const).map(([label, v]) => h("button", { class: "mopt" + (evFilter === v ? " on" : ""), id: `ev-${v}`, onclick: () => { evFilter = v; draw(); } }, label)));
       const subs = h("div", { class: "mset-opts pt-filter nt-sub", id: "nt-sub" }, ...([["朝代表", "dyn"], ["大事年表", "ev"], ["考点重点", "key"]] as const).map(([label, v]) => h("button", { class: "mopt" + (hsub === v ? " on" : ""), id: `hs-${v}`, "data-v": v, onclick: () => { hsub = v; draw(); } }, label)));
       body.replaceChildren(subs, ...(hsub === "dyn" ? [dyn] : hsub === "ev" ? [evChips, ev] : stages(hs)));
