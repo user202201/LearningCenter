@@ -189,7 +189,7 @@ async function crawlConfig(cfg, report) {
 
 
   // ---------- scripted flows: the dialogs, messages and game screens that a plain click on a route does not reach
-  const tryFlow = async (name, fn) => { try { await fn(); } catch (e) { log(`flow "${name}" stopped: ${String(e.message).split('\n')[0]}`); } };
+  const tryFlow = async (name, fn) => { try { await fn(); } catch (e) { const where = await page.evaluate(() => location.hash + ' | ' + document.body.innerText.replace(/\s+/g, ' ').slice(0, 120)).catch(() => '?'); log(`flow "${name}" stopped: ${String(e.message).split('\n')[0]} @ ${where}`); } };
   const adminOn = async () => { await goto('#/settings'); if (await page.isChecked('#manage-mode')) return; await page.click('#manage-mode'); await page.waitForSelector('#admin-pw'); await scan('admin password dialog'); await page.fill('#admin-pw', '1234'); if (await page.locator('#admin-pw2').count()) { await page.fill('#admin-pw2', '9999'); await page.click('#admin-ok'); await page.waitForTimeout(250); await scan('admin password: mismatch message'); await page.fill('#admin-pw2', '1234'); } await page.click('#admin-ok'); await page.waitForSelector('dialog.center', { state: 'detached' }); await page.waitForSelector('#add-kid', { state: 'visible' }); await page.waitForTimeout(300); };
   await tryFlow('settings', async () => {
     await adminOn(); await scan('settings: manage mode');
