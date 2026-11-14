@@ -119,7 +119,7 @@ export function genInfer(r: Rnd, lv: number, kind: string): Q {
     const fits = all.filter((c) => clues.every((k) => clueOf(k, c) === clueOf(k, x)));
     if (fits.length !== 1) continue;
     const wrongs = shuf(r, all.filter((c) => F(c) !== F(x)));
-    return choiceQ({ ...base, key: "infer:unk", stem: ["某盐 X 的溶液是下列八种溶液中的一种：", { f: all.map(F).join(L.U.sep) }, { u: L.U.dot }, ...clues.flatMap((k, i) => [i ? { u: " " } : "", clueOf(k, x)]) as Part[], "X 的化学式是："], expl: ["蓝色溶液含 Cu²⁺，黄色溶液含 Fe³⁺；氢氧化钠与 Cu²⁺ 生成蓝色沉淀，与 Fe³⁺ 生成红褐色沉淀，与 Mg²⁺ 生成白色沉淀；氯化钡与 SO₄²⁻ 生成不溶于水的白色沉淀 BaSO₄。根据上面的现象，只有一种盐符合：", { f: F(x) }, { u: " " + cname(x) }] }, r, [{ f: F(x) }, { u: " " + cname(x) }], wrongs.map((c) => [{ f: F(c) }, { u: " " + cname(c) }]), { meta: { x: F(x), clues, cands: all.map(F) } }) as Q;
+    return choiceQ({ ...base, key: "infer:unk", stem: ["某盐 X 的溶液是下列八种溶液中的一种：", { f: all.map(F).join(L.sepOf()) }, { u: L.U.dot }, ...clues.flatMap((k, i) => [i ? { u: " " } : "", clueOf(k, x)]) as Part[], "X 的化学式是："], expl: ["蓝色溶液含 Cu²⁺，黄色溶液含 Fe³⁺；氢氧化钠与 Cu²⁺ 生成蓝色沉淀，与 Fe³⁺ 生成红褐色沉淀，与 Mg²⁺ 生成白色沉淀；氯化钡与 SO₄²⁻ 生成不溶于水的白色沉淀 BaSO₄。根据上面的现象，只有一种盐符合：", { f: F(x) }, { u: " " + cname(x) }] }, r, [{ f: F(x) }, { u: " " + cname(x) }], wrongs.map((c) => [{ f: F(c) }, { u: " " + cname(c) }]), { meta: { x: F(x), clues, cands: all.map(F) } }) as Q;
   }
   throw new Error("no unknown");
 }
@@ -302,7 +302,7 @@ export function flowRows(f: Flow): FlowRow[] {
   if (f.end) rows.push({ k: "box", t: f.end.join(", ") });
   return rows;
 }
-const setTxt = (xs: string[]): string => (xs.length ? xs.join(L.U.sep) : "无");
+const setTxt = (xs: string[]): string => (xs.length ? xs.join(L.sepOf()) : "无");
 
 export function genFlow(r: Rnd, lv: number, kind: string): Q {
   const base = { mode: "flow", kind, lv: lv || 2, key: `flow:${kind}` };

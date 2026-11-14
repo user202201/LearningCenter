@@ -19,6 +19,8 @@ export function tn(s: string): string {
   return trExact("§" + s) ?? tr(s);
 }
 /** a content text of a question part ("{u}"): translated whole, or piece by piece around the Chinese punctuation, which becomes ordinary punctuation outside Chinese */
+/** the separator of a list of formulas / names: the Chinese one only on a Chinese screen */
+export const sepOf = (): string => (getLang() === "zh" ? U.sep : ", ");
 export function uText(s: string): string {
   if (getLang() === "zh" || !CJK_RE.test(s)) return s;
   const whole = tn(s);
