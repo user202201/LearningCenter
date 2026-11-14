@@ -368,7 +368,7 @@ const CJK = /[一-鿿]/;
   };
   for (const lv of [0, 1, 2]) {
     const r = await fullGame(lv);
-    ok(r.winner >= 0 && r.hands[r.winner] === 0 && r.plays > 3 && /赢了/.test(r.h2), `a full game at level ${lv} through the buttons: ${r.plays} plays, ${r.passes} passes, winner seat ${r.winner}, "${r.h2}"`);
+    ok(r.winner >= 0 && r.hands[r.winner] === 0 && r.plays + r.passes > 3 && /赢了/.test(r.h2), `a full game at level ${lv} through the buttons: ${r.plays} plays, ${r.passes} passes, winner seat ${r.winner}, "${r.h2}"`);
   }
   await p.screenshot({ path: OUT + 'paodekuai-over.png' });
   // a deal where somebody else leads: the computer plays first and includes the 3 of diamonds

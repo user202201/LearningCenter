@@ -442,7 +442,9 @@ const CJK = /[㐀-鿿]/;
   await tapCard(hand0.length ? (await st()).hands[0].map(rk).indexOf(7) : 0); await p.click('#dz-play'); a = await st();
   ok((await p.textContent('#dz-msg')) === '没有大过上家。' && a.table.by === 1 && a.hands[0].length === 7, 'a card that does not beat the table is refused: ' + (await p.textContent('#dz-msg')));
   await p.keyboard.press('Escape'); a = await st(); ok(a.sel.length === 0, 'Escape clears the selection');
+  await p.evaluate(() => window.__dz.hold(true));
   await p.click('#dz-pass'); a = await st();
+  await p.evaluate(() => window.__dz.hold(false));
   ok(a.last[0] === 'pass' && a.hands[0].length === 7 && a.turn !== 0, 'Pass passes');
   // nothing beats a rocket: the hint says so
   await load({ hands: [sortDesc([card(15, 0), card(3, 0), card(4, 0)]), [card(5, 0), card(5, 1)], [card(6, 0), card(6, 1)]], landlord: 1, turn: 0, table: { by: 2, combo: cmb('rocket', 17, 1, 2), cards: [52, 53] }, last: [null, null, { cards: [52, 53], combo: cmb('rocket', 17, 1, 2) }], plays: [0, 1, 1], bombs: 1 });
@@ -475,8 +477,10 @@ const CJK = /[㐀-鿿]/;
   ok(bestStore.best === 6 && (await p.textContent('#dz-best')) === '最高：6' && bestStore.wins === 1, 'the best score is kept in learn.games.v1: ' + JSON.stringify(bestStore));
   await p.screenshot({ path: OUT + 'doudizhu-win.png' });
   // lose and the spring line: the computer landlord goes out at once
+  await p.evaluate(() => window.__dz.hold(true));
   await p.click('#dz-start'); await p.waitForTimeout(100);
-  a = await st(); ok(a.started && a.phase === 'bid' && a.dealt >= 2 && !(await ovlVisible()), 'Play again: a new deal, the best stays');
+  a = await st(); await p.evaluate(() => window.__dz.hold(false));
+  ok(a.started && a.phase === 'bid' && a.dealt >= 2 && !(await ovlVisible()), 'Play again: a new deal, the best stays');
   ok((await p.textContent('#dz-best')) === '最高：6', 'the best score stays after a new game');
   await load({ hands: [[card(15, 0), card(14, 0)], [card(3, 1)], [card(5, 1), card(6, 1)]], landlord: 1, turn: 1, table: null, bombs: 0, high: 2, plays: [0, 0, 0] });
   await waitOvl();

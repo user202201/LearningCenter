@@ -30,8 +30,8 @@
 .pdk-card { position: absolute; left: 0; top: 0; width: var(--cw); height: calc(var(--cw) * 1.4); transition: transform .16s cubic-bezier(.3, .8, .35, 1); will-change: transform; touch-action: none; }
 .pdk-card.mini { transition: none; animation: pdk-pop .22s ease-out both; }
 .pdk-in { position: absolute; inset: 0; box-sizing: border-box; background: #fff8e1; border: 2.5px solid #3b2f2f; border-radius: calc(var(--cw) * .14); box-shadow: 0 calc(var(--cw) * .04) 0 #b99a5b, 0 2px 4px rgba(0, 0, 0, .25); overflow: hidden; }
-.pdk-top { position: absolute; left: 5%; top: 2%; display: flex; flex-direction: column; align-items: center; line-height: 1; font-weight: 900; font-family: "Arial Rounded MT Bold", "Nunito", "Varela Round", system-ui, -apple-system, sans-serif; font-size: calc(var(--cw) * .32); letter-spacing: -1px; }
-.pdk-top svg { width: calc(var(--cw) * .27); height: calc(var(--cw) * .27); display: block; margin-top: 1px; }
+.pdk-top { position: absolute; left: 5%; top: 2%; display: flex; flex-direction: column; align-items: center; line-height: 1; font-weight: 900; font-family: "Arial Rounded MT Bold", "Nunito", "Varela Round", system-ui, -apple-system, sans-serif; font-size: min(calc(var(--cw) * .32), calc(var(--st, 99px) * .9)); letter-spacing: -1px; }
+.pdk-top svg { width: min(calc(var(--cw) * .27), calc(var(--st, 99px) - 3px)); height: min(calc(var(--cw) * .27), calc(var(--st, 99px) - 3px)); display: block; margin-top: 1px; }
 .pdk-card.red .pdk-top { color: #e03131; }
 .pdk-card.blk .pdk-top { color: #343a40; }
 .pdk-big { position: absolute; left: 50%; bottom: 5%; width: 58%; transform: translateX(-50%); }

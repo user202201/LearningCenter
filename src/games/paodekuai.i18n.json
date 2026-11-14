@@ -26,7 +26,7 @@
   "小兔赢了。": ["Rabbit wins.", "Le lapin a gagné."],
   "新纪录：{0}": ["New record: {0}", "Nouveau record : {0}"],
   "本局得分：{0}": ["Score of this game: {0}", "Score de la partie : {0}"],
-  "你持有方块 3，请先出牌，必须包含方块 3。": ["You hold the 3 of diamonds. Please lead; the play must include it.", "Vous avez le 3 de carreau. Jouez en premier ; la combinaison doit l'inclure."],
+  "请先出牌，须包含方块 3。": ["Lead first; the play must include the 3 of diamonds.", "Ouvrez la partie ; le coup doit inclure le 3 de carreau."],
   "轮到你出牌。": ["Your turn.", "À vous de jouer."],
   "轮到你出牌，可任选牌型。": ["Your turn. You may lead any combination.", "À vous de jouer. Vous pouvez ouvrir avec n'importe quelle combinaison."],
   "小熊出牌中。": ["Bear is playing.", "L'ours joue."],

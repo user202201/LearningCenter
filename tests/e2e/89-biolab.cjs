@@ -14,7 +14,7 @@ const { execFileSync } = require('child_process');
 const OUT = process.env.D || 'tests/out/biolab/';
 fs.mkdirSync(OUT, { recursive: true });
 
-const IDS = ['foodweb', 'population', 'microscope', 'cells', 'division', 'levels', 'seed', 'photo', 'respiration', 'transpiration', 'flower', 'digest', 'breathing', 'blood', 'nerve', 'hormone', 'eye', 'motion', 'ferment', 'classify', 'genetics', 'selection', 'epidemic', 'lifecycle', 'development', 'vessels', 'excretion', 'ear', 'behaviour', 'fossils', 'diet', 'firstaid', 'skin', 'bones', 'impact', 'health'];
+const IDS = ['foodweb', 'population', 'microscope', 'cells', 'division', 'levels', 'seed', 'photo', 'respiration', 'transpiration', 'flower', 'digest', 'breathing', 'blood', 'nerve', 'hormone', 'eye', 'motion', 'ferment', 'classify', 'genetics', 'selection', 'epidemic', 'lifecycle', 'development', 'vessels', 'excretion', 'ear', 'behaviour', 'fossils', 'diet', 'firstaid', 'skin', 'bones', 'impact', 'health', 'reproduction', 'bloodpressure', 'microbe', 'slide', 'seedlab', 'energy', 'daphnia', 'dna', 'propagation', 'evidence', 'breeding', 'eugenics', 'animalgroups', 'ecology'];
 const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
 const extraOf = (f) => JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/' + f), 'utf8'));
 const extra = extraOf('biolab.json');
@@ -64,6 +64,21 @@ const SOLVE = {
   impact: { habitat: { mode: 0, lost: 95 }, emit: { mode: 1, emit: 9, years: 100 }, cut: { mode: 1, emit: 0, years: 50 } },
   health: { aerobic: { mode: 0, age: 14, hr: 150 }, hard: { mode: 0, hr: 180 }, sleep: { mode: 1, age: 12, sleep: 10 } },
   epidemic: { herd: { mode: 0, vacc: 60 }, flat: { mode: 0, vacc: 30, iso: 30, route: 30 }, boost: { mode: 1, tb: 28 } },
+  // third pass (14 more simulations)
+  reproduction: { female: { mode: 0, ...L(4, 'f') }, male: { mode: 1, ...L(4, 'm') }, events: { mode: 2, ...L(4, 'e') }, order: { mode: 3, ...L(5, 'o') } },
+  bloodpressure: { high: { mode: 0, r: 200 }, sys: { mode: 1, person: 0, cuff: 118 }, dia: { mode: 1, person: 0, cuff: 76 }, pulse: { mode: 2, secs: 15, hr: 120 } },
+  microbe: { valid: { mode: 0, c0: 7, dil: 4, vol: 0.1 }, bact: { mode: 1, ...L(6, 'b') }, yeast: { mode: 2, ...L(6, 'y') }, resist: { mode: 3, courses: 4 } },
+  slide: { onion: { mode: 0, ...L(7, 'o') }, cheek: { mode: 1, ...L(7, 'k') }, clean: { mode: 2, angle: 5, water: 3 } },
+  seedlab: { bean: { mode: 0, ...L(5, 'b') }, maize: { mode: 1, ...L(6, 'm') }, iodine: { mode: 2, seed: 1, part: 1 }, sample: { mode: 3, n: 100 } },
+  energy: { shield: { shield: 1 }, rice: { food: 3, shield: 1 }, heat: { food: 1, shield: 1, m: 1.5, vw: 100 } },
+  daphnia: { low: { conc: 1 }, drop: { conc: 10 }, dead: { conc: 20 } },
+  dna: { chrom: { mode: 0, ...L(5, 'c') }, pair: { mode: 1, k: 8 }, gamete: { mode: 2, sp: 0, cell: 1 }, sexratio: { mode: 3, N: 500 } },
+  propagation: { graft: { mode: 0, scion: 0, stock: 0, align: 100 }, mismatch: { mode: 0, scion: 0, stock: 1, align: 100 }, methods: { mode: 1, ...L(6, 'm') }, compare: { mode: 2, ...L(8, 'k') } },
+  evidence: { homol: { mode: 0, an: 1, ...L(5, 'h') }, embryo: { mode: 1, stage: 20 }, cyt: { mode: 2, csp: 0 }, tree: { mode: 3, a: 0, b: 1 } },
+  breeding: { f2: { mode: 0, gen: 1, n: 160 }, tech: { mode: 1, ...L(8, 't') }, dolly: { mode: 2, nuc: 0, egg: 1, sur: 1 } },
+  eugenics: { cousin: { mode: 0, rel: 1 }, sibling: { mode: 0, rel: 2 }, eugen: { mode: 1, ...L(8, 'e') } },
+  animalgroups: { org: { mode: 0, ...L(8, 'o') }, feat: { mode: 1, ...L(8, 'f') }, bird: { mode: 2, grp: 3 } },
+  ecology: { dark: { mode: 0, factor: 0, n: 20 }, types: { mode: 1, ...L(8, 'e') }, resil: { mode: 2, div: 30, dist: 60 }, fragile: { mode: 2, div: 4, dist: 40 } },
 };
 const numOf = (s) => parseFloat(String(s).replace('−', '-'));
 const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim()); return m ? m[1].length : 0; };
@@ -125,6 +140,19 @@ const EXPECT = {
   impact: { species: ([l]) => 100 * (1 - l) ** 0.25, co2: ([e, y]) => 420 + (0.45 * e * y) / 2.13, warm: ([c]) => 2 * Math.log2(c / 280) },
   health: { max: ([a]) => 220 - a, low: ([a]) => Math.round(0.7 * (220 - a)), high: ([a]) => Math.round(0.85 * (220 - a)) },
   epidemic: { herd: ([R]) => (1 - 1 / R) * 100, reff: ([R, i, r, v]) => R * (1 - i) * (1 - r) * (1 - v), susc: ([v]) => 1000 * (1 - v) },
+  // third pass: written here, from the biology (not the formulas of the models)
+  bloodpressure: { co: ([sv, hr]) => (sv * hr) / 1000, pp: ([sys, dia]) => sys - dia, kpa: ([mm]) => mm / 7.5 },
+  microbe: { estimate: ([n, dil, vol]) => (n * 10 ** dil) / vol / 1e6, resist: ([r0, kill, k]) => (100 * (r0 / 1000)) / (r0 / 1000 + (1 - r0 / 1000) * (1 - kill / 100) ** k) },
+  slide: { steps: () => 7 },
+  seedlab: { avg: ([n, a, b, c]) => ((a + b + c) / (3 * n)) * 100 },
+  energy: { q: ([vw, dT]) => 4.2 * vw * dT, per: ([Q, m]) => Q / (m * 1000), dt: ([, dT]) => dT, total: ([f, m]) => [24, 28, 16, 15][f] * m },
+  daphnia: { pmin: ([n]) => 6 * n, drop: ([a, b]) => ((a - b) / a) * 100, avg: ([x, y, z]) => (x + y + z) / 3 },
+  dna: { count: ([sp, cell]) => [46, 8, 14, 20, 24, 38][sp] / (cell === 1 ? 2 : 1) },
+  evidence: { cyt: ([i]) => ((104 - [0, 1, 10, 12, 13, 15, 21, 44][i]) / 104) * 100, mrca: ([a, b]) => { const rank = [0, 0, 1, 2, 3, 4], t = [7, 9, 14, 28, 90]; return a === b ? 0 : t[Math.max(rank[a], rank[b])]; } },
+  breeding: { f2: ([n]) => (9 * n) / 16, pure: ([n]) => n / 16 },
+  eugenics: { risk: ([N, r]) => ([1 / (N * N), 1 / N / 8, 1 / N / 2][r] / 4) * 10000, ratio: ([N, r]) => [1, N / 8, N / 2][r] },
+  animalgroups: { legs: ([l]) => [3, 4][l] },
+  ecology: { cap: ([d]) => (80 * d) / (d + 8) },
 };
 // text kinds: tables written here
 const STRUCT = [['细胞壁', '保护和支持细胞', 1, 0], ['细胞膜', '控制物质进出细胞', 1, 1], ['细胞质', '细胞生命活动的主要场所', 1, 1], ['细胞核', '含有遗传物质，控制生物的发育和遗传', 1, 1], ['叶绿体', '进行光合作用，制造有机物', 1, 0], ['液泡', '储存水分、糖类等物质', 1, 0], ['线粒体', '进行呼吸作用，释放能量', 1, 1]];
@@ -182,7 +210,28 @@ const TEXT = {
   bones: { treat: ([t], a) => a === ['有弹性又坚硬', '变脆，易碎（只剩无机盐）', '变软，可以弯曲（只剩有机物）'][t], child: (p, a) => a.startsWith('有机物含量较多'), inorganic: (p, a) => a === '无机盐', joint: (p, a) => a.startsWith('关节面') },
   impact: { protect: (p, a, q) => a === PROT.find((x) => q.includes(`“${x[0]}”`))[1], cause: (p, a) => a === '光合作用增强' },
   health: { sleep: ([age], a) => a === (age <= 12 ? '10–12 小时' : age <= 15 ? '9–11 小时' : '8–10 小时'), habit: (p, a) => a.startsWith('合理饮食') },
+  // third pass
+  reproduction: { organ: (p, a, q) => { const f = Object.entries(ORGAN_FN).find(([, fn]) => q.includes('“' + fn + '”')); return !!f && a === f[0]; }, site: (p, a) => a === '输卵管', gonad: ([g], a) => a === (g === 0 ? '睾丸' : '卵巢'), nutri: (p, a) => a === '胎盘和脐带', next: ([i], a, q) => q.includes('“' + REPRO_STAGES[i] + '”') && a === REPRO_STAGES[i + 1] },
+  bloodpressure: { status: ([s, d], a) => a === (s > 140 || d > 90 ? '血压偏高（高血压）' : s < 90 || d < 60 ? '血压偏低' : '血压正常'), sound: (p, a) => a.startsWith('听不到声音') },
+  microbe: { fold: ([k], a) => a === '10' + [...String(k)].map((d) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[+d]).join(''), range: (p, a) => a === '30–300 个', struct: (p, a) => a === '细菌没有成形的细胞核' },
+  slide: { order: ([i], a, q) => q.includes('“' + ONION_STEPS[i] + '”') && a === ONION_STEPS[i + 1], saline: (p, a) => a === '生理盐水', stain: (p, a) => a.startsWith('使细胞核等结构着色'), bubble: (p, a) => a.startsWith('用镊子夹起盖玻片，使一侧先接触水滴') },
+  seedlab: { part: ([i], a, q) => a === ['种皮', '胚根', '胚轴', '胚芽', '子叶'][i] && q.includes(['保护种子内部结构的是', '将来发育成根的是', '将来发育成连接根和茎的部分的是', '将来发育成茎和叶的是', '菜豆种子储存营养物质的是'][i]), store: (p, a) => a === '胚乳', iodine: (p, a) => a === '胚乳', samp: (p, a) => a.startsWith('每组取数量较多的种子') },
+  energy: { loss: (p, a) => a.startsWith('燃烧放出的热量没有全部被水吸收') },
+  daphnia: { ctrl: (p, a) => a.startsWith('作对照'), high: (p, a) => a.startsWith('停止跳动') },
+  dna: { who: (p, a) => a === 'DNA 和蛋白质', gene: (p, a) => a === 'DNA 上具有特定遗传信息的片段', pair: ([b], a) => a === ['T', 'A', 'G', 'C'][b], sex: (p, a) => a === 'X 或 Y' },
+  propagation: { scion: ([i], a) => a === ['红富士苹果', '鸭梨', '水蜜桃'][i], cambium: (p, a) => a === '接穗与砧木的形成层紧密结合', method: ([m], a, q) => { const T = { 月季: 0, 优良苹果: 1, 桂花: 2, 兰花: 3 }; const k = Object.keys(T).find((x) => q.includes(x)); return a === ['扦插', '嫁接', '压条', '组织培养'][T[k]]; }, trait: (p, a) => a === '能保持母体的优良性状', type: ([c], a) => a === (['由受精卵发育成新个体', '后代具有双亲的遗传特性，变异较多', '后代适应环境变化的能力较强，有利于生物进化', '用种子繁殖'].includes(COMPARE_ITEMS[c]) ? '有性生殖' : '无性生殖') },
+  evidence: { homol: (p, a) => a === '起源于共同的祖先', embry: (p, a) => a === '它们可能有共同的祖先', closest: (four, a) => { const D = [0, 1, 10, 12, 13, 15, 21, 44], N = ['黑猩猩', '恒河猴', '狗', '马', '鸡', '海龟', '金枪鱼', '酵母菌']; const best = four.slice().sort((x, y) => D[x] - D[y])[0]; return a === N[best]; } },
+  breeding: { tech: ([i], a) => a === TECH_OF[i], dolly: (p, a) => a === '提供细胞核的羊', principle: ([k], a) => a === ['让不同品种杂交，从后代中选出具有优良性状的新品种', '诱发生物的遗传物质发生改变（变异），再选育'][k] },
+  eugenics: { ban: (p, a) => a === '直系血亲和三代以内的旁系血亲', measure: ([i], a) => a === MEASURE_OF[i], carrier: (p, a) => a.startsWith('不患病，但会把致病基因传给后代') },
+  animalgroups: { phylum: ([o], a) => a === ['腔肠动物', '腔肠动物', '扁形动物', '扁形动物', '线形动物', '环节动物', '软体动物', '节肢动物'][o], feature: ([f], a) => a === ['腔肠动物', '扁形动物', '线形动物', '环节动物', '软体动物', '节肢动物', '环节动物', '软体动物'][f], warm: (p, a) => a === '鸟类和哺乳动物', cover: ([g], a) => a === ['鳞片，有黏液', '裸露、湿润', '鳞片或甲', '羽毛', '体表被毛'][g] },
+  ecology: { abiotic: ([i], a) => a === ['阳光', '空气', '水', '温度', '土壤'][i], ecos: ([e], a) => a === ['森林', '森林', '草原', '湿地', '湿地', '海洋', '农田', '城市'][e] + '生态系统', control: (p, a) => a === '保持相同', rep: (p, a) => a === '减少偶然性，使结论更可靠' },
 };
+const ORGAN_FN = { 卵巢: '产生卵细胞，分泌雌性激素', 输卵管: '输送卵细胞，是受精的场所', 子宫: '胚胎和胎儿发育的场所', 阴道: '胎儿产出的通道，也是月经排出的通道', 睾丸: '产生精子，分泌雄性激素', 附睾: '储存精子，使精子成熟', 输精管: '输送精子', 精囊腺: '分泌黏液，参与精液的形成' };
+const REPRO_STAGES = ['精子与卵细胞结合，形成受精卵', '受精卵分裂，形成胚泡', '胚泡植入子宫内膜（怀孕）', '胚胎发育，约 8 周发育成胎儿', '胎儿发育成熟，从母体产出（分娩）'];
+const ONION_STEPS = ['擦拭载玻片和盖玻片', '在载玻片中央滴一滴清水', '撕取一小块洋葱鳞片叶内表皮', '把内表皮放入水滴中展平', '盖上盖玻片（一侧先接触水滴，缓缓放平）', '在盖玻片一侧滴一滴碘液', '在盖玻片另一侧用吸水纸吸引碘液'];
+const COMPARE_ITEMS = ['由受精卵发育成新个体', '不经过两性生殖细胞的结合', '后代具有双亲的遗传特性，变异较多', '后代保持母体的优良性状，遗传稳定', '能在较短时间内产生大量新个体', '后代适应环境变化的能力较强，有利于生物进化', '用种子繁殖', '扦插、嫁接和组织培养'];
+const TECH_OF = ['杂交育种', '杂交育种', '诱变育种', '诱变育种', '转基因技术', '转基因技术', '克隆技术', '克隆技术'];
+const MEASURE_OF = ['禁止近亲结婚', '禁止近亲结婚', '遗传咨询', '遗传咨询', '产前诊断', '产前诊断', '适龄生育', '适龄生育'];
 
 (async () => {
   const t = await start(new Map(), { local: true, viewport: { width: 1180, height: 820 } });
@@ -455,6 +504,183 @@ const TEXT = {
     }
   }
 
+  // =====================================================================================  A2. THE THIRD PASS (14 more simulations): the models against independent computations
+  {
+    const R = await page.evaluate(async (A) => {
+      const out = {}; const fails = [];
+      const chk = (c, m) => { if (!c) fails.push(m); };
+      const near = (a, b, t = 1e-9) => Math.abs(a - b) <= t;
+      const M = {}; for (const n of ['reproduction', 'bloodpressure', 'microbe', 'slide', 'seedlab', 'energy', 'daphnia', 'dna', 'propagation', 'evidence', 'breeding', 'eugenics', 'animalgroups', 'ecology']) M[n] = await import(`/src/bio/model-${n}.ts`);
+      const rnd = (a, b) => a + Math.random() * (b - a);
+      const mean = (a) => a.reduce((x, y) => x + y, 0) / a.length;
+      const sd = (a) => { const m = mean(a); return Math.sqrt(mean(a.map((x) => (x - m) ** 2))); };
+      // ---- reproduction: the textbook organs and what they do
+      { const m = M.reproduction;
+        chk(m.FEMALE.map((o) => o.name).join() === '卵巢,输卵管,子宫,阴道' && m.MALE.map((o) => o.name).join() === '睾丸,附睾,输精管,精囊腺', 'reproduction organ names');
+        for (const o of [...m.FEMALE, ...m.MALE]) chk(A.ORGAN_FN[o.name] === o.fn, 'reproduction function of ' + o.name);
+        chk(m.EVENTS.length === 4 && m.EVENTS.every(([, i], k) => i === k) && m.EVENTS[1][0] === '受精作用发生' && m.FEMALE[m.EVENTS[1][1]].name === '输卵管' && m.FEMALE[m.EVENTS[2][1]].name === '子宫', 'reproduction events: fertilisation in the oviduct, development in the uterus');
+        chk(m.STAGES.join('|') === A.REPRO_STAGES.join('|'), 'reproduction stages in order');
+        chk(m.STAGES.every((s) => s.length > 6) && m.STAGE_FN.length === 5, 'reproduction stage notes');
+      }
+      // ---- bloodpressure
+      { const m = M.bloodpressure; let bad = 0;
+        const ref = (sv, hr, r, el) => { const co = (sv * hr) / 1000, map = co * 17 * (r / 100), pp = sv / (1.75 * (el / 100)), dia = map - pp / 3; return { co, map, pp, dia, sys: dia + pp }; };
+        for (let i = 0; i < 400; i++) { const sv = Math.round(rnd(40, 110)), hr = Math.round(rnd(40, 180)), r = Math.round(rnd(50, 200)), el = Math.round(rnd(50, 150)), x = ref(sv, hr, r, el);
+          if (!near(m.output(sv, hr), x.co) || !near(m.mean(sv, hr, r), x.map, 1e-9) || !near(m.pulsePressure(sv, el), x.pp, 1e-9) || !near(m.diastolic(sv, hr, r, el), x.dia, 1e-9) || !near(m.systolic(sv, hr, r, el), x.sys, 1e-9)) bad++; if (!(x.sys > x.dia)) bad++; }
+        chk(bad === 0, 'bloodpressure: pressures against the independent formulas');
+        const d = ref(70, 75, 100, 100); chk(Math.round(d.sys) === 116 && Math.round(d.dia) === 76 && m.status(d.sys, d.dia) === 0, 'bloodpressure: the default is a normal 116 / 76');
+        chk(m.systolic(70, 75, 120, 100) > m.systolic(70, 75, 100, 100) && m.systolic(70, 90, 100, 100) > m.systolic(70, 75, 100, 100) && m.pulsePressure(70, 60) > m.pulsePressure(70, 100), 'bloodpressure: narrower vessels / faster heart raise the pressure, stiffer arteries widen the pulse pressure');
+        const cls = [[118, 76, 0], [140, 90, 0], [141, 80, 1], [120, 91, 1], [90, 60, 0], [89, 70, 2], [100, 59, 2], [152, 96, 1], [86, 56, 2]]; chk(cls.every(([s, di, k]) => m.status(s, di) === k), 'bloodpressure: classification by the textbook ranges 90-140 / 60-90');
+        let seq = []; for (let c = 200; c >= 0; c--) seq.push(m.sound(c, 118, 76)); const trans = seq.filter((x, i) => i && x !== seq[i - 1]).length;
+        chk(seq[0] === 0 && seq[200 - 118] === 1 && seq[200 - 119] === 0 && seq[200 - 76] === 2 && seq[200 - 77] === 1 && trans === 2, 'bloodpressure: sound from 118 down to 77 mmHg only (silent above the systolic and at or below the diastolic pressure)');
+        chk(near(m.kpa(140), 18.6667, 1e-3) && near(m.kpa(90), 12) && m.PEOPLE.length === 3 && m.counted(120, 15) === 30 && m.counted(75, 60) === 75, 'bloodpressure: kPa conversion and pulse counting');
+      }
+      // ---- microbe
+      { const m = M.microbe;
+        chk(near(m.expected(7, 4, 0.1), 100) && near(m.expected(8, 0, 1), 1e8) && near(m.estimate(100, 4, 0.1), 1e7), 'microbe: expected colonies and the estimate');
+        for (const mu of [50, 100, 200, 400]) { const a = Array.from({ length: 600 }, (_, s) => m.colonies(mu, s + 1)); chk(Math.abs(mean(a) - mu) < 0.06 * mu && Math.abs(sd(a) - Math.sqrt(mu)) < 0.3 * Math.sqrt(mu), `microbe: colony counts scatter like a count (mean ${mean(a).toFixed(1)}, sd ${sd(a).toFixed(1)} for ${mu})`); }
+        chk(m.plateState(500, 480) === 0 && m.plateState(100, 100) === 1 && m.plateState(100, 29) === 2 && m.plateState(10, 12) === 2 && m.plateState(301, 301) === 0, 'microbe: plate states');
+        let bad = 0; for (let i = 0; i < 300; i++) { const r0 = rnd(0.0005, 0.05), k = rnd(0.5, 0.99), n = Math.floor(rnd(0, 7)); const cf = r0 / (r0 + (1 - r0) * (1 - k) ** n); if (!near(m.resistFrac(r0, k, n), cf, 1e-9)) bad++; }
+        chk(bad === 0 && m.resistFrac(0.01, 0, 5) === 0.01 && m.resistFrac(0.001, 0.9, 4) > m.resistFrac(0.001, 0.9, 3), 'microbe: resistant share against the closed form r0 / (r0 + (1 - r0)(1 - k)^n); no killing = no change; grows with every course');
+        chk(m.sci(2.5e7) === '2.5 × 10⁷' && m.pow10(0) === '10⁰' && m.pow10(12) === '10¹²' && m.pow10(-3) === '10⁻³', 'microbe: scientific notation text');
+        chk(m.BACT.length === 6 && m.YEAST.length === 6 && new Set(m.BACT.map((x) => x.name)).size === 6 && m.BACT.some((x) => x.name === 'DNA 集中的区域') && m.YEAST.some((x) => x.name === '细胞核'), 'microbe: the bacterium has no nucleus label, the yeast has one');
+      }
+      // ---- slide
+      { const m = M.slide;
+        chk(m.ONION.length === 7 && m.CHEEK.length === 7 && m.ONION.join() === A.ONION_STEPS.join() && m.ONION[1].includes('清水') && m.CHEEK[1].includes('生理盐水') && m.ONION[0] === m.CHEEK[0] && m.ONION[4] === m.CHEEK[4], 'slide: 7 steps each, clear water for the onion, saline for the cheek, same first and cover-slip steps');
+        chk(m.bubbles(0, 3) === 0 && m.bubbles(90, 3) === 12 && m.bubbles(0, 1) === 4 && m.bubbles(45, 3) === 3 && [0, 15, 30, 45, 60, 75, 90].every((a, i, l) => !i || m.bubbles(a, 3) >= m.bubbles(l[i - 1], 3)), 'slide: bubbles grow with the angle, fewer with a bigger drop');
+        chk(m.ONION_FN.length === 7 && m.CHEEK_FN.length === 7, 'slide: a reason for every step');
+      }
+      // ---- seedlab
+      { const m = M.seedlab;
+        const g = Array.from({ length: 400 }, (_, s) => m.groups(100, 90, s + 1)); const all = g.flat();
+        chk(Math.abs(mean(all) - 90) < 1 && Math.abs(sd(all) - 3) < 1, `seedlab: group counts are binomial (mean ${mean(all).toFixed(2)}, sd ${sd(all).toFixed(2)})`);
+        const g10 = Array.from({ length: 400 }, (_, s) => m.groups(10, 90, s + 1)).flat(); chk(sd(g10) > 0.5 && sd(g10) < 1.4 && Math.abs(mean(g10) - 9) < 0.3, 'seedlab: the smaller the group, the larger the relative scatter');
+        chk(m.groups(20, 100, 3).every((k) => k === 20) && m.groups(20, 0, 3).every((k) => k === 0) && m.groups(30, 70, 5).length === 3 && JSON.stringify(m.groups(30, 70, 5)) === JSON.stringify(m.groups(30, 70, 5)), 'seedlab: 100 % all, 0 % none, three groups, repeatable');
+        const e1 = []; for (const n of [10, 50, 200]) { const errs = Array.from({ length: 300 }, (_, s) => Math.abs(m.average(m.groups(n, 90, s + 11), n) - 90)); e1.push(mean(errs)); }
+        chk(e1[0] > e1[1] && e1[1] > e1[2], 'seedlab: the average error falls as the groups get bigger (' + e1.map((x) => x.toFixed(2)).join(' > ') + ')');
+        chk(near(m.average([18, 19, 20], 20), 95) && m.blue(0, 1) && m.blue(1, 1) && !m.blue(0, 0) && !m.blue(1, 2) && m.BEAN.length === 5 && m.MAIZE.length === 6, 'seedlab: average, iodine only on the food store, 5 + 6 structures');
+      }
+      // ---- energy
+      { const m = M.energy; let bad = 0;
+        for (let i = 0; i < 300; i++) { const f = Math.floor(rnd(0, 4)), mm = Math.round(rnd(1, 6)) / 2, vw = Math.round(rnd(2, 10)) * 10, sh = Math.floor(rnd(0, 2)); const e = [24, 28, 16, 15][f], eta = [0.35, 0.75][sh], raw = (eta * mm * e * 1000) / (4.2 * vw);
+          if (!near(m.riseRaw(f, mm, vw, sh), raw, 1e-9) || m.boils(f, mm, vw, sh) !== (raw > 80) || !near(m.rise(f, mm, vw, sh), Math.min(80, raw), 1e-9)) bad++;
+          if (!m.boils(f, mm, vw, sh) && !near(m.measured(f, mm, vw, sh) / e, eta, 1e-9)) bad++; }
+        chk(bad === 0, 'energy: temperature rise, boiling and the measured value (always eta x the true value)');
+        chk(m.measured(0, 0.5, 50, 1) > m.measured(0, 0.5, 50, 0) && m.measured(0, 0.5, 50, 1) < 24 && near(m.heat(50, 20), 4200) && m.FOODS.map((x) => x[1]).join() === '24,28,16,15', 'energy: a wind shield raises the measured value but never above the true one; Q = c m dT');
+      }
+      // ---- daphnia
+      { const m = M.daphnia;
+        let bad = 0; const per = {}; for (const c of m.CONC) { per[c] = []; for (let s = 1; s <= 300; s++) { const k = m.counts(c, s); if (k.length !== 3) bad++; for (const x of k) { per[c].push(x); if (Math.abs(x - m.baseOf(c)) > 1 && c !== 20) bad++; if (c === 20 && x !== 0) bad++; } } }
+        chk(bad === 0, 'daphnia: three counts within one beat of the table, none after death');
+        chk(m.CONC.every((c, i) => !i || m.baseOf(c) < m.baseOf(m.CONC[i - 1])) && m.baseOf(0) === 33 && m.baseOf(20) === 0 && Math.abs(mean(per[0]) - 33) < 0.2, 'daphnia: the higher the concentration the lower the rate');
+        chk(near(m.change(0, 5), 0) && m.change(10, 5) < -20 && m.change(1, 5) > -10 && m.change(20, 5) === -100 && m.perMinute(33) === 198, 'daphnia: change against the control, per minute');
+      }
+      // ---- dna
+      { const m = M.dna;
+        chk(m.SPECIES.map((x) => x[1]).join() === '46,8,14,20,24,38' && m.SPECIES.every(([, n], i) => m.chromosomes(i, 0) === n && m.chromosomes(i, 2) === n && m.chromosomes(i, 1) * 2 === n), 'dna: chromosome numbers: body cell = zygote = 2n, sex cell = n');
+        chk(['A', 'T', 'C', 'G'].every((b) => m.partner(m.partner(b)) === b && m.partner(b) !== b) && m.partner('A') === 'T' && m.partner('C') === 'G' && m.STRAND.length === 8 && /^[ATCG]+$/.test(m.STRAND), 'dna: base pairing A-T, C-G is an involution');
+        const b = Array.from({ length: 300 }, (_, s) => m.boys(1000, s + 1)); chk(Math.abs(mean(b) - 500) < 4 && Math.abs(sd(b) - 15.8) < 4, `dna: boys among 1000 births (mean ${mean(b).toFixed(1)}, sd ${sd(b).toFixed(1)})`);
+        chk(Math.abs(2 * m.boys(500, 1) - 500) / 500 < 0.1 && m.boys(0, 1) === 0 && m.PARTS.map((x) => x.name).join() === '细胞核,染色体,DNA,基因,蛋白质', 'dna: the default sample of the task is near 1:1; parts');
+      }
+      // ---- propagation
+      { const m = M.propagation;
+        let ok = true; for (let a = 0; a < 3; a++) for (let s = 0; s < 3; s++) { if (m.compatible(a, s) !== (a === s)) ok = false; for (const al of [0, 30, 60, 69, 70, 100]) if (m.takes(a, s, al) !== (a === s && al >= 70)) ok = false; }
+        chk(ok && m.graftResult(0, 0, 100) === 0 && m.graftResult(0, 0, 60) === 1 && m.graftResult(0, 1, 100) === 2, 'propagation: a graft takes only between relatives AND with the cambium layers aligned (70 %)');
+        chk(m.METHOD_ITEMS.length === 6 && [0, 1, 2, 3].every((k) => m.METHOD_ITEMS.some((x) => x[1] === k)) && m.COMPARE.length === 8 && m.COMPARE.filter((x) => x[1] === 0).length === 4 && m.COMPARE.map((x) => x[0]).join() === A.COMPARE_ITEMS.join(), 'propagation: methods and the comparison list');
+      }
+      // ---- evidence
+      { const m = M.evidence;
+        chk([0, 1, 2, 3].every((i) => near(m.similarity(i, 0), 1) && m.similarity(i, 100) < m.similarity(i, 50) && m.similarity(i, 50) < m.similarity(i, 20) && m.similarity(i, 100) > 0) && m.similarity(0, 100) < m.similarity(3, 100), 'evidence: embryos are alike early and differ more later; fish differ more than the pig');
+        chk(near(m.identical(0), 100) && near(m.identical(7), (60 / 104) * 100) && m.CYT.every((x, i) => !i || x[1] >= m.CYT[i - 1][1]), 'evidence: cytochrome c table is ordered by difference');
+        let bad = 0; const n = m.TREE_SP.length; for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) { if (m.mrca(a, b) !== m.mrca(b, a)) bad++; for (let c = 0; c < n; c++) if (m.mrca(a, c) > Math.max(m.mrca(a, b), m.mrca(b, c))) bad++; }
+        chk(bad === 0 && m.mrca(0, 1) === 7 && m.mrca(0, 5) === 90 && [2, 3, 4, 5].every((b) => m.mrca(0, 1) < m.mrca(0, b)), 'evidence: the tree distances are symmetric and ultrametric, the chimpanzee is the closest to humans');
+        chk(m.LIMBS.every((l) => l[2].length === 5 && l[2].reduce((x, y) => x + y, 0) <= 400) && m.BONES.length === 5, 'evidence: the limbs fit the drawing');
+      }
+      // ---- breeding
+      { const m = M.breeding;
+        const g = ['AB', 'Ab', 'aB', 'ab']; const cnt = { 高产抗病: 0, 高产感病: 0, 低产抗病: 0, 低产感病: 0, AABB: 0 };
+        for (const x of g) for (const y of g) { const gt = (i) => [x[i], y[i]].sort().join(''); const a = gt(0), bb = gt(1); const hy = a.includes('A'), rs = bb.includes('B'); cnt[(hy ? '高产' : '低产') + (rs ? '抗病' : '感病')]++; if (a === 'AA' && bb === 'BB') cnt.AABB++; }
+        chk(cnt.高产抗病 === 9 && cnt.高产感病 === 3 && cnt.低产抗病 === 3 && cnt.低产感病 === 1 && cnt.AABB === 1 && m.F2.map((x) => x[1]).join() === '9,3,3,1', 'breeding: the F2 ratio 9 : 3 : 3 : 1 and 1/16 AABB by enumerating the 16 combinations');
+        chk(near(m.f2count(160, 0), 90) && near(m.pureTarget(160), 10) && [0, 1, 2, 3].reduce((s, i) => s + m.f2count(320, i), 0) === 320, 'breeding: counts');
+        let ok = true; for (let a = 0; a < 3; a++) for (let b = 0; b < 3; b++) for (let c = 0; c < 3; c++) if (m.faceOf(a, b, c) !== a) ok = false;
+        chk(ok && m.TECH_ITEMS.map((x) => m.TECHS[x[1]]).join() === A.TECH_OF.join(), 'breeding: the clone looks like the nucleus donor whatever the egg donor and the surrogate; techniques of the items');
+      }
+      // ---- eugenics
+      { const m = M.eugenics; let bad = 0;
+        for (const N of [10, 20, 50, 100, 200]) { if (!near(m.bothCarry(N, 0), 1 / (N * N)) || !near(m.bothCarry(N, 1), 1 / N / 8) || !near(m.bothCarry(N, 2), 1 / N / 2) || !near(m.risk(N, 1), m.bothCarry(N, 1) / 4) || !near(m.fold(N, 1), N / 8) || !near(m.fold(N, 2), N / 2) || !near(m.fold(N, 0), 1)) bad++; if (!(m.risk(N, 0) < m.risk(N, 1) && m.risk(N, 1) < m.risk(N, 2))) bad++; }
+        chk(bad === 0 && m.risk(20, 0) > m.risk(50, 0) && near(m.per10000(m.risk(50, 0)), 1), 'eugenics: both-carry chances, a quarter for the child, folds N/8 and N/2, closer relatives = higher risk');
+        chk(m.MEASURE_ITEMS.length === 8 && m.MEASURE_ITEMS.map((x) => m.MEASURES[x[1]]).join() === A.MEASURE_OF.join(), 'eugenics: measure items');
+      }
+      // ---- animalgroups
+      { const m = M.animalgroups;
+        chk(m.GROUPS.length === 6 && [...Array(6).keys()].every((k) => m.ORG_ITEMS.some((x) => x[1] === k) && m.FEATURE_ITEMS.some((x) => x[1] === k)), 'animalgroups: all six invertebrate groups appear in both sorting lists');
+        const t = m.VERT_TABLE; chk(t.length === 5 && t.every((r) => r.length === 4) && t.map((r) => r[2]).join() === '变温,变温,变温,恒温,恒温' && t.filter((r) => /胎生/.test(r[3])).length === 1 && new Set(t.map((r) => r[0])).size === 5, 'animalgroups: vertebrate table (birds and mammals warm-blooded, only mammals viviparous)');
+        chk(m.LEGS[0][1] === 3 && m.LEGS[1][1] === 4, 'animalgroups: insects 3 pairs of legs, spiders 4');
+      }
+      // ---- ecology
+      { const m = M.ecology;
+        let ok = true; for (let d = 2; d <= 40; d += 2) { if (!near(m.capacity(d), (80 * d) / (d + 8)) || m.capacity(d) >= 80 || (d > 2 && m.capacity(d) <= m.capacity(d - 2))) ok = false; for (let x = 0; x <= 100; x += 5) if (m.recovers(d, x) !== (x <= (80 * d) / (d + 8))) ok = false; }
+        chk(ok, 'ecology: capacity 80 d / (d + 8) grows with the species number and decides the recovery');
+        let ok2 = true; for (const [d, x] of [[30, 60], [10, 40], [4, 40], [2, 50]]) { const rec = m.recovers(d, x); let prev = m.biomass(d, x, 0); if (!near(prev, 1 - x / 100)) ok2 = false; for (let t = 1; t <= 30; t++) { const v = m.biomass(d, x, t); if (rec ? v < prev : v > prev) ok2 = false; prev = v; } if (rec && m.biomass(d, x, 30) < 0.95) ok2 = false; if (!rec && m.biomass(d, x, 30) > 0.5 * (1 - x / 100)) ok2 = false; }
+        chk(ok2, 'ecology: biomass climbs back when the ecosystem recovers and keeps falling when it does not');
+        for (const f of [0, 1, 2]) { const a = Array.from({ length: 300 }, (_, s) => m.onRight(1000, f, s + 1)); chk(Math.abs(mean(a) - 1000 * m.FACTORS[f][3]) < 8, `ecology: pillbugs on the preferred side (factor ${f}: ${mean(a).toFixed(0)})`); }
+        chk(m.ECOS.length === 6 && [...Array(6).keys()].every((k) => m.ECO_ITEMS.some((x) => x[1] === k)) && new Set(m.ECO_ITEMS.map((x) => x[0])).size === 8, 'ecology: every ecosystem type has an item');
+      }
+      out.fails = fails; return out;
+    }, { ORGAN_FN, REPRO_STAGES, ONION_STEPS, COMPARE_ITEMS, TECH_OF, MEASURE_OF });
+    ok(R.fails.length === 0, 'A2 third pass: every new model against its independent computation' + (R.fails.length ? '\n   ' + R.fails.join('\n   ') : ''));
+    // the drag modes: data and layout of every DMode of the new simulations
+    const D = await page.evaluate(async () => {
+      const fails = []; const chk = (c, m) => { if (!c) fails.push(m); };
+      const Mt = await import('/src/bio/match.ts'), Dn = await import('/src/bio/dnd.ts');
+      const mods = {};
+      for (const n of ['reproduction', 'microbe', 'slide', 'seedlab', 'dna', 'propagation', 'evidence', 'breeding', 'eugenics', 'animalgroups', 'ecology']) { const m = await import(`/src/bio/${n}.ts`); mods[n] = (m.MODES || m.HOM).filter(Boolean); }
+      let nModes = 0;
+      for (const [n, list] of Object.entries(mods)) for (const [k, m] of list.entries()) {
+        nModes++; const tag = `${n}#${k}`, N = m.items.length, sp = Mt.specOf(m), s = {};
+        chk(N >= 3 && N <= 10 && new Set(m.items).size === N, tag + ' items 3-10 and different');
+        chk(new Set(m.items.map((_, i) => Mt.trayIndex(i, N))).size === N, tag + ' tray order is a permutation');
+        const tp = m.items.map((_, i) => sp.at(i, s));
+        chk(tp.every(([x, y]) => (m.kind === 'label' ? x - 88 >= 0 && x + 88 <= 640 && y - 22 >= 0 && y + 22 <= 480 : x - 76 >= 0 && x + 76 <= 640 && y - 32 >= 0 && y + 32 <= 480)), tag + ' chips inside the canvas');
+        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) { const dx = Math.abs(tp[i][0] - tp[j][0]), dy = Math.abs(tp[i][1] - tp[j][1]); chk(m.kind === 'label' ? dy >= 44 : dx >= 152 || dy >= 64, tag + ` chips ${i}/${j} do not overlap`); }
+        const tg = sp.targets(s); 
+        if (m.kind === 'label') {
+          chk(m.marks.length === N && m.fn.length === N, tag + ' one mark and one note per item');
+          chk(m.marks.every(([x, y]) => x >= 26 && x <= 440 && y >= 26 && y <= 454), tag + ' marks inside the picture, left of the tray');
+          for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) chk(Math.hypot(m.marks[i][0] - m.marks[j][0], m.marks[i][1] - m.marks[j][1]) >= 40, tag + ` marks ${i}/${j} are 40+ apart`);
+          if (m.place === 'right') chk(m.marks.every(([x]) => x + 24 + 292 <= 440), tag + ' slot chips fit left of the tray');
+          chk(m.items.every((_, i) => sp.answer(i, s) === i), tag + ' item i belongs to mark i');
+        } else {
+          chk(m.answers.length === N && m.answers.every((a) => a >= 0 && a < m.buckets.length) && m.buckets.every((_, j) => m.answers.includes(j)), tag + ' every bucket gets an item, answers in range');
+          for (let i = 0; i < tg.length; i++) for (let j = i + 1; j < tg.length; j++) chk(Math.abs(tg[i].x - tg[j].x) >= tg[i].hw + tg[j].hw - 0.01, tag + ` buckets ${i}/${j} do not overlap`);
+        }
+        chk(m.items.every((_, i) => Dn.targetAt(sp, s, tg[sp.answer(i, s)].x, tg[sp.answer(i, s)].y) === sp.answer(i, s)), tag + ' dropping on a target centre hits that target');
+        // pointer logic: a right drop places, a wrong drop counts a mistake, a tap + a tap works
+        const st = { ...Mt.dndFlags([m.prefix]) }; const ptr = Mt.dndPtr(() => m); const ap = (r) => r && Object.assign(st, r);
+        const at0 = sp.at(0, st), right = tg[sp.answer(0, st)], wrongIdx = tg.findIndex((_, j) => j !== sp.answer(0, st));
+        ap(ptr('down', at0[0], at0[1], st)); ap(ptr('move', at0[0] + 5, at0[1] - 30, st)); ap(ptr('up', tg[wrongIdx].x, tg[wrongIdx].y, st)); chk(st[`${m.prefix}0`] === 0 && st.miss === 1 && st.h === -1, tag + ' a wrong drop counts a mistake');
+        ap(ptr('down', at0[0], at0[1], st)); ap(ptr('move', at0[0] + 5, at0[1] - 30, st)); ap(ptr('up', right.x, right.y, st)); chk(st[`${m.prefix}0`] === 1 && st.last === 1, tag + ' a right drop places the item');
+        if (N > 1) { const at1 = sp.at(1, st), r1 = tg[sp.answer(1, st)]; ap(ptr('down', at1[0], at1[1], st)); ap(ptr('up', at1[0], at1[1], st)); chk(st.sel === 1, tag + ' a tap selects'); ap(ptr('down', r1.x, r1.y, st)); chk(st[`${m.prefix}1`] === 1 && st.sel === -1, tag + ' a tap on the target places the selected item'); }
+        chk(Mt.count(st, m) === (N > 1 ? 2 : 1) && !Mt.allPlaced(st, m), tag + ' count');
+      }
+      return { fails, nModes };
+    });
+    ok(D.fails.length === 0 && D.nModes >= 24, `A2 drag modes: ${D.nModes} modes of the new simulations (chips and marks inside the picture, nothing overlapping, every bucket used, wrong / right drop and tap-tap) ` + D.fails.slice(0, 8).join('; '));
+    // no graphic words in the reproductive system simulation (as the deny-list of 84-safety): its own texts in Chinese
+    const texts = await page.evaluate(async () => {
+      const m = await import('/src/bio/reproduction.ts'), mm = await import('/src/bio/model-reproduction.ts'), Q = await import('/src/phys/qtools.ts');
+      const t = [...m.def.lesson, ...m.def.tasks.map((x) => x.text), ...m.MODES.flatMap((x) => [...x.items, ...(x.fn || [])]), ...mm.STAGE_FN];
+      for (let s = 1; s <= 300; s++) for (const q of mm.quiz(Q.mulberry32(s))) t.push(q.q, q.why || '', ...q.choices);
+      return t;
+    });
+    const DENY = /性交|性行为|性生活|阴茎|阴蒂|阴唇|外阴|勃起|射精|高潮|避孕|手淫|色情|裸|交配|做爱|情欲|性欲|性感|生殖器|私处|性爱/;
+    ok(texts.length > 1500 && !texts.some((x) => DENY.test(x)), `A2 reproduction: ${texts.length} texts (lesson, tasks, labels, notes, quiz questions) contain none of the words of the deny-list`);
+    ok(texts.some((x) => /教科书/.test(x)), 'A2 reproduction: the lesson says that this is textbook content');
+    const dna = await page.evaluate(async () => { const m = await import('/src/bio/dna.ts'); return m.def.lesson.join(' '); });
+    ok(/拓展/.test(dna) && /教科书/.test(dna), 'A2 dna: the lesson marks base pairing as an extension of the textbook');
+  }
+
   // =====================================================================================  B. THE PAGES
   const consoleErrors = [];
   page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text()); });
@@ -468,7 +694,7 @@ const TEXT = {
     ok(cards.length === IDS.length && IDS.every((id) => cards.some((c) => c.id === id)) && cards.every((c) => c.icon && /实验任务 0 \/ \d/.test(c.text)), `B ${IDS.length} cards, each with its drawn icon and "实验任务 0 / n"`);
     const groups = await page.evaluate(() => [...document.querySelectorAll('#bl-home > h2, #bl-home .pl-sc')].map((e) => (e.tagName === 'H2' ? 'H:' + e.textContent : e.dataset.sim)));
     const g8 = groups.indexOf('H:八年级');
-    ok(groups[0] === 'H:七年级' && g8 === 24 && groups.slice(1, g8).length === 23 && groups.slice(g8 + 1).length === 13 && groups[g8 + 1] === 'bones' && groups[1] === 'foodweb', 'B the lab starts with 七年级 (17 cards), then 八年级 (the bones of 八上 · 动物的运动 now stand with the other 八年级 cards): ' + groups.join(' '));
+    ok(groups[0] === 'H:七年级' && g8 === 31 && groups.slice(1, g8).length === 30 && groups.slice(g8 + 1).length === 20 && groups[g8 + 1] === 'animalgroups' && groups[1] === 'foodweb', 'B the lab starts with 七年级 (30 cards), then 八年级 (20 cards): ' + groups.join(' '));
     const chs = await page.evaluate(() => [...document.querySelectorAll('.pl-sc')].map((c) => c.dataset.chapter));
     ok(chs.every((c) => /^(七|八)(上|下) · /.test(c)) && new Set(chs).size >= 12, 'B each card names its textbook part (七上 / 七下 / 八上 / 八下) and chapter');
     ok(await page.isVisible('#bl-notes') && (await page.getAttribute('#bl-notes', 'href')) === '#/science/notes', 'B the lab links to the 知识总结 page');
@@ -503,7 +729,7 @@ const TEXT = {
         if (any) changed++; await page.evaluate(([pid, v0]) => window.__bio.set(pid, v0), [pid, info.params.find((p) => p[0] === pid)[4]]);
       }
     }
-    ok(finite && sweeps >= 0 && (changed >= 1 || ['microscope', 'cells', 'levels', 'classify'].includes(id)), `B ${id}: every slider in every mode (${sweeps} settings) keeps the readouts finite; ${changed} slider(s) change the readouts`);
+    ok(finite && sweeps >= 0 && (changed >= 1 || ['microscope', 'cells', 'levels', 'classify', 'reproduction', 'animalgroups', 'daphnia'].includes(id)), `B ${id}: every slider in every mode (${sweeps} settings) keeps the readouts finite; ${changed} slider(s) change the readouts`);
     await page.evaluate(() => window.__bio.reset());
     const first = info.params.find((p) => !/^(t|T|day|stage)$/.test(p[0])) || info.params[0];
     if (first) {

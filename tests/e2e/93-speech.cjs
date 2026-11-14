@@ -25,8 +25,9 @@ const mk = () => {
 (async () => {
   // ---------- 1. the module ----------
   {
-    const t = await start(mk(), { viewport: { width: 390, height: 844 }, init: speechInit, initArg: { voices: [{ lang: 'en-US', localService: false, name: 'net' }, { lang: 'en-US', localService: true, name: 'loc' }, { lang: 'en-GB', localService: true, name: 'gb' }, { lang: 'zh_CN', localService: true, name: 'zh' }, { lang: 'fr-FR', localService: true, name: 'fr' }], ios: true, delay: 600 } });
+    const t = await start(mk(), { viewport: { width: 390, height: 844 }, init: speechInit, initArg: { voices: [{ lang: 'en-US', localService: false, name: 'net' }, { lang: 'en-US', localService: true, name: 'loc' }, { lang: 'en-GB', localService: true, name: 'gb' }, { lang: 'zh_CN', localService: true, name: 'zh' }, { lang: 'fr-FR', localService: true, name: 'fr' }], ios: true, delay: 4000 } });
     const p = t.page;
+    await p.evaluate(() => import('/src/speech.ts'));
     const r0 = await p.evaluate(async () => {
       const S = await import('/src/speech.ts');
       const early = S.voiceFor('en-US');
@@ -34,8 +35,8 @@ const mk = () => {
       return { early: early && early.name, supported: S.speechSupported(), startedEarly: before.started };
     });
     ok(r0.supported && r0.early === null, 'before the voices have loaded voiceFor() finds none (the list is empty until voiceschanged)');
-    await p.waitForTimeout(1500);
-    ok((await p.evaluate(() => window.__says.length)) === 0 && (await p.evaluate(() => window.__ignored.some((x) => x[2] === 'locked'))), 'without a gesture the (iOS-like) engine ignores a speak(): the call was made and nothing was heard');
+    await p.waitForTimeout(4200);
+    ok((await p.evaluate(() => window.__says.length)) === 0 && (await p.evaluate(() => window.__ignored.length)) >= 1, 'a speak() before the voice list has loaded has no voice to choose: the (iOS-like) engine drops it, nothing is heard');
     const v = await p.evaluate(async () => {
       const S = await import('/src/speech.ts');
       return { en: S.voiceFor('en-US')?.name, gb: S.voiceFor('en-GB')?.name, zh: S.voiceFor('zh-CN')?.name, fr: S.voiceFor('fr-FR')?.name, ja: S.voiceFor('ja-JP'), has: [await S.hasVoice('en-US'), await S.hasVoice('zh-CN'), await S.hasVoice('ja-JP')], now: [S.canSpeakNow('fr-FR'), S.canSpeakNow('ja-JP')] };
@@ -47,7 +48,7 @@ const mk = () => {
     await p.evaluate(async () => { const S = await import('/src/speech.ts'); window.__h = S.speakText('Hello', 'en-US', { rate: 0.8 }); });
     await p.waitForTimeout(100);
     const says = await p.evaluate(() => window.__says);
-    ok(says.length === 1 && says[0][0] === 'Hello' && says[0][1] === 'en-US' && says[0][2] === 'en-US', 'after the first tap of the page a speak() from a script is heard, with a chosen en-US voice');
+    ok(says.length === 1 && says[0][0] === 'Hello' && says[0][1] === 'en-US' && says[0][2] === 'en-US', 'after the first tap of the page a speak() from a script is heard, with a chosen en-US voice ' + JSON.stringify([says, await p.evaluate(() => window.__ignored)]));
     ok(await p.evaluate(() => window.__h.started), 'the handle reports that the speech started');
     await p.waitForTimeout(400);
     ok(await p.evaluate(() => window.__h.ended), 'and that it ended');
@@ -64,6 +65,20 @@ const mk = () => {
       return { log, aEnded: a.ended, c: c.ended, resumes: window.__resumes };
     });
     ok(rr.aEnded && !rr.log.includes('a-end') && rr.log.includes('b-end') && rr.log.includes('c-end') && rr.resumes >= 2, `stop() ends silently, a new speech replaces the old one (${rr.log.join()}), the engine is resumed before every speak (${rr.resumes})`);
+    await t.browser.close();
+  }
+  {
+    // a page where nobody has tapped yet: the engine is locked; the first tap unlocks it for good (also for a later speak() from a timer)
+    const t = await start(mk(), { noLogin: true, viewport: { width: 390, height: 844 }, init: speechInit, initArg: { voices: ALLV, ios: true } });
+    const p = t.page;
+    await p.waitForTimeout(300);
+    await p.evaluate(async () => { const S = await import('/src/speech.ts'); S.speakText('first', 'en-US'); });
+    await p.waitForTimeout(150);
+    ok((await p.evaluate(() => window.__says.length)) === 0 && (await p.evaluate(() => window.__ignored.map((x) => x[2]).join())) === 'locked', 'before any tap the engine is locked: a speak() from a script is refused');
+    await p.mouse.click(8, 8);
+    await p.evaluate(async () => { const S = await import('/src/speech.ts'); S.speakText('second', 'en-US'); });
+    await p.waitForTimeout(150);
+    ok((await p.evaluate(() => window.__says.map((x) => x[0]).join())) === 'second', 'after the first tap of the page (ensureUnlockedOnFirstGesture) a speak() from a script is heard');
     await t.browser.close();
   }
   {
@@ -116,9 +131,9 @@ const mk = () => {
       let s = await toQ();
       await p.waitForTimeout(1500);
       const v = await p.evaluate(() => [0, 1].map((side) => { const e = document.querySelector(`.pk-panel[data-side="${side}"]`), n = e.querySelector('.pk-nosnd'), c = e.querySelector('.pk-char').getBoundingClientRect(), nr = n.getBoundingClientRect(), rp = e.querySelector('.pk-replay'), rr = rp.getBoundingClientRect(), cs = getComputedStyle(n);
-        return { shown: cs.display !== 'none', text: n.textContent, inside: nr.left >= c.left - 1 && nr.right <= c.right + 1 && nr.top >= c.top - 1 && nr.bottom <= c.bottom + 1 && n.scrollHeight <= n.clientHeight + 1, noOverlap: nr.right <= rr.left + 1 || nr.bottom <= rr.top + 1 || nr.top >= rr.bottom - 1, attn: rp.classList.contains('attn'), rw: rr.width, rh: rr.height, ch: e.querySelector('.pk-ch').textContent }; }));
+        return { shown: cs.display !== 'none', text: n.textContent, inside: nr.left >= c.left - 1 && nr.right <= c.right + 1 && nr.top >= c.top - 1 && nr.bottom <= c.bottom + 1 && n.scrollHeight <= n.clientHeight + 1, noOverlap: !(nr.left < rr.right - 1 && nr.right > rr.left + 1 && nr.top < rr.bottom - 1 && nr.bottom > rr.top + 1), attn: rp.classList.contains('attn'), rw: rr.width, rh: rr.height, ch: e.querySelector('.pk-ch').textContent }; }));
       if (mode === 'word') {
-        ok(v.every((x) => x.shown && x.text === '没有声音。请点喇叭重听。' && x.inside && x.noOverlap && x.ch === ''), 'silent engine, 听音选词: both halves show "没有声音。请点喇叭重听。" inside the card, the word is NOT shown (the options are words)');
+        ok(v.every((x) => x.shown && x.text === '没有声音。请点喇叭重听。' && x.inside && x.noOverlap && x.ch === ''), 'silent engine, 听音选词: ' + JSON.stringify(v) + ' both halves show "没有声音。请点喇叭重听。" inside the card, the word is NOT shown (the options are words)');
       } else {
         ok(v.every((x) => !x.shown && x.ch === s.items[0].prompt), 'silent engine, 听音选义: the word is shown as text on both halves (the options are meanings, nothing is given away)');
       }
@@ -155,7 +170,7 @@ const mk = () => {
       localStorage.setItem('learn.settings.v1', JSON.stringify({ lang: 'auto' }));
       (0, eval)('(' + src + ')')(spec.speech);
     };
-    const t = await start(new Map(), { noLogin: true, init, initArg: { spec: { week: WEEK, eng: EN.slice(0, 12).map((x) => x.w), speech: IOS }, src: speechInit.toString() }, viewport: { width: 390, height: 844 }, today: '2026-11-10' });
+    const t = await start(new Map(), { noLogin: true, init, initArg: { spec: { week: WEEK, eng: EN.slice(0, 12).map((x) => x.w), speech: IOS }, src: speechInit.toString() }, viewport: { width: 390, height: 844 } });
     const p = t.page;
     await p.waitForSelector('.hub-grid');
     await p.evaluate(() => (location.hash = '#/dictation/kdory')); await p.waitForSelector('#dw-start');
@@ -166,7 +181,7 @@ const mk = () => {
     ok(sy.length >= 1 && sy[0][1] === 'zh-CN' && sy[0][2] === 'zh-CN', 'dictation: the first item is spoken after the start button (zh-CN voice)');
     await p.waitForFunction(() => window.__says.length >= 3, null, { timeout: 12000 }).catch(() => {});
     sy = await p.evaluate(() => window.__says);
-    ok(sy.length >= 3 && !(await p.evaluate(() => window.__ignored.length)), `dictation: the next items are spoken from the timer, nothing refused (${sy.length} utterances)`);
+    ok(sy.length >= 3 && !(await p.evaluate(() => window.__ignored.length)), `dictation: the next items are spoken from the timer, nothing refused (${sy.length} utterances, refused: ${JSON.stringify(await p.evaluate(() => window.__ignored))}, says: ${JSON.stringify(sy)})`);
     await p.evaluate(() => (location.hash = '#/english/kdory')); await p.waitForSelector('#dict-btn');
     const before = (await p.evaluate(() => window.__says)).length;
     await p.click('#dict-btn'); await p.waitForSelector('#sp-input');

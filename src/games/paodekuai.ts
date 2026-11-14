@@ -134,7 +134,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
     const cards = g ? g.hands[0] : [];
     const n = cards.length, W = hand.clientWidth, ch = cw * 1.4;
     const step = n > 1 ? Math.min((W - 12 - cw) / (n - 1), cw * 0.72) : 0, x0 = (W - (cw + step * Math.max(0, n - 1))) / 2;
-    lefts = cards.map((_, i) => x0 + step * i);
+    lefts = cards.map((_, i) => x0 + step * i); hand.style.setProperty("--st", `${step || cw}px`);
     const keep = new Set(cards);
     for (const [id, el] of cardEls) if (!keep.has(id)) { el.remove(); cardEls.delete(id); }
     cards.forEach((id, i) => {
@@ -159,6 +159,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
       const cramped = (H - tw * 1.4) / 2 < 24 && !!t0, res = cramped ? 56 : 0;   // a short lane: the name of the combination gets its own place at the left
       const step = n > 1 ? Math.min((W - res - tw - 4) / (n - 1), tw * 0.72) : 0;
       const x0 = res + (W - res - (tw + step * (n - 1))) / 2, y0 = Math.max(0, (H - tw * 1.4) / 2);
+      lane.style.setProperty("--st", `${step || tw}px`);
       sh.cards.forEach((c, k) => {
         const e = cardEl(c, tw); e.classList.add("mini");
         e.style.transform = `translate(${x0 + step * k}px, ${y0}px)`; e.style.zIndex = String(k + 1); e.style.animationDelay = `${k * 25}ms`;
@@ -192,7 +193,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const say = (t: string, bad = false) => { msg.textContent = t; msg.classList.toggle("bad", bad); };
   const turnMsg = () => {
     if (phase !== "play") return;
-    if (g.turn === 0) say(g.firstPlay ? "你持有方块 3，请先出牌，必须包含方块 3。" : g.table ? "轮到你出牌。" : "轮到你出牌，可任选牌型。");
+    if (g.turn === 0) say(g.firstPlay ? "请先出牌，须包含方块 3。" : g.table ? "轮到你出牌。" : "轮到你出牌，可任选牌型。");
     else say(g.turn === 1 ? "小熊出牌中。" : "小兔出牌中。");
   };
 
