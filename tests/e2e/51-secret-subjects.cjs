@@ -13,20 +13,20 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     const t = await start(new Map(), { local: true, locked: true, motion, today: '2026-11-12', viewport: vp });
     const p = t.page;
     await p.evaluate(() => (location.hash = '#/')); await p.waitForSelector('.hub-grid'); await p.waitForTimeout(500);
-    ok((await cards(p)).join() === 'chinese,math,english,science', `${dn}: at first only the four school subjects are shown`);
+    ok((await cards(p)).join() === 'chinese,math,english,science,coding', `${dn}: at first only the five school subjects are shown`);
     const box = await p.locator('.hub-hero .mascot').boundingBox();
     ok(box.x < 60 && box.y < 80, `${dn}: the tap corner is the mascot at the top-left (${Math.round(box.x)}, ${Math.round(box.y)})`);
     await tap(p, 9);
-    ok((await cards(p)).length === 4, `${dn}: nine taps are not enough`);
+    ok((await cards(p)).length === 5, `${dn}: nine taps are not enough`);
     // a slow tap resets the count
     await p.waitForTimeout(1700); await tap(p, 5); await p.waitForTimeout(1700); await tap(p, 5);
-    ok((await cards(p)).length === 4, `${dn}: slow taps (more than 1.5 s apart) do not add up`);
+    ok((await cards(p)).length === 5, `${dn}: slow taps (more than 1.5 s apart) do not add up`);
     await p.waitForTimeout(1700);
     await tap(p, 10);
     if (motion) await p.waitForFunction(() => document.querySelectorAll('.subject.hub-arrive').length === 2, null, { timeout: 4000 });
     else await p.waitForTimeout(150);
     const arriving = await p.locator('.subject.hub-arrive').count();
-    ok((await cards(p)).join() === 'chinese,math,english,science,music,games' && (motion ? arriving === 2 : arriving === 0), `${dn}: ten quick taps show music and games (${motion ? 'the cards fly in with the "arrive" animation' : 'no animation with reduced motion'})`);
+    ok((await cards(p)).join() === 'chinese,math,english,science,coding,music,games' && (motion ? arriving === 2 : arriving === 0), `${dn}: ten quick taps show music and games (${motion ? 'the cards fly in with the "arrive" animation' : 'no animation with reduced motion'})`);
     if (motion) ok(await p.locator('.hub-spot').count() === 1 && (await p.evaluate(() => !!document.querySelector('.hub-veil mask rect[filter] , .hub-veil mask rect[rx]') && !!document.querySelector('.hub-veil feGaussianBlur'))), `${dn}: a spotlight lights the new cards and everything else falls into shadow`);
     ok(motion ? await p.locator('.confetti').count() >= 20 : true, `${dn}: ${motion ? 'confetti flies out of the new cards' : 'no confetti with reduced motion'}`);
     ok((await p.locator('.toast').allTextContents()).join().includes('已显示隐藏学科'), `${dn}: a message says what happened`);
@@ -34,15 +34,15 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     ok((await p.evaluate(() => localStorage.getItem('learn.hidden.v1'))) === '1', `${dn}: the state is kept on this device`);
     // wild tapping during the animation does nothing
     await tap(p, 40, 10);
-    ok((await cards(p)).length === 6, `${dn}: 40 more wild taps during the animation change nothing`);
+    ok((await cards(p)).length === 7, `${dn}: 40 more wild taps during the animation change nothing`);
     await p.waitForTimeout(4400);
     ok(await p.locator('.hub-spot').count() === 0, `${dn}: the spotlight goes away again`);
     // the new cards work
     await p.reload(); await p.waitForSelector('.hub-grid'); await p.waitForTimeout(1500);
-    ok((await cards(p)).length === 6, `${dn}: after a reload they are still shown`);
-    // equal space left and right with six cards
+    ok((await cards(p)).length === 7, `${dn}: after a reload they are still shown`);
+    // equal space left and right with seven cards
     const lr = await p.evaluate(() => { const c = [...document.querySelectorAll('.subject')].map((e) => e.getBoundingClientRect()); return [Math.min(...c.map((r) => r.left)), innerWidth - Math.max(...c.map((r) => r.right)), document.documentElement.scrollWidth <= innerWidth]; });
-    ok(Math.abs(lr[0] - lr[1]) <= 2 && lr[2], `${dn}: six cards are centred (${Math.round(lr[0])} / ${Math.round(lr[1])})`);
+    ok(Math.abs(lr[0] - lr[1]) <= 2 && lr[2], `${dn}: seven cards are centred (${Math.round(lr[0])} / ${Math.round(lr[1])})`);
     // ten more taps hide them again
     await p.waitForTimeout(1800);
     await tap(p, 10);
@@ -50,7 +50,7 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     ok((await cards(p)).join() === 'chinese,math,english,science' && (await p.evaluate(() => localStorage.getItem('learn.hidden.v1'))) === '0', `${dn}: ten more quick taps hide them again`);
     ok((await p.locator('.toast').allTextContents()).join().includes('已收起隐藏学科'), `${dn}: and say so`);
     await tap(p, 30, 10); await p.waitForTimeout(300);
-    ok((await cards(p)).length === 4, `${dn}: wild tapping right after hiding does not bring them back`);
+    ok((await cards(p)).length === 5, `${dn}: wild tapping right after hiding does not bring them back`);
     ok(await p.locator('.subject[data-subject=chinese]').count() === 1 && t.log.external.length === 0, `${dn}: the school subjects are untouched, no outside request`);
     await t.browser.close();
   }
@@ -79,7 +79,7 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     const p = t.page;
     await p.evaluate(() => (location.hash = '#/')); await p.waitForSelector('.hub-grid'); await p.waitForTimeout(400);
     await tap(p, 25, 30); await p.waitForTimeout(300);
-    ok((await cards(p)).length === 4 && (await p.evaluate(() => localStorage.getItem('learn.hidden.v1'))) !== '1', 'with the switch off, 25 quick taps do nothing');
+    ok((await cards(p)).length === 5 && (await p.evaluate(() => localStorage.getItem('learn.hidden.v1'))) !== '1', 'with the switch off, 25 quick taps do nothing');
     await openManage(p);
     ok(await p.locator('#egg-card').isVisible() && !(await p.locator('#egg-allow').isChecked()), 'manage mode has the card "隐藏彩蛋" with the switch, off at first (the grown-up decides)');
     await p.screenshot({ path: OUT + 'secret-switch-settings.png' });
@@ -88,24 +88,24 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     await p.evaluate(() => (location.hash = '#/')); await p.waitForSelector('.hub-grid'); await p.waitForTimeout(400);
     await tap(p, 10);
     await p.waitForTimeout(300);
-    ok((await cards(p)).length === 6, 'now ten quick taps show the secret subjects');
+    ok((await cards(p)).length === 7, 'now ten quick taps show the secret subjects');
     await p.waitForTimeout(2600);
     await openManage(p);
     ok(await p.locator('#egg-allow').isChecked(), 'the switch shows on');
     await p.uncheck('#egg-allow');
     ok((await p.locator('.toast').allTextContents()).join().includes('彩蛋已关闭') && (await p.evaluate(() => [localStorage.getItem('learn.hidden.allow.v1'), localStorage.getItem('learn.hidden.v1')].join())) === '0,0', 'switching it off says so and tucks the subjects away');
     await p.evaluate(() => (location.hash = '#/')); await p.waitForSelector('.hub-grid'); await p.waitForTimeout(400);
-    ok((await cards(p)).length === 4, 'the picker is back to the four school subjects');
+    ok((await cards(p)).length === 5, 'the picker is back to the five school subjects');
     await tap(p, 15, 30); await p.waitForTimeout(300);
-    ok((await cards(p)).length === 4, 'and tapping the corner does nothing again');
+    ok((await cards(p)).length === 5, 'and tapping the corner does nothing again');
     await t.browser.close();
   }
-  // the four cards on a wide screen fill the row (no empty columns)
+  // the five cards on a wide screen fill the row (no empty columns)
   {
     const t = await start(new Map(), { local: true, locked: true, today: '2026-11-12', viewport: { width: 1180, height: 820 } });
     await t.page.evaluate(() => (location.hash = '#/')); await t.page.waitForSelector('.hub-grid'); await t.page.waitForTimeout(400);
     const lr = await t.page.evaluate(() => { const c = [...document.querySelectorAll('.subject')].map((e) => e.getBoundingClientRect()); return [Math.min(...c.map((r) => r.left)), innerWidth - Math.max(...c.map((r) => r.right))]; });
-    ok(Math.abs(lr[0] - lr[1]) <= 2, `four cards on a wide screen are centred (${Math.round(lr[0])} / ${Math.round(lr[1])})`);
+    ok(Math.abs(lr[0] - lr[1]) <= 2, `five cards on a wide screen are centred (${Math.round(lr[0])} / ${Math.round(lr[1])})`);
     await t.browser.close();
   }
   await done();
