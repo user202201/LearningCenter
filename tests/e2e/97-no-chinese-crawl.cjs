@@ -48,6 +48,11 @@ function pageScan(known) {
     for (const a of ['title', 'placeholder', 'aria-label', 'alt']) { const v = el.getAttribute(a); if (v && cjk.test(v) && (visible(el) || a === 'title')) out.push({ t: v.trim(), k: 'attr:' + a, sel: sel(el), html: el.outerHTML.slice(0, 160) }); }
     if (el.tagName === 'INPUT' && ['button', 'submit', 'reset'].includes(el.type) && cjk.test(el.value) && visible(el)) out.push({ t: el.value, k: 'value', sel: sel(el), html: el.outerHTML.slice(0, 160) });
   }
+  for (const el of document.querySelectorAll('input:not([type=hidden]):not([type=file]), textarea, select')) {   // a prefilled field that is not the child's own text (a default name ...)
+    if (isUser(el) || !visible(el)) continue;
+    const v = el.tagName === 'SELECT' ? (el.selectedOptions[0]?.textContent || '') : el.value;
+    if (v && cjk.test(v) && !el.matches('input[type=button],input[type=submit]')) out.push({ t: v.trim(), k: 'value', sel: sel(el), html: el.outerHTML.slice(0, 160) });
+  }
   if (cjk.test(document.title)) out.push({ t: document.title, k: 'document.title', sel: 'title', html: '' });
   return out;
 }
@@ -268,10 +273,10 @@ async function crawlConfig(cfg, report) {
     await page.evaluate(() => document.querySelector('#pk-slot-1').click()); await page.waitForTimeout(250); await scan(label + ' pick'); await page.evaluate(() => document.querySelector('#pk-pick button')?.click()); await page.waitForTimeout(200);
     await page.evaluate(() => document.querySelector('#pk-slot-2')?.click()); await page.waitForTimeout(250); await scan(label + ' pick 2'); await page.evaluate(() => [...document.querySelectorAll('#pk-pick button:not([disabled])')][0]?.click()); await page.waitForTimeout(250); await scan(label + ' lobby, two players');
     const st = page.locator('#pk-start'); if (!(await st.isEnabled().catch(() => false))) { await scan(label + ' start off'); return; }
-    await st.click(); await page.waitForTimeout(500); await scan(label + ' opening');
+    await page.evaluate(() => document.querySelector('#pk-start').click()); await page.waitForTimeout(500); await scan(label + ' opening');
     await page.evaluate(() => window.__pk && window.__pk.manual(true)).catch(() => {});
-    await page.locator('#pk-exit').click().catch(() => {}); await page.waitForTimeout(250); await scan(label + ' leave?'); await closeDialogs();
-    await page.locator('#pk-skip').click().catch(() => {});
+    await page.evaluate(() => document.querySelector('#pk-exit')?.click()); await page.waitForTimeout(250); await scan(label + ' leave?'); await closeDialogs();
+    await page.evaluate(() => document.querySelector('#pk-skip')?.click());
     for (let i = 0; i < 120; i++) {
       await page.evaluate((i) => { const w = window.__pk; if (!w) return; w.skip(i % 5 === 0 ? 600 : 1500); if (i % 5 === 1) w.tap(0, i % 4); if (i % 5 === 3) w.tap(1, (i + 1) % 4); }, i).catch(() => {});
       await page.waitForTimeout(40);
@@ -280,7 +285,7 @@ async function crawlConfig(cfg, report) {
     }
     await page.waitForTimeout(1800); await scan(label + ' final');
     await page.waitForTimeout(1500); await scan(label + ' final +');
-    await page.locator('#pk-again-1').click().catch(() => {}); await page.locator('#pk-again-2').click().catch(() => {}); await page.waitForTimeout(500); await scan(label + ' again');
+    await page.evaluate(() => { document.querySelector('#pk-again-1')?.click(); document.querySelector('#pk-again-2')?.click(); }); await page.waitForTimeout(500); await scan(label + ' again');
   };
   await tryFlow('pk chinese', () => pkFlow('#/chinese/pk', 'pk chinese'));
   await tryFlow('pk english', () => pkFlow('#/english/pk', 'pk languages'));

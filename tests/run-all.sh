@@ -21,7 +21,7 @@ if [ $# -gt 0 ]; then SUITES=("$@"); else mapfile -t SUITES < tests/suites.txt; 
 run_one() {
   local s="$1" log="$OUT/$1.log"
   for attempt in 1 2; do
-    D="$OUT/work/" timeout 280 node "$ROOT/tests/e2e/$s.cjs" > "$log" 2>&1 && { echo "PASS  $s"; return 0; }
+    D="$OUT/work/" timeout "$([ "$s" = 97-no-chinese-crawl ] && echo 5400 || echo 280)" node "$ROOT/tests/e2e/$s.cjs" > "$log" 2>&1 && { echo "PASS  $s"; return 0; }
     [ $attempt = 1 ] && { cp "$log" "$OUT/$s.first-try.log"; echo "retry $s (first run failed)"; }
   done
   echo "FAIL  $s"; grep -E "^FAIL|Error" "$log" | head -5 | sed 's/^/        /'
