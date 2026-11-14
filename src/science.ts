@@ -16,6 +16,7 @@ import { renderRich, renderTeX } from "./mathtext";
 import { SYMBOLS, CIRCUITS, RULES } from "./diagrams";
 import { figure } from "./figures";
 import { ct, loadContentTr } from "./contenttr";
+import { tr } from "./i18n";
 import { mascot } from "./art";
 import { subjectArt, shortcuts } from "./hub";
 import { spaceIcon } from "./spaceart";
@@ -382,8 +383,9 @@ interface Group { name: string; sections: Section[] }
 interface Block { groups?: Group[]; sections?: Section[] }
 interface Notes { history: Block & { dynasties: { n: string; from: number; to: number | null; cap: string; who: string; gist: string }[]; events: { y: number; t: string; d: string; w?: boolean }[] }; geo: Block; bio: Block; politics: Block; safety: Block }
 const groupsOf = (b: Block): Group[] => b.groups ?? [{ name: "全部", sections: b.sections ?? [] }];
-const yearText = (y: number | null) => (y === null ? "至今" : y < 0 ? `前${-y}` : String(y));
-const spanText = (a: number, b: number | null) => (a < -100000 ? "远古" : `${yearText(a)} – ${yearText(b)}`);
+// (each piece is translated on its own: a pattern like "前{0}" must never swallow a whole "2070 – 前1600")
+const yearText = (y: number | null) => (y === null ? tr("至今") : y < 0 ? tr(`前${-y}`) : String(y));
+const spanText = (a: number, b: number | null) => (a < -100000 ? tr("远古") : `${yearText(a)} – ${yearText(b)}`);
 
 function sectionCard(sec: Section, no: number, open = false): HTMLElement {
   const body = h("div", { class: "nt-body" },
