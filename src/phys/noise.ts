@@ -36,7 +36,7 @@ export const def: SimDef = {
   ],
   aspect: 0.62,
   readouts: (s) => {
-    if (s.mode === 0) return [{ label: "相当于", value: Mo.example(s.L) }, { label: "对人的影响", value: Mo.effect(s.L) }];
+    if (s.mode === 0) return [{ label: "声音的强弱", value: fmt(s.L, 0), unit: "dB" }, { label: "相当于", value: Mo.example(s.L) }, { label: "对人的影响", value: Mo.effect(s.L) }];
     if (s.mode === 1) return [{ label: "采取措施后的噪声", value: fmt(final(s), 0), unit: "dB" }, { label: "对人的影响", value: Mo.effect(final(s)) }, { label: "是否适合休息和睡眠", value: final(s) <= Mo.LIMIT_SLEEP ? "是" : "否" }];
     if (s.mode === 2) return [{ label: "声速", value: fmt(v(s), 0), unit: "m/s" }, { label: "回声比原声晚", value: fmt(delay(s), 3), unit: "s" }, { label: "能否区分回声和原声", value: delay(s) >= Mo.MIN_GAP ? "能（相隔 0.1 s 以上）" : "不能（相隔不到 0.1 s）" }, { label: "至少需要的距离", value: fmt(Mo.minDistance(v(s)), 1), unit: "m" }];
     return [{ label: "海水中的声速", value: fmt(Mo.SEA, 0), unit: "m/s" }, { label: "海水的深度", value: fmt(Mo.depth(s.ts), 0), unit: "m" }];

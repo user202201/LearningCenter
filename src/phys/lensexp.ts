@@ -35,7 +35,7 @@ export const def: SimDef = {
   aspect: 0.62,
   readouts: (s) => {
     const o = sc(s), out: { label: string; value: string; unit?: string }[] = [];
-    if (s.mode === 0) out.push({ label: "光斑的宽度", value: fmt(Mo.spot(f(s), s.v), 1), unit: "cm" }, { label: "光斑", value: Mo.spot(f(s), s.v) <= Mo.SHARP_CM ? "最小最亮：光屏在焦点上" : "还不是最小" });
+    if (s.mode === 0) out.push({ label: "光屏到透镜的距离", value: fmt(s.v, 1), unit: "cm" }, { label: "光斑的宽度", value: fmt(Mo.spot(f(s), s.v), 1), unit: "cm" }, { label: "光斑", value: Mo.spot(f(s), s.v) <= Mo.SHARP_CM ? "最小最亮：光屏在焦点上" : "还不是最小" });
     else out.push({ label: "物距", value: fmt(s.u, 1), unit: "cm" }, { label: "屏上的像", value: o.none ? "光屏上没有像" : o.sharp ? "清晰" : "模糊" }, { label: "像的性质", value: o.sharp ? Mo.KINDS[o.kind] : "—" });
     for (let i = 0; i < s.n; i++) out.push({ label: `第 ${i + 1} 组`, value: `u = ${fmt(s[`ru${i}`], 1)} cm，v = ${fmt(s[`rv${i}`], 1)} cm，${Mo.KINDS[s[`rk${i}`]]}` });
     return out;

@@ -41,11 +41,11 @@ export const def: SimDef = {
     rect(c, 0, 0, 640, 397, "#f8f9fa", null, 0, 0);
     if (s.mode === 0) {
       const dt = work(s), col = dt > 0 ? COL.red : dt < 0 ? COL.blue : COL.grey;
-      rect(c, 240, 180, 160, 120, "#ffe3e3", COL.ink, 5, 16); rect(c, 240, 180, 160, 120, "rgba(0,0,0,0)", col, 8, 16);
+      rect(c, 240, 180, 160, 120, "#ffe3e3", col, 10, 16); rect(c, 240, 180, 160, 120, "rgba(0,0,0,0)", COL.ink, 3, 16);
       const n = Math.min(7, Math.round(Math.abs(s.W) / 70));
       for (let i = 0; i < n; i++) arrow(c, s.action === 2 ? 330 : 120, 220 + (i % 3) * 30, s.action === 2 ? 440 : 230, 220 + (i % 3) * 30, COL.orange, 4);
       if (s.action === 2) for (let i = 0; i < n; i++) arrow(c, 410, 210 + (i % 3) * 30, 520, 210 + (i % 3) * 30, COL.blue, 4);
-      txt(c, `${fmt(Mo.T0 + dt, 1)} C`, 320, 120, 36, col); txt(c, `${s.W} J`, 100, 60, 26, COL.orange);
+      txt(c, `${fmt(Mo.T0 + dt, 1)} C`, 320, 120, 36, col); txt(c, `${s.W} J`, 100, 60, 26, COL.ink);
     } else {
       const f = flow(s);
       rect(c, 80, 150, 180, 140, "#ffc9c9", COL.ink, 5, 16); rect(c, 380, 150, 180, 140, "#a5d8ff", COL.ink, 5, 16);

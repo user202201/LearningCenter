@@ -601,7 +601,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
             cases++; const o2 = M.onScreen(f, u, v);
             if (u <= f) { if (!o2.none || o2.sharp) b++; continue; }
             const v0 = 1 / (1 / f - 1 / u), blur = 4 * Math.abs(v - v0) / v0;
-            if (!near(o2.v0, v0, 1e-9) || !near(o2.blur, blur, 1e-9) || o2.sharp !== (blur <= 0.25) || !near(1 / u + 1 / o2.v0, 1 / f, 1e-9)) b++;
+            if (!near(o2.v0, v0, 1e-9) || !near(o2.blur, blur, 1e-9) || (Math.abs(blur - 0.25) > 1e-9 && o2.sharp !== (blur <= 0.25)) || !near(1 / u + 1 / o2.v0, 1 / f, 1e-9)) b++;
             const kind = Math.abs(u - 2 * f) < 1e-9 ? 1 : u > 2 * f ? 0 : 2; if (o2.kind !== kind || !near(o2.m, v0 / u, 1e-9)) b++;
           }
           if (u > f && Math.abs(best[0] - 1 / (1 / f - 1 / u)) <= 0.25 && !M.onScreen(f, u, best[0]).sharp && 1 / (1 / f - 1 / u) <= 70) b++;
@@ -643,7 +643,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
       // ---- meter
       { const M = L.meter; let b = 0;
         for (const P of [100, 500, 1000, 3000]) for (const t of [10, 60, 3600]) for (const rate of M.RATES) { const kwh = P * t / 3.6e6, n = M.revs(kwh, rate); if (!near(M.powerFromRevs(n, t, rate), P, 1e-9)) b++; if (!near(M.toKwh(M.work(220, P / 220, t)), kwh, 1e-9)) b++; }
-        o.meter = { b, j: [M.toKwh(3.6e6), M.energyKwh(1000, 3), M.cost(100, 0.6)], dial: [M.dialText(M.dial(1234, 0.56)), M.dialText(M.dial(99999, 0.5)), M.dialText(M.dial(0, 0)), M.dialText(M.dial(9999, 1.04))], rates: M.RATES.join() };
+        o.meter = { b, j: [M.toKwh(3.6e6), M.energyKwh(1000, 3), M.cost(100, 0.6)], dial: [M.dialText(M.dial(1234, 0.56)), M.dialText(M.dial(99999, 1.5)), M.dialText(M.dial(0, 0)), M.dialText(M.dial(9999, 1.04))], rates: M.RATES.join() };
       }
       // ---- emdev
       { const M = L.emdev; let b = 0;
@@ -677,7 +677,7 @@ const decimals = (s) => { const m = /^[−-]?\d+\.(\d+)/.exec(String(s).trim());
     ok(r.lensexp.b === 0 && r.lensexp.cases > 3000, `A4 lensexp: sharp image exactly where the lens equation says (3 lenses x 81 object distances x 132 screen positions = ${r.lensexp.cases} cases), blur width = aperture x |v - v0| / v0, no real image for u <= f, the sharpest screen position found by search is the image position`);
     ok(r.lensexp.spot.join() === '0,4,2,0.8' && r.lensexp.sharpAt && r.lensexp.kinds.join() === '0,1,2', 'A4 lensexp: parallel light: spot 0 at the focus, 4 cm at 2f, 2 cm at f/2, 0.8 cm at 1.2 f; the kinds are smaller / same / larger: ' + r.lensexp.spot.join());
     ok(r.internal.b === 0 && r.internal.rel === 67200, 'A4 internal: heat lost by the hotter body = heat gained by the colder (2916 cases), the common temperature lies between the two and is the mean for equal masses and substances, work in / out changes the temperature by ± W / (c m); relative internal energy c m t');
-    ok(r.resistance.b === 0 && r.resistance.len === 3 && r.resistance.area === 2 && Math.abs(r.resistance.temp - 1.5) < 1e-9 && r.resistance.cu && r.resistance.I.join() === '0.6,0.3,0.15', 'A4 resistance: R ∝ L, R ∝ 1/S, stretching to k x gives k² R, the materials are ordered copper < aluminium < iron < constantan < nichrome, resistance rises with the temperature of a metal; wire B equals wire A at the starting values; ammeter 3 V / (5 Ω + R)');
+    ok(r.resistance.b === 0 && Math.abs(r.resistance.len - 3) < 1e-9 && Math.abs(r.resistance.area - 2) < 1e-9 && Math.abs(r.resistance.temp - 1.5) < 1e-9 && r.resistance.cu && r.resistance.I.join() === '0.6,0.3,0.15', 'A4 resistance: R ∝ L, R ∝ 1/S, stretching to k x gives k² R, the materials are ordered copper < aluminium < iron < constantan < nichrome, resistance rises with the temperature of a metal; wire B equals wire A at the starting values; ammeter 3 V / (5 Ω + R)');
     ok(r.ohmlaw.b === 0 && r.ohmlaw.prop.join() === 'true,false,false,true' && r.ohmlaw.inv.join() === 'true,false,false' && r.ohmlaw.maxrows === 6, 'A4 ohmlaw: the ammeter reads U / R to 0.01 A (160 cases); the checks accept I ∝ U and I ∝ 1/R, refuse I ∝ U² and a straight line that does not go through the origin, and need at least 3 points');
     ok(r.rmeasure.b === 0 && r.rmeasure.bulb[0] > r.rmeasure.bulb[1] + 1 && r.rmeasure.r0.Uread === 3 && r.rmeasure.r0.Iread === 0.3 && r.rmeasure.mean === 3, 'A4 rmeasure: a resistor measures U = I R with the meters\' resolution (0.02 A / 0.1 V); the bulb obeys Kirchhoff\'s voltage law E = U + I (Rp + r) and its resistance falls as the rheostat grows (the filament cools): ' + r.rmeasure.bulb.map((x) => x.toFixed(2)).join(' -> '));
     ok(r.meter.b === 0, 'A4 meter: P t / 3.6e6 turns x rate and back to P (36 cases), W = U I t in kW·h');

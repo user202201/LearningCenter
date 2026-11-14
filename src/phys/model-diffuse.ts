@@ -4,8 +4,8 @@ import { makeQ, numQ, pick, shuffle, type Q } from "./qtools";
 export const spread = (r: number) => Math.max(2, 50 * r);
 /** the facet tilts used for the nine rays that are drawn (fractions of the largest tilt) */
 export const TILTS = [-1, 0.6, -0.3, 1, 0, -0.8, 0.4, -0.6, 0.9];
-/** direction of the ray from facet i (degrees from the normal) for the incident angle theta (law of reflection at the tilted facet) */
-export const outAngle = (r: number, theta: number, i: number) => theta + 2 * 25 * r * TILTS[i];
+/** direction of the ray from facet i (degrees from the normal) for the incident angle theta (law of reflection at the tilted facet; a facet whose right end is raised sends the ray to the left of the mirror direction) */
+export const outAngle = (r: number, theta: number, i: number) => theta - 2 * 25 * r * TILTS[i];
 /** brightness (0..1) seen by an eye in the direction alpha: the same light spread over a wider angle is dimmer */
 export const brightness = (r: number, theta: number, alpha: number) => (Math.abs(alpha - theta) <= spread(r) ? Math.min(1, 2 / spread(r)) : 0);
 export const isMirror = (r: number) => spread(r) <= 5;

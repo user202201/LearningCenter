@@ -32,7 +32,7 @@ export const def: SimDef = {
   ],
   aspect: 0.62,
   readouts: (s) => {
-    if (s.mode === 0) { const W = Mo.work(s.U, s.I, s.t); return [{ label: "电流做的功", value: fmt(W, 0), unit: "J" }, { label: "合", value: fmt(Mo.toKwh(W), 4), unit: "kW·h" }]; }
+    if (s.mode === 0) { const W = Mo.work(s.U, s.I, s.t); return [{ label: "用电器的功率", value: fmt(s.U * s.I, 0), unit: "W" }, { label: "电流做的功", value: fmt(W, 0), unit: "J" }, { label: "合", value: fmt(Mo.toKwh(W), 4), unit: "kW·h" }]; }
     if (s.mode === 1) { const k = kwh1(s); return [{ label: "这段时间用的电能", value: fmt(k, 2), unit: "kW·h" }, { label: "电能表现在的示数", value: Mo.dialText(Mo.dial(s.r0, k)), unit: "kW·h" }, { label: "电费", value: `${fmt(Mo.cost(k, s.price), 2)} 元` }];
     }
     const W = s.n / rate(s); return [{ label: "消耗的电能", value: fmt(W, 4), unit: "kW·h" }, { label: "用电器的功率", value: fmt(Mo.powerFromRevs(s.n, s.tt, rate(s)), 0), unit: "W" }];
