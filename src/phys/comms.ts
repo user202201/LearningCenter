@@ -9,13 +9,13 @@ const fc = (s: S) => (s.band === 0 ? s.fcA * 1e3 : s.fcF * 1e6);
 const got = (s: S) => (s.band === 0 ? s.fcA === s.ftA : s.fcF === s.ftF);
 function signal(c: CanvasRenderingContext2D, s: S) {
   const X = (i: number) => 60 + (i + 0.5) * 65, n = s.noise;
-  txt(c, "DIGITAL", 70, 40, 18, COL.grey, "left"); txt(c, "ANALOG", 70, 215, 18, COL.grey, "left");
+  txt(c, "DIGITAL", 56, 36, 18, COL.grey, "left"); txt(c, "ANALOG", 56, 214, 18, COL.grey, "left");
   rect(c, 50, 55, 540, 120, "#fff", "#d0bfff", 2, 6); line(c, 50, 115, 590, 115, COL.grey, 1.5);
   const bad = Mo.wrongBits(n);
   Mo.BITS.forEach((b, i) => { const sg = b === 1 ? 1 : -1, y = 115 - 40 * sg; line(c, X(i) - 32, y, X(i) + 32, y, "#adb5bd", 5); circle(c, X(i), Math.max(58, Math.min(172, 115 - 40 * (sg + n * Mo.SAMPLE[i]))), 8, bad[i] ? COL.red : COL.green, COL.ink, 2); txt(c, String(b), X(i), 190, 16, COL.grey); });
   rect(c, 50, 235, 540, 120, "#fff", "#d0bfff", 2, 6); line(c, 50, 295, 590, 295, COL.grey, 1.5);
   c.beginPath(); for (let i = 0; i <= 260; i++) { const x = 50 + i * 2.08, a = Math.sin((i / 260) * Math.PI * 4); i ? c.lineTo(x, 295 - 45 * a) : c.moveTo(x, 295 - 45 * a); } c.strokeStyle = "#adb5bd"; c.lineWidth = 5; c.stroke();
-  c.beginPath(); for (let i = 0; i <= 260; i++) { const x = 50 + i * 2.08, a = Math.sin((i / 260) * Math.PI * 4) + n * Mo.SAMPLE[Math.floor((i / 261) * 8)] * Math.sin(i * 0.9); i ? c.lineTo(x, 295 - 45 * a) : c.moveTo(x, 295 - 45 * a); } c.strokeStyle = COL.blue; c.lineWidth = 3; c.stroke();
+  c.beginPath(); for (let i = 0; i <= 260; i++) { const x = 50 + i * 2.08, a = Math.sin((i / 260) * Math.PI * 4) + n * Mo.SAMPLE[Math.floor((i / 261) * 8)] * Math.sin(i * 0.9); const y = 295 - Math.max(-56, Math.min(56, 45 * a)); i ? c.lineTo(x, y) : c.moveTo(x, y); } c.strokeStyle = COL.blue; c.lineWidth = 3; c.stroke();
 }
 export const def: SimDef = {
   meta,

@@ -45,7 +45,7 @@ export const def: SimDef = {
       line(c, 70, cy - oh / 2, sx, cy + ih / 2, COL.orange, 2); line(c, 70, cy + oh / 2, sx, cy - ih / 2, COL.orange, 2);
       arrow(c, sx, cy - ih / 2, sx, cy + ih / 2, COL.red, 6);
     } else if (s.mode === 1) {
-      const r = sh(s), x0 = 40, xo = 40 + s.a * 3, xs = xo + s.b * 3 > 600 ? 600 : xo + s.b * 3, cy = 200, k = 2.4;
+      const r = sh(s), x0 = 40, xo = 40 + s.a * 3, xs = xo + s.b * 3 > 600 ? 600 : xo + s.b * 3, cy = 200, k = Math.min(4, 170 / Math.max(1, r.whole / 2, s.src / 2, s.D / 2));
       const half = (v: number) => (v * k) / 2;
       // penumbra and umbra on the screen
       rect(c, xs - 4, cy - half(r.whole) - 2, 8, half(r.whole) * 2 + 4, "#ced4da", null, 0, 2);
