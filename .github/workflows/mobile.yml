@@ -32,6 +32,7 @@ jobs:
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 21 }   # Capacitor 8: JDK 21
       - uses: android-actions/setup-android@v3
+        with: { packages: "platform-tools" }   # (the default also asks for the old "tools" package, which no longer exists: the first run failed there)
       - run: npm ci
       - name: Build the packaged web app and copy it into android/
         run: |
