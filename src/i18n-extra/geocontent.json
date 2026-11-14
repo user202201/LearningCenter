@@ -1,0 +1,294 @@
+{
+ "地球是一个两极稍扁、赤道略鼓的不规则球体，平均半径约 6371 千米，赤道周长约 4 万千米。地球仪是地球的模型。": [
+  "The Earth is an irregular sphere, slightly flattened at the poles and slightly bulging at the equator, with a mean radius of about 6371 km and an equatorial circumference of about 40 000 km. A globe is a model of the Earth.",
+  "La Terre est une sphère irrégulière, légèrement aplatie aux pôles et légèrement renflée à l'équateur, de rayon moyen d'environ 6371 km et de circonférence équatoriale d'environ 40 000 km. Un globe est un modèle de la Terre."
+ ],
+ "经线（子午线）连接南北两极，指示南北方向，长度都相等；纬线是与赤道平行的圆圈，指示东西方向，赤道最长，越向两极越短。0°经线叫本初子午线，0°纬线叫赤道。": [
+  "Lines of longitude (meridians) join the North and South Poles and show the north–south direction; they are all the same length. Lines of latitude are circles parallel to the equator and show the east–west direction; the equator is the longest, and they get shorter towards the poles. The 0° meridian is called the prime meridian and the 0° parallel is called the equator.",
+  "Les lignes de longitude (méridiens) relient les pôles Nord et Sud et indiquent la direction nord–sud ; elles ont toutes la même longueur. Les lignes de latitude sont des cercles parallèles à l'équateur et indiquent la direction est–ouest ; l'équateur est le plus long, et les parallèles raccourcissent vers les pôles. Le méridien 0° s'appelle le méridien d'origine et le parallèle 0° s'appelle l'équateur."
+ ],
+ "经纬度确定位置：纬度从赤道向北、向南各分 0°～90°（北纬 N、南纬 S），经度从本初子午线向东、向西各分 0°～180°（东经 E、西经 W）。20°W 和 160°E 组成的经线圈把地球分为东、西半球。": [
+  "Latitude and longitude fix a position: latitude is measured from the equator, 0°–90° to the north and to the south (north latitude N, south latitude S); longitude is measured from the prime meridian, 0°–180° to the east and to the west (east longitude E, west longitude W). The great circle formed by 20°W and 160°E divides the Earth into the Eastern and Western Hemispheres.",
+  "La latitude et la longitude déterminent une position : la latitude se mesure à partir de l'équateur, de 0° à 90° vers le nord et vers le sud (latitude nord N, latitude sud S) ; la longitude se mesure à partir du méridien d'origine, de 0° à 180° vers l'est et vers l'ouest (longitude est E, longitude ouest W). Le grand cercle formé par 20° O et 160° E divise la Terre en hémisphères oriental et occidental."
+ ],
+ "五带按太阳光热的分布划分：南、北回归线（约 23.5°）之间是热带，回归线与极圈（约 66.5°）之间是温带，极圈以内是寒带。纬度 0°～30° 为低纬度，30°～60° 为中纬度，60°～90° 为高纬度。": [
+  "The five zones are divided according to the distribution of the Sun's light and heat: between the Tropics of Cancer and Capricorn (about 23.5°) is the torrid zone, between the tropics and the polar circles (about 66.5°) are the temperate zones, and inside the polar circles are the frigid zones. Latitudes 0°–30° are low latitudes, 30°–60° mid-latitudes and 60°–90° high latitudes.",
+  "Les cinq zones sont délimitées selon la répartition de la lumière et de la chaleur du Soleil : entre les tropiques du Cancer et du Capricorne (environ 23,5°) se trouve la zone tropicale, entre les tropiques et les cercles polaires (environ 66,5°) les zones tempérées, et à l'intérieur des cercles polaires les zones glaciales. Les latitudes 0°–30° sont les basses latitudes, 30°–60° les latitudes moyennes et 60°–90° les hautes latitudes."
+ ],
+ "地球自西向东自转，所以东边的地方比西边的地方先看到日出，东边的时刻比西边早。同一条经线上的地方时相同。": [
+  "The Earth rotates from west to east, so places in the east see the sunrise before places in the west, and the time in the east is ahead of the time in the west. Places on the same meridian have the same local time.",
+  "La Terre tourne d'ouest en est ; les lieux situés à l'est voient donc le lever du soleil avant ceux de l'ouest, et l'heure à l'est est en avance sur l'heure à l'ouest. Les lieux situés sur le même méridien ont la même heure locale."
+ ],
+ "全球分为 24 个时区，每个时区跨经度 15°。以 0° 经线为中央经线的是中时区（零时区），向东依次为东一区至东十二区，向西依次为西一区至西十二区，东十二区与西十二区合为一个时区，位于 180° 经线两侧。": [
+  "The globe is divided into 24 time zones, each spanning 15° of longitude. The zone centred on the 0° meridian is the central zone (zone zero); going east are the East 1 to East 12 zones, and going west are the West 1 to West 12 zones; East 12 and West 12 together make one zone, on both sides of the 180° meridian.",
+  "Le globe est divisé en 24 fuseaux horaires, chacun couvrant 15° de longitude. Le fuseau centré sur le méridien 0° est le fuseau central (fuseau zéro) ; vers l'est viennent les fuseaux Est 1 à Est 12, vers l'ouest les fuseaux Ouest 1 à Ouest 12 ; les fuseaux Est 12 et Ouest 12 forment ensemble un seul fuseau, de part et d'autre du méridien 180°."
+ ],
+ "区时：东加西减。从一个时区到另一个时区，每相差一个时区，时间相差 1 小时。北京时间是东八区的区时（120°E 的地方时）。": [
+  "Zone time: add for the east, subtract for the west. For every zone between two places the time differs by 1 hour. Beijing time is the zone time of East 8 (the local time at 120°E).",
+  "Heure du fuseau : on ajoute à l'est, on retranche à l'ouest. Pour chaque fuseau d'écart entre deux lieux, l'heure diffère d'une heure. L'heure de Pékin est l'heure du fuseau Est 8 (l'heure locale à 120° E)."
+ ],
+ "国际日期变更线（日界线）大致沿 180° 经线。自西向东越过日界线，日期减一天；自东向西越过日界线，日期加一天。拖动图中的太阳线，观察各地时间与日期的变化。": [
+  "The International Date Line runs roughly along the 180° meridian. Crossing it from west to east, the date goes back one day; crossing it from east to west, the date goes forward one day. Drag the Sun line in the picture and watch how the times and dates of different places change.",
+  "La ligne de changement de date internationale suit à peu près le méridien 180°. En la franchissant d'ouest en est, on retire un jour à la date ; en la franchissant d'est en ouest, on ajoute un jour. Faites glisser la ligne du Soleil dans l'image et observez comment changent l'heure et la date des différents lieux."
+ ],
+ "地球自转的方向是自西向东，周期约为一天，产生昼夜交替；地球绕太阳公转的周期约为一年，公转时地轴倾斜（黄赤交角约 23.5°）且方向不变，产生太阳直射点的移动和四季的变化。": [
+  "The Earth rotates from west to east, with a period of about a day, which produces the alternation of day and night; the Earth goes round the Sun in about a year, and as it does so its axis is tilted (the obliquity is about 23.5°) and keeps its direction, which makes the point where the Sun is overhead move and produces the seasons.",
+  "La Terre tourne d'ouest en est, avec une période d'environ un jour, ce qui produit l'alternance du jour et de la nuit ; la Terre fait le tour du Soleil en environ un an, et pendant cette révolution son axe est incliné (l'obliquité est d'environ 23,5°) et garde sa direction, ce qui déplace le point où le Soleil est au zénith et produit les saisons."
+ ],
+ "太阳直射点在南、北回归线之间往返移动：春分（3 月 21 日前后）和秋分（9 月 23 日前后）直射赤道；夏至（6 月 22 日前后）直射北回归线；冬至（12 月 22 日前后）直射南回归线。": [
+  "The point where the Sun is overhead moves back and forth between the Tropic of Cancer and the Tropic of Capricorn: at the spring equinox (around 21 March) and autumn equinox (around 23 September) the Sun is overhead at the equator; at the summer solstice (around 22 June) over the Tropic of Cancer; at the winter solstice (around 22 December) over the Tropic of Capricorn.",
+  "Le point où le Soleil est au zénith se déplace entre le tropique du Cancer et le tropique du Capricorne : à l'équinoxe de printemps (vers le 21 mars) et à l'équinoxe d'automne (vers le 23 septembre), le Soleil est au zénith à l'équateur ; au solstice d'été (vers le 22 juin), au-dessus du tropique du Cancer ; au solstice d'hiver (vers le 22 décembre), au-dessus du tropique du Capricorne."
+ ],
+ "正午太阳高度 H = 90° − |当地纬度 − 太阳直射点纬度|。昼长也随之变化：夏至日北半球昼最长，冬至日北半球昼最短，南半球相反。": [
+  "Noon solar elevation H = 90° − |local latitude − latitude of the point where the Sun is overhead|. The length of the day changes with it: at the summer solstice the day is longest in the Northern Hemisphere, at the winter solstice it is shortest, and the opposite in the Southern Hemisphere.",
+  "Hauteur du Soleil à midi H = 90° − |latitude du lieu − latitude du point où le Soleil est au zénith|. La durée du jour varie en conséquence : au solstice d'été le jour est le plus long dans l'hémisphère Nord, au solstice d'hiver il est le plus court, et c'est l'inverse dans l'hémisphère Sud."
+ ],
+ "更详细的天体运动模型，请到“天文”里的实验室。": [
+  "For a more detailed model of the motion of the heavenly bodies, go to the lab in “Astronomy”.",
+  "Pour un modèle plus détaillé du mouvement des astres, rendez-vous au laboratoire de la section « Astronomie »."
+ ],
+ "地图的基本要素有比例尺、方向、图例和注记。比例尺 = 图上距离 ∕ 实地距离，有数字式（1∶100000）、线段式和文字式三种。": [
+  "The basic elements of a map are the scale, direction, legend and annotations. Scale = distance on the map ∕ distance on the ground; it can be a numerical scale (1∶100000), a line scale or a verbal scale.",
+  "Les éléments de base d'une carte sont l'échelle, l'orientation, la légende et les inscriptions. Échelle = distance sur la carte ∕ distance sur le terrain ; elle peut être numérique (1∶100000), graphique ou verbale."
+ ],
+ "比例尺的分母越小，比例尺越大，表示的范围越小，内容越详细；分母越大，比例尺越小，表示的范围越大，内容越简略。": [
+  "The smaller the denominator of the scale, the larger the scale: the area shown is smaller and the content more detailed; the larger the denominator, the smaller the scale: the area shown is larger and the content less detailed.",
+  "Plus le dénominateur de l'échelle est petit, plus l'échelle est grande : la zone représentée est plus petite et le contenu plus détaillé ; plus le dénominateur est grand, plus l'échelle est petite : la zone représentée est plus grande et le contenu moins détaillé."
+ ],
+ "方向：一般地图“上北下南，左西右东”；有指向标的地图，指向标箭头指向北方；有经纬网的地图，经线指示南北方向，纬线指示东西方向。": [
+  "Direction: on an ordinary map “north is up, south is down, west is left, east is right”; on a map with a direction arrow, the arrow points north; on a map with a grid of latitude and longitude, meridians show the north–south direction and parallels show the east–west direction.",
+  "Orientation : sur une carte ordinaire, « le nord est en haut, le sud en bas, l'ouest à gauche, l'est à droite » ; sur une carte avec une flèche d'orientation, la flèche pointe vers le nord ; sur une carte avec un quadrillage de latitudes et de longitudes, les méridiens indiquent la direction nord–sud et les parallèles la direction est–ouest."
+ ],
+ "图例是地图上各种符号的说明。拖动图中的两个点，用尺量出图上距离，再换算成实地距离。": [
+  "The legend explains the various symbols on a map. Drag the two points in the picture, measure the distance on the map with the ruler, and then convert it into the real distance.",
+  "La légende explique les différents symboles d'une carte. Faites glisser les deux points dans l'image, mesurez la distance sur la carte avec la règle, puis convertissez-la en distance réelle."
+ ],
+ "等高线是把海拔相同的各点连成的闭合曲线。等高线上的数字表示海拔，相邻两条等高线的高差叫等高距。": [
+  "A contour line is a closed curve joining points of the same altitude. The number on a contour line shows the altitude, and the difference in height between two neighbouring contour lines is called the contour interval.",
+  "Une courbe de niveau est une courbe fermée qui relie les points de même altitude. Le nombre porté sur une courbe de niveau indique l'altitude, et la différence de hauteur entre deux courbes de niveau voisines s'appelle l'équidistance."
+ ],
+ "等高线越密集，坡越陡；等高线越稀疏，坡越缓；几条等高线重合处是陡崖。": [
+  "The closer together the contour lines, the steeper the slope; the farther apart, the gentler the slope; where several contour lines coincide there is a cliff.",
+  "Plus les courbes de niveau sont serrées, plus la pente est raide ; plus elles sont espacées, plus la pente est douce ; là où plusieurs courbes de niveau se confondent, il y a une falaise."
+ ],
+ "山顶：数值中间高、四周低的闭合曲线；盆地：数值中间低、四周高；山脊：等高线向海拔较低处凸出；山谷：等高线向海拔较高处凸出；鞍部：两个山顶之间相对低洼的地方。": [
+  "Peak: closed curves with high values in the middle and low values around; basin: low in the middle and high around; ridge: contour lines bulge towards lower ground; valley: contour lines bulge towards higher ground; saddle: a relatively low place between two peaks.",
+  "Sommet : courbes fermées dont les valeurs sont élevées au centre et basses autour ; cuvette : basses au centre et élevées autour ; crête : les courbes de niveau font saillie vers les altitudes plus basses ; vallée : les courbes de niveau font saillie vers les altitudes plus hautes ; col : endroit relativement bas entre deux sommets."
+ ],
+ "相对高度 = 较高点的海拔 − 较低点的海拔。拖动图中的小山，观察等高线和地形剖面如何变化。": [
+  "Relative height = altitude of the higher point − altitude of the lower point. Drag the hill in the picture and watch how the contour lines and the terrain profile change.",
+  "Dénivelé = altitude du point le plus haut − altitude du point le plus bas. Faites glisser la colline dans l'image et observez comment changent les courbes de niveau et le profil du relief."
+ ],
+ "陆地的五种基本地形是平原、高原、山地、丘陵和盆地。海拔（绝对高度）从海平面算起，相对高度是两点海拔的差。": [
+  "The five basic landforms on land are plains, plateaus, mountains, hills and basins. Altitude (absolute height) is measured from sea level; relative height is the difference in altitude between two points.",
+  "Les cinq formes de relief de base sur les terres sont les plaines, les plateaux, les montagnes, les collines et les bassins. L'altitude (hauteur absolue) se mesure à partir du niveau de la mer ; le dénivelé est la différence d'altitude entre deux points."
+ ],
+ "平原：海拔较低（一般在 200 米以下），地面平坦。高原：海拔较高（一般在 500 米以上），顶面平坦，边缘陡峭。山地：海拔较高，起伏大，坡度陡。丘陵：海拔一般在 500 米以下，相对高度不超过 200 米，坡度和缓。盆地：四周高、中间低。": [
+  "Plain: low altitude (generally below 200 m) and flat ground. Plateau: high altitude (generally above 500 m), a flat top and steep edges. Mountain: high altitude, great relief and steep slopes. Hill: altitude generally below 500 m, relative height not more than 200 m and gentle slopes. Basin: high around the edges and low in the middle.",
+  "Plaine : altitude basse (en général moins de 200 m) et sol plat. Plateau : altitude élevée (en général plus de 500 m), sommet plat et bords escarpés. Montagne : altitude élevée, fort relief et pentes raides. Colline : altitude en général inférieure à 500 m, dénivelé d'au plus 200 m et pentes douces. Bassin : élevé sur les bords et bas au milieu."
+ ],
+ "拖动滑块，改变海拔、相对高度和地表特征，看地形如何分类。": [
+  "Drag the sliders to change the altitude, the relative height and the features of the surface, and see how the landform is classified.",
+  "Faites glisser les curseurs pour modifier l'altitude, le dénivelé et les caractéristiques de la surface, et voyez comment le relief est classé."
+ ],
+ "地球表面陆地约占 29%，海洋约占 71%。陆地主要集中在北半球，海洋在南北半球都很广阔。": [
+  "About 29% of the Earth's surface is land and about 71% is ocean. Most of the land is in the Northern Hemisphere, while the oceans are wide in both hemispheres.",
+  "Environ 29 % de la surface de la Terre est occupée par les terres et environ 71 % par les océans. Les terres sont surtout dans l'hémisphère Nord, tandis que les océans sont vastes dans les deux hémisphères."
+ ],
+ "陆地分为七大洲：亚洲、非洲、北美洲、南美洲、南极洲、欧洲和大洋洲；海洋分为四大洋：太平洋、大西洋、印度洋和北冰洋。": [
+  "Land is divided into seven continents: Asia, Africa, North America, South America, Antarctica, Europe and Oceania; the sea is divided into four oceans: the Pacific, the Atlantic, the Indian Ocean and the Arctic Ocean.",
+  "Les terres se divisent en sept continents : l'Asie, l'Afrique, l'Amérique du Nord, l'Amérique du Sud, l'Antarctique, l'Europe et l'Océanie ; la mer se divise en quatre océans : le Pacifique, l'Atlantique, l'océan Indien et l'océan Arctique."
+ ],
+ "大洲的主要分界：亚欧——乌拉尔山脉、乌拉尔河、大高加索山脉和土耳其海峡；亚非——苏伊士运河；南、北美洲——巴拿马运河；亚洲与北美洲——白令海峡；欧非——直布罗陀海峡。": [
+  "The main boundaries of the continents: Asia and Europe, the Ural Mountains, the Ural River, the Greater Caucasus and the Turkish Straits; Asia and Africa, the Suez Canal; North and South America, the Panama Canal; Asia and North America, the Bering Strait; Europe and Africa, the Strait of Gibraltar.",
+  "Les principales limites des continents : Asie et Europe, les monts Oural, le fleuve Oural, le Grand Caucase et les détroits turcs ; Asie et Afrique, le canal de Suez ; Amérique du Nord et du Sud, le canal de Panama ; Asie et Amérique du Nord, le détroit de Béring ; Europe et Afrique, le détroit de Gibraltar."
+ ],
+ "点选一个大洲或大洋，在经纬网上看它的位置。": [
+  "Tap a continent or an ocean to see its position on the grid of latitude and longitude.",
+  "Touchez un continent ou un océan pour voir sa position sur le quadrillage de latitudes et de longitudes."
+ ],
+ "天气是短时间内的大气状况，变化快；气候是一个地方多年的天气平均状况，比较稳定。": [
+  "Weather is the state of the atmosphere over a short time and changes quickly; climate is the average weather of a place over many years and is fairly stable.",
+  "Le temps est l'état de l'atmosphère sur une courte durée et change rapidement ; le climat est le temps moyen d'un lieu sur de nombreuses années et est assez stable."
+ ],
+ "气温曲线图表示各月平均气温，降水柱状图表示各月平均降水量。读图时看：最热月和最冷月的气温（年较差）、全年降水量、降水集中在哪个季节，以及在南半球还是北半球（北半球 7 月最热，南半球 1 月最热）。": [
+  "A temperature curve shows the mean temperature of each month and a precipitation bar chart shows the mean precipitation of each month. When reading the graphs, look at the temperatures of the hottest and coldest months (the annual range), the total yearly precipitation, which season the precipitation is concentrated in, and whether the place is in the Northern or Southern Hemisphere (in the Northern Hemisphere July is the hottest month, in the Southern Hemisphere January).",
+  "Une courbe de température montre la température moyenne de chaque mois et un diagramme en barres des précipitations montre les précipitations moyennes de chaque mois. En lisant les graphiques, regardez les températures du mois le plus chaud et du mois le plus froid (l'amplitude annuelle), le total annuel des précipitations, la saison où les précipitations se concentrent, et si le lieu est dans l'hémisphère Nord ou Sud (dans l'hémisphère Nord, juillet est le mois le plus chaud, dans l'hémisphère Sud, janvier)."
+ ],
+ "常见的气候类型：热带雨林、热带季风、热带草原、热带沙漠、亚热带季风、温带季风、温带大陆性、温带海洋性、地中海和极地、高原山地气候。": [
+  "Common climate types: tropical rainforest, tropical monsoon, tropical savanna, tropical desert, subtropical monsoon, temperate monsoon, temperate continental, temperate maritime, Mediterranean, polar, and plateau mountain climates.",
+  "Types de climat courants : forêt tropicale humide, mousson tropicale, savane tropicale, désert tropical, mousson subtropicale, mousson tempérée, continental tempéré, océanique tempéré, méditerranéen, polaire, et climats de montagne et de plateau."
+ ],
+ "影响气候的主要因素：纬度位置、海陆位置、地形地势、洋流和人类活动。选择一个观测站，读它的气温曲线和降水柱状图，判断气候类型。": [
+  "The main factors affecting climate: latitude, the position relative to land and sea, terrain and relief, ocean currents and human activity. Choose a weather station, read its temperature curve and precipitation bar chart, and decide the climate type.",
+  "Les principaux facteurs qui influencent le climat : la latitude, la position par rapport aux terres et aux mers, le relief, les courants océaniques et l'activité humaine. Choisissez une station météorologique, lisez sa courbe de température et son diagramme des précipitations, et déterminez le type de climat."
+ ],
+ "天气预报常用天气符号、气温、风向和风力表示。风向是风吹来的方向，风向标的箭头指向风吹来的方向；风力分 0～12 级。": [
+  "Weather forecasts commonly use weather symbols, temperature, wind direction and wind force. Wind direction is the direction the wind blows from, and the arrow of a wind vane points in the direction the wind comes from; wind force is graded 0–12.",
+  "Les prévisions météorologiques utilisent couramment des symboles météo, la température, la direction du vent et la force du vent. La direction du vent est la direction d'où le vent souffle, et la flèche d'une girouette pointe dans la direction d'où vient le vent ; la force du vent est graduée de 0 à 12."
+ ],
+ "降水按 24 小时降水量分级：小雨（小于 10 毫米）、中雨（10～24.9）、大雨（25～49.9）、暴雨（50～99.9）、大暴雨（100～249.9）、特大暴雨（250 以上）。": [
+  "Precipitation is graded by the amount in 24 hours: light rain (less than 10 mm), moderate rain (10–24.9), heavy rain (25–49.9), rainstorm (50–99.9), heavy rainstorm (100–249.9), extraordinary rainstorm (250 and above).",
+  "Les précipitations sont classées d'après la quantité tombée en 24 heures : pluie faible (moins de 10 mm), pluie modérée (10–24,9), pluie forte (25–49,9), pluie torrentielle (50–99,9), pluie très torrentielle (100–249,9), pluie exceptionnelle (250 et plus)."
+ ],
+ "气温日较差 = 一天中最高气温 − 最低气温。调整各项，看天气预报卡的变化。": [
+  "Daily temperature range = highest temperature of the day − lowest temperature. Adjust the items and see how the weather forecast card changes.",
+  "Amplitude thermique journalière = température la plus haute de la journée − température la plus basse. Modifiez les éléments et voyez comment change la carte de prévision météo."
+ ],
+ "人口自然增长率 = 出生率 − 死亡率（单位：‰ 换算为 %，除以 10）。自然增长率高的地区，人口增长快，人口金字塔底宽顶尖，称增长型；增长缓慢的为稳定型；出现负增长的为衰退型。": [
+  "Natural population growth rate = birth rate − death rate (unit: convert ‰ to % by dividing by 10). Where the natural growth rate is high, the population grows fast and the population pyramid has a wide base and a narrow top, called an expanding type; slow growth is a stable type; negative growth is a declining type.",
+  "Taux d'accroissement naturel de la population = taux de natalité − taux de mortalité (unité : on convertit les ‰ en % en divisant par 10). Là où le taux d'accroissement naturel est élevé, la population croît vite et la pyramide des âges a une base large et un sommet étroit : c'est le type en expansion ; une croissance lente est le type stable ; une croissance négative est le type en déclin."
+ ],
+ "人口密度 = 人口总数 ∕ 土地面积（人∕平方千米）。世界人口分布不均：东亚、南亚、西欧、北美东部稠密，极地、沙漠、高山和热带雨林稀疏。": [
+  "Population density = total population ∕ land area (people per square kilometre). The world's population is unevenly distributed: East Asia, South Asia, Western Europe and the east of North America are densely populated, while the poles, deserts, high mountains and tropical rainforests are sparsely populated.",
+  "Densité de population = population totale ∕ superficie (habitants par kilomètre carré). La population mondiale est répartie de façon inégale : l'Asie de l'Est, l'Asie du Sud, l'Europe occidentale et l'est de l'Amérique du Nord sont densément peuplés, tandis que les pôles, les déserts, les hautes montagnes et les forêts tropicales humides sont peu peuplés."
+ ],
+ "世界三大人种：黄种人、白种人、黑种人。联合国的六种工作语言：汉语、英语、法语、俄语、西班牙语和阿拉伯语。三大宗教：基督教、伊斯兰教、佛教。": [
+  "The world's three main races: Mongoloid, Caucasian and Negroid. The six working languages of the United Nations: Chinese, English, French, Russian, Spanish and Arabic. The three main religions: Christianity, Islam and Buddhism.",
+  "Les trois grandes races du monde : mongoloïde, caucasoïde et négroïde. Les six langues de travail des Nations unies : le chinois, l'anglais, le français, le russe, l'espagnol et l'arabe. Les trois grandes religions : le christianisme, l'islam et le bouddhisme."
+ ],
+ "聚落分为乡村和城市。调整出生率、死亡率和年数，看人口如何变化。": [
+  "Settlements are divided into rural and urban settlements. Adjust the birth rate, the death rate and the number of years to see how the population changes.",
+  "Les peuplements se divisent en peuplements ruraux et urbains. Modifiez le taux de natalité, le taux de mortalité et le nombre d'années pour voir comment la population évolue."
+ ],
+ "世界上的国家可以按经济发展水平分为发达国家和发展中国家。发达国家经济发达，人均国内生产总值高，大多在北半球；发展中国家数量多，主要分布在亚洲、非洲和拉丁美洲。": [
+  "The countries of the world can be divided by level of economic development into developed and developing countries. Developed countries have developed economies and a high GDP per head, and most of them are in the Northern Hemisphere; developing countries are many and are mainly in Asia, Africa and Latin America.",
+  "Les pays du monde peuvent être répartis, selon leur niveau de développement économique, en pays développés et pays en développement. Les pays développés ont une économie développée et un PIB par habitant élevé, et la plupart se trouvent dans l'hémisphère Nord ; les pays en développement sont nombreux et se trouvent surtout en Asie, en Afrique et en Amérique latine."
+ ],
+ "发达国家与发展中国家之间的差距，叫南北差距；发展中国家之间的合作叫南南合作；发达国家与发展中国家之间的对话叫南北对话。": [
+  "The gap between developed and developing countries is called the North–South gap; cooperation among developing countries is called South–South cooperation; dialogue between developed and developing countries is called North–South dialogue.",
+  "L'écart entre pays développés et pays en développement s'appelle le fossé Nord–Sud ; la coopération entre pays en développement s'appelle la coopération Sud–Sud ; le dialogue entre pays développés et pays en développement s'appelle le dialogue Nord–Sud."
+ ],
+ "图中每个点是一个国家：横轴是人均国内生产总值，纵轴是出生率。拖动分界线，看哪些国家在分界线以上。（数据为约数，仅供练习。）": [
+  "Each point in the picture is a country: the horizontal axis is GDP per head and the vertical axis is the birth rate. Drag the dividing line and see which countries are above it. (The data are rounded and for practice only.)",
+  "Chaque point de l'image est un pays : l'axe horizontal est le PIB par habitant et l'axe vertical est le taux de natalité. Faites glisser la ligne de séparation et voyez quels pays sont au-dessus. (Les données sont arrondies et ne servent qu'à s'exercer.)"
+ ],
+ "学习一个地区或国家，通常从位置、自然特征（地形、气候）、人文特征（人口、民族、语言）和经济特点几个方面入手。": [
+  "To study a region or a country, one usually starts from its position, its natural features (terrain and climate), its human features (population, ethnic groups and languages) and its economy.",
+  "Pour étudier une région ou un pays, on part en général de sa position, de ses caractéristiques naturelles (relief et climat), de ses caractéristiques humaines (population, groupes ethniques et langues) et de son économie."
+ ],
+ "本页选取了日本、东南亚、南亚、西亚、俄罗斯、欧洲西部、澳大利亚、美国、巴西等重要地区和国家，以及一些大国首都。点选地区，在经纬网上看位置，读要点。": [
+  "This page picks important regions and countries such as Japan, Southeast Asia, South Asia, West Asia, Russia, Western Europe, Australia, the United States and Brazil, and the capitals of some large countries. Tap a region, see its position on the grid of latitude and longitude, and read the key points.",
+  "Cette page retient des régions et des pays importants comme le Japon, l'Asie du Sud-Est, l'Asie du Sud, l'Asie occidentale, la Russie, l'Europe occidentale, l'Australie, les États-Unis et le Brésil, ainsi que les capitales de quelques grands pays. Touchez une région, voyez sa position sur le quadrillage de latitudes et de longitudes, et lisez les points essentiels."
+ ],
+ "更详细的世界地图，请到“地图”里练习。": [
+  "For a more detailed world map, go to “Maps” to practise.",
+  "Pour une carte du monde plus détaillée, rendez-vous dans « Cartes » pour vous exercer."
+ ],
+ "地球的岩石圈被分为六大板块：亚欧板块、非洲板块、美洲板块、太平洋板块、印度洋板块和南极洲板块。板块不断缓慢地运动，每年只有几厘米。": [
+  "The Earth's lithosphere is divided into six major plates: the Eurasian, African, American, Pacific, Indo-Australian and Antarctic plates. The plates move slowly all the time, only a few centimetres a year.",
+  "La lithosphère terrestre est divisée en six grandes plaques : eurasiatique, africaine, américaine, pacifique, indo-australienne et antarctique. Les plaques se déplacent lentement en permanence, de quelques centimètres seulement par an."
+ ],
+ "两个板块相互碰撞挤压，形成山脉（如喜马拉雅山脉）或海沟、岛弧；两个板块相互张裂，形成裂谷或海洋（如东非大裂谷、红海）。": [
+  "When two plates collide and press against each other, they form mountain ranges (such as the Himalayas) or trenches and island arcs; when two plates pull apart, they form rift valleys or oceans (such as the East African Rift and the Red Sea).",
+  "Quand deux plaques entrent en collision et se compriment, elles forment des chaînes de montagnes (comme l'Himalaya) ou des fosses et des arcs insulaires ; quand deux plaques s'écartent, elles forment des fossés d'effondrement ou des océans (comme le grand rift est-africain et la mer Rouge)."
+ ],
+ "地球内部积累的能量突然释放，引起地面震动，就是地震。地震波有纵波（P 波，约 6 千米∕秒）和横波（S 波，约 3.5 千米∕秒），纵波先到。震级每增加 1 级，释放的能量约增加 32 倍。": [
+  "When energy built up inside the Earth is suddenly released and shakes the ground, it is an earthquake. Seismic waves include longitudinal waves (P waves, about 6 km/s) and transverse waves (S waves, about 3.5 km/s); the longitudinal wave arrives first. Each increase of 1 in magnitude releases about 32 times more energy.",
+  "Quand l'énergie accumulée à l'intérieur de la Terre est brusquement libérée et fait trembler le sol, c'est un séisme. Les ondes sismiques comprennent les ondes longitudinales (ondes P, environ 6 km/s) et les ondes transversales (ondes S, environ 3,5 km/s) ; l'onde longitudinale arrive la première. Chaque augmentation de 1 de la magnitude libère environ 32 fois plus d'énergie."
+ ],
+ "世界火山、地震集中在板块交界处：环太平洋地带和地中海——喜马拉雅山地带。": [
+  "The world's volcanoes and earthquakes are concentrated at plate boundaries: the Circum-Pacific belt and the Mediterranean–Himalayan belt.",
+  "Les volcans et les séismes du monde sont concentrés aux limites des plaques : la ceinture circum-pacifique et la ceinture méditerranéo-himalayenne."
+ ],
+ "地球上的水处于不停的循环中。水循环的主要环节有蒸发、水汽输送、降水、地表径流、下渗和地下径流，植物的蒸腾也向大气输送水汽。": [
+  "The water on the Earth is in constant circulation. The main links of the water cycle are evaporation, water vapour transport, precipitation, surface runoff, infiltration and underground runoff; the transpiration of plants also carries water vapour into the atmosphere.",
+  "L'eau de la Terre est en circulation permanente. Les principaux maillons du cycle de l'eau sont l'évaporation, le transport de vapeur d'eau, les précipitations, le ruissellement de surface, l'infiltration et l'écoulement souterrain ; la transpiration des plantes apporte aussi de la vapeur d'eau à l'atmosphère."
+ ],
+ "水循环分为三种类型：海陆间循环（联系最密切，意义最大）、海上内循环和陆上内循环。": [
+  "The water cycle has three types: the sea–land cycle (the most closely linked and the most important), the cycle over the sea and the cycle over land.",
+  "Le cycle de l'eau comprend trois types : le cycle mer–terre (le plus étroitement lié et le plus important), le cycle au-dessus de la mer et le cycle au-dessus des terres."
+ ],
+ "太阳辐射是水循环的动力，重力也起作用。选择一个环节，观察它在图中的位置。": [
+  "Solar radiation is the driving force of the water cycle, and gravity also plays a part. Choose a link and see where it is in the picture.",
+  "Le rayonnement solaire est le moteur du cycle de l'eau, et la pesanteur joue aussi un rôle. Choisissez un maillon et voyez où il se trouve dans l'image."
+ ],
+ "地球内部分为地壳、地幔和地核三层。地壳最薄，平均厚度约 17 千米；地幔到约 2900 千米深处；地核又分为外核（液态）和内核（固态）。": [
+  "The inside of the Earth is divided into three layers: crust, mantle and core. The crust is the thinnest, about 17 km thick on average; the mantle goes down to about 2900 km; the core is divided into the outer core (liquid) and the inner core (solid).",
+  "L'intérieur de la Terre est divisé en trois couches : la croûte, le manteau et le noyau. La croûte est la plus mince, d'environ 17 km d'épaisseur en moyenne ; le manteau descend jusqu'à environ 2900 km de profondeur ; le noyau se divise en noyau externe (liquide) et noyau interne (solide)."
+ ],
+ "岩石圈包括地壳和上地幔顶部的坚硬岩石。岩石按成因分为岩浆岩（如花岗岩）、沉积岩（如石灰岩，常含化石）和变质岩（如大理岩）。": [
+  "The lithosphere includes the crust and the hard rock at the top of the upper mantle. By origin, rocks are divided into igneous rocks (such as granite), sedimentary rocks (such as limestone, which often contains fossils) and metamorphic rocks (such as marble).",
+  "La lithosphère comprend la croûte et la roche dure du sommet du manteau supérieur. Selon leur origine, les roches se divisent en roches magmatiques (comme le granite), roches sédimentaires (comme le calcaire, qui contient souvent des fossiles) et roches métamorphiques (comme le marbre)."
+ ],
+ "岩石循环：岩浆冷却凝固成岩浆岩；岩石经风化、侵蚀、搬运、沉积、固结成沉积岩；岩石在高温高压下变质成变质岩；再熔化成岩浆。": [
+  "The rock cycle: magma cools and solidifies into igneous rock; rock is weathered, eroded, transported, deposited and consolidated into sedimentary rock; rock changes under high temperature and pressure into metamorphic rock; and it melts again into magma.",
+  "Le cycle des roches : le magma refroidit et se solidifie en roche magmatique ; la roche est altérée, érodée, transportée, déposée et consolidée en roche sédimentaire ; la roche se transforme sous haute température et haute pression en roche métamorphique ; puis elle fond de nouveau en magma."
+ ],
+ "塑造地表形态的力量有内力（地壳运动、火山、地震）和外力（风化、侵蚀、搬运、沉积）。": [
+  "The forces that shape the surface of the Earth are internal forces (crustal movement, volcanoes, earthquakes) and external forces (weathering, erosion, transport, deposition).",
+  "Les forces qui façonnent la surface de la Terre sont les forces internes (mouvements de la croûte, volcans, séismes) et les forces externes (altération, érosion, transport, dépôt)."
+ ],
+ "自然资源分为可再生资源（如水、森林、太阳能）和不可再生资源（如煤、石油、天然气）。资源人均占有量 = 资源总量 ∕ 人口。": [
+  "Natural resources are divided into renewable resources (such as water, forests and solar energy) and non-renewable resources (such as coal, oil and natural gas). Resources per head = total resources ∕ population.",
+  "Les ressources naturelles se divisent en ressources renouvelables (comme l'eau, les forêts et l'énergie solaire) et ressources non renouvelables (comme le charbon, le pétrole et le gaz naturel). Ressources par habitant = ressources totales ∕ population."
+ ],
+ "环境问题包括大气污染、水污染、土地荒漠化、森林减少、全球变暖和生物多样性减少。可持续发展：既满足当代人的需求，又不损害后代满足其需求的能力。": [
+  "Environmental problems include air pollution, water pollution, desertification, loss of forests, global warming and loss of biodiversity. Sustainable development: meeting the needs of the present generation without harming the ability of later generations to meet their own needs.",
+  "Les problèmes d'environnement comprennent la pollution de l'air, la pollution de l'eau, la désertification, la diminution des forêts, le réchauffement climatique et la perte de biodiversité. Développement durable : répondre aux besoins de la génération actuelle sans nuire à la capacité des générations suivantes de répondre aux leurs."
+ ],
+ "调整能源结构的各项份额，看二氧化碳排放指数如何变化。（各燃料的排放系数为简化的相对值。）": [
+  "Adjust the shares of the energy mix and see how the carbon dioxide emission index changes. (The emission factors of the fuels are simplified relative values.)",
+  "Modifiez les parts du mix énergétique et voyez comment change l'indice d'émission de dioxyde de carbone. (Les facteurs d'émission des combustibles sont des valeurs relatives simplifiées.)"
+ ],
+ "我国位于亚洲东部、太平洋西岸，陆地面积约 960 万平方千米，居世界第三位。领土最北端在黑龙江漠河以北的黑龙江主航道中心线（约 53.5°N），最南端是南海的曾母暗沙（约 4°N），最东端是黑龙江与乌苏里江主航道汇合处（约 135°E），最西端在帕米尔高原（约 73°E）。": [
+  "China lies in eastern Asia, on the western shore of the Pacific, with a land area of about 9.6 million square kilometres, the third largest in the world. Its northernmost point is on the centre line of the main channel of the Heilongjiang north of Mohe (about 53.5°N), its southernmost point is Zengmu Ansha in the South China Sea (about 4°N), its easternmost point is where the main channels of the Heilongjiang and Wusuli River meet (about 135°E), and its westernmost point is on the Pamir Plateau (about 73°E).",
+  "La Chine est située dans l'est de l'Asie, sur la rive occidentale du Pacifique, avec une superficie terrestre d'environ 9,6 millions de kilomètres carrés, la troisième du monde. Son point le plus au nord se trouve sur la ligne médiane du chenal principal du Heilongjiang, au nord de Mohe (environ 53,5° N), son point le plus au sud est Zengmu Ansha en mer de Chine méridionale (environ 4° N), son point le plus à l'est est la confluence des chenaux principaux du Heilongjiang et de l'Oussouri (environ 135° E), et son point le plus à l'ouest se trouve sur le plateau du Pamir (environ 73° E)."
+ ],
+ "全国有 34 个省级行政区：4 个直辖市、23 个省、5 个自治区、2 个特别行政区。有 56 个民族，汉族约占总人口的 91%，少数民族分布呈“大杂居、小聚居”。": [
+  "The country has 34 province-level divisions: 4 municipalities, 23 provinces, 5 autonomous regions and 2 special administrative regions. There are 56 ethnic groups; the Han make up about 91% of the total population, and the minorities are spread in a pattern of “large mixed communities and small compact communities”.",
+  "Le pays compte 34 divisions de niveau provincial : 4 municipalités, 23 provinces, 5 régions autonomes et 2 régions administratives spéciales. Il y a 56 groupes ethniques ; les Han représentent environ 91 % de la population totale, et les minorités sont réparties selon le principe « grandes communautés mêlées et petites communautés compactes »."
+ ],
+ "我国东西跨经度约 60°，东部与西部的地方时相差约 4 小时，但全国统一使用北京时间（东八区区时）。点选一个城市，看它在中国经纬网上的位置。": [
+  "China spans about 60° of longitude from east to west, so the local times of the east and the west differ by about 4 hours, but the whole country uses Beijing time (the zone time of East 8). Tap a city to see its position on the grid of latitude and longitude of China.",
+  "La Chine s'étend sur environ 60° de longitude d'est en ouest ; l'heure locale de l'est et de l'ouest diffère donc d'environ 4 heures, mais tout le pays utilise l'heure de Pékin (l'heure du fuseau Est 8). Touchez une ville pour voir sa position sur le quadrillage de latitudes et de longitudes de la Chine."
+ ],
+ "我国地势西高东低，呈阶梯状分布，大致分为三级阶梯：第一级是青藏高原（平均海拔 4000 米以上）；第二级是内蒙古高原、黄土高原、云贵高原以及塔里木盆地、准噶尔盆地、四川盆地（海拔 1000～2000 米）；第三级是东北平原、华北平原、长江中下游平原和丘陵（海拔多在 500 米以下）。": [
+  "The terrain of China is high in the west and low in the east and descends in steps, roughly divided into three steps: the first step is the Qinghai–Tibet Plateau (average altitude above 4000 m); the second step is the Inner Mongolia Plateau, the Loess Plateau, the Yunnan–Guizhou Plateau and the Tarim, Junggar and Sichuan Basins (altitude 1000–2000 m); the third step is the Northeast Plain, the North China Plain, the plains of the middle and lower Yangtze and the hills (altitude mostly below 500 m).",
+  "Le relief de la Chine est élevé à l'ouest et bas à l'est et descend en gradins, divisés en gros en trois paliers : le premier palier est le plateau Qinghai–Tibet (altitude moyenne supérieure à 4000 m) ; le deuxième palier comprend le plateau de Mongolie-Intérieure, le plateau de lœss, le plateau Yunnan–Guizhou et les bassins du Tarim, de Dzoungarie et du Sichuan (altitude de 1000 à 2000 m) ; le troisième palier comprend la plaine du Nord-Est, la plaine de Chine du Nord, les plaines du moyen et du bas Yangzi et les collines (altitude le plus souvent inférieure à 500 m)."
+ ],
+ "一、二级阶梯的分界线是昆仑山—祁连山—横断山；二、三级阶梯的分界线是大兴安岭—太行山—巫山—雪峰山。": [
+  "The boundary between the first and second steps is the Kunlun Mountains–Qilian Mountains–Hengduan Mountains; the boundary between the second and third steps is the Greater Khingan Range–Taihang Mountains–Wu Mountains–Xuefeng Mountains.",
+  "La limite entre le premier et le deuxième palier est formée par les monts Kunlun, les monts Qilian et les monts Hengduan ; la limite entre le deuxième et le troisième palier est formée par le Grand Khingan, les monts Taihang, les monts Wu et les monts Xuefeng."
+ ],
+ "地势影响河流流向：许多大河自西向东流入海洋，在阶梯交界处落差大，水能资源丰富。拖动图中的标记，看它在第几级阶梯。（剖面为示意图。）": [
+  "The terrain affects the direction of rivers: many large rivers flow from west to east into the ocean, with great drops at the boundaries of the steps, so water-power resources are rich. Drag the marker in the picture and see which step it is on. (The profile is a schematic diagram.)",
+  "Le relief influence le sens d'écoulement des fleuves : beaucoup de grands fleuves coulent d'ouest en est jusqu'à l'océan, avec de fortes dénivellations aux limites des paliers, de sorte que les ressources hydroélectriques sont riches. Faites glisser le repère dans l'image et voyez sur quel palier il se trouve. (Le profil est un schéma.)"
+ ],
+ "中国的地形多种多样：山区面积广，平原、高原、盆地、丘陵、山地俱全。主要山脉按走向分为东西走向、南北走向、东北—西南走向等。": [
+  "The landforms of China are varied: mountainous areas are wide, and there are plains, plateaus, basins, hills and mountains. The main mountain ranges are divided by their direction into east–west, north–south, northeast–southwest ranges and so on.",
+  "Les reliefs de la Chine sont variés : les régions montagneuses sont vastes, et l'on trouve des plaines, des plateaux, des bassins, des collines et des montagnes. Les principales chaînes de montagnes se répartissent selon leur orientation en chaînes est–ouest, nord–sud, nord-est–sud-ouest, etc."
+ ],
+ "外流河最终注入海洋，如长江、黄河、珠江、黑龙江；内流河的水注入内陆湖泊或消失在沙漠中，如塔里木河。": [
+  "Exorheic rivers finally flow into the ocean, such as the Yangtze, Yellow River, Pearl River and Heilongjiang; the water of endorheic rivers flows into inland lakes or disappears in the desert, such as the Tarim River.",
+  "Les fleuves exoréiques se jettent finalement dans l'océan, comme le Yangzi, le fleuve Jaune, la rivière des Perles et le Heilongjiang ; l'eau des cours d'eau endoréiques se jette dans des lacs intérieurs ou disparaît dans le désert, comme le Tarim."
+ ],
+ "点选一个地理事物，在经纬网上看它的大致范围，读要点。": [
+  "Tap a geographical feature, see its approximate extent on the grid of latitude and longitude, and read the key points.",
+  "Touchez un élément géographique, voyez son étendue approximative sur le quadrillage de latitudes et de longitudes, et lisez les points essentiels."
+ ],
+ "我国的农业因地制宜：东部季风区以种植业为主，北方旱作、南方水田；西北牧业和灌溉农业；青藏高寒牧业。": [
+  "China's agriculture suits local conditions: the eastern monsoon region is mainly crop farming, with dry farming in the north and paddy fields in the south; the northwest has animal husbandry and irrigated agriculture; the Qinghai–Tibet region has high-cold pastoral farming.",
+  "L'agriculture chinoise s'adapte aux conditions locales : la région de la mousson de l'est pratique surtout les cultures, avec des cultures sèches au nord et des rizières au sud ; le nord-ouest a l'élevage et l'agriculture irriguée ; la région Qinghai–Tibet pratique l'élevage d'altitude et de froid."
+ ],
+ "主要工业基地有辽中南、京津唐、沪宁杭、珠江三角洲等；矿产与能源基地有山西煤炭、大庆石油、攀枝花钢铁等。": [
+  "The main industrial bases are the south–central Liaoning, Beijing–Tianjin–Tangshan, Shanghai–Nanjing–Hangzhou and the Pearl River Delta; the mineral and energy bases include Shanxi coal, Daqing oil and Panzhihua iron and steel.",
+  "Les principales bases industrielles sont le centre-sud du Liaoning, Pékin–Tianjin–Tangshan, Shanghai–Nankin–Hangzhou et le delta de la rivière des Perles ; les bases minières et énergétiques comprennent le charbon du Shanxi, le pétrole de Daqing et la sidérurgie de Panzhihua."
+ ],
+ "交通运输方式有铁路、公路、水运、航空和管道。铁路是综合运输的骨干，主要干线有京沪、京广、京哈、陇海、兰新等。": [
+  "The modes of transport are railways, roads, water transport, air transport and pipelines. Railways are the backbone of integrated transport, and the main trunk lines include Beijing–Shanghai, Beijing–Guangzhou, Beijing–Harbin, Longhai and Lanxin.",
+  "Les modes de transport sont le chemin de fer, la route, le transport par voie d'eau, le transport aérien et les pipelines. Le chemin de fer est l'épine dorsale des transports intégrés, et les principales lignes comprennent Pékin–Shanghai, Pékin–Canton, Pékin–Harbin, Longhai et Lanxin."
+ ],
+ "我国分为北方地区、南方地区、西北地区和青藏地区四大地理区域；香港、澳门、台湾是三个特殊的区域。划分的依据是自然和人文差异。": [
+  "China is divided into four major geographical regions: the Northern region, the Southern region, the Northwest region and the Qinghai–Tibet region; Hong Kong, Macao and Taiwan are three special regions. The division is based on natural and human differences.",
+  "La Chine est divisée en quatre grandes régions géographiques : la région du Nord, la région du Sud, la région du Nord-Ouest et la région Qinghai–Tibet ; Hong Kong, Macao et Taïwan sont trois régions particulières. La division repose sur des différences naturelles et humaines."
+ ],
+ "北方地区以旱地为主，南方地区以水田为主；西北地区干旱，畜牧业为主；青藏地区高寒，是“世界屋脊”。东部沿海地区经济较发达，西部地区相对落后，区域之间通过交通、通信和西气东输、南水北调等工程联系起来。": [
+  "The Northern region has mainly dry land and the Southern region mainly paddy fields; the Northwest region is arid and mainly pastoral; the Qinghai–Tibet region is high and cold, and is the “roof of the world”. The eastern coastal region has a fairly developed economy and the western region is relatively backward; the regions are linked by transport, communications and projects such as the West–East Gas Pipeline and the South–North Water Transfer.",
+  "La région du Nord a surtout des terres sèches et la région du Sud surtout des rizières ; la région du Nord-Ouest est aride et surtout pastorale ; la région Qinghai–Tibet est haute et froide, et c'est le « toit du monde ». La région côtière de l'est a une économie assez développée et la région de l'ouest est relativement en retard ; les régions sont reliées par les transports, les communications et des projets comme le gazoduc Ouest–Est et le transfert d'eau Sud–Nord."
+ ],
+ "点选地图上的省区，看它的简称、省会和特色；也可以按四大区域着色。（四大区域按省区近似着色，边界省区只作示意。）": [
+  "Tap a province on the map to see its abbreviation, its capital and its characteristics; the map can also be coloured by the four major regions. (The four regions are coloured approximately by province, and border provinces are only shown schematically.)",
+  "Touchez une province sur la carte pour voir son abréviation, son chef-lieu et ses particularités ; la carte peut aussi être colorée selon les quatre grandes régions. (Les quatre régions sont colorées approximativement par province, et les provinces limitrophes ne sont indiquées qu'à titre schématique.)"
+ ]
+}

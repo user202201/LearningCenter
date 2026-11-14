@@ -49,8 +49,9 @@ const FLAGS: Record<string, string> = {
   au: r(0, 0, 90, 60, NAVY) + jack(0, 0, 45, 30) + star(22.5, 45, 7, WHITE, -90, 7, 0.45) + star(67, 47, 3, WHITE) + star(58, 33, 3, WHITE) + star(76, 28, 3, WHITE) + star(67, 12, 3, WHITE) + star(70, 36, 1.8, WHITE),
   ca: V([RED, WHITE, RED], [1, 2, 1]) + poly([[45, 12], [48, 21], [54, 19], [52, 27], [58, 24], [56, 33], [60, 35], [47, 41], [47, 49], [43, 49], [43, 41], [30, 35], [34, 33], [32, 24], [38, 27], [36, 19], [42, 21]], RED),
   eg: H([RED, WHITE, BLACK]) + circ(45, 30, 4.5, "#C09300"),
+  // trigrams (no. of bars: 1 = solid, 0 = broken): top left Geon (three solid), top right Gam (broken, solid, broken), bottom left Ri (solid, broken, solid), bottom right Gon (three broken); the bars lie across the line to the centre
   kr: r(0, 0, 90, 60, WHITE) + `<path d="M31 30a14 14 0 0 1 28 0z" fill="${RED}"/><path d="M31 30a14 14 0 0 0 28 0z" fill="#0047A0"/>`
-    + [[10, 8], [80, 8], [10, 52], [80, 52]].map(([x, y]) => `<g transform="translate(${x} ${y}) rotate(${x < 40 ? (y < 30 ? -34 : 34) : y < 30 ? 34 : -34})">${r(-6, -5, 12, 2, BLACK)}${r(-6, -1, 12, 2, BLACK)}${r(-6, 3, 12, 2, BLACK)}</g>`).join(""),
+    + ([[10, 8, 1, 1, 1], [80, 8, 0, 1, 0], [10, 52, 1, 0, 1], [80, 52, 0, 0, 0]] as number[][]).map(([x, y, ...bars]) => `<g transform="translate(${x} ${y}) rotate(${x < 40 ? (y < 30 ? -56.3 : 56.3) : y < 30 ? 56.3 : -56.3})">${bars.map((solid, i) => solid ? r(-6, -5 + i * 4, 12, 2, BLACK) : r(-6, -5 + i * 4, 5, 2, BLACK) + r(1, -5 + i * 4, 5, 2, BLACK)).join("")}</g>`).join(""),
   kp: H([BLUE, WHITE, RED, WHITE, BLUE], [1, 0.2, 4.6, 0.2, 1]) + circ(30, 30, 11, WHITE) + star(30, 30, 9.5, RED),
   mn: V([RED, "#0066B3", RED]) + circ(15, 18, 3, YELLOW) + r(12, 22, 6, 14, YELLOW) + r(10, 38, 10, 2, YELLOW),
   th: H([RED, WHITE, "#2D2A4A", WHITE, RED], [1, 1, 2, 1, 1]),
@@ -67,7 +68,7 @@ const FLAGS: Record<string, string> = {
   kz: r(0, 0, 90, 60, "#00AFCA") + circ(48, 26, 8, YELLOW) + `<path d="M26 44Q48 52 70 44" stroke="${YELLOW}" stroke-width="3" fill="none"/>` + r(8, 8, 3, 44, YELLOW),
   pk: r(0, 0, 90, 60, "#01411C") + r(0, 0, 22.5, 60, WHITE) + crescent(56, 30, 14, WHITE, "#01411C") + star(64, 24, 5, WHITE, -50),
   ph: H(["#0038A8", "#CE1126"]) + poly([[0, 0], [52, 30], [0, 60]], WHITE) + circ(14, 30, 5, YELLOW) + star(5, 8, 3, YELLOW) + star(5, 52, 3, YELLOW) + star(40, 30, 3, YELLOW),
-  my: H([RED, WHITE, RED, WHITE, RED, WHITE, RED, WHITE, RED, WHITE, RED, WHITE, RED, WHITE]) + r(0, 0, 45, 32.2, "#010066") + crescent(17, 16, 9, YELLOW, "#010066") + star(26, 16, 6, YELLOW, -90, 14, 0.5),
+  my: H([RED, WHITE, RED, WHITE, RED, WHITE, RED, WHITE, RED, WHITE, RED, WHITE, RED, WHITE]) + r(0, 0, 45, 34.3, "#010066") + crescent(17, 17.1, 9, YELLOW, "#010066") + star(26, 17.1, 6, YELLOW, -90, 14, 0.5),
   mm: H([YELLOW, GREEN, "#EA2839"]) + star(45, 32, 19, WHITE),
   np: r(0, 0, 90, 60, WHITE) + poly([[26, 2], [66, 28], [48, 28], [66, 58], [26, 58]], "#003893") + poly([[29.5, 7], [58, 26.5], [42, 26.5], [58, 53], [29.5, 53]], "#DC143C") + circ(38, 20, 3.5, WHITE) + circ(38, 42, 4.5, WHITE),
   ir: H(["#239F40", WHITE, "#DA0000"]) + circ(45, 30, 5, "#DA0000") + r(44, 24, 2, 12, "#DA0000"),
@@ -86,6 +87,7 @@ const FLAGS: Record<string, string> = {
   co: H([YELLOW, "#003893", "#CE1126"], [2, 1, 1]),
   la: H(["#CE1126", "#002868", "#CE1126"], [1, 2, 1]) + circ(45, 30, 10, WHITE),
   bt: r(0, 0, 90, 60, YELLOW) + poly([[0, 60], [90, 0], [90, 60]], "#FF4E12") + `<path d="M26 40Q40 22 60 32Q50 44 36 46Z" fill="${WHITE}"/>`,
+  // Afghanistan: the black-red-green tricolour of the former republic (the flag the UN and the other reference lists still show), emblem reduced to a white disc; the Taliban banner of 2021 is not used
   af: V([BLACK, "#BE0000", "#007A36"]) + circ(45, 30, 8, WHITE),
   tj: H(["#CC0000", WHITE, "#006600"], [2, 3, 2]) + star(45, 30, 7, "#F8C300", -90, 7, 0.45),
   kg: r(0, 0, 90, 60, "#E8112D") + circ(45, 30, 13, YELLOW) + circ(45, 30, 9, "#E8112D") + star(45, 30, 18, YELLOW, -90, 40, 0.88) + circ(45, 30, 8.4, "#E8112D"),
@@ -108,7 +110,7 @@ const FLAGS: Record<string, string> = {
   gr: H(["#0D5EAF", WHITE, "#0D5EAF", WHITE, "#0D5EAF", WHITE, "#0D5EAF", WHITE, "#0D5EAF"]) + r(0, 0, 33.3, 33.4, "#0D5EAF") + r(13.3, 0, 6.7, 33.4, WHITE) + r(0, 13.3, 33.3, 6.7, WHITE),
   ch: `<rect width="90" height="60" fill="${WHITE}"/>` + r(15, 0, 60, 60, "#DA291C") + r(40, 12, 10, 36, WHITE) + r(27, 25, 36, 10, WHITE),
   fi: nordic(WHITE, "#003580"),
-  pg: r(0, 0, 90, 60, BLACK) + poly([[0, 0], [90, 0], [90, 60]], "#CE1126") + [[22, 14], [14, 30], [30, 30], [22, 46], [12, 52]].map(([x, y]) => star(x, y, 3.6, WHITE)).join(""),
+  pg: r(0, 0, 90, 60, BLACK) + poly([[0, 0], [90, 0], [90, 60]], "#CE1126") + [[22, 22], [14, 36], [30, 36], [22, 50], [12, 52]].map(([x, y]) => star(x, y, 3.6, WHITE)).join(""),
   uz: H(["#0099B5", "#CE1126", WHITE, "#CE1126", "#1EB53A"], [10, 0.5, 9, 0.5, 10]) + crescent(12, 9, 5, WHITE, "#0099B5"),
   mg: r(0, 0, 90, 60, WHITE) + r(30, 0, 60, 30, "#FC3D32") + r(30, 30, 60, 30, "#007E3A"),
   ro: V(["#002B7F", "#FCD116", "#CE1126"]),
