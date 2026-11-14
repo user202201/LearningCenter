@@ -296,8 +296,8 @@
   "La force produite lorsqu'un objet subit une déformation élastique s'appelle la force élastique. Dans la limite d'élasticité, l'allongement d'un ressort est proportionnel à la force de traction : F = kx. Le dynamomètre est fondé sur ce principe ; au-delà de la limite d'élasticité, le ressort ne peut plus reprendre sa longueur initiale."
  ],
  "重力是由于地球的吸引而使物体受到的力，方向竖直向下，大小 G = mg。地球上 g = 9.8 N/kg，粗略计算时取 10 N/kg，本实验室取 g = 10 N/kg；月球上的 g 约为地球上的六分之一。质量是物体所含物质的多少，不随位置改变；重力会随位置改变。": [
-  "Weight is the force on an object caused by the Earth's attraction; its direction is vertically downward and its size is G = mg. On the Earth g = 9.8 N/kg, and 10 N/kg is used for rough calculations; this lab takes g = 10 N/kg. On the Moon g is about one sixth of that on the Earth. Mass is the amount of matter in an object and does not change with position; weight changes with position.",
-  "Le poids est la force exercée sur un objet du fait de l'attraction de la Terre ; sa direction est verticale, vers le bas, et sa valeur est P = mg. Sur la Terre g = 9,8 N/kg, et l'on prend 10 N/kg pour les calculs approchés ; ce laboratoire prend g = 10 N/kg. Sur la Lune, g vaut environ un sixième de cette valeur. La masse est la quantité de matière d'un objet et ne change pas avec le lieu ; le poids change avec le lieu."
+  "Weight is the force on an object caused by the Earth's attraction; its direction is vertically downward and its size is G = mg. On the Earth g = 10 N/kg, and 10 N/kg is used for rough calculations; this lab takes g = 10 N/kg. On the Moon g is about one sixth of that on the Earth. Mass is the amount of matter in an object and does not change with position; weight changes with position.",
+  "Le poids est la force exercée sur un objet du fait de l'attraction de la Terre ; sa direction est verticale, vers le bas, et sa valeur est P = mg. Sur la Terre g = 10 N/kg, et l'on prend 10 N/kg pour les calculs approchés ; ce laboratoire prend g = 10 N/kg. Sur la Lune, g vaut environ un sixième de cette valeur. La masse est la quantité de matière d'un objet et ne change pas avec le lieu ; le poids change avec le lieu."
  ],
  "测小灯泡的电功率：电压表示数 {0} V，电流表示数 {1} A，小灯泡的实际功率是多少？": [
   "Measuring the electric power of a small bulb: the voltmeter reads {0} V and the ammeter reads {1} A. What is the actual power of the bulb?",
@@ -361,7 +361,7 @@
  ],
  "体积 {0} cm³ 的物体浸没在水中（密度 1000 kg/m³），受到的浮力是多少？（g = 10 N/kg）": [
   "An object of volume {0} cm³ is fully immersed in water (density 1000 kg/m³). What is the buoyant force on it? (g = 10 N/kg)",
-  "Un objet de volume {0} cm³ est complètement immergé dans l'eau (masse volumique 1000 kg/m³). Quelle est la poussée qu'il subit ? (g = 9,8 N/kg)"
+  "Un objet de volume {0} cm³ est complètement immergé dans l'eau (masse volumique 1000 kg/m³). Quelle est la poussée qu'il subit ? (g = 10 N/kg)"
  ],
  "F浮 = ρ液gV排。": [
   "F_buoyancy = ρ_liquid g V_displaced.",
@@ -385,7 +385,7 @@
  ],
  "质量 {0} kg 的物体漂浮在水面上，受到的浮力是多少？（g = 10 N/kg）": [
   "An object of mass {0} kg floats on water. What is the buoyant force on it? (g = 10 N/kg)",
-  "Un objet de masse {0} kg flotte sur l'eau. Quelle est la poussée qu'il subit ? (g = 9,8 N/kg)"
+  "Un objet de masse {0} kg flotte sur l'eau. Quelle est la poussée qu'il subit ? (g = 10 N/kg)"
  ],
  "漂浮时 F浮 = G = mg。": [
   "When floating, F_buoyancy = G = mg.",
@@ -661,7 +661,7 @@
  ],
  "质量 {0} kg 的物体被举高 {1} m，增加的重力势能是多少？（g = 10 N/kg）": [
   "An object of mass {0} kg is lifted {1} m. By how much does its gravitational potential energy increase? (g = 10 N/kg)",
-  "Un objet de masse {0} kg est soulevé de {1} m. De combien augmente son énergie potentielle de pesanteur ? (g = 9,8 N/kg)"
+  "Un objet de masse {0} kg est soulevé de {1} m. De combien augmente son énergie potentielle de pesanteur ? (g = 10 N/kg)"
  ],
  "质量 {0} kg 的物体以 {1} m/s 运动，动能是多少？": [
   "An object of mass {0} kg moves at {1} m/s. What is its kinetic energy?",
@@ -669,7 +669,7 @@
  ],
  "不计空气阻力，物体从 {0} m 高处自由下落，落地时的速度是多少？（g = 10 m/s²）": [
   "Ignoring air resistance, an object falls freely from a height of {0} m. What is its speed when it reaches the ground? (g = 10 m/s²)",
-  "En négligeant la résistance de l'air, un objet tombe en chute libre d'une hauteur de {0} m. Quelle est sa vitesse en arrivant au sol ? (g = 9,8 m/s²)"
+  "En négligeant la résistance de l'air, un objet tombe en chute libre d'une hauteur de {0} m. Quelle est sa vitesse en arrivant au sol ? (g = 10 m/s²)"
  ],
  "机械能守恒：mgh = ½mv²。": [
   "Conservation of mechanical energy: mgh = ½mv².",
@@ -893,7 +893,7 @@
  ],
  "水平地面上质量 {0} kg 的物体，与地面的动摩擦因数为 {1}，滑动时受到的摩擦力是多少？（g = 10 N/kg）": [
   "An object of mass {0} kg lies on level ground, and the coefficient of kinetic friction with the ground is {1}. What is the friction when it slides? (g = 10 N/kg)",
-  "Un objet de masse {0} kg repose sur un sol horizontal, et le coefficient de frottement dynamique avec le sol est {1}. Quel est le frottement lorsqu'il glisse ? (g = 9,8 N/kg)"
+  "Un objet de masse {0} kg repose sur un sol horizontal, et le coefficient de frottement dynamique avec le sol est {1}. Quel est le frottement lorsqu'il glisse ? (g = 10 N/kg)"
  ],
  "f = μN，水平面上 N = mg。": [
   "f = μN, and on a level surface N = mg.",
@@ -913,11 +913,11 @@
  ],
  "质量 {0} kg 的物体放在倾角为 {1}° 的斜面上，斜面对它的支持力是多少？（g = 10 N/kg）": [
   "An object of mass {0} kg lies on an incline of angle {1}°. What is the normal force of the incline on it? (g = 10 N/kg)",
-  "Un objet de masse {0} kg repose sur un plan incliné d'angle {1}°. Quelle est la réaction normale du plan sur l'objet ? (g = 9,8 N/kg)"
+  "Un objet de masse {0} kg repose sur un plan incliné d'angle {1}°. Quelle est la réaction normale du plan sur l'objet ? (g = 10 N/kg)"
  ],
  "要使质量 {0} kg 的物体在水平面上做匀速直线运动（动摩擦因数 {1}），水平拉力应为多少？（g = 10 N/kg）": [
   "What horizontal pull makes an object of mass {0} kg move in a straight line at constant speed on a level surface (coefficient of kinetic friction {1})? (g = 10 N/kg)",
-  "Quelle force de traction horizontale faut-il pour qu'un objet de masse {0} kg se déplace en ligne droite à vitesse constante sur une surface horizontale (coefficient de frottement dynamique {1}) ? (g = 9,8 N/kg)"
+  "Quelle force de traction horizontale faut-il pour qu'un objet de masse {0} kg se déplace en ligne droite à vitesse constante sur une surface horizontale (coefficient de frottement dynamique {1}) ? (g = 10 N/kg)"
  ],
  "匀速时，拉力等于滑动摩擦力。": [
   "At constant speed, the pull equals the sliding friction.",
@@ -1325,11 +1325,11 @@
  ],
  "小车以 {0} m/s 的速度冲上粗糙水平面（动摩擦因数 {1}），滑行多远才停下？（g = 10 m/s²）": [
   "A trolley runs onto a rough horizontal surface at {0} m/s (coefficient of kinetic friction {1}). How far does it slide before stopping? (g = 10 m/s²)",
-  "Un chariot arrive à {0} m/s sur une surface horizontale rugueuse (coefficient de frottement dynamique {1}). Sur quelle distance glisse-t-il avant de s'arrêter ? (g = 9,8 m/s²)"
+  "Un chariot arrive à {0} m/s sur une surface horizontale rugueuse (coefficient de frottement dynamique {1}). Sur quelle distance glisse-t-il avant de s'arrêter ? (g = 10 m/s²)"
  ],
  "小车以 {0} m/s 的速度冲上粗糙水平面（动摩擦因数 {1}），经过多少秒停下？（g = 10 m/s²）": [
   "A trolley runs onto a rough horizontal surface at {0} m/s (coefficient of kinetic friction {1}). After how many seconds does it stop? (g = 10 m/s²)",
-  "Un chariot arrive à {0} m/s sur une surface horizontale rugueuse (coefficient de frottement dynamique {1}). Au bout de combien de secondes s'arrête-t-il ? (g = 9,8 m/s²)"
+  "Un chariot arrive à {0} m/s sur une surface horizontale rugueuse (coefficient de frottement dynamique {1}). Au bout de combien de secondes s'arrête-t-il ? (g = 10 m/s²)"
  ],
  "一个物体受到两个力而处于平衡状态，其中一个力是 {0} N，另一个力的大小是多少？": [
   "An object acted on by two forces is in equilibrium, and one of the forces is {0} N. What is the size of the other force?",
@@ -1401,7 +1401,7 @@
  ],
  "水（密度 1000 kg/m³）中深度 {0} m 处，液体产生的压强是多少？（g = 10 N/kg）": [
   "In water (density 1000 kg/m³) at a depth of {0} m, what is the pressure produced by the liquid? (g = 10 N/kg)",
-  "Dans l'eau (masse volumique 1000 kg/m³), à une profondeur de {0} m, quelle est la pression due au liquide ? (g = 9,8 N/kg)"
+  "Dans l'eau (masse volumique 1000 kg/m³), à une profondeur de {0} m, quelle est la pression due au liquide ? (g = 10 N/kg)"
  ],
  "{0} N 的压力作用在 {1} cm² 的面积上，压强是多少？": [
   "A force of {0} N acts on an area of {1} cm². What is the pressure?",
@@ -1413,7 +1413,7 @@
  ],
  "标准大气压约为 1.013×10⁵ Pa，它能支持多高的水柱？（水的密度 1000 kg/m³，g = 10 N/kg）": [
   "Standard atmospheric pressure is about 1.013×10⁵ Pa. How high a column of water can it support? (Density of water 1000 kg/m³, g = 10 N/kg)",
-  "La pression atmosphérique normale est d'environ 1,013×10⁵ Pa. Quelle hauteur de colonne d'eau peut-elle soutenir ? (Masse volumique de l'eau 1000 kg/m³, g = 9,8 N/kg)"
+  "La pression atmosphérique normale est d'environ 1,013×10⁵ Pa. Quelle hauteur de colonne d'eau peut-elle soutenir ? (Masse volumique de l'eau 1000 kg/m³, g = 10 N/kg)"
  ],
  "h = p / (ρg)，水柱约 10 m 高。": [
   "h = p / (ρg); the water column is about 10 m high.",
@@ -1421,7 +1421,7 @@
  ],
  "水中某处液体压强为 {0} kPa，该处的深度是多少？（g = 10 N/kg）": [
   "The pressure of the liquid at a point in water is {0} kPa. What is the depth of that point? (g = 10 N/kg)",
-  "La pression du liquide en un point de l'eau est {0} kPa. Quelle est la profondeur de ce point ? (g = 9,8 N/kg)"
+  "La pression du liquide en un point de l'eau est {0} kPa. Quelle est la profondeur de ce point ? (g = 10 N/kg)"
  ],
  "压力不变，受力面积变为原来的 1/{0}，压强变为原来的：": [
   "The force stays the same and the area becomes 1/{0} of what it was. The pressure becomes:",
@@ -1673,7 +1673,7 @@
  ],
  "质量 {0} kg 的物体在地球上受到的重力是多少？（g = 10 N/kg）": [
   "What is the weight of an object of mass {0} kg on the Earth? (g = 10 N/kg)",
-  "Quel est le poids d'un objet de masse {0} kg sur la Terre ? (g = 9,8 N/kg)"
+  "Quel est le poids d'un objet de masse {0} kg sur la Terre ? (g = 10 N/kg)"
  ],
  "质量 {0} kg 的宇航员在月球上受到的重力是多少？（月球上 g = 1.6 N/kg）": [
   "What is the weight of an astronaut of mass {0} kg on the Moon? (On the Moon g = 1.6 N/kg)",
@@ -1693,7 +1693,7 @@
  ],
  "物体在地球上受到的重力是 {0} N，它的质量是多少？（g = 10 N/kg）": [
   "The weight of an object on the Earth is {0} N. What is its mass? (g = 10 N/kg)",
-  "Le poids d'un objet sur la Terre est {0} N. Quelle est sa masse ? (g = 9,8 N/kg)"
+  "Le poids d'un objet sur la Terre est {0} N. Quelle est sa masse ? (g = 10 N/kg)"
  ],
  "弹簧受 {0} N 的拉力时伸长 {1} m，弹簧的劲度系数是多少？": [
   "A spring extends by {1} m under a pull of {0} N. What is the spring constant?",

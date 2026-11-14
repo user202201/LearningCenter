@@ -313,6 +313,36 @@ const CJK = /[㐀-鿿]/;
     }
     res.info.strength = { easy: easyWins / strengthGames, hard: hardWins / strengthGames };
     res.info.stats = stats; res.info.perLevel = perLevel;
+    // every seat takes part: 300 games per level, same level at all three seats (the first bidder rotates)
+    const seatStats = {};
+    for (const lv of [1, 2, 3]) {
+      const z = [0, 0, 0], pl = [0, 0, 0]; let n = 0, lw = 0;
+      for (let g = 0; g < 400 && n < 300; g++) {
+        const r3 = M.mulberry(70000 + 977 * lv + g); let st = M.newDeal(r3, g % 3), ok3 = true;
+        while (st.phase === 'bid') { const seat = st.turn, v = M.aiBid(st.hands[seat], st.high, lv, r3); if (M.bid(st, seat, v) === 'redeal') { ok3 = false; break; } }
+        if (!ok3) continue;
+        let guard = 0;
+        while (st.phase === 'play' && guard++ < 700) { const seat = st.turn, cs = M.aiPlay(st, seat, lv, r3); if (cs) M.play(st, seat, cs); else M.pass(st, seat); }
+        if (st.phase !== 'over') { bad('a game of level ' + lv + ' did not end'); continue; }
+        n++; if (st.winner === st.landlord) lw++;
+        for (let k = 0; k < 3; k++) { const seat = (st.landlord + k) % 3; pl[k] += st.plays[seat]; if (!st.plays[seat]) z[k]++; }
+      }
+      seatStats[lv] = { n, lw: lw / n, zero: z.map((x) => x / n), avg: pl.map((x) => x / n) };
+    }
+    const mixedLandlord = (a, b) => {   // landlord of level a against two peasants of level b: the landlord's win share
+      let n = 0, lw = 0;
+      for (let g = 0; g < 300; g++) {
+        const r4 = M.mulberry(80000 + g * 3 + a * 10 + b); let st = M.newDeal(r4, g % 3), ok4 = true;
+        while (st.phase === 'bid') { const seat = st.turn, v = M.aiBid(st.hands[seat], st.high, Math.max(a, b), r4); if (M.bid(st, seat, v) === 'redeal') { ok4 = false; break; } }
+        if (!ok4) continue;
+        let guard = 0;
+        while (st.phase === 'play' && guard++ < 700) { const seat = st.turn, cs = M.aiPlay(st, seat, seat === st.landlord ? a : b, r4); if (cs) M.play(st, seat, cs); else M.pass(st, seat); }
+        if (st.phase === 'over') { n++; if (st.winner === st.landlord) lw++; }
+      }
+      return lw / n;
+    };
+    res.info.seatStats = seatStats;
+    res.info.mixed = { l3p2: mixedLandlord(3, 2), l2p3: mixedLandlord(2, 3), l2p1: mixedLandlord(2, 1), l1p2: mixedLandlord(1, 2) };
     // hints: a legal play that beats the table, the smallest first
     s = mk([[rankId(3, 0), rankId(7, 0), rankId(9, 0), rankId(15, 0)], [rankId(8, 0)], [rankId(4, 0)]], 0);
     M.play(s, 0, [rankId(7, 0)]); M.pass(s, 1); M.pass(s, 2);
@@ -334,6 +364,14 @@ const CJK = /[㐀-鿿]/;
   ok(R.info.longMs < 8000, 'a 20 card hand is enumerated quickly: ' + R.info.longMs + ' ms for 40 hands');
   ok(R.info.stats.games >= 360, 'computer games played: ' + R.info.stats.games + ' (' + R.info.stats.moves + ' moves, ' + R.info.stats.bombs + ' bombs, ' + R.info.stats.springs + ' springs, ' + R.info.stats.redeals + ' redeals)');
   ok(R.info.stats.bombs > 20 && R.info.stats.redeals >= 0, 'bombs and rockets do occur in the games');
+  for (const lv of [2, 3]) {
+    const q = R.info.seatStats[lv], names = ['landlord', 'first peasant', 'second peasant'];
+    ok(q.zero.every((x) => x <= 0.05), 'level ' + lv + ': no seat sits through a whole game without playing (zero-play share ' + q.zero.map((x, i) => names[i] + ' ' + (100 * x).toFixed(1) + '%').join(', ') + ')');
+    ok(q.avg.every((x) => x >= 4), 'level ' + lv + ': every seat plays at least 4 times a game (' + q.avg.map((x) => x.toFixed(1)).join(' / ') + ')');
+  }
+  for (const lv of [1, 2, 3]) { const q = R.info.seatStats[lv]; ok(q.lw >= 0.35 && q.lw <= 0.65 && q.n >= 250, 'level ' + lv + ': the landlord wins ' + (100 * q.lw).toFixed(0) + '% of ' + q.n + ' games (35-65%)'); }
+  ok(R.info.seatStats[1].zero.every((x) => x <= 0.08), 'level 1: the zero-play share of every seat is small (' + R.info.seatStats[1].zero.map((x) => (100 * x).toFixed(1) + '%').join(', ') + ')');
+  ok(R.info.mixed.l3p2 > 0.6 && R.info.mixed.l2p3 < 0.45 && R.info.mixed.l2p1 > 0.7 && R.info.mixed.l1p2 < 0.3, 'hard > normal > easy in both roles: landlord 3 vs peasants 2 ' + R.info.mixed.l3p2.toFixed(2) + ', 2 vs 3 ' + R.info.mixed.l2p3.toFixed(2) + ', 2 vs 1 ' + R.info.mixed.l2p1.toFixed(2) + ', 1 vs 2 ' + R.info.mixed.l1p2.toFixed(2));
   ok(R.info.strength.hard > R.info.strength.easy + 0.03, 'the hard players beat the easy one more often: easy ' + R.info.strength.easy.toFixed(2) + ' vs hard ' + R.info.strength.hard.toFixed(2));
 
   // ================================================================ 2. the screen

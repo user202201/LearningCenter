@@ -1437,7 +1437,7 @@ async function renderSettings() {
 }
 
 async function signOut() {
-  if (!(await confirmDlg("退出登录？", "本设备上保存的令牌将被删除，数据仍保留在 GitHub 上。", "退出"))) return;
+  if (!(await confirmDlg("退出登录？", "本设备上保存的令牌将被删除，数据仍保留在 GitHub 上。", "退出登录"))) return;
   api.logout();
   toast("已退出登录");
   restart();
