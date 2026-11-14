@@ -341,7 +341,7 @@ export function handStrength(hand: number[]): number {
   return s;
 }
 export function aiBid(hand: number[], high: number, level: Level, rng: Rng): number {
-  const st = handStrength(hand) + (rng() - 0.5) * (level === 1 ? 4 : 3);
+  const st = handStrength(hand) + (rng() - 0.5) * (level === 1 ? 4 : level === 2 ? 8 : 9);
   const want = st >= 7 ? 3 : st >= 5 ? 2 : st >= 3.5 ? 1 : 0;
   return want > high ? want : 0;
 }
@@ -378,6 +378,7 @@ export function estTurns(cnt: number[], depth = 0): number {
   return t + best;
 }
 const without = (cnt: number[], cards: number[]): number[] => { const c = cnt.slice(); for (const x of cards) c[rankOf(x)]--; return c; };
+const LEAD_RANK_W = 0.25;   // a hard computer landlord prefers low plays to big ones when the number of turns is about the same
 const isBombLike = (cb: Combo): boolean => cb.type === "bomb" || cb.type === "rocket";
 const cls = (cards: number[]): Combo => classify(cards)!;
 const mate = (s: DZState, a: number, b: number): boolean => a !== s.landlord && b !== s.landlord && a !== b;
@@ -416,7 +417,7 @@ export function aiPlay(s: DZState, seat: number, level: Level, rng: Rng): number
     let best: number[] = pool[0], bv = Infinity, br = Infinity;
     for (const c of pool) {
       const cb = cls(c);
-      const v = estTurns(without(cnt, c)) + (cb.type === "single" || cb.type === "pair" ? 0.01 * cb.rank : 0);
+      const v = estTurns(without(cnt, c)) + (cb.type === "single" || cb.type === "pair" ? 0.01 * cb.rank : 0) + LEAD_RANK_W * cb.rank;
       if (v < bv - 1e-9 || (Math.abs(v - bv) < 1e-9 && cb.rank < br)) { best = c; bv = v; br = cb.rank; }
     }
     return best;
@@ -440,7 +441,7 @@ export function aiPlay(s: DZState, seat: number, level: Level, rng: Rng): number
     let best: number[] = calm[0], bv = Infinity, br = Infinity;
     for (const c of calm) {
       const cb = cls(c);
-      if (level === 3 && cb.rank >= 15 && cb.n <= 2 && tableSmall > 6 && calm.some((d) => cls(d).rank < 15 || cls(d).n > 2)) continue;   // keep the 2s and jokers while the landlord still has many cards
+      if (level === 3 && cb.rank >= 14 && cb.n <= 2 && tableSmall > 6 && table.combo.rank <= 11 && calm.some((d) => cls(d).rank < 15 || cls(d).n > 2)) continue;   // keep the 2s and jokers while the landlord still has many cards
       const v = level === 2 ? 0 : estTurns(without(cnt, c));
       if (v < bv - 1e-9 || (Math.abs(v - bv) < 1e-9 && cb.rank < br)) { best = c; bv = v; br = cb.rank; }
     }
@@ -451,7 +452,7 @@ export function aiPlay(s: DZState, seat: number, level: Level, rng: Rng): number
       return best;
     }
     const after = estTurns(without(cnt, best)), before = estTurns(cnt);
-    if (cb.rank >= 15 && cb.n <= 2 && tableSmall > 6) return bombs.length && bombOk(bombs[0]) ? bombs[0] : null;
+    if (cb.rank >= 14 && cb.n <= 2 && tableSmall > 6 && table.combo.rank <= 11) return bombs.length && bombOk(bombs[0]) ? bombs[0] : null;
     if (after <= before || tableSmall <= 5) return best;
     return bombs.length && bombOk(bombs[0]) ? bombs[0] : null;
   }
@@ -469,7 +470,7 @@ function aiFollowMate(s: DZState, seat: number, level: Level, rng: Rng, table: T
   const mateLeft = s.hands[table.by].length;
   if (mateLeft <= 3) return null;                                  // the partner is about to go out
   if (isBombLike(tb)) return null;
-  const light = (tb.type === "single" || tb.type === "pair" || tb.type === "triple" || tb.type === "triple1" || tb.type === "triple2") && tb.rank <= 11;
+  const light = (tb.type === "single" || tb.type === "pair" || tb.type === "triple" || tb.type === "triple1" || tb.type === "triple2") && tb.rank <= (level === 3 ? 12 : 11);
   if (!light) return null;                                         // a high card or a long shape: let it stand
   if (level === 1 && rng() < 0.75) return null;
   const before = estTurns(cnt), fresh = s.plays[seat] === 0 && s.moves >= 3;
