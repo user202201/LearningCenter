@@ -53,6 +53,17 @@
       "sel": "tx-(str|com)",
       "kind": "text",
       "reason": "Program text: string literals and comments inside the example Python programs of the text-coding lessons and workshop (the program prints exactly this text; the level checks compare it)."
+    },
+    {
+      "route": "^#/games/xiangqi",
+      "sel": "^text < ",
+      "kind": "userbox",
+      "reason": "The characters on the Chinese-chess (xiangqi) pieces (车 马 象 士 将 炮 卒 ...) and the river legend 楚河 汉界 are part of the real game's pieces and board; the screens, messages and move names around them are translated."
+    },
+    {
+      "text": "^\"(你好，世界|第二行)\"$",
+      "kind": "text",
+      "reason": "A string literal in the example Python program of a text-coding lesson (the lesson's demo prints this Chinese text, as the task asks)."
     }
   ]
 }
