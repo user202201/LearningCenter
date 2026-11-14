@@ -267,7 +267,7 @@ export const renderPhysics = () => import("./physlab").then((m) => m.renderLab(X
 export const renderPhysSim = (id: string) => import("./physlab").then((m) => m.renderSim(X, id));
 // ---------- the biology lab (simulations of the junior-high biology course), in its own module ----------
 /** the biology lab card is shown only when this is true: the lead sets it to true when the lab is finished, translated and tested (the card is hidden on purpose until then) */
-const BIO_READY = false;
+const BIO_READY = true;
 export const renderBio = () => import("./biolab").then((m) => m.renderLab(X));
 export const renderBioSim = (id: string) => import("./biolab").then((m) => m.renderSim(X, id));
 // ---------- the geography lab (modules of the primary-school and junior-high geography), in its own module ----------

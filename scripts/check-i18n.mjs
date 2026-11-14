@@ -14,7 +14,7 @@ const texts = new Map();
 // the games (src/games/*.ts, one module each) are checked too
 // TEMPORARY (lead): src/bio is NOT scanned yet because the biology lab is unfinished and would block every deploy: the biology agent / the lead must add "bio" back to the list below when src/i18n-extra/biolab.json is merged.
 // the physics lab (src/phys) and the biology lab (src/bio) too: their UI texts (labels, tasks, readouts, canvas labels) are translated; their CONTENT (lessons, quiz questions and the tables only the quizzes use) is not, it is shown in `user` boxes
-const files = [...fs.readdirSync(dir), ...["games", "phys", ...(process.env.CHECK_BIO ? ["bio"] : [])].flatMap((d) => (fs.existsSync(path.join(dir, d)) ? fs.readdirSync(path.join(dir, d)).map((x) => `${d}/${x}`) : []))];
+const files = [...fs.readdirSync(dir), ...["games", "phys", "bio"].flatMap((d) => (fs.existsSync(path.join(dir, d)) ? fs.readdirSync(path.join(dir, d)).map((x) => `${d}/${x}`) : []))];
 const CONTENT_TABLES = new Set(["ROLES", "DEV", "GLANDS", "LACK", "EXAMPLES", "PRODUCTS", "LINKS", "GENO", "defs", "VALVE_TEXT_QUIZ"]);
 const isContent = (n, f) => {
   if (!/^(phys|bio)\//.test(f)) return false;

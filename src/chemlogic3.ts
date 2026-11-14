@@ -91,7 +91,7 @@ export function genInfer(r: Rnd, lv: number, kind: string): Q {
       if (countAssignments(holds, table) !== 1) continue;
       const ask = ri(r, n), right = holds[ask];
       const tbl = { head: ["", ...LETTERS.slice(0, n)], rows: holds.map((_, i) => [LETTERS[i], ...holds.map((__, j) => (i === j ? "" : MARK[table[i][j]]))]) };
-      return choiceQ({ ...base, lv: lv || (n === 3 ? 1 : 2), stem: [`有 ${n} 瓶无色溶液 ${LETTERS.slice(0, n).join(L.U.sep)}，它们分别是下列物质的溶液中的一种：${holds.map(F).sort().map(sub).join(L.U.sep)}。把它们两两混合，现象如下表（↓ 表示产生白色沉淀，↑ 表示产生气体，— 表示无明显现象，空格是同一种溶液）。${LETTERS[ask]} 是：`], expl: [`根据两两混合的现象逐一推断。结果：`, { u: " " + holds.map((c, i) => `${LETTERS[i]} = ${F(c)}`).join(L.U.comma) }, "。每种溶液与其他溶液混合的现象组合是唯一的，所以推断的结果是唯一的。"] }, r, [{ f: F(right) }, { u: " " + cname(right) }], shuf(r, cands.filter((c) => F(c) !== F(right))).map((c) => [{ f: F(c) }, { u: " " + cname(c) }]), { tbl, meta: { letters: LETTERS.slice(0, n), assign: holds.map(F), ask, cands: cands.map(F) } }, n) as Q;
+      return choiceQ({ ...base, lv: lv || (n === 3 ? 1 : 2), stem: [`有 ${n} 瓶无色溶液 ${LETTERS.slice(0, n).join(", ")}，它们分别是下列物质的溶液中的一种：${holds.map(F).sort().map(sub).join(", ")}。把它们两两混合，现象如下表（↓ 表示产生白色沉淀，↑ 表示产生气体，— 表示无明显现象，空格是同一种溶液）。${LETTERS[ask]} 是：`], expl: [`根据两两混合的现象逐一推断。结果：`, { u: " " + holds.map((c, i) => `${LETTERS[i]} = ${F(c)}`).join(L.U.comma) }, "。每种溶液与其他溶液混合的现象组合是唯一的，所以推断的结果是唯一的。"] }, r, [{ f: F(right) }, { u: " " + cname(right) }], shuf(r, cands.filter((c) => F(c) !== F(right))).map((c) => [{ f: F(c) }, { u: " " + cname(c) }]), { tbl, meta: { letters: LETTERS.slice(0, n), assign: holds.map(F), ask, cands: cands.map(F) } }, n) as Q;
     }
     throw new Error("no matrix");
   }
@@ -108,7 +108,7 @@ export function genInfer(r: Rnd, lv: number, kind: string): Q {
       if (!valid.length || invalid.length < 3) continue;
       const right = pick(r, valid), wrongs = shuf(r, invalid).slice(0, 3);
       const label = (e: (typeof rs)[number]): Part[] => (e.x.zh ? [e.x.zh] : [{ f: e.x.id }, { u: " " + cname(e.x.c!) }]);
-      return choiceQ({ ...base, lv: lv || 2, stem: [`有三瓶无色溶液，分别是 ${trio.map(F).sort().map(sub).join(L.U.sep)} 的溶液（标签已丢失）。只用一种试剂一次就把它们区分开，这种试剂是：`], expl: [right.x.zh ? right.x.zh : { f: right.x.id }, " 分别加入三种溶液，现象依次是：", { u: " " + trio.map((t, i) => `${F(t)}：${right.v[i]}`).join(L.U.semi) }, "。三种现象各不相同，能区分开。其他选项的现象有相同的，不能一次区分。"] }, r, label(right), wrongs.map(label), { meta: { trio: trio.map(F), right: right.x.id, choices: [right, ...wrongs].map((e) => e.x.id) } }) as Q;
+      return choiceQ({ ...base, lv: lv || 2, stem: [`有三瓶无色溶液，分别是 ${trio.map(F).sort().map(sub).join(", ")} 的溶液（标签已丢失）。只用一种试剂一次就把它们区分开，这种试剂是：`], expl: [right.x.zh ? right.x.zh : { f: right.x.id }, " 分别加入三种溶液，现象依次是：", { u: " " + trio.map((t, i) => `${F(t)}：${right.v[i]}`).join(L.U.semi) }, "。三种现象各不相同，能区分开。其他选项的现象有相同的，不能一次区分。"] }, r, label(right), wrongs.map(label), { meta: { trio: trio.map(F), right: right.x.id, choices: [right, ...wrongs].map((e) => e.x.id) } }) as Q;
     }
     throw new Error("no reagent");
   }

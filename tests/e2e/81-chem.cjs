@@ -1018,9 +1018,15 @@ async function checkSpec(page, q) {
   }
   // --- part 2 screens: ordering steps with the real controls
   {
-    await page.evaluate(() => localStorage.removeItem('learn.chem.v1'));   // (a fresh memory: the seeds below were searched without it)
-    await page.evaluate(async () => { const C = await import('/src/chemlogic.ts'); await C.loadChem(); let best = 1; for (let s = 1; s < 800; s++) { const q = C.buildRound('lab', 0, s, C.EMPTY_PROGRESS, '2026-11-13')[0]; if (q.kind === 'ord' && q.items.length >= 5) { best = s; break; } } window.__chemSeed = best; location.hash = '#/science/chem/lab'; });
-    await page.waitForSelector('#chem-q .chem-ordb');
+    const openOrd = async (minSteps) => {
+      for (let s = 1; s <= 80; s++) {
+        await page.evaluate((s) => { localStorage.removeItem('learn.chem.v1'); window.__chemSeed = s; location.hash = '#/science/chem'; }, s); await page.waitForSelector('#chem-modes');
+        await page.evaluate(() => { location.hash = '#/science/chem/lab'; }); await page.waitForSelector('#chem-q');
+        const q = await currentQ(page); if (q.t === 'ord' && q.items.length >= minSteps) return q;
+      }
+      throw new Error('no ordering question found');
+    };
+    await openOrd(5);
     let q = await currentQ(page);
     ok(q.t === 'ord' && await page.locator('.chem-ordb').count() === q.items.length && await page.locator('#chem-check[disabled]').count() === 1, 'an ordering question: one button per step, check stays off until every step is chosen');
     const first = q.shown.indexOf(q.items[0]), second = q.shown.indexOf(q.items[1]);
@@ -1035,9 +1041,7 @@ async function checkSpec(page, q) {
     await page.click('#chem-check'); await page.waitForSelector('#chem-verdict');
     ok((await page.textContent('#chem-verdict')).includes('不正确') && await page.locator('.chem-ordb.bad').count() >= 2 && (await page.textContent('#chem-expl')).includes(q.items[0].slice(0, 6)) && await page.locator('.chem-ordb:disabled').count() === q.items.length, 'a wrong order: red steps, locked, the right order in the explanation');
     // the right order
-    await page.evaluate(() => { localStorage.removeItem('learn.chem.v1'); location.hash = '#/science/chem'; }); await page.waitForSelector('#chem-modes');
-    await page.evaluate(async () => { const C = await import('/src/chemlogic.ts'); await C.loadChem(); for (let s = 1; s < 800; s++) { const q = C.buildRound('lab', 0, s, C.EMPTY_PROGRESS, '2026-11-13')[0]; if (q.kind === 'ord') { window.__chemSeed = s; break; } } location.hash = '#/science/chem/lab'; });
-    await page.waitForSelector('#chem-q .chem-ordb'); q = await currentQ(page);
+    q = await openOrd(4);
     await answer(page, q, true);
     ok((await page.textContent('#chem-verdict')).includes('回答正确') && await page.locator('.chem-ordb.ok').count() === q.items.length && (await page.textContent('#chem-msg')).includes('顺序正确'), 'the right order: all steps green, the verdict is right');
     const pr = await progress(page); ok(pr.cards[q.key] && pr.cards[q.key].box >= 1, 'the ordering task is remembered in the memory boxes (' + q.key + ')');

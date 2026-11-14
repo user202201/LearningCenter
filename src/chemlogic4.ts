@@ -105,7 +105,7 @@ export function genAtom(r: Rnd, lv: number, kind: string): Q {
     for (const b of [z, e + 1, e - 1, 2 * z - e]) if (b >= 0) wr.add(ionText(z, b));
     for (const k of shuf(r, zs.filter((x) => x !== z && Math.abs(x - z) <= 2))) { const ee = usualIon(k); if (ee !== null) wr.add(ionText(k, ee)); }
     wr.delete(right);
-    return choiceQ({ ...base, lv: lv || 2, stem: [`${nameZh(z)}原子的最外层有 ${v} 个电子。它在化学反应中容易${c > 0 ? "失去" : "得到"}电子，形成的稳定离子是：`], expl: [`最外层电子数 ${v}：${c > 0 ? "少于 4 个，容易失去电子" : "多于 4 个，容易得到电子"}，达到 8 个电子的稳定结构（第一层只有 2 个电子时也稳定）。${nameZh(z)}原子${c > 0 ? "失去" : "得到"} ${Math.abs(c)} 个电子，形成`, u(right), { u: L.U.dot }] }, r, [u(right)], uw(shuf(r, [...wr])), { meta: { z, right } }) as Q;
+    return choiceQ({ ...base, lv: lv || 2, stem: [`${symOf(z)}原子的最外层有 ${v} 个电子。它在化学反应中容易${c > 0 ? "失去" : "得到"}电子，形成的稳定离子是：`], expl: [`最外层电子数 ${v}：${c > 0 ? "少于 4 个，容易失去电子" : "多于 4 个，容易得到电子"}，达到 8 个电子的稳定结构（第一层只有 2 个电子时也稳定）。${symOf(z)}原子${c > 0 ? "失去" : "得到"} ${Math.abs(c)} 个电子，形成`, u(right), { u: L.U.dot }] }, r, [u(right)], uw(shuf(r, [...wr])), { meta: { z, right } }) as Q;
   }
   // cell
   const z = pick(r, zs), at = atomOf(z), neutron = r() < 0.5 && z >= 3 && z !== 17;
