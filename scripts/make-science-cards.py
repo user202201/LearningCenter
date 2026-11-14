@@ -64,7 +64,7 @@ for n, cap, con, fact in C: by_con.setdefault(con, []).append((n, cap))
 for n, cap, con, fact in C:
     g, gx = (1, 9) if n in geo.POPULAR else (3, 9) if n in geo.KNOWN else (5, 9)
     where = f'{n}跨两个大洲，通常归入{con}' if n in AMBIG else f'{n}位于{con}'
-    e = (f'{cap}是{n}的首都，{where}。' if cap != n else f'{n}是城市国家，首都就是{n}本身，{where}。') + (f'{n}{fact}。' if fact else '')
+    e = (f'{cap}是{n}的首都，{where}。' if cap != n else f'{n}的首都就是{n}本身，{where}。') + (f'{n}{fact}。' if fact else '')
     same = [(m, c) for m, c in by_con[con] if m != n]
     if cap != n:
         add('cap', 'country', f'{n}的首都是哪座城市？', cap, [c for m, c in same], e, g, gx)
@@ -238,7 +238,9 @@ for name, y in EV:
     y = int(y)
     cand = sorted({y + d for d in (-1, 1, -2, 2, -3, 3, -5, 5, -10, 10, -20, 20, -50, 50) if y + d != y and (y + d < 0) == (y < 0)} | {v for v in yrs if v != y})
     near = sorted(cand, key=lambda v: abs(v - y))[:8]
-    add('ev', 'dynasty', f'{name}发生在哪一年？', fmt(y), [fmt(v) for v in near], f'{name}发生在{fmt(y)}。', 5, 9)
+    if name.endswith('爆发'): qv, ev_ = f'{name}于哪一年？', f'{name}于{"" if y < 0 else " "}{fmt(y)}。'   # (not "爆发发生在")
+    else: qv, ev_ = f'{name}发生在哪一年？', f'{name}发生在{"" if y < 0 else " "}{fmt(y)}。'
+    add('ev', 'dynasty', qv, fmt(y), [fmt(v) for v in near], ev_, 5, 9)
 FE = rows(hist.FESTIVALS)
 MOD = {'国庆节', '劳动节', '儿童节', '教师节', '植树节', '妇女节', '七夕节'}   # festivals whose line is a meaning, not a list of customs
 FESTBAN = {'春节': ['除夕'], '除夕': ['春节', '中秋节'], '中秋节': ['除夕']}   # festivals that share customs / food with each other
@@ -273,7 +275,7 @@ PO = rows(hist.POEMS)
 SAME_TITLE = {'绝句', '春日', '清明', '江南', '梅花', '元日', '相思'}   # titles that several poets used: the first line says which poem is meant
 for i, (title, author, dyn, line) in enumerate(PO):
     g = 1 if i < 9 else 3
-    e = f'《{title}》是{dyn}{author}写的：“{line}”。'
+    e = f'《{title}》是{dyn if not author.startswith(dyn.rstrip("代")) else ""}{author}写的：“{line}”。'   # (not 北朝北朝民歌 / 汉代汉乐府)
     tt = f'《{title}》（“{line.split("，")[0]}”）' if title in SAME_TITLE else f'《{title}》'
     add('oa', 'poem', f'“{line}”出自谁的诗？', author, [x[1] for x in PO], e, g, 9)
     add('ot', 'poem', f'“{line}”出自哪首诗？', title, [x[0] for x in PO], e, g, 9)

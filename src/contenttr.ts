@@ -62,7 +62,9 @@ export function translateFigure(root: Element, lang: Lang = getLang()): void {
     if (el.children.length) continue;
     const zh = el.textContent ?? "";
     if (!cjk.test(zh)) continue;
-    const out = ct(zh, lang);
+    const key = el.getAttribute("data-k") ?? zh;   // (a label made of pieces names the whole text to translate; see safetyfig.ts `t`)
+    const out = ct(key, lang) + (el.getAttribute("data-sfx") ?? "");
+    if (el.hasAttribute("data-drop")) { el.setAttribute("data-zh", zh); el.textContent = ""; continue; }
     if (out === zh) continue;
     el.setAttribute("data-zh", zh);
     el.textContent = out;

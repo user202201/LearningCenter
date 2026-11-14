@@ -28,7 +28,12 @@ export async function sources() {
   }
   const { FIGS } = await import(pathToFileURL(path.join(tmp, "figures.mjs")).href);
   fs.rmSync(tmp, { recursive: true, force: true });
-  for (const svg of Object.values(FIGS)) for (const m of svg.matchAll(/<text\b[^>]*>([^<]*)<\/text>/g)) if (CJK.test(m[1])) groups.figures.add(m[1]);
+  for (const svg of Object.values(FIGS)) for (const m of svg.matchAll(/<text\b([^>]*)>([^<]*)<\/text>/g)) {
+    if (/\bdata-drop=/.test(m[1])) continue;   // the second line of a label whose first line holds the whole name
+    const k = m[1].match(/\bdata-k="([^"]*)"/);
+    const key = k ? k[1] : m[2];
+    if (CJK.test(key)) groups.figures.add(key);
+  }
   return groups;
 }
 

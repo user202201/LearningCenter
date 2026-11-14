@@ -8,7 +8,8 @@
 const INK = "#5b4b57", FILL = "#ffe3a3", RED = "#e03131", BLUE = "#1c7ed6", GREEN = "#2f9e44", YELLOW = "#fcc419", ORANGE = "#f76707", GRAY = "#868e96";
 const W = 240, H = 150;
 const wrap = (inner: string) => `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" class="fig-svg"><g stroke="${INK}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" fill="none" font-family="system-ui, sans-serif">${inner}</g></svg>`;
-const t = (x: number, y: number, s: string, size = 12, anchor = "middle", fill = "#2d2230") => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" fill="${fill}" stroke="none" font-weight="700">${s}</text>`;
+/** `extra`: more attributes of the label: `data-k` = the text to translate when the shown text is made of pieces, `data-sfx` = a suffix kept as it is (a number), `data-drop` = a second line that disappears when the first one holds the whole translated name (rule 65) */
+const t = (x: number, y: number, s: string, size = 12, anchor = "middle", fill = "#2d2230", extra = "") => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" fill="${fill}" stroke="none" font-weight="700"${extra ? " " + extra : ""}>${s}</text>`;
 const arrow = (x1: number, y1: number, x2: number, y2: number, c = INK) => {
   const a = Math.atan2(y2 - y1, x2 - x1), l = 7;
   return `<path d="M${x1} ${y1}L${x2} ${y2}M${x2 - l * Math.cos(a - 0.5)} ${y2 - l * Math.sin(a - 0.5)}L${x2} ${y2}L${x2 - l * Math.cos(a + 0.5)} ${y2 - l * Math.sin(a + 0.5)}" stroke="${c}"/>`;
@@ -64,14 +65,14 @@ export const SAFETY_FIGS: Record<string, string> = {
       `<rect x="${x + 14}" y="${y + 16}" width="22" height="16" rx="7" fill="${FILL}"/><rect x="${x + 33}" y="${y + 8}" width="6" height="14" rx="3" fill="#ffd27a"/>`,
       `<rect x="${x + 12}" y="${y + 18}" width="28" height="14" rx="5" fill="${FILL}"/><path d="M${x + 18} ${y + 8}L${x + 18} ${y + 18}M${x + 26} ${y + 8}L${x + 26} ${y + 18}M${x + 34} ${y + 8}L${x + 34} ${y + 18}" stroke-width="3"/>`,
       `<rect x="${x + 16}" y="${y + 10}" width="18" height="24" rx="4" fill="${FILL}"/><ellipse cx="${x + 25}" cy="${y + 28}" rx="15" ry="5" stroke="${RED}" stroke-width="2.5"/>`][i];
-    return `<rect x="${x}" y="${y}" width="52" height="64" rx="10" fill="#fff"/>${glyph}<circle cx="${x + 9}" cy="${y + 10}" r="0"/>${t(x + 26, y + 46, c + " " + (i + 1), 12)}${t(x + 26, y + 58, s, 8)}`;
+    return `<rect x="${x}" y="${y}" width="52" height="64" rx="10" fill="#fff"/>${glyph}<circle cx="${x + 9}" cy="${y + 10}" r="0"/>${t(x + 26, y + 46, c + " " + (i + 1), 12, "middle", "#2d2230", `data-k="${c}" data-sfx=" ${i + 1}"`)}${t(x + 26, y + 58, s, 8)}`;
   }).join("") + ["每步至少", "搓 15 秒", "全程不少", "于 20 秒"].map((l, i) => t(207, 92 + i * 14, l, 10)).join("")),
   "sf-2020": wrap(`<ellipse cx="42" cy="40" rx="26" ry="16" fill="#fff"/><circle cx="42" cy="40" r="9" fill="${BLUE}"/><circle cx="42" cy="40" r="3" fill="#111"/>${t(42, 74, "近距离用眼", 11)}`
     + `${arrow(76, 40, 100, 40)}${[[110, "20", "分钟", ORANGE], [166, "6", "米外", BLUE], [214, "20", "秒", GREEN]].map(([x, n, u, c], i) => `<circle cx="${x}" cy="40" r="22" fill="${c}" stroke="none"/>${t(x as number, 41, String(n), 20, "middle", "#fff")}${t(x as number, 54, String(u), 10, "middle", "#fff")}`).join("")}`
     + `${arrow(132, 40, 144, 40)}${arrow(188, 40, 192, 40)}${t(120, 98, "每看 20 分钟，远眺 6 米外至少 20 秒", 12)}${t(120, 120, "每天户外活动 2 小时", 12, "middle", GREEN)}`),
   "sf-bins": wrap([["可回收物", BLUE, "纸 塑料 金属"], ["厨余垃圾", GREEN, "剩饭 果皮"], ["有害垃圾", RED, "电池 药品"], ["其他垃圾", GRAY, "纸巾 尘土"]].map(([n, c, e], i) => {
     const x = 8 + i * 58;
-    return `<path d="M${x + 2} 40L${x + 6} 112L${x + 44} 112L${x + 48} 40Z" fill="${c}"/><rect x="${x - 2}" y="30" width="54" height="12" rx="5" fill="${c}"/>${t(x + 25, 80, String(n).slice(0, 2), 14, "middle", "#fff")}${t(x + 25, 96, String(n).slice(2), 11, "middle", "#fff")}${t(x + 25, 130, String(e), 9)}`;
+    return `<path d="M${x + 2} 40L${x + 6} 112L${x + 44} 112L${x + 48} 40Z" fill="${c}"/><rect x="${x - 2}" y="30" width="54" height="12" rx="5" fill="${c}"/>${t(x + 25, 80, String(n).slice(0, 2), 14, "middle", "#fff", `data-k="${n}"`)}${t(x + 25, 96, String(n).slice(2), 11, "middle", "#fff", "data-drop=\"1\"")}${t(x + 25, 130, String(e), 9)}`;
   }).join("")),
   "sf-warn": wrap([["蓝", BLUE, "一般"], ["黄", YELLOW, "较重"], ["橙", ORANGE, "严重"], ["红", RED, "特别严重"]].map(([n, c, e], i) => {
     const x = 8 + i * 58;

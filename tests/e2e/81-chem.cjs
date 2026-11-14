@@ -107,7 +107,7 @@ const crossF = (cat, cc, an, ac) => { const g = gcd(cc, ac); const a = ac / g, b
 const ANIONS = { Cl: ['Cl', 1], NO3: ['NO3', 1], SO4: ['SO4', 2] };
 
 // ------------------------------------------------------------------ helpers for the browser
-const extra = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/chem.json'), 'utf8'));
+const extra = Object.assign({}, ...['chem.json', 'chemcontent.json'].map((f) => JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/' + f), 'utf8'))));   // (chemcontent.json: the content of the data library, the banks and the generated texts, rule 66)
 const withExtra = async (t) => {
   const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[1]]))) + ');\n';
   await t.ctx.route('**/src/i18n-data.ts*', async (route) => { const r = await route.fetch(); await route.fulfill({ response: r, body: (await r.text()) + '\n' + add }); });
@@ -119,11 +119,12 @@ const open = async (opts = {}) => {
   return t;
 };
 const go = async (page, hash, sel) => { await page.evaluate((h) => (location.hash = h), hash); await page.waitForSelector(sel); await page.waitForTimeout(120); };
+// rule 66: the content of the chemistry is translated too, so even the `user` boxes may hold no Chinese
 const chineseLeft = (page) => page.evaluate((src) => {
   const re = new RegExp(src), out = [];
   const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  for (let n; (n = w.nextNode()); ) { const p = n.parentElement; if (!p || p.closest('.user, .user-title, script, style')) continue; if (re.test(n.nodeValue)) out.push(n.nodeValue.trim().slice(0, 40)); }
-  for (const e of document.querySelectorAll('[title],[aria-label],[placeholder]')) { if (e.closest('.user, .user-title')) continue; for (const a of ['title', 'aria-label', 'placeholder']) { const v = e.getAttribute(a); if (v && re.test(v)) out.push(a + ':' + v.slice(0, 30)); } }
+  for (let n; (n = w.nextNode()); ) { const p = n.parentElement; if (!p || p.closest('script, style')) continue; if (re.test(n.nodeValue)) out.push(n.nodeValue.trim().slice(0, 40)); }
+  for (const e of document.querySelectorAll('[title],[aria-label],[placeholder]')) { for (const a of ['title', 'aria-label', 'placeholder']) { const v = e.getAttribute(a); if (v && re.test(v)) out.push(a + ':' + v.slice(0, 30)); } }
   return out;
 }, CJK.source);
 const progress = (page) => page.evaluate(() => { try { return JSON.parse(localStorage.getItem('learn.chem.v1')); } catch (e) { return null; } });
@@ -1154,6 +1155,22 @@ async function checkSpec(page, q) {
       bad.push(...await chineseLeft(pg));
       ok(bad.length === 0, `${label} ${m}: a whole round (questions, explanations, summary) has no Chinese left ${[...new Set(bad)].slice(0, 5)}`);
     }
+    // 200 generated questions per mode (40 seeds x one round of 10): every text of every question (stem, explanation, choices, steps, table, order items, class names) is translated, no Chinese is left
+    const sampled = await pg.evaluate(async () => {
+      const C = await import('/src/chemlogic.ts'); await C.loadChem(); const I = await import('/src/i18n.ts');
+      const cj = /[　-〿一-鿿＀-￯]/; const bad = {}; let n = 0;
+      const txt = (m, x, ctx) => {
+        if (typeof x === 'string') { const v = I.tr(x); if (cj.test(v)) (bad[m] ??= new Map()).set(v.slice(0, 80), ctx); }
+        else if (Array.isArray(x)) x.forEach((y) => txt(m, y, ctx));
+        else if (x && typeof x === 'object') { if ('u' in x) { const v = C.uText(x.u); if (cj.test(v)) (bad[m] ??= new Map()).set(v.slice(0, 80), ctx); } else if (!('f' in x || 'eq' in x || 'cross' in x)) for (const k of Object.keys(x)) txt(m, x[k], ctx); }
+      };
+      for (const m of C.MODES.map((x) => x.id)) for (let s = 1; s <= 40; s++) {
+        const qs = C.buildRound(m, 0, s * 7919 + m.length, C.EMPTY_PROGRESS, '2026-11-13');
+        for (const q of qs) { n++; for (const k of ['stem', 'expl', 'choices', 'steps', 'desc', 'tbl', 'shown', 'buckets']) if (q[k] !== undefined) txt(m, q[k], q.key + ':' + k); if (q.t === 'class') q.items.forEach((it) => txt(m, [C.tn(it.n)], q.key)); }
+      }
+      return { n, bad: Object.fromEntries(Object.entries(bad).map(([m, mp]) => [m, [...mp.entries()].slice(0, 3)])) };
+    });
+    ok(sampled.n >= 3000 && Object.keys(sampled.bad).length === 0, `${label}: ${sampled.n} generated questions (all modes, 40 rounds each): no Chinese left in any text ${JSON.stringify(sampled.bad).slice(0, 300)}`);
     ok(tl.log.external.length === 0, `${label}: no outside request`);
     await tl.browser.close();
   }

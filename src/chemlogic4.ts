@@ -42,7 +42,7 @@ export function bankQ(mode: string, id: string, r: Rnd, lv = 0): Q | null {
   if (e.ord) {
     const items = e.ord[1], shown = shuf(r, items.map((_, i) => i)).map((i) => items[i]);
     const same = shown.every((x, i) => x === items[i]);
-    return { t: "ord", ...base, kind: "ord", lv: 2, stem: [u(e.ord[0]), "（点击步骤，按先后顺序依次选出）"], items, shown: same ? shown.slice().reverse() : shown, expl: ["正确的顺序：", u(items.map((x, i) => `${i + 1}. ${x}`).join(" "))] } as OrdQ;
+    return { t: "ord", ...base, kind: "ord", lv: 2, stem: [u(e.ord[0]), "（点击步骤，按先后顺序依次选出）"], items, shown: same ? shown.slice().reverse() : shown, expl: ["正确的顺序：", ...items.flatMap((x, i) => [u((i ? " " : "") + `${i + 1}. `), u(x)])] } as OrdQ;
   }
   const b = e.b!;
   return choiceQ({ ...base, kind: mode === "rem" ? "gas" : "qa", stem: [u(b.q)], expl: [u(b.e)] }, r, [u(b.a)], uw(b.w), { meta: { bank: id } }) as Q;
