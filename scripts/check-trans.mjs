@@ -78,8 +78,9 @@ export async function check() {
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const res = await check();
-  if (args.has("--json")) { console.log(JSON.stringify(res)); process.exit(0); }
   let bad = 0;
+  if (args.has("--json")) process.stdout.write(JSON.stringify(res) + "\n");
+  else {
   for (const [lang, r] of Object.entries(res)) {
     console.log(`${lang}: ${r.total} source strings; ` + Object.entries(r.byGroup).map(([g, v]) => `${g} ${v.total - v.missing}/${v.total}`).join(", "));
     if (r.missing.length) { bad++; console.log(`  ${r.missing.length} MISSING`); if (args.has("--list")) for (const m of r.missing) console.log(`   [${m.group}] ${JSON.stringify(m.text)}`); }
@@ -87,6 +88,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     if (r.leftover.length) { bad++; console.log(`  ${r.leftover.length} translations still hold Chinese outside brackets`); for (const m of r.leftover.slice(0, 20)) console.log(`   ${JSON.stringify(m.src.slice(0, 40))} -> ${JSON.stringify(m.got.slice(0, 60))}`); }
     if (r.empty.length) { bad++; console.log(`  ${r.empty.length} empty translations`); }
   }
-  if (bad) { if (!args.has("--list")) console.log("(run with --list to see every missing string)"); process.exit(1); }
-  console.log("trans ok: everything is translated");
+  if (bad) { if (!args.has("--list")) console.log("(run with --list to see every missing string)"); process.exitCode = 1; }
+  else console.log("trans ok: everything is translated");
+  }
 }

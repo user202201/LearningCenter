@@ -22,6 +22,12 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>用相机扫描登录二维码，或为孩子拍摄头像。照片只保存在本设备上。 / The camera scans the sign-in QR code or takes a picture for a child. Pictures stay on this device. / L'appareil photo lit le code QR de connexion ou prend une photo pour un enfant. Les photos restent sur cet appareil.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>从相册选择孩子的头像。照片只保存在本设备上。 / Choose a picture for a child from the photo library. Pictures stay on this device. / Choisir une photo pour un enfant dans la photothèque. Les photos restent sur cet appareil.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>

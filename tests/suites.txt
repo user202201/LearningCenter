@@ -86,3 +86,4 @@
 85c-coding2-screens
 90-geolab
 89-biolab
+91-content-i18n

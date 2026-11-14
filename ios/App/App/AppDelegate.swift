@@ -42,3 +42,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return config
     }
 }
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// Print bridge (src/native.ts, plugin name "PrintPage"): window.print() does nothing in a WKWebView, so the page is handed to the system
+// print dialog ("Save as PDF" / share / AirPrint). Kept in this file on purpose: it is already part of the Xcode target, so no project
+// file has to be edited. NOT compiled in the sandbox that wrote it (no macOS / Xcode): the macOS job of .github/workflows/mobile.yml is
+// its first compile; see packaging/README.md. NOTE: WKWebView's print formatter may ignore some @media print rules; check the practice
+// sheet on a real iPad (packaging/README.md, "Test on a real device").
+// ---------------------------------------------------------------------------------------------------------------------------------
+@objc(PrintPagePlugin)
+public class PrintPagePlugin: CAPPlugin, CAPBridgedPlugin {
+    public let identifier = "PrintPagePlugin"
+    public let jsName = "PrintPage"
+    public let pluginMethods: [CAPPluginMethod] = [CAPPluginMethod(name: "print", returnType: CAPPluginReturnPromise)]
+
+    @objc func print(_ call: CAPPluginCall) {
+        let name = call.getString("name") ?? "LearningCenter"
+        DispatchQueue.main.async {
+            guard let web = self.bridge?.webView else { call.reject("no web view"); return }
+            let info = UIPrintInfo(dictionary: nil)
+            info.outputType = .general
+            info.jobName = name
+            let controller = UIPrintInteractionController.shared
+            controller.printInfo = info
+            controller.printFormatter = web.viewPrintFormatter()
+            controller.present(animated: true) { _, _, error in
+                if let error = error { call.reject(error.localizedDescription) } else { call.resolve() }
+            }
+        }
+    }
+}
+
+/// The view controller of the storyboard (Main.storyboard names it): the normal Capacitor one plus the print plugin.
+class AppViewController: CAPBridgeViewController {
+    override func capacitorDidLoad() {
+        bridge?.registerPluginInstance(PrintPagePlugin())
+    }
+}

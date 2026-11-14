@@ -1,0 +1,306 @@
+{
+ "史前": {
+  "en": "Prehistory",
+  "fr": "Préhistoire"
+ },
+ "夏": {
+  "en": "Xia dynasty",
+  "fr": "dynastie Xia"
+ },
+ "商": {
+  "en": "Shang dynasty",
+  "fr": "dynastie Shang"
+ },
+ "西周": {
+  "en": "Western Zhou",
+  "fr": "Zhou occidentaux"
+ },
+ "东周": {
+  "en": "Eastern Zhou",
+  "fr": "Zhou orientaux"
+ },
+ "春秋": {
+  "en": "Spring and Autumn period",
+  "fr": "période des Printemps et Automnes"
+ },
+ "战国": {
+  "en": "Warring States period",
+  "fr": "période des Royaumes combattants"
+ },
+ "秦": {
+  "en": "Qin dynasty",
+  "fr": "dynastie Qin"
+ },
+ "西汉": {
+  "en": "Western Han",
+  "fr": "Han occidentaux"
+ },
+ "东汉": {
+  "en": "Eastern Han",
+  "fr": "Han orientaux"
+ },
+ "新": {
+  "en": "Xin dynasty",
+  "fr": "dynastie Xin"
+ },
+ "三国": {
+  "en": "Three Kingdoms",
+  "fr": "Trois Royaumes"
+ },
+ "魏": {
+  "en": "Wei",
+  "fr": "Wei"
+ },
+ "蜀汉": {
+  "en": "Shu Han",
+  "fr": "Shu Han"
+ },
+ "吴": {
+  "en": "Wu",
+  "fr": "Wu"
+ },
+ "西晋": {
+  "en": "Western Jin",
+  "fr": "Jin occidentaux"
+ },
+ "东晋": {
+  "en": "Eastern Jin",
+  "fr": "Jin orientaux"
+ },
+ "十六国": {
+  "en": "Sixteen Kingdoms",
+  "fr": "Seize Royaumes"
+ },
+ "南北朝": {
+  "en": "Northern and Southern dynasties",
+  "fr": "dynasties du Sud et du Nord"
+ },
+ "隋": {
+  "en": "Sui dynasty",
+  "fr": "dynastie Sui"
+ },
+ "唐": {
+  "en": "Tang dynasty",
+  "fr": "dynastie Tang"
+ },
+ "五代十国": {
+  "en": "Five Dynasties and Ten Kingdoms",
+  "fr": "Cinq Dynasties et Dix Royaumes"
+ },
+ "北宋": {
+  "en": "Northern Song",
+  "fr": "Song du Nord"
+ },
+ "南宋": {
+  "en": "Southern Song",
+  "fr": "Song du Sud"
+ },
+ "辽": {
+  "en": "Liao dynasty",
+  "fr": "dynastie Liao"
+ },
+ "西夏": {
+  "en": "Western Xia",
+  "fr": "Xia occidentaux"
+ },
+ "金": {
+  "en": "Jin dynasty (Jurchen)",
+  "fr": "dynastie Jin (Jurchens)"
+ },
+ "元": {
+  "en": "Yuan dynasty",
+  "fr": "dynastie Yuan"
+ },
+ "明": {
+  "en": "Ming dynasty",
+  "fr": "dynastie Ming"
+ },
+ "清": {
+  "en": "Qing dynasty",
+  "fr": "dynastie Qing"
+ },
+ "中华民国": {
+  "en": "Republic of China",
+  "fr": "République de Chine"
+ },
+ "中华人民共和国": {
+  "en": "People's Republic of China",
+  "fr": "République populaire de Chine"
+ },
+ "秦始皇": {
+  "en": "Qin Shi Huang (First Emperor)",
+  "fr": "Qin Shi Huang (Premier Empereur)"
+ },
+ "汉武帝": {
+  "en": "Emperor Wu of Han",
+  "fr": "empereur Wu des Han"
+ },
+ "刘邦": {
+  "en": "Liu Bang",
+  "fr": "Liu Bang"
+ },
+ "光武帝": {
+  "en": "Emperor Guangwu",
+  "fr": "empereur Guangwu"
+ },
+ "唐太宗": {
+  "en": "Emperor Taizong of Tang",
+  "fr": "empereur Taizong des Tang"
+ },
+ "武则天": {
+  "en": "Wu Zetian",
+  "fr": "Wu Zetian"
+ },
+ "忽必烈": {
+  "en": "Kublai Khan",
+  "fr": "Kubilaï Khan"
+ },
+ "成吉思汗": {
+  "en": "Genghis Khan",
+  "fr": "Gengis Khan"
+ },
+ "朱元璋": {
+  "en": "Zhu Yuanzhang",
+  "fr": "Zhu Yuanzhang"
+ },
+ "孙中山": {
+  "en": "Sun Yat-sen",
+  "fr": "Sun Yat-sen"
+ },
+ "毛泽东": {
+  "en": "Mao Zedong",
+  "fr": "Mao Zedong"
+ },
+ "邓小平": {
+  "en": "Deng Xiaoping",
+  "fr": "Deng Xiaoping"
+ },
+ "孔子": {
+  "en": "Confucius",
+  "fr": "Confucius"
+ },
+ "孟子": {
+  "en": "Mencius",
+  "fr": "Mencius"
+ },
+ "老子": {
+  "en": "Laozi",
+  "fr": "Laozi"
+ },
+ "孙武": {
+  "en": "Sun Wu",
+  "fr": "Sun Wu"
+ },
+ "商鞅变法": {
+  "en": "Shang Yang's reform",
+  "fr": "réforme de Shang Yang"
+ },
+ "科举制": {
+  "en": "imperial examination system",
+  "fr": "système des examens impériaux"
+ },
+ "分封制": {
+  "en": "enfeoffment system",
+  "fr": "système de fiefs"
+ },
+ "郡县制": {
+  "en": "commandery-county system",
+  "fr": "système des commanderies et des districts"
+ },
+ "行省制度": {
+  "en": "provincial system",
+  "fr": "système des provinces"
+ },
+ "禅让": {
+  "en": "abdication (shanrang)",
+  "fr": "abdication (shanrang)"
+ },
+ "鸦片战争": {
+  "en": "Opium War",
+  "fr": "guerre de l'opium"
+ },
+ "南京条约": {
+  "en": "Treaty of Nanking",
+  "fr": "traité de Nankin"
+ },
+ "马关条约": {
+  "en": "Treaty of Shimonoseki",
+  "fr": "traité de Shimonoseki"
+ },
+ "辛丑条约": {
+  "en": "Boxer Protocol",
+  "fr": "protocole des Boxeurs"
+ },
+ "洋务运动": {
+  "en": "Self-Strengthening Movement",
+  "fr": "mouvement d'auto-renforcement"
+ },
+ "戊戌变法": {
+  "en": "Reform Movement of 1898 (Hundred Days' Reform)",
+  "fr": "Réforme de 1898 (Réforme des Cent Jours)"
+ },
+ "辛亥革命": {
+  "en": "Xinhai Revolution",
+  "fr": "révolution de Xinhai"
+ },
+ "五四运动": {
+  "en": "May Fourth Movement",
+  "fr": "mouvement du 4 mai"
+ },
+ "遵义会议": {
+  "en": "Zunyi Conference",
+  "fr": "conférence de Zunyi"
+ },
+ "长征": {
+  "en": "Long March",
+  "fr": "Longue Marche"
+ },
+ "西安事变": {
+  "en": "Xi'an Incident",
+  "fr": "incident de Xi'an"
+ },
+ "七七事变": {
+  "en": "Marco Polo Bridge (Lugou Bridge) Incident",
+  "fr": "incident du pont Marco Polo (pont Lugou)"
+ },
+ "抗美援朝": {
+  "en": "Resist America and Aid Korea",
+  "fr": "résister à l'Amérique et aider la Corée"
+ },
+ "改革开放": {
+  "en": "reform and opening up",
+  "fr": "réforme et ouverture"
+ },
+ "一国两制": {
+  "en": "one country, two systems",
+  "fr": "un pays, deux systèmes"
+ },
+ "一带一路": {
+  "en": "Belt and Road",
+  "fr": "la Ceinture et la Route"
+ },
+ "文艺复兴": {
+  "en": "Renaissance",
+  "fr": "Renaissance"
+ },
+ "工业革命": {
+  "en": "Industrial Revolution",
+  "fr": "révolution industrielle"
+ },
+ "十月革命": {
+  "en": "October Revolution",
+  "fr": "révolution d'Octobre"
+ },
+ "罗斯福新政": {
+  "en": "Roosevelt's New Deal",
+  "fr": "New Deal de Roosevelt"
+ },
+ "联合国": {
+  "en": "United Nations",
+  "fr": "Organisation des Nations unies"
+ },
+ "冷战": {
+  "en": "Cold War",
+  "fr": "guerre froide"
+ }
+}
