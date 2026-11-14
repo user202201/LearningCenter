@@ -5,6 +5,7 @@
  * Choosing Chinese simply puts the original texts back.
  */
 import { EN, FR } from "./i18n-data";
+import CRAWL from "./i18n-extra/crawl.json";   // texts found by the crawl audit (97-no-chinese-crawl) and the lab texts not merged into i18n-data.ts yet: the table in i18n-data.ts wins
 
 export type LangPref = "auto" | "zh" | "en" | "fr";
 export type Lang = "zh" | "en" | "fr";
@@ -43,7 +44,8 @@ function buildTable(src: Record<string, string>): Table {
   pats.sort((a, b) => b.weight - a.weight);
   return { exact, pats };
 }
-const SOURCES: Record<Exclude<Lang, "zh">, Record<string, string>> = { en: EN, fr: FR };
+const late = (i: 0 | 1): Record<string, string> => Object.fromEntries(Object.entries(CRAWL as Record<string, string[]>).map(([k, v]) => [k, v[i]]));
+const SOURCES: Record<Exclude<Lang, "zh">, Record<string, string>> = { en: { ...late(0), ...EN }, fr: { ...late(1), ...FR } };
 const tableFor = (l: Lang): Table | null => (l === "zh" ? null : (tables[l] ??= buildTable(SOURCES[l])));
 
 // ---------- context (one Chinese text, two meanings) ----------

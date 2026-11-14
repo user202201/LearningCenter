@@ -151,7 +151,7 @@ async function crawlConfig(cfg, report) {
 
   const LABEL_SKIP = /改用|退出登录|退出|Sign out|Log out|Se déconnecter|Quitter|^中文$|English|Français|清除全部|强制刷新|Force refresh|Forcer|Actualiser|Clear all|Tout effacer/;
   // clicking: candidates are the visible buttons of the page; every click is followed by a scan and a reset of the page
-  const clickThrough = async (hash, maxClicks) => {
+  const clickThrough = async (hash, maxClicks, prep) => {
     const sig = () => page.evaluate(() => location.hash + '|' + document.body.innerText.length + '|' + document.querySelectorAll('button').length);
     const cands = async () => page.evaluate(() => {
       const list = [];
@@ -173,7 +173,7 @@ async function crawlConfig(cfg, report) {
       if (hashNow !== hash && /^#\//.test(hashNow)) enqueue(hashNow);
       await closeDialogs();
       const after = await sig();
-      if (after !== before || hashNow !== hash) await goto(hash);
+      if (after !== before || hashNow !== hash) { await goto(hash); if (prep) await prep(); }
     }
   };
   const gameInteractions = async () => {
@@ -187,6 +187,120 @@ async function crawlConfig(cfg, report) {
     }
   };
 
+
+  // ---------- scripted flows: the dialogs, messages and game screens that a plain click on a route does not reach
+  const tryFlow = async (name, fn) => { try { await fn(); } catch (e) { log(`flow "${name}" stopped: ${String(e.message).split('\n')[0]}`); } };
+  const adminOn = async () => { await goto('#/settings'); if (await page.isChecked('#manage-mode')) return; await page.click('#manage-mode'); await page.waitForSelector('#admin-pw'); await scan('admin password dialog'); await page.fill('#admin-pw', '1234'); if (await page.locator('#admin-pw2').count()) { await page.fill('#admin-pw2', '9999'); await page.click('#admin-ok'); await page.waitForTimeout(250); await scan('admin password: mismatch message'); await page.fill('#admin-pw2', '1234'); } await page.click('#admin-ok'); await page.waitForSelector('dialog.center', { state: 'detached' }); await page.waitForSelector('#add-kid', { state: 'visible' }); await page.waitForTimeout(300); };
+  await tryFlow('settings', async () => {
+    await adminOn(); await scan('settings: manage mode');
+    await page.click('#add-kid'); await page.waitForSelector('dialog input'); await scan('settings: add child'); await page.click('dialog button.primary'); await page.waitForTimeout(250); await scan('settings: add child, empty'); await closeDialogs();
+    await clickThrough('#/settings', 40, adminOn);
+    // wrong password
+    await goto('#/settings'); if (await page.isChecked('#manage-mode')) await page.uncheck('#manage-mode'); await page.click('#manage-mode'); await page.waitForSelector('#admin-pw'); await page.fill('#admin-pw', '0000'); await page.click('#admin-ok'); await page.waitForTimeout(300); await scan('admin: wrong password'); await closeDialogs();
+  });
+  await tryFlow('settings dialogs', async () => {
+    await adminOn();
+    for (const sel of ['.rename', '.change-avatar', '.kid-grade', '.delete', '#import-btn', '#backup-import', '#credits', '#license-link']) {
+      if (!(await page.locator(sel).first().count())) continue;
+      await page.locator(sel).first().click({ timeout: 1500 }).catch(() => {}); await page.waitForTimeout(250); await scan('settings dialog ' + sel); await closeDialogs(); await page.waitForTimeout(100);
+    }
+    // wrong files
+    for (const sel of ['#import-file', '#backup-file', '#avatar-file']) {
+      await goto('#/settings'); await adminOn();
+      if (sel === '#avatar-file') { await page.locator('.change-avatar').first().click(); await page.waitForTimeout(250); }
+      if (sel === '#import-file') { await page.locator('#import-btn').click(); await page.waitForTimeout(250); }
+      const inp = page.locator(sel).first(); const any = page.locator('input[type=file]').first();
+      const t = (await inp.count()) ? inp : any; if (!(await t.count())) { await closeDialogs(); continue; }
+      await t.setInputFiles({ name: 'wrong.txt', mimeType: 'text/plain', buffer: Buffer.from('this is not a valid file') }).catch(() => {});
+      await page.waitForTimeout(500); await scan('wrong file via ' + sel); await closeDialogs();
+    }
+    await goto('#/settings'); await page.locator('#backup-export').click().catch(() => {}); await page.waitForTimeout(500); await scan('backup export toast');
+    await page.locator('#egg-allow').click().catch(() => {}); await page.waitForTimeout(300); await scan('egg switch'); await page.locator('#egg-allow').click().catch(() => {});
+    await page.locator('#check-update').click().catch(() => {}); await page.waitForTimeout(600); await scan('check update message');
+  });
+  await tryFlow('grade dialog', async () => {
+    await goto('#/chinese'); await addKid(page, 'Cara'); const id3 = await page.evaluate(() => { const k = JSON.parse(localStorage.getItem('learn.local.kids.json') || '{}'); return (k.kids || []).map((x) => x.id).pop(); });
+    for (const r of ['english', 'math', 'science']) { await goto(`#/${r}/${id3}`); await page.waitForTimeout(300); await scan(`grade dialog (${r})`); await closeDialogs(); }
+    await goto(`#/coding/${id3}`); await scan('coding, no grade');
+  });
+  await tryFlow('games of the children', async () => {
+    const play = async (hash, label) => {
+      await goto(hash); await scan(label + ' lobby');
+      for (const st of ['#game-start', '.game-start', 'button.primary']) { const b = page.locator(st).first(); if (await b.count()) { await b.click({ timeout: 1500 }).catch(() => {}); break; } }
+      await page.waitForTimeout(500);
+      for (let i = 0; i < 70; i++) {
+        const did = await page.evaluate((i) => {
+          const vis = (el) => el && !el.disabled && el.getBoundingClientRect().width > 0;
+          const click = (el) => { el.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true })); el.click(); return true; };
+          for (const sel of ['#math-next', '#game-again', '.pl-qopt']) { const e = document.querySelector(sel); if (sel === '#game-again') continue; if (vis(e)) return click(e); }
+          const ch = [...document.querySelectorAll('#math-choices button, .sopt, .mchoices button')].filter(vis); if (ch.length) return click(ch[(i * 7) % ch.length]);
+          for (const sel of [i % 3 ? '#game-right' : '#game-wrong', '#game-wrong', '#game-right', '#game-char', '#game-speak']) { const e = document.querySelector(sel); if (vis(e)) return click(e); }
+          return false;
+        }, i).catch(() => false);
+        await page.waitForTimeout(did ? 120 : 400);
+        if (i % 6 === 5) await scan(label + ' playing');
+        if (await page.locator('#game-final, #game-done, #game-end').count()) { await scan(label + ' result'); break; }
+      }
+      await scan(label + ' end');
+      // leaving a running game asks first
+      await goto(hash); for (const st of ['#game-start', 'button.primary']) { const b = page.locator(st).first(); if (await b.count()) { await b.click({ timeout: 1500 }).catch(() => {}); break; } }
+      await page.waitForTimeout(500); const q = page.locator('#game-quit').first(); if (await q.count()) { await q.click().catch(() => {}); await page.waitForTimeout(300); await scan(label + ' leave?'); await closeDialogs(); }
+    };
+    for (const k of [A, B]) { await play(`#/kid/${k}/game`, 'chinese game'); await play(`#/math/${k}/game`, 'math game'); await play(`#/english/${k}/game`, 'languages game'); await play(`#/science/${k}/game`, 'science game'); }
+    await goto(`#/math/${A}/tables`); for (const sel of ['.mt-cell', '#tables-practice', 'button.primary']) { const b = page.locator(sel).first(); if (await b.count()) { await b.click().catch(() => {}); await page.waitForTimeout(300); await scan('times table ' + sel); } }
+    for (let i = 0; i < 12; i++) { const b = page.locator('#game-pad button, .keypad button').nth(i % 10); if (await b.count()) await b.click().catch(() => {}); }
+    await page.waitForTimeout(300); await scan('times table practice');
+  });
+  await tryFlow('labs: quiz and tasks', async () => {
+    for (const lab of ['physics', 'bio', 'geo']) {
+      await goto('#/science/' + lab); const sims = await page.evaluate(() => [...document.querySelectorAll('[data-sim]')].map((e) => e.dataset.sim));
+      for (const id of sims.slice(0, Number(process.env.CRAWL_LABSIMS || 99))) {
+        await goto(`#/science/${lab}/${id}`);
+        for (let i = 0; i < 10; i++) { const o = page.locator('.pl-qopt:not([disabled])').first(); if (await o.count()) await o.click({ timeout: 800 }).catch(() => {}); else break; await page.waitForTimeout(80); const nx = page.locator('#pl-quiz button.primary, #quiz-next').first(); if (await nx.count()) await nx.click({ timeout: 800 }).catch(() => {}); await page.waitForTimeout(80); if (i % 3 === 2) await scan(`${lab}/${id} quiz`); }
+        await scan(`${lab}/${id} quiz end`);
+      }
+    }
+  });
+  const pkFlow = async (setup, label) => {
+    await goto(setup); await scan(label + ' lobby');
+    await page.click('#pk-slot-1'); await page.waitForTimeout(250); await scan(label + ' pick'); const first = page.locator('#pk-pick button').first(); await first.click().catch(() => {}); await page.waitForTimeout(200);
+    await page.click('#pk-slot-2').catch(() => {}); await page.waitForTimeout(250); await scan(label + ' pick 2'); await page.locator('#pk-pick button:not([disabled])').nth(0).click().catch(() => {}); await page.waitForTimeout(250); await scan(label + ' lobby, two players');
+    const st = page.locator('#pk-start'); if (!(await st.isEnabled().catch(() => false))) { await scan(label + ' start off'); return; }
+    await st.click(); await page.waitForTimeout(500); await scan(label + ' opening');
+    await page.evaluate(() => window.__pk && window.__pk.manual(true)).catch(() => {});
+    await page.locator('#pk-exit').click().catch(() => {}); await page.waitForTimeout(250); await scan(label + ' leave?'); await closeDialogs();
+    await page.locator('#pk-skip').click().catch(() => {});
+    for (let i = 0; i < 120; i++) {
+      await page.evaluate((i) => { const w = window.__pk; if (!w) return; w.skip(i % 5 === 0 ? 600 : 1500); if (i % 5 === 1) w.tap(0, i % 4); if (i % 5 === 3) w.tap(1, (i + 1) % 4); }, i).catch(() => {});
+      await page.waitForTimeout(40);
+      if (i % 8 === 4) await scan(label + ' round');
+      if (await page.locator('#pk-again-1').count()) break;
+    }
+    await page.waitForTimeout(1800); await scan(label + ' final');
+    await page.waitForTimeout(1500); await scan(label + ' final +');
+    await page.locator('#pk-again-1').click().catch(() => {}); await page.locator('#pk-again-2').click().catch(() => {}); await page.waitForTimeout(500); await scan(label + ' again');
+  };
+  await tryFlow('pk chinese', () => pkFlow('#/chinese/pk', 'pk chinese'));
+  await tryFlow('pk english', () => pkFlow('#/english/pk', 'pk languages'));
+  await tryFlow('pk record', async () => { await goto('#/chinese/pk'); const r = page.locator('#pk-reset').first(); if (await r.count()) { await r.click().catch(() => {}); await page.waitForTimeout(250); await scan('pk reset confirm'); await closeDialogs(); } });
+  await tryFlow('idiom editor', async () => {
+    await goto(idiomHash); await scan('idiom story');
+    await page.locator('#story-edit').dblclick().catch(() => {}); await page.waitForTimeout(300); await scan('idiom editor'); await closeDialogs();
+    await goto('#/idioms'); await page.locator('#idiom-add').first().click().catch(() => {}); await page.waitForTimeout(250); await page.fill('dialog textarea', '一心一意').catch(() => {}); await page.waitForTimeout(300); await scan('idiom duplicate message'); await page.fill('dialog textarea', '亡羊补牢 掩耳盗铃 abc').catch(() => {}); await page.waitForTimeout(300); await scan('idiom new + invalid'); await closeDialogs();
+    await goto(`#/kid/${A}`); await page.locator('#enter, .plus').first().click().catch(() => {}); await page.waitForTimeout(250); await page.fill('dialog textarea >> nth=0', 'abc 你 你 你').catch(() => {}); await page.waitForTimeout(300); await scan('week entry: invalid / duplicate'); await closeDialogs();
+    await goto(`#/sheet/${A}`); await page.waitForTimeout(300); await scan('sheet'); await page.locator('#sheet-opt, #sheet-write-go').first().click().catch(() => {}); await page.waitForTimeout(300); await scan('sheet options'); await closeDialogs();
+    await goto('#/stories'); await scan('story printout');
+  });
+  const loginFlow = () => tryFlow('login screen', async () => {
+    await goto('#/settings'); await page.locator('button:has-text("instead"), button:has-text("plutôt")').first().click({ timeout: 2000 }).catch(() => {});
+    await page.waitForSelector('.login', { timeout: 4000 }).catch(() => {}); await page.waitForTimeout(300); await scan('login after leaving this device');
+    for (const [repo, tok] of [['', ''], ['abc', 'x'], ['demo/PublicRepo', 'good'], ['demo/PianistScores', 'good'], ['demo/ReadOnly', 'good'], ['demo/LearningData', 'bad']]) {
+      await page.fill('input[type=text]', repo).catch(() => {}); await page.fill('input[type=password]', tok).catch(() => {}); await page.click('button.primary').catch(() => {}); await page.waitForTimeout(700); await scan(`login message (${repo || 'empty'})`);
+    }
+    for (const sel of ['#qr-btn', '#scan-btn', '#pin-toggle']) { const b = page.locator(sel).first(); if (await b.count()) { await b.click().catch(() => {}); await page.waitForTimeout(500); await scan('login ' + sel); await closeDialogs(); } }
+  });
+
+  await goto('#/chinese');
   let n = 0;
   while (queue.length) {
     const hash = queue.shift(); n++;
@@ -209,7 +323,7 @@ async function crawlConfig(cfg, report) {
     await clickThrough(hash, quick ? Math.min(MAXCLICKS, 9) : MAXCLICKS);
     if (n % 10 === 0) { log(`${n} routes, ${queue.length} queued, ${findings.size} findings so far`); if (process.env.CRAWL_REPORT) fs.writeFileSync(process.env.CRAWL_REPORT + '.' + tag.replace('/', '-') + '.partial', JSON.stringify({ routes: [...visited], findings: [...findings.values()] }, null, 1)); }
   }
-  await page.evaluate(() => (location.hash = '#/'));
+  await loginFlow();
   log(`done: ${n} routes`);
   await browser.close();
 }

@@ -1,0 +1,1170 @@
+{
+ "温度升高，酶的活性增大，呼吸作用增强（模型：温度每升高 10 °C，速率约为原来的 2 倍）。发芽的种子呼吸旺盛，放出的二氧化碳使澄清石灰水变浑浊。": [
+  "When the temperature rises, enzyme activity increases and respiration gets stronger (model: for every 10 °C rise the rate is about 2 times as great). Germinating seeds respire vigorously, and the carbon dioxide they give out makes clear limewater turn cloudy.",
+  "Quand la température s'élève, l'activité des enzymes augmente et la respiration s'intensifie (modèle : pour chaque élévation de 10 °C, la vitesse est environ multipliée par 2). Les graines qui germent respirent intensément, et le dioxyde de carbone qu'elles dégagent trouble l'eau de chaux limpide."
+ ],
+ "把发芽的种子放在密闭的瓶中，一段时间后澄清石灰水变浑浊，说明种子呼吸时产生了：": [
+  "Germinating seeds are put in a closed bottle, and after some time clear limewater turns cloudy. This shows that the seeds produced which gas when they respired?",
+  "Des graines qui germent sont placées dans un flacon fermé, et au bout d'un certain temps l'eau de chaux limpide se trouble. Cela montre que les graines ont produit, en respirant :"
+ ],
+ "{0} 粒种子中有 {1} 粒萌发，种子的发芽率是多少？": [
+  "Of {0} seeds, {1} germinate. What is the germination rate of the seeds?",
+  "Sur {0} graines, {1} germent. Quel est le taux de germination des graines ?"
+ ],
+ "发芽率 = 发芽的种子数 / 供检测的种子数 × 100%。": [
+  "Germination rate = number of seeds germinated / number of seeds tested × 100%.",
+  "Taux de germination = nombre de graines germées / nombre de graines testées × 100 %."
+ ],
+ "播种 {0} 粒种子，发芽率为 {1}%，发芽的种子大约有多少粒？": [
+  "{0} seeds are sown and the germination rate is {1}%. About how many seeds germinate?",
+  "On sème {0} graines et le taux de germination est {1} %. Environ combien de graines germent ?"
+ ],
+ "发芽的种子数 = 种子数 × 发芽率。": [
+  "Number germinated = number of seeds × germination rate.",
+  "Nombre de graines germées = nombre de graines × taux de germination."
+ ],
+ "用射线处理发芽的种子，从变异的后代中选育新品种": [
+  "Treat germinating seeds with radiation and select new varieties from the mutated offspring",
+  "Traiter des graines en germination avec des rayonnements et sélectionner de nouvelles variétés parmi les descendants mutants"
+ ],
+ "测定种子的发芽率：每组 {0} 粒，共 3 组，发芽的种子分别为 {1} 粒、{2} 粒、{3} 粒。平均发芽率是多少？": [
+  "Measuring the germination rate: {0} seeds per group, 3 groups; {1}, {2} and {3} seeds germinated. What is the average germination rate?",
+  "Mesure du taux de germination : {0} graines par groupe, 3 groupes ; {1}, {2} et {3} graines ont germé. Quel est le taux moyen de germination ?"
+ ],
+ "平均发芽率 = 三组发芽的种子总数 ÷ 种子总数 × 100 %。": [
+  "Average germination rate = total of the germinated seeds of the three groups ÷ total number of seeds × 100%.",
+  "Taux moyen de germination = total des graines germées des trois groupes ÷ nombre total de graines × 100 %."
+ ],
+ "测定种子的发芽率时，为了减小误差，应该：": [
+  "To reduce the error when measuring the germination rate of seeds, you should:",
+  "Pour réduire l'erreur lors de la mesure du taux de germination des graines, il faut :"
+ ],
+ "把发芽的种子扔掉不数": [
+  "Throw away the seeds that germinated without counting them",
+  "Jeter les graines qui ont germé sans les compter"
+ ],
+ "样本越大、重复越多，结果越接近整批种子的真实发芽率。": [
+  "The larger the sample and the more the repeats, the closer the result to the true germination rate of the whole lot.",
+  "Plus l'échantillon est grand et plus il y a de répétitions, plus le résultat est proche du vrai taux de germination de tout le lot."
+ ],
+ "种子的发芽率 = 发芽的种子数 ÷ 供检测的种子数 × 100 %。测定时要随机取样，每组种子数量要足够多，并重复做几组取平均值，才能减小误差。本模型每组种子是否发芽由这批种子的真实发芽率决定。（以 90 % 作为合格线，是教学假设。）": [
+  "Germination rate of seeds = number of germinated seeds ÷ number of seeds tested × 100%. The seeds must be taken at random, each group must have enough seeds and several groups must be repeated and averaged to reduce the error. In this model whether each seed germinates depends on the true germination rate of the lot. (Taking 90% as the passing line is a teaching assumption.)",
+  "Taux de germination des graines = nombre de graines germées ÷ nombre de graines testées × 100 %. Les graines doivent être prises au hasard, chaque groupe doit avoir assez de graines et plusieurs groupes doivent être répétés et moyennés pour réduire l'erreur. Dans ce modèle, la germination de chaque graine dépend du taux réel de germination du lot. (Prendre 90 % comme seuil d'acceptation est une hypothèse pédagogique.)"
+ ],
+ "环境中影响生物生活的因素分为非生物因素（光、温度、水、空气、土壤等）和生物因素（其他生物）。探究鼠妇的分布：在一个盒子的两半设置不同的条件（如明亮与阴暗），把鼠妇放在中间，过一段时间数各侧的数量。对照实验只能有一个变量，其他条件相同；教科书的做法是用 10 只鼠妇，每隔 1 min 统计一次，共统计 10 次，再取平均值；用较多的鼠妇并重复几次，可以减少偶然性。研究水分的影响时，用湿土和干土做对照。": [
+  "The factors that affect living things in the environment are divided into abiotic factors (light, temperature, water, air, soil and so on) and biotic factors (other organisms). Investigating the distribution of woodlice: set different conditions in the two halves of a box (for example bright and dark), put the woodlice in the middle and count those on each side after a while. A controlled experiment may have only one variable, all other conditions being the same; the textbook method uses 10 woodlice, counts them once every minute 10 times in all and takes the average; using more woodlice and repeating several times reduces chance effects. To study the effect of moisture, wet soil and dry soil are compared.",
+  "Les facteurs qui agissent sur les êtres vivants dans leur milieu se divisent en facteurs abiotiques (lumière, température, eau, air, sol, etc.) et facteurs biotiques (les autres êtres vivants). Étude de la répartition des cloportes : on crée des conditions différentes dans les deux moitiés d'une boîte (par exemple clair et sombre), on place les cloportes au milieu et on compte ceux de chaque côté après un moment. Une expérience témoin ne doit avoir qu'une seule variable, toutes les autres conditions étant identiques ; la méthode du manuel utilise 10 cloportes, les compte une fois par minute, 10 fois au total, et prend la moyenne ; utiliser plus de cloportes et répéter plusieurs fois réduit les effets du hasard. Pour étudier l'effet de l'humidité, on compare une terre humide et une terre sèche."
+ ],
+ "培养细菌和真菌时，把菌液逐级稀释（每次稀释 10 倍），取一定体积涂在培养基上，每个活的细菌或孢子会长成一个肉眼可见的菌落（细菌的菌落较小、表面光滑黏稠，真菌的菌落较大，常呈绒毛状、絮状或蜘蛛网状）。数出菌落数，就能估算原菌液中的细菌数：每毫升的细菌数 = 菌落数 ÷ 涂布体积 × 稀释倍数。菌落数在 30–300 个之间的平板最适合计数。稀释涂布计数属于拓展内容，教科书只要求学会培养、观察和比较菌落。": [
+  "To culture bacteria and fungi, a suspension is diluted step by step (10 times each time) and a known volume is spread on the culture medium; each living bacterium or spore grows into a colony visible to the naked eye (bacterial colonies are small, smooth and sticky; fungal colonies are larger and often look downy, fluffy or cobweb-like). Counting the colonies gives an estimate of the number of bacteria in the original suspension: bacteria per millilitre = colonies ÷ volume spread × dilution factor. Plates with 30–300 colonies are best for counting. Counting by dilution and plating is an extension; the textbook only asks pupils to culture, observe and compare colonies.",
+  "Pour cultiver des bactéries et des champignons, on dilue une suspension par étapes (10 fois à chaque fois) et on étale un volume connu sur le milieu de culture ; chaque bactérie ou spore vivante donne une colonie visible à l'œil nu (les colonies bactériennes sont petites, lisses et visqueuses ; les colonies de champignons sont plus grandes et souvent duveteuses, cotonneuses ou en toile d'araignée). Le nombre de colonies permet d'estimer le nombre de bactéries de la suspension d'origine : bactéries par millilitre = colonies ÷ volume étalé × facteur de dilution. Les boîtes de 30 à 300 colonies sont les meilleures pour le comptage. Le comptage par dilution et étalement est un approfondissement ; le manuel demande seulement de cultiver, d'observer et de comparer des colonies."
+ ],
+ "杂交育种：让不同品种的生物杂交，从后代中选出具有优良性状的新品种，如杂交水稻。诱变育种：用射线、药物处理或太空环境（太空育种）使生物的遗传物质发生改变，再从变异的后代中选育新品种。转基因技术：把一种生物的基因转入另一种生物体内，使它获得新的性状，如抗虫棉。克隆技术：用体细胞的细胞核培育出遗传物质与供核个体基本相同的个体，如 1996 年诞生的多莉羊；克隆没有经过两性生殖细胞的结合，属于无性生殖。": [
+  "Cross breeding: crossing different varieties and selecting from the offspring a new variety with good traits, such as hybrid rice. Mutation breeding: radiation, chemicals or the space environment (space breeding) change the genetic material of organisms, and new varieties are selected from the mutated offspring. Transgenic technology: a gene of one organism is put into another organism, which then gains a new trait, such as insect-resistant cotton. Cloning: an individual with genetic material almost identical to that of the nucleus donor is raised from the nucleus of a body cell, such as Dolly the sheep, born in 1996; cloning involves no union of sex cells, so it is asexual reproduction.",
+  "Croisement (hybridation) : on croise des variétés différentes et on sélectionne dans la descendance une nouvelle variété aux bonnes qualités, comme le riz hybride. Sélection par mutation : des rayonnements, des produits chimiques ou l'environnement spatial (sélection dans l'espace) modifient le matériel génétique des organismes, et l'on sélectionne de nouvelles variétés parmi les descendants mutants. Transgenèse : un gène d'un organisme est introduit dans un autre organisme, qui acquiert ainsi un nouveau caractère, comme le coton résistant aux insectes. Clonage : on obtient, à partir du noyau d'une cellule du corps, un individu dont le matériel génétique est presque identique à celui du donneur du noyau, comme la brebis Dolly, née en 1996 ; le clonage ne passe pas par l'union de cellules sexuelles : c'est une reproduction asexuée."
+ ],
+ "（两对相对性状的 9 : 3 : 3 : 1 属于拓展内容，教科书只讲一对相对性状的 3 : 1。）在杂交育种模型中，高产（A）对低产（a）、抗病（B）对感病（b）都是显性。纯种高产感病（AAbb）与纯种低产抗病（aaBB）杂交，F1 都是 AaBb，表现为高产抗病；F1 自交，F2 出现四种表现型，比例约 9 : 3 : 3 : 1，其中只有 AABB（1/16）的高产抗病植株能稳定遗传。克隆模型中，克隆羊的性状主要像提供细胞核的羊。": [
+  "(The 9 : 3 : 3 : 1 ratio of two pairs of traits is an extension; the textbook covers only 3 : 1 for one pair.) In the cross-breeding model high yield (A) is dominant over low yield (a), and disease resistance (B) over susceptibility (b). A pure high-yield, susceptible plant (AAbb) crossed with a pure low-yield, resistant plant (aaBB) gives F1 plants that are all AaBb, high-yield and resistant; when the F1 self-pollinates, the F2 shows four phenotypes in a ratio of about 9 : 3 : 3 : 1, and only the AABB plants (1/16) breed true. In the cloning model the cloned sheep resembles the sheep that gave the nucleus.",
+  "(Le rapport 9 : 3 : 3 : 1 de deux paires de caractères est un approfondissement ; le manuel ne traite que le 3 : 1 d'une paire.) Dans le modèle de croisement, le rendement élevé (A) est dominant sur le rendement faible (a), et la résistance à la maladie (B) sur la sensibilité (b). Une plante pure à rendement élevé et sensible (AAbb) croisée avec une plante pure à rendement faible et résistante (aaBB) donne des plantes F1 toutes AaBb, à rendement élevé et résistantes ; quand la F1 s'autoféconde, la F2 montre quatre phénotypes dans un rapport d'environ 9 : 3 : 3 : 1, et seules les plantes AABB (1/16) se reproduisent fidèlement. Dans le modèle de clonage, la brebis clonée ressemble à la brebis qui a donné le noyau."
+ ],
+ "隐性遗传病只有当一个人从父母双方各得到一个致病基因（aa）时才会发病。携带者（Aa）本人表现正常，但会把致病基因传给后代。近亲是指直系血亲和三代以内的旁系血亲，他们带有同一致病基因的可能性大得多，所以近亲结婚的后代患隐性遗传病的机会大大增加。《中华人民共和国民法典》规定，直系血亲和三代以内的旁系血亲禁止结婚。": [
+  "A recessive genetic disease appears only when a person receives a disease gene from each parent (aa). A carrier (Aa) is healthy but passes the disease gene to the offspring. Close relatives are lineal relatives by blood and collateral relatives by blood within three generations; they are much more likely to carry the same disease gene, so the chance that the children of close relatives who marry have a recessive genetic disease rises greatly. The Civil Code of the People's Republic of China forbids marriage between lineal relatives by blood and between collateral relatives by blood within three generations.",
+  "Une maladie génétique récessive n'apparaît que lorsqu'une personne reçoit un gène de la maladie de chacun de ses parents (aa). Un porteur (Aa) est en bonne santé mais transmet le gène de la maladie à sa descendance. Les proches parents sont les parents en ligne directe et les parents collatéraux jusqu'au troisième degré ; ils ont beaucoup plus de chances de porter le même gène de maladie ; le risque qu'un enfant de proches parents mariés ait une maladie génétique récessive augmente donc fortement. Le Code civil de la République populaire de Chine interdit le mariage entre parents en ligne directe et entre parents collatéraux jusqu'au troisième degré."
+ ],
+ "本模型：血压的高低取决于心输出量（每搏输出量 × 心率）、血管的阻力和动脉壁的弹性；动脉变窄或变硬，血压会升高。测量血压时，通常在上臂的肱动脉处进行：袖带压力高于收缩压，血流被阻断；袖带压力降到收缩压时开始听到脉搏声，降到舒张压时声音消失。脉搏是动脉随心脏跳动而产生的搏动，在手腕处（桡动脉）可摸到，次数与心率相同。（这是教学模型，不是诊断工具。）": [
+  "In this model blood pressure depends on the cardiac output (stroke volume × heart rate), the resistance of the vessels and the elasticity of the arterial wall; narrower or stiffer arteries raise the pressure. When measuring, which is usually done at the brachial artery of the upper arm, a cuff pressure above the systolic pressure stops the blood flow; the pulse sound starts when the cuff pressure falls to the systolic pressure and disappears when it falls to the diastolic pressure. The pulse is the beat of an artery with each heartbeat; it can be felt at the wrist (radial artery) and its rate equals the heart rate. (This is a teaching model, not a diagnostic tool.)",
+  "Dans ce modèle, la pression artérielle dépend du débit cardiaque (volume d'éjection × fréquence cardiaque), de la résistance des vaisseaux et de l'élasticité de la paroi artérielle ; des artères plus étroites ou plus rigides font monter la pression. Lors de la mesure, qui se fait en général sur l'artère brachiale du bras, une pression du brassard supérieure à la pression systolique arrête la circulation du sang ; le bruit du pouls apparaît quand la pression du brassard descend jusqu'à la pression systolique et disparaît quand elle descend jusqu'à la pression diastolique. Le pouls est le battement d'une artère à chaque battement du cœur ; on le sent au poignet (artère radiale) et sa fréquence est égale à la fréquence cardiaque. (Il s'agit d'un modèle pédagogique, pas d'un outil de diagnostic.)"
+ ],
+ "角质的鳞片或甲": [
+  "Horny scales or a shell",
+  "Écailles cornées ou carapace"
+ ],
+ "是细胞进行生命活动的场所": [
+  "The place where the cell carries out its life activities",
+  "Lieu où la cellule exerce ses activités vitales"
+ ],
+ "吸水纸从另一侧吸引，使碘液浸润标本的全部。": [
+  "Blotting paper on the other side draws the iodine across so that it soaks the whole specimen.",
+  "Le papier buvard placé de l'autre côté attire l'iode, qui imprègne tout le spécimen."
+ ],
+ "胚芽、胚轴、胚根": [
+  "Plumule, hypocotyl and radicle",
+  "Gemmule, hypocotyle et radicule"
+ ],
+ "{0} 百万年": [
+  "{0} million years",
+  "{0} millions d'années"
+ ],
+ "发芽的种子": [
+  "Germinating seeds",
+  "Graines en germination"
+ ],
+ "发芽的种子呼吸 30 分钟以上，石灰水明显变浑浊（浑浊度 50% 以上）": [
+  "Germinating seeds respire for 30 minutes or more: the limewater turns clearly cloudy (over 50 %)",
+  "Des graines en germination respirent 30 minutes ou plus : l'eau de chaux se trouble nettement (plus de 50 %)"
+ ],
+ "E 皿发芽率": [
+  "Germination rate in dish E",
+  "Taux de germination de la boîte E"
+ ],
+ "培养到种子发芽率达到 90% 以上（E 皿条件都适宜）": [
+  "Culture until over 90 % of the seeds have germinated (all conditions in E suitable)",
+  "Cultivez jusqu'à plus de 90 % de graines germées (toutes les conditions de E adaptées)"
+ ],
+ "这批种子的真实发芽率": [
+  "True germination rate of the lot",
+  "Taux réel de germination du lot"
+ ],
+ "测定发芽率": [
+  "Measuring the germination rate",
+  "Mesure du taux de germination"
+ ],
+ "三组发芽的种子数": [
+  "Seeds germinated in the three groups",
+  "Graines germées dans les trois groupes"
+ ],
+ "平均发芽率": [
+  "Average germination rate",
+  "Taux moyen de germination"
+ ],
+ "已发芽": [
+  "Germinated",
+  "Germées"
+ ],
+ "未发芽": [
+  "Not germinated",
+  "Non germées"
+ ],
+ "每组取 100 粒以上的种子测定发芽率": [
+  "Measure the germination rate with 100 or more seeds per group",
+  "Mesurer le taux de germination avec 100 graines ou plus par groupe"
+ ],
+ "血管阻力（血管越窄，阻力越大）": [
+  "Vessel resistance (the narrower the vessel, the higher)",
+  "Résistance des vaisseaux (plus le vaisseau est étroit, plus elle est élevée)"
+ ],
+ "相当于无亲缘关系时的": [
+  "Equal to that for unrelated partners",
+  "Équivaut à celle de conjoints sans lien de parenté"
+ ],
+ "平均每分钟蒸发的质量 = 蒸发的质量 ÷ 时间。": [
+  "Mass evaporated per minute on average = mass evaporated ÷ time.",
+  "Masse évaporée par minute en moyenne = masse évaporée ÷ durée."
+ ],
+ "分度值 = 温度差 ÷ 格数，这里的温度差是 100 ℃。": [
+  "Value of a division = temperature difference ÷ number of divisions; here the difference is 100 °C.",
+  "Valeur d'une graduation = écart de température ÷ nombre de graduations ; ici l'écart est de 100 °C."
+ ],
+ "光源很小（点光源）时，物体后面只有一片黑暗的影；光源较大时，影的中间是完全没有光的本影，周围是只有一部分光的半影。日食是月球挡住太阳光，月球的影落在地球上；月食是地球挡住太阳光，月球进入地球的影。因为月球的轨道面与地球的轨道面约有 5° 的夹角，只有在新月（日食）或满月（月食）时，月球恰好又在地球轨道面附近，才会发生日食或月食，所以并不是每个月都发生。": [
+  "When the source is very small (a point source) there is only a dark shadow behind the object; when the source is larger, the middle of the shadow is the umbra, which gets no light at all, and round it is the penumbra, which gets only part of the light. A solar eclipse is when the Moon blocks the sunlight and its shadow falls on the Earth; a lunar eclipse is when the Earth blocks the sunlight and the Moon enters the Earth's shadow. The plane of the Moon's orbit makes an angle of about 5° with the plane of the Earth's orbit; an eclipse happens only at new Moon (solar) or full Moon (lunar) when the Moon is also close to the plane of the Earth's orbit, so there is not an eclipse every month.",
+  "Quand la source est très petite (source ponctuelle), il n'y a derrière l'objet qu'une ombre sombre ; quand la source est plus grande, le milieu de l'ombre est l'ombre propre, qui ne reçoit aucune lumière, et autour d'elle se trouve la pénombre, qui ne reçoit qu'une partie de la lumière. Une éclipse de Soleil se produit quand la Lune arrête la lumière du Soleil et que son ombre tombe sur la Terre ; une éclipse de Lune, quand la Terre arrête la lumière du Soleil et que la Lune entre dans l'ombre de la Terre. Le plan de l'orbite de la Lune fait un angle d'environ 5° avec celui de l'orbite de la Terre ; il n'y a d'éclipse qu'à la nouvelle Lune (Soleil) ou à la pleine Lune (Lune) lorsque la Lune est aussi proche du plan de l'orbite de la Terre : il n'y a donc pas d'éclipse chaque mois."
+ ],
+ "小平面的法线与竖直方向成 t 角，入射角是 t，反射角也是 t，所以反射光线与竖直向上的方向（入射光线的反方向）成 2t 角。": [
+  "The normal of the small surface makes an angle t with the vertical, so the angle of incidence is t and the angle of reflection is also t; the reflected ray therefore makes an angle 2t with the upward vertical (the reverse of the incident direction).",
+  "La normale à la petite surface fait un angle t avec la verticale ; l'angle d'incidence est donc t et l'angle de réflexion est aussi t : le rayon réfléchi fait donc un angle 2t avec la verticale dirigée vers le haut (sens opposé au rayon incident)."
+ ],
+ "在这个实验中，A 是参照的导线，B 每次只改变一个因素。注意：电阻越大，电流表的示数越小。": [
+  "In this experiment A is the reference wire and B changes only one factor each time. Note: the greater the resistance, the smaller the reading of the ammeter.",
+  "Dans cette expérience, A est le fil de référence et B ne change qu'un seul facteur à chaque fois. Remarque : plus la résistance est grande, plus l'indication de l'ampèremètre est petite."
+ ],
+ "声音的强弱：找一个会损害听力的声音（超过 90 dB）": [
+  "Loudness of sound: find a sound that damages hearing (above 90 dB)",
+  "Intensité sonore : trouvez un son qui abîme l'ouïe (plus de 90 dB)"
+ ],
+ "日食与月食：调节月球的位置和偏离地球轨道面的角度，使它满足发生日食或月食的条件": [
+  "Solar and lunar eclipses: set the position of the Moon and its angle away from the plane of the Earth's orbit so that the conditions for a solar or lunar eclipse are met",
+  "Éclipses de Soleil et de Lune : réglez la position de la Lune et son écart angulaire avec le plan de l'orbite de la Terre pour que les conditions d'une éclipse de Soleil ou de Lune soient réunies"
+ ],
+ "A 比 0 ℃ 时多的内能": [
+  "Internal energy of A above its value at 0 °C",
+  "Énergie interne de A en plus de sa valeur à 0 °C"
+ ],
+ "B 比 0 ℃ 时多的内能": [
+  "Internal energy of B above its value at 0 °C",
+  "Énergie interne de B en plus de sa valeur à 0 °C"
+ ],
+ "电流的方向（取某一方向为正）": [
+  "Direction of the current (one direction taken as positive)",
+  "Sens du courant (un sens est pris comme positif)"
+ ],
+ "正方向": [
+  "Positive direction",
+  "Sens positif"
+ ],
+ "负方向": [
+  "Negative direction",
+  "Sens négatif"
+ ],
+ "数字信号判断错误的位数": [
+  "Number of bits the digital signal gets wrong",
+  "Nombre de bits erronés du signal numérique"
+ ],
+ "比大小": [
+  "Comparing numbers",
+  "Comparer des nombres"
+ ],
+ "用 >、<、= 填一填": [
+  "Fill in with >, < or =",
+  "Compléter avec >, < ou ="
+ ],
+ "找规律": [
+  "Finding patterns",
+  "Trouver des régularités"
+ ],
+ "接着数下去": [
+  "Keep counting on",
+  "Continuer à compter"
+ ],
+ "10以内加法": [
+  "Addition within 10",
+  "Additions jusqu'à 10"
+ ],
+ "和不超过 10": [
+  "The sum is at most 10",
+  "La somme ne dépasse pas 10"
+ ],
+ "10以内减法": [
+  "Subtraction within 10",
+  "Soustractions jusqu'à 10"
+ ],
+ "被减数不超过 10": [
+  "The minuend is at most 10",
+  "Le nombre dont on soustrait ne dépasse pas 10"
+ ],
+ "20以内进位加法": [
+  "Addition within 20 with carrying",
+  "Additions jusqu'à 20 avec retenue"
+ ],
+ "凑十法": [
+  "Making ten",
+  "La méthode du « faire dix »"
+ ],
+ "20以内退位减法": [
+  "Subtraction within 20 with borrowing",
+  "Soustractions jusqu'à 20 avec emprunt"
+ ],
+ "破十法": [
+  "Breaking up ten",
+  "La méthode de la décomposition de dix"
+ ],
+ "100以内加法": [
+  "Addition within 100",
+  "Additions jusqu'à 100"
+ ],
+ "两位数加法": [
+  "Adding two-digit numbers",
+  "Addition de nombres à deux chiffres"
+ ],
+ "100以内减法": [
+  "Subtraction within 100",
+  "Soustractions jusqu'à 100"
+ ],
+ "两位数减法": [
+  "Subtracting two-digit numbers",
+  "Soustraction de nombres à deux chiffres"
+ ],
+ "表内乘法": [
+  "Times tables",
+  "Tables de multiplication"
+ ],
+ "乘法口诀": [
+  "Times-table rhymes",
+  "Comptines des tables de multiplication"
+ ],
+ "表内除法": [
+  "Division using the times tables",
+  "Divisions des tables"
+ ],
+ "用口诀求商": [
+  "Finding the quotient with the rhymes",
+  "Trouver le quotient avec les comptines"
+ ],
+ "单位换算": [
+  "Unit conversion",
+  "Conversion d'unités"
+ ],
+ "长度、质量、时间": [
+  "Length, mass and time",
+  "Longueur, masse et temps"
+ ],
+ "三位数加法": [
+  "Addition of three-digit numbers",
+  "Addition de nombres à trois chiffres"
+ ],
+ "万以内加法": [
+  "Addition within 10,000",
+  "Additions jusqu'à 10 000"
+ ],
+ "三位数减法": [
+  "Subtraction of three-digit numbers",
+  "Soustraction de nombres à trois chiffres"
+ ],
+ "万以内减法": [
+  "Subtraction within 10,000",
+  "Soustractions jusqu'à 10 000"
+ ],
+ "多位数乘一位数": [
+  "Multiplying by a one-digit number",
+  "Multiplication par un nombre à un chiffre"
+ ],
+ "竖式乘法": [
+  "Long multiplication",
+  "Multiplication posée"
+ ],
+ "除数是一位数的除法": [
+  "Division by a one-digit number",
+  "Division par un nombre à un chiffre"
+ ],
+ "整除": [
+  "Exact division",
+  "Division exacte"
+ ],
+ "长方形面积与周长": [
+  "Area and perimeter of a rectangle",
+  "Aire et périmètre d'un rectangle"
+ ],
+ "公式应用": [
+  "Applying the formula",
+  "Application de la formule"
+ ],
+ "两位数乘法": [
+  "Multiplying by a two-digit number",
+  "Multiplication par un nombre à deux chiffres"
+ ],
+ "三位数乘两位数": [
+  "A three-digit number times a two-digit number",
+  "Un nombre à trois chiffres par un nombre à deux chiffres"
+ ],
+ "除数是两位数的除法": [
+  "Division by a two-digit number",
+  "Division par un nombre à deux chiffres"
+ ],
+ "四则混合运算": [
+  "Mixed operations",
+  "Calculs mêlant les quatre opérations"
+ ],
+ "先乘除后加减，括号优先": [
+  "Multiply and divide before adding and subtracting; brackets first",
+  "Multiplications et divisions avant additions et soustractions ; parenthèses d'abord"
+ ],
+ "小数加减法": [
+  "Adding and subtracting decimals",
+  "Addition et soustraction de nombres décimaux"
+ ],
+ "小数点对齐": [
+  "Line up the decimal points",
+  "Aligner les virgules"
+ ],
+ "三角形的内角": [
+  "Interior angles of a triangle",
+  "Angles d'un triangle"
+ ],
+ "内角和 180°": [
+  "The interior angles add up to 180°",
+  "La somme des angles est égale à 180°"
+ ],
+ "总和 ÷ 个数": [
+  "Total ÷ number of values",
+  "Somme ÷ nombre de valeurs"
+ ],
+ "小数乘法": [
+  "Multiplying decimals",
+  "Multiplication de nombres décimaux"
+ ],
+ "小数乘整数、小数乘小数": [
+  "Decimal × whole number, decimal × decimal",
+  "Décimal × entier, décimal × décimal"
+ ],
+ "小数除法": [
+  "Dividing decimals",
+  "Division de nombres décimaux"
+ ],
+ "除以整数": [
+  "Dividing by a whole number",
+  "Division par un entier"
+ ],
+ "简易方程": [
+  "Simple equations",
+  "Équations simples"
+ ],
+ "x + a = b 等": [
+  "x + a = b and similar",
+  "x + a = b et équations semblables"
+ ],
+ "同分母分数加法": [
+  "Adding fractions with the same denominator",
+  "Addition de fractions de même dénominateur"
+ ],
+ "结果约分": [
+  "Simplify the result",
+  "Simplifier le résultat"
+ ],
+ "异分母分数加减": [
+  "Adding and subtracting fractions with different denominators",
+  "Addition et soustraction de fractions de dénominateurs différents"
+ ],
+ "通分后计算": [
+  "Find a common denominator, then calculate",
+  "Réduire au même dénominateur, puis calculer"
+ ],
+ "约分": [
+  "Simplifying fractions",
+  "Simplification de fractions"
+ ],
+ "化成最简分数": [
+  "Reduce to lowest terms",
+  "Réduire à la fraction irréductible"
+ ],
+ "公因数与公倍数": [
+  "Common factors and common multiples",
+  "Diviseurs communs et multiples communs"
+ ],
+ "最大公因数、最小公倍数": [
+  "Greatest common factor, lowest common multiple",
+  "PGCD, PPCM"
+ ],
+ "三角形面积": [
+  "Area of a triangle",
+  "Aire d'un triangle"
+ ],
+ "底 × 高 ÷ 2": [
+  "Base × height ÷ 2",
+  "Base × hauteur ÷ 2"
+ ],
+ "分数乘法": [
+  "Multiplying fractions",
+  "Multiplication de fractions"
+ ],
+ "分子乘分子，分母乘分母": [
+  "Numerator times numerator, denominator times denominator",
+  "Numérateur par numérateur, dénominateur par dénominateur"
+ ],
+ "分数除法": [
+  "Dividing fractions",
+  "Division de fractions"
+ ],
+ "除以一个数等于乘它的倒数": [
+  "Dividing by a number is the same as multiplying by its reciprocal",
+  "Diviser par un nombre revient à multiplier par son inverse"
+ ],
+ "百分数": [
+  "Percentages",
+  "Pourcentages"
+ ],
+ "求百分数 / 求一个数的百分之几": [
+  "Finding a percentage / a percentage of a number",
+  "Calculer un pourcentage / un pourcentage d'un nombre"
+ ],
+ "化简比": [
+  "Simplifying ratios",
+  "Simplification de rapports"
+ ],
+ "化成最简整数比": [
+  "Reduce to the simplest whole-number ratio",
+  "Réduire au rapport entier le plus simple"
+ ],
+ "圆的周长与面积": [
+  "Circumference and area of a circle",
+  "Circonférence et aire d'un cercle"
+ ],
+ "π 取 3.14": [
+  "Take π as 3.14",
+  "Prendre π égal à 3,14"
+ ],
+ "解比例": [
+  "Solving proportions",
+  "Résolution de proportions"
+ ],
+ "内项积等于外项积": [
+  "The product of the means equals the product of the extremes",
+  "Le produit des moyens est égal au produit des extrêmes"
+ ],
+ "有理数加减": [
+  "Adding and subtracting rational numbers",
+  "Addition et soustraction de nombres rationnels"
+ ],
+ "正负数运算": [
+  "Calculating with positive and negative numbers",
+  "Calculs avec des nombres positifs et négatifs"
+ ],
+ "有理数乘除": [
+  "Multiplying and dividing rational numbers",
+  "Multiplication et division de nombres rationnels"
+ ],
+ "同号得正，异号得负": [
+  "Same signs give a positive, different signs a negative",
+  "Deux signes identiques donnent un positif, deux signes différents un négatif"
+ ],
+ "一元一次方程 ax+b=c": [
+  "Linear equations ax + b = c",
+  "Équations du premier degré ax + b = c"
+ ],
+ "移项、合并": [
+  "Moving terms and collecting",
+  "Transposer et regrouper les termes"
+ ],
+ "一元一次方程 ax+b=cx+d": [
+  "Linear equations ax + b = cx + d",
+  "Équations du premier degré ax + b = cx + d"
+ ],
+ "未知数在两边": [
+  "The unknown is on both sides",
+  "L'inconnue figure des deux côtés"
+ ],
+ "合并同类项": [
+  "Collecting like terms",
+  "Regroupement de termes semblables"
+ ],
+ "系数相加": [
+  "Add the coefficients",
+  "Additionner les coefficients"
+ ],
+ "多项式乘法 (x+p)(x+q)": [
+  "Multiplying polynomials (x + p)(x + q)",
+  "Multiplication de polynômes (x + p)(x + q)"
+ ],
+ "整式乘法": [
+  "Multiplying algebraic expressions",
+  "Multiplication d'expressions algébriques"
+ ],
+ "平方与平方根": [
+  "Squares and square roots",
+  "Carrés et racines carrées"
+ ],
+ "算术平方根": [
+  "The arithmetic square root",
+  "La racine carrée arithmétique"
+ ],
+ "勾股定理": [
+  "The Pythagorean theorem",
+  "Le théorème de Pythagore"
+ ],
+ "一次函数求值": [
+  "Evaluating linear functions",
+  "Calcul de valeurs d'une fonction affine"
+ ],
+ "中位数": [
+  "Median",
+  "Médiane"
+ ],
+ "从小到大排列": [
+  "Arrange in order from smallest to largest",
+  "Ranger du plus petit au plus grand"
+ ],
+ "一元二次方程（因式分解）": [
+  "Quadratic equations (by factorising)",
+  "Équations du second degré (par factorisation)"
+ ],
+ "求两个根": [
+  "Find the two roots",
+  "Trouver les deux racines"
+ ],
+ "特殊角的三角函数值": [
+  "Trigonometric values of special angles",
+  "Valeurs trigonométriques des angles remarquables"
+ ],
+ "简单概率": [
+  "Simple probability",
+  "Probabilités simples"
+ ],
+ "所求情况数 ÷ 总情况数": [
+  "Favourable outcomes ÷ all outcomes",
+  "Cas favorables ÷ nombre de cas possibles"
+ ],
+ "应用题：加减": [
+  "Word problems: addition and subtraction",
+  "Problèmes : addition et soustraction"
+ ],
+ "用加法或减法解决问题": [
+  "Solve the problem with addition or subtraction",
+  "Résoudre le problème par une addition ou une soustraction"
+ ],
+ "应用题：乘除": [
+  "Word problems: multiplication and division",
+  "Problèmes : multiplication et division"
+ ],
+ "每份几个、平均分": [
+  "How many in each share; sharing equally",
+  "Combien par part ; partage équitable"
+ ],
+ "应用题：行程与周长": [
+  "Word problems: distance and perimeter",
+  "Problèmes : distance et périmètre"
+ ],
+ "路程、周长、先减后加": [
+  "Distance, perimeter, subtract first then add",
+  "Distance, périmètre, soustraire puis additionner"
+ ],
+ "应用题：年龄、单价、天数": [
+  "Word problems: ages, unit prices, days",
+  "Problèmes : âges, prix unitaires, jours"
+ ],
+ "差、均分、需要几天": [
+  "Differences, equal sharing, how many days are needed",
+  "Écarts, partages égaux, nombre de jours nécessaires"
+ ],
+ "应用题：折扣、百分数、比": [
+  "Word problems: discounts, percentages, ratios",
+  "Problèmes : remises, pourcentages, rapports"
+ ],
+ "打几折、占百分之几、按比分配": [
+  "Percentage off, percentage share, sharing in a ratio",
+  "Remise en pourcentage, part en pourcentage, partage selon un rapport"
+ ],
+ "应用题：方程": [
+  "Word problems: equations",
+  "Problèmes : équations"
+ ],
+ "列方程解应用题": [
+  "Solve word problems by writing an equation",
+  "Résoudre des problèmes en posant une équation"
+ ],
+ "应用题：勾股与连续数": [
+  "Word problems: Pythagoras and consecutive numbers",
+  "Problèmes : Pythagore et nombres consécutifs"
+ ],
+ "梯子靠墙、连续整数": [
+  "A ladder against a wall; consecutive integers",
+  "Échelle contre un mur ; entiers consécutifs"
+ ],
+ "绝对值与相反数": [
+  "Absolute value and opposites",
+  "Valeur absolue et opposés"
+ ],
+ "乘方": [
+  "Powers",
+  "Puissances"
+ ],
+ "(−2)³ 等": [
+  "(−2)³ and similar",
+  "(−2)³ et expressions semblables"
+ ],
+ "一元一次不等式": [
+  "Linear inequalities",
+  "Inéquations du premier degré"
+ ],
+ "解不等式": [
+  "Solve the inequality",
+  "Résoudre l'inéquation"
+ ],
+ "二次根式化简": [
+  "Simplifying square-root expressions",
+  "Simplification de radicaux"
+ ],
+ "乘法公式": [
+  "Multiplication formulae",
+  "Identités remarquables"
+ ],
+ "平方差、完全平方": [
+  "Difference of squares, perfect squares",
+  "Différence de deux carrés, carrés parfaits"
+ ],
+ "因式分解": [
+  "Factorising",
+  "Factorisation"
+ ],
+ "反比例函数求值": [
+  "Evaluating inverse proportion functions",
+  "Calcul de valeurs d'une fonction de proportionnalité inverse"
+ ],
+ "二次函数的顶点": [
+  "Vertex of a quadratic function",
+  "Sommet d'une fonction du second degré"
+ ],
+ "顶点式 y=(x−h)²+k": [
+  "Vertex form y = (x − h)² + k",
+  "Forme canonique y = (x − h)² + k"
+ ],
+ "弧长": [
+  "Arc length",
+  "Longueur d'un arc"
+ ],
+ "认识图形": [
+  "Recognising shapes",
+  "Reconnaître des formes"
+ ],
+ "认识长方形、正方形、三角形、圆和立体图形": [
+  "Recognise rectangles, squares, triangles, circles and solid shapes",
+  "Reconnaître rectangles, carrés, triangles, cercles et solides"
+ ],
+ "认识钟表": [
+  "Reading clocks",
+  "Lire l'heure"
+ ],
+ "读出整点和半点": [
+  "Read whole and half hours",
+  "Lire les heures pile et les demi-heures"
+ ],
+ "认识人民币": [
+  "Recognising RMB",
+  "Reconnaître la monnaie chinoise (RMB)"
+ ],
+ "数一数图中一共有多少元": [
+  "Count how many yuan there are in the picture",
+  "Compter combien de yuans il y a sur l'image"
+ ],
+ "数的组成": [
+  "Place value",
+  "Composition des nombres"
+ ],
+ "几个十和几个一": [
+  "How many tens and how many ones",
+  "Combien de dizaines et combien d'unités"
+ ],
+ "图形找规律": [
+  "Patterns with shapes",
+  "Régularités avec des formes"
+ ],
+ "找出下一个图形": [
+  "Find the next shape",
+  "Trouver la forme suivante"
+ ],
+ "求多求少": [
+  "How many more, how many fewer",
+  "Plus ou moins"
+ ],
+ "比多少的简单应用题": [
+  "Simple word problems comparing amounts",
+  "Problèmes simples de comparaison de quantités"
+ ],
+ "补全乘法口诀": [
+  "Complete the times-table rhyme",
+  "Compléter la comptine de la table"
+ ],
+ "选口诀": [
+  "Choosing the rhyme",
+  "Choisir la comptine"
+ ],
+ "算乘法用哪句口诀": [
+  "Which rhyme gives the product",
+  "Quelle comptine donne le produit"
+ ],
+ "乘法填数": [
+  "Missing factors",
+  "Facteurs manquants"
+ ],
+ "找出缺少的因数": [
+  "Find the missing factor",
+  "Trouver le facteur manquant"
+ ],
+ "用口诀算除法": [
+  "Division using the rhymes",
+  "Division avec les comptines"
+ ],
+ "想乘法口诀求商": [
+  "Think of the times-table rhyme to find the quotient",
+  "Penser à la comptine de multiplication pour trouver le quotient"
+ ],
+ "倍的认识": [
+  "Understanding “times as many”",
+  "Comprendre « fois plus »"
+ ],
+ "几倍和几的几倍": [
+  "How many times, and a multiple of a number",
+  "Combien de fois, et multiple d'un nombre"
+ ],
+ "有余数的除法": [
+  "Division with a remainder",
+  "Division avec reste"
+ ],
+ "商和余数": [
+  "Quotient and remainder",
+  "Quotient et reste"
+ ],
+ "几时几分": [
+  "Hours and minutes",
+  "Heures et minutes"
+ ],
+ "读出钟表上的时间": [
+  "Read the time on the clock",
+  "Lire l'heure sur l'horloge"
+ ],
+ "选钟表": [
+  "Choosing the clock",
+  "Choisir l'horloge"
+ ],
+ "找出显示指定时间的钟表": [
+  "Find the clock that shows the given time",
+  "Trouver l'horloge qui indique l'heure donnée"
+ ],
+ "元角分": [
+  "Yuan, jiao and fen",
+  "Yuan, jiao et fen"
+ ],
+ "元、角的换算和计算": [
+  "Converting and calculating with yuan and jiao",
+  "Conversions et calculs avec les yuans et les jiaos"
+ ],
+ "找钱": [
+  "Giving change",
+  "Rendre la monnaie"
+ ],
+ "付钱后应找回多少": [
+  "How much change is due after paying",
+  "Combien de monnaie rendre après le paiement"
+ ],
+ "凑钱": [
+  "Making an amount",
+  "Faire l'appoint"
+ ],
+ "怎样付正好的钱数": [
+  "How to pay the exact amount",
+  "Comment payer la somme exacte"
+ ],
+ "选单位": [
+  "Choosing the unit",
+  "Choisir l'unité"
+ ],
+ "选择合适的长度、质量、时间单位": [
+  "Choose a suitable unit of length, mass or time",
+  "Choisir une unité de longueur, de masse ou de temps adaptée"
+ ],
+ "条形统计图": [
+  "Bar charts",
+  "Diagrammes en barres"
+ ],
+ "看图读数据": [
+  "Read the data from the chart",
+  "Lire les données sur le graphique"
+ ],
+ "万以内数的认识": [
+  "Numbers within 10,000",
+  "Les nombres jusqu'à 10 000"
+ ],
+ "数位和位值": [
+  "Digits and place value",
+  "Chiffres et valeur de position"
+ ],
+ "边和角": [
+  "Sides and angles",
+  "Côtés et angles"
+ ],
+ "数一数图形的边和角": [
+  "Count the sides and angles of a shape",
+  "Compter les côtés et les angles d'une forme"
+ ],
+ "倍和平均分": [
+  "Multiples and equal sharing",
+  "Multiples et partage équitable"
+ ],
+ "倍数和平均分的应用题": [
+  "Word problems on multiples and equal sharing",
+  "Problèmes sur les multiples et le partage équitable"
+ ],
+ "乘除混合": [
+  "Mixed multiplication and division",
+  "Multiplications et divisions mêlées"
+ ],
+ "乘法和除法的混合运算": [
+  "Mixed calculations with multiplication and division",
+  "Calculs mêlant multiplication et division"
+ ],
+ "余数问题": [
+  "Remainder problems",
+  "Problèmes de reste"
+ ],
+ "被除数、余数最大": [
+  "The dividend; the largest possible remainder",
+  "Le dividende ; le plus grand reste possible"
+ ],
+ "经过时间": [
+  "Elapsed time",
+  "Durée écoulée"
+ ],
+ "计算经过了多长时间": [
+  "Work out how much time has passed",
+  "Calculer le temps écoulé"
+ ],
+ "钟表与时间": [
+  "Clocks and time",
+  "Horloges et durées"
+ ],
+ "看钟表算几时几分": [
+  "Work out the time from the clock",
+  "Calculer l'heure à partir de l'horloge"
+ ],
+ "长度和质量单位": [
+  "Units of length and mass",
+  "Unités de longueur et de masse"
+ ],
+ "长度和质量单位的换算": [
+  "Converting units of length and mass",
+  "Conversion d'unités de longueur et de masse"
+ ],
+ "时间单位": [
+  "Units of time",
+  "Unités de temps"
+ ],
+ "时、分、年、月、日": [
+  "Hours, minutes, years, months and days",
+  "Heures, minutes, années, mois et jours"
+ ],
+ "周长": [
+  "Perimeter",
+  "Périmètre"
+ ],
+ "长方形、正方形、三角形的周长": [
+  "Perimeter of rectangles, squares and triangles",
+  "Périmètre des rectangles, des carrés et des triangles"
+ ],
+ "长方形和正方形的面积": [
+  "Area of rectangles and squares",
+  "Aire des rectangles et des carrés"
+ ],
+ "认识分数": [
+  "Understanding fractions",
+  "Comprendre les fractions"
+ ],
+ "看图写分数": [
+  "Write the fraction shown in the picture",
+  "Écrire la fraction représentée sur l'image"
+ ],
+ "分数比大小": [
+  "Comparing fractions",
+  "Comparer des fractions"
+ ],
+ "同分母分数的大小": [
+  "Fractions with the same denominator",
+  "Fractions de même dénominateur"
+ ],
+ "小数与元角分": [
+  "Decimals and money",
+  "Nombres décimaux et monnaie"
+ ],
+ "用小数表示钱数": [
+  "Write amounts of money as decimals",
+  "Écrire des sommes d'argent sous forme décimale"
+ ],
+ "小数的大小": [
+  "Comparing decimals",
+  "Comparer des nombres décimaux"
+ ],
+ "比较小数、认识数位": [
+  "Compare decimals and recognise place value",
+  "Comparer des décimaux et reconnaître les positions"
+ ],
+ "分配问题": [
+  "Sharing problems",
+  "Problèmes de partage"
+ ],
+ "平均分和余数的应用题": [
+  "Word problems on equal sharing and remainders",
+  "Problèmes de partage équitable et de reste"
+ ],
+ "统计图计算": [
+  "Calculating from charts",
+  "Calculs à partir de graphiques"
+ ],
+ "看图求多少、差多少": [
+  "Find the amount or the difference from the chart",
+  "Trouver la quantité ou l'écart à partir du graphique"
+ ],
+ "数列找规律": [
+  "Number sequences",
+  "Suites de nombres"
+ ],
+ "找出下一个数": [
+  "Find the next number",
+  "Trouver le nombre suivant"
+ ],
+ "小棒图形": [
+  "Matchstick patterns",
+  "Figures en bâtonnets"
+ ],
+ "图形中的规律": [
+  "Patterns in shapes",
+  "Régularités dans les figures"
+ ],
+ "因数与倍数": [
+  "Factors and multiples",
+  "Diviseurs et multiples"
+ ],
+ "因数的个数和倍数": [
+  "Counting factors; multiples",
+  "Nombre de diviseurs ; multiples"
+ ],
+ "质数与合数": [
+  "Prime and composite numbers",
+  "Nombres premiers et nombres composés"
+ ],
+ "认识质数和合数": [
+  "Recognise prime and composite numbers",
+  "Reconnaître les nombres premiers et les nombres composés"
+ ],
+ "大数的认识": [
+  "Large numbers",
+  "Les grands nombres"
+ ],
+ "万和亿以内数的读写": [
+  "Reading and writing numbers up to hundreds of millions",
+  "Lire et écrire les nombres jusqu'aux centaines de millions"
+ ],
+ "近似数与估算": [
+  "Approximation and estimation",
+  "Valeurs approchées et estimation"
+ ],
+ "四舍五入和估算": [
+  "Rounding and estimating",
+  "Arrondi et estimation"
+ ],
+ "量角": [
+  "Measuring angles",
+  "Mesurer des angles"
+ ],
+ "读出量角器上的度数": [
+  "Read the degrees on the protractor",
+  "Lire les degrés sur le rapporteur"
+ ],
+ "角的分类": [
+  "Classifying angles",
+  "Classer les angles"
+ ],
+ "锐角、直角、钝角和平角": [
+  "Acute, right, obtuse and straight angles",
+  "Angles aigus, droits, obtus et plats"
+ ],
+ "轴对称": [
+  "Line symmetry",
+  "Symétrie axiale"
+ ],
+ "找出对称轴的条数": [
+  "Find the number of lines of symmetry",
+  "Trouver le nombre d'axes de symétrie"
+ ],
+ "单位换算（含面积）": [
+  "Unit conversion (including area)",
+  "Conversion d'unités (y compris les aires)"
+ ],
+ "长度、质量、面积单位的换算": [
+  "Converting units of length, mass and area",
+  "Conversion d'unités de longueur, de masse et d'aire"
+ ],
+ "看图求平均数": [
+  "Mean from a chart",
+  "Moyenne à partir d'un graphique"
+ ],
+ "看统计图求平均数": [
+  "Find the mean from a chart",
+  "Calculer la moyenne à partir d'un graphique statistique"
+ ],
+ "公倍数与公因数": [
+  "Common multiples and common factors",
+  "Multiples communs et diviseurs communs"
+ ],
+ "找公倍数和公因数": [
+  "Find common multiples and common factors",
+  "Trouver des multiples communs et des diviseurs communs"
+ ],
+ "分解质因数": [
+  "Prime factorisation",
+  "Décomposition en facteurs premiers"
+ ],
+ "把合数分解成质数的积": [
+  "Write a composite number as a product of primes",
+  "Écrire un nombre composé comme produit de nombres premiers"
+ ],
+ "平行四边形面积": [
+  "Area of a parallelogram",
+  "Aire d'un parallélogramme"
+ ],
+ "看图求面积": [
+  "Find the area from the picture",
+  "Calculer l'aire à partir de l'image"
+ ],
+ "三角形面积（看图）": [
+  "Area of a triangle (from a picture)",
+  "Aire d'un triangle (à partir d'une image)"
+ ],
+ "梯形面积": [
+  "Area of a trapezium",
+  "Aire d'un trapèze"
+ ],
+ "组合图形": [
+  "Composite shapes",
+  "Figures composées"
+ ],
+ "求组合图形的面积和周长": [
+  "Find the area and perimeter of a composite shape",
+  "Calculer l'aire et le périmètre d'une figure composée"
+ ],
+ "长方体和正方体": [
+  "Cuboids and cubes",
+  "Pavés droits et cubes"
+ ],
+ "体积、表面积和面棱顶点": [
+  "Volume, surface area, faces, edges and vertices",
+  "Volume, aire totale, faces, arêtes et sommets"
+ ],
+ "分数与小数": [
+  "Fractions and decimals",
+  "Fractions et nombres décimaux"
+ ],
+ "分数、小数和百分数互化": [
+  "Converting between fractions, decimals and percentages",
+  "Conversion entre fractions, décimaux et pourcentages"
+ ],
+ "容积和体积单位": [
+  "Units of capacity and volume",
+  "Unités de contenance et de volume"
+ ],
+ "升、毫升和立方单位的换算": [
+  "Converting litres, millilitres and cubic units",
+  "Conversion des litres, des millilitres et des unités de volume"
+ ],
+ "圆的周长和面积": [
+  "Circumference and area of a circle (from a picture)",
+  "Circonférence et aire d'un cercle (à partir d'une image)"
+ ],
+ "看图求圆的周长和面积": [
+  "Find the circumference and area of the circle in the picture",
+  "Calculer la circonférence et l'aire du cercle de l'image"
+ ],
+ "圆柱和圆锥": [
+  "Cylinders and cones",
+  "Cylindres et cônes"
+ ],
+ "看图求体积": [
+  "Find the volume from the picture",
+  "Calculer le volume à partir de l'image"
+ ],
+ "相交线": [
+  "Intersecting lines",
+  "Droites sécantes"
+ ],
+ "对顶角和邻补角": [
+  "Vertically opposite angles and adjacent supplementary angles",
+  "Angles opposés par le sommet et angles supplémentaires adjacents"
+ ],
+ "数轴": [
+  "The number line",
+  "La droite numérique"
+ ],
+ "在数轴上读数和移动": [
+  "Read and move along the number line",
+  "Lire et se déplacer sur la droite numérique"
+ ],
+ "平面直角坐标系": [
+  "The Cartesian coordinate plane",
+  "Le plan muni d'un repère"
+ ],
+ "读出点的坐标": [
+  "Read the coordinates of a point",
+  "Lire les coordonnées d'un point"
+ ],
+ "数与代数": [
+  "Number and algebra",
+  "Nombres et algèbre"
+ ],
+ "图形与几何": [
+  "Shapes and geometry",
+  "Figures et géométrie"
+ ],
+ "统计与概率": [
+  "Statistics and probability",
+  "Statistiques et probabilités"
+ ],
+ "综合与实践": [
+  "Integrated practice",
+  "Intégration et pratique"
+ ]
+}

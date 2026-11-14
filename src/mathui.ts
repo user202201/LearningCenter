@@ -223,7 +223,7 @@ export function openMathGame(o: MathGameOpts): void {
     const stars = starsFor(score, total);
     const per = new Map<string, { right: number; n: number }>();
     for (const a of answers) { const c = per.get(a.topic) ?? { right: 0, n: 0 }; c.n++; if (a.right) c.right++; per.set(a.topic, c); }
-    const rows = [...per.entries()].map(([t, c]) => h("div", { class: "mrow", "data-topic": t }, h("span", { class: "user" }, o.topicName(t)), h("b", {}, `${c.right} / ${c.n}`)));
+    const rows = [...per.entries()].map(([t, c]) => h("div", { class: "mrow", "data-topic": t }, h("span", {}, o.topicName(t)), h("b", {}, `${c.right} / ${c.n}`)));
     const again = h("button", { class: "primary", id: "game-again", onclick: async () => { await saving; root.remove(); o.onAgain(); } }, "再玩一次");
     const fin = h("button", { id: "game-done", onclick: async () => { await saving; root.remove(); o.onClose(); } }, "完成");
     root.replaceChildren(h("div", { class: "gend", id: "game-end" },

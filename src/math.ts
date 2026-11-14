@@ -155,7 +155,7 @@ const chip = (a: number | null) => h("span", { class: "macc" + (a === null ? " n
 function topicCard(id: string, names: Map<string, MM.Topic>, review: MM.MathReview, onPractice?: () => void): HTMLElement {
   const t = names.get(id);
   return h("div", { class: "mtcard", "data-topic": id },
-    h("div", { class: "mtinfo" }, h("b", { class: "mtname user" }, t?.name ?? id), h("span", { class: "mtdesc user" }, t?.desc ?? ""), chip(MM.accuracy(review.topics[id]))),
+    h("div", { class: "mtinfo" }, h("b", { class: "mtname" }, t?.name ?? id), h("span", { class: "mtdesc" }, t?.desc ?? ""), chip(MM.accuracy(review.topics[id]))),
     onPractice ? h("button", { class: "primary mpractice", "data-topic": id, onclick: onPractice }, "练习") : null);
 }
 
