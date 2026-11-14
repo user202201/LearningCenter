@@ -356,7 +356,7 @@ export async function renderFormulas() {
   };
   draw();
   X.show(h("div", { class: "page", style: `--kid:${COLOR}` },
-    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, "公式与方程式")), X.gear("#/science/formulas")),
+    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", { class: "fit-title" }, "公式与方程式")), X.gear("#/science/formulas")),
     h("main", { class: "scroll" }, h("div", { class: "narrow" },
       chips([["全部", ""], ["数学", "数学"], ["物理", "物理"], ["化学", "化学"]], (v) => (kind = v), "fm"),
       chips([["全部", ""], ["小学", "primary"], ["初中", "junior"]], (v) => (level = v), "fl"), body))));
@@ -366,7 +366,7 @@ export async function renderFormulas() {
 export function renderCircuits() {
   const fig = (svg: string) => { const d = h("div", { class: "dg-fig" }); d.innerHTML = svg; return d; };
   X.show(h("div", { class: "page", style: `--kid:${COLOR}` },
-    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, "电路与电磁")), X.gear("#/science/circuits")),
+    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", { class: "fit-title" }, "电路与电磁")), X.gear("#/science/circuits")),
     h("main", { class: "scroll" }, h("div", { class: "narrow" },
       h("h2", { class: "sec" }, "电路元件符号"),
       h("div", { class: "dg-symbols", id: "dg-symbols" }, ...SYMBOLS.map((s) => h("div", { class: "dg-sym" }, fig(s.svg), h("span", {}, s.name)))),
@@ -431,6 +431,6 @@ export async function renderNotes() {
   const tabBtn = (label: string, v: Tab) => h("button", { class: "mopt" + (tab === v ? " on" : ""), id: `nt-${v}`, "data-v": v, onclick: (e: Event) => { tab = v; (e.currentTarget as HTMLElement).parentElement!.querySelectorAll("button").forEach((b) => b.classList.toggle("on", (b as HTMLElement).dataset.v === v)); draw(); } }, label);
   draw();
   X.show(h("div", { class: "page", style: `--kid:${COLOR}` },
-    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, "知识总结")), X.gear("#/science/notes")),
+    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/subject/science", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", { class: "fit-title" }, "知识总结")), X.gear("#/science/notes")),
     h("main", { class: "scroll" }, h("div", { class: "narrow" }, h("div", { class: "mset-opts pt-filter nt-tabs" }, tabBtn("历史", "history"), tabBtn("地理", "geo"), tabBtn("生物", "bio"), tabBtn("政治", "politics"), tabBtn("安全", "safety")), body))));
 }

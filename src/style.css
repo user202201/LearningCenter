@@ -2856,3 +2856,6 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .chem-ordb.bad .chem-ordn { background: #e03131; border-color: #e03131; }
 .chem-ordb .chem-ordt { flex: 1; overflow-wrap: anywhere; }
 .chem-attbl th, .chem-attbl td { text-align: center; }
+
+/* a long translated title (English / French) wraps and shrinks inside the hero instead of being cut off */
+.subj-hero h1.fit-title { white-space: normal; font-size: min(26px, 5.8vw); line-height: 1.12; overflow-wrap: anywhere; }
