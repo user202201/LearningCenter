@@ -5,6 +5,7 @@
 export interface NoteEvent { t: number; m: number; on: 0 | 1 }
 export interface Take { id: string; name: string; date: string; ms: number; events: NoteEvent[] }
 import { tr } from "./i18n";
+import { saveFile } from "./native";
 import { TRACKS, cols, choicesOf, SWING, type Pattern } from "./beatlogic";
 const KEY = "learn.music.takes.v1";
 export const MAX_TAKES = 20;
@@ -37,15 +38,8 @@ export function buildMidi(events: NoteEvent[], name = "Demo"): Uint8Array {
   const len = track.length;
   return new Uint8Array([0x4d, 0x54, 0x68, 0x64, 0, 0, 0, 6, 0, 0, 0, 1, 0x01, 0xe0, 0x4d, 0x54, 0x72, 0x6b, (len >>> 24) & 255, (len >>> 16) & 255, (len >>> 8) & 255, len & 255, ...track]);
 }
-/** a file given to the person (a download); also used by the beat maker */
-export function downloadBytes(bytes: Uint8Array, filename: string): void {
-  const blob = new Blob([bytes as BlobPart], { type: "audio/midi" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = filename;
-  document.body.append(a); a.click(); a.remove();
-  window.setTimeout(() => URL.revokeObjectURL(url), 4000);
-}
+/** a file given to the person (a download on the web, the share sheet in the app: native.ts); also used by the beat maker */
+export function downloadBytes(bytes: Uint8Array, filename: string): void { void saveFile(bytes, filename, "audio/midi"); }
 export function downloadMidi(take: Take): void { downloadBytes(buildMidi(take.events, take.name), `${take.name.replace(/[^\w一-鿿-]+/g, "_") || "demo"}.mid`); }
 
 /**

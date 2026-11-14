@@ -54,7 +54,7 @@ const table = (name) => {
 const LANGS = ["EN", "FR"];
 const tables = Object.fromEntries(LANGS.map((l) => [l, table(l)]));
 // the geography lab's translations are written in src/i18n-extra/geolab.json (merged into i18n-data.ts by the person who integrates the change); until then their keys count as translated
-try { const x = JSON.parse(fs.readFileSync(path.join(dir, "i18n-extra/geolab.json"), "utf8")); for (const [k, v] of Object.entries(x)) if (Array.isArray(v) && v.length === 2 && v[0] && v[1]) for (const l of LANGS) tables[l].add(k.trim()); } catch { /* none yet */ }
+for (const extraName of ["geolab", "backup"]) try { const x = JSON.parse(fs.readFileSync(path.join(dir, `i18n-extra/${extraName}.json`), "utf8")); for (const [k, v] of Object.entries(x)) if (Array.isArray(v) && v.length === 2 && v[0] && v[1]) for (const l of LANGS) tables[l].add(k.trim()); } catch { /* none yet */ }
 // texts that are only used as a language's own name, or are part of an HTML fragment / not shown as such
 const ALLOW = new Set(["中文", "语言 / Language"]);
 let bad = 0;

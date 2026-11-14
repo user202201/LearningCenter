@@ -18,6 +18,8 @@ import * as I from "./importer";
 import { subjectById, hubGrid, hubHero, soonPage, reveal, shortcuts, secretTaps, eggAllowed, setEggAllowed } from "./hub";
 import * as E from "./english";
 import * as MU from "./music";
+import * as N from "./native";
+import * as B from "./backup";
 import * as GM from "./gameshub";
 import * as MA from "./math";
 import * as SC from "./science";
@@ -444,7 +446,7 @@ async function renderSheet(id: string) {
     h("main", { class: "scroll sheet-scroll" },
       h("div", { class: "sheet-hint center" }, chars.length ? h("span", { class: "muted small" }, "在打印窗口中选择“另存为 PDF”，即可保存为 PDF 文件。") : null, optBtn),
       paper ?? h("p", { class: "empty" }, "该周暂无汉字。")),
-    chars.length ? h("div", { class: "idiom-foot sheet-foot" }, h("button", { class: "primary wide", id: "sheet-print", onclick: () => window.print() }, "打印 / 保存为 PDF")) : null));
+    chars.length ? h("div", { class: "idiom-foot sheet-foot" }, h("button", { class: "primary wide", id: "sheet-print", onclick: () => void N.printPage() }, "打印 / 保存为 PDF")) : null));
 }
 
 /** the practice sheet of the week on the child's page: straight to the sheet, or (option on for this child) the window to type this week's characters to write first */
@@ -513,7 +515,7 @@ async function renderStories() {
   show(h("div", { class: "page sheet-page", style: idiomColor ? `--kid:${idiomColor}` : "" },
     h("header", { class: "top plain" }, backBtn("#/idioms"), h("h1", {}, `故事打印 · 第${no}周`), h("span", { class: "slot" })),
     h("main", { class: "scroll sheet-scroll" }, items.length ? h("div", { class: "narrow story-wrap" }, note, scale) : h("p", { class: "empty" }, "该周暂无成语。")),
-    items.length ? h("div", { class: "idiom-foot sheet-foot" }, h("button", { class: "primary wide", id: "story-print", onclick: () => window.print() }, "打印 / 保存为 PDF")) : null));
+    items.length ? h("div", { class: "idiom-foot sheet-foot" }, h("button", { class: "primary wide", id: "story-print", onclick: () => void N.printPage() }, "打印 / 保存为 PDF")) : null));
   if (!items.length) return;
   // on screen the page is shown as wide as the screen allows (the printout always uses real mm / pt)
   const fit = () => { const w = scale.clientWidth; const pageW = paper.querySelector<HTMLElement>(".sp")!.offsetWidth; (paper.style as CSSStyleDeclaration & { zoom: string }).zoom = String(Math.min(1.6, w / pageW)); };
@@ -1411,6 +1413,10 @@ async function renderSettings() {
 
         h("h2", { class: "set-sec" }, "通用"),
         h("div", { class: "card" }, h("h3", {}, "语言"), lang),
+        h("div", { class: "card", id: "backup-card" }, h("h3", {}, "备份与恢复"),
+          h("p", { class: "muted small" }, "把本设备上的设置和学习进度保存为一个文件（年级、游戏、音乐、编程等；“仅在本设备”模式下的数据也包含在内）。不含登录令牌和管理密码。"),
+          h("button", { class: "wide", id: "backup-export", onclick: () => void B.exportBackup() }, "导出备份"),
+          h("button", { class: "wide", id: "backup-import", onclick: () => void B.importBackup() }, "导入备份")),
 
         h("h2", { class: "set-sec" }, "关于"),
         h("div", { class: "card" }, h("h3", {}, "应用"),
@@ -1590,5 +1596,6 @@ if (!__MOBILE__ && import.meta.env.PROD && "serviceWorker" in navigator) {
 window.addEventListener("online", () => { api.networkMayBeBack(); void api.flushAll(); });
 void api.flushAll();
 setLang(settings.lang);
+void N.initNative();
 window.addEventListener("hashchange", () => void route());
 void route();

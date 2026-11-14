@@ -2,6 +2,7 @@
  * 编程 graduation: the 创作工坊 (six project templates the child edits and plays; saved on this device only, at most 12 per child, delete asks first) and the
  * certificate (drawn in code, the child's name as user text, printable A4 landscape through window.print). The pure rules of the templates are exported.
  */
+import { printPage } from "./native";
 import { h, toast, confirmDlg } from "./ui";
 import type * as M from "./model";
 import * as CM from "./coding-model";
@@ -217,7 +218,7 @@ export function renderCertificate(x: PCtx, medals: Medal[], today: string): void
     const rows = h("div", { class: "ci-medals" }, ...medals.map((m) => { const s = h("span", { class: "cl-trophy" + (m.got ? " got" : ""), "data-medal": m.id, title: m.got ? m.name : "", "aria-label": m.got ? m.name : "未获得" }); s.innerHTML = m.svg; return s; }));
     body.replaceChildren(h("p", { class: "ci-certstat", id: "ci-certstat" }, `${got} / ${medals.length}`), rows,
       show ? h("div", { class: "ci-cert", id: "ci-cert" }, h("div", { class: "ci-certin" }, h("small", {}, preview && !all ? "预览" : ""), h("h2", {}, "编程学习证书"), h("p", {}, "兹证明"), h("p", { class: "ci-certname user", id: "ci-certname" }, x.kid.name), h("p", {}, "完成了编程课程的全部关卡，并获得全部徽章。"), rows.cloneNode(true) as HTMLElement, h("p", { class: "ci-certdate user" }, today))) : h("p", { class: "muted", id: "ci-certlock" }, "完成所有世界，获得全部徽章后，可以领取证书。"),
-      h("div", { class: "ci-row" }, !all ? h("button", { class: "ci-btn", id: "ci-certprev", type: "button", onclick: () => { preview = !preview; draw(); } }, preview ? "关闭预览" : "预览") : null, show ? h("button", { class: "ci-btn primary", id: "ci-certprint", type: "button", onclick: () => window.print() }, "打印 / 保存为 PDF") : null));
+      h("div", { class: "ci-row" }, !all ? h("button", { class: "ci-btn", id: "ci-certprev", type: "button", onclick: () => { preview = !preview; draw(); } }, preview ? "关闭预览" : "预览") : null, show ? h("button", { class: "ci-btn primary", id: "ci-certprint", type: "button", onclick: () => void printPage() }, "打印 / 保存为 PDF") : null));
   };
   draw();
   x.X.show(h("div", { class: "page cert-page", style: `--kid:${x.kid.color}` }, h("header", { class: "top hero kid-hero" }, x.X.back(`#/coding/${x.kid.id}`, "世界"), h("h1", {}, "证书")), h("main", { class: "scroll" }, h("div", { class: "narrow cl-narrow ci-proj" }, body))));

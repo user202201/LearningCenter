@@ -42,7 +42,14 @@ export function tableOf(lang) {
   try { for (const [k, v] of Object.entries(JSON.parse(fs.readFileSync(path.join(dir, `${lang}.json`), "utf8")))) if (!(k in t)) t[k] = v; } catch { /* none yet */ }
   return t;
 }
-const tex = (s) => (s.match(/\$[^$]*\$/g) ?? []).join("\u0000");
+const segs = (s) => s.match(/\$[^$]*\$/g) ?? [];
+/** the TeX pieces ($...$) must stay as they are; a piece with Chinese in it (a \text{...}) is translated, so only its place has to stay */
+const sameTex = (a, b) => {
+  const x = segs(a), rest = [...segs(b)];
+  if (rest.length !== x.length) return false;
+  for (const p of x.filter((q) => !CJK.test(q))) { const i = rest.indexOf(p); if (i < 0) return false; rest.splice(i, 1); }   // (the order may change in a translation)
+  return true;
+};
 /** Chinese outside brackets: the original name may be kept in brackets, nothing else */
 export const cjkOutsideBrackets = (s) => CJK.test(s.replace(/\([^()]*\)|（[^（）]*）/g, ""));
 
@@ -59,7 +66,7 @@ export async function check() {
         const v = table[s];
         if (v === undefined) { r.missing.push({ group: g, text: s }); miss++; continue; }
         if (!v.trim()) r.empty.push(s);
-        if (s.includes("$") && tex(s) !== tex(v)) r.badTex.push({ src: s, got: v });
+        if (s.includes("$") && !sameTex(s, v)) r.badTex.push({ src: s, got: v });
         if (cjkOutsideBrackets(v) && !g.startsWith("formulas-tex")) r.leftover.push({ src: s, got: v });
       }
       r.byGroup[g] = { total: set.size, missing: miss };

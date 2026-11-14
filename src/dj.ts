@@ -8,6 +8,7 @@
 import { h, toast } from "./ui";
 import * as A from "./musicaudio";
 import * as L from "./djlogic";
+import { saveFile } from "./native";
 import * as G from "./djgrid";
 import { DJ, type LoadError } from "./djaudio";
 import { tr } from "./i18n";
@@ -281,8 +282,9 @@ export function renderDJ(d: Deps): void {
     if (!r) return void toast("录音为空，未保存。", 3000);
     const t = new Date(), p2 = (x: number) => String(x).padStart(2, "0");
     const file = `dj_mix_${t.getFullYear()}${p2(t.getMonth() + 1)}${p2(t.getDate())}_${p2(t.getHours())}${p2(t.getMinutes())}.${r.ext}`;
-    const url = URL.createObjectURL(r.blob), a = document.createElement("a");
-    a.href = url; a.download = file; document.body.append(a); a.click(); a.remove(); window.setTimeout(() => URL.revokeObjectURL(url), 4000);
+    const res = await saveFile(r.blob, file, r.blob.type || "audio/webm");
+    if (res === "cancelled") return;
+    if (res === "error") return void toast("无法保存录音。", 3000);
     toast(`已保存：${file}`);
   } }, "● 录音");
   recBtn.hidden = !DJ.canRecord();
