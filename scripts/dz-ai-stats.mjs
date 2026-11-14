@@ -1,8 +1,8 @@
 // Statistics of the computer players of Dou Dizhu and Paodekuai (AI against AI, no screen).
 // usage: node scripts/dz-ai-stats.mjs [games per row = 600]
-// Bundles the TypeScript logic with esbuild (a dependency of vite) into the OS temp folder and imports it from there.
-import { buildSync } from "esbuild";
-import { mkdtempSync, rmSync } from "node:fs";
+// The two logic files have no imports: they are transpiled with the TypeScript compiler into the OS temp folder and imported from there.
+import ts from "typescript";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -11,7 +11,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dir = mkdtempSync(join(tmpdir(), "dz-stats-"));
 const load = async (name) => {
   const out = join(dir, name + ".mjs");
-  buildSync({ entryPoints: [join(root, "src/games", name + ".ts")], bundle: true, format: "esm", platform: "node", outfile: out, logLevel: "error" });
+  const src = readFileSync(join(root, "src/games", name + ".ts"), "utf8");
+  writeFileSync(out, ts.transpileModule(src, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText);
   return import(pathToFileURL(out).href);
 };
 const N = +process.argv[2] || 600;
