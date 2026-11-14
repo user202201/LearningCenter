@@ -2,6 +2,7 @@ import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-straight";
 import { COL, arrow, circle, line, poly, rect, txt } from "./draw";
+import { tr } from "../i18n";
 
 export const meta = CATALOG.straight;
 type S = Record<string, number>;
@@ -56,12 +57,32 @@ export const def: SimDef = {
       line(c, x0, cy - half(s.src), xo, cy - half(s.D), COL.orange, 2); line(c, x0, cy + half(s.src), xo, cy + half(s.D), COL.orange, 2);
       txt(c, `${fmt(r.whole, 1)} cm`, xs - 16, 40, 22, COL.ink, "right");
     } else {
-      const e = ecl(s), cx = 360, cy = 200, rad = (s.phase * Math.PI) / 180, mx = cx - 130 * Math.cos(rad), my = cy - s.beta * 12;
-      circle(c, 80, cy, 56, "#ffd43b", COL.orange, 4); circle(c, cx, cy, 30, COL.water2, COL.ink, 4); circle(c, mx, my, 12, "#dee2e6", COL.ink, 3);
-      line(c, 140, cy, cx + 150, cy, COL.grey, 1.5, [6, 6]);
-      if (e === "solar") poly(c, [[mx, my - 10], [cx - 6, cy - 6], [cx - 6, cy + 6], [mx, my + 10]], "rgba(52,58,64,0.5)", null);
-      if (e === "lunar") poly(c, [[cx, cy - 30], [cx + 150, cy - 10], [cx + 150, cy + 10], [cx, cy + 30]], "rgba(52,58,64,0.35)", null);
-      txt(c, e === "solar" ? "SOLAR" : e === "lunar" ? "LUNAR" : "NO ECLIPSE", 480, 60, 28, e === "none" ? COL.grey : COL.red);
+      // top view (looking down on the Earth's orbit plane) and a side view that shows how far the Moon is above / below that plane
+      const e = ecl(s), rad = (s.phase * Math.PI) / 180, SX = 62, SY = 135, EX = 350, EY = 135, R = 95, SR = 46, ER = 24;
+      const mx = EX - R * Math.cos(rad), my = EY - R * Math.sin(rad), ink = COL.ink;
+      const nearNew = s.phase <= 5 || s.phase >= 355, nearFull = Math.abs(s.phase - 180) <= 5;
+      const msg = e === "solar" ? "日食：月球挡住太阳光，月球的影落在地球上。" : e === "lunar" ? "月食：地球挡住太阳光，月球进入地球的影。"
+        : nearNew ? "新月时月球偏离轨道面太远，影子从地球上方或下方掠过。" : nearFull ? "满月时月球偏离轨道面太远，从地球的影子上方或下方经过。" : "月球不在太阳和地球的连线上，没有日食或月食。";
+      txt(c, tr(msg), 320, 18, 17, e === "none" ? COL.grey : COL.red);
+      txt(c, tr("俯视图（从地球北极上方看）"), 12, 44, 12, COL.grey, "left");
+      // sunlight, the Earth's shadow and the Moon's shadow
+      poly(c, [[SX, SY - SR], [EX, EY - ER], [EX, EY + ER], [SX, SY + SR]], "rgba(255,212,59,0.16)", null);
+      poly(c, [[EX, EY - ER], [EX + 200, EY], [EX, EY + ER]], "rgba(52,58,64,0.28)", null);
+      c.beginPath(); c.arc(EX, EY, R, 0, Math.PI * 2); c.strokeStyle = COL.grey; c.lineWidth = 1.5; c.setLineDash([5, 6]); c.stroke(); c.setLineDash([]);
+      const dl = Math.hypot(mx - SX, my - SY), ux = (mx - SX) / dl, uy = (my - SY) / dl;
+      poly(c, [[mx - uy * 10, my + ux * 10], [mx + ux * 105, my + uy * 105], [mx + uy * 10, my - ux * 10]], "rgba(52,58,64,0.5)", null);
+      circle(c, SX, SY, SR, "#ffd43b", COL.orange, 4); circle(c, EX, EY, ER, COL.water2, ink, 4);
+      if (e === "solar") circle(c, EX - ER + 4, EY, 5, "#212529", null, 0);
+      circle(c, mx, my, 10, e === "lunar" ? "#c92a2a" : "#dee2e6", ink, 3);
+      txt(c, tr("太阳"), SX, SY + SR + 16, 15, ink); txt(c, tr("地球"), EX, EY + ER + 16, 15, ink);
+      txt(c, tr("月球"), mx, my - 20, 14, ink); txt(c, tr("月球轨道"), EX + R * 0.7 + 34, EY - R * 0.7 - 6, 12, COL.grey);
+      // side view
+      const by = 338, my2 = by - s.beta * 10;
+      txt(c, tr("侧视图（偏离的角度已夸大）"), 12, 288, 12, COL.grey, "left");
+      line(c, 20, by, 620, by, COL.grey, 2, [6, 6]); txt(c, tr("地球轨道面"), 628, by + 16, 12, COL.grey, "right");
+      circle(c, SX, by, 14, "#ffd43b", COL.orange, 3); circle(c, EX, by, 11, COL.water2, ink, 3);
+      line(c, mx, by, mx, my2, COL.purple, 2, [3, 4]); circle(c, mx, my2, 7, e === "lunar" ? "#c92a2a" : "#dee2e6", ink, 2);
+      txt(c, `${fmt(s.beta, 1)}°`, mx + 30, (by + my2) / 2, 13, COL.purple);
     }
   },
   tasks: [
