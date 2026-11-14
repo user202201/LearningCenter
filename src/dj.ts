@@ -11,7 +11,7 @@ import * as L from "./djlogic";
 import { saveFile } from "./native";
 import * as G from "./djgrid";
 import { DJ, type LoadError } from "./djaudio";
-import { tr } from "./i18n";
+import { cx, tr } from "./i18n";
 import type { Ctx } from "./english";
 
 interface Deps { X: Ctx; hero: (title: string, back: string, backLabel: string, gearBack: string) => HTMLElement; fullToggle: (get: () => HTMLElement, id: string, onChange?: (on: boolean) => void) => HTMLButtonElement; color: string }
@@ -148,7 +148,7 @@ export function renderDJ(d: Deps): void {
     const sel = h("select", { class: "dj-select", id: `dj-track-${n}`, "aria-label": i === 0 ? "A 盘曲目" : "B 盘曲目", onchange: (e: Event) => { const id = (e.target as HTMLSelectElement).value; if (id === "file") return; ui[i].name.hidden = true; ui[i].sel.querySelectorAll("option[value=file]").forEach((o) => o.remove()); dj.setPitch(i, 0); ui[i].pitch.set(0); ui[i].last = { a: 0, t: 0 }; void loadDeck(i, id); } },
       ...L.TRACKS.map((t) => h("option", { value: t.id }, `${tr(t.name)} · ${t.bpm}`)));
     sel.value = def.id;
-    const pitch = ctl({ id: `dj-pitch-${n}`, kind: "hfader", min: -L.PITCH_RANGE, max: L.PITCH_RANGE, value: 0, step: 0.1, label: "速度", reset: 0, onInput: (v) => dj.setPitch(i, v) });
+    const pitch = ctl({ id: `dj-pitch-${n}`, kind: "hfader", min: -L.PITCH_RANGE, max: L.PITCH_RANGE, value: 0, step: 0.1, label: cx("速度", "tempo"), reset: 0, onInput: (v) => dj.setPitch(i, v) });
     const mk = (id: string, label: string, band: "low" | "mid" | "high" | "filter") => ctl({ id: `dj-${id}-${n}`, kind: "knob", min: -1, max: 1, value: 0, step: 0.02, label, reset: 0, onInput: (v) => (band === "filter" ? dj.setFilter(i, v) : dj.setEq(i, band, v)) });
     const low = mk("low", "低音", "low"), mid = mk("mid", "中音", "mid"), high = mk("high", "高音", "high"), filt = mk("filter", "滤波", "filter");
     const bpm = h("b", { id: `dj-bpm-${n}` }, def.bpm.toFixed(1)), pc = h("span", { class: "dj-pct", id: `dj-pct-${n}` }, pct(0)), load = h("span", { class: "dj-load", id: `dj-load-${n}` }, "生成中…");
@@ -248,7 +248,7 @@ export function renderDJ(d: Deps): void {
           h("div", { class: "dj-trans" }, play, cue),
           sel,
           h("div", { class: "dj-importrow" }, importBtn, hint),
-          h("div", { class: "dj-pitchrow" }, h("span", { class: "muted small dj-pl" }, "速度"), pitch.el, pc))),
+          h("div", { class: "dj-pitchrow" }, h("span", { class: "muted small dj-pl" }, cx("速度", "tempo")), pitch.el, pc))),
       h("div", { class: "dj-knobs" }, cell("低音", low.el), cell("中音", mid.el), cell("高音", high.el), cell("滤波", filt.el)),
       h("div", { class: "dj-hcrow", id: `dj-hcs-${n}` }, ...hc, hcDel, gridBtn),
       loopRow, loopC, gridP, file);

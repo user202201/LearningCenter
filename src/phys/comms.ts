@@ -39,7 +39,7 @@ export const def: SimDef = {
   ],
   aspect: 0.62,
   readouts: (s) => {
-    if (s.mode === 0) return [{ label: "数字信号判断错的位数", value: `${Mo.bitErrors(s.noise)} / 8` }, { label: "模拟信号的失真（噪声的有效值）", value: fmt(Mo.analogDistortion(s.noise), 0), unit: "%" }, { label: "数字信号", value: Mo.bitErrors(s.noise) === 0 ? "完全恢复" : "有错误" }];
+    if (s.mode === 0) return [{ label: "数字信号判断错误的位数", value: `${Mo.bitErrors(s.noise)} / 8` }, { label: "模拟信号的失真（噪声的有效值）", value: fmt(Mo.analogDistortion(s.noise), 0), unit: "%" }, { label: "数字信号", value: Mo.bitErrors(s.noise) === 0 ? "完全恢复" : "有错误" }];
     if (s.mode === 1) return [{ label: "电磁波的波长", value: fmt(Mo.wavelength(fc(s)), 1), unit: "m" }, { label: "收音机", value: got(s) ? "收到这个电台（频率相同）" : "没有收到（频率不同）" }];
     return [{ label: "光射到管壁的入射角", value: fmt(s.th, 0), unit: "°" }, { label: "临界角", value: fmt(Mo.critical(), 1), unit: "°" }, { label: "结果", value: Mo.totalReflection(s.th) ? "发生全反射，光沿光纤传下去" : "不发生全反射，有一部分光折射出管壁" }];
   },

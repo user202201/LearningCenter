@@ -9,7 +9,7 @@ export const FEATURE_ITEMS: [string, number][] = [
 export const VERTS = ["鱼类", "两栖动物", "爬行动物", "鸟类", "哺乳动物"];
 export const VFEATS = ["体表", "呼吸器官", "体温", "生殖方式"];
 export const VERT_TABLE: string[][] = [
-  ["鳞片，有黏液", "鳃", "变温", "卵生（体外受精）"], ["裸露、湿润", "幼体用鳃，成体用肺，皮肤辅助", "变温", "卵生（体外受精）"], ["鳞片或甲", "肺", "变温", "卵生（体内受精）"],
+  ["鳞片，有黏液", "鳃", "变温", "卵生（体外受精）"], ["裸露、湿润", "幼体用鳃，成体用肺，皮肤辅助", "变温", "卵生（体外受精）"], ["角质的鳞片或甲", "肺", "变温", "卵生（体内受精）"],
   ["羽毛", "肺，有气囊辅助", "恒温", "卵生"], ["体表被毛", "肺", "恒温", "胎生、哺乳"],
 ];
 /** an animal drawn for each class (indexes of the 42 organisms of the classification lab) */

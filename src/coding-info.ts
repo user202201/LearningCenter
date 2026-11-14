@@ -19,6 +19,7 @@ import type { Io, Mount, Widget } from "./coding-infolabs";
 import { InfoAct, InfoContent, WORLD_IDS, L, actsOf, loadContent } from "./coding-infocontent";
 import { INFO_COLOR, demoEl, infoBadgeSvg, infoIslandSvg } from "./coding-infoart";
 import * as PJ from "./coding-infoproj";
+import { cx } from "./i18n";
 
 let X!: Ctx;
 export const initInfo = (c: Ctx) => { X = c; };
@@ -97,7 +98,7 @@ function worldPage(k: M.Kid, doc: CM.CodingDoc, c: InfoContent, world: number) {
   for (const a of actsOf(c, world)) {
     const s = doc.stars?.[a.id] ?? 0;
     grid.append(h("a", { class: "cl-lvl" + (a.boss ? " boss" : "") + (s ? " solved" : ""), href: `#/coding/${k.id}/i${world}/${a.no}`, "data-level": a.id, "data-stars": String(s), style: `--wc:${INFO_COLOR[world]}` },
-      h("span", { class: "lvl-no" }, String(a.no)), starRow(s, "lvl-stars"), h("span", { class: "lvl-title user" }, L(a.title)), a.boss ? h("span", { class: "lvl-tag" }, "挑战") : null));
+      h("span", { class: "lvl-no" }, String(a.no)), starRow(s, "lvl-stars"), h("span", { class: "lvl-title user" }, L(a.title)), a.boss ? h("span", { class: "lvl-tag" }, cx("挑战", "boss")) : null));
   }
   X.stagger([...grid.querySelectorAll<HTMLElement>(".cl-lvl")]);
   const medal = h("span", { class: "cl-trophy" + (st.done ? " got" : ""), id: "cl-medal" });
@@ -145,7 +146,7 @@ async function saveProgress(k: M.Kid, c: InfoContent, a: InfoAct, stars: number,
     const out = await api.update<CM.CodingDoc>(CM.codingPath(k.id), CM.EMPTY_CODING, (cur) => CM.applyResult(cur, a.id, stars, mistakes), `coding ${k.id} ${a.id}`);
     done(); toast("已记录进度");
     if (!worldStat(c, before, a.world).done && worldStat(c, out, a.world).done) {
-      await modal<boolean>((close) => { const art = h("div", { class: "cl-medal-art" }); art.innerHTML = infoBadgeSvg(a.world, true); return h("div", { class: "dlg cl-medal", id: "cl-medal-dlg" }, h("h2", {}, "获得徽章"), h("p", { class: "user" }, L(c.worlds[a.world].name)), art, h("div", { class: "row end" }, h("button", { class: "primary", id: "cl-medal-ok", onclick: () => close(true) }, "继续"))); });
+      await modal<boolean>((close) => { const art = h("div", { class: "cl-medal-art" }); art.innerHTML = infoBadgeSvg(a.world, true); return h("div", { class: "dlg cl-medal", id: "cl-medal-dlg" }, h("h2", {}, "获得徽章"), h("p", { class: "user" }, L(c.worlds[a.world].name)), art, h("div", { class: "row end" }, h("button", { class: "primary", id: "cl-medal-ok", onclick: () => close(true) }, cx("继续", "next")))); });
     }
     return out;
   } catch (e) { done(); throw e; }

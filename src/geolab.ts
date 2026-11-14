@@ -12,6 +12,7 @@ import * as M from "./geolab-model";
 import { todayLocal } from "./model";
 import type { Ctx } from "./english";
 import type { GeoMapProv } from "./geolab-sims2";
+import { cx } from "./i18n";
 
 const COLOR = "#2b8a3e";
 const KEY = "learn.geolab.v1";
@@ -113,7 +114,7 @@ async function renderPractice(X: Ctx): Promise<void> {
         opts.forEach((b, j) => { b.classList.toggle("right", j === q.a); b.classList.toggle("wrong", j === k && !right); b.disabled = true; });
         why.hidden = false; next.hidden = false;
       } }, c));
-      body.replaceChildren(h("p", { class: "muted small", id: "gl-no" }, `第 ${i + 1} / ${qs.length} 题`), h("p", { class: "pl-q", id: "gl-q", "data-key": it.key }, q.q), h("div", { class: "pl-qopts" }, ...opts), why, next);
+      body.replaceChildren(h("p", { class: "muted small", id: "gl-no" }, cx(`第 ${i + 1} / ${qs.length} 题`, "q")), h("p", { class: "pl-q", id: "gl-q", "data-key": it.key }, q.q), h("div", { class: "pl-qopts" }, ...opts), why, next);
     };
     show();
   };

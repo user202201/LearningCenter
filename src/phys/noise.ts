@@ -58,7 +58,7 @@ export const def: SimDef = {
     }
   },
   tasks: [
-    { id: "loud", text: "声音的强弱：找一个会损害听力的声音（90 dB 以上）", check: (s) => s.mode === 0 && s.L >= 90 },
+    { id: "loud", text: "声音的强弱：找一个会损害听力的声音（超过 90 dB）", check: (s) => s.mode === 0 && s.L > 90 },
     { id: "quiet", text: "控制噪声：采取措施，使噪声降到适合休息和睡眠的 50 dB 以下", check: (s) => s.mode === 1 && final(s) <= Mo.LIMIT_SLEEP },
     { id: "echo", text: "回声：在空气中，使人能把回声和原声区分开", check: (s) => s.mode === 2 && s.med === 0 && delay(s) >= Mo.MIN_GAP },
     { id: "sonar", text: "声呐测深：使测得的海水深度恰好是 3000 m", check: (s) => s.mode === 3 && Math.abs(Mo.depth(s.ts) - 3000) < 0.5 },

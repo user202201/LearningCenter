@@ -10,7 +10,7 @@ const modeOf = (s: Record<string, number>) => MODES[s.mode];
 export const def: SimDef = {
   meta,
   lesson: [
-    "隐性遗传病只有当一个人从父母双方各得到一个致病基因（aa）时才会发病。携带者（Aa）本人表现正常，但会把致病基因传给后代。近亲（有共同祖先的亲属）带有同一致病基因的可能性大得多，所以近亲结婚的后代患隐性遗传病的机会大大增加。我国法律禁止直系血亲和三代以内的旁系血亲结婚。",
+    "隐性遗传病只有当一个人从父母双方各得到一个致病基因（aa）时才会发病。携带者（Aa）本人表现正常，但会把致病基因传给后代。近亲是指直系血亲和三代以内的旁系血亲，他们带有同一致病基因的可能性大得多，所以近亲结婚的后代患隐性遗传病的机会大大增加。《中华人民共和国民法典》规定，直系血亲和三代以内的旁系血亲禁止结婚。",
     "优生优育的措施有：禁止近亲结婚、遗传咨询、产前诊断和适龄生育。本模型是简化的教学计算：设每 N 人中有 1 位携带者，无亲缘关系的夫妻双方都是携带者的概率约 1/N²；亲属中一方是携带者时，另一方带有同一基因的概率取共有基因的比例（表兄妹 1/8，同胞兄妹 1/2）；孩子患病的概率再乘 1/4。数值只用来说明道理。",
   ],
   links: [{ text: "相关：遗传", href: "#/science/bio/genetics" }, { text: "相关：人的由来与青春期", href: "#/science/bio/development" }],
@@ -26,7 +26,7 @@ export const def: SimDef = {
   pointer: dndPtr(modeOf),
   readouts: (s) => s.mode === 1 ? dndReadouts(s, MODES[1]!) : [
     { label: "携带者所占比例", value: `1 / ${s.N}` }, { label: "双方携带同一致病基因的概率", value: fmt(Mo.per10000(Mo.bothCarry(s.N, s.rel)), 1), unit: "/10000" },
-    { label: "孩子患病的概率", value: fmt(Mo.per10000(Mo.risk(s.N, s.rel)), 2), unit: "/10000" }, { label: "是无亲缘关系的", value: fmt(Mo.fold(s.N, s.rel), 1), unit: "×" }],
+    { label: "孩子患病的概率", value: fmt(Mo.per10000(Mo.risk(s.N, s.rel)), 2), unit: "/10000" }, { label: "相当于无亲缘关系时的", value: fmt(Mo.fold(s.N, s.rel), 1), unit: "×" }],
   draw(c, w, h, s) {
     if (s.mode === 1) { drawDnd(c, s, MODES[1]!); return; }
     const a = Mo.risk(s.N, 0), b = Mo.risk(s.N, s.rel), mx = Math.max(a, Mo.risk(s.N, 2));

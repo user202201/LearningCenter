@@ -2,6 +2,7 @@ import { mountBio, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-blood";
 import { COL, lab, txt, circle, ell, rect, line, arrow } from "./draw";
+import { cx } from "../i18n";
 export const meta = CATALOG.blood;
 const RED = "#e03131", BLUE = "#4263eb";
 const TOP = 70;
@@ -13,8 +14,8 @@ function heart(c: CanvasRenderingContext2D, s: Record<string, number>) {
   chamber(120, TOP + 190, 130, 130, cv, "#4c6ef5", "右心室"); chamber(280, TOP + 190, 130, 130, cv, "#fa5252", "左心室");
   for (const x of [190, 340]) { if (v.av) { line(c, x - 22, TOP + 172, x - 8, TOP + 160, COL.ink, 5); line(c, x + 22, TOP + 172, x + 8, TOP + 160, COL.ink, 5); } else line(c, x - 28, TOP + 166, x + 28, TOP + 166, COL.ink, 7); }
   for (const x of [190, 340]) { if (v.artery) { line(c, x - 26, TOP + 188, x - 26, TOP + 205, COL.ink, 4); line(c, x + 26, TOP + 188, x + 26, TOP + 205, COL.ink, 4); } else { line(c, x - 26, TOP + 196, x + 26, TOP + 196, COL.ink, 0.1); } }
-  lab(c, "房室瓣", 450, TOP + 166, 16, COL.grey, "left"); lab(c, v.av ? "打开" : "关闭", 450, TOP + 190, 16, v.av ? COL.green : COL.red, "left");
-  lab(c, "动脉瓣", 450, TOP + 250, 16, COL.grey, "left"); lab(c, v.artery ? "打开" : "关闭", 450, TOP + 274, 16, v.artery ? COL.green : COL.red, "left");
+  lab(c, "房室瓣", 450, TOP + 166, 16, COL.grey, "left"); lab(c, v.av ? "打开" : cx("关闭", "closed"), 450, TOP + 190, 16, v.av ? COL.green : COL.red, "left");
+  lab(c, "动脉瓣", 450, TOP + 250, 16, COL.grey, "left"); lab(c, v.artery ? "打开" : cx("关闭", "closed"), 450, TOP + 274, 16, v.artery ? COL.green : COL.red, "left");
   if (st === 0) { arrow(c, 190, TOP + 100, 190, TOP + 190, BLUE, 5); arrow(c, 340, TOP + 100, 340, TOP + 190, RED, 5); }
   if (st === 1) { arrow(c, 170, TOP + 200, 150, TOP + 20, BLUE, 5); arrow(c, 360, TOP + 200, 380, TOP + 20, RED, 5); lab(c, "肺动脉", 120, TOP + 12, 16, BLUE); lab(c, "主动脉", 400, TOP + 12, 16, RED); }
   if (st === 2) { arrow(c, 190, TOP + 6, 190, TOP + 58, BLUE, 4); arrow(c, 340, TOP + 6, 340, TOP + 58, RED, 4); }

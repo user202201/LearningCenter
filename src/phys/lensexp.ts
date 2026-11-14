@@ -2,6 +2,7 @@ import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-lensexp";
 import { COL, arrow, circle, line, rect, txt } from "./draw";
+import { cx } from "../i18n";
 
 export const meta = CATALOG.lensexp;
 type S = Record<string, number>;
@@ -29,7 +30,7 @@ export const def: SimDef = {
   hidden,
   actions: [
     { id: "rec", label: "记录这组数据", run: (s) => { const o = sc(s); if (s.mode !== 1 || !o.sharp || s.n >= Mo.MAXROWS) return; for (let i = 0; i < s.n; i++) if (s[`ru${i}`] === s.u) return; const i = s.n; return { n: s.n + 1, [`ru${i}`]: s.u, [`rv${i}`]: s.v, [`rk${i}`]: o.kind }; } },
-    { id: "clear", label: "清除记录", run: () => ({ n: 0 }) },
+    { id: "clear", label: cx("清除记录", "data"), run: () => ({ n: 0 }) },
   ],
   derive: (s, changed) => { if (changed === "lens" || changed === "mode") s.n = 0; },
   aspect: 0.62,

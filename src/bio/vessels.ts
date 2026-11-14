@@ -2,6 +2,7 @@ import { mountBio, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-vessels";
 import { COL, lab, txt, circle, ell, rect, line } from "./draw";
+import { cx } from "../i18n";
 export const meta = CATALOG.vessels;
 export const def: SimDef = {
   meta,
@@ -26,7 +27,7 @@ export const def: SimDef = {
     { label: "全身血量", value: fmt(Mo.bloodVolume(s.kg), 2), unit: "L" }, { label: "血浆", value: fmt(Mo.plasmaVolume(s.kg, s.hct), 2), unit: "L" },
     { label: "每微升红细胞数", value: fmt(Mo.rbcPerUl(s.hct) / 1e6, 2), unit: "百万" }, { label: "判断", value: Mo.anaemic(s.hct) ? "偏低（贫血）" : "正常" }] : s.mode === 1 ? [
     { label: "血流速度", value: fmt(Mo.speed(s.hr, s.v), 3), unit: "cm/s" }, { label: "总横截面积", value: String(Mo.VESSELS[s.v][1]), unit: "cm²" },
-    { label: "管壁", value: Mo.VESSELS[s.v][2] }, { label: "瓣膜", value: Mo.VESSELS[s.v][3] ? "有" : "无" }] : [
+    { label: "管壁", value: Mo.VESSELS[s.v][2] }, { label: "瓣膜", value: Mo.VESSELS[s.v][3] ? "有" : cx("无", "no") }] : [
     { label: "血液的特点", value: Mo.BLEED[s.b][1] }, { label: "按压的位置", value: Mo.BLEED[s.b][2] }],
   draw(c, w, h, s) {
     if (s.mode === 0) {

@@ -165,7 +165,7 @@
  ],
  "用遗传图解（棋盘）列出 4 种组合：Aa × Aa 的后代基因型比为 1AA : 2Aa : 1aa，表现型比为显性 : 隐性 = 3 : 1。样本越大，实际比例越接近理论比例。人的性别由性染色体决定：女性 XX，男性 XY，生男生女的机会均等。ABO 血型由 I^A、I^B、i 三个基因决定。": [
   "Use a genetic diagram (a grid) to list the 4 combinations: the offspring of Aa × Aa have genotypes in the ratio 1AA : 2Aa : 1aa and phenotypes in the ratio dominant : recessive = 3 : 1. The larger the sample, the closer the actual ratio is to the theoretical ratio. A person's sex is decided by the sex chromosomes: women XX, men XY, and the chances of a boy or a girl are equal. The ABO blood group is decided by three genes, I^A, I^B and i.",
-  "Utilisez un diagramme génétique (un échiquier) pour lister les 4 combinaisons : la descendance de Aa × Aa a des génotypes dans le rapport 1AA : 2Aa : 1aa et des phénotypes dans le rapport dominant : récessif = 3 : 1. Plus l'échantillon est grand, plus le rapport réel se rapproche du rapport théorique. Le sexe d'une personne est déterminé par les chromosomes sexuels : XX pour les femmes, XY pour les hommes, et les chances d'avoir un garçon ou une fille sont égales. Le groupe sanguin ABO est déterminé par trois gènes, I^A, I^B et i."
+  "Utilisez un diagramme génétique (un échiquier) pour lister les 4 combinaisons : la descendance d'Aa × Aa a des génotypes dans le rapport 1AA : 2Aa : 1aa et des phénotypes dans le rapport dominant : récessif = 3 : 1. Plus l'échantillon est grand, plus le rapport réel se rapproche du rapport théorique. Le sexe d'une personne est déterminé par les chromosomes sexuels : XX pour les femmes, XY pour les hommes, et les chances d'avoir un garçon ou une fille sont égales. Le groupe sanguin ABO est déterminé par trois gènes, I^A, I^B et i."
  ],
  "健康的生活方式：合理营养、适度运动、规律作息、不吸烟、不酗酒、拒绝毒品、保持心理健康、积极参加集体活动。运动时心率随强度增加；估算最大心率 = 220 − 年龄，有氧锻炼的目标心率约为最大心率的 70 %–85 %，过高不宜持续。": [
   "A healthy way of life: a balanced diet, moderate exercise, regular hours, no smoking, no heavy drinking, saying no to drugs, a healthy state of mind and active participation in group activities. Heart rate rises with the intensity of exercise; the estimated maximum heart rate = 220 − age, and the target heart rate for aerobic exercise is about 70%–85% of the maximum; a rate that is too high should not be kept up.",
@@ -1308,7 +1308,7 @@
   "attendre que d'autres s'en occupent"
  ],
  "用冷水泼醒": [
-  "throw cold water on the person to wake him",
+  "throw cold water on the person to wake them",
   "lui jeter de l'eau froide pour le réveiller"
  ],
  "急救电话 120；成人按压深度约 5–6 cm，按压与吹气的比例为 30 : 2。": [
@@ -3044,7 +3044,7 @@
   "Choisissez fille et trouvez l'âge de la croissance en taille la plus rapide (environ 11 ans)"
  ],
  "安全用药：服药前阅读说明书，按剂量（常按体重计算）和时间服用，不随意加量，有疑问时咨询医生或药师；本页的“示例药”和它的最大日剂量是为计算练习假设的，每种药的限量都不同，不能当作真实用药的依据；过期的药不能吃；非处方药（OTC）也要谨慎；药物有副作用。烧烫伤的处理：冲、脱、泡、盖、送。": [
-  "Safe use of medicine: read the package leaflet before taking a medicine, take it at the dose (often calculated by body mass) and times given, never take more on your own, and ask a doctor or pharmacist when in doubt. The “example drug” on this page and its maximum daily dose are invented for the calculation exercise; every drug has its own limit, so they must not be used as a basis for real medication. Do not take expired medicine; over-the-counter (OTC) medicines also call for care; medicines have side effects. First aid for burns and scalds: rinse, remove, soak, cover, send.",
+  "Safe use of medicine: read the package leaflet before taking a medicine, take it at the dose (often calculated by body mass) and times given, never take more on your own, and ask a doctor or pharmacist when in doubt. The “example drug” on this page and its maximum daily dose are invented for the calculation exercise; every drug has its own limit, so they must not be used as a basis for real medication. Do not take expired medicine; over-the-counter (OTC) medicines also call for care; medicines have side effects. First aid for burns and scalds: rinse, remove, soak, cover, send to hospital.",
   "Utilisation sûre des médicaments : lisez la notice avant de prendre un médicament, prenez-le à la dose (souvent calculée selon la masse corporelle) et aux heures indiquées, n'augmentez jamais la dose de votre propre chef et demandez conseil à un médecin ou à un pharmacien en cas de doute. Le « médicament d'exemple » de cette page et sa dose maximale quotidienne sont inventés pour l'exercice de calcul ; chaque médicament a sa propre limite, ils ne doivent donc pas servir de base à une vraie prise de médicament. Ne prenez pas de médicament périmé ; les médicaments sans ordonnance (OTC) demandent aussi de la prudence ; les médicaments ont des effets secondaires. Premiers secours pour les brûlures : rincer, retirer, tremper, couvrir, transporter."
  ],
  "示例药的最大日剂量（假设值）": [
@@ -5434,5 +5434,101 @@
  "把操作步骤拖到按顺序编号的位置上（也可以先点步骤，再点编号）。在“盖盖玻片”中，调整盖玻片放下时的角度和水滴的大小，看看气泡怎样变化。（气泡数是教学模型。）": [
   "Drag the steps to the numbered places in order (or tap a step first and then a number). Under “Lowering the cover slip” change the angle at which the cover slip is let go and the size of the water drop and see how the bubbles change. (The number of bubbles is a teaching model.)",
   "Faites glisser les étapes vers les places numérotées dans l'ordre (ou touchez d'abord une étape, puis un numéro). Dans « Poser la lamelle », changez l'angle auquel on lâche la lamelle et la taille de la goutte d'eau, et voyez comment changent les bulles. (Le nombre de bulles est un modèle pédagogique.)"
+ ],
+ "温度升高，酶的活性增大，呼吸作用增强（模型：温度每升高 10 °C，速率约为原来的 2 倍）。发芽的种子呼吸旺盛，放出的二氧化碳使澄清石灰水变浑浊。": [
+  "When the temperature rises, enzyme activity increases and respiration gets stronger (model: for every 10 °C rise the rate is about 2 times as great). Germinating seeds respire vigorously, and the carbon dioxide they give out makes clear limewater turn cloudy.",
+  "Quand la température s'élève, l'activité des enzymes augmente et la respiration s'intensifie (modèle : pour chaque élévation de 10 °C, la vitesse est environ multipliée par 2). Les graines qui germent respirent intensément, et le dioxyde de carbone qu'elles dégagent trouble l'eau de chaux limpide."
+ ],
+ "把发芽的种子放在密闭的瓶中，一段时间后澄清石灰水变浑浊，说明种子呼吸时产生了：": [
+  "Germinating seeds are put in a closed bottle, and after some time clear limewater turns cloudy. This shows that the seeds produced which gas when they respired?",
+  "Des graines qui germent sont placées dans un flacon fermé, et au bout d'un certain temps l'eau de chaux limpide se trouble. Cela montre que les graines ont produit, en respirant :"
+ ],
+ "{0} 粒种子中有 {1} 粒萌发，种子的发芽率是多少？": [
+  "Of {0} seeds, {1} germinate. What is the germination rate of the seeds?",
+  "Sur {0} graines, {1} germent. Quel est le taux de germination des graines ?"
+ ],
+ "发芽率 = 发芽的种子数 / 供检测的种子数 × 100%。": [
+  "Germination rate = number of seeds germinated / number of seeds tested × 100%.",
+  "Taux de germination = nombre de graines germées / nombre de graines testées × 100 %."
+ ],
+ "播种 {0} 粒种子，发芽率为 {1}%，发芽的种子大约有多少粒？": [
+  "{0} seeds are sown and the germination rate is {1}%. About how many seeds germinate?",
+  "On sème {0} graines et le taux de germination est {1} %. Environ combien de graines germent ?"
+ ],
+ "发芽的种子数 = 种子数 × 发芽率。": [
+  "Number germinated = number of seeds × germination rate.",
+  "Nombre de graines germées = nombre de graines × taux de germination."
+ ],
+ "用射线处理发芽的种子，从变异的后代中选育新品种": [
+  "Treat germinating seeds with radiation and select new varieties from the mutated offspring",
+  "Traiter des graines en germination avec des rayonnements et sélectionner de nouvelles variétés parmi les descendants mutants"
+ ],
+ "测定种子的发芽率：每组 {0} 粒，共 3 组，发芽的种子分别为 {1} 粒、{2} 粒、{3} 粒。平均发芽率是多少？": [
+  "Measuring the germination rate: {0} seeds per group, 3 groups; {1}, {2} and {3} seeds germinated. What is the average germination rate?",
+  "Mesure du taux de germination : {0} graines par groupe, 3 groupes ; {1}, {2} et {3} graines ont germé. Quel est le taux moyen de germination ?"
+ ],
+ "平均发芽率 = 三组发芽的种子总数 ÷ 种子总数 × 100 %。": [
+  "Average germination rate = total of the germinated seeds of the three groups ÷ total number of seeds × 100 %.",
+  "Taux moyen de germination = total des graines germées des trois groupes ÷ nombre total de graines × 100 %."
+ ],
+ "测定种子的发芽率时，为了减小误差，应该：": [
+  "To reduce the error when measuring the germination rate of seeds, you should:",
+  "Pour réduire l'erreur lors de la mesure du taux de germination des graines, il faut :"
+ ],
+ "把发芽的种子扔掉不数": [
+  "Throw away the seeds that germinated without counting them",
+  "Jeter les graines qui ont germé sans les compter"
+ ],
+ "样本越大、重复越多，结果越接近整批种子的真实发芽率。": [
+  "The larger the sample and the more the repeats, the closer the result to the true germination rate of the whole lot.",
+  "Plus l'échantillon est grand et plus il y a de répétitions, plus le résultat est proche du vrai taux de germination de tout le lot."
+ ],
+ "种子的发芽率 = 发芽的种子数 ÷ 供检测的种子数 × 100 %。测定时要随机取样，每组种子数量要足够多，并重复做几组取平均值，才能减小误差。本模型每组种子是否发芽由这批种子的真实发芽率决定。（以 90 % 作为合格线，是教学假设。）": [
+  "Germination rate of seeds = number of germinated seeds ÷ number of seeds tested × 100 %. The seeds must be taken at random, each group must have enough seeds and several groups must be repeated and averaged to reduce the error. In this model whether each seed germinates depends on the true germination rate of the lot. (Taking 90 % as the passing line is a teaching assumption.)",
+  "Taux de germination des graines = nombre de graines germées ÷ nombre de graines testées × 100 %. Les graines doivent être prises au hasard, chaque groupe doit avoir assez de graines et plusieurs groupes doivent être répétés et moyennés pour réduire l'erreur. Dans ce modèle, la germination de chaque graine dépend du taux réel de germination du lot. (Prendre 90 % comme seuil d'acceptation est une hypothèse pédagogique.)"
+ ],
+ "环境中影响生物生活的因素分为非生物因素（光、温度、水、空气、土壤等）和生物因素（其他生物）。探究鼠妇的分布：在一个盒子的两半设置不同的条件（如明亮与阴暗），把鼠妇放在中间，过一段时间数各侧的数量。对照实验只能有一个变量，其他条件相同；教科书的做法是用 10 只鼠妇，每隔 1 min 统计一次，共统计 10 次，再取平均值；用较多的鼠妇并重复几次，可以减少偶然性。研究水分的影响时，用湿土和干土做对照。": [
+  "The factors that affect living things in the environment are divided into abiotic factors (light, temperature, water, air, soil and so on) and biotic factors (other organisms). Investigating the distribution of woodlice: set different conditions in the two halves of a box (for example bright and dark), put the woodlice in the middle and count those on each side after a while. A controlled experiment may have only one variable, all other conditions being the same; the textbook method uses 10 woodlice, counts them once every minute 10 times in all and takes the average; using more woodlice and repeating several times reduces chance effects. To study the effect of moisture, wet soil and dry soil are compared.",
+  "Les facteurs qui agissent sur les êtres vivants dans leur milieu se divisent en facteurs abiotiques (lumière, température, eau, air, sol, etc.) et facteurs biotiques (les autres êtres vivants). Étude de la répartition des cloportes : on crée des conditions différentes dans les deux moitiés d'une boîte (par exemple clair et sombre), on place les cloportes au milieu et on compte ceux de chaque côté après un moment. Une expérience témoin ne doit avoir qu'une seule variable, toutes les autres conditions étant identiques ; la méthode du manuel utilise 10 cloportes, les compte une fois par minute, 10 fois au total, et prend la moyenne ; utiliser plus de cloportes et répéter plusieurs fois réduit les effets du hasard. Pour étudier l'effet de l'humidité, on compare une terre humide et une terre sèche."
+ ],
+ "培养细菌和真菌时，把菌液逐级稀释（每次稀释 10 倍），取一定体积涂在培养基上，每个活的细菌或孢子会长成一个肉眼可见的菌落（细菌的菌落较小、表面光滑黏稠，真菌的菌落较大，常呈绒毛状、絮状或蜘蛛网状）。数出菌落数，就能估算原菌液中的细菌数：每毫升的细菌数 = 菌落数 ÷ 涂布体积 × 稀释倍数。菌落数在 30–300 个之间的平板最适合计数。稀释涂布计数属于拓展内容，教科书只要求学会培养、观察和比较菌落。": [
+  "To culture bacteria and fungi, a suspension is diluted step by step (10 times each time) and a known volume is spread on the culture medium; each living bacterium or spore grows into a colony visible to the naked eye (bacterial colonies are small, smooth and sticky; fungal colonies are larger and often look downy, fluffy or cobweb-like). Counting the colonies gives an estimate of the number of bacteria in the original suspension: bacteria per millilitre = colonies ÷ volume spread × dilution factor. Plates with 30–300 colonies are best for counting. Counting by dilution and plating is an extension; the textbook only asks pupils to culture, observe and compare colonies.",
+  "Pour cultiver des bactéries et des champignons, on dilue une suspension par étapes (10 fois à chaque fois) et on étale un volume connu sur le milieu de culture ; chaque bactérie ou spore vivante donne une colonie visible à l'œil nu (les colonies bactériennes sont petites, lisses et visqueuses ; les colonies de champignons sont plus grandes et souvent duveteuses, cotonneuses ou en toile d'araignée). Le nombre de colonies permet d'estimer le nombre de bactéries de la suspension d'origine : bactéries par millilitre = colonies ÷ volume étalé × facteur de dilution. Les boîtes de 30 à 300 colonies sont les meilleures pour le comptage. Le comptage par dilution et étalement est un approfondissement ; le manuel demande seulement de cultiver, d'observer et de comparer des colonies."
+ ],
+ "杂交育种：让不同品种的生物杂交，从后代中选出具有优良性状的新品种，如杂交水稻。诱变育种：用射线、药物处理或太空环境（太空育种）使生物的遗传物质发生改变，再从变异的后代中选育新品种。转基因技术：把一种生物的基因转入另一种生物体内，使它获得新的性状，如抗虫棉。克隆技术：用体细胞的细胞核培育出遗传物质与供核个体基本相同的个体，如 1996 年诞生的多莉羊；克隆没有经过两性生殖细胞的结合，属于无性生殖。": [
+  "Cross breeding: crossing different varieties and selecting from the offspring a new variety with good traits, such as hybrid rice. Mutation breeding: radiation, chemicals or the space environment (space breeding) change the genetic material of organisms, and new varieties are selected from the mutated offspring. Transgenic technology: a gene of one organism is put into another organism, which then gains a new trait, such as insect-resistant cotton. Cloning: an individual with genetic material almost identical to that of the nucleus donor is raised from the nucleus of a body cell, such as Dolly the sheep, born in 1996; cloning involves no union of sex cells, so it is asexual reproduction.",
+  "Croisement (hybridation) : on croise des variétés différentes et on sélectionne dans la descendance une nouvelle variété aux bonnes qualités, comme le riz hybride. Sélection par mutation : des rayonnements, des produits chimiques ou l'environnement spatial (sélection dans l'espace) modifient le matériel génétique des organismes, et l'on sélectionne de nouvelles variétés parmi les descendants mutants. Transgenèse : un gène d'un organisme est introduit dans un autre organisme, qui acquiert ainsi un nouveau caractère, comme le coton résistant aux insectes. Clonage : on obtient, à partir du noyau d'une cellule du corps, un individu dont le matériel génétique est presque identique à celui du donneur du noyau, comme la brebis Dolly, née en 1996 ; le clonage ne passe pas par l'union de cellules sexuelles : c'est une reproduction asexuée."
+ ],
+ "（两对相对性状的 9 : 3 : 3 : 1 属于拓展内容，教科书只讲一对相对性状的 3 : 1。）在杂交育种模型中，高产（A）对低产（a）、抗病（B）对感病（b）都是显性。纯种高产感病（AAbb）与纯种低产抗病（aaBB）杂交，F1 都是 AaBb，表现为高产抗病；F1 自交，F2 出现四种表现型，比例约 9 : 3 : 3 : 1，其中只有 AABB（1/16）的高产抗病植株能稳定遗传。克隆模型中，克隆羊的性状主要像提供细胞核的羊。": [
+  "(The 9 : 3 : 3 : 1 ratio of two pairs of traits is an extension; the textbook covers only 3 : 1 for one pair.) In the cross-breeding model high yield (A) is dominant over low yield (a), and disease resistance (B) over susceptibility (b). A pure high-yield, susceptible plant (AAbb) crossed with a pure low-yield, resistant plant (aaBB) gives F1 plants that are all AaBb, high-yield and resistant; when the F1 self-pollinates, the F2 shows four phenotypes in a ratio of about 9 : 3 : 3 : 1, and only the AABB plants (1/16) breed true. In the cloning model the cloned sheep resembles the sheep that gave the nucleus.",
+  "(Le rapport 9 : 3 : 3 : 1 de deux paires de caractères est un approfondissement ; le manuel ne traite que le 3 : 1 d'une paire.) Dans le modèle de croisement, le rendement élevé (A) est dominant sur le rendement faible (a), et la résistance à la maladie (B) sur la sensibilité (b). Une plante pure à rendement élevé et sensible (AAbb) croisée avec une plante pure à rendement faible et résistante (aaBB) donne des plantes F1 toutes AaBb, à rendement élevé et résistantes ; quand la F1 s'autoféconde, la F2 montre quatre phénotypes dans un rapport d'environ 9 : 3 : 3 : 1, et seules les plantes AABB (1/16) se reproduisent fidèlement. Dans le modèle de clonage, la brebis clonée ressemble à la brebis qui a donné le noyau."
+ ],
+ "隐性遗传病只有当一个人从父母双方各得到一个致病基因（aa）时才会发病。携带者（Aa）本人表现正常，但会把致病基因传给后代。近亲是指直系血亲和三代以内的旁系血亲，他们带有同一致病基因的可能性大得多，所以近亲结婚的后代患隐性遗传病的机会大大增加。《中华人民共和国民法典》规定，直系血亲和三代以内的旁系血亲禁止结婚。": [
+  "A recessive genetic disease appears only when a person receives a disease gene from each parent (aa). A carrier (Aa) is healthy but passes the disease gene to the offspring. Close relatives are lineal relatives by blood and collateral relatives by blood within three generations; they are much more likely to carry the same disease gene, so the chance that the children of close relatives who marry have a recessive genetic disease rises greatly. The Civil Code of the People's Republic of China forbids marriage between lineal relatives by blood and between collateral relatives by blood within three generations.",
+  "Une maladie génétique récessive n'apparaît que lorsqu'une personne reçoit un gène de la maladie de chacun de ses parents (aa). Un porteur (Aa) est en bonne santé mais transmet le gène de la maladie à sa descendance. Les proches parents sont les parents en ligne directe et les parents collatéraux jusqu'au troisième degré ; ils ont beaucoup plus de chances de porter le même gène de maladie ; le risque qu'un enfant de proches parents mariés ait une maladie génétique récessive augmente donc fortement. Le Code civil de la République populaire de Chine interdit le mariage entre parents en ligne directe et entre parents collatéraux jusqu'au troisième degré."
+ ],
+ "本模型：血压的高低取决于心输出量（每搏输出量 × 心率）、血管的阻力和动脉壁的弹性；动脉变窄或变硬，血压会升高。测量血压时，通常在上臂的肱动脉处进行：袖带压力高于收缩压，血流被阻断；袖带压力降到收缩压时开始听到脉搏声，降到舒张压时声音消失。脉搏是动脉随心脏跳动而产生的搏动，在手腕处（桡动脉）可摸到，次数与心率相同。（这是教学模型，不是诊断工具。）": [
+  "In this model blood pressure depends on the cardiac output (stroke volume × heart rate), the resistance of the vessels and the elasticity of the arterial wall; narrower or stiffer arteries raise the pressure. When measuring, which is usually done at the brachial artery of the upper arm, a cuff pressure above the systolic pressure stops the blood flow; the pulse sound starts when the cuff pressure falls to the systolic pressure and disappears when it falls to the diastolic pressure. The pulse is the beat of an artery with each heartbeat; it can be felt at the wrist (radial artery) and its rate equals the heart rate. (This is a teaching model, not a diagnostic tool.)",
+  "Dans ce modèle, la pression artérielle dépend du débit cardiaque (volume d'éjection × fréquence cardiaque), de la résistance des vaisseaux et de l'élasticité de la paroi artérielle ; des artères plus étroites ou plus rigides font monter la pression. Lors de la mesure, qui se fait en général sur l'artère brachiale du bras, une pression du brassard supérieure à la pression systolique arrête la circulation du sang ; le bruit du pouls apparaît quand la pression du brassard descend jusqu'à la pression systolique et disparaît quand elle descend jusqu'à la pression diastolique. Le pouls est le battement d'une artère à chaque battement du cœur ; on le sent au poignet (artère radiale) et sa fréquence est égale à la fréquence cardiaque. (Il s'agit d'un modèle pédagogique, pas d'un outil de diagnostic.)"
+ ],
+ "角质的鳞片或甲": [
+  "Horny scales or a shell",
+  "Écailles cornées ou carapace"
+ ],
+ "是细胞进行生命活动的场所": [
+  "The place where the cell carries out its life activities",
+  "Lieu où la cellule exerce ses activités vitales"
+ ],
+ "吸水纸从另一侧吸引，使碘液浸润标本的全部。": [
+  "Blotting paper on the other side draws the iodine across so that it soaks the whole specimen.",
+  "Le papier buvard placé de l'autre côté attire l'iode, qui imprègne tout le spécimen."
+ ],
+ "胚芽、胚轴、胚根": [
+  "Plumule, hypocotyl and radicle",
+  "Gemmule, hypocotyle et radicule"
+ ],
+ "{0} 百万年": [
+  "{0} million years",
+  "{0} millions d'années"
  ]
 }

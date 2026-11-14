@@ -2,6 +2,7 @@ import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-ohmlaw";
 import { COL, axes, circle, curve, line, rect, txt } from "./draw";
+import { cx } from "../i18n";
 
 export const meta = CATALOG.ohmlaw;
 type S = Record<string, number>;
@@ -27,7 +28,7 @@ export const def: SimDef = {
   hidden,
   actions: [
     { id: "rec", label: "记录这组数据", run: (s) => { if (s.n >= Mo.MAXROWS) return; const x = s.mode === 0 ? s.U : R(s); for (let i = 0; i < s.n; i++) if (s[`x${i}`] === x) return; return { n: s.n + 1, [`x${s.n}`]: x, [`y${s.n}`]: Iof(s) }; } },
-    { id: "clear", label: "清除记录", run: () => ({ n: 0 }) },
+    { id: "clear", label: cx("清除记录", "data"), run: () => ({ n: 0 }) },
   ],
   derive: (s, ch) => { if (ch === "mode" || (ch === "r" && s.mode === 0)) s.n = 0; },
   aspect: 0.62,

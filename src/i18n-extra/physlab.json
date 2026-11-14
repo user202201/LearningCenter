@@ -1385,7 +1385,7 @@
  ],
  "选择方波，并把频率调到 880 Hz（比 A4 高一个八度）": [
   "Choose the square wave and set 880 Hz (one octave above A4).",
-  "Choisissez l'onde carrée et réglez 880 Hz (une octave au-dessus de A4)."
+  "Choisissez l'onde carrée et réglez 880 Hz (une octave au-dessus d'A4)."
  ],
  "冰的熔化：使加热时间处在熔化阶段（固液共存），观察温度保持 0 °C 不变": [
   "Melting ice: set a heating time in the melting stage (solid and liquid) and watch the temperature stay at 0 °C.",
@@ -3121,7 +3121,7 @@
  ],
  "近视眼：用凹透镜（负焦度）使极远处的物体看得清": [
   "Short-sighted eye: use a concave lens (negative power) to see very distant objects sharply",
-  "Œil myope : utiliser une lentille concave (vergence négative) pour voir nettement les objets très éloignés"
+  "Œil myope : utiliser une lentille divergente (vergence négative) pour voir nettement les objets très éloignés"
  ],
  "还没有判断": [
   "No answer yet",
@@ -3145,7 +3145,7 @@
  ],
  "远视眼：配戴凸透镜，使 25 cm 处的书本看得清": [
   "Long-sighted eye: wear a convex lens so that a book at 25 cm is seen sharply",
-  "Œil hypermétrope : porter une lentille convexe pour voir nettement un livre à 25 cm"
+  "Œil hypermétrope : porter une lentille convergente pour voir nettement un livre à 25 cm"
  ],
  "连通器": [
   "Communicating vessels",
@@ -4140,12 +4140,12 @@
   "Mesure de la distance focale : déplacez l'écran pour que la tache de lumière parallèle soit la plus petite et la plus brillante"
  ],
  "成像规律：在光屏上得到倒立、放大的清晰实像": [
-  "Images: obtain a sharp, real, inverted, enlarged image on the screen",
-  "Images : obtenez sur l'écran une image nette, réelle, renversée et agrandie"
+  "Image formation: obtain a sharp, real, inverted, enlarged image on the screen",
+  "Formation de l'image : obtenez sur l'écran une image nette, réelle, renversée et agrandie"
  ],
  "成像规律：在光屏上得到倒立、缩小的清晰实像": [
-  "Images: obtain a sharp, real, inverted, reduced image on the screen",
-  "Images : obtenez sur l'écran une image nette, réelle, renversée et réduite"
+  "Image formation: obtain a sharp, real, inverted, reduced image on the screen",
+  "Formation de l'image : obtenez sur l'écran une image nette, réelle, renversée et réduite"
  ],
  "记录数据：记下至少 3 组清晰成像时的物距和像距": [
   "Recording data: note the object distance and image distance of at least 3 sharp images",
@@ -4710,5 +4710,37 @@
  "测量水温：用正确的放法测量 60 ℃ 以上的热水，使示数准确": [
   "Measuring the temperature of water: with the correct way of holding the thermometer, measure hot water above 60 ℃ so that the reading is accurate",
   "Mesure de la température de l'eau : en tenant le thermomètre de la bonne façon, mesurez de l'eau chaude à plus de 60 ℃ pour que l'indication soit exacte"
+ ],
+ "声音的强弱：找一个会损害听力的声音（超过 90 dB）": [
+  "Loudness of sound: find a sound that damages hearing (above 90 dB)",
+  "Intensité sonore : trouvez un son qui abîme l'ouïe (plus de 90 dB)"
+ ],
+ "日食与月食：调节月球的位置和偏离地球轨道面的角度，使它满足发生日食或月食的条件": [
+  "Solar and lunar eclipses: set the position of the Moon and its angle away from the plane of the Earth's orbit so that the conditions for a solar or lunar eclipse are met",
+  "Éclipses de Soleil et de Lune : réglez la position de la Lune et son écart angulaire avec le plan de l'orbite de la Terre pour que les conditions d'une éclipse de Soleil ou de Lune soient réunies"
+ ],
+ "A 比 0 ℃ 时多的内能": [
+  "Internal energy of A above its value at 0 ℃",
+  "Énergie interne de A en plus de sa valeur à 0 ℃"
+ ],
+ "B 比 0 ℃ 时多的内能": [
+  "Internal energy of B above its value at 0 ℃",
+  "Énergie interne de B en plus de sa valeur à 0 ℃"
+ ],
+ "电流的方向（取某一方向为正）": [
+  "Direction of the current (one direction taken as positive)",
+  "Sens du courant (un sens est pris comme positif)"
+ ],
+ "正方向": [
+  "Positive direction",
+  "Sens positif"
+ ],
+ "负方向": [
+  "Negative direction",
+  "Sens négatif"
+ ],
+ "数字信号判断错误的位数": [
+  "Number of bits the digital signal gets wrong",
+  "Nombre de bits erronés du signal numérique"
  ]
 }

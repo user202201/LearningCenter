@@ -1,0 +1,7 @@
+# Open questions: the 13 newest physics-lab simulations (answer in a few words)
+
+1. **Dial of the energy meter (`meter`).** The sim shows 5 integer digits + 1 red decimal digit (e.g. 01234.6), as the coverage table says. I remember the 人教版 picture as 4 integer digits + 1 red decimal digit (e.g. 0316.2). Which do you want? Best guess: keep 5 + 1 (modern meters have both kinds); unsure because I could not open the textbook.
+2. **Total internal reflection and the critical angle (`comms`, fibre part).** The fibre screen uses the critical angle 76.7° (n = 1.5 core, 1.46 cladding). Is 全反射 / 临界角 wanted at 初中 level, or should the textbook wording "光在光纤中多次反射" be used? Best guess: keep (you listed it explicitly); unsure because the 2012 人教版 text, as I remember it, only says the light is reflected again and again.
+3. **Critical temperature and Clausius-Clapeyron boiling points (`evap`, liquefaction part).** Correct physics but beyond 人教版 (which only says: lower the temperature or compress). Keep it as an enrichment, or hide the "沸点" readout and "临界温度" sentence? Best guess: keep; unsure about the intended scope.
+4. **Edition.** Chapter names follow the 2012 人教版 (八上 第二章…, 九年级 第十三章…). If you use the 2024 new edition the chapter numbers and some sections differ: which edition? Best guess: 2012 edition as in the coverage table.
+5. **Sound speed in iron (`noise`, 5200 m/s).** I remember 5200 m/s from the 人教版 table (some books give 5000 or 5100). Is 5200 your table's value? Best guess: yes; unsure without the book.

@@ -26,7 +26,7 @@ export function resistFrac(r0: number, kill: number, n: number): number {
 /** what is left of the bacteria right after one course (a share of the total before it) */
 export const residual = (r: number, kill: number) => r + (1 - r) * (1 - kill);
 export const BACT: { name: string; fn: string }[] = [
-  { name: "细胞壁", fn: "保护和支持细胞" }, { name: "细胞膜", fn: "控制物质进出细胞" }, { name: "细胞质", fn: "含有核糖体等，是生命活动的场所" },
+  { name: "细胞壁", fn: "保护和支持细胞" }, { name: "细胞膜", fn: "控制物质进出细胞" }, { name: "细胞质", fn: "是细胞进行生命活动的场所" },
   { name: "DNA 集中的区域", fn: "没有成形的细胞核，只有 DNA 集中的区域" }, { name: "荚膜", fn: "保护细菌，有的细菌才有" }, { name: "鞭毛", fn: "使细菌能够运动，有的细菌才有" },
 ];
 export const YEAST: { name: string; fn: string }[] = [

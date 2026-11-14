@@ -13,11 +13,11 @@
  ],
  "浸在液体（或气体）中的物体受到向上的浮力。阿基米德原理：浸在液体中的物体受到的浮力，大小等于它排开的液体所受的重力：F浮 = G排 = ρ液 g V排。本实验室取 g = 10 N/kg。": [
   "An object immersed in a liquid (or a gas) experiences an upward buoyant force. Archimedes' principle: the buoyant force on an object immersed in a liquid equals the weight of the liquid it displaces: F_buoyancy = G_displaced = ρ_liquid g V_displaced. This lab takes g = 10 N/kg.",
-  "Un objet plongé dans un liquide (ou un gaz) subit une force d'Archimède dirigée vers le haut. Principe d'Archimède : la poussée exercée sur un objet immergé dans un liquide est égale au poids du liquide déplacé : F = P_déplacé = ρ_liquide g V_déplacé. Ce laboratoire prend g = 10 N/kg."
+  "Un objet plongé dans un liquide (ou un gaz) subit une force d'Archimède dirigée vers le haut. Principe d'Archimède : la poussée exercée sur un objet immergé dans un liquide est égale au poids du liquide déplacé : F_poussée = P_déplacé = ρ_liquide g V_déplacé. Ce laboratoire prend g = 10 N/kg."
  ],
  "称重法：F浮 = G − F示。浮沉条件：物体浸没时，F浮 > G（ρ液 > ρ物）上浮，最后漂浮，漂浮时 F浮 = G；F浮 = G（ρ液 = ρ物）悬浮；F浮 < G（ρ液 < ρ物）下沉。": [
   "Weighing method: F_buoyancy = G − F_reading. Conditions for floating and sinking: when the object is fully immersed, F_buoyancy > G (ρ_liquid > ρ_object) means it rises and finally floats, with F_buoyancy = G when floating; F_buoyancy = G (ρ_liquid = ρ_object) means it is suspended; F_buoyancy < G (ρ_liquid < ρ_object) means it sinks.",
-  "Méthode de la pesée : F = P − F_lue. Conditions de flottaison : lorsque l'objet est totalement immergé, F > P (ρ_liquide > ρ_objet) : il monte puis flotte, avec F = P à la surface ; F = P (ρ_liquide = ρ_objet) : il reste en équilibre dans le liquide ; F < P (ρ_liquide < ρ_objet) : il coule."
+  "Méthode de la pesée : F_poussée = P − F_lue. Conditions de flottaison : lorsque l'objet est totalement immergé, F_poussée > P (ρ_liquide > ρ_objet) : il monte puis flotte, avec F_poussée = P à la surface ; F_poussée = P (ρ_liquide = ρ_objet) : il reste en équilibre dans le liquide ; F_poussée < P (ρ_liquide < ρ_objet) : il coule."
  ],
  "用“手动浸入”慢慢放下物体，观察浮力和排开液体的重力总是相等；用“自由释放”观察物体最后的状态。": [
   "Lower the object slowly with “manual immersion” and observe that the buoyant force and the weight of the displaced liquid are always equal; use “free release” to see the final state of the object.",
@@ -365,7 +365,7 @@
  ],
  "F浮 = ρ液gV排。": [
   "F_buoyancy = ρ_liquid g V_displaced.",
-  "F = ρ_liquide g V_déplacé."
+  "F_poussée = ρ_liquide g V_déplacé."
  ],
  "物体挂在弹簧测力计下，示数是 {0} N；浸没在水中后示数变为 {1} N，物体受到的浮力是多少？": [
   "An object hangs from a spring balance, which reads {0} N; when it is fully immersed in water the reading becomes {1} N. What is the buoyant force on the object?",
@@ -373,7 +373,7 @@
  ],
  "称重法：F浮 = G − F示。": [
   "Weighing method: F_buoyancy = G − F_reading.",
-  "Méthode de la pesée : F = P − F_lue."
+  "Méthode de la pesée : F_poussée = P − F_lue."
  ],
  "密度为 {0} g/cm³ 的木块漂浮在水面上，木块浸入水中的体积占它总体积的百分之几？": [
   "A block of wood of density {0} g/cm³ floats on water. What percentage of its volume is below the water?",
@@ -381,7 +381,7 @@
  ],
  "漂浮时 F浮 = G，ρ液 V排 = ρ物 V物。": [
   "When floating, F_buoyancy = G, ρ_liquid V_displaced = ρ_object V_object.",
-  "À la flottaison, F = P, ρ_liquide V_déplacé = ρ_objet V_objet."
+  "À la flottaison, F_poussée = P, ρ_liquide V_déplacé = ρ_objet V_objet."
  ],
  "质量 {0} kg 的物体漂浮在水面上，受到的浮力是多少？（g = 10 N/kg）": [
   "An object of mass {0} kg floats on water. What is the buoyant force on it? (g = 10 N/kg)",
@@ -389,7 +389,7 @@
  ],
  "漂浮时 F浮 = G = mg。": [
   "When floating, F_buoyancy = G = mg.",
-  "À la flottaison, F = P = mg."
+  "À la flottaison, F_poussée = P = mg."
  ],
  "物体的密度是 {0} g/cm³，放入密度为 {1} g/cm³ 的液体中（浸没后松手），物体将：": [
   "The density of an object is {0} g/cm³, and it is put into a liquid of density {1} g/cm³ (and let go after being fully immersed). The object will:",
@@ -1765,7 +1765,7 @@
  ],
  "λ = c / f；3×10⁸ m/s ÷ 10⁶ Hz = 300 m·MHz。": [
   "λ = c / f; 3×10⁸ m/s ÷ 10⁶ Hz = 300 m·MHz.",
-  "λ = c / f; 3×10⁸ m/s ÷ 10⁶ Hz = 300 m·MHz."
+  "λ = c / f ; 3×10⁸ m/s ÷ 10⁶ Hz = 300 m·MHz."
  ],
  "f = c / λ。": [
   "f = c / λ.",
@@ -1793,11 +1793,11 @@
  ],
  "1 kW·h = 1000 W × 3600 s = 3.6×10⁶ J。": [
   "1 kW·h = 1000 W × 3600 s = 3.6×10⁶ J.",
-  "1 kW·h = 1000 W × 3600 s = 3.6×10⁶ J."
+  "1 kW·h = 1000 W × 3600 s = 3,6×10⁶ J."
  ],
  "Q = qm；1 MJ = 10⁶ J。": [
   "Q = qm; 1 MJ = 10⁶ J.",
-  "Q = qm; 1 MJ = 10⁶ J."
+  "Q = qm ; 1 MJ = 10⁶ J."
  ],
  "v = Q / S。": [
   "v = Q / S.",
@@ -1849,11 +1849,11 @@
  ],
  "B = 2×10⁻⁷ × I / d；1 μT = 10⁻⁶ T。": [
   "B = 2×10⁻⁷ × I / d; 1 μT = 10⁻⁶ T.",
-  "B = 2×10⁻⁷ × I / d; 1 μT = 10⁻⁶ T."
+  "B = 2×10⁻⁷ × I / d ; 1 μT = 10⁻⁶ T."
  ],
  "L / d；1 μm = 1000 nm。": [
   "L / d; 1 μm = 1000 nm.",
-  "L / d; 1 μm = 1000 nm."
+  "L / d ; 1 μm = 1000 nm."
  ],
  "s = vt。": [
   "s = vt.",
@@ -1865,7 +1865,7 @@
  ],
  "1 m/s = 3.6 km/h。": [
   "1 m/s = 3.6 km/h.",
-  "1 m/s = 3.6 km/h."
+  "1 m/s = 3,6 km/h."
  ],
  "v = v₀ + at。": [
   "v = v₀ + at.",
@@ -3388,7 +3388,7 @@
   "La lumière se propage en ligne droite : largeur de l'ombre ÷ largeur du panneau = distance de la source à l'écran ÷ distance de la source au panneau."
  ],
  "某天体离地球约 {0}×10⁶ km，光在真空中的速度取 3×10⁵ km/s，光从那里传到地球需要多长时间？": [
-  "A heavenly body is about {0}×10⁶ km from the Earth. Taking the speed of light in a vacuum as 3×10⁵ km/s, how long does light take to travel from there to the Earth?",
+  "A celestial body is about {0}×10⁶ km from the Earth. Taking the speed of light in a vacuum as 3×10⁵ km/s, how long does light take to travel from there to the Earth?",
   "Un astre est à environ {0}×10⁶ km de la Terre. En prenant 3×10⁵ km/s pour la vitesse de la lumière dans le vide, combien de temps la lumière met-elle à aller de là jusqu'à la Terre ?"
  ],
  "下列现象中，由光的直线传播形成的是：": [
@@ -3594,5 +3594,57 @@
  "体温计的量程是 35 ℃~42 ℃，分度值是 0.1 ℃。它的玻璃泡和直玻璃管之间有一段很细的缩口，水银柱上升后遇冷收缩时在缩口处断开，水银柱不会自己退回玻璃泡，所以体温计可以离开人体读数。每次使用前要用力甩几下，把水银甩回玻璃泡。": [
   "The range of a clinical thermometer is 35 ℃ to 42 ℃ and the value of a division is 0.1 ℃. Between its bulb and the straight glass tube there is a very narrow neck; when the mercury column has risen and then cools and contracts, it breaks at the neck and does not go back into the bulb by itself, so a clinical thermometer can be read after it has left the body. Before each use it must be shaken hard a few times to shake the mercury back into the bulb.",
   "L'étendue d'un thermomètre médical va de 35 ℃ à 42 ℃ et la valeur d'une graduation est de 0,1 ℃. Entre son réservoir et le tube de verre droit se trouve un étranglement très étroit ; quand la colonne de mercure a monté puis se refroidit et se contracte, elle se sépare à l'étranglement et ne redescend pas d'elle-même dans le réservoir : un thermomètre médical peut donc être lu après avoir quitté le corps. Avant chaque usage, il faut le secouer fortement plusieurs fois pour faire redescendre le mercure dans le réservoir."
+ ],
+ "平均每分钟蒸发的质量 = 蒸发的质量 ÷ 时间。": [
+  "Mass evaporated per minute on average = mass evaporated ÷ time.",
+  "Masse évaporée par minute en moyenne = masse évaporée ÷ durée."
+ ],
+ "分度值 = 温度差 ÷ 格数，这里的温度差是 100 ℃。": [
+  "Value of a division = temperature difference ÷ number of divisions; here the difference is 100 ℃.",
+  "Valeur d'une graduation = écart de température ÷ nombre de graduations ; ici l'écart est de 100 ℃."
+ ],
+ "光源很小（点光源）时，物体后面只有一片黑暗的影；光源较大时，影的中间是完全没有光的本影，周围是只有一部分光的半影。日食是月球挡住太阳光，月球的影落在地球上；月食是地球挡住太阳光，月球进入地球的影。因为月球的轨道面与地球的轨道面约有 5° 的夹角，只有在新月（日食）或满月（月食）时，月球恰好又在地球轨道面附近，才会发生日食或月食，所以并不是每个月都发生。": [
+  "When the source is very small (a point source) there is only a dark shadow behind the object; when the source is larger, the middle of the shadow is the umbra, which gets no light at all, and round it is the penumbra, which gets only part of the light. A solar eclipse is when the Moon blocks the sunlight and its shadow falls on the Earth; a lunar eclipse is when the Earth blocks the sunlight and the Moon enters the Earth's shadow. The plane of the Moon's orbit makes an angle of about 5° with the plane of the Earth's orbit; an eclipse happens only at new Moon (solar) or full Moon (lunar) when the Moon is also close to the plane of the Earth's orbit, so there is not an eclipse every month.",
+  "Quand la source est très petite (source ponctuelle), il n'y a derrière l'objet qu'une ombre sombre ; quand la source est plus grande, le milieu de l'ombre est l'ombre propre, qui ne reçoit aucune lumière, et autour d'elle se trouve la pénombre, qui ne reçoit qu'une partie de la lumière. Une éclipse de Soleil se produit quand la Lune arrête la lumière du Soleil et que son ombre tombe sur la Terre ; une éclipse de Lune, quand la Terre arrête la lumière du Soleil et que la Lune entre dans l'ombre de la Terre. Le plan de l'orbite de la Lune fait un angle d'environ 5° avec celui de l'orbite de la Terre ; il n'y a d'éclipse qu'à la nouvelle Lune (Soleil) ou à la pleine Lune (Lune) lorsque la Lune est aussi proche du plan de l'orbite de la Terre : il n'y a donc pas d'éclipse chaque mois."
+ ],
+ "小平面的法线与竖直方向成 t 角，入射角是 t，反射角也是 t，所以反射光线与竖直向上的方向（入射光线的反方向）成 2t 角。": [
+  "The normal of the small surface makes an angle t with the vertical, so the angle of incidence is t and the angle of reflection is also t; the reflected ray therefore makes an angle 2t with the upward vertical (the reverse of the incident direction).",
+  "La normale à la petite surface fait un angle t avec la verticale ; l'angle d'incidence est donc t et l'angle de réflexion est aussi t : le rayon réfléchi fait donc un angle 2t avec la verticale dirigée vers le haut (sens opposé au rayon incident)."
+ ],
+ "在这个实验中，A 是参照的导线，B 每次只改变一个因素。注意：电阻越大，电流表的示数越小。": [
+  "In this experiment A is the reference wire and B changes only one factor each time. Note: the greater the resistance, the smaller the reading of the ammeter.",
+  "Dans cette expérience, A est le fil de référence et B ne change qu'un seul facteur à chaque fois. Remarque : plus la résistance est grande, plus l'indication de l'ampèremètre est petite."
+ ],
+ "声音的强弱：找一个会损害听力的声音（超过 90 dB）": [
+  "Loudness of sound: find a sound that damages hearing (above 90 dB)",
+  "Intensité sonore : trouvez un son qui abîme l'ouïe (plus de 90 dB)"
+ ],
+ "日食与月食：调节月球的位置和偏离地球轨道面的角度，使它满足发生日食或月食的条件": [
+  "Solar and lunar eclipses: set the position of the Moon and its angle away from the plane of the Earth's orbit so that the conditions for a solar or lunar eclipse are met",
+  "Éclipses de Soleil et de Lune : réglez la position de la Lune et son écart angulaire avec le plan de l'orbite de la Terre pour que les conditions d'une éclipse de Soleil ou de Lune soient réunies"
+ ],
+ "A 比 0 ℃ 时多的内能": [
+  "Internal energy of A above its value at 0 ℃",
+  "Énergie interne de A en plus de sa valeur à 0 ℃"
+ ],
+ "B 比 0 ℃ 时多的内能": [
+  "Internal energy of B above its value at 0 ℃",
+  "Énergie interne de B en plus de sa valeur à 0 ℃"
+ ],
+ "电流的方向（取某一方向为正）": [
+  "Direction of the current (one direction taken as positive)",
+  "Sens du courant (un sens est pris comme positif)"
+ ],
+ "正方向": [
+  "Positive direction",
+  "Sens positif"
+ ],
+ "负方向": [
+  "Negative direction",
+  "Sens négatif"
+ ],
+ "数字信号判断错误的位数": [
+  "Number of bits the digital signal gets wrong",
+  "Nombre de bits erronés du signal numérique"
  ]
 }

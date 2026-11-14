@@ -2,6 +2,7 @@ import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-emwave";
 import { COL, arrow, circle, line, rect, txt } from "./draw";
+import { cx } from "../i18n";
 
 export const meta = CATALOG.emwave;
 const SEG = ["#adb5bd", "#e03131", "#fcc419", "#7048e8", "#1c7ed6", "#2d2230"];
@@ -23,7 +24,7 @@ export const def: SimDef = {
   ],
   aspect: 0.62,
   readouts: (s) => {
-    if (s.mode === 0) { const f = Mo.freq(s.lf), b = Mo.BANDS[Mo.band(f)]; return [{ label: "频率", value: Mo.sci(f), unit: "Hz" }, { label: "波长", value: Mo.sci(Mo.wavelength(f)), unit: "m" }, { label: "波段", value: b.name }, { label: "应用", value: b.use }]; }
+    if (s.mode === 0) { const f = Mo.freq(s.lf), b = Mo.BANDS[Mo.band(f)]; return [{ label: "频率", value: Mo.sci(f), unit: "Hz" }, { label: "波长", value: Mo.sci(Mo.wavelength(f)), unit: "m" }, { label: "波段", value: b.name }, { label: cx("应用", "use"), value: b.use }]; }
     const t = tm(s), ms = t < 1;
     return [{ label: "路程", value: fmt(Mo.DESTS[s.dest][1], 0), unit: "km" }, { label: "传播的速度", value: Mo.sci(Mo.MEDIA[s.med][1]), unit: "m/s" }, { label: "单程的时间", value: ms ? fmt(t * 1000, 1) : fmt(t, 2), unit: ms ? "ms" : "s" }];
   },

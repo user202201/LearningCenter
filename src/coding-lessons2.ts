@@ -8,6 +8,7 @@ import { Machine, State, LevelData, makeTurtle } from "./coding-interp";
 import type { Demo, Lesson } from "./coding-lessons";
 import { StageRun, StageExt, SpriteSpec, Input } from "./coding-stage";
 import { stageView, dataView } from "./coding-views";
+import { cx } from "./i18n";
 
 export interface StageDemo { sprites: SpriteSpec[]; texts?: Record<string, string>; msgs?: Record<string, string>; inputs?: Input[]; ticks?: number; vars?: string[] }
 export interface DataDemo { lists: Record<string, number[]>; vars?: Record<string, number>; view?: "list" | "bars" | "graph" | "scale"; data?: LevelData }
@@ -107,7 +108,7 @@ export const LESSONS2: Record<string, Lesson> = {
     { text: "排好顺序的列表，每次看中间的数，就能去掉一半。", demo: dd(BIN, { xs: [1, 3, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 22, 25, 27] }, { view: "bars" }) },
     { text: "64 个数最多看 7 次，顺序查找最多要看 64 次。", demo: dd(BIN, { xs: [1, 3, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 22, 25, 27] }, { view: "bars" }) },
   ] },
-  sort: { id: "sort", title: "排序", steps: [
+  sort: { id: "sort", title: cx("排序", "sorting"), steps: [
     { text: "选择排序：每一轮找出最小的数，换到最前面。", demo: dd(SORT, { xs: [5, 2, 8, 1, 9] }, { view: "bars" }) },
     { text: "冒泡排序：相邻的两个数，左边大就交换。", demo: dd(BUBBLE, { xs: [5, 2, 8, 1, 9] }, { view: "bars" }) },
     { text: "“交换”的次数也会显示出来。", demo: dd(SORT, { xs: [5, 2, 8, 1, 9] }, { view: "bars" }) },

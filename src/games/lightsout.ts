@@ -1,6 +1,7 @@
 import type { GameCtx } from "./ctx";
 import "./lightsout.css";
 import { SIZES, makeRng, generate, press, isSolved, solve, hint, stars, rangeFor, type Level, type Board } from "./lightsout-logic";
+import { cx } from "../i18n";
 
 export const ICON = `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="100" height="100" rx="26" fill="#dbe4ff"/><rect x="10" y="10" width="100" height="100" rx="26" fill="none" stroke="#748ffc" stroke-width="4"/><g><rect x="20" y="20" width="38" height="38" rx="11" fill="#fff3bf" stroke="#fcc419" stroke-width="3.5"/><circle cx="39" cy="38" r="12" fill="#ffd43b" stroke="#e67700" stroke-width="3"/><path d="M33 36 q3 -4 6 0 M40 36 q3 -4 6 0" fill="none" stroke="#3a2e39" stroke-width="2.4" stroke-linecap="round"/><path d="M34 42 q5 6 10 0" fill="none" stroke="#3a2e39" stroke-width="2.4" stroke-linecap="round"/><rect x="34" y="50" width="10" height="5" rx="2" fill="#adb5bd"/></g><g><rect x="62" y="62" width="38" height="38" rx="11" fill="#fff3bf" stroke="#fcc419" stroke-width="3.5"/><circle cx="81" cy="80" r="12" fill="#ffd43b" stroke="#e67700" stroke-width="3"/><path d="M75 78 q3 -4 6 0 M82 78 q3 -4 6 0" fill="none" stroke="#3a2e39" stroke-width="2.4" stroke-linecap="round"/><path d="M76 84 q5 6 10 0" fill="none" stroke="#3a2e39" stroke-width="2.4" stroke-linecap="round"/><rect x="76" y="92" width="10" height="5" rx="2" fill="#adb5bd"/></g><g><rect x="62" y="20" width="38" height="38" rx="11" fill="#4a587a" stroke="#364260" stroke-width="3.5"/><circle cx="81" cy="38" r="12" fill="#6c7b9c" stroke="#2f3b57" stroke-width="3"/><path d="M75 37 q3 3 6 0 M82 37 q3 3 6 0" fill="none" stroke="#1e2740" stroke-width="2.4" stroke-linecap="round"/><path d="M78 43 h6" fill="none" stroke="#1e2740" stroke-width="2.4" stroke-linecap="round"/><rect x="76" y="50" width="10" height="5" rx="2" fill="#adb5bd"/></g><g><rect x="20" y="62" width="38" height="38" rx="11" fill="#4a587a" stroke="#364260" stroke-width="3.5"/><circle cx="39" cy="80" r="12" fill="#6c7b9c" stroke="#2f3b57" stroke-width="3"/><path d="M33 79 q3 3 6 0 M40 79 q3 3 6 0" fill="none" stroke="#1e2740" stroke-width="2.4" stroke-linecap="round"/><path d="M36 85 h6" fill="none" stroke="#1e2740" stroke-width="2.4" stroke-linecap="round"/><rect x="34" y="92" width="10" height="5" rx="2" fill="#adb5bd"/></g><path d="M100 14 v10 M95 19 h10" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>`;
 
@@ -32,7 +33,7 @@ export default function mount(root: HTMLElement, ctx: GameCtx): () => void {
   const hintBtn = h("button", { class: "mopt", id: "lo-hint", onclick: () => showHint() }, "提示");
   const undoBtn = h("button", { class: "mopt", id: "lo-undo", onclick: () => undo() }, "撤销");
   const restartBtn = h("button", { class: "mopt", id: "lo-restart", onclick: () => restart() }, "重来");
-  const newBtn = h("button", { class: "mopt", id: "lo-new", onclick: () => { ctx.sfx("tap"); newPuzzle(); } }, "新题");
+  const newBtn = h("button", { class: "mopt", id: "lo-new", onclick: () => { ctx.sfx("tap"); newPuzzle(); } }, cx("新题", "puzzle"));
   const demoBtn = h("button", { class: "mopt", id: "lo-demo", onclick: () => startDemo() }, "自动演示");
   const act = h("div", { class: "lo-act" }, hintBtn, undoBtn, restartBtn, newBtn, demoBtn);
 

@@ -35,7 +35,7 @@ export const def: SimDef = {
   readouts: (s) => {
     if (s.mode === 0) return [{ label: "内能的变化", value: `${Mo.dU(s.action, s.W) >= 0 ? "+" : "−"}${fmt(Math.abs(Mo.dU(s.action, s.W)), 0)}`, unit: "J" }, { label: "温度的变化", value: `${work(s) >= 0 ? "+" : "−"}${fmt(Math.abs(work(s)), 1)}`, unit: "℃" }, { label: "末温", value: fmt(Mo.T0 + work(s), 1), unit: "℃" }, { label: "能量的转化", value: s.action === 2 ? "内能转化为机械能" : "机械能转化为内能" }];
     const f = flow(s), cA = Mo.SUBS[s.subA][1], cB = Mo.SUBS[s.subB][1];
-    return [{ label: "热量传递的方向", value: f.dir === "AB" ? "从 A 传向 B" : f.dir === "BA" ? "从 B 传向 A" : "没有热传递（温度相同）" }, { label: "达到的共同温度", value: fmt(f.Tf, 1), unit: "℃" }, { label: "传递的热量", value: fmt(Math.abs(f.Q), 0), unit: "J" }, { label: "A 的内能（相对于 0 ℃）", value: fmt(Mo.relEnergy(cA, s.mA, s.TA), 0), unit: "J" }, { label: "B 的内能（相对于 0 ℃）", value: fmt(Mo.relEnergy(cB, s.mB, s.TB), 0), unit: "J" }];
+    return [{ label: "热量传递的方向", value: f.dir === "AB" ? "从 A 传向 B" : f.dir === "BA" ? "从 B 传向 A" : "没有热传递（温度相同）" }, { label: "达到的共同温度", value: fmt(f.Tf, 1), unit: "℃" }, { label: "传递的热量", value: fmt(Math.abs(f.Q), 0), unit: "J" }, { label: "A 比 0 ℃ 时多的内能", value: fmt(Mo.relEnergy(cA, s.mA, s.TA), 0), unit: "J" }, { label: "B 比 0 ℃ 时多的内能", value: fmt(Mo.relEnergy(cB, s.mB, s.TB), 0), unit: "J" }];
   },
   draw(c, w, hh, s) {
     rect(c, 0, 0, 640, 397, "#f8f9fa", null, 0, 0);

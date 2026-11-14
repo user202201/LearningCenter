@@ -2,6 +2,7 @@ import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-rmeasure";
 import { COL, circle, line, rect, txt } from "./draw";
+import { cx } from "../i18n";
 
 export const meta = CATALOG.rmeasure;
 type S = Record<string, number>;
@@ -23,7 +24,7 @@ export const def: SimDef = {
   hidden,
   actions: [
     { id: "rec", label: "记录这组数据", run: (s) => { if (s.n >= Mo.MAXROWS) return; const l = L(s); if (l.Iread <= 0) return; for (const r of rows(s)) if (r.U === l.Uread && r.I === l.Iread) return; return { n: s.n + 1, [`u${s.n}`]: l.Uread, [`i${s.n}`]: l.Iread }; } },
-    { id: "clear", label: "清除记录", run: () => ({ n: 0 }) },
+    { id: "clear", label: cx("清除记录", "data"), run: () => ({ n: 0 }) },
   ],
   derive: (s, ch) => { if (ch === "target" || ch === "rx") s.n = 0; },
   aspect: 0.62,

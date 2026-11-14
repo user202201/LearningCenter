@@ -9,6 +9,7 @@ import { h, toast } from "./ui";
 import { Blk, BlockKind, Expr, PaletteKind, Program, allLists, cloneBlk, cloneProgram, countBlocks, emptyProgram, newId, num, slotsOf, walk, toText, exprText, paramsOf, LIST_ARITY, ListFn, FnName, FN_ARITY, MeProp } from "./coding-ast";
 import { COLORS } from "./coding-turtle";
 import { condExpr } from "./coding-levels";
+import { cx } from "./i18n";
 
 export interface SlotOpt { sprite: string; on: string; events: string[] }
 export interface EditorOpts {
@@ -327,7 +328,7 @@ function blockEl(b: Blk, sc: Scope, seqs: Map<HTMLElement, { list: Blk[]; script
     case "each": head.append(T("对每一项"), varBtn(), T("来自"), listBtn()); break;
     case "wait": head.append(T("等待"), S("n", META.secs), T("秒钟")); break;
     case "waitUntil": head.append(T("等到"), condSlot(sc, b)); break;
-    case "return": head.append(T("返回"), S("e", META.val)); break;
+    case "return": head.append(T(cx("返回", "return")), S("e", META.val)); break;
     case "push": head.append(T("加入"), S("e", META.val), T("到列表"), listBtn()); break;
     case "lset": head.append(T("修改"), listBtn(), T("的编号"), S("n", META.idx), T("改为"), S("e", META.val)); break;
     case "lremove": head.append(T("删除"), listBtn(), T("的编号"), S("n", META.idx)); break;

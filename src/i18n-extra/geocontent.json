@@ -820,8 +820,8 @@
   "15 + 30 × profondeur (km)."
  ],
  "某资源总量 {0} 亿吨，人口 {1} 亿，人均占有量约是多少吨？": [
-  "The total of a resource is {0} hundred million tonnes and the population is {1} hundred million. About how many tonnes per head is that?",
-  "Le total d'une ressource est de {0} centaines de millions de tonnes et la population de {1} centaines de millions d'habitants. Combien de tonnes par habitant cela fait-il environ ?"
+  "The total of a resource is {0} × 10⁸ tonnes and the population is {1} hundred million. About how many tonnes per head is that?",
+  "Le total d'une ressource est de {0} × 10⁸ de tonnes et la population de {1} centaines de millions d'habitants. Combien de tonnes par habitant cela fait-il environ ?"
  ],
  "吨": [
   "tonnes",
@@ -3604,8 +3604,8 @@
   "l'est est plus développé et l'ouest relativement moins développé"
  ],
  "东部落后，西部发达": [
-  "the east is backward and the west developed",
-  "l'est est en retard et l'ouest développé"
+  "the east is less developed and the west is developed",
+  "l'est est moins développé et l'ouest est développé"
  ],
  "东西部一样": [
   "east and west are the same",
@@ -4701,7 +4701,7 @@
  ],
  "简称“{0}”的省级行政区是？": [
   "Which province-level division has the abbreviation “{0}”?",
-  "Quelle division de niveau provincial a pour abréviation « {0} » ?"
+  "Quelle division administrative de niveau provincial a pour abréviation « {0} » ?"
  ],
  "{0}的省会（首府、首都）是？": [
   "What is the capital of {0} (the seat of government, or the capital city)?",
@@ -4709,7 +4709,7 @@
  ],
  "{0}是哪个省级行政区的行政中心？": [
   "Of which province-level division is {0} the administrative centre?",
-  "De quelle division de niveau provincial {0} est-elle le centre administratif ?"
+  "De quelle division administrative de niveau provincial {0} est-elle le centre administratif ?"
  ],
  "{0}的大致范围是？": [
   "What is the approximate extent of {0}?",
@@ -5149,7 +5149,7 @@
  ],
  "面积最大的省级行政区，盛产棉花和瓜果": [
   "the largest province-level division by area, rich in cotton, melons and fruit",
-  "la plus grande division de niveau provincial par la superficie, riche en coton, melons et fruits"
+  "la plus grande division administrative de niveau provincial par la superficie, riche en coton, melons et fruits"
  ],
  "香港": [
   "Hong Kong",
@@ -5336,8 +5336,8 @@
   "environ {0} dizaines de milliers de km²"
  ],
  "约 {0} 亿平方千米": [
-  "about {0} hundred million km²",
-  "environ {0} centaines de millions de km²"
+  "about {0} × 10⁸ km²",
+  "environ {0} × 10⁸ de km²"
  ],
  "{0}月{1}日 {2}:{3}": [
   "{0}/{1}, {2}:{3}",

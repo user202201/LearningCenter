@@ -10,7 +10,7 @@ export const MAIZE = [
 ];
 export const SEEDS = ["菜豆种子", "玉米种子"];
 /** the three parts the iodine is dropped on: the outer coat, the part that stores the food (bean: the cotyledons, maize: the endosperm), the embryo */
-export const PARTS = [["种皮", "子叶", "胚"], ["果皮和种皮", "胚乳", "胚"]];
+export const PARTS = [["种皮", "子叶", "胚芽、胚轴、胚根"], ["果皮和种皮", "胚乳", "胚"]];
 /** starch turns iodine blue-black: only the food store has plenty of it */
 export const blue = (seed: number, part: number) => part === 1;
 export const IODINE_TEXT = ["滴碘液后不变蓝：几乎不含淀粉", "滴碘液后变成蓝色：含有大量淀粉"];
@@ -28,7 +28,7 @@ export function quiz(rng: () => number): Q[] {
     makeQ(rng, "part", [i], `菜豆种子的结构中，${DESC[i]}：`, BEAN[i].name, BEAN.filter((_, k) => k !== i).map((x) => x.name).concat(["胚乳"]), "种皮保护种子；胚由胚根、胚轴、胚芽和子叶组成，是新植物的幼体。"),
     makeQ(rng, "store", [], "玉米种子储存营养物质的结构是：", "胚乳", ["子叶", "胚芽", "果皮和种皮", "胚根"], "玉米是单子叶植物，营养储存在胚乳中；菜豆是双子叶植物，营养储存在子叶中。"),
     makeQ(rng, "iodine", [], "在玉米种子的纵切面上滴一滴碘液，变成蓝色的部分是：", "胚乳", ["果皮和种皮", "胚芽", "胚轴", "胚根"], "淀粉遇碘变蓝，胚乳中含有大量淀粉。"),
-    numQ(rng, "avg", [n, a, b, c], `测定种子的萌发率：每组 ${n} 粒，共 3 组，萌发的种子分别为 ${a} 粒、${b} 粒、${c} 粒。平均萌发率是多少？`, ((a + b + c) / (3 * n)) * 100, "%", 1, "平均萌发率 = 三组萌发的种子总数 ÷ 种子总数 × 100 %。"),
-    makeQ(rng, "samp", [], "测定种子的萌发率时，为了减小误差，应该：", "每组取数量较多的种子，并重复做几组取平均值", ["只取 1 粒最饱满的种子", "只做一组，数量越少越好", "挑选颜色最好的种子", "把萌发的种子扔掉不数"], "样本越大、重复越多，结果越接近整批种子的真实萌发率。"),
+    numQ(rng, "avg", [n, a, b, c], `测定种子的发芽率：每组 ${n} 粒，共 3 组，发芽的种子分别为 ${a} 粒、${b} 粒、${c} 粒。平均发芽率是多少？`, ((a + b + c) / (3 * n)) * 100, "%", 1, "平均发芽率 = 三组发芽的种子总数 ÷ 种子总数 × 100 %。"),
+    makeQ(rng, "samp", [], "测定种子的发芽率时，为了减小误差，应该：", "每组取数量较多的种子，并重复做几组取平均值", ["只取 1 粒最饱满的种子", "只做一组，数量越少越好", "挑选颜色最好的种子", "把发芽的种子扔掉不数"], "样本越大、重复越多，结果越接近整批种子的真实发芽率。"),
   ];
 }

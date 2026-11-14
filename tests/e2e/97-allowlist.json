@@ -1,0 +1,10 @@
+{
+  "_comment": "Content that MUST stay Chinese in English / French. Each entry: text (regex on the string), sel (regex on the element path), route (regex on the route), reason. An entry needs at least one of text / sel / route.",
+  "allow": [
+    {
+      "text": "^(中文)$",
+      "sel": "seg",
+      "reason": "The language menu names every language in its own script (中文 / English / Français), so that a user who cannot read the current language finds theirs."
+    }
+  ]
+}

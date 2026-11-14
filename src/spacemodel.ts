@@ -4,7 +4,7 @@
  * to be checked by a teacher / astronomer), imported lazily.
  */
 import * as G from "./game";
-import { getLang, tr, type Lang } from "./i18n";
+import { cx, getLang, tr, type Lang } from "./i18n";
 
 export interface Names { zh: string; en: string; fr: string }
 export interface Body extends Names {
@@ -161,7 +161,7 @@ export interface Question {
   key: string; kind: string; stem: Text; fig?: { t: "planet" | "moon" | "phase" | "const"; id: string; E?: number };
   choices: Choice[]; answer: string; explain: { text?: string; tpl?: string; args?: string[] };
 }
-const KINDS = { pp: "行星图", pd: "矮行星图", pm: "卫星图", or: "顺序", sp: "之最", mf: "卫星特征", mo: "卫星归属", ph: "月相", cs: "星座", mq: "知识", wt: "体重" };
+const KINDS = { pp: "行星图", pd: "矮行星图", pm: "卫星图", or: cx("顺序", "order"), sp: "之最", mf: "卫星特征", mo: "卫星归属", ph: "月相", cs: "星座", mq: "知识", wt: "体重" };
 export const kindName = (k: string): string => KINDS[k as keyof typeof KINDS] ?? k;
 export function allKeys(s: Space): string[] {
   return [

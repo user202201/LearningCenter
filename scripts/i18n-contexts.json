@@ -1,0 +1,617 @@
+{
+ "速度": {
+  "variants": {
+   "": {
+    "meaning": "speed / velocity (physics)",
+    "en": "Speed",
+    "fr": "Vitesse"
+   },
+   "tempo": {
+    "meaning": "tempo of a beat / DJ pitch fader",
+    "en": "Tempo",
+    "fr": "Tempo"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/phys/motion.ts:28",
+    "find": "label: \"速度\"",
+    "variant": ""
+   },
+   {
+    "where": "src/phys/energy.ts:35",
+    "find": "label: \"速度\"",
+    "variant": ""
+   },
+   {
+    "where": "src/phys/newton.ts:36",
+    "find": "label: \"速度\"",
+    "variant": ""
+   },
+   {
+    "where": "src/beats.ts:230",
+    "find": "cx(\"速度\", \"tempo\")",
+    "variant": "tempo"
+   },
+   {
+    "where": "src/dj.ts:151",
+    "find": "label: cx(\"速度\", \"tempo\")",
+    "variant": "tempo"
+   },
+   {
+    "where": "src/dj.ts:251",
+    "find": "dj-pl\" }, cx(\"速度\", \"tempo\")",
+    "variant": "tempo"
+   }
+  ],
+  "note": "was 'Tempo' everywhere: the physics readouts said Tempo"
+ },
+ "继续": {
+  "variants": {
+   "": {
+    "meaning": "resume after a pause / go on with the game",
+    "en": "Resume",
+    "fr": "Reprendre"
+   },
+   "next": {
+    "meaning": "OK button of the badge dialog: go on",
+    "en": "Continue",
+    "fr": "Continuer"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/games/snake.ts:53",
+    "find": "\"继续\" : \"暂停\"",
+    "variant": ""
+   },
+   {
+    "where": "src/dictation.ts:166",
+    "find": "pauseBtn.title = \"继续\"",
+    "variant": ""
+   },
+   {
+    "where": "src/coding.ts:404",
+    "find": "cx(\"继续\", \"next\")",
+    "variant": "next"
+   },
+   {
+    "where": "src/coding-info.ts:149",
+    "find": "cx(\"继续\", \"next\")",
+    "variant": "next"
+   },
+   {
+    "where": "src/coding-text.ts:307",
+    "find": "cx(\"继续\", \"next\")",
+    "variant": "next"
+   }
+  ]
+ },
+ "挑战": {
+  "variants": {
+   "": {
+    "meaning": "difficulty: hard (Sokoban group)",
+    "en": "Hard",
+    "fr": "Difficile"
+   },
+   "boss": {
+    "meaning": "tag of a boss level of the coding worlds",
+    "en": "Challenge",
+    "fr": "Défi"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/games/sokoban.ts:7",
+    "find": "\"入门\", \"进阶\", \"挑战\"",
+    "variant": ""
+   },
+   {
+    "where": "src/coding.ts:143",
+    "find": "cx(\"挑战\", \"boss\")",
+    "variant": "boss"
+   },
+   {
+    "where": "src/coding-info.ts:101",
+    "find": "cx(\"挑战\", \"boss\")",
+    "variant": "boss"
+   },
+   {
+    "where": "src/coding-text.ts:104",
+    "find": "cx(\"挑战\", \"boss\"))",
+    "variant": "boss"
+   }
+  ]
+ },
+ "排序": {
+  "variants": {
+   "": {
+    "meaning": "practice mode: put the lines of a poem in order",
+    "en": "Order",
+    "fr": "Ordre"
+   },
+   "sorting": {
+    "meaning": "lesson title: sorting algorithms",
+    "en": "Sorting",
+    "fr": "Tri"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/poems.ts:292",
+    "find": "order: \"排序\"",
+    "variant": ""
+   },
+   {
+    "where": "src/coding-lessons2.ts:111",
+    "find": "cx(\"排序\", \"sorting\")",
+    "variant": "sorting"
+   }
+  ]
+ },
+ "顺序": {
+  "variants": {
+   "": {
+    "meaning": "coding world 1: sequence of blocks",
+    "en": "Sequence",
+    "fr": "Séquence"
+   },
+   "order": {
+    "meaning": "space quiz kind: the order of the planets",
+    "en": "Order",
+    "fr": "Ordre"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/coding-levels.ts:329",
+    "find": "{ id: 1, name: \"顺序\" }",
+    "variant": ""
+   },
+   {
+    "where": "src/spacemodel.ts:164",
+    "find": "cx(\"顺序\", \"order\")",
+    "variant": "order"
+   }
+  ]
+ },
+ "关闭": {
+  "variants": {
+   "": {
+    "meaning": "button: close a dialog",
+    "en": "Close",
+    "fr": "Fermer"
+   },
+   "closed": {
+    "meaning": "state of a heart valve (not a button)",
+    "en": "Closed",
+    "fr": "Fermée"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/coding-play2.ts:277",
+    "find": "\"cl-answer-close\"",
+    "variant": ""
+   },
+   {
+    "where": "src/main.ts:716",
+    "find": "id: \"viewer-close\"",
+    "variant": ""
+   },
+   {
+    "where": "src/bio/blood.ts:17",
+    "find": "cx(\"关闭\", \"closed\")",
+    "variant": "closed"
+   }
+  ]
+ },
+ "没有": {
+  "variants": {
+   "": {
+    "meaning": "answer: no (a yes / no pair with 有)",
+    "en": "No",
+    "fr": "Non"
+   },
+   "none": {
+    "meaning": "nothing at all: no glasses, no moons",
+    "en": "None",
+    "fr": "Aucune"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/bio/energy.ts:19",
+    "find": "[0, \"没有\"], [1, \"有\"]",
+    "variant": ""
+   },
+   {
+    "where": "src/bio/excretion.ts:22",
+    "find": "\"有（超过重吸收限度）\" : \"没有\"",
+    "variant": ""
+   },
+   {
+    "where": "src/bio/model-cells.ts:24",
+    "find": "yes ? \"有\" : \"没有\"",
+    "variant": ""
+   },
+   {
+    "where": "src/phys/home.ts:28",
+    "find": "[0, \"没有\"], [1, \"装有\"]",
+    "variant": ""
+   },
+   {
+    "where": "src/phys/eye.ts:38",
+    "find": "cx(\"没有\", \"none\")",
+    "variant": "none"
+   },
+   {
+    "where": "src/spaceplanet.ts:34",
+    "find": "cx(\"没有\", \"none\")",
+    "variant": "none"
+   }
+  ],
+  "note": "was 'None' (FR 'Aucune') everywhere: a yes / no question was answered 'None'"
+ },
+ "无": {
+  "variants": {
+   "": {
+    "meaning": "none (no part cut, no neighbours listed, no rings)",
+    "en": "None",
+    "fr": "Aucun"
+   },
+   "no": {
+    "meaning": "answer no (valves: 有 / 无)",
+    "en": "No",
+    "fr": "Non"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/bio/nerve.ts:21",
+    "find": "[0, \"无\"]",
+    "variant": ""
+   },
+   {
+    "where": "src/chemlogic3.ts:305",
+    "find": "xs.join(L.sepOf()) : \"无\"",
+    "variant": ""
+   },
+   {
+    "where": "src/bio/vessels.ts:30",
+    "find": "cx(\"无\", \"no\")",
+    "variant": "no"
+   }
+  ]
+ },
+ "输入": {
+  "variants": {
+   "": {
+    "meaning": "verb: type (the typed answer mode of a game, the writing tab)",
+    "en": "Type",
+    "fr": "Saisir"
+   },
+   "input": {
+    "meaning": "noun: the input given to a program",
+    "en": "Input",
+    "fr": "Entrée"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/games/idiomchain.ts:40",
+    "find": "\"icn-mode-type\"",
+    "variant": ""
+   },
+   {
+    "where": "src/writeui.ts:323",
+    "find": "tabBtn(\"type\"",
+    "variant": ""
+   },
+   {
+    "where": "src/coding-text.ts:128",
+    "find": "\"aria-label\": cx(\"输入\", \"input\")",
+    "variant": "input"
+   },
+   {
+    "where": "src/coding-text.ts:190",
+    "find": "\"tx-label\" }, cx(\"输入\", \"input\")",
+    "variant": "input"
+   }
+  ]
+ },
+ "地图": {
+  "variants": {
+   "": {
+    "meaning": "the Maps page / card",
+    "en": "Maps",
+    "fr": "Cartes"
+   },
+   "single": {
+    "meaning": "one map (the picture of a robot map)",
+    "en": "Map",
+    "fr": "Carte"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/science.ts:60",
+    "find": "h(\"b\", {}, \"地图\")",
+    "variant": ""
+   },
+   {
+    "where": "src/coding-scene.ts:79",
+    "find": "cx(\"地图\", \"single\")",
+    "variant": "single"
+   }
+  ]
+ },
+ "应用": {
+  "variants": {
+   "": {
+    "meaning": "Settings card: the app",
+    "en": "App",
+    "fr": "Application"
+   },
+   "use": {
+    "meaning": "physics readout: applications of a radio band",
+    "en": "Uses",
+    "fr": "Usages"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/main.ts:1423",
+    "find": "h(\"h3\", {}, \"应用\")",
+    "variant": ""
+   },
+   {
+    "where": "src/phys/emwave.ts:27",
+    "find": "cx(\"应用\", \"use\")",
+    "variant": "use"
+   }
+  ]
+ },
+ "形成": {
+  "variants": {
+   "": {
+    "meaning": "fruit forms: yes (value of a readout)",
+    "en": "Forms",
+    "fr": "Se forme"
+   },
+   "formation": {
+    "meaning": "geography readout label: the formation of a landform",
+    "en": "Formation",
+    "fr": "Formation"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/bio/flower.ts:26",
+    "find": "? \"形成\" :",
+    "variant": ""
+   },
+   {
+    "where": "src/geolab-sims2.ts:115",
+    "find": "cx(\"形成\", \"formation\")",
+    "variant": "formation"
+   }
+  ]
+ },
+ "清除记录": {
+  "variants": {
+   "": {
+    "meaning": "clear the match record of the PK duels",
+    "en": "Clear record",
+    "fr": "Effacer l'historique"
+   },
+   "data": {
+    "meaning": "clear the table of measurements of a physics experiment",
+    "en": "Clear data",
+    "fr": "Effacer les mesures"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/pk.ts:174",
+    "find": "\"清除记录\"",
+    "variant": ""
+   },
+   {
+    "where": "src/phys/lensexp.ts:33",
+    "find": "cx(\"清除记录\", \"data\")",
+    "variant": "data"
+   },
+   {
+    "where": "src/phys/ohmlaw.ts:31",
+    "find": "cx(\"清除记录\", \"data\")",
+    "variant": "data"
+   },
+   {
+    "where": "src/phys/rmeasure.ts:27",
+    "find": "cx(\"清除记录\", \"data\")",
+    "variant": "data"
+   }
+  ]
+ },
+ "新题": {
+  "variants": {
+   "": {
+    "meaning": "Make 24: a new deal",
+    "en": "New hand",
+    "fr": "Nouvelle main"
+   },
+   "puzzle": {
+    "meaning": "Lights out: a new puzzle",
+    "en": "New puzzle",
+    "fr": "Nouvelle grille"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/games/game24.ts:32",
+    "find": "}, \"新题\")",
+    "variant": ""
+   },
+   {
+    "where": "src/games/lightsout.ts:36",
+    "find": "cx(\"新题\", \"puzzle\")",
+    "variant": "puzzle"
+   }
+  ]
+ },
+ "返回": {
+  "variants": {
+   "": {
+    "meaning": "go back to the previous screen",
+    "en": "Back",
+    "fr": "Retour"
+   },
+   "return": {
+    "meaning": "the 'return' block of the block language (function result)",
+    "en": "Return",
+    "fr": "Retourner"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/chemui.ts:57",
+    "find": "backLabel = \"返回\"",
+    "variant": ""
+   },
+   {
+    "where": "src/poems.ts:68",
+    "find": "label = \"返回\"",
+    "variant": ""
+   },
+   {
+    "where": "src/coding-editor.ts:331",
+    "find": "T(cx(\"返回\", \"return\"))",
+    "variant": "return"
+   }
+  ]
+ },
+ "种": {
+  "variants": {
+   "": {
+    "meaning": "count word: kinds / types (4 blood types, 16 pairings)",
+    "en": "types",
+    "fr": "types"
+   },
+   "species": {
+    "meaning": "count of identified species",
+    "en": "species",
+    "fr": "espèces"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/bio/model-blood.ts:27",
+    "find": "几种",
+    "variant": ""
+   },
+   {
+    "where": "src/bio/classify.ts:54",
+    "find": "cx(\"种\", \"species\")",
+    "variant": "species"
+   }
+  ]
+ },
+ "第 {0} / {1} 题": {
+  "variants": {
+   "": {
+    "meaning": "PK duel: round n of m",
+    "en": "Round {0} / {1}",
+    "fr": "Manche {0} / {1}"
+   },
+   "q": {
+    "meaning": "quiz of a lab: question n of m",
+    "en": "Question {0} / {1}",
+    "fr": "Question {0} / {1}"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/pk.ts:419",
+    "find": "题`))]",
+    "variant": ""
+   },
+   {
+    "where": "src/phys/kit.ts:234",
+    "find": "cx(`第 ${qi + 1} / ${qs.length} 题`, \"q\")",
+    "variant": "q"
+   },
+   {
+    "where": "src/geolab.ts:117",
+    "find": "cx(`第 ${i + 1} / ${qs.length} 题`, \"q\")",
+    "variant": "q"
+   }
+  ]
+ },
+ "退出": {
+  "variants": {
+   "": {
+    "meaning": "quit (the game, the practice): confirm button",
+    "en": "Quit",
+    "fr": "Quitter"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/gameui.ts:211",
+    "find": "\"退出游戏？\"",
+    "variant": ""
+   },
+   {
+    "where": "src/poems.ts:364",
+    "find": "\"退出练习？\"",
+    "variant": ""
+   }
+  ],
+  "note": "all uses mean quit; the lead had split 退出登录 (Sign out) from it"
+ },
+ "退出登录": {
+  "variants": {
+   "": {
+    "meaning": "sign out of the account (Settings)",
+    "en": "Sign out",
+    "fr": "Se déconnecter"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/main.ts:1440",
+    "find": "\"退出登录？\"",
+    "variant": ""
+   }
+  ],
+  "note": "was '退出' before; split by the lead"
+ },
+ "重置": {
+  "variants": {
+   "": {
+    "meaning": "reset to the start (Make 24, a physics sim, the code of a coding level)",
+    "en": "Reset",
+    "fr": "Réinitialiser"
+   }
+  },
+  "uses": [
+   {
+    "where": "src/games/game24.ts:44",
+    "find": "\"重置\"",
+    "variant": ""
+   },
+   {
+    "where": "src/phys/kit.ts:240",
+    "find": "}, \"重置\")",
+    "variant": ""
+   },
+   {
+    "where": "src/coding-text.ts:329",
+    "find": "\"tx-reset\", \"重置\"",
+    "variant": ""
+   }
+  ],
+  "note": "FR was 'Refaire' (= redo)"
+ }
+}

@@ -37,7 +37,13 @@ for (const f of files.filter((x) => x.endsWith(".ts") && !x.endsWith(".d.ts") &&
     if (/^\s*</.test(t)) for (const m of t.matchAll(/>([^<>]*[\u4e00-\u9fff][^<>]*)</g)) texts.set(m[1].trim(), f);
     else texts.set(t.trim(), f);
   };
+  const lit = (n) => ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) ? n.text : ts.isTemplateExpression(n) ? n.templateSpans.reduce((s, sp, i) => s + `{${i}}` + sp.literal.text, n.head.text) : null;
   (function walk(n) {
+    // cx("text", "ctx") (src/i18n.ts): the key is "text@ctx" (one Chinese text with two meanings); the plain text is not needed for this use
+    if (ts.isCallExpression(n) && ts.isIdentifier(n.expression) && n.expression.text === "cx" && n.arguments.length === 2 && lit(n.arguments[0]) !== null && ts.isStringLiteral(n.arguments[1])) {
+      add(lit(n.arguments[0]) + "@" + n.arguments[1].text);
+      return;
+    }
     if (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) { if (!isContent(n, f)) add(n.text); }
     else if (ts.isTemplateExpression(n)) { if (!isContent(n, f)) add(n.templateSpans.reduce((s, sp, i) => s + `{${i}}` + sp.literal.text, n.head.text)); }
     ts.forEachChild(n, walk);

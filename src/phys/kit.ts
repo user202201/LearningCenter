@@ -12,7 +12,7 @@
 import { h, toast } from "../ui";
 import { renderRich, renderTeX } from "../mathtext";
 import { mulberry32, clamp, fmt } from "./qtools";
-import { tr } from "../i18n";
+import { cx, tr } from "../i18n";
 import type { Q } from "./qtools";
 
 export type St = Record<string, number>;
@@ -231,7 +231,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
       if (q.why) { renderRich(why, tq(q.why), false); why.hidden = false; }
       next.hidden = false;
     } }, tq(c)));
-    quizBox.append(h("p", { class: "muted small", id: "quiz-no" }, `第 ${qi + 1} / ${qs.length} 题`), qEl, h("div", { class: "pl-qopts" }, ...opts), why, next);
+    quizBox.append(h("p", { class: "muted small", id: "quiz-no" }, cx(`第 ${qi + 1} / ${qs.length} 题`, "q")), qEl, h("div", { class: "pl-qopts" }, ...opts), why, next);
   };
 
   // ----- the page

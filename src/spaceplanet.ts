@@ -3,7 +3,7 @@
  * mini-system with a card for each moon, the weight scale (体重计), the age counter (年龄计) and the size next to the Earth.
  */
 import { h } from "./ui";
-import { tr } from "./i18n";
+import { cx, tr } from "./i18n";
 import { subjectArt } from "./hub";
 import type { Ctx } from "./english";
 import { fit, Loop, reducedMotion, nearest, big, sig, kmText, durText, hoursText, fmt, con, user } from "./spaceui";
@@ -31,7 +31,7 @@ export function dataRows(b: Body, asOf = 2025): [string, (Node | string)[]][] {
   rows.push(["赤道自转速度", [`${big(surfaceSpeedKmh(b))} 千米/小时`]]);
   rows.push(["自转轴倾角", [b.tilt === null ? "未知" : `${sig(b.tilt, 3)}°`]]);
   rows.push(["大气", [con(b.atm, "span", "sp-atm")]]);
-  rows.push(["卫星", [b.moons === 0 ? "没有" : b.moonsCheck ? `已确认约 ${b.moons} 颗（截至 ${asOf} 年）` : `${b.moons} 颗`]]);
+  rows.push(["卫星", [b.moons === 0 ? cx("没有", "none") : b.moonsCheck ? `已确认约 ${b.moons} 颗（截至 ${asOf} 年）` : `${b.moons} 颗`]]);
   rows.push(["光环", [ringsText(b)]]);
   return rows;
 }

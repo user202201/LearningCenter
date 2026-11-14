@@ -24,6 +24,7 @@ import { islandSvg, badgeSvg, worldColor } from "./coding-art";
 import { pathsByColor, colorHex } from "./coding-turtle";
 import * as II from "./coding-info";   // 信息科技 worlds 14-16, workshop and certificate (rule 62)
 import { initText, renderText, textSection } from "./coding-text";   // text coding, worlds 11-13 (rule 61)
+import { cx } from "./i18n";
 
 let X!: Ctx;
 export const initCoding = (c: Ctx) => { X = c; initText(c); II.initInfo(c); };
@@ -139,7 +140,7 @@ function worldPage(k: M.Kid, doc: CM.CodingDoc, world: number) {
     const s = doc.stars?.[l.id] ?? 0;
     const a = h("a", { class: "cl-lvl" + (l.boss ? " boss" : "") + (l.debug ? " debug" : "") + (s ? " solved" : ""), href: `#/coding/${k.id}/w${world}/${l.no}`, "data-level": l.id, "data-stars": String(s), style: `--wc:${worldColor(world)}` },
       h("span", { class: "lvl-no" }, String(l.no)), starRow(s, "lvl-stars"), h("span", { class: "lvl-title" }, l.title),
-      l.boss ? h("span", { class: "lvl-tag" }, "挑战") : l.debug ? h("span", { class: "lvl-tag" }, "找错误") : null);
+      l.boss ? h("span", { class: "lvl-tag" }, cx("挑战", "boss")) : l.debug ? h("span", { class: "lvl-tag" }, "找错误") : null);
     grid.append(a);
   }
   X.stagger([...grid.querySelectorAll<HTMLElement>(".cl-lvl")]);
@@ -400,7 +401,7 @@ async function medalDialog(world: number) {
   await modal<boolean>((close) => {
     const art = h("div", { class: "cl-medal-art" });
     art.innerHTML = badgeSvg(world, true);
-    return h("div", { class: "dlg cl-medal", id: "cl-medal-dlg" }, h("h2", {}, `获得徽章：${worldName(world)}`), art, h("div", { class: "row end" }, h("button", { class: "primary", id: "cl-medal-ok", onclick: () => close(true) }, "继续")));
+    return h("div", { class: "dlg cl-medal", id: "cl-medal-dlg" }, h("h2", {}, `获得徽章：${worldName(world)}`), art, h("div", { class: "row end" }, h("button", { class: "primary", id: "cl-medal-ok", onclick: () => close(true) }, cx("继续", "next"))));
   });
 }
 

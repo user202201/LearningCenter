@@ -1,7 +1,7 @@
 /** The geography lab's modules, part 2: climate, population, development, the earth's layers and rocks, energy, China (extent, steps, regions) and the generic fact explorers
  *  (continents, regions of the world, China's nature and economy). Each is a `SimDef` of the physics lab's kit; the content is `data/geolab.json`. */
 import { h } from "./ui";
-import { tr } from "./i18n";
+import { cx, tr } from "./i18n";
 import { type SimDef, type St, type Readout, fmt } from "./phys/kit";
 import { type GeoId } from "./geolab-catalog";
 import * as M from "./geolab-model";
@@ -112,7 +112,7 @@ export function rocks(D: M.GeoData): SimDef {
     choices: [{ id: "mode", label: "内容", options: [[0, "地球的圈层"], [1, "岩石循环"]], value: 0 }, { id: "proc", label: "过程", options: PROC.map(([n], i) => [i, n] as [number, string]), value: 0, when: is1 }],
     params: [{ id: "depth", label: "深度", min: 0, max: 6370, step: 10, value: 1000, unit: "km", when: is0 }],
     readouts: (s) => s.mode === 0 ? [{ label: "圈层", value: M.layerOf(s.depth) }, ...(s.depth > 6 && s.depth < 33 ? [{ label: "说明", value: "大陆地壳（海洋地壳只有约 6～7 千米厚）" }] : []), { label: "物质状态", value: M.LAYERS.find((l) => l[0] === M.layerOf(s.depth))![3] }, { label: "距地心", value: fmt(6371 - s.depth, 0), unit: "km" }]
-      : [{ label: "过程", value: PROC[s.proc][0] }, { label: "形成", value: PROC[s.proc][1] }, { label: "动力", value: PROC[s.proc][2] }],
+      : [{ label: "过程", value: PROC[s.proc][0] }, { label: cx("形成", "formation"), value: PROC[s.proc][1] }, { label: "动力", value: PROC[s.proc][2] }],
     draw(c, w, hh, s: St) {
       rect(c, 0, 0, w, hh, "#fff", null, 0, 0);
       if (s.mode === 0) {

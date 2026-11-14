@@ -48,7 +48,7 @@ export function quiz(rng: () => number): Q[] {
   const names = shuffle(rng, PROC.filter((_, i) => i !== pi));
   return [
     numQ(rng, "remain", [m0, r, t], `一杯水 ${m0} g，每分钟蒸发 ${r} g，${t} min 后还剩多少克？`, m0 - r * t, "g", 1, "剩余的水 = 原来的水 − 每分钟蒸发的质量 × 时间。"),
-    numQ(rng, "avgrate", [m, t2], `${m} g 水在 ${t2} min 内全部蒸发，平均每分钟蒸发多少克？`, m / t2, "g", 2, "平均速度 = 蒸发的质量 ÷ 时间。"),
+    numQ(rng, "avgrate", [m, t2], `${m} g 水在 ${t2} min 内全部蒸发，平均每分钟蒸发多少克？`, m / t2, "g", 2, "平均每分钟蒸发的质量 = 蒸发的质量 ÷ 时间。"),
     makeQ(rng, "factor", [], factor[0], factor[1], factor[2], factor[3]),
     makeQ(rng, "liquefy", [], lq[0], lq[1], lq[2], lq[3]),
     makeQ(rng, "process", [PHEN.findIndex((x) => x[0] === ph)], `“${ph}”发生的物态变化是：`, PROC[pi], names, WHY[pi]),

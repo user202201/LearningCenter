@@ -5,6 +5,7 @@ import { drawOrganism } from "./organisms";
 import { mulberry32 } from "../phys/qtools";
 import { dndInit, dndPointer, placedCount, type DndSpec } from "./dnd";
 import { COL, lab, txt, rect, circle } from "./draw";
+import { cx } from "../i18n";
 export const meta = CATALOG.classify;
 type S = Record<string, number>;
 const colX = (i: number) => 66 + 127 * i;
@@ -50,7 +51,7 @@ export const def: SimDef = {
     return r;
   },
   readouts: (s) => {
-    if (s.mode === 0) return [{ label: "已提出的问题", value: String(s.qn) }, { label: "已正确鉴定", value: String(s.ident), unit: "种" }, { label: "鉴定结果", value: s.fin ? (s.ok ? "鉴定正确" : "鉴定有误：与标本不符") : "—" }];
+    if (s.mode === 0) return [{ label: "已提出的问题", value: String(s.qn) }, { label: "已正确鉴定", value: String(s.ident), unit: cx("种", "species") }, { label: "鉴定结果", value: s.fin ? (s.ok ? "鉴定正确" : "鉴定有误：与标本不符") : "—" }];
     const n = specFor(s).n; return [{ label: "已放对", value: `${placedCount(s, n, "cl")} / ${n}` }, { label: "失误", value: String(s.miss), unit: "次" }, { label: "最后放对", value: s.last ? Mo.ORGS[itemsOf(s)[s.last - 1]].name : "—" }];
   },
   draw(c, w, h, s) {

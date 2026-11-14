@@ -22,6 +22,7 @@ import { blocksToPython } from "./coding-textbridge";
 import { parse as parseBlocks } from "./coding-ast";
 import { programEl } from "./coding-editor";
 import type { Seg } from "./coding-interp";
+import { cx } from "./i18n";
 
 let X!: Ctx;
 export const initText = (c: Ctx) => { X = c; };
@@ -100,7 +101,7 @@ function worldPage(k: M.Kid, doc: CM.CodingDoc, world: number) {
     const s = doc.stars?.[l.id] ?? 0;
     grid.append(h("a", { class: "cl-lvl tx-lvl" + (l.boss ? " boss" : "") + (l.kind === "debug" ? " debug" : "") + (s ? " solved" : ""), href: `#/coding/${k.id}/w${world}/${l.no}`, "data-level": l.id, "data-stars": String(s), style: `--wc:${WCOLOR[world]}` },
       h("span", { class: "lvl-no" }, String(l.no)), starRow(s, "lvl-stars"), h("span", { class: "lvl-title user" }, l.title),
-      l.boss ? h("span", { class: "lvl-tag" }, "挑战") : l.kind === "debug" ? h("span", { class: "lvl-tag" }, "找错误") : l.kind === "draw" ? h("span", { class: "lvl-tag draw" }, "画图") : null));
+      l.boss ? h("span", { class: "lvl-tag" }, cx("挑战", "boss")) : l.kind === "debug" ? h("span", { class: "lvl-tag" }, "找错误") : l.kind === "draw" ? h("span", { class: "lvl-tag draw" }, "画图") : null));
   }
   X.stagger([...grid.querySelectorAll<HTMLElement>(".cl-lvl")]);
   const first = levelsOfText(world)[0].lesson;
@@ -124,7 +125,7 @@ export async function openTextLesson(id: string): Promise<void> {
     const text = h("p", { class: "cl-lesson-text user", id: "tx-lesson-text" });
     const blocksBox = h("div", { class: "tx-lesson-blocks user", id: "tx-lesson-blocks" });
     const out = h("pre", { class: "tx-console user", id: "tx-lesson-out" });
-    const inputEl = h("textarea", { class: "tx-input", id: "tx-lesson-input", rows: 2, "aria-label": "输入" }) as HTMLTextAreaElement;
+    const inputEl = h("textarea", { class: "tx-input", id: "tx-lesson-input", rows: 2, "aria-label": cx("输入", "input") }) as HTMLTextAreaElement;
     inputEl.spellcheck = false;
     const ed = createCodeEditor({ id: "tx-lesson-ta", toolbar: false, label: "代码", onRun: () => tryIt() });
     const dots = h("div", { class: "cl-dots" });
@@ -184,9 +185,9 @@ interface Panel {
 function makePanel(o: { initial: string; input: string; showInput: boolean; extraButtons: HTMLElement[]; draw: boolean; ghost?: Seg[]; budget?: number; onCode?: (c: string) => void; onSubmit?: () => void; onRun?: () => void }): Panel {
   let ghost: Seg[] = o.ghost ?? [];
   const editor = createCodeEditor({ value: o.initial, onRun: () => runNow(), onChange: (v) => o.onCode?.(v) });
-  const inputEl = h("textarea", { class: "tx-input", id: "tx-input", rows: 2, "aria-label": "输入", placeholder: "每行对应一次 input()" }) as HTMLTextAreaElement;
+  const inputEl = h("textarea", { class: "tx-input", id: "tx-input", rows: 2, "aria-label": cx("输入", "input"), placeholder: "每行对应一次 input()" }) as HTMLTextAreaElement;
   inputEl.spellcheck = false; inputEl.value = o.input;
-  const inputBox = h("label", { class: "tx-field", hidden: !o.showInput }, h("span", { class: "tx-label" }, "输入"), inputEl);
+  const inputBox = h("label", { class: "tx-field", hidden: !o.showInput }, h("span", { class: "tx-label" }, cx("输入", "input")), inputEl);
   const out = h("pre", { class: "tx-console user", id: "tx-out", "aria-live": "polite" });
   const errBox = h("div", { class: "tx-error", id: "tx-error", hidden: true, role: "alert" });
   const canvas = h("div", { class: "tx-canvas", id: "tx-canvas", hidden: !o.draw });
@@ -272,7 +273,7 @@ function makePanel(o: { initial: string; input: string; showInput: boolean; extr
     const draw2 = level?.kind === "draw";
     const box = h("div", { class: "tx-case", id: "tx-case" });
     if (f.call) box.append(h("div", { class: "tx-case-row" }, h("span", { class: "tx-label" }, "测试代码"), h("pre", { class: "user tx-pre" }, f.call)));
-    if (f.input) box.append(h("div", { class: "tx-case-row" }, h("span", { class: "tx-label" }, "输入"), h("pre", { class: "user tx-pre" }, f.input.length > 300 ? f.input.slice(0, 300) + " …" : f.input)));
+    if (f.input) box.append(h("div", { class: "tx-case-row" }, h("span", { class: "tx-label" }, cx("输入", "input")), h("pre", { class: "user tx-pre" }, f.input.length > 300 ? f.input.slice(0, 300) + " …" : f.input)));
     if (f.error) { box.append(h("div", { class: "tx-case-row" }, h("span", { class: "tx-label" }, f.reason === "budget" ? "运行步数超过了限制" : "程序出错了"), h("pre", { class: "user tx-pre bad" }, f.reason === "budget" ? `${f.error.message}\n${level?.budget ? `限制：${level.budget} 步。请想一个更高效的办法。` : ""}` : `${f.error.message}${f.error.hint ? "\n" + f.error.hint : ""}`))); showError(f.error); }
     else if (draw2) {
       box.append(h("p", { class: "muted small tx-draw-note" }, "你的图形和要求的图形不一样（灰色的是要求的图形）。"));
@@ -303,7 +304,7 @@ async function saveProgress(kid: M.Kid, level: TLevel, stars: number, tokens: nu
 }
 async function medalDialog(world: number) {
   await modal<boolean>((close) => h("div", { class: "dlg cl-medal", id: "cl-medal-dlg" }, h("h2", {}, `获得徽章：${WNAME(world)}`), h("div", { class: "cl-medal-art" }, emblem(world, true, 120)),
-    h("div", { class: "row end" }, h("button", { class: "primary", id: "cl-medal-ok", onclick: () => close(true) }, "继续"))));
+    h("div", { class: "row end" }, h("button", { class: "primary", id: "cl-medal-ok", onclick: () => close(true) }, cx("继续", "next")))));
 }
 
 function levelPage(k: M.Kid, docIn: CM.CodingDoc, level: TLevel) {
@@ -370,7 +371,7 @@ function levelPage(k: M.Kid, docIn: CM.CodingDoc, level: TLevel) {
   }
   const lessonBtn = level.lesson ? h("button", { id: "tx-lesson-btn", class: "cl-round", type: "button", title: "课程", "aria-label": "课程", onclick: () => void openTextLesson(level.lesson!) }, "?") : h("span", { class: "slot" });
   const task = h("section", { class: "tx-task", id: "tx-task" },
-    h("div", { class: "tx-task-top" }, h("span", { class: "tx-kind " + level.kind }, level.kind === "debug" ? "找错误" : level.kind === "fill" ? "填空" : level.kind === "draw" ? "画图" : "编程"), level.boss ? h("span", { class: "tx-kind boss" }, "挑战") : null,
+    h("div", { class: "tx-task-top" }, h("span", { class: "tx-kind " + level.kind }, level.kind === "debug" ? "找错误" : level.kind === "fill" ? "填空" : level.kind === "draw" ? "画图" : "编程"), level.boss ? h("span", { class: "tx-kind boss" }, cx("挑战", "boss")) : null,
       level.budget ? h("span", { class: "tx-kind budget" }, "限制步数") : null),
     h("div", { class: "tx-statement user", id: "tx-statement" }, level.task),
     level.kind !== "draw" ? h("div", { class: "tx-example", id: "tx-example" },

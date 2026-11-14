@@ -250,7 +250,7 @@
 "a \\parallel b \\Rightarrow \\angle 1 = \\angle 2\\ \\text{（同位角相等）}": "a \\parallel b \\Rightarrow \\angle 1 = \\angle 2\\ \\text{(angles correspondants égaux)}",
 "\\dfrac{y}{x} = k\\ \\text{（一定）}": "\\dfrac{y}{x} = k\\ \\text{(constante)}",
 "xy = k\\ \\text{（一定）}": "xy = k\\ \\text{(constante)}",
-"c_{\\text{水}} = 4.2 \\times 10^{3}\\ \\text{J/(kg}\\cdot{}^{\\circ}\\text{C)}": "c_{\\text{eau}} = 4.2 \\times 10^{3}\\ \\text{J/(kg}\\cdot{}^{\\circ}\\text{C)}",
+"c_{\\text{水}} = 4.2 \\times 10^{3}\\ \\text{J/(kg}\\cdot{}^{\\circ}\\text{C)}": "c_{\\text{eau}} = 4,2 \\times 10^{3}\\ \\text{J/(kg}\\cdot{}^{\\circ}\\text{C)}",
 "U = 220\\ \\text{V}\\quad \\text{（对人体安全的电压不高于 36 V）}": "U = 220\\ \\text{V}\\quad \\text{(une tension sans danger pour le corps humain ne dépasse pas 36 V)}",
 "$a$ 是长，$b$ 是宽，周长是四条边的总长度。": "$a$ est la longueur et $b$ la largeur ; le périmètre est la somme des longueurs des quatre côtés.",
 "长 5 厘米、宽 3 厘米：$C=2(5+3)=16$ 厘米": "Longueur 5 cm, largeur 3 cm : $C=2(5+3)=16$ cm",

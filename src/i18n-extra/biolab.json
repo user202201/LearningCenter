@@ -5422,5 +5422,81 @@
 "盖盖玻片时不产生气泡": [
 "Lower the cover slip without any bubbles",
 "Poser la lamelle sans aucune bulle"
+],
+"发芽的种子": [
+"Germinating seeds",
+"Graines en germination"
+],
+"发芽的种子呼吸 30 分钟以上，石灰水明显变浑浊（浑浊度 50% 以上）": [
+"Germinating seeds respire for 30 minutes or more: the limewater turns clearly cloudy (over 50 %)",
+"Des graines en germination respirent 30 minutes ou plus : l'eau de chaux se trouble nettement (plus de 50 %)"
+],
+"E 皿发芽率": [
+"Germination rate in dish E",
+"Taux de germination de la boîte E"
+],
+"培养到种子发芽率达到 90% 以上（E 皿条件都适宜）": [
+"Culture until over 90 % of the seeds have germinated (all conditions in E suitable)",
+"Cultivez jusqu'à plus de 90 % de graines germées (toutes les conditions de E adaptées)"
+],
+"这批种子的真实发芽率": [
+"True germination rate of the lot",
+"Taux réel de germination du lot"
+],
+"测定发芽率": [
+"Measuring the germination rate",
+"Mesure du taux de germination"
+],
+"三组发芽的种子数": [
+"Seeds germinated in the three groups",
+"Graines germées dans les trois groupes"
+],
+"平均发芽率": [
+"Average germination rate",
+"Taux moyen de germination"
+],
+"已发芽": [
+"Germinated",
+"Germées"
+],
+"未发芽": [
+"Not germinated",
+"Non germées"
+],
+"每组取 100 粒以上的种子测定发芽率": [
+"Measure the germination rate with 100 or more seeds per group",
+"Mesurer le taux de germination avec 100 graines ou plus par groupe"
+],
+"血管阻力（血管越窄，阻力越大）": [
+"Vessel resistance (the narrower the vessel, the higher)",
+"Résistance des vaisseaux (plus le vaisseau est étroit, plus elle est élevée)"
+],
+"相当于无亲缘关系时的": [
+"Equal to that for unrelated partners",
+"Équivaut à celle de conjoints sans lien de parenté"
+],
+"百万年": [
+"million years",
+"millions d'années"
+],
+"角质的鳞片或甲": [
+"Horny scales or a shell",
+"Écailles cornées ou carapace"
+],
+"是细胞进行生命活动的场所": [
+"The place where the cell carries out its life activities",
+"Lieu où la cellule exerce ses activités vitales"
+],
+"吸水纸从另一侧吸引，使碘液浸润标本的全部。": [
+"Blotting paper on the other side draws the iodine across so that it soaks the whole specimen.",
+"Le papier buvard placé de l'autre côté attire l'iode, qui imprègne tout le spécimen."
+],
+"胚芽、胚轴、胚根": [
+"Plumule, hypocotyl and radicle",
+"Gemmule, hypocotyle et radicule"
+],
+"{0} 百万年": [
+"{0} million years",
+"{0} millions d'années"
 ]
 }

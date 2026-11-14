@@ -46,9 +46,38 @@ function buildTable(src: Record<string, string>): Table {
 const SOURCES: Record<Exclude<Lang, "zh">, Record<string, string>> = { en: EN, fr: FR };
 const tableFor = (l: Lang): Table | null => (l === "zh" ? null : (tables[l] ??= buildTable(SOURCES[l])));
 
+// ---------- context (one Chinese text, two meanings) ----------
+// The tables are keyed by the Chinese text, so one text used with two meanings would get ONE translation. `cx(text, ctx)` gives the minority use its own key
+// `text@ctx` (written like that in i18n-data.ts) WITHOUT changing what a Chinese reader sees: the context is appended as invisible characters
+// (INVISIBLE SEPARATOR + the ASCII code of every letter of ctx as 8 zero-width bits), which stay in the DOM, so the choice survives a switch of language.
+// `tr` looks up `text@ctx` first and falls back to the plain `text`. The marked text must be the whole text of its element / attribute.
+const CX_MARK = "\u2063", CX_0 = "\u200b", CX_1 = "\u200c";
+const CX_RE = new RegExp(`${CX_MARK}([${CX_0}${CX_1}]+)`, "g");
+export function cx(text: string, ctx: string): string {
+  let bits = "";
+  for (const ch of ctx) bits += (ch.charCodeAt(0) & 255).toString(2).padStart(8, "0");
+  return text + CX_MARK + bits.replace(/0/g, CX_0).replace(/1/g, CX_1);
+}
+/** the text without its context marks, and the context ("" when there is none) */
+export function splitCx(s: string): { text: string; ctx: string } {
+  if (!s.includes(CX_MARK)) return { text: s, ctx: "" };
+  let ctx = "";
+  const text = s.replace(CX_RE, (_, b: string) => {
+    if (!ctx) { const bits = b.replace(new RegExp(CX_0, "g"), "0").replace(new RegExp(CX_1, "g"), "1"); for (let i = 0; i + 8 <= bits.length; i += 8) ctx += String.fromCharCode(parseInt(bits.slice(i, i + 8), 2)); }
+    return "";
+  });
+  return { text, ctx };
+}
+
 /** translate one text (leading / trailing white space is kept). Unknown texts are returned unchanged. */
 export function tr(s: string, lang: Lang = current): string {
   if (lang === "zh" || !s || !cjk.test(s)) return s;
+  if (s.includes(CX_MARK)) {
+    const { text, ctx } = splitCx(s);
+    const withCtx = ctx ? tr(text.trimEnd() + "@" + ctx, lang) : text;
+    // a text that has a translation of its own for this context; else the plain one (the marks never reach the screen)
+    return ctx && withCtx !== text.trimEnd() + "@" + ctx ? withCtx + text.slice(text.trimEnd().length) : tr(text, lang);
+  }
   const t = tableFor(lang)!;
   const core = s.trim();
   let out = t.exact.get(core);

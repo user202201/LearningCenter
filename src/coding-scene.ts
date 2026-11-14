@@ -7,6 +7,7 @@
 import { State, GridWorld } from "./coding-interp";
 import { Seg } from "./coding-interp";
 import { pathsByColor, colorHex } from "./coding-turtle";
+import { cx } from "./i18n";
 
 const NS = "http://www.w3.org/2000/svg";
 const U = 40;
@@ -75,7 +76,7 @@ export function gridScene(world: GridWorld, init: State): Scene {
   root.append(robot);
   const vars = varsBar();
   const wrap = div("cs-wrap cs-grid");
-  wrap.setAttribute("role", "img"); wrap.setAttribute("aria-label", "地图");
+  wrap.setAttribute("role", "img"); wrap.setAttribute("aria-label", cx("地图", "single"));
   wrap.style.setProperty("--ar", String(world.w / world.h));
   wrap.append(root as unknown as Node, vars.el);
   let moodNow: Mood | "" = "";

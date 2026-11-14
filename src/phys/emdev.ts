@@ -39,7 +39,7 @@ export const def: SimDef = {
   readouts: (s) => {
     if (s.mode === 0) return [{ label: "控制电路的电流", value: fmt(Ic(s) * 1000, 1), unit: "mA" }, { label: "吸合所需的电流", value: fmt(Mo.I_PULL * 1000, 0), unit: "mA" }, { label: "衔铁", value: on(s) ? "被吸下（吸合）" : "被弹簧拉起（释放）" }, { label: "工作电路（220 V）", value: on(s) ? "接通" : "断开" }, { label: "工作电路的电流", value: on(s) ? fmt(Mo.loadCurrent(Mo.LOADS[s.load][1]), 2) : "0", unit: "A" }];
     if (s.mode === 1) return [{ label: "环境温度", value: fmt(s.T, 0), unit: "℃" }, { label: "控制电路", value: Mo.alarmOn(s.T, s.Tset) ? "水银柱接通了金属丝" : "没有接通" }, { label: "电铃", value: Mo.alarmOn(s.T, s.Tset) ? "响（报警）" : "不响" }];
-    if (s.mode === 2) return [{ label: "线圈中电流的方向", value: ["向左", "没有电流", "向右"][Mo.direction(cur(s)) + 1] }, { label: "线圈受力的方向", value: ["向左", "不受力", "向右"][Mo.direction(cur(s)) + 1] }, { label: "纸盆偏离中间的位置", value: fmt(cur(s) * 100, 0), unit: "%" }, { label: "声音", value: `音调：${fmt(s.f, 0)} Hz；响度由电流大小决定` }];
+    if (s.mode === 2) return [{ label: "电流的方向（取某一方向为正）", value: ["负方向", "没有电流", "正方向"][Mo.direction(cur(s)) + 1] }, { label: "线圈受力的方向", value: ["向左", "不受力", "向右"][Mo.direction(cur(s)) + 1] }, { label: "纸盆偏离中间的位置", value: fmt(cur(s) * 100, 0), unit: "%" }, { label: "声音", value: `音调：${fmt(s.f, 0)} Hz；响度由电流大小决定` }];
     return [{ label: "声音的频率", value: fmt(s.f, 0), unit: "Hz" }, { label: "线圈的运动", value: Mo.direction(cur(s)) === 0 ? "在最远处，瞬间不动" : "切割磁感线" }, { label: "感应电流的大小（相对值）", value: fmt(emf(s), 0), unit: "%" }, { label: "电流的频率", value: `与声音的频率相同，${fmt(s.f, 0)} Hz` }];
   },
   draw(c, w, hh, s) {

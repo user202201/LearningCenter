@@ -2,6 +2,7 @@ import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-eye";
 import { COL, arrow, circle, line, rect, txt } from "./draw";
+import { cx } from "../i18n";
 
 export const meta = CATALOG.eye;
 const dist = (m: number) => (m === Infinity ? "∞" : fmt(m * 100, 0));
@@ -34,7 +35,7 @@ export const def: SimDef = {
       return [
         { label: "晶状体需要增加的焦度", value: fmt(v.need, 2), unit: "D" }, { label: "像的位置", value: v.where === "on" ? "在视网膜上" : v.where === "before" ? "在视网膜前" : "在视网膜后" },
         { label: "能看清吗", value: v.clear ? "能看清" : "看不清" }, { label: "近点", value: dist(r.near), unit: r.near === Infinity ? "" : "cm" }, { label: "远点", value: dist(r.far), unit: r.far === Infinity ? "" : "cm" },
-        { label: "眼镜", value: s.P === 0 ? "没有" : s.P < 0 ? "凹透镜" : "凸透镜" },
+        { label: "眼镜", value: s.P === 0 ? cx("没有", "none") : s.P < 0 ? "凹透镜" : "凸透镜" },
       ];
     }
     if (s.mode === 1) { const m = Mo.microMag(Mo.OBJECTIVES[s.ob], Mo.EYEPIECES[s.ey]); return [{ label: "总放大倍数", value: fmt(m, 0), unit: "×" }, { label: "视野的直径", value: fmt(Mo.fieldMm(Mo.OBJECTIVES[s.ob]), 2), unit: "mm" }, { label: "视野里排得下的细胞数", value: fmt(Mo.cellsAcross(Mo.OBJECTIVES[s.ob]), 0) }]; }

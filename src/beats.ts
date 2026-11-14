@@ -8,7 +8,7 @@ import { h, toast, confirmDlg } from "./ui";
 import * as A from "./musicaudio";
 import * as B from "./beatlogic";
 import * as R from "./musicrec";
-import { tr } from "./i18n";
+import { cx, tr } from "./i18n";
 import type { Ctx } from "./english";
 
 interface Deps { X: Ctx; hero: (title: string, back: string, backLabel: string, gearBack: string) => HTMLElement; fullToggle: (get: () => HTMLElement, id: string, onChange?: (on: boolean) => void) => HTMLButtonElement; color: string }
@@ -227,7 +227,7 @@ export function renderBeats(d: Deps): void {
 
   // ---------- the controls ----------
   const bpmNum = h("b", { class: "bt-bpm", id: "bt-bpm" }, String(p.bpm));
-  const tempo = h("input", { type: "range", class: "bt-slider", id: "bt-tempo", min: String(B.BPM_MIN), max: String(B.BPM_MAX), value: String(p.bpm), "aria-label": "速度", oninput: (e: Event) => setBpm(+(e.target as HTMLInputElement).value) });
+  const tempo = h("input", { type: "range", class: "bt-slider", id: "bt-tempo", min: String(B.BPM_MIN), max: String(B.BPM_MAX), value: String(p.bpm), "aria-label": cx("速度", "tempo"), oninput: (e: Event) => setBpm(+(e.target as HTMLInputElement).value) });
   const setBpm = (v: number) => { p.bpm = Math.max(B.BPM_MIN, Math.min(B.BPM_MAX, Math.round(v))); bpmNum.textContent = String(p.bpm); tempo.value = String(p.bpm); persist(); };
   const chip = (id: string, text: string, on: boolean, f: () => void) => h("button", { class: "mopt" + (on ? " on" : ""), id, onclick: f }, text);
   const sigBox = h("div", { class: "bt-chips", id: "bt-sig" });
