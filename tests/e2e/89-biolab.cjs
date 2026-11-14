@@ -5,6 +5,7 @@
 // Part B: the pages (23 cards by grade, every simulation mounts, readouts finite, sliders respond, every task completed by driving the state, kept after a reload, quiz right / wrong, hidden state / actions / 重置).
 // Part C: layout on 5 screen sizes (dpr 2 / 3, crisp canvas, sliders >= 44 px, no overflow, centred). Part D: real touch drags (CDP, dpr 2) on a slider and on three drag-and-drop simulations.
 // Part E: English / French (nothing Chinese left outside content boxes; the check:i18n list is covered by src/i18n-extra/biolab.json). Part F: nothing leaves the device.
+// Third pass (50 simulations): part A2 checks the 14 new models against independent computations (closed forms, enumerations, statistics of the seeded samples, ultrametric tree) and the 21 drag modes (match.ts) in bulk, plus a deny-list of words for the reproductive-system texts (zh here, en / fr in part E); B has the small interactions, D real touch drags in a label, an order and a bucket mode.
 // Not tested: real fingers / Apple Pencil on an iPad, how the simulations feel to a child, the biology content (a teacher must proofread lessons, quiz wording, numbers, the 42 organisms and their features).
 const { start, checks } = require('./harness.cjs');
 const { ok, done } = checks();
