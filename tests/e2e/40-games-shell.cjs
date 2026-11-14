@@ -12,7 +12,7 @@ const IDS = [...require('fs').readFileSync('src/games/index.ts', 'utf8').matchAl
   const p = t.page;
   await p.evaluate(() => (location.hash = '#/')); await p.waitForSelector('.hub-grid'); await p.waitForTimeout(700);
   const names = await p.locator('.subject .s-name').allTextContents();
-  ok(names.join() === '识字,数学,英语,科学,音乐,小游戏', 'the picker has six cards, games is the sixth: ' + names.join());
+  ok(names.join() === '识字,数学,英语,科学,编程,音乐,小游戏', 'the picker has seven cards, games is the last: ' + names.join());
   await p.click('.subject[data-subject=games]'); await p.waitForSelector('.gm-card');
   ok((await p.locator('.gm-card').count()) === IDS.length && (await p.locator('.gm-card').evaluateAll((e) => e.map((x) => x.dataset.game))).join() === IDS.join(), 'the home has all the games in order: ' + IDS.join(' '));
   const icons = await p.locator('.gm-art > svg').evaluateAll((els) => els.map((e) => ({ n: e.querySelectorAll('*').length, ph: /马上就好/.test(e.outerHTML) || (e.querySelectorAll('text').length === 1 && e.querySelectorAll('*').length < 5) })));
