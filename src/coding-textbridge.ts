@@ -68,7 +68,7 @@ export function blocksToPython(p: Program): Bridge {
   emit(p.main, "", 0, null);
   const main = out.splice(mainStart);
   const head: string[] = [];
-  if (turtleUsed) head.push("import turtle", "turtle.setheading(90)   # 积木里的海龟一开始朝上", "");
+  if (turtleUsed) head.push("import turtle", "turtle.setheading(90)   # in the blocks the turtle starts facing up (a code comment: written in English in every language)", "");
   const initVars = [...vars].filter((v) => !params.has(v));
   if (initVars.length) head.push(...initVars.map((v) => `${v} = 0`), "");
   void robot;

@@ -254,7 +254,7 @@ async function renderReading(k: M.Kid) {
     h("header", { class: "top hero kid-hero" }, X.back(`#/english/${k.id}`, "返回"), h("h1", { class: "user-title" }, X.avatarEl(k), k.name), shortcuts(k.id, "english")),
     h("main", { class: "scroll" }, h("div", { class: "narrow rd-narrow" },
       h("h2", { class: "rd-h user", id: "rd-title" }, r.t),
-      h("div", { class: "rd-tools" }, speakBtn, h("span", { class: "muted small user" }, `来源：${r.src === "original" ? "原创" : r.src}`)),
+      h("div", { class: "rd-tools" }, speakBtn, h("span", { class: "muted small" }, `来源：${r.src === "original" ? "原创" : r.src}`)),
       h("div", { class: "rd-text", id: "rd-text" }, ...paras), bubble,
       h("div", { class: "sec-row" }, h("h2", { class: "sec" }, "生词")),
       h("div", { class: "rd-words" }, ...r.gl.map((g) => h("span", { class: "rd-w user" }, h("b", {}, g.w), ` ${meaning(g)}`))),

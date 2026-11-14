@@ -45,7 +45,7 @@ export function seasons(D: M.GeoData): SimDef {
     },
     tasks: [
       { id: "summer", text: "找到夏至：让太阳直射点到达北回归线附近（纬度 23° 以上）", check: (s) => SM.declination(s.day) > 23 },
-      { id: "south", text: "让南纬 30° 的正午太阳高度大于 80°", check: (s) => s.lat <= -25 && s.lat >= -35 && SM.noonElevation(s.lat, SM.declination(s.day)) > 80 },
+      { id: "south", text: "让南纬 30° 的正午太阳高度角大于 80°", check: (s) => s.lat <= -25 && s.lat >= -35 && SM.noonElevation(s.lat, SM.declination(s.day)) > 80 },
       { id: "short", text: "找到北半球中纬度（北纬 30°～50°）昼长不足 10 小时的日期", check: (s) => s.lat >= 30 && s.lat <= 50 && SM.dayLength(s.lat, SM.declination(s.day)) < 10 }],
     links: [{ text: "相关：天文实验室", href: "#/science/space" }],
   };

@@ -144,13 +144,13 @@ export async function renderQuiz(id: string) {
   const ask = () => {
     if (n >= qs.length) return end();
     const q = qs[n];
-    const explain = h("div", { class: "qz-explain user", id: "qz-explain" });
+    const explain = h("div", { class: "qz-explain", id: "qz-explain" });
     const nextBtn = h("button", { class: "primary", id: "qz-next", style: "display:none", onclick: () => { n++; ask(); } }, n === qs.length - 1 ? "看成绩" : "下一题 ›");
     const btns = shuffle([q.a, ...q.w]).map((x) => h("button", { class: "qz-opt user", "data-right": x === q.a ? "1" : "0", onclick: (e: Event) => {
       if (btns.some((b) => b.disabled)) return;
       btns.forEach((b) => { b.disabled = true; if (b.dataset.right === "1") b.classList.add("right"); });
       const ok = x === q.a; if (ok) right++; else (e.currentTarget as HTMLElement).classList.add("wrong");
-      explain.textContent = (ok ? "正确。" : "请再思考：") + (q.e ? ` ${q.e}` : "");
+      explain.replaceChildren(ok ? "正确。" : "请再思考：", ...(q.e ? [" ", h("span", { class: "user" }, q.e)] : []));   // (the frame is translated, the course text is content)
       explain.classList.add(ok ? "ok" : "bad");
       nextBtn.style.display = "";
     } }, x));
