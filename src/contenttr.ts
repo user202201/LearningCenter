@@ -12,7 +12,7 @@
 import { getLang, type Lang } from "./i18n";
 
 const maps: Partial<Record<Lang, Record<string, string>>> = {};
-const cjk = /[一-鿿]/;
+const cjk = /[\u3000-\u303F\u3400-\u9FFF\uFF00-\uFFEF]/;   // (also CJK / fullwidth punctuation: a text such as a formula + "；" has no letter but must still be looked up)
 
 /** load the translation table of a language (nothing to load for Chinese) */
 export async function loadContentTr(lang: Lang = getLang()): Promise<void> {

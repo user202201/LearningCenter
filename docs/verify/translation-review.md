@@ -59,3 +59,5 @@ Checked item by item against the Chinese: 110 police, 119 fire, 120 ambulance / 
 ## Tests
 
 `node scripts/make-trans.mjs`, `node scripts/check-trans.mjs` (0 missing), `npm run check:i18n`, `npx tsc --noEmit`, `BASE_PATH=/ npx vite build`; suites `91-content-i18n`, `36-notes-formulas`, `33-science` (cards only) against a private Vite on port 5395 (results at the end of this file).
+
+Results: `91-content-i18n` PASS, `36-notes-formulas` PASS, `33-science` (CARDS_ONLY) PASS; `check-trans` 0 missing, `check:i18n` ok, `tsc` clean, `vite build` ok.
