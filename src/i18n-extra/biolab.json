@@ -2850,5 +2850,1313 @@
 "在光照充足时（光照 50% 以上），把空气相对湿度调到 90% 以上：失水量降到初始状态的 25% 以下": [
 "In good light (50 % or more) set humidity to 90 % or more: water loss falls below 25 % of the start",
 "Avec assez de lumière (50 % ou plus), portez l'humidité à 90 % ou plus : la perte tombe sous 25 % du départ"
+],
+"判断": [
+"Verdict",
+"Verdict"
+],
+"有": [
+"Yes",
+"Oui"
+],
+"练习的次数": [
+"Number of trials",
+"Nombre d'essais"
+],
+"行为分类": [
+"Sorting behaviours",
+"Classement des comportements"
+],
+"学习曲线": [
+"Learning curve",
+"Courbe d'apprentissage"
+],
+"动物": [
+"Animal",
+"Animal"
+],
+"错误率": [
+"Error rate",
+"Taux d'erreur"
+],
+"错误率降到 20 % 以下需要": [
+"Trials needed to get below 20 % errors",
+"Essais pour passer sous 20 % d'erreurs"
+],
+"把 10 种行为全部放进正确的类别": [
+"Put all 10 behaviours into the right class",
+"Placez les 10 comportements dans la bonne classe"
+],
+"蚯蚓练习 60 次后，错误率仍高于 40 %": [
+"After 60 trials the earthworm still makes over 40 % errors",
+"Après 60 essais, le ver de terre fait encore plus de 40 % d'erreurs"
+],
+"黑猩猩只练习 20 次以内，错误率就降到 20 % 以下": [
+"The chimpanzee gets below 20 % errors within 20 trials",
+"Le chimpanzé passe sous 20 % d'erreurs en 20 essais ou moins"
+],
+"岁": [
+"years",
+"ans"
+],
+"处理": [
+"Treatment",
+"Traitement"
+],
+"有机物所占比例": [
+"Share of organic matter",
+"Part de matière organique"
+],
+"无机物所占比例": [
+"Share of mineral salts",
+"Part de sels minéraux"
+],
+"骨的特点": [
+"Property of the bone",
+"Propriété de l'os"
+],
+"弯曲程度": [
+"Bendability",
+"Souplesse"
+],
+"无机物": [
+"Minerals",
+"Minéraux"
+],
+"易碎": [
+"Brittle",
+"Cassant"
+],
+"可弯曲": [
+"Bends",
+"Se plie"
+],
+"坚硬又有弹性": [
+"Hard and elastic",
+"Dur et élastique"
+],
+"选择煅烧：骨变脆，一碰就碎": [
+"Choose burning: the bone becomes brittle and crumbles",
+"Choisissez la calcination : l'os devient cassant"
+],
+"选择盐酸浸泡：骨变软，可以弯曲": [
+"Choose the acid bath: the bone becomes soft and bends",
+"Choisissez le bain d'acide : l'os devient mou et se plie"
+],
+"不处理，年龄调到 10 岁以下：有机物约占一半，骨弹性大": [
+"No treatment, age under 10: about half is organic matter, very elastic",
+"Sans traitement, moins de 10 ans : environ la moitié de matière organique, très élastique"
+],
+"动物的生殖和发育": [
+"Reproduction and development of animals",
+"Reproduction et développement des animaux"
+],
+"八下 · 生殖和发育": [
+"Grade 8, term 2 · Reproduction and development",
+"8e, 2e semestre · Reproduction et développement"
+],
+"人的由来与青春期": [
+"Human origin and puberty",
+"Origine de l'humain et puberté"
+],
+"七下 · 人的由来": [
+"Grade 7, term 2 · Human origin",
+"7e, 2e semestre · Origine de l'humain"
+],
+"血管与血液": [
+"Vessels and blood",
+"Vaisseaux et sang"
+],
+"排泄与肾": [
+"Excretion and the kidney",
+"Excrétion et rein"
+],
+"七下 · 废物的排出": [
+"Grade 7, term 2 · Removal of waste",
+"7e, 2e semestre · Élimination des déchets"
+],
+"耳与听觉": [
+"The ear and hearing",
+"L'oreille et l'audition"
+],
+"动物的行为": [
+"Animal behaviour",
+"Comportement animal"
+],
+"化石与进化的证据": [
+"Fossils and evidence of evolution",
+"Fossiles et preuves de l'évolution"
+],
+"合理营养": [
+"Balanced nutrition",
+"Alimentation équilibrée"
+],
+"急救与安全用药": [
+"First aid and safe medication",
+"Premiers secours et médicaments"
+],
+"皮肤与体温调节": [
+"Skin and body temperature",
+"Peau et température du corps"
+],
+"骨的成分与特性": [
+"Composition and properties of bone",
+"Composition et propriétés de l'os"
+],
+"七下 · 人体的运动": [
+"Grade 7, term 2 · Human movement",
+"7e, 2e semestre · Mouvement humain"
+],
+"人类活动与生物多样性": [
+"Human activity and biodiversity",
+"Activité humaine et biodiversité"
+],
+"八下 · 保护生物多样性": [
+"Grade 8, term 2 · Protecting biodiversity",
+"8e, 2e semestre · Protéger la biodiversité"
+],
+"健康的生活方式": [
+"A healthy lifestyle",
+"Un mode de vie sain"
+],
+"怀孕的周数": [
+"Weeks of pregnancy",
+"Semaines de grossesse"
+],
+"周": [
+"weeks",
+"semaines"
+],
+"从受精卵到出生": [
+"From fertilised egg to birth",
+"De l'œuf fécondé à la naissance"
+],
+"青春期的生长": [
+"Growth in puberty",
+"Croissance à la puberté"
+],
+"性别": [
+"Sex",
+"Sexe"
+],
+"身长": [
+"Length",
+"Longueur"
+],
+"身高": [
+"Height",
+"Taille"
+],
+"每年长高": [
+"Growth per year",
+"Croissance par an"
+],
+"是否处于突增期": [
+"In the growth spurt?",
+"En poussée de croissance ?"
+],
+"脐带": [
+"Umbilical cord",
+"Cordon ombilical"
+],
+"子宫": [
+"Uterus",
+"Utérus"
+],
+"怀孕满 40 周：胎儿的质量达到 3000 g 以上": [
+"At 40 weeks the fetus weighs over 3000 g",
+"À 40 semaines, le fœtus pèse plus de 3000 g"
+],
+"找到胚胎发育为胎儿的时间（怀孕第 8 周）": [
+"Find when the embryo becomes a fetus (week 8)",
+"Trouvez le moment où l'embryon devient fœtus (semaine 8)"
+],
+"选择女孩，找到身高突增最快的年龄（约 12 岁）": [
+"Choose girl and find the age of the fastest growth (about 12)",
+"Choisissez fille et trouvez l'âge de croissance la plus rapide (environ 12 ans)"
+],
+"一天需要的能量": [
+"Energy needed per day",
+"Énergie nécessaire par jour"
+],
+"蛋白质": [
+"Protein",
+"Protéines"
+],
+"脂肪提供的能量占": [
+"Energy from fat",
+"Part de l'énergie venant des graisses"
+],
+"在推荐范围内的食物类别": [
+"Food groups within the recommended range",
+"Groupes d'aliments dans la fourchette recommandée"
+],
+"膳食平衡": [
+"Balanced diet",
+"Régime équilibré"
+],
+"需要调整": [
+"Needs adjusting",
+"À ajuster"
+],
+"调整六类食物：全部在推荐范围内，总能量与需要相差不超过 10 %": [
+"Adjust the six food groups: all within range and total energy within 10 % of the need",
+"Ajustez les six groupes : tous dans la fourchette, énergie à 10 % près du besoin"
+],
+"油吃到 80 g：脂肪提供的能量超过总能量的 35 %": [
+"Oil at 80 g: fat gives over 35 % of the energy",
+"Huile à 80 g : les graisses fournissent plus de 35 % de l'énergie"
+],
+"不吃蔬菜和水果（都为 0），谷类减到 200 g 以下：总能量低于 1500 kcal": [
+"No vegetables or fruit (both 0), grain below 200 g: total energy under 1500 kcal",
+"Ni légumes ni fruits (0), céréales sous 200 g : énergie totale sous 1500 kcal"
+],
+"相关：物理实验室·声音的三要素": [
+"Related: physics lab, the three features of sound",
+"À voir : labo de physique, les trois caractéristiques du son"
+],
+"声音的频率": [
+"Frequency of the sound",
+"Fréquence du son"
+],
+"声音的强度": [
+"Loudness of the sound",
+"Intensité du son"
+],
+"声音传到的部位": [
+"Part the sound has reached",
+"Partie atteinte par le son"
+],
+"听力范围与保护": [
+"Hearing range and protection",
+"Plage d'audition et protection"
+],
+"声音在耳中的传导": [
+"Sound in the ear",
+"Le son dans l'oreille"
+],
+"能否听到": [
+"Can it be heard?",
+"Est-il audible ?"
+],
+"能": [
+"Yes",
+"Oui"
+],
+"不能": [
+"No",
+"Non"
+],
+"此年龄听到的最高频率": [
+"Highest frequency heard at this age",
+"Fréquence la plus haute entendue à cet âge"
+],
+"每天安全聆听时间": [
+"Safe listening time per day",
+"Durée d'écoute sans risque par jour"
+],
+"部位": [
+"Part",
+"Partie"
+],
+"此处的形式": [
+"Form here",
+"Forme à cet endroit"
+],
+"能听到": [
+"Can be heard",
+"Audible"
+],
+"听不到": [
+"Cannot be heard",
+"Inaudible"
+],
+"安全聆听时间": [
+"Safe listening time",
+"Durée d'écoute sans risque"
+],
+"年龄 50 岁，频率 17000 Hz：听不到（高频听力下降）": [
+"Age 50, 17000 Hz: not heard (high-frequency hearing falls)",
+"50 ans, 17000 Hz : inaudible (l'audition des aigus baisse)"
+],
+"声音强度调到 100 dB：每天安全聆听时间不到半小时": [
+"Set 100 dB: the safe listening time is under half an hour a day",
+"Réglez 100 dB : moins d'une demi-heure d'écoute sans risque par jour"
+],
+"找到听觉感受器所在的部位：耳蜗": [
+"Find the part with the hearing receptors: the cochlea",
+"Trouvez la partie des récepteurs de l'audition : la cochlée"
+],
+"一天喝水": [
+"Water drunk per day",
+"Eau bue par jour"
+],
+"一天出汗": [
+"Sweat per day",
+"Sueur par jour"
+],
+"血糖浓度": [
+"Blood sugar",
+"Glycémie"
+],
+"一天形成的原尿": [
+"Primary urine per day",
+"Urine primitive par jour"
+],
+"一天的尿量": [
+"Urine per day",
+"Urine par jour"
+],
+"肾小管重吸收的水": [
+"Water reabsorbed by the tubule",
+"Eau réabsorbée par le tubule"
+],
+"尿中的尿素是血浆的": [
+"Urea in urine vs plasma",
+"Urée de l'urine par rapport au plasma"
+],
+"尿中是否有葡萄糖": [
+"Sugar in the urine?",
+"Sucre dans l'urine ?"
+],
+"有（超过重吸收限度）": [
+"Yes (above the reabsorption limit)",
+"Oui (au-dessus de la limite de réabsorption)"
+],
+"肾小球": [
+"Glomerulus",
+"Glomérule"
+],
+"肾小囊": [
+"Bowman's capsule",
+"Capsule de Bowman"
+],
+"肾小管": [
+"Tubule",
+"Tubule"
+],
+"集合管": [
+"Collecting duct",
+"Tube collecteur"
+],
+"滤过": [
+"Filtration",
+"Filtration"
+],
+"重吸收": [
+"Reabsorption",
+"Réabsorption"
+],
+"尿糖": [
+"Urine sugar",
+"Sucre urinaire"
+],
+"每天喝水 3 L 以上：尿量增加到 2 L 以上": [
+"Drink 3 L or more a day: urine rises above 2 L",
+"Buvez 3 L ou plus par jour : l'urine dépasse 2 L"
+],
+"喝水很少、出汗很多：尿量降到最低（0.5 L），尿素被浓缩 100 倍以上": [
+"Drink little and sweat a lot: urine falls to the minimum (0.5 L) and urea is concentrated over 100 times",
+"Buvez peu et transpirez beaucoup : urine au minimum (0,5 L), urée concentrée plus de 100 fois"
+],
+"把血糖浓度升到 10 mmol/L 以上：尿中出现葡萄糖": [
+"Raise blood sugar above 10 mmol/L: sugar appears in the urine",
+"Montez la glycémie au-dessus de 10 mmol/L : du sucre apparaît dans l'urine"
+],
+"相关：知识总结（安全 · 急救）": [
+"Related: summaries (safety, first aid)",
+"À voir : résumés (sécurité, premiers secours)"
+],
+"按压频率": [
+"Compression rate",
+"Fréquence des compressions"
+],
+"按压深度": [
+"Compression depth",
+"Profondeur de compression"
+],
+"每次每千克体重的剂量": [
+"Dose per kg of body mass per time",
+"Dose par kg de masse corporelle par prise"
+],
+"一天服药次数": [
+"Doses per day",
+"Prises par jour"
+],
+"心肺复苏": [
+"CPR",
+"Réanimation cardio-pulmonaire"
+],
+"安全用药": [
+"Safe medication",
+"Médicaments en sécurité"
+],
+"烧烫伤的处理": [
+"Treating burns",
+"Traitement des brûlures"
+],
+"2 分钟的按压次数": [
+"Compressions in 2 minutes",
+"Compressions en 2 minutes"
+],
+"每次的剂量": [
+"Dose each time",
+"Dose par prise"
+],
+"一天的总量": [
+"Total per day",
+"Total par jour"
+],
+"最大日剂量（模型）": [
+"Maximum daily dose (model)",
+"Dose maximale par jour (modèle)"
+],
+"是否安全": [
+"Safe?",
+"Sans risque ?"
+],
+"在安全范围内": [
+"Within the safe range",
+"Dans la plage sûre"
+],
+"超过最大日剂量": [
+"Over the maximum daily dose",
+"Au-dessus de la dose maximale"
+],
+"胸部": [
+"Chest",
+"Thorax"
+],
+"调到有效的心肺复苏：每分钟 100–120 次，深度 5–6 cm": [
+"Set effective CPR: 100–120 per minute, depth 5–6 cm",
+"Réglez une RCP efficace : 100–120 par minute, 5–6 cm de profondeur"
+],
+"找到一天总量超过最大日剂量的情况（并认识到这是不安全的）": [
+"Find a case where the daily total exceeds the maximum (and see that it is unsafe)",
+"Trouvez un cas où le total journalier dépasse le maximum (et voyez que c'est dangereux)"
+],
+"把烧烫伤处理的五个步骤按“冲、脱、泡、盖、送”的顺序放好": [
+"Put the five burn steps in order: rinse, undress, soak, cover, send",
+"Placez les cinq étapes d'une brûlure dans l'ordre : rincer, déshabiller, tremper, couvrir, envoyer"
+],
+"样品中同位素剩下的比例": [
+"Share of the isotope left in the sample",
+"Part de l'isotope restant dans l'échantillon"
+],
+"放射性测定年龄": [
+"Radiometric dating",
+"Datation radiométrique"
+],
+"地层与化石": [
+"Strata and fossils",
+"Couches et fossiles"
+],
+"同位素": [
+"Isotope",
+"Isotope"
+],
+"同位素的半衰期": [
+"Half-life of the isotope",
+"Demi-vie de l'isotope"
+],
+"样品的年龄": [
+"Age of the sample",
+"Âge de l'échantillon"
+],
+"碳-14 只剩 25 %：样品的年龄约 11460 年（两个半衰期）": [
+"Carbon-14 at 25 %: the sample is about 11460 years old (two half-lives)",
+"Carbone 14 à 25 % : l'échantillon a environ 11460 ans (deux demi-vies)"
+],
+"铀-238 剩 50 %：岩石的年龄约 44.7 亿年": [
+"Uranium-238 at 50 %: the rock is about 4.47 billion years old",
+"Uranium 238 à 50 % : la roche a environ 4,47 milliards d'années"
+],
+"把 8 种化石全部放进它们最早大量出现的地层": [
+"Put all 8 fossils into the layer where they first appear in numbers",
+"Placez les 8 fossiles dans la couche où ils apparaissent en nombre"
+],
+"相关：知识总结（安全 · 健康）": [
+"Related: summaries (safety, health)",
+"À voir : résumés (sécurité, santé)"
+],
+"运动时的心率": [
+"Heart rate during exercise",
+"Fréquence cardiaque à l'effort"
+],
+"每天的睡眠时间": [
+"Sleep per day",
+"Sommeil par jour"
+],
+"运动强度": [
+"Exercise intensity",
+"Intensité de l'effort"
+],
+"睡眠": [
+"Sleep",
+"Sommeil"
+],
+"最大心率（估算）": [
+"Maximum heart rate (estimate)",
+"Fréquence cardiaque maximale (estimation)"
+],
+"占最大心率": [
+"Share of maximum",
+"Part du maximum"
+],
+"强度": [
+"Intensity",
+"Intensité"
+],
+"有氧锻炼的目标心率": [
+"Target heart rate for aerobic exercise",
+"Fréquence cible pour l'effort aérobie"
+],
+"推荐的睡眠": [
+"Recommended sleep",
+"Sommeil recommandé"
+],
+"睡眠充足": [
+"Enough sleep",
+"Sommeil suffisant"
+],
+"睡眠不足": [
+"Too little sleep",
+"Sommeil insuffisant"
+],
+"睡眠偏多": [
+"A lot of sleep",
+"Beaucoup de sommeil"
+],
+"14 岁：把心率调到有氧锻炼的目标范围内（约 144–175 次/分钟）": [
+"Age 14: set the heart rate in the aerobic target range (about 144–175 per minute)",
+"14 ans : réglez la fréquence dans la plage aérobie (environ 144–175 par minute)"
+],
+"把心率调到最大心率的 85 % 以上：强度过高，不宜持续": [
+"Set the heart rate over 85 % of the maximum: too intense to keep up",
+"Réglez la fréquence au-dessus de 85 % du maximum : trop intense pour durer"
+],
+"年龄 12 岁：把睡眠时间调到推荐范围（9–12 小时）": [
+"Age 12: set the sleep time in the recommended range (9–12 hours)",
+"12 ans : réglez le sommeil dans la plage recommandée (9–12 heures)"
+],
+"相关：知识总结（生物 · 地理）": [
+"Related: summaries (biology, geography)",
+"À voir : résumés (biologie, géographie)"
+],
+"被破坏的栖息地": [
+"Habitat destroyed",
+"Habitat détruit"
+],
+"每年排放的碳": [
+"Carbon emitted per year",
+"Carbone émis par an"
+],
+"经过的年数": [
+"Years passed",
+"Années écoulées"
+],
+"栖息地与物种": [
+"Habitat and species",
+"Habitat et espèces"
+],
+"二氧化碳与气温": [
+"Carbon dioxide and temperature",
+"Dioxyde de carbone et température"
+],
+"剩下的物种": [
+"Species left",
+"Espèces restantes"
+],
+"消失的物种": [
+"Species lost",
+"Espèces disparues"
+],
+"大气 CO₂": [
+"Atmospheric CO₂",
+"CO₂ atmosphérique"
+],
+"比工业化前升高": [
+"Rise over pre-industrial",
+"Hausse depuis l'ère préindustrielle"
+],
+"栖息地被破坏 90 % 以上：物种减少到原来的 60 % 以下": [
+"Destroy over 90 % of the habitat: species fall below 60 % of the original",
+"Détruisez plus de 90 % de l'habitat : les espèces passent sous 60 % de l'origine"
+],
+"每年排放 9 GtC 以上，经过 100 年：CO₂ 超过 600 ppm": [
+"Emit 9 GtC a year or more for 100 years: CO₂ exceeds 600 ppm",
+"Émettez 9 GtC par an ou plus pendant 100 ans : le CO₂ dépasse 600 ppm"
+],
+"把排放减到 0：无论经过多少年，CO₂ 都保持 420 ppm": [
+"Cut emissions to 0: CO₂ stays at 420 ppm whatever the years",
+"Ramenez les émissions à 0 : le CO₂ reste à 420 ppm quelles que soient les années"
+],
+"该阶段的时间": [
+"Time of this stage",
+"Durée de cette étape"
+],
+"发育方式": [
+"Way of development",
+"Mode de développement"
+],
+"受精方式": [
+"Way of fertilisation",
+"Mode de fécondation"
+],
+"受精卵": [
+"Fertilised egg",
+"Œuf fécondé"
+],
+"蛹": [
+"Pupa",
+"Nymphe"
+],
+"蝌蚪": [
+"Tadpole",
+"Têtard"
+],
+"选择家蚕，找到不吃不动的蛹期": [
+"Choose the silkworm and find the pupa stage, which neither eats nor moves",
+"Choisissez le ver à soie et trouvez la nymphe, qui ne mange ni ne bouge"
+],
+"选择蝗虫，找到与成虫相似的若虫期": [
+"Choose the grasshopper and find the nymph stage, which looks like the adult",
+"Choisissez le criquet et trouvez la larve, semblable à l'adulte"
+],
+"选择青蛙，找到用鳃呼吸的蝌蚪期": [
+"Choose the frog and find the tadpole stage, which breathes with gills",
+"Choisissez la grenouille et trouvez le têtard, qui respire par des branchies"
+],
+"先天性行为": [
+"Innate behaviour",
+"Comportement inné"
+],
+"学习行为": [
+"Learned behaviour",
+"Comportement appris"
+],
+"社会行为": [
+"Social behaviour",
+"Comportement social"
+],
+"蜘蛛结网": [
+"Spider spinning a web",
+"Araignée tissant sa toile"
+],
+"母鸡孵卵": [
+"Hen sitting on eggs",
+"Poule couvant"
+],
+"蜜蜂采蜜": [
+"Bee collecting nectar",
+"Abeille butinant"
+],
+"黑猩猩用树枝钓白蚁": [
+"Chimpanzee fishing termites with a twig",
+"Chimpanzé pêchant des termites avec une brindille"
+],
+"小狗学算算术": [
+"Dog learning to count",
+"Chien apprenant à compter"
+],
+"鹦鹉学舌": [
+"Parrot imitating speech",
+"Perroquet imitant la parole"
+],
+"蚂蚁分工合作": [
+"Ants dividing the work",
+"Fourmis se partageant le travail"
+],
+"狒狒的首领与等级": [
+"Baboon leader and ranks",
+"Chef et rangs des babouins"
+],
+"蜜蜂跳舞传递信息": [
+"Bee dance passing information",
+"Danse des abeilles transmettant une information"
+],
+"大山雀偷喝牛奶": [
+"Great tit stealing milk",
+"Mésange volant du lait"
+],
+"小鼠": [
+"Mouse",
+"Souris"
+],
+"黑猩猩": [
+"Chimpanzee",
+"Chimpanzé"
+],
+"不处理": [
+"No treatment",
+"Aucun traitement"
+],
+"煅烧（烧掉有机物）": [
+"Burning (organic matter burnt off)",
+"Calcination (matière organique brûlée)"
+],
+"盐酸浸泡（溶去无机盐）": [
+"Acid bath (minerals dissolved)",
+"Bain d'acide (minéraux dissous)"
+],
+"有弹性又坚硬": [
+"Elastic and hard",
+"Élastique et dur"
+],
+"变脆，易碎（只剩无机盐）": [
+"Brittle (only minerals left)",
+"Cassant (il ne reste que les minéraux)"
+],
+"变软，可以弯曲（只剩有机物）": [
+"Soft and bendable (only organic matter left)",
+"Mou et flexible (il ne reste que la matière organique)"
+],
+"胚胎": [
+"Embryo",
+"Embryon"
+],
+"胎儿": [
+"Fetus",
+"Fœtus"
+],
+"谷类和薯类": [
+"Grains and tubers",
+"Céréales et tubercules"
+],
+"蔬菜": [
+"Vegetables",
+"Légumes"
+],
+"水果": [
+"Fruit",
+"Fruits"
+],
+"肉、蛋、鱼": [
+"Meat, eggs, fish",
+"Viande, œufs, poisson"
+],
+"奶和豆制品": [
+"Milk and soy products",
+"Lait et produits au soja"
+],
+"油": [
+"Oil",
+"Huile"
+],
+"外耳道": [
+"Ear canal",
+"Conduit auditif"
+],
+"声波": [
+"Sound wave",
+"Onde sonore"
+],
+"鼓膜": [
+"Eardrum",
+"Tympan"
+],
+"鼓膜的振动": [
+"Eardrum vibrating",
+"Vibration du tympan"
+],
+"听小骨": [
+"Ossicles",
+"Osselets"
+],
+"骨的振动（放大）": [
+"Bones vibrating (amplified)",
+"Vibration des osselets (amplifiée)"
+],
+"耳蜗": [
+"Cochlea",
+"Cochlée"
+],
+"耳蜗内液体的波动，听觉感受器兴奋": [
+"Fluid waves in the cochlea excite the hearing receptors",
+"Ondes du liquide de la cochlée excitant les récepteurs de l'audition"
+],
+"听神经": [
+"Auditory nerve",
+"Nerf auditif"
+],
+"神经冲动": [
+"Nerve impulse",
+"Influx nerveux"
+],
+"大脑皮层的听觉中枢": [
+"Hearing centre of the cortex",
+"Centre de l'audition du cortex"
+],
+"形成听觉": [
+"Hearing is formed",
+"L'audition se forme"
+],
+"太慢": [
+"Too slow",
+"Trop lent"
+],
+"太快": [
+"Too fast",
+"Trop rapide"
+],
+"太浅": [
+"Too shallow",
+"Trop superficiel"
+],
+"太深": [
+"Too deep",
+"Trop profond"
+],
+"有效": [
+"Effective",
+"Efficace"
+],
+"冲：用流动的凉水冲洗": [
+"Rinse with running cool water",
+"Rincer à l'eau fraîche courante"
+],
+"脱：小心脱去衣物": [
+"Take off clothing carefully",
+"Retirer les vêtements avec précaution"
+],
+"泡：继续浸泡在凉水中": [
+"Keep soaking in cool water",
+"Continuer à tremper dans l'eau fraîche"
+],
+"盖：用干净的纱布覆盖": [
+"Cover with clean gauze",
+"Couvrir d'une gaze propre"
+],
+"送：及时送往医院": [
+"Get to hospital promptly",
+"Conduire rapidement à l'hôpital"
+],
+"碳-14": [
+"Carbon-14",
+"Carbone 14"
+],
+"钾-40": [
+"Potassium-40",
+"Potassium 40"
+],
+"铀-238": [
+"Uranium-238",
+"Uranium 238"
+],
+"寒武纪（约 5.4 亿年前）": [
+"Cambrian (about 540 million years ago)",
+"Cambrien (il y a environ 540 millions d'années)"
+],
+"泥盆纪（约 4 亿年前）": [
+"Devonian (about 400 million years ago)",
+"Dévonien (il y a environ 400 millions d'années)"
+],
+"石炭纪（约 3.5 亿年前）": [
+"Carboniferous (about 350 million years ago)",
+"Carbonifère (il y a environ 350 millions d'années)"
+],
+"中生代（约 2.5 亿 – 6600 万年前）": [
+"Mesozoic (250 – 66 million years ago)",
+"Mésozoïque (il y a 250 – 66 millions d'années)"
+],
+"新生代（6600 万年前至今）": [
+"Cenozoic (66 million years ago to now)",
+"Cénozoïque (depuis 66 millions d'années)"
+],
+"三叶虫": [
+"Trilobite",
+"Trilobite"
+],
+"早期鱼类": [
+"Early fish",
+"Premiers poissons"
+],
+"巨型蕨类": [
+"Giant ferns",
+"Fougères géantes"
+],
+"恐龙": [
+"Dinosaur",
+"Dinosaure"
+],
+"始祖鸟": [
+"Archaeopteryx",
+"Archéoptéryx"
+],
+"哺乳动物繁盛": [
+"Mammals flourish",
+"Essor des mammifères"
+],
+"人类化石": [
+"Human fossils",
+"Fossiles humains"
+],
+"热身（轻松）": [
+"Warm-up (easy)",
+"Échauffement (facile)"
+],
+"中等强度": [
+"Moderate",
+"Modéré"
+],
+"有氧锻炼": [
+"Aerobic exercise",
+"Effort aérobie"
+],
+"高强度（不宜持续）": [
+"Hard (not to be kept up)",
+"Intense (à ne pas prolonger)"
+],
+"建立自然保护区": [
+"Setting up nature reserves",
+"Créer des réserves naturelles"
+],
+"就地保护": [
+"Protection in place",
+"Protection sur place"
+],
+"建立动物园和植物园": [
+"Setting up zoos and botanical gardens",
+"Créer des zoos et jardins botaniques"
+],
+"迁地保护": [
+"Protection elsewhere",
+"Protection hors du site"
+],
+"建立濒危物种的基因库": [
+"Setting up gene banks of endangered species",
+"Créer des banques de gènes d'espèces menacées"
+],
+"离体保护": [
+"Protection of genetic material",
+"Conservation du matériel génétique"
+],
+"颁布《野生动物保护法》": [
+"Passing the Wildlife Protection Law",
+"Promulguer la loi de protection de la faune sauvage"
+],
+"法制管理": [
+"Legal management",
+"Gestion par la loi"
+],
+"不完全变态": [
+"Incomplete metamorphosis",
+"Métamorphose incomplète"
+],
+"体内受精": [
+"Internal fertilisation",
+"Fécondation interne"
+],
+"若虫": [
+"Nymph",
+"Larve"
+],
+"成虫": [
+"Adult insect",
+"Insecte adulte"
+],
+"家蚕": [
+"Silkworm",
+"Ver à soie"
+],
+"完全变态": [
+"Complete metamorphosis",
+"Métamorphose complète"
+],
+"幼虫": [
+"Larva",
+"Larve"
+],
+"变态发育": [
+"Metamorphosis",
+"Métamorphose"
+],
+"体外受精": [
+"External fertilisation",
+"Fécondation externe"
+],
+"幼蛙": [
+"Young frog",
+"Jeune grenouille"
+],
+"成蛙": [
+"Adult frog",
+"Grenouille adulte"
+],
+"不变态": [
+"No metamorphosis",
+"Pas de métamorphose"
+],
+"雏鸡": [
+"Chick",
+"Poussin"
+],
+"成鸡": [
+"Adult hen",
+"Poule adulte"
+],
+"静坐": [
+"Sitting still",
+"Assis, immobile"
+],
+"慢走": [
+"Slow walking",
+"Marche lente"
+],
+"跑步": [
+"Running",
+"Course"
+],
+"战栗（产热增加）": [
+"Shivering (more heat made)",
+"Frissons (plus de chaleur produite)"
+],
+"排汗、皮肤血管舒张": [
+"Sweating, skin vessels widen",
+"Transpiration, vaisseaux de la peau dilatés"
+],
+"体温平衡": [
+"Body temperature balanced",
+"Température du corps équilibrée"
+],
+"动脉": [
+"Artery",
+"Artère"
+],
+"厚、弹性大": [
+"Thick and elastic",
+"Épaisse et élastique"
+],
+"高（约 100）": [
+"High (about 100)",
+"Élevée (environ 100)"
+],
+"毛细血管": [
+"Capillary",
+"Capillaire"
+],
+"极薄（一层细胞）": [
+"Very thin (one cell layer)",
+"Très mince (une couche de cellules)"
+],
+"低（约 25）": [
+"Low (about 25)",
+"Basse (environ 25)"
+],
+"静脉": [
+"Vein",
+"Veine"
+],
+"较薄": [
+"Rather thin",
+"Assez mince"
+],
+"很低（约 5）": [
+"Very low (about 5)",
+"Très basse (environ 5)"
+],
+"动脉出血": [
+"Arterial bleeding",
+"Saignement artériel"
+],
+"鲜红、喷射状": [
+"Bright red, spurting",
+"Rouge vif, en jet"
+],
+"近心端": [
+"Heart side",
+"Côté du cœur"
+],
+"静脉出血": [
+"Venous bleeding",
+"Saignement veineux"
+],
+"暗红、缓缓流出": [
+"Dark red, flowing slowly",
+"Rouge sombre, écoulement lent"
+],
+"远心端": [
+"Side away from the heart",
+"Côté éloigné du cœur"
+],
+"毛细血管出血": [
+"Capillary bleeding",
+"Saignement capillaire"
+],
+"渗出、像水珠": [
+"Oozing like drops",
+"Suintement en gouttelettes"
+],
+"自然止血或消毒包扎": [
+"Stops by itself or clean and bandage",
+"S'arrête seul ou nettoyer et bander"
+],
+"衣服层数": [
+"Layers of clothing",
+"Couches de vêtements"
+],
+"活动": [
+"Activity",
+"Activité"
+],
+"产热": [
+"Heat produced",
+"Chaleur produite"
+],
+"皮肤散热": [
+"Heat lost by the skin",
+"Chaleur perdue par la peau"
+],
+"需要排汗": [
+"Sweat needed",
+"Sueur nécessaire"
+],
+"身体的反应": [
+"Body's response",
+"Réaction du corps"
+],
+"表皮": [
+"Epidermis",
+"Épiderme"
+],
+"真皮": [
+"Dermis",
+"Derme"
+],
+"皮下组织": [
+"Subcutaneous tissue",
+"Tissu sous-cutané"
+],
+"战栗": [
+"Shivering",
+"Frissons"
+],
+"在 30 °C 的气温下跑步：每小时需要排汗 300 mL 以上": [
+"Run at 30 °C: over 300 mL of sweat an hour is needed",
+"Courez à 30 °C : plus de 300 mL de sueur par heure sont nécessaires"
+],
+"静坐在 0 °C 的环境里，只穿 1 层衣服以下：身体开始战栗": [
+"Sit still at 0 °C in one layer or less: the body starts to shiver",
+"Assis à 0 °C avec une couche ou moins : le corps frissonne"
+],
+"静坐在 20–24 °C 的气温下（穿 2–3 层衣服）：体温平衡，不需要排汗": [
+"Sit still at 20–24 °C in 2–3 layers: balanced, no sweat needed",
+"Assis à 20–24 °C avec 2–3 couches : équilibre, pas de sueur nécessaire"
+],
+"血细胞所占体积比": [
+"Volume share of blood cells",
+"Part du volume occupée par les cellules du sang"
+],
+"心率（脉搏）": [
+"Heart rate (pulse)",
+"Fréquence cardiaque (pouls)"
+],
+"血液的成分": [
+"Components of blood",
+"Composants du sang"
+],
+"三种血管": [
+"The three kinds of vessel",
+"Les trois sortes de vaisseaux"
+],
+"出血与止血": [
+"Bleeding and stopping it",
+"Saignement et arrêt"
+],
+"血管": [
+"Vessel",
+"Vaisseau"
+],
+"出血的类型": [
+"Type of bleeding",
+"Type de saignement"
+],
+"全身血量": [
+"Blood in the body",
+"Sang dans le corps"
+],
+"血浆": [
+"Plasma",
+"Plasma"
+],
+"每微升红细胞数": [
+"Red cells per microlitre",
+"Globules rouges par microlitre"
+],
+"百万": [
+"million",
+"millions"
+],
+"偏低（贫血）": [
+"Low (anaemia)",
+"Bas (anémie)"
+],
+"血流速度": [
+"Blood speed",
+"Vitesse du sang"
+],
+"总横截面积": [
+"Total cross-section",
+"Section totale"
+],
+"管壁": [
+"Wall",
+"Paroi"
+],
+"血液的特点": [
+"Look of the blood",
+"Aspect du sang"
+],
+"按压的位置": [
+"Where to press",
+"Où appuyer"
+],
+"白细胞和血小板": [
+"White cells and platelets",
+"Globules blancs et plaquettes"
+],
+"心脏方向": [
+"Towards the heart",
+"Vers le cœur"
+],
+"选择毛细血管：血流速度小于 0.05 cm/s（血流最慢）": [
+"Choose the capillary: blood speed under 0.05 cm/s (the slowest)",
+"Choisissez le capillaire : vitesse sous 0,05 cm/s (la plus lente)"
+],
+"把血细胞所占体积比降到 36 % 以下：红细胞偏低（贫血）": [
+"Lower the cell volume share below 36 %: red cells low (anaemia)",
+"Baissez la part des cellules sous 36 % : globules rouges bas (anémie)"
+],
+"选择动脉出血：应按压近心端": [
+"Choose arterial bleeding: press on the heart side",
+"Choisissez le saignement artériel : appuyez côté cœur"
+],
+"行为总数": [
+"Behaviours",
+"Comportements"
+],
+"学习速度系数 k": [
+"Learning speed coefficient k",
+"Coefficient de vitesse d'apprentissage k"
+],
+"经过的半衰期数": [
+"Half-lives passed",
+"Demi-vies écoulées"
+],
+"地层数": [
+"Number of layers",
+"Nombre de couches"
+],
+"步骤数": [
+"Number of steps",
+"Nombre d'étapes"
+],
+"保留的栖息地": [
+"Habitat left",
+"Habitat restant"
+],
+"累计排放的碳": [
+"Total carbon emitted",
+"Carbone total émis"
 ]
 }

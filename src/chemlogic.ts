@@ -4,6 +4,9 @@
  * of its own except the progress of this device (`learn.chem.v1`). Questions are never stored: each is made on the spot from the data and a seed.
  */
 import * as G from "./game";
+import * as C2 from "./chemlogic2";
+import * as C3 from "./chemlogic3";
+import * as C4 from "./chemlogic4";
 
 // ---------- data ----------
 export interface Term { c: number; f: string; mark: "" | "↑" | "↓" }
@@ -18,7 +21,19 @@ export interface ChemData {
   activity: string[]; indicators: { n: string; acid: string; neutral: string; base: string }[]; ph: { n: string; v: number }[];
   solub: { T: number[]; d: { f: string; n: string; v: number[] }[] };
   gases: { f: string; n: string; rx: string[]; gen: Record<string, string>; col: string[]; why: string; test: string; full: string; bad: string[][] }[];
+  /** part 2: question banks (content) and tables, built by scripts/chem/extra.mjs */
+  more: {
+    lab: Bank[]; life: Bank[]; prop: Bank[]; atomqa: Bank[]; flowqa: Bank[]; remgas: Bank[]; apps: string[][]; ord: [string, string[]][]; foods: [string, string[]][]; nutr: [string, string][]; health: [string, string][];
+    trace: { major: string[]; trace: string[] }; material: [string, string[]][]; env: [string, string][]; uses: [string, string, string][]; atoms: (string | number)[][]; gasd: [string, string, number][];
+    dens: [string, string, number, number][]; flows: unknown[]; opnames: string[];
+  };
 }
+export interface Bank { q: string; a: string; w: string[]; e: string }
+/** the picture of a question (drawn by chemfig2.ts from these numbers) */
+export type FlowRow = { k: "box"; t: string; side?: string } | { k: "pill"; n: number; t?: string };
+export type Spec =
+  | { k: "curve"; subs: string[]; marks: { T: number; S: number; n: string }[] }
+  | { k: "atom"; z: number; e: number } | { k: "cell"; z: number } | { k: "app"; id: string } | { k: "flow"; rows: FlowRow[] };
 let D!: ChemData;
 export const data = (): ChemData => D;
 const parseSide = (s: string): Term[] => s.split("+").map((t) => { const m = /^(\d*)(.+?)([↑↓]?)$/.exec(t)!; return { c: m[1] ? +m[1] : 1, f: m[2], mark: m[3] as Term["mark"] }; });
@@ -102,28 +117,30 @@ export const CONDS = ["点燃", "加热", "通电", "高温", "催化剂", "常�
 // ---------- random ----------
 export type Rnd = () => number;
 /** punctuation of the sentences is made here (not written as a literal) so that it is not taken for a UI text that needs a translation */
-const U = { dot: String.fromCharCode(0x3002), comma: String.fromCharCode(0xff0c), colon: String.fromCharCode(0xff1a), semi: String.fromCharCode(0xff1b), sep: String.fromCharCode(0x3001), lp: String.fromCharCode(0xff08), rp: String.fromCharCode(0xff09) };
+export const U = { dot: String.fromCharCode(0x3002), comma: String.fromCharCode(0xff0c), colon: String.fromCharCode(0xff1a), semi: String.fromCharCode(0xff1b), sep: String.fromCharCode(0x3001), lp: String.fromCharCode(0xff08), rp: String.fromCharCode(0xff09) };
 const SUBS_DIGITS = "\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089";
 /** a formula as plain text with real subscript characters (for texts that are translated as a whole): H2SO4 -> H\u2082SO\u2084 */
 export const sub = (f: string): string => f.replace(/([A-Za-z)])(\d+)/g, (_, a: string, d: string) => a + d.replace(/\d/g, (x) => SUBS_DIGITS[+x]));
 export function rng(seed: number): Rnd { let a = seed >>> 0; return () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
-const ri = (r: Rnd, n: number) => Math.floor(r() * n);
-const pick = <T,>(r: Rnd, a: readonly T[]): T => a[ri(r, a.length)];
-const shuf = <T,>(r: Rnd, a: readonly T[]): T[] => G.shuffle(a, r);
+export const ri = (r: Rnd, n: number) => Math.floor(r() * n);
+export const pick = <T,>(r: Rnd, a: readonly T[]): T => a[ri(r, a.length)];
+export const shuf = <T,>(r: Rnd, a: readonly T[]): T[] => G.shuffle(a, r);
 
 // ---------- questions ----------
 /** a piece of text: UI text (translated), the user's own content, a formula, an equation (by reaction id), or the cross-method drawing */
 export type Part = string | { u: string } | { f: string } | { eq: string } | { cross: { cat: string; cc: number; an: string; ac: number } };
 export interface QBase { key: string; mode: string; kind: string; lv: number; stem: Part[]; expl: Part[] }
-export interface ChoiceQ extends QBase { t: "choice"; meta?: Record<string, unknown>; fig?: string; tbl?: { head: string[]; rows: string[][] }; choices: Part[][]; right: number }
+export interface ChoiceQ extends QBase { t: "choice"; meta?: Record<string, unknown>; fig?: string; spec?: Spec; tbl?: { head: string[]; rows: string[][] }; choices: Part[][]; right: number }
 export interface NumStep { label: Part[]; answer: number; tol: number; unit?: string; say: Part[] }
-export interface NumQ extends QBase { t: "num"; steps: NumStep[]; els?: string[]; meta?: Record<string, unknown> }
+export interface NumQ extends QBase { t: "num"; steps: NumStep[]; els?: string[]; spec?: Spec; meta?: Record<string, unknown> }
+/** put the steps in the right order (`items` is the right order, `shown` the order they are offered in) */
+export interface OrdQ extends QBase { t: "ord"; items: string[]; shown: string[] }
 export interface BalQ extends QBase { t: "bal"; rx: string }
 export interface WriteQ extends QBase { t: "write"; rx: string; desc: string; tiles: string[] }
 export interface ClassQ extends QBase { t: "class"; items: { id: string; f?: string; n: string; cat: string }[]; buckets: string[] }
-export type Q = ChoiceQ | NumQ | BalQ | WriteQ | ClassQ;
+export type Q = ChoiceQ | NumQ | BalQ | WriteQ | ClassQ | OrdQ;
 export const partKey = (p: Part[]) => JSON.stringify(p);
-const num = (x: number) => String(+x.toFixed(2));
+export const num = (x: number) => String(+x.toFixed(2));
 const sgn = (v: number) => (v > 0 ? `+${v}` : `${v}`);
 const dot = (s: string) => ({ u: s });
 void dot;
@@ -135,14 +152,34 @@ export const MODES: { id: string; name: string; sub: string; badge: string; kind
   { id: "val", name: "化学式与化合价", sub: "交叉法、化合价、相对分子质量", badge: "NaCl", kinds: ["cross", "find", "n2f", "f2n", "mr", "pct"] },
   { id: "type", name: "反应类型与现象", sub: "类型、条件、实验现象", badge: "A+B", kinds: ["type", "pick", "cond", "ph"], byRx: true },
   { id: "calc", name: "根据方程式计算", sub: "分步计算质量", badge: "g", kinds: ["calc"], byRx: true },
-  { id: "sol", name: "溶液", sub: "质量分数、配制、溶解度", badge: "%", kinds: ["frac", "prep", "dilute", "read", "sat", "satfrac"] },
+  { id: "sol", name: "溶液", sub: "质量分数、配制、溶解度", badge: "%", kinds: ["frac", "prep", "dilute", "read", "sat", "satfrac", "dens", "mix", "conc"] },
   { id: "dec", name: "复分解反应", sub: "能否发生，为什么", badge: "↓↑", kinds: ["dec"] },
   { id: "act", name: "金属活动性", sub: "能否反应，生成什么", badge: "Zn", kinds: ["acid", "salt", "notreact", "order"] },
   { id: "cls", name: "物质分类", sub: "把物质拖进正确的类别", badge: "▦", kinds: ["class"] },
   { id: "ind", name: "指示剂与 pH", sub: "颜色、酸碱性、pH 变化", badge: "pH", kinds: ["color", "acidity", "more", "change", "red"] },
   { id: "gas", name: "气体的制取", sub: "药品、装置、收集与检验", badge: "O₂", kinds: ["react", "gen", "col", "test", "full"] },
+  { id: "curve", name: "溶解度曲线", sub: "读曲线、饱和、结晶", badge: "S-T", kinds: ["read", "pt", "how", "cmp", "purify", "cross", "cool"] },
+  { id: "calc2", name: "化学计算进阶", sub: "气体体积、纯度、产率、质量差", badge: "mol", kinds: ["gasv", "pure", "yield", "excess", "loss", "sollast"] },
+  { id: "infer", name: "推断题", sub: "由现象推断未知物", badge: "?", kinds: ["mat", "one", "unk"] },
+  { id: "rem", name: "除杂与干燥", sub: "选试剂，不引入新杂质", badge: "−", kinds: ["soln", "solid"] },
+  { id: "flow", name: "流程图题", sub: "读工艺流程，判断滤渣与滤液", badge: "⇩", kinds: ["op", "res", "fil", "type"] },
+  { id: "lab", name: "实验基本操作", sub: "仪器、步骤顺序、安全", badge: "⚗", kinds: ["app", "use"] },
+  { id: "life", name: "化学与生活", sub: "营养素、材料、元素与健康、环境", badge: "Ca", kinds: ["food", "nutr", "elem", "trace", "mat", "env"] },
+  { id: "atom", name: "原子与离子", sub: "结构示意图、离子、周期表", badge: "e⁻", kinds: ["z2el", "outer", "fig", "ion", "period", "cell"] },
+  { id: "prop", name: "物质的性质与用途", sub: "用途、酸碱盐的通性", badge: "↯", kinds: ["use", "asp"] },
 ];
+/** the difficulty of each question kind of the part-2 modes (a level shows the kinds up to it) */
+export const KIND_LV: Record<string, Record<string, number>> = {
+  curve: { read: 1, pt: 1, how: 1, cmp: 2, purify: 2, cross: 2, cool: 3 },
+  calc2: { gasv: 1, pure: 1, yield: 2, excess: 2, loss: 3, sollast: 3 },
+  infer: { mat: 1, one: 2, unk: 1 },
+  rem: { soln: 1, solid: 2 },
+  flow: { op: 1, type: 1, res: 1, fil: 2 },
+  atom: { z2el: 1, outer: 1, fig: 2, ion: 2, period: 2, cell: 3 },
+};
 export const modeOf = (id: string) => MODES.find((m) => m.id === id)!;
+/** the kinds of a mode that a level shows (all of them at "全部") */
+export const kindsOf = (mode: string, lv: number): string[] => { const m = modeOf(mode), t = KIND_LV[mode]; return !t || !lv ? m.kinds : m.kinds.filter((k) => (t[k] ?? 1) <= lv); };
 export const TYPES = ["化合", "分解", "置换", "复分解", "其他"];
 export const TYPE_NAME: Record<string, string> = { 化合: "化合反应", 分解: "分解反应", 置换: "置换反应", 复分解: "复分解反应", 其他: "其他反应" };
 const TYPE_RULE: Record<string, string> = {
@@ -152,7 +189,7 @@ const TYPE_RULE: Record<string, string> = {
   复分解: "复分解反应：两种化合物互相交换成分，生成另外两种化合物。",
   其他: "不属于四种基本反应类型，例如氧气与有机物的反应，或非金属氧化物与碱、一氧化碳与金属氧化物的反应。",
 };
-const eqP = (rx: Rx): Part => ({ eq: rx.id });
+export const eqP = (rx: Rx): Part => ({ eq: rx.id });
 /** conditions as parts: 催化剂、加热 */
 export const condParts = (c: string[]): Part[] => c.flatMap((x, i) => (i ? [{ u: U.sep }, x] : [x]));
 
@@ -202,10 +239,10 @@ function chooseFrom(r: Rnd, right: Part[], wrongs: Part[][], n = 4): { choices: 
   const all = shuf(r, [right, ...w]);
   return { choices: all, right: all.findIndex((x) => partKey(x) === partKey(right)) };
 }
-const choiceQ = (base: QBase, r: Rnd, right: Part[], wrongs: Part[][], extra: Partial<ChoiceQ> = {}, n = 4): ChoiceQ => ({ ...base, t: "choice", ...chooseFrom(r, right, wrongs, n), ...extra });
-const wrap = (xs: string[]): Part[][] => xs.map((x) => [x]);
-const fWrap = (xs: string[]): Part[][] => xs.map((x) => [{ f: x }]);
-const uWrap = (xs: string[]): Part[][] => xs.map((x) => [{ u: x }]);
+export const choiceQ = (base: QBase, r: Rnd, right: Part[], wrongs: Part[][], extra: Partial<ChoiceQ> = {}, n = 4): ChoiceQ => ({ ...base, t: "choice", ...chooseFrom(r, right, wrongs, n), ...extra });
+export const wrap = (xs: string[]): Part[][] => xs.map((x) => [x]);
+export const fWrap = (xs: string[]): Part[][] => xs.map((x) => [{ f: x }]);
+export const uWrap = (xs: string[]): Part[][] => xs.map((x) => [{ u: x }]);
 
 /** valence of an element in a compound by the rule "the sum of all valences is zero": the other elements (or atom groups) are taken from the table; null when not solvable (or fractional) */
 const FIXED: Record<string, number> = { H: 1, Li: 1, Na: 1, K: 1, Ag: 1, Ca: 2, Mg: 2, Ba: 2, Zn: 2, Al: 3, O: -2, F: -1 };
@@ -387,6 +424,7 @@ function solTable(f: string[]): { head: string[]; rows: string[][] } {
   return { head: ["T / ℃", ...D.solub.T.map(String)], rows: f.map((x) => [x, ...D.solub.d.find((d) => d.f === x)!.v.map(String)]) };
 }
 function genSol(r: Rnd, lv: number, kind: string): Q {
+  if (kind === "dens" || kind === "mix" || kind === "conc") return C2.genSol2(r, lv, kind);
   const base = { mode: "sol", kind, lv: lv || 1, key: `sol:${kind}` };
   const one = (label: Part[], answer: number, tol: number, say: Part[], stem: Part[], expl: Part[], meta: Record<string, unknown>): NumQ => ({ t: "num", ...base, stem, steps: [{ label, answer, tol, say }], expl, meta });
   if (kind === "frac") {
@@ -643,6 +681,15 @@ export function makeQ(mode: string, kind: string, r: Rnd, lv: number, rx?: Rx): 
     case "cls": return genClass(r, lv);
     case "ind": return genInd(r, lv, kind);
     case "gas": return genGas(r, lv, kind);
+    case "curve": return C2.genCurve(r, lv, kind);
+    case "calc2": return C2.genCalc2(r, lv, kind);
+    case "infer": return C3.genInfer(r, lv, kind);
+    case "rem": return C3.genRem(r, lv, kind);
+    case "flow": return C3.genFlow(r, lv, kind);
+    case "lab": return C4.genLab(r, lv, kind);
+    case "life": return C4.genLife(r, lv, kind);
+    case "atom": return C4.genAtom(r, lv, kind);
+    case "prop": return C4.genProp(r, lv, kind);
   }
   return null;
 }
@@ -688,16 +735,25 @@ export function buildRound(mode: string, lv: number, seed: number, p: Progress, 
     });
     return out;
   }
-  const kinds = shuf(r, m.kinds);
+  const kinds = shuf(r, kindsOf(mode, lv));
   const seen = new Set<string>();
-  for (let i = 0, tries = 0; out.length < n && tries < 400; tries++) {
-    const q = makeQ(mode, kinds[i % kinds.length], r, lv);
-    if (!q) continue;
-    const k = JSON.stringify([q.stem, q.t === "choice" ? q.choices : q.t === "class" ? q.items.map((x) => x.id) : 0]);
-    if (seen.has(k)) continue;
+  const sig = (q: Q) => JSON.stringify([q.stem, q.t === "choice" ? q.choices.map(partKey).sort() : q.t === "class" ? q.items.map((x) => x.id) : q.t === "ord" ? q.items : 0]);
+  // the written banks (content): what is due first, then new, then known: chosen by the memory boxes like the equations
+  const share = C4.BANK_SHARE[mode];
+  if (share) {
+    const ids = selectIds(C4.bankIds(mode), (id) => `${mode}:${id}`, p, today, Math.round(n * share), r, avoid);
+    for (const id of ids) { const q = C4.bankQ(mode, id, r, lv); if (q && !seen.has(sig(q))) { seen.add(sig(q)); out.push(q); } }
+  }
+  const gen = kinds.filter((k) => !(mode === "rem" && k === "gas"));
+  for (let i = 0, tries = 0; out.length < n && tries < 600; tries++) {
+    let q: Q | null = null;
+    try { q = makeQ(mode, gen[i % gen.length], r, lv); } catch { q = null; }
+    if (!q) { i++; continue; }
+    const k = sig(q);
+    if (seen.has(k)) { i++; continue; }
     seen.add(k); out.push(q); i++;
   }
-  return out;
+  return share ? shuf(r, out) : out;
 }
 export function checkChoiceQ(q: ChoiceQ): string[] {
   const bad: string[] = [];

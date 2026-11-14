@@ -8,6 +8,7 @@ import { h, toast } from "./ui";
 import * as M from "./model";
 import * as C from "./chemlogic";
 import * as FG from "./chemfig";
+import * as FG2 from "./chemfig2";
 import { subjectArt } from "./hub";
 import type { Ctx } from "./english";
 
@@ -129,6 +130,7 @@ function play(mode: string): void {
     else if (q.t === "num") drawNum(q);
     else if (q.t === "bal") drawBal(q);
     else if (q.t === "write") drawWrite(q);
+    else if (q.t === "ord") drawOrd(q);
     else drawClass(q);
   };
   next.addEventListener("click", () => {
@@ -137,7 +139,15 @@ function play(mode: string): void {
   });
 
   // --- choice
+  /** the drawing of a question (a curve, an atom, an apparatus, a flowchart ...) */
+  function specEl(spec: C.Spec | undefined): void {
+    if (!spec) return;
+    const f = h("div", { class: "chem-spec chem-spec-" + spec.k, id: "chem-spec" });
+    f.innerHTML = FG2.specSvg(spec);
+    body.append(f);
+  }
   function drawChoice(q: C.ChoiceQ) {
+    specEl(q.spec);
     if (q.fig) { const f = h("div", { class: "chem-fig", id: "chem-fig" }); f.innerHTML = FG.apparatusRow(q.fig); body.append(f); }
     if (q.tbl) {
       body.append(h("div", { class: "chem-tblwrap" }, h("table", { class: "chem-tbl", id: "chem-tbl" }, h("thead", {}, h("tr", {}, ...q.tbl.head.map((x) => h("th", { class: "user" }, x)))), h("tbody", {}, ...q.tbl.rows.map((r) => h("tr", {}, ...r.map((x, i) => (i ? h("td", { class: "user" }, x) : h("th", { class: "user" }, formulaEl(x))))))))));
@@ -156,6 +166,7 @@ function play(mode: string): void {
 
   // --- numbers (one or several steps)
   function drawNum(q: C.NumQ) {
+    specEl(q.spec);
     if (q.els) body.append(ARline(q.els));
     let step = 0, allRight = true;
     const rows = h("div", { class: "chem-steps", id: "chem-steps" });
@@ -286,6 +297,31 @@ function play(mode: string): void {
     (window as Win).__chem = { add, sides, setActive: (s: number) => { active = s; paint(); } };
   }
 
+  // --- put the steps in order (tap them one after the other)
+  function drawOrd(q: C.OrdQ) {
+    const seq: number[] = [];
+    const msg = h("p", { class: "chem-msg", id: "chem-msg", "aria-live": "polite" });
+    const btns = q.shown.map((t, i) => h("button", { class: "chem-ordb", "data-i": String(i), type: "button", onclick: () => tap(i) }, h("b", { class: "chem-ordn user" }, ""), h("span", { class: "user chem-ordt" }, t)));
+    const check = h("button", { class: "primary chem-check", id: "chem-check", disabled: true, onclick: () => grade() }, "检查");
+    const clear = h("button", { class: "mopt", id: "chem-clear", onclick: () => { if (locked) return; seq.length = 0; paint(); } }, "清除");
+    const paint = () => {
+      btns.forEach((b, i) => { const k = seq.indexOf(i); b.classList.toggle("sel", k >= 0); (b.firstElementChild as HTMLElement).textContent = k >= 0 ? String(k + 1) : ""; });
+      check.disabled = seq.length < q.shown.length;
+    };
+    function tap(i: number) { if (locked) return; const k = seq.indexOf(i); if (k >= 0) seq.splice(k, 1); else seq.push(i); paint(); }
+    function grade() {
+      if (locked || seq.length < q.shown.length) return;
+      const ok = seq.every((i, k) => q.shown[i] === q.items[k]);
+      seq.forEach((i, k) => { const b = btns[i]; b.classList.add(q.shown[i] === q.items[k] ? "ok" : "bad"); (b as HTMLButtonElement).disabled = true; });
+      msg.textContent = ok ? "顺序正确。" : "顺序不对，正确的顺序见下面的讲解。"; msg.className = "chem-msg " + (ok ? "ok" : "bad");
+      check.disabled = true;
+      finish(q, ok, h("div", { class: "chem-expl", id: "chem-expl" }, partsEl(q.expl)));
+    }
+    body.append(h("div", { class: "chem-ordlist", id: "chem-ordlist" }, ...btns), msg, h("div", { class: "chem-actions" }, clear, check));
+    paint();
+    (window as Win).__chem = { tap, seq };
+  }
+
   // --- classification by drag (and by tap)
   function drawClass(q: C.ClassQ) {
     const placed = new Map<string, string>();   // item id -> bucket
@@ -371,10 +407,11 @@ function play(mode: string): void {
 }
 
 // ---------- reference tables ----------
+const shellsText = (z: number): string => { const o: number[] = []; let left = z; for (const c of [2, 8, 8, 8]) { if (left <= 0) break; o.push(Math.min(c, left)); left -= c; } return o.join(" · "); };
 const SUP: Record<string, string> = { "+": "⁺", "-": "⁻", "2": "²", "3": "³" };
 const ionText = (f: string, ch: number): string => C.sub(f) + (Math.abs(ch) > 1 ? (Math.abs(ch) === 2 ? "²" : "³") : "") + SUP[ch > 0 ? "+" : "-"];
 const CHAPTER_NAMES: Record<string, string> = { air: "空气和氧气", water: "自然界的水", carbon: "碳和碳的氧化物", fuel: "燃料及其利用", metal: "金属和金属材料", acid: "酸和碱", salt: "盐和化肥" };
-const REF_TABS: [string, string][] = [["sol", "溶解性表"], ["act", "活动性顺序"], ["val", "化合价"], ["subs", "常见物质"], ["ind", "指示剂与 pH"], ["rx", "化学方程式"]];
+const REF_TABS: [string, string][] = [["sol", "溶解性表"], ["act", "活动性顺序"], ["val", "化合价"], ["subs", "常见物质"], ["ind", "指示剂与 pH"], ["rx", "化学方程式"], ["at", "前 20 号元素"]];
 function renderRef(): void {
   const D = C.data();
   let tab = "sol", cat = "", chap = "";
@@ -401,6 +438,8 @@ function renderRef(): void {
     } else if (tab === "ind") {
       body.push(h("table", { class: "chem-tbl" }, h("thead", {}, h("tr", {}, h("th", {}, "指示剂"), h("th", {}, "酸性"), h("th", {}, "中性"), h("th", {}, "碱性"))), h("tbody", {}, ...D.indicators.map((i) => h("tr", {}, h("th", { class: "user" }, i.n), h("td", { class: "user" }, i.acid), h("td", { class: "user" }, i.neutral), h("td", { class: "user" }, i.base))))),
         h("h3", {}, "常见物质的 pH"), h("div", { class: "chem-ph", id: "chem-ph" }, ...D.ph.map((p) => h("div", { class: "chem-phrow", "data-ph": String(p.v) }, h("span", { class: "user chem-phn" }, p.n), h("span", { class: "chem-phbar" }, h("i", { style: `width:${(p.v / 14) * 100}%;background:hsl(${Math.round((p.v / 14) * 240)} 70% 50%)` })), h("b", { class: "user" }, String(p.v))))));
+    } else if (tab === "at") {
+      body.push(h("table", { class: "chem-tbl chem-attbl", id: "chem-attbl" }, h("thead", {}, h("tr", {}, h("th", {}, "序号"), h("th", {}, "符号"), h("th", {}, "名称"), h("th", {}, "相对原子质量"), h("th", {}, "电子层排布"))), h("tbody", {}, ...D.more.atoms.map((a) => h("tr", { "data-z": String(a[0]) }, h("th", { class: "user" }, String(a[0])), h("td", { class: "user" }, String(a[1])), h("td", { class: "user" }, String(a[2])), h("td", { class: "user" }, String(a[3])), h("td", { class: "user" }, shellsText(a[0] as number)))))));
     } else {
       const chaps = [["", "全部"], ...Object.entries(CHAPTER_NAMES)] as [string, string][];
       body.push(chips(chaps, () => chap, (v) => (chap = v), "rr"), h("div", { class: "chem-rxlist", id: "chem-rxlist" }, ...D.reactions.filter((r) => !chap || r.ch === chap).map((r) => h("div", { class: "chem-rxrow", "data-rx": r.id }, h("div", { class: "chem-eqline" }, eqEl(r)), h("div", { class: "small" }, h("span", { class: "chem-tag" }, C.TYPE_NAME[r.type]), " ", h("span", { class: "user muted" }, r.ph))))));

@@ -958,5 +958,973 @@
  "配平 · 计算 · 酸碱盐 · 气体": [
   "Balancing · calculation · acids, bases, salts · gases",
   "Équilibrage · calculs · acides, bases, sels · gaz"
+ ],
+ "溶解度曲线": [
+  "Solubility curves",
+  "Courbes de solubilité"
+ ],
+ "读曲线、饱和、结晶": [
+  "Reading curves, saturation, crystallisation",
+  "Lecture des courbes, saturation, cristallisation"
+ ],
+ "化学计算进阶": [
+  "Advanced calculations",
+  "Calculs avancés"
+ ],
+ "气体体积、纯度、产率、质量差": [
+  "Gas volume, purity, yield, mass loss",
+  "Volume de gaz, pureté, rendement, perte de masse"
+ ],
+ "推断题": [
+  "Identification problems",
+  "Problèmes d'identification"
+ ],
+ "由现象推断未知物": [
+  "Find the unknown from the observations",
+  "Trouver l'inconnu d'après les observations"
+ ],
+ "除杂与干燥": [
+  "Removing impurities",
+  "Élimination des impuretés"
+ ],
+ "选试剂，不引入新杂质": [
+  "Choose a reagent that adds no new impurity",
+  "Choisir un réactif qui n'ajoute pas d'impureté"
+ ],
+ "流程图题": [
+  "Flowchart problems",
+  "Problèmes de schéma de procédé"
+ ],
+ "读工艺流程，判断滤渣与滤液": [
+  "Read a process, find the residue and the filtrate",
+  "Lire un procédé, trouver le résidu et le filtrat"
+ ],
+ "实验基本操作": [
+  "Laboratory basics",
+  "Manipulations de base"
+ ],
+ "仪器、步骤顺序、安全": [
+  "Apparatus, order of steps, safety",
+  "Appareils, ordre des étapes, sécurité"
+ ],
+ "化学与生活": [
+  "Chemistry and life",
+  "Chimie et vie quotidienne"
+ ],
+ "营养素、材料、元素与健康、环境": [
+  "Nutrients, materials, elements and health, environment",
+  "Nutriments, matériaux, éléments et santé, environnement"
+ ],
+ "原子与离子": [
+  "Atoms and ions",
+  "Atomes et ions"
+ ],
+ "结构示意图、离子、周期表": [
+  "Structure diagrams, ions, periodic table",
+  "Schémas de structure, ions, tableau périodique"
+ ],
+ "物质的性质与用途": [
+  "Properties and uses of substances",
+  "Propriétés et usages des substances"
+ ],
+ "用途、酸碱盐的通性": [
+  "Uses, general properties of acids, bases and salts",
+  "Usages, propriétés générales des acides, bases et sels"
+ ],
+ "降温结晶（冷却热饱和溶液）": [
+  "Crystallisation by cooling (cool the hot saturated solution)",
+  "Cristallisation par refroidissement (refroidir la solution saturée chaude)"
+ ],
+ "蒸发结晶（蒸发溶剂）": [
+  "Crystallisation by evaporation (evaporate the solvent)",
+  "Cristallisation par évaporation (évaporer le solvant)"
+ ],
+ "升高温度": [
+  "Raise the temperature",
+  "Augmenter la température"
+ ],
+ "过滤": [
+  "Filtration",
+  "Filtration"
+ ],
+ "蒸馏": [
+  "Distillation",
+  "Distillation"
+ ],
+ "溶解": [
+  "Dissolving",
+  "Dissolution"
+ ],
+ "蒸发": [
+  "Evaporation",
+  "Évaporation"
+ ],
+ "结晶": [
+  "Crystallisation",
+  "Cristallisation"
+ ],
+ "吸附": [
+  "Adsorption",
+  "Adsorption"
+ ],
+ "{0}～{1} ℃": [
+  "{0}-{1} ℃",
+  "{0}-{1} ℃"
+ ],
+ "根据图中的溶解度曲线，{0} ℃时 {1} 的溶解度约为多少（g / 100 g 水）？": [
+  "According to the solubility curves in the figure, what is the solubility of {1} at {0} ℃ (g per 100 g of water), approximately?",
+  "D'après les courbes de solubilité de la figure, quelle est approximativement la solubilité de {1} à {0} ℃ (g pour 100 g d'eau) ?"
+ ],
+ "在横坐标 {0} ℃处向上找到 {1} 的曲线，再向左读纵坐标：约 {2} g，即 {3} ℃时 100 g 水最多溶解 {4} g {5}。": [
+  "Go up from {0} ℃ on the horizontal axis to the curve of {1}, then read the vertical axis to the left: about {2} g, that is, at {3} ℃ 100 g of water dissolves at most {4} g of {5}.",
+  "Montez depuis {0} ℃ sur l'axe horizontal jusqu'à la courbe de {1}, puis lisez l'axe vertical à gauche : environ {2} g, c'est-à-dire qu'à {3} ℃ 100 g d'eau dissolvent au plus {4} g de {5}."
+ ],
+ "{0} ℃时，图中三种物质的溶解度由大到小的顺序是：": [
+  "At {0} ℃, the order of the solubilities of the three substances in the figure, from largest to smallest, is:",
+  "À {0} ℃, l'ordre des solubilités des trois substances de la figure, de la plus grande à la plus petite, est :"
+ ],
+ "在 {0} ℃处作竖线，与三条曲线的交点由高到低的顺序，就是溶解度由大到小的顺序：": [
+  "Draw a vertical line at {0} ℃: the order of its intersections with the three curves, from top to bottom, is the order of the solubilities from largest to smallest:",
+  "Tracez une verticale à {0} ℃ : l'ordre de ses intersections avec les trois courbes, de haut en bas, est l'ordre des solubilités de la plus grande à la plus petite :"
+ ],
+ "恰好饱和的溶液": [
+  "A solution that is exactly saturated",
+  "Une solution exactement saturée"
+ ],
+ "饱和溶液，且有固体未溶解": [
+  "A saturated solution with undissolved solid",
+  "Une solution saturée avec du solide non dissous"
+ ],
+ "图中点 P 表示：{0} ℃时，100 g 水中溶解了 {1} g {2} 所形成的溶液。它是：": [
+  "Point P in the figure represents the solution formed when {1} g of {2} is dissolved in 100 g of water at {0} ℃. It is:",
+  "Le point P de la figure représente la solution obtenue en dissolvant {1} g de {2} dans 100 g d'eau à {0} ℃. C'est :"
+ ],
+ "点 P 在曲线的下方：{0} g 小于 {1} ℃时的溶解度 {2} g，所以是不饱和溶液。": [
+  "Point P is below the curve: {0} g is less than the solubility {2} g at {1} ℃, so the solution is unsaturated.",
+  "Le point P est sous la courbe : {0} g est inférieur à la solubilité {2} g à {1} ℃, la solution est donc insaturée."
+ ],
+ "点 P 在曲线上：{0} g 等于 {1} ℃时的溶解度，恰好饱和。": [
+  "Point P is on the curve: {0} g equals the solubility at {1} ℃, so the solution is exactly saturated.",
+  "Le point P est sur la courbe : {0} g est égal à la solubilité à {1} ℃, la solution est exactement saturée."
+ ],
+ "点 P 在曲线的上方：{0} g 大于 {1} ℃时的溶解度 {2} g，多出来的溶质不能溶解，得到饱和溶液，且有固体未溶解。": [
+  "Point P is above the curve: {0} g is more than the solubility {2} g at {1} ℃; the excess solute cannot dissolve, so the solution is saturated and some solid remains undissolved.",
+  "Le point P est au-dessus de la courbe : {0} g est supérieur à la solubilité {2} g à {1} ℃ ; l'excès de soluté ne se dissout pas, la solution est saturée et du solide reste non dissous."
+ ],
+ "{0} 的溶解度：{1} ℃时为 {2} g，{3} ℃时为 {4} g。{5} ℃时，{6} g 水中溶解 {7} 恰好饱和，把这份饱和溶液降温到 {8} ℃，最多析出晶体多少 g？": [
+  "Solubility of {0}: {2} g at {1} ℃ and {4} g at {3} ℃. At {5} ℃, {6} g of water dissolves {7} to exactly saturation. The saturated solution is cooled to {8} ℃. At most how many grams of crystals separate out?",
+  "Solubilité de {0} : {2} g à {1} ℃ et {4} g à {3} ℃. À {5} ℃, {6} g d'eau dissolvent {7} jusqu'à saturation exacte. On refroidit la solution saturée à {8} ℃. Quelle masse maximale de cristaux (en g) se sépare ?"
+ ],
+ "第 1 步：每 100 g 水析出晶体的质量（g）= {0} ℃与 {1} ℃的溶解度之差": [
+  "Step 1: mass of crystals per 100 g of water (g) = difference of the solubilities at {0} ℃ and {1} ℃",
+  "Étape 1 : masse de cristaux pour 100 g d'eau (g) = différence des solubilités à {0} ℃ et à {1} ℃"
+ ],
+ "第 2 步：{0} g 水析出晶体的质量（g）": [
+  "Step 2: mass of crystals from {0} g of water (g)",
+  "Étape 2 : masse de cristaux pour {0} g d'eau (g)"
+ ],
+ "降温时溶剂的质量不变，析出的晶体质量 = 溶解度之差 × 水的质量 ÷ 100：": [
+  "On cooling, the mass of the solvent does not change; mass of crystals = difference of solubilities x mass of water / 100:",
+  "Lors du refroidissement, la masse du solvant ne change pas ; masse de cristaux = différence des solubilités x masse d'eau / 100 :"
+ ],
+ "要从 {0} 的饱和溶液中得到较多的晶体，较好的方法是：": [
+  "To obtain a large amount of crystals from a saturated solution of {0}, a good method is:",
+  "Pour obtenir beaucoup de cristaux à partir d'une solution saturée de {0}, une bonne méthode est :"
+ ],
+ "{0} 的溶解度随温度升高明显增大（曲线陡），冷却热饱和溶液时析出大量晶体。": [
+  "The solubility of {0} rises sharply with temperature (steep curve); cooling the hot saturated solution gives many crystals.",
+  "La solubilité de {0} augmente nettement avec la température (courbe raide) ; refroidir la solution saturée chaude donne beaucoup de cristaux."
+ ],
+ "{0} 的溶解度受温度影响很小（曲线平缓），降温析出很少，应蒸发溶剂。": [
+  "The solubility of {0} hardly changes with temperature (flat curve); cooling gives very few crystals, so the solvent should be evaporated.",
+  "La solubilité de {0} change très peu avec la température (courbe plate) ; le refroidissement donne très peu de cristaux, il faut donc évaporer le solvant."
+ ],
+ "{0} 的溶解度随温度升高而减小，升高温度时晶体析出。": [
+  "The solubility of {0} decreases as the temperature rises, so crystals appear when the temperature is raised.",
+  "La solubilité de {0} diminue quand la température augmente ; des cristaux apparaissent donc quand on chauffe."
+ ],
+ "{0} 中混有少量的 {1}，提纯 {2} 应采用的方法是：": [
+  "{0} contains a little {1}. To purify {2}, the method to use is:",
+  "{0} contient un peu de {1}. Pour purifier {2}, la méthode à employer est :"
+ ],
+ "{0} 的溶解度受温度影响大，{1} 受温度影响小：把混合物配成热的饱和溶液，降温时 {2} 大量析出，少量的 {3} 仍留在溶液中。": [
+  "The solubility of {0} depends strongly on temperature, that of {1} hardly: make a hot saturated solution of the mixture; on cooling, a lot of {2} crystallises while the little {3} stays in solution.",
+  "La solubilité de {0} dépend fortement de la température, celle de {1} très peu : préparez une solution saturée chaude du mélange ; au refroidissement, beaucoup de {2} cristallise tandis que le peu de {3} reste en solution."
+ ],
+ "{0} 的溶解度受温度影响小，{1} 受温度影响大：蒸发溶剂时 {2} 析出，少量的 {3} 留在溶液里。": [
+  "The solubility of {0} hardly depends on temperature, that of {1} strongly: when the solvent is evaporated, {2} crystallises and the little {3} stays in solution.",
+  "La solubilité de {0} dépend très peu de la température, celle de {1} fortement : quand on évapore le solvant, {2} cristallise et le peu de {3} reste en solution."
+ ],
+ "{0} 和 {1} 的溶解度曲线相交，交点所在的温度范围是：": [
+  "The solubility curves of {0} and {1} cross. The temperature range of the crossing point is:",
+  "Les courbes de solubilité de {0} et de {1} se croisent. La plage de température du point d'intersection est :"
+ ],
+ "在 {0} 之间，两种物质溶解度的大小关系发生了变化，所以两条曲线在这个范围内相交；交点处两种物质的溶解度相等。": [
+  "Within {0} the order of the two solubilities changes, so the curves cross in this range; at the crossing point the two solubilities are equal.",
+  "Dans la plage {0}, l'ordre des deux solubilités s'inverse, les courbes se croisent donc dans cette plage ; au point d'intersection les deux solubilités sont égales."
+ ],
+ "用质量分数为 {0}%、密度为 {1} g/mL 的{2}（溶质 {3}）配制 {4} g 质量分数为 {5}% 的稀溶液，需要浓溶液多少 mL？（保留一位小数）": [
+  "A dilute solution of {4} g with a mass fraction of {5}% is prepared from {2} (solute {3}) with a mass fraction of {0}% and a density of {1} g/mL. How many mL of the concentrated solution are needed? (one decimal place)",
+  "On prépare {4} g d'une solution diluée de fraction massique {5}% à partir de {2} (soluté {3}) de fraction massique {0}% et de masse volumique {1} g/mL. Quel volume (en mL) de solution concentrée faut-il ? (une décimale)"
+ ],
+ "第 1 步：稀溶液中溶质的质量（g）": [
+  "Step 1: mass of solute in the dilute solution (g)",
+  "Étape 1 : masse de soluté dans la solution diluée (g)"
+ ],
+ "第 2 步：需要浓溶液的质量（g）": [
+  "Step 2: mass of concentrated solution needed (g)",
+  "Étape 2 : masse de solution concentrée nécessaire (g)"
+ ],
+ "第 3 步：需要浓溶液的体积（mL）": [
+  "Step 3: volume of concentrated solution needed (mL)",
+  "Étape 3 : volume de solution concentrée nécessaire (mL)"
+ ],
+ "稀释前后溶质的质量不变；体积 = 质量 ÷ 密度：": [
+  "The mass of solute does not change on dilution; volume = mass / density:",
+  "La masse de soluté ne change pas lors de la dilution ; volume = masse / masse volumique :"
+ ],
+ "{0} mL 质量分数为 {1}%、密度为 {2} g/mL 的{3}（溶质 {4}），其中含溶质多少 g？": [
+  "How many grams of solute are in {0} mL of {3} (solute {4}) with a mass fraction of {1}% and a density of {2} g/mL?",
+  "Quelle masse de soluté (en g) contiennent {0} mL de {3} (soluté {4}) de fraction massique {1}% et de masse volumique {2} g/mL ?"
+ ],
+ "第 1 步：溶液的质量（g）= 体积 × 密度": [
+  "Step 1: mass of the solution (g) = volume x density",
+  "Étape 1 : masse de la solution (g) = volume x masse volumique"
+ ],
+ "第 2 步：溶质的质量（g）": [
+  "Step 2: mass of solute (g)",
+  "Étape 2 : masse de soluté (g)"
+ ],
+ "溶液质量 = 体积 × 密度；溶质质量 = 溶液质量 × 质量分数：": [
+  "Mass of solution = volume x density; mass of solute = mass of solution x mass fraction:",
+  "Masse de la solution = volume x masse volumique ; masse de soluté = masse de la solution x fraction massique :"
+ ],
+ "把 {0} g {1} 溶于 {2} mL 水（水的密度为 1 g/mL）中，所得溶液的溶质质量分数是多少（%，保留一位小数）？": [
+  "{0} g of {1} is dissolved in {2} mL of water (density of water 1 g/mL). What is the mass fraction of solute in the solution (%, one decimal place)?",
+  "On dissout {0} g de {1} dans {2} mL d'eau (masse volumique de l'eau 1 g/mL). Quelle est la fraction massique de soluté de la solution (%, une décimale) ?"
+ ],
+ "第 1 步：水的质量（g）": [
+  "Step 1: mass of water (g)",
+  "Étape 1 : masse d'eau (g)"
+ ],
+ "第 2 步：质量分数（%）": [
+  "Step 2: mass fraction (%)",
+  "Étape 2 : fraction massique (%)"
+ ],
+ "水的密度是 1 g/mL，所以 1 mL 水的质量是 1 g；溶液质量 = 溶质质量 + 水的质量：": [
+  "The density of water is 1 g/mL, so 1 mL of water has a mass of 1 g; mass of solution = mass of solute + mass of water:",
+  "La masse volumique de l'eau est de 1 g/mL, donc 1 mL d'eau a une masse de 1 g ; masse de la solution = masse de soluté + masse d'eau :"
+ ],
+ "把 {0} g 质量分数为 {1}% 的氯化钠溶液与 {2} g 质量分数为 {3}% 的氯化钠溶液混合，所得溶液的溶质质量分数是多少（%）？": [
+  "{0} g of sodium chloride solution with a mass fraction of {1}% is mixed with {2} g of sodium chloride solution with a mass fraction of {3}%. What is the mass fraction of solute in the mixture (%)?",
+  "On mélange {0} g de solution de chlorure de sodium de fraction massique {1}% avec {2} g de solution de chlorure de sodium de fraction massique {3}%. Quelle est la fraction massique de soluté du mélange (%) ?"
+ ],
+ "第 1 步：混合后溶质的总质量（g）": [
+  "Step 1: total mass of solute after mixing (g)",
+  "Étape 1 : masse totale de soluté après mélange (g)"
+ ],
+ "第 2 步：混合后溶质的质量分数（%）": [
+  "Step 2: mass fraction of solute after mixing (%)",
+  "Étape 2 : fraction massique de soluté après mélange (%)"
+ ],
+ "混合前后溶质的总质量不变，溶液的总质量也相加：": [
+  "The total mass of solute does not change on mixing, and the masses of the solutions add up:",
+  "La masse totale de soluté ne change pas lors du mélange, et les masses des solutions s'additionnent :"
+ ],
+ "在 {0} g 质量分数为 {1}% 的氯化钠溶液中，再加入 {2} g 氯化钠，完全溶解后，溶液的溶质质量分数是多少（%）？": [
+  "{2} g of sodium chloride is added to {0} g of sodium chloride solution with a mass fraction of {1}% and dissolves completely. What is the mass fraction of solute in the solution (%)?",
+  "On ajoute {2} g de chlorure de sodium à {0} g de solution de chlorure de sodium de fraction massique {1}% ; il se dissout complètement. Quelle est la fraction massique de soluté de la solution (%) ?"
+ ],
+ "溶质质量分数（%）": [
+  "Mass fraction of solute (%)",
+  "Fraction massique de soluté (%)"
+ ],
+ "加入溶质后，溶质和溶液的质量都增加了同样的质量：": [
+  "After the solute is added, the mass of solute and the mass of solution increase by the same amount:",
+  "Après l'ajout de soluté, la masse de soluté et la masse de solution augmentent de la même quantité :"
+ ],
+ "把 {0} g 质量分数为 {1}% 的氯化钠溶液蒸发掉 {2} g 水（没有晶体析出），溶液的溶质质量分数是多少（%）？": [
+  "{2} g of water is evaporated from {0} g of sodium chloride solution with a mass fraction of {1}% (no crystals separate out). What is the mass fraction of solute in the solution (%)?",
+  "On évapore {2} g d'eau de {0} g de solution de chlorure de sodium de fraction massique {1}% (aucun cristal ne se forme). Quelle est la fraction massique de soluté de la solution (%) ?"
+ ],
+ "蒸发水时溶质的质量不变，溶液的质量减小：": [
+  "When water is evaporated the mass of solute does not change, and the mass of the solution decreases:",
+  "Quand l'eau s'évapore, la masse de soluté ne change pas et la masse de la solution diminue :"
+ ],
+ "稀盐酸": [
+  "dilute hydrochloric acid",
+  "acide chlorhydrique dilué"
+ ],
+ "稀硫酸": [
+  "dilute sulfuric acid",
+  "acide sulfurique dilué"
+ ],
+ "已知 {0} 的质量为 {1} g。标准状况下 {2} 的密度为 {3} g/L，求生成的 {4} 的体积（L，保留一位小数）。": [
+  "The mass of {0} is {1} g. The density of {2} at standard conditions is {3} g/L. Find the volume of {4} produced (L, one decimal place).",
+  "La masse de {0} est de {1} g. La masse volumique de {2} dans les conditions normales est de {3} g/L. Calculez le volume de {4} produit (L, une décimale)."
+ ],
+ "第 1 步：生成 {0} 的质量（g）": [
+  "Step 1: mass of {0} produced (g)",
+  "Étape 1 : masse de {0} produit (g)"
+ ],
+ "第 2 步：{0} 的体积（L）= 质量 ÷ 密度": [
+  "Step 2: volume of {0} (L) = mass / density",
+  "Étape 2 : volume de {0} (L) = masse / masse volumique"
+ ],
+ "先由化学方程式求出气体的质量，再用 体积 = 质量 ÷ 密度：": [
+  "First find the mass of the gas from the equation, then use volume = mass / density:",
+  "Calculez d'abord la masse du gaz avec l'équation, puis utilisez volume = masse / masse volumique :"
+ ],
+ "含杂质的样品与反应物发生下面的反应（杂质不参加反应）：": [
+  "A sample with impurities takes part in this reaction (the impurities do not react):",
+  "Un échantillon impur participe à cette réaction (les impuretés ne réagissent pas) :"
+ ],
+ "取 {0} g 含 {1} 的质量分数为 {2}% 的样品，完全反应后，可得到 {3} 多少 g？": [
+  "A {0} g sample contains {1} with a mass fraction of {2}%. After complete reaction, how many grams of {3} are obtained?",
+  "Un échantillon de {0} g contient {1} avec une fraction massique de {2}%. Après réaction complète, quelle masse de {3} (en g) obtient-on ?"
+ ],
+ "第 1 步：样品中纯 {0} 的质量（g）": [
+  "Step 1: mass of pure {0} in the sample (g)",
+  "Étape 1 : masse de {0} pur dans l'échantillon (g)"
+ ],
+ "第 2 步：生成 {0} 的质量（g）": [
+  "Step 2: mass of {0} produced (g)",
+  "Étape 2 : masse de {0} formé (g)"
+ ],
+ "只有纯物质参加反应，先求纯物质的质量 = 样品质量 × 质量分数，再列比例：": [
+  "Only the pure substance reacts: first find its mass = mass of sample x mass fraction, then set up the proportion:",
+  "Seule la substance pure réagit : calculez d'abord sa masse = masse de l'échantillon x fraction massique, puis posez la proportion :"
+ ],
+ "工业制取时，实际得到的产品比理论值少：": [
+  "In industrial production the product actually obtained is less than the theoretical amount:",
+  "Dans une production industrielle, la quantité de produit réellement obtenue est inférieure à la valeur théorique :"
+ ],
+ "用 {0} g {1} 反应，产率（实际产量 ÷ 理论产量 × 100%）为 {2}%，实际得到 {3} 多少 g？": [
+  "{0} g of {1} reacts. The yield (actual amount / theoretical amount x 100%) is {2}%. How many grams of {3} are actually obtained?",
+  "On fait réagir {0} g de {1}. Le rendement (quantité réelle / quantité théorique x 100%) est de {2}%. Quelle masse de {3} (en g) obtient-on réellement ?"
+ ],
+ "第 1 步：{0} 的理论产量（g）": [
+  "Step 1: theoretical amount of {0} (g)",
+  "Étape 1 : quantité théorique de {0} (g)"
+ ],
+ "第 2 步：实际产量（g）= 理论产量 × 产率": [
+  "Step 2: actual amount (g) = theoretical amount x yield",
+  "Étape 2 : quantité réelle (g) = quantité théorique x rendement"
+ ],
+ "先按方程式算出理论产量，再乘以产率：": [
+  "First find the theoretical amount from the equation, then multiply by the yield:",
+  "Calculez d'abord la quantité théorique avec l'équation, puis multipliez par le rendement :"
+ ],
+ "两种反应物混合反应：": [
+  "Two reactants are mixed and react:",
+  "Deux réactifs sont mélangés et réagissent :"
+ ],
+ "{0} g {1} 与 {2} g {3} 充分反应（{4} 完全反应），反应后剩余的 {5} 的质量是多少 g？": [
+  "{0} g of {1} reacts fully with {2} g of {3} ({4} reacts completely). What mass of {5} is left over after the reaction (g)?",
+  "{0} g de {1} réagissent à fond avec {2} g de {3} ({4} réagit complètement). Quelle masse de {5} reste-t-il après la réaction (g) ?"
+ ],
+ "第 1 步：与 {0} g {1} 恰好反应的 {2} 的质量（g）": [
+  "Step 1: mass of {2} that reacts exactly with {0} g of {1} (g)",
+  "Étape 1 : masse de {2} qui réagit exactement avec {0} g de {1} (g)"
+ ],
+ "第 2 步：剩余 {0} 的质量（g）": [
+  "Step 2: mass of {0} left over (g)",
+  "Étape 2 : masse de {0} restant (g)"
+ ],
+ "完全反应的物质决定生成物的量；另一种物质过量，剩余质量 = 加入的质量 − 反应掉的质量：": [
+  "The substance that reacts completely decides the amount of product; the other is in excess, and mass left = mass added - mass that reacted:",
+  "La substance qui réagit complètement détermine la quantité de produit ; l'autre est en excès, et masse restante = masse ajoutée - masse ayant réagi :"
+ ],
+ "加热含杂质的固体混合物（杂质不含该气体的元素，也不参加反应）：": [
+  "A solid mixture with impurities is heated (the impurities contain none of the gas's elements and do not react):",
+  "On chauffe un mélange solide impur (les impuretés ne contiennent aucun élément du gaz et ne réagissent pas) :"
+ ],
+ "取 {0} g 混合物加热，直到质量不再减少，剩余固体的质量为 {1} g。求混合物中 {2} 的质量分数（%）。": [
+  "{0} g of the mixture is heated until its mass no longer decreases; the remaining solid has a mass of {1} g. Find the mass fraction of {2} in the mixture (%).",
+  "On chauffe {0} g du mélange jusqu'à ce que sa masse ne diminue plus ; le solide restant a une masse de {1} g. Calculez la fraction massique de {2} dans le mélange (%)."
+ ],
+ "第 1 步：生成 {0} 的质量（g）= 固体减少的质量": [
+  "Step 1: mass of {0} produced (g) = mass lost by the solid",
+  "Étape 1 : masse de {0} produit (g) = masse perdue par le solide"
+ ],
+ "第 2 步：混合物中 {0} 的质量（g）": [
+  "Step 2: mass of {0} in the mixture (g)",
+  "Étape 2 : masse de {0} dans le mélange (g)"
+ ],
+ "第 3 步：{0} 的质量分数（%）": [
+  "Step 3: mass fraction of {0} (%)",
+  "Étape 3 : fraction massique de {0} (%)"
+ ],
+ "质量守恒：固体减少的质量就是逸出气体的质量；再由方程式求反应物的质量：": [
+  "Conservation of mass: the mass lost by the solid is the mass of the gas that escaped; then find the mass of the reactant from the equation:",
+  "Conservation de la masse : la masse perdue par le solide est la masse du gaz dégagé ; trouvez ensuite la masse du réactif avec l'équation :"
+ ],
+ "碳酸盐与稀酸反应：": [
+  "A carbonate reacts with a dilute acid:",
+  "Un carbonate réagit avec un acide dilué :"
+ ],
+ "向 {0} g {1}中加入 {2} g {3}，恰好完全反应。求反应后所得溶液的溶质质量分数（%，保留一位小数）。": [
+  "{2} g of {3} is added to {0} g of {1} and they react exactly. Find the mass fraction of solute in the solution obtained (%, one decimal place).",
+  "On ajoute {2} g de {3} à {0} g de {1} ; ils réagissent exactement. Calculez la fraction massique de soluté de la solution obtenue (%, une décimale)."
+ ],
+ "第 1 步：生成的溶质 {0} 的质量（g）": [
+  "Step 1: mass of the solute {0} formed (g)",
+  "Étape 1 : masse du soluté {0} formé (g)"
+ ],
+ "第 2 步：逸出的二氧化碳的质量（g）": [
+  "Step 2: mass of carbon dioxide that escaped (g)",
+  "Étape 2 : masse de dioxyde de carbone dégagé (g)"
+ ],
+ "第 3 步：所得溶液的溶质质量分数（%）= 溶质 ÷（固体 + 酸溶液 − 气体）": [
+  "Step 3: mass fraction of solute in the solution (%) = solute / (solid + acid solution - gas)",
+  "Étape 3 : fraction massique de soluté de la solution (%) = soluté / (solide + solution acide - gaz)"
+ ],
+ "反应后溶液的质量 = 加入的固体质量 + 酸溶液质量 − 逸出气体的质量：": [
+  "Mass of the solution after the reaction = mass of solid added + mass of acid solution - mass of gas that escaped:",
+  "Masse de la solution après la réaction = masse de solide ajouté + masse de solution acide - masse de gaz dégagé :"
+ ],
+ "产生气泡": [
+  "Bubbles form",
+  "Des bulles se forment"
+ ],
+ "产生白色沉淀": [
+  "A white precipitate forms",
+  "Un précipité blanc se forme"
+ ],
+ "无明显现象": [
+  "No visible change",
+  "Aucun changement visible"
+ ],
+ "紫色石蕊溶液变红": [
+  "Purple litmus turns red",
+  "Le tournesol violet devient rouge"
+ ],
+ "紫色石蕊溶液不变色": [
+  "Purple litmus does not change colour",
+  "Le tournesol violet ne change pas de couleur"
+ ],
+ "紫色石蕊溶液变蓝": [
+  "Purple litmus turns blue",
+  "Le tournesol violet devient bleu"
+ ],
+ "无色酚酞溶液不变色": [
+  "Colourless phenolphthalein does not change colour",
+  "La phénolphtaléine incolore ne change pas de couleur"
+ ],
+ "无色酚酞溶液变红": [
+  "Colourless phenolphthalein turns red",
+  "La phénolphtaléine incolore devient rouge"
+ ],
+ "溶液呈蓝色。": [
+  "The solution is blue.",
+  "La solution est bleue."
+ ],
+ "溶液呈黄色。": [
+  "The solution is yellow.",
+  "La solution est jaune."
+ ],
+ "溶液是无色的。": [
+  "The solution is colourless.",
+  "La solution est incolore."
+ ],
+ "取少量溶液，滴加氢氧化钠溶液，产生蓝色沉淀。": [
+  "A little of the solution is taken and sodium hydroxide solution is added dropwise: a blue precipitate forms.",
+  "On prélève un peu de solution et on ajoute goutte à goutte de la solution d'hydroxyde de sodium : un précipité bleu se forme."
+ ],
+ "取少量溶液，滴加氢氧化钠溶液，产生红褐色沉淀。": [
+  "A little of the solution is taken and sodium hydroxide solution is added dropwise: a red-brown precipitate forms.",
+  "On prélève un peu de solution et on ajoute goutte à goutte de la solution d'hydroxyde de sodium : un précipité brun-rouge se forme."
+ ],
+ "取少量溶液，滴加氢氧化钠溶液，产生白色沉淀。": [
+  "A little of the solution is taken and sodium hydroxide solution is added dropwise: a white precipitate forms.",
+  "On prélève un peu de solution et on ajoute goutte à goutte de la solution d'hydroxyde de sodium : un précipité blanc se forme."
+ ],
+ "取少量溶液，滴加氢氧化钠溶液，无明显现象。": [
+  "A little of the solution is taken and sodium hydroxide solution is added dropwise: no visible change.",
+  "On prélève un peu de solution et on ajoute goutte à goutte de la solution d'hydroxyde de sodium : aucun changement visible."
+ ],
+ "另取少量溶液，滴加氯化钡溶液，产生白色沉淀。": [
+  "Another little of the solution is taken and barium chloride solution is added dropwise: a white precipitate forms.",
+  "On prélève un autre peu de solution et on ajoute goutte à goutte de la solution de chlorure de baryum : un précipité blanc se forme."
+ ],
+ "另取少量溶液，滴加氯化钡溶液，无明显现象。": [
+  "Another little of the solution is taken and barium chloride solution is added dropwise: no visible change.",
+  "On prélève un autre peu de solution et on ajoute goutte à goutte de la solution de chlorure de baryum : aucun changement visible."
+ ],
+ "有 {0} 瓶无色溶液 {1}，它们分别是下列物质的溶液中的一种：{2}。把它们两两混合，现象如下表（↓ 表示产生白色沉淀，↑ 表示产生气体，— 表示无明显现象，空格是同一种溶液）。{3} 是：": [
+  "There are {0} bottles of colourless solution {1}. They are solutions of the following substances, one each: {2}. They are mixed two at a time, with the observations in the table (↓ white precipitate, ↑ gas, — no visible change, blank = the same solution). {3} is:",
+  "Il y a {0} flacons de solution incolore {1}. Ce sont des solutions des substances suivantes, une chacun : {2}. On les mélange deux à deux, avec les observations du tableau (↓ précipité blanc, ↑ gaz, — aucun changement visible, case vide = la même solution). {3} est :"
+ ],
+ "根据两两混合的现象逐一推断。结果：": [
+  "Work it out one by one from the observations of mixing two at a time. Result:",
+  "Déduisez-le pas à pas des observations des mélanges deux à deux. Résultat :"
+ ],
+ "。每种溶液与其他溶液混合的现象组合是唯一的，所以推断的结果是唯一的。": [
+  ". The combination of observations of each solution with the others is unique, so the result is unique.",
+  ". La combinaison des observations de chaque solution avec les autres est unique, le résultat est donc unique."
+ ],
+ "紫色石蕊溶液": [
+  "Purple litmus solution",
+  "Solution de tournesol violet"
+ ],
+ "无色酚酞溶液": [
+  "Colourless phenolphthalein solution",
+  "Solution de phénolphtaléine incolore"
+ ],
+ "有三瓶无色溶液，分别是 {0} 的溶液（标签已丢失）。只用一种试剂一次就把它们区分开，这种试剂是：": [
+  "There are three bottles of colourless solution, which are solutions of {0} (the labels are lost). Using just one reagent, once, to tell them apart, the reagent is:",
+  "Il y a trois flacons de solution incolore, qui sont des solutions de {0} (les étiquettes sont perdues). Pour les distinguer avec un seul réactif, en une seule fois, le réactif est :"
+ ],
+ "分别加入三种溶液，现象依次是：": [
+  "is added to the three solutions in turn; the observations are:",
+  " est ajouté successivement aux trois solutions ; les observations sont :"
+ ],
+ "{0}：{1}": [
+  "{0}: {1}",
+  "{0} : {1}"
+ ],
+ "。三种现象各不相同，能区分开。其他选项的现象有相同的，不能一次区分。": [
+  ". The three observations all differ, so they can be told apart. With the other choices some observations are the same, so they cannot be told apart in one go.",
+  ". Les trois observations sont toutes différentes, on peut donc les distinguer. Avec les autres choix, certaines observations sont identiques : on ne peut pas les distinguer en une seule fois."
+ ],
+ "某盐 X 的溶液是下列八种溶液中的一种：": [
+  "The solution of a salt X is one of these eight solutions:",
+  "La solution d'un sel X est l'une de ces huit solutions :"
+ ],
+ "X 的化学式是：": [
+  "The formula of X is:",
+  "La formule de X est :"
+ ],
+ "蓝色溶液含 Cu²⁺，黄色溶液含 Fe³⁺；氢氧化钠与 Cu²⁺ 生成蓝色沉淀，与 Fe³⁺ 生成红褐色沉淀，与 Mg²⁺ 生成白色沉淀；氯化钡与 SO₄²⁻ 生成不溶于水的白色沉淀 BaSO₄。根据上面的现象，只有一种盐符合：": [
+  "A blue solution contains Cu²⁺ and a yellow one Fe³⁺; sodium hydroxide gives a blue precipitate with Cu²⁺, a red-brown one with Fe³⁺ and a white one with Mg²⁺; barium chloride gives the insoluble white precipitate BaSO₄ with SO₄²⁻. Only one salt fits the observations above:",
+  "Une solution bleue contient Cu²⁺ et une solution jaune Fe³⁺ ; l'hydroxyde de sodium donne un précipité bleu avec Cu²⁺, brun-rouge avec Fe³⁺ et blanc avec Mg²⁺ ; le chlorure de baryum donne avec SO₄²⁻ le précipité blanc insoluble BaSO₄. Un seul sel correspond aux observations ci-dessus :"
+ ],
+ "：不能与杂质反应。": [
+  ": does not react with the impurity.",
+  " : ne réagit pas avec l'impureté."
+ ],
+ "：也会与主要物质反应。": [
+  ": also reacts with the main substance.",
+  " : réagit aussi avec la substance principale."
+ ],
+ "：不能确定。": [
+  ": cannot be decided.",
+  " : ne peut pas être décidé."
+ ],
+ "：杂质被除去，生成物中没有新的杂质，也不与主要物质反应。": [
+  ": the impurity is removed, the products contain no new impurity, and it does not react with the main substance.",
+  " : l'impureté est éliminée, les produits ne contiennent pas de nouvelle impureté et il ne réagit pas avec la substance principale."
+ ],
+ "：引入了新杂质：": [
+  ": it brings in a new impurity:",
+  " : il introduit une nouvelle impureté : "
+ ],
+ "除去 {0} 溶液中混有的少量 {1}，下列试剂（适量）中可选用的是：": [
+  "To remove a little {1} mixed in a {0} solution, the reagent (in the right amount) that can be used is:",
+  "Pour éliminer un peu de {1} mélangé à une solution de {0}, le réactif (en quantité juste suffisante) utilisable est :"
+ ],
+ "{0} 能与稀酸反应而溶解，{1} 排在氢的后面，不与稀酸反应；过滤、洗涤、干燥即得 {2}。": [
+  "{0} dissolves in dilute acid, while {1} is below hydrogen and does not react with dilute acid; filtering, washing and drying give {2}.",
+  "{0} se dissout dans un acide dilué, alors que {1} est après l'hydrogène et ne réagit pas avec un acide dilué ; filtrer, laver et sécher donne {2}."
+ ],
+ "{0} 能把 {1} 从它的盐溶液中置换出来，生成的正是 {2}，没有引入新杂质。": [
+  "{0} displaces {1} from its salt solution, and what forms is exactly {2}, so no new impurity is introduced.",
+  "{0} déplace {1} de la solution de son sel, et ce qui se forme est exactement {2} : aucune nouvelle impureté n'est introduite."
+ ],
+ "除去 {0} 粉中混有的少量 {1}，下列试剂中可选用的是：": [
+  "To remove a little {1} mixed in {0} powder, the reagent that can be used is:",
+  "Pour éliminer un peu de {1} mélangé à de la poudre de {0}, le réactif utilisable est :"
+ ],
+ "除去 {0} 粉中混有的少量 {1} 粉，下列试剂中可选用的是：": [
+  "To remove a little {1} powder mixed in {0} powder, the reagent that can be used is:",
+  "Pour éliminer un peu de poudre de {1} mélangée à de la poudre de {0}, le réactif utilisable est :"
+ ],
+ "下面是 “{0}” 的流程，各步都发生化学反应。步骤 {1} 的反应属于：": [
+  "Below is the process “{0}”; a chemical reaction takes place in every step. The reaction of step {1} is a:",
+  "Voici le procédé « {0} » ; une réaction chimique a lieu à chaque étape. La réaction de l'étape {1} est une :"
+ ],
+ "。该步的化学方程式：": [
+  ". The chemical equation of this step:",
+  ". L'équation chimique de cette étape :"
+ ],
+ "下面是 “{0}” 的流程（所加试剂均过量）。操作 {1} 的名称是：": [
+  "Below is the process “{0}” (all reagents are added in excess). The name of operation {1} is:",
+  "Voici le procédé « {0} » (tous les réactifs sont ajoutés en excès). Le nom de l'opération {1} est :"
+ ],
+ "操作 {0}：": [
+  "Operation {0}:",
+  "Opération {0} : "
+ ],
+ "。把不溶于水的固体和液体分开。": [
+  ". It separates the insoluble solid from the liquid.",
+  ". Elle sépare le solide insoluble du liquide."
+ ],
+ "。使溶剂挥发，得到溶质的晶体。": [
+  ". It lets the solvent evaporate and gives crystals of the solute.",
+  ". Elle fait évaporer le solvant et donne des cristaux du soluté."
+ ],
+ "。把固体溶解在水中。": [
+  ". It dissolves the solid in water.",
+  ". Elle dissout le solide dans l'eau."
+ ],
+ "下面是 “{0}” 的流程（所加试剂均过量）。固体 {1} 的成分是：": [
+  "Below is the process “{0}” (all reagents are added in excess). The solid {1} consists of:",
+  "Voici le procédé « {0} » (tous les réactifs sont ajoutés en excès). Le solide {1} est constitué de :"
+ ],
+ "固体 {0} 是过滤时留在滤纸上的不溶物：": [
+  "The solid {0} is the insoluble matter left on the filter paper:",
+  "Le solide {0} est la matière insoluble restée sur le papier filtre :"
+ ],
+ "下面是 “{0}” 的流程（所加试剂均过量，微溶物视为可溶）。溶液 {1} 中含有的离子是：": [
+  "Below is the process “{0}” (all reagents are added in excess; slightly soluble substances count as soluble). The ions in solution {1} are:",
+  "Voici le procédé « {0} » (tous les réactifs sont ajoutés en excès ; les substances peu solubles sont considérées comme solubles). Les ions de la solution {1} sont :"
+ ],
+ "溶液 {0} 中：": [
+  "In solution {0}:",
+  "Dans la solution {0} : "
+ ],
+ "加入的过量试剂的离子还留在溶液中；与它们结合成沉淀、气体或水的离子已被除去。": [
+  "The ions of the excess reagents stay in the solution; the ions that combine with them to give a precipitate, a gas or water have been removed.",
+  "Les ions des réactifs en excès restent dans la solution ; les ions qui se combinent avec eux pour donner un précipité, un gaz ou de l'eau ont été éliminés."
+ ],
+ "（点击步骤，按先后顺序依次选出）": [
+  "(Tap the steps one after another in the right order)",
+  "(Touchez les étapes l'une après l'autre dans le bon ordre)"
+ ],
+ "正确的顺序：": [
+  "The right order:",
+  "L'ordre correct : "
+ ],
+ "原子": [
+  "atom",
+  "atome"
+ ],
+ "核电荷数（质子数）为 {0} 的元素是：": [
+  "The element with nuclear charge (number of protons) {0} is:",
+  "L'élément de charge nucléaire (nombre de protons) {0} est :"
+ ],
+ "元素的种类由核电荷数决定。核电荷数为 {0} 的元素是": [
+  "The kind of an element is decided by its nuclear charge. The element with nuclear charge {0} is",
+  "Le type d'un élément est déterminé par sa charge nucléaire. L'élément de charge nucléaire {0} est "
+ ],
+ "下图是某原子的结构示意图，它的最外层电子数是：": [
+  "The figure shows the structure of an atom. The number of electrons in its outer shell is:",
+  "La figure montre la structure d'un atome. Le nombre d'électrons de sa couche externe est :"
+ ],
+ "下图是某原子的结构示意图，该元素位于元素周期表的第几周期：": [
+  "The figure shows the structure of an atom. This element is in which period of the periodic table:",
+  "La figure montre la structure d'un atome. Cet élément se trouve dans quelle période du tableau périodique :"
+ ],
+ "最外层是最外面的一个电子层，有 {0} 个电子。": [
+  "The outer shell is the outermost electron shell; it has {0} electrons.",
+  "La couche externe est la couche électronique la plus extérieure ; elle contient {0} électrons."
+ ],
+ "电子层数 = 周期数：这个原子有 {0} 个电子层，在第 {1} 周期。": [
+  "Number of electron shells = period number: this atom has {0} electron shells, so it is in period {1}.",
+  "Nombre de couches électroniques = numéro de période : cet atome a {0} couches électroniques, il est donc en période {1}."
+ ],
+ "阳离子": [
+  "cation",
+  "cation"
+ ],
+ "阴离子": [
+  "anion",
+  "anion"
+ ],
+ "下图是某粒子的结构示意图（圆圈内是核电荷数）。该粒子是：": [
+  "The figure shows the structure of a particle (the number in the circle is the nuclear charge). The particle is:",
+  "La figure montre la structure d'une particule (le nombre dans le cercle est la charge nucléaire). La particule est :"
+ ],
+ "核电荷数为 {0}，是": [
+  "The nuclear charge is {0}, so it is",
+  "La charge nucléaire est {0} ; c'est "
+ ],
+ "；核外电子数为 {0}，{1}。该粒子是": [
+  "; the number of electrons outside the nucleus is {0}, {1}. The particle is",
+  " ; le nombre d'électrons autour du noyau est {0}, {1}. La particule est "
+ ],
+ "与核电荷数相等，是原子": [
+  "equal to the nuclear charge, so it is an atom",
+  "égal à la charge nucléaire, c'est donc un atome"
+ ],
+ "少于核电荷数，是阳离子": [
+  "less than the nuclear charge, so it is a cation",
+  "inférieur à la charge nucléaire, c'est donc un cation"
+ ],
+ "多于核电荷数，是阴离子": [
+  "more than the nuclear charge, so it is an anion",
+  "supérieur à la charge nucléaire, c'est donc un anion"
+ ],
+ "{0}原子的最外层有 {1} 个电子。它在化学反应中容易{2}电子，形成的稳定离子是：": [
+  "The outer shell of the {0} atom has {1} electrons. In chemical reactions it easily {2} electrons, and the stable ion it forms is:",
+  "La couche externe de l'atome de {0} contient {1} électrons. Dans les réactions chimiques il {2} facilement des électrons, et l'ion stable qu'il forme est :"
+ ],
+ "失去": [
+  "loses",
+  "perd"
+ ],
+ "得到": [
+  "gains",
+  "gagne"
+ ],
+ "最外层电子数 {0}：{1}，达到 8 个电子的稳定结构（第一层只有 2 个电子时也稳定）。{2}原子{3} {4} 个电子，形成": [
+  "Outer electrons {0}: {1}, to reach the stable structure of 8 electrons (2 electrons are also stable when only the first shell is left). The {2} atom {3} {4} electrons and forms",
+  "Électrons externes {0} : {1}, pour atteindre la structure stable à 8 électrons (2 électrons sont aussi stables quand il ne reste que la première couche). L'atome de {2} {3} {4} électrons et forme "
+ ],
+ "少于 4 个，容易失去电子": [
+  "fewer than 4, so it easily loses electrons",
+  "moins de 4, il perd donc facilement des électrons"
+ ],
+ "多于 4 个，容易得到电子": [
+  "more than 4, so it easily gains electrons",
+  "plus de 4, il gagne donc facilement des électrons"
+ ],
+ "下图是元素周期表中的一格。该原子的中子数是多少？（相对原子质量取整数）": [
+  "The figure shows one cell of the periodic table. How many neutrons does this atom have? (Use the whole-number relative atomic mass.)",
+  "La figure montre une case du tableau périodique. Combien de neutrons cet atome a-t-il ? (Prenez la masse atomique relative arrondie à l'entier.)"
+ ],
+ "中子数": [
+  "Number of neutrons",
+  "Nombre de neutrons"
+ ],
+ "相对原子质量 ≈ 质子数 + 中子数，质子数 = 原子序数：": [
+  "Relative atomic mass ≈ protons + neutrons, and protons = atomic number:",
+  "Masse atomique relative ≈ protons + neutrons, et protons = numéro atomique :"
+ ],
+ "下图是元素周期表中的一格，它表示的元素是：": [
+  "The figure shows one cell of the periodic table. The element it shows is:",
+  "La figure montre une case du tableau périodique. L'élément qu'elle représente est :"
+ ],
+ "格中的数字是原子序数（= 核电荷数 = 质子数）、元素符号和相对原子质量。该元素是": [
+  "The numbers in the cell are the atomic number (= nuclear charge = number of protons), the element symbol and the relative atomic mass. The element is",
+  "Les nombres de la case sont le numéro atomique (= charge nucléaire = nombre de protons), le symbole de l'élément et la masse atomique relative. L'élément est "
+ ],
+ "下图中的仪器是：": [
+  "The apparatus in the figure is:",
+  "L'appareil de la figure est :"
+ ],
+ "这是": [
+  "This is",
+  "C'est "
+ ],
+ "下面这种用途的仪器是：": [
+  "The apparatus with this use is:",
+  "L'appareil qui a cet usage est :"
+ ],
+ "仪器": [
+  "The apparatus",
+  "L'appareil "
+ ],
+ "的用途是：": [
+  "is used for:",
+  " sert à :"
+ ],
+ "中富含的营养素主要是：": [
+  "is rich mainly in the nutrient:",
+  " est riche surtout en nutriment :"
+ ],
+ "富含": [
+  "is rich in",
+  " est riche en "
+ ],
+ "下列食物中，富含": [
+  "Which of the following foods is rich in",
+  "Lequel de ces aliments est riche en "
+ ],
+ "的是：": [
+  "?",
+  " ?"
+ ],
+ "下面的描述对应的营养素是：": [
+  "The nutrient that fits this description is:",
+  "Le nutriment qui correspond à cette description est : "
+ ],
+ "人体缺少下列哪种元素：": [
+  "A lack of which element in the body causes this:",
+  "Le manque de quel élément dans le corps cause ceci : "
+ ],
+ "元素，容易出现：": [
+  "in the body easily causes:",
+  " dans le corps provoque facilement :"
+ ],
+ "下列元素中，属于人体必需的微量元素的是：": [
+  "Which of the following elements is an essential trace element of the human body?",
+  "Lequel de ces éléments est un oligo-élément indispensable au corps humain ?"
+ ],
+ "属于微量元素；钙、钠、钾、镁、磷等含量较多，属于常量元素。": [
+  "is a trace element; calcium, sodium, potassium, magnesium and phosphorus are present in larger amounts and are major elements.",
+  " est un oligo-élément ; le calcium, le sodium, le potassium, le magnésium et le phosphore sont présents en plus grande quantité et sont des éléments majeurs."
+ ],
+ "下列物品或材料中，属于": [
+  "Which of the following items or materials is a",
+  "Lequel de ces objets ou matériaux est un matériau de type "
+ ],
+ "属于": [
+  "is a",
+  " est de type "
+ ],
+ "下列物品或材料": [
+  "The item or material",
+  "L'objet ou le matériau "
+ ],
+ "属于：": [
+  "is a:",
+  " est de type :"
+ ],
+ "造成": [
+  "The main cause of",
+  "La cause principale de "
+ ],
+ "的主要原因是：": [
+  "is:",
+  " est :"
+ ],
+ "：主要由": [
+  ": mainly caused by",
+  " : principalement causé par "
+ ],
+ "引起。": [
+  ".",
+  "."
+ ],
+ "氢氧化钠溶液": [
+  "sodium hydroxide solution",
+  "solution d'hydroxyde de sodium"
+ ],
+ "硫酸铜溶液": [
+  "copper(II) sulfate solution",
+  "solution de sulfate de cuivre(II)"
+ ],
+ "碳酸钠溶液": [
+  "sodium carbonate solution",
+  "solution de carbonate de sodium"
+ ],
+ "排在氢前面的金属能与稀酸反应，放出氢气。": [
+  "Metals above hydrogen react with dilute acids and give off hydrogen.",
+  "Les métaux placés avant l'hydrogène réagissent avec les acides dilués et dégagent de l'hydrogène."
+ ],
+ "排在氢后面的金属不能与稀酸反应。": [
+  "Metals below hydrogen do not react with dilute acids.",
+  "Les métaux placés après l'hydrogène ne réagissent pas avec les acides dilués."
+ ],
+ "金属氧化物能与酸反应，生成盐和水。": [
+  "Metal oxides react with acids to give a salt and water.",
+  "Les oxydes métalliques réagissent avec les acides pour donner un sel et de l'eau."
+ ],
+ "非金属氧化物不能与酸反应。": [
+  "Non-metal oxides do not react with acids.",
+  "Les oxydes non métalliques ne réagissent pas avec les acides."
+ ],
+ "酸与碱发生中和反应，生成盐和水。": [
+  "An acid and a base undergo neutralisation and give a salt and water.",
+  "Un acide et une base subissent une neutralisation et donnent un sel et de l'eau."
+ ],
+ "碱能与非金属氧化物反应，生成盐和水。": [
+  "Bases react with non-metal oxides to give a salt and water.",
+  "Les bases réagissent avec les oxydes non métalliques pour donner un sel et de l'eau."
+ ],
+ "金属氧化物不能与碱反应。": [
+  "Metal oxides do not react with bases.",
+  "Les oxydes métalliques ne réagissent pas avec les bases."
+ ],
+ "金属不能与碱溶液反应（初中范围）。": [
+  "Metals do not react with solutions of bases (at junior-high level).",
+  "Les métaux ne réagissent pas avec les solutions de bases (niveau collège)."
+ ],
+ "排在前面的金属能把排在后面的金属从它的盐溶液中置换出来。": [
+  "A metal higher in the series displaces a metal lower in the series from the solution of its salt.",
+  "Un métal placé plus haut dans la série déplace un métal placé plus bas de la solution de son sel."
+ ],
+ "这种金属不如盐中的金属活泼，不能把它置换出来。": [
+  "This metal is less reactive than the metal in the salt and cannot displace it.",
+  "Ce métal est moins réactif que le métal du sel et ne peut pas le déplacer."
+ ],
+ "氧化物不与盐溶液反应。": [
+  "Oxides do not react with salt solutions.",
+  "Les oxydes ne réagissent pas avec les solutions de sels."
+ ],
+ "酸与盐的反应要看有没有沉淀、气体或水生成。": [
+  "Whether an acid reacts with a salt depends on whether a precipitate, a gas or water forms.",
+  "La réaction d'un acide avec un sel dépend de la formation d'un précipité, d'un gaz ou d'eau."
+ ],
+ "两种碱之间不反应。": [
+  "Two bases do not react with each other.",
+  "Deux bases ne réagissent pas entre elles."
+ ],
+ "两种酸之间不反应。": [
+  "Two acids do not react with each other.",
+  "Deux acides ne réagissent pas entre eux."
+ ],
+ "下面这种用途对应的物质是：": [
+  "The substance with this use is:",
+  "La substance qui a cet usage est : "
+ ],
+ "物质": [
+  "The substance",
+  "La substance "
+ ],
+ "：能反应。": [
+  ": reacts.",
+  " : réagit."
+ ],
+ "：不能反应。": [
+  ": does not react.",
+  " : ne réagit pas."
+ ],
+ "下列物质中，能与{0}反应的是：": [
+  "Which of the following substances reacts with {0}?",
+  "Laquelle de ces substances réagit avec {0} ?"
+ ],
+ "下列物质中，不能与{0}反应的是：": [
+  "Which of the following substances does not react with {0}?",
+  "Laquelle de ces substances ne réagit pas avec {0} ?"
+ ],
+ "顺序不对，正确的顺序见下面的讲解。": [
+  "The order is wrong; the right order is in the explanation below.",
+  "L'ordre est incorrect ; l'ordre correct figure dans l'explication ci-dessous."
+ ],
+ "前 20 号元素": [
+  "First 20 elements",
+  "20 premiers éléments"
+ ],
+ "序号": [
+  "No.",
+  "N°"
+ ],
+ "符号": [
+  "Symbol",
+  "Symbole"
+ ],
+ "电子层排布": [
+  "Electron shells",
+  "Couches électroniques"
+ ],
+ "缺少": [
+  "A lack of",
+  "Un manque de "
+ ],
+ "人体缺少": [
+  "A lack of",
+  "Un manque de "
+ ],
+ "粗盐提纯（除去泥沙）": [
+  "Purifying crude salt (removing sand)",
+  "Purification du sel brut (élimination du sable)"
+ ],
+ "精制食盐水（除去 Na2SO4、MgCl2、CaCl2）": [
+  "Refining brine (removing Na2SO4, MgCl2, CaCl2)",
+  "Raffinage de la saumure (élimination de Na2SO4, MgCl2, CaCl2)"
+ ],
+ "从含 CuSO4 的废水中回收铜": [
+  "Recovering copper from waste water containing CuSO4",
+  "Récupération du cuivre dans des eaux usées contenant CuSO4"
+ ],
+ "由石灰石制取氢氧化钠": [
+  "Making sodium hydroxide from limestone",
+  "Fabrication de l'hydroxyde de sodium à partir du calcaire"
+ ],
+ "由铜制取硫酸铜再回收铜": [
+  "Making copper sulfate from copper and recovering the copper",
+  "Fabrication du sulfate de cuivre à partir du cuivre puis récupération du cuivre"
  ]
 }

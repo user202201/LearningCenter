@@ -1527,6 +1527,9 @@ async function route() {
   if (hash === "#/science/physics") return void SC.renderPhysics();
   const phys = /^#\/science\/physics\/([\w-]+)$/.exec(hash);
   if (phys) return void SC.renderPhysSim(phys[1]);
+  if (hash === "#/science/geo") return void SC.renderGeo();
+  const geo = /^#\/science\/geo\/([\w-]+)$/.exec(hash);
+  if (geo) return void SC.renderGeoSim(geo[1]);
   if (hash === "#/science/bio") return void SC.renderBio();
   const bio = /^#\/science\/bio\/([\w-]+)$/.exec(hash);
   if (bio) return void SC.renderBioSim(bio[1]);

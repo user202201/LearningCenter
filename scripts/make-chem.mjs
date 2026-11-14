@@ -1,6 +1,7 @@
 // Builds src/data/chem.json: the junior-high chemistry library (written from memory, to be proofread by a teacher).
 // Run: node scripts/make-chem.mjs   (checks every equation for atom balance and every formula for a name before writing)
 import fs from "node:fs";
+import * as X from "./chem/extra.mjs";
 const out = new URL("../src/data/chem.json", import.meta.url).pathname;
 
 // equation | conditions | type | chapter | phenomenon
@@ -341,5 +342,29 @@ for (const s of SUBS) { const el = Object.keys(parse(s.f)); for (const e of el) 
 if (bad) { console.log(bad + " problem(s)"); process.exit(1); }
 
 const reactions = RX.map(([eq, cond, type, ch, ph], i) => ({ id: "r" + String(i + 1).padStart(3, "0"), eq, cond: cond.split("+"), type, ch, ph }));
-fs.writeFileSync(out, JSON.stringify({ chapters: CHAPTERS, reactions, subs: SUBS, mix: MIX, elements: EL, groups: GROUPS, ions: { cat: CATIONS, catZh: CATZH, catCh: CATCH, an: ANIONS, sol: SOL }, say: SAY, names: NAMES, phKeys: PHKEYS, activity: ACTIVITY, indicators: INDICATORS, ph: PH, solub: SOLUB, gases: GASES }));
+// ---------- checks of the part-2 data ----------
+{
+  let n = 0; const fail = (m) => { console.log("PART 2:", m); n++; };
+  for (const [name, b] of Object.entries({ LAB: X.LAB, REMGAS: X.REMGAS, LIFE: X.LIFE, PROP: X.PROP, ATOMQA: X.ATOMQA, FLOWQA: X.FLOWQA })) {
+    const qs = new Set();
+    for (const q of b) {
+      const all = [q.a, ...q.w];
+      if (all.some((x) => !x) || new Set(all).size !== 4) fail(name + ": needs four different choices: " + q.q);
+      if (!q.e || q.e.length < 8) fail(name + ": explanation missing: " + q.q);
+      if (qs.has(q.q)) fail(name + ": question twice: " + q.q); qs.add(q.q);
+    }
+  }
+  for (const [t, steps] of X.ORD) { if (steps.length < 4 || new Set(steps).size !== steps.length) fail("ORD: " + t); }
+  const seen = new Map();
+  for (const [grp, items] of [...X.FOODS, ...X.MATERIAL]) for (const it of items) { if (seen.has(it)) fail("item in two classes: " + it); seen.set(it, grp); }
+  if (new Set(X.APPS.map((a) => a[1])).size !== X.APPS.length) fail("apparatus names");
+  const phrases = [...X.USES.map((u) => u[2])]; if (new Set(phrases).size !== phrases.length) fail("uses are not unique");
+  if (new Set(X.USES.map((u) => u[0])).size !== X.USES.length) fail("use substances are not unique");
+  for (const f of X.FLOWS) for (const s of f.steps) if (s.rx && !RX.some(([eq]) => eq === s.rx)) fail("flow reaction not in the library: " + s.rx);
+  for (const d of X.DENS) if (!names.has(d[0])) fail("density substance without name " + d[0]);
+  for (const g of X.GASD) if (!names.has(g[0])) fail("gas without name " + g[0]);
+  if (X.ATOMS.length !== 20 || X.ATOMS.some((a, i) => a[0] !== i + 1)) fail("atoms must be 1..20");
+  if (n) { console.log(n + " problem(s) in part 2"); process.exit(1); }
+}
+fs.writeFileSync(out, JSON.stringify({ chapters: CHAPTERS, reactions, subs: SUBS, mix: MIX, elements: EL, groups: GROUPS, ions: { cat: CATIONS, catZh: CATZH, catCh: CATCH, an: ANIONS, sol: SOL }, say: SAY, names: NAMES, phKeys: PHKEYS, activity: ACTIVITY, indicators: INDICATORS, ph: PH, solub: SOLUB, gases: GASES, more: { remgas: X.REMGAS, lab: X.LAB, life: X.LIFE, prop: X.PROP, atomqa: X.ATOMQA, flowqa: X.FLOWQA, apps: X.APPS, ord: X.ORD, foods: X.FOODS, nutr: X.NUTR, health: X.HEALTH, trace: X.TRACE, material: X.MATERIAL, env: X.ENV, uses: X.USES, atoms: X.ATOMS, gasd: X.GASD, dens: X.DENS, flows: X.FLOWS, opnames: X.OPNAMES } }));
 console.log("ok: " + reactions.length + " reactions, " + SUBS.length + " substances, " + (fs.statSync(out).size / 1024).toFixed(0) + " KB");

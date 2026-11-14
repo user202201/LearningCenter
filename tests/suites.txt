@@ -84,3 +84,4 @@
 85-coding2
 85b-coding2-editor
 85c-coding2-screens
+90-geolab

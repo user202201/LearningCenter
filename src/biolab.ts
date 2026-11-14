@@ -17,9 +17,11 @@ const LOADERS: Record<BioId, () => Promise<{ mount: (root: HTMLElement, ctx: Phy
   flower: () => import("./bio/flower"), digest: () => import("./bio/digest"), breathing: () => import("./bio/breathing"), blood: () => import("./bio/blood"), nerve: () => import("./bio/nerve"),
   hormone: () => import("./bio/hormone"), eye: () => import("./bio/eye"), motion: () => import("./bio/motion"), ferment: () => import("./bio/ferment"), classify: () => import("./bio/classify"),
   genetics: () => import("./bio/genetics"), selection: () => import("./bio/selection"), epidemic: () => import("./bio/epidemic"),
+  lifecycle: () => import("./bio/lifecycle"), development: () => import("./bio/development"), vessels: () => import("./bio/vessels"), excretion: () => import("./bio/excretion"), ear: () => import("./bio/ear"), behaviour: () => import("./bio/behaviour"),
+  fossils: () => import("./bio/fossils"), diet: () => import("./bio/diet"), firstaid: () => import("./bio/firstaid"), skin: () => import("./bio/skin"), bones: () => import("./bio/bones"), impact: () => import("./bio/impact"), health: () => import("./bio/health"),
 };
 const hero = (X: Ctx, title: string, back: string, backLabel: string, self: string) =>
-  h("header", { class: "top hero home-hero subj-hero" }, X.back(back, backLabel), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, title)), X.gear(self));
+  h("header", { class: "top hero home-hero subj-hero pl-hero" }, X.back(back, backLabel), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, title)), X.gear(self));
 
 export function renderLab(X: Ctx): void {
   const saved = loadSaved();

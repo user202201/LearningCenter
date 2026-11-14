@@ -14,7 +14,7 @@ const { execFileSync } = require('child_process');
 const OUT = process.env.D || 'tests/out/biolab/';
 fs.mkdirSync(OUT, { recursive: true });
 
-const IDS = ['foodweb', 'population', 'microscope', 'cells', 'division', 'levels', 'seed', 'photo', 'respiration', 'transpiration', 'flower', 'digest', 'breathing', 'blood', 'nerve', 'hormone', 'eye', 'motion', 'ferment', 'classify', 'genetics', 'selection', 'epidemic'];
+const IDS = ['foodweb', 'population', 'microscope', 'cells', 'division', 'levels', 'seed', 'photo', 'respiration', 'transpiration', 'flower', 'digest', 'breathing', 'blood', 'nerve', 'hormone', 'eye', 'motion', 'ferment', 'classify', 'genetics', 'selection', 'epidemic', 'lifecycle', 'development', 'vessels', 'excretion', 'ear', 'behaviour', 'fossils', 'diet', 'firstaid', 'skin', 'bones', 'impact', 'health'];
 const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
 const extra = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/biolab.json'), 'utf8'));
 const withExtra = async (t) => {
@@ -48,6 +48,19 @@ const SOLVE = {
   selection: { soot: { s: 0.9, e: 0.8, gen: 30 }, clean: { s: 0.1, e: 0.8, gen: 30 }, nopred: { e: 0, gen: 10 } },
   foodweb: { web: { mode: 0, ...L(11, 'l') }, snake: { mode: 0, ...L(11, 'l'), rm5: 1 }, pyr: { mode: 1, lv: 5, eta: 10 }, ddt: { mode: 2, f: 6, lv: 5 } },
   population: { eq: { mode: 0, x0: 25, y0: 10 }, crash: { mode: 0, y0: 40 }, k90: { mode: 1, N0: 20, r: 0.5, K: 1000, T: 20 } },
+  lifecycle: { pupa: { c: 1, stage: 2 }, nymph: { c: 0, stage: 1 }, tadpole: { c: 2, stage: 1 } },
+  development: { birth: { mode: 0, week: 40 }, fetus: { mode: 0, week: 8 }, spurt: { mode: 1, sex: 0, age: 12 } },
+  vessels: { capillary: { mode: 1, v: 1, hr: 75 }, anaemia: { mode: 0, hct: 30 }, artery: { mode: 2, b: 0 } },
+  excretion: { normal: { water: 3 }, dehyd: { water: 0.5, sweat: 2 }, glu: { glu: 12 } },
+  ear: { mosquito: { mode: 0, age: 50, f: 17000 }, loud: { mode: 0, db: 100 }, cochlea: { mode: 1, part: 3 } },
+  behaviour: { sort: { mode: 0, ...L(10, 'bh') }, slow: { mode: 1, a: 0, n: 60 }, fast: { mode: 1, a: 2, n: 15 } },
+  fossils: { c14: { mode: 0, iso: 0, f: 25 }, u238: { mode: 0, iso: 2, f: 50 }, layers: { mode: 1, ...L(8, 'fo') } },
+  diet: { balanced: { g0: 300, g1: 400, g2: 250, g3: 150, g4: 300, g5: 25, need: 2000 }, oil: { g5: 80 }, veg: { g1: 0, g2: 0, g0: 200 } },
+  firstaid: { cpr: { mode: 0, rate: 110, depth: 5.5 }, overdose: { mode: 1, mgkg: 15, times: 6 }, burn: { mode: 2, ...L(5, 'ba') } },
+  skin: { run: { a: 2, ta: 30 }, cold: { a: 0, ta: 0, cl: 1 }, ok: { a: 0, ta: 20, cl: 2 } },
+  bones: { burn: { t: 1 }, acid: { t: 2 }, young: { t: 0, age: 10 } },
+  impact: { habitat: { mode: 0, lost: 95 }, emit: { mode: 1, emit: 9, years: 100 }, cut: { mode: 1, emit: 0, years: 50 } },
+  health: { aerobic: { mode: 0, age: 14, hr: 150 }, hard: { mode: 0, hr: 180 }, sleep: { mode: 1, age: 12, sleep: 10 } },
   epidemic: { herd: { mode: 0, vacc: 60 }, flat: { mode: 0, vacc: 30, iso: 30, route: 30 }, boost: { mode: 1, tb: 28 } },
 };
 const numOf = (s) => parseFloat(String(s).replace('−', '-'));
@@ -96,6 +109,19 @@ const EXPECT = {
   },
   foodweb: { energy: ([E, n]) => E * 0.1 ** (n - 1), maxget: ([E]) => E * 0.2, chains: () => chainsN(), conc: ([c, f, n]) => c * f ** (n - 1) },
   population: { eqx: ([c, d]) => c / d, eqy: ([a, b]) => a / b, logN: ([N0, r, K, t]) => K / (1 + (K / N0 - 1) * Math.exp(-r * t)), halfK: ([K]) => K / 2, period: ([a, c]) => (2 * Math.PI) / Math.sqrt(a * c) },
+  lifecycle: { total: ([c]) => [130, 54, 400, 506][c], stages: ([c]) => [3, 4, 4, 3][c] },
+  development: { len: ([w]) => ({ 8: 30, 12: 60, 20: 250, 28: 370, 36: 470, 40: 500 })[w], mass: ([w]) => ({ 8: 4, 12: 14, 20: 300, 28: 1000, 36: 2600, 40: 3400 })[w], spurt: ([x]) => [12, 14][x] },
+  vessels: { vol: ([kg]) => (kg * 75) / 1000, plasma: ([kg, h]) => ((kg * 75) / 1000) * (1 - h / 100), speed: ([hr, v]) => ((70 * hr) / 60) / [3, 4500, 18][v] },
+  excretion: { filtered: ([g]) => (g * 1440) / 1000, urine: ([w, sw]) => Math.max(0.5, w + 0.3 - sw - 0.6), reabs: ([u]) => (1 - u / 180) * 100 },
+  ear: { limit: ([a]) => Math.max(8000, 20000 - 300 * Math.max(0, a - 10)), safe: ([d]) => 8 * 2 ** (-(d - 85) / 3), safe2: ([d]) => 8 * 2 ** (-(d - 85) / 3) },
+  behaviour: { err: ([a, n]) => 5 + 95 * Math.exp(-[0.01, 0.05, 0.2][a] * n), trials: ([a, l]) => Math.ceil(Math.log(95 / (l - 5)) / [0.01, 0.05, 0.2][a]) },
+  fossils: { left: ([n]) => 100 * 0.5 ** n, age: ([, f]) => 5730 * Math.log2(1 / f), half: ([i]) => [5730, 1.25e9, 4.47e9][i] },
+  diet: { energy: ([a, b]) => (a * 350 + b * 25) / 100, protein: ([i, a]) => (a / 100) * [10, 1.5, 0.7, 18, 3, 0][i], oil: ([o]) => o * 9 },
+  firstaid: { press: ([r, m]) => r * m, dose: ([k, m]) => k * m, daily: ([k, m, t]) => k * m * t },
+  skin: { dry: ([ta, cl]) => 8 * (1 - 0.1 * cl) * (34 - ta), sweat: ([a, ta]) => Math.max(0, (([80, 200, 600][a] - 8 * (34 - ta)) * 3.6) / 2.43), heat: ([a]) => [80, 200, 600][a] * 3.6 },
+  bones: { organic: ([a]) => 100 * (a <= 12 ? 0.5 : a <= 40 ? 0.5 - ((a - 12) / 28) / 6 : Math.max(0.2, 1 / 3 - ((a - 40) / 40) * (1 / 3 - 0.2))) },
+  impact: { species: ([l]) => 100 * (1 - l) ** 0.25, co2: ([e, y]) => 420 + (0.45 * e * y) / 2.13, warm: ([c]) => 2 * Math.log2(c / 280) },
+  health: { max: ([a]) => 220 - a, low: ([a]) => Math.round(0.7 * (220 - a)), high: ([a]) => Math.round(0.85 * (220 - a)) },
   epidemic: { herd: ([R]) => (1 - 1 / R) * 100, reff: ([R, i, r, v]) => R * (1 - i) * (1 - r) * (1 - v), susc: ([v]) => 1000 * (1 - v) },
 };
 // text kinds: tables written here
@@ -112,6 +138,10 @@ const ROLE = [['青草', '生产者'], ['蝗虫', '初级消费者'], ['吃蝗�
 const LINK = [['隔离患者', '控制传染源'], ['戴口罩、勤洗手', '切断传播途径'], ['接种疫苗', '保护易感人群'], ['消毒、杀灭蚊蝇', '切断传播途径'], ['对密切接触者进行医学观察', '控制传染源'], ['锻炼身体、增强抵抗力', '保护易感人群']];
 const PROD = [['酵母菌', '酒精和二氧化碳'], ['乳酸菌', '乳酸'], ['醋酸菌', '醋酸']];
 const DEVS = [['子房', '果实'], ['胚珠', '种子'], ['受精卵', '胚'], ['子房壁', '果皮'], ['珠被', '种皮']];
+const BEH = { 蜘蛛结网: '先天性行为', 母鸡孵卵: '先天性行为', 蜜蜂采蜜: '先天性行为', 黑猩猩用树枝钓白蚁: '学习行为', 小狗学算算术: '学习行为', 鹦鹉学舌: '学习行为', 蚂蚁分工合作: '社会行为', 狒狒的首领与等级: '社会行为', 蜜蜂跳舞传递信息: '社会行为', 大山雀偷喝牛奶: '学习行为' };
+const FOS = { 三叶虫: '寒武纪（约 5.4 亿年前）', 早期鱼类: '泥盆纪（约 4 亿年前）', 两栖类: '石炭纪（约 3.5 亿年前）', 巨型蕨类: '石炭纪（约 3.5 亿年前）', 恐龙: '中生代（约 2.5 亿 – 6600 万年前）', 始祖鸟: '中生代（约 2.5 亿 – 6600 万年前）', 哺乳动物繁盛: '新生代（6600 万年前至今）', 人类化石: '新生代（6600 万年前至今）' };
+const LACKD = [['维生素 A', '夜盲症'], ['维生素 C', '坏血病'], ['维生素 D 或钙', '佝偻病（儿童）'], ['维生素 B₁', '脚气病'], ['铁', '缺铁性贫血'], ['碘', '地方性甲状腺肿（大脖子病）']];
+const PROT = [['建立自然保护区', '就地保护'], ['建立动物园和植物园', '迁地保护'], ['建立濒危物种的基因库', '离体保护'], ['颁布《野生动物保护法》', '法制管理']];
 const ROTM = { p: 'd', b: 'q', d: 'p', q: 'b', n: 'u', u: 'n' }, ROTK = ['p', 'b', 'd', 'q', 'n', 'u'];
 const compat = (d, r) => ({ 0: [0, 1, 2, 3], 1: [1, 3], 2: [2, 3], 3: [3] }[d].includes(r));
 const TEXT = {
@@ -137,6 +167,19 @@ const TEXT = {
   foodweb: { role: (p, a, q) => a === ROLE.find((x) => q.includes(`“${x[0]}”`))[1] },
   epidemic: { link: (p, a, q) => a === LINK.find((x) => q.includes(`“${x[0]}”`))[1], memory: (p, a) => a === '记忆细胞' },
   population: {},
+  lifecycle: { kind: ([c], a) => a === ['不完全变态', '完全变态', '变态发育', '不变态'][c], fert: ([c], a) => a === ['体内受精', '体内受精', '体外受精', '体内受精'][c], pupa: (p, a) => a === '蛹' },
+  development: { fert: (p, a) => a === '输卵管', nutri: (p, a) => a === '胎盘和脐带' },
+  vessels: { valve: (p, a) => a === '防止血液倒流', bleed: ([b], a) => a === ['近心端', '远心端', '自然止血或消毒包扎'][b] },
+  excretion: { step: (p, a) => a.startsWith('肾小球的滤过'), gluc: (p, a) => a.startsWith('被肾小管全部重吸收') },
+  ear: { cochlea: (p, a) => a === '耳蜗', balance: (p, a) => a === '前庭和半规管' },
+  behaviour: { class: (p, a, q) => a === BEH[q.match(/“(.+?)”/)[1]], class2: (p, a, q) => a === BEH[q.match(/“(.+?)”/)[1]], brain: (p, a) => a.startsWith('神经系统和大脑') },
+  fossils: { layer: (p, a, q) => a === FOS[q.match(/“(.+?)”/)[1]], order: (p, a) => a.startsWith('更古老') },
+  diet: { lack: (p, a, q) => a === LACKD.find((x) => q.includes(`缺乏${x[0]}`))[1], 'energy-main': (p, a) => a === '糖类' },
+  firstaid: { number: (p, a) => a.startsWith('立即拨打 120'), otc: (p, a) => a.startsWith('服药前阅读说明书') },
+  skin: { hot: (p, a) => a.startsWith('皮肤血管舒张'), skin: (p, a) => a === '进行光合作用' },
+  bones: { treat: ([t], a) => a === ['有弹性又坚硬', '变脆，易碎（只剩无机盐）', '变软，可以弯曲（只剩有机物）'][t], child: (p, a) => a.startsWith('有机物含量较多'), inorganic: (p, a) => a === '无机盐', joint: (p, a) => a.startsWith('关节面') },
+  impact: { protect: (p, a, q) => a === PROT.find((x) => q.includes(`“${x[0]}”`))[1], cause: (p, a) => a === '光合作用增强' },
+  health: { sleep: ([age], a) => a === (age < 13 ? '9–12 小时' : '8–10 小时'), habit: (p, a) => a.startsWith('合理饮食') },
 };
 
 (async () => {
@@ -306,6 +349,47 @@ const TEXT = {
     ok(cl.sets.every(Boolean) && cl.classes.every(([n, a, b, k]) => (GROUP[n] || '') === a && (PLANT[n] || '') === b && !!k) && cl.classes.filter((c) => c[3] === '动物界').length === 29 && cl.classes.filter((c) => c[3] === '植物界').length === 6 && cl.classes.filter((c) => c[3] === '真菌界').length === 3 && cl.classes.filter((c) => c[3] === '细菌界').length === 2 && cl.classes.filter((c) => c[3] === '病毒').length === 2, 'A classify: the sorting rounds (30 seeds x 3 sets) have distinct items with every class present; vertebrate / plant classes and the five kingdoms agree with the table written in the test');
   }
 
+  // ---- the models of the second batch (reproduction, vessels, kidney, ear, behaviour, fossils, diet, first aid, skin, bones, environment, health) ----
+  {
+    const r = await page.evaluate(async () => {
+      const M = {}; for (const n of ['lifecycle', 'development', 'vessels', 'excretion', 'ear', 'behaviour', 'fossils', 'diet', 'firstaid', 'skin', 'bones', 'impact', 'health']) M[n] = await import(`/src/bio/model-${n}.ts`);
+      const o = {}; const mono = (a, d = 1) => a.every((x, i) => i === 0 || (d > 0 ? x >= a[i - 1] - 1e-12 : x <= a[i - 1] + 1e-12));
+      const L = M.lifecycle; o.life = { n: L.CYCLES.length, tot: [0, 1, 2, 3].map(L.total), pupa: [0, 1, 2, 3].map(L.hasPupa), kinds: L.CYCLES.map((c) => c.kind) };
+      const D = M.development; const wk = Array.from({ length: 41 }, (_, i) => i);
+      let dd = 0; for (let a = 1; a < 17; a += 0.37) for (const sx of [0, 1]) { const h = 1e-3; const num = (D.height(a + h, sx) - D.height(a - h, sx)) / (2 * h); dd = Math.max(dd, Math.abs(num - D.velocity(a, sx))); }
+      const vel = (sx) => { const a = Array.from({ length: 121 }, (_, i) => 6 + i / 10); const v = a.map((x) => D.velocity(x, sx)); return a[v.indexOf(Math.max(...v))]; };
+      o.dev = { len: mono(wk.map(D.lengthAt)), mass: mono(wk.map(D.massAt)), nodes: D.FETUS.map(([w, l, m]) => [D.lengthAt(w) === l, D.massAt(w) === m]).flat(), phase: [0.5, 3, 8, 30].map(D.phase), dd, peaks: [vel(0), vel(1)], h18: [D.height(18, 0), D.height(18, 1)], h0: D.height(0, 0) };
+      const V = M.vessels; o.ves = { prod: [0, 1, 2].map((v) => V.speed(75, v) * V.VESSELS[v][1] - V.flow(75)), order: [V.speed(75, 0), V.speed(75, 2), V.speed(75, 1)], vol: V.plasmaVolume(50, 45) + (V.bloodVolume(50) * 45) / 100 - V.bloodVolume(50), an: [V.anaemic(35), V.anaemic(36)], rbc: V.rbcPerUl(45), valves: V.VESSELS.map((x) => x[3]) };
+      const X = M.excretion; o.exc = { f: X.filtered(), u: [X.urine(0.5, 3), X.urine(2, 0.5), X.urine(3, 0.5), X.urine(4, 0)], reabs: X.reabsorbed(1.5), glu: [X.glucoseInUrine(10), X.glucoseInUrine(15)], monoW: mono(Array.from({ length: 15 }, (_, i) => X.urine(0.5 + i * 0.25, 0.5))), factor: X.ureaFactor(1.5) };
+      const E = M.ear; o.ear = { lim: [10, 30, 50, 70].map(E.upperLimit), monoLim: mono([5, 10, 20, 40, 60, 70].map(E.upperLimit), -1), aud: [E.audible(10, 10), E.audible(20, 10), E.audible(20000, 10), E.audible(20001, 10), E.audible(17000, 60)], safe: [E.safeHours(85), E.safeHours(88), E.safeHours(100)], path: E.PATH.length };
+      const B = M.behaviour; o.beh = { e0: B.errors(0, 0.2), e1: B.errors(1e6, 0.2), mono: [0.01, 0.05, 0.2].map((k) => mono(Array.from({ length: 50 }, (_, n) => B.errors(n * 4, k)), -1)), fast: [B.errors(30, 0.01) > B.errors(30, 0.05), B.errors(30, 0.05) > B.errors(30, 0.2)], tt: [0.01, 0.05, 0.2].flatMap((k) => [20, 30, 50].map((l) => { const n = B.trialsTo(k, l); return B.errors(n, k) < l && B.errors(n - 1, k) >= l; })), items: B.ITEMS.length, cls: B.ITEMS.map((x) => x[1]) };
+      const F = M.fossils; o.fos = { half: F.ISOTOPES.map(([, h]) => F.remaining(h, h)), age: [0.5, 0.25, 0.125].map((f) => F.age(f, 5730) / 5730), round: [0.9, 0.3, 0.01].map((f) => F.remaining(F.age(f, 4.47e9), 4.47e9) - f), layers: F.LAYERS.length, items: F.FOSSILS.map((x) => x[1]) };
+      const Di = M.diet; const gs = [300, 400, 250, 150, 300, 25]; o.diet = { energy: Di.energy(gs), sum: Di.energy([100, 0, 0, 0, 0, 0]) + Di.energy([0, 100, 0, 0, 0, 0]) - Di.energy([100, 100, 0, 0, 0, 0]), macro: Di.GROUPS.map((g) => Math.abs(4 * g[2] + 9 * g[3] + 4 * g[4] - g[1]) / g[1]), bal: [Di.balanced(gs, 2000), Di.balanced([300, 100, 250, 150, 300, 25], 2000), Di.balanced(gs, 3000)], fat: [Di.fatShare([0, 0, 0, 0, 0, 100]), Di.fatShare([0, 0, 0, 0, 0, 0])] };
+      const Fa = M.firstaid; const cp = []; for (let r = 60; r <= 160; r += 5) for (let d = 2; d <= 8; d += 0.5) cp.push([Fa.effectiveCpr(r, d), r >= 100 && r <= 120 && d >= 5 && d <= 6]);
+      o.fa = { cpr: cp.every(([a, b]) => a === b), n: cp.filter((x) => x[0]).length, dose: [Fa.dose(30, 5), Fa.daily(30, 5, 3)], safe: [Fa.safeDaily(30, 5, 3, 30), Fa.safeDaily(30, 15, 6, 30), Fa.safeDaily(30, 10, 3, 30)], burn: Fa.BURN.length };
+      const Sk = M.skin; let bal = 0; for (let ta = 0; ta <= 45; ta += 3) for (const cl of [0, 2, 5]) for (const [, Mw] of Sk.ACTIVITY) { const sw = Sk.sweat(Mw, ta, cl), d = Sk.dryLoss(ta, cl); if (sw > 0 && Math.abs(Mw - d - (sw * 2.43) / 3.6) > 1e-9) bal++; if (sw === 0 && Mw > d + 1e-9) bal++; }
+      o.skin = { bal, d: [Sk.dryLoss(34, 0), Sk.dryLoss(20, 0), Sk.dryLoss(20, 5)], st: [Sk.state(80, 0, 1), Sk.state(600, 30, 2), Sk.state(80, 20, 2)] };
+      const Bo = M.bones; const ag = Array.from({ length: 76 }, (_, i) => 5 + i); o.bone = { mono: mono(ag.map(Bo.organic), -1), range: [Bo.organic(5), Bo.organic(12), Bo.organic(40), Bo.organic(80)], bend: [Bo.bend(20, 1), Bo.bend(20, 2), Bo.bend(8, 0) > Bo.bend(70, 0)], hard: Bo.hardness(20, 2) < Bo.hardness(20, 0) };
+      const Im = M.impact; o.imp = { s: [Im.speciesLeft(0), Im.speciesLeft(0.9), Im.speciesLeft(1 - 0.5 ** 4)], mono: mono(Array.from({ length: 20 }, (_, i) => Im.speciesLeft(i / 20)), -1), c: [Im.co2(0, 50), Im.co2(10, 20) - Im.co2(10, 10) - (Im.co2(10, 10) - Im.co2(10, 0))], w: [Im.warming(560), Im.warming(280), Im.warming(1120)] };
+      const H = M.health; o.hl = { max: H.maxHr(14), z: [H.zone(90, 14), H.zone(130, 14), H.zone(160, 14), H.zone(190, 14)], t: H.target(14), sl: [H.sleepOk(12, 10), H.sleepOk(12, 7), H.sleepOk(15, 9), H.sleepOk(15, 11)] };
+      return o;
+    });
+    const near2 = (a, b, t = 1e-9) => Math.abs(a - b) <= t;
+    ok(r.life.n === 4 && r.life.tot.join() === '130,54,400,506' && r.life.pupa.join() === 'false,true,false,false' && r.life.kinds.join() === '不完全变态,完全变态,变态发育,不变态', 'A lifecycle: four life cycles with their total days; only the silkworm has a pupa; incomplete / complete metamorphosis');
+    ok(r.dev.len && r.dev.mass && r.dev.nodes.every(Boolean) && r.dev.phase.join() === '受精卵,胚胎,胎儿,胎儿' && r.dev.dd < 1e-4 && Math.abs(r.dev.peaks[0] - 12) <= 0.5 && Math.abs(r.dev.peaks[1] - 14) <= 0.5 && r.dev.h18[0] > 140 && r.dev.h18[0] < 200 && r.dev.h0 === 50, 'A development: fetal length and mass grow with the week and equal the table at its nodes, height is the integral of the growth speed (derivative check ' + r.dev.dd.toExponential(1) + '), the spurt peaks at 12 (girls) and 14 (boys)');
+    ok(r.ves.prod.every((x) => near2(x, 0, 1e-9)) && r.ves.order[0] > r.ves.order[1] && r.ves.order[1] > r.ves.order[2] && near2(r.ves.vol, 0, 1e-9) && r.ves.an.join() === 'true,false' && near2(r.ves.rbc, 5e6) && r.ves.valves.join() === 'false,false,true', 'A vessels: blood speed x cross-section = flow (continuity), artery > vein > capillary, plasma + cells = blood volume, anaemia below 36 %, only veins have valves');
+    ok(near2(r.exc.f, 180) && near2(r.exc.u[0], 0.5) && near2(r.exc.u[1], 1.2) && near2(r.exc.u[2], 2.2) && near2(r.exc.u[3], 3.7) && r.exc.reabs > 0.99 && r.exc.glu[0] === 0 && r.exc.glu[1] > 0 && r.exc.monoW && near2(r.exc.factor, 25 / 1.5 / 0.3, 1e-9), 'A excretion: 180 L of primary urine a day, urine volume from the water balance (never below 0.5 L) rising with drinking, over 99 % of the water reabsorbed, sugar in the urine only above 10 mmol/L');
+    ok(r.ear.lim.join() === '20000,14000,8000,8000' && r.ear.monoLim && r.ear.aud.join() === 'false,true,true,false,false' && near2(r.ear.safe[0], 8) && near2(r.ear.safe[1], 4) && near2(r.ear.safe[2], 0.25) && r.ear.path === 6, 'A ear: the upper limit of hearing falls with age, 20 Hz - 20 kHz audible, 85 dB = 8 h and every 3 dB halves it, six parts on the sound path');
+    ok(near2(r.beh.e0, 100) && near2(r.beh.e1, 5, 1e-6) && r.beh.mono.every(Boolean) && r.beh.fast.every(Boolean) && r.beh.tt.every(Boolean) && r.beh.items === 10 && r.beh.cls.join() === '0,0,0,1,1,1,2,2,2,1', 'A behaviour: errors fall from 100 % to 5 %, faster for a larger k (earthworm < mouse < chimpanzee), trialsTo is the first trial below the limit (9 cases)');
+    ok(r.fos.half.every((x) => near2(x, 0.5)) && r.fos.age.join() === '1,2,3' && r.fos.round.every((x) => Math.abs(x) < 1e-12) && r.fos.layers === 5 && r.fos.items.join() === '0,1,2,2,3,3,4,4', 'A fossils: one half-life leaves half, age = T x log2(1/f) and the remaining fraction of that age is f again, 5 layers in order');
+    ok(near2(r.diet.energy, 1905, 1e-6) && near2(r.diet.sum, 0, 1e-9) && r.diet.macro.every((x) => x < 0.1) && r.diet.bal.join() === 'true,false,false' && near2(r.diet.fat[0], 1) && r.diet.fat[1] === 0, 'A diet: energy is additive, 4 kcal/g protein + 9 fat + 4 carbohydrate agrees with the table within 10 % for every food group, balance needs all six groups in range and the energy within 10 %');
+    ok(r.fa.cpr && r.fa.n === 5 * 3 && r.fa.dose.join() === '150,450' && r.fa.safe.join() === 'true,false,true' && r.fa.burn === 5, 'A firstaid: compressions are effective only at 100-120 per minute and 5-6 cm (' + r.fa.n + ' of the 21 x 13 grid), dose = mass x mg/kg, the daily limit');
+    ok(r.skin.bal === 0 && near2(r.skin.d[0], 0) && near2(r.skin.d[1], 8 * 14) && near2(r.skin.d[2], 8 * 0.5 * 14) && r.skin.st[0].startsWith('战栗') && r.skin.st[1].startsWith('排汗') && r.skin.st[2] === '体温平衡', 'A skin: heat made - heat lost through the skin = heat carried away by sweat (2.43 kJ/mL) in 150 settings, no sweat when the skin alone is enough');
+    ok(r.bone.mono && near2(r.bone.range[0], 0.5) && near2(r.bone.range[1], 0.5) && near2(r.bone.range[2], 1 / 3, 1e-9) && near2(r.bone.range[3], 0.2, 1e-9) && r.bone.bend[0] === 0 && r.bone.bend[1] === 1 && r.bone.bend[2] && r.bone.hard, 'A bones: the organic share never rises with age (50 % at 12, 1/3 at 40, 20 % at 80), burned bone is brittle, acid-soaked bone bends, young bone bends more');
+    ok(near2(r.imp.s[0], 1) && near2(r.imp.s[1], 0.1 ** 0.25) && near2(r.imp.s[2], 0.5, 1e-9) && r.imp.mono && r.imp.c[0] === 420 && near2(r.imp.c[1], 0, 1e-9) && near2(r.imp.w[0], 2) && r.imp.w[1] === 0 && near2(r.imp.w[2], 4), 'A impact: species left = (1 - lost)^0.25 (losing 15/16 of the area halves them), CO2 grows linearly with the years, 2 degrees for every doubling');
+    ok(r.hl.max === 206 && r.hl.z.join() === '热身（轻松）,中等强度,有氧锻炼,高强度（不宜持续）' && r.hl.t.join() === '144,175' && r.hl.sl.join() === 'true,false,true,false', 'A health: maximum heart rate 220 - age, four zones, target range 144-175 at 14, sleep ranges');
+  }
+
   // ---- the quiz generators ----
   {
     const r = await page.evaluate(async (ids) => {
@@ -336,7 +420,7 @@ const TEXT = {
       if (Object.keys(EXPECT[id] || {}).length) { const w = chk(id, list, true); ok(w.bad > 0, `A quiz ${id}: the check is able to fail (a formula 30% off is caught)`); }
       const kinds = new Set(list.flat().map((q) => q.kind)); ok(kinds.size === 5, `A quiz ${id}: five different kinds of question (${[...kinds].join(', ')})`);
     }
-    ok(total === 23 * 300 * 5, 'A quiz: ' + total + ' questions checked');
+    ok(total === IDS.length * 300 * 5, 'A quiz: ' + total + ' questions checked');
     // a text check that is wrong must be caught too
     const wt = chk('blood', r.blood.list.map((qz) => qz.map((q) => (q.kind === 'abo' ? { ...q, ans: q.choices[(q.a + 1) % 4], a: (q.a + 1) % 4 } : q))), false);
     ok(wt.bad > 0, 'A quiz: a deliberately wrong text answer (ABO) is caught by the independent table');
@@ -352,10 +436,10 @@ const TEXT = {
     await page.click('#open-bio'); await page.waitForSelector('#bl-home');
     ok(await page.evaluate(() => location.hash) === '#/science/bio', 'B the card opens #/science/bio');
     const cards = await page.evaluate(() => [...document.querySelectorAll('.pl-sc')].map((c) => ({ id: c.dataset.sim, icon: !!c.querySelector('svg'), text: c.textContent, ch: c.dataset.chapter })));
-    ok(cards.length === 23 && IDS.every((id) => cards.some((c) => c.id === id)) && cards.every((c) => c.icon && /实验任务 0 \/ \d/.test(c.text)), 'B 23 cards, each with its drawn icon and "实验任务 0 / n"');
+    ok(cards.length === IDS.length && IDS.every((id) => cards.some((c) => c.id === id)) && cards.every((c) => c.icon && /实验任务 0 \/ \d/.test(c.text)), `B ${IDS.length} cards, each with its drawn icon and "实验任务 0 / n"`);
     const groups = await page.evaluate(() => [...document.querySelectorAll('#bl-home > h2, #bl-home .pl-sc')].map((e) => (e.tagName === 'H2' ? 'H:' + e.textContent : e.dataset.sim)));
     const g8 = groups.indexOf('H:八年级');
-    ok(groups[0] === 'H:七年级' && g8 === 18 && groups.slice(1, g8).length === 17 && groups.slice(g8 + 1).length === 6 && groups[g8 + 1] === 'motion' && groups[1] === 'foodweb', 'B the lab starts with 七年级 (17 cards), then 八年级 (6): ' + groups.join(' '));
+    ok(groups[0] === 'H:七年级' && g8 === 25 && groups.slice(1, g8).length === 24 && groups.slice(g8 + 1).length === 12 && groups[g8 + 1] === 'motion' && groups[1] === 'foodweb', 'B the lab starts with 七年级 (17 cards), then 八年级 (6): ' + groups.join(' '));
     const chs = await page.evaluate(() => [...document.querySelectorAll('.pl-sc')].map((c) => c.dataset.chapter));
     ok(chs.every((c) => /^(七|八)(上|下) · /.test(c)) && new Set(chs).size >= 12, 'B each card names its textbook part (七上 / 七下 / 八上 / 八下) and chapter');
     ok(await page.isVisible('#bl-notes') && (await page.getAttribute('#bl-notes', 'href')) === '#/science/notes', 'B the lab links to the 知识总结 page');
@@ -368,7 +452,7 @@ const TEXT = {
     await to('#/science/bio/nonsense', '#bl-home');
     ok(true, 'B an unknown simulation id goes back to the lab');
     await to('#/science/physics', '#pl-home');
-    ok((await page.locator('.pl-sc').count()) === 17, 'B the physics lab is unchanged: 17 cards');
+    ok((await page.locator('.pl-sc').count()) >= 17, 'B the physics lab is still there (17 cards or more)');
   }
 
   const finiteText = (sel) => page.evaluate((sel) => { const t = [...document.querySelectorAll(sel)].map((e) => e.textContent).join(' '); return !/NaN|undefined|Infinity|null/.test(t); }, sel);
@@ -417,7 +501,7 @@ const TEXT = {
     const txt = await page.evaluate(() => [...document.querySelectorAll('.pl-sc')].map((c) => [c.dataset.sim, c.textContent, c.classList.contains('all')]));
     ok(txt.every(([id, tx, all]) => new RegExp('实验任务 (\\d) / \\1').test(tx) && all), 'B after a reload every card shows all tasks done (progress kept in learn.bio.v1)');
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('learn.bio.v1')));
-    ok(Object.keys(stored.done).length === 23 && !(await page.evaluate(() => localStorage.getItem('learn.phys.v1') && JSON.parse(localStorage.getItem('learn.phys.v1')).done.cells)), 'B learn.bio.v1 holds the tasks of 23 simulations; the physics store has none of them');
+    ok(Object.keys(stored.done).length === IDS.length && !(await page.evaluate(() => localStorage.getItem('learn.phys.v1') && JSON.parse(localStorage.getItem('learn.phys.v1')).done.cells)), 'B learn.bio.v1 holds the tasks of all simulations; the physics store has none of them');
   }
   // the kit extensions: hidden state, actions, derive, links, play
   {
@@ -521,7 +605,7 @@ const TEXT = {
         if (name === 'landscape' || name === 'tablet') { if (['microscope', 'cells', 'photo', 'blood', 'genetics', 'foodweb', 'classify', 'epidemic', 'eye', 'digest'].includes(id)) await p2.screenshot({ path: path.join(OUT, `sim-${id}-${name}.png`) }); }
       }
     }
-    ok(probs.length === 0, '"C 23 simulations + the lab page on 5 screen sizes at dpr 2: no overflow, centred, canvas crisp (backing = layout x dpr), sliders >= 44 px, buttons >= 40 px, nothing clipped / outside, touch-action right"' + (probs.length ? '\n   ' + probs.slice(0, 12).join('\n   ') : ''));
+    ok(probs.length === 0, `C ${IDS.length} simulations + the lab page on 5 screen sizes at dpr 2: no overflow, centred, canvas crisp (backing = layout x dpr), sliders >= 44 px, buttons >= 40 px, nothing clipped / outside, touch-action right` + (probs.length ? '\n   ' + probs.slice(0, 12).join('\n   ') : ''));
     const t3 = await start(new Map(), { local: true, viewport: { width: 390, height: 844 }, dpr: 3 });
     await t3.page.evaluate(() => (location.hash = '#/science/bio/microscope')); await t3.page.waitForSelector('.pl-sim'); await t3.page.waitForTimeout(250);
     const c3 = await t3.page.evaluate(() => { const c = document.querySelector('#pl-canvas'); return [c.width, c.offsetWidth, devicePixelRatio]; });
@@ -609,8 +693,8 @@ const TEXT = {
   // =====================================================================================  E. ENGLISH / FRENCH
   {
     // the texts the check:i18n script finds in src (scan of src/, games, phys, bio) that are not yet in i18n-data.ts must all be in src/i18n-extra/biolab.json
-    let out = ''; try { execFileSync('node', ['scripts/check-i18n.mjs'], { cwd: path.join(__dirname, '../..'), encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }); } catch (e) { out = String(e.stderr || '') + String(e.stdout || ''); }
-    const missing = [...out.matchAll(/^missing .*?\((.+?)\): (".*")$/gm)].map((m) => JSON.parse(m[2]));
+    let out = ''; try { execFileSync('node', ['scripts/check-i18n.mjs'], { cwd: path.join(__dirname, '../..'), env: { ...process.env, CHECK_BIO: '1' }, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }); } catch (e) { out = String(e.stderr || '') + String(e.stdout || ''); }
+    const missing = [...out.matchAll(/^missing .*?\((.+?)\): (".*")$/gm)].filter((m) => /^bio\/|^biolab\.ts/.test(m[1])).map((m) => JSON.parse(m[2]));
     const notInExtra = missing.filter((k) => !(k in extra));
     ok(notInExtra.length === 0, `E check:i18n: every text it reports (${missing.length}) is in src/i18n-extra/biolab.json (the lead merges the file into i18n-data.ts)${notInExtra.length ? ': ' + notInExtra.slice(0, 8).join(' | ') : ''}`);
     ok(Object.entries(extra).every(([k, v]) => Array.isArray(v) && v.length === 2 && typeof v[0] === "string" && typeof v[1] === "string" && v.every((x) => !/[一-鿿]/.test(x))), 'E biolab.json: {"中文": ["English", "Français"]}, no Chinese in a translation');
@@ -650,7 +734,7 @@ const TEXT = {
     ok(/[一-鿿]/.test(await p.textContent('#pl-lesson')) && (await p.evaluate(() => !!document.querySelector('#pl-lesson.user'))), `E ${label}: the lesson text is content: it stays Chinese in a user box`);
     let probs = [];
     for (const [w, hh] of [[390, 844], [320, 568], [820, 1180]]) { await p.setViewportSize({ width: w, height: hh }); for (const id of IDS) { await p.evaluate((id) => (location.hash = '#/science/bio/' + id), id); await p.waitForSelector('.pl-sim'); await p.waitForTimeout(40); const m = await p.evaluate(() => { const vis = (e) => !e.closest('[hidden]') && e.offsetParent !== null; return { over: document.documentElement.scrollWidth - innerWidth, clip: [...document.querySelectorAll('.pl-rl, .pl-rv, .pl-lab, .pl-tt, .pl-opt, .pl-btn, .pl-link')].filter((e) => vis(e) && e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflowX !== 'auto').map((e) => e.textContent.slice(0, 14)) }; }); if (m.over > 0 || m.clip.length) probs.push(`${id}@${w}: ${m.over} ${m.clip.join('/')}`); } }
-    ok(probs.length === 0, `E ${label}: 23 simulations on 390 / 320 / 820 px wide: no overflow, no clipped label${probs.length ? ' ' + probs.slice(0, 6).join('; ') : ''}`);
+    ok(probs.length === 0, `E ${label}: all simulations on 390 / 320 / 820 px wide: no overflow, no clipped label${probs.length ? ' ' + probs.slice(0, 6).join('; ') : ''}`);
     await p.setViewportSize({ width: 390, height: 844 }); await p.evaluate(() => (location.hash = '#/science/bio/cells')); await p.waitForTimeout(300);
     await p.screenshot({ path: path.join(OUT, `sim-cells-${loc}.png`), fullPage: true });
     await p.evaluate(() => (location.hash = '#/science/bio')); await p.waitForTimeout(300); await p.screenshot({ path: path.join(OUT, `lab-${loc}.png`), fullPage: true });

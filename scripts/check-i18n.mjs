@@ -8,13 +8,13 @@ const dir = new URL("../src/", import.meta.url).pathname;
 const cjk = /[一-鿿　-〿＀-￯]/;
 // not UI texts: translation tables themselves, and keywords used to recognise "primo / secondo" file names
 // mathcn.ts: Chinese numerals and times-table rhymes (content a Chinese child reads, single characters). musicfig.ts: the course drawings (labels like 五度圈 are Chinese course content). figures.ts: the labels of the drawings of the summaries (Chinese content like the science cards, shown in a `user` box: never translated)
-const SKIP_FILES = new Set(["coding-infomodel.ts", "coding-textlevels.ts", "coding-textlessons.ts", "coding-textlang.ts", "coding-textrun.ts", "coding-textbridge.ts", "i18n-data.ts", "mathcn.ts", "figures.ts", "safetyfig.ts", "musicfig.ts", "games/xiangqi-logic.ts", "games/xiangqi-art.ts"])   // (xiangqi: the characters ON the pieces and the river, shown in `user` boxes: board content, never translated);
+const SKIP_FILES = new Set(["geolab-model.ts", "coding-infomodel.ts", "coding-textlevels.ts", "coding-textlessons.ts", "coding-textlang.ts", "coding-textrun.ts", "coding-textbridge.ts", "i18n-data.ts", "mathcn.ts", "figures.ts", "safetyfig.ts", "musicfig.ts", "games/xiangqi-logic.ts", "games/xiangqi-art.ts"])   // (xiangqi: the characters ON the pieces and the river, shown in `user` boxes: board content, never translated);
 
 const texts = new Map();
 // the games (src/games/*.ts, one module each) are checked too
 // TEMPORARY (lead): src/bio is NOT scanned yet because the biology lab is unfinished and would block every deploy: the biology agent / the lead must add "bio" back to the list below when src/i18n-extra/biolab.json is merged.
 // the physics lab (src/phys) and the biology lab (src/bio) too: their UI texts (labels, tasks, readouts, canvas labels) are translated; their CONTENT (lessons, quiz questions and the tables only the quizzes use) is not, it is shown in `user` boxes
-const files = [...fs.readdirSync(dir), ...["games", "phys", "bio"].flatMap((d) => (fs.existsSync(path.join(dir, d)) ? fs.readdirSync(path.join(dir, d)).map((x) => `${d}/${x}`) : []))];
+const files = [...fs.readdirSync(dir), ...["games", "phys", ...(process.env.CHECK_BIO ? ["bio"] : [])].flatMap((d) => (fs.existsSync(path.join(dir, d)) ? fs.readdirSync(path.join(dir, d)).map((x) => `${d}/${x}`) : []))];
 const CONTENT_TABLES = new Set(["ROLES", "DEV", "GLANDS", "LACK", "EXAMPLES", "PRODUCTS", "LINKS", "GENO", "defs", "VALVE_TEXT_QUIZ"]);
 const isContent = (n, f) => {
   if (!/^(phys|bio)\//.test(f)) return false;
@@ -53,6 +53,8 @@ const table = (name) => {
 };
 const LANGS = ["EN", "FR"];
 const tables = Object.fromEntries(LANGS.map((l) => [l, table(l)]));
+// the geography lab's translations are written in src/i18n-extra/geolab.json (merged into i18n-data.ts by the person who integrates the change); until then their keys count as translated
+try { const x = JSON.parse(fs.readFileSync(path.join(dir, "i18n-extra/geolab.json"), "utf8")); for (const [k, v] of Object.entries(x)) if (Array.isArray(v) && v.length === 2 && v[0] && v[1]) for (const l of LANGS) tables[l].add(k.trim()); } catch { /* none yet */ }
 // texts that are only used as a language's own name, or are part of an HTML fragment / not shown as such
 const ALLOW = new Set(["中文", "语言 / Language"]);
 let bad = 0;

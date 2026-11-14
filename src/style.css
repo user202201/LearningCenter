@@ -2833,3 +2833,26 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .pl-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .pl-link { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
 .pl-act { min-height: 44px; }
+.pl-rv { display: block; word-break: break-word; }
+.pl-ru:empty { display: none; }
+.pl-hero h1 { font-size: clamp(15px, 4.8vw, 24px); line-height: 1.15; white-space: normal; overflow-wrap: anywhere; }
+.pl-hero .hero-text { min-width: 0; }
+
+/* ---------- 化学 part 2: drawings of the questions, ordering the steps ---------- */
+.chem-spec { display: flex; justify-content: center; margin: 8px 0 10px; }
+.chem-spec svg { display: block; width: 100%; height: auto; }
+.chem-spec-curve svg { max-width: 380px; }
+.chem-spec-atom svg, .chem-spec-cell svg, .chem-spec-app svg { max-width: 190px; }
+.chem-spec-flow svg { max-width: 340px; }
+.chem-spec svg text { user-select: none; }
+.chem-ordlist { display: flex; flex-direction: column; gap: 8px; margin: 8px 0; }
+.chem-ordb { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 48px; padding: 8px 12px; text-align: left; font-size: 16px; border-radius: 14px; border: 2px solid #d0bfff; background: #fff; color: inherit; }
+.chem-ordb .chem-ordn { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; border-radius: 14px; border: 2px dashed #b197fc; color: #fff; font-size: 14px; }
+.chem-ordb.sel { background: #f3f0ff; border-color: #7048e8; }
+.chem-ordb.sel .chem-ordn { background: #7048e8; border: 2px solid #7048e8; }
+.chem-ordb.ok { background: #ebfbee; border-color: #2f9e44; }
+.chem-ordb.ok .chem-ordn { background: #2f9e44; border-color: #2f9e44; }
+.chem-ordb.bad { background: #fff5f5; border-color: #e03131; }
+.chem-ordb.bad .chem-ordn { background: #e03131; border-color: #e03131; }
+.chem-ordb .chem-ordt { flex: 1; overflow-wrap: anywhere; }
+.chem-attbl th, .chem-attbl td { text-align: center; }

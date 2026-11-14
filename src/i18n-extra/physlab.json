@@ -1582,5 +1582,1709 @@
  "电磁感应：使感应电动势的大小超过 100 mV": [
   "Induction: make the induced EMF larger than 100 mV.",
   "Induction : obtenez une force électromotrice induite supérieure à 100 mV."
+ ],
+ "2 节": [
+  "2 cells",
+  "2 piles"
+ ],
+ "3 节": [
+  "3 cells",
+  "3 piles"
+ ],
+ "4 节": [
+  "4 cells",
+  "4 piles"
+ ],
+ "2.5 V 灯泡": [
+  "2.5 V bulb",
+  "Ampoule de 2,5 V"
+ ],
+ "3.8 V 灯泡": [
+  "3.8 V bulb",
+  "Ampoule de 3,8 V"
+ ],
+ "X 射线": [
+  "X-rays",
+  "Rayons X"
+ ],
+ "γ 射线": [
+  "Gamma rays",
+  "Rayons gamma"
+ ],
+ "一样近": [
+  "Equally near",
+  "Aussi proche"
+ ],
+ "一次能源": [
+  "Primary energy",
+  "Énergie primaire"
+ ],
+ "一次还是二次": [
+  "Primary or secondary",
+  "Primaire ou secondaire"
+ ],
+ "三棱镜的顶角": [
+  "Apex angle of the prism",
+  "Angle au sommet du prisme"
+ ],
+ "三棱镜色散": [
+  "Dispersion by a prism",
+  "Dispersion par un prisme"
+ ],
+ "三棱镜：使红光与紫光之间的色散角超过 8°": [
+  "Prism: make the angle between red and violet light larger than 8°",
+  "Prisme : obtenir un écart angulaire de plus de 8° entre la lumière rouge et la lumière violette"
+ ],
+ "三项合计": [
+  "Total of the three",
+  "Total des trois"
+ ],
+ "上孔": [
+  "Top hole",
+  "Trou du haut"
+ ],
+ "不动": [
+  "Does not move",
+  "Ne bouge pas"
+ ],
+ "不发光": [
+  "Does not light",
+  "Ne s'allume pas"
+ ],
+ "不可再生能源": [
+  "Non-renewable energy",
+  "Énergie non renouvelable"
+ ],
+ "不接入": [
+  "Not connected",
+  "Non connectée"
+ ],
+ "不正确（手必须接触笔尾的金属体）": [
+  "Incorrect (a finger must touch the metal cap)",
+  "Incorrect (un doigt doit toucher le capuchon métallique)"
+ ],
+ "不适用（二次能源）": [
+  "Not applicable (secondary energy)",
+  "Sans objet (énergie secondaire)"
+ ],
+ "两个分子之间的距离（单位 r₀）": [
+  "Distance between two molecules (unit r₀)",
+  "Distance entre deux molécules (unité r₀)"
+ ],
+ "两张纸中间吹气": [
+  "Blowing between two sheets of paper",
+  "Souffler entre deux feuilles de papier"
+ ],
+ "两张纸之间的气压比外面低": [
+  "Air pressure between the sheets, below the outside",
+  "Pression de l'air entre les feuilles, inférieure à l'extérieur"
+ ],
+ "两种分子混合的程度": [
+  "Degree of mixing of the two kinds of molecules",
+  "Degré de mélange des deux sortes de molécules"
+ ],
+ "严重危险，可能致命": [
+  "Seriously dangerous, possibly fatal",
+  "Très dangereux, peut-être mortel"
+ ],
+ "二次能源": [
+  "Secondary energy",
+  "Énergie secondaire"
+ ],
+ "二次能源不分可再生与否": [
+  "Secondary energy is not classed as renewable or not",
+  "L'énergie secondaire n'est pas classée en renouvelable ou non"
+ ],
+ "交界面处的压强": [
+  "Pressure at the interface",
+  "Pression à l'interface"
+ ],
+ "人眼能看见的光": [
+  "Light that the human eye can see",
+  "Lumière visible par l'œil humain"
+ ],
+ "从右端看是逆时针": [
+  "Anticlockwise seen from the right end",
+  "Sens antihoraire vu de l'extrémité droite"
+ ],
+ "从右端看是顺时针": [
+  "Clockwise seen from the right end",
+  "Sens horaire vu de l'extrémité droite"
+ ],
+ "传播的信号": [
+  "Signal",
+  "Signal"
+ ],
+ "传播的速度": [
+  "Speed of propagation",
+  "Vitesse de propagation"
+ ],
+ "作用力很大": [
+  "Very strong force",
+  "Force très grande"
+ ],
+ "作用力极小": [
+  "Extremely small force",
+  "Force extrêmement faible"
+ ],
+ "作用力较大": [
+  "Fairly strong force",
+  "Force assez grande"
+ ],
+ "作用力（相对值，正为斥力）": [
+  "Force (relative value, positive = repulsion)",
+  "Force (valeur relative, positive = répulsion)"
+ ],
+ "你的判断": [
+  "Your answer",
+  "Votre réponse"
+ ],
+ "使小灯泡正常发光（电压表示数约等于额定电压）": [
+  "Make the bulb shine normally (voltmeter reading about the rated voltage)",
+  "Faire briller normalement l'ampoule (tension lue au voltmètre proche de la tension nominale)"
+ ],
+ "使小灯泡的实际功率超过额定功率的 1.2 倍（实验中应避免）": [
+  "Make the actual power exceed 1.2 times the rated power (to be avoided in a real experiment)",
+  "Faire dépasser 1,2 fois la puissance nominale (à éviter dans une vraie expérience)"
+ ],
+ "保险丝": [
+  "Fuse",
+  "Fusible"
+ ],
+ "保险丝的额定电流": [
+  "Rated current of the fuse",
+  "Courant nominal du fusible"
+ ],
+ "信号传播的时间": [
+  "Travel time of a signal",
+  "Temps de propagation d'un signal"
+ ],
+ "信号传播：用电磁波传到月球，单程时间超过 1 s": [
+  "Signal: send an electromagnetic wave to the Moon (one-way time above 1 s)",
+  "Signal : envoyer une onde électromagnétique vers la Lune (temps aller supérieur à 1 s)"
+ ],
+ "信号传播：通过光纤从北京传到纽约，单程时间超过 50 ms": [
+  "Signal: send a signal through optical fibre from Beijing to New York (one-way time above 50 ms)",
+  "Signal : envoyer un signal par fibre optique de Pékin à New York (temps aller supérieur à 50 ms)"
+ ],
+ "偏折最大的色光": [
+  "Colour that is bent the most",
+  "Couleur la plus déviée"
+ ],
+ "偏转的方向": [
+  "Direction of the turn",
+  "Sens de la rotation"
+ ],
+ "做功冲程": [
+  "Power stroke",
+  "Temps moteur (détente)"
+ ],
+ "光源": [
+  "Light source",
+  "Source lumineuse"
+ ],
+ "光的色散与色光混合": [
+  "Dispersion of light and mixing of coloured lights",
+  "Dispersion de la lumière et mélange de lumières colorées"
+ ],
+ "光纤中的光信号": [
+  "Light signal in an optical fibre",
+  "Signal lumineux dans une fibre optique"
+ ],
+ "光能 → 直流电能 → 交流电能": [
+  "Light energy → direct-current electricity → alternating-current electricity",
+  "Énergie lumineuse → courant continu → courant alternatif"
+ ],
+ "内能 → 机械能 → 电能": [
+  "Internal energy → mechanical energy → electrical energy",
+  "Énergie interne → énergie mécanique → énergie électrique"
+ ],
+ "内能转化为机械能": [
+  "Internal energy is converted into mechanical energy",
+  "L'énergie interne est convertie en énergie mécanique"
+ ],
+ "冲程": [
+  "Stroke",
+  "Temps du moteur"
+ ],
+ "冷却水带走的热量": [
+  "Heat carried away by the cooling water",
+  "Chaleur évacuée par l'eau de refroidissement"
+ ],
+ "几乎不亮": [
+  "Hardly lit",
+  "À peine allumée"
+ ],
+ "几乎没有感觉": [
+  "Almost no sensation",
+  "Presque aucune sensation"
+ ],
+ "分子热运动与分子力": [
+  "Thermal motion of molecules and molecular forces",
+  "Agitation thermique des molécules et forces intermoléculaires"
+ ],
+ "分子间的作用力": [
+  "Force between molecules",
+  "Force entre les molécules"
+ ],
+ "分子间的作用力：使分子之间的距离等于 r₀，引力等于斥力": [
+  "Force between molecules: set the distance to r₀ so that attraction equals repulsion",
+  "Force entre les molécules : régler la distance à r₀ pour que l'attraction égale la répulsion"
+ ],
+ "分子间的作用力：使分子表现为斥力": [
+  "Force between molecules: make the molecules repel each other",
+  "Force entre les molécules : faire en sorte que les molécules se repoussent"
+ ],
+ "分子间的距离": [
+  "Distance between the molecules",
+  "Distance entre les molécules"
+ ],
+ "判断": [
+  "Verdict",
+  "Verdict"
+ ],
+ "判断正确": [
+  "Correct",
+  "Correct"
+ ],
+ "判断错误": [
+  "Wrong",
+  "Faux"
+ ],
+ "动作，切断电源": [
+  "Tripped: the power is cut off",
+  "Déclenché : l'alimentation est coupée"
+ ],
+ "化学能 → 内能 → 机械能 → 电能": [
+  "Chemical energy → internal energy → mechanical energy → electrical energy",
+  "Énergie chimique → énergie interne → énergie mécanique → énergie électrique"
+ ],
+ "北京到上海": [
+  "Beijing to Shanghai",
+  "De Pékin à Shanghai"
+ ],
+ "北京到纽约": [
+  "Beijing to New York",
+  "De Pékin à New York"
+ ],
+ "医院的透视和拍片": [
+  "Medical X-ray imaging",
+  "Radiographie médicale"
+ ],
+ "单程的时间": [
+  "One-way time",
+  "Temps aller"
+ ],
+ "压缩冲程": [
+  "Compression stroke",
+  "Temps de compression"
+ ],
+ "反应堆": [
+  "Reactor",
+  "Réacteur"
+ ],
+ "发光": [
+  "Lit",
+  "Allumé"
+ ],
+ "发电方式": [
+  "Way of generating electricity",
+  "Mode de production d'électricité"
+ ],
+ "发电机": [
+  "Generator",
+  "Générateur"
+ ],
+ "发电的能量转化": [
+  "Energy conversion in power generation",
+  "Conversion d'énergie dans la production d'électricité"
+ ],
+ "发电的能量转化：用火力发电，通过技术改进使总效率超过 45%": [
+  "Energy conversion in power generation: with a coal-fired plant, raise the total efficiency above 45% by technical improvement",
+  "Conversion d'énergie : avec une centrale thermique, porter le rendement total au-dessus de 45 % par amélioration technique"
+ ],
+ "古代植物的遗体经过漫长年代形成（化石能源）": [
+  "Formed over a very long time from the remains of ancient plants (fossil energy)",
+  "Formé pendant de très longues périodes à partir de restes de plantes anciennes (énergie fossile)"
+ ],
+ "古代生物的遗体经过漫长年代形成（化石能源）": [
+  "Formed over a very long time from the remains of ancient organisms (fossil energy)",
+  "Formé pendant de très longues périodes à partir de restes d'organismes anciens (énergie fossile)"
+ ],
+ "可以移动，位置不固定": [
+  "Can move, no fixed position",
+  "Peuvent se déplacer, sans position fixe"
+ ],
+ "可再生吗": [
+  "Renewable?",
+  "Renouvelable ?"
+ ],
+ "可再生能源": [
+  "Renewable energy",
+  "Énergie renouvelable"
+ ],
+ "可再生能源的比例": [
+  "Share of renewable energy",
+  "Part des énergies renouvelables"
+ ],
+ "可见光": [
+  "Visible light",
+  "Lumière visible"
+ ],
+ "右孔": [
+  "Right hole",
+  "Trou de droite"
+ ],
+ "右管液柱的高度": [
+  "Height of the liquid column in the right arm",
+  "Hauteur de la colonne de liquide du bras droit"
+ ],
+ "右管的液体": [
+  "Liquid in the right arm",
+  "Liquide du bras droit"
+ ],
+ "右边": [
+  "Right",
+  "À droite"
+ ],
+ "右边更高": [
+  "Right side higher",
+  "Le côté droit est plus haut"
+ ],
+ "合成的颜色": [
+  "Resulting colour",
+  "Couleur obtenue"
+ ],
+ "合计的效率": [
+  "Overall efficiency",
+  "Rendement global"
+ ],
+ "向上倾斜": [
+  "Tilted upwards",
+  "Incliné vers le haut"
+ ],
+ "向上运动": [
+  "Moves up",
+  "Monte"
+ ],
+ "向下倾斜": [
+  "Tilted downwards",
+  "Incliné vers le bas"
+ ],
+ "向下运动": [
+  "Moves down",
+  "Descend"
+ ],
+ "向东偏": [
+  "Turns towards the east",
+  "Dévie vers l'est"
+ ],
+ "向北": [
+  "Northwards",
+  "Vers le nord"
+ ],
+ "向南": [
+  "Southwards",
+  "Vers le sud"
+ ],
+ "向西偏": [
+  "Turns towards the west",
+  "Dévie vers l'ouest"
+ ],
+ "吸气冲程": [
+  "Intake stroke",
+  "Temps d'admission"
+ ],
+ "吹气的速度": [
+  "Speed of the blown air",
+  "Vitesse de l'air soufflé"
+ ],
+ "吹纸：使两张纸靠拢": [
+  "Blowing on paper: make the two sheets come together",
+  "Souffler sur le papier : rapprocher les deux feuilles"
+ ],
+ "品红色": [
+  "Magenta",
+  "Magenta"
+ ],
+ "四冲程": [
+  "Four strokes",
+  "Quatre temps"
+ ],
+ "四冲程：使排气门打开（排气冲程）": [
+  "Four strokes: open the exhaust valve (exhaust stroke)",
+  "Quatre temps : ouvrir la soupape d'échappement (temps d'échappement)"
+ ],
+ "四冲程：把曲轴转到做功冲程，观察内能转化为机械能": [
+  "Four strokes: turn the crankshaft to the power stroke and watch internal energy become mechanical energy",
+  "Quatre temps : tourner le vilebrequin jusqu'au temps moteur et observer la conversion de l'énergie interne en énergie mécanique"
+ ],
+ "在平衡位置附近振动": [
+  "Vibrate about fixed positions",
+  "Vibrent autour de positions fixes"
+ ],
+ "在视网膜上": [
+  "On the retina",
+  "Sur la rétine"
+ ],
+ "在视网膜前": [
+  "In front of the retina",
+  "Devant la rétine"
+ ],
+ "在视网膜后": [
+  "Behind the retina",
+  "Derrière la rétine"
+ ],
+ "地热发电": [
+  "Geothermal power",
+  "Géothermie"
+ ],
+ "地热能": [
+  "Geothermal energy",
+  "Énergie géothermique"
+ ],
+ "地球内部的热": [
+  "Heat from the Earth's interior",
+  "Chaleur de l'intérieur de la Terre"
+ ],
+ "地球到同步卫星": [
+  "Earth to a geostationary satellite",
+  "De la Terre à un satellite géostationnaire"
+ ],
+ "地球到月球": [
+  "Earth to the Moon",
+  "De la Terre à la Lune"
+ ],
+ "地磁场": [
+  "Earth's magnetic field",
+  "Champ magnétique terrestre"
+ ],
+ "地磁场（水平分量）": [
+  "Earth's field (horizontal part)",
+  "Champ terrestre (composante horizontale)"
+ ],
+ "地磁场：移到接近磁极的纬度，使磁倾角达到 80° 以上": [
+  "Earth's field: move to a latitude near a pole so that the dip angle exceeds 80°",
+  "Champ terrestre : se placer à une latitude proche d'un pôle pour que l'inclinaison dépasse 80°"
+ ],
+ "地线": [
+  "Earth wire",
+  "Fil de terre"
+ ],
+ "声称得到的有用功": [
+  "Claimed useful work",
+  "Travail utile annoncé"
+ ],
+ "声称损失的声能和其他": [
+  "Claimed sound and other losses",
+  "Pertes annoncées (son et autres)"
+ ],
+ "声称散失的热量": [
+  "Claimed heat lost",
+  "Chaleur perdue annoncée"
+ ],
+ "声音（空气中）": [
+  "Sound (in air)",
+  "Son (dans l'air)"
+ ],
+ "天然气": [
+  "Natural gas",
+  "Gaz naturel"
+ ],
+ "太阳内部的核聚变": [
+  "Nuclear fusion inside the Sun",
+  "Fusion nucléaire au cœur du Soleil"
+ ],
+ "太阳照射使水循环，水从高处流向低处": [
+  "The Sun drives the water cycle, and water flows from high to low",
+  "Le Soleil entretient le cycle de l'eau, et l'eau s'écoule du haut vers le bas"
+ ],
+ "太阳照射使空气受热不均而流动": [
+  "The Sun heats the air unevenly, so that air moves",
+  "Le Soleil chauffe l'air de façon inégale, ce qui le met en mouvement"
+ ],
+ "太阳能": [
+  "Solar energy",
+  "Énergie solaire"
+ ],
+ "太阳能光伏发电": [
+  "Solar photovoltaic power",
+  "Électricité photovoltaïque"
+ ],
+ "太阳能电池板": [
+  "Solar panel",
+  "Panneau solaire"
+ ],
+ "奥斯特实验": [
+  "Oersted's experiment",
+  "Expérience d'Œrsted"
+ ],
+ "奥斯特实验：使电流方向向南，并使小磁针偏转 45° 以上": [
+  "Oersted's experiment: send the current southwards and make the compass needle turn by more than 45°",
+  "Expérience d'Œrsted : faire passer le courant vers le sud et faire dévier l'aiguille de plus de 45°"
+ ],
+ "完好，电路接通": [
+  "Intact, circuit closed",
+  "Intact, circuit fermé"
+ ],
+ "实际功率": [
+  "Actual power",
+  "Puissance réelle"
+ ],
+ "家庭电路与保险丝": [
+  "Household circuit and fuse",
+  "Circuit domestique et fusible"
+ ],
+ "家庭电路与安全用电": [
+  "Household circuits and electrical safety",
+  "Circuits domestiques et sécurité électrique"
+ ],
+ "家庭电路：使保险丝熔断（用电器的总功率过大）": [
+  "Household circuit: blow the fuse (total power too large)",
+  "Circuit domestique : faire fondre le fusible (puissance totale trop élevée)"
+ ],
+ "家庭电路：换用 20 A 的保险丝，使总电流超过 15 A 而保险丝不熔断": [
+  "Household circuit: use a 20 A fuse and keep it intact with a total current above 15 A",
+  "Circuit domestique : utiliser un fusible de 20 A et le laisser intact avec un courant total supérieur à 15 A"
+ ],
+ "宽处的压强": [
+  "Pressure in the wide part",
+  "Pression dans la partie large"
+ ],
+ "宽处的流速": [
+  "Speed in the wide part",
+  "Vitesse dans la partie large"
+ ],
+ "导线中电流的方向": [
+  "Direction of the current in the wire",
+  "Sens du courant dans le fil"
+ ],
+ "导线中的电流": [
+  "Current in the wire",
+  "Courant dans le fil"
+ ],
+ "小灯泡": [
+  "Small bulb",
+  "Petite ampoule"
+ ],
+ "小磁针 N 极所指的方向": [
+  "Direction of the needle's N pole",
+  "Direction du pôle N de l'aiguille"
+ ],
+ "小磁针到导线的距离": [
+  "Distance from the needle to the wire",
+  "Distance de l'aiguille au fil"
+ ],
+ "小磁针的偏转角": [
+  "Deflection of the needle",
+  "Déviation de l'aiguille"
+ ],
+ "左孔": [
+  "Left hole",
+  "Trou de gauche"
+ ],
+ "左管水柱的高度": [
+  "Height of the water column in the left arm",
+  "Hauteur de la colonne d'eau du bras gauche"
+ ],
+ "左管水柱的高度（交界面以上）": [
+  "Height of the water column in the left arm (above the interface)",
+  "Hauteur de la colonne d'eau du bras gauche (au-dessus de l'interface)"
+ ],
+ "左边": [
+  "Left",
+  "À gauche"
+ ],
+ "左边更高": [
+  "Left side higher",
+  "Le côté gauche est plus haut"
+ ],
+ "已经过的时间": [
+  "Elapsed time",
+  "Temps écoulé"
+ ],
+ "已记录的数据组数": [
+  "Number of recorded readings",
+  "Nombre de relevés enregistrés"
+ ],
+ "干木柴": [
+  "Dry firewood",
+  "Bois sec"
+ ],
+ "干燥": [
+  "Dry",
+  "Sèche"
+ ],
+ "广播、电视、手机通信、雷达": [
+  "Radio, television, mobile phones, radar",
+  "Radio, télévision, téléphonie mobile, radar"
+ ],
+ "废气带走的热量": [
+  "Heat carried away by the exhaust gas",
+  "Chaleur évacuée par les gaz d'échappement"
+ ],
+ "开关": [
+  "Switch",
+  "Interrupteur"
+ ],
+ "引力": [
+  "Attraction",
+  "Attraction"
+ ],
+ "引力等于斥力": [
+  "Attraction equals repulsion",
+  "Attraction égale à la répulsion"
+ ],
+ "形状和体积": [
+  "Shape and volume",
+  "Forme et volume"
+ ],
+ "彼此相距很远，没有固定的位置": [
+  "Far apart, no fixed positions",
+  "Très éloignées, sans position fixe"
+ ],
+ "总功率": [
+  "Total power",
+  "Puissance totale"
+ ],
+ "总电流": [
+  "Total current",
+  "Courant total"
+ ],
+ "感觉与危险": [
+  "Sensation and danger",
+  "Sensation et danger"
+ ],
+ "所在的纬度（北纬为正）": [
+  "Latitude (north is positive)",
+  "Latitude (positive vers le nord)"
+ ],
+ "手接触的导线": [
+  "Wire touched by the hand",
+  "Fil touché par la main"
+ ],
+ "手的位置": [
+  "Position of the hand",
+  "Position de la main"
+ ],
+ "手的状态": [
+  "Condition of the hand",
+  "État de la main"
+ ],
+ "扩散": [
+  "Diffusion",
+  "Diffusion"
+ ],
+ "扩散：把温度升高到 400 °C 以上，让两种分子在 30 s 内混合到 90% 以上": [
+  "Diffusion: raise the temperature above 400 °C so that the two kinds of molecules are more than 90% mixed within 30 s",
+  "Diffusion : élever la température au-dessus de 400 °C pour que les deux sortes de molécules soient mélangées à plus de 90 % en 30 s"
+ ],
+ "把 A、B、C 三个电阻全部串联，总电阻为 60 Ω": [
+  "Connect all three resistors A, B and C in series (total resistance 60 Ω)",
+  "Brancher les trois résistances A, B et C en série (résistance totale 60 Ω)"
+ ],
+ "把 A、B、C 三个电阻全部并联，使总电阻小于 6 Ω": [
+  "Connect all three resistors A, B and C in parallel (total resistance below 6 Ω)",
+  "Brancher les trois résistances A, B et C en parallèle (résistance totale inférieure à 6 Ω)"
+ ],
+ "把效率最低的环节提高": [
+  "Improve the least efficient step by",
+  "Améliorer l'étape la moins efficace de"
+ ],
+ "指定距离": [
+  "Chosen distance",
+  "Distance choisie"
+ ],
+ "损失的能量": [
+  "Energy lost",
+  "Énergie perdue"
+ ],
+ "换用 3.8 V 的灯泡，使它正常发光": [
+  "Use the 3.8 V bulb and make it shine normally",
+  "Utiliser l'ampoule de 3,8 V et la faire briller normalement"
+ ],
+ "排列": [
+  "Arrangement",
+  "Arrangement"
+ ],
+ "排列整齐，位置固定": [
+  "Regular arrangement, fixed positions",
+  "Arrangement régulier, positions fixes"
+ ],
+ "排列较紧密，没有固定的位置": [
+  "Fairly close together, no fixed positions",
+  "Assez rapprochées, sans position fixe"
+ ],
+ "排气冲程": [
+  "Exhaust stroke",
+  "Temps d'échappement"
+ ],
+ "排气门": [
+  "Exhaust valve",
+  "Soupape d'échappement"
+ ],
+ "接触笔尾的金属体": [
+  "Touching the metal cap of the pen",
+  "Touchant le capuchon métallique du stylo"
+ ],
+ "搭一个混联电路：至少一个电阻串联，另外两个并联": [
+  "Build a series-parallel circuit: at least one resistor in series and two in parallel",
+  "Construire un circuit mixte : au moins une résistance en série et deux en parallèle"
+ ],
+ "摩擦和辐射损失": [
+  "Friction and radiation losses",
+  "Pertes par frottement et rayonnement"
+ ],
+ "改变滑动变阻器，记录 3 组电压和电流的数据": [
+  "Change the rheostat and record 3 pairs of voltage and current readings",
+  "Modifier le rhéostat et relever 3 couples de tension et de courant"
+ ],
+ "放射治疗、金属探伤": [
+  "Radiotherapy, flaw detection in metals",
+  "Radiothérapie, contrôle des défauts des métaux"
+ ],
+ "效率最低的环节": [
+  "Least efficient step",
+  "Étape la moins efficace"
+ ],
+ "断开": [
+  "Open",
+  "Ouvert"
+ ],
+ "无线电波": [
+  "Radio waves",
+  "Ondes radio"
+ ],
+ "显微镜：使总放大倍数达到 400 倍以上": [
+  "Microscope: reach a total magnification of more than 400",
+  "Microscope : atteindre un grossissement total supérieur à 400"
+ ],
+ "晶状体需要增加的焦度": [
+  "Extra power the lens must add",
+  "Puissance supplémentaire que le cristallin doit ajouter"
+ ],
+ "曲轴转过的角度": [
+  "Crankshaft angle",
+  "Angle du vilebrequin"
+ ],
+ "有固定的形状和体积": [
+  "Fixed shape and volume",
+  "Forme et volume fixes"
+ ],
+ "有麻的感觉，能自己摆脱": [
+  "Tingling, able to let go",
+  "Picotements, on peut se dégager"
+ ],
+ "望远镜": [
+  "Telescope",
+  "Télescope"
+ ],
+ "望远镜：使角放大率至少为 20 倍，且镜筒不长于 90 cm": [
+  "Telescope: reach an angular magnification of at least 20 with a tube no longer than 90 cm",
+  "Télescope : atteindre un grossissement angulaire d'au moins 20 avec un tube d'au plus 90 cm"
+ ],
+ "未超过 100%": [
+  "Does not exceed 100%",
+  "Ne dépasse pas 100 %"
+ ],
+ "机械能转化为内能": [
+  "Mechanical energy is converted into internal energy",
+  "L'énergie mécanique est convertie en énergie interne"
+ ],
+ "杀菌消毒、验钞": [
+  "Disinfection, banknote checking",
+  "Désinfection, vérification des billets"
+ ],
+ "条形磁铁": [
+  "Bar magnet",
+  "Barreau aimanté"
+ ],
+ "来源": [
+  "Origin",
+  "Origine"
+ ],
+ "极远处": [
+  "Very far away",
+  "Très loin"
+ ],
+ "柴油": [
+  "Diesel",
+  "Gazole"
+ ],
+ "核电的比例": [
+  "Share of nuclear power",
+  "Part du nucléaire"
+ ],
+ "核能": [
+  "Nuclear energy",
+  "Énergie nucléaire"
+ ],
+ "核能 → 内能 → 机械能 → 电能": [
+  "Nuclear energy → internal energy → mechanical energy → electrical energy",
+  "Énergie nucléaire → énergie interne → énergie mécanique → énergie électrique"
+ ],
+ "核能发电": [
+  "Nuclear power",
+  "Électricité nucléaire"
+ ],
+ "植物油": [
+  "Vegetable oil",
+  "Huile végétale"
+ ],
+ "植物通过光合作用储存的太阳能": [
+  "Solar energy stored by plants through photosynthesis",
+  "Énergie solaire stockée par les plantes grâce à la photosynthèse"
+ ],
+ "正常发光": [
+  "Shining normally",
+  "Brille normalement"
+ ],
+ "每度电的碳排放": [
+  "Carbon emission per kWh",
+  "Émission de carbone par kWh"
+ ],
+ "比正常亮": [
+  "Brighter than normal",
+  "Plus brillante que la normale"
+ ],
+ "比正常暗": [
+  "Dimmer than normal",
+  "Plus faible que la normale"
+ ],
+ "氖管": [
+  "Neon lamp",
+  "Néon"
+ ],
+ "氢能": [
+  "Hydrogen energy",
+  "Énergie de l'hydrogène"
+ ],
+ "水力发电": [
+  "Hydroelectric power",
+  "Électricité hydraulique"
+ ],
+ "水平": [
+  "Horizontal",
+  "Horizontale"
+ ],
+ "水平分量（相对赤道）": [
+  "Horizontal part (relative to the equator)",
+  "Composante horizontale (relative à l'équateur)"
+ ],
+ "水流：使窄处的压强低于 60 kPa": [
+  "Water flow: make the pressure in the narrow part lower than 60 kPa",
+  "Écoulement : faire descendre la pression de la partie étroite sous 60 kPa"
+ ],
+ "水电的比例": [
+  "Share of hydroelectric power",
+  "Part de l'hydraulique"
+ ],
+ "水的机械能 → 机械能 → 电能": [
+  "Mechanical energy of water → mechanical energy → electrical energy",
+  "Énergie mécanique de l'eau → énergie mécanique → énergie électrique"
+ ],
+ "水的流量": [
+  "Water flow rate",
+  "Débit d'eau"
+ ],
+ "水能": [
+  "Hydro energy",
+  "Énergie hydraulique"
+ ],
+ "水轮机": [
+  "Water turbine",
+  "Turbine hydraulique"
+ ],
+ "汽油": [
+  "Petrol",
+  "Essence"
+ ],
+ "汽轮机": [
+  "Steam turbine",
+  "Turbine à vapeur"
+ ],
+ "没有动作": [
+  "Not tripped",
+  "Non déclenché"
+ ],
+ "没有固定的形状和体积": [
+  "No fixed shape or volume",
+  "Ni forme ni volume fixes"
+ ],
+ "没有固定的形状，有一定的体积": [
+  "No fixed shape, a fixed volume",
+  "Pas de forme fixe, volume fixe"
+ ],
+ "没有安装": [
+  "Not installed",
+  "Non installé"
+ ],
+ "没有接入电阻": [
+  "No resistor connected",
+  "Aucune résistance connectée"
+ ],
+ "没有接触笔尾的金属体": [
+  "Not touching the metal cap of the pen",
+  "Ne touchant pas le capuchon métallique du stylo"
+ ],
+ "没有能量转化（靠飞轮的惯性）": [
+  "No energy conversion (the flywheel's inertia carries on)",
+  "Pas de conversion d'énergie (l'inertie du volant continue le mouvement)"
+ ],
+ "波段": [
+  "Band",
+  "Bande"
+ ],
+ "波长": [
+  "Wavelength",
+  "Longueur d'onde"
+ ],
+ "活塞": [
+  "Piston",
+  "Piston"
+ ],
+ "测小灯泡的电功率": [
+  "Measuring the power of a small bulb",
+  "Mesure de la puissance d'une petite ampoule"
+ ],
+ "测电笔": [
+  "Test pen",
+  "Tournevis testeur"
+ ],
+ "测电笔的用法": [
+  "Use of the test pen",
+  "Utilisation du testeur"
+ ],
+ "测电笔：正确使用，使氖管发光": [
+  "Test pen: use it correctly so that the neon lamp lights",
+  "Testeur : l'utiliser correctement pour que le néon s'allume"
+ ],
+ "液面": [
+  "Liquid levels",
+  "Niveaux des liquides"
+ ],
+ "液面相平": [
+  "Levels equal",
+  "Niveaux égaux"
+ ],
+ "混联电路": [
+  "Series-parallel circuit",
+  "Circuit mixte"
+ ],
+ "滑动变阻器接入的电阻": [
+  "Resistance of the rheostat in the circuit",
+  "Résistance du rhéostat dans le circuit"
+ ],
+ "漏电保护器": [
+  "Residual-current device",
+  "Disjoncteur différentiel"
+ ],
+ "潮湿": [
+  "Wet",
+  "Mouillée"
+ ],
+ "火力发电": [
+  "Coal-fired power",
+  "Centrale thermique"
+ ],
+ "火线": [
+  "Live wire",
+  "Fil de phase"
+ ],
+ "火线与零线直接相连（短路）": [
+  "Live and neutral wires joined directly (short circuit)",
+  "Phase et neutre reliés directement (court-circuit)"
+ ],
+ "灯丝的电阻": [
+  "Filament resistance",
+  "Résistance du filament"
+ ],
+ "灯的盏数（每盏 60 W）": [
+  "Number of lamps (60 W each)",
+  "Nombre de lampes (60 W chacune)"
+ ],
+ "灰色": [
+  "Grey",
+  "Gris"
+ ],
+ "热机与能量守恒": [
+  "Heat engines and conservation of energy",
+  "Moteurs thermiques et conservation de l'énergie"
+ ],
+ "热机的效率": [
+  "Efficiency of the engine",
+  "Rendement du moteur"
+ ],
+ "热机的效率：减少各项损失，使效率达到 40% 以上": [
+  "Efficiency of the engine: reduce the losses until the efficiency exceeds 40%",
+  "Rendement du moteur : réduire les pertes jusqu'à dépasser 40 % de rendement"
+ ],
+ "煤炭": [
+  "Coal",
+  "Charbon"
+ ],
+ "煤电的比例": [
+  "Share of coal power",
+  "Part du charbon"
+ ],
+ "照明的光": [
+  "Illuminating light",
+  "Lumière éclairante"
+ ],
+ "熔断，电路断开": [
+  "Blown, circuit open",
+  "Fondu, circuit ouvert"
+ ],
+ "燃料": [
+  "Fuel",
+  "Combustible"
+ ],
+ "燃料的质量": [
+  "Mass of fuel",
+  "Masse de combustible"
+ ],
+ "物体": [
+  "Object",
+  "Objet"
+ ],
+ "物体到眼睛的距离": [
+  "Distance from the object to the eye",
+  "Distance de l'objet à l'œil"
+ ],
+ "物体的颜色": [
+  "Colour of an object",
+  "Couleur d'un objet"
+ ],
+ "物体的颜色：使一个红色物体看起来是黑色的": [
+  "Colour of an object: make a red object look black",
+  "Couleur d'un objet : faire paraître noir un objet rouge"
+ ],
+ "物态": [
+  "State of matter",
+  "État de la matière"
+ ],
+ "物质的三态": [
+  "The three states of matter",
+  "Les trois états de la matière"
+ ],
+ "物质的三态：选择气态，观察分子的自由运动": [
+  "The three states of matter: choose the gas state and watch the molecules move freely",
+  "Les trois états de la matière : choisir l'état gazeux et observer le mouvement libre des molécules"
+ ],
+ "物镜的焦距": [
+  "Focal length of the objective",
+  "Distance focale de l'objectif"
+ ],
+ "生物质能": [
+  "Biomass energy",
+  "Énergie de la biomasse"
+ ],
+ "由一次能源转化而来（二次能源）": [
+  "Made from primary energy (secondary energy)",
+  "Obtenue à partir d'énergie primaire (énergie secondaire)"
+ ],
+ "由其他能源制取（二次能源），燃烧只生成水": [
+  "Made from other energy sources (secondary energy); burning it gives only water",
+  "Produit à partir d'autres sources (énergie secondaire) ; sa combustion ne donne que de l'eau"
+ ],
+ "电力结构与碳排放": [
+  "Electricity mix and carbon emission",
+  "Bouquet électrique et émissions de carbone"
+ ],
+ "电力结构：使可再生能源的比例达到 50% 以上，且每度电的碳排放不超过 0.5 kg": [
+  "Electricity mix: reach more than 50% renewable energy with no more than 0.5 kg of carbon dioxide per kWh",
+  "Bouquet électrique : dépasser 50 % d'énergies renouvelables avec au plus 0,5 kg de dioxyde de carbone par kWh"
+ ],
+ "电压表的示数": [
+  "Voltmeter reading",
+  "Valeur du voltmètre"
+ ],
+ "电流产生的磁场": [
+  "Field produced by the current",
+  "Champ produit par le courant"
+ ],
+ "电流表的示数": [
+  "Ammeter reading",
+  "Valeur de l'ampèremètre"
+ ],
+ "电热水器": [
+  "Electric water heater",
+  "Chauffe-eau électrique"
+ ],
+ "电磁波": [
+  "Electromagnetic waves",
+  "Ondes électromagnétiques"
+ ],
+ "电磁波谱": [
+  "Electromagnetic spectrum",
+  "Spectre électromagnétique"
+ ],
+ "电磁波谱：使频率落在可见光的范围内": [
+  "Electromagnetic spectrum: set a frequency in the visible range",
+  "Spectre électromagnétique : régler une fréquence dans le domaine visible"
+ ],
+ "电磁波谱：调到调频广播的频率，约 100 MHz，波长约 3 m": [
+  "Electromagnetic spectrum: tune to FM radio, about 100 MHz (wavelength about 3 m)",
+  "Spectre électromagnétique : se placer sur la radio FM, environ 100 MHz (longueur d'onde environ 3 m)"
+ ],
+ "电磁波（真空或空气）": [
+  "Electromagnetic wave (vacuum or air)",
+  "Onde électromagnétique (vide ou air)"
+ ],
+ "电能": [
+  "Electrical energy",
+  "Énergie électrique"
+ ],
+ "电视": [
+  "Television",
+  "Télévision"
+ ],
+ "电路搭建": [
+  "Building circuits",
+  "Construction de circuits"
+ ],
+ "电路的情况": [
+  "State of the circuit",
+  "État du circuit"
+ ],
+ "电阻 A（10 Ω）": [
+  "Resistor A (10 Ω)",
+  "Résistance A (10 Ω)"
+ ],
+ "电阻 B（20 Ω）": [
+  "Resistor B (20 Ω)",
+  "Résistance B (20 Ω)"
+ ],
+ "电阻 C（30 Ω）": [
+  "Resistor C (30 Ω)",
+  "Résistance C (30 Ω)"
+ ],
+ "电饭煲": [
+  "Rice cooker",
+  "Autocuiseur de riz"
+ ],
+ "白光": [
+  "White light",
+  "Lumière blanche"
+ ],
+ "白色": [
+  "White",
+  "Blanc"
+ ],
+ "百分点": [
+  "percentage points",
+  "points de pourcentage"
+ ],
+ "目镜的焦距": [
+  "Focal length of the eyepiece",
+  "Distance focale de l'oculaire"
+ ],
+ "看不清": [
+  "Blurred",
+  "Flou"
+ ],
+ "看到的颜色": [
+  "Colour seen",
+  "Couleur vue"
+ ],
+ "看哪里": [
+  "Looking at",
+  "Regard dirigé vers"
+ ],
+ "眼睛、显微镜与望远镜": [
+  "The eye, microscope and telescope",
+  "L'œil, le microscope et le télescope"
+ ],
+ "眼睛与眼镜": [
+  "The eye and glasses",
+  "L'œil et les lunettes"
+ ],
+ "眼镜": [
+  "Glasses",
+  "Lunettes"
+ ],
+ "石油": [
+  "Oil",
+  "Pétrole"
+ ],
+ "磁倾角": [
+  "Dip angle",
+  "Inclinaison magnétique"
+ ],
+ "磁场与奥斯特实验": [
+  "Magnetic fields and Oersted's experiment",
+  "Champs magnétiques et expérience d'Œrsted"
+ ],
+ "磁场的强弱（相对值）": [
+  "Field strength (relative value)",
+  "Intensité du champ (valeur relative)"
+ ],
+ "磁场的强弱（相对赤道）": [
+  "Field strength (relative to the equator)",
+  "Intensité du champ (relative à l'équateur)"
+ ],
+ "磁场的来源": [
+  "Source of the field",
+  "Source du champ"
+ ],
+ "磁感线": [
+  "Field lines",
+  "Lignes de champ"
+ ],
+ "磁感线：把小磁针拖到 N 极附近，观察它的 N 极指向远离磁铁的方向": [
+  "Field lines: drag the compass near the N pole and see its N end point away from the magnet",
+  "Lignes de champ : faire glisser la boussole près du pôle N et constater que son pôle N s'éloigne de l'aimant"
+ ],
+ "磁针 N 极": [
+  "N pole of the needle",
+  "Pôle N de l'aiguille"
+ ],
+ "磁铁的 N 极在": [
+  "The magnet's N pole is on the",
+  "Le pôle N de l'aimant est à"
+ ],
+ "离哪个磁极更近": [
+  "Nearer to which pole",
+  "Plus proche de quel pôle"
+ ],
+ "空调": [
+  "Air conditioner",
+  "Climatiseur"
+ ],
+ "窄处的压强": [
+  "Pressure in the narrow part",
+  "Pression dans la partie étroite"
+ ],
+ "窄处的横截面积": [
+  "Cross-section of the narrow part",
+  "Section de la partie étroite"
+ ],
+ "窄处的流速": [
+  "Speed in the narrow part",
+  "Vitesse dans la partie étroite"
+ ],
+ "站在地面上": [
+  "Standing on the ground",
+  "Debout sur le sol"
+ ],
+ "站在绝缘垫上": [
+  "Standing on an insulating mat",
+  "Debout sur un tapis isolant"
+ ],
+ "笔尖插入的插孔": [
+  "Hole the pen tip is put into",
+  "Trou dans lequel la pointe est introduite"
+ ],
+ "符合能量守恒": [
+  "Consistent with conservation of energy",
+  "Conforme à la conservation de l'énergie"
+ ],
+ "第二十一章 信息的传递": [
+  "Chapter 21 Transmission of information",
+  "Chapitre 21 Transmission de l'information"
+ ],
+ "第二十二章 能源与可持续发展": [
+  "Chapter 22 Energy and sustainable development",
+  "Chapitre 22 Énergie et développement durable"
+ ],
+ "第十九章 生活用电": [
+  "Chapter 19 Electricity in daily life",
+  "Chapitre 19 L'électricité au quotidien"
+ ],
+ "第十五章 电流和电路": [
+  "Chapter 15 Current and circuits",
+  "Chapitre 15 Courant et circuits"
+ ],
+ "第十八章 电功率": [
+  "Chapter 18 Electric power",
+  "Chapitre 18 Puissance électrique"
+ ],
+ "第十四章 内能的利用": [
+  "Chapter 14 Using internal energy",
+  "Chapitre 14 Utilisation de l'énergie interne"
+ ],
+ "管子里的水流": [
+  "Water flowing in a pipe",
+  "Eau s'écoulant dans un tuyau"
+ ],
+ "紫光": [
+  "Violet light",
+  "Lumière violette"
+ ],
+ "紫光的偏折角": [
+  "Deviation of violet light",
+  "Déviation de la lumière violette"
+ ],
+ "紫外线": [
+  "Ultraviolet",
+  "Ultraviolet"
+ ],
+ "红、绿、蓝三种色光": [
+  "Red, green and blue lights",
+  "Lumières rouge, verte et bleue"
+ ],
+ "红光": [
+  "Red light",
+  "Lumière rouge"
+ ],
+ "红光和绿光": [
+  "Red and green light",
+  "Lumières rouge et verte"
+ ],
+ "红光和蓝光": [
+  "Red and blue light",
+  "Lumières rouge et bleue"
+ ],
+ "红光的亮度": [
+  "Brightness of the red light",
+  "Luminosité de la lumière rouge"
+ ],
+ "红光的偏折角": [
+  "Deviation of red light",
+  "Déviation de la lumière rouge"
+ ],
+ "红外线": [
+  "Infrared",
+  "Infrarouge"
+ ],
+ "纸片": [
+  "Paper",
+  "Papier"
+ ],
+ "绿光": [
+  "Green light",
+  "Lumière verte"
+ ],
+ "绿光和蓝光": [
+  "Green and blue light",
+  "Lumières verte et bleue"
+ ],
+ "绿光的亮度": [
+  "Brightness of the green light",
+  "Luminosité de la lumière verte"
+ ],
+ "缸内的气压（相对值）": [
+  "Gas pressure in the cylinder (relative value)",
+  "Pression du gaz dans le cylindre (valeur relative)"
+ ],
+ "能源": [
+  "Energy source",
+  "Source d'énergie"
+ ],
+ "能源与可持续发展": [
+  "Energy sources and sustainable development",
+  "Sources d'énergie et développement durable"
+ ],
+ "能源分类": [
+  "Classifying energy sources",
+  "Classement des sources d'énergie"
+ ],
+ "能源分类：选择核能，并正确判断它是不可再生能源": [
+  "Classifying energy sources: choose nuclear energy and correctly say that it is non-renewable",
+  "Classement des sources d'énergie : choisir l'énergie nucléaire et indiquer correctement qu'elle est non renouvelable"
+ ],
+ "能源分类：选择风能，并正确判断它是可再生能源": [
+  "Classifying energy sources: choose wind energy and correctly say that it is renewable",
+  "Classement des sources d'énergie : choisir l'énergie éolienne et indiquer correctement qu'elle est renouvelable"
+ ],
+ "能看清": [
+  "Sharp",
+  "Net"
+ ],
+ "能看清吗": [
+  "Seen sharply?",
+  "Vue nette ?"
+ ],
+ "能量凭空增加，不可能": [
+  "Energy appearing from nothing: impossible",
+  "De l'énergie apparaissant de rien : impossible"
+ ],
+ "能量凭空消失，不可能": [
+  "Energy disappearing into nothing: impossible",
+  "De l'énergie disparaissant sans raison : impossible"
+ ],
+ "能量守恒": [
+  "Conservation of energy",
+  "Conservation de l'énergie"
+ ],
+ "能量守恒：使输出的能量之和等于 100 J，其中有用功不少于 40 J": [
+  "Conservation of energy: make the outputs add up to 100 J, with at least 40 J of useful work",
+  "Conservation de l'énergie : faire en sorte que les sorties totalisent 100 J, dont au moins 40 J de travail utile"
+ ],
+ "能量的转化": [
+  "Energy conversion",
+  "Conversion d'énergie"
+ ],
+ "脚下": [
+  "Underfoot",
+  "Sous les pieds"
+ ],
+ "自由地做无规则运动": [
+  "Move freely in random directions",
+  "Se déplacent librement et au hasard"
+ ],
+ "色光的混合": [
+  "Mixing coloured lights",
+  "Mélange de lumières colorées"
+ ],
+ "色光的混合：使红光和绿光混合得到黄色（蓝光熄灭）": [
+  "Mixing coloured lights: mix red and green light to get yellow (blue light off)",
+  "Mélange de lumières : mélanger lumières rouge et verte pour obtenir du jaune (lumière bleue éteinte)"
+ ],
+ "色光的混合：用红、绿、蓝三种色光得到白色": [
+  "Mixing coloured lights: get white from red, green and blue light",
+  "Mélange de lumières : obtenir du blanc avec les lumières rouge, verte et bleue"
+ ],
+ "色散角（紫与红之差）": [
+  "Dispersion angle (violet minus red)",
+  "Angle de dispersion (violet moins rouge)"
+ ],
+ "蓝光": [
+  "Blue light",
+  "Lumière bleue"
+ ],
+ "蓝光的亮度": [
+  "Brightness of the blue light",
+  "Luminosité de la lumière bleue"
+ ],
+ "螺线管中的电流": [
+  "Current in the solenoid",
+  "Courant dans le solénoïde"
+ ],
+ "表现为": [
+  "Appears as",
+  "Se manifeste par"
+ ],
+ "视力": [
+  "Eyesight",
+  "Vue"
+ ],
+ "视野的直径": [
+  "Diameter of the field of view",
+  "Diamètre du champ de vision"
+ ],
+ "视野里排得下的细胞数": [
+  "Number of cells that fit across the field of view",
+  "Nombre de cellules dans le champ de vision"
+ ],
+ "角放大率": [
+  "Angular magnification",
+  "Grossissement angulaire"
+ ],
+ "触电": [
+  "Electric shock",
+  "Électrocution"
+ ],
+ "触电：手接触火线，站在绝缘垫上，使通过人体的电流小于 1 mA": [
+  "Electric shock: touch the live wire while standing on an insulating mat so that the current through the body is below 1 mA",
+  "Électrocution : toucher le fil de phase debout sur un tapis isolant, de sorte que le courant dans le corps soit inférieur à 1 mA"
+ ],
+ "记录一组数据": [
+  "Record a reading",
+  "Enregistrer un relevé"
+ ],
+ "超过 100%，已按比例缩小": [
+  "Exceeds 100%, scaled down in proportion",
+  "Dépasse 100 %, réduit proportionnellement"
+ ],
+ "输入的能量": [
+  "Input energy",
+  "Énergie fournie"
+ ],
+ "输出的电能": [
+  "Electrical energy produced",
+  "Énergie électrique produite"
+ ],
+ "输出的能量之和": [
+  "Total output energy",
+  "Énergie totale en sortie"
+ ],
+ "过亮，灯丝可能烧断": [
+  "Far too bright, the filament may burn out",
+  "Beaucoup trop brillante, le filament peut griller"
+ ],
+ "运动": [
+  "Motion",
+  "Mouvement"
+ ],
+ "近点": [
+  "Near point",
+  "Punctum proximum"
+ ],
+ "近视": [
+  "Short-sighted",
+  "Myope"
+ ],
+ "近视眼：用凹透镜（负焦度）使极远处的物体看得清": [
+  "Short-sighted eye: use a concave lens (negative power) to see very distant objects sharply",
+  "Œil myope : utiliser une lentille concave (vergence négative) pour voir nettement les objets très éloignés"
+ ],
+ "还没有判断": [
+  "No answer yet",
+  "Pas encore de réponse"
+ ],
+ "这个插孔接": [
+  "This hole is connected to",
+  "Ce trou est relié au"
+ ],
+ "进气门": [
+  "Intake valve",
+  "Soupape d'admission"
+ ],
+ "远点": [
+  "Far point",
+  "Punctum remotum"
+ ],
+ "远视": [
+  "Long-sighted",
+  "Hypermétrope"
+ ],
+ "远视眼：配戴凸透镜，使 25 cm 处的书本看得清": [
+  "Long-sighted eye: wear a convex lens so that a book at 25 cm is seen sharply",
+  "Œil hypermétrope : porter une lentille convexe pour voir nettement un livre à 25 cm"
+ ],
+ "连通器": [
+  "Communicating vessels",
+  "Vases communicants"
+ ],
+ "连通器与流体压强": [
+  "Communicating vessels and fluid pressure",
+  "Vases communicants et pression des fluides"
+ ],
+ "连通器：右管换成酒精，使右管酒精柱高达 15 cm 以上": [
+  "Communicating vessels: put alcohol in the right arm so that its column is more than 15 cm high",
+  "Vases communicants : mettre de l'alcool dans le bras droit pour que sa colonne dépasse 15 cm"
+ ],
+ "连通器：在右管倒入水，使两管液面相平": [
+  "Communicating vessels: pour water into the right arm so that both levels are equal",
+  "Vases communicants : verser de l'eau dans le bras droit pour que les deux niveaux soient égaux"
+ ],
+ "逆变器": [
+  "Inverter",
+  "Onduleur"
+ ],
+ "通电螺线管": [
+  "Current-carrying solenoid",
+  "Solénoïde parcouru par un courant"
+ ],
+ "通电螺线管：改变电流方向，使螺线管的右端是 N 极": [
+  "Current-carrying solenoid: reverse the current so that the right end becomes the N pole",
+  "Solénoïde : inverser le courant pour que l'extrémité droite devienne le pôle N"
+ ],
+ "通过 A 的电流": [
+  "Current through A",
+  "Courant dans A"
+ ],
+ "通过 B 的电流": [
+  "Current through B",
+  "Courant dans B"
+ ],
+ "通过 C 的电流": [
+  "Current through C",
+  "Courant dans C"
+ ],
+ "通过人体的电流": [
+  "Current through the body",
+  "Courant dans le corps"
+ ],
+ "遥控器、红外测温、夜视仪": [
+  "Remote controls, infrared thermometers, night vision",
+  "Télécommandes, thermomètres infrarouges, vision nocturne"
+ ],
+ "铀等重原子核的裂变（或轻核的聚变）": [
+  "Fission of heavy nuclei such as uranium (or fusion of light nuclei)",
+  "Fission de noyaux lourds comme l'uranium (ou fusion de noyaux légers)"
+ ],
+ "锅炉": [
+  "Boiler",
+  "Chaudière"
+ ],
+ "镜筒的长度": [
+  "Length of the tube",
+  "Longueur du tube"
+ ],
+ "闭合": [
+  "Closed",
+  "Fermé"
+ ],
+ "难以摆脱，有危险": [
+  "Hard to let go, dangerous",
+  "Difficile de se dégager, dangereux"
+ ],
+ "零线": [
+  "Neutral wire",
+  "Fil neutre"
+ ],
+ "青色": [
+  "Cyan",
+  "Cyan"
+ ],
+ "靠拢": [
+  "Move together",
+  "Se rapprochent"
+ ],
+ "频率（10 的几次方 Hz）": [
+  "Frequency (power of ten, in Hz)",
+  "Fréquence (puissance de dix, en Hz)"
+ ],
+ "额定功率": [
+  "Rated power",
+  "Puissance nominale"
+ ],
+ "风力发电": [
+  "Wind power",
+  "Énergie éolienne"
+ ],
+ "风力机叶片": [
+  "Wind turbine blades",
+  "Pales d'éolienne"
+ ],
+ "风电和光伏的比例": [
+  "Share of wind and photovoltaic power",
+  "Part de l'éolien et du photovoltaïque"
+ ],
+ "风的动能 → 机械能 → 电能": [
+  "Kinetic energy of wind → mechanical energy → electrical energy",
+  "Énergie cinétique du vent → énergie mécanique → énergie électrique"
+ ],
+ "风能": [
+  "Wind energy",
+  "Énergie éolienne"
+ ],
+ "装有": [
+  "Installed",
+  "Installé"
+ ],
+ "电视（150 W）": [
+  "Television (150 W)",
+  "Télévision (150 W)"
+ ],
+ "电饭煲（800 W）": [
+  "Rice cooker (800 W)",
+  "Autocuiseur de riz (800 W)"
+ ],
+ "空调（1500 W）": [
+  "Air conditioner (1500 W)",
+  "Climatiseur (1500 W)"
+ ],
+ "电热水器（2000 W）": [
+  "Electric water heater (2000 W)",
+  "Chauffe-eau électrique (2000 W)"
+ ],
+ "斥力": [
+  "Repulsion",
+  "Répulsion"
+ ],
+ "每步的移动（20 °C 时为 1）": [
+  "Size of each step (1 at 20 °C)",
+  "Longueur de chaque pas (1 à 20 °C)"
+ ],
+ "电灯": [
+  "Lamp",
+  "Lampe"
+ ],
+ "{0}（{1} W）": [
+  "{0} ({1} W)",
+  "{0} ({1} W)"
  ]
 }

@@ -1,0 +1,1670 @@
+{
+ "地理实验室": [
+  "Geography lab",
+  "Laboratoire de géographie"
+ ],
+ "初中地理 · 经纬网 · 气候 · 中国": [
+  "Junior-high geography · grid · climate · China",
+  "Géographie du collège · quadrillage · climat · Chine"
+ ],
+ "小学": [
+  "Primary school",
+  "École primaire"
+ ],
+ "七年级": [
+  "Grade 7",
+  "Classe de 5e"
+ ],
+ "八年级": [
+  "Grade 8",
+  "Classe de 4e"
+ ],
+ "拖动滑块或图中的标记，观察结果；完成实验任务，再做小测验。": [
+  "Drag the sliders or the markers in the picture and watch the result. Complete the tasks, then take the quiz.",
+  "Faites glisser les curseurs ou les repères du dessin et observez le résultat. Réalisez les tâches, puis faites le quiz."
+ ],
+ "综合练习": [
+  "Mixed practice",
+  "Entraînement mixte"
+ ],
+ "综合练习（按记忆曲线复习）": [
+  "Mixed practice (review by memory curve)",
+  "Entraînement mixte (révision selon la courbe de mémoire)"
+ ],
+ "相关：地图": [
+  "Related: maps",
+  "À voir aussi : cartes"
+ ],
+ "相关：地图（中国、世界）": [
+  "Related: maps (China, world)",
+  "À voir aussi : cartes (Chine, monde)"
+ ],
+ "相关：天文实验室": [
+  "Related: astronomy lab",
+  "À voir aussi : laboratoire d'astronomie"
+ ],
+ "全部模块": [
+  "All modules",
+  "Tous les modules"
+ ],
+ "题目 {0} 道，已练 {1} 道，到期 {2} 道": [
+  "{0} questions, {1} practised, {2} due",
+  "{0} questions, {1} travaillées, {2} à réviser"
+ ],
+ "开始练习（10 题）": [
+  "Start practice (10 questions)",
+  "Commencer l'entraînement (10 questions)"
+ ],
+ "上次：{0} / {1}": [
+  "Last time: {0} / {1}",
+  "Dernière fois : {0} / {1}"
+ ],
+ "练习结果已保存在这台设备上": [
+  "The result is saved on this device.",
+  "Le résultat est enregistré sur cet appareil."
+ ],
+ "该模块出错：{0}": [
+  "This module failed: {0}",
+  "Ce module a échoué : {0}"
+ ],
+ "昼夜与四季": [
+  "Day, night and seasons",
+  "Jour, nuit et saisons"
+ ],
+ "五种地形": [
+  "The five landforms",
+  "Les cinq formes de relief"
+ ],
+ "水循环": [
+  "The water cycle",
+  "Le cycle de l'eau"
+ ],
+ "天气与天气预报": [
+  "Weather and forecasts",
+  "Météo et prévisions"
+ ],
+ "板块、地震与火山": [
+  "Plates, earthquakes and volcanoes",
+  "Plaques, séismes et volcans"
+ ],
+ "我们的国家": [
+  "Our country",
+  "Notre pays"
+ ],
+ "地球与经纬网": [
+  "The Earth and the grid",
+  "La Terre et le quadrillage"
+ ],
+ "时区与日界线": [
+  "Time zones and the date line",
+  "Fuseaux horaires et ligne de changement de date"
+ ],
+ "地图的三要素": [
+  "Elements of a map",
+  "Éléments d'une carte"
+ ],
+ "等高线与地形图": [
+  "Contour lines and relief maps",
+  "Courbes de niveau et cartes du relief"
+ ],
+ "大洲、大洋与陆海分布": [
+  "Continents, oceans, land and sea",
+  "Continents, océans, terres et mers"
+ ],
+ "气温曲线与降水柱状图": [
+  "Temperature curves and rainfall bars",
+  "Courbes de température et barres de précipitations"
+ ],
+ "人口与人种、语言、宗教": [
+  "Population, races, languages, religions",
+  "Population, « races », langues, religions"
+ ],
+ "发展中国家与发达国家": [
+  "Developing and developed countries",
+  "Pays en développement et pays développés"
+ ],
+ "世界重要地区与国家": [
+  "Important regions and countries",
+  "Régions et pays importants"
+ ],
+ "岩石圈、岩石与内外力": [
+  "Lithosphere, rocks, inner and outer forces",
+  "Lithosphère, roches, forces internes et externes"
+ ],
+ "中国地势三级阶梯": [
+  "China's three steps of relief",
+  "Les trois paliers du relief chinois"
+ ],
+ "中国的山河湖泊与地形": [
+  "China's mountains, rivers, lakes and landforms",
+  "Montagnes, fleuves, lacs et reliefs de la Chine"
+ ],
+ "中国的农业、工业与交通": [
+  "China's farming, industry and transport",
+  "Agriculture, industrie et transports de la Chine"
+ ],
+ "资源、环境与可持续发展": [
+  "Resources, environment and sustainability",
+  "Ressources, environnement et développement durable"
+ ],
+ "四大地理区域与省区": [
+  "The four regions and the provinces",
+  "Les quatre grandes régions et les provinces"
+ ],
+ "小学常识 · 地球的运动": [
+  "Primary · movements of the Earth",
+  "Primaire · mouvements de la Terre"
+ ],
+ "小学常识 · 地形": [
+  "Primary · landforms",
+  "Primaire · reliefs"
+ ],
+ "小学常识 · 水": [
+  "Primary · water",
+  "Primaire · eau"
+ ],
+ "小学常识 · 天气": [
+  "Primary · weather",
+  "Primaire · météo"
+ ],
+ "小学常识 · 地震": [
+  "Primary · earthquakes",
+  "Primaire · séismes"
+ ],
+ "小学常识 · 疆域、行政区、民族": [
+  "Primary · territory, divisions, peoples",
+  "Primaire · territoire, divisions, peuples"
+ ],
+ "七年级上 · 地球和地图": [
+  "Grade 7 vol. 1 · Earth and maps",
+  "5e, 1er semestre · Terre et cartes"
+ ],
+ "七年级上 · 陆地和海洋": [
+  "Grade 7 vol. 1 · land and sea",
+  "5e, 1er semestre · terres et mers"
+ ],
+ "七年级上 · 地球的内部": [
+  "Grade 7 vol. 1 · inside the Earth",
+  "5e, 1er semestre · intérieur de la Terre"
+ ],
+ "七年级上 · 天气与气候": [
+  "Grade 7 vol. 1 · weather and climate",
+  "5e, 1er semestre · temps et climat"
+ ],
+ "七年级上 · 居民与聚落": [
+  "Grade 7 vol. 1 · people and settlements",
+  "5e, 1er semestre · habitants et peuplement"
+ ],
+ "七年级上 · 发展与合作": [
+  "Grade 7 vol. 1 · development and cooperation",
+  "5e, 1er semestre · développement et coopération"
+ ],
+ "七年级下 · 我们生活的大洲": [
+  "Grade 7 vol. 2 · the continents we live on",
+  "5e, 2e semestre · les continents où nous vivons"
+ ],
+ "八年级上 · 中国的自然环境": [
+  "Grade 8 vol. 1 · China's natural environment",
+  "4e, 1er semestre · milieu naturel de la Chine"
+ ],
+ "八年级上 · 中国的经济发展": [
+  "Grade 8 vol. 1 · China's economy",
+  "4e, 1er semestre · économie de la Chine"
+ ],
+ "八年级上 · 资源与环境": [
+  "Grade 8 vol. 1 · resources and environment",
+  "4e, 1er semestre · ressources et environnement"
+ ],
+ "八年级下 · 中国的区域差异": [
+  "Grade 8 vol. 2 · regional differences in China",
+  "4e, 2e semestre · différences régionales en Chine"
+ ],
+ "纬度": [
+  "Latitude",
+  "Latitude"
+ ],
+ "经度": [
+  "Longitude",
+  "Longitude"
+ ],
+ "半球": [
+  "Hemisphere",
+  "Hémisphère"
+ ],
+ "温度带": [
+  "Temperature zone",
+  "Zone thermique"
+ ],
+ "纬度带": [
+  "Latitude band",
+  "Bande de latitude"
+ ],
+ "纬度（北为正）": [
+  "Latitude (north positive)",
+  "Latitude (nord positif)"
+ ],
+ "经度（东为正）": [
+  "Longitude (east positive)",
+  "Longitude (est positif)"
+ ],
+ "{0}、{1}": [
+  "{0}, {1}",
+  "{0}, {1}"
+ ],
+ "北半球": [
+  "Northern Hemisphere",
+  "Hémisphère nord"
+ ],
+ "南半球": [
+  "Southern Hemisphere",
+  "Hémisphère sud"
+ ],
+ "东半球": [
+  "Eastern Hemisphere",
+  "Hémisphère est"
+ ],
+ "西半球": [
+  "Western Hemisphere",
+  "Hémisphère ouest"
+ ],
+ "热带": [
+  "Tropics",
+  "Zone tropicale"
+ ],
+ "北温带": [
+  "North temperate zone",
+  "Zone tempérée nord"
+ ],
+ "南温带": [
+  "South temperate zone",
+  "Zone tempérée sud"
+ ],
+ "北寒带": [
+  "North frigid zone",
+  "Zone glaciale nord"
+ ],
+ "南寒带": [
+  "South frigid zone",
+  "Zone glaciale sud"
+ ],
+ "低纬度": [
+  "Low latitude",
+  "Basses latitudes"
+ ],
+ "中纬度": [
+  "Mid latitude",
+  "Latitudes moyennes"
+ ],
+ "高纬度": [
+  "High latitude",
+  "Hautes latitudes"
+ ],
+ "把图钉放到北京附近（约 40°N，116°E）": [
+  "Put the pin near Beijing (about 40°N, 116°E)",
+  "Placez l'épingle près de Pékin (environ 40° N, 116° E)"
+ ],
+ "把图钉放到南半球热带的西半球": [
+  "Put the pin in the tropics of the Southern Hemisphere, in the Western Hemisphere",
+  "Placez l'épingle dans la zone tropicale de l'hémisphère sud, dans l'hémisphère ouest"
+ ],
+ "把图钉放到北寒带": [
+  "Put the pin in the north frigid zone",
+  "Placez l'épingle dans la zone glaciale nord"
+ ],
+ "找到赤道与本初子午线的交点": [
+  "Find where the equator meets the prime meridian",
+  "Trouvez l'intersection de l'équateur et du méridien d'origine"
+ ],
+ "日期（一年中的第几天）": [
+  "Date (day of the year)",
+  "Date (jour de l'année)"
+ ],
+ "观测地的纬度": [
+  "Latitude of the observer",
+  "Latitude de l'observateur"
+ ],
+ "日期": [
+  "Date",
+  "Date"
+ ],
+ "太阳直射点纬度": [
+  "Latitude of the direct sun",
+  "Latitude du point subsolaire"
+ ],
+ "正午太阳高度": [
+  "Noon solar height",
+  "Hauteur du soleil à midi"
+ ],
+ "昼长": [
+  "Day length",
+  "Durée du jour"
+ ],
+ "小时": [
+  "hours",
+  "heures"
+ ],
+ "找到夏至：让太阳直射点到达北回归线附近（纬度 23° 以上）": [
+  "Find the June solstice: let the direct sun reach the Tropic of Cancer (above 23°)",
+  "Trouvez le solstice de juin : amenez le soleil au zénith vers le tropique du Cancer (plus de 23°)"
+ ],
+ "让南纬 30° 的正午太阳高度大于 80°": [
+  "Make the noon solar height at 30°S greater than 80°",
+  "Obtenez une hauteur du soleil à midi supérieure à 80° à 30° S"
+ ],
+ "找到北半球中纬度（北纬 30°～50°）昼长不足 10 小时的日期": [
+  "Find a date when the day is shorter than 10 hours at mid latitudes (30°N-50°N)",
+  "Trouvez une date où le jour dure moins de 10 heures aux latitudes moyennes (30° N-50° N)"
+ ],
+ "海拔": [
+  "Altitude",
+  "Altitude"
+ ],
+ "相对高度": [
+  "Relative height",
+  "Hauteur relative"
+ ],
+ "地形类型": [
+  "Landform",
+  "Forme de relief"
+ ],
+ "地表特征": [
+  "Surface",
+  "Surface"
+ ],
+ "地面平坦": [
+  "Flat ground",
+  "Terrain plat"
+ ],
+ "坡度和缓": [
+  "Gentle slopes",
+  "Pentes douces"
+ ],
+ "起伏很大": [
+  "Strongly rugged",
+  "Très accidenté"
+ ],
+ "四周高中间低": [
+  "High around, low in the middle",
+  "Haut autour, bas au milieu"
+ ],
+ "平原": [
+  "Plain",
+  "Plaine"
+ ],
+ "高原": [
+  "Plateau",
+  "Plateau"
+ ],
+ "山地": [
+  "Mountains",
+  "Montagnes"
+ ],
+ "丘陵": [
+  "Hills",
+  "Collines"
+ ],
+ "盆地": [
+  "Basin",
+  "Bassin"
+ ],
+ "做出一个高原：海拔 500 米以上、顶面平坦": [
+  "Make a plateau: above 500 m with a flat top",
+  "Créez un plateau : plus de 500 m, sommet plat"
+ ],
+ "做出一个盆地：四周高、中间低": [
+  "Make a basin: high around, low in the middle",
+  "Créez un bassin : haut autour, bas au milieu"
+ ],
+ "做出丘陵：海拔 500 米以下、相对高度不超过 200 米、坡度和缓": [
+  "Make hills: below 500 m, relative height up to 200 m, gentle slopes",
+  "Créez des collines : moins de 500 m, hauteur relative d'au plus 200 m, pentes douces"
+ ],
+ "太阳辐射": [
+  "Solar radiation",
+  "Rayonnement solaire"
+ ],
+ "森林覆盖率": [
+  "Forest cover",
+  "Couvert forestier"
+ ],
+ "环节": [
+  "Stage",
+  "Étape"
+ ],
+ "蒸发": [
+  "Evaporation",
+  "Évaporation"
+ ],
+ "水汽输送": [
+  "Vapour transport",
+  "Transport de vapeur"
+ ],
+ "降水": [
+  "Precipitation",
+  "Précipitations"
+ ],
+ "地表径流": [
+  "Surface runoff",
+  "Ruissellement de surface"
+ ],
+ "下渗": [
+  "Infiltration",
+  "Infiltration"
+ ],
+ "地下径流": [
+  "Groundwater flow",
+  "Écoulement souterrain"
+ ],
+ "蒸腾": [
+  "Transpiration",
+  "Transpiration"
+ ],
+ "当前环节": [
+  "Current stage",
+  "Étape actuelle"
+ ],
+ "陆地降水": [
+  "Rain over land",
+  "Précipitations sur terre"
+ ],
+ "蒸发与蒸腾": [
+  "Evaporation and transpiration",
+  "Évaporation et transpiration"
+ ],
+ "选择“水汽输送”这个环节，看它把海上的水汽送到陆地": [
+  "Choose the stage “vapour transport” and see it carry vapour from sea to land",
+  "Choisissez l'étape « transport de vapeur » et voyez-la amener la vapeur de la mer vers la terre"
+ ],
+ "把森林覆盖率调到 80% 以上，看地下径流的变化": [
+  "Raise forest cover above 80% and watch the groundwater flow",
+  "Portez le couvert forestier au-dessus de 80 % et observez l'écoulement souterrain"
+ ],
+ "把太阳辐射降到 30 以下，看降水减少": [
+  "Lower solar radiation below 30 and see the rain decrease",
+  "Baissez le rayonnement solaire sous 30 et voyez les pluies diminuer"
+ ],
+ "云量": [
+  "Cloud cover",
+  "Nébulosité"
+ ],
+ "24 小时降水量": [
+  "24-hour rainfall",
+  "Précipitations en 24 h"
+ ],
+ "风力（级）": [
+  "Wind force (level)",
+  "Force du vent (degré)"
+ ],
+ "最高气温": [
+  "Highest temperature",
+  "Température maximale"
+ ],
+ "最低气温": [
+  "Lowest temperature",
+  "Température minimale"
+ ],
+ "风向": [
+  "Wind direction",
+  "Direction du vent"
+ ],
+ "天气": [
+  "Weather",
+  "Temps"
+ ],
+ "风速": [
+  "Wind speed",
+  "Vitesse du vent"
+ ],
+ "气温日较差": [
+  "Daily temperature range",
+  "Amplitude thermique journalière"
+ ],
+ "晴天": [
+  "Sunny",
+  "Ensoleillé"
+ ],
+ "多云": [
+  "Partly cloudy",
+  "Nuageux"
+ ],
+ "阴天": [
+  "Overcast",
+  "Couvert"
+ ],
+ "下雪": [
+  "Snow",
+  "Neige"
+ ],
+ "小雨": [
+  "Light rain",
+  "Pluie faible"
+ ],
+ "中雨": [
+  "Moderate rain",
+  "Pluie modérée"
+ ],
+ "大雨": [
+  "Heavy rain",
+  "Forte pluie"
+ ],
+ "暴雨": [
+  "Rainstorm",
+  "Averse violente"
+ ],
+ "大暴雨": [
+  "Heavy rainstorm",
+  "Très forte averse"
+ ],
+ "特大暴雨": [
+  "Extreme rainstorm",
+  "Averse extrême"
+ ],
+ "北风": [
+  "North wind",
+  "Vent du nord"
+ ],
+ "东北风": [
+  "Northeast wind",
+  "Vent du nord-est"
+ ],
+ "东风": [
+  "East wind",
+  "Vent d'est"
+ ],
+ "东南风": [
+  "Southeast wind",
+  "Vent du sud-est"
+ ],
+ "南风": [
+  "South wind",
+  "Vent du sud"
+ ],
+ "西南风": [
+  "Southwest wind",
+  "Vent du sud-ouest"
+ ],
+ "西风": [
+  "West wind",
+  "Vent d'ouest"
+ ],
+ "西北风": [
+  "Northwest wind",
+  "Vent du nord-ouest"
+ ],
+ "{0}～{1} 米∕秒": [
+  "{0}–{1} m/s",
+  "{0}–{1} m/s"
+ ],
+ "让天气成为暴雨（24 小时降水量 50 毫米以上）": [
+  "Make it a rainstorm (24-hour rainfall above 50 mm)",
+  "Provoquez une averse violente (plus de 50 mm en 24 h)"
+ ],
+ "把风力调到 8 级以上（大风）": [
+  "Set the wind force to level 8 or more (gale)",
+  "Réglez la force du vent à 8 ou plus (coup de vent)"
+ ],
+ "使气温日较差大于 15℃": [
+  "Make the daily temperature range greater than 15 °C",
+  "Obtenez une amplitude journalière supérieure à 15 °C"
+ ],
+ "内容": [
+  "Content",
+  "Contenu"
+ ],
+ "板块边界": [
+  "Plate boundary",
+  "Limite de plaques"
+ ],
+ "地震波": [
+  "Seismic waves",
+  "Ondes sismiques"
+ ],
+ "边界类型": [
+  "Boundary type",
+  "Type de limite"
+ ],
+ "张裂": [
+  "Divergent",
+  "Divergente"
+ ],
+ "碰撞": [
+  "Collision",
+  "Collision"
+ ],
+ "俯冲": [
+  "Subduction",
+  "Subduction"
+ ],
+ "板块速度": [
+  "Plate speed",
+  "Vitesse des plaques"
+ ],
+ "cm/年": [
+  "cm/year",
+  "cm/an"
+ ],
+ "经过的时间": [
+  "Time elapsed",
+  "Temps écoulé"
+ ],
+ "百万年": [
+  "million years",
+  "millions d'années"
+ ],
+ "震中距": [
+  "Epicentral distance",
+  "Distance épicentrale"
+ ],
+ "震级": [
+  "Magnitude",
+  "Magnitude"
+ ],
+ "移动距离": [
+  "Distance moved",
+  "Distance parcourue"
+ ],
+ "形成的地貌": [
+  "Landform produced",
+  "Relief produit"
+ ],
+ "纵波到达": [
+  "P wave arrives",
+  "Arrivée de l'onde P"
+ ],
+ "横波到达": [
+  "S wave arrives",
+  "Arrivée de l'onde S"
+ ],
+ "秒": [
+  "s",
+  "s"
+ ],
+ "时间差": [
+  "Time gap",
+  "Écart de temps"
+ ],
+ "能量约为 5 级的": [
+  "Energy compared with magnitude 5",
+  "Énergie comparée à la magnitude 5"
+ ],
+ "倍": [
+  "times",
+  "fois"
+ ],
+ "裂谷和海岭（如东非大裂谷、红海）": [
+  "Rift valleys and ridges (East African Rift, Red Sea)",
+  "Rifts et dorsales (rift est-africain, mer Rouge)"
+ ],
+ "褶皱山脉（如喜马拉雅山脉）": [
+  "Fold mountains (the Himalayas)",
+  "Chaînes plissées (l'Himalaya)"
+ ],
+ "海沟、岛弧和火山（如日本、安第斯山脉）": [
+  "Trenches, island arcs and volcanoes (Japan, the Andes)",
+  "Fosses, arcs insulaires et volcans (Japon, Andes)"
+ ],
+ "让两个板块碰撞 50 百万年以上，看山脉隆起": [
+  "Let two plates collide for over 50 million years and watch the mountains rise",
+  "Laissez deux plaques entrer en collision plus de 50 millions d'années et voyez la montagne se soulever"
+ ],
+ "把震中距调到 260 千米以上，使横波比纵波晚到 30 秒以上": [
+  "Set the epicentral distance above 260 km so that the S wave arrives over 30 s after the P wave",
+  "Réglez la distance épicentrale au-dessus de 260 km pour que l'onde S arrive plus de 30 s après l'onde P"
+ ],
+ "把震级调到 7 级以上，看能量比 5 级大多少倍": [
+  "Set the magnitude to 7 or more and see how much more energy than magnitude 5",
+  "Réglez la magnitude à 7 ou plus et voyez combien d'énergie en plus par rapport à 5"
+ ],
+ "零时区（中时区）的时刻": [
+  "Time in zone 0",
+  "Heure au fuseau 0"
+ ],
+ "时": [
+  "h",
+  "h"
+ ],
+ "伦敦": [
+  "London",
+  "Londres"
+ ],
+ "北京": [
+  "Beijing",
+  "Pékin"
+ ],
+ "纽约": [
+  "New York",
+  "New York"
+ ],
+ "悉尼": [
+  "Sydney",
+  "Sydney"
+ ],
+ "次日": [
+  "next day",
+  "jour suivant"
+ ],
+ "前一日": [
+  "previous day",
+  "jour précédent"
+ ],
+ "使北京时间为 12:00（这时伦敦是 4:00）": [
+  "Make Beijing time 12:00 (London is then 4:00)",
+  "Obtenez 12 h 00 à Pékin (il est alors 4 h 00 à Londres)"
+ ],
+ "使纽约与北京不在同一天": [
+  "Make New York and Beijing fall on different dates",
+  "Faites en sorte que New York et Pékin ne soient pas le même jour"
+ ],
+ "使正午太阳线位于日界线（180° 经线）上": [
+  "Put the noon line of the Sun on the date line (180° meridian)",
+  "Placez la ligne de midi du Soleil sur la ligne de changement de date (méridien 180°)"
+ ],
+ "图上距离": [
+  "Map distance",
+  "Distance sur la carte"
+ ],
+ "cm": [
+  "cm",
+  "cm"
+ ],
+ "比例尺": [
+  "Scale",
+  "Échelle"
+ ],
+ "实地距离": [
+  "Real distance",
+  "Distance réelle"
+ ],
+ "图上 1 厘米代表": [
+  "1 cm on the map stands for",
+  "1 cm sur la carte représente"
+ ],
+ "把比例尺调到 1∶1000000，量得图上 6 厘米，读出实地距离": [
+  "Set the scale to 1∶1000000, measure 6 cm on the map and read the real distance",
+  "Réglez l'échelle à 1∶1000000, mesurez 6 cm sur la carte et lisez la distance réelle"
+ ],
+ "使实地距离超过 500 千米": [
+  "Make the real distance more than 500 km",
+  "Obtenez une distance réelle de plus de 500 km"
+ ],
+ "选择最大的比例尺 1∶10000": [
+  "Choose the largest scale, 1∶10000",
+  "Choisissez la plus grande échelle, 1∶10000"
+ ],
+ "山峰高度": [
+  "Hill height",
+  "Hauteur de la colline"
+ ],
+ "山体宽度": [
+  "Hill width",
+  "Largeur de la colline"
+ ],
+ "山峰位置（东西）": [
+  "Hill position (east-west)",
+  "Position de la colline (est-ouest)"
+ ],
+ "山峰位置（南北）": [
+  "Hill position (north-south)",
+  "Position de la colline (nord-sud)"
+ ],
+ "剖面线位置": [
+  "Position of the section line",
+  "Position de la ligne de coupe"
+ ],
+ "等高距": [
+  "Contour interval",
+  "Équidistance"
+ ],
+ "最高点海拔": [
+  "Highest altitude",
+  "Altitude maximale"
+ ],
+ "等高线条数": [
+  "Number of contour lines",
+  "Nombre de courbes de niveau"
+ ],
+ "最大坡度": [
+  "Steepest slope",
+  "Pente maximale"
+ ],
+ "使山顶海拔高于 600 米": [
+  "Make the summit higher than 600 m",
+  "Faites dépasser 600 m au sommet"
+ ],
+ "使山坡变陡：最大坡度超过 20%": [
+  "Make the slope steeper: over 20%",
+  "Rendez la pente plus raide : plus de 20 %"
+ ],
+ "把剖面线拉到经过山顶": [
+  "Move the section line through the summit",
+  "Faites passer la ligne de coupe par le sommet"
+ ],
+ "把等高距改为 200 米，看等高线变少": [
+  "Set the interval to 200 m and see fewer contour lines",
+  "Réglez l'équidistance à 200 m et voyez moins de courbes"
+ ],
+ "观测站": [
+  "Station",
+  "Station"
+ ],
+ "气候类型": [
+  "Climate type",
+  "Type de climat"
+ ],
+ "隐藏": [
+  "Hide",
+  "Masquer"
+ ],
+ "显示": [
+  "Show",
+  "Afficher"
+ ],
+ "最冷月均温": [
+  "Mean temperature of the coldest month",
+  "Température moyenne du mois le plus froid"
+ ],
+ "最热月均温": [
+  "Mean temperature of the hottest month",
+  "Température moyenne du mois le plus chaud"
+ ],
+ "气温年较差": [
+  "Annual temperature range",
+  "Amplitude thermique annuelle"
+ ],
+ "年降水量": [
+  "Annual rainfall",
+  "Précipitations annuelles"
+ ],
+ "暖半年降水占": [
+  "Share of rain in the warm half-year",
+  "Part des pluies dans le semestre chaud"
+ ],
+ "所在半球": [
+  "Hemisphere",
+  "Hémisphère"
+ ],
+ "观测站资料": [
+  "Station data",
+  "Données de la station"
+ ],
+ "资料为约数，仅供练习。": [
+  "The figures are approximate and for practice only.",
+  "Les valeurs sont approximatives et servent à l'entraînement."
+ ],
+ "选择北京并显示气候类型，看雨热同期": [
+  "Choose Beijing, show its climate type and see rain and heat arrive together",
+  "Choisissez Pékin, affichez son climat et voyez chaleur et pluie coïncider"
+ ],
+ "选择一个南半球的观测站，注意最热月在 12 月至 2 月": [
+  "Choose a station in the Southern Hemisphere; its hottest month is December to February",
+  "Choisissez une station de l'hémisphère sud ; son mois le plus chaud va de décembre à février"
+ ],
+ "找到降水集中在冬半年的观测站（暖半年降水不足 40%）": [
+  "Find a station whose rain falls mostly in the cool half-year (under 40% in the warm half)",
+  "Trouvez une station dont les pluies tombent surtout au semestre frais (moins de 40 % au semestre chaud)"
+ ],
+ "新加坡": [
+  "Singapore",
+  "Singapour"
+ ],
+ "马瑙斯": [
+  "Manaus",
+  "Manaus"
+ ],
+ "孟买": [
+  "Mumbai",
+  "Bombay"
+ ],
+ "达尔文": [
+  "Darwin",
+  "Darwin"
+ ],
+ "开罗": [
+  "Cairo",
+  "Le Caire"
+ ],
+ "广州": [
+  "Guangzhou",
+  "Canton"
+ ],
+ "乌鲁木齐": [
+  "Urumqi",
+  "Ürümqi"
+ ],
+ "罗马": [
+  "Rome",
+  "Rome"
+ ],
+ "开普敦": [
+  "Cape Town",
+  "Le Cap"
+ ],
+ "拉萨": [
+  "Lhasa",
+  "Lhassa"
+ ],
+ "南极内陆站": [
+  "Inland Antarctic station",
+  "Station de l'intérieur de l'Antarctique"
+ ],
+ "热带雨林气候": [
+  "Tropical rainforest climate",
+  "Climat équatorial"
+ ],
+ "热带季风气候": [
+  "Tropical monsoon climate",
+  "Climat tropical de mousson"
+ ],
+ "热带草原气候": [
+  "Tropical savanna climate",
+  "Climat de savane"
+ ],
+ "热带沙漠气候": [
+  "Tropical desert climate",
+  "Climat désertique chaud"
+ ],
+ "亚热带季风气候": [
+  "Subtropical monsoon climate",
+  "Climat subtropical de mousson"
+ ],
+ "温带季风气候": [
+  "Temperate monsoon climate",
+  "Climat tempéré de mousson"
+ ],
+ "温带大陆性气候": [
+  "Temperate continental climate",
+  "Climat tempéré continental"
+ ],
+ "温带海洋性气候": [
+  "Temperate oceanic climate",
+  "Climat océanique tempéré"
+ ],
+ "地中海气候": [
+  "Mediterranean climate",
+  "Climat méditerranéen"
+ ],
+ "极地气候": [
+  "Polar climate",
+  "Climat polaire"
+ ],
+ "高原山地气候": [
+  "Highland climate",
+  "Climat de montagne"
+ ],
+ "出生率": [
+  "Birth rate",
+  "Taux de natalité"
+ ],
+ "死亡率": [
+  "Death rate",
+  "Taux de mortalité"
+ ],
+ "经过的年数": [
+  "Years elapsed",
+  "Années écoulées"
+ ],
+ "自然增长率": [
+  "Natural growth rate",
+  "Taux d'accroissement naturel"
+ ],
+ "人口类型": [
+  "Population type",
+  "Type de population"
+ ],
+ "人口倍增时间": [
+  "Doubling time",
+  "Temps de doublement"
+ ],
+ "起始人口 100 百万人，现在": [
+  "Starting at 100 million, now",
+  "Partant de 100 millions, aujourd'hui"
+ ],
+ "百万人": [
+  "million",
+  "millions"
+ ],
+ "年": [
+  "yr",
+  "ans"
+ ],
+ "增长型": [
+  "Growing",
+  "En croissance"
+ ],
+ "稳定型": [
+  "Stable",
+  "Stable"
+ ],
+ "衰退型": [
+  "Declining",
+  "En déclin"
+ ],
+ "过渡型": [
+  "Transitional",
+  "De transition"
+ ],
+ "使人口自然增长率超过 2.5%": [
+  "Make the natural growth rate exceed 2.5%",
+  "Faites dépasser 2,5 % au taux d'accroissement naturel"
+ ],
+ "使人口呈负增长（衰退型）": [
+  "Make the population shrink (declining type)",
+  "Faites diminuer la population (type en déclin)"
+ ],
+ "使 50 年后的人口超过起始人口的 2 倍": [
+  "Make the population after 50 years more than double the start",
+  "Faites plus que doubler la population après 50 ans"
+ ],
+ "人均国内生产总值分界线": [
+  "GDP per person dividing line",
+  "Seuil de PIB par habitant"
+ ],
+ "千美元": [
+  "thousand USD",
+  "milliers de dollars"
+ ],
+ "分界线以上的国家": [
+  "Countries above the line",
+  "Pays au-dessus du seuil"
+ ],
+ "其中发达国家": [
+  "Of which developed",
+  "Dont pays développés"
+ ],
+ "以上的平均出生率": [
+  "Mean birth rate above",
+  "Natalité moyenne au-dessus"
+ ],
+ "以下的平均出生率": [
+  "Mean birth rate below",
+  "Natalité moyenne en dessous"
+ ],
+ "把分界线调到恰好把发达国家与发展中国家分开": [
+  "Set the line so that it separates developed from developing countries",
+  "Placez le seuil de façon à séparer pays développés et en développement"
+ ],
+ "把分界线调到最左，使所有国家都在分界线以上": [
+  "Move the line to the far left so that every country is above it",
+  "Mettez le seuil tout à gauche pour que tous les pays soient au-dessus"
+ ],
+ "使分界线以上国家的平均出生率低于 10‰": [
+  "Make the mean birth rate of the countries above the line lower than 10‰",
+  "Obtenez une natalité moyenne inférieure à 10 ‰ pour les pays au-dessus du seuil"
+ ],
+ "地球的圈层": [
+  "Layers of the Earth",
+  "Couches de la Terre"
+ ],
+ "岩石循环": [
+  "Rock cycle",
+  "Cycle des roches"
+ ],
+ "过程": [
+  "Process",
+  "Processus"
+ ],
+ "深度": [
+  "Depth",
+  "Profondeur"
+ ],
+ "圈层": [
+  "Layer",
+  "Couche"
+ ],
+ "物质状态": [
+  "State of matter",
+  "État de la matière"
+ ],
+ "距地心": [
+  "Distance from the centre",
+  "Distance au centre"
+ ],
+ "形成": [
+  "Forms",
+  "Produit"
+ ],
+ "动力": [
+  "Driving force",
+  "Force motrice"
+ ],
+ "内力": [
+  "Inner force",
+  "Force interne"
+ ],
+ "外力": [
+  "Outer force",
+  "Force externe"
+ ],
+ "地壳": [
+  "Crust",
+  "Croûte"
+ ],
+ "地幔": [
+  "Mantle",
+  "Manteau"
+ ],
+ "外核": [
+  "Outer core",
+  "Noyau externe"
+ ],
+ "内核": [
+  "Inner core",
+  "Noyau interne"
+ ],
+ "固态": [
+  "Solid",
+  "Solide"
+ ],
+ "液态": [
+  "Liquid",
+  "Liquide"
+ ],
+ "固态为主（可缓慢流动）": [
+  "Mostly solid (flows slowly)",
+  "Surtout solide (s'écoule lentement)"
+ ],
+ "冷却凝固": [
+  "Cooling and solidifying",
+  "Refroidissement et solidification"
+ ],
+ "风化、侵蚀、搬运与沉积": [
+  "Weathering, erosion, transport and deposition",
+  "Altération, érosion, transport et dépôt"
+ ],
+ "变质作用": [
+  "Metamorphism",
+  "Métamorphisme"
+ ],
+ "重熔再生": [
+  "Remelting",
+  "Refusion"
+ ],
+ "岩浆岩（如花岗岩）": [
+  "Igneous rock (e.g. granite)",
+  "Roche magmatique (ex. granite)"
+ ],
+ "沉积岩（如石灰岩）": [
+  "Sedimentary rock (e.g. limestone)",
+  "Roche sédimentaire (ex. calcaire)"
+ ],
+ "变质岩（如大理岩）": [
+  "Metamorphic rock (e.g. marble)",
+  "Roche métamorphique (ex. marbre)"
+ ],
+ "岩浆": [
+  "Magma",
+  "Magma"
+ ],
+ "找到液态的外核": [
+  "Find the liquid outer core",
+  "Trouvez le noyau externe liquide"
+ ],
+ "找到地球中心的固态内核": [
+  "Find the solid inner core at the centre",
+  "Trouvez le noyau interne solide au centre"
+ ],
+ "在岩石循环中选择“变质作用”": [
+  "Choose “metamorphism” in the rock cycle",
+  "Choisissez le « métamorphisme » dans le cycle des roches"
+ ],
+ "煤": [
+  "Coal",
+  "Charbon"
+ ],
+ "石油": [
+  "Oil",
+  "Pétrole"
+ ],
+ "天然气": [
+  "Natural gas",
+  "Gaz naturel"
+ ],
+ "清洁能源": [
+  "Clean energy",
+  "Énergies propres"
+ ],
+ "二氧化碳排放指数": [
+  "CO₂ emission index",
+  "Indice d'émission de CO₂"
+ ],
+ "与基准（73）相比": [
+  "Compared with the baseline (73)",
+  "Par rapport à la référence (73)"
+ ],
+ "使二氧化碳排放指数降到 40 以下": [
+  "Bring the CO₂ emission index below 40",
+  "Ramenez l'indice d'émission de CO₂ sous 40"
+ ],
+ "使清洁能源的份额达到 50% 以上": [
+  "Raise the share of clean energy to 50% or more",
+  "Portez la part des énergies propres à 50 % ou plus"
+ ],
+ "使煤的份额降到 10% 以下": [
+  "Lower the share of coal to 10% or less",
+  "Abaissez la part du charbon à 10 % ou moins"
+ ],
+ "自定义": [
+  "Custom",
+  "Personnalisé"
+ ],
+ "城市": [
+  "City",
+  "Ville"
+ ],
+ "上海": [
+  "Shanghai",
+  "Shanghai"
+ ],
+ "哈尔滨": [
+  "Harbin",
+  "Harbin"
+ ],
+ "三亚": [
+  "Sanya",
+  "Sanya"
+ ],
+ "漠河": [
+  "Mohe",
+  "Mohe"
+ ],
+ "与我国范围的关系": [
+  "Relation to China's extent",
+  "Position par rapport à l'étendue de la Chine"
+ ],
+ "在范围内": [
+  "Inside the extent",
+  "Dans l'étendue"
+ ],
+ "不在范围内": [
+  "Outside the extent",
+  "Hors de l'étendue"
+ ],
+ "北京时间 12:00 时，当地的地方时": [
+  "Local solar time when Beijing time is 12:00",
+  "Heure solaire locale quand il est 12 h 00 à Pékin"
+ ],
+ "选择乌鲁木齐，比较它的地方时与北京时间": [
+  "Choose Urumqi and compare its local time with Beijing time",
+  "Choisissez Ürümqi et comparez son heure locale à l'heure de Pékin"
+ ],
+ "把图钉放到最北端附近（北纬 52° 以上）": [
+  "Put the pin near the northern end (above 52°N)",
+  "Placez l'épingle près de l'extrémité nord (au-dessus de 52° N)"
+ ],
+ "把图钉放到我国范围内的热带（北纬 23.5° 以南）": [
+  "Put the pin in the tropics inside China's extent (south of 23.5°N)",
+  "Placez l'épingle dans la zone tropicale de la Chine (au sud de 23,5° N)"
+ ],
+ "{0}月{1}日": [
+  "Month {0}, day {1}",
+  "Jour {1} du mois {0}"
+ ],
+ "经度（东经）": [
+  "Longitude (east)",
+  "Longitude (est)"
+ ],
+ "海拔（示意）": [
+  "Altitude (schematic)",
+  "Altitude (schématique)"
+ ],
+ "所在阶梯": [
+  "Step",
+  "Palier"
+ ],
+ "第一级阶梯": [
+  "Step 1",
+  "Palier 1"
+ ],
+ "第二级阶梯": [
+  "Step 2",
+  "Palier 2"
+ ],
+ "第三级阶梯": [
+  "Step 3",
+  "Palier 3"
+ ],
+ "这一级阶梯": [
+  "This step",
+  "Ce palier"
+ ],
+ "主要地形": [
+  "Main landforms",
+  "Principaux reliefs"
+ ],
+ "范围": [
+  "Extent",
+  "Étendue"
+ ],
+ "把标记拖到第三级阶梯上": [
+  "Drag the marker onto step 3",
+  "Faites glisser le repère sur le palier 3"
+ ],
+ "把标记拖到第二级阶梯上": [
+  "Drag the marker onto step 2",
+  "Faites glisser le repère sur le palier 2"
+ ],
+ "找到海拔最高处（示意海拔 4500 米以上）": [
+  "Find the highest place (schematic altitude above 4500 m)",
+  "Trouvez le point le plus haut (altitude schématique de plus de 4500 m)"
+ ],
+ "条目": [
+  "Entry",
+  "Élément"
+ ],
+ "类别": [
+  "Category",
+  "Catégorie"
+ ],
+ "纬度范围": [
+  "Latitude range",
+  "Plage de latitude"
+ ],
+ "经度范围": [
+  "Longitude range",
+  "Plage de longitude"
+ ],
+ "此条内容请对照资料核对。": [
+  "Please check this entry against a reference.",
+  "Veuillez vérifier cet élément dans une source."
+ ],
+ "面积": [
+  "Area",
+  "Superficie"
+ ],
+ "特征": [
+  "Feature",
+  "Caractéristique"
+ ],
+ "最高峰": [
+  "Highest peak",
+  "Plus haut sommet"
+ ],
+ "最长河流": [
+  "Longest river",
+  "Plus long fleuve"
+ ],
+ "位置": [
+  "Position",
+  "Situation"
+ ],
+ "自然特征": [
+  "Natural features",
+  "Caractères naturels"
+ ],
+ "经济特点": [
+  "Economy",
+  "Économie"
+ ],
+ "首都": [
+  "Capital",
+  "Capitale"
+ ],
+ "类型": [
+  "Type",
+  "Type"
+ ],
+ "注入": [
+  "Flows into",
+  "Se jette dans"
+ ],
+ "走向": [
+  "Direction",
+  "Orientation"
+ ],
+ "主要产品": [
+  "Main products",
+  "Principaux produits"
+ ],
+ "特点": [
+  "Characteristics",
+  "Caractéristiques"
+ ],
+ "简称": [
+  "Abbreviation",
+  "Abréviation"
+ ],
+ "省会": [
+  "Capital",
+  "Chef-lieu"
+ ],
+ "特色": [
+  "Highlights",
+  "Particularités"
+ ],
+ "气候": [
+  "Climate",
+  "Climat"
+ ],
+ "地形": [
+  "Relief",
+  "Relief"
+ ],
+ "农业": [
+  "Agriculture",
+  "Agriculture"
+ ],
+ "所属区域": [
+  "Region",
+  "Région"
+ ],
+ "大洲": [
+  "Continent",
+  "Continent"
+ ],
+ "大洋": [
+  "Ocean",
+  "Océan"
+ ],
+ "国家": [
+  "Country",
+  "Pays"
+ ],
+ "地区": [
+  "Region",
+  "Région"
+ ],
+ "河流": [
+  "River",
+  "Fleuve"
+ ],
+ "湖泊": [
+  "Lake",
+  "Lac"
+ ],
+ "山脉": [
+  "Mountains",
+  "Chaîne"
+ ],
+ "工业": [
+  "Industry",
+  "Industrie"
+ ],
+ "资源": [
+  "Resources",
+  "Ressources"
+ ],
+ "铁路": [
+  "Railway",
+  "Chemin de fer"
+ ],
+ "省区": [
+  "Province",
+  "Province"
+ ],
+ "区域": [
+  "Region",
+  "Région"
+ ],
+ "亚洲": [
+  "Asia",
+  "Asie"
+ ],
+ "南极洲": [
+  "Antarctica",
+  "Antarctique"
+ ],
+ "太平洋": [
+  "Pacific Ocean",
+  "océan Pacifique"
+ ],
+ "西亚": [
+  "West Asia",
+  "Asie occidentale"
+ ],
+ "日本": [
+  "Japan",
+  "Japon"
+ ],
+ "澳大利亚": [
+  "Australia",
+  "Australie"
+ ],
+ "德国": [
+  "Germany",
+  "Allemagne"
+ ],
+ "长江": [
+  "Yangtze",
+  "Yangzi Jiang"
+ ],
+ "青藏高原": [
+  "Qinghai-Tibet Plateau",
+  "plateau Qinghai-Tibet"
+ ],
+ "秦岭": [
+  "Qinling",
+  "Qinling"
+ ],
+ "东北平原": [
+  "Northeast Plain",
+  "plaine du Nord-Est"
+ ],
+ "大庆": [
+  "Daqing",
+  "Daqing"
+ ],
+ "青藏铁路": [
+  "Qinghai-Tibet Railway",
+  "chemin de fer Qinghai-Tibet"
+ ],
+ "选中亚洲，看它跨越的纬度范围": [
+  "Select Asia and see the latitudes it spans",
+  "Sélectionnez l'Asie et voyez les latitudes qu'elle couvre"
+ ],
+ "选中南极洲，看它的位置": [
+  "Select Antarctica and see where it lies",
+  "Sélectionnez l'Antarctique et voyez où il se trouve"
+ ],
+ "选中太平洋，看它的范围": [
+  "Select the Pacific Ocean and see its extent",
+  "Sélectionnez l'océan Pacifique et voyez son étendue"
+ ],
+ "选中西亚，看它在亚、欧、非三洲交界处的位置": [
+  "Select West Asia and see it where Asia, Europe and Africa meet",
+  "Sélectionnez l'Asie occidentale et voyez-la au contact de l'Asie, de l'Europe et de l'Afrique"
+ ],
+ "选中日本，读它的自然和经济特点": [
+  "Select Japan and read its natural and economic features",
+  "Sélectionnez le Japon et lisez ses caractères naturels et économiques"
+ ],
+ "选中澳大利亚，读它的首都和经济特点": [
+  "Select Australia and read its capital and economy",
+  "Sélectionnez l'Australie et lisez sa capitale et son économie"
+ ],
+ "选中长江，看它流经的范围": [
+  "Select the Yangtze and see the area it crosses",
+  "Sélectionnez le Yangzi Jiang et voyez la région traversée"
+ ],
+ "选中青藏高原，读它的特征": [
+  "Select the Qinghai-Tibet Plateau and read its features",
+  "Sélectionnez le plateau Qinghai-Tibet et lisez ses caractéristiques"
+ ],
+ "选中秦岭，读它的走向和意义": [
+  "Select the Qinling and read its direction and importance",
+  "Sélectionnez le Qinling et lisez son orientation et son importance"
+ ],
+ "选中东北平原，读它的主要作物": [
+  "Select the Northeast Plain and read its main crops",
+  "Sélectionnez la plaine du Nord-Est et lisez ses principales cultures"
+ ],
+ "选中大庆，读它的资源": [
+  "Select Daqing and read about its resource",
+  "Sélectionnez Daqing et lisez sa ressource"
+ ],
+ "选中青藏铁路，读它的起止": [
+  "Select the Qinghai-Tibet Railway and read its route",
+  "Sélectionnez le chemin de fer Qinghai-Tibet et lisez son tracé"
+ ],
+ "显示方式": [
+  "Display",
+  "Affichage"
+ ],
+ "四大区域着色": [
+  "Colour by the four regions",
+  "Colorer par les quatre régions"
+ ],
+ "只突出选中的省区": [
+  "Highlight only the selected province",
+  "Mettre en valeur la province choisie"
+ ],
+ "省级行政区序号": [
+  "Number of the province-level division",
+  "Numéro de la division de niveau provincial"
+ ],
+ "序号": [
+  "Number",
+  "Numéro"
+ ],
+ "北方地区": [
+  "Northern region",
+  "Région du Nord"
+ ],
+ "南方地区": [
+  "Southern region",
+  "Région du Sud"
+ ],
+ "西北地区": [
+  "Northwest region",
+  "Région du Nord-Ouest"
+ ],
+ "青藏地区": [
+  "Qinghai-Tibet region",
+  "Région Qinghai-Tibet"
+ ],
+ "港澳台": [
+  "Hong Kong, Macao, Taiwan",
+  "Hong Kong, Macao, Taïwan"
+ ],
+ "上一个": [
+  "Previous",
+  "Précédent"
+ ],
+ "下一个": [
+  "Next",
+  "Suivant"
+ ],
+ "四大区域按省区近似着色，边界省区只作示意。": [
+  "The four regions are coloured by province, approximately; border provinces are only indicative.",
+  "Les quatre régions sont colorées par province, de façon approximative ; les provinces limitrophes sont indicatives."
+ ],
+ "香港、澳门、台湾是三个特殊的区域。": [
+  "Hong Kong, Macao and Taiwan are three special regions.",
+  "Hong Kong, Macao et Taïwan sont trois régions particulières."
+ ],
+ "切换到“只突出选中的省区”": [
+  "Switch to “highlight only the selected province”",
+  "Passez à « mettre en valeur la province choisie »"
+ ],
+ "选中台湾，看它属于哪个区域": [
+  "Select Taiwan and see which region it belongs to",
+  "Sélectionnez Taïwan et voyez à quelle région elle appartient"
+ ],
+ "选中西藏，看它属于哪个区域": [
+  "Select Tibet and see which region it belongs to",
+  "Sélectionnez le Tibet et voyez à quelle région il appartient"
+ ],
+ "按四大区域着色，选中内蒙古，比较它与邻近省区的区域": [
+  "Colour by the four regions, select Inner Mongolia and compare it with neighbouring provinces",
+  "Colorez par les quatre régions, sélectionnez la Mongolie-Intérieure et comparez-la aux provinces voisines"
+ ]
+}

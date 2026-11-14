@@ -15,6 +15,8 @@ const LOADERS: Record<SimId, () => Promise<{ mount: (root: HTMLElement, ctx: Phy
   refraction: () => import("./phys/refraction"), lens: () => import("./phys/lens"), spring: () => import("./phys/spring"), friction: () => import("./phys/friction"),
   newton: () => import("./phys/newton"), pressure: () => import("./phys/pressure"), buoyancy: () => import("./phys/buoyancy"), energy: () => import("./phys/energy"),
   lever: () => import("./phys/lever"), pulley: () => import("./phys/pulley"), specificheat: () => import("./phys/specificheat"), ohm: () => import("./phys/ohm"), em: () => import("./phys/em"),
+  dispersion: () => import("./phys/dispersion"), eye: () => import("./phys/eye"), fluid: () => import("./phys/fluid"), molecule: () => import("./phys/molecule"), engine: () => import("./phys/engine"), circuit: () => import("./phys/circuit"),
+  bulbpower: () => import("./phys/bulbpower"), home: () => import("./phys/home"), magfield: () => import("./phys/magfield"), emwave: () => import("./phys/emwave"), energysrc: () => import("./phys/energysrc"),
 };
 const hero = (X: Ctx, title: string, back: string, backLabel: string, self: string) =>
   h("header", { class: "top hero home-hero subj-hero" }, X.back(back, backLabel), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", {}, title)), X.gear(self));
