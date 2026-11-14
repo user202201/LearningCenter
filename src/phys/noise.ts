@@ -1,4 +1,5 @@
 import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
+import { tr } from "../i18n";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-noise";
 import { COL, arrow, circle, line, rect, txt } from "./draw";
@@ -44,7 +45,7 @@ export const def: SimDef = {
   draw(c, w, hh, s) {
     rect(c, 0, 0, 640, 397, "#f8f9fa", null, 0, 0);
     if (s.mode === 0) { dbBar(c, 150, s.L, ""); for (let i = 0; i < Math.min(6, Math.ceil(s.L / 25)); i++) { c.beginPath(); c.arc(90, 300, 20 + i * 14, -0.9, 0.9); c.strokeStyle = COL.purple; c.lineWidth = 4; c.stroke(); } rect(c, 60, 285, 20, 30, COL.grey, COL.ink, 3, 4); }
-    else if (s.mode === 1) { dbBar(c, 90, s.L0, ""); dbBar(c, 220, final(s), ""); txt(c, "BEFORE", 320, 56, 18, COL.grey); txt(c, "AFTER", 320, 186, 18, COL.grey); for (let i = 0; i < 3; i++) { rect(c, 70 + i * 180, 320, 150, 40, s[`m${i}`] ? "#b2f2bb" : "#fff", COL.ink, 3, 10); txt(c, String(i + 1), 145 + i * 180, 340, 22, COL.ink); } }
+    else if (s.mode === 1) { dbBar(c, 90, s.L0, ""); dbBar(c, 220, final(s), ""); txt(c, tr("降噪前"), 320, 56, 18, COL.grey); txt(c, tr("降噪后"), 320, 186, 18, COL.grey); for (let i = 0; i < 3; i++) { rect(c, 70 + i * 180, 320, 150, 40, s[`m${i}`] ? "#b2f2bb" : "#fff", COL.ink, 3, 10); txt(c, String(i + 1), 145 + i * 180, 340, 22, COL.ink); } }
     else if (s.mode === 2) {
       const X = 80 + (s.d / 400) * 440;
       circle(c, 70, 220, 18, "#ffd8a8", COL.ink, 4); line(c, 70, 238, 70, 300, COL.ink, 5); rect(c, X, 140, 20, 170, COL.metal, COL.ink, 4, 4);

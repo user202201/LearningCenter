@@ -1,4 +1,5 @@
 import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
+import { tr } from "../i18n";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-emdev";
 import { COL, arrow, circle, line, poly, rect, txt } from "./draw";
@@ -56,7 +57,7 @@ export const def: SimDef = {
       const lit = Mo.alarmOn(s.T, s.Tset), Y = (t: number) => 320 - ((t - 20) / 80) * 220;
       rect(c, 150, 90, 24, 240, "#fff", COL.ink, 4, 12); circle(c, 162, 340, 22, COL.red, COL.ink, 4); rect(c, 156, Y(s.T), 12, 336 - Y(s.T), COL.red, null, 0, 3);
       line(c, 174, Y(s.Tset), 260, Y(s.Tset), COL.ink, 4); circle(c, 162, Y(s.Tset), 7, COL.blue, COL.ink, 2);
-      rect(c, 260, 90, 120, 90, lit ? "#ffe066" : "#fff", COL.ink, 4, 10); txt(c, "BELL", 320, 135, 24, lit ? COL.red : COL.grey); if (lit) for (let i = 0; i < 3; i++) { c.beginPath(); c.arc(320, 135, 70 + i * 14, -0.6, 0.6); c.strokeStyle = COL.orange; c.lineWidth = 4; c.stroke(); }
+      rect(c, 260, 90, 120, 90, lit ? "#ffe066" : "#fff", COL.ink, 4, 10); txt(c, tr("电铃"), 320, 135, 24, lit ? COL.red : COL.grey); if (lit) for (let i = 0; i < 3; i++) { c.beginPath(); c.arc(320, 135, 70 + i * 14, -0.6, 0.6); c.strokeStyle = COL.orange; c.lineWidth = 4; c.stroke(); }
       txt(c, `${s.T} C`, 480, 250, 40, lit ? COL.red : COL.blue); txt(c, `${s.Tset} C`, 330, Y(s.Tset), 22, COL.blue);
     } else {
       const x = cur(s), dir = Mo.direction(x);

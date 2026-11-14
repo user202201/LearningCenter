@@ -1,4 +1,5 @@
 import { mountSim, type SimDef, type PhysCtx, fmt, clamp } from "./kit";
+import { tr } from "../i18n";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-magfield";
 import { COL, arrow, circle, line, poly, rect, txt } from "./draw";
@@ -66,7 +67,7 @@ export const def: SimDef = {
     circle(c, cx, cy, R, "#d0ebff", COL.ink, 5);
     for (const L of [1.3, 1.8, 2.5]) { const lm = Math.acos(Math.sqrt(1 / L)); for (const sg of [1, -1]) { c.beginPath(); for (let i = 0; i <= 60; i++) { const t = -lm + (2 * lm * i) / 60, r = R * L * Math.cos(t) ** 2; const X = cx + sg * r * Math.cos(t), Y = cy - r * Math.sin(t); (i ? c.lineTo : c.moveTo).call(c, X, Y); } c.strokeStyle = "rgba(112,72,232,0.4)"; c.lineWidth = 2.5; c.stroke(); } }
     txt(c, "N", cx, cy - R - 16, 22, COL.ink); txt(c, "S", cx, cy + R + 16, 22, COL.ink);
-    txt(c, "S-pole", cx - 78, cy - R + 14, 14, COL.blue); txt(c, "N-pole", cx - 78, cy + R - 14, 14, COL.red);
+    txt(c, tr("S 极"), cx - 78, cy - R + 14, 14, COL.blue); txt(c, tr("N 极"), cx - 78, cy + R - 14, 14, COL.red);
     const px = cx + R * Math.cos(l), py = cy - R * Math.sin(l);
     const bx = -3 * Math.sin(l) * Math.cos(l), by = -(Math.cos(l) ** 2) + 2 * Math.sin(l) ** 2;
     circle(c, px, py, 5, COL.ink); needle(c, px + Math.cos(l) * 34, py - Math.sin(l) * 34, bx, by, 24);

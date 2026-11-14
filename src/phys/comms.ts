@@ -1,4 +1,5 @@
 import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
+import { tr } from "../i18n";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-comms";
 import { COL, arrow, circle, line, rect, txt } from "./draw";
@@ -9,7 +10,7 @@ const fc = (s: S) => (s.band === 0 ? s.fcA * 1e3 : s.fcF * 1e6);
 const got = (s: S) => (s.band === 0 ? s.fcA === s.ftA : s.fcF === s.ftF);
 function signal(c: CanvasRenderingContext2D, s: S) {
   const X = (i: number) => 60 + (i + 0.5) * 65, n = s.noise;
-  txt(c, "DIGITAL", 56, 36, 18, COL.grey, "left"); txt(c, "ANALOG", 56, 214, 18, COL.grey, "left");
+  txt(c, tr("数字信号"), 56, 36, 18, COL.grey, "left"); txt(c, tr("模拟信号"), 56, 214, 18, COL.grey, "left");
   rect(c, 50, 55, 540, 120, "#fff", "#d0bfff", 2, 6); line(c, 50, 115, 590, 115, COL.grey, 1.5);
   const bad = Mo.wrongBits(n);
   Mo.BITS.forEach((b, i) => { const sg = b === 1 ? 1 : -1, y = 115 - 40 * sg; line(c, X(i) - 32, y, X(i) + 32, y, "#adb5bd", 5); circle(c, X(i), Math.max(58, Math.min(172, 115 - 40 * (sg + n * Mo.SAMPLE[i]))), 8, bad[i] ? COL.red : COL.green, COL.ink, 2); txt(c, String(b), X(i), 190, 16, COL.grey); });
@@ -50,7 +51,7 @@ export const def: SimDef = {
       const lo = s.band === 0 ? 540 : 88, hi = s.band === 0 ? 1600 : 108, cc = s.band === 0 ? s.fcA : s.fcF, tt = s.band === 0 ? s.ftA : s.ftF, X = (v: number) => 70 + ((v - lo) / (hi - lo)) * 500;
       rect(c, 50, 120, 540, 110, "#fff", COL.ink, 4, 14); line(c, 70, 190, 570, 190, COL.ink, 3);
       for (let i = 0; i <= 10; i++) line(c, 70 + i * 50, 190, 70 + i * 50, 200, COL.ink, 2);
-      arrow(c, X(cc), 150, X(cc), 186, COL.red, 5); txt(c, "STATION", X(cc), 138, 16, COL.red); line(c, X(tt), 130, X(tt), 215, COL.blue, 5); txt(c, got(s) ? "OK" : "-", 320, 280, 44, got(s) ? COL.green : COL.grey);
+      arrow(c, X(cc), 150, X(cc), 186, COL.red, 5); txt(c, tr("电台"), X(cc), 138, 16, COL.red); line(c, X(tt), 130, X(tt), 215, COL.blue, 5); txt(c, got(s) ? "OK" : "-", 320, 280, 44, got(s) ? COL.green : COL.grey);
     } else {
       const ok = Mo.totalReflection(s.th), t = (s.th * Math.PI) / 180, slope = 55 * Math.tan(t);
       rect(c, 40, 140, 560, 110, "#d0ebff", COL.ink, 4, 4);

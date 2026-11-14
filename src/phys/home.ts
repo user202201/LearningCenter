@@ -1,4 +1,5 @@
 import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
+import { tr } from "../i18n";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-home";
 import { COL, arrow, circle, line, rect, txt } from "./draw";
@@ -44,7 +45,7 @@ export const def: SimDef = {
       line(c, 40, 80, 600, 80, COL.red, 5); line(c, 40, 320, 600, 320, COL.blue, 5); txt(c, "L", 20, 80, 20, COL.red); txt(c, "N", 20, 320, 20, COL.blue);
       rect(c, 90, 56, 60, 48, l.blown ? "#ffc9c9" : "#fff3bf", COL.ink, 4, 6); txt(c, l.blown ? "x" : "fuse", 120, 80, 18, COL.ink);
       Mo.APPS.forEach(([, p], i) => { const x = 210 + i * 82, act = on(s)[i] > 0 && !l.blown; line(c, x, 80, x, 150, COL.ink, 3); line(c, x, 250, x, 320, COL.ink, 3); circle(c, x, 200, 34, act ? "#ffe066" : "#fff", COL.ink, 4); txt(c, i === 0 ? `${on(s)[0]}x${p}` : `${p}`, x, 200, i === 0 ? 14 : 17, COL.ink); });
-      if (s.sc === 1) { line(c, 580, 80, 580, 320, COL.orange, 8); txt(c, "short", 560, 200, 17, COL.orange, "right"); }
+      if (s.sc === 1) { line(c, 580, 80, 580, 320, COL.orange, 8); txt(c, tr("短路"), 560, 200, 17, COL.orange, "right"); }
       txt(c, `${fmt(l.I, 1)} A`, 340, 36, 26, l.blown ? COL.red : COL.green);
       return;
     }

@@ -1,4 +1,5 @@
 import { mountSim, type SimDef, type PhysCtx, fmt, rad } from "./kit";
+import { tr } from "../i18n";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-dispersion";
 import { COL, circle, line, rect, txt } from "./draw";
@@ -55,7 +56,7 @@ export const def: SimDef = {
         const det = dx * -uy - dy * -ux, t = ((AX - P1[0]) * -uy - (AY - P1[1]) * -ux) / det;
         const P2 = [P1[0] + t * dx, P1[1] + t * dy];
         line(c, P1[0], P1[1], P2[0], P2[1], wv.c, 3);
-        if (p.tir) { txt(c, "TIR", P2[0] + 30, P2[1], 16, COL.red); continue; }
+        if (p.tir) { txt(c, tr("全反射"), P2[0] + 30, P2[1], 16, COL.red); continue; }
         const out = -h + rad(p.theta2), len = (SX - P2[0]) / Math.cos(out), Y = P2[1] + len * Math.sin(out);
         line(c, P2[0], P2[1], SX, Y, wv.c, 3); circle(c, SX + 7, Y, 6, wv.c, null);
       }
@@ -76,11 +77,11 @@ export const def: SimDef = {
     }
     const lamp = Mo.LAMPS[s.lamp][1].map((v) => v * 100), obj = Mo.OBJECTS[s.obj][1].map((v) => v * 255), sn = Mo.seen(s.obj, s.lamp);
     rect(c, 0, 0, 640, 397, "#f1f3f5", null, 0, 0);
-    circle(c, 100, 200, 46, hex(lamp), COL.ink, 4); txt(c, "Lamp", 100, 275, 20, COL.ink);
+    circle(c, 100, 200, 46, hex(lamp), COL.ink, 4); txt(c, tr("灯泡"), 100, 275, 20, COL.ink);
     line(c, 150, 200, 280, 200, hex(lamp), 10);
-    rect(c, 290, 130, 120, 140, `rgb(${obj.join(",")})`, COL.ink, 4, 10); txt(c, "Object", 350, 295, 20, COL.ink);
+    rect(c, 290, 130, 120, 140, `rgb(${obj.join(",")})`, COL.ink, 4, 10); txt(c, tr("物体"), 350, 295, 20, COL.ink);
     line(c, 415, 200, 520, 200, hex(sn), 10);
-    circle(c, 560, 200, 40, hex(sn), COL.ink, 4); txt(c, "Eye", 560, 270, 20, COL.ink);
+    circle(c, 560, 200, 40, hex(sn), COL.ink, 4); txt(c, tr("人眼"), 560, 270, 20, COL.ink);
   },
   tasks: [
     { id: "spread", text: "三棱镜：使红光与紫光之间的色散角超过 8°", check: (s) => s.mode === 0 && (Mo.spread(s.A, s.th) ?? 0) > 8 },

@@ -1,4 +1,5 @@
 import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
+import { tr } from "../i18n";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-evap";
 import { COL, arrow, circle, line, rect, txt } from "./draw";
@@ -71,7 +72,7 @@ export const def: SimDef = {
     } else if (s.mode === 2) {
       const v = Mo.vapour(s.bath, s.ti), k = Mo.crystals(s.bath, s.ti, s.cold);
       rect(c, 130, 260, 380, 100, COL.water, COL.ink, 4, 14); circle(c, 320, 210, 62, "#fff", COL.ink, 5); rect(c, 296, 108, 48, 56, "#fff", COL.ink, 5, 6);
-      if (s.cold === 1) { rect(c, 280, 70, 80, 36, "#e3fafc", COL.ink, 4, 8); txt(c, "ICE", 320, 88, 18, COL.blue); }
+      if (s.cold === 1) { rect(c, 280, 70, 80, 36, "#e3fafc", COL.ink, 4, 8); txt(c, tr("冰块"), 320, 88, 18, COL.blue); }
       circle(c, 320, 244, 14, "#5f3dc4", COL.ink, 3);
       c.globalAlpha = Math.min(0.85, v / Mo.M_IODINE + 0.05); circle(c, 320, 205, 52, "#9c36b5", null); c.globalAlpha = 1;
       for (let i = 0; i < Math.round(k * 20); i++) circle(c, 300 + (i % 5) * 10, 118 + Math.floor(i / 5) * 8, 3.5, "#5f3dc4", null);

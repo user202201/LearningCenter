@@ -79,9 +79,9 @@
   "Relative height = altitude of the higher point − altitude of the lower point. Drag the hill in the picture and watch how the contour lines and the terrain profile change.",
   "Dénivelé = altitude du point le plus haut − altitude du point le plus bas. Faites glisser la colline dans l'image et observez comment changent les courbes de niveau et le profil du relief."
  ],
- "陆地的五种基本地形是平原、高原、山地、丘陵和盆地。海拔（绝对高度）从海平面算起，相对高度是两点海拔的差。": [
-  "The five basic landforms on land are plains, plateaus, mountains, hills and basins. Altitude (absolute height) is measured from sea level; relative height is the difference in altitude between two points.",
-  "Les cinq formes de relief de base sur les terres sont les plaines, les plateaux, les montagnes, les collines et les bassins. L'altitude (hauteur absolue) se mesure à partir du niveau de la mer ; le dénivelé est la différence d'altitude entre deux points."
+ "陆地的五种基本地形是平原、高原、山地、丘陵和盆地。海拔（绝对高度）是地面某点高出海平面的垂直距离；相对高度是同一地区最高点与最低点的海拔差，不是平均值。": [
+  "The five basic landforms on land are plains, plateaus, mountains, hills and basins. Altitude (absolute height) is the vertical distance of a point on the ground above sea level; relative height is the difference in altitude between the highest and the lowest point of the same area (not an average).",
+  "Les cinq formes de relief de base sur les terres sont les plaines, les plateaux, les montagnes, les collines et les bassins. L'altitude (hauteur absolue) est la distance verticale d'un point du sol au-dessus du niveau de la mer ; le dénivelé est la différence d'altitude entre le point le plus haut et le point le plus bas d'une même zone (et non une moyenne)."
  ],
  "平原：海拔较低（一般在 200 米以下），地面平坦。高原：海拔较高（一般在 500 米以上），顶面平坦，边缘陡峭。山地：海拔较高，起伏大，坡度陡。丘陵：海拔一般在 500 米以下，相对高度不超过 200 米，坡度和缓。盆地：四周高、中间低。": [
   "Plain: low altitude (generally below 200 m) and flat ground. Plateau: high altitude (generally above 500 m), a flat top and steep edges. Mountain: high altitude, great relief and steep slopes. Hill: altitude generally below 500 m, relative height not more than 200 m and gentle slopes. Basin: high around the edges and low in the middle.",

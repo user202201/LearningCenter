@@ -40,7 +40,7 @@ export const def: SimDef = {
       // a wave: three crests whose spacing follows the wavelength on a log scale
       const f = Mo.freq(s.lf), wl = Math.log10(Mo.wavelength(f)), cyc = 6 - (wl + 12) / 18 * 5.4;   // lg(lambda) from -12 to 5 -> 0.6..6 cycles
       c.beginPath(); for (let x = 40; x <= 600; x += 2) { const y = 270 - 60 * Math.sin(((x - 40) / 560) * Math.PI * 2 * Math.max(0.6, cyc)); (x === 40 ? c.moveTo(x, y) : c.lineTo(x, y)); } c.strokeStyle = COL.purple; c.lineWidth = 4; c.stroke();
-      line(c, 40, 270, 600, 270, COL.grey, 2, [6, 6]); txt(c, "lambda", 320, 350, 20, COL.grey);
+      line(c, 40, 270, 600, 270, COL.grey, 2, [6, 6]); txt(c, "λ", 320, 350, 20, COL.grey);
       return;
     }
     const t = tm(s), d = Mo.DESTS[s.dest][1];

@@ -11,7 +11,7 @@ import { loadSaved, mountSim, mulberry32, type SimDef } from "./phys/kit";
 import * as M from "./geolab-model";
 import { todayLocal } from "./model";
 import type { Ctx } from "./english";
-import type { GeoMapProv } from "./geolab-sims2";
+import type { GeoMapProv, GeoMapChina } from "./geolab-sims2";
 import { cx } from "./i18n";
 
 const COLOR = "#2b8a3e";
@@ -45,7 +45,7 @@ async function def(id: GeoId, D: M.GeoData): Promise<SimDef> {
     case "seasons": return s1.seasons(D); case "terrain": return s1.terrain(D); case "watercycle": return s1.watercycle(D); case "weather": return s1.weather(D);
     case "plates": return s1.plates(D); case "globe": return s1.globe(D); case "timezone": return s1.timezone(D); case "scale": return s1.scale(D); case "contour": return s1.contour(D);
     case "climate": return s2.climate(D); case "population": return s2.population(D); case "development": return s2.development(D); case "rocks": return s2.rocks(D);
-    case "sustain": return s2.sustain(D); case "chinabasic": return s2.chinabasic(D); case "chinaterrain": return s2.chinaterrain(D);
+    case "sustain": return s2.sustain(D); case "chinabasic": return s2.chinabasic(D, (await import("./data/geomap-china.json")).default as unknown as GeoMapChina); case "chinaterrain": return s2.chinaterrain(D);
     case "continents": return s2.facts(D, "continents", true, 5, [["亚洲", "选中亚洲，看它跨越的纬度范围"], ["南极洲", "选中南极洲，看它的位置"], ["太平洋", "选中太平洋，看它的范围"]]);
     case "regions": return s2.facts(D, "regions", true, D.facts.regions.entries.findIndex((e) => e.n === "德国"), [["西亚", "选中西亚，看它在亚、欧、非三洲交界处的位置"], ["日本", "选中日本，读它的自然和经济特点"], ["澳大利亚", "选中澳大利亚，读它的首都和经济特点"]]);
     case "chinanature": return s2.facts(D, "chinanature", false, 3, [["长江", "选中长江，看它流经的范围"], ["青藏高原", "选中青藏高原，读它的特征"], ["秦岭", "选中秦岭，读它的走向和意义"]]);

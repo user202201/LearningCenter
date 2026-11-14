@@ -2,7 +2,7 @@ import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-eye";
 import { COL, arrow, circle, line, rect, txt } from "./draw";
-import { cx } from "../i18n";
+import { cx, tr } from "../i18n";
 
 export const meta = CATALOG.eye;
 const dist = (m: number) => (m === Infinity ? "∞" : fmt(m * 100, 0));
@@ -46,7 +46,7 @@ export const def: SimDef = {
     if (s.mode === 0) {
       const v = Mo.view(s.vision, U(s), s.P);
       c.beginPath(); c.ellipse(380, 200, 150, 100, 0, 0, Math.PI * 2); c.fillStyle = "#fff"; c.fill(); c.strokeStyle = COL.ink; c.lineWidth = 4; c.stroke();
-      line(c, 400, 100, 400, 300, COL.red, 6); txt(c, "retina", 470, 322, 16, COL.red);   // the retina (a vertical line)
+      line(c, 400, 100, 400, 300, COL.red, 6); txt(c, tr("视网膜"), 470, 322, 16, COL.red);   // the retina (a vertical line)
       c.beginPath(); c.ellipse(300, 200, 12 + Math.min(Mo.AMAX, Math.max(0, v.need)) * 1.5 + (s.vision === 1 ? 4 : s.vision === 2 ? -3 : 0), 62, 0, 0, Math.PI * 2); c.fillStyle = "#c5f6fa"; c.fill(); c.strokeStyle = COL.ink; c.lineWidth = 4; c.stroke();
       const fx = Math.min(590, Math.max(330, 400 + ((v.image === Infinity ? 5 : v.image / 0.024) - 1) * 600)), g = s.P !== 0;   // (the distance of the image from the retina is exaggerated so that it can be seen)
       if (g) { rect(c, 225, 130, 10, 140, s.P < 0 ? "#a5d8ff" : "#b2f2bb", COL.ink, 3, 5); txt(c, s.P < 0 ? "-" : "+", 230, 290, 22, COL.ink); }

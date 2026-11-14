@@ -126,12 +126,12 @@ export function rocks(D: M.GeoData): SimDef {
         for (const d of [33, 2900, 5100]) txt(c, String(d), bx - 30, Y(d), 12, COL.grey);
         return;
       }
-      const rocksAt: [number, number, string, string][] = [[320, 70, "#ff8787", "MAGMA"], [120, 300, "#ffa94d", "IGNEOUS"], [520, 300, "#d9a066", "SEDIMENTS"], [320, 200, "#b197fc", "METAMORPHIC"]];
+      const rocksAt: [number, number, string, string][] = [[320, 70, "#ff8787", "岩浆"], [120, 300, "#ffa94d", "岩浆岩"], [520, 300, "#d9a066", "沉积物"], [320, 200, "#b197fc", "变质岩"]];
       arrow(c, 280, 100, 160, 250, s.proc === 0 ? COL.red : COL.grey, s.proc === 0 ? 8 : 4);
       arrow(c, 180, 300, 450, 300, s.proc === 1 ? COL.red : COL.grey, s.proc === 1 ? 8 : 4);
       arrow(c, 450, 270, 360, 225, s.proc === 2 ? COL.red : COL.grey, s.proc === 2 ? 8 : 4);
       arrow(c, 320, 170, 320, 105, s.proc === 3 ? COL.red : COL.grey, s.proc === 3 ? 8 : 4);
-      for (const [x, y, f, t] of rocksAt) { rect(c, x - 70, y - 22, 140, 44, f, COL.ink, 3, 14); txt(c, t, x, y, 14, COL.ink); }
+      for (const [x, y, f, t] of rocksAt) { rect(c, x - 70, y - 22, 140, 44, f, COL.ink, 3, 14); txt(c, tr(t), x, y, 16, COL.ink); }
       txt(c, ["1", "2", "3", "4"][s.proc], 320, 360, 26, COL.red);
     },
     tasks: [
@@ -168,24 +168,50 @@ export function sustain(D: M.GeoData): SimDef {
 
 // ---------- China: extent and local time ----------
 const CITY: [string, number, number][] = [["北京", 39.9, 116.4], ["上海", 31.2, 121.5], ["广州", 23.1, 113.3], ["乌鲁木齐", 43.8, 87.6], ["拉萨", 29.7, 91.1], ["哈尔滨", 45.8, 126.6], ["三亚", 18.3, 109.5], ["漠河", 53.5, 122.4]];
-export function chinabasic(D: M.GeoData): SimDef {
-  const F = frame(60, 14, 480, 384, 70, 140, 0, 56);
-  const idxU = CITY.findIndex((x) => x[0] === "乌鲁木齐") + 1;
+/** Albers conic equal-area (parallels 25 / 47, central meridian 105 E) fitted to the map data of `geomap-china.json` (viewBox 2000 x 1853): the same projection the province map was made with */
+const AL = (() => {
+  const rad = Math.PI / 180, n = (Math.sin(25 * rad) + Math.sin(47 * rad)) / 2, C = Math.cos(25 * rad) ** 2 + 2 * n * Math.sin(25 * rad);
+  const rho = (la: number) => Math.sqrt(C - 2 * n * Math.sin(la * rad)) / n, r0 = rho(0), SC = 2453.7, OX = 1081.1, OY = 2359.7;
   return {
-    ...base(D, "chinabasic"), aspect: 0.68, drag: true,
-    params: [{ id: "lat", label: "纬度", min: 0, max: 56, step: 0.1, value: 35, unit: "°N" }, { id: "lon", label: "经度", min: 70, max: 140, step: 0.1, value: 105, unit: "°E" }],
+    fwd: (la: number, lo: number): [number, number] => { const th = n * (lo - 105) * rad, r = rho(la); return [SC * r * Math.sin(th) + OX, SC * (r * Math.cos(th) - r0) + OY]; },
+    inv: (x: number, y: number): [number, number] => { const X = (x - OX) / SC, Y = (y - OY) / SC + r0, r = Math.hypot(X, Y), th = Math.atan2(X, Y); return [Math.asin(Math.max(-1, Math.min(1, (C - (r * n) ** 2) / (2 * n)))) / rad, 105 + th / n / rad]; },
+  };
+})();
+export interface GeoMapChina { provinces: GeoMapProv[]; nbrs: { d: string }[]; inset: { box: [number, number, number, number]; land: string; dashes: string[] } }
+export function chinabasic(D: M.GeoData, gm: GeoMapChina): SimDef {
+  const idxU = CITY.findIndex((x) => x[0] === "乌鲁木齐") + 1;
+  const provP = gm.provinces.map((p) => new Path2D(p.d)), nbP = gm.nbrs.map((p) => new Path2D(p.d)), insLand = new Path2D(gm.inset.land), insDash = gm.inset.dashes.map((d) => new Path2D(d));
+  const line2 = (c: CanvasRenderingContext2D, pts: [number, number][], S: number, col: string, wd: number, dash: number[] = []) => { c.beginPath(); pts.forEach(([x, y], i) => (i ? c.lineTo(x * S, y * S) : c.moveTo(x * S, y * S))); c.strokeStyle = col; c.lineWidth = wd; c.setLineDash(dash); c.stroke(); c.setLineDash([]); };
+  const seq = (a: number, b: number, k = 40) => Array.from({ length: k + 1 }, (_, i) => a + ((b - a) * i) / k);
+  return {
+    ...base(D, "chinabasic"), aspect: 1853 / 2000, drag: true,
+    params: [{ id: "lat", label: "纬度", min: 0, max: 56, step: 0.1, value: 35, unit: "°N", show: (v) => (v === 0 ? "赤道" : `北纬 ${fmt(v, 1)}°`) }, { id: "lon", label: "经度", min: 70, max: 140, step: 0.1, value: 105, unit: "°E", show: (v) => `东经 ${fmt(v, 1)}°` }],
     choices: [{ id: "city", label: "城市", options: [[0, "自定义"], ...CITY.map(([n], i) => [i + 1, n] as [number, string])], value: 0 }],
     derive: (s, ch) => { if (ch === "city" && s.city > 0) { s.lat = CITY[s.city - 1][1]; s.lon = CITY[s.city - 1][2]; } else if (ch === "lat" || ch === "lon") s.city = 0; },
-    pointer: (kind, x, y) => (x >= F.x0 - 4 && x <= F.x0 + F.w + 4 && y >= F.y0 - 4 && y <= F.y0 + F.h + 4 ? { lat: Math.round(Math.max(0, Math.min(56, F.lat(y))) * 10) / 10, lon: Math.round(Math.max(70, Math.min(140, F.lon(x))) * 10) / 10 } : undefined),
+    pointer: (kind, x, y) => { const S = 640 / 2000, [la, lo] = AL.inv(x / S, y / S); return Number.isFinite(la) && Number.isFinite(lo) ? { lat: Math.round(Math.max(0, Math.min(56, la)) * 10) / 10, lon: Math.round(Math.max(70, Math.min(140, lo)) * 10) / 10 } : undefined; },
     readouts: (s) => [{ label: "纬度", value: M.latStr(Math.round(s.lat * 10) / 10) }, { label: "经度", value: M.lonStr(Math.round(s.lon * 10) / 10) }, { label: "与我国范围的关系", value: M.inChinaBox(s.lat, s.lon) ? "在范围内" : "不在范围内" }, { label: "温度带", value: M.zoneOfLat(s.lat) }, { label: "北京时间 12:00 时，当地的地方时", value: M.solarClock(12, s.lon) }],
     draw(c, w, hh, s: St) {
-      rect(c, 0, 0, w, hh, "#fff", null, 0, 0);
-      drawWorld(c, F, { zones: true, step: 10 });
-      line(c, F.x0, F.Y(23.5), F.x0 + F.w, F.Y(23.5), COL.orange, 3, [8, 5]);
-      box(c, F, [M.CHINA_BOX.latS, M.CHINA_BOX.latN, M.CHINA_BOX.lonW, M.CHINA_BOX.lonE], COL.red);
-      line(c, F.X(120), F.y0, F.X(120), F.y0 + F.h, COL.purple, 3, [10, 6]);
-      for (const [, la, lo] of CITY) circle(c, F.X(lo), F.Y(la), 4, COL.ink, "#fff", 2);
-      pin(c, F.X(s.lon), F.Y(s.lat));
+      const S = w / 2000;
+      rect(c, 0, 0, w, hh, "#e7f5ff", null, 0, 0);
+      c.save(); c.scale(S, S);
+      for (const p of nbP) { c.fillStyle = "#eceff3"; c.fill(p); c.strokeStyle = "#ced4da"; c.lineWidth = 3; c.stroke(p); }
+      for (const p of provP) { c.fillStyle = "#d3f9d8"; c.fill(p); c.strokeStyle = "#fff"; c.lineWidth = 3; c.stroke(p); }
+      c.restore();
+      // the graticule (curved on an Albers map)
+      for (const la of [10, 20, 30, 40, 50]) line2(c, seq(70, 140).map((lo) => AL.fwd(la, lo)), S, "rgba(34,139,230,.45)", 1.5);
+      for (const lo of [70, 80, 90, 100, 110, 120, 130, 140]) line2(c, seq(8, 56).map((la) => AL.fwd(la, lo)), S, "rgba(34,139,230,.45)", 1.5);
+      line2(c, seq(70, 140).map((lo) => AL.fwd(23.5, lo)), S, COL.orange, 3, [8, 5]);
+      line2(c, seq(8, 56).map((la) => AL.fwd(la, 120)), S, COL.purple, 3, [10, 6]);
+      const B = M.CHINA_BOX;
+      line2(c, [...seq(B.lonW, B.lonE, 30).map((lo) => AL.fwd(B.latS, lo)), ...seq(B.latS, B.latN, 30).map((la) => AL.fwd(la, B.lonE)), ...seq(B.lonE, B.lonW, 30).map((lo) => AL.fwd(B.latN, lo)), ...seq(B.latN, B.latS, 30).map((la) => AL.fwd(la, B.lonW))], S, "rgba(224,49,49,.55)", 1.5, [4, 5]);
+      const clampX = (x: number) => Math.max(18, Math.min(w - 22, x * S)), clampY = (y: number) => Math.max(14, Math.min(hh - 14, y * S));
+      for (const la of [20, 30, 40, 50]) { const [x, y] = AL.fwd(la, 137); txt(c, `${la}°N`, clampX(x), clampY(y) - 8, 12, COL.grey); }
+      for (const lo of [80, 90, 100, 110]) { const [x, y] = AL.fwd(12, lo); txt(c, `${lo}°E`, clampX(x), clampY(y) - 2, 12, COL.grey); }
+      { const [x, y] = AL.fwd(23.5, 71); txt(c, "23.5°N", clampX(x) + 22, clampY(y) - 9, 12, COL.orange); const [x2, y2] = AL.fwd(47, 120); txt(c, "120°E", clampX(x2) + 28, clampY(y2), 12, COL.purple); }
+      // the South China Sea inset
+      { const [bx, by, bw, bh] = gm.inset.box; c.save(); c.scale(S, S); c.fillStyle = "#fff"; c.fillRect(bx, by, bw, bh); c.strokeStyle = COL.ink; c.lineWidth = 3; c.strokeRect(bx, by, bw, bh); c.fillStyle = "#d3f9d8"; c.fill(insLand); c.strokeStyle = "#868e96"; c.lineWidth = 2; c.stroke(insLand); for (const d of insDash) { c.strokeStyle = COL.red; c.lineWidth = 3; c.stroke(d); } c.restore(); }
+      for (const [n, la, lo] of CITY) { const [x, y] = AL.fwd(la, lo); circle(c, x * S, y * S, 4, COL.ink, "#fff", 2); txt(c, tr(n), x * S, y * S - 13, 13, COL.ink); }
+      const [px, py] = AL.fwd(s.lat, s.lon); pin(c, Math.max(8, Math.min(w - 8, px * S)), Math.max(8, Math.min(hh - 8, py * S)));
     },
     tasks: [
       { id: "urumqi", text: "选择乌鲁木齐，比较它的地方时与北京时间", check: (s) => s.city === idxU },

@@ -2,6 +2,7 @@
 import { type SimDef, type St, fmt } from "./phys/kit";
 import { CATALOG, type GeoId } from "./geolab-catalog";
 import * as M from "./geolab-model";
+import { tr } from "./i18n";
 import * as SM from "./spacemodel";
 import { COL, arrow, circle, frame, line, poly, rect, txt, drawWorld, pin } from "./geolab-draw";
 
@@ -55,14 +56,14 @@ const feat = ["地面平坦", "坡度和缓", "起伏很大", "四周高中间�
 export function terrain(D: M.GeoData): SimDef {
   return {
     ...base(D, "terrain"), aspect: 0.55,
-    params: [{ id: "alt", label: "海拔", min: 0, max: 6000, step: 100, value: 100, unit: "m" }, { id: "rel", label: "相对高度", min: 0, max: 3000, step: 50, value: 100, unit: "m" }],
+    params: [{ id: "alt", label: "海拔（高出海平面）", min: 0, max: 6000, step: 100, value: 100, unit: "m" }, { id: "rel", label: "相对高度（最高点与最低点之差）", min: 0, max: 3000, step: 50, value: 100, unit: "m" }],
     choices: [{ id: "feat", label: "地表特征", options: feat.map((f, i) => [i, f] as [number, string]), value: 0 }],
     readouts: (s) => [{ label: "海拔", value: fmt(s.alt, 0), unit: "m" }, { label: "相对高度", value: fmt(s.rel, 0), unit: "m" }, { label: "地形类型", value: M.terrainType(s.alt, s.rel, s.feat) }],
     draw(c, w, h, s: St) {
       const y0 = 330, k = 250 / 6000, Y = (m: number) => y0 - Math.max(m, 2) * k, X0 = 40, X1 = 600;
       rect(c, 0, 0, w, h, "#f1fbff", null, 0, 0);
       c.fillStyle = "#74c0fc"; c.fillRect(0, y0, w, h - y0); line(c, 0, y0, w, y0, COL.blue, 4);
-      for (const [m, col] of [[200, "#2f9e44"], [500, COL.orange]] as [number, string][]) { line(c, X0, Y(m), X1, Y(m), col, 2, [6, 6]); txt(c, String(m), X1 + 14, Y(m), 13, col); }
+      for (const [m, col] of [[200, "#2f9e44"], [500, COL.orange]] as [number, string][]) { line(c, X0, Y(m), X1, Y(m), col, 2, [6, 6]); txt(c, `${m} m`, X1 + 24, Y(m), 13, col); }
       const pts: [number, number][] = [];
       const t = M.terrainType(s.alt, s.rel, s.feat);
       if (s.feat === 3) { const rim = s.alt + s.rel; pts.push([X0, Y(rim)], [180, Y(rim)], [260, Y(s.alt)], [420, Y(s.alt)], [500, Y(rim)], [X1, Y(rim)]); }
@@ -71,7 +72,7 @@ export function terrain(D: M.GeoData): SimDef {
       else if (s.alt >= 500) pts.push([X0, Y(Math.max(0, s.alt - s.rel))], [150, Y(s.alt)], [490, Y(s.alt)], [X1, Y(Math.max(0, s.alt - s.rel))]);
       else pts.push([X0, Y(s.alt)], [X1, Y(s.alt)]);
       poly(c, [[X0, y0], ...pts, [X1, y0]], t === "平原" || t === M.LOWLAND ? "#b2f2bb" : t === "丘陵" ? "#d8f5a2" : t === "高原" ? "#ffe066" : t === "盆地" ? "#ffd8a8" : "#d9a066", COL.ink, 4);
-      txt(c, t === "平原" ? "PLAIN" : t === M.LOWLAND ? "LOWLAND" : t === "丘陵" ? "HILLS" : t === "高原" ? "PLATEAU" : t === "盆地" ? "BASIN" : "MOUNTAINS", w / 2, 40, 24, COL.ink);
+      txt(c, tr(t === M.LOWLAND ? "低地" : t), w / 2, 40, 24, COL.ink);
     },
     tasks: [
       { id: "plateau", text: "做出一个高原：海拔 500 米以上、顶面平坦", check: (s) => M.terrainType(s.alt, s.rel, s.feat) === "高原" },
@@ -173,27 +174,51 @@ export function plates(D: M.GeoData): SimDef {
         line(c, X(tp), 50, X(tp), 160, COL.blue, 3); txt(c, "P", X(tp), 36, 16, COL.blue);
         line(c, X(ts), 50, X(ts), 160, COL.red, 3); txt(c, "S", X(ts), 36, 16, COL.red);
         txt(c, `${fmt(M.waveGap(s.d), 0)} s`, (X(tp) + X(ts)) / 2, 182, 18, COL.purple);
-        circle(c, 120, 300, 10, COL.red, COL.ink, 3);
+        circle(c, 120, 300, 10, COL.red, COL.ink, 3); txt(c, tr("震中"), 120, 266, 15, COL.red);
         for (let k = 1; k <= 4; k++) { c.beginPath(); c.arc(120, 300, k * 30, 0, 7); c.strokeStyle = k % 2 ? COL.blue : COL.red; c.lineWidth = 2; c.stroke(); }
-        const sx = 120 + Math.min(440, (s.d / 800) * 440); circle(c, sx, 300, 9, COL.green, COL.ink, 3); line(c, 130, 340, sx, 340, COL.ink, 2); txt(c, `${s.d} km`, (130 + sx) / 2, 358, 16);
+        const sx = 120 + Math.min(440, (s.d / 800) * 440); circle(c, sx, 300, 9, COL.green, COL.ink, 3); txt(c, tr("地震台站"), sx, 276, 14, COL.green); line(c, 130, 340, sx, 340, COL.ink, 2); txt(c, `${s.d} km`, (130 + sx) / 2, 358, 16);
         return;
       }
-      const sep = Math.min(130, (M.kmMoved(s.v, s.t) / 1200) * 130), top = 230, bot = 360;
-      c.fillStyle = "#ffa8a8"; c.fillRect(0, bot, w, h - bot);
+      const sep = Math.min(130, (M.kmMoved(s.v, s.t) / 1200) * 130), top = 210, cr = 40, ink = COL.ink;
+      // sky, mantle (hot, flowing rock) under everything
+      rect(c, 0, 0, w, h, "#d0ebff", null, 0, 0);
+      rect(c, 0, top + cr, w, h - top - cr, "#ffa94d", null, 0, 0);
+      txt(c, tr("地幔"), 40, h - 18, 15, ink);
       if (s.b === 0) {
-        rect(c, 10, top, 300 - sep, bot - top, "#d9a066", COL.ink, 4, 4); rect(c, 330 + sep, top, 300 - sep, bot - top, "#d9a066", COL.ink, 4, 4);
-        c.fillStyle = "#ff6b6b"; c.fillRect(310 - sep, top + 30, 20 + 2 * sep, bot - top - 30);
-        arrow(c, 250 - sep, 150, 130, 150, COL.red, 6); arrow(c, 390 + sep, 150, 510, 150, COL.red, 6);
+        // divergent: two plates move apart, magma rises, new sea floor, a mid-ocean ridge
+        const y0 = top + 10, g = 14 + sep * 0.9;
+        rect(c, 0, 140, w, y0 - 140, "#a5d8ff", null, 0, 0);
+        poly(c, [[320 - g, y0 - 14], [320 + g, y0 - 14], [320 + g - 10, y0 + cr], [320 + g + 26, y0 + cr + 44], [320 - g - 26, y0 + cr + 44], [320 - g + 10, y0 + cr]], "#e8590c", null, 0);
+        poly(c, [[0, y0], [320 - g - 22, y0], [320 - g, y0 - 14], [320 - g + 10, y0 + cr], [0, y0 + cr]], "#9c6b4b", ink, 4);
+        poly(c, [[w, y0], [320 + g + 22, y0], [320 + g, y0 - 14], [320 + g - 10, y0 + cr], [w, y0 + cr]], "#9c6b4b", ink, 4);
+        arrow(c, 250 - g, y0 + 20, 110, y0 + 20, "#fff", 6); arrow(c, 390 + g, y0 + 20, 530, y0 + 20, "#fff", 6);
+        arrow(c, 320, y0 + cr + 70, 320, y0 + cr + 6, "#fff", 5);
+        txt(c, tr("海水"), 90, 170, 15, "#1864ab"); txt(c, tr("大洋中脊"), 320, y0 - 36, 15, ink);
+        txt(c, tr("大洋板块"), 100, y0 - 14, 14, ink); txt(c, tr("大洋板块"), 540, y0 - 14, 14, ink);
+        txt(c, tr("岩浆上升"), 320, y0 + cr + 92, 14, ink);
       } else if (s.b === 1) {
-        rect(c, 10, top, 300, bot - top, "#d9a066", COL.ink, 4, 4); rect(c, 330, top, 300, bot - top, "#c08552", COL.ink, 4, 4);
-        const mh = 10 + sep * 1.1; poly(c, [[250, top], [320 - sep * 0.2, top - mh], [390, top]], "#adb5bd", COL.ink, 4);
-        arrow(c, 120, 150, 230, 150, COL.red, 6); arrow(c, 520, 150, 410, 150, COL.red, 6);
+        // collision: two continents push together, the crust folds into a mountain range with a deep root
+        rect(c, 0, top, 320, cr, "#d9a066", ink, 4, 3); rect(c, 320, top, w - 320, cr, "#c08552", ink, 4, 3);
+        const mh = 10 + sep * 1.1, bw = 60 + sep * 0.3;
+        poly(c, [[320 - bw, top + cr], [320, top + cr + 10 + mh * 0.5], [320 + bw, top + cr]], "#c08552", ink, 3);
+        poly(c, [[320 - bw, top], [320, top - mh], [320 + bw, top]], "#adb5bd", ink, 4);
+        if (mh > 60) poly(c, [[320 - mh * 0.2, top - mh * 0.78], [320, top - mh], [320 + mh * 0.2, top - mh * 0.78]], "#fff", null, 0);
+        arrow(c, 70, top + 20, 230, top + 20, "#fff", 6); arrow(c, 570, top + 20, 410, top + 20, "#fff", 6);
+        txt(c, tr("大陆板块"), 130, top - 20, 14, ink); txt(c, tr("大陆板块"), 510, top - 20, 14, ink);
+        txt(c, tr("褶皱山脉"), 320, Math.max(22, top - mh - 16), 15, ink); txt(c, tr("山根"), 320, top + cr + 10 + mh * 0.5 + 18, 14, ink);
       } else {
-        rect(c, 330, top - 20, 300, bot - top + 20, "#c08552", COL.ink, 4, 4);
-        poly(c, [[10, top + 30], [300, top + 30], [440, bot], [10, bot]], "#4dabf7", COL.ink, 4);
-        const vh = 10 + sep * 0.7; poly(c, [[470, top - 20], [500, top - 20 - vh], [530, top - 20]], "#e8590c", COL.ink, 4);
-        for (let k = 0; k < 5; k++) circle(c, 330 + k * 22, top + 40 + k * 22, 5, COL.red, "#fff", 2);
-        arrow(c, 100, 150, 230, 175, COL.red, 6);
+        // subduction: the heavy ocean plate dives under the continent: trench, volcano, earthquakes along the slab
+        const T = 255, k = 0.62, D = 60 + sep * 1.3, ex = T + D, ey = top + 20 + k * D;
+        rect(c, 0, 140, 340, top + 20 - 140, "#a5d8ff", null, 0, 0);
+        poly(c, [[300, top + 20], [345, top - 30], [w, top - 30], [w, top + 70], [330, top + 70]], "#c08552", ink, 4);
+        poly(c, [[0, top + 20], [T, top + 20], [ex, ey], [ex, ey + 22], [T, top + 42], [0, top + 42]], "#6c757d", ink, 4);
+        circle(c, 475, top + 28, 18, "#e8590c", ink, 3); line(c, 475, top + 28, 475, top - 30, "#e8590c", 8);
+        const vh = 20 + sep * 0.7; poly(c, [[440, top - 30], [475, top - 30 - vh], [510, top - 30]], "#e8590c", ink, 4);
+        for (let i = 1; i <= 5; i++) circle(c, T + (D * i) / 5.5, top + 20 + (k * D * i) / 5.5, 5, COL.red, "#fff", 2);
+        arrow(c, 40, top + 31, 190, top + 31, "#fff", 6);
+        txt(c, tr("海水"), 90, 170, 15, "#1864ab"); txt(c, tr("大洋板块"), 100, top + 66, 14, ink); txt(c, tr("大陆板块"), 570, top + 20, 14, ink);
+        txt(c, tr("海沟"), T - 6, top - 8, 15, ink); txt(c, tr("火山"), 475, Math.max(18, top - 30 - vh - 14), 15, ink); txt(c, tr("岩浆房"), 475, top + 56, 13, ink);
+        txt(c, tr("震源"), T + (D * 3) / 5.5 - 34, top + 20 + (k * D * 3) / 5.5 + 30, 14, COL.red);
       }
     },
     tasks: [

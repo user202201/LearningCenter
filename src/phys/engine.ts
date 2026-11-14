@@ -1,4 +1,5 @@
 import { mountSim, type SimDef, type PhysCtx, fmt } from "./kit";
+import { tr } from "../i18n";
 import { CATALOG } from "./catalog";
 import * as Mo from "./model-engine";
 import { COL, arrow, circle, line, rect, txt } from "./draw";
@@ -46,10 +47,10 @@ export const def: SimDef = {
       line(c, 300, py + 26, 300, 290, COL.ink, 8);
       const a = (s.th * Math.PI) / 180; circle(c, 300, 330, 38, "#fff", COL.ink, 4); const cx = 300 + 22 * Math.sin(a), cy = 330 - 22 * Math.cos(a); line(c, 300, 330, cx, cy, COL.red, 5); circle(c, cx, cy, 7, COL.red);
       rect(c, 248, top - 36, 24, 20, Mo.intakeOpen(s.th) ? "#fff" : COL.green, COL.ink, 3, 3); rect(c, 328, top - 36, 24, 20, Mo.exhaustOpen(s.th) ? "#fff" : COL.red, COL.ink, 3, 3);
-      txt(c, "in", 260, top - 52, 16, COL.green); txt(c, "out", 340, top - 52, 16, COL.red);
+      txt(c, "in", 260, top - 52, 16, COL.green); txt(c, tr("输出"), 340, top - 52, 16, COL.red);
       if (k === 0) arrow(c, 190, top - 70, 250, top - 36, COL.blue, 5); if (k === 3) arrow(c, 340, top - 20, 420, top - 70, COL.grey, 5);
       if (k === 2 && s.th > 365) circle(c, 300, top + 30, 12 + (540 - s.th) * 0.1, COL.yellow, COL.orange, 3);
-      if (k === 1 && s.th > 340) txt(c, "spark", 300, top - 6, 16, COL.orange);
+      if (k === 1 && s.th > 340) txt(c, tr("火花"), 300, top - 6, 16, COL.orange);
       const P = Mo.pressure(s.th), bw = Math.min(180, 20 + (P / 70) * 160); rect(c, 420, 150, 180, 22, "#fff", COL.ink, 3, 4); rect(c, 420, 150, bw, 22, COL.red, null, 0, 4); txt(c, "p", 400, 161, 18, COL.ink);
       return;
     }
