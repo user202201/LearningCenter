@@ -21,7 +21,7 @@ const run = async (loc, expect) => {
   const stored = await p.evaluate((id) => ({ en: localStorage.getItem('learn.local.english/' + id + '.json') !== null, fr: localStorage.getItem('learn.local.french/' + id + '.json') !== null }), id);
   ok(stored.fr === expect.french && stored.en === !expect.french, `${loc}: the words are kept in ${expect.french ? 'french/' : 'english/'}<kid>.json`);
   const sc = await p.locator('.shortcuts .sc-name').allTextContents();
-  ok(!sc.includes(expect.card) && sc.length === 3, `${loc}: the shortcuts on this page are the three OTHER subjects (${sc.join(', ')})`);
+  ok(!sc.includes(expect.card) && sc.length === 4, `${loc}: the shortcuts on this page are the four OTHER subjects (${sc.join(', ')})`);
   // the game says the word and shows the meaning on a tap
   await p.click('#tab-game'); await p.click('#game-start'); await p.waitForSelector('#game-char');
   await p.click('#game-dial');
