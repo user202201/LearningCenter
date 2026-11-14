@@ -41,7 +41,8 @@ def add(code, topic, q, a, pool, e, g, gx, k=3, ban=()):
     if q in seen_q: return None
     banned = set(ban)
     opts = [x for x in dict.fromkeys(pool) if x != a and x and x not in banned]
-    if len(opts) < k: return None
+    if len(opts) < k:
+        print('WARNING: not enough wrong choices, card skipped (the ids after it would move):', code, q); return None
     w = random.Random(zlib.crc32((code + '|' + q).encode('utf-8')) ^ 20261112).sample(opts, k)
     count[code] = count.get(code, 0) + 1
     card = {'id': f'x-{code}-{count[code]:03d}', 'g': g, 'gx': gx, 't': topic, 'q': q, 'a': a, 'w': w, 'e': e}
@@ -63,7 +64,7 @@ for n, cap, con, fact in C: by_con.setdefault(con, []).append((n, cap))
 for n, cap, con, fact in C:
     g, gx = (1, 9) if n in geo.POPULAR else (3, 9) if n in geo.KNOWN else (5, 9)
     where = f'{n}跨两个大洲，通常归入{con}' if n in AMBIG else f'{n}位于{con}'
-    e = f'{cap}是{n}的首都，{where}。' + (f'{n}{fact}。' if fact else '')
+    e = (f'{cap}是{n}的首都，{where}。' if cap != n else f'{n}是城市国家，首都就是{n}本身，{where}。') + (f'{n}{fact}。' if fact else '')
     same = [(m, c) for m, c in by_con[con] if m != n]
     if cap != n:
         add('cap', 'country', f'{n}的首都是哪座城市？', cap, [c for m, c in same], e, g, gx)
@@ -114,6 +115,7 @@ for name, cls, hab, food, fun, gr in A:
     if food:
         assert name in life.FOOD_X, name
         codes = life.FOOD_X[name]
+        if 'm' in codes: codes += 'ikp'   # flesh: fish, insects and small shrimps count as meat, so they are never the wrong choice of a meat eater
         pool = [lab for lab, c in life.FOOD_ALL.items() if c not in codes and lab not in food and food not in lab]
         add('af', 'animal', f'{name}主要吃什么？', food, pool, e, g, gx)
     add('an', 'animal', f'关于{name}，下面哪句话说得对？', text, [opt_of[r[0]] for r in A if r[0] != name], e, g, gx)

@@ -65,6 +65,12 @@ export function tr(s: string, lang: Lang = current): string {
   return s.slice(0, s.length - s.trimStart().length) + out + s.slice(s.trimEnd().length);
 }
 
+/** the translation of a text that is a whole table entry (no patterns, nothing translated piece by piece); undefined when there is none */
+export function trExact(s: string, lang: Lang = current): string | undefined {
+  if (lang === "zh") return undefined;
+  return tableFor(lang)!.exact.get(s.trim());
+}
+
 // ---------- DOM ----------
 const ATTRS = ["title", "placeholder", "aria-label", "alt"];
 const texts = new WeakMap<Text, { orig: string; shown: string }>();

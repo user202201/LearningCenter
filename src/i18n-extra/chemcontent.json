@@ -4074,5 +4074,53 @@
  "§铜": [
   "copper",
   "cuivre"
+ ],
+ "碘": [
+  "iodine",
+  "l'iode"
+ ],
+ "铁": [
+  "iron",
+  "le fer"
+ ],
+ "血液": [
+  "blood",
+  "le sang"
+ ],
+ "氧气": [
+  "oxygen",
+  "de l'oxygène"
+ ],
+ "氮气": [
+  "nitrogen",
+  "de l'azote"
+ ],
+ "醋酸": [
+  "acetic acid",
+  "acide acétique"
+ ],
+ "糖类": [
+  "carbohydrates",
+  "les glucides"
+ ],
+ "坏血病": [
+  "scurvy",
+  "le scorbut"
+ ],
+ "脚气病": [
+  "beriberi",
+  "le béribéri"
+ ],
+ "水蒸气": [
+  "water vapour",
+  "de la vapeur d'eau"
+ ],
+ "夜盲症": [
+  "night blindness",
+  "la cécité nocturne"
+ ],
+ "维生素": [
+  "vitamins",
+  "les vitamines"
  ]
 }

@@ -7,7 +7,7 @@ import * as G from "./game";
 import * as C2 from "./chemlogic2";
 import * as C3 from "./chemlogic3";
 import * as C4 from "./chemlogic4";
-import { getLang, tr } from "./i18n";
+import { getLang, tr, trExact } from "./i18n";
 
 // ---------- the content in the screen language (rule 66) ----------
 const CJK_RE = /[\u3000-\u303f\u4e00-\u9fff\uff00-\uffef]/;
@@ -16,16 +16,17 @@ const lcFirst = (s: string): string => s.charAt(0).toLowerCase() + s.slice(1);
 /** a substance / ion / content name in the screen language. Entries of `chemcontent.json` whose key starts with "§" are the chemistry's own wording (lower case, no article) and win over the general table */
 export function tn(s: string): string {
   if (!s || getLang() === "zh" || !CJK_RE.test(s)) return s;
-  const k = "§" + s, t = tr(k);
-  return t !== k ? t : tr(s);
+  return trExact("§" + s) ?? tr(s);
 }
 /** a content text of a question part ("{u}"): translated whole, or piece by piece around the Chinese punctuation, which becomes ordinary punctuation outside Chinese */
 export function uText(s: string): string {
   if (getLang() === "zh" || !CJK_RE.test(s)) return s;
   const whole = tn(s);
   if (whole !== s && !CJK_RE.test(whole)) return whole;
+  const par = /^(\s*\()(.*)(\)\s*)$/.exec(s);
+  if (par) return par[1] + uText(par[2]) + par[3];
   const P: Record<string, string> = { [U.comma]: ", ", [U.sep]: ", ", [U.semi]: "; ", [U.colon]: ": ", [U.dot]: ". ", [U.lp]: " (", [U.rp]: ")" };
-  const out = s.split(new RegExp("([" + Object.keys(P).join("") + "])")).map((x) => (P[x] !== undefined ? P[x] : tn(x))).join("");
+  const out = s.split(new RegExp("([" + Object.keys(P).join("") + "()])")).map((x) => (P[x] !== undefined ? P[x] : tn(x))).join("");
   return out.replace(/\s+([,;:.)])/g, "$1").replace(/\(\s+/g, "(").replace(/ {2,}/g, " ").replace(/^ (?=\()/, "");
 }
 
@@ -236,7 +237,7 @@ export function ionName(cat: Ion, an: Ion): string {
   if (an.k === "OH") return N.qingyanghua + c;
   return a + c;
 }
-export const catName = (k: string): string => { const z = D.names.cat[k]; if (getLang() === "zh") return z; const t = tr("§§" + z); return t !== "§§" + z ? t : tn(z); };
+export const catName = (k: string): string => { const z = D.names.cat[k]; if (getLang() === "zh") return z; return trExact("§§" + z) ?? tn(z); };
 export const IONS = { CAT, AN, catByK, crossFormula, ionName };
 const catPool = (lv: number) => CAT.filter((c) => c.k !== "H" && (lv >= 3 || !["NH4", "Ag", "Fe3", "Fe2"].includes(c.k)) && (lv >= 2 || !["Ba", "Zn", "Cu"].includes(c.k)));
 const anPool = (lv: number) => AN.filter((a) => lv >= 3 || (lv >= 2 ? a.k !== "PO4" : ["Cl", "O", "OH", "SO4"].includes(a.k)));
@@ -675,10 +676,10 @@ export function genGas(r: Rnd, lv: number, kind: string): Q {
   const gn: Part = { u: ` ${g.n}` };
   if (kind === "react") {
     const rxe = pick(r, g.rx), rx = D.reactions.find((x) => x.eq === rxe)!;
-    const label = (t: Term[]) => t.map((x) => nameOf(x.f)).join(D.say.and);
+    const label = (t: Term[]) => (getLang() === "zh" ? t.map((x) => nameOf(x.f)).join(D.say.and) : t.map((x) => tn(nameOf(x.f))).join(getLang() === "en" ? " and " : " et "));
     const right = label(rx.l);
     const wrongs = [...g.bad.map((b) => b[0]), ...D.gases.filter((x) => x !== g).map((x) => label(D.reactions.find((y) => y.eq === x.rx[0])!.l))];
-    return choiceQ({ ...base, stem: [`实验室制取 ${sub(g.f)} 可以选用的药品是：`, gn], expl: [eqP(rx), ...(g.bad.length ? ["其他药品不合适的原因：", { u: g.bad.map((b) => b[0] + U.colon + b[1]).join(" ") }] as Part[] : [])] }, r, [{ u: right }], uWrap(wrongs.filter((x) => x !== right))) as Q;
+    return choiceQ({ ...base, stem: [`实验室制取 ${sub(g.f)} 可以选用的药品是：`, gn], expl: [eqP(rx), ...(g.bad.length ? ["其他药品不合适的原因：", ...g.bad.flatMap((b, i) => [{ u: (i ? " " : "") + b[0] }, { u: U.colon }, { u: b[1] }] as Part[])] as Part[] : [])] }, r, [{ u: right }], uWrap(wrongs.filter((x) => x !== right))) as Q;
   }
   if (kind === "gen") {
     const rxe = pick(r, g.rx), rx = D.reactions.find((x) => x.eq === rxe)!, right = g.gen[rxe];
