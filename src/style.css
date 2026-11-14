@@ -750,8 +750,8 @@ button.subject:focus-visible { outline: 4px solid #fff; outline-offset: -8px; }
 .nt-tip { margin: 8px 0 0; padding: 8px 10px; border-radius: 12px; background: #fff3bf; font-size: 14px; color: #8a5a00; font-weight: 600; }
 .nt-dyn { display: grid; gap: 8px; }
 .nt-d { padding: 10px 12px; border-radius: 16px; background: #fff; border: 2px solid var(--kid-line); }
-.nt-d-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-.nt-d-top b { font-size: 18px; color: #5430b8; }
+.nt-d-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 8px; }
+.nt-d-top b { font-size: 18px; color: #5430b8; min-width: 0; overflow-wrap: anywhere; }
 .nt-d-yr { font-size: 13px; font-weight: 800; color: var(--muted); white-space: nowrap; }
 .nt-d-gist { margin-top: 2px; font-size: 14px; line-height: 1.5; color: #2d2230; overflow-wrap: anywhere; }
 .nt-events { display: grid; gap: 6px; margin-top: 8px; }
