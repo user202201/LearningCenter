@@ -70,7 +70,7 @@ const clearPlays = (page) => page.evaluate(() => { window.__music.plays.length =
   // ---- the picker and the music home ----
   await p.evaluate(() => (location.hash = '#/')); await p.waitForSelector('.hub-grid');
   const names = await p.locator('.subject .s-name').allTextContents();
-  ok(names.join() === '识字,数学,英语,科学,音乐,小游戏', 'the picker has six cards, music is the fifth: ' + names.join());
+  ok(names.join() === '识字,数学,英语,科学,编程,音乐,小游戏', 'the picker has seven cards, music is the sixth: ' + names.join());
   await p.click('.subject[data-subject=music]'); await p.waitForSelector('#mus-theory');
   ok((await p.locator('.mus-card').count()) === 6 && (await p.textContent('.hero h1')) === '音乐', 'music home: theory, piano, drums, guitar, beat maker, DJ decks; no child is asked for');
   ok(await p.locator('.shortcuts').count() === 0, 'no subject shortcuts on the music pages (they belong to a child\'s page)');
