@@ -21,13 +21,13 @@ export function seasons(D: M.GeoData): SimDef {
     draw(c, w, h, s: St) {
       const dec = SM.declination(s.day);
       // the orbit seen from above the north pole (the Earth goes round counter-clockwise): the axis keeps its direction
-      const cx = 160, cy = 200, rx = 120, ry = 90, phi = ((s.day - 172) / 365.25) * 2 * Math.PI;
+      const cx = 165, cy = 200, rx = 105, ry = 85, phi = ((s.day - 172) / 365.25) * 2 * Math.PI;
       c.beginPath(); c.ellipse(cx, cy, rx, ry, 0, 0, 7); c.strokeStyle = COL.grey; c.lineWidth = 2; c.setLineDash([5, 6]); c.stroke(); c.setLineDash([]);
       circle(c, cx, cy, 18, COL.yellow, COL.orange, 3);
       const ex = cx - rx * Math.cos(phi), ey = cy + ry * Math.sin(phi);   // counter-clockwise seen from above the north pole: June (left) -> September (bottom) -> December (right) -> March (top)
       circle(c, ex, ey, 14, COL.water2, COL.ink, 3);
       arrow(c, ex, ey, ex + 34 * Math.sin(23.5 * RAD), ey - 34 * Math.cos(23.5 * RAD), COL.red, 3); txt(c, "N", ex + 46 * Math.sin(23.5 * RAD), ey - 46 * Math.cos(23.5 * RAD), 14, COL.red);
-      for (const [d, lx, ly] of [[172, cx - rx - 14, cy + 24], [355, cx + rx + 14, cy + 24], [80, cx, cy - ry - 22], [264, cx, cy + ry + 26]] as [number, number, number][]) txt(c, M.monthDay(d), lx, ly, 13, COL.grey);
+      for (const [d, lx, ly] of [[172, cx - rx - 20, cy + 46], [355, cx + rx + 26, cy + 46], [80, cx, cy - ry - 24], [264, cx, cy + ry + 28]] as [number, number, number][]) txt(c, M.monthDay(d), lx, ly, 13, COL.grey);
       // the side view at noon: parallel rays, the Earth tilted so that the direct point is at the declination
       const R = 105, ox = 480, oy = 205;
       for (let k = -4; k <= 4; k++) { const y = oy + k * 24; if (Math.abs(k * 24) < R) { const dx = Math.sqrt(R * R - (k * 24) ** 2); arrow(c, 335, y, ox - dx - 4, y, COL.yellow, 3); } else line(c, 335, y, ox, y, COL.yellow, 2); }
