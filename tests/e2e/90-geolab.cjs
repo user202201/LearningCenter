@@ -14,7 +14,7 @@ const OUT = process.env.D || 'tests/out/geolab/';
 fs.mkdirSync(OUT, { recursive: true });
 
 const IDS = ['seasons', 'terrain', 'watercycle', 'weather', 'plates', 'chinabasic', 'globe', 'timezone', 'scale', 'contour', 'continents', 'rocks', 'climate', 'population', 'development', 'regions', 'chinaterrain', 'chinanature', 'chinaecon', 'sustain', 'chinaregions'];
-const extra = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/geolab.json'), 'utf8'));
+const extra = Object.assign({}, ...['geolab.json', 'geocontent.json'].map((f) => JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/' + f), 'utf8'))));   // (geocontent.json: the lessons, rule 66; the quiz banks / facts are not translated yet)
 const withExtra = async (t) => {
   const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[1]]))) + ');\n';
   await t.ctx.route('**/src/i18n-data.ts*', async (route) => { const r = await route.fetch(); await route.fulfill({ response: r, body: (await r.text()) + '\n' + add }); });
@@ -449,7 +449,7 @@ const SOLVE = () => ({
     const uniq = [...new Set(left)];
     ok(uniq.length === 0, `F ${label}: no Chinese left outside content boxes (${uniq.length})${uniq.length ? '\n   ' + uniq.slice(0, 30).join('\n   ') : ''}`);
     await p.evaluate(() => (location.hash = '#/science/geo/globe')); await p.waitForSelector('.pl-sim');
-    ok(/[一-鿿]/.test(await p.textContent('#pl-lesson')) && (await p.evaluate(() => !!document.querySelector('#pl-lesson.user'))), `F ${label}: the lesson text is content: it stays Chinese in a user box`);
+    ok(!/[一-鿿]/.test(await p.textContent('#pl-lesson')) && (await p.evaluate(() => !document.querySelector('#pl-lesson.user'))), `F ${label}: the lesson text is translated (rule 66); the quiz banks / facts are still content in user boxes (not translated yet)`);
     let probs = [];
     for (const [w, hh] of [[390, 844], [320, 568], [820, 1180]]) { await p.setViewportSize({ width: w, height: hh }); for (const id of IDS) { await p.evaluate((id) => (location.hash = '#/science/geo/' + id), id); await p.waitForSelector('.pl-sim'); await p.waitForTimeout(40); const m = await p.evaluate(() => { const vis = (e) => !e.closest('[hidden]') && e.offsetParent !== null; return { over: document.documentElement.scrollWidth - innerWidth, clip: [...document.querySelectorAll('.pl-rl, .pl-lab, .pl-tt, .pl-opt, .pl-btn, .pl-card h3')].filter((e) => vis(e) && e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent.slice(0, 20)) }; }); if (m.over > 0 || m.clip.length) probs.push(`${id}@${w}: ${m.over} ${m.clip.join(',')}`); } }
     ok(probs.length === 0, `F ${label}: 21 modules on 390 / 320 / 820 px wide: no overflow, no clipped label${probs.length ? ' ' + probs.slice(0, 6).join('; ') : ''}`);
