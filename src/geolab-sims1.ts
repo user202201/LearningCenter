@@ -13,7 +13,7 @@ const MAPLINK = { text: "相关：地图（中国、世界）", href: "#/science
 export function seasons(D: M.GeoData): SimDef {
   return {
     ...base(D, "seasons"), aspect: 0.62,
-    params: [{ id: "day", label: "日期（一年中的第几天）", min: 1, max: 365, step: 1, value: 80 }, { id: "lat", label: "观测地的纬度", min: -90, max: 90, step: 5, value: 40, unit: "°" }],
+    params: [{ id: "day", label: "日期（一年中的第几天）", min: 1, max: 365, step: 1, value: 80 }, { id: "lat", label: "观测地的纬度", min: -90, max: 90, step: 5, value: 40, unit: "°", show: (v) => (v === 0 ? "赤道" : v > 0 ? `北纬 ${v}°` : `南纬 ${-v}°`) }],
     play: { param: "day", rate: 30, loop: true },
     readouts: (s) => { const dec = SM.declination(s.day); return [
       { label: "日期", value: M.monthDay(s.day) }, { label: "太阳直射点纬度", value: M.latStr(Math.round(dec * 10) / 10) },
@@ -208,7 +208,7 @@ export function globe(D: M.GeoData): SimDef {
   const clampLat = (v: number) => Math.round(Math.max(-90, Math.min(90, v))), clampLon = (v: number) => Math.round(Math.max(-180, Math.min(180, v)));
   return {
     ...base(D, "globe"), aspect: 0.55, drag: true,
-    params: [{ id: "lat", label: "纬度（北为正）", min: -90, max: 90, step: 1, value: 30, unit: "°" }, { id: "lon", label: "经度（东为正）", min: -180, max: 180, step: 1, value: 60, unit: "°" }],
+    params: [{ id: "lat", label: "纬度", min: -90, max: 90, step: 1, value: 30, unit: "°", show: (v) => (v === 0 ? "赤道" : v > 0 ? `北纬 ${v}°` : `南纬 ${-v}°`) }, { id: "lon", label: "经度", min: -180, max: 180, step: 1, value: 60, unit: "°", show: (v) => (v === 0 ? "0°" : Math.abs(v) === 180 ? "180°" : v > 0 ? `东经 ${v}°` : `西经 ${-v}°`) }],
     pointer: (kind, x, y) => (x >= F.x0 - 6 && x <= F.x0 + F.w + 6 && y >= F.y0 - 6 && y <= F.y0 + F.h + 6 ? { lat: clampLat(F.lat(y)), lon: clampLon(F.lon(x)) } : undefined),
     readouts: (s) => [{ label: "纬度", value: M.latStr(s.lat) }, { label: "经度", value: M.lonStr(s.lon) }, { label: "半球", value: `${M.hemiNS(s.lat)}、${M.hemiEW(s.lon)}` }, { label: "温度带", value: M.zoneOfLat(s.lat) }, { label: "纬度带", value: M.latBand(s.lat) }],
     draw(c, w, h, s: St) {

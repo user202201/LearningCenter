@@ -18,7 +18,7 @@ import type { Q } from "./qtools";
 export type St = Record<string, number>;
 export const VW = 640;
 export interface Meta { id: string; title: string; grade: number; chapter: string; icon: string; tasks: number }
-export interface ParamDef { id: string; label: string; min: number; max: number; step: number; value: number; unit?: string; dec?: number; when?: (s: St) => boolean }
+export interface ParamDef { id: string; label: string; min: number; max: number; step: number; value: number; unit?: string; dec?: number; show?: (v: number) => string; when?: (s: St) => boolean }
 export interface ChoiceDef { id: string; label: string; options: [number, string][]; value: number; when?: (s: St) => boolean }
 export interface Readout { label: string; value: string; unit?: string }
 export interface Task { id: string; text: string; check: (s: St) => boolean }
@@ -130,7 +130,7 @@ export function mountSim(def: SimDef, root: HTMLElement, ctx: PhysCtx): () => vo
     const input = h("input", { type: "range", class: "pl-range", id: `pl-${p.id}`, min: String(p.min), max: String(p.max), step: String(p.step), value: String(p.value), "aria-label": p.label }) as HTMLInputElement;
     input.addEventListener("input", () => set(p.id, Number(input.value)));
     const el = h("label", { class: "pl-ctl", "data-p": p.id }, h("span", { class: "pl-lab" }, h("span", {}, p.label), val), input);
-    rows.set(p.id, { el, when: p.when, update: () => { if (Number(input.value) !== st[p.id]) input.value = String(st[p.id]); vn.textContent = fmt(st[p.id], dec); vu.textContent = p.unit ? " " + p.unit : ""; } });
+    rows.set(p.id, { el, when: p.when, update: () => { if (Number(input.value) !== st[p.id]) input.value = String(st[p.id]); vn.textContent = p.show ? tr(p.show(st[p.id])) : fmt(st[p.id], dec); vu.textContent = p.show ? "" : p.unit ? " " + p.unit : ""; } });
   }
   // choices first, then the sliders (a choice changes which sliders are there)
   for (const [, r] of rows) ctlBox.append(r.el);

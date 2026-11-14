@@ -22,7 +22,7 @@ export const def: SimDef = {
   params: [
     { id: "I", label: "导线中的电流", min: 0, max: 5, step: 0.5, value: 0, unit: "A", when: (s) => s.mode === 1 },
     { id: "d", label: "小磁针到导线的距离", min: 1, max: 10, step: 1, value: 4, unit: "cm", when: (s) => s.mode === 1 },
-    { id: "lat", label: "所在的纬度（北纬为正）", min: -90, max: 90, step: 5, value: 40, unit: "°", when: (s) => s.mode === 2 },
+    { id: "lat", label: "所在的纬度", min: -90, max: 90, step: 5, value: 40, unit: "°", show: (v) => (v === 0 ? "赤道" : v > 0 ? `北纬 ${v}°` : `南纬 ${-v}°`), when: (s) => s.mode === 2 },
   ],
   choices: [
     { id: "mode", label: "实验", value: 0, options: [[0, "磁感线"], [1, "奥斯特实验"], [2, "地磁场"]] },
