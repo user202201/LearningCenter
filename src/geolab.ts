@@ -66,6 +66,7 @@ export async function renderSim(X: Ctx, id: string): Promise<void> {
     const D = await M.loadGeo();
     const d = await def(id as GeoId, D);
     if (!root.isConnected) return;
+    d.userQuiz = true;   // rule 66: the lessons are translated; the quiz banks, facts and question templates of this lab are not yet (partial)
     stop = mountSim(d, stage, { id, exit: () => (location.hash = "#/science/geo") });
     // the names of the places in the explorers are content: shown as they are (the stations and cities are translated); a card of `user` content follows the state in the modules that have one
     for (const b of stage.querySelectorAll<HTMLElement>('.pl-choice[data-c="e"] .pl-opt')) b.classList.add("user");
