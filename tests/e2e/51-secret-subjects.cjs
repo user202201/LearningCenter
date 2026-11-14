@@ -47,7 +47,7 @@ const tap = async (p, n, gap = 40) => { for (let i = 0; i < n; i++) { await p.lo
     await p.waitForTimeout(1800);
     await tap(p, 10);
     await p.waitForTimeout(motion ? 1100 : 200);
-    ok((await cards(p)).join() === 'chinese,math,english,science' && (await p.evaluate(() => localStorage.getItem('learn.hidden.v1'))) === '0', `${dn}: ten more quick taps hide them again`);
+    ok((await cards(p)).join() === 'chinese,math,english,science,coding' && (await p.evaluate(() => localStorage.getItem('learn.hidden.v1'))) === '0', `${dn}: ten more quick taps hide them again`);
     ok((await p.locator('.toast').allTextContents()).join().includes('已收起隐藏学科'), `${dn}: and say so`);
     await tap(p, 30, 10); await p.waitForTimeout(300);
     ok((await cards(p)).length === 5, `${dn}: wild tapping right after hiding does not bring them back`);
