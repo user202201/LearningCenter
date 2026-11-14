@@ -5,6 +5,10 @@
       "text": "^(中文)$",
       "sel": "seg",
       "reason": "The language menu names every language in its own script (中文 / English / Français), so that a user who cannot read the current language finds theirs."
+    },
+    {
+      "text": "第1周-2026-10-25",
+      "reason": "Quotes the exact label that the user's Chinese Google / Excel sheet must contain in column A (the import reads this Chinese pattern); an example in another language would not be recognised."
     }
   ]
 }

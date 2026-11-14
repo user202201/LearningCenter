@@ -20,12 +20,14 @@ const MAXCLICKS = Number(process.env.CRAWL_CLICKS || 14);
 const PAR = Number(process.env.CRAWL_PAR || 4);
 const MAXROUTES = Number(process.env.CRAWL_MAXROUTES || 700);
 const ALLOW = JSON.parse(fs.readFileSync(path.join(__dirname, '97-allowlist.json'), 'utf8')).allow.map((a) => ({ ...a, re: a.text ? new RegExp(a.text) : null, rre: a.route ? new RegExp(a.route) : null }));
+const KNOWN = WEEK1 + WEEK2 + '一心一意画蛇添足守株待兔';   // (the characters and idioms typed by the test: the child's own texts)
 const CJK = /[　-〿一-鿿＀-￯]/;
 const BRACKETS = /[(（][^()（）]*[)）]/g;
 
 /** runs inside the page: every text a user can see, as {t, k (kind), sel}. */
-function pageScan() {
+function pageScan(known) {
   const out = [];
+  const knownRe = new RegExp('[' + known + '\\s0-9a-zA-Z·，。、：；！？“”‘’（）()\\-—~|/]', 'g');
   const cjk = /[　-〿一-鿿＀-￯]/;
   const isUser = (el) => !!(el && el.closest && el.closest('.user, .user-title'));
   const visible = (el) => { if (!el) return false; if (el.closest('[hidden]')) return false; const r = el.getBoundingClientRect(); if (!r.width && !r.height) return false; const cs = getComputedStyle(el); return cs.visibility !== 'hidden' && cs.display !== 'none'; };
@@ -33,7 +35,11 @@ function pageScan() {
   const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   for (let n; (n = w.nextNode());) {
     const v = n.nodeValue; if (!cjk.test(v)) continue;
-    const el = n.parentElement; if (!el || el.closest('script, style, noscript') || isUser(el)) continue;
+    const el = n.parentElement; if (!el || el.closest('script, style, noscript')) continue;
+    if (isUser(el)) {   // a .user box holds the child's own texts; app CONTENT in a .user box is a finding too (kind 'userbox')
+      if (visible(el) && v.replace(knownRe, '').match(cjk)) out.push({ t: v.trim(), k: 'userbox', sel: sel(el), html: el.outerHTML.slice(0, 160) });
+      continue;
+    }
     if (!visible(el) && el.tagName !== 'OPTION' && el.tagName !== 'TITLE') continue;
     out.push({ t: v.trim(), k: 'text', sel: sel(el), html: el.outerHTML.slice(0, 160) });
   }
@@ -87,7 +93,7 @@ async function crawlConfig(cfg, report) {
   const addAll = (list, route, what) => { for (const f of list) if (bad(f, route)) { const key = f.t; const e = (findings.get(key) ?? { text: f.t, kind: f.k, where: [] }); if (e.where.length < 6 && !e.where.some((w) => w.tag === tag && w.route === route)) e.where.push({ tag, route, what, sel: f.sel, html: f.html }); findings.set(key, e); } };
   let current = '';
   const scan = async (what) => {
-    const a = await page.evaluate(pageScan).catch(() => []);
+    const a = await page.evaluate(pageScan, KNOWN).catch(() => []);
     const b = await page.evaluate(() => { const s = window.__seen || []; window.__seen = []; const n = window.__native || []; window.__native = []; return s.concat(n); }).catch(() => []);
     addAll(a, current, what); addAll(b, current, what + ' (transient)');
   };

@@ -134,8 +134,8 @@ function walk(node: Node) {
   if (node.nodeType === Node.TEXT_NODE) return doText(node as Text);
   if (node.nodeType !== Node.ELEMENT_NODE) return;
   const el = node as Element;
+  for (const a of ATTRS) doAttr(el, a);   // (also on svg / canvas: their aria-label / title are read aloud; only their CHILDREN are left alone)
   if (SKIP.has(el.tagName.toUpperCase())) return;
-  for (const a of ATTRS) doAttr(el, a);
   if (el.tagName.toUpperCase() === "TEXTAREA") return;
   for (let c = el.firstChild; c; c = c.nextSibling) walk(c);
 }

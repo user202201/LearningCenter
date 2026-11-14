@@ -214,8 +214,8 @@ async function renderReading(k: M.Kid) {
   const all = await R.loadReadings();
   if (my !== X.epoch()) return;
   const r = R.readingFor(all, P.gradeOf(k.id) ?? 1, curWeek || todayWeek());
-  if (!r) return void (location.hash = `#/english/${k.id}`);
   const lang = getLang();
+  if (!r || lang === "en") return void (location.hash = `#/english/${k.id}`);   // (the passages are English with Chinese / French word meanings: on the English screen, where the Languages subject teaches French, there are none)
   const meaning = (g: R.Gloss) => (lang === "fr" ? g.fr : g.zh);
   const bubble = h("div", { class: "rd-bubble", id: "rd-gloss", role: "status" }, "点击带下划线的单词可查看释义");
   const paras = r.text.split(/\n+/).map((para) => {
