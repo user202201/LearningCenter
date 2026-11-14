@@ -7,7 +7,7 @@ import path from "node:path";
 const dir = new URL("../src/", import.meta.url).pathname;
 const cjk = /[一-鿿　-〿＀-￯]/;
 // not UI texts: translation tables themselves, and keywords used to recognise "primo / secondo" file names
-// mathcn.ts: Chinese numerals and times-table rhymes (content a Chinese child reads, single characters). musicfig.ts: the course drawings (labels like 五度圈 are Chinese course content). figures.ts: the labels of the drawings of the summaries (Chinese content like the science cards, shown in a `user` box: never translated)
+// mathcn.ts: Chinese numerals and times-table rhymes (content a Chinese child reads, single characters). musicfig.ts: the course drawings (labels like 五度圈 are Chinese course content). figures.ts: the labels of the drawings of the summaries (translated through data/trans, rule 65)
 const SKIP_FILES = new Set(["geolab-model.ts", "coding-infomodel.ts", "coding-textlevels.ts", "coding-textlessons.ts", "coding-textlang.ts", "coding-textrun.ts", "coding-textbridge.ts", "i18n-data.ts", "mathcn.ts", "figures.ts", "safetyfig.ts", "musicfig.ts", "games/xiangqi-logic.ts", "games/xiangqi-art.ts"])   // (xiangqi: the characters ON the pieces and the river, shown in `user` boxes: board content, never translated);
 
 const texts = new Map();
