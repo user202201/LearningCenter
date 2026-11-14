@@ -341,7 +341,7 @@ export function handStrength(hand: number[]): number {
   return s;
 }
 export function aiBid(hand: number[], high: number, level: Level, rng: Rng): number {
-  const st = handStrength(hand) + (level === 1 ? (rng() - 0.5) * 4 : 0);
+  const st = handStrength(hand) + (rng() - 0.5) * (level === 1 ? 4 : 3);
   const want = st >= 7 ? 3 : st >= 5 ? 2 : st >= 3.5 ? 1 : 0;
   return want > high ? want : 0;
 }
@@ -423,23 +423,24 @@ export function aiPlay(s: DZState, seat: number, level: Level, rng: Rng): number
   }
   // ---- following the table
   const byMate = mate(s, seat, table.by);
-  if (byMate) return null;                                      // let the partner have it (going out was handled above)
   const calm = cands.filter((c) => !isBombLike(cls(c)));
   const bombs = cands.filter((c) => isBombLike(cls(c)));
   const tableSmall = oppMin;
+  if (byMate) return aiFollowMate(s, seat, level, rng, table, cnt, calm);
   if (level === 1) {
     if (!calm.length || rng() < 0.45) return null;
     return calm.slice().sort((a, b) => cls(a).rank - cls(b).rank)[0];
   }
   const bombOk = (c: number[]): boolean => {
-    if (level === 2) return tableSmall <= 2;
+    if (level === 2) return tableSmall <= 4;
     const rest = without(cnt, c);
-    return tableSmall <= 4 || estTurns(rest) <= 2;
+    return tableSmall <= 6 || estTurns(rest) <= 3;
   };
   if (calm.length) {
     let best: number[] = calm[0], bv = Infinity, br = Infinity;
     for (const c of calm) {
       const cb = cls(c);
+      if (level === 3 && cb.rank >= 15 && cb.n <= 2 && tableSmall > 6 && calm.some((d) => cls(d).rank < 15 || cls(d).n > 2)) continue;   // keep the 2s and jokers while the landlord still has many cards
       const v = level === 2 ? 0 : estTurns(without(cnt, c));
       if (v < bv - 1e-9 || (Math.abs(v - bv) < 1e-9 && cb.rank < br)) { best = c; bv = v; br = cb.rank; }
     }
@@ -450,6 +451,7 @@ export function aiPlay(s: DZState, seat: number, level: Level, rng: Rng): number
       return best;
     }
     const after = estTurns(without(cnt, best)), before = estTurns(cnt);
+    if (cb.rank >= 15 && cb.n <= 2 && tableSmall > 6) return bombs.length && bombOk(bombs[0]) ? bombs[0] : null;
     if (after <= before || tableSmall <= 5) return best;
     return bombs.length && bombOk(bombs[0]) ? bombs[0] : null;
   }
@@ -459,6 +461,31 @@ export function aiPlay(s: DZState, seat: number, level: Level, rng: Rng): number
     if (bombOk(pick)) return pick;
   }
   return null;
+}
+
+/** a peasant facing his partner's play: let it stand when it is strong, the partner is nearly out or beating would hurt the own hand; otherwise take a LOW play with a cheap one (taking the lead to dump small cards) */
+function aiFollowMate(s: DZState, seat: number, level: Level, rng: Rng, table: TableCards, cnt: number[], calm: number[][]): number[] | null {
+  const tb = table.combo;
+  const mateLeft = s.hands[table.by].length;
+  if (mateLeft <= 3) return null;                                  // the partner is about to go out
+  if (isBombLike(tb)) return null;
+  const light = (tb.type === "single" || tb.type === "pair" || tb.type === "triple" || tb.type === "triple1" || tb.type === "triple2") && tb.rank <= 11;
+  if (!light) return null;                                         // a high card or a long shape: let it stand
+  if (level === 1 && rng() < 0.75) return null;
+  const before = estTurns(cnt), fresh = s.plays[seat] === 0 && s.moves >= 3;
+  let best: number[] | null = null, bv = Infinity;
+  for (const c of calm) {
+    const cb = cls(c);
+    if (cb.rank > 13 || (cb.rank >= 14 && cb.n <= 2)) continue;     // no big cards on a partner's low play
+    const rest = without(cnt, c);
+    const after = estTurns(rest);
+    if (c.some((x) => cnt[rankOf(x)] === 4)) continue;             // never break a bomb
+    if (level === 3 && !fresh && after > before + 1) continue;      // it must not break the structure (a player who has not played yet takes the chance)
+    if (level < 3 && !fresh && (cb.type === "single" || cb.type === "pair") && c.some((x) => cnt[rankOf(x)] > cb.n)) continue;
+    const v = after + cb.rank * 0.01;
+    if (v < bv) { bv = v; best = c; }
+  }
+  return best;
 }
 
 /** what the hint shows: the smallest play that beats the table (a bomb only when nothing else does) or, on a free lead, what the computer would lead; `skip` cycles */
