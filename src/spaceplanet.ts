@@ -6,7 +6,7 @@ import { h } from "./ui";
 import { tr } from "./i18n";
 import { subjectArt } from "./hub";
 import type { Ctx } from "./english";
-import { fit, Loop, reducedMotion, nearest, big, sig, kmText, durText, hoursText, fmt, user } from "./spaceui";
+import { fit, Loop, reducedMotion, nearest, big, sig, kmText, durText, hoursText, fmt, con, user } from "./spaceui";
 import { renderSphereInto, sprite, drawRings, RING_PAD } from "./spaceart";
 import { type Space, type Body, type Moon, loadSpace, allBodies, nameOf, moonName, paren, weightOn, ageOn, surfaceSpeedKmh, sizeVsEarth, MOON_G, G_EARTH } from "./spacemodel";
 
@@ -14,7 +14,7 @@ const COLOR = "#7048e8";
 const KIND: Record<string, string> = { rock: "岩质行星", gas: "气态巨行星", ice: "冰巨星", dwarf: "矮行星" };
 
 function ringsText(b: Body): string { return b.ring === 2 ? "有，明亮" : b.ring === 1 ? "有，暗淡" : "无"; }
-export function dataRows(b: Body): [string, (Node | string)[]][] {
+export function dataRows(b: Body, asOf = 2025): [string, (Node | string)[]][] {
   const rel = b.g / G_EARTH, retro = b.rot < 0;
   const rows: [string, (Node | string)[]][] = [
     ["类型", [KIND[b.kind]]],
@@ -30,8 +30,8 @@ export function dataRows(b: Body): [string, (Node | string)[]][] {
   rows.push(["平均密度", [`${sig(b.dens, 3)} 克/厘米³`]]);
   rows.push(["赤道自转速度", [`${big(surfaceSpeedKmh(b))} 千米/小时`]]);
   rows.push(["自转轴倾角", [b.tilt === null ? "未知" : `${sig(b.tilt, 3)}°`]]);
-  rows.push(["大气", [user(b.atm, "span", "sp-atm")]]);
-  rows.push(["卫星", [b.moons === 0 ? "没有" : b.moonsCheck ? `已确认约 ${b.moons} 颗（截至 2024 年）` : `${b.moons} 颗`]]);
+  rows.push(["大气", [con(b.atm, "span", "sp-atm")]]);
+  rows.push(["卫星", [b.moons === 0 ? "没有" : b.moonsCheck ? `已确认约 ${b.moons} 颗（截至 ${asOf} 年）` : `${b.moons} 颗`]]);
   rows.push(["光环", [ringsText(b)]]);
   return rows;
 }
@@ -78,8 +78,8 @@ export async function renderPlanet(X: Ctx, id: string): Promise<void> {
     h("div", { class: "mset-opts sp-chips" }, ...speedChips));
 
   // ---------- the data cards and facts ----------
-  const rows = dataRows(b).map(([k, v]) => h("div", { class: "sp-card sp-data", "data-k": k }, h("span", { class: "muted small" }, k), h("b", {}, ...v.map((x) => (typeof x === "string" ? (/[一-鿿]/.test(x) ? x : x) : x)))));
-  const facts = h("div", { class: "sp-facts", id: "sp-facts" }, ...b.facts.map((f, i) => h("div", { class: "sp-fact", "data-i": String(i) }, h("i", {}, String(i + 1)), user(f, "p"))));
+  const rows = dataRows(b, S.moonsAsOf).map(([k, v]) => h("div", { class: "sp-card sp-data", "data-k": k }, h("span", { class: "muted small" }, k), h("b", {}, ...v.map((x) => (typeof x === "string" ? (/[一-鿿]/.test(x) ? x : x) : x)))));
+  const facts = h("div", { class: "sp-facts", id: "sp-facts" }, ...b.facts.map((f, i) => h("div", { class: "sp-fact", "data-i": String(i) }, h("i", {}, String(i + 1)), con(f, "p"))));
 
   // ---------- the moons ----------
   const moonsEl = h("section", { class: "sp-sec", id: "sp-moons" }, h("h2", { class: "sec" }, "卫星"));
@@ -126,8 +126,8 @@ export async function renderPlanet(X: Ctx, id: string): Promise<void> {
             h("span", {}, h("small", {}, tr("直径")), `${big(m.d)} 千米`, h("small", { class: "sp-sub" }, `月球的 ${sig(m.d / 3475, 2)} 倍`)),
             h("span", {}, h("small", {}, tr("轨道周期")), durText(m.P), ...(m.P < 0 ? [h("small", { class: "sp-sub" }, tr("逆行"))] : [])),
             h("span", {}, h("small", {}, tr("离行星的距离")), `${big(m.a)} 千米`),
-            h("span", {}, h("small", {}, tr("发现者")), user(m.yr ? paren(m.by, m.yr) : m.by))),
-          user(m.fact, "p", "sp-moon-fact"))));
+            h("span", {}, h("small", {}, tr("发现者")), con(m.yr ? paren(tr(m.by), m.yr) : m.by))),
+          con(m.fact, "p", "sp-moon-fact"))));
     }
     const speeds = [1, 4, 16].map((k) => h("button", { class: "mopt" + (k === 1 ? " on" : ""), id: `sp-ms-${k}`, onclick: () => { msp = k; speeds.forEach((e, i) => e.classList.toggle("on", [1, 4, 16][i] === k)); mloop.start(); } }, `${k}×`));
     moonsEl.append(h("div", { class: "sp-stage sp-moonstage" }, mc), h("div", { class: "mset-opts sp-chips" }, ...speeds),
@@ -182,7 +182,7 @@ export async function renderPlanet(X: Ctx, id: string): Promise<void> {
     h("button", { class: "mopt", id: "sp-prev", onclick: () => (location.hash = `#/science/space/${prev.id}`) }, "‹ ", user(nameOf(prev))),
     h("button", { class: "mopt", id: "sp-next", onclick: () => (location.hash = `#/science/space/${next.id}`) }, user(nameOf(next)), " ›"));
   const page = h("div", { class: "page sp-page", style: `--kid:${COLOR}`, "data-planet": b.id },
-    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/science/space", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", { class: "user" }, nameOf(b)), h("p", { class: "user" }, b.intro)), X.gear(`#/science/space/${b.id}`)),
+    h("header", { class: "top hero home-hero subj-hero" }, X.back("#/science/space", "返回"), h("span", { class: "subj-ico" }, subjectArt("science")), h("div", { class: "hero-text" }, h("h1", { class: "user" }, nameOf(b)), h("p", {}, tr(b.intro))), X.gear(`#/science/space/${b.id}`)),
     h("main", { class: "scroll" }, h("div", { class: "narrow" },
       h("div", { class: "sp-hero-stage" }, h("div", { class: "sp-view" }, tiltBox), spinInfo),
       h("h2", { class: "sec" }, "基本数据"), h("div", { class: "sp-grid", id: "sp-data" }, ...rows),

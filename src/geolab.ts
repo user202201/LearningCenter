@@ -66,10 +66,8 @@ export async function renderSim(X: Ctx, id: string): Promise<void> {
     const D = await M.loadGeo();
     const d = await def(id as GeoId, D);
     if (!root.isConnected) return;
-    d.userQuiz = true;   // rule 66: the lessons are translated; the quiz banks, facts and question templates of this lab are not yet (partial)
     stop = mountSim(d, stage, { id, exit: () => (location.hash = "#/science/geo") });
-    // the names of the places in the explorers are content: shown as they are (the stations and cities are translated); a card of `user` content follows the state in the modules that have one
-    for (const b of stage.querySelectorAll<HTMLElement>('.pl-choice[data-c="e"] .pl-opt')) b.classList.add("user");
+    // rule 66: the names of the places, the cards and the quiz texts are translated like everything else; a card that follows the state is made below for the modules that have one
     if (["climate", "chinaterrain", "continents", "regions", "chinanature", "chinaecon", "chinaregions"].includes(id)) stage.querySelector(".pl-main")?.after(h("section", { class: "pl-card gl-card", id: "gl-card" }));
   } catch (e) { toast(`该模块出错：${e instanceof Error ? e.message : String(e)}`, 6000); }
   const watch = new MutationObserver(() => { if (!root.isConnected) { try { stop?.(); } catch { /* ok */ } stop = null; watch.disconnect(); } });
@@ -107,15 +105,15 @@ async function renderPractice(X: Ctx): Promise<void> {
         return;
       }
       const { it, q } = qs[i];
-      const why = h("p", { class: "pl-why user", id: "gl-why", hidden: true }, q.why ?? "");
+      const why = h("p", { class: "pl-why", id: "gl-why", hidden: true }, q.why ?? "");
       const next = h("button", { class: "primary", id: "gl-next", hidden: true, onclick: () => { i++; show(); } }, i + 1 >= qs.length ? "查看得分" : "下一题");
-      const opts = q.choices.map((c, k) => h("button", { class: "mopt pl-qopt user", "data-i": String(k), "data-right": k === q.a ? "1" : "0", onclick: () => {
+      const opts = q.choices.map((c, k) => h("button", { class: "mopt pl-qopt", "data-i": String(k), "data-right": k === q.a ? "1" : "0", onclick: () => {
         if (opts.some((b) => b.disabled)) return;
         const right = k === q.a; if (right) score++; answers.push({ key: it.key, right });
         opts.forEach((b, j) => { b.classList.toggle("right", j === q.a); b.classList.toggle("wrong", j === k && !right); b.disabled = true; });
         why.hidden = false; next.hidden = false;
       } }, c));
-      body.replaceChildren(h("p", { class: "muted small", id: "gl-no" }, `第 ${i + 1} / ${qs.length} 题`), h("p", { class: "pl-q user", id: "gl-q", "data-key": it.key }, q.q), h("div", { class: "pl-qopts" }, ...opts), why, next);
+      body.replaceChildren(h("p", { class: "muted small", id: "gl-no" }, `第 ${i + 1} / ${qs.length} 题`), h("p", { class: "pl-q", id: "gl-q", "data-key": it.key }, q.q), h("div", { class: "pl-qopts" }, ...opts), why, next);
     };
     show();
   };

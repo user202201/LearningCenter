@@ -7,6 +7,27 @@ import * as G from "./game";
 import * as C2 from "./chemlogic2";
 import * as C3 from "./chemlogic3";
 import * as C4 from "./chemlogic4";
+import { getLang, tr } from "./i18n";
+
+// ---------- the content in the screen language (rule 66) ----------
+const CJK_RE = /[\u3000-\u303f\u4e00-\u9fff\uff00-\uffef]/;
+const capFirst = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
+const lcFirst = (s: string): string => s.charAt(0).toLowerCase() + s.slice(1);
+/** a substance / ion / content name in the screen language. Entries of `chemcontent.json` whose key starts with "§" are the chemistry's own wording (lower case, no article) and win over the general table */
+export function tn(s: string): string {
+  if (!s || getLang() === "zh" || !CJK_RE.test(s)) return s;
+  const k = "§" + s, t = tr(k);
+  return t !== k ? t : tr(s);
+}
+/** a content text of a question part ("{u}"): translated whole, or piece by piece around the Chinese punctuation, which becomes ordinary punctuation outside Chinese */
+export function uText(s: string): string {
+  if (getLang() === "zh" || !CJK_RE.test(s)) return s;
+  const whole = tn(s);
+  if (whole !== s && !CJK_RE.test(whole)) return whole;
+  const P: Record<string, string> = { [U.comma]: ", ", [U.sep]: ", ", [U.semi]: "; ", [U.colon]: ": ", [U.dot]: ". ", [U.lp]: " (", [U.rp]: ")" };
+  const out = s.split(new RegExp("([" + Object.keys(P).join("") + "])")).map((x) => (P[x] !== undefined ? P[x] : tn(x))).join("");
+  return out.replace(/\s+([,;:.)])/g, "$1").replace(/\(\s+/g, "(").replace(/ {2,}/g, " ").replace(/^ (?=\()/, "");
+}
 
 // ---------- data ----------
 export interface Term { c: number; f: string; mark: "" | "↑" | "↓" }
@@ -215,7 +236,7 @@ export function ionName(cat: Ion, an: Ion): string {
   if (an.k === "OH") return N.qingyanghua + c;
   return a + c;
 }
-export const catName = (k: string): string => D.names.cat[k];
+export const catName = (k: string): string => { const z = D.names.cat[k]; if (getLang() === "zh") return z; const t = tr("§§" + z); return t !== "§§" + z ? t : tn(z); };
 export const IONS = { CAT, AN, catByK, crossFormula, ionName };
 const catPool = (lv: number) => CAT.filter((c) => c.k !== "H" && (lv >= 3 || !["NH4", "Ag", "Fe3", "Fe2"].includes(c.k)) && (lv >= 2 || !["Ba", "Zn", "Cu"].includes(c.k)));
 const anPool = (lv: number) => AN.filter((a) => lv >= 3 || (lv >= 2 ? a.k !== "PO4" : ["Cl", "O", "OH", "SO4"].includes(a.k)));
@@ -360,8 +381,15 @@ function genBal(_r: Rnd, lv: number, rx: Rx): Q {
 }
 /** the sentence of a reaction in words ("红磷和氧气在点燃的条件下反应，生成五氧化二磷。"): content, shown in a user box */
 export function describeRx(rx: Rx): string {
-  const S = D.say, names = (t: Term[]) => t.map((x) => nameOf(x.f)).join(S.and);
-  const conds = rx.cond.filter((c) => c !== CONDS[5]);
+  const S = D.say, conds = rx.cond.filter((c) => c !== CONDS[5]);
+  const lang = getLang();
+  if (lang !== "zh") {
+    const names = (t: Term[], and: string) => t.map((x) => tn(nameOf(x.f))).join(and);
+    const cs = conds.map((c) => lcFirst(tr(c))).join(", ");
+    if (lang === "en") return `${capFirst(names(rx.l, " and "))} ${rx.l.length > 1 ? "react" : "reacts"}${cs ? ` (conditions: ${cs})` : ""} to form ${names(rx.r, " and ")}.`;
+    return `${capFirst(names(rx.l, " et "))} ${rx.l.length > 1 ? "réagissent" : "réagit"}${cs ? ` (conditions : ${cs})` : ""} pour former ${names(rx.r, " et ")}.`;
+  }
+  const names = (t: Term[]) => t.map((x) => nameOf(x.f)).join(S.and);
   const cs = conds.length ? S.under + conds.join(U.sep) + (rx.cond.includes(CONDS[4]) ? S.byCat : S.byCond) : "";
   return `${names(rx.l)}${cs}${S.mid}${names(rx.r)}${S.end}`;
 }

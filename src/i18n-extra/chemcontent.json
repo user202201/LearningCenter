@@ -1,0 +1,4078 @@
+{
+ "红磷在空气中燃烧，产生大量白烟，放出热量。": [
+  "Red phosphorus burns in air with a lot of white smoke and gives out heat.",
+  "Le phosphore rouge brûle dans l’air avec beaucoup de fumée blanche et dégage de la chaleur."
+ ],
+ "硫在空气中燃烧发出淡蓝色火焰，在氧气中发出明亮的蓝紫色火焰，生成有刺激性气味的气体。": [
+  "Sulfur burns in air with a pale blue flame and in oxygen with a bright blue-violet flame, forming a gas with a pungent smell.",
+  "Le soufre brûle dans l’air avec une flamme bleu pâle et dans le dioxygène avec une flamme bleu violet vif, en formant un gaz à l’odeur piquante."
+ ],
+ "木炭在氧气中燃烧发出白光，放出热量，生成能使澄清石灰水变浑浊的气体。": [
+  "Charcoal burns in oxygen with a white glow and gives out heat, forming a gas that turns limewater cloudy.",
+  "Le charbon de bois brûle dans le dioxygène avec une lueur blanche et dégage de la chaleur, en formant un gaz qui trouble l’eau de chaux."
+ ],
+ "氧气不足时碳不完全燃烧，生成一氧化碳。": [
+  "When there is too little oxygen, carbon burns incompletely and forms carbon monoxide.",
+  "Lorsque le dioxygène manque, le carbone brûle de façon incomplète et forme du monoxyde de carbone."
+ ],
+ "铁丝在氧气中剧烈燃烧，火星四射，生成黑色固体，放出大量的热。": [
+  "An iron wire burns fiercely in oxygen with sparks flying in all directions, forming a black solid and giving out a lot of heat.",
+  "Un fil de fer brûle vivement dans le dioxygène en projetant des étincelles dans toutes les directions, en formant un solide noir et en dégageant beaucoup de chaleur."
+ ],
+ "镁条剧烈燃烧，发出耀眼的白光，生成白色固体。": [
+  "A magnesium ribbon burns fiercely with a dazzling white light and forms a white solid.",
+  "Un ruban de magnésium brûle vivement avec une lumière blanche éblouissante et forme un solide blanc."
+ ],
+ "铝在空气中表面生成一层致密的氧化铝薄膜，保护内部的铝。": [
+  "In air, aluminium quickly forms a dense film of aluminium oxide on its surface, which protects the aluminium inside.",
+  "Dans l’air, l’aluminium forme à sa surface une couche dense d’oxyde d’aluminium qui protège l’aluminium situé en dessous."
+ ],
+ "红色的铜丝加热后表面变黑。": [
+  "A red copper wire turns black on its surface when heated.",
+  "Un fil de cuivre rouge noircit en surface lorsqu’on le chauffe."
+ ],
+ "银白色的液态汞加热后变成红色粉末（拉瓦锡测定空气成分）。": [
+  "Silvery liquid mercury turns into a red powder when heated (Lavoisier’s experiment on the composition of air).",
+  "Le mercure liquide, argenté, se transforme en poudre rouge lorsqu’on le chauffe (expérience de Lavoisier sur la composition de l’air)."
+ ],
+ "红色粉末受热变成银白色液体，同时产生能使带火星木条复燃的气体。": [
+  "A red powder turns into a silvery liquid when heated and gives off a gas that relights a glowing splint.",
+  "Une poudre rouge se transforme en liquide argenté lorsqu’on la chauffe et dégage un gaz qui rallume une allumette incandescente."
+ ],
+ "紫黑色固体受热分解，产生能使带火星木条复燃的气体。": [
+  "A purple-black solid decomposes when heated and gives off a gas that relights a glowing splint.",
+  "Un solide noir violacé se décompose sous l’effet de la chaleur et dégage un gaz qui rallume une allumette incandescente."
+ ],
+ "白色固体与二氧化锰混合加热，产生能使带火星木条复燃的气体。": [
+  "A white solid mixed with manganese dioxide gives off, when heated, a gas that relights a glowing splint.",
+  "Un solide blanc mélangé à du dioxyde de manganèse dégage, lorsqu’on le chauffe, un gaz qui rallume une allumette incandescente."
+ ],
+ "过氧化氢溶液中加入二氧化锰，立即产生大量气泡，带火星木条复燃。": [
+  "When manganese dioxide is added to hydrogen peroxide solution, many bubbles form at once and a glowing splint relights.",
+  "Lorsqu’on ajoute du dioxyde de manganèse à une solution de peroxyde d’hydrogène, de nombreuses bulles se forment aussitôt et une allumette incandescente se rallume."
+ ],
+ "无色气体遇到氧气变成红棕色气体。": [
+  "A colourless gas turns into a reddish-brown gas on meeting oxygen.",
+  "Un gaz incolore devient un gaz brun-rouge au contact du dioxygène."
+ ],
+ "铁粉和硫粉的混合物加热，发出红光，生成黑色固体。": [
+  "A mixture of iron powder and sulfur powder glows red when heated and forms a black solid.",
+  "Un mélange de poudre de fer et de poudre de soufre devient rouge incandescent lorsqu’on le chauffe et forme un solide noir."
+ ],
+ "氢气安静燃烧，发出淡蓝色火焰，烧杯内壁出现水雾。": [
+  "Hydrogen burns quietly with a pale blue flame, and mist appears on the inside wall of the beaker.",
+  "Le dihydrogène brûle calmement avec une flamme bleu pâle, et de la buée apparaît sur la paroi intérieure du bécher."
+ ],
+ "两个电极上都产生气泡，负极与正极气体的体积比约为2比1。": [
+  "Bubbles form at both electrodes; the volume of gas at the negative electrode to that at the positive electrode is about 2 to 1.",
+  "Des bulles se forment aux deux électrodes ; le rapport du volume de gaz à l’électrode négative à celui de l’électrode positive est d’environ 2 pour 1."
+ ],
+ "生石灰遇水剧烈反应，放出大量的热。": [
+  "Quicklime reacts violently with water and gives out a lot of heat.",
+  "La chaux vive réagit violemment avec l’eau et dégage beaucoup de chaleur."
+ ],
+ "氧化钠与水反应生成氢氧化钠，放出热量。": [
+  "Sodium oxide reacts with water to form sodium hydroxide and gives out heat.",
+  "L’oxyde de sodium réagit avec l’eau pour former de l’hydroxyde de sodium et dégage de la chaleur."
+ ],
+ "二氧化碳通入紫色石蕊溶液，溶液变红。": [
+  "When carbon dioxide is passed into purple litmus solution, the solution turns red.",
+  "Lorsqu’on fait passer du dioxyde de carbone dans une solution de tournesol violette, la solution devient rouge."
+ ],
+ "变红的石蕊溶液加热后又变回紫色，有气泡产生。": [
+  "When the reddened litmus solution is heated, it turns purple again and bubbles form.",
+  "Lorsqu’on chauffe la solution de tournesol rougie, elle redevient violette et des bulles se forment."
+ ],
+ "二氧化硫溶于水生成亚硫酸（酸雨的成因之一）。": [
+  "Sulfur dioxide dissolves in water to form sulfurous acid (one cause of acid rain).",
+  "Le dioxyde de soufre se dissout dans l’eau pour former de l’acide sulfureux (l’une des causes des pluies acides)."
+ ],
+ "三氧化硫与水反应生成硫酸（酸雨的成因之一）。": [
+  "Sulfur trioxide reacts with water to form sulfuric acid (one cause of acid rain).",
+  "Le trioxyde de soufre réagit avec l’eau pour former de l’acide sulfurique (l’une des causes des pluies acides)."
+ ],
+ "白色的无水硫酸铜遇水变蓝（用来检验水）。": [
+  "White anhydrous copper(II) sulfate turns blue on contact with water (used to test for water).",
+  "Le sulfate de cuivre(II) anhydre, blanc, devient bleu au contact de l’eau (utilisé pour mettre en évidence l’eau)."
+ ],
+ "蓝色晶体受热失去结晶水，变成白色粉末。": [
+  "Blue crystals lose their water of crystallisation when heated and turn into a white powder.",
+  "Des cristaux bleus perdent leur eau de cristallisation lorsqu’on les chauffe et se transforment en poudre blanche."
+ ],
+ "黑色粉末逐渐变红，试管口有水珠。": [
+  "A black powder gradually turns red, and droplets of water form at the mouth of the test tube.",
+  "Une poudre noire devient peu à peu rouge, et des gouttelettes d’eau se forment à l’extrémité du tube à essai."
+ ],
+ "氢气在氯气中安静燃烧，发出苍白色火焰，瓶口有白雾。": [
+  "Hydrogen burns quietly in chlorine with a pale flame, and white mist forms at the mouth of the bottle.",
+  "Le dihydrogène brûle calmement dans le dichlore avec une flamme pâle, et un brouillard blanc se forme à l’ouverture du flacon."
+ ],
+ "黑色粉末逐渐变红，澄清石灰水变浑浊。": [
+  "A black powder gradually turns red, and limewater turns cloudy.",
+  "Une poudre noire devient peu à peu rouge, et l’eau de chaux se trouble."
+ ],
+ "红棕色粉末逐渐变黑，澄清石灰水变浑浊。": [
+  "A reddish-brown powder gradually turns black, and limewater turns cloudy.",
+  "Une poudre brun-rouge devient peu à peu noire, et l’eau de chaux se trouble."
+ ],
+ "二氧化碳通过灼热的炭层，被还原成一氧化碳。": [
+  "Carbon dioxide passed over red-hot carbon is reduced to carbon monoxide.",
+  "Le dioxyde de carbone passé sur du carbone chauffé au rouge est réduit en monoxyde de carbone."
+ ],
+ "大理石（石灰石）表面产生大量气泡。": [
+  "A lot of bubbles form on the surface of the marble (limestone).",
+  "De nombreuses bulles se forment à la surface du marbre (calcaire)."
+ ],
+ "白色固体高温煅烧，生成白色固体和能使澄清石灰水变浑浊的气体（工业制生石灰）。": [
+  "A white solid heated strongly forms a white solid and a gas that turns limewater cloudy (industrial production of quicklime).",
+  "Un solide blanc chauffé très fortement forme un solide blanc et un gaz qui trouble l’eau de chaux (production industrielle de la chaux vive)."
+ ],
+ "澄清石灰水变浑浊（用来检验二氧化碳）。": [
+  "Limewater turns cloudy (used to test for carbon dioxide).",
+  "L’eau de chaux se trouble (utilisé pour mettre en évidence le dioxyde de carbone)."
+ ],
+ "无明显现象（用氢氧化钠溶液吸收二氧化碳）。": [
+  "No obvious change (sodium hydroxide solution absorbs carbon dioxide).",
+  "Aucun changement apparent (la solution d’hydroxyde de sodium absorbe le dioxyde de carbone)."
+ ],
+ "无明显现象（氢氧化钾溶液吸收二氧化碳）。": [
+  "No obvious change (potassium hydroxide solution absorbs carbon dioxide).",
+  "Aucun changement apparent (la solution d’hydroxyde de potassium absorbe le dioxyde de carbone)."
+ ],
+ "浑浊的石灰水继续通入二氧化碳，沉淀溶解，溶液变澄清（溶洞的形成）。": [
+  "When more carbon dioxide is passed into cloudy limewater, the precipitate dissolves and the solution becomes clear (formation of caves).",
+  "Lorsqu’on continue à faire passer du dioxyde de carbone dans l’eau de chaux trouble, le précipité se dissout et la solution devient limpide (formation des grottes)."
+ ],
+ "澄清溶液受热变浑浊，有气泡产生（钟乳石、水垢的形成）。": [
+  "A clear solution turns cloudy when heated and bubbles form (formation of stalactites and kettle scale).",
+  "Une solution limpide se trouble lorsqu’on la chauffe et des bulles se forment (formation des stalactites et du tartre)."
+ ],
+ "黑色粉末逐渐变红，澄清石灰水变浑浊，尾气要点燃或收集。": [
+  "A black powder gradually turns red and limewater turns cloudy; the exhaust gas must be burned or collected.",
+  "Une poudre noire devient peu à peu rouge et l’eau de chaux se trouble ; le gaz de sortie doit être brûlé ou recueilli."
+ ],
+ "绿色植物吸收二氧化碳和水，在光照下合成葡萄糖并放出氧气（光合作用）。": [
+  "Green plants take in carbon dioxide and water, make glucose in the light and release oxygen (photosynthesis).",
+  "Les plantes vertes absorbent le dioxyde de carbone et l’eau, fabriquent du glucose à la lumière et libèrent du dioxygène (photosynthèse)."
+ ],
+ "葡萄糖在体内缓慢氧化，放出能量（呼吸作用）。": [
+  "Glucose is slowly oxidised in the body and releases energy (respiration).",
+  "Le glucose est lentement oxydé dans l’organisme et libère de l’énergie (respiration)."
+ ],
+ "甲烷燃烧发出淡蓝色火焰，烧杯内壁有水雾，澄清石灰水变浑浊。": [
+  "Methane burns with a pale blue flame, mist forms on the inside wall of the beaker and limewater turns cloudy.",
+  "Le méthane brûle avec une flamme bleu pâle, de la buée se forme sur la paroi intérieure du bécher et l’eau de chaux se trouble."
+ ],
+ "酒精燃烧发出淡蓝色火焰，放出大量的热。": [
+  "Ethanol burns with a pale blue flame and gives out a lot of heat.",
+  "L’éthanol brûle avec une flamme bleu pâle et dégage beaucoup de chaleur."
+ ],
+ "丙烷燃烧发出淡蓝色火焰，放出热量。": [
+  "Propane burns with a pale blue flame and gives out heat.",
+  "Le propane brûle avec une flamme bleu pâle et dégage de la chaleur."
+ ],
+ "丁烷燃烧，放出大量的热。": [
+  "Butane burns and gives out a lot of heat.",
+  "Le butane brûle et dégage beaucoup de chaleur."
+ ],
+ "乙炔燃烧火焰明亮并伴有浓烟，放出大量的热（氧炔焰用于切割、焊接金属）。": [
+  "Ethyne burns with a bright, smoky flame and gives out a lot of heat (the oxy-acetylene flame is used to cut and weld metals).",
+  "L’éthyne brûle avec une flamme vive et fuligineuse et dégage beaucoup de chaleur (la flamme oxyacétylénique sert à couper et à souder les métaux)."
+ ],
+ "乙烯燃烧火焰明亮，伴有黑烟。": [
+  "Ethene burns with a bright flame and black smoke.",
+  "L’éthène brûle avec une flamme vive et de la fumée noire."
+ ],
+ "一氧化碳燃烧，发出蓝色火焰，放出热量。": [
+  "Carbon monoxide burns with a blue flame and gives out heat.",
+  "Le monoxyde de carbone brûle avec une flamme bleue et dégage de la chaleur."
+ ],
+ "赤热的炭与水蒸气反应，生成一氧化碳和氢气（水煤气）。": [
+  "Red-hot carbon reacts with steam to form carbon monoxide and hydrogen (water gas).",
+  "Le carbone chauffé au rouge réagit avec la vapeur d’eau pour former du monoxyde de carbone et du dihydrogène (gaz à l’eau)."
+ ],
+ "红热的铁与水蒸气反应，生成黑色固体和可燃性气体。": [
+  "Red-hot iron reacts with steam to form a black solid and a flammable gas.",
+  "Le fer chauffé au rouge réagit avec la vapeur d’eau pour former un solide noir et un gaz inflammable."
+ ],
+ "镁条剧烈反应，产生大量气泡，放出热量。": [
+  "A magnesium ribbon reacts violently, many bubbles form and heat is given out.",
+  "Un ruban de magnésium réagit vivement, de nombreuses bulles se forment et de la chaleur est dégagée."
+ ],
+ "锌粒表面产生气泡。": [
+  "Bubbles form on the surface of the zinc granules.",
+  "Des bulles se forment à la surface des grains de zinc."
+ ],
+ "铁表面产生气泡，溶液逐渐变为浅绿色。": [
+  "Bubbles form on the surface of the iron and the solution gradually turns light green.",
+  "Des bulles se forment à la surface du fer et la solution devient peu à peu vert clair."
+ ],
+ "铝表面产生气泡，放出热量。": [
+  "Bubbles form on the surface of the aluminium and heat is given out.",
+  "Des bulles se forment à la surface de l’aluminium et de la chaleur est dégagée."
+ ],
+ "锌粒表面产生气泡（实验室制氢气）。": [
+  "Bubbles form on the surface of the zinc granules (laboratory preparation of hydrogen).",
+  "Des bulles se forment à la surface des grains de zinc (préparation du dihydrogène au laboratoire)."
+ ],
+ "铁表面覆盖一层红色固体，溶液由蓝色逐渐变为浅绿色（湿法炼铜）。": [
+  "The iron is covered with a red solid and the solution gradually changes from blue to light green (hydrometallurgy of copper).",
+  "Le fer se recouvre d’un solide rouge et la solution passe peu à peu du bleu au vert clair (hydrométallurgie du cuivre)."
+ ],
+ "锌表面覆盖一层红色固体，溶液的蓝色逐渐变浅。": [
+  "The zinc is covered with a red solid and the blue colour of the solution gradually fades.",
+  "Le zinc se recouvre d’un solide rouge et la couleur bleue de la solution s’atténue peu à peu."
+ ],
+ "镁表面覆盖一层红色固体，溶液的蓝色逐渐变浅。": [
+  "The magnesium is covered with a red solid and the blue colour of the solution gradually fades.",
+  "Le magnésium se recouvre d’un solide rouge et la couleur bleue de la solution s’atténue peu à peu."
+ ],
+ "铝丝表面覆盖一层红色固体，溶液的蓝色逐渐变浅。": [
+  "The aluminium wire is covered with a red solid and the blue colour of the solution gradually fades.",
+  "Le fil d’aluminium se recouvre d’un solide rouge et la couleur bleue de la solution s’atténue peu à peu."
+ ],
+ "铁表面覆盖一层红色固体，溶液由蓝绿色变为浅绿色。": [
+  "The iron is covered with a red solid and the solution changes from blue-green to light green.",
+  "Le fer se recouvre d’un solide rouge et la solution passe du bleu-vert au vert clair."
+ ],
+ "铁表面覆盖一层红色固体，溶液由蓝色变为浅绿色。": [
+  "The iron is covered with a red solid and the solution changes from blue to light green.",
+  "Le fer se recouvre d’un solide rouge et la solution passe du bleu au vert clair."
+ ],
+ "铜丝表面覆盖一层银白色固体，溶液由无色逐渐变为蓝色。": [
+  "The copper wire is covered with a silvery-white solid and the solution gradually changes from colourless to blue.",
+  "Le fil de cuivre se recouvre d’un solide blanc argenté et la solution passe peu à peu de l’incolore au bleu."
+ ],
+ "铁表面覆盖一层银白色固体，溶液由无色变为浅绿色。": [
+  "The iron is covered with a silvery-white solid and the solution changes from colourless to light green.",
+  "Le fer se recouvre d’un solide blanc argenté et la solution passe de l’incolore au vert clair."
+ ],
+ "锌表面覆盖一层银白色固体。": [
+  "The zinc is covered with a silvery-white solid.",
+  "Le zinc se recouvre d’un solide blanc argenté."
+ ],
+ "镁表面覆盖一层银白色固体。": [
+  "The magnesium is covered with a silvery-white solid.",
+  "Le magnésium se recouvre d’un solide blanc argenté."
+ ],
+ "铝丝表面覆盖一层银白色固体。": [
+  "The aluminium wire is covered with a silvery-white solid.",
+  "Le fil d’aluminium se recouvre d’un solide blanc argenté."
+ ],
+ "锌表面覆盖一层黑色固体，溶液由浅绿色变为无色。": [
+  "The zinc is covered with a black solid and the solution changes from light green to colourless.",
+  "Le zinc se recouvre d’un solide noir et la solution passe du vert clair à l’incolore."
+ ],
+ "镁表面覆盖一层黑色固体，溶液由浅绿色变为无色。": [
+  "The magnesium is covered with a black solid and the solution changes from light green to colourless.",
+  "Le magnésium se recouvre d’un solide noir et la solution passe du vert clair à l’incolore."
+ ],
+ "铝表面覆盖一层黑色固体，溶液由浅绿色变为无色。": [
+  "The aluminium is covered with a black solid and the solution changes from light green to colourless.",
+  "L’aluminium se recouvre d’un solide noir et la solution passe du vert clair à l’incolore."
+ ],
+ "红棕色粉末逐渐变黑，澄清石灰水变浑浊，尾气要处理（炼铁的原理）。": [
+  "A reddish-brown powder gradually turns black and limewater turns cloudy; the exhaust gas must be dealt with (principle of iron smelting).",
+  "Une poudre brun-rouge devient peu à peu noire et l’eau de chaux se trouble ; le gaz de sortie doit être traité (principe de la sidérurgie)."
+ ],
+ "黑色粉末仍为黑色（生成的铁粉也呈黑色），澄清石灰水变浑浊。": [
+  "The black powder stays black (the iron powder formed is black too) and limewater turns cloudy.",
+  "La poudre noire reste noire (la poudre de fer formée est noire elle aussi) et l’eau de chaux se trouble."
+ ],
+ "红棕色粉末逐渐变黑，同时生成水。": [
+  "A reddish-brown powder gradually turns black and water is formed at the same time.",
+  "Une poudre brun-rouge devient peu à peu noire et de l’eau se forme en même temps."
+ ],
+ "黄色粉末被还原成金属钨，同时生成水。": [
+  "A yellow powder is reduced to metallic tungsten and water is formed at the same time.",
+  "Une poudre jaune est réduite en tungstène métallique et de l’eau se forme en même temps."
+ ],
+ "熔融的氧化铝（加入冰晶石）通电，得到银白色的铝（工业炼铝）。": [
+  "Molten aluminium oxide (with cryolite added) is electrolysed and silvery-white aluminium is obtained (industrial production of aluminium).",
+  "L’oxyde d’aluminium fondu (additionné de cryolithe) est électrolysé et l’on obtient de l’aluminium blanc argenté (production industrielle de l’aluminium)."
+ ],
+ "铁在潮湿的空气中缓慢生锈，表面出现红棕色物质（铁锈的主要成分是 Fe2O3·xH2O）。": [
+  "Iron rusts slowly in damp air and a reddish-brown substance appears on its surface (the main component of rust is Fe2O3·xH2O).",
+  "Le fer rouille lentement dans l’air humide et une substance brun-rouge apparaît à sa surface (le constituant principal de la rouille est Fe2O3·xH2O)."
+ ],
+ "铜在潮湿的空气中表面慢慢生成绿色的铜绿。": [
+  "In damp air, copper slowly forms green verdigris on its surface.",
+  "Dans l’air humide, le cuivre forme lentement du vert-de-gris à sa surface."
+ ],
+ "绿色粉末变黑，试管口有水珠，澄清石灰水变浑浊。": [
+  "A green powder turns black, droplets of water form at the mouth of the test tube and limewater turns cloudy.",
+  "Une poudre verte devient noire, des gouttelettes d’eau se forment à l’extrémité du tube à essai et l’eau de chaux se trouble."
+ ],
+ "红棕色铁锈逐渐溶解，溶液由无色变为黄色（用盐酸除铁锈）。": [
+  "The reddish-brown rust gradually dissolves and the solution changes from colourless to yellow (removing rust with hydrochloric acid).",
+  "La rouille brun-rouge se dissout peu à peu et la solution passe de l’incolore au jaune (élimination de la rouille avec l’acide chlorhydrique)."
+ ],
+ "红棕色铁锈逐渐溶解，溶液由无色变为黄色。": [
+  "The reddish-brown rust gradually dissolves and the solution changes from colourless to yellow.",
+  "La rouille brun-rouge se dissout peu à peu et la solution passe de l’incolore au jaune."
+ ],
+ "黑色粉末逐渐溶解，溶液由无色变为蓝绿色。": [
+  "The black powder gradually dissolves and the solution changes from colourless to blue-green.",
+  "La poudre noire se dissout peu à peu et la solution passe de l’incolore au bleu-vert."
+ ],
+ "黑色粉末逐渐溶解，溶液由无色变为蓝色。": [
+  "The black powder gradually dissolves and the solution changes from colourless to blue.",
+  "La poudre noire se dissout peu à peu et la solution passe de l’incolore au bleu."
+ ],
+ "白色固体逐渐溶解。": [
+  "The white solid gradually dissolves.",
+  "Le solide blanc se dissout peu à peu."
+ ],
+ "白色固体逐渐溶解，放出热量。": [
+  "The white solid gradually dissolves and heat is given out.",
+  "Le solide blanc se dissout peu à peu et de la chaleur est dégagée."
+ ],
+ "无明显现象，放出热量（可用酚酞溶液由红色变无色证明发生了反应）。": [
+  "No obvious change, heat is given out (the colour of phenolphthalein solution changing from red to colourless shows that a reaction has taken place).",
+  "Aucun changement apparent, de la chaleur est dégagée (le passage de la phénolphtaléine du rouge à l’incolore montre qu’une réaction a eu lieu)."
+ ],
+ "无明显现象，放出热量。": [
+  "No obvious change, heat is given out.",
+  "Aucun changement apparent, de la chaleur est dégagée."
+ ],
+ "无明显现象（熟石灰可以中和酸性土壤、酸性废水）。": [
+  "No obvious change (slaked lime can neutralise acidic soil and acidic waste water).",
+  "Aucun changement apparent (la chaux éteinte peut neutraliser les sols acides et les eaux usées acides)."
+ ],
+ "溶液中可能出现微溶的白色固体（CaSO4）。": [
+  "A slightly soluble white solid (CaSO4) may appear in the solution.",
+  "Un solide blanc peu soluble (CaSO4) peut apparaître dans la solution."
+ ],
+ "产生白色沉淀。": [
+  "A white precipitate forms.",
+  "Un précipité blanc se forme."
+ ],
+ "白色固体逐渐溶解（氢氧化铝可以治疗胃酸过多）。": [
+  "The white solid gradually dissolves (aluminium hydroxide can treat excess stomach acid).",
+  "Le solide blanc se dissout peu à peu (l’hydroxyde d’aluminium peut soigner l’excès d’acidité gastrique)."
+ ],
+ "蓝色沉淀逐渐溶解，溶液变为蓝绿色。": [
+  "The blue precipitate gradually dissolves and the solution becomes blue-green.",
+  "Le précipité bleu se dissout peu à peu et la solution devient bleu-vert."
+ ],
+ "蓝色沉淀逐渐溶解，溶液变为蓝色。": [
+  "The blue precipitate gradually dissolves and the solution becomes blue.",
+  "Le précipité bleu se dissout peu à peu et la solution devient bleue."
+ ],
+ "红褐色沉淀逐渐溶解，溶液变为黄色。": [
+  "The reddish-brown precipitate gradually dissolves and the solution becomes yellow.",
+  "Le précipité brun-rouge se dissout peu à peu et la solution devient jaune."
+ ],
+ "无明显现象（用氢氧化钠溶液吸收二氧化硫）。": [
+  "No obvious change (sodium hydroxide solution absorbs sulfur dioxide).",
+  "Aucun changement apparent (la solution d’hydroxyde de sodium absorbe le dioxyde de soufre)."
+ ],
+ "蓝色固体变黑，试管口有水珠。": [
+  "The blue solid turns black and droplets of water form at the mouth of the test tube.",
+  "Le solide bleu devient noir et des gouttelettes d’eau se forment à l’extrémité du tube à essai."
+ ],
+ "红褐色固体变为红棕色，试管口有水珠。": [
+  "The reddish-brown solid turns brick red and droplets of water form at the mouth of the test tube.",
+  "Le solide brun-rouge devient rouge brique et des gouttelettes d’eau se forment à l’extrémité du tube à essai."
+ ],
+ "产生大量气泡（反应比大理石快，不适合实验室制二氧化碳）。": [
+  "Many bubbles form (the reaction is faster than with marble, so it is not suitable for making carbon dioxide in the laboratory).",
+  "De nombreuses bulles se forment (la réaction est plus rapide qu’avec le marbre, elle ne convient donc pas à la préparation du dioxyde de carbone au laboratoire)."
+ ],
+ "产生大量气泡（小苏打可以治疗胃酸过多）。": [
+  "Many bubbles form (baking soda can treat excess stomach acid).",
+  "De nombreuses bulles se forment (le bicarbonate de soude peut soigner l’excès d’acidité gastrique)."
+ ],
+ "产生大量气泡。": [
+  "Many bubbles form.",
+  "De nombreuses bulles se forment."
+ ],
+ "白色固体溶解，产生气泡。": [
+  "The white solid dissolves and bubbles form.",
+  "Le solide blanc se dissout et des bulles se forment."
+ ],
+ "白色固体受热，试管口有水珠，产生的气体使澄清石灰水变浑浊。": [
+  "When the white solid is heated, droplets of water form at the mouth of the test tube and the gas given off turns limewater cloudy.",
+  "Lorsqu’on chauffe le solide blanc, des gouttelettes d’eau se forment à l’extrémité du tube à essai et le gaz dégagé trouble l’eau de chaux."
+ ],
+ "白色固体受热消失，产生有刺激性气味的气体，试管口有水珠（碳铵要低温保存）。": [
+  "The white solid disappears when heated, a gas with a pungent smell is given off and droplets of water form at the mouth of the test tube (ammonium hydrogencarbonate must be stored at a low temperature).",
+  "Le solide blanc disparaît lorsqu’on le chauffe, un gaz à l’odeur piquante se dégage et des gouttelettes d’eau se forment à l’extrémité du tube à essai (l’hydrogénocarbonate d’ammonium doit être conservé à basse température)."
+ ],
+ "产生白色沉淀（工业制烧碱）。": [
+  "A white precipitate forms (industrial production of caustic soda).",
+  "Un précipité blanc se forme (production industrielle de la soude caustique)."
+ ],
+ "产生白色沉淀（草木灰的主要成分是碳酸钾，其水溶液呈碱性）。": [
+  "A white precipitate forms (the main component of plant ash is potassium carbonate, whose aqueous solution is alkaline).",
+  "Un précipité blanc se forme (le constituant principal de la cendre de bois est le carbonate de potassium, dont la solution aqueuse est basique)."
+ ],
+ "产生白色沉淀，沉淀不溶于稀硝酸（检验硫酸根）。": [
+  "A white precipitate forms that does not dissolve in dilute nitric acid (test for sulfate).",
+  "Un précipité blanc se forme, insoluble dans l’acide nitrique dilué (test des ions sulfate)."
+ ],
+ "产生白色沉淀，沉淀不溶于稀硝酸。": [
+  "A white precipitate forms that does not dissolve in dilute nitric acid.",
+  "Un précipité blanc se forme, insoluble dans l’acide nitrique dilué."
+ ],
+ "产生白色沉淀，溶液仍为蓝色。": [
+  "A white precipitate forms and the solution stays blue.",
+  "Un précipité blanc se forme et la solution reste bleue."
+ ],
+ "同时产生白色沉淀和蓝色沉淀。": [
+  "A white precipitate and a blue precipitate form at the same time.",
+  "Un précipité blanc et un précipité bleu se forment en même temps."
+ ],
+ "产生白色沉淀，沉淀不溶于稀硝酸（检验氯离子）。": [
+  "A white precipitate forms that does not dissolve in dilute nitric acid (test for chloride).",
+  "Un précipité blanc se forme, insoluble dans l’acide nitrique dilué (test des ions chlorure)."
+ ],
+ "产生蓝色沉淀，溶液的蓝色变浅。": [
+  "A blue precipitate forms and the blue colour of the solution fades.",
+  "Un précipité bleu se forme et la couleur bleue de la solution s’atténue."
+ ],
+ "产生蓝色沉淀。": [
+  "A blue precipitate forms.",
+  "Un précipité bleu se forme."
+ ],
+ "产生红褐色沉淀，溶液黄色变浅。": [
+  "A reddish-brown precipitate forms and the yellow colour of the solution fades.",
+  "Un précipité brun-rouge se forme et la couleur jaune de la solution s’atténue."
+ ],
+ "产生红褐色沉淀。": [
+  "A reddish-brown precipitate forms.",
+  "Un précipité brun-rouge se forme."
+ ],
+ "产生有刺激性气味的气体，使湿润的红色石蕊试纸变蓝（检验铵根）。": [
+  "A gas with a pungent smell is given off and turns damp red litmus paper blue (test for ammonium).",
+  "Un gaz à l’odeur piquante se dégage et fait virer au bleu le papier de tournesol rouge humide (test des ions ammonium)."
+ ],
+ "产生有刺激性气味的气体，使湿润的红色石蕊试纸变蓝。": [
+  "A gas with a pungent smell is given off and turns damp red litmus paper blue.",
+  "Un gaz à l’odeur piquante se dégage et fait virer au bleu le papier de tournesol rouge humide."
+ ],
+ "产生有刺激性气味的气体（铵态氮肥不能与碱性物质混用）。": [
+  "A gas with a pungent smell is given off (ammonium nitrogen fertilisers must not be mixed with alkaline substances).",
+  "Un gaz à l’odeur piquante se dégage (les engrais azotés ammoniacaux ne doivent pas être mélangés à des substances basiques)."
+ ],
+ "氮气和氢气在高温和催化剂的作用下生成氨气（工业合成氨还需要高压）。": [
+  "Nitrogen and hydrogen form ammonia at high temperature and with a catalyst (industrial synthesis of ammonia also needs high pressure).",
+  "Le diazote et le dihydrogène forment de l’ammoniac à haute température et en présence d’un catalyseur (la synthèse industrielle de l’ammoniac exige aussi une pression élevée)."
+ ],
+ "浓氨水和浓盐酸靠近时产生白烟。": [
+  "White smoke forms when concentrated ammonia solution and concentrated hydrochloric acid are brought close together.",
+  "Une fumée blanche se forme lorsqu’on rapproche de l’ammoniaque concentrée et de l’acide chlorhydrique concentré."
+ ],
+ "无明显现象（氢氧化钠溶液吸收三氧化硫）。": [
+  "No obvious change (sodium hydroxide solution absorbs sulfur trioxide).",
+  "Aucun changement apparent (la solution d’hydroxyde de sodium absorbe le trioxyde de soufre)."
+ ],
+ "产生蓝色沉淀（波尔多液中的反应之一，不能用铁桶盛放）。": [
+  "A blue precipitate forms (one of the reactions in Bordeaux mixture; it must not be kept in an iron bucket).",
+  "Un précipité bleu se forme (l’une des réactions de la bouillie bordelaise ; elle ne doit pas être conservée dans un seau en fer)."
+ ],
+ "产生白色胶状沉淀。": [
+  "A white gelatinous precipitate forms.",
+  "Un précipité blanc gélatineux se forme."
+ ],
+ "同时产生红褐色沉淀和白色沉淀。": [
+  "A reddish-brown precipitate and a white precipitate form at the same time.",
+  "Un précipité brun-rouge et un précipité blanc se forment en même temps."
+ ],
+ "产生白色沉淀和有刺激性气味的气体。": [
+  "A white precipitate forms and a gas with a pungent smell is given off.",
+  "Un précipité blanc se forme et un gaz à l’odeur piquante se dégage."
+ ],
+ "镁条在二氧化碳中继续燃烧，生成白色固体和黑色固体。": [
+  "A magnesium ribbon keeps burning in carbon dioxide, forming a white solid and a black solid.",
+  "Un ruban de magnésium continue à brûler dans le dioxyde de carbone, en formant un solide blanc et un solide noir."
+ ],
+ "氨气与硝酸反应生成硝酸铵（一种氮肥）。": [
+  "Ammonia reacts with nitric acid to form ammonium nitrate (a nitrogen fertiliser).",
+  "L’ammoniac réagit avec l’acide nitrique pour former du nitrate d’ammonium (un engrais azoté)."
+ ],
+ "氨气与硫酸反应生成硫酸铵（一种氮肥）。": [
+  "Ammonia reacts with sulfuric acid to form ammonium sulfate (a nitrogen fertiliser).",
+  "L’ammoniac réagit avec l’acide sulfurique pour former du sulfate d’ammonium (un engrais azoté)."
+ ],
+ "氢气": [
+  "hydrogen",
+  "dihydrogène"
+ ],
+ "氯气": [
+  "chlorine",
+  "dichlore"
+ ],
+ "碳": [
+  "carbon",
+  "carbone"
+ ],
+ "金刚石、石墨是碳的单质": [
+  "Diamond and graphite are elemental forms of carbon",
+  "Le diamant et le graphite sont des formes du carbone"
+ ],
+ "硫": [
+  "sulfur",
+  "soufre"
+ ],
+ "硫磺": [
+  "brimstone",
+  "soufre (fleur de soufre)"
+ ],
+ "磷": [
+  "phosphorus",
+  "phosphore"
+ ],
+ "红磷、白磷是磷的单质": [
+  "Red phosphorus and white phosphorus are elemental forms of phosphorus",
+  "Le phosphore rouge et le phosphore blanc sont des formes du phosphore"
+ ],
+ "铜": [
+  "copper",
+  "cuivre"
+ ],
+ "锌": [
+  "zinc",
+  "zinc"
+ ],
+ "镁": [
+  "magnesium",
+  "magnésium"
+ ],
+ "铝": [
+  "aluminium",
+  "aluminium"
+ ],
+ "汞": [
+  "mercury",
+  "mercure"
+ ],
+ "银": [
+  "silver",
+  "argent"
+ ],
+ "钨": [
+  "tungsten",
+  "tungstène"
+ ],
+ "固态叫干冰": [
+  "The solid is called dry ice",
+  "Le solide est appelé neige carbonique"
+ ],
+ "一氧化碳": [
+  "carbon monoxide",
+  "monoxyde de carbone"
+ ],
+ "二氧化硫": [
+  "sulfur dioxide",
+  "dioxyde de soufre"
+ ],
+ "三氧化硫": [
+  "sulfur trioxide",
+  "trioxyde de soufre"
+ ],
+ "一氧化氮": [
+  "nitrogen monoxide",
+  "monoxyde d’azote"
+ ],
+ "二氧化氮": [
+  "nitrogen dioxide",
+  "dioxyde d’azote"
+ ],
+ "五氧化二磷": [
+  "diphosphorus pentoxide",
+  "pentaoxyde de diphosphore"
+ ],
+ "氧化铁": [
+  "iron(III) oxide",
+  "oxyde de fer(III)"
+ ],
+ "铁锈的主要成分": [
+  "The main component of rust",
+  "Constituant principal de la rouille"
+ ],
+ "四氧化三铁": [
+  "triiron tetroxide",
+  "tétraoxyde de trifer"
+ ],
+ "氧化铜": [
+  "copper(II) oxide",
+  "oxyde de cuivre(II)"
+ ],
+ "氧化镁": [
+  "magnesium oxide",
+  "oxyde de magnésium"
+ ],
+ "氧化钙": [
+  "calcium oxide",
+  "oxyde de calcium"
+ ],
+ "生石灰": [
+  "quicklime",
+  "chaux vive"
+ ],
+ "氧化铝": [
+  "aluminium oxide",
+  "oxyde d’aluminium"
+ ],
+ "氧化汞": [
+  "mercury(II) oxide",
+  "oxyde de mercure(II)"
+ ],
+ "氧化锌": [
+  "zinc oxide",
+  "oxyde de zinc"
+ ],
+ "二氧化锰": [
+  "manganese dioxide",
+  "dioxyde de manganèse"
+ ],
+ "过氧化氢": [
+  "hydrogen peroxide",
+  "peroxyde d’hydrogène"
+ ],
+ "双氧水": [
+  "hydrogen peroxide solution (“peroxide”)",
+  "eau oxygénée"
+ ],
+ "三氧化钨": [
+  "tungsten trioxide",
+  "trioxyde de tungstène"
+ ],
+ "氧化钠": [
+  "sodium oxide",
+  "oxyde de sodium"
+ ],
+ "盐酸": [
+  "hydrochloric acid",
+  "acide chlorhydrique"
+ ],
+ "氢氯酸": [
+  "hydrochloric acid (alternative name)",
+  "acide chlorhydrique (autre nom)"
+ ],
+ "硫酸": [
+  "sulfuric acid",
+  "acide sulfurique"
+ ],
+ "硝酸": [
+  "nitric acid",
+  "acide nitrique"
+ ],
+ "碳酸": [
+  "carbonic acid",
+  "acide carbonique"
+ ],
+ "亚硫酸": [
+  "sulfurous acid",
+  "acide sulfureux"
+ ],
+ "乙酸": [
+  "ethanoic acid",
+  "acide éthanoïque"
+ ],
+ "氢氧化钠": [
+  "sodium hydroxide",
+  "hydroxyde de sodium"
+ ],
+ "烧碱、火碱、苛性钠": [
+  "caustic soda, lye",
+  "soude caustique"
+ ],
+ "氢氧化钾": [
+  "potassium hydroxide",
+  "hydroxyde de potassium"
+ ],
+ "氢氧化钙": [
+  "calcium hydroxide",
+  "hydroxyde de calcium"
+ ],
+ "熟石灰、消石灰": [
+  "slaked lime, hydrated lime",
+  "chaux éteinte"
+ ],
+ "氢氧化钡": [
+  "barium hydroxide",
+  "hydroxyde de baryum"
+ ],
+ "氢氧化铜": [
+  "copper(II) hydroxide",
+  "hydroxyde de cuivre(II)"
+ ],
+ "氢氧化铁": [
+  "iron(III) hydroxide",
+  "hydroxyde de fer(III)"
+ ],
+ "氢氧化镁": [
+  "magnesium hydroxide",
+  "hydroxyde de magnésium"
+ ],
+ "氢氧化铝": [
+  "aluminium hydroxide",
+  "hydroxyde d’aluminium"
+ ],
+ "氯化钠": [
+  "sodium chloride",
+  "chlorure de sodium"
+ ],
+ "食盐": [
+  "table salt",
+  "sel de table"
+ ],
+ "碳酸钠": [
+  "sodium carbonate",
+  "carbonate de sodium"
+ ],
+ "纯碱、苏打": [
+  "soda ash, washing soda",
+  "soude (carbonate de sodium)"
+ ],
+ "碳酸氢钠": [
+  "sodium hydrogencarbonate",
+  "hydrogénocarbonate de sodium"
+ ],
+ "小苏打": [
+  "baking soda",
+  "bicarbonate de soude"
+ ],
+ "碳酸钙": [
+  "calcium carbonate",
+  "carbonate de calcium"
+ ],
+ "大理石、石灰石的主要成分": [
+  "The main component of marble and limestone",
+  "Constituant principal du marbre et du calcaire"
+ ],
+ "硫酸铜": [
+  "copper(II) sulfate",
+  "sulfate de cuivre(II)"
+ ],
+ "五水硫酸铜": [
+  "copper(II) sulfate pentahydrate",
+  "sulfate de cuivre(II) pentahydraté"
+ ],
+ "胆矾、蓝矾": [
+  "blue vitriol",
+  "vitriol bleu"
+ ],
+ "高锰酸钾": [
+  "potassium permanganate",
+  "permanganate de potassium"
+ ],
+ "灰锰氧": [
+  "permanganate of potash",
+  "permanganate de potassium (nom courant)"
+ ],
+ "锰酸钾": [
+  "potassium manganate",
+  "manganate de potassium"
+ ],
+ "氯酸钾": [
+  "potassium chlorate",
+  "chlorate de potassium"
+ ],
+ "氯化钾": [
+  "potassium chloride",
+  "chlorure de potassium"
+ ],
+ "硝酸银": [
+  "silver nitrate",
+  "nitrate d’argent"
+ ],
+ "氯化银": [
+  "silver chloride",
+  "chlorure d’argent"
+ ],
+ "硫酸钡": [
+  "barium sulfate",
+  "sulfate de baryum"
+ ],
+ "氯化钡": [
+  "barium chloride",
+  "chlorure de baryum"
+ ],
+ "碳酸钡": [
+  "barium carbonate",
+  "carbonate de baryum"
+ ],
+ "硝酸钡": [
+  "barium nitrate",
+  "nitrate de baryum"
+ ],
+ "硫酸钠": [
+  "sodium sulfate",
+  "sulfate de sodium"
+ ],
+ "亚硫酸钠": [
+  "sodium sulfite",
+  "sulfite de sodium"
+ ],
+ "硝酸钠": [
+  "sodium nitrate",
+  "nitrate de sodium"
+ ],
+ "碳酸钾": [
+  "potassium carbonate",
+  "carbonate de potassium"
+ ],
+ "草木灰的主要成分": [
+  "The main component of plant ash",
+  "Constituant principal de la cendre de bois"
+ ],
+ "硝酸钾": [
+  "potassium nitrate",
+  "nitrate de potassium"
+ ],
+ "硫酸钾": [
+  "potassium sulfate",
+  "sulfate de potassium"
+ ],
+ "氯化钙": [
+  "calcium chloride",
+  "chlorure de calcium"
+ ],
+ "硫酸钙": [
+  "calcium sulfate",
+  "sulfate de calcium"
+ ],
+ "硝酸钙": [
+  "calcium nitrate",
+  "nitrate de calcium"
+ ],
+ "氯化镁": [
+  "magnesium chloride",
+  "chlorure de magnésium"
+ ],
+ "硫酸镁": [
+  "magnesium sulfate",
+  "sulfate de magnésium"
+ ],
+ "碳酸镁": [
+  "magnesium carbonate",
+  "carbonate de magnésium"
+ ],
+ "硝酸镁": [
+  "magnesium nitrate",
+  "nitrate de magnésium"
+ ],
+ "氯化铁": [
+  "iron(III) chloride",
+  "chlorure de fer(III)"
+ ],
+ "氯化亚铁": [
+  "iron(II) chloride",
+  "chlorure de fer(II)"
+ ],
+ "硫酸亚铁": [
+  "iron(II) sulfate",
+  "sulfate de fer(II)"
+ ],
+ "硫酸铁": [
+  "iron(III) sulfate",
+  "sulfate de fer(III)"
+ ],
+ "硝酸亚铁": [
+  "iron(II) nitrate",
+  "nitrate de fer(II)"
+ ],
+ "硫化亚铁": [
+  "iron(II) sulfide",
+  "sulfure de fer(II)"
+ ],
+ "氯化锌": [
+  "zinc chloride",
+  "chlorure de zinc"
+ ],
+ "硫酸锌": [
+  "zinc sulfate",
+  "sulfate de zinc"
+ ],
+ "硝酸锌": [
+  "zinc nitrate",
+  "nitrate de zinc"
+ ],
+ "氯化铝": [
+  "aluminium chloride",
+  "chlorure d’aluminium"
+ ],
+ "硫酸铝": [
+  "aluminium sulfate",
+  "sulfate d’aluminium"
+ ],
+ "硝酸铝": [
+  "aluminium nitrate",
+  "nitrate d’aluminium"
+ ],
+ "氯化铜": [
+  "copper(II) chloride",
+  "chlorure de cuivre(II)"
+ ],
+ "硝酸铜": [
+  "copper(II) nitrate",
+  "nitrate de cuivre(II)"
+ ],
+ "氯化铵": [
+  "ammonium chloride",
+  "chlorure d’ammonium"
+ ],
+ "硫酸铵": [
+  "ammonium sulfate",
+  "sulfate d’ammonium"
+ ],
+ "碳酸氢铵": [
+  "ammonium hydrogencarbonate",
+  "hydrogénocarbonate d’ammonium"
+ ],
+ "碳铵": [
+  "ammonium bicarbonate (common name)",
+  "bicarbonate d’ammonium (nom courant)"
+ ],
+ "硝酸铵": [
+  "ammonium nitrate",
+  "nitrate d’ammonium"
+ ],
+ "碱式碳酸铜": [
+  "basic copper(II) carbonate",
+  "carbonate basique de cuivre(II)"
+ ],
+ "铜绿": [
+  "verdigris",
+  "vert-de-gris"
+ ],
+ "碳酸氢钙": [
+  "calcium hydrogencarbonate",
+  "hydrogénocarbonate de calcium"
+ ],
+ "甲烷": [
+  "methane",
+  "méthane"
+ ],
+ "沼气、天然气的主要成分": [
+  "The main component of biogas and natural gas",
+  "Constituant principal du biogaz et du gaz naturel"
+ ],
+ "乙醇": [
+  "ethanol",
+  "éthanol"
+ ],
+ "丙烷": [
+  "propane",
+  "propane"
+ ],
+ "丁烷": [
+  "butane",
+  "butane"
+ ],
+ "乙炔": [
+  "ethyne",
+  "éthyne"
+ ],
+ "乙烯": [
+  "ethene",
+  "éthène"
+ ],
+ "尿素": [
+  "urea",
+  "urée"
+ ],
+ "氨气": [
+  "ammonia",
+  "ammoniac"
+ ],
+ "按体积计，氮气约占78%，氧气约占21%": [
+  "By volume, air is about 78% nitrogen and 21% oxygen",
+  "En volume, l’air contient environ 78 % de diazote et 21 % de dioxygène"
+ ],
+ "氯化氢气体的水溶液": [
+  "An aqueous solution of hydrogen chloride gas",
+  "Solution aqueuse du chlorure d’hydrogène gazeux"
+ ],
+ "氢氧化钙的水溶液": [
+  "An aqueous solution of calcium hydroxide",
+  "Solution aqueuse d’hydroxyde de calcium"
+ ],
+ "食盐水": [
+  "salt water",
+  "eau salée"
+ ],
+ "氯化钠的水溶液": [
+  "An aqueous solution of sodium chloride",
+  "Solution aqueuse de chlorure de sodium"
+ ],
+ "生铁": [
+  "pig iron",
+  "fonte"
+ ],
+ "含碳量较高的铁合金": [
+  "An iron alloy with a fairly high carbon content",
+  "Alliage de fer à teneur en carbone assez élevée"
+ ],
+ "钢": [
+  "steel",
+  "acier"
+ ],
+ "含碳量较低的铁合金": [
+  "An iron alloy with a fairly low carbon content",
+  "Alliage de fer à faible teneur en carbone"
+ ],
+ "黄铜": [
+  "brass",
+  "laiton"
+ ],
+ "铜和锌的合金": [
+  "An alloy of copper and zinc",
+  "Alliage de cuivre et de zinc"
+ ],
+ "多种碳氢化合物的混合物": [
+  "A mixture of many hydrocarbons",
+  "Mélange de nombreux hydrocarbures"
+ ],
+ "主要含碳的混合物": [
+  "A mixture consisting mainly of carbon",
+  "Mélange constitué principalement de carbone"
+ ],
+ "主要成分是甲烷": [
+  "The main component is methane",
+  "Le constituant principal est le méthane"
+ ],
+ "碘酒": [
+  "tincture of iodine",
+  "teinture d’iode"
+ ],
+ "碘的酒精溶液": [
+  "A solution of iodine in alcohol",
+  "Solution d’iode dans l’alcool"
+ ],
+ "矿泉水": [
+  "mineral water",
+  "eau minérale"
+ ],
+ "含有多种矿物质的水": [
+  "Water containing many minerals",
+  "Eau contenant de nombreux minéraux"
+ ],
+ "大理石": [
+  "marble",
+  "marbre"
+ ],
+ "主要成分是碳酸钙的岩石": [
+  "A rock whose main component is calcium carbonate",
+  "Roche dont le constituant principal est le carbonate de calcium"
+ ],
+ "雨水": [
+  "rainwater",
+  "eau de pluie"
+ ],
+ "溶有二氧化碳等的水": [
+  "Water in which carbon dioxide and other gases are dissolved",
+  "Eau dans laquelle du dioxyde de carbone et d’autres gaz sont dissous"
+ ],
+ "白酒": [
+  "baijiu (Chinese liquor)",
+  "baijiu (alcool chinois)"
+ ],
+ "乙醇和水等的混合物": [
+  "A mixture of ethanol, water and other substances",
+  "Mélange d’éthanol, d’eau et d’autres substances"
+ ],
+ "氢": [
+  "hydrogen",
+  "hydrogène"
+ ],
+ "锂": [
+  "lithium",
+  "lithium"
+ ],
+ "氮": [
+  "nitrogen",
+  "azote"
+ ],
+ "氧": [
+  "oxygen",
+  "oxygène"
+ ],
+ "氟": [
+  "fluorine",
+  "fluor"
+ ],
+ "钠": [
+  "sodium",
+  "sodium"
+ ],
+ "硅": [
+  "silicon",
+  "silicium"
+ ],
+ "氯": [
+  "chlorine",
+  "chlore"
+ ],
+ "钾": [
+  "potassium",
+  "potassium"
+ ],
+ "钙": [
+  "calcium",
+  "calcium"
+ ],
+ "锰": [
+  "manganese",
+  "manganèse"
+ ],
+ "钡": [
+  "barium",
+  "baryum"
+ ],
+ "氢氧根": [
+  "hydroxide ion",
+  "ion hydroxyde"
+ ],
+ "硝酸根": [
+  "nitrate ion",
+  "ion nitrate"
+ ],
+ "硫酸根": [
+  "sulfate ion",
+  "ion sulfate"
+ ],
+ "碳酸根": [
+  "carbonate ion",
+  "ion carbonate"
+ ],
+ "铵根": [
+  "ammonium ion",
+  "ion ammonium"
+ ],
+ "磷酸根": [
+  "phosphate ion",
+  "ion phosphate"
+ ],
+ "高锰酸根": [
+  "permanganate ion",
+  "ion permanganate"
+ ],
+ "氯酸根": [
+  "chlorate ion",
+  "ion chlorate"
+ ],
+ "碳酸氢根": [
+  "hydrogencarbonate ion",
+  "ion hydrogénocarbonate"
+ ],
+ "铵": [
+  "ammonium",
+  "ammonium"
+ ],
+ "亚铁": [
+  "iron(II)",
+  "fer(II)"
+ ],
+ "白色沉淀": [
+  "white precipitate",
+  "précipité blanc"
+ ],
+ "蓝色沉淀": [
+  "blue precipitate",
+  "précipité bleu"
+ ],
+ "红褐色沉淀": [
+  "reddish-brown precipitate",
+  "précipité brun-rouge"
+ ],
+ "气泡": [
+  "bubbles",
+  "bulles"
+ ],
+ "淡蓝色火焰": [
+  "pale blue flame",
+  "flamme bleu pâle"
+ ],
+ "蓝紫色火焰": [
+  "blue-violet flame",
+  "flamme bleu violet"
+ ],
+ "蓝色火焰": [
+  "blue flame",
+  "flamme bleue"
+ ],
+ "火星四射": [
+  "sparks flying in all directions",
+  "étincelles projetées dans toutes les directions"
+ ],
+ "白烟": [
+  "white smoke",
+  "fumée blanche"
+ ],
+ "石蕊溶液，溶液变红": [
+  "litmus solution, the solution turns red",
+  "solution de tournesol, la solution devient rouge"
+ ],
+ "变黑": [
+  "turns black",
+  "devient noir"
+ ],
+ "变红": [
+  "turns red",
+  "devient rouge"
+ ],
+ "变蓝": [
+  "turns blue",
+  "devient bleu"
+ ],
+ "浅绿色": [
+  "light green",
+  "vert clair"
+ ],
+ "变为黄色": [
+  "turns yellow",
+  "devient jaune"
+ ],
+ "刺激性气味": [
+  "pungent smell",
+  "odeur piquante"
+ ],
+ "水珠": [
+  "droplets of water",
+  "gouttelettes d’eau"
+ ],
+ "耀眼": [
+  "dazzling",
+  "éblouissante"
+ ],
+ "放出大量的热": [
+  "gives out a lot of heat",
+  "dégage beaucoup de chaleur"
+ ],
+ "浑浊": [
+  "cloudy",
+  "trouble"
+ ],
+ "胃液": [
+  "gastric juice",
+  "suc gastrique"
+ ],
+ "柠檬汁": [
+  "lemon juice",
+  "jus de citron"
+ ],
+ "食醋": [
+  "vinegar",
+  "vinaigre"
+ ],
+ "橙汁": [
+  "orange juice",
+  "jus d’orange"
+ ],
+ "酸雨": [
+  "acid rain",
+  "pluie acide"
+ ],
+ "牛奶": [
+  "milk",
+  "lait"
+ ],
+ "纯水": [
+  "pure water",
+  "eau pure"
+ ],
+ "小苏打溶液": [
+  "baking soda solution",
+  "solution de bicarbonate de soude"
+ ],
+ "肥皂水": [
+  "soapy water",
+  "eau savonneuse"
+ ],
+ "草木灰水": [
+  "plant ash solution",
+  "solution de cendre de bois"
+ ],
+ "石灰水": [
+  "limewater",
+  "eau de chaux"
+ ],
+ "炉具清洁剂": [
+  "oven cleaner",
+  "nettoyant pour four"
+ ],
+ "氧气不易溶于水，密度比空气大。": [
+  "Oxygen is not very soluble in water and is denser than air.",
+  "Le dioxygène est peu soluble dans l’eau et plus dense que l’air."
+ ],
+ "把带火星的木条伸入集气瓶，木条复燃。": [
+  "Put a glowing splint into the gas jar: the splint relights.",
+  "Introduire une allumette incandescente dans le flacon : l’allumette se rallume."
+ ],
+ "把带火星的木条放在瓶口，木条复燃。": [
+  "Hold a glowing splint at the mouth of the jar: the splint relights.",
+  "Placer une allumette incandescente à l’ouverture du flacon : l’allumette se rallume."
+ ],
+ "高锰酸钾溶液和稀盐酸": [
+  "potassium permanganate solution and dilute hydrochloric acid",
+  "solution de permanganate de potassium et acide chlorhydrique dilué"
+ ],
+ "高锰酸钾溶液与稀盐酸混合不会放出氧气。": [
+  "Mixing potassium permanganate solution with dilute hydrochloric acid does not release oxygen.",
+  "Le mélange d’une solution de permanganate de potassium et d’acide chlorhydrique dilué ne libère pas de dioxygène."
+ ],
+ "大理石和稀盐酸": [
+  "marble and dilute hydrochloric acid",
+  "marbre et acide chlorhydrique dilué"
+ ],
+ "这一组反应放出的是二氧化碳。": [
+  "This pair of reagents gives off carbon dioxide.",
+  "Ce couple de réactifs dégage du dioxyde de carbone."
+ ],
+ "氢气难溶于水，密度比空气小。": [
+  "Hydrogen is insoluble in water and less dense than air.",
+  "Le dihydrogène est insoluble dans l’eau et moins dense que l’air."
+ ],
+ "点燃，产生淡蓝色火焰；混有空气时点燃会发出爆鸣声。": [
+  "Light it: it burns with a pale blue flame; when mixed with air it burns with a pop.",
+  "L’enflammer : il brûle avec une flamme bleu pâle ; mélangé à l’air, il brûle avec une détonation."
+ ],
+ "用排水法收集，集气瓶口有气泡冒出时已满。": [
+  "Collect it over water; the jar is full when bubbles escape from its mouth.",
+  "Le recueillir sur l’eau ; le flacon est plein lorsque des bulles s’échappent de son ouverture."
+ ],
+ "铜片和稀硫酸": [
+  "copper sheet and dilute sulfuric acid",
+  "lame de cuivre et acide sulfurique dilué"
+ ],
+ "铜排在氢的后面，不能与稀硫酸反应放出氢气。": [
+  "Copper is below hydrogen in the reactivity series and does not react with dilute sulfuric acid to give hydrogen.",
+  "Le cuivre se trouve après l’hydrogène dans la série de réactivité et ne réagit pas avec l’acide sulfurique dilué pour donner du dihydrogène."
+ ],
+ "锌粒和浓硝酸": [
+  "zinc granules and concentrated nitric acid",
+  "grains de zinc et acide nitrique concentré"
+ ],
+ "浓硝酸有强氧化性，反应放出的不是氢气。": [
+  "Concentrated nitric acid is a strong oxidising agent; the gas given off is not hydrogen.",
+  "L’acide nitrique concentré est un oxydant puissant ; le gaz dégagé n’est pas du dihydrogène."
+ ],
+ "二氧化碳能溶于水，密度比空气大，所以用向上排空气法。": [
+  "Carbon dioxide dissolves in water and is denser than air, so it is collected by upward displacement of air.",
+  "Le dioxyde de carbone est soluble dans l’eau et plus dense que l’air ; on le recueille donc par déplacement d’air vers le haut."
+ ],
+ "通入澄清石灰水，石灰水变浑浊。": [
+  "Pass it into limewater: the limewater turns cloudy.",
+  "Le faire barboter dans l’eau de chaux : l’eau de chaux se trouble."
+ ],
+ "把燃着的木条放在瓶口，木条熄灭。": [
+  "Hold a burning splint at the mouth of the jar: the splint goes out.",
+  "Placer une allumette enflammée à l’ouverture du flacon : l’allumette s’éteint."
+ ],
+ "大理石和稀硫酸": [
+  "marble and dilute sulfuric acid",
+  "marbre et acide sulfurique dilué"
+ ],
+ "生成的硫酸钙微溶，覆盖在大理石表面，反应会逐渐停止。": [
+  "The calcium sulfate formed is slightly soluble and covers the marble, so the reaction gradually stops.",
+  "Le sulfate de calcium formé est peu soluble et recouvre le marbre ; la réaction s’arrête donc peu à peu."
+ ],
+ "碳酸钠粉末和稀盐酸": [
+  "sodium carbonate powder and dilute hydrochloric acid",
+  "poudre de carbonate de sodium et acide chlorhydrique dilué"
+ ],
+ "反应太快，不容易控制和收集。": [
+  "The reaction is too fast and is hard to control and to collect from.",
+  "La réaction est trop rapide et difficile à maîtriser et à recueillir."
+ ],
+ "木炭在氧气中燃烧": [
+  "charcoal burning in oxygen",
+  "charbon de bois brûlant dans le dioxygène"
+ ],
+ "产物不纯，收集不到纯净的二氧化碳。": [
+  "The product is impure, so pure carbon dioxide cannot be collected.",
+  "Le produit est impur : on ne peut pas recueillir du dioxyde de carbone pur."
+ ],
+ "除去 CO 中混有的少量 CO₂，可将混合气体通过": [
+  "To remove a little CO₂ mixed with CO, pass the gas mixture through",
+  "Pour éliminer un peu de CO₂ mélangé à du CO, on peut faire passer le mélange gazeux dans le réactif suivant :"
+ ],
+ "足量的氢氧化钠溶液": [
+  "excess sodium hydroxide solution",
+  "solution d’hydroxyde de sodium en excès"
+ ],
+ "灼热的氧化铜": [
+  "hot copper(II) oxide",
+  "oxyde de cuivre(II) chauffé"
+ ],
+ "浓硫酸": [
+  "concentrated sulfuric acid",
+  "acide sulfurique concentré"
+ ],
+ "二氧化碳与氢氧化钠反应被吸收，一氧化碳不反应。": [
+  "Carbon dioxide reacts with sodium hydroxide and is absorbed; carbon monoxide does not react.",
+  "Le dioxyde de carbone réagit avec l’hydroxyde de sodium et est absorbé ; le monoxyde de carbone ne réagit pas."
+ ],
+ "除去 CO₂ 中混有的少量 CO，可将混合气体通过": [
+  "To remove a little CO mixed with CO₂, pass the gas mixture through",
+  "Pour éliminer un peu de CO mélangé à du CO₂, on peut faire passer le mélange gazeux dans le réactif suivant :"
+ ],
+ "一氧化碳还原氧化铜，生成二氧化碳。": [
+  "Carbon monoxide reduces copper(II) oxide and forms carbon dioxide.",
+  "Le monoxyde de carbone réduit l’oxyde de cuivre(II) et forme du dioxyde de carbone."
+ ],
+ "除去 N₂ 中混有的少量 O₂，可将混合气体通过": [
+  "To remove a little O₂ mixed with N₂, pass the gas mixture through",
+  "Pour éliminer un peu de O₂ mélangé à du N₂, on peut faire passer le mélange gazeux dans le réactif suivant :"
+ ],
+ "灼热的铜网": [
+  "hot copper gauze",
+  "toile de cuivre chauffée"
+ ],
+ "铜与氧气反应生成氧化铜，氮气不反应。": [
+  "Copper reacts with oxygen to form copper(II) oxide; nitrogen does not react.",
+  "Le cuivre réagit avec le dioxygène pour former de l’oxyde de cuivre(II) ; le diazote ne réagit pas."
+ ],
+ "除去 H₂ 中混有的少量 HCl 气体，可将混合气体通过": [
+  "To remove a little HCl gas mixed with H₂, pass the gas mixture through",
+  "Pour éliminer un peu de HCl gazeux mélangé à du H₂, on peut faire passer le mélange gazeux dans le réactif suivant :"
+ ],
+ "氯化氢与氢氧化钠反应被吸收，氢气不反应。": [
+  "Hydrogen chloride reacts with sodium hydroxide and is absorbed; hydrogen does not react.",
+  "Le chlorure d’hydrogène réagit avec l’hydroxyde de sodium et est absorbé ; le dihydrogène ne réagit pas."
+ ],
+ "干燥氧气，可选用的干燥剂是": [
+  "To dry oxygen, the drying agent that can be used is",
+  "Pour sécher du dioxygène, l’agent desséchant utilisable est :"
+ ],
+ "浓硫酸有吸水性，且不与氧气反应；溶液不能用来干燥气体。": [
+  "Concentrated sulfuric acid absorbs water and does not react with oxygen; a solution cannot be used to dry a gas.",
+  "L’acide sulfurique concentré absorbe l’eau et ne réagit pas avec le dioxygène ; une solution ne peut pas servir à sécher un gaz."
+ ],
+ "下列气体中，不能用浓硫酸干燥的是": [
+  "Of the following gases, the one that cannot be dried with concentrated sulfuric acid is",
+  "Parmi les gaz suivants, celui qui ne peut pas être séché avec de l’acide sulfurique concentré est"
+ ],
+ "氨气是碱性气体，能与浓硫酸反应。": [
+  "Ammonia is a basic gas and reacts with concentrated sulfuric acid.",
+  "L’ammoniac est un gaz basique et réagit avec l’acide sulfurique concentré."
+ ],
+ "除去 CO₂ 中混有的水蒸气，可选用": [
+  "To remove water vapour mixed with CO₂, one can use",
+  "Pour éliminer la vapeur d’eau mélangée à du CO₂, on peut utiliser le produit suivant :"
+ ],
+ "氢氧化钠固体": [
+  "solid sodium hydroxide",
+  "hydroxyde de sodium solide"
+ ],
+ "氢氧化钠固体和生石灰都能与二氧化碳反应；浓硫酸只吸收水。": [
+  "Solid sodium hydroxide and quicklime both react with carbon dioxide; concentrated sulfuric acid absorbs only water.",
+  "L’hydroxyde de sodium solide et la chaux vive réagissent tous deux avec le dioxyde de carbone ; l’acide sulfurique concentré n’absorbe que l’eau."
+ ],
+ "熄灭酒精灯的正确方法是": [
+  "The correct way to put out an alcohol lamp is to",
+  "La bonne façon d’éteindre une lampe à alcool est de"
+ ],
+ "用灯帽盖灭": [
+  "cover it with the cap",
+  "la recouvrir de son capuchon"
+ ],
+ "用嘴吹灭": [
+  "blow it out",
+  "souffler dessus"
+ ],
+ "用水浇灭": [
+  "pour water on it",
+  "verser de l’eau dessus"
+ ],
+ "用手扇灭": [
+  "fan it out",
+  "l’éteindre en l’éventant"
+ ],
+ "用灯帽盖灭，使灯内的酒精蒸气与空气隔绝；不能用嘴吹，否则火焰可能进入灯内引起燃烧。": [
+  "Cover it with the cap so that the alcohol vapour in the lamp is cut off from the air; do not blow it out, or the flame may get into the lamp and cause a fire.",
+  "La recouvrir de son capuchon pour isoler de l’air la vapeur d’alcool qu’elle contient ; il ne faut pas souffler dessus, car la flamme pourrait pénétrer dans la lampe et provoquer un incendie."
+ ],
+ "给试管里的液体加热时，液体的体积不能超过试管容积的": [
+  "When heating a liquid in a test tube, the volume of liquid must not exceed what fraction of the tube’s capacity?",
+  "Lorsqu’on chauffe un liquide dans un tube à essai, le volume du liquide ne doit pas dépasser quelle fraction de la capacité du tube ?"
+ ],
+ "三分之一": [
+  "one third",
+  "un tiers"
+ ],
+ "二分之一": [
+  "one half",
+  "la moitié"
+ ],
+ "三分之二": [
+  "two thirds",
+  "deux tiers"
+ ],
+ "四分之三": [
+  "three quarters",
+  "trois quarts"
+ ],
+ "液体过多，沸腾时容易喷出伤人，所以不超过试管容积的三分之一。": [
+  "If there is too much liquid it may spray out and hurt someone when it boils, so it must not exceed one third of the tube’s capacity.",
+  "S’il y a trop de liquide, il peut gicler et blesser quelqu’un à l’ébullition ; il ne doit donc pas dépasser un tiers de la capacité du tube."
+ ],
+ "给试管里的固体加热时，试管口要略向下倾斜，目的是": [
+  "When heating a solid in a test tube, the mouth of the tube is tilted slightly downwards in order to",
+  "Lorsqu’on chauffe un solide dans un tube à essai, on incline légèrement l’ouverture du tube vers le bas. Le but est :"
+ ],
+ "防止冷凝水倒流使试管炸裂": [
+  "stop condensed water running back and cracking the tube",
+  "empêcher l’eau condensée de refluer et de faire éclater le tube"
+ ],
+ "使固体受热均匀": [
+  "heat the solid evenly",
+  "chauffer le solide uniformément"
+ ],
+ "便于观察现象": [
+  "make the changes easier to observe",
+  "faciliter l’observation des changements"
+ ],
+ "防止固体滑出试管": [
+  "stop the solid sliding out of the tube",
+  "empêcher le solide de glisser hors du tube"
+ ],
+ "加热时固体中的湿气会在管口冷凝成水珠，倒流到热的管底会使试管炸裂。": [
+  "When heated, the moisture in the solid condenses into droplets at the mouth of the tube; if they run back onto the hot bottom, the tube cracks.",
+  "Lorsqu’on chauffe, l’humidité du solide se condense en gouttelettes à l’ouverture du tube ; si elles refluent sur le fond chaud, le tube éclate."
+ ],
+ "用量筒量取液体读数时，视线应": [
+  "When reading a measuring cylinder, your line of sight should be",
+  "Pour lire une éprouvette graduée, la ligne de visée doit être"
+ ],
+ "与量筒内凹液面的最低处保持水平": [
+  "level with the lowest point of the liquid’s curved surface",
+  "à la hauteur du point le plus bas du ménisque"
+ ],
+ "与凹液面的最高处保持水平": [
+  "level with the highest point of the curved surface",
+  "à la hauteur du point le plus haut du ménisque"
+ ],
+ "从上往下俯视刻度": [
+  "looking down on the scale from above",
+  "dirigée de haut en bas vers la graduation"
+ ],
+ "从下往上仰视刻度": [
+  "looking up at the scale from below",
+  "dirigée de bas en haut vers la graduation"
+ ],
+ "视线与凹液面最低处相平才能读准；俯视读数偏大，仰视读数偏小。": [
+  "The reading is accurate only when your eye is level with the lowest point of the meniscus; looking down gives a reading that is too high, looking up one that is too low.",
+  "La lecture n’est exacte que si l’œil est à la hauteur du point le plus bas du ménisque ; en regardant d’en haut, on lit une valeur trop grande, en regardant d’en bas, une valeur trop petite."
+ ],
+ "用托盘天平称量固体药品时，药品和砝码的放法是": [
+  "When weighing a solid chemical on a platform balance, the chemical and the weights are placed",
+  "Pour peser un produit solide sur une balance à plateaux, le produit et les masses marquées se placent"
+ ],
+ "左盘放药品，右盘放砝码": [
+  "chemical on the left pan, weights on the right pan",
+  "produit sur le plateau gauche, masses sur le plateau droit"
+ ],
+ "右盘放药品，左盘放砝码": [
+  "chemical on the right pan, weights on the left pan",
+  "produit sur le plateau droit, masses sur le plateau gauche"
+ ],
+ "两盘都放药品": [
+  "chemicals on both pans",
+  "produit sur les deux plateaux"
+ ],
+ "药品直接放在托盘上": [
+  "chemical placed directly on the pan",
+  "produit posé directement sur le plateau"
+ ],
+ "“左物右码”，并且药品下面要垫纸（腐蚀性药品放在玻璃器皿中）。": [
+  "“Object on the left, weights on the right”, with paper under the chemical (a corrosive chemical goes in a glass container).",
+  "« Objet à gauche, masses à droite », avec une feuille de papier sous le produit (un produit corrosif se place dans un récipient en verre)."
+ ],
+ "取用块状固体药品一般使用的仪器是": [
+  "The apparatus generally used to take lumps of solid chemical is",
+  "L’instrument généralement utilisé pour prélever des morceaux de produit solide est"
+ ],
+ "镊子": [
+  "tweezers",
+  "la pince"
+ ],
+ "药匙": [
+  "spatula",
+  "la spatule"
+ ],
+ "胶头滴管": [
+  "dropper",
+  "le compte-gouttes"
+ ],
+ "玻璃棒": [
+  "glass rod",
+  "l’agitateur en verre"
+ ],
+ "块状固体用镊子夹取；粉末状固体用药匙或纸槽。": [
+  "Lumps of solid are picked up with tweezers; powdered solids with a spatula or a paper trough.",
+  "Les morceaux de solide se prennent avec une pince ; les solides en poudre avec une spatule ou une gouttière en papier."
+ ],
+ "取用粉末状固体药品一般使用的仪器是": [
+  "The apparatus generally used to take a powdered solid chemical is",
+  "L’instrument généralement utilisé pour prélever un produit solide en poudre est"
+ ],
+ "量筒": [
+  "measuring cylinder",
+  "l’éprouvette graduée"
+ ],
+ "粉末状固体用药匙（或纸槽）取用，先把试管横放，再送到试管底部。": [
+  "A powdered solid is taken with a spatula (or paper trough): lay the test tube on its side first, then slide the powder to the bottom of the tube.",
+  "Un solide en poudre se prend avec une spatule (ou une gouttière en papier) : coucher d’abord le tube à essai, puis faire glisser la poudre jusqu’au fond."
+ ],
+ "稀释浓硫酸的正确操作是": [
+  "The correct way to dilute concentrated sulfuric acid is to",
+  "La bonne façon de diluer l’acide sulfurique concentré est de"
+ ],
+ "把浓硫酸沿烧杯壁慢慢倒入水中，并不断搅拌": [
+  "pour the concentrated acid slowly down the side of the beaker into water, stirring all the time",
+  "verser lentement l’acide concentré le long de la paroi du bécher dans l’eau, en remuant sans cesse"
+ ],
+ "把水倒入浓硫酸中": [
+  "pour water into the concentrated acid",
+  "verser l’eau dans l’acide concentré"
+ ],
+ "把浓硫酸一次倒入水中，不搅拌": [
+  "pour all the concentrated acid into the water at once, without stirring",
+  "verser tout l’acide concentré d’un coup dans l’eau, sans remuer"
+ ],
+ "在量筒中稀释浓硫酸": [
+  "dilute the concentrated acid in a measuring cylinder",
+  "diluer l’acide concentré dans une éprouvette graduée"
+ ],
+ "浓硫酸溶于水放出大量的热，密度比水大；“酸入水”，边倒边搅拌，使热量及时散发。": [
+  "Concentrated sulfuric acid gives out a lot of heat when it dissolves in water and is denser than water; “acid into water”, pouring and stirring so that the heat is carried away at once.",
+  "L’acide sulfurique concentré dégage beaucoup de chaleur en se dissolvant dans l’eau et il est plus dense que l’eau ; « l’acide dans l’eau », en versant et en remuant pour évacuer aussitôt la chaleur."
+ ],
+ "过滤操作中玻璃棒的作用是": [
+  "The glass rod in filtration is used to",
+  "Dans la filtration, l’agitateur en verre sert à"
+ ],
+ "引流": [
+  "guide the liquid",
+  "guider le liquide"
+ ],
+ "搅拌": [
+  "stir",
+  "remuer"
+ ],
+ "加快过滤": [
+  "speed up filtration",
+  "accélérer la filtration"
+ ],
+ "蘸取溶液": [
+  "pick up some solution",
+  "prélever un peu de solution"
+ ],
+ "过滤时用玻璃棒引流，防止液体洒出或冲破滤纸。": [
+  "In filtration the glass rod guides the liquid so that it does not splash or tear the filter paper.",
+  "Dans la filtration, l’agitateur guide le liquide afin qu’il n’éclabousse pas et ne déchire pas le papier filtre."
+ ],
+ "蒸发操作中玻璃棒的作用是": [
+  "The glass rod in evaporation is used to",
+  "Dans l’évaporation, l’agitateur en verre sert à"
+ ],
+ "搅拌，防止局部温度过高使液滴飞溅": [
+  "stir, to stop local overheating making droplets spit out",
+  "remuer, pour éviter qu’une surchauffe locale ne fasse jaillir des gouttelettes"
+ ],
+ "加快溶解": [
+  "make the solid dissolve faster",
+  "faire dissoudre plus vite"
+ ],
+ "吸水": [
+  "absorb water",
+  "absorber l’eau"
+ ],
+ "蒸发时不断搅拌，使液体受热均匀，防止局部过热造成液滴飞溅。": [
+  "Stirring all the time during evaporation heats the liquid evenly and stops local overheating making droplets spit out.",
+  "Remuer sans cesse pendant l’évaporation chauffe le liquide uniformément et évite qu’une surchauffe locale ne fasse jaillir des gouttelettes."
+ ],
+ "使用胶头滴管滴加液体时，正确的做法是": [
+  "When adding liquid with a dropper, the correct way is to",
+  "Pour ajouter un liquide avec un compte-gouttes, la bonne façon est de"
+ ],
+ "悬空垂直在容器口上方滴加": [
+  "hold it vertically above the mouth of the container and let the drops fall",
+  "le tenir à la verticale au-dessus de l’ouverture du récipient et laisser tomber les gouttes"
+ ],
+ "伸入容器内滴加": [
+  "put it inside the container",
+  "le plonger dans le récipient"
+ ],
+ "紧贴容器内壁滴加": [
+  "press it against the inside wall of the container",
+  "l’appuyer contre la paroi intérieure du récipient"
+ ],
+ "倒持滴管滴加": [
+  "hold it upside down",
+  "le tenir à l’envers"
+ ],
+ "滴管不能伸入容器内，也不能接触容器，以免污染试剂。": [
+  "The dropper must not go inside the container or touch it, so that the reagent is not contaminated.",
+  "Le compte-gouttes ne doit ni pénétrer dans le récipient ni le toucher, afin de ne pas contaminer le réactif."
+ ],
+ "闻气体气味的正确方法是": [
+  "The correct way to smell a gas is to",
+  "La bonne façon de sentir un gaz est de"
+ ],
+ "用手在瓶口轻轻扇动，使少量气体飘进鼻孔": [
+  "waft it gently towards your nose with your hand over the mouth of the bottle, so that a little gas drifts in",
+  "l’envoyer doucement vers le nez avec la main au-dessus de l’ouverture du flacon, de façon qu’un peu de gaz parvienne jusqu’à lui"
+ ],
+ "把鼻孔凑到瓶口直接闻": [
+  "put your nose to the mouth of the bottle and sniff directly",
+  "mettre le nez à l’ouverture du flacon et sentir directement"
+ ],
+ "用鼻子深深吸气": [
+  "breathe in deeply through your nose",
+  "inspirer profondément par le nez"
+ ],
+ "尝一尝": [
+  "taste it",
+  "le goûter"
+ ],
+ "不能直接闻或尝，以免吸入过多有毒气体。": [
+  "A gas must not be sniffed or tasted directly, or too much toxic gas may be breathed in.",
+  "On ne doit jamais sentir ni goûter directement un gaz, au risque d’en inhaler trop s’il est toxique."
+ ],
+ "酒精灯碰倒，洒出的酒精在桌上燃烧起来，应该": [
+  "If an alcohol lamp is knocked over and the spilt alcohol burns on the bench, you should",
+  "Si une lampe à alcool se renverse et que l’alcool répandu brûle sur la paillasse, il faut"
+ ],
+ "立即用湿抹布扑盖": [
+  "smother it at once with a damp cloth",
+  "l’étouffer aussitôt avec un chiffon humide"
+ ],
+ "赶快离开": [
+  "run away quickly",
+  "s’enfuir rapidement"
+ ],
+ "用湿抹布盖住，隔绝空气，同时降温，使火熄灭。": [
+  "Cover it with a damp cloth to cut off the air and cool it at the same time, so that the fire goes out.",
+  "La couvrir avec un chiffon humide pour couper l’air et refroidir en même temps, de façon que le feu s’éteigne."
+ ],
+ "浓硫酸不慎沾到皮肤上，应该": [
+  "If concentrated sulfuric acid gets on your skin, you should",
+  "Si de l’acide sulfurique concentré tombe sur la peau, il faut"
+ ],
+ "立即用大量水冲洗，再涂 3%～5% 的碳酸氢钠溶液": [
+  "rinse at once with plenty of water, then apply 3%–5% sodium hydrogencarbonate solution",
+  "rincer aussitôt à grande eau, puis appliquer une solution de bicarbonate de soude à 3 %–5 %"
+ ],
+ "立即涂氢氧化钠溶液": [
+  "apply sodium hydroxide solution at once",
+  "appliquer aussitôt une solution d’hydroxyde de sodium"
+ ],
+ "用干布擦干后不再处理": [
+  "wipe it dry with a cloth and do nothing more",
+  "l’essuyer avec un chiffon sec et ne rien faire de plus"
+ ],
+ "涂上食醋": [
+  "apply vinegar",
+  "appliquer du vinaigre"
+ ],
+ "先用大量水冲洗，再涂弱碱性的碳酸氢钠溶液；不能用氢氧化钠溶液，它的腐蚀性很强。": [
+  "Rinse first with plenty of water, then apply a weakly alkaline sodium hydrogencarbonate solution; never use sodium hydroxide solution, which is very corrosive.",
+  "Rincer d’abord à grande eau, puis appliquer une solution faiblement basique de bicarbonate de soude ; ne jamais utiliser de solution d’hydroxyde de sodium, très corrosive."
+ ],
+ "下列仪器中，不能用来加热的是": [
+  "Of the following apparatus, the one that cannot be used for heating is",
+  "Parmi les instruments suivants, celui qui ne peut pas servir au chauffage est"
+ ],
+ "试管": [
+  "test tube",
+  "le tube à essai"
+ ],
+ "蒸发皿": [
+  "evaporating dish",
+  "la capsule d’évaporation"
+ ],
+ "燃烧匙": [
+  "combustion spoon",
+  "la cuillère à combustion"
+ ],
+ "量筒用来量取液体的体积，不能加热，也不能作反应容器。": [
+  "A measuring cylinder is used to measure the volume of a liquid; it must not be heated and must not be used as a reaction vessel.",
+  "L’éprouvette graduée sert à mesurer le volume d’un liquide ; on ne doit ni la chauffer ni l’utiliser comme récipient de réaction."
+ ],
+ "下列仪器中，可以直接加热的是": [
+  "Of the following apparatus, the one that can be heated directly is",
+  "Parmi les instruments suivants, celui qui peut être chauffé directement est"
+ ],
+ "烧杯": [
+  "beaker",
+  "le bécher"
+ ],
+ "锥形瓶": [
+  "conical flask",
+  "l’erlenmeyer"
+ ],
+ "试管、蒸发皿、燃烧匙可直接加热；烧杯、锥形瓶要垫石棉网加热；量筒不能加热。": [
+  "Test tubes, evaporating dishes and combustion spoons can be heated directly; beakers and conical flasks need a wire gauze; a measuring cylinder must not be heated.",
+  "Les tubes à essai, les capsules d’évaporation et les cuillères à combustion peuvent être chauffés directement ; les béchers et les erlenmeyers exigent une toile métallique ; l’éprouvette graduée ne se chauffe pas."
+ ],
+ "检查装置气密性时，把导管一端浸入水中，用手紧握试管外壁，如果装置不漏气，观察到的现象是": [
+  "To test an apparatus for leaks, put one end of the delivery tube in water and hold the wall of the test tube tightly in your hand. If the apparatus does not leak, you observe that",
+  "Pour vérifier l’étanchéité d’un montage, on plonge une extrémité du tube à dégagement dans l’eau et on serre la paroi du tube à essai dans la main. Si le montage est étanche, on observe que"
+ ],
+ "导管口有气泡冒出": [
+  "bubbles come out of the end of the tube",
+  "des bulles sortent à l’extrémité du tube"
+ ],
+ "导管内液面下降": [
+  "the liquid level in the tube falls",
+  "le niveau du liquide dans le tube baisse"
+ ],
+ "试管内出现水珠": [
+  "droplets of water appear inside the test tube",
+  "des gouttelettes d’eau apparaissent dans le tube à essai"
+ ],
+ "水变浑浊": [
+  "the water turns cloudy",
+  "l’eau se trouble"
+ ],
+ "手的温度使管内气体受热膨胀，从导管口逸出，形成气泡。": [
+  "The warmth of the hand makes the gas in the tube expand and escape from the end of the tube, forming bubbles.",
+  "La chaleur de la main dilate le gaz contenu dans le tube, qui s’échappe par l’extrémité du tube à dégagement et forme des bulles."
+ ],
+ "用高锰酸钾制氧气时，试管口要放一团棉花，目的是": [
+  "When making oxygen from potassium permanganate, a wad of cotton wool is put at the mouth of the test tube in order to",
+  "Quand on prépare du dioxygène à partir du permanganate de potassium, on place un tampon de coton à l’ouverture du tube à essai. Le but est :"
+ ],
+ "防止高锰酸钾粉末进入导管": [
+  "stop potassium permanganate powder getting into the delivery tube",
+  "empêcher la poudre de permanganate de potassium de passer dans le tube à dégagement"
+ ],
+ "防止水倒吸": [
+  "stop water being sucked back",
+  "empêcher l’eau de remonter"
+ ],
+ "便于收集气体": [
+  "make the gas easier to collect",
+  "faciliter la collecte du gaz"
+ ],
+ "使受热均匀": [
+  "heat evenly",
+  "assurer un chauffage uniforme"
+ ],
+ "高锰酸钾受热时粉末会随气流进入导管，堵塞导管或进入水槽。": [
+  "When potassium permanganate is heated, its powder is carried by the gas stream into the delivery tube, blocking it or getting into the water trough.",
+  "Lorsqu’on chauffe le permanganate de potassium, sa poudre est entraînée par le courant gazeux dans le tube à dégagement, qu’elle bouche, ou dans la cuve à eau."
+ ],
+ "用排水法收集氧气结束时，正确的操作是": [
+  "When oxygen has been collected over water, the correct procedure at the end is to",
+  "Lorsque le dioxygène a été recueilli sur l’eau, la bonne façon de terminer est :"
+ ],
+ "先把导管移出水面，再熄灭酒精灯": [
+  "take the delivery tube out of the water first, then put out the alcohol lamp",
+  "sortir d’abord le tube à dégagement de l’eau, puis éteindre la lampe à alcool"
+ ],
+ "先熄灭酒精灯，再把导管移出水面": [
+  "put out the alcohol lamp first, then take the delivery tube out of the water",
+  "éteindre d’abord la lampe à alcool, puis sortir le tube à dégagement de l’eau"
+ ],
+ "两步同时进行": [
+  "do both at the same time",
+  "faire les deux en même temps"
+ ],
+ "顺序无所谓": [
+  "the order does not matter",
+  "l’ordre n’a pas d’importance"
+ ],
+ "先熄灭酒精灯，试管内气体收缩，水会倒吸使热的试管炸裂。": [
+  "If the lamp is put out first, the gas in the tube contracts and water is sucked back, cracking the hot tube.",
+  "Si l’on éteint d’abord la lampe, le gaz du tube se contracte et l’eau remonte, ce qui fait éclater le tube chaud."
+ ],
+ "用排水法收集氧气，开始收集的适宜时刻是": [
+  "When collecting oxygen over water, the right moment to start collecting is",
+  "Quand on recueille du dioxygène sur l’eau, le bon moment pour commencer à recueillir est"
+ ],
+ "导管口气泡连续、均匀冒出时": [
+  "when bubbles come out of the tube steadily and evenly",
+  "lorsque les bulles sortent du tube de façon continue et régulière"
+ ],
+ "刚有气泡冒出时": [
+  "as soon as the first bubbles appear",
+  "dès que les premières bulles apparaissent"
+ ],
+ "开始加热时": [
+  "as soon as heating starts",
+  "dès que le chauffage commence"
+ ],
+ "气泡停止时": [
+  "when the bubbles stop",
+  "lorsque les bulles s’arrêtent"
+ ],
+ "刚开始排出的是装置内的空气，要等气泡连续均匀冒出再收集，才能得到较纯的氧气。": [
+  "The first gas to come out is the air in the apparatus; wait until the bubbles are steady and even before collecting, to get fairly pure oxygen.",
+  "Le premier gaz qui sort est l’air du montage ; il faut attendre que les bulles soient continues et régulières avant de recueillir, pour obtenir du dioxygène assez pur."
+ ],
+ "向试管中倾倒液体药品时，瓶塞的放法是": [
+  "When pouring a liquid chemical into a test tube, the stopper of the bottle is put",
+  "Quand on verse un liquide dans un tube à essai, le bouchon du flacon doit être :"
+ ],
+ "倒放在桌面上": [
+  "upside down on the bench",
+  "posé à l’envers sur la paillasse"
+ ],
+ "正放在桌面上": [
+  "the right way up on the bench",
+  "posé à l’endroit sur la paillasse"
+ ],
+ "拿在手里": [
+  "held in the hand",
+  "tenu à la main"
+ ],
+ "丢弃不用": [
+  "thrown away",
+  "jeté"
+ ],
+ "瓶塞倒放，防止污染药品；标签向着手心，防止残液腐蚀标签。": [
+  "The stopper is put upside down to avoid contaminating the chemical; the label faces the palm so that drips do not corrode it.",
+  "Le bouchon se pose à l’envers pour ne pas contaminer le produit ; l’étiquette est tournée vers la paume afin que les gouttes ne l’abîment pas."
+ ],
+ "取用液体药品，没有说明用量时，一般取": [
+  "When no quantity is stated for a liquid chemical, you generally take",
+  "Lorsqu’aucune quantité n’est indiquée pour un liquide, on prélève en général"
+ ],
+ "半试管": [
+  "half a test tube",
+  "un demi-tube à essai"
+ ],
+ "节约药品：液体取 1～2 mL，固体只需盖满试管底部。": [
+  "Save chemicals: take 1–2 mL of a liquid, and just enough solid to cover the bottom of the test tube.",
+  "Économiser les produits : prélever 1 à 2 mL de liquide, et seulement de quoi couvrir le fond du tube à essai pour un solide."
+ ],
+ "实验后剩余的药品应": [
+  "Chemicals left over after an experiment should be",
+  "Les produits restant après une expérience doivent être"
+ ],
+ "放入指定的容器中": [
+  "put into the container provided",
+  "versés dans le récipient prévu"
+ ],
+ "放回原试剂瓶": [
+  "put back into the original bottle",
+  "remis dans le flacon d’origine"
+ ],
+ "倒入水池": [
+  "poured down the sink",
+  "versés dans l’évier"
+ ],
+ "带回家": [
+  "taken home",
+  "rapportés à la maison"
+ ],
+ "剩余药品不能放回原瓶（防止污染），不能随意丢弃，要放入指定容器。": [
+  "Leftover chemicals must not be put back into the bottle (to avoid contamination) or thrown away carelessly; they go into the container provided.",
+  "Les produits restants ne doivent pas être remis dans le flacon (pour éviter toute contamination) ni jetés n’importe où ; ils vont dans le récipient prévu."
+ ],
+ "点燃氢气等可燃性气体之前，必须": [
+  "Before lighting hydrogen or another flammable gas, you must",
+  "Avant d’enflammer du dihydrogène ou un autre gaz inflammable, il faut"
+ ],
+ "检验气体的纯度": [
+  "test the gas for purity",
+  "vérifier la pureté du gaz"
+ ],
+ "通入氧气": [
+  "pass in oxygen",
+  "faire arriver du dioxygène"
+ ],
+ "加水": [
+  "add water",
+  "ajouter de l’eau"
+ ],
+ "可燃性气体与空气混合，遇明火可能发生爆炸，点燃前一定要验纯。": [
+  "A flammable gas mixed with air may explode when it meets a flame, so it must always be tested for purity before it is lit.",
+  "Un gaz inflammable mélangé à l’air peut exploser au contact d’une flamme ; il faut donc toujours vérifier sa pureté avant de l’enflammer."
+ ],
+ "一氧化碳还原氧化铜的实验，对尾气要处理，原因是": [
+  "In the experiment of reducing copper(II) oxide with carbon monoxide, the exhaust gas must be dealt with because",
+  "Dans l’expérience de réduction de l’oxyde de cuivre(II) par le monoxyde de carbone, il faut traiter le gaz de sortie parce que"
+ ],
+ "一氧化碳有毒，排放会污染空气": [
+  "carbon monoxide is poisonous and would pollute the air if released",
+  "le monoxyde de carbone est toxique et polluerait l’air s’il était rejeté"
+ ],
+ "一氧化碳有可燃性": [
+  "carbon monoxide is flammable",
+  "le monoxyde de carbone est inflammable"
+ ],
+ "一氧化碳密度比空气小": [
+  "carbon monoxide is less dense than air",
+  "le monoxyde de carbone est moins dense que l’air"
+ ],
+ "节约一氧化碳": [
+  "this saves carbon monoxide",
+  "cela économise le monoxyde de carbone"
+ ],
+ "一氧化碳有毒，尾气要点燃或收集。": [
+  "Carbon monoxide is poisonous; the exhaust gas must be burned or collected.",
+  "Le monoxyde de carbone est toxique ; le gaz de sortie doit être brûlé ou recueilli."
+ ],
+ "氢气还原氧化铜的实验，正确的操作顺序是": [
+  "In the experiment of reducing copper(II) oxide with hydrogen, the correct order of operations is",
+  "Dans l’expérience de réduction de l’oxyde de cuivre(II) par le dihydrogène, l’ordre correct des opérations est"
+ ],
+ "先通氢气，再加热；结束时先停止加热，继续通氢气至冷却": [
+  "pass hydrogen first, then heat; at the end stop heating first and keep passing hydrogen until cool",
+  "faire d’abord passer le dihydrogène, puis chauffer ; à la fin, arrêter d’abord le chauffage et continuer à faire passer le dihydrogène jusqu’au refroidissement"
+ ],
+ "先加热，再通氢气": [
+  "heat first, then pass hydrogen",
+  "chauffer d’abord, puis faire passer le dihydrogène"
+ ],
+ "结束时先停止通氢气": [
+  "at the end stop the hydrogen first",
+  "à la fin, arrêter d’abord le dihydrogène"
+ ],
+ "同时加热并通氢气": [
+  "heat and pass hydrogen at the same time",
+  "chauffer et faire passer le dihydrogène en même temps"
+ ],
+ "先通氢气排尽空气，防止爆炸；继续通氢气，防止热的铜被空气重新氧化。": [
+  "Pass hydrogen first to drive out the air and prevent an explosion; keep passing it so that the hot copper is not oxidised by air again.",
+  "Faire d’abord passer le dihydrogène pour chasser l’air et éviter une explosion ; continuer à le faire passer pour que le cuivre chaud ne soit pas de nouveau oxydé par l’air."
+ ],
+ "测定空气中氧气含量的实验中，所用红磷必须": [
+  "In the experiment to measure the oxygen content of air, the red phosphorus used must be",
+  "Dans l’expérience de mesure de la teneur en dioxygène de l’air, le phosphore rouge utilisé doit être"
+ ],
+ "过量": [
+  "excess",
+  "en excès"
+ ],
+ "少量": [
+  "a small amount",
+  "en petite quantité"
+ ],
+ "适量": [
+  "a suitable amount",
+  "en quantité convenable"
+ ],
+ "不需要": [
+  "not needed",
+  "superflu"
+ ],
+ "红磷过量才能把瓶内的氧气全部耗尽，测量结果才准确。": [
+  "Only an excess of red phosphorus uses up all the oxygen in the bottle, so that the result is accurate.",
+  "Seul un excès de phosphore rouge consomme tout le dioxygène du flacon, ce qui rend le résultat exact."
+ ],
+ "用 pH 试纸测溶液酸碱度的方法是": [
+  "The method of measuring the pH of a solution with pH paper is to",
+  "La méthode pour mesurer le pH d’une solution avec du papier pH est de"
+ ],
+ "用玻璃棒蘸取待测液滴在试纸上，再与标准比色卡对照": [
+  "dip a glass rod in the solution, put a drop on the paper, then compare with the standard colour chart",
+  "tremper un agitateur en verre dans la solution, déposer une goutte sur le papier, puis comparer avec l’échelle de teintes de référence"
+ ],
+ "把试纸直接浸入待测液中": [
+  "dip the paper straight into the solution",
+  "plonger directement le papier dans la solution"
+ ],
+ "先用水润湿试纸": [
+  "wet the paper with water first",
+  "humecter d’abord le papier avec de l’eau"
+ ],
+ "直接闻气味": [
+  "smell it directly",
+  "la sentir directement"
+ ],
+ "试纸不能浸入待测液（会污染溶液），也不能先润湿（会稀释待测液）。": [
+  "The paper must not be dipped into the solution (it would contaminate it) nor wetted first (it would dilute the solution).",
+  "Le papier ne doit pas être plongé dans la solution (il la contaminerait) ni humidifié au préalable (il diluerait la solution)."
+ ],
+ "配制 50 g 质量分数为 10% 的氯化钠溶液，下列仪器中用不到的是": [
+  "In preparing 50 g of sodium chloride solution of mass fraction 10%, the apparatus that is not needed is",
+  "Pour préparer 50 g de solution de chlorure de sodium de fraction massique 10 %, l’instrument qui n’est pas nécessaire est"
+ ],
+ "酒精灯": [
+  "alcohol lamp",
+  "la lampe à alcool"
+ ],
+ "托盘天平": [
+  "platform balance",
+  "la balance à plateaux"
+ ],
+ "配制溶液不需要加热，所以用不到酒精灯。": [
+  "Preparing a solution needs no heating, so the alcohol lamp is not needed.",
+  "La préparation d’une solution n’exige pas de chauffage ; la lampe à alcool n’est donc pas nécessaire."
+ ],
+ "过滤时，下列做法正确的是": [
+  "When filtering, the correct practice is that",
+  "Lors d’une filtration, la bonne pratique est que"
+ ],
+ "漏斗下端的管口紧靠烧杯内壁": [
+  "the lower end of the funnel stem touches the inside wall of the beaker",
+  "l’extrémité inférieure du tube de l’entonnoir touche la paroi intérieure du bécher"
+ ],
+ "滤纸的边缘高于漏斗的边缘": [
+  "the edge of the filter paper is above the edge of the funnel",
+  "le bord du papier filtre dépasse celui de l’entonnoir"
+ ],
+ "液面高于滤纸的边缘": [
+  "the liquid level is above the edge of the filter paper",
+  "le niveau du liquide dépasse le bord du papier filtre"
+ ],
+ "用玻璃棒在漏斗里搅拌": [
+  "the glass rod is used to stir inside the funnel",
+  "l’agitateur en verre sert à remuer dans l’entonnoir"
+ ],
+ "“一贴、二低、三靠”：滤纸紧贴漏斗，滤纸边缘低于漏斗边缘，液面低于滤纸边缘，漏斗下端紧靠烧杯内壁。": [
+  "“One touch, two lows, three contacts”: the paper touches the funnel, the paper’s edge is lower than the funnel’s edge, the liquid level is lower than the paper’s edge, and the funnel stem touches the beaker wall.",
+  "« Un contact, deux niveaux bas, trois appuis » : le papier épouse l’entonnoir, le bord du papier est plus bas que celui de l’entonnoir, le niveau du liquide est plus bas que le bord du papier, et le tube de l’entonnoir touche la paroi du bécher."
+ ],
+ "用向上排空气法收集二氧化碳，验满的方法是": [
+  "When carbon dioxide is collected by upward displacement of air, the way to test that the jar is full is to",
+  "Lorsqu’on recueille du dioxyde de carbone par déplacement d’air vers le haut, la façon de vérifier que le flacon est plein est de"
+ ],
+ "把燃着的木条放在集气瓶口": [
+  "hold a burning splint at the mouth of the jar",
+  "placer une allumette enflammée à l’ouverture du flacon"
+ ],
+ "把燃着的木条伸入瓶中": [
+  "put a burning splint into the jar",
+  "introduire une allumette enflammée dans le flacon"
+ ],
+ "把澄清石灰水倒入瓶中": [
+  "pour limewater into the jar",
+  "verser de l’eau de chaux dans le flacon"
+ ],
+ "把带火星的木条放在瓶口": [
+  "hold a glowing splint at the mouth of the jar",
+  "placer une allumette incandescente à l’ouverture du flacon"
+ ],
+ "二氧化碳不支持燃烧，木条在瓶口熄灭说明已集满。": [
+  "Carbon dioxide does not support burning; if the splint goes out at the mouth, the jar is full.",
+  "Le dioxyde de carbone n’entretient pas la combustion ; si l’allumette s’éteint à l’ouverture, le flacon est plein."
+ ],
+ "给烧杯里的液体加热时，必须垫上": [
+  "When heating a liquid in a beaker, you must put under it a",
+  "Pour chauffer un liquide dans un bécher, il faut placer dessous une"
+ ],
+ "石棉网": [
+  "wire gauze",
+  "toile métallique"
+ ],
+ "铁片": [
+  "iron sheet",
+  "plaque de fer"
+ ],
+ "玻璃片": [
+  "piece of glass",
+  "plaque de verre"
+ ],
+ "湿布": [
+  "wet cloth",
+  "serviette humide"
+ ],
+ "烧杯底面积大，直接加热会受热不均而炸裂，要垫石棉网。": [
+  "A beaker has a large base and cracks if heated directly because it heats unevenly, so a wire gauze is put under it.",
+  "Le fond d’un bécher est large ; chauffé directement, il chauffe de façon inégale et se fissure ; on place donc une toile métallique dessous."
+ ],
+ "下列关于量筒使用的说法，错误的是": [
+  "Of the following statements about using a measuring cylinder, the one that is wrong is",
+  "Parmi les affirmations suivantes sur l’usage de l’éprouvette graduée, celle qui est fausse est :"
+ ],
+ "可以在量筒里溶解固体或配制溶液": [
+  "solids can be dissolved or solutions prepared in the cylinder",
+  "on peut dissoudre des solides ou préparer des solutions dans l’éprouvette"
+ ],
+ "读数时视线与凹液面最低处相平": [
+  "when reading, the eye is level with the lowest point of the meniscus",
+  "pour la lecture, l’œil est à la hauteur du point le plus bas du ménisque"
+ ],
+ "量取液体时，先倾倒，接近刻度后改用胶头滴管": [
+  "when measuring a liquid, pour it in first, then use a dropper when near the mark",
+  "pour mesurer un liquide, on le verse d’abord, puis on utilise un compte-gouttes près du trait"
+ ],
+ "不能用来加热": [
+  "it must not be heated",
+  "elle ne doit pas être chauffée"
+ ],
+ "量筒只用来量取液体的体积，不能作反应容器，也不能用来溶解和配制溶液。": [
+  "A measuring cylinder is used only to measure the volume of a liquid; it is not a reaction vessel and must not be used to dissolve or prepare solutions.",
+  "L’éprouvette graduée sert uniquement à mesurer le volume d’un liquide ; ce n’est pas un récipient de réaction et on ne s’en sert pas pour dissoudre ni pour préparer des solutions."
+ ],
+ "酒精灯里的酒精量不能超过灯容积的": [
+  "The amount of alcohol in an alcohol lamp must not exceed what fraction of the lamp’s capacity?",
+  "La quantité d’alcool dans une lampe à alcool ne doit pas dépasser quelle fraction de la capacité de la lampe ?"
+ ],
+ "全部装满": [
+  "filled completely",
+  "complètement remplie"
+ ],
+ "酒精太多容易洒出着火，太少会使灯内酒精蒸气过多，引起爆燃。": [
+  "Too much alcohol may spill and catch fire; too little lets the alcohol vapour in the lamp build up and cause a flash fire.",
+  "Trop d’alcool risque de se répandre et de s’enflammer ; trop peu laisse s’accumuler la vapeur d’alcool dans la lampe et provoque un embrasement."
+ ],
+ "实验室里最简便地区分氧气和二氧化碳的方法是": [
+  "The simplest way in the laboratory to tell oxygen from carbon dioxide is to",
+  "La façon la plus simple de distinguer au laboratoire le dioxygène du dioxyde de carbone est de"
+ ],
+ "把燃着的木条分别伸入集气瓶": [
+  "put a burning splint into each gas jar",
+  "introduire une allumette enflammée dans chaque flacon"
+ ],
+ "观察颜色": [
+  "look at the colour",
+  "observer la couleur"
+ ],
+ "闻气味": [
+  "smell them",
+  "les sentir"
+ ],
+ "分别加水": [
+  "add water to each",
+  "ajouter de l’eau dans chacun"
+ ],
+ "氧气使燃着的木条燃烧更旺，二氧化碳使燃着的木条熄灭，现象明显。": [
+  "Oxygen makes a burning splint burn more brightly and carbon dioxide puts it out, so the difference is clear.",
+  "Le dioxygène ravive une allumette enflammée, le dioxyde de carbone l’éteint : la différence est nette."
+ ],
+ "缺乏维生素 C 会引起": [
+  "A lack of vitamin C causes",
+  "Une carence en vitamine C provoque"
+ ],
+ "佝偻病": [
+  "rickets",
+  "le rachitisme"
+ ],
+ "贫血": [
+  "anaemia",
+  "l’anémie"
+ ],
+ "维生素 C 缺乏引起坏血病；缺乏维生素 A 引起夜盲症。": [
+  "A lack of vitamin C causes scurvy; a lack of vitamin A causes night blindness.",
+  "Une carence en vitamine C provoque le scorbut ; une carence en vitamine A provoque la cécité nocturne."
+ ],
+ "缺乏维生素 A 会引起": [
+  "A lack of vitamin A causes",
+  "Une carence en vitamine A provoque"
+ ],
+ "甲状腺肿大": [
+  "goitre",
+  "le goitre"
+ ],
+ "维生素 A 缺乏会引起夜盲症，多吃胡萝卜、动物肝脏有益。": [
+  "A lack of vitamin A causes night blindness; eating carrots and animal liver helps.",
+  "Une carence en vitamine A provoque la cécité nocturne ; manger des carottes et du foie animal est bénéfique."
+ ],
+ "下列物质中，不属于有机物的是": [
+  "Of the following substances, the one that is not an organic compound is",
+  "Parmi les substances suivantes, celle qui n’est pas un composé organique est"
+ ],
+ "含碳的化合物一般是有机物，但一氧化碳、二氧化碳、碳酸盐等性质与无机物相似，属于无机物。": [
+  "Compounds containing carbon are generally organic, but carbon monoxide, carbon dioxide and carbonates behave like inorganic substances and count as inorganic.",
+  "Les composés contenant du carbone sont en général organiques, mais le monoxyde de carbone, le dioxyde de carbone et les carbonates se comportent comme des substances minérales et sont classés comme minéraux."
+ ],
+ "为了防止“白色污染”，下列做法不合适的是": [
+  "To prevent “white pollution”, the practice that is not suitable is",
+  "Pour prévenir la « pollution blanche », la pratique qui ne convient pas est de"
+ ],
+ "把废弃塑料就地焚烧": [
+  "burn waste plastic on the spot",
+  "brûler sur place les déchets plastiques"
+ ],
+ "减少使用不必要的塑料制品": [
+  "use fewer unnecessary plastic products",
+  "réduire l’usage des objets en plastique inutiles"
+ ],
+ "回收利用废弃塑料": [
+  "recycle waste plastic",
+  "recycler les déchets plastiques"
+ ],
+ "使用可降解塑料": [
+  "use degradable plastics",
+  "utiliser des plastiques biodégradables"
+ ],
+ "焚烧塑料会产生有害气体，污染空气。": [
+  "Burning plastic produces harmful gases and pollutes the air.",
+  "La combustion du plastique produit des gaz nocifs et pollue l’air."
+ ],
+ "霉变的大米、花生不能食用，因为其中含有": [
+  "Mouldy rice and peanuts must not be eaten because they contain",
+  "Le riz et les cacahuètes moisis ne doivent pas être consommés car ils contiennent :"
+ ],
+ "黄曲霉毒素": [
+  "aflatoxin",
+  "aflatoxine"
+ ],
+ "霉变食物中有黄曲霉毒素，有毒，蒸煮也不能破坏。": [
+  "Mouldy food contains aflatoxin, which is poisonous and is not destroyed by cooking.",
+  "Les aliments moisis contiennent de l’aflatoxine, qui est toxique et n’est pas détruite par la cuisson."
+ ],
+ "甲醛水溶液不能用来浸泡食品，因为甲醛": [
+  "Formalin solution must not be used to soak food because formaldehyde",
+  "La solution de formol ne doit pas servir à conserver des aliments car le formaldéhyde"
+ ],
+ "能使蛋白质变性，对人体有害": [
+  "denatures proteins and harms the human body",
+  "dénature les protéines et nuit à l’organisme"
+ ],
+ "会增加营养": [
+  "adds nutrition",
+  "apporte des nutriments"
+ ],
+ "有香味": [
+  "has a pleasant smell",
+  "a une bonne odeur"
+ ],
+ "甲醛能使蛋白质变性，危害人体健康。": [
+  "Formaldehyde denatures proteins and harms human health.",
+  "Le formaldéhyde dénature les protéines et nuit à la santé."
+ ],
+ "煤气中毒是因为吸入了": [
+  "Gas poisoning is caused by breathing in",
+  "L’intoxication au gaz (monoxyde de carbone du gaz de houille) est due à l’inhalation de :"
+ ],
+ "一氧化碳与血红蛋白结合的能力比氧气强，使人缺氧。": [
+  "Carbon monoxide binds to haemoglobin more strongly than oxygen does, so the body is short of oxygen.",
+  "Le monoxyde de carbone se lie à l’hémoglobine plus fortement que le dioxygène, ce qui prive l’organisme de dioxygène."
+ ],
+ "“低碳生活”主要是为了减少哪种气体的排放": [
+  "“Low-carbon living” is mainly meant to reduce emissions of which gas?",
+  "Le « mode de vie bas carbone » vise surtout à réduire les émissions de quel gaz ?"
+ ],
+ "氦气": [
+  "helium",
+  "l’hélium"
+ ],
+ "二氧化碳是造成温室效应的主要气体。": [
+  "Carbon dioxide is the main gas that causes the greenhouse effect.",
+  "Le dioxyde de carbone est le principal gaz responsable de l’effet de serre."
+ ],
+ "下列属于化石燃料的是": [
+  "Of the following, a fossil fuel is",
+  "Parmi les suivants, un combustible fossile est"
+ ],
+ "煤、石油、天然气": [
+  "coal, oil and natural gas",
+  "le charbon, le pétrole et le gaz naturel"
+ ],
+ "木材": [
+  "wood",
+  "le bois"
+ ],
+ "煤、石油、天然气是古代生物遗体经过漫长的变化形成的，叫化石燃料。": [
+  "Coal, oil and natural gas formed from the remains of ancient organisms over a very long time and are called fossil fuels.",
+  "Le charbon, le pétrole et le gaz naturel se sont formés à partir de restes d’organismes anciens au cours d’un temps très long ; on les appelle combustibles fossiles."
+ ],
+ "最理想的清洁燃料是": [
+  "The ideal clean fuel is",
+  "Le combustible propre idéal est"
+ ],
+ "氢气燃烧的产物只有水，热值高，来源广，不污染环境。": [
+  "Hydrogen burns to give only water, has a high heating value and is widely available, and it does not pollute.",
+  "Le dihydrogène ne donne que de l’eau en brûlant, a un pouvoir calorifique élevé, est abondant et ne pollue pas."
+ ],
+ "天然气泄漏时，正确的做法是": [
+  "When natural gas leaks, the correct action is to",
+  "En cas de fuite de gaz naturel, la bonne action est de"
+ ],
+ "关闭阀门，打开门窗通风，不开灯、不用明火": [
+  "close the valve, open doors and windows for ventilation, and use no lights or naked flames",
+  "fermer le robinet, ouvrir portes et fenêtres pour aérer, et n’allumer ni lumière ni flamme"
+ ],
+ "立即开灯检查": [
+  "switch on the light to check at once",
+  "allumer aussitôt la lumière pour vérifier"
+ ],
+ "点火检查泄漏处": [
+  "light a flame to check where it leaks",
+  "allumer une flamme pour repérer la fuite"
+ ],
+ "打开排气扇的开关": [
+  "switch on the extractor fan",
+  "mettre en marche le ventilateur d’extraction"
+ ],
+ "天然气（甲烷）与空气混合遇到电火花或明火可能发生爆炸。": [
+  "Natural gas (methane) mixed with air may explode when it meets an electric spark or a naked flame.",
+  "Le gaz naturel (méthane) mélangé à l’air peut exploser au contact d’une étincelle électrique ou d’une flamme nue."
+ ],
+ "我们吃的米饭、馒头中含量最多的营养素是": [
+  "The nutrient present in the greatest amount in the rice and steamed buns we eat is",
+  "Le nutriment présent en plus grande quantité dans le riz et les petits pains vapeur que nous mangeons est"
+ ],
+ "油脂": [
+  "fat",
+  "les lipides"
+ ],
+ "大米和面粉的主要成分是淀粉，淀粉属于糖类。": [
+  "The main component of rice and flour is starch, which is a carbohydrate.",
+  "Le constituant principal du riz et de la farine est l’amidon, qui est un glucide."
+ ],
+ "下列做法有利于保护环境的是": [
+  "Of the following, the practice that helps protect the environment is",
+  "Parmi les pratiques suivantes, celle qui contribue à protéger l’environnement est"
+ ],
+ "分类回收废旧电池": [
+  "collecting used batteries separately",
+  "collecter séparément les piles usagées"
+ ],
+ "大量使用一次性塑料袋": [
+  "using large numbers of disposable plastic bags",
+  "utiliser de grandes quantités de sacs plastiques jetables"
+ ],
+ "随意丢弃废电池": [
+  "throwing used batteries away carelessly",
+  "jeter les piles usagées n’importe où"
+ ],
+ "焚烧秸秆": [
+  "burning crop stalks",
+  "brûler les tiges des cultures"
+ ],
+ "废旧电池含重金属，要分类回收，防止污染土壤和水。": [
+  "Used batteries contain heavy metals and must be collected separately to avoid polluting soil and water.",
+  "Les piles usagées contiennent des métaux lourds et doivent être collectées séparément pour ne pas polluer le sol et l’eau."
+ ],
+ "鉴别羊毛线和合成纤维线，可以采用的方法是": [
+  "A way to tell wool thread from synthetic-fibre thread is to",
+  "Pour distinguer un fil de laine d’un fil de fibre synthétique, on peut"
+ ],
+ "灼烧并闻气味": [
+  "burn it and smell the smoke",
+  "le brûler et en sentir l’odeur"
+ ],
+ "用手摸": [
+  "feel it with the hand",
+  "le toucher avec la main"
+ ],
+ "用水浸泡": [
+  "soak it in water",
+  "le faire tremper dans l’eau"
+ ],
+ "羊毛灼烧时有烧焦羽毛的气味，合成纤维灼烧时有特殊气味并熔成球状。": [
+  "Wool smells like burnt feathers when burned; synthetic fibre smells different and melts into a bead.",
+  "La laine dégage en brûlant une odeur de plume brûlée ; la fibre synthétique dégage une odeur particulière et fond en une boule."
+ ],
+ "下列物质中，属于有机合成材料的是": [
+  "Of the following, an organic synthetic material is",
+  "Parmi les suivants, un matériau organique de synthèse est"
+ ],
+ "塑料": [
+  "plastic",
+  "le plastique"
+ ],
+ "棉花": [
+  "cotton",
+  "le coton"
+ ],
+ "羊毛": [
+  "wool",
+  "la laine"
+ ],
+ "蚕丝": [
+  "silk",
+  "la soie"
+ ],
+ "塑料、合成纤维、合成橡胶是三大合成材料；棉花、羊毛、蚕丝是天然材料。": [
+  "Plastics, synthetic fibres and synthetic rubber are the three major synthetic materials; cotton, wool and silk are natural materials.",
+  "Les plastiques, les fibres synthétiques et le caoutchouc synthétique sont les trois grandes familles de matériaux de synthèse ; le coton, la laine et la soie sont des matériaux naturels."
+ ],
+ "油锅着火时，最好的灭火方法是": [
+  "When oil in a pan catches fire, the best way to put it out is to",
+  "Quand l’huile d’une poêle prend feu, la meilleure façon de l’éteindre est de"
+ ],
+ "盖上锅盖": [
+  "put the lid on the pan",
+  "mettre le couvercle sur la poêle"
+ ],
+ "用扇子扇": [
+  "fan it with a fan",
+  "l’éventer"
+ ],
+ "继续加热": [
+  "keep heating it",
+  "continuer à chauffer"
+ ],
+ "盖上锅盖使油与空气隔绝，缺氧而熄灭；油的密度比水小，用水浇会使油溅出。": [
+  "Putting on the lid cuts the oil off from the air and the fire goes out for lack of oxygen; oil is less dense than water, so pouring water on it makes the oil spatter.",
+  "Mettre le couvercle coupe l’huile de l’air et le feu s’éteint faute de dioxygène ; l’huile est moins dense que l’eau, et verser de l’eau la fait gicler."
+ ],
+ "森林火灾时，砍掉一部分树木形成隔离带，灭火的原理是": [
+  "In a forest fire, cutting down some trees to make a firebreak puts out the fire on the principle of",
+  "Lors d’un incendie de forêt, abattre une partie des arbres pour créer un pare-feu éteint l’incendie selon le principe suivant :"
+ ],
+ "清除可燃物": [
+  "removing the combustible material",
+  "retirer le combustible"
+ ],
+ "隔绝氧气": [
+  "cutting off oxygen",
+  "couper l’arrivée de dioxygène"
+ ],
+ "使温度降到着火点以下": [
+  "lowering the temperature below the ignition point",
+  "abaisser la température sous le point d’inflammation"
+ ],
+ "降低可燃物的着火点": [
+  "lowering the ignition point of the combustible",
+  "abaisser le point d’inflammation du combustible"
+ ],
+ "隔离带没有可燃物，火势不能蔓延。": [
+  "A firebreak has nothing to burn, so the fire cannot spread.",
+  "Un pare-feu ne contient rien qui puisse brûler, de sorte que le feu ne peut pas se propager."
+ ],
+ "燃烧必须同时满足的条件是": [
+  "The conditions that must all be met for burning are",
+  "Les conditions qui doivent être réunies pour qu’il y ait combustion sont"
+ ],
+ "有可燃物，与氧气（或空气）接触，温度达到着火点": [
+  "a combustible, contact with oxygen (or air), and a temperature that reaches the ignition point",
+  "un combustible, le contact avec le dioxygène (ou l’air) et une température atteignant le point d’inflammation"
+ ],
+ "有可燃物和氧气": [
+  "a combustible and oxygen",
+  "un combustible et du dioxygène"
+ ],
+ "有可燃物，温度达到着火点": [
+  "a combustible and a temperature that reaches the ignition point",
+  "un combustible et une température atteignant le point d’inflammation"
+ ],
+ "有氧气，温度达到着火点": [
+  "oxygen and a temperature that reaches the ignition point",
+  "du dioxygène et une température atteignant le point d’inflammation"
+ ],
+ "三个条件缺一不可；灭火只需破坏其中一个。": [
+  "All three conditions are needed; to put out a fire it is enough to remove one of them.",
+  "Les trois conditions sont indispensables ; pour éteindre un feu, il suffit d’en supprimer une."
+ ],
+ "用水灭火的主要原理是": [
+  "The main principle by which water puts out a fire is",
+  "Le principal principe selon lequel l’eau éteint un feu est"
+ ],
+ "使温度降到可燃物的着火点以下": [
+  "lowering the temperature below the ignition point of the combustible",
+  "abaisser la température sous le point d’inflammation du combustible"
+ ],
+ "水蒸发吸收大量的热，使温度降到着火点以下；着火点是物质的性质，不能降低。": [
+  "Water evaporates and absorbs a lot of heat, lowering the temperature below the ignition point; the ignition point is a property of the substance and cannot be lowered.",
+  "L’eau s’évapore en absorbant beaucoup de chaleur, ce qui abaisse la température sous le point d’inflammation ; le point d’inflammation est une propriété de la substance et ne peut pas être abaissé."
+ ],
+ "铁生锈的条件是铁与什么物质同时接触": [
+  "Iron rusts when it is in contact with which substances at the same time?",
+  "Le fer rouille lorsqu’il est en contact avec quelles substances en même temps ?"
+ ],
+ "水和氧气": [
+  "water and oxygen",
+  "l’eau et le dioxygène"
+ ],
+ "只与水": [
+  "water only",
+  "l’eau seulement"
+ ],
+ "只与氧气": [
+  "oxygen only",
+  "le dioxygène seulement"
+ ],
+ "二氧化碳和氧气": [
+  "carbon dioxide and oxygen",
+  "le dioxyde de carbone et le dioxygène"
+ ],
+ "铁在潮湿的空气中容易生锈；隔绝水或氧气都可以防锈。": [
+  "Iron rusts easily in damp air; cutting off the water or the oxygen prevents rust.",
+  "Le fer rouille facilement dans l’air humide ; supprimer l’eau ou le dioxygène empêche la rouille."
+ ],
+ "下列措施中，不能防止铁生锈的是": [
+  "Of the following measures, the one that cannot prevent iron from rusting is",
+  "Parmi les mesures suivantes, celle qui ne peut pas empêcher le fer de rouiller est"
+ ],
+ "把铁器放在潮湿的空气中": [
+  "leaving the iron object in damp air",
+  "laisser l’objet en fer dans l’air humide"
+ ],
+ "在铁器表面刷油漆": [
+  "painting the surface of the iron object",
+  "peindre la surface de l’objet en fer"
+ ],
+ "在铁器表面涂油": [
+  "oiling the surface of the iron object",
+  "huiler la surface de l’objet en fer"
+ ],
+ "在铁器表面镀一层不易锈蚀的金属": [
+  "plating the iron object with a metal that does not rust easily",
+  "recouvrir l’objet en fer d’un métal qui rouille difficilement"
+ ],
+ "防锈的原理是隔绝水和氧气。": [
+  "Rust prevention works by cutting off water and oxygen.",
+  "La protection contre la rouille consiste à supprimer l’eau et le dioxygène."
+ ],
+ "铝制品比较耐腐蚀的原因是": [
+  "Aluminium goods resist corrosion fairly well because",
+  "Les objets en aluminium résistent assez bien à la corrosion car"
+ ],
+ "铝的表面形成一层致密的氧化铝薄膜": [
+  "a dense film of aluminium oxide forms on the surface of the aluminium",
+  "une couche dense d’oxyde d’aluminium se forme à la surface de l’aluminium"
+ ],
+ "铝的化学性质不活泼": [
+  "aluminium is chemically unreactive",
+  "l’aluminium est chimiquement peu réactif"
+ ],
+ "铝不与氧气反应": [
+  "aluminium does not react with oxygen",
+  "l’aluminium ne réagit pas avec le dioxygène"
+ ],
+ "铝的密度小": [
+  "aluminium has a low density",
+  "l’aluminium a une faible masse volumique"
+ ],
+ "铝很活泼，常温下与氧气反应生成致密的氧化铝薄膜，保护里面的铝。": [
+  "Aluminium is reactive and reacts with oxygen at room temperature to form a dense film of aluminium oxide, which protects the aluminium underneath.",
+  "L’aluminium est réactif et réagit à température ambiante avec le dioxygène pour former une couche dense d’oxyde d’aluminium qui protège l’aluminium situé en dessous."
+ ],
+ "合金与组成它的纯金属相比，一般具有的特点是": [
+  "Compared with the pure metals it is made from, an alloy generally has the property of",
+  "Par rapport aux métaux purs qui le composent, un alliage présente en général"
+ ],
+ "硬度更大，熔点更低": [
+  "greater hardness and a lower melting point",
+  "une dureté plus grande et un point de fusion plus bas"
+ ],
+ "硬度更小": [
+  "less hardness",
+  "une dureté plus faible"
+ ],
+ "熔点更高": [
+  "a higher melting point",
+  "un point de fusion plus élevé"
+ ],
+ "抗腐蚀性更差": [
+  "poorer resistance to corrosion",
+  "une moins bonne résistance à la corrosion"
+ ],
+ "合金的硬度一般比纯金属大，熔点一般比纯金属低。": [
+  "An alloy is generally harder than a pure metal and generally has a lower melting point.",
+  "Un alliage est en général plus dur qu’un métal pur et a en général un point de fusion plus bas."
+ ],
+ "生铁和钢的主要区别是": [
+  "The main difference between pig iron and steel is",
+  "La principale différence entre la fonte et l’acier est"
+ ],
+ "含碳量不同": [
+  "different carbon content",
+  "une teneur en carbone différente"
+ ],
+ "含铁量相同": [
+  "the same iron content",
+  "la même teneur en fer"
+ ],
+ "颜色不同": [
+  "different colour",
+  "une couleur différente"
+ ],
+ "都是纯净物": [
+  "both are pure substances",
+  "que ce sont tous deux des corps purs"
+ ],
+ "生铁含碳量约 2%～4.3%，钢含碳量约 0.03%～2%，二者都是铁的合金。": [
+  "Pig iron contains about 2%–4.3% carbon and steel about 0.03%–2%; both are alloys of iron.",
+  "La fonte contient environ 2 %–4,3 % de carbone et l’acier environ 0,03 %–2 % ; ce sont deux alliages du fer."
+ ],
+ "空气中含量最多的气体是": [
+  "The gas present in the greatest amount in air is",
+  "Le gaz le plus abondant dans l’air est"
+ ],
+ "按体积计，空气中氮气约占 78%，氧气约占 21%。": [
+  "By volume, air is about 78% nitrogen and 21% oxygen.",
+  "En volume, l’air contient environ 78 % de diazote et 21 % de dioxygène."
+ ],
+ "按体积计，空气中氧气约占": [
+  "By volume, the proportion of oxygen in air is about",
+  "En volume, la proportion de dioxygène dans l’air est d’environ"
+ ],
+ "氮气约占 78%，氧气约占 21%，稀有气体约占 0.94%，二氧化碳约占 0.03%。": [
+  "Nitrogen is about 78%, oxygen about 21%, noble gases about 0.94% and carbon dioxide about 0.03%.",
+  "Le diazote représente environ 78 %, le dioxygène environ 21 %, les gaz nobles environ 0,94 % et le dioxyde de carbone environ 0,03 %."
+ ],
+ "下列气体中，不属于空气污染物的是": [
+  "Of the following gases, the one that is not an air pollutant is",
+  "Parmi les gaz suivants, celui qui n’est pas un polluant de l’air est"
+ ],
+ "二氧化碳是空气的成分之一，虽能引起温室效应，但不计入空气污染物。": [
+  "Carbon dioxide is one of the components of air; although it can cause the greenhouse effect, it is not counted as an air pollutant.",
+  "Le dioxyde de carbone est l’un des constituants de l’air ; bien qu’il puisse provoquer l’effet de serre, il n’est pas compté parmi les polluants de l’air."
+ ],
+ "氮气常用作食品包装中的保护气，是因为": [
+  "Nitrogen is often used as a protective gas in food packaging because it",
+  "Le diazote sert souvent de gaz protecteur dans les emballages alimentaires car il"
+ ],
+ "常温下化学性质不活泼": [
+  "is chemically unreactive at room temperature",
+  "est chimiquement peu réactif à température ambiante"
+ ],
+ "密度比空气小": [
+  "is less dense than air",
+  "est moins dense que l’air"
+ ],
+ "无色无味": [
+  "is colourless and odourless",
+  "est incolore et inodore"
+ ],
+ "难溶于水": [
+  "is insoluble in water",
+  "est insoluble dans l’eau"
+ ],
+ "氮气化学性质不活泼，可以防止食品氧化变质。": [
+  "Nitrogen is chemically unreactive and can stop food being oxidised and going bad.",
+  "Le diazote est chimiquement peu réactif et peut empêcher les aliments de s’oxyder et de s’altérer."
+ ],
+ "干冰可用于人工降雨，是因为": [
+  "Dry ice can be used to make artificial rain because",
+  "La neige carbonique peut servir à provoquer de la pluie artificielle car"
+ ],
+ "干冰升华时吸收大量的热": [
+  "dry ice absorbs a lot of heat when it sublimes",
+  "la neige carbonique absorbe beaucoup de chaleur en se sublimant"
+ ],
+ "干冰能溶于水": [
+  "dry ice dissolves in water",
+  "la neige carbonique se dissout dans l’eau"
+ ],
+ "干冰无毒": [
+  "dry ice is non-toxic",
+  "la neige carbonique n’est pas toxique"
+ ],
+ "干冰是白色固体": [
+  "dry ice is a white solid",
+  "la neige carbonique est un solide blanc"
+ ],
+ "固态二氧化碳升华吸热，使水蒸气凝结成水滴。": [
+  "Solid carbon dioxide absorbs heat as it sublimes and makes water vapour condense into droplets.",
+  "Le dioxyde de carbone solide absorbe de la chaleur en se sublimant et fait condenser la vapeur d’eau en gouttelettes."
+ ],
+ "金刚石可用来切割玻璃，是因为金刚石": [
+  "Diamond can be used to cut glass because it",
+  "Le diamant peut servir à couper le verre car il"
+ ],
+ "硬度很大": [
+  "is very hard",
+  "est très dur"
+ ],
+ "能导电": [
+  "conducts electricity",
+  "conduit l’électricité"
+ ],
+ "透明": [
+  "is transparent",
+  "est transparent"
+ ],
+ "密度大": [
+  "has a high density",
+  "a une masse volumique élevée"
+ ],
+ "金刚石是天然存在的最硬的物质。": [
+  "Diamond is the hardest naturally occurring substance.",
+  "Le diamant est la substance naturelle la plus dure."
+ ],
+ "石墨可用作电极，是因为石墨": [
+  "Graphite can be used as an electrode because it",
+  "Le graphite peut servir d’électrode car il"
+ ],
+ "质地很硬": [
+  "is very hard",
+  "est très dur"
+ ],
+ "熔点低": [
+  "has a low melting point",
+  "a un point de fusion bas"
+ ],
+ "是黑色的": [
+  "is black",
+  "est noir"
+ ],
+ "石墨具有良好的导电性，而且质软、有滑腻感，也可作润滑剂。": [
+  "Graphite conducts electricity well, and it is soft and feels slippery, so it can also be used as a lubricant.",
+  "Le graphite conduit bien l’électricité, il est mou et glissant au toucher ; il peut donc aussi servir de lubrifiant."
+ ],
+ "活性炭可用于净水，是因为它": [
+  "Activated carbon can be used to purify water because it",
+  "Le charbon actif peut servir à purifier l’eau car il"
+ ],
+ "具有疏松多孔的结构，能吸附色素和异味": [
+  "has a loose, porous structure and can adsorb colouring matter and odours",
+  "a une structure poreuse et peut adsorber les colorants et les odeurs"
+ ],
+ "可以燃烧": [
+  "can burn",
+  "peut brûler"
+ ],
+ "活性炭有很强的吸附性，但不能除去水中可溶性的钙、镁化合物。": [
+  "Activated carbon adsorbs strongly, but it cannot remove the soluble calcium and magnesium compounds from water.",
+  "Le charbon actif adsorbe fortement, mais il ne peut pas éliminer de l’eau les composés solubles du calcium et du magnésium."
+ ],
+ "浓硫酸可用作干燥剂，是因为浓硫酸具有": [
+  "Concentrated sulfuric acid can be used as a drying agent because it has",
+  "L’acide sulfurique concentré peut servir d’agent desséchant car il possède"
+ ],
+ "吸水性": [
+  "the property of absorbing water",
+  "le pouvoir d’absorber l’eau"
+ ],
+ "脱水性": [
+  "dehydrating power",
+  "un pouvoir déshydratant"
+ ],
+ "挥发性": [
+  "volatility",
+  "une volatilité"
+ ],
+ "氧化性": [
+  "oxidising power",
+  "un pouvoir oxydant"
+ ],
+ "浓硫酸能吸收空气中和气体中的水蒸气；脱水性是使纸张、木材炭化。": [
+  "Concentrated sulfuric acid absorbs water vapour from air and gases; its dehydrating power is what chars paper and wood.",
+  "L’acide sulfurique concentré absorbe la vapeur d’eau de l’air et des gaz ; c’est son pouvoir déshydratant qui carbonise le papier et le bois."
+ ],
+ "浓盐酸敞口放置，质量会减小，是因为浓盐酸具有": [
+  "Concentrated hydrochloric acid left open loses mass because it has",
+  "L’acide chlorhydrique concentré laissé à l’air libre perd de la masse car il possède"
+ ],
+ "可燃性": [
+  "flammability",
+  "une inflammabilité"
+ ],
+ "不稳定性": [
+  "instability",
+  "une instabilité"
+ ],
+ "浓盐酸挥发出氯化氢气体，溶质质量减小；浓硫酸则因吸水使溶液质量增大。": [
+  "Concentrated hydrochloric acid gives off hydrogen chloride gas, so the mass of solute falls; concentrated sulfuric acid, by contrast, absorbs water and its solution gains mass.",
+  "L’acide chlorhydrique concentré dégage du chlorure d’hydrogène gazeux, si bien que la masse de soluté diminue ; l’acide sulfurique concentré, au contraire, absorbe l’eau et la masse de sa solution augmente."
+ ],
+ "氢氧化钠固体敞口放置，会潮解并变质，变质是因为它吸收了空气中的": [
+  "Solid sodium hydroxide left open becomes damp and goes bad because it has absorbed from the air",
+  "L’hydroxyde de sodium solide laissé à l’air libre devient humide et s’altère parce qu’il a absorbé de l’air :"
+ ],
+ "水蒸气和二氧化碳": [
+  "water vapour and carbon dioxide",
+  "la vapeur d’eau et le dioxyde de carbone"
+ ],
+ "氢氧化钠易吸水潮解，又与二氧化碳反应生成碳酸钠，所以要密封保存。": [
+  "Sodium hydroxide readily absorbs water and deliquesces, and it also reacts with carbon dioxide to form sodium carbonate, so it must be kept sealed.",
+  "L’hydroxyde de sodium absorbe facilement l’eau et devient déliquescent, et il réagit aussi avec le dioxyde de carbone pour former du carbonate de sodium ; il faut donc le conserver bien fermé."
+ ],
+ "氢氧化钠固体可以干燥的气体是": [
+  "A gas that solid sodium hydroxide can dry is",
+  "Un gaz que l’hydroxyde de sodium solide peut sécher est :"
+ ],
+ "氯化氢": [
+  "hydrogen chloride",
+  "chlorure d’hydrogène"
+ ],
+ "氢氧化钠能与二氧化碳、二氧化硫、氯化氢等气体反应，不能干燥它们。": [
+  "Sodium hydroxide reacts with gases such as carbon dioxide, sulfur dioxide and hydrogen chloride, so it cannot be used to dry them.",
+  "L’hydroxyde de sodium réagit avec des gaz tels que le dioxyde de carbone, le dioxyde de soufre et le chlorure d’hydrogène ; on ne peut donc pas s’en servir pour les sécher."
+ ],
+ "熟石灰常用来改良酸性土壤，是因为熟石灰的水溶液": [
+  "Slaked lime is often used to improve acidic soil because its aqueous solution",
+  "La chaux éteinte sert souvent à amender les sols acides car sa solution aqueuse"
+ ],
+ "显碱性": [
+  "is alkaline",
+  "est basique"
+ ],
+ "显酸性": [
+  "is acidic",
+  "est acide"
+ ],
+ "显中性": [
+  "is neutral",
+  "est neutre"
+ ],
+ "有氧化性": [
+  "is oxidising",
+  "est oxydante"
+ ],
+ "熟石灰是碱，能与土壤里的酸性物质发生中和反应。": [
+  "Slaked lime is a base and undergoes neutralisation with the acidic substances in the soil.",
+  "La chaux éteinte est une base et subit une neutralisation avec les substances acides du sol."
+ ],
+ "稀盐酸和稀硫酸具有相似的化学性质，是因为它们的溶液中都含有": [
+  "Dilute hydrochloric acid and dilute sulfuric acid have similar chemical properties because their solutions both contain",
+  "L’acide chlorhydrique dilué et l’acide sulfurique dilué ont des propriétés chimiques semblables car leurs solutions contiennent toutes deux"
+ ],
+ "氢离子": [
+  "hydrogen ions",
+  "des ions hydrogène"
+ ],
+ "氯离子": [
+  "chloride ions",
+  "des ions chlorure"
+ ],
+ "硫酸根离子": [
+  "sulfate ions",
+  "des ions sulfate"
+ ],
+ "氢氧根离子": [
+  "hydroxide ions",
+  "des ions hydroxyde"
+ ],
+ "酸在水溶液中解离出的阳离子全部是氢离子，所以化学性质相似。": [
+  "The only positive ions that an acid releases in water are hydrogen ions, so its chemical properties are similar.",
+  "Les seuls ions positifs libérés par un acide dans l’eau sont les ions hydrogène ; ses propriétés chimiques sont donc semblables."
+ ],
+ "氢氧化钠和氢氧化钙具有相似的化学性质，是因为它们的溶液中都含有": [
+  "Sodium hydroxide and calcium hydroxide have similar chemical properties because their solutions both contain",
+  "L’hydroxyde de sodium et l’hydroxyde de calcium ont des propriétés chimiques semblables car leurs solutions contiennent toutes deux"
+ ],
+ "钠离子": [
+  "sodium ions",
+  "des ions sodium"
+ ],
+ "钙离子": [
+  "calcium ions",
+  "des ions calcium"
+ ],
+ "碱在水溶液中解离出的阴离子全部是氢氧根离子。": [
+  "The only negative ions that a base releases in water are hydroxide ions.",
+  "Les seuls ions négatifs libérés par une base dans l’eau sont les ions hydroxyde."
+ ],
+ "生活中降低水的硬度常用的方法是": [
+  "A common method of lowering the hardness of water at home is",
+  "Une méthode courante pour diminuer la dureté de l’eau à la maison est"
+ ],
+ "煮沸": [
+  "boiling",
+  "l’ébullition"
+ ],
+ "静置": [
+  "leaving it to stand",
+  "le repos"
+ ],
+ "煮沸使水中的可溶性钙、镁化合物转化为沉淀；实验室用蒸馏。": [
+  "Boiling turns the soluble calcium and magnesium compounds in the water into precipitates; the laboratory uses distillation.",
+  "L’ébullition transforme en précipités les composés solubles du calcium et du magnésium présents dans l’eau ; au laboratoire, on utilise la distillation."
+ ],
+ "区分硬水和软水，可以加入": [
+  "To tell hard water from soft water, one can add",
+  "Pour distinguer l’eau dure de l’eau douce, on peut utiliser le réactif suivant :"
+ ],
+ "酚酞溶液": [
+  "phenolphthalein solution",
+  "solution de phénolphtaléine"
+ ],
+ "加肥皂水，产生泡沫多的是软水，泡沫少、浮渣多的是硬水。": [
+  "Add soapy water: the one that foams a lot is soft water; the one that foams little and gives a lot of scum is hard water.",
+  "Ajouter de l’eau savonneuse : celle qui mousse beaucoup est de l’eau douce ; celle qui mousse peu et donne beaucoup d’écume est de l’eau dure."
+ ],
+ "净化水的方法中，净化程度最高的是": [
+  "Of the methods of purifying water, the one that gives the highest degree of purity is",
+  "Parmi les méthodes de purification de l’eau, celle qui donne le degré de pureté le plus élevé est"
+ ],
+ "沉淀": [
+  "sedimentation",
+  "la décantation"
+ ],
+ "蒸馏得到的是纯水，其他方法不能除去所有可溶性杂质。": [
+  "Distillation gives pure water; the other methods cannot remove all the soluble impurities.",
+  "La distillation donne de l’eau pure ; les autres méthodes ne peuvent pas éliminer toutes les impuretés solubles."
+ ],
+ "元素是具有相同什么的一类原子的总称": [
+  "An element is the name for a class of atoms that have the same",
+  "Un élément est le nom d’une famille d’atomes qui ont le même"
+ ],
+ "核电荷数（质子数）": [
+  "nuclear charge (number of protons)",
+  "nombre de charges nucléaires (nombre de protons)"
+ ],
+ "电子数": [
+  "number of electrons",
+  "nombre d’électrons"
+ ],
+ "元素的种类由质子数（核电荷数）决定，质子数相同的原子属于同一种元素。": [
+  "The kind of element is decided by the number of protons (nuclear charge); atoms with the same number of protons belong to the same element.",
+  "L’espèce d’un élément est déterminée par le nombre de protons (charge nucléaire) ; les atomes qui ont le même nombre de protons appartiennent au même élément."
+ ],
+ "构成原子的粒子中，不带电的是": [
+  "Of the particles that make up an atom, the one that has no charge is the",
+  "Parmi les particules qui constituent un atome, celle qui n’a pas de charge est"
+ ],
+ "中子": [
+  "neutron",
+  "le neutron"
+ ],
+ "质子": [
+  "proton",
+  "le proton"
+ ],
+ "电子": [
+  "electron",
+  "l’électron"
+ ],
+ "原子核": [
+  "nucleus",
+  "le noyau"
+ ],
+ "质子带正电，电子带负电，中子不带电；原子核由质子和中子构成，带正电。": [
+  "Protons are positive, electrons negative and neutrons neutral; the nucleus is made of protons and neutrons and is positive.",
+  "Les protons sont positifs, les électrons négatifs et les neutrons neutres ; le noyau est constitué de protons et de neutrons et il est positif."
+ ],
+ "原子的质量主要集中在": [
+  "The mass of an atom is mainly concentrated in the",
+  "La masse d’un atome est principalement concentrée dans"
+ ],
+ "核外空间": [
+  "space outside the nucleus",
+  "l’espace autour du noyau"
+ ],
+ "中子和电子": [
+  "neutrons and electrons",
+  "les neutrons et les électrons"
+ ],
+ "电子的质量很小，原子的质量主要集中在由质子和中子构成的原子核上。": [
+  "The mass of an electron is very small; the mass of an atom is mainly in the nucleus, made of protons and neutrons.",
+  "La masse d’un électron est très faible ; la masse d’un atome se trouve principalement dans le noyau, constitué de protons et de neutrons."
+ ],
+ "在原子中，下列关系一定成立的是": [
+  "In an atom, the relation that always holds is",
+  "Dans un atome, la relation qui est toujours vraie est"
+ ],
+ "质子数 = 核外电子数": [
+  "number of protons = number of electrons outside the nucleus",
+  "nombre de protons = nombre d’électrons autour du noyau"
+ ],
+ "质子数 = 中子数": [
+  "number of protons = number of neutrons",
+  "nombre de protons = nombre de neutrons"
+ ],
+ "中子数 = 电子数": [
+  "number of neutrons = number of electrons",
+  "nombre de neutrons = nombre d’électrons"
+ ],
+ "相对原子质量 = 质子数": [
+  "relative atomic mass = number of protons",
+  "masse atomique relative = nombre de protons"
+ ],
+ "原子不显电性，所以核电荷数（质子数）等于核外电子数；中子数不一定等于质子数。": [
+  "An atom is electrically neutral, so the nuclear charge (number of protons) equals the number of electrons outside the nucleus; the number of neutrons need not equal the number of protons.",
+  "Un atome est électriquement neutre ; la charge nucléaire (nombre de protons) est donc égale au nombre d’électrons autour du noyau ; le nombre de neutrons n’est pas nécessairement égal au nombre de protons."
+ ],
+ "相对原子质量约等于": [
+  "Relative atomic mass is approximately equal to the",
+  "La masse atomique relative est approximativement égale au"
+ ],
+ "质子数 + 中子数": [
+  "number of protons + number of neutrons",
+  "nombre de protons + nombre de neutrons"
+ ],
+ "质子数 + 电子数": [
+  "number of protons + number of electrons",
+  "nombre de protons + nombre d’électrons"
+ ],
+ "中子数 + 电子数": [
+  "number of neutrons + number of electrons",
+  "nombre de neutrons + nombre d’électrons"
+ ],
+ "质子数": [
+  "number of protons",
+  "nombre de protons"
+ ],
+ "电子的质量很小，可以忽略，相对原子质量 ≈ 质子数 + 中子数。": [
+  "The mass of electrons is very small and can be ignored, so relative atomic mass ≈ number of protons + number of neutrons.",
+  "La masse des électrons est très faible et peut être négligée ; la masse atomique relative est donc ≈ nombre de protons + nombre de neutrons."
+ ],
+ "由分子构成的物质，保持其化学性质的最小粒子是": [
+  "For a substance made of molecules, the smallest particle that keeps its chemical properties is the",
+  "Pour une substance constituée de molécules, la plus petite particule qui conserve ses propriétés chimiques est :"
+ ],
+ "分子": [
+  "molecule",
+  "molécule"
+ ],
+ "离子": [
+  "ion",
+  "ion"
+ ],
+ "分子是保持物质化学性质的最小粒子；原子是化学变化中的最小粒子。": [
+  "The molecule is the smallest particle that keeps the chemical properties of a substance; the atom is the smallest particle in a chemical change.",
+  "La molécule est la plus petite particule qui conserve les propriétés chimiques d’une substance ; l’atome est la plus petite particule lors d’un changement chimique."
+ ],
+ "在化学变化中，不能再分的粒子是": [
+  "In a chemical change, the particle that cannot be divided further is the",
+  "Lors d’un changement chimique, la particule qui ne peut pas être divisée davantage est :"
+ ],
+ "化合物": [
+  "compound",
+  "composé"
+ ],
+ "化学变化中分子分成原子，原子重新组合成新分子，原子本身不变。": [
+  "In a chemical change molecules split into atoms and the atoms regroup into new molecules; the atoms themselves do not change.",
+  "Lors d’un changement chimique, les molécules se scindent en atomes et les atomes se regroupent en nouvelles molécules ; les atomes eux-mêmes ne changent pas."
+ ],
+ "氯化钠是由什么粒子构成的": [
+  "Sodium chloride is made up of which particles?",
+  "Le chlorure de sodium est constitué de quelles particules ?"
+ ],
+ "钠离子和氯离子": [
+  "sodium ions and chloride ions",
+  "des ions sodium et des ions chlorure"
+ ],
+ "氯化钠分子": [
+  "sodium chloride molecules",
+  "des molécules de chlorure de sodium"
+ ],
+ "钠原子和氯原子": [
+  "sodium atoms and chlorine atoms",
+  "des atomes de sodium et des atomes de chlore"
+ ],
+ "钠分子": [
+  "sodium molecules",
+  "des molécules de sodium"
+ ],
+ "氯化钠等由金属和非金属组成的化合物，一般由离子构成。": [
+  "Compounds such as sodium chloride, made of a metal and a non-metal, are generally made up of ions.",
+  "Les composés tels que le chlorure de sodium, formés d’un métal et d’un non-métal, sont en général constitués d’ions."
+ ],
+ "水结成冰时，发生变化的是": [
+  "When water freezes to ice, what changes is",
+  "Lorsque l’eau gèle et devient de la glace, ce qui change est"
+ ],
+ "水分子之间的间隔": [
+  "the spacing between the water molecules",
+  "l’espacement entre les molécules d’eau"
+ ],
+ "水分子的种类": [
+  "the kind of water molecules",
+  "l’espèce des molécules d’eau"
+ ],
+ "水分子的大小": [
+  "the size of the water molecules",
+  "la taille des molécules d’eau"
+ ],
+ "水分子中原子的种类": [
+  "the kinds of atoms in the water molecules",
+  "les espèces d’atomes dans les molécules d’eau"
+ ],
+ "冰是水分子之间的间隔变化的结果，水分子本身没有改变，属于物理变化。": [
+  "Ice results from a change in the spacing between water molecules; the water molecules themselves do not change, so it is a physical change.",
+  "La glace résulte d’un changement de l’espacement entre les molécules d’eau ; les molécules d’eau elles-mêmes ne changent pas : c’est un changement physique."
+ ],
+ "精制食盐水时，Na2CO3 溶液必须在 BaCl2 溶液之后加入，原因是": [
+  "When refining brine, the Na2CO3 solution must be added after the BaCl2 solution, because",
+  "Lors du raffinage de la saumure, la solution de Na2CO3 doit être ajoutée après la solution de BaCl2, parce que"
+ ],
+ "Na2CO3 还要除去过量的 Ba²⁺": [
+  "Na2CO3 must also remove the excess Ba²⁺",
+  "Na2CO3 doit aussi éliminer l’excès de Ba²⁺"
+ ],
+ "Na2CO3 要先除去 SO₄²⁻": [
+  "Na2CO3 must first remove SO₄²⁻",
+  "Na2CO3 doit d’abord éliminer SO₄²⁻"
+ ],
+ "BaCl2 要先除去 CO₃²⁻": [
+  "BaCl2 must first remove CO₃²⁻",
+  "BaCl2 doit d’abord éliminer CO₃²⁻"
+ ],
+ "顺序没有影响": [
+  "the order makes no difference",
+  "l’ordre n’a aucune importance"
+ ],
+ "BaCl2 过量，多余的 Ba²⁺ 要靠后加入的 Na2CO3 生成 BaCO3 沉淀除去。": [
+  "BaCl2 is in excess, and the surplus Ba²⁺ must be removed as BaCO3 precipitate by the Na2CO3 added afterwards.",
+  "BaCl2 est en excès, et le Ba²⁺ en surplus doit être éliminé sous forme de précipité de BaCO3 par le Na2CO3 ajouté ensuite."
+ ],
+ "粗盐提纯的实验中，蒸发时当蒸发皿中出现较多固体时应": [
+  "In the experiment on purifying crude salt, when a lot of solid appears in the evaporating dish during evaporation you should",
+  "Dans l’expérience de purification du sel brut, lorsque beaucoup de solide apparaît dans la capsule pendant l’évaporation, il faut"
+ ],
+ "停止加热，利用余热蒸干": [
+  "stop heating and let the remaining heat dry it",
+  "arrêter le chauffage et laisser la chaleur résiduelle terminer le séchage"
+ ],
+ "继续加热直到完全蒸干": [
+  "keep heating until it is completely dry",
+  "continuer à chauffer jusqu’à dessiccation complète"
+ ],
+ "加水后继续加热": [
+  "add water and keep heating",
+  "ajouter de l’eau et continuer à chauffer"
+ ],
+ "倒掉剩余液体": [
+  "pour away the remaining liquid",
+  "jeter le liquide restant"
+ ],
+ "出现较多固体时停止加热，用余热使剩余水分蒸干，防止固体飞溅。": [
+  "When a lot of solid appears, stop heating and let the remaining heat evaporate the rest of the water, so that the solid does not spit out.",
+  "Lorsque beaucoup de solide apparaît, arrêter le chauffage et laisser la chaleur résiduelle évaporer le reste de l’eau, afin que le solide ne soit pas projeté."
+ ],
+ "从含 CuSO4 的废水中回收铜，加入过量铁粉后再加入过量稀硫酸的目的是": [
+  "In recovering copper from waste water containing CuSO4, excess iron powder is added and then excess dilute sulfuric acid. The purpose of the acid is",
+  "Pour récupérer le cuivre dans des eaux usées contenant CuSO4, on ajoute un excès de poudre de fer, puis un excès d’acide sulfurique dilué. Le but de l’acide est de"
+ ],
+ "除去过量的铁": [
+  "to remove the excess iron",
+  "éliminer l’excès de fer"
+ ],
+ "使铜溶解": [
+  "to dissolve the copper",
+  "dissoudre le cuivre"
+ ],
+ "增加溶液的酸性": [
+  "to make the solution more acidic",
+  "rendre la solution plus acide"
+ ],
+ "生成更多的铜": [
+  "to form more copper",
+  "former plus de cuivre"
+ ],
+ "铁与稀硫酸反应而溶解，铜不反应，最后得到纯净的铜。": [
+  "Iron reacts with dilute sulfuric acid and dissolves, while copper does not react, so pure copper is finally obtained.",
+  "Le fer réagit avec l’acide sulfurique dilué et se dissout, alors que le cuivre ne réagit pas ; on obtient donc finalement du cuivre pur."
+ ],
+ "流程图中“过滤”操作得到的滤渣是": [
+  "In a flowchart, the residue obtained from the “filtration” step is",
+  "Dans un schéma de procédé, le résidu obtenu à l’étape de « filtration » est"
+ ],
+ "不溶于水的固体": [
+  "a solid that does not dissolve in water",
+  "un solide insoluble dans l’eau"
+ ],
+ "溶于水的物质": [
+  "a substance that dissolves in water",
+  "une substance soluble dans l’eau"
+ ],
+ "混合物中的液体": [
+  "the liquid in the mixture",
+  "le liquide du mélange"
+ ],
+ "过滤把不溶性固体与液体分离，留在滤纸上的是滤渣。": [
+  "Filtration separates an insoluble solid from a liquid; what stays on the filter paper is the residue.",
+  "La filtration sépare un solide insoluble d’un liquide ; ce qui reste sur le papier filtre est le résidu."
+ ],
+ "用作配制溶液和较大量试剂的反应容器，加热时要垫石棉网": [
+  "Used as a reaction vessel for preparing solutions and larger amounts of reagents; needs a wire gauze when heated",
+  "Sert de récipient de réaction pour préparer des solutions et des quantités plus importantes de réactifs ; il faut une toile métallique pour le chauffer"
+ ],
+ "用作常温下制取气体的反应容器": [
+  "Used as a reaction vessel for preparing gases at room temperature",
+  "Sert de récipient de réaction pour préparer des gaz à température ambiante"
+ ],
+ "用作少量试剂的反应容器，可以直接加热": [
+  "Used as a reaction vessel for small amounts of reagents; can be heated directly",
+  "Sert de récipient de réaction pour de petites quantités de réactifs ; peut être chauffé directement"
+ ],
+ "用于蒸发溶液、浓缩结晶，可以直接加热": [
+  "Used to evaporate solutions and concentrate crystals; can be heated directly",
+  "Sert à évaporer des solutions et à faire cristalliser par concentration ; peut être chauffée directement"
+ ],
+ "漏斗": [
+  "funnel",
+  "entonnoir"
+ ],
+ "用于过滤，也可用来向小口容器里倾倒液体": [
+  "Used for filtering, and also for pouring liquid into a container with a small opening",
+  "Sert à filtrer, et aussi à verser un liquide dans un récipient à petite ouverture"
+ ],
+ "用作热源，加热仪器": [
+  "Used as a heat source for heating apparatus",
+  "Sert de source de chaleur pour chauffer les appareils"
+ ],
+ "用来量取一定体积的液体，不能加热": [
+  "Used to measure a certain volume of liquid; must not be heated",
+  "Sert à mesurer un certain volume de liquide ; ne doit pas être chauffée"
+ ],
+ "用来吸取和滴加少量的液体": [
+  "Used to draw up and add small amounts of liquid",
+  "Sert à prélever et à ajouter de petites quantités de liquide"
+ ],
+ "分液漏斗": [
+  "separating funnel",
+  "ampoule à décanter"
+ ],
+ "用于分离互不相溶的液体，或随时添加液体控制反应速率": [
+  "Used to separate liquids that do not mix, or to add liquid at any moment to control the reaction rate",
+  "Sert à séparer des liquides non miscibles, ou à ajouter du liquide à tout moment pour régler la vitesse de la réaction"
+ ],
+ "集气瓶": [
+  "gas jar",
+  "flacon à gaz (éprouvette à gaz)"
+ ],
+ "用来收集或贮存少量的气体": [
+  "Used to collect or store small amounts of gas",
+  "Sert à recueillir ou à conserver de petites quantités de gaz"
+ ],
+ "配制 50 g 质量分数为 10% 的氯化钠溶液，操作步骤的顺序是": [
+  "In preparing 50 g of sodium chloride solution of mass fraction 10%, the order of the steps is",
+  "Pour préparer 50 g de solution de chlorure de sodium de fraction massique 10 %, l’ordre des étapes est"
+ ],
+ "计算所需氯化钠和水的质量": [
+  "calculate the masses of sodium chloride and water needed",
+  "calculer les masses de chlorure de sodium et d’eau nécessaires"
+ ],
+ "用托盘天平称取氯化钠": [
+  "weigh the sodium chloride on a platform balance",
+  "peser le chlorure de sodium sur une balance à plateaux"
+ ],
+ "用量筒量取水": [
+  "measure the water with a measuring cylinder",
+  "mesurer l’eau avec une éprouvette graduée"
+ ],
+ "把氯化钠和水倒入烧杯中，搅拌溶解": [
+  "put the sodium chloride and the water into a beaker and stir until dissolved",
+  "mettre le chlorure de sodium et l’eau dans un bécher et remuer jusqu’à dissolution"
+ ],
+ "把溶液装入试剂瓶，贴上标签": [
+  "put the solution into a reagent bottle and label it",
+  "verser la solution dans un flacon et l’étiqueter"
+ ],
+ "粗盐提纯（除去泥沙）的步骤是": [
+  "The steps of purifying crude salt (removing sand) are",
+  "Les étapes de la purification du sel brut (élimination du sable) sont"
+ ],
+ "称量粗盐并溶解": [
+  "weigh the crude salt and dissolve it",
+  "peser le sel brut et le dissoudre"
+ ],
+ "蒸发滤液": [
+  "evaporate the filtrate",
+  "évaporer le filtrat"
+ ],
+ "称量得到的精盐，计算产率": [
+  "weigh the pure salt obtained and calculate the yield",
+  "peser le sel pur obtenu et calculer le rendement"
+ ],
+ "加热高锰酸钾制取氧气并用排水法收集，操作步骤的顺序是": [
+  "When oxygen is made by heating potassium permanganate and collected over water, the order of the steps is",
+  "Lorsqu’on prépare du dioxygène en chauffant du permanganate de potassium et qu’on le recueille sur l’eau, l’ordre des étapes est"
+ ],
+ "连接装置并检查气密性": [
+  "assemble the apparatus and check that it is gas-tight",
+  "monter l’appareillage et vérifier son étanchéité"
+ ],
+ "装入药品，并在试管口塞一团棉花": [
+  "put in the chemical and plug the mouth of the tube with a wad of cotton wool",
+  "introduire le produit et boucher l’ouverture du tube avec un tampon de coton"
+ ],
+ "固定试管并加热": [
+  "fix the test tube and heat it",
+  "fixer le tube à essai et chauffer"
+ ],
+ "待气泡连续均匀冒出时收集氧气": [
+  "collect the oxygen when the bubbles come out steadily and evenly",
+  "recueillir le dioxygène lorsque les bulles sortent de façon continue et régulière"
+ ],
+ "把导管移出水面": [
+  "take the delivery tube out of the water",
+  "sortir le tube à dégagement de l’eau"
+ ],
+ "熄灭酒精灯": [
+  "put out the alcohol lamp",
+  "éteindre la lampe à alcool"
+ ],
+ "稀释浓硫酸的操作顺序是": [
+  "The order of the steps for diluting concentrated sulfuric acid is",
+  "L’ordre des étapes pour diluer l’acide sulfurique concentré est"
+ ],
+ "往烧杯里倒入适量的水": [
+  "pour a suitable amount of water into the beaker",
+  "verser une quantité d’eau convenable dans le bécher"
+ ],
+ "把浓硫酸沿烧杯壁慢慢倒入水中": [
+  "pour the concentrated sulfuric acid slowly down the side of the beaker into the water",
+  "verser lentement l’acide sulfurique concentré le long de la paroi du bécher dans l’eau"
+ ],
+ "用玻璃棒不断搅拌": [
+  "keep stirring with a glass rod",
+  "remuer sans cesse avec un agitateur en verre"
+ ],
+ "冷却后装入试剂瓶": [
+  "after cooling, put it into a reagent bottle",
+  "après refroidissement, le verser dans un flacon"
+ ],
+ "实验室制取二氧化碳，操作步骤的顺序是": [
+  "The order of the steps for making carbon dioxide in the laboratory is",
+  "L’ordre des étapes pour préparer du dioxyde de carbone au laboratoire est"
+ ],
+ "向锥形瓶中加入大理石": [
+  "put marble into the conical flask",
+  "mettre du marbre dans l’erlenmeyer"
+ ],
+ "从长颈漏斗中加入稀盐酸": [
+  "add dilute hydrochloric acid through the thistle funnel",
+  "ajouter de l’acide chlorhydrique dilué par l’entonnoir à long col"
+ ],
+ "用向上排空气法收集气体": [
+  "collect the gas by upward displacement of air",
+  "recueillir le gaz par déplacement d’air vers le haut"
+ ],
+ "用燃着的木条放在瓶口验满": [
+  "hold a burning splint at the mouth of the jar to test whether it is full",
+  "placer une allumette enflammée à l’ouverture du flacon pour vérifier s’il est plein"
+ ],
+ "一氧化碳还原氧化铜，操作步骤的顺序是": [
+  "The order of the steps for reducing copper(II) oxide with carbon monoxide is",
+  "L’ordre des étapes pour réduire l’oxyde de cuivre(II) avec du monoxyde de carbone est"
+ ],
+ "检查装置气密性，装入氧化铜": [
+  "check that the apparatus is gas-tight and put in the copper(II) oxide",
+  "vérifier l’étanchéité de l’appareillage et introduire l’oxyde de cuivre(II)"
+ ],
+ "先通入一氧化碳": [
+  "pass in carbon monoxide first",
+  "faire d’abord passer du monoxyde de carbone"
+ ],
+ "再点燃酒精灯加热": [
+  "then light the alcohol lamp and heat",
+  "allumer ensuite la lampe à alcool et chauffer"
+ ],
+ "反应结束后先熄灭酒精灯": [
+  "when the reaction is over, put out the alcohol lamp first",
+  "lorsque la réaction est terminée, éteindre d’abord la lampe à alcool"
+ ],
+ "继续通入一氧化碳直到试管冷却": [
+  "keep passing carbon monoxide until the tube has cooled",
+  "continuer à faire passer du monoxyde de carbone jusqu’au refroidissement du tube"
+ ],
+ "过滤操作的步骤是": [
+  "The steps of filtration are",
+  "Les étapes de la filtration sont"
+ ],
+ "把滤纸折叠后放入漏斗，用水润湿并使其紧贴漏斗壁": [
+  "fold the filter paper, put it in the funnel, wet it with water and press it against the funnel wall",
+  "plier le papier filtre, le placer dans l’entonnoir, l’humidifier avec de l’eau et le plaquer contre la paroi de l’entonnoir"
+ ],
+ "把漏斗固定在铁架台上，漏斗下端紧靠烧杯内壁": [
+  "fix the funnel on the stand, with the lower end of its stem against the inside wall of the beaker",
+  "fixer l’entonnoir sur le support, l’extrémité inférieure de son tube contre la paroi intérieure du bécher"
+ ],
+ "用玻璃棒引流，把液体缓缓倒入漏斗": [
+  "guide the liquid with a glass rod and pour it slowly into the funnel",
+  "guider le liquide avec un agitateur en verre et le verser lentement dans l’entonnoir"
+ ],
+ "液体滤完后检查滤液是否澄清": [
+  "when the liquid has all drained through, check whether the filtrate is clear",
+  "lorsque tout le liquide est passé, vérifier si le filtrat est limpide"
+ ],
+ "氢气还原氧化铜，操作步骤的顺序是": [
+  "The order of the steps for reducing copper(II) oxide with hydrogen is",
+  "L’ordre des étapes pour réduire l’oxyde de cuivre(II) avec du dihydrogène est"
+ ],
+ "检查装置气密性": [
+  "check that the apparatus is gas-tight",
+  "vérifier l’étanchéité de l’appareillage"
+ ],
+ "在试管中装入氧化铜": [
+  "put the copper(II) oxide into the test tube",
+  "introduire l’oxyde de cuivre(II) dans le tube à essai"
+ ],
+ "先通入氢气": [
+  "pass in hydrogen first",
+  "faire d’abord passer du dihydrogène"
+ ],
+ "再加热": [
+  "then heat",
+  "chauffer ensuite"
+ ],
+ "反应完毕先停止加热": [
+  "when the reaction is over, stop heating first",
+  "lorsque la réaction est terminée, arrêter d’abord le chauffage"
+ ],
+ "继续通入氢气直到试管冷却": [
+  "keep passing hydrogen until the tube has cooled",
+  "continuer à faire passer du dihydrogène jusqu’au refroidissement du tube"
+ ],
+ "用托盘天平称取一定质量的固体，操作步骤的顺序是": [
+  "The order of the steps for weighing a given mass of a solid on a platform balance is",
+  "L’ordre des étapes pour peser une masse donnée de solide sur une balance à plateaux est"
+ ],
+ "把天平放在水平桌面上，游码归零": [
+  "put the balance on a level bench and set the rider to zero",
+  "poser la balance sur une table horizontale et ramener le curseur à zéro"
+ ],
+ "在两个托盘上各放一张相同的纸，并调节天平平衡": [
+  "put an identical piece of paper on each pan and adjust the balance until level",
+  "poser une feuille de papier identique sur chaque plateau et équilibrer la balance"
+ ],
+ "在右盘放上所需质量的砝码": [
+  "put weights of the required mass on the right pan",
+  "placer sur le plateau droit les masses marquées voulues"
+ ],
+ "向左盘慢慢加入药品直到天平平衡": [
+  "slowly add the chemical to the left pan until the balance is level",
+  "ajouter lentement le produit sur le plateau gauche jusqu’à l’équilibre de la balance"
+ ],
+ "称量完毕，把砝码放回砝码盒": [
+  "when finished, return the weights to the weight box",
+  "une fois terminé, remettre les masses marquées dans leur boîte"
+ ],
+ "用红磷测定空气中氧气的含量，操作步骤的顺序是": [
+  "The order of the steps for measuring the oxygen content of air with red phosphorus is",
+  "L’ordre des étapes pour mesurer la teneur en dioxygène de l’air avec du phosphore rouge est"
+ ],
+ "在集气瓶中加入少量水，把水面以上的部分分成五等份": [
+  "put a little water in the gas jar and divide the part above the water into five equal parts",
+  "mettre un peu d’eau dans le flacon et diviser en cinq parties égales la partie située au-dessus de l’eau"
+ ],
+ "点燃红磷并立即伸入瓶中，塞紧瓶塞": [
+  "light the red phosphorus, put it into the jar at once and press the stopper in firmly",
+  "allumer le phosphore rouge, l’introduire aussitôt dans le flacon et enfoncer fermement le bouchon"
+ ],
+ "等红磷熄灭并冷却到室温": [
+  "wait until the red phosphorus goes out and the jar has cooled to room temperature",
+  "attendre que le phosphore rouge s’éteigne et que le flacon ait refroidi à température ambiante"
+ ],
+ "打开弹簧夹，观察进入瓶中水的体积": [
+  "open the clip and observe the volume of water that enters the jar",
+  "ouvrir la pince et observer le volume d’eau qui entre dans le flacon"
+ ],
+ "测定溶液 pH 的操作步骤是": [
+  "The order of the steps for measuring the pH of a solution is",
+  "L’ordre des étapes pour mesurer le pH d’une solution est"
+ ],
+ "把一小片 pH 试纸放在白瓷板上": [
+  "put a small piece of pH paper on a white porcelain tile",
+  "poser un petit morceau de papier pH sur une plaque de porcelaine blanche"
+ ],
+ "用玻璃棒蘸取待测液滴在试纸上": [
+  "dip a glass rod in the solution to be tested and put a drop on the paper",
+  "tremper un agitateur en verre dans la solution à tester et déposer une goutte sur le papier"
+ ],
+ "把试纸显示的颜色与标准比色卡对照": [
+  "compare the colour shown by the paper with the standard colour chart",
+  "comparer la couleur prise par le papier avec l’échelle de teintes de référence"
+ ],
+ "读出溶液的 pH": [
+  "read off the pH of the solution",
+  "lire le pH de la solution"
+ ],
+ "用过氧化氢溶液制取氧气，操作步骤的顺序是": [
+  "The order of the steps for making oxygen from hydrogen peroxide solution is",
+  "L’ordre des étapes pour préparer du dioxygène à partir de la solution de peroxyde d’hydrogène est"
+ ],
+ "在锥形瓶中加入二氧化锰": [
+  "put manganese dioxide into the conical flask",
+  "mettre du dioxyde de manganèse dans l’erlenmeyer"
+ ],
+ "从长颈漏斗中加入过氧化氢溶液": [
+  "add the hydrogen peroxide solution through the thistle funnel",
+  "ajouter la solution de peroxyde d’hydrogène par l’entonnoir à long col"
+ ],
+ "用排水法收集氧气": [
+  "collect the oxygen over water",
+  "recueillir le dioxygène sur l’eau"
+ ],
+ "用带火星的木条检验氧气": [
+  "test for oxygen with a glowing splint",
+  "tester la présence de dioxygène avec une allumette incandescente"
+ ],
+ "用酚酞溶液检验氢氧化钠与盐酸恰好完全反应，操作顺序是": [
+  "The order of operations for using phenolphthalein solution to show that sodium hydroxide and hydrochloric acid have just reacted completely is",
+  "L’ordre des opérations pour montrer, avec la phénolphtaléine, que l’hydroxyde de sodium et l’acide chlorhydrique ont juste réagi complètement est"
+ ],
+ "向氢氧化钠溶液中滴入几滴酚酞溶液": [
+  "add a few drops of phenolphthalein solution to the sodium hydroxide solution",
+  "ajouter quelques gouttes de phénolphtaléine à la solution d’hydroxyde de sodium"
+ ],
+ "观察到溶液变红": [
+  "observe that the solution turns red",
+  "observer que la solution devient rouge"
+ ],
+ "用胶头滴管逐滴加入稀盐酸并不断振荡": [
+  "add dilute hydrochloric acid drop by drop from a dropper, shaking all the time",
+  "ajouter l’acide chlorhydrique dilué goutte à goutte avec un compte-gouttes, en agitant sans cesse"
+ ],
+ "红色恰好消失时停止滴加": [
+  "stop adding when the red colour has just disappeared",
+  "arrêter d’ajouter dès que la couleur rouge vient de disparaître"
+ ],
+ "鸡蛋": [
+  "egg",
+  "œuf"
+ ],
+ "瘦肉": [
+  "lean meat",
+  "viande maigre"
+ ],
+ "豆腐": [
+  "tofu",
+  "tofu"
+ ],
+ "鱼": [
+  "fish",
+  "poisson"
+ ],
+ "米饭": [
+  "rice",
+  "riz"
+ ],
+ "馒头": [
+  "steamed bun",
+  "petit pain vapeur"
+ ],
+ "面包": [
+  "bread",
+  "pain"
+ ],
+ "土豆": [
+  "potato",
+  "pomme de terre"
+ ],
+ "红薯": [
+  "sweet potato",
+  "patate douce"
+ ],
+ "花生油": [
+  "peanut oil",
+  "huile d’arachide"
+ ],
+ "猪油": [
+  "lard",
+  "saindoux"
+ ],
+ "奶油": [
+  "butter",
+  "beurre"
+ ],
+ "菜籽油": [
+  "rapeseed oil",
+  "huile de colza"
+ ],
+ "肥肉": [
+  "fatty meat",
+  "viande grasse"
+ ],
+ "青菜": [
+  "green vegetables",
+  "légumes verts"
+ ],
+ "西红柿": [
+  "tomato",
+  "tomate"
+ ],
+ "黄瓜": [
+  "cucumber",
+  "concombre"
+ ],
+ "橙子": [
+  "orange",
+  "orange"
+ ],
+ "芹菜": [
+  "celery",
+  "céleri"
+ ],
+ "人体最主要的供能物质": [
+  "The main energy-supplying substance of the human body",
+  "Principale substance fournissant de l’énergie à l’organisme"
+ ],
+ "构成细胞的基本物质，是机体生长和修补受损组织的主要原料": [
+  "The basic substance of cells and the main raw material for growth and for repairing damaged tissue",
+  "Substance de base des cellules et principale matière première pour la croissance et la réparation des tissus abîmés"
+ ],
+ "人体重要的备用能源，储存在体内": [
+  "An important reserve of energy for the human body, stored in the body",
+  "Réserve d’énergie importante de l’organisme, stockée dans le corps"
+ ],
+ "调节新陈代谢，预防疾病，维持身体健康": [
+  "Regulates metabolism, prevents disease and keeps the body healthy",
+  "Régule le métabolisme, prévient les maladies et maintient le corps en bonne santé"
+ ],
+ "人体内含量最多的物质，是体内物质运输的载体": [
+  "The substance present in the greatest amount in the human body and the carrier that transports substances within it",
+  "Substance la plus abondante dans l’organisme et vecteur qui transporte les substances en son sein"
+ ],
+ "幼儿和青少年易患佝偻病，老年人易患骨质疏松": [
+  "Young children and teenagers are prone to rickets, and old people to osteoporosis",
+  "Les jeunes enfants et les adolescents sont exposés au rachitisme, et les personnes âgées à l’ostéoporose"
+ ],
+ "易患缺铁性贫血": [
+  "Prone to iron-deficiency anaemia",
+  "Risque d’anémie par carence en fer"
+ ],
+ "易患甲状腺肿大": [
+  "Prone to goitre",
+  "Risque de goitre"
+ ],
+ "生长迟缓，发育不良": [
+  "Slow growth and poor development",
+  "Croissance lente et mauvais développement"
+ ],
+ "易患龋齿": [
+  "Prone to tooth decay",
+  "Risque de caries dentaires"
+ ],
+ "硒": [
+  "selenium",
+  "sélénium"
+ ],
+ "有机合成材料": [
+  "Synthetic organic materials",
+  "Matériaux organiques de synthèse"
+ ],
+ "聚乙烯塑料袋": [
+  "polythene carrier bag",
+  "sac en polyéthylène"
+ ],
+ "聚氯乙烯水管": [
+  "PVC water pipe",
+  "tuyau d’eau en PVC"
+ ],
+ "涤纶衣服": [
+  "polyester clothes",
+  "vêtements en polyester"
+ ],
+ "腈纶毛衣": [
+  "acrylic sweater",
+  "pull en acrylique"
+ ],
+ "丁苯橡胶轮胎": [
+  "styrene-butadiene rubber tyre",
+  "pneu en caoutchouc styrène-butadiène"
+ ],
+ "天然有机材料": [
+  "Natural organic materials",
+  "Matériaux organiques naturels"
+ ],
+ "天然橡胶": [
+  "natural rubber",
+  "caoutchouc naturel"
+ ],
+ "金属材料": [
+  "Metallic materials",
+  "Matériaux métalliques"
+ ],
+ "不锈钢": [
+  "stainless steel",
+  "acier inoxydable"
+ ],
+ "青铜": [
+  "bronze",
+  "bronze"
+ ],
+ "铝合金": [
+  "aluminium alloy",
+  "alliage d’aluminium"
+ ],
+ "无机非金属材料": [
+  "Inorganic non-metallic materials",
+  "Matériaux minéraux non métalliques"
+ ],
+ "陶瓷": [
+  "ceramics",
+  "céramique"
+ ],
+ "水泥": [
+  "cement",
+  "ciment"
+ ],
+ "石英砂": [
+  "quartz sand",
+  "sable de quartz"
+ ],
+ "二氧化硫和氮氧化物": [
+  "sulfur dioxide and nitrogen oxides",
+  "dioxyde de soufre et oxydes d’azote"
+ ],
+ "温室效应": [
+  "greenhouse effect",
+  "effet de serre"
+ ],
+ "臭氧层空洞": [
+  "hole in the ozone layer",
+  "trou dans la couche d’ozone"
+ ],
+ "氟氯代烷": [
+  "chlorofluorocarbons",
+  "chlorofluorocarbures"
+ ],
+ "白色污染": [
+  "white pollution",
+  "pollution blanche"
+ ],
+ "废弃塑料制品": [
+  "waste plastic products",
+  "déchets d’objets en plastique"
+ ],
+ "水体富营养化": [
+  "eutrophication of water",
+  "eutrophisation de l’eau"
+ ],
+ "含氮、磷的生活污水和化肥": [
+  "domestic sewage and fertilisers containing nitrogen and phosphorus",
+  "eaux usées domestiques et engrais contenant de l’azote et du phosphore"
+ ],
+ "供给呼吸，支持燃烧（急救、气焊）": [
+  "Supports breathing and burning (first aid, gas welding)",
+  "Entretient la respiration et la combustion (secours, soudage au gaz)"
+ ],
+ "最清洁的高能燃料，充灌探空气球": [
+  "The cleanest high-energy fuel; fills weather balloons",
+  "Combustible le plus propre et très énergétique ; gonfle les ballons-sondes"
+ ],
+ "干冰": [
+  "dry ice",
+  "neige carbonique"
+ ],
+ "升华吸热，用于人工降雨和制冷": [
+  "Sublimes and absorbs heat; used for artificial rain and for cooling",
+  "Se sublime en absorbant de la chaleur ; sert à la pluie artificielle et au refroidissement"
+ ],
+ "金刚石": [
+  "diamond",
+  "diamant"
+ ],
+ "切割玻璃、钻探": [
+  "Cutting glass, drilling",
+  "Découpe du verre, forage"
+ ],
+ "石墨": [
+  "graphite",
+  "graphite"
+ ],
+ "制铅笔芯、电极、润滑剂": [
+  "Making pencil leads, electrodes and lubricants",
+  "Fabrication de mines de crayon, d’électrodes et de lubrifiants"
+ ],
+ "活性炭": [
+  "activated carbon",
+  "charbon actif"
+ ],
+ "吸附水中的色素和异味，用于净水器和防毒面具": [
+  "Adsorbs colouring matter and odours in water; used in water purifiers and gas masks",
+  "Adsorbe les colorants et les odeurs de l’eau ; utilisé dans les purificateurs d’eau et les masques à gaz"
+ ],
+ "作气体燃料（煤气）": [
+  "Used as a gas fuel (coal gas)",
+  "Sert de combustible gazeux (gaz de houille)"
+ ],
+ "作食品干燥剂": [
+  "Used as a food drying agent",
+  "Sert d’agent desséchant alimentaire"
+ ],
+ "熟石灰": [
+  "slaked lime",
+  "chaux éteinte"
+ ],
+ "改良酸性土壤": [
+  "Improving acidic soil",
+  "Amendement des sols acides"
+ ],
+ "制肥皂，作炉具清洁剂": [
+  "Making soap; used as an oven cleaner",
+  "Fabrication du savon ; sert de nettoyant pour four"
+ ],
+ "除铁锈，胃液中的助消化成分": [
+  "Removing rust; a digestive component of gastric juice",
+  "Élimination de la rouille ; composant du suc gastrique qui aide à la digestion"
+ ],
+ "作建筑材料，用作补钙剂": [
+  "Used as a building material and as a calcium supplement",
+  "Sert de matériau de construction et de complément en calcium"
+ ],
+ "用于生产玻璃和造纸": [
+  "Used in making glass and paper",
+  "Sert à fabriquer le verre et le papier"
+ ],
+ "焙制糕点的发酵粉": [
+  "Baking powder for making pastry",
+  "Poudre à lever pour la pâtisserie"
+ ],
+ "作调味品，配制生理盐水，融化道路积雪": [
+  "Used as a seasoning, to make physiological saline and to melt snow on roads",
+  "Sert d’assaisonnement, à préparer le sérum physiologique et à faire fondre la neige sur les routes"
+ ],
+ "检验水（无水硫酸铜遇水变蓝）": [
+  "Testing for water (white anhydrous copper(II) sulfate turns blue with water)",
+  "Mise en évidence de l’eau (le sulfate de cuivre(II) anhydre blanc devient bleu en présence d’eau)"
+ ],
+ "制作导线": [
+  "Making electric wires",
+  "Fabrication de fils électriques"
+ ],
+ "制作灯泡的灯丝": [
+  "Making the filaments of light bulbs",
+  "Fabrication des filaments d’ampoules"
+ ],
+ "氦": [
+  "helium",
+  "hélium"
+ ],
+ "铍": [
+  "beryllium",
+  "béryllium"
+ ],
+ "硼": [
+  "boron",
+  "bore"
+ ],
+ "氖": [
+  "neon",
+  "néon"
+ ],
+ "氩": [
+  "argon",
+  "argon"
+ ],
+ "浓盐酸": [
+  "concentrated hydrochloric acid",
+  "acide chlorhydrique concentré"
+ ],
+ "氯化钠溶液": [
+  "sodium chloride solution",
+  "solution de chlorure de sodium"
+ ],
+ "§§氢": [
+  "hydrogen",
+  "hydrogène"
+ ],
+ "§§钠": [
+  "sodium",
+  "sodium"
+ ],
+ "§§钾": [
+  "potassium",
+  "potassium"
+ ],
+ "§§银": [
+  "silver",
+  "argent"
+ ],
+ "§§镁": [
+  "magnesium",
+  "magnésium"
+ ],
+ "§§钙": [
+  "calcium",
+  "calcium"
+ ],
+ "§§钡": [
+  "barium",
+  "baryum"
+ ],
+ "§§锌": [
+  "zinc",
+  "zinc"
+ ],
+ "§§铝": [
+  "aluminium",
+  "aluminium"
+ ],
+ "§§亚铁": [
+  "iron(II)",
+  "fer(II)"
+ ],
+ "§§铁": [
+  "iron(III)",
+  "fer(III)"
+ ],
+ "§§铜": [
+  "copper(II)",
+  "cuivre(II)"
+ ],
+ "§§铵": [
+  "ammonium",
+  "ammonium"
+ ],
+ "水": [
+  "water",
+  "eau"
+ ],
+ "氢氧化铵": [
+  "ammonium hydroxide",
+  "hydroxyde d’ammonium"
+ ],
+ "碳酸铵": [
+  "ammonium carbonate",
+  "carbonate d’ammonium"
+ ],
+ "碳酸铝": [
+  "aluminium carbonate",
+  "carbonate d’aluminium"
+ ],
+ "氢氧化锌": [
+  "zinc hydroxide",
+  "hydroxyde de zinc"
+ ],
+ "碳酸锌": [
+  "zinc carbonate",
+  "carbonate de zinc"
+ ],
+ "氢氧化亚铁": [
+  "iron(II) hydroxide",
+  "hydroxyde de fer(II)"
+ ],
+ "碳酸亚铁": [
+  "iron(II) carbonate",
+  "carbonate de fer(II)"
+ ],
+ "硝酸铁": [
+  "iron(III) nitrate",
+  "nitrate de fer(III)"
+ ],
+ "碳酸铁": [
+  "iron(III) carbonate",
+  "carbonate de fer(III)"
+ ],
+ "碳酸铜": [
+  "copper(II) carbonate",
+  "carbonate de cuivre(II)"
+ ],
+ "氢氧化银": [
+  "silver hydroxide",
+  "hydroxyde d’argent"
+ ],
+ "硫酸银": [
+  "silver sulfate",
+  "sulfate d’argent"
+ ],
+ "碳酸银": [
+  "silver carbonate",
+  "carbonate d’argent"
+ ],
+ "§氧气": [
+  "oxygen",
+  "dioxygène"
+ ],
+ "§氮气": [
+  "nitrogen",
+  "diazote"
+ ],
+ "§铁": [
+  "iron",
+  "fer"
+ ],
+ "§水": [
+  "water",
+  "eau"
+ ],
+ "§二氧化碳": [
+  "carbon dioxide",
+  "dioxyde de carbone"
+ ],
+ "§葡萄糖": [
+  "glucose",
+  "glucose"
+ ],
+ "§空气": [
+  "air",
+  "air"
+ ],
+ "§澄清石灰水": [
+  "limewater",
+  "eau de chaux"
+ ],
+ "§石油": [
+  "crude oil",
+  "pétrole"
+ ],
+ "§煤": [
+  "coal",
+  "charbon"
+ ],
+ "§天然气": [
+  "natural gas",
+  "gaz naturel"
+ ],
+ "§碘": [
+  "iodine",
+  "iode"
+ ],
+ "§铜": [
+  "copper",
+  "cuivre"
+ ]
+}

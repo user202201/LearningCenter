@@ -11,7 +11,7 @@ fs.mkdirSync(OUT, { recursive: true });
 
 // The translations of this page are written in src/i18n-extra/space.json and merged into src/i18n-data.ts by the person who integrates the change; until then (and harmlessly afterwards)
 // the test puts them into the page's translation tables itself.
-const extra = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/space.json'), 'utf8'));
+const extra = Object.assign({}, ...['space.json', 'spacecontent.json'].map((f) => JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/' + f), 'utf8'))));   // (spacecontent.json: the course content, rule 66)
 const withExtra = async (t) => {
   const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[1]]))) + ');\n';
   await t.ctx.route('**/src/i18n-data.ts*', async (route) => { const r = await route.fetch(); await route.fulfill({ response: r, body: (await r.text()) + '\n' + add }); });
@@ -22,9 +22,12 @@ const painted = (page, sel) => page.evaluate((sel) => { const cv = document.quer
   for (let i = 0; i < 400; i++) { const x = Math.floor(((i * 37) % 100) / 100 * w), y = Math.floor(((i * 61) % 100) / 100 * h); const d = c.getImageData(x, y, 1, 1).data; seen.add((d[0] >> 4) + ',' + (d[1] >> 4) + ',' + (d[2] >> 4) + ',' + (d[3] > 0)); if (d[3] > 0) opaque++; }
   return opaque > 20 ? seen.size : 0; }, sel);
 const CJK = /[　-〿一-鿿＀-￯]/;
+// rule 66: in en / fr nothing is Chinese, content included (only a Chinese proper name inside brackets may stay); SVG labels and aria-labels count too
 const leftover = (page) => page.evaluate(() => {
   const out = []; const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  for (let n = w.nextNode(); n; n = w.nextNode()) { const t = n.nodeValue; if (!/[　-〿一-鿿＀-￯]/.test(t)) continue; const p = n.parentElement; if (p.closest('.user, .user-title, svg, script, style')) continue; out.push(t.trim().slice(0, 40)); }
+  const strip = (s) => s.replace(/[(（][^)）]*[一-鿿][^)）]*[)）]/g, '');
+  for (let n = w.nextNode(); n; n = w.nextNode()) { const t = strip(n.nodeValue); if (!/[　-〿一-鿿＀-￯]/.test(t)) continue; const p = n.parentElement; if (p.closest('script, style')) continue; out.push(n.nodeValue.trim().slice(0, 40)); }
+  for (const e of document.querySelectorAll('[aria-label], [title], [alt]')) for (const a of ['aria-label', 'title', 'alt']) { const v = e.getAttribute(a); if (v && /[　-〿一-鿿＀-￯]/.test(strip(v))) out.push(a + ': ' + v.slice(0, 40)); }
   return out;
 });
 const SIZES = [[390, 844], [320, 568], [820, 1180], [1180, 820], [844, 390]];
@@ -35,6 +38,7 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
   {
     const t = await start(new Map(), { local: true });
     const { page } = t;
+    await withExtra(t);
     const R = await page.evaluate(async () => {
       const SM = await import('/src/spacemodel.ts'); const S = await SM.loadSpace(); const bad = []; const b = (m) => { if (bad.length < 12) bad.push(m); };
       const out = { bad };
@@ -191,7 +195,7 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
       const SM = await import('/src/spacemodel.ts'); const S = await SM.loadSpace(); const G = await import('/src/game.ts'); const bad = []; const b = (m) => { if (bad.length < 14) bad.push(m); };
       const rnd = (() => { let s = 11; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); })();
       const keys = SM.allKeys(S); if (new Set(keys).size !== keys.length || keys.length < 140) b('keys ' + keys.length);
-      const all = [...S.planets, ...S.dwarfs];
+      const all = [...S.planets, ...S.dwarfs]; const I0 = await import('/src/i18n.ts');
       for (const lang of ['zh', 'en', 'fr']) for (const k of keys) for (let rep = 0; rep < 3; rep++) {
         const q = SM.makeQuestion(S, k, rnd, lang);
         if (q.choices.length !== 4 || new Set(q.choices.map((c) => c.t)).size !== 4 || new Set(q.choices.map((c) => c.k)).size !== 4 || q.choices.some((c) => !c.t) || !q.choices.some((c) => c.k === q.answer)) { b('choices ' + k + ' ' + JSON.stringify(q.choices)); continue; }
@@ -204,10 +208,24 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
         if (kind === 'mo') { if (q.answer !== S.moons.find((m) => m.id === id).planet) b('belongs to ' + k); }
         if (kind === 'ph') { if (+q.answer !== +id || q.fig.E !== +id * 45) b('phase ' + k); }
         if (kind === 'cs') { if (q.answer !== id) b('constellation ' + k); }
-        if (kind === 'mq') { const x = S.mcq[+id]; if (right !== x.a) b('mcq ' + k); }
+        if (kind === 'mq') { const x = S.mcq[+id]; if (right !== I0.tr(x.a, lang)) b('mcq ' + k); }
         if (kind === 'wt') { const g = id === 'moon' ? SM.MOON_G : S.planets.find((p) => p.id === id).g; const kg = +q.stem.args[0]; if (Math.abs(+q.answer - SM.weightOn(kg, g)) > 0.051) b('weight answer ' + k + ' ' + q.answer); }
         if (lang !== 'zh' && /[一-鿿]/.test(q.choices.map((c) => c.t).join('')) && kind !== 'mq' && kind !== 'ph') b(lang + ' choices have Chinese ' + k);
       }
+      // rule 66: EVERY text of space.json (prose, names of astronomers, star names, quiz texts) has an English and a French translation without Chinese (zh names / aliases of bodies stay Chinese by design)
+      { const I = await import('/src/i18n.ts'); const CJ = /[一-鿿]/; let n = 0; const miss = [];
+        const walk = (o, key) => { if (typeof o === 'string') { if (key === 'note' || !CJ.test(o)) return; n++; for (const lang of ['en', 'fr']) if (CJ.test(I.tr(o, lang))) miss.push(lang + ': ' + o.slice(0, 24)); } else if (Array.isArray(o)) o.forEach((x) => walk(x, key)); else if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) if (k !== 'zh' && k !== 'alias') walk(v, k); };
+        walk(S); if (miss.length) b('untranslated space.json texts (' + miss.length + '): ' + miss.slice(0, 4).join(' | ')); if (n < 400) b('translated texts counted ' + n); }
+      // rule 66: 200 generated questions in en and fr (stem, explanation, choices) hold no Chinese; the zh-made questions are untouched
+      { const I = await import('/src/i18n.ts'); const CJ = /[　-〿一-鿿＀-￯]/; let n = 0;
+        for (const lang of ['en', 'fr']) for (let i = 0; i < 100; i++) {
+          const q = SM.makeQuestion(S, keys[Math.floor(rnd() * keys.length)], rnd, lang);
+          const fill = (tpl, args) => I.tr(tpl, lang).replace(/\{(\d+)\}/g, (_, j) => (args ?? [])[+j] ?? '');
+          const all = [fill(q.stem.tpl, q.stem.args), q.explain.text ?? fill(q.explain.tpl, q.explain.args), ...q.choices.map((c) => c.t)];
+          for (const s of all) if (CJ.test(s)) b(lang + ' question ' + q.key + ' has Chinese: ' + s.slice(0, 30));
+          n++;
+        }
+        const z = SM.makeQuestion(S, 'mq:0', rnd, 'zh'); if (!/[一-鿿]/.test(z.stem.args[0])) b('zh question stays Chinese'); }
       // the superlatives are right by the data itself (independent of the answer key in the file)
       const by = (f, max = true) => S.planets.reduce((a, p) => ((max ? f(p) > f(a) : f(p) < f(a)) ? p : a)).id;
       const rules = [['最大', by((p) => p.d)], ['最小', by((p) => p.d, false)], ['最热', by((p) => (p.tmin + p.tmax) / 2)], ['离太阳最近', by((p) => p.a, false)], ['离太阳最远', by((p) => p.a)], ['一年（公转一圈）最短', by((p) => p.P, false)], ['自转最快', by((p) => Math.abs(p.rot), false)], ['比水还小', by((p) => -p.dens)], ['躺着转', by((p) => -Math.abs(p.tilt - 90))], ['风速最快', 'neptune'], ['有生命', 'earth'], ['天文', 'x']];
@@ -385,7 +403,7 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
     ok(/687/.test(await cell('公转周期（一年）')) && /24\.6/.test(await cell('自转周期')), 'Mars: year 687 days, day 24.6 hours');
     ok(/2 颗/.test(await cell('卫星')), 'Mars: 2 moons');
     await page.evaluate(() => (location.hash = '#/science/space/saturn')); await page.waitForSelector('.sp-page[data-planet=saturn] #sp-planet');
-    ok(/已确认约 146 颗（截至 2024 年）/.test(await cell('卫星')), 'Saturn: "about 146 confirmed (as of 2024)": ' + await cell('卫星'));
+    ok(/已确认约 274 颗（截至 2025 年）/.test(await cell('卫星')), 'Saturn: "about 274 confirmed (as of 2025, from space.json)": ' + await cell('卫星'));
     ok(/明亮/.test(await cell('光环')) && /0\.69/.test(await cell('平均密度')), 'Saturn: bright rings, density 0.69');
     ok(await page.locator('#sp-moon-more').count() === 1, 'Saturn: says that only the famous moons are listed');
     // the weight scale
@@ -555,7 +573,7 @@ const IDS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus',
       ok(await page.evaluate(() => { const c = document.querySelector('#sp-orrery'); const r = c.getBoundingClientRect(); return r.width > 150 && Math.abs(r.width - r.height) < 2 && r.left >= 0 && r.right <= innerWidth + 0.5 && Math.abs(r.left - (innerWidth - r.right)) < 3; }), `${tag} the orrery is a centred square inside the screen`);
       await page.click('#sp-mode-true'); await page.click('#sp-dwarfs'); await geom('solar true'); await noCjk('solar true'); await page.screenshot({ path: OUT + `space-solar-true-${tag}.png`, fullPage: true });
       await page.evaluate(() => (location.hash = '#/science/space/saturn')); await page.waitForSelector('.sp-page[data-planet=saturn] .sp-moon');
-      await geom('Saturn'); await noCjk('Saturn'); await page.screenshot({ path: OUT + `space-saturn-${tag}.png` });
+      await geom('Saturn'); await noCjk('Saturn'); ok(/2025/.test(await page.textContent('[data-k="卫星"]')), `${tag} Saturn: the moon count says 2025 in every language`); await page.screenshot({ path: OUT + `space-saturn-${tag}.png` });
       await page.evaluate(() => document.querySelector('#sp-moons').scrollIntoView()); await page.locator('#sp-moons').screenshot({ path: OUT + `space-saturn-moons-${tag}.png` });
       await page.evaluate(() => document.querySelector('#sp-tools').scrollIntoView()); await page.locator('#sp-tools').screenshot({ path: OUT + `space-tools-${tag}.png` });
       ok(await page.evaluate(() => { const cs = [...document.querySelectorAll('.sp-moon, .sp-wrow, .sp-data, .sp-fact')]; return cs.every((e) => { const r = e.getBoundingClientRect(); return r.right <= innerWidth + 0.5 && r.left >= -0.5; }); }), `${tag} Saturn: cards inside the screen`);

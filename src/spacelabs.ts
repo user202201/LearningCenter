@@ -71,7 +71,7 @@ function phaseLab(): HTMLElement {
   const row = h("div", { class: "sp-phases", id: "sp-phases" });
   SM.PHASES.forEach((name, i) => {
     const cv = h("canvas", { width: 128, height: 128, class: "sp-ph-cv" }); const c = cv.getContext("2d")!; c.fillStyle = "#0b0d26"; c.fillRect(0, 0, 128, 128); drawPhase(c, 64, 64, 52, i * 45);
-    row.append(h("button", { class: "sp-ph", "data-i": String(i), onclick: () => { E = i * 45; draw(); } }, cv, h("b", {}, name), h("small", { class: "user" }, `约${SM.lunarDayOf(i * 45)}`)));
+    row.append(h("button", { class: "sp-ph", "data-i": String(i), onclick: () => { E = i * 45; draw(); } }, cv, h("b", {}, name), h("small", {}, ...fmt("农历{0}", [SM.lunarDayOf(i * 45)]))));
   });
   root.append(h("h3", { class: "sp-h3" }, "八种月相"), row);
   queueMicrotask(() => requestAnimationFrame(() => { if (root.isConnected) draw(); }));

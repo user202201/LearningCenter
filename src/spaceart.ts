@@ -3,7 +3,8 @@
  * sphere pixel by pixel (the lookup is made once per size, so a turning planet only shifts the texture), rings, the moon phase, constellations, the icon of the science
  * home. No image file, nothing fetched.
  */
-import type { Const } from "./spacemodel";
+import { nameOf, type Const } from "./spacemodel";
+import { tr } from "./i18n";
 
 const TW = 512, TH = 256;
 const mkRng = (seed: number) => () => { seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
@@ -236,8 +237,8 @@ const stars = (seed: number, n: number): string => { const r = mkRng(seed); let 
 /** the dots and lines of a constellation in a square night-sky picture (no names, so that it can be asked about) */
 export function constSvg(c: Const, withNames = false): string {
   const lines = c.lines.map(([a, b]) => `<line x1="${c.stars[a][0]}" y1="${c.stars[a][1]}" x2="${c.stars[b][0]}" y2="${c.stars[b][1]}" stroke="#a5b4fc" stroke-width=".9" stroke-linecap="round"/>`).join("");
-  const dots = c.stars.map(([x, y, r, n]) => `<circle cx="${x}" cy="${y}" r="${r * 2.4}" fill="#fff" opacity=".18"/><circle cx="${x}" cy="${y}" r="${(0.9 + r * 0.55).toFixed(2)}" fill="${r >= 4 ? "#ffd8a8" : "#fff"}"/>${withNames && n ? `<text x="${x + 3}" y="${y - 3}" font-size="4.5" fill="#dbe4ff">${n}</text>` : ""}`).join("");
-  return `<svg viewBox="-4 -4 108 108" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${c.zh}" data-const="${c.id}"><rect x="-4" y="-4" width="108" height="108" rx="10" fill="#171a3c"/>${stars(hash(c.id), 40)}${lines}${dots}</svg>`;
+  const dots = c.stars.map(([x, y, r, n]) => `<circle cx="${x}" cy="${y}" r="${r * 2.4}" fill="#fff" opacity=".18"/><circle cx="${x}" cy="${y}" r="${(0.9 + r * 0.55).toFixed(2)}" fill="${r >= 4 ? "#ffd8a8" : "#fff"}"/>${withNames && n ? `<text x="${x + 3}" y="${y - 3}" font-size="4.5" fill="#dbe4ff">${tr(n)}</text>` : ""}`).join("");
+  return `<svg viewBox="-4 -4 108 108" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${nameOf(c)}" data-const="${c.id}"><rect x="-4" y="-4" width="108" height="108" rx="10" fill="#171a3c"/>${stars(hash(c.id), 40)}${lines}${dots}</svg>`;
 }
 /** how to find the Pole Star: the two pointer stars of the Big Dipper, five times their distance, and the W of Cassiopeia on the other side */
 export function finderSvg(bear: Const): string {

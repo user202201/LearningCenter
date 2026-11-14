@@ -314,5 +314,5033 @@
  "北方地区以旱地为主，南方地区以水田为主；西北地区干旱，畜牧业为主；青藏地区高寒，是“世界屋脊”。东部沿海地区经济较发达，西部地区经济发展水平相对较低，区域之间通过交通、通信和西气东输、南水北调等工程联系起来。": [
   "The Northern region has mainly dry land and the Southern region mainly paddy fields; the Northwest region is arid and mainly pastoral; the Qinghai–Tibet region is high and cold, and is the “roof of the world”. The eastern coastal region has a fairly developed economy and the western region a relatively lower level of economic development; the regions are linked by transport, communications and projects such as the West–East Gas Pipeline and the South–North Water Transfer.",
   "La région du Nord a surtout des terres sèches et la région du Sud surtout des rizières ; la région du Nord-Ouest est aride et surtout pastorale ; la région Qinghai–Tibet est haute et froide, et c'est le « toit du monde ». La région côtière de l'est a une économie assez développée et la région de l'ouest un niveau de développement économique relativement plus faible ; les régions sont reliées par les transports, les communications et des projets comme le gazoduc Ouest–Est et le transfert d'eau Sud–Nord."
+ ],
+ "中时区": [
+  "central zone",
+  "fuseau central"
+ ],
+ "相对高度 = 较高点海拔 − 较低点海拔。": [
+  "Relative height = altitude of the higher point − altitude of the lower point.",
+  "Dénivelé = altitude du point le plus haut − altitude du point le plus bas."
+ ],
+ "年较差 = 最热月均温 − 最冷月均温。": [
+  "Annual range = mean temperature of the hottest month − mean temperature of the coldest month.",
+  "Amplitude annuelle = température moyenne du mois le plus chaud − température moyenne du mois le plus froid."
+ ],
+ "西北": [
+  "northwest",
+  "nord-ouest"
+ ],
+ "东南": [
+  "southeast",
+  "sud-est"
+ ],
+ "西南": [
+  "southwest",
+  "sud-ouest"
+ ],
+ "东北": [
+  "northeast",
+  "nord-est"
+ ],
+ "正北": [
+  "due north",
+  "plein nord"
+ ],
+ "正东": [
+  "due east",
+  "plein est"
+ ],
+ "正南": [
+  "due south",
+  "plein sud"
+ ],
+ "正西": [
+  "due west",
+  "plein ouest"
+ ],
+ "原地": [
+  "the same place",
+  "au même endroit"
+ ],
+ "零": [
+  "zero",
+  "zéro"
+ ],
+ "一": [
+  "one",
+  "un"
+ ],
+ "二": [
+  "two",
+  "deux"
+ ],
+ "三": [
+  "three",
+  "trois"
+ ],
+ "四": [
+  "four",
+  "quatre"
+ ],
+ "五": [
+  "five",
+  "cinq"
+ ],
+ "六": [
+  "six",
+  "six"
+ ],
+ "七": [
+  "seven",
+  "sept"
+ ],
+ "八": [
+  "eight",
+  "huit"
+ ],
+ "九": [
+  "nine",
+  "neuf"
+ ],
+ "十": [
+  "ten",
+  "dix"
+ ],
+ "十一": [
+  "eleven",
+  "onze"
+ ],
+ "十二": [
+  "twelve",
+  "douze"
+ ],
+ "东{0}区": [
+  "East {0}",
+  "Est {0}"
+ ],
+ "西{0}区": [
+  "West {0}",
+  "Ouest {0}"
+ ],
+ "起伏很大、坡度陡": [
+  "great relief and steep slopes",
+  "fort relief et pentes raides"
+ ],
+ "四周高、中间低": [
+  "high around the edges and low in the middle",
+  "élevé sur les bords et bas au milieu"
+ ],
+ "11～4 月": [
+  "November–April",
+  "de novembre à avril"
+ ],
+ "5～10 月": [
+  "May–October",
+  "de mai à octobre"
+ ],
+ "某地最冷月均温 {0}℃，最热月均温 {1}℃，年降水量 {2} 毫米，降水最少的月份 {3} 毫米，{4}的降水占全年的 {5}%，海拔 {6} 米。该地的气候类型是？": [
+  "At a place the mean temperature of the coldest month is {0}℃ and of the hottest month {1}℃, the annual precipitation is {2} mm, the driest month has {3} mm, the precipitation of {4} makes up {5}% of the year, and the altitude is {6} m. What is the climate type of the place?",
+  "En un lieu, la température moyenne du mois le plus froid est {0}℃ et celle du mois le plus chaud {1}℃, les précipitations annuelles sont de {2} mm, le mois le plus sec reçoit {3} mm, les précipitations de {4} représentent {5} % de l'année et l'altitude est de {6} m. Quel est le type de climat de ce lieu ?"
+ ],
+ "按各项数字对照：海拔 3000 米以上为高原山地；最热月低于 10℃ 为极地；最冷月 18℃ 以上为热带（降水少为沙漠，各月多雨为雨林，有旱季时年降水约 1900 毫米以上为季风、否则为草原）；冬季温和而夏季少雨为地中海；温和而夏季不热为海洋性，否则亚热带季风；冬冷则降水少为大陆性，降水多为季风。": [
+  "Compare the figures: altitude above 3000 m is plateau mountain climate; hottest month below 10℃ is polar; coldest month above 18℃ is tropical (little precipitation: desert; rain in every month: rainforest; with a dry season, annual precipitation of about 1900 mm or more: monsoon, otherwise savanna); mild winter and dry summer: Mediterranean; mild and not hot in summer: maritime, otherwise subtropical monsoon; cold winter with little precipitation: continental, with much precipitation: monsoon.",
+  "Comparez les chiffres : une altitude supérieure à 3000 m correspond au climat de montagne et de plateau ; un mois le plus chaud inférieur à 10℃ correspond au climat polaire ; un mois le plus froid supérieur à 18℃ correspond au climat tropical (peu de précipitations : désert ; pluie tous les mois : forêt humide ; avec une saison sèche, précipitations annuelles d'environ 1900 mm ou plus : mousson, sinon savane) ; hiver doux et été sec : méditerranéen ; été doux et peu chaud : océanique, sinon mousson subtropicale ; hiver froid avec peu de précipitations : continental, avec beaucoup de précipitations : mousson."
+ ],
+ "平均海拔 4000 米以上": [
+  "mean altitude above 4000 m",
+  "altitude moyenne supérieure à 4000 m"
+ ],
+ "昆仑山—祁连山—横断山以西": [
+  "west of the Kunlun Mountains–Qilian Mountains–Hengduan Mountains",
+  "à l'ouest des monts Kunlun, Qilian et Hengduan"
+ ],
+ "海拔 1000～2000 米": [
+  "altitude 1000–2000 m",
+  "altitude de 1000 à 2000 m"
+ ],
+ "内蒙古高原、黄土高原、云贵高原；塔里木、准噶尔、四川盆地": [
+  "Inner Mongolia Plateau, Loess Plateau, Yunnan–Guizhou Plateau; Tarim, Junggar and Sichuan Basins",
+  "plateau de Mongolie-Intérieure, plateau de lœss, plateau Yunnan–Guizhou ; bassins du Tarim, de Dzoungarie et du Sichuan"
+ ],
+ "介于两条分界线之间": [
+  "between the two boundary lines",
+  "entre les deux lignes de séparation"
+ ],
+ "海拔多在 500 米以下": [
+  "altitude mostly below 500 m",
+  "altitude le plus souvent inférieure à 500 m"
+ ],
+ "东北平原、华北平原、长江中下游平原，丘陵": [
+  "Northeast Plain, North China Plain, plains of the middle and lower Yangtze, hills",
+  "plaine du Nord-Est, plaine de Chine du Nord, plaines du moyen et du bas Yangzi, collines"
+ ],
+ "大兴安岭—太行山—巫山—雪峰山以东": [
+  "east of the Greater Khingan Range–Taihang Mountains–Wu Mountains–Xuefeng Mountains",
+  "à l'est du Grand Khingan et des monts Taihang, Wu et Xuefeng"
+ ],
+ "某地的纬度是 {0}，它位于哪个温度带？": [
+  "The latitude of a place is {0}. In which temperature zone is it?",
+  "La latitude d'un lieu est {0}. Dans quelle zone thermique se trouve-t-il ?"
+ ],
+ "以南北回归线（约 23.5°）和南北极圈（约 66.5°）为界划分五带。": [
+  "The five zones are divided by the tropics (about 23.5°) and the polar circles (about 66.5°).",
+  "Les cinq zones sont délimitées par les tropiques (environ 23,5°) et les cercles polaires (environ 66,5°)."
+ ],
+ "某地的位置是 {0}，{1}，它位于哪个半球？": [
+  "A place is at {0}, {1}. In which hemisphere is it?",
+  "Un lieu se trouve à {0}, {1}. Dans quel hémisphère est-il ?"
+ ],
+ "赤道分南北半球；20°W 和 160°E 组成的经线圈分东西半球。": [
+  "The equator divides the Northern and Southern Hemispheres; the great circle formed by 20°W and 160°E divides the Eastern and Western Hemispheres.",
+  "L'équateur sépare les hémisphères Nord et Sud ; le grand cercle formé par 20° O et 160° E sépare les hémisphères oriental et occidental."
+ ],
+ "沿同一条经线，从北纬 {0}° 到北纬 {1}° 的距离约是多少（纬度相差 1° 约 {2} 千米）？": [
+  "Along the same meridian, about how far is it from {0}° N to {1}° N (1° of latitude is about {2} km)?",
+  "Le long du même méridien, quelle est environ la distance de {0}° N à {1}° N (1° de latitude vaut environ {2} km) ?"
+ ],
+ "千米": [
+  "km",
+  "km"
+ ],
+ "相差 {0}°，{1} × {2} = {3} 千米。": [
+  "The difference is {0}°, {1} × {2} = {3} km.",
+  "L'écart est de {0}°, {1} × {2} = {3} km."
+ ],
+ "纬度 {0}° 的纬线长度约是赤道长度的多少倍？": [
+  "About how many times the length of the equator is the parallel of latitude {0}°?",
+  "Combien de fois environ la longueur de l'équateur vaut la longueur du parallèle de latitude {0}° ?"
+ ],
+ "纬线长度 = 赤道长度 × cos 纬度，纬度越高越短。": [
+  "Length of a parallel = length of the equator × cos latitude; the higher the latitude, the shorter.",
+  "Longueur d'un parallèle = longueur de l'équateur × cos latitude ; plus la latitude est élevée, plus il est court."
+ ],
+ "A 地位于 {0}，{1}；B 地位于 {2}，{3}。B 地在 A 地的什么方向？": [
+  "Place A is at {0}, {1}; place B is at {2}, {3}. In which direction is B from A?",
+  "Le lieu A se trouve à {0}, {1} ; le lieu B se trouve à {2}, {3}. Dans quelle direction B se trouve-t-il par rapport à A ?"
+ ],
+ "北纬度数越大越靠北，东经度数越大越靠东。": [
+  "The greater the degrees of north latitude, the farther north; the greater the degrees of east longitude, the farther east.",
+  "Plus les degrés de latitude nord sont grands, plus on est au nord ; plus les degrés de longitude est sont grands, plus on est à l'est."
+ ],
+ "{0}的时间是 {1} {2}:00 时，{3}的时间是？（{4}与{5}相差 {6} 个时区）": [
+  "The time in {0} is {2}:00 on {1}. What is the time in {3}? ({4} and {5} are {6} time zones apart)",
+  "L'heure à {0} est {1} {2} h 00. Quelle est l'heure à {3} ? ({4} et {5} sont séparés de {6} fuseaux horaires)"
+ ],
+ "区时：东加西减，每个时区相差 1 小时；注意日期的变化。": [
+  "Zone time: add for the east, subtract for the west, 1 hour for each zone; watch the change of date.",
+  "Heure du fuseau : on ajoute à l'est, on retranche à l'ouest, 1 heure par fuseau ; attention au changement de date."
+ ],
+ "{0}位于哪个时区？": [
+  "In which time zone is {0}?",
+  "Dans quel fuseau horaire se trouve {0} ?"
+ ],
+ "每个时区跨经度 15°，时区号 = 经度 ÷ 15 取整（四舍五入）。": [
+  "Each zone spans 15° of longitude; zone number = longitude ÷ 15, rounded.",
+  "Chaque fuseau couvre 15° de longitude ; numéro du fuseau = longitude ÷ 15, arrondi."
+ ],
+ "东{0}区与西{1}区的时差是多少小时？": [
+  "What is the time difference in hours between East {0} and West {1}?",
+  "Quelle est la différence d'heure, en heures, entre Est {0} et Ouest {1} ?"
+ ],
+ "东、西两侧的时区相加。": [
+  "Add the zones on the east and west sides.",
+  "Additionnez les fuseaux de l'est et de l'ouest."
+ ],
+ "{0}日，{1}的正午太阳高度是多少度（太阳直射点纬度 {2}）？": [
+  "On {0}, what is the noon solar elevation at {1} (latitude of the point where the Sun is overhead: {2})?",
+  "Le {0}, quelle est la hauteur du Soleil à midi à {1} (latitude du point où le Soleil est au zénith : {2}) ?"
+ ],
+ "正午太阳高度 = 90° − |当地纬度 − 直射点纬度|。": [
+  "Noon solar elevation = 90° − |local latitude − latitude of the overhead point|.",
+  "Hauteur du Soleil à midi = 90° − |latitude du lieu − latitude du point zénithal|."
+ ],
+ "春分日，某地（北半球）的正午太阳高度是 {0}°，该地的纬度是北纬多少度？": [
+  "On the day of the spring equinox the noon solar elevation at a place (Northern Hemisphere) is {0}°. What is the north latitude of the place?",
+  "Le jour de l'équinoxe de printemps, la hauteur du Soleil à midi en un lieu (hémisphère Nord) est de {0}°. Quelle est la latitude nord de ce lieu ?"
+ ],
+ "春分日直射赤道，H = 90° − 纬度。": [
+  "On the spring equinox the Sun is overhead at the equator, H = 90° − latitude.",
+  "À l'équinoxe de printemps, le Soleil est au zénith à l'équateur, H = 90° − latitude."
+ ],
+ "北回归线（23.5°N）": [
+  "Tropic of Cancer (23.5°N)",
+  "Tropique du Cancer (23,5° N)"
+ ],
+ "南回归线（23.5°S）": [
+  "Tropic of Capricorn (23.5°S)",
+  "Tropique du Capricorne (23,5° S)"
+ ],
+ "赤道（0°）": [
+  "Equator (0°)",
+  "Équateur (0°)"
+ ],
+ "{0}日，太阳直射的纬线是？": [
+  "On {0}, over which parallel is the Sun overhead?",
+  "Le {0}, au-dessus de quel parallèle le Soleil est-il au zénith ?"
+ ],
+ "北极圈（66.5°N）": [
+  "Arctic Circle (66.5°N)",
+  "Cercle polaire arctique (66,5° N)"
+ ],
+ "南极圈（66.5°S）": [
+  "Antarctic Circle (66.5°S)",
+  "Cercle polaire antarctique (66,5° S)"
+ ],
+ "直射点在南北回归线之间往返移动。": [
+  "The overhead point moves back and forth between the Tropics of Cancer and Capricorn.",
+  "Le point zénithal se déplace entre le tropique du Cancer et le tropique du Capricorne."
+ ],
+ "在比例尺为 1∶{0} 的地图上，两地的图上距离是 {1} 厘米，它们的实地距离约是多少千米？": [
+  "On a map of scale 1∶{0}, the distance between two places on the map is {1} cm. About how many kilometres is the real distance between them?",
+  "Sur une carte à l'échelle 1∶{0}, la distance entre deux lieux sur la carte est de {1} cm. Quelle est environ leur distance réelle, en kilomètres ?"
+ ],
+ "实地距离 = 图上距离 × 比例尺的分母。": [
+  "Real distance = distance on the map × denominator of the scale.",
+  "Distance réelle = distance sur la carte × dénominateur de l'échelle."
+ ],
+ "两地的实地距离是 {0} 千米，在比例尺为 1∶{1} 的地图上，图上距离是多少厘米？": [
+  "The real distance between two places is {0} km. On a map of scale 1∶{1}, how many centimetres is the distance on the map?",
+  "La distance réelle entre deux lieux est de {0} km. Sur une carte à l'échelle 1∶{1}, quelle est la distance sur la carte, en centimètres ?"
+ ],
+ "厘米": [
+  "cm",
+  "cm"
+ ],
+ "图上距离 = 实地距离 ÷ 比例尺的分母。": [
+  "Distance on the map = real distance ÷ denominator of the scale.",
+  "Distance sur la carte = distance réelle ÷ dénominateur de l'échelle."
+ ],
+ "图上 1 厘米代表实地 {0} 千米，这幅地图的比例尺是？": [
+  "1 cm on the map stands for {0} km on the ground. What is the scale of this map?",
+  "1 cm sur la carte représente {0} km sur le terrain. Quelle est l'échelle de cette carte ?"
+ ],
+ "1 千米 = 100000 厘米，1 厘米代表 k 千米，则分母 = k × 100000。": [
+  "1 km = 100000 cm; if 1 cm stands for k km, the denominator = k × 100000.",
+  "1 km = 100000 cm ; si 1 cm représente k km, le dénominateur = k × 100000."
+ ],
+ "某山顶的海拔是 {0} 米，山脚的海拔是 {1} 米，两地的相对高度是多少米？": [
+  "The altitude of a hilltop is {0} m and the altitude of the foot of the hill is {1} m. What is the relative height between the two places, in metres?",
+  "L'altitude d'un sommet est de {0} m et celle du pied de la colline est de {1} m. Quel est le dénivelé entre les deux lieux, en mètres ?"
+ ],
+ "米": [
+  "m",
+  "m"
+ ],
+ "在比例尺 1∶{0} 的地形图上，两点图上距离 {1} 厘米，高差 {2} 米，两点间的平均坡度（高差 ÷ 水平距离）约是多少％？": [
+  "On a topographic map of scale 1∶{0}, two points are {1} cm apart on the map and differ in height by {2} m. About what is the mean slope between them (height difference ÷ horizontal distance), in %?",
+  "Sur une carte topographique à l'échelle 1∶{0}, deux points sont distants de {1} cm sur la carte et diffèrent en hauteur de {2} m. Quelle est environ la pente moyenne entre eux (différence de hauteur ÷ distance horizontale), en % ?"
+ ],
+ "水平距离 = {0} × {1} ÷ 100 = {2} 米，坡度 = {3} ÷ {4}。": [
+  "Horizontal distance = {0} × {1} ÷ 100 = {2} m, slope = {3} ÷ {4}.",
+  "Distance horizontale = {0} × {1} ÷ 100 = {2} m, pente = {3} ÷ {4}."
+ ],
+ "山脚的气温是 {0}℃，海拔每升高 100 米，气温下降 0.6℃。山顶比山脚高 {1} 米，山顶的气温约是多少℃？": [
+  "The temperature at the foot of a mountain is {0}℃, and it falls by 0.6℃ for every 100 m of height. The summit is {1} m higher than the foot. About what is the temperature at the summit, in ℃?",
+  "La température au pied d'une montagne est de {0}℃, et elle baisse de 0,6℃ tous les 100 m d'altitude. Le sommet est {1} m plus haut que le pied. Quelle est environ la température au sommet, en ℃ ?"
+ ],
+ "气温递减率约 0.6℃∕100 米。": [
+  "The lapse rate of temperature is about 0.6℃ per 100 m.",
+  "Le gradient thermique vertical est d'environ 0,6℃ par 100 m."
+ ],
+ "某地海拔约 {0} 米，相对高度约 {1} 米，{2}。这种地形属于哪一类？": [
+  "A place has an altitude of about {0} m and a relative height of about {1} m, {2}. Which kind of landform is it?",
+  "Un lieu a une altitude d'environ {0} m et un dénivelé d'environ {1} m, {2}. De quel type de relief s'agit-il ?"
+ ],
+ "平原低而平，高原高而顶平，山地高而陡，丘陵低而缓，盆地四周高中间低。": [
+  "A plain is low and flat, a plateau is high with a flat top, a mountain is high and steep, a hill is low and gentle, and a basin is high around the edges and low in the middle.",
+  "Une plaine est basse et plate, un plateau est élevé avec un sommet plat, une montagne est élevée et raide, une colline est basse et douce, et un bassin est élevé sur les bords et bas au milieu."
+ ],
+ "某地最热月均温 {0}℃，最冷月均温 {1}℃，气温的年较差是多少℃？": [
+  "The mean temperature of the hottest month of a place is {0}℃ and of the coldest month {1}℃. What is the annual range of temperature, in ℃?",
+  "La température moyenne du mois le plus chaud d'un lieu est {0}℃ et celle du mois le plus froid {1}℃. Quelle est l'amplitude thermique annuelle, en ℃ ?"
+ ],
+ "风力 {0} 级的风速大约是多少？": [
+  "About what is the wind speed of a wind of force {0}?",
+  "Quelle est environ la vitesse d'un vent de force {0} ?"
+ ],
+ "风力等级越高，风速越大。": [
+  "The higher the wind force, the greater the wind speed.",
+  "Plus la force du vent est élevée, plus la vitesse du vent est grande."
+ ],
+ "某地 24 小时降水量为 {0} 毫米，这属于什么等级的降水？": [
+  "The 24-hour precipitation at a place is {0} mm. What grade of precipitation is this?",
+  "Les précipitations en 24 heures en un lieu sont de {0} mm. De quelle catégorie de précipitations s'agit-il ?"
+ ],
+ "小雨 <10，中雨 10～24.9，大雨 25～49.9，暴雨 50～99.9，大暴雨 100～249.9，特大暴雨 ≥250（毫米∕24 小时）。": [
+  "Light rain <10, moderate rain 10–24.9, heavy rain 25–49.9, rainstorm 50–99.9, heavy rainstorm 100–249.9, extraordinary rainstorm ≥250 (mm per 24 hours).",
+  "Pluie faible <10, pluie modérée 10–24,9, pluie forte 25–49,9, pluie torrentielle 50–99,9, pluie très torrentielle 100–249,9, pluie exceptionnelle ≥250 (mm par 24 heures)."
+ ],
+ "风向标的箭头指向{0}方，这是什么风？": [
+  "The arrow of a wind vane points to the {0}. What wind is this?",
+  "La flèche d'une girouette pointe vers le {0}. De quel vent s'agit-il ?"
+ ],
+ "北": [
+  "north",
+  "nord"
+ ],
+ "东": [
+  "east",
+  "est"
+ ],
+ "南": [
+  "south",
+  "sud"
+ ],
+ "西": [
+  "west",
+  "ouest"
+ ],
+ "风向标箭头指向风吹来的方向，风向以来向命名。": [
+  "The arrow of a wind vane points in the direction the wind comes from, and winds are named by the direction they come from.",
+  "La flèche d'une girouette pointe dans la direction d'où vient le vent, et les vents sont nommés d'après leur direction d'origine."
+ ],
+ "某天最高气温 {0}℃，最低气温 {1}℃，气温日较差是多少℃？": [
+  "One day the highest temperature is {0}℃ and the lowest is {1}℃. What is the daily temperature range, in ℃?",
+  "Un jour, la température la plus haute est de {0}℃ et la plus basse de {1}℃. Quelle est l'amplitude thermique journalière, en ℃ ?"
+ ],
+ "日较差 = 最高气温 − 最低气温。": [
+  "Daily range = highest temperature − lowest temperature.",
+  "Amplitude journalière = température la plus haute − température la plus basse."
+ ],
+ "某国出生率 {0}‰，死亡率 {1}‰，人口自然增长率是多少？": [
+  "A country has a birth rate of {0}‰ and a death rate of {1}‰. What is the natural population growth rate?",
+  "Un pays a un taux de natalité de {0} ‰ et un taux de mortalité de {1} ‰. Quel est le taux d'accroissement naturel de la population ?"
+ ],
+ "自然增长率 = 出生率 − 死亡率，‰ 换成 % 要除以 10。": [
+  "Natural growth rate = birth rate − death rate; to change ‰ into %, divide by 10.",
+  "Taux d'accroissement naturel = taux de natalité − taux de mortalité ; pour passer de ‰ à %, divisez par 10."
+ ],
+ "某地人口 {0} 万人，年增长率 {1}%，按此速度，{2} 年后人口约是多少万人（保留一位小数）？": [
+  "A place has a population of {0} ten thousand people and an annual growth rate of {1}%. At this rate, about how many ten thousand people will there be after {2} years (to one decimal place)?",
+  "Un lieu compte {0} dizaines de milliers d'habitants et le taux de croissance annuel est de {1} %. À ce rythme, combien y aura-t-il environ de dizaines de milliers d'habitants dans {2} ans (à une décimale près) ?"
+ ],
+ "万人": [
+  "ten thousand people",
+  "dizaines de milliers d'habitants"
+ ],
+ "按复利计算：P × (1 + r)ⁿ。": [
+  "Using compound growth: P × (1 + r)ⁿ.",
+  "Avec une croissance composée : P × (1 + r)ⁿ."
+ ],
+ "某地面积 {0} 万平方千米，人口 {1} 万人，人口密度约是多少人∕平方千米？": [
+  "A place has an area of {0} ten thousand square kilometres and a population of {1} ten thousand people. About what is the population density, in people per square kilometre?",
+  "Un lieu a une superficie de {0} dizaines de milliers de kilomètres carrés et une population de {1} dizaines de milliers d'habitants. Quelle est environ la densité de population, en habitants par kilomètre carré ?"
+ ],
+ "人∕平方千米": [
+  "people per km²",
+  "habitants par km²"
+ ],
+ "人口密度 = 人口 ÷ 面积。": [
+  "Population density = population ÷ area.",
+  "Densité de population = population ÷ superficie."
+ ],
+ "某国出生率 {0}‰，死亡率 {1}‰，其人口结构最可能属于哪一类型？": [
+  "A country has a birth rate of {0}‰ and a death rate of {1}‰. Which type is its population structure most likely to be?",
+  "Un pays a un taux de natalité de {0} ‰ et un taux de mortalité de {1} ‰. À quel type sa structure de population correspond-elle le plus probablement ?"
+ ],
+ "自然增长率 ≥ 1% 为增长型；接近 0 为稳定型；为负为衰退型。": [
+  "Natural growth rate ≥ 1%: expanding type; close to 0: stable type; negative: declining type.",
+  "Taux d'accroissement naturel ≥ 1 % : type en expansion ; proche de 0 : type stable ; négatif : type en déclin."
+ ],
+ "一块板块每年移动 {0} 厘米，{1} 百万年约移动多少千米？": [
+  "A plate moves {0} cm a year. About how many kilometres does it move in {1} million years?",
+  "Une plaque se déplace de {0} cm par an. De combien de kilomètres se déplace-t-elle environ en {1} millions d'années ?"
+ ],
+ "1 厘米∕年 = 10 千米∕百万年。": [
+  "1 cm/year = 10 km per million years.",
+  "1 cm/an = 10 km par million d'années."
+ ],
+ "纵波速度 6 千米∕秒，横波速度 3.5 千米∕秒。震中距 {0} 千米的地方，横波比纵波晚到约多少秒？": [
+  "The speed of the longitudinal wave is 6 km/s and that of the transverse wave 3.5 km/s. At a place {0} km from the epicentre, about how many seconds later does the transverse wave arrive than the longitudinal wave?",
+  "La vitesse de l'onde longitudinale est de 6 km/s et celle de l'onde transversale de 3,5 km/s. En un lieu situé à {0} km de l'épicentre, environ combien de secondes plus tard l'onde transversale arrive-t-elle que l'onde longitudinale ?"
+ ],
+ "晚到时间 = d ÷ 3.5 − d ÷ 6。": [
+  "Delay = d ÷ 3.5 − d ÷ 6.",
+  "Retard = d ÷ 3,5 − d ÷ 6."
+ ],
+ "纵波速度 6 千米∕秒，横波速度 3.5 千米∕秒。某地测得横波比纵波晚到 {0} 秒，震中距约是多少千米？": [
+  "The speed of the longitudinal wave is 6 km/s and that of the transverse wave 3.5 km/s. At a place the transverse wave arrives {0} s later than the longitudinal wave. About how far is the epicentre, in km?",
+  "La vitesse de l'onde longitudinale est de 6 km/s et celle de l'onde transversale de 3,5 km/s. En un lieu, l'onde transversale arrive {0} s plus tard que l'onde longitudinale. À quelle distance se trouve environ l'épicentre, en km ?"
+ ],
+ "地震的震级每增加 1 级，释放的能量约增加 32 倍。震级相差 {0} 级，释放的能量约相差多少倍？": [
+  "Each increase of 1 in earthquake magnitude releases about 32 times more energy. When magnitudes differ by {0}, about how many times do the released energies differ?",
+  "Chaque augmentation de 1 de la magnitude d'un séisme libère environ 32 fois plus d'énergie. Quand les magnitudes diffèrent de {0}, environ combien de fois les énergies libérées diffèrent-elles ?"
+ ],
+ "2 倍": [
+  "2 times",
+  "2 fois"
+ ],
+ "10 倍": [
+  "10 times",
+  "10 fois"
+ ],
+ "32 倍": [
+  "32 times",
+  "32 fois"
+ ],
+ "100 倍": [
+  "100 times",
+  "100 fois"
+ ],
+ "1000 倍": [
+  "1000 times",
+  "1000 fois"
+ ],
+ "3200 倍": [
+  "3200 times",
+  "3200 fois"
+ ],
+ "某封闭流域一年的降水量 {0} 毫米，蒸发量 {1} 毫米，若地下水储量不变，径流量约是多少毫米？": [
+  "The annual precipitation of a closed drainage basin is {0} mm and the evaporation is {1} mm. If the groundwater storage does not change, about how many millimetres is the runoff?",
+  "Les précipitations annuelles d'un bassin fermé sont de {0} mm et l'évaporation de {1} mm. Si le stock d'eaux souterraines ne change pas, quel est environ le ruissellement, en millimètres ?"
+ ],
+ "毫米": [
+  "mm",
+  "mm"
+ ],
+ "水量平衡：降水 = 蒸发 + 径流。": [
+  "Water balance: precipitation = evaporation + runoff.",
+  "Bilan hydrique : précipitations = évaporation + ruissellement."
+ ],
+ "地下 {0} 千米深处属于地球内部的哪一层？": [
+  "Which layer of the Earth's interior is {0} km below the surface in?",
+  "Dans quelle couche de l'intérieur de la Terre se trouve-t-on à {0} km sous la surface ?"
+ ],
+ "地壳约 0～33 千米，地幔至约 2900 千米，外核至约 5100 千米，以下是内核。": [
+  "Crust about 0–33 km, mantle to about 2900 km, outer core to about 5100 km, and below that the inner core.",
+  "Croûte d'environ 0 à 33 km, manteau jusqu'à environ 2900 km, noyau externe jusqu'à environ 5100 km, puis noyau interne en dessous."
+ ],
+ "地表温度约 15℃，地温梯度约每深 100 米升高 3℃。地下 {0} 千米深处的温度约是多少℃？": [
+  "The surface temperature is about 15℃ and the geothermal gradient is about 3℃ for every 100 m of depth. About what is the temperature {0} km below the surface, in ℃?",
+  "La température de surface est d'environ 15℃ et le gradient géothermique est d'environ 3℃ par 100 m de profondeur. Quelle est environ la température à {0} km sous la surface, en ℃ ?"
+ ],
+ "15 + 30 × 深度（千米）。": [
+  "15 + 30 × depth (km).",
+  "15 + 30 × profondeur (km)."
+ ],
+ "某资源总量 {0} 亿吨，人口 {1} 亿，人均占有量约是多少吨？": [
+  "The total of a resource is {0} hundred million tonnes and the population is {1} hundred million. About how many tonnes per head is that?",
+  "Le total d'une ressource est de {0} centaines de millions de tonnes et la population de {1} centaines de millions d'habitants. Combien de tonnes par habitant cela fait-il environ ?"
+ ],
+ "吨": [
+  "tonnes",
+  "tonnes"
+ ],
+ "人均占有量 = 总量 ÷ 人口。": [
+  "Resources per head = total ÷ population.",
+  "Ressources par habitant = total ÷ population."
+ ],
+ "某地面积 {0} 万公顷，森林面积 {1} 万公顷，森林覆盖率是多少％？": [
+  "A place has an area of {0} ten thousand hectares and a forest area of {1} ten thousand hectares. What is the forest cover, in %?",
+  "Un lieu a une superficie de {0} dizaines de milliers d'hectares et une superficie forestière de {1} dizaines de milliers d'hectares. Quel est le taux de couverture forestière, en % ?"
+ ],
+ "森林覆盖率 = 森林面积 ÷ 土地面积。": [
+  "Forest cover = forest area ÷ land area.",
+  "Couverture forestière = superficie forestière ÷ superficie terrestre."
+ ],
+ "某地能源结构：煤 {0}%，石油 {1}%，天然气 {2}%，清洁能源 {3}%。按排放系数煤 0.95、石油 0.75、天然气 0.55、清洁能源 0.02 计算，二氧化碳排放指数是多少（保留一位小数）？": [
+  "The energy mix of a place: coal {0}%, oil {1}%, natural gas {2}%, clean energy {3}%. With emission factors of 0.95 for coal, 0.75 for oil, 0.55 for natural gas and 0.02 for clean energy, what is the carbon dioxide emission index (to one decimal place)?",
+  "Le mix énergétique d'un lieu : charbon {0} %, pétrole {1} %, gaz naturel {2} %, énergies propres {3} %. Avec des facteurs d'émission de 0,95 pour le charbon, 0,75 pour le pétrole, 0,55 pour le gaz naturel et 0,02 pour les énergies propres, quel est l'indice d'émission de dioxyde de carbone (à une décimale près) ?"
+ ],
+ "指数 = 各能源份额 × 排放系数 之和。": [
+  "Index = sum of (share of each energy × emission factor).",
+  "Indice = somme de (part de chaque énergie × facteur d'émission)."
+ ],
+ "北京时间（120°E 的地方时）是 {0}:00 时，东经 {1}° 的地方时是？": [
+  "Beijing time (the local time at 120°E) is {0}:00. What is the local time at {1}° E?",
+  "Il est {0} h 00 à l'heure de Pékin (heure locale à 120° E). Quelle est l'heure locale à {1}° E ?"
+ ],
+ "经度每相差 15°，地方时相差 1 小时，每相差 1° 相差 4 分钟；西边的时间晚。": [
+  "Local time differs by 1 hour for every 15° of longitude and by 4 minutes for every 1°; the time in the west is later.",
+  "L'heure locale diffère d'une heure pour chaque 15° de longitude et de 4 minutes pour chaque 1° ; l'heure à l'ouest est plus tardive."
+ ],
+ "我国最西端约 {0}°E，某地约 {1}°E，两地地方时相差约多少小时？": [
+  "The westernmost point of China is about {0}°E and a place is at about {1}°E. About how many hours do the local times of the two places differ?",
+  "Le point le plus à l'ouest de la Chine est à environ {0}° E et un lieu est à environ {1}° E. De combien d'heures environ les heures locales des deux lieux diffèrent-elles ?"
+ ],
+ "时差 = 经度差 ÷ 15。": [
+  "Time difference = difference of longitude ÷ 15.",
+  "Différence d'heure = différence de longitude ÷ 15."
+ ],
+ "第{0}级阶梯": [
+  "step {0}",
+  "palier {0}"
+ ],
+ "按图中示意的剖面，东经 {0}° 附近大致处在我国地势的哪一级阶梯？": [
+  "According to the profile in the picture, which step of China's terrain is the area near {0}° E roughly on?",
+  "D'après le profil de l'image, sur quel palier du relief de la Chine la zone proche de {0}° E se trouve-t-elle à peu près ?"
+ ],
+ "第四级阶梯": [
+  "step 4",
+  "quatrième palier"
+ ],
+ "第一、二级以约 102°E 为界，第二、三级以约 111°E 为界（示意）。": [
+  "The first and second steps are separated at about 102°E and the second and third at about 111°E (schematic).",
+  "Les premier et deuxième paliers sont séparés vers 102° E et les deuxième et troisième vers 111° E (schéma)."
+ ],
+ "下列国家中，人均国内生产总值最高的是？（数据为约数）": [
+  "Which of the following countries has the highest GDP per head? (The data are rounded.)",
+  "Lequel des pays suivants a le PIB par habitant le plus élevé ? (Les données sont arrondies.)"
+ ],
+ "{0}约 {1} 美元。": [
+  "{0} about {1} US dollars.",
+  "{0} environ {1} dollars américains."
+ ],
+ "赤道把地球分为哪两部分？": [
+  "Into which two parts does the equator divide the Earth?",
+  "En quelles deux parties l'équateur divise-t-il la Terre ?"
+ ],
+ "南半球和北半球": [
+  "the Southern and Northern Hemispheres",
+  "les hémisphères Sud et Nord"
+ ],
+ "东半球和西半球": [
+  "the Eastern and Western Hemispheres",
+  "les hémisphères oriental et occidental"
+ ],
+ "热带和温带": [
+  "the torrid zone and the temperate zone",
+  "la zone tropicale et la zone tempérée"
+ ],
+ "高纬度和低纬度": [
+  "high latitudes and low latitudes",
+  "les hautes latitudes et les basses latitudes"
+ ],
+ "赤道是 0° 纬线，南北半球的分界线。": [
+  "The equator is the 0° parallel, the boundary between the Northern and Southern Hemispheres.",
+  "L'équateur est le parallèle 0°, la limite entre les hémisphères Nord et Sud."
+ ],
+ "本初子午线是哪条经线？": [
+  "Which meridian is the prime meridian?",
+  "Quel méridien est le méridien d'origine ?"
+ ],
+ "0° 经线": [
+  "the 0° meridian",
+  "le méridien 0°"
+ ],
+ "180° 经线": [
+  "the 180° meridian",
+  "le méridien 180°"
+ ],
+ "20°W 经线": [
+  "the 20°W meridian",
+  "le méridien 20° O"
+ ],
+ "160°E 经线": [
+  "the 160°E meridian",
+  "le méridien 160° E"
+ ],
+ "本初子午线 0° 经线，经过英国伦敦格林尼治天文台旧址。": [
+  "The prime meridian is the 0° meridian and passes through the site of the old Royal Observatory at Greenwich, London, England.",
+  "Le méridien d'origine est le méridien 0°, qui passe par l'ancien observatoire royal de Greenwich, à Londres, en Angleterre."
+ ],
+ "北回归线的纬度约为多少？": [
+  "About what is the latitude of the Tropic of Cancer?",
+  "Quelle est environ la latitude du tropique du Cancer ?"
+ ],
+ "北回归线约 23.5°N，是热带和北温带的分界线。": [
+  "The Tropic of Cancer is at about 23.5°N and is the boundary between the torrid zone and the north temperate zone.",
+  "Le tropique du Cancer est à environ 23,5° N et marque la limite entre la zone tropicale et la zone tempérée nord."
+ ],
+ "北极圈的纬度约为多少？": [
+  "About what is the latitude of the Arctic Circle?",
+  "Quelle est environ la latitude du cercle polaire arctique ?"
+ ],
+ "北极圈约 66.5°N，是北温带与北寒带的分界线。": [
+  "The Arctic Circle is at about 66.5°N and is the boundary between the north temperate zone and the north frigid zone.",
+  "Le cercle polaire arctique est à environ 66,5° N et marque la limite entre la zone tempérée nord et la zone glaciale nord."
+ ],
+ "经线指示的方向是？": [
+  "What direction do meridians show?",
+  "Quelle direction les méridiens indiquent-ils ?"
+ ],
+ "南北方向": [
+  "north–south",
+  "nord–sud"
+ ],
+ "东西方向": [
+  "east–west",
+  "est–ouest"
+ ],
+ "东北方向": [
+  "northeast",
+  "nord-est"
+ ],
+ "任意方向": [
+  "any direction",
+  "n'importe quelle direction"
+ ],
+ "经线连接南北两极，指示南北方向；纬线指示东西方向。": [
+  "Meridians join the North and South Poles and show the north–south direction; parallels show the east–west direction.",
+  "Les méridiens relient les pôles Nord et Sud et indiquent la direction nord–sud ; les parallèles indiquent la direction est–ouest."
+ ],
+ "划分东、西半球的经线是？": [
+  "Which meridians divide the Eastern and Western Hemispheres?",
+  "Quels méridiens séparent les hémisphères oriental et occidental ?"
+ ],
+ "20°W 和 160°E": [
+  "20°W and 160°E",
+  "20° O et 160° E"
+ ],
+ "0° 和 180°": [
+  "0° and 180°",
+  "0° et 180°"
+ ],
+ "90°W 和 90°E": [
+  "90°W and 90°E",
+  "90° O et 90° E"
+ ],
+ "23.5°W 和 66.5°E": [
+  "23.5°W and 66.5°E",
+  "23,5° O et 66,5° E"
+ ],
+ "东西半球以 20°W 和 160°E 组成的经线圈为界。": [
+  "The Eastern and Western Hemispheres are divided by the great circle formed by 20°W and 160°E.",
+  "Les hémisphères oriental et occidental sont séparés par le grand cercle formé par 20° O et 160° E."
+ ],
+ "下列纬度中，属于中纬度的是？": [
+  "Which of the following latitudes is a mid-latitude?",
+  "Parmi les latitudes suivantes, laquelle est une latitude moyenne ?"
+ ],
+ "0°～30° 低纬，30°～60° 中纬，60°～90° 高纬。": [
+  "0°–30° low latitude, 30°–60° mid-latitude, 60°–90° high latitude.",
+  "0°–30° basse latitude, 30°–60° latitude moyenne, 60°–90° haute latitude."
+ ],
+ "地球赤道周长约为多少千米？": [
+  "About how long is the circumference of the Earth at the equator?",
+  "Quelle est environ la circonférence de la Terre à l'équateur ?"
+ ],
+ "4 万千米": [
+  "40 000 km",
+  "40 000 km"
+ ],
+ "4000 千米": [
+  "4000 km",
+  "4000 km"
+ ],
+ "40 万千米": [
+  "400 000 km",
+  "400 000 km"
+ ],
+ "6371 千米": [
+  "6371 km",
+  "6371 km"
+ ],
+ "赤道周长约 4 万千米，平均半径约 6371 千米。": [
+  "The equatorial circumference is about 40 000 km and the mean radius about 6371 km.",
+  "La circonférence équatoriale est d'environ 40 000 km et le rayon moyen d'environ 6371 km."
+ ],
+ "关于经线的叙述，正确的是？": [
+  "Which statement about meridians is correct?",
+  "Quelle affirmation sur les méridiens est correcte ?"
+ ],
+ "所有经线长度都相等": [
+  "all meridians are the same length",
+  "tous les méridiens ont la même longueur"
+ ],
+ "所有经线互相平行": [
+  "all meridians are parallel to each other",
+  "tous les méridiens sont parallèles entre eux"
+ ],
+ "经线指示东西方向": [
+  "meridians show the east–west direction",
+  "les méridiens indiquent la direction est–ouest"
+ ],
+ "赤道是最长的经线": [
+  "the equator is the longest meridian",
+  "l'équateur est le plus long des méridiens"
+ ],
+ "经线都是半圆，长度相等，相交于南北两极。": [
+  "Meridians are all half circles of equal length that meet at the North and South Poles.",
+  "Les méridiens sont tous des demi-cercles de même longueur qui se rejoignent aux pôles Nord et Sud."
+ ],
+ "在地球仪上，纬线的形状是？": [
+  "What is the shape of a parallel of latitude on a globe?",
+  "Quelle est la forme d'un parallèle sur un globe ?"
+ ],
+ "圆圈，赤道最长": [
+  "circles, with the equator the longest",
+  "des cercles, l'équateur étant le plus long"
+ ],
+ "半圆，长度都相等": [
+  "half circles, all of the same length",
+  "des demi-cercles, tous de même longueur"
+ ],
+ "直线": [
+  "straight lines",
+  "des droites"
+ ],
+ "椭圆，两极最长": [
+  "ellipses, longest at the poles",
+  "des ellipses, les plus longues aux pôles"
+ ],
+ "纬线是与赤道平行的圆圈，越向两极越短。": [
+  "Parallels are circles parallel to the equator and get shorter towards the poles.",
+  "Les parallèles sont des cercles parallèles à l'équateur et raccourcissent vers les pôles."
+ ],
+ "全球共划分为多少个时区？": [
+  "How many time zones is the world divided into?",
+  "En combien de fuseaux horaires le monde est-il divisé ?"
+ ],
+ "24 个": [
+  "24",
+  "24"
+ ],
+ "12 个": [
+  "12",
+  "12"
+ ],
+ "15 个": [
+  "15",
+  "15"
+ ],
+ "360 个": [
+  "360",
+  "360"
+ ],
+ "每个时区跨经度 15°，共 24 个时区。": [
+  "Each time zone spans 15° of longitude, making 24 zones.",
+  "Chaque fuseau horaire couvre 15° de longitude, ce qui fait 24 fuseaux."
+ ],
+ "北京时间采用的是哪个时区的区时？": [
+  "Beijing time is the zone time of which time zone?",
+  "L'heure de Pékin est l'heure de quel fuseau horaire ?"
+ ],
+ "东八区": [
+  "East 8",
+  "Est 8"
+ ],
+ "东九区": [
+  "East 9",
+  "Est 9"
+ ],
+ "东七区": [
+  "East 7",
+  "Est 7"
+ ],
+ "北京时间是东八区的区时，即 120°E 的地方时。": [
+  "Beijing time is the zone time of East 8, that is the local time at 120°E.",
+  "L'heure de Pékin est l'heure du fuseau Est 8, c'est-à-dire l'heure locale à 120° E."
+ ],
+ "东西相邻的两个地方，时刻的关系是？": [
+  "What is the relation between the times of two neighbouring places, one east and one west of each other?",
+  "Quelle est la relation entre les heures de deux lieux voisins, l'un à l'est de l'autre ?"
+ ],
+ "东边的比西边的早": [
+  "the east is ahead of the west",
+  "l'est est en avance sur l'ouest"
+ ],
+ "西边的比东边的早": [
+  "the west is ahead of the east",
+  "l'ouest est en avance sur l'est"
+ ],
+ "时刻相同": [
+  "the time is the same",
+  "l'heure est la même"
+ ],
+ "东早西晚，因为地球自西向东自转。": [
+  "The east is earlier because the Earth rotates from west to east.",
+  "L'est est en avance parce que la Terre tourne d'ouest en est."
+ ],
+ "国际日期变更线大致沿着哪条经线？": [
+  "Roughly along which meridian does the International Date Line run?",
+  "Le long de quel méridien la ligne de changement de date internationale passe-t-elle à peu près ?"
+ ],
+ "120°E 经线": [
+  "the 120°E meridian",
+  "le méridien 120° E"
+ ],
+ "90°W 经线": [
+  "the 90°W meridian",
+  "le méridien 90° O"
+ ],
+ "日界线大致沿 180° 经线，有的地方为了方便而弯曲。": [
+  "The date line runs roughly along the 180° meridian, bending in some places for convenience.",
+  "La ligne de changement de date suit à peu près le méridien 180°, avec des détours par endroits pour plus de commodité."
+ ],
+ "自西向东越过日界线，日期怎样变化？": [
+  "How does the date change when crossing the date line from west to east?",
+  "Comment la date change-t-elle quand on franchit la ligne de changement de date d'ouest en est ?"
+ ],
+ "减一天": [
+  "it goes back one day",
+  "on retire un jour"
+ ],
+ "加一天": [
+  "it goes forward one day",
+  "on ajoute un jour"
+ ],
+ "加一周": [
+  "it goes forward one week",
+  "on ajoute une semaine"
+ ],
+ "自西向东越过日界线，日期减一天；自东向西加一天。": [
+  "Crossing the date line from west to east, the date goes back one day; from east to west, it goes forward one day.",
+  "En franchissant la ligne de changement de date d'ouest en est, on retire un jour ; d'est en ouest, on ajoute un jour."
+ ],
+ "相邻的两个时区，区时相差多少？": [
+  "By how much does the zone time differ between two neighbouring time zones?",
+  "De combien l'heure du fuseau diffère-t-elle entre deux fuseaux voisins ?"
+ ],
+ "1 小时": [
+  "1 hour",
+  "1 heure"
+ ],
+ "15 分钟": [
+  "15 minutes",
+  "15 minutes"
+ ],
+ "2 小时": [
+  "2 hours",
+  "2 heures"
+ ],
+ "24 小时": [
+  "24 hours",
+  "24 heures"
+ ],
+ "每相差一个时区，时间相差 1 小时。": [
+  "For every zone of difference the time differs by 1 hour.",
+  "Pour chaque fuseau d'écart, l'heure diffère d'une heure."
+ ],
+ "东十二区和西十二区的关系是？": [
+  "What is the relation between East 12 and West 12?",
+  "Quelle est la relation entre Est 12 et Ouest 12 ?"
+ ],
+ "合为一个时区，位于 180° 经线两侧": [
+  "together they make one time zone, on both sides of the 180° meridian",
+  "ensemble ils forment un seul fuseau horaire, de part et d'autre du méridien 180°"
+ ],
+ "相距 24 小时": [
+  "they are 24 hours apart",
+  "ils sont distants de 24 heures"
+ ],
+ "互为对跖点": [
+  "they are antipodes of each other",
+  "ils sont antipodes l'un de l'autre"
+ ],
+ "是两个相同的时区": [
+  "they are two identical time zones",
+  "ce sont deux fuseaux horaires identiques"
+ ],
+ "东西十二区各跨 7.5°，合为一个时区。": [
+  "East 12 and West 12 each span 7.5° and together make one time zone.",
+  "Est 12 et Ouest 12 couvrent chacun 7,5° et forment ensemble un seul fuseau horaire."
+ ],
+ "地球自转的方向是？": [
+  "In which direction does the Earth rotate?",
+  "Dans quel sens la Terre tourne-t-elle ?"
+ ],
+ "自西向东": [
+  "from west to east",
+  "d'ouest en est"
+ ],
+ "自东向西": [
+  "from east to west",
+  "d'est en ouest"
+ ],
+ "自南向北": [
+  "from south to north",
+  "du sud au nord"
+ ],
+ "自北向南": [
+  "from north to south",
+  "du nord au sud"
+ ],
+ "地球自西向东自转，周期约 24 小时。": [
+  "The Earth rotates from west to east with a period of about 24 hours.",
+  "La Terre tourne d'ouest en est avec une période d'environ 24 heures."
+ ],
+ "产生昼夜交替现象的原因是？": [
+  "What causes the alternation of day and night?",
+  "Quelle est la cause de l'alternance du jour et de la nuit ?"
+ ],
+ "地球自转": [
+  "the rotation of the Earth",
+  "la rotation de la Terre"
+ ],
+ "地球公转": [
+  "the revolution of the Earth",
+  "la révolution de la Terre"
+ ],
+ "月球绕地球运转": [
+  "the Moon going round the Earth",
+  "la Lune qui tourne autour de la Terre"
+ ],
+ "太阳自转": [
+  "the rotation of the Sun",
+  "la rotation du Soleil"
+ ],
+ "昼夜交替由地球自转产生。": [
+  "The alternation of day and night is caused by the rotation of the Earth.",
+  "L'alternance du jour et de la nuit est causée par la rotation de la Terre."
+ ],
+ "产生四季变化的原因是？": [
+  "What causes the change of the seasons?",
+  "Quelle est la cause du changement des saisons ?"
+ ],
+ "地球公转，且地轴倾斜": [
+  "the revolution of the Earth, together with the tilt of its axis",
+  "la révolution de la Terre, avec l'inclinaison de son axe"
+ ],
+ "月相变化": [
+  "the phases of the Moon",
+  "les phases de la Lune"
+ ],
+ "地球形状": [
+  "the shape of the Earth",
+  "la forme de la Terre"
+ ],
+ "四季变化由公转并伴随地轴倾斜产生。": [
+  "The seasons are caused by the revolution accompanied by the tilt of the Earth's axis.",
+  "Les saisons sont causées par la révolution accompagnée de l'inclinaison de l'axe de la Terre."
+ ],
+ "太阳直射北回归线的节气是？": [
+  "At which solar term is the Sun overhead at the Tropic of Cancer?",
+  "À quelle période de l'année le Soleil est-il au zénith au tropique du Cancer ?"
+ ],
+ "夏至（6 月 22 日前后）直射北回归线。": [
+  "At the summer solstice (around 22 June) the Sun is overhead at the Tropic of Cancer.",
+  "Au solstice d'été (vers le 22 juin), le Soleil est au zénith au tropique du Cancer."
+ ],
+ "北半球昼最长、夜最短的节气是？": [
+  "At which solar term is the day longest and the night shortest in the Northern Hemisphere?",
+  "À quelle période de l'année le jour est-il le plus long et la nuit la plus courte dans l'hémisphère Nord ?"
+ ],
+ "夏至日北半球昼最长。": [
+  "At the summer solstice the day is longest in the Northern Hemisphere.",
+  "Au solstice d'été, le jour est le plus long dans l'hémisphère Nord."
+ ],
+ "全球昼夜等长的节气是？": [
+  "At which solar terms are day and night equal in length all over the world?",
+  "À quelles périodes de l'année le jour et la nuit ont-ils la même durée sur tout le globe ?"
+ ],
+ "春分和秋分": [
+  "the spring equinox and the autumn equinox",
+  "l'équinoxe de printemps et l'équinoxe d'automne"
+ ],
+ "夏至和冬至": [
+  "the summer solstice and the winter solstice",
+  "le solstice d'été et le solstice d'hiver"
+ ],
+ "立春和立秋": [
+  "the beginning of spring and the beginning of autumn",
+  "le début du printemps et le début de l'automne"
+ ],
+ "冬至和春分": [
+  "the winter solstice and the spring equinox",
+  "le solstice d'hiver et l'équinoxe de printemps"
+ ],
+ "春分、秋分太阳直射赤道，全球昼夜等长（极点除外）。": [
+  "At the spring and autumn equinoxes the Sun is overhead at the equator, and day and night are equal all over the world (except at the poles).",
+  "Aux équinoxes de printemps et d'automne, le Soleil est au zénith à l'équateur, et le jour et la nuit ont la même durée sur tout le globe (sauf aux pôles)."
+ ],
+ "北半球是夏季时，南半球是？": [
+  "When it is summer in the Northern Hemisphere, what is it in the Southern Hemisphere?",
+  "Quand c'est l'été dans l'hémisphère Nord, quelle saison est-ce dans l'hémisphère Sud ?"
+ ],
+ "南北半球的季节相反。": [
+  "The seasons in the Northern and Southern Hemispheres are opposite.",
+  "Les saisons des hémisphères Nord et Sud sont opposées."
+ ],
+ "黄赤交角约为多少度？": [
+  "About how many degrees is the obliquity of the ecliptic?",
+  "Combien de degrés vaut environ l'obliquité de l'écliptique ?"
+ ],
+ "黄赤交角约 23°26′，即约 23.5°。": [
+  "The obliquity is about 23°26′, that is about 23.5°.",
+  "L'obliquité est d'environ 23°26′, soit environ 23,5°."
+ ],
+ "夏至日北极圈内出现的现象是？": [
+  "What happens inside the Arctic Circle at the summer solstice?",
+  "Que se passe-t-il à l'intérieur du cercle polaire arctique au solstice d'été ?"
+ ],
+ "极昼": [
+  "polar day",
+  "le jour polaire"
+ ],
+ "极夜": [
+  "polar night",
+  "la nuit polaire"
+ ],
+ "昼夜等长": [
+  "day and night equal in length",
+  "un jour et une nuit de même durée"
+ ],
+ "太阳直射": [
+  "the Sun overhead",
+  "le Soleil au zénith"
+ ],
+ "夏至日北极圈及其以北地区出现极昼。": [
+  "At the summer solstice polar day occurs within the Arctic Circle and to the north of it.",
+  "Au solstice d'été, le jour polaire se produit à l'intérieur du cercle polaire arctique et au nord de celui-ci."
+ ],
+ "一般的地图，方向的判断是？": [
+  "On an ordinary map, how is direction judged?",
+  "Sur une carte ordinaire, comment juge-t-on l'orientation ?"
+ ],
+ "上北下南，左西右东": [
+  "north is up, south is down, west is left, east is right",
+  "le nord est en haut, le sud en bas, l'ouest à gauche, l'est à droite"
+ ],
+ "上南下北，左东右西": [
+  "south is up, north is down, east is left, west is right",
+  "le sud est en haut, le nord en bas, l'est à gauche, l'ouest à droite"
+ ],
+ "上东下西": [
+  "east is up, west is down",
+  "l'est est en haut, l'ouest en bas"
+ ],
+ "上西下东": [
+  "west is up, east is down",
+  "l'ouest est en haut, l'est en bas"
+ ],
+ "没有指向标和经纬网时，一般“上北下南，左西右东”。": [
+  "Without a direction arrow or a grid of latitude and longitude, it is generally “north is up, south is down, west is left, east is right”.",
+  "Sans flèche d'orientation ni quadrillage de latitudes et de longitudes, c'est en général « le nord en haut, le sud en bas, l'ouest à gauche, l'est à droite »."
+ ],
+ "下列比例尺中，最大的是？": [
+  "Which of the following scales is the largest?",
+  "Parmi les échelles suivantes, laquelle est la plus grande ?"
+ ],
+ "分母越小，比例尺越大。": [
+  "The smaller the denominator, the larger the scale.",
+  "Plus le dénominateur est petit, plus l'échelle est grande."
+ ],
+ "比例尺大的地图的特点是？": [
+  "What are the characteristics of a map with a large scale?",
+  "Quelles sont les caractéristiques d'une carte à grande échelle ?"
+ ],
+ "范围小，内容详细": [
+  "a small area, detailed content",
+  "une petite zone, un contenu détaillé"
+ ],
+ "范围大，内容详细": [
+  "a large area, detailed content",
+  "une grande zone, un contenu détaillé"
+ ],
+ "范围大，内容简略": [
+  "a large area, less detailed content",
+  "une grande zone, un contenu moins détaillé"
+ ],
+ "范围小，内容简略": [
+  "a small area, less detailed content",
+  "une petite zone, un contenu moins détaillé"
+ ],
+ "同样大小的图幅，比例尺越大，表示的范围越小，内容越详细。": [
+  "For a map sheet of the same size, the larger the scale, the smaller the area shown and the more detailed the content.",
+  "Pour une feuille de carte de même taille, plus l'échelle est grande, plus la zone représentée est petite et plus le contenu est détaillé."
+ ],
+ "比例尺的三种表示方法是？": [
+  "What are the three ways of showing a scale?",
+  "Quelles sont les trois façons d'indiquer une échelle ?"
+ ],
+ "数字式、线段式、文字式": [
+  "numerical, line and verbal",
+  "numérique, graphique et verbale"
+ ],
+ "数字式、符号式、文字式": [
+  "numerical, symbol and verbal",
+  "numérique, par symboles et verbale"
+ ],
+ "线段式、图例式、数字式": [
+  "line, legend and numerical",
+  "graphique, par légende et numérique"
+ ],
+ "经纬式、线段式、文字式": [
+  "latitude–longitude, line and verbal",
+  "par latitude–longitude, graphique et verbale"
+ ],
+ "常见的是数字式、线段式和文字式。": [
+  "The usual ones are the numerical, line and verbal scales.",
+  "Les plus courantes sont les échelles numérique, graphique et verbale."
+ ],
+ "地图上用来说明各种符号含义的是？": [
+  "What on a map explains the meaning of the various symbols?",
+  "Qu'est-ce qui, sur une carte, explique la signification des différents symboles ?"
+ ],
+ "图例": [
+  "the legend",
+  "la légende"
+ ],
+ "指向标": [
+  "the direction arrow",
+  "la flèche d'orientation"
+ ],
+ "等高线": [
+  "contour lines",
+  "les courbes de niveau"
+ ],
+ "图例是地图上各种符号的说明。": [
+  "The legend explains the symbols on a map.",
+  "La légende explique les symboles d'une carte."
+ ],
+ "在有经纬网的地图上，纬线指示的方向是？": [
+  "On a map with a grid of latitude and longitude, what direction do parallels show?",
+  "Sur une carte avec un quadrillage de latitudes et de longitudes, quelle direction les parallèles indiquent-ils ?"
+ ],
+ "无方向": [
+  "no direction",
+  "aucune direction"
+ ],
+ "经线指南北，纬线指东西。": [
+  "Meridians show north–south and parallels show east–west.",
+  "Les méridiens indiquent le nord–sud et les parallèles l'est–ouest."
+ ],
+ "把一幅地图的比例尺从 1∶10000 变为 1∶5000，则？": [
+  "The scale of a map is changed from 1∶10000 to 1∶5000. Then:",
+  "L'échelle d'une carte passe de 1∶10000 à 1∶5000. Alors :"
+ ],
+ "比例尺放大一倍": [
+  "the scale is doubled",
+  "l'échelle est doublée"
+ ],
+ "比例尺缩小一半": [
+  "the scale is halved",
+  "l'échelle est réduite de moitié"
+ ],
+ "比例尺不变": [
+  "the scale does not change",
+  "l'échelle ne change pas"
+ ],
+ "范围扩大一倍": [
+  "the area shown is doubled",
+  "la zone représentée est doublée"
+ ],
+ "分母变小，比例尺变大。": [
+  "The denominator gets smaller, so the scale gets larger.",
+  "Le dénominateur diminue, donc l'échelle augmente."
+ ],
+ "等高线密集的地方，地势？": [
+  "Where contour lines are close together, the terrain is:",
+  "Là où les courbes de niveau sont serrées, le relief est :"
+ ],
+ "陡峭": [
+  "steep",
+  "raide"
+ ],
+ "平缓": [
+  "gentle",
+  "doux"
+ ],
+ "低洼": [
+  "low-lying",
+  "bas"
+ ],
+ "高大": [
+  "tall",
+  "élevé"
+ ],
+ "等高线越密集，坡越陡。": [
+  "The closer the contour lines, the steeper the slope.",
+  "Plus les courbes de niveau sont serrées, plus la pente est raide."
+ ],
+ "几条等高线重合的地方，是？": [
+  "Where several contour lines coincide, there is:",
+  "Là où plusieurs courbes de niveau se confondent, il y a :"
+ ],
+ "陡崖": [
+  "a cliff",
+  "une falaise"
+ ],
+ "山顶": [
+  "a peak",
+  "un sommet"
+ ],
+ "鞍部": [
+  "a saddle",
+  "un col"
+ ],
+ "等高线重合处是陡崖。": [
+  "Where contour lines coincide there is a cliff.",
+  "Là où les courbes de niveau se confondent, il y a une falaise."
+ ],
+ "等高线向海拔较低处凸出的地方，是？": [
+  "Where contour lines bulge towards lower altitude, there is a:",
+  "Là où les courbes de niveau font saillie vers les altitudes plus basses, il y a :"
+ ],
+ "山脊": [
+  "ridge",
+  "une crête"
+ ],
+ "山谷": [
+  "valley",
+  "une vallée"
+ ],
+ "山脊等高线向低处凸出；山谷向高处凸出。": [
+  "Ridge contours bulge towards low ground; valley contours bulge towards high ground.",
+  "Les courbes d'une crête font saillie vers les basses altitudes ; celles d'une vallée vers les hautes altitudes."
+ ],
+ "等高线向海拔较高处凸出的地方，是？": [
+  "Where contour lines bulge towards higher altitude, there is a:",
+  "Là où les courbes de niveau font saillie vers les altitudes plus hautes, il y a :"
+ ],
+ "山谷常有河流发育。": [
+  "Rivers often develop in valleys.",
+  "Des cours d'eau se forment souvent dans les vallées."
+ ],
+ "两个山顶之间相对低洼的部位叫？": [
+  "The relatively low place between two peaks is called a:",
+  "L'endroit relativement bas entre deux sommets s'appelle :"
+ ],
+ "鞍部像马鞍，是交通要道。": [
+  "A saddle is shaped like a horse's saddle and is often a traffic route.",
+  "Un col a la forme d'une selle de cheval et est souvent une voie de passage."
+ ],
+ "相对高度指的是？": [
+  "What does relative height mean?",
+  "Que signifie le dénivelé ?"
+ ],
+ "两点海拔的差": [
+  "the difference in altitude of two points",
+  "la différence d'altitude de deux points"
+ ],
+ "某点到海平面的高度": [
+  "the height of a point above sea level",
+  "la hauteur d'un point au-dessus du niveau de la mer"
+ ],
+ "山的总高度": [
+  "the total height of the mountain",
+  "la hauteur totale de la montagne"
+ ],
+ "两点的水平距离": [
+  "the horizontal distance of two points",
+  "la distance horizontale de deux points"
+ ],
+ "分层设色地形图上，绿色一般表示？": [
+  "On a layer-tinted map, what does green generally show?",
+  "Sur une carte à teintes hypsométriques, que représente en général le vert ?"
+ ],
+ "高山": [
+  "high mountains",
+  "les hautes montagnes"
+ ],
+ "海洋": [
+  "the ocean",
+  "l'océan"
+ ],
+ "绿色表示平原，黄色表示高原、丘陵，褐色表示山地。": [
+  "Green stands for plains, yellow for plateaus and hills, and brown for mountains.",
+  "Le vert représente les plaines, le jaune les plateaux et les collines, le brun les montagnes."
+ ],
+ "闭合等高线，中间数值大于四周，表示？": [
+  "A closed contour line with higher values in the middle than around it shows:",
+  "Une courbe de niveau fermée dont les valeurs sont plus élevées au centre qu'autour représente :"
+ ],
+ "山顶或山地": [
+  "a peak or mountain",
+  "un sommet ou une montagne"
+ ],
+ "中间高四周低是山顶，中间低四周高是盆地。": [
+  "High in the middle and low around is a peak; low in the middle and high around is a basin.",
+  "Élevé au centre et bas autour : un sommet ; bas au centre et élevé autour : une cuvette."
+ ],
+ "世界最高峰是？": [
+  "What is the highest mountain in the world?",
+  "Quelle est la plus haute montagne du monde ?"
+ ],
+ "珠穆朗玛峰": [
+  "Mount Qomolangma (Everest)",
+  "le mont Qomolangma (Everest)"
+ ],
+ "乞力马扎罗山": [
+  "Mount Kilimanjaro",
+  "le mont Kilimandjaro"
+ ],
+ "阿尔卑斯山": [
+  "the Alps",
+  "les Alpes"
+ ],
+ "富士山": [
+  "Mount Fuji",
+  "le mont Fuji"
+ ],
+ "珠穆朗玛峰海拔约 8849 米，位于中国与尼泊尔边界。": [
+  "Mount Qomolangma is about 8849 m high and lies on the border between China and Nepal.",
+  "Le mont Qomolangma culmine à environ 8849 m et se trouve à la frontière entre la Chine et le Népal."
+ ],
+ "海拔（绝对高度）是从哪里算起的垂直距离？": [
+  "From where is altitude (absolute height) measured vertically?",
+  "À partir de quoi l'altitude (hauteur absolue) se mesure-t-elle verticalement ?"
+ ],
+ "海平面": [
+  "sea level",
+  "le niveau de la mer"
+ ],
+ "山脚": [
+  "the foot of the mountain",
+  "le pied de la montagne"
+ ],
+ "地面平均高度": [
+  "the mean height of the ground",
+  "la hauteur moyenne du sol"
+ ],
+ "大气顶部": [
+  "the top of the atmosphere",
+  "le sommet de l'atmosphère"
+ ],
+ "海拔以海平面为起点。": [
+  "Altitude starts from sea level.",
+  "L'altitude se mesure à partir du niveau de la mer."
+ ],
+ "顶面平坦、边缘陡峭、海拔较高的地形是？": [
+  "Which landform has a flat top, steep edges and a high altitude?",
+  "Quel relief a un sommet plat, des bords escarpés et une altitude élevée ?"
+ ],
+ "高原海拔一般在 500 米以上。": [
+  "The altitude of a plateau is generally above 500 m.",
+  "L'altitude d'un plateau est en général supérieure à 500 m."
+ ],
+ "四周高、中间低的地形是？": [
+  "Which landform is high around the edges and low in the middle?",
+  "Quel relief est élevé sur les bords et bas au milieu ?"
+ ],
+ "盆地四周为山地或高原，中间低平。": [
+  "A basin is surrounded by mountains or plateaus and is low and flat in the middle.",
+  "Un bassin est entouré de montagnes ou de plateaux et est bas et plat au milieu."
+ ],
+ "海拔一般在 500 米以下，相对高度不超过 200 米，坡度和缓的地形是？": [
+  "Which landform has an altitude generally below 500 m, a relative height of not more than 200 m and gentle slopes?",
+  "Quel relief a une altitude en général inférieure à 500 m, un dénivelé d'au plus 200 m et des pentes douces ?"
+ ],
+ "丘陵坡度和缓。": [
+  "Hills have gentle slopes.",
+  "Les collines ont des pentes douces."
+ ],
+ "下列属于山地的特征的是？": [
+  "Which of the following is a feature of mountains?",
+  "Parmi les éléments suivants, lequel est une caractéristique des montagnes ?"
+ ],
+ "海拔较高，起伏大，坡度陡": [
+  "high altitude, great relief and steep slopes",
+  "altitude élevée, fort relief et pentes raides"
+ ],
+ "海拔低，地面平坦": [
+  "low altitude and flat ground",
+  "basse altitude et sol plat"
+ ],
+ "顶面平坦": [
+  "a flat top",
+  "un sommet plat"
+ ],
+ "山地起伏大，不适合大面积耕作。": [
+  "Mountains have great relief and are not suitable for large-scale farming.",
+  "Les montagnes ont un fort relief et ne se prêtent pas aux cultures sur de grandes surfaces."
+ ],
+ "地球表面，海洋与陆地的比例大约是？": [
+  "On the Earth's surface, about what is the ratio of ocean to land?",
+  "À la surface de la Terre, quel est à peu près le rapport entre les océans et les terres ?"
+ ],
+ "七比三（海洋约 71%）": [
+  "seven to three (ocean about 71%)",
+  "sept pour trois (océan environ 71 %)"
+ ],
+ "五比五": [
+  "five to five",
+  "cinq pour cinq"
+ ],
+ "三比七": [
+  "three to seven",
+  "trois pour sept"
+ ],
+ "九比一": [
+  "nine to one",
+  "neuf pour un"
+ ],
+ "海洋约占 71%，陆地约占 29%。": [
+  "The ocean makes up about 71% and the land about 29%.",
+  "Les océans représentent environ 71 % et les terres environ 29 %."
+ ],
+ "陆地主要集中分布在哪个半球？": [
+  "In which hemisphere is the land mainly concentrated?",
+  "Dans quel hémisphère les terres sont-elles principalement concentrées ?"
+ ],
+ "北半球陆地面积大，南半球海洋面积大。": [
+  "The Northern Hemisphere has more land, the Southern Hemisphere more ocean.",
+  "L'hémisphère Nord a plus de terres, l'hémisphère Sud plus d'océans."
+ ],
+ "亚洲和欧洲的分界线是？": [
+  "What is the boundary between Asia and Europe?",
+  "Quelle est la limite entre l'Asie et l'Europe ?"
+ ],
+ "乌拉尔山脉": [
+  "the Ural Mountains",
+  "les monts Oural"
+ ],
+ "苏伊士运河": [
+  "the Suez Canal",
+  "le canal de Suez"
+ ],
+ "巴拿马运河": [
+  "the Panama Canal",
+  "le canal de Panama"
+ ],
+ "白令海峡": [
+  "the Bering Strait",
+  "le détroit de Béring"
+ ],
+ "亚欧分界：乌拉尔山脉、乌拉尔河、大高加索山脉、土耳其海峡。": [
+  "The boundary of Asia and Europe: the Ural Mountains, the Ural River, the Greater Caucasus and the Turkish Straits.",
+  "La limite entre l'Asie et l'Europe : les monts Oural, le fleuve Oural, le Grand Caucase et les détroits turcs."
+ ],
+ "亚洲和非洲的分界线是？": [
+  "What is the boundary between Asia and Africa?",
+  "Quelle est la limite entre l'Asie et l'Afrique ?"
+ ],
+ "直布罗陀海峡": [
+  "the Strait of Gibraltar",
+  "le détroit de Gibraltar"
+ ],
+ "苏伊士运河沟通地中海与红海。": [
+  "The Suez Canal links the Mediterranean and the Red Sea.",
+  "Le canal de Suez relie la Méditerranée et la mer Rouge."
+ ],
+ "南美洲和北美洲的分界线是？": [
+  "What is the boundary between South America and North America?",
+  "Quelle est la limite entre l'Amérique du Sud et l'Amérique du Nord ?"
+ ],
+ "巴拿马运河沟通太平洋和大西洋。": [
+  "The Panama Canal links the Pacific and the Atlantic.",
+  "Le canal de Panama relie le Pacifique et l'Atlantique."
+ ],
+ "亚洲和北美洲之间的海峡是？": [
+  "Which strait lies between Asia and North America?",
+  "Quel détroit se trouve entre l'Asie et l'Amérique du Nord ?"
+ ],
+ "马六甲海峡": [
+  "the Strait of Malacca",
+  "le détroit de Malacca"
+ ],
+ "土耳其海峡": [
+  "the Turkish Straits",
+  "les détroits turcs"
+ ],
+ "白令海峡位于亚洲东北端与北美洲西北端之间。": [
+  "The Bering Strait lies between the northeastern end of Asia and the northwestern end of North America.",
+  "Le détroit de Béring se trouve entre l'extrémité nord-est de l'Asie et l'extrémité nord-ouest de l'Amérique du Nord."
+ ],
+ "欧洲和非洲之间的海峡是？": [
+  "Which strait lies between Europe and Africa?",
+  "Quel détroit se trouve entre l'Europe et l'Afrique ?"
+ ],
+ "霍尔木兹海峡": [
+  "the Strait of Hormuz",
+  "le détroit d'Ormuz"
+ ],
+ "直布罗陀海峡沟通地中海和大西洋。": [
+  "The Strait of Gibraltar links the Mediterranean and the Atlantic.",
+  "Le détroit de Gibraltar relie la Méditerranée et l'Atlantique."
+ ],
+ "跨经度最广、面积最大的大洋是？": [
+  "Which ocean spans the most longitude and has the largest area?",
+  "Quel océan couvre le plus de longitudes et a la plus grande superficie ?"
+ ],
+ "大西洋": [
+  "the Atlantic Ocean",
+  "l'océan Atlantique"
+ ],
+ "印度洋": [
+  "the Indian Ocean",
+  "l'océan Indien"
+ ],
+ "北冰洋": [
+  "the Arctic Ocean",
+  "l'océan Arctique"
+ ],
+ "太平洋是面积最大、最深的大洋。": [
+  "The Pacific is the largest and deepest ocean.",
+  "Le Pacifique est le plus grand et le plus profond des océans."
+ ],
+ "下列不属于影响气候的主要因素的是？": [
+  "Which of the following is NOT a main factor affecting climate?",
+  "Parmi les éléments suivants, lequel n'est PAS un facteur principal du climat ?"
+ ],
+ "纬度位置": [
+  "latitude",
+  "la latitude"
+ ],
+ "海陆位置": [
+  "position relative to land and sea",
+  "la position par rapport aux terres et aux mers"
+ ],
+ "地形地势": [
+  "terrain and relief",
+  "le relief"
+ ],
+ "影响气候的主要因素：纬度、海陆、地形、洋流、人类活动。": [
+  "The main factors affecting climate: latitude, land and sea, terrain, ocean currents and human activity.",
+  "Les principaux facteurs du climat : la latitude, la répartition des terres et des mers, le relief, les courants océaniques et l'activité humaine."
+ ],
+ "全年高温多雨的气候类型是？": [
+  "Which climate type is hot and rainy all year?",
+  "Quel type de climat est chaud et pluvieux toute l'année ?"
+ ],
+ "热带雨林气候分布在赤道附近。": [
+  "The tropical rainforest climate is found near the equator.",
+  "Le climat de forêt tropicale humide se rencontre près de l'équateur."
+ ],
+ "夏季炎热干燥、冬季温和多雨的气候类型是？": [
+  "Which climate type has hot, dry summers and mild, rainy winters?",
+  "Quel type de climat a des étés chauds et secs et des hivers doux et pluvieux ?"
+ ],
+ "地中海气候分布在地中海沿岸等地。": [
+  "The Mediterranean climate is found around the Mediterranean and in other places.",
+  "Le climat méditerranéen se rencontre autour de la Méditerranée et ailleurs."
+ ],
+ "雨热同期、冬冷夏热的我国北方气候类型是？": [
+  "Which climate type of northern China has rain and heat in the same season, with cold winters and hot summers?",
+  "Quel type de climat du nord de la Chine a la pluie et la chaleur à la même saison, avec des hivers froids et des étés chauds ?"
+ ],
+ "温带季风气候夏季高温多雨，冬季寒冷干燥。": [
+  "The temperate monsoon climate is hot and rainy in summer and cold and dry in winter.",
+  "Le climat de mousson tempérée est chaud et pluvieux en été, froid et sec en hiver."
+ ],
+ "北半球的气温最高月，一般是？": [
+  "In the Northern Hemisphere, which month is generally the hottest?",
+  "Dans l'hémisphère Nord, quel mois est en général le plus chaud ?"
+ ],
+ "7 月": [
+  "July",
+  "juillet"
+ ],
+ "1 月": [
+  "January",
+  "janvier"
+ ],
+ "4 月": [
+  "April",
+  "avril"
+ ],
+ "10 月": [
+  "October",
+  "octobre"
+ ],
+ "北半球 7 月最热，南半球 1 月最热。": [
+  "In the Northern Hemisphere July is the hottest month; in the Southern Hemisphere January.",
+  "Dans l'hémisphère Nord, juillet est le mois le plus chaud ; dans l'hémisphère Sud, janvier."
+ ],
+ "全年温和湿润、降水均匀的气候类型是？": [
+  "Which climate type is mild and moist all year with evenly spread precipitation?",
+  "Quel type de climat est doux et humide toute l'année, avec des précipitations bien réparties ?"
+ ],
+ "温带海洋性气候受西风和暖流影响，分布在西欧等地。": [
+  "The temperate maritime climate is influenced by westerly winds and warm currents and is found in Western Europe and elsewhere.",
+  "Le climat océanique tempéré est influencé par les vents d'ouest et les courants chauds et se rencontre en Europe occidentale et ailleurs."
+ ],
+ "寒流对沿岸气候的影响是？": [
+  "What is the effect of a cold current on the climate of the coast?",
+  "Quel est l'effet d'un courant froid sur le climat de la côte ?"
+ ],
+ "降温减湿": [
+  "it lowers the temperature and reduces the moisture",
+  "il abaisse la température et réduit l'humidité"
+ ],
+ "增温增湿": [
+  "it raises the temperature and adds moisture",
+  "il élève la température et ajoute de l'humidité"
+ ],
+ "增温减湿": [
+  "it raises the temperature and reduces the moisture",
+  "il élève la température et réduit l'humidité"
+ ],
+ "降温增湿": [
+  "it lowers the temperature and adds moisture",
+  "il abaisse la température et ajoute de l'humidité"
+ ],
+ "寒流使沿岸气温降低、降水减少。": [
+  "A cold current lowers the temperature along the coast and reduces precipitation.",
+  "Un courant froid abaisse la température le long de la côte et réduit les précipitations."
+ ],
+ "世界降水量最多的地区在？": [
+  "Which region of the world has the most precipitation?",
+  "Quelle région du monde reçoit le plus de précipitations ?"
+ ],
+ "赤道附近": [
+  "near the equator",
+  "près de l'équateur"
+ ],
+ "南北纬 30° 附近": [
+  "near 30° north and south",
+  "près de 30° de latitude nord et sud"
+ ],
+ "极地": [
+  "the polar regions",
+  "les régions polaires"
+ ],
+ "内陆沙漠": [
+  "inland deserts",
+  "les déserts intérieurs"
+ ],
+ "赤道地区空气上升，降水多。": [
+  "Air rises near the equator and there is much precipitation.",
+  "L'air s'élève près de l'équateur et les précipitations sont abondantes."
+ ],
+ "气温的年较差是指？": [
+  "What is the annual range of temperature?",
+  "Qu'est-ce que l'amplitude thermique annuelle ?"
+ ],
+ "最热月均温与最冷月均温的差": [
+  "the difference between the mean temperatures of the hottest and coldest months",
+  "la différence entre les températures moyennes du mois le plus chaud et du mois le plus froid"
+ ],
+ "一天中最高与最低气温的差": [
+  "the difference between the highest and lowest temperatures of a day",
+  "la différence entre les températures la plus haute et la plus basse d'une journée"
+ ],
+ "全年气温的平均值": [
+  "the mean temperature of the whole year",
+  "la température moyenne de l'année entière"
+ ],
+ "夏季与冬季降水量的差": [
+  "the difference between summer and winter precipitation",
+  "la différence entre les précipitations d'été et d'hiver"
+ ],
+ "下列属于气候而不是天气的是？": [
+  "Which of the following is climate and not weather?",
+  "Parmi les éléments suivants, lequel relève du climat et non du temps ?"
+ ],
+ "昆明四季如春": [
+  "Kunming is like spring all year round",
+  "Kunming est comme au printemps toute l'année"
+ ],
+ "今天有大风": [
+  "there is a strong wind today",
+  "il y a un vent fort aujourd'hui"
+ ],
+ "明天将下雨": [
+  "it will rain tomorrow",
+  "il pleuvra demain"
+ ],
+ "此刻雷电交加": [
+  "thunder and lightning at this moment",
+  "orage avec éclairs et tonnerre en ce moment"
+ ],
+ "气候是多年的平均状况，稳定；天气变化快。": [
+  "Climate is the average state over many years and is stable; weather changes quickly.",
+  "Le climat est l'état moyen sur de nombreuses années et est stable ; le temps change rapidement."
+ ],
+ "风向标的箭头指向哪里？": [
+  "Where does the arrow of a wind vane point?",
+  "Vers où la flèche d'une girouette pointe-t-elle ?"
+ ],
+ "风吹来的方向": [
+  "the direction the wind comes from",
+  "la direction d'où vient le vent"
+ ],
+ "风吹去的方向": [
+  "the direction the wind blows towards",
+  "la direction vers laquelle souffle le vent"
+ ],
+ "北方": [
+  "north",
+  "le nord"
+ ],
+ "地面": [
+  "the ground",
+  "le sol"
+ ],
+ "风向是指风吹来的方向。": [
+  "Wind direction means the direction the wind comes from.",
+  "La direction du vent est la direction d'où il vient."
+ ],
+ "预报“西北风 3 级”，说明风是从哪个方向吹来？": [
+  "A forecast says “northwest wind, force 3”. From which direction does the wind come?",
+  "Une prévision annonce « vent de nord-ouest, force 3 ». D'où vient le vent ?"
+ ],
+ "风向指风的来向。": [
+  "Wind direction is the direction the wind comes from.",
+  "La direction du vent est la direction d'où il vient."
+ ],
+ "一般来说，高气压控制下的天气是？": [
+  "Generally, what is the weather under high pressure?",
+  "En général, quel temps fait-il sous une haute pression ?"
+ ],
+ "晴朗": [
+  "clear",
+  "dégagé"
+ ],
+ "阴雨": [
+  "cloudy and rainy",
+  "nuageux et pluvieux"
+ ],
+ "大风雪": [
+  "gale and snow",
+  "tempête et neige"
+ ],
+ "高压中心空气下沉，天气晴朗；低压多阴雨。": [
+  "Air sinks at the centre of a high-pressure area and the weather is clear; low pressure brings cloud and rain.",
+  "L'air descend au centre d'une zone de haute pression et le temps est dégagé ; une basse pression apporte nuages et pluie."
+ ],
+ "台风预警信号中最严重的颜色是？": [
+  "Which is the most serious colour of a typhoon warning signal?",
+  "Quelle est la couleur la plus grave d'un signal d'alerte au typhon ?"
+ ],
+ "台风预警信号由轻到重为蓝、黄、橙、红。": [
+  "Typhoon warning signals go from light to serious: blue, yellow, orange, red.",
+  "Les signaux d'alerte au typhon vont du plus léger au plus grave : bleu, jaune, orange, rouge."
+ ],
+ "冷锋过境时常出现的天气是？": [
+  "What weather often occurs when a cold front passes?",
+  "Quel temps survient souvent au passage d'un front froid ?"
+ ],
+ "降温、大风和降雨": [
+  "a fall in temperature, strong wind and rain",
+  "baisse de température, vent fort et pluie"
+ ],
+ "升温、晴朗": [
+  "a rise in temperature and clear sky",
+  "hausse de température et ciel dégagé"
+ ],
+ "持续高温": [
+  "lasting high temperature",
+  "chaleur persistante"
+ ],
+ "无风无雨": [
+  "no wind and no rain",
+  "ni vent ni pluie"
+ ],
+ "冷空气推动暖空气，常带来降温、大风和降雨。": [
+  "Cold air pushes warm air, often bringing a fall in temperature, strong wind and rain.",
+  "L'air froid repousse l'air chaud, apportant souvent baisse de température, vent fort et pluie."
+ ],
+ "世界人口分布，最稠密的地区之一是？": [
+  "Which is one of the most densely populated regions of the world?",
+  "Quelle est l'une des régions les plus densément peuplées du monde ?"
+ ],
+ "东亚": [
+  "East Asia",
+  "l'Asie de l'Est"
+ ],
+ "北极地区": [
+  "the Arctic region",
+  "la région arctique"
+ ],
+ "撒哈拉沙漠": [
+  "the Sahara Desert",
+  "le désert du Sahara"
+ ],
+ "亚马孙雨林": [
+  "the Amazon rainforest",
+  "la forêt amazonienne"
+ ],
+ "东亚、南亚、西欧、北美东部人口稠密。": [
+  "East Asia, South Asia, Western Europe and eastern North America are densely populated.",
+  "L'Asie de l'Est, l'Asie du Sud, l'Europe occidentale et l'est de l'Amérique du Nord sont densément peuplés."
+ ],
+ "世界三大人种是？": [
+  "What are the world's three main races?",
+  "Quelles sont les trois grandes races du monde ?"
+ ],
+ "黄种人、白种人、黑种人": [
+  "Mongoloid, Caucasian, Negroid",
+  "mongoloïde, caucasoïde, négroïde"
+ ],
+ "红种人、白种人、黄种人": [
+  "Native American, Caucasian, Mongoloid",
+  "amérindienne, caucasoïde, mongoloïde"
+ ],
+ "黑种人、蓝种人、白种人": [
+  "Negroid, “blue”, Caucasian",
+  "négroïde, « bleue », caucasoïde"
+ ],
+ "黄种人、棕种人、红种人": [
+  "Mongoloid, brown, Native American",
+  "mongoloïde, brune, amérindienne"
+ ],
+ "按肤色等特征分为黄、白、黑三大人种。": [
+  "By skin colour and other features, people are divided into the yellow, white and black races.",
+  "D'après la couleur de la peau et d'autres caractères, on distingue les races jaune, blanche et noire."
+ ],
+ "联合国的工作语言不包括？": [
+  "Which is NOT a working language of the United Nations?",
+  "Laquelle n'est PAS une langue de travail des Nations unies ?"
+ ],
+ "日语": [
+  "Japanese",
+  "le japonais"
+ ],
+ "汉语": [
+  "Chinese",
+  "le chinois"
+ ],
+ "联合国六种工作语言：汉、英、法、俄、西、阿拉伯语。": [
+  "The six working languages of the United Nations: Chinese, English, French, Russian, Spanish and Arabic.",
+  "Les six langues de travail des Nations unies : le chinois, l'anglais, le français, le russe, l'espagnol et l'arabe."
+ ],
+ "世界三大宗教是？": [
+  "What are the world's three main religions?",
+  "Quelles sont les trois grandes religions du monde ?"
+ ],
+ "基督教、伊斯兰教、佛教": [
+  "Christianity, Islam, Buddhism",
+  "christianisme, islam, bouddhisme"
+ ],
+ "基督教、道教、佛教": [
+  "Christianity, Taoism, Buddhism",
+  "christianisme, taoïsme, bouddhisme"
+ ],
+ "伊斯兰教、犹太教、道教": [
+  "Islam, Judaism, Taoism",
+  "islam, judaïsme, taoïsme"
+ ],
+ "佛教、印度教、道教": [
+  "Buddhism, Hinduism, Taoism",
+  "bouddhisme, hindouisme, taoïsme"
+ ],
+ "三大宗教：基督教、伊斯兰教、佛教。": [
+  "The three main religions: Christianity, Islam, Buddhism.",
+  "Les trois grandes religions : le christianisme, l'islam, le bouddhisme."
+ ],
+ "人口自然增长率等于？": [
+  "The natural population growth rate equals:",
+  "Le taux d'accroissement naturel de la population est égal à :"
+ ],
+ "出生率减去死亡率": [
+  "the birth rate minus the death rate",
+  "le taux de natalité moins le taux de mortalité"
+ ],
+ "出生率加死亡率": [
+  "the birth rate plus the death rate",
+  "le taux de natalité plus le taux de mortalité"
+ ],
+ "死亡率减去出生率": [
+  "the death rate minus the birth rate",
+  "le taux de mortalité moins le taux de natalité"
+ ],
+ "出生率除以死亡率": [
+  "the birth rate divided by the death rate",
+  "le taux de natalité divisé par le taux de mortalité"
+ ],
+ "自然增长率 = 出生率 − 死亡率。": [
+  "Natural growth rate = birth rate − death rate.",
+  "Taux d'accroissement naturel = taux de natalité − taux de mortalité."
+ ],
+ "下列属于人口稀疏的地区的是？": [
+  "Which of the following is a sparsely populated region?",
+  "Parmi les éléments suivants, lequel est une région peu peuplée ?"
+ ],
+ "极地和沙漠": [
+  "the polar regions and deserts",
+  "les régions polaires et les déserts"
+ ],
+ "长江三角洲": [
+  "the Yangtze River Delta",
+  "le delta du Yangzi"
+ ],
+ "恒河平原": [
+  "the Ganges Plain",
+  "la plaine du Gange"
+ ],
+ "西欧平原": [
+  "the plains of Western Europe",
+  "les plaines d'Europe occidentale"
+ ],
+ "自然条件恶劣的地区人口稀疏。": [
+  "Regions with harsh natural conditions are sparsely populated.",
+  "Les régions aux conditions naturelles rudes sont peu peuplées."
+ ],
+ "聚落可以分为？": [
+  "Into what can settlements be divided?",
+  "En quoi les peuplements peuvent-ils se diviser ?"
+ ],
+ "乡村和城市": [
+  "rural and urban settlements",
+  "peuplements ruraux et urbains"
+ ],
+ "农村和山区": [
+  "villages and mountain areas",
+  "villages et zones de montagne"
+ ],
+ "城市和港口": [
+  "cities and ports",
+  "villes et ports"
+ ],
+ "平原和高原": [
+  "plains and plateaus",
+  "plaines et plateaux"
+ ],
+ "聚落分为乡村聚落和城市聚落。": [
+  "Settlements are divided into rural settlements and urban settlements.",
+  "Les peuplements se divisent en peuplements ruraux et peuplements urbains."
+ ],
+ "下列国家属于发达国家的是？": [
+  "Which of the following countries is a developed country?",
+  "Parmi les pays suivants, lequel est un pays développé ?"
+ ],
+ "印度": [
+  "India",
+  "l'Inde"
+ ],
+ "埃及": [
+  "Egypt",
+  "l'Égypte"
+ ],
+ "巴西": [
+  "Brazil",
+  "le Brésil"
+ ],
+ "日本是亚洲的发达国家。": [
+  "Japan is a developed country in Asia.",
+  "Le Japon est un pays développé d'Asie."
+ ],
+ "发展中国家主要分布在？": [
+  "Where are developing countries mainly found?",
+  "Où se trouvent principalement les pays en développement ?"
+ ],
+ "亚洲、非洲和拉丁美洲": [
+  "Asia, Africa and Latin America",
+  "en Asie, en Afrique et en Amérique latine"
+ ],
+ "北美和西欧": [
+  "North America and Western Europe",
+  "en Amérique du Nord et en Europe occidentale"
+ ],
+ "大洋洲和北美": [
+  "Oceania and North America",
+  "en Océanie et en Amérique du Nord"
+ ],
+ "欧洲和大洋洲": [
+  "Europe and Oceania",
+  "en Europe et en Océanie"
+ ],
+ "发展中国家多在亚非拉。": [
+  "Most developing countries are in Asia, Africa and Latin America.",
+  "La plupart des pays en développement se trouvent en Asie, en Afrique et en Amérique latine."
+ ],
+ "发达国家与发展中国家之间的差距通常叫？": [
+  "What is the gap between developed and developing countries usually called?",
+  "Comment appelle-t-on d'ordinaire l'écart entre pays développés et pays en développement ?"
+ ],
+ "南北差距": [
+  "the North–South gap",
+  "le fossé Nord–Sud"
+ ],
+ "东西差距": [
+  "the East–West gap",
+  "le fossé Est–Ouest"
+ ],
+ "南南差距": [
+  "the South–South gap",
+  "le fossé Sud–Sud"
+ ],
+ "新旧差距": [
+  "the old–new gap",
+  "le fossé ancien–nouveau"
+ ],
+ "南北差距指发达国家与发展中国家的差距。": [
+  "The North–South gap is the gap between developed and developing countries.",
+  "Le fossé Nord–Sud est l'écart entre pays développés et pays en développement."
+ ],
+ "发展中国家之间的合作叫？": [
+  "What is cooperation among developing countries called?",
+  "Comment appelle-t-on la coopération entre pays en développement ?"
+ ],
+ "南南合作": [
+  "South–South cooperation",
+  "la coopération Sud–Sud"
+ ],
+ "南北对话": [
+  "North–South dialogue",
+  "le dialogue Nord–Sud"
+ ],
+ "东西合作": [
+  "East–West cooperation",
+  "la coopération Est–Ouest"
+ ],
+ "北北合作": [
+  "North–North cooperation",
+  "la coopération Nord–Nord"
+ ],
+ "南南合作是发展中国家之间的合作。": [
+  "South–South cooperation is cooperation among developing countries.",
+  "La coopération Sud–Sud est la coopération entre pays en développement."
+ ],
+ "世界上最大的发展中国家是？": [
+  "What is the largest developing country in the world?",
+  "Quel est le plus grand pays en développement du monde ?"
+ ],
+ "美国": [
+  "the United States",
+  "les États-Unis"
+ ],
+ "中国是最大的发展中国家。": [
+  "China is the largest developing country.",
+  "La Chine est le plus grand pays en développement."
+ ],
+ "东南亚国家联盟的简称是？": [
+  "What is the short name of the Association of Southeast Asian Nations?",
+  "Quel est le nom abrégé de l'Association des nations de l'Asie du Sud-Est ?"
+ ],
+ "东盟": [
+  "ASEAN",
+  "l'ASEAN"
+ ],
+ "欧盟": [
+  "the EU",
+  "l'UE"
+ ],
+ "石油输出国组织": [
+  "OPEC",
+  "l'OPEP"
+ ],
+ "世贸组织": [
+  "the WTO",
+  "l'OMC"
+ ],
+ "东盟（ASEAN）。": [
+  "ASEAN (Association of Southeast Asian Nations).",
+  "L'ASEAN (Association des nations de l'Asie du Sud-Est)."
+ ],
+ "喜马拉雅山脉是由哪两个板块碰撞形成的？": [
+  "Which two plates colliding formed the Himalayas?",
+  "La collision de quelles deux plaques a formé l'Himalaya ?"
+ ],
+ "印度洋板块与亚欧板块": [
+  "the Indo-Australian Plate and the Eurasian Plate",
+  "la plaque indo-australienne et la plaque eurasiatique"
+ ],
+ "太平洋板块与美洲板块": [
+  "the Pacific Plate and the American Plate",
+  "la plaque pacifique et la plaque américaine"
+ ],
+ "非洲板块与南极洲板块": [
+  "the African Plate and the Antarctic Plate",
+  "la plaque africaine et la plaque antarctique"
+ ],
+ "美洲板块与亚欧板块": [
+  "the American Plate and the Eurasian Plate",
+  "la plaque américaine et la plaque eurasiatique"
+ ],
+ "印度洋板块向北与亚欧板块碰撞挤压。": [
+  "The Indo-Australian Plate moves north and collides with and presses against the Eurasian Plate.",
+  "La plaque indo-australienne se déplace vers le nord et entre en collision avec la plaque eurasiatique en la comprimant."
+ ],
+ "东非大裂谷位于什么性质的板块边界？": [
+  "At what kind of plate boundary is the East African Rift?",
+  "Sur quel type de limite de plaques se trouve le grand rift est-africain ?"
+ ],
+ "转换": [
+  "transform",
+  "transformante"
+ ],
+ "东非大裂谷是板块张裂形成的。": [
+  "The East African Rift was formed by plates pulling apart.",
+  "Le grand rift est-africain s'est formé par l'écartement des plaques."
+ ],
+ "世界上火山、地震最集中的地带是？": [
+  "Where are the world's volcanoes and earthquakes most concentrated?",
+  "Où les volcans et les séismes du monde sont-ils le plus concentrés ?"
+ ],
+ "环太平洋地带": [
+  "the Circum-Pacific belt",
+  "la ceinture circum-pacifique"
+ ],
+ "大西洋中部": [
+  "the middle of the Atlantic",
+  "le milieu de l'Atlantique"
+ ],
+ "撒哈拉地区": [
+  "the Sahara region",
+  "la région du Sahara"
+ ],
+ "环太平洋地带又称“火环”。": [
+  "The Circum-Pacific belt is also called the “Ring of Fire”.",
+  "La ceinture circum-pacifique est aussi appelée la « ceinture de feu »."
+ ],
+ "地震发生时，最先到达的地震波是？": [
+  "Which seismic wave arrives first when an earthquake occurs?",
+  "Quelle onde sismique arrive la première lors d'un séisme ?"
+ ],
+ "纵波（P 波）": [
+  "the longitudinal wave (P wave)",
+  "l'onde longitudinale (onde P)"
+ ],
+ "横波（S 波）": [
+  "the transverse wave (S wave)",
+  "l'onde transversale (onde S)"
+ ],
+ "面波": [
+  "the surface wave",
+  "l'onde de surface"
+ ],
+ "海浪": [
+  "ocean waves",
+  "les vagues de l'océan"
+ ],
+ "纵波传播速度快，先到达。": [
+  "The longitudinal wave travels fast and arrives first.",
+  "L'onde longitudinale se propage vite et arrive la première."
+ ],
+ "地震发生的地下位置叫？": [
+  "What is the place underground where an earthquake occurs called?",
+  "Comment s'appelle l'endroit souterrain où se produit un séisme ?"
+ ],
+ "震源": [
+  "the focus",
+  "le foyer"
+ ],
+ "震中": [
+  "the epicentre",
+  "l'épicentre"
+ ],
+ "烈度": [
+  "the intensity",
+  "l'intensité"
+ ],
+ "震源正上方的地面叫震中。": [
+  "The ground directly above the focus is called the epicentre.",
+  "Le point de la surface situé juste au-dessus du foyer s'appelle l'épicentre."
+ ],
+ "全球岩石圈被分为几大板块？": [
+  "Into how many major plates is the Earth's lithosphere divided?",
+  "En combien de grandes plaques la lithosphère terrestre est-elle divisée ?"
+ ],
+ "六大板块": [
+  "six major plates",
+  "six grandes plaques"
+ ],
+ "三大板块": [
+  "three major plates",
+  "trois grandes plaques"
+ ],
+ "四大板块": [
+  "four major plates",
+  "quatre grandes plaques"
+ ],
+ "十二大板块": [
+  "twelve major plates",
+  "douze grandes plaques"
+ ],
+ "亚欧、非洲、美洲、太平洋、印度洋、南极洲六大板块。": [
+  "The six major plates: Eurasian, African, American, Pacific, Indo-Australian and Antarctic.",
+  "Les six grandes plaques : eurasiatique, africaine, américaine, pacifique, indo-australienne et antarctique."
+ ],
+ "红海的形成与什么有关？": [
+  "What is the formation of the Red Sea related to?",
+  "À quoi la formation de la mer Rouge est-elle liée ?"
+ ],
+ "板块张裂": [
+  "plates pulling apart",
+  "l'écartement des plaques"
+ ],
+ "板块碰撞": [
+  "plates colliding",
+  "la collision des plaques"
+ ],
+ "冰川作用": [
+  "glacial action",
+  "l'action des glaciers"
+ ],
+ "流水侵蚀": [
+  "erosion by running water",
+  "l'érosion par les eaux courantes"
+ ],
+ "红海是非洲板块与亚欧板块（阿拉伯半岛一侧）张裂的结果。": [
+  "The Red Sea is the result of the African Plate and the Eurasian Plate (the Arabian side) pulling apart.",
+  "La mer Rouge est le résultat de l'écartement de la plaque africaine et de la plaque eurasiatique (côté péninsule arabique)."
+ ],
+ "水循环的动力主要来自？": [
+  "Where does the driving force of the water cycle mainly come from?",
+  "D'où vient principalement le moteur du cycle de l'eau ?"
+ ],
+ "月球引力": [
+  "the gravitation of the Moon",
+  "l'attraction de la Lune"
+ ],
+ "风": [
+  "the wind",
+  "le vent"
+ ],
+ "太阳辐射使水蒸发，是水循环的能量来源。": [
+  "Solar radiation makes water evaporate and is the source of energy of the water cycle.",
+  "Le rayonnement solaire fait évaporer l'eau et est la source d'énergie du cycle de l'eau."
+ ],
+ "联系最密切、意义最大的水循环类型是？": [
+  "Which type of water cycle is the most closely linked and the most important?",
+  "Quel type de cycle de l'eau est le plus étroitement lié et le plus important ?"
+ ],
+ "海陆间循环": [
+  "the sea–land cycle",
+  "le cycle mer–terre"
+ ],
+ "海上内循环": [
+  "the cycle over the sea",
+  "le cycle au-dessus de la mer"
+ ],
+ "陆上内循环": [
+  "the cycle over land",
+  "le cycle au-dessus des terres"
+ ],
+ "地下循环": [
+  "the underground cycle",
+  "le cycle souterrain"
+ ],
+ "海陆间循环使陆地水得到补给。": [
+  "The sea–land cycle replenishes the water on land.",
+  "Le cycle mer–terre alimente les eaux des terres."
+ ],
+ "下列属于水循环环节的是？": [
+  "Which of the following is a link of the water cycle?",
+  "Parmi les éléments suivants, lequel est un maillon du cycle de l'eau ?"
+ ],
+ "地震": [
+  "earthquakes",
+  "les séismes"
+ ],
+ "火山喷发": [
+  "volcanic eruptions",
+  "les éruptions volcaniques"
+ ],
+ "水循环环节：蒸发、水汽输送、降水、径流、下渗。": [
+  "Links of the water cycle: evaporation, water vapour transport, precipitation, runoff, infiltration.",
+  "Maillons du cycle de l'eau : évaporation, transport de vapeur d'eau, précipitations, ruissellement, infiltration."
+ ],
+ "植物向大气输送水汽的过程叫？": [
+  "What is the process by which plants send water vapour into the atmosphere called?",
+  "Comment s'appelle le processus par lequel les plantes envoient de la vapeur d'eau dans l'atmosphère ?"
+ ],
+ "径流": [
+  "runoff",
+  "le ruissellement"
+ ],
+ "凝结": [
+  "condensation",
+  "la condensation"
+ ],
+ "蒸腾与蒸发共同提供水汽。": [
+  "Transpiration and evaporation together supply water vapour.",
+  "La transpiration et l'évaporation fournissent ensemble de la vapeur d'eau."
+ ],
+ "地表水渗入地下的环节叫？": [
+  "What is the link in which surface water seeps underground called?",
+  "Comment s'appelle le maillon par lequel l'eau de surface s'infiltre dans le sol ?"
+ ],
+ "下渗补给地下水。": [
+  "Infiltration replenishes groundwater.",
+  "L'infiltration alimente les eaux souterraines."
+ ],
+ "人类对水循环的影响，较明显的环节是？": [
+  "Which link of the water cycle do human beings affect most clearly?",
+  "Quel maillon du cycle de l'eau les êtres humains influencent-ils le plus nettement ?"
+ ],
+ "修建水库、调水等主要影响地表径流。": [
+  "Building reservoirs and transferring water mainly affect surface runoff.",
+  "La construction de réservoirs et les transferts d'eau influencent surtout le ruissellement de surface."
+ ],
+ "下列岩石属于岩浆岩的是？": [
+  "Which of the following rocks is an igneous rock?",
+  "Parmi les roches suivantes, laquelle est une roche magmatique ?"
+ ],
+ "花岗岩": [
+  "granite",
+  "le granite"
+ ],
+ "石灰岩": [
+  "limestone",
+  "le calcaire"
+ ],
+ "大理岩": [
+  "marble",
+  "le marbre"
+ ],
+ "页岩": [
+  "shale",
+  "le schiste argileux"
+ ],
+ "花岗岩由岩浆冷却凝固形成。": [
+  "Granite is formed when magma cools and solidifies.",
+  "Le granite se forme quand le magma refroidit et se solidifie."
+ ],
+ "常含有化石的岩石是？": [
+  "Which kind of rock often contains fossils?",
+  "Quel type de roche contient souvent des fossiles ?"
+ ],
+ "沉积岩": [
+  "sedimentary rock",
+  "la roche sédimentaire"
+ ],
+ "岩浆岩": [
+  "igneous rock",
+  "la roche magmatique"
+ ],
+ "变质岩": [
+  "metamorphic rock",
+  "la roche métamorphique"
+ ],
+ "玄武岩": [
+  "basalt",
+  "le basalte"
+ ],
+ "沉积岩由沉积物固结而成，可含化石。": [
+  "Sedimentary rock is formed by the consolidation of sediments and can contain fossils.",
+  "La roche sédimentaire se forme par la consolidation de sédiments et peut contenir des fossiles."
+ ],
+ "石灰岩经变质作用形成？": [
+  "Limestone changed by metamorphism forms:",
+  "Le calcaire transformé par métamorphisme donne :"
+ ],
+ "砂岩": [
+  "sandstone",
+  "le grès"
+ ],
+ "石灰岩变质成大理岩。": [
+  "Limestone changes into marble by metamorphism.",
+  "Le calcaire se transforme en marbre par métamorphisme."
+ ],
+ "下列属于外力作用的是？": [
+  "Which of the following is an external force?",
+  "Parmi les éléments suivants, lequel est une force externe ?"
+ ],
+ "风化和侵蚀": [
+  "weathering and erosion",
+  "l'altération et l'érosion"
+ ],
+ "外力作用：风化、侵蚀、搬运、沉积。": [
+  "External forces: weathering, erosion, transport and deposition.",
+  "Forces externes : altération, érosion, transport et dépôt."
+ ],
+ "下列属于内力作用的是？": [
+  "Which of the following is an internal force?",
+  "Parmi les éléments suivants, lequel est une force interne ?"
+ ],
+ "地壳运动": [
+  "crustal movement",
+  "les mouvements de la croûte"
+ ],
+ "风力堆积": [
+  "accumulation by wind",
+  "l'accumulation par le vent"
+ ],
+ "冰川搬运": [
+  "transport by glaciers",
+  "le transport par les glaciers"
+ ],
+ "内力作用来自地球内部。": [
+  "Internal forces come from inside the Earth.",
+  "Les forces internes viennent de l'intérieur de la Terre."
+ ],
+ "地球内部最厚的圈层是？": [
+  "Which is the thickest layer inside the Earth?",
+  "Quelle est la couche la plus épaisse à l'intérieur de la Terre ?"
+ ],
+ "地幔厚度近 2900 千米，是最厚的圈层。": [
+  "The mantle is nearly 2900 km thick and is the thickest layer.",
+  "Le manteau mesure près de 2900 km d'épaisseur et c'est la couche la plus épaisse."
+ ],
+ "下列圈层中，通常认为是液态的是？": [
+  "Which of the following layers is usually thought to be liquid?",
+  "Parmi les couches suivantes, laquelle est généralement considérée comme liquide ?"
+ ],
+ "外核为液态，内核为固态。": [
+  "The outer core is liquid and the inner core is solid.",
+  "Le noyau externe est liquide et le noyau interne est solide."
+ ],
+ "下列属于可再生资源的是？": [
+  "Which of the following is a renewable resource?",
+  "Parmi les éléments suivants, lequel est une ressource renouvelable ?"
+ ],
+ "太阳能取之不尽。": [
+  "Solar energy is inexhaustible.",
+  "L'énergie solaire est inépuisable."
+ ],
+ "下列属于不可再生资源的是？": [
+  "Which of the following is a non-renewable resource?",
+  "Parmi les éléments suivants, lequel est une ressource non renouvelable ?"
+ ],
+ "森林": [
+  "forests",
+  "les forêts"
+ ],
+ "煤、石油等需要亿万年形成。": [
+  "Coal, oil and so on take hundreds of millions of years to form.",
+  "Le charbon, le pétrole, etc. mettent des centaines de millions d'années à se former."
+ ],
+ "可持续发展的核心是？": [
+  "What is the core of sustainable development?",
+  "Quel est le cœur du développement durable ?"
+ ],
+ "既满足当代人需求，又不损害后代的需求": [
+  "meeting the needs of the present without harming the needs of later generations",
+  "répondre aux besoins du présent sans nuire à ceux des générations futures"
+ ],
+ "只考虑当代人的需求": [
+  "considering only the needs of the present generation",
+  "ne considérer que les besoins de la génération actuelle"
+ ],
+ "禁止一切开发": [
+  "forbidding all development",
+  "interdire tout développement"
+ ],
+ "只发展工业": [
+  "developing only industry",
+  "ne développer que l'industrie"
+ ],
+ "可持续发展兼顾当代和后代。": [
+  "Sustainable development takes both the present and later generations into account.",
+  "Le développement durable tient compte à la fois de la génération actuelle et des générations suivantes."
+ ],
+ "全球变暖的主要原因之一是？": [
+  "What is one of the main causes of global warming?",
+  "Quelle est l'une des principales causes du réchauffement climatique ?"
+ ],
+ "二氧化碳等温室气体增多": [
+  "the increase of greenhouse gases such as carbon dioxide",
+  "l'augmentation des gaz à effet de serre comme le dioxyde de carbone"
+ ],
+ "臭氧增多": [
+  "an increase of ozone",
+  "une augmentation de l'ozone"
+ ],
+ "太阳停止辐射": [
+  "the Sun stopping to radiate",
+  "l'arrêt du rayonnement du Soleil"
+ ],
+ "火山减少": [
+  "fewer volcanoes",
+  "moins de volcans"
+ ],
+ "温室气体增多使大气保温作用增强。": [
+  "More greenhouse gases strengthen the warming effect of the atmosphere.",
+  "Davantage de gaz à effet de serre renforcent l'effet de réchauffement de l'atmosphère."
+ ],
+ "土地荒漠化的主要原因包括？": [
+  "What are the main causes of desertification?",
+  "Quelles sont les principales causes de la désertification ?"
+ ],
+ "过度放牧、开垦和砍伐": [
+  "over-grazing, over-reclamation and felling of trees",
+  "le surpâturage, les défrichements excessifs et l'abattage des arbres"
+ ],
+ "大量植树": [
+  "planting many trees",
+  "planter beaucoup d'arbres"
+ ],
+ "减少人口": [
+  "reducing the population",
+  "réduire la population"
+ ],
+ "增加降水": [
+  "increasing precipitation",
+  "augmenter les précipitations"
+ ],
+ "不合理的人类活动加剧荒漠化。": [
+  "Unreasonable human activity worsens desertification.",
+  "Les activités humaines déraisonnables aggravent la désertification."
+ ],
+ "减少碳排放，较合适的做法是？": [
+  "What is a suitable way of reducing carbon emissions?",
+  "Quelle est une manière appropriée de réduire les émissions de carbone ?"
+ ],
+ "多用清洁能源，节约用电": [
+  "using more clean energy and saving electricity",
+  "utiliser davantage d'énergies propres et économiser l'électricité"
+ ],
+ "多烧煤取暖": [
+  "burning more coal for heating",
+  "brûler plus de charbon pour se chauffer"
+ ],
+ "多开私家车": [
+  "driving a private car more",
+  "utiliser davantage sa voiture personnelle"
+ ],
+ "浪费纸张": [
+  "wasting paper",
+  "gaspiller le papier"
+ ],
+ "低碳生活从节约能源做起。": [
+  "A low-carbon way of life starts with saving energy.",
+  "Un mode de vie sobre en carbone commence par les économies d'énergie."
+ ],
+ "我国淡水资源的特点是？": [
+  "What are the characteristics of China's fresh-water resources?",
+  "Quelles sont les caractéristiques des ressources en eau douce de la Chine ?"
+ ],
+ "总量较多，人均占有量少": [
+  "the total is large but the amount per head is small",
+  "le total est élevé mais la quantité par habitant est faible"
+ ],
+ "总量少，人均多": [
+  "the total is small but the amount per head is large",
+  "le total est faible mais la quantité par habitant est élevée"
+ ],
+ "人均世界第一": [
+  "first in the world per head",
+  "première du monde par habitant"
+ ],
+ "分布均匀": [
+  "evenly distributed",
+  "répartie de façon uniforme"
+ ],
+ "我国人均淡水量约为世界平均的四分之一。": [
+  "China's fresh water per head is about a quarter of the world average.",
+  "L'eau douce par habitant en Chine est d'environ un quart de la moyenne mondiale."
+ ],
+ "我国陆地面积约为多少？": [
+  "About what is the land area of China?",
+  "Quelle est environ la superficie terrestre de la Chine ?"
+ ],
+ "960 万平方千米": [
+  "9.6 million km²",
+  "9,6 millions de km²"
+ ],
+ "1000 万平方千米": [
+  "10 million km²",
+  "10 millions de km²"
+ ],
+ "360 万平方千米": [
+  "3.6 million km²",
+  "3,6 millions de km²"
+ ],
+ "1710 万平方千米": [
+  "17.1 million km²",
+  "17,1 millions de km²"
+ ],
+ "约 960 万平方千米，居世界第三位。": [
+  "About 9.6 million km², the third largest in the world.",
+  "Environ 9,6 millions de km², la troisième du monde."
+ ],
+ "我国领土最南端是？": [
+  "What is the southernmost point of China?",
+  "Quel est le point le plus au sud de la Chine ?"
+ ],
+ "曾母暗沙": [
+  "Zengmu Ansha",
+  "Zengmu Ansha"
+ ],
+ "西沙群岛": [
+  "the Xisha Islands",
+  "les îles Xisha"
+ ],
+ "台湾岛": [
+  "the island of Taiwan",
+  "l'île de Taïwan"
+ ],
+ "海南岛": [
+  "the island of Hainan",
+  "l'île de Hainan"
+ ],
+ "曾母暗沙约 4°N。": [
+  "Zengmu Ansha is at about 4°N.",
+  "Zengmu Ansha est à environ 4° N."
+ ],
+ "我国领土最北端在哪个省区？": [
+  "In which province or region is the northernmost point of China?",
+  "Dans quelle province ou région se trouve le point le plus au nord de la Chine ?"
+ ],
+ "黑龙江": [
+  "Heilongjiang",
+  "le Heilongjiang"
+ ],
+ "内蒙古": [
+  "Inner Mongolia",
+  "la Mongolie-Intérieure"
+ ],
+ "吉林": [
+  "Jilin",
+  "le Jilin"
+ ],
+ "新疆": [
+  "Xinjiang",
+  "le Xinjiang"
+ ],
+ "漠河以北的黑龙江主航道中心线，约 53.5°N。": [
+  "It is on the centre line of the main channel of the Heilongjiang north of Mohe, at about 53.5°N.",
+  "Il se trouve sur la ligne médiane du chenal principal du Heilongjiang, au nord de Mohe, à environ 53,5° N."
+ ],
+ "我国共有多少个省级行政区？": [
+  "How many province-level divisions does China have?",
+  "Combien de divisions de niveau provincial la Chine compte-t-elle ?"
+ ],
+ "34 个": [
+  "34",
+  "34"
+ ],
+ "23 个": [
+  "23",
+  "23"
+ ],
+ "31 个": [
+  "31",
+  "31"
+ ],
+ "56 个": [
+  "56",
+  "56"
+ ],
+ "4 个直辖市、23 个省、5 个自治区、2 个特别行政区。": [
+  "4 municipalities, 23 provinces, 5 autonomous regions and 2 special administrative regions.",
+  "4 municipalités, 23 provinces, 5 régions autonomes et 2 régions administratives spéciales."
+ ],
+ "我国的民族数目是？": [
+  "How many ethnic groups are there in China?",
+  "Combien de groupes ethniques y a-t-il en Chine ?"
+ ],
+ "5 个": [
+  "5",
+  "5"
+ ],
+ "56 个民族，汉族约占 91%。": [
+  "There are 56 ethnic groups, and the Han make up about 91%.",
+  "Il y a 56 groupes ethniques, et les Han représentent environ 91 %."
+ ],
+ "我国的 4 个直辖市是？": [
+  "What are China's 4 municipalities?",
+  "Quelles sont les 4 municipalités de la Chine ?"
+ ],
+ "北京、天津、上海、重庆": [
+  "Beijing, Tianjin, Shanghai, Chongqing",
+  "Pékin, Tianjin, Shanghai, Chongqing"
+ ],
+ "北京、天津、广州、重庆": [
+  "Beijing, Tianjin, Guangzhou, Chongqing",
+  "Pékin, Tianjin, Canton, Chongqing"
+ ],
+ "北京、上海、南京、重庆": [
+  "Beijing, Shanghai, Nanjing, Chongqing",
+  "Pékin, Shanghai, Nankin, Chongqing"
+ ],
+ "天津、上海、武汉、重庆": [
+  "Tianjin, Shanghai, Wuhan, Chongqing",
+  "Tianjin, Shanghai, Wuhan, Chongqing"
+ ],
+ "直辖市：京、津、沪、渝。": [
+  "The municipalities: Beijing, Tianjin, Shanghai and Chongqing.",
+  "Les municipalités : Pékin, Tianjin, Shanghai et Chongqing."
+ ],
+ "我国的 5 个自治区是？": [
+  "What are China's 5 autonomous regions?",
+  "Quelles sont les 5 régions autonomes de la Chine ?"
+ ],
+ "内蒙古、广西、西藏、宁夏、新疆": [
+  "Inner Mongolia, Guangxi, Tibet, Ningxia, Xinjiang",
+  "Mongolie-Intérieure, Guangxi, Tibet, Ningxia, Xinjiang"
+ ],
+ "内蒙古、广西、西藏、青海、新疆": [
+  "Inner Mongolia, Guangxi, Tibet, Qinghai, Xinjiang",
+  "Mongolie-Intérieure, Guangxi, Tibet, Qinghai, Xinjiang"
+ ],
+ "内蒙古、广东、西藏、宁夏、新疆": [
+  "Inner Mongolia, Guangdong, Tibet, Ningxia, Xinjiang",
+  "Mongolie-Intérieure, Guangdong, Tibet, Ningxia, Xinjiang"
+ ],
+ "内蒙古、广西、云南、宁夏、新疆": [
+  "Inner Mongolia, Guangxi, Yunnan, Ningxia, Xinjiang",
+  "Mongolie-Intérieure, Guangxi, Yunnan, Ningxia, Xinjiang"
+ ],
+ "自治区：蒙、桂、藏、宁、新。": [
+  "The autonomous regions: Inner Mongolia, Guangxi, Tibet, Ningxia, Xinjiang.",
+  "Les régions autonomes : Mongolie-Intérieure, Guangxi, Tibet, Ningxia, Xinjiang."
+ ],
+ "我国全国统一使用的时间是？": [
+  "Which time is used throughout China?",
+  "Quelle heure est utilisée dans toute la Chine ?"
+ ],
+ "北京时间（东八区区时）": [
+  "Beijing time (the zone time of East 8)",
+  "l'heure de Pékin (heure du fuseau Est 8)"
+ ],
+ "当地地方时": [
+  "the local time of each place",
+  "l'heure locale de chaque lieu"
+ ],
+ "东九区区时": [
+  "the zone time of East 9",
+  "l'heure du fuseau Est 9"
+ ],
+ "格林尼治时间": [
+  "Greenwich time",
+  "l'heure de Greenwich"
+ ],
+ "全国统一使用北京时间。": [
+  "The whole country uses Beijing time.",
+  "Tout le pays utilise l'heure de Pékin."
+ ],
+ "我国最东端位于哪两条河流主航道汇合处？": [
+  "The easternmost point of China is where the main channels of which two rivers meet?",
+  "Le point le plus à l'est de la Chine est la confluence des chenaux principaux de quels deux fleuves ?"
+ ],
+ "黑龙江与乌苏里江": [
+  "the Heilongjiang and the Wusuli (Ussuri)",
+  "le Heilongjiang et l'Oussouri"
+ ],
+ "黄河与渭河": [
+  "the Yellow River and the Wei River",
+  "le fleuve Jaune et la rivière Wei"
+ ],
+ "长江与汉江": [
+  "the Yangtze and the Han River",
+  "le Yangzi et la rivière Han"
+ ],
+ "松花江与嫩江": [
+  "the Songhua River and the Nen River",
+  "la rivière Songhua et la rivière Nen"
+ ],
+ "约 135°E。": [
+  "About 135°E.",
+  "Environ 135° E."
+ ],
+ "我国地势的总特点是？": [
+  "What is the general feature of China's terrain?",
+  "Quelle est la caractéristique générale du relief de la Chine ?"
+ ],
+ "西高东低，呈阶梯状": [
+  "high in the west and low in the east, in steps",
+  "élevé à l'ouest et bas à l'est, en gradins"
+ ],
+ "东高西低": [
+  "high in the east and low in the west",
+  "élevé à l'est et bas à l'ouest"
+ ],
+ "南高北低": [
+  "high in the south and low in the north",
+  "élevé au sud et bas au nord"
+ ],
+ "中间高四周低": [
+  "high in the middle and low around",
+  "élevé au centre et bas autour"
+ ],
+ "地势西高东低，三级阶梯。": [
+  "The terrain is high in the west and low in the east, in three steps.",
+  "Le relief est élevé à l'ouest et bas à l'est, en trois paliers."
+ ],
+ "第一级阶梯的主体是？": [
+  "What is the main body of the first step?",
+  "Quel est le corps principal du premier palier ?"
+ ],
+ "云贵高原": [
+  "the Yunnan–Guizhou Plateau",
+  "le plateau Yunnan–Guizhou"
+ ],
+ "黄土高原": [
+  "the Loess Plateau",
+  "le plateau de lœss"
+ ],
+ "青藏高原平均海拔 4000 米以上。": [
+  "The Qinghai–Tibet Plateau has a mean altitude above 4000 m.",
+  "Le plateau Qinghai–Tibet a une altitude moyenne supérieure à 4000 m."
+ ],
+ "第二级阶梯的海拔大致是？": [
+  "Roughly what is the altitude of the second step?",
+  "Quelle est à peu près l'altitude du deuxième palier ?"
+ ],
+ "1000～2000 米": [
+  "1000–2000 m",
+  "1000 à 2000 m"
+ ],
+ "4000 米以上": [
+  "above 4000 m",
+  "plus de 4000 m"
+ ],
+ "500 米以下": [
+  "below 500 m",
+  "moins de 500 m"
+ ],
+ "3000～4000 米": [
+  "3000–4000 m",
+  "3000 à 4000 m"
+ ],
+ "第二级阶梯海拔 1000～2000 米。": [
+  "The second step has an altitude of 1000–2000 m.",
+  "Le deuxième palier a une altitude de 1000 à 2000 m."
+ ],
+ "第三级阶梯的海拔大致是？": [
+  "Roughly what is the altitude of the third step?",
+  "Quelle est à peu près l'altitude du troisième palier ?"
+ ],
+ "2000～3000 米": [
+  "2000–3000 m",
+  "2000 à 3000 m"
+ ],
+ "第三级阶梯多为平原和丘陵。": [
+  "The third step is mostly plains and hills.",
+  "Le troisième palier est surtout fait de plaines et de collines."
+ ],
+ "下列属于第三级阶梯的是？": [
+  "Which of the following belongs to the third step?",
+  "Parmi les éléments suivants, lequel appartient au troisième palier ?"
+ ],
+ "华北平原": [
+  "the North China Plain",
+  "la plaine de Chine du Nord"
+ ],
+ "塔里木盆地": [
+  "the Tarim Basin",
+  "le bassin du Tarim"
+ ],
+ "四川盆地": [
+  "the Sichuan Basin",
+  "le bassin du Sichuan"
+ ],
+ "华北平原属于第三级阶梯。": [
+  "The North China Plain belongs to the third step.",
+  "La plaine de Chine du Nord appartient au troisième palier."
+ ],
+ "一、二级阶梯的分界是？": [
+  "What is the boundary between the first and second steps?",
+  "Quelle est la limite entre le premier et le deuxième palier ?"
+ ],
+ "昆仑山—阿尔金山—祁连山—横断山": [
+  "Kunlun Mountains–Altun Mountains–Qilian Mountains–Hengduan Mountains",
+  "monts Kunlun–monts Altun–monts Qilian–monts Hengduan"
+ ],
+ "大兴安岭—太行山—巫山—雪峰山": [
+  "Greater Khingan Range–Taihang Mountains–Wu Mountains–Xuefeng Mountains",
+  "Grand Khingan–monts Taihang–monts Wu–monts Xuefeng"
+ ],
+ "秦岭—淮河": [
+  "Qinling Mountains–Huaihe River",
+  "monts Qinling–fleuve Huai"
+ ],
+ "天山—阴山": [
+  "Tianshan Mountains–Yinshan Mountains",
+  "monts Tianshan–monts Yinshan"
+ ],
+ "二、三级阶梯分界是大兴安岭—太行山—巫山—雪峰山。": [
+  "The boundary of the second and third steps is the Greater Khingan Range–Taihang Mountains–Wu Mountains–Xuefeng Mountains.",
+  "La limite entre le deuxième et le troisième palier est formée par le Grand Khingan, les monts Taihang, Wu et Xuefeng."
+ ],
+ "我国阶梯状地势的主要影响是？": [
+  "What is the main effect of China's stepped terrain?",
+  "Quel est l'effet principal du relief en gradins de la Chine ?"
+ ],
+ "大河自西向东流，水能资源丰富": [
+  "big rivers flow from west to east and water-power resources are rich",
+  "les grands fleuves coulent d'ouest en est et les ressources hydroélectriques sont riches"
+ ],
+ "河流自东向西流": [
+  "rivers flow from east to west",
+  "les fleuves coulent d'est en ouest"
+ ],
+ "河流都流入内陆": [
+  "all rivers flow inland",
+  "tous les fleuves se jettent à l'intérieur des terres"
+ ],
+ "没有水能资源": [
+  "there are no water-power resources",
+  "il n'y a pas de ressources hydroélectriques"
+ ],
+ "阶梯交界处落差大，水能丰富。": [
+  "The drops are large at the boundaries of the steps, so water power is rich.",
+  "Les dénivellations sont fortes aux limites des paliers, donc l'énergie hydraulique est abondante."
+ ],
+ "我国最长的河流是？": [
+  "What is the longest river in China?",
+  "Quel est le plus long fleuve de la Chine ?"
+ ],
+ "黄河": [
+  "the Yellow River",
+  "le fleuve Jaune"
+ ],
+ "珠江": [
+  "the Pearl River",
+  "la rivière des Perles"
+ ],
+ "长江约 6300 千米。": [
+  "The Yangtze is about 6300 km long.",
+  "Le Yangzi mesure environ 6300 km de long."
+ ],
+ "黄河下游河床高出地面，形成？": [
+  "The bed of the lower Yellow River is higher than the ground around it and forms:",
+  "Le lit du bas fleuve Jaune est plus haut que le sol environnant et forme :"
+ ],
+ "地上河": [
+  "a “suspended river” (a river above the surrounding land)",
+  "un « fleuve suspendu » (un fleuve au-dessus des terres environnantes)"
+ ],
+ "三角洲": [
+  "a delta",
+  "un delta"
+ ],
+ "冲积扇": [
+  "an alluvial fan",
+  "un cône alluvial"
+ ],
+ "喀斯特": [
+  "karst",
+  "un relief karstique"
+ ],
+ "黄河含沙量大，下游泥沙淤积。": [
+  "The Yellow River carries much silt, which settles in the lower reaches.",
+  "Le fleuve Jaune charrie beaucoup de limon, qui se dépose dans son cours inférieur."
+ ],
+ "下列属于内流河的是？": [
+  "Which of the following is an endorheic river?",
+  "Parmi les éléments suivants, lequel est un cours d'eau endoréique ?"
+ ],
+ "塔里木河": [
+  "the Tarim River",
+  "le Tarim"
+ ],
+ "淮河": [
+  "the Huaihe River",
+  "le fleuve Huai"
+ ],
+ "塔里木河是我国最长的内流河。": [
+  "The Tarim River is the longest endorheic river in China.",
+  "Le Tarim est le plus long cours d'eau endoréique de Chine."
+ ],
+ "我国最大的淡水湖是？": [
+  "What is the largest fresh-water lake in China?",
+  "Quel est le plus grand lac d'eau douce de Chine ?"
+ ],
+ "鄱阳湖": [
+  "Poyang Lake",
+  "le lac Poyang"
+ ],
+ "洞庭湖": [
+  "Dongting Lake",
+  "le lac Dongting"
+ ],
+ "太湖": [
+  "Taihu Lake",
+  "le lac Tai"
+ ],
+ "青海湖": [
+  "Qinghai Lake",
+  "le lac Qinghai"
+ ],
+ "鄱阳湖在江西。": [
+  "Poyang Lake is in Jiangxi.",
+  "Le lac Poyang se trouve dans le Jiangxi."
+ ],
+ "秦岭—淮河一线大致是我国哪两种地区的分界？": [
+  "The line of the Qinling Mountains and Huaihe River is roughly the boundary between which two regions of China?",
+  "La ligne des monts Qinling et du fleuve Huai sépare à peu près quelles deux régions de la Chine ?"
+ ],
+ "南方和北方": [
+  "south and north",
+  "le sud et le nord"
+ ],
+ "东部和西部": [
+  "east and west",
+  "l'est et l'ouest"
+ ],
+ "季风区和非季风区": [
+  "monsoon region and non-monsoon region",
+  "région de mousson et région hors mousson"
+ ],
+ "湿润区和干旱区": [
+  "humid region and arid region",
+  "région humide et région aride"
+ ],
+ "秦岭—淮河是南北方分界线，也是 1 月 0℃等温线和 800 毫米等降水量线的大致位置。": [
+  "The Qinling–Huaihe line is the boundary of north and south and also roughly the position of the January 0℃ isotherm and the 800 mm isohyet.",
+  "La ligne Qinling–Huai est la limite entre le nord et le sud et correspond aussi à peu près à l'isotherme de 0℃ de janvier et à l'isohyète de 800 mm."
+ ],
+ "我国季风气候最显著的特点是？": [
+  "What is the most striking feature of China's monsoon climate?",
+  "Quelle est la caractéristique la plus frappante du climat de mousson de la Chine ?"
+ ],
+ "雨热同期": [
+  "rain and heat in the same season",
+  "la pluie et la chaleur à la même saison"
+ ],
+ "冬暖夏凉": [
+  "warm winters and cool summers",
+  "des hivers chauds et des étés frais"
+ ],
+ "全年干旱": [
+  "dry all year",
+  "sec toute l'année"
+ ],
+ "全年多雨": [
+  "rainy all year",
+  "pluvieux toute l'année"
+ ],
+ "夏季高温多雨，冬季寒冷干燥。": [
+  "Hot and rainy in summer, cold and dry in winter.",
+  "Chaud et pluvieux en été, froid et sec en hiver."
+ ],
+ "我国的降水量分布总体特点是？": [
+  "What is the general feature of the distribution of precipitation in China?",
+  "Quelle est la caractéristique générale de la répartition des précipitations en Chine ?"
+ ],
+ "从东南沿海向西北内陆递减": [
+  "it decreases from the southeast coast to the northwest interior",
+  "elles diminuent de la côte sud-est vers l'intérieur nord-ouest"
+ ],
+ "从西北向东南递减": [
+  "it decreases from the northwest to the southeast",
+  "elles diminuent du nord-ouest vers le sud-est"
+ ],
+ "南北一样": [
+  "it is the same north and south",
+  "elles sont les mêmes au nord et au sud"
+ ],
+ "东西一样": [
+  "it is the same east and west",
+  "elles sont les mêmes à l'est et à l'ouest"
+ ],
+ "受夏季风影响，沿海多、内陆少。": [
+  "Because of the summer monsoon there is more on the coast and less inland.",
+  "À cause de la mousson d'été, il y en a plus sur la côte et moins à l'intérieur."
+ ],
+ "世界上海拔最高的高原铁路是？": [
+  "Which is the highest-altitude plateau railway in the world?",
+  "Quel est le chemin de fer de plateau le plus élevé du monde ?"
+ ],
+ "京广铁路": [
+  "the Beijing–Guangzhou Railway",
+  "le chemin de fer Pékin–Canton"
+ ],
+ "京沪铁路": [
+  "the Beijing–Shanghai Railway",
+  "le chemin de fer Pékin–Shanghai"
+ ],
+ "兰新铁路": [
+  "the Lanzhou–Xinjiang Railway",
+  "le chemin de fer Lanzhou–Xinjiang"
+ ],
+ "青藏铁路从西宁到拉萨。": [
+  "The Qinghai–Tibet Railway runs from Xining to Lhasa.",
+  "Le chemin de fer Qinghai–Tibet va de Xining à Lhassa."
+ ],
+ "我国最大的商品粮基地之一是？": [
+  "Which is one of China's largest commodity-grain bases?",
+  "Quelle est l'une des plus grandes bases de céréales commerciales de la Chine ?"
+ ],
+ "东北平原黑土肥沃。": [
+  "The black soil of the Northeast Plain is fertile.",
+  "La terre noire de la plaine du Nord-Est est fertile."
+ ],
+ "我国北方耕地以什么为主？": [
+  "What is the cultivated land of northern China mainly?",
+  "De quoi les terres cultivées du nord de la Chine sont-elles principalement faites ?"
+ ],
+ "旱地": [
+  "dry land",
+  "des terres sèches"
+ ],
+ "水田": [
+  "paddy fields",
+  "des rizières"
+ ],
+ "草地": [
+  "grassland",
+  "des prairies"
+ ],
+ "林地": [
+  "woodland",
+  "des bois"
+ ],
+ "北方以旱地为主，南方以水田为主。": [
+  "The north is mainly dry land and the south mainly paddy fields.",
+  "Le nord est surtout fait de terres sèches et le sud surtout de rizières."
+ ],
+ "我国石油工业的代表基地之一是？": [
+  "Which is one of the representative bases of China's oil industry?",
+  "Quelle est l'une des bases représentatives de l'industrie pétrolière de la Chine ?"
+ ],
+ "攀枝花": [
+  "Panzhihua",
+  "Panzhihua"
+ ],
+ "鞍山": [
+  "Anshan",
+  "Anshan"
+ ],
+ "景德镇": [
+  "Jingdezhen",
+  "Jingdezhen"
+ ],
+ "大庆在黑龙江。": [
+  "Daqing is in Heilongjiang.",
+  "Daqing se trouve dans le Heilongjiang."
+ ],
+ "我国最大的煤炭基地所在省份是？": [
+  "In which province is China's largest coal base?",
+  "Dans quelle province se trouve la plus grande base charbonnière de la Chine ?"
+ ],
+ "山西": [
+  "Shanxi",
+  "le Shanxi"
+ ],
+ "海南": [
+  "Hainan",
+  "le Hainan"
+ ],
+ "福建": [
+  "Fujian",
+  "le Fujian"
+ ],
+ "浙江": [
+  "Zhejiang",
+  "le Zhejiang"
+ ],
+ "山西煤炭资源丰富。": [
+  "Shanxi is rich in coal resources.",
+  "Le Shanxi est riche en ressources de charbon."
+ ],
+ "连接东西的铁路干线是？": [
+  "Which trunk railway line links east and west?",
+  "Quelle ligne ferroviaire principale relie l'est et l'ouest ?"
+ ],
+ "陇海线": [
+  "the Longhai Line",
+  "la ligne Longhai"
+ ],
+ "京沪线": [
+  "the Beijing–Shanghai Line",
+  "la ligne Pékin–Shanghai"
+ ],
+ "京广线": [
+  "the Beijing–Guangzhou Line",
+  "la ligne Pékin–Canton"
+ ],
+ "京哈线": [
+  "the Beijing–Harbin Line",
+  "la ligne Pékin–Harbin"
+ ],
+ "陇海线东起连云港，西至兰州。": [
+  "The Longhai Line runs from Lianyungang in the east to Lanzhou in the west.",
+  "La ligne Longhai va de Lianyungang à l'est jusqu'à Lanzhou à l'ouest."
+ ],
+ "“西气东输”工程的主要目的是？": [
+  "What is the main purpose of the “West–East Gas Pipeline” project?",
+  "Quel est le but principal du projet de « gazoduc Ouest–Est » ?"
+ ],
+ "把西部天然气送到东部": [
+  "to carry natural gas from the west to the east",
+  "acheminer le gaz naturel de l'ouest vers l'est"
+ ],
+ "把东部天然气送到西部": [
+  "to carry natural gas from the east to the west",
+  "acheminer le gaz naturel de l'est vers l'ouest"
+ ],
+ "把北方水送到南方": [
+  "to carry water from the north to the south",
+  "acheminer l'eau du nord vers le sud"
+ ],
+ "把南方电送到北方": [
+  "to carry electricity from the south to the north",
+  "acheminer l'électricité du sud vers le nord"
+ ],
+ "解决东部能源紧张。": [
+  "It solves the shortage of energy in the east.",
+  "Il résout la pénurie d'énergie dans l'est."
+ ],
+ "“南水北调”主要缓解的是？": [
+  "What does the “South–North Water Transfer” mainly ease?",
+  "Que le « transfert d'eau Sud–Nord » soulage-t-il principalement ?"
+ ],
+ "北方缺水": [
+  "the water shortage in the north",
+  "la pénurie d'eau dans le nord"
+ ],
+ "南方干旱": [
+  "drought in the south",
+  "la sécheresse dans le sud"
+ ],
+ "东部洪涝": [
+  "floods in the east",
+  "les inondations dans l'est"
+ ],
+ "西部沙化": [
+  "desertification in the west",
+  "la désertification dans l'ouest"
+ ],
+ "把长江流域的水调往华北等地。": [
+  "It transfers water of the Yangtze basin to North China and other places.",
+  "Il transfère l'eau du bassin du Yangzi vers la Chine du Nord et d'autres régions."
+ ],
+ "我国四大地理区域不包括？": [
+  "Which of the following is NOT one of China's four major geographical regions?",
+  "Parmi les éléments suivants, lequel n'est PAS l'une des quatre grandes régions géographiques de la Chine ?"
+ ],
+ "东北地区": [
+  "the Northeast region",
+  "la région du Nord-Est"
+ ],
+ "四大区域：北方、南方、西北、青藏。": [
+  "The four regions: North, South, Northwest and Qinghai–Tibet.",
+  "Les quatre régions : Nord, Sud, Nord-Ouest et Qinghai–Tibet."
+ ],
+ "被称为“世界屋脊”的区域是？": [
+  "Which region is called the “roof of the world”?",
+  "Quelle région est appelée le « toit du monde » ?"
+ ],
+ "南方地区的耕地以什么为主？": [
+  "What is the cultivated land of southern China mainly?",
+  "De quoi les terres cultivées du sud de la Chine sont-elles principalement faites ?"
+ ],
+ "沙地": [
+  "sandy land",
+  "des terrains sablonneux"
+ ],
+ "南方以水田为主，主要种植水稻。": [
+  "The south is mainly paddy fields, mainly growing rice.",
+  "Le sud est surtout fait de rizières, où l'on cultive principalement le riz."
+ ],
+ "西北地区的传统农业以什么为主？": [
+  "What is the traditional agriculture of the Northwest region mainly?",
+  "En quoi consiste principalement l'agriculture traditionnelle de la région du Nord-Ouest ?"
+ ],
+ "畜牧业和灌溉农业": [
+  "animal husbandry and irrigated agriculture",
+  "l'élevage et l'agriculture irriguée"
+ ],
+ "水稻种植": [
+  "rice growing",
+  "la riziculture"
+ ],
+ "渔业": [
+  "fishing",
+  "la pêche"
+ ],
+ "林业": [
+  "forestry",
+  "la sylviculture"
+ ],
+ "西北干旱，多牧区和绿洲农业。": [
+  "The northwest is dry, with many pastoral areas and oasis agriculture.",
+  "Le nord-ouest est aride, avec beaucoup de zones pastorales et une agriculture d'oasis."
+ ],
+ "东西部经济发展的差异总体是？": [
+  "What is the general difference in economic development between east and west?",
+  "Quelle est la différence générale de développement économique entre l'est et l'ouest ?"
+ ],
+ "东部较发达，西部相对欠发达": [
+  "the east is more developed and the west relatively less developed",
+  "l'est est plus développé et l'ouest relativement moins développé"
+ ],
+ "东部落后，西部发达": [
+  "the east is backward and the west developed",
+  "l'est est en retard et l'ouest développé"
+ ],
+ "东西部一样": [
+  "east and west are the same",
+  "l'est et l'ouest sont identiques"
+ ],
+ "只有中部发达": [
+  "only the centre is developed",
+  "seul le centre est développé"
+ ],
+ "东部沿海较发达。": [
+  "The eastern coastal region is more developed.",
+  "La région côtière de l'est est plus développée."
+ ],
+ "香港、澳门回归祖国的年份分别是？": [
+  "In which years did Hong Kong and Macao return to the motherland?",
+  "En quelles années Hong Kong et Macao sont-ils revenus à la mère patrie ?"
+ ],
+ "1997 年、1999 年": [
+  "1997 and 1999",
+  "1997 et 1999"
+ ],
+ "1999 年、1997 年": [
+  "1999 and 1997",
+  "1999 et 1997"
+ ],
+ "1949 年、1997 年": [
+  "1949 and 1997",
+  "1949 et 1997"
+ ],
+ "1997 年、2000 年": [
+  "1997 and 2000",
+  "1997 et 2000"
+ ],
+ "香港 1997 年，澳门 1999 年。": [
+  "Hong Kong in 1997 and Macao in 1999.",
+  "Hong Kong en 1997 et Macao en 1999."
+ ],
+ "台湾岛是我国的？": [
+  "The island of Taiwan is China's:",
+  "L'île de Taïwan est, parmi les îles de la Chine :"
+ ],
+ "第一大岛": [
+  "largest island",
+  "la plus grande"
+ ],
+ "第二大岛": [
+  "second largest island",
+  "la deuxième plus grande"
+ ],
+ "第三大岛": [
+  "third largest island",
+  "la troisième plus grande"
+ ],
+ "最小的岛": [
+  "smallest island",
+  "la plus petite"
+ ],
+ "台湾岛面积最大，海南岛第二。": [
+  "Taiwan is the largest island and Hainan the second.",
+  "Taïwan est la plus grande île et Hainan la deuxième."
+ ],
+ "被称为“石油宝库”的地区是？": [
+  "Which region is called the “treasure house of oil”?",
+  "Quelle région est appelée le « trésor de pétrole » ?"
+ ],
+ "东南亚": [
+  "Southeast Asia",
+  "l'Asie du Sud-Est"
+ ],
+ "南亚": [
+  "South Asia",
+  "l'Asie du Sud"
+ ],
+ "欧洲西部": [
+  "Western Europe",
+  "l'Europe occidentale"
+ ],
+ "西亚石油储量大、产量多、出口量大。": [
+  "West Asia has large oil reserves, high output and large exports.",
+  "L'Asie occidentale a de grandes réserves de pétrole, une forte production et de grandes exportations."
+ ],
+ "沟通太平洋和印度洋的重要海峡是？": [
+  "Which important strait links the Pacific and the Indian Ocean?",
+  "Quel détroit important relie le Pacifique et l'océan Indien ?"
+ ],
+ "马六甲海峡位于东南亚。": [
+  "The Strait of Malacca is in Southeast Asia.",
+  "Le détroit de Malacca se trouve en Asie du Sud-Est."
+ ],
+ "被称为“骑在羊背上的国家”的是？": [
+  "Which country is called the “country riding on the sheep's back”?",
+  "Quel pays est appelé le « pays qui chevauche le dos du mouton » ?"
+ ],
+ "澳大利亚畜牧业发达。": [
+  "Australia has a developed animal husbandry.",
+  "L'Australie a un élevage très développé."
+ ],
+ "世界上面积最大的国家是？": [
+  "Which is the largest country in the world by area?",
+  "Quel est le plus grand pays du monde par la superficie ?"
+ ],
+ "俄罗斯": [
+  "Russia",
+  "la Russie"
+ ],
+ "加拿大": [
+  "Canada",
+  "le Canada"
+ ],
+ "约 1710 万平方千米。": [
+  "About 17.1 million km².",
+  "Environ 17,1 millions de km²."
+ ],
+ "拥有世界上面积最大的热带雨林的国家是？": [
+  "Which country has the largest tropical rainforest in the world?",
+  "Quel pays possède la plus grande forêt tropicale humide du monde ?"
+ ],
+ "亚马孙热带雨林主要在巴西。": [
+  "The Amazon rainforest is mainly in Brazil.",
+  "La forêt amazonienne se trouve principalement au Brésil."
+ ],
+ "日本多火山、地震的主要原因是？": [
+  "What is the main reason Japan has many volcanoes and earthquakes?",
+  "Quelle est la principale raison pour laquelle le Japon a beaucoup de volcans et de séismes ?"
+ ],
+ "位于板块交界处": [
+  "it lies at a plate boundary",
+  "il se trouve à une limite de plaques"
+ ],
+ "纬度太高": [
+  "its latitude is too high",
+  "sa latitude est trop élevée"
+ ],
+ "气候干旱": [
+  "the climate is dry",
+  "le climat est aride"
+ ],
+ "地势平坦": [
+  "the terrain is flat",
+  "le relief est plat"
+ ],
+ "日本位于环太平洋火山地震带。": [
+  "Japan lies in the Circum-Pacific volcanic and seismic belt.",
+  "Le Japon se trouve dans la ceinture volcanique et sismique circum-pacifique."
+ ],
+ "约 4400 万平方千米": [
+  "about 44 million km²",
+  "environ 44 millions de km²"
+ ],
+ "面积最大、跨纬度最广的大洲，也是人口最多的大洲": [
+  "the largest continent in area and spanning the widest range of latitude, and also the most populous",
+  "le plus grand continent par la superficie, qui s'étend sur le plus de latitudes, et aussi le plus peuplé"
+ ],
+ "非洲": [
+  "Africa",
+  "l'Afrique"
+ ],
+ "约 3020 万平方千米": [
+  "about 30.2 million km²",
+  "environ 30,2 millions de km²"
+ ],
+ "赤道穿过中部，大部分位于热带，撒哈拉沙漠是世界最大的沙漠": [
+  "the equator passes through the middle, most of it lies in the tropics, and the Sahara is the largest desert in the world",
+  "l'équateur passe par le milieu, la plus grande partie se trouve dans la zone tropicale, et le Sahara est le plus grand désert du monde"
+ ],
+ "尼罗河": [
+  "the Nile",
+  "le Nil"
+ ],
+ "北美洲": [
+  "North America",
+  "l'Amérique du Nord"
+ ],
+ "约 2420 万平方千米": [
+  "about 24.2 million km²",
+  "environ 24,2 millions de km²"
+ ],
+ "西部有科迪勒拉山系，东部有大西洋沿岸平原，北濒北冰洋": [
+  "the Cordillera in the west, coastal plains along the Atlantic in the east, and the Arctic Ocean to the north",
+  "la Cordillère à l'ouest, des plaines côtières le long de l'Atlantique à l'est, et l'océan Arctique au nord"
+ ],
+ "德纳利山": [
+  "Denali",
+  "le Denali"
+ ],
+ "密西西比河": [
+  "the Mississippi",
+  "le Mississippi"
+ ],
+ "南美洲": [
+  "South America",
+  "l'Amérique du Sud"
+ ],
+ "约 1800 万平方千米": [
+  "about 18 million km²",
+  "environ 18 millions de km²"
+ ],
+ "有世界上流域面积最大的河流和最大的热带雨林，西部是安第斯山脉": [
+  "it has the river with the largest drainage basin and the largest tropical rainforest in the world, and the Andes in the west",
+  "il possède le fleuve au plus grand bassin versant et la plus grande forêt tropicale humide du monde, et les Andes à l'ouest"
+ ],
+ "阿空加瓜山": [
+  "Aconcagua",
+  "l'Aconcagua"
+ ],
+ "亚马孙河": [
+  "the Amazon",
+  "l'Amazone"
+ ],
+ "约 1400 万平方千米": [
+  "about 14 million km²",
+  "environ 14 millions de km²"
+ ],
+ "终年冰雪覆盖，平均海拔最高，没有常住居民": [
+  "covered with ice and snow all year, the highest mean altitude, and no permanent residents",
+  "couvert de glace et de neige toute l'année, l'altitude moyenne la plus élevée, et sans habitants permanents"
+ ],
+ "文森山": [
+  "Vinson Massif",
+  "le massif Vinson"
+ ],
+ "欧洲": [
+  "Europe",
+  "l'Europe"
+ ],
+ "约 1016 万平方千米": [
+  "about 10.16 million km²",
+  "environ 10,16 millions de km²"
+ ],
+ "海岸线曲折，半岛和岛屿多，大部分地区位于温带": [
+  "a winding coastline, many peninsulas and islands, and most of it in the temperate zone",
+  "un littoral découpé, beaucoup de péninsules et d'îles, et la plus grande partie en zone tempérée"
+ ],
+ "厄尔布鲁士山": [
+  "Mount Elbrus",
+  "le mont Elbrouz"
+ ],
+ "伏尔加河": [
+  "the Volga",
+  "la Volga"
+ ],
+ "大洋洲": [
+  "Oceania",
+  "l'Océanie"
+ ],
+ "约 897 万平方千米": [
+  "about 8.97 million km²",
+  "environ 8,97 millions de km²"
+ ],
+ "面积最小的大洲，澳大利亚大陆占其主要部分": [
+  "the smallest continent, with the Australian mainland making up most of it",
+  "le plus petit continent, dont le continent australien forme la plus grande partie"
+ ],
+ "墨累河": [
+  "the Murray River",
+  "le Murray"
+ ],
+ "约 1.79 亿平方千米": [
+  "about 179 million km²",
+  "environ 179 millions de km²"
+ ],
+ "面积最大、最深的大洋，有马里亚纳海沟": [
+  "the largest and deepest ocean, with the Mariana Trench",
+  "le plus grand et le plus profond des océans, avec la fosse des Mariannes"
+ ],
+ "约 9300 万平方千米": [
+  "about 93 million km²",
+  "environ 93 millions de km²"
+ ],
+ "面积第二大，呈“S”形，两岸有曲折的海岸线": [
+  "the second largest by area, S-shaped, with winding coastlines on both sides",
+  "le deuxième par la superficie, en forme de « S », avec des côtes découpées de part et d'autre"
+ ],
+ "约 7400 万平方千米": [
+  "about 74 million km²",
+  "environ 74 millions de km²"
+ ],
+ "大部分位于南半球，北部有阿拉伯海": [
+  "mostly in the Southern Hemisphere, with the Arabian Sea to the north",
+  "en grande partie dans l'hémisphère Sud, avec la mer d'Arabie au nord"
+ ],
+ "约 1300 万平方千米": [
+  "about 13 million km²",
+  "environ 13 millions de km²"
+ ],
+ "面积最小、最浅的大洋，大部分被冰层覆盖": [
+  "the smallest and shallowest ocean, mostly covered with ice",
+  "le plus petit et le moins profond des océans, en grande partie couvert de glace"
+ ],
+ "亚洲东部，太平洋西岸的岛国": [
+  "an island country in eastern Asia, on the western shore of the Pacific",
+  "un pays insulaire de l'est de l'Asie, sur la rive occidentale du Pacifique"
+ ],
+ "多火山、地震，国土狭小，资源贫乏": [
+  "many volcanoes and earthquakes, a small territory and few resources",
+  "beaucoup de volcans et de séismes, un territoire exigu et peu de ressources"
+ ],
+ "工业发达，原料和市场依赖国外，汽车和电子工业著名": [
+  "a developed industry that depends on other countries for raw materials and markets, famous for the motor and electronics industries",
+  "une industrie développée qui dépend de l'étranger pour les matières premières et les marchés, célèbre pour les industries automobile et électronique"
+ ],
+ "东京": [
+  "Tokyo",
+  "Tokyo"
+ ],
+ "位于亚洲东南部，包括中南半岛和马来群岛，扼马六甲海峡": [
+  "in southeastern Asia, including the Indochina Peninsula and the Malay Archipelago, commanding the Strait of Malacca",
+  "dans le sud-est de l'Asie, comprenant la péninsule indochinoise et l'archipel malais, et dominant le détroit de Malacca"
+ ],
+ "大部分为热带气候，终年高温，热带雨林广布": [
+  "mostly a tropical climate, hot all year, with tropical rainforest widespread",
+  "un climat surtout tropical, chaud toute l'année, avec de vastes forêts tropicales humides"
+ ],
+ "盛产橡胶、油棕等热带经济作物，稻米产量大，华人华侨较多": [
+  "rich in tropical cash crops such as rubber and oil palm, large rice output, and many overseas Chinese",
+  "riche en cultures commerciales tropicales comme l'hévéa et le palmier à huile, grande production de riz, et nombreux Chinois d'outre-mer"
+ ],
+ "位于亚洲南部，北部有喜马拉雅山脉": [
+  "in southern Asia, with the Himalayas to the north",
+  "dans le sud de l'Asie, avec l'Himalaya au nord"
+ ],
+ "热带季风气候，雨季和旱季明显，恒河平原人口稠密": [
+  "a tropical monsoon climate with clear rainy and dry seasons, and the densely populated Ganges Plain",
+  "un climat de mousson tropicale avec des saisons des pluies et sèche bien marquées, et la plaine du Gange densément peuplée"
+ ],
+ "以农业为主，印度的软件和信息产业发展迅速": [
+  "mainly agriculture, and India's software and information industry is developing rapidly",
+  "surtout l'agriculture, et l'industrie du logiciel et de l'information de l'Inde se développe rapidement"
+ ],
+ "地处亚、欧、非三大洲交界，沟通两洋三洲五海": [
+  "at the junction of Asia, Europe and Africa, linking two oceans, three continents and five seas",
+  "à la jonction de l'Asie, de l'Europe et de l'Afrique, reliant deux océans, trois continents et cinq mers"
+ ],
+ "大部分地区气候干旱，沙漠广布": [
+  "a dry climate in most areas, with deserts widespread",
+  "un climat aride dans la plupart des zones, avec de vastes déserts"
+ ],
+ "石油储量大、产量多、出口量大，被称为“石油宝库”": [
+  "large oil reserves, high output and large exports, called the “treasure house of oil”",
+  "de grandes réserves de pétrole, une forte production et de grandes exportations, appelé le « trésor de pétrole »"
+ ],
+ "横跨欧亚两洲，是世界上面积最大的国家": [
+  "it spans Asia and Europe and is the largest country in the world by area",
+  "il s'étend sur l'Asie et l'Europe et c'est le plus grand pays du monde par la superficie"
+ ],
+ "大部分地区纬度较高，冬季寒冷漫长，地形以平原和高原为主，东部多山地": [
+  "most of it lies at high latitudes with long cold winters, the terrain is mainly plains and plateaus, and the east is mountainous",
+  "la plus grande partie se trouve à de hautes latitudes, avec de longs hivers froids ; le relief est surtout fait de plaines et de plateaux, et l'est est montagneux"
+ ],
+ "能源和重工业发达，地跨欧亚的铁路网发达": [
+  "developed energy and heavy industries, and a railway network spanning Europe and Asia",
+  "des industries énergétiques et lourdes développées, et un réseau ferroviaire qui s'étend sur l'Europe et l'Asie"
+ ],
+ "莫斯科": [
+  "Moscow",
+  "Moscou"
+ ],
+ "位于欧洲西部，濒临大西洋": [
+  "in western Europe, bordering the Atlantic",
+  "dans l'ouest de l'Europe, bordant l'Atlantique"
+ ],
+ "以温带海洋性气候为主，海岸线曲折，多半岛和岛屿": [
+  "mainly a temperate maritime climate, a winding coastline, and many peninsulas and islands",
+  "surtout un climat océanique tempéré, un littoral découpé, et beaucoup de péninsules et d'îles"
+ ],
+ "经济发达，旅游业发达，许多国家加入了欧盟": [
+  "a developed economy with a developed tourist industry, and many countries have joined the EU",
+  "une économie développée avec un tourisme développé, et de nombreux pays ont rejoint l'UE"
+ ],
+ "位于南半球，四面环海，整个大陆是一个国家": [
+  "in the Southern Hemisphere, surrounded by sea, the whole continent being one country",
+  "dans l'hémisphère Sud, entouré par la mer, le continent entier formant un seul pays"
+ ],
+ "地形自西向东分为西部高原、中部平原和东部山地（大分水岭），内陆干旱，动物种类独特，如袋鼠": [
+  "from west to east the terrain is divided into the western plateau, the central plain and the eastern highlands (the Great Dividing Range); the interior is dry and the animals are unique, such as the kangaroo",
+  "d'ouest en est, le relief se divise en plateau occidental, plaine centrale et hautes terres orientales (la Grande Cordillère australienne) ; l'intérieur est aride et les animaux sont uniques, comme le kangourou"
+ ],
+ "畜牧业发达，煤、铁矿石出口多，被称为“骑在羊背上的国家”": [
+  "a developed animal husbandry and large exports of coal and iron ore, called the “country riding on the sheep's back”",
+  "un élevage développé et de grandes exportations de charbon et de minerai de fer, appelé le « pays qui chevauche le dos du mouton »"
+ ],
+ "堪培拉": [
+  "Canberra",
+  "Canberra"
+ ],
+ "位于北美洲中部，本土东临大西洋、西临太平洋": [
+  "in central North America, with the Atlantic to the east and the Pacific to the west of the mainland",
+  "au centre de l'Amérique du Nord, avec l'Atlantique à l'est et le Pacifique à l'ouest du territoire continental"
+ ],
+ "本土地形南北纵列，中部是广阔的平原": [
+  "the terrain of the mainland runs in north–south strips, with a broad plain in the middle",
+  "le relief du territoire continental s'étire en bandes nord–sud, avec une vaste plaine au centre"
+ ],
+ "世界上经济最发达的国家之一，农业机械化，高新技术产业发达": [
+  "one of the most economically developed countries in the world, with mechanised agriculture and developed high-tech industries",
+  "l'un des pays les plus développés économiquement du monde, avec une agriculture mécanisée et des industries de haute technologie développées"
+ ],
+ "华盛顿": [
+  "Washington",
+  "Washington"
+ ],
+ "位于南美洲东部，是南美洲面积最大的国家": [
+  "in eastern South America, the largest country in South America by area",
+  "dans l'est de l'Amérique du Sud, le plus grand pays d'Amérique du Sud par la superficie"
+ ],
+ "北部有亚马孙平原，热带雨林面积广大": [
+  "the Amazon Plain in the north, with a vast area of tropical rainforest",
+  "la plaine amazonienne au nord, avec une vaste forêt tropicale humide"
+ ],
+ "咖啡、甘蔗等种植业重要，铁矿储量丰富，是发展中大国": [
+  "important crops such as coffee and sugar cane, rich iron-ore reserves, and a large developing country",
+  "des cultures importantes comme le café et la canne à sucre, de riches réserves de minerai de fer, et un grand pays en développement"
+ ],
+ "巴西利亚": [
+  "Brasília",
+  "Brasilia"
+ ],
+ "撒哈拉以南非洲": [
+  "Sub-Saharan Africa",
+  "l'Afrique subsaharienne"
+ ],
+ "位于非洲撒哈拉沙漠以南，大部分在热带": [
+  "south of the Sahara in Africa, mostly in the tropics",
+  "au sud du Sahara en Afrique, en grande partie dans la zone tropicale"
+ ],
+ "高原为主，热带草原和热带雨林广布": [
+  "mainly plateaus, with tropical savanna and tropical rainforest widespread",
+  "surtout des plateaux, avec de vastes savanes tropicales et forêts tropicales humides"
+ ],
+ "经济发展水平相对较低，盛产可可、咖啡等热带经济作物": [
+  "a relatively low level of economic development, rich in tropical cash crops such as cocoa and coffee",
+  "un niveau de développement économique relativement faible, riche en cultures commerciales tropicales comme le cacao et le café"
+ ],
+ "位于南亚，北有喜马拉雅山，南面伸入印度洋": [
+  "in South Asia, with the Himalayas to the north and extending south into the Indian Ocean",
+  "en Asie du Sud, avec l'Himalaya au nord et s'avançant au sud dans l'océan Indien"
+ ],
+ "恒河平原广阔，夏季多暴雨": [
+  "a broad Ganges Plain and heavy rainstorms in summer",
+  "une vaste plaine du Gange et de fortes pluies en été"
+ ],
+ "软件和信息产业发展迅速，粮食产量大": [
+  "a rapidly developing software and information industry and a large grain output",
+  "une industrie du logiciel et de l'information qui se développe rapidement et une grande production de céréales"
+ ],
+ "新德里": [
+  "New Delhi",
+  "New Delhi"
+ ],
+ "位于非洲东北部，跨亚、非两洲，濒临地中海和红海": [
+  "in northeastern Africa, spanning Asia and Africa, bordering the Mediterranean and the Red Sea",
+  "dans le nord-est de l'Afrique, à cheval sur l'Asie et l'Afrique, bordant la Méditerranée et la mer Rouge"
+ ],
+ "大部分是沙漠，尼罗河三角洲是主要的农耕区": [
+  "mostly desert, with the Nile Delta the main farming area",
+  "en grande partie désertique, avec le delta du Nil pour principale zone agricole"
+ ],
+ "苏伊士运河收入重要，旅游业发达": [
+  "important income from the Suez Canal and a developed tourist industry",
+  "d'importants revenus du canal de Suez et un tourisme développé"
+ ],
+ "位于欧洲中部": [
+  "in central Europe",
+  "au centre de l'Europe"
+ ],
+ "北部低平，南部多山，温带海洋性与大陆性气候过渡": [
+  "low and flat in the north, mountainous in the south, with a climate between temperate maritime and continental",
+  "bas et plat au nord, montagneux au sud, avec un climat de transition entre océanique tempéré et continental"
+ ],
+ "欧洲的工业强国，汽车和机械工业发达": [
+  "a leading industrial country of Europe, with developed motor and machinery industries",
+  "une grande puissance industrielle de l'Europe, avec des industries automobile et mécanique développées"
+ ],
+ "柏林": [
+  "Berlin",
+  "Berlin"
+ ],
+ "法国": [
+  "France",
+  "la France"
+ ],
+ "位于欧洲西部，濒临大西洋和地中海": [
+  "in western Europe, bordering the Atlantic and the Mediterranean",
+  "dans l'ouest de l'Europe, bordant l'Atlantique et la Méditerranée"
+ ],
+ "以平原为主，温带海洋性气候": [
+  "mainly plains, with a temperate maritime climate",
+  "surtout des plaines, avec un climat océanique tempéré"
+ ],
+ "农业发达，葡萄酒和航空航天业著名": [
+  "developed agriculture, with famous wine and aerospace industries",
+  "une agriculture développée, avec des industries du vin et de l'aérospatiale célèbres"
+ ],
+ "巴黎": [
+  "Paris",
+  "Paris"
+ ],
+ "英国": [
+  "the United Kingdom",
+  "le Royaume-Uni"
+ ],
+ "位于欧洲西部，由大不列颠岛等岛屿组成": [
+  "in western Europe, made up of the island of Great Britain and other islands",
+  "dans l'ouest de l'Europe, formé de l'île de Grande-Bretagne et d'autres îles"
+ ],
+ "温带海洋性气候，多雨雾": [
+  "a temperate maritime climate, with much rain and fog",
+  "un climat océanique tempéré, avec beaucoup de pluie et de brouillard"
+ ],
+ "工业革命的发源地，金融业发达": [
+  "the birthplace of the Industrial Revolution, with a developed financial sector",
+  "le berceau de la révolution industrielle, avec un secteur financier développé"
+ ],
+ "位于北美洲北部，面积世界第二": [
+  "in northern North America, the second largest country in the world by area",
+  "dans le nord de l'Amérique du Nord, le deuxième pays du monde par la superficie"
+ ],
+ "纬度较高，冬季漫长寒冷，森林和湖泊多": [
+  "at high latitudes, with long cold winters and many forests and lakes",
+  "à de hautes latitudes, avec de longs hivers froids et beaucoup de forêts et de lacs"
+ ],
+ "森林、矿产和小麦出口多": [
+  "large exports of timber, minerals and wheat",
+  "de grandes exportations de bois, de minerais et de blé"
+ ],
+ "渥太华": [
+  "Ottawa",
+  "Ottawa"
+ ],
+ "南极地区": [
+  "the Antarctic region",
+  "la région antarctique"
+ ],
+ "位于地球最南端，以南极洲为主体": [
+  "at the southernmost end of the Earth, with the continent of Antarctica as its main body",
+  "à l'extrémité sud de la Terre, avec le continent antarctique pour corps principal"
+ ],
+ "全年严寒，冰雪覆盖，有科学考察站": [
+  "bitterly cold all year, covered with ice and snow, with scientific research stations",
+  "glacial toute l'année, couvert de glace et de neige, avec des stations de recherche scientifique"
+ ],
+ "没有常住居民，主要用于科学考察，受《南极条约》保护": [
+  "no permanent residents, used mainly for scientific research and protected by the Antarctic Treaty",
+  "pas d'habitants permanents, utilisé surtout pour la recherche scientifique et protégé par le Traité sur l'Antarctique"
+ ],
+ "位于地球最北端，以北冰洋为主体": [
+  "at the northernmost end of the Earth, with the Arctic Ocean as its main body",
+  "à l'extrémité nord de la Terre, avec l'océan Arctique pour corps principal"
+ ],
+ "中心是被冰层覆盖的海洋，周围是冻土带": [
+  "an ice-covered sea in the centre, surrounded by tundra",
+  "une mer couverte de glace au centre, entourée de toundra"
+ ],
+ "资源丰富但开发困难，有因纽特人居住": [
+  "rich in resources but difficult to exploit, inhabited by the Inuit",
+  "riche en ressources mais difficile à exploiter, habité par les Inuits"
+ ],
+ "{0}属于哪一类地理事物？": [
+  "What kind of geographical feature is {0}?",
+  "De quel type d'élément géographique {0} relève-t-il ?"
+ ],
+ "关于{0}，下列叙述正确的是？": [
+  "Which statement about {0} is correct?",
+  "Quelle affirmation sur {0} est correcte ?"
+ ],
+ "{0}最终注入的海是？": [
+  "Into which sea does {0} finally flow?",
+  "Dans quelle mer {0} se jette-t-il finalement ?"
+ ],
+ "{0}的走向是？": [
+  "What is the direction of {0}?",
+  "Quelle est l'orientation de {0} ?"
+ ],
+ "发源于青藏高原，自西向东流经三级阶梯": [
+  "rises on the Qinghai–Tibet Plateau and flows from west to east across the three steps",
+  "prend sa source sur le plateau Qinghai–Tibet et coule d'ouest en est à travers les trois paliers"
+ ],
+ "中国第一长河，全长约 6300 千米，水能和航运资源丰富": [
+  "the longest river of China, about 6300 km long, rich in water-power and shipping resources",
+  "le plus long fleuve de Chine, long d'environ 6300 km, riche en ressources hydroélectriques et de navigation"
+ ],
+ "东海": [
+  "the East China Sea",
+  "la mer de Chine orientale"
+ ],
+ "发源于青藏高原巴颜喀拉山，流经黄土高原": [
+  "rises in the Bayan Har Mountains of the Qinghai–Tibet Plateau and flows through the Loess Plateau",
+  "prend sa source dans les monts Bayan Har du plateau Qinghai–Tibet et traverse le plateau de lœss"
+ ],
+ "中国第二长河，含沙量大，下游是“地上河”": [
+  "the second longest river of China, carrying much silt, with a “suspended river” in its lower reaches",
+  "le deuxième plus long fleuve de Chine, qui charrie beaucoup de limon, avec un « fleuve suspendu » dans son cours inférieur"
+ ],
+ "渤海": [
+  "the Bohai Sea",
+  "la mer de Bohai"
+ ],
+ "流经我国南部，在广东入海形成三角洲": [
+  "flows through southern China and enters the sea in Guangdong, forming a delta",
+  "traverse le sud de la Chine et se jette dans la mer au Guangdong en formant un delta"
+ ],
+ "水量丰富，终年不冻，航运便利": [
+  "abundant water, never frozen, convenient for shipping",
+  "un débit abondant, jamais gelé, pratique pour la navigation"
+ ],
+ "南海": [
+  "the South China Sea",
+  "la mer de Chine méridionale"
+ ],
+ "位于我国最北部，部分河段为中俄界河": [
+  "in the far north of China, with some sections forming the Sino-Russian border river",
+  "à l'extrême nord de la Chine, certains tronçons formant le fleuve frontière sino-russe"
+ ],
+ "冬季结冰期长，有明显的春汛": [
+  "a long frozen period in winter and a clear spring flood",
+  "une longue période de gel en hiver et une crue de printemps bien marquée"
+ ],
+ "鄂霍次克海": [
+  "the Sea of Okhotsk",
+  "la mer d'Okhotsk"
+ ],
+ "位于新疆南部的塔里木盆地": [
+  "in the Tarim Basin in southern Xinjiang",
+  "dans le bassin du Tarim, dans le sud du Xinjiang"
+ ],
+ "我国最长的内流河，沿岸有绿洲": [
+  "the longest endorheic river in China, with oases along its banks",
+  "le plus long cours d'eau endoréique de Chine, avec des oasis le long de ses rives"
+ ],
+ "京杭大运河": [
+  "the Beijing–Hangzhou Grand Canal",
+  "le Grand Canal Pékin–Hangzhou"
+ ],
+ "人工运河": [
+  "an artificial canal",
+  "un canal artificiel"
+ ],
+ "北起北京，南到杭州": [
+  "from Beijing in the north to Hangzhou in the south",
+  "de Pékin au nord jusqu'à Hangzhou au sud"
+ ],
+ "世界上开凿最早、最长的人工运河": [
+  "the earliest dug and longest artificial canal in the world",
+  "le plus ancien et le plus long canal artificiel du monde"
+ ],
+ "位于长江和黄河之间，与秦岭一起构成南北分界线": [
+  "between the Yangtze and the Yellow River, forming with the Qinling Mountains the north–south dividing line",
+  "entre le Yangzi et le fleuve Jaune, formant avec les monts Qinling la ligne de séparation nord–sud"
+ ],
+ "秦岭—淮河一线是我国南方和北方的分界线之一": [
+  "The Qinling–Huaihe line is one of the dividing lines between southern and northern China.",
+  "La ligne Qinling–Huai est l'une des lignes de séparation entre le sud et le nord de la Chine."
+ ],
+ "位于青藏高原东北部，青海省境内": [
+  "in the northeast of the Qinghai–Tibet Plateau, within Qinghai Province",
+  "au nord-est du plateau Qinghai–Tibet, dans la province du Qinghai"
+ ],
+ "我国最大的湖泊，咸水湖": [
+  "the largest lake in China, a salt lake",
+  "le plus grand lac de Chine, un lac salé"
+ ],
+ "位于江西省北部，通过长江入海": [
+  "in northern Jiangxi, flowing into the sea through the Yangtze",
+  "dans le nord du Jiangxi, se jetant dans la mer par le Yangzi"
+ ],
+ "我国最大的淡水湖": [
+  "the largest fresh-water lake in China",
+  "le plus grand lac d'eau douce de Chine"
+ ],
+ "位于湖南省北部，长江南岸": [
+  "in northern Hunan, on the south bank of the Yangtze",
+  "dans le nord du Hunan, sur la rive sud du Yangzi"
+ ],
+ "我国第二大淡水湖之一，是长江的重要调蓄湖泊": [
+  "one of the second largest fresh-water lakes in China, an important regulating lake of the Yangtze",
+  "l'un des deux plus grands lacs d'eau douce de Chine après le premier, un important lac régulateur du Yangzi"
+ ],
+ "位于长江三角洲，跨江苏、浙江两省": [
+  "in the Yangtze River Delta, spanning Jiangsu and Zhejiang",
+  "dans le delta du Yangzi, à cheval sur le Jiangsu et le Zhejiang"
+ ],
+ "我国五大淡水湖之一，周边水网密布": [
+  "one of the five large fresh-water lakes of China, surrounded by a dense network of waterways",
+  "l'un des cinq grands lacs d'eau douce de Chine, entouré d'un dense réseau de voies d'eau"
+ ],
+ "喜马拉雅山脉": [
+  "the Himalayas",
+  "l'Himalaya"
+ ],
+ "位于青藏高原南缘，是中国与尼泊尔等国的边界": [
+  "on the southern edge of the Qinghai–Tibet Plateau, the border between China and Nepal and other countries",
+  "sur le bord sud du plateau Qinghai–Tibet, la frontière entre la Chine et le Népal et d'autres pays"
+ ],
+ "世界上最高大的山脉，有世界最高峰珠穆朗玛峰": [
+  "the highest mountain range in the world, with the highest peak, Mount Qomolangma",
+  "la plus haute chaîne de montagnes du monde, avec le plus haut sommet, le mont Qomolangma"
+ ],
+ "东西走向": [
+  "east–west",
+  "est–ouest"
+ ],
+ "昆仑山脉": [
+  "the Kunlun Mountains",
+  "les monts Kunlun"
+ ],
+ "位于青藏高原北部": [
+  "in the north of the Qinghai–Tibet Plateau",
+  "dans le nord du plateau Qinghai–Tibet"
+ ],
+ "被称为“亚洲脊柱”，是第一、二级阶梯的界线之一": [
+  "called the “backbone of Asia”, one of the boundaries of the first and second steps",
+  "appelée la « colonne vertébrale de l'Asie », l'une des limites des premier et deuxième paliers"
+ ],
+ "天山": [
+  "the Tianshan Mountains",
+  "les monts Tianshan"
+ ],
+ "位于新疆中部，把新疆分为南北两部分": [
+  "in central Xinjiang, dividing Xinjiang into a northern and a southern part",
+  "au centre du Xinjiang, qu'elle divise en une partie nord et une partie sud"
+ ],
+ "山麓有绿洲，山上有冰川和积雪": [
+  "oases at the foot of the mountains, glaciers and snow on the mountains",
+  "des oasis au pied des montagnes, des glaciers et de la neige sur les montagnes"
+ ],
+ "位于陕西省南部": [
+  "in southern Shaanxi",
+  "dans le sud du Shaanxi"
+ ],
+ "我国南方和北方的分界线": [
+  "the dividing line between southern and northern China",
+  "la ligne de séparation entre le sud et le nord de la Chine"
+ ],
+ "横断山脉": [
+  "the Hengduan Mountains",
+  "les monts Hengduan"
+ ],
+ "位于青藏高原东南部，多条大河并行": [
+  "in the southeast of the Qinghai–Tibet Plateau, with several big rivers running side by side",
+  "dans le sud-est du plateau Qinghai–Tibet, avec plusieurs grands fleuves qui coulent côte à côte"
+ ],
+ "山高谷深，南北向山脉与河流相间": [
+  "high mountains and deep valleys, with north–south mountain ranges alternating with rivers",
+  "hautes montagnes et vallées profondes, avec des chaînes nord–sud alternant avec des fleuves"
+ ],
+ "南北走向": [
+  "north–south",
+  "nord–sud"
+ ],
+ "大兴安岭": [
+  "the Greater Khingan Range",
+  "le Grand Khingan"
+ ],
+ "位于东北地区西部，内蒙古高原东缘": [
+  "in the west of the Northeast region, on the eastern edge of the Inner Mongolia Plateau",
+  "dans l'ouest de la région du Nord-Est, sur le bord est du plateau de Mongolie-Intérieure"
+ ],
+ "是第二、三级阶梯的界线之一，林区": [
+  "one of the boundaries of the second and third steps, a forest area",
+  "l'une des limites des deuxième et troisième paliers, une région forestière"
+ ],
+ "东北—西南走向": [
+  "northeast–southwest",
+  "nord-est–sud-ouest"
+ ],
+ "位于我国西南部，西藏和青海是其主体": [
+  "in the southwest of China, with Tibet and Qinghai as its main body",
+  "dans le sud-ouest de la Chine, avec le Tibet et le Qinghai pour corps principal"
+ ],
+ "“世界屋脊”，平均海拔 4000 米以上，我国面积最大、海拔最高的高原": [
+  "the “roof of the world”, with a mean altitude above 4000 m, the largest and highest plateau of China",
+  "le « toit du monde », d'altitude moyenne supérieure à 4000 m, le plus grand et le plus haut plateau de Chine"
+ ],
+ "内蒙古高原": [
+  "the Inner Mongolia Plateau",
+  "le plateau de Mongolie-Intérieure"
+ ],
+ "位于我国北部，内蒙古自治区是其主体": [
+  "in the north of China, with the Inner Mongolia Autonomous Region as its main body",
+  "dans le nord de la Chine, avec la région autonome de Mongolie-Intérieure pour corps principal"
+ ],
+ "地面平坦开阔，天然牧场广布": [
+  "flat and open ground with natural pastures widespread",
+  "un sol plat et ouvert avec de vastes pâturages naturels"
+ ],
+ "位于我国中部偏北，黄河中游": [
+  "in the north of central China, on the middle reaches of the Yellow River",
+  "dans le centre-nord de la Chine, sur le cours moyen du fleuve Jaune"
+ ],
+ "黄土深厚，沟壑纵横，水土流失严重": [
+  "thick loess, a land cut by gullies, with serious soil erosion",
+  "un lœss épais, une terre découpée de ravins, avec une érosion des sols grave"
+ ],
+ "位于我国西南部，云南、贵州一带": [
+  "in the southwest of China, around Yunnan and Guizhou",
+  "dans le sud-ouest de la Chine, autour du Yunnan et du Guizhou"
+ ],
+ "石灰岩广布，喀斯特地貌典型，地表崎岖": [
+  "widespread limestone, typical karst landforms and rugged ground",
+  "du calcaire très répandu, un relief karstique typique et un sol accidenté"
+ ],
+ "位于新疆南部，天山与昆仑山之间": [
+  "in southern Xinjiang, between the Tianshan and Kunlun Mountains",
+  "dans le sud du Xinjiang, entre les monts Tianshan et Kunlun"
+ ],
+ "我国最大的盆地，中部有塔克拉玛干沙漠": [
+  "the largest basin in China, with the Taklamakan Desert in its middle",
+  "le plus grand bassin de Chine, avec le désert du Taklamakan en son centre"
+ ],
+ "位于我国西南部，四周被山地环绕": [
+  "in the southwest of China, surrounded by mountains",
+  "dans le sud-ouest de la Chine, entouré de montagnes"
+ ],
+ "紫色土肥沃，“天府之国”，气候温和湿润": [
+  "fertile purple soil, the “land of abundance”, with a mild and moist climate",
+  "une terre pourpre fertile, le « pays d'abondance », avec un climat doux et humide"
+ ],
+ "柴达木盆地": [
+  "the Qaidam Basin",
+  "le bassin du Qaidam"
+ ],
+ "位于青海省西北部，青藏高原上": [
+  "in the northwest of Qinghai, on the Qinghai–Tibet Plateau",
+  "dans le nord-ouest du Qinghai, sur le plateau Qinghai–Tibet"
+ ],
+ "盐湖多，矿产资源丰富，有“聚宝盆”之称": [
+  "many salt lakes and rich mineral resources, called the “treasure bowl”",
+  "beaucoup de lacs salés et de riches ressources minérales, appelé le « bol aux trésors »"
+ ],
+ "位于我国东北部，大兴安岭、小兴安岭和长白山之间": [
+  "in the northeast of China, between the Greater Khingan, the Lesser Khingan and the Changbai Mountains",
+  "dans le nord-est de la Chine, entre le Grand Khingan, le Petit Khingan et les monts Changbai"
+ ],
+ "我国面积最大的平原，黑土肥沃": [
+  "the largest plain in China, with fertile black soil",
+  "la plus grande plaine de Chine, avec une terre noire fertile"
+ ],
+ "位于黄河下游，北至燕山，南到淮河": [
+  "on the lower reaches of the Yellow River, from the Yanshan Mountains in the north to the Huaihe in the south",
+  "sur le cours inférieur du fleuve Jaune, des monts Yanshan au nord jusqu'au fleuve Huai au sud"
+ ],
+ "由黄河、海河、淮河泥沙冲积而成，地势平坦": [
+  "formed by the silt of the Yellow River, Haihe and Huaihe, with flat ground",
+  "formée par les alluvions du fleuve Jaune, du Hai et du Huai, au sol plat"
+ ],
+ "长江中下游平原": [
+  "the plains of the middle and lower Yangtze",
+  "les plaines du moyen et du bas Yangzi"
+ ],
+ "位于长江中下游沿岸": [
+  "along the middle and lower reaches of the Yangtze",
+  "le long du cours moyen et inférieur du Yangzi"
+ ],
+ "地势低平，河网密布，湖泊众多，有“鱼米之乡”之称": [
+  "low and flat ground, a dense network of rivers and many lakes, called the “land of fish and rice”",
+  "un sol bas et plat, un dense réseau de rivières et de nombreux lacs, appelé le « pays du poisson et du riz »"
+ ],
+ "{0}主要的产品或作物是？": [
+  "What are the main products or crops of {0}?",
+  "Quels sont les principaux produits ou cultures de {0} ?"
+ ],
+ "关于{0}，叙述正确的是？": [
+  "Which statement about {0} is correct?",
+  "Quelle affirmation sur {0} est correcte ?"
+ ],
+ "{0}主要分布在哪里？": [
+  "Where is {0} mainly found?",
+  "Où {0} se trouve-t-il principalement ?"
+ ],
+ "玉米、大豆、春小麦（一年一熟）": [
+  "maize, soya beans and spring wheat (one crop a year)",
+  "maïs, soja et blé de printemps (une récolte par an)"
+ ],
+ "黑土肥沃，是我国重要的商品粮基地": [
+  "fertile black soil, an important commodity-grain base of China",
+  "une terre noire fertile, une importante base de céréales commerciales de la Chine"
+ ],
+ "冬小麦、玉米、棉花（两年三熟或一年两熟）": [
+  "winter wheat, maize and cotton (three crops in two years or two crops a year)",
+  "blé d'hiver, maïs et coton (trois récoltes en deux ans ou deux récoltes par an)"
+ ],
+ "我国重要的小麦、玉米产区，以旱地为主": [
+  "an important wheat and maize area of China, mainly dry land",
+  "une importante zone de blé et de maïs de la Chine, surtout des terres sèches"
+ ],
+ "水稻、油菜、棉花（一年两熟）": [
+  "rice, rape and cotton (two crops a year)",
+  "riz, colza et coton (deux récoltes par an)"
+ ],
+ "以水田为主，是“鱼米之乡”": [
+  "mainly paddy fields, the “land of fish and rice”",
+  "surtout des rizières, le « pays du poisson et du riz »"
+ ],
+ "珠江三角洲": [
+  "the Pearl River Delta",
+  "le delta de la rivière des Perles"
+ ],
+ "水稻、甘蔗、热带水果（一年三熟）": [
+  "rice, sugar cane and tropical fruit (three crops a year)",
+  "riz, canne à sucre et fruits tropicaux (trois récoltes par an)"
+ ],
+ "热量充足，是我国重要的热带、亚热带作物产区": [
+  "plenty of heat; an important area of tropical and subtropical crops in China",
+  "beaucoup de chaleur ; une importante zone de cultures tropicales et subtropicales de la Chine"
+ ],
+ "水稻、油菜、柑橘": [
+  "rice, rape and oranges",
+  "riz, colza et agrumes"
+ ],
+ "“天府之国”，农业发达": [
+  "the “land of abundance”, with a developed agriculture",
+  "le « pays d'abondance », avec une agriculture développée"
+ ],
+ "新疆绿洲": [
+  "the oases of Xinjiang",
+  "les oasis du Xinjiang"
+ ],
+ "棉花、瓜果": [
+  "cotton, melons and fruit",
+  "coton, melons et fruits"
+ ],
+ "依靠高山冰雪融水灌溉，光照充足，昼夜温差大": [
+  "irrigated by meltwater from high-mountain ice and snow, with plenty of sunshine and a large daily temperature range",
+  "irriguées par l'eau de fonte des glaces et neiges de haute montagne, avec beaucoup de soleil et une grande amplitude thermique journalière"
+ ],
+ "内蒙古草原": [
+  "the Inner Mongolia grassland",
+  "la prairie de Mongolie-Intérieure"
+ ],
+ "牛、羊、羊毛": [
+  "cattle, sheep and wool",
+  "bovins, moutons et laine"
+ ],
+ "天然草场辽阔，以畜牧业为主": [
+  "vast natural pastures, with animal husbandry as the main activity",
+  "de vastes pâturages naturels, avec l'élevage pour principale activité"
+ ],
+ "青藏高原河谷": [
+  "the river valleys of the Qinghai–Tibet Plateau",
+  "les vallées de fleuves du plateau Qinghai–Tibet"
+ ],
+ "青稞、牦牛": [
+  "highland barley and yaks",
+  "orge des hautes terres et yaks"
+ ],
+ "高寒，河谷农业与高山牧业并存": [
+  "high and cold, with valley farming and high-mountain herding side by side",
+  "haut et froid, avec l'agriculture de vallée et l'élevage de haute montagne côte à côte"
+ ],
+ "辽中南工业基地": [
+  "the south–central Liaoning industrial base",
+  "la base industrielle du centre-sud du Liaoning"
+ ],
+ "钢铁、机械、石油化工": [
+  "iron and steel, machinery and petrochemicals",
+  "sidérurgie, machines et pétrochimie"
+ ],
+ "我国重要的重工业基地，鞍山有大型钢铁企业": [
+  "an important heavy-industry base of China, with large iron and steel works at Anshan",
+  "une importante base d'industrie lourde de la Chine, avec de grandes aciéries à Anshan"
+ ],
+ "京津唐工业基地": [
+  "the Beijing–Tianjin–Tangshan industrial base",
+  "la base industrielle Pékin–Tianjin–Tangshan"
+ ],
+ "钢铁、化工、电子": [
+  "iron and steel, chemicals and electronics",
+  "sidérurgie, chimie et électronique"
+ ],
+ "以首都和港口为依托，科技力量雄厚": [
+  "based on the capital and the ports, with strong scientific and technological strength",
+  "appuyée sur la capitale et les ports, avec une forte puissance scientifique et technologique"
+ ],
+ "沪宁杭工业基地": [
+  "the Shanghai–Nanjing–Hangzhou industrial base",
+  "la base industrielle Shanghai–Nankin–Hangzhou"
+ ],
+ "纺织、电子、汽车": [
+  "textiles, electronics and motor vehicles",
+  "textile, électronique et automobile"
+ ],
+ "我国经济最发达、综合实力最强的地区之一": [
+  "one of the most economically developed areas of China with the greatest overall strength",
+  "l'une des régions les plus développées économiquement de la Chine, avec la plus grande puissance globale"
+ ],
+ "珠江三角洲工业区": [
+  "the Pearl River Delta industrial area",
+  "la zone industrielle du delta de la rivière des Perles"
+ ],
+ "电子、家电、服装": [
+  "electronics, household appliances and clothing",
+  "électronique, électroménager et vêtements"
+ ],
+ "外向型经济发达，毗邻港澳": [
+  "a developed export-oriented economy, next to Hong Kong and Macao",
+  "une économie tournée vers l'exportation et développée, voisine de Hong Kong et de Macao"
+ ],
+ "我国最大的陆上油田之一": [
+  "one of the largest onshore oilfields of China",
+  "l'un des plus grands champs pétrolifères terrestres de la Chine"
+ ],
+ "我国最重要的煤炭基地": [
+  "the most important coal base of China",
+  "la plus importante base charbonnière de la Chine"
+ ],
+ "钢铁、钒钛": [
+  "iron and steel, vanadium and titanium",
+  "fer et acier, vanadium et titane"
+ ],
+ "西南地区的钢铁和钒钛基地": [
+  "the iron and steel and vanadium–titanium base of the southwest",
+  "la base de fer et d'acier et de vanadium–titane du sud-ouest"
+ ],
+ "白云鄂博": [
+  "Bayan Obo",
+  "Bayan Obo"
+ ],
+ "稀土、铁": [
+  "rare earths and iron",
+  "terres rares et fer"
+ ],
+ "世界著名的稀土矿区，位于内蒙古包头": [
+  "a world-famous rare-earth mining area, at Baotou in Inner Mongolia",
+  "une zone d'extraction de terres rares de renommée mondiale, à Baotou, en Mongolie-Intérieure"
+ ],
+ "北京—上海": [
+  "Beijing–Shanghai",
+  "Pékin–Shanghai"
+ ],
+ "南北方向的铁路干线，连接京津和长江三角洲": [
+  "a north–south trunk railway linking Beijing and Tianjin with the Yangtze River Delta",
+  "une grande ligne ferroviaire nord–sud reliant Pékin et Tianjin au delta du Yangzi"
+ ],
+ "北京—广州": [
+  "Beijing–Guangzhou",
+  "Pékin–Canton"
+ ],
+ "南北方向的铁路干线，纵贯华北平原和江南": [
+  "a north–south trunk railway running through the North China Plain and Jiangnan",
+  "une grande ligne ferroviaire nord–sud qui traverse la plaine de Chine du Nord et le Jiangnan"
+ ],
+ "北京—哈尔滨": [
+  "Beijing–Harbin",
+  "Pékin–Harbin"
+ ],
+ "连接华北与东北的铁路干线": [
+  "a trunk railway linking North China and the Northeast",
+  "une grande ligne ferroviaire reliant la Chine du Nord et le Nord-Est"
+ ],
+ "连云港—兰州": [
+  "Lianyungang–Lanzhou",
+  "Lianyungang–Lanzhou"
+ ],
+ "东西方向的铁路干线，向西延伸为兰新线": [
+  "an east–west trunk railway, extending west as the Lanxin Line",
+  "une grande ligne ferroviaire est–ouest, prolongée à l'ouest par la ligne Lanxin"
+ ],
+ "兰新线": [
+  "the Lanxin Line",
+  "la ligne Lanxin"
+ ],
+ "兰州—乌鲁木齐": [
+  "Lanzhou–Ürümqi",
+  "Lanzhou–Ürümqi"
+ ],
+ "贯穿河西走廊，通向新疆": [
+  "running through the Hexi Corridor and leading to Xinjiang",
+  "qui traverse le couloir du Hexi et mène au Xinjiang"
+ ],
+ "西宁—拉萨": [
+  "Xining–Lhasa",
+  "Xining–Lhassa"
+ ],
+ "世界海拔最高的高原铁路": [
+  "the highest-altitude plateau railway in the world",
+  "le chemin de fer de plateau le plus élevé du monde"
+ ],
+ "沪昆线": [
+  "the Shanghai–Kunming Line",
+  "la ligne Shanghai–Kunming"
+ ],
+ "上海—昆明": [
+  "Shanghai–Kunming",
+  "Shanghai–Kunming"
+ ],
+ "东西向铁路干线，贯穿江南和西南": [
+  "an east–west trunk railway running through Jiangnan and the southwest",
+  "une grande ligne ferroviaire est–ouest qui traverse le Jiangnan et le sud-ouest"
+ ],
+ "{0}的简称是？": [
+  "What is the abbreviation of {0}?",
+  "Quelle est l'abréviation de {0} ?"
+ ],
+ "简称“{0}”的省级行政区是？": [
+  "Which province-level division has the abbreviation “{0}”?",
+  "Quelle division de niveau provincial a pour abréviation « {0} » ?"
+ ],
+ "{0}的省会（首府、首都）是？": [
+  "What is the capital of {0} (the seat of government, or the capital city)?",
+  "Quel est le chef-lieu de {0} (siège du gouvernement, ou capitale) ?"
+ ],
+ "{0}是哪个省级行政区的行政中心？": [
+  "Of which province-level division is {0} the administrative centre?",
+  "De quelle division de niveau provincial {0} est-elle le centre administratif ?"
+ ],
+ "{0}的大致范围是？": [
+  "What is the approximate extent of {0}?",
+  "Quelle est l'étendue approximative de {0} ?"
+ ],
+ "{0}的气候特点是？": [
+  "What are the climate features of {0}?",
+  "Quelles sont les caractéristiques climatiques de {0} ?"
+ ],
+ "{0}的地形特点是？": [
+  "What are the terrain features of {0}?",
+  "Quelles sont les caractéristiques du relief de {0} ?"
+ ],
+ "{0}的农业特点是？": [
+  "What are the agricultural features of {0}?",
+  "Quelles sont les caractéristiques agricoles de {0} ?"
+ ],
+ "京": [
+  "Jing (京)",
+  "Jing (京)"
+ ],
+ "全国政治、文化中心，有故宫和长城": [
+  "the political and cultural centre of China, with the Forbidden City and the Great Wall",
+  "le centre politique et culturel de la Chine, avec la Cité interdite et la Grande Muraille"
+ ],
+ "天津": [
+  "Tianjin",
+  "Tianjin"
+ ],
+ "津": [
+  "Jin (津)",
+  "Jin (津)"
+ ],
+ "北方重要的港口城市，位于海河下游": [
+  "an important port city of the north, on the lower reaches of the Haihe",
+  "une importante ville portuaire du nord, sur le cours inférieur du Hai"
+ ],
+ "河北": [
+  "Hebei",
+  "le Hebei"
+ ],
+ "冀": [
+  "Ji (冀)",
+  "Ji (冀)"
+ ],
+ "环绕京津，位于华北平原": [
+  "surrounds Beijing and Tianjin, on the North China Plain",
+  "entoure Pékin et Tianjin, sur la plaine de Chine du Nord"
+ ],
+ "石家庄": [
+  "Shijiazhuang",
+  "Shijiazhuang"
+ ],
+ "晋": [
+  "Jin (晋)",
+  "Jin (晋)"
+ ],
+ "煤炭基地，位于黄土高原": [
+  "a coal base, on the Loess Plateau",
+  "une base charbonnière, sur le plateau de lœss"
+ ],
+ "太原": [
+  "Taiyuan",
+  "Taiyuan"
+ ],
+ "蒙": [
+  "Meng (蒙)",
+  "Meng (蒙)"
+ ],
+ "草原辽阔，畜牧业发达，煤炭和稀土丰富": [
+  "vast grassland, developed animal husbandry, rich coal and rare earths",
+  "de vastes prairies, un élevage développé, du charbon et des terres rares en abondance"
+ ],
+ "呼和浩特": [
+  "Hohhot",
+  "Hohhot"
+ ],
+ "辽宁": [
+  "Liaoning",
+  "le Liaoning"
+ ],
+ "辽": [
+  "Liao (辽)",
+  "Liao (辽)"
+ ],
+ "老工业基地，钢铁和机械工业发达": [
+  "an old industrial base, with developed iron and steel and machinery industries",
+  "une vieille base industrielle, avec des industries sidérurgique et mécanique développées"
+ ],
+ "沈阳": [
+  "Shenyang",
+  "Shenyang"
+ ],
+ "吉": [
+  "Ji (吉)",
+  "Ji (吉)"
+ ],
+ "汽车工业和商品粮基地": [
+  "the motor industry and a commodity-grain base",
+  "l'industrie automobile et une base de céréales commerciales"
+ ],
+ "长春": [
+  "Changchun",
+  "Changchun"
+ ],
+ "黑": [
+  "Hei (黑)",
+  "Hei (黑)"
+ ],
+ "黑土地粮仓，有大庆油田": [
+  "the granary of the black earth, with the Daqing oilfield",
+  "le grenier de la terre noire, avec le champ pétrolifère de Daqing"
+ ],
+ "沪": [
+  "Hu (沪)",
+  "Hu (沪)"
+ ],
+ "我国经济和金融中心，长江三角洲的龙头": [
+  "China's economic and financial centre, the leader of the Yangtze River Delta",
+  "le centre économique et financier de la Chine, le fer de lance du delta du Yangzi"
+ ],
+ "江苏": [
+  "Jiangsu",
+  "le Jiangsu"
+ ],
+ "苏": [
+  "Su (苏)",
+  "Su (苏)"
+ ],
+ "经济发达，水网密布": [
+  "a developed economy and a dense network of waterways",
+  "une économie développée et un dense réseau de voies d'eau"
+ ],
+ "南京": [
+  "Nanjing",
+  "Nankin"
+ ],
+ "浙": [
+  "Zhe (浙)",
+  "Zhe (浙)"
+ ],
+ "民营经济发达，有西湖": [
+  "a developed private economy, with the West Lake",
+  "une économie privée développée, avec le lac de l'Ouest"
+ ],
+ "杭州": [
+  "Hangzhou",
+  "Hangzhou"
+ ],
+ "安徽": [
+  "Anhui",
+  "l'Anhui"
+ ],
+ "皖": [
+  "Wan (皖)",
+  "Wan (皖)"
+ ],
+ "有黄山，地跨长江和淮河": [
+  "has the Huangshan Mountains and spans the Yangtze and the Huaihe",
+  "possède les monts Huangshan et s'étend sur le Yangzi et le fleuve Huai"
+ ],
+ "合肥": [
+  "Hefei",
+  "Hefei"
+ ],
+ "闽": [
+  "Min (闽)",
+  "Min (闽)"
+ ],
+ "隔海峡与台湾相望，著名侨乡": [
+  "faces Taiwan across the strait; a famous home region of overseas Chinese",
+  "fait face à Taïwan de l'autre côté du détroit ; une célèbre région d'origine de Chinois d'outre-mer"
+ ],
+ "福州": [
+  "Fuzhou",
+  "Fuzhou"
+ ],
+ "江西": [
+  "Jiangxi",
+  "le Jiangxi"
+ ],
+ "赣": [
+  "Gan (赣)",
+  "Gan (赣)"
+ ],
+ "有鄱阳湖，景德镇瓷器著名": [
+  "has Poyang Lake and the famous porcelain of Jingdezhen",
+  "possède le lac Poyang et la célèbre porcelaine de Jingdezhen"
+ ],
+ "南昌": [
+  "Nanchang",
+  "Nanchang"
+ ],
+ "山东": [
+  "Shandong",
+  "le Shandong"
+ ],
+ "鲁": [
+  "Lu (鲁)",
+  "Lu (鲁)"
+ ],
+ "有泰山，是农业大省和沿海经济大省": [
+  "has Mount Tai and is a big agricultural province and a big coastal economic province",
+  "possède le mont Tai et est une grande province agricole et une grande province économique côtière"
+ ],
+ "济南": [
+  "Jinan",
+  "Jinan"
+ ],
+ "河南": [
+  "Henan",
+  "le Henan"
+ ],
+ "豫": [
+  "Yu (豫)",
+  "Yu (豫)"
+ ],
+ "人口大省，粮食产量大，位于中原": [
+  "a populous province with a large grain output, in the Central Plains",
+  "une province très peuplée avec une grande production de céréales, dans les plaines centrales"
+ ],
+ "郑州": [
+  "Zhengzhou",
+  "Zhengzhou"
+ ],
+ "湖北": [
+  "Hubei",
+  "le Hubei"
+ ],
+ "鄂": [
+  "E (鄂)",
+  "E (鄂)"
+ ],
+ "九省通衢，有长江三峡和葛洲坝": [
+  "a thoroughfare of nine provinces, with the Three Gorges of the Yangtze and the Gezhouba Dam",
+  "un carrefour de neuf provinces, avec les Trois Gorges du Yangzi et le barrage de Gezhouba"
+ ],
+ "武汉": [
+  "Wuhan",
+  "Wuhan"
+ ],
+ "湖南": [
+  "Hunan",
+  "le Hunan"
+ ],
+ "湘": [
+  "Xiang (湘)",
+  "Xiang (湘)"
+ ],
+ "洞庭湖平原，“鱼米之乡”": [
+  "the Dongting Lake plain, a “land of fish and rice”",
+  "la plaine du lac Dongting, un « pays du poisson et du riz »"
+ ],
+ "长沙": [
+  "Changsha",
+  "Changsha"
+ ],
+ "广东": [
+  "Guangdong",
+  "le Guangdong"
+ ],
+ "粤": [
+  "Yue (粤)",
+  "Yue (粤)"
+ ],
+ "经济总量大，改革开放的前沿": [
+  "a large economy and the forefront of reform and opening up",
+  "une grande économie et l'avant-garde de la réforme et de l'ouverture"
+ ],
+ "广西": [
+  "Guangxi",
+  "le Guangxi"
+ ],
+ "桂": [
+  "Gui (桂)",
+  "Gui (桂)"
+ ],
+ "桂林山水著名，壮族自治区": [
+  "famous for the landscapes of Guilin, the Zhuang Autonomous Region",
+  "célèbre pour les paysages de Guilin, la région autonome zhuang"
+ ],
+ "南宁": [
+  "Nanning",
+  "Nanning"
+ ],
+ "琼": [
+  "Qiong (琼)",
+  "Qiong (琼)"
+ ],
+ "热带岛屿，经济特区": [
+  "a tropical island and a special economic zone",
+  "une île tropicale et une zone économique spéciale"
+ ],
+ "海口": [
+  "Haikou",
+  "Haikou"
+ ],
+ "重庆": [
+  "Chongqing",
+  "Chongqing"
+ ],
+ "渝": [
+  "Yu (渝)",
+  "Yu (渝)"
+ ],
+ "“山城”，长江上游的直辖市": [
+  "the “mountain city”, a municipality on the upper reaches of the Yangtze",
+  "la « ville de montagne », une municipalité sur le cours supérieur du Yangzi"
+ ],
+ "四川": [
+  "Sichuan",
+  "le Sichuan"
+ ],
+ "川": [
+  "Chuan (川)",
+  "Chuan (川)"
+ ],
+ "“天府之国”，有大熊猫": [
+  "the “land of abundance”, with giant pandas",
+  "le « pays d'abondance », avec des pandas géants"
+ ],
+ "成都": [
+  "Chengdu",
+  "Chengdu"
+ ],
+ "贵州": [
+  "Guizhou",
+  "le Guizhou"
+ ],
+ "黔": [
+  "Qian (黔)",
+  "Qian (黔)"
+ ],
+ "喀斯特地貌广布，有黄果树瀑布": [
+  "widespread karst landforms, with the Huangguoshu Waterfall",
+  "des reliefs karstiques très répandus, avec la chute de Huangguoshu"
+ ],
+ "贵阳": [
+  "Guiyang",
+  "Guiyang"
+ ],
+ "云南": [
+  "Yunnan",
+  "le Yunnan"
+ ],
+ "滇": [
+  "Dian (滇)",
+  "Dian (滇)"
+ ],
+ "高原，多民族，“植物王国”": [
+  "a plateau with many ethnic groups, the “kingdom of plants”",
+  "un plateau avec de nombreux groupes ethniques, le « royaume des plantes »"
+ ],
+ "昆明": [
+  "Kunming",
+  "Kunming"
+ ],
+ "西藏": [
+  "Tibet",
+  "le Tibet"
+ ],
+ "藏": [
+  "Zang (藏)",
+  "Zang (藏)"
+ ],
+ "青藏高原，有布达拉宫和珠穆朗玛峰": [
+  "the Qinghai–Tibet Plateau, with the Potala Palace and Mount Qomolangma",
+  "le plateau Qinghai–Tibet, avec le palais du Potala et le mont Qomolangma"
+ ],
+ "陕西": [
+  "Shaanxi",
+  "le Shaanxi"
+ ],
+ "陕": [
+  "Shaan (陕)",
+  "Shaan (陕)"
+ ],
+ "古都，有兵马俑，位于黄土高原": [
+  "an ancient capital with the Terracotta Army, on the Loess Plateau",
+  "une ancienne capitale avec l'armée de terre cuite, sur le plateau de lœss"
+ ],
+ "西安": [
+  "Xi'an",
+  "Xi'an"
+ ],
+ "甘肃": [
+  "Gansu",
+  "le Gansu"
+ ],
+ "甘": [
+  "Gan (甘)",
+  "Gan (甘)"
+ ],
+ "狭长的河西走廊，有敦煌莫高窟": [
+  "the long narrow Hexi Corridor, with the Dunhuang Mogao Caves",
+  "le long et étroit couloir du Hexi, avec les grottes de Mogao à Dunhuang"
+ ],
+ "兰州": [
+  "Lanzhou",
+  "Lanzhou"
+ ],
+ "青海": [
+  "Qinghai",
+  "le Qinghai"
+ ],
+ "青": [
+  "Qing (青)",
+  "Qing (青)"
+ ],
+ "有三江源和青海湖": [
+  "has the Three-River Source region and Qinghai Lake",
+  "possède la région des sources des Trois Fleuves et le lac Qinghai"
+ ],
+ "西宁": [
+  "Xining",
+  "Xining"
+ ],
+ "宁夏": [
+  "Ningxia",
+  "le Ningxia"
+ ],
+ "宁": [
+  "Ning (宁)",
+  "Ning (宁)"
+ ],
+ "回族自治区，“塞上江南”": [
+  "the Hui Autonomous Region, the “Jiangnan beyond the Great Wall”",
+  "la région autonome hui, le « Jiangnan au-delà de la Grande Muraille »"
+ ],
+ "银川": [
+  "Yinchuan",
+  "Yinchuan"
+ ],
+ "新": [
+  "Xin (新)",
+  "Xin (新)"
+ ],
+ "面积最大的省级行政区，盛产棉花和瓜果": [
+  "the largest province-level division by area, rich in cotton, melons and fruit",
+  "la plus grande division de niveau provincial par la superficie, riche en coton, melons et fruits"
+ ],
+ "香港": [
+  "Hong Kong",
+  "Hong Kong"
+ ],
+ "港": [
+  "Gang (港)",
+  "Gang (港)"
+ ],
+ "国际金融、贸易和航运中心，1997 年回归": [
+  "an international financial, trade and shipping centre, returned in 1997",
+  "un centre international de finance, de commerce et de transport maritime, revenu en 1997"
+ ],
+ "澳门": [
+  "Macao",
+  "Macao"
+ ],
+ "澳": [
+  "Ao (澳)",
+  "Ao (澳)"
+ ],
+ "以旅游业著称，1999 年回归": [
+  "known for tourism, returned in 1999",
+  "connu pour le tourisme, revenu en 1999"
+ ],
+ "台湾": [
+  "Taiwan",
+  "Taïwan"
+ ],
+ "台": [
+  "Tai (台)",
+  "Tai (台)"
+ ],
+ "我国第一大岛，有阿里山和日月潭": [
+  "the largest island of China, with Alishan and Sun Moon Lake",
+  "la plus grande île de Chine, avec l'Alishan et le lac du Soleil et de la Lune"
+ ],
+ "台北": [
+  "Taipei",
+  "Taipei"
+ ],
+ "大兴安岭以东、青藏高原以东、秦岭—淮河以北": [
+  "east of the Greater Khingan Range and the Qinghai–Tibet Plateau, north of the Qinling–Huaihe line",
+  "à l'est du Grand Khingan et du plateau Qinghai–Tibet, au nord de la ligne Qinling–Huai"
+ ],
+ "温带季风气候，冬冷夏热，降水较少": [
+  "a temperate monsoon climate, cold winters, hot summers and little precipitation",
+  "un climat de mousson tempérée, des hivers froids, des étés chauds et peu de précipitations"
+ ],
+ "平原广阔，有黄土高原": [
+  "broad plains, with the Loess Plateau",
+  "de vastes plaines, avec le plateau de lœss"
+ ],
+ "以旱地为主，种植小麦、玉米": [
+  "mainly dry land, growing wheat and maize",
+  "surtout des terres sèches, où l'on cultive le blé et le maïs"
+ ],
+ "秦岭—淮河以南，青藏高原以东": [
+  "south of the Qinling–Huaihe line and east of the Qinghai–Tibet Plateau",
+  "au sud de la ligne Qinling–Huai et à l'est du plateau Qinghai–Tibet"
+ ],
+ "亚热带和热带季风气候，温暖湿润": [
+  "subtropical and tropical monsoon climates, warm and moist",
+  "climats de mousson subtropicale et tropicale, chauds et humides"
+ ],
+ "丘陵、山地和平原相间，河网密布": [
+  "hills, mountains and plains alternating, with a dense network of rivers",
+  "des collines, des montagnes et des plaines en alternance, avec un dense réseau de rivières"
+ ],
+ "以水田为主，种植水稻": [
+  "mainly paddy fields, growing rice",
+  "surtout des rizières, où l'on cultive le riz"
+ ],
+ "位于大兴安岭以西、长城以北，昆仑山—阿尔金山—祁连山以北": [
+  "west of the Greater Khingan Range and north of the Great Wall, north of the Kunlun–Altun–Qilian Mountains",
+  "à l'ouest du Grand Khingan et au nord de la Grande Muraille, au nord des monts Kunlun–Altun–Qilian"
+ ],
+ "温带大陆性气候，干旱少雨": [
+  "a temperate continental climate, dry with little rain",
+  "un climat continental tempéré, aride avec peu de pluie"
+ ],
+ "高原、盆地和沙漠广布": [
+  "plateaus, basins and deserts widespread",
+  "des plateaux, des bassins et des déserts très répandus"
+ ],
+ "位于我国西南部，青藏高原为主体": [
+  "in the southwest of China, with the Qinghai–Tibet Plateau as its main body",
+  "dans le sud-ouest de la Chine, avec le plateau Qinghai–Tibet pour corps principal"
+ ],
+ "高原山地气候，高寒": [
+  "a plateau mountain climate, high and cold",
+  "un climat de montagne et de plateau, haut et froid"
+ ],
+ "平均海拔 4000 米以上，被称为“世界屋脊”": [
+  "a mean altitude above 4000 m, called the “roof of the world”",
+  "une altitude moyenne supérieure à 4000 m, appelée le « toit du monde »"
+ ],
+ "高寒牧业和河谷农业，种植青稞": [
+  "high-cold pastoral farming and valley agriculture, growing highland barley",
+  "l'élevage d'altitude et de froid et l'agriculture de vallée, avec la culture de l'orge des hautes terres"
+ ],
+ "韩国": [
+  "South Korea",
+  "la Corée du Sud"
+ ],
+ "尼日利亚": [
+  "Nigeria",
+  "le Nigeria"
+ ],
+ "南非": [
+  "South Africa",
+  "l'Afrique du Sud"
+ ],
+ "印度尼西亚": [
+  "Indonesia",
+  "l'Indonésie"
+ ],
+ "孟加拉国": [
+  "Bangladesh",
+  "le Bangladesh"
+ ],
+ "埃塞俄比亚": [
+  "Ethiopia",
+  "l'Éthiopie"
+ ],
+ "越南": [
+  "Vietnam",
+  "le Viêt Nam"
+ ],
+ "{0}的面积约为多少？": [
+  "About what is the area of {0}?",
+  "Quelle est environ la superficie de {0} ?"
+ ],
+ "下列关于{0}的叙述，正确的是？": [
+  "Which statement about {0} is correct?",
+  "Quelle affirmation sur {0} est correcte ?"
+ ],
+ "{0}的最高峰是？": [
+  "What is the highest mountain of {0}?",
+  "Quelle est la plus haute montagne de {0} ?"
+ ],
+ "最高峰是{0}的大洲是？": [
+  "Which continent has {0} as its highest mountain?",
+  "Quel continent a pour plus haute montagne {0} ?"
+ ],
+ "{0}最长的河流是？": [
+  "What is the longest river of {0}?",
+  "Quel est le plus long fleuve de {0} ?"
+ ],
+ "关于{0}的位置，叙述正确的是？": [
+  "Which statement about the position of {0} is correct?",
+  "Quelle affirmation sur la position de {0} est correcte ?"
+ ],
+ "关于{0}的自然特征，叙述正确的是？": [
+  "Which statement about the natural features of {0} is correct?",
+  "Quelle affirmation sur les caractéristiques naturelles de {0} est correcte ?"
+ ],
+ "关于{0}的经济特点，叙述正确的是？": [
+  "Which statement about the economy of {0} is correct?",
+  "Quelle affirmation sur l'économie de {0} est correcte ?"
+ ],
+ "{0}的首都是？": [
+  "What is the capital of {0}?",
+  "Quelle est la capitale de {0} ?"
+ ],
+ "首都是{0}的国家是？": [
+  "Which country has {0} as its capital?",
+  "Quel pays a pour capitale {0} ?"
+ ],
+ "{0}：{1}。": [
+  "{0}: {1}.",
+  "{0} : {1}."
+ ],
+ "{0} 万人": [
+  "{0} ten thousand people",
+  "{0} dizaines de milliers d'habitants"
+ ],
+ "{0} 人∕平方千米": [
+  "{0} people per km²",
+  "{0} habitants par km²"
+ ],
+ "约 {0} 万平方千米": [
+  "about {0} ten thousand km²",
+  "environ {0} dizaines de milliers de km²"
+ ],
+ "约 {0} 亿平方千米": [
+  "about {0} hundred million km²",
+  "environ {0} centaines de millions de km²"
+ ],
+ "{0}月{1}日 {2}:{3}": [
+  "{0}/{1}, {2}:{3}",
+  "{1}/{0}, {2}:{3}"
  ]
 }

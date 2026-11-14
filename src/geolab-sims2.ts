@@ -1,6 +1,7 @@
 /** The geography lab's modules, part 2: climate, population, development, the earth's layers and rocks, energy, China (extent, steps, regions) and the generic fact explorers
  *  (continents, regions of the world, China's nature and economy). Each is a `SimDef` of the physics lab's kit; the content is `data/geolab.json`. */
 import { h } from "./ui";
+import { tr } from "./i18n";
 import { type SimDef, type St, type Readout, fmt } from "./phys/kit";
 import { type GeoId } from "./geolab-catalog";
 import * as M from "./geolab-model";
@@ -12,7 +13,7 @@ export function withCard(def: SimDef, key: (s: St) => string, fill: (el: HTMLEle
   const orig = def.draw; let last = "";
   return { ...def, draw(c, w, hh, s) { orig(c, w, hh, s); const el = document.getElementById("gl-card"); if (!el) return; const k = key(s); if (k !== last || !el.childElementCount) { last = k; fill(el, s); } } };
 }
-const U = (t: string, tag: "span" | "b" = "span") => h(tag, { class: "user" }, t);
+const U = (t: string, tag: "span" | "b" = "span") => h(tag, {}, tr(t));   // (rule 66: card texts are translated)
 
 // ---------- climate ----------
 export function climate(D: M.GeoData): SimDef {
@@ -237,7 +238,7 @@ export function facts(D: M.GeoData, id: GeoId, world: boolean, start: number, ta
     links: [{ text: "相关：地图（中国、世界）", href: "#/science/map" }],
   }, (s) => String(s.e), (el, s) => {
     const e = E[s.e];
-    el.replaceChildren(h("h3", { class: "user" }, e.n), ...Object.entries(mod.fields).filter(([f]) => e.f[f] !== undefined).map(([f, d]) => h("p", { class: "gl-line" }, h("b", {}, d.label), U(e.f[f]))), ...(e.check ? [h("p", { class: "muted small" }, "此条内容请对照资料核对。")] : []));
+    el.replaceChildren(h("h3", {}, tr(e.n)), ...Object.entries(mod.fields).filter(([f]) => e.f[f] !== undefined).map(([f, d]) => h("p", { class: "gl-line" }, h("b", {}, d.label), U(e.f[f]))), ...(e.check ? [h("p", { class: "muted small" }, "此条内容请对照资料核对。")] : []));
   });
 }
 
@@ -274,7 +275,7 @@ export function chinaregions(D: M.GeoData, provs: GeoMapProv[]): SimDef {
     links: [{ text: "相关：地图（中国、世界）", href: "#/science/map" }],
   }, (s) => String(s.p), (el, s) => {
     const pv = provs[s.p], e = byName.get(pv.n), rg = byName.get(REG4[pv.id]);
-    el.replaceChildren(h("h3", { class: "user" }, pv.n), ...(e ? Object.entries(D.facts.chinaregions.fields).filter(([f]) => e.f[f] !== undefined && ["ab", "cap", "feat"].includes(f)).map(([f, d]) => h("p", { class: "gl-line" }, h("b", {}, d.label), U(e.f[f]))) : []),
+    el.replaceChildren(h("h3", {}, tr(pv.n)), ...(e ? Object.entries(D.facts.chinaregions.fields).filter(([f]) => e.f[f] !== undefined && ["ab", "cap", "feat"].includes(f)).map(([f, d]) => h("p", { class: "gl-line" }, h("b", {}, d.label), U(e.f[f]))) : []),
       ...(rg ? [h("h3", {}, "所属区域"), h("p", { class: "gl-line" }, U(rg.n, "b")), ...Object.entries(D.facts.chinaregions.fields).filter(([f]) => rg.f[f] !== undefined).map(([f, d]) => h("p", { class: "gl-line" }, h("b", {}, d.label), U(rg.f[f])))] : [h("p", { class: "muted small" }, "香港、澳门、台湾是三个特殊的区域。")]), h("p", { class: "muted small" }, "四大区域按省区近似着色，边界省区只作示意。"));
   });
 }

@@ -1,7 +1,7 @@
 /** Stars and the sky: the Sun's layers, the life of a star, 12 constellations (dots and lines) with their stories and how to find the Pole Star, the ladder of sizes from the Earth to the universe, and the timeline of space exploration. */
 import { h } from "./ui";
 import { tr } from "./i18n";
-import { user, chips } from "./spaceui";
+import { con, chips } from "./spaceui";
 import { constSvg, finderSvg } from "./spaceart";
 import { nameOf, type Space } from "./spacemodel";
 
@@ -15,7 +15,7 @@ function sunSection(S: Space): HTMLElement {
   const list = h("div", { class: "sp-layers" });
   const pick = (id: string) => {
     const l = layers.find((x) => x.id === id)!;
-    info.replaceChildren(h("b", {}, tr(l.zh)), user(l.text, "p"));
+    info.replaceChildren(h("b", {}, tr(l.zh)), con(l.text, "p"));
     list.querySelectorAll<HTMLElement>("button").forEach((b) => b.classList.toggle("on", b.dataset.id === id));
     svg.querySelectorAll<SVGElement>(".sp-sunl").forEach((c) => c.setAttribute("opacity", c.dataset.id === id ? "1" : "0.78"));
   };
@@ -24,10 +24,10 @@ function sunSection(S: Space): HTMLElement {
   pick("core");
   return h("section", { class: "sp-sec", id: "sp-sun" }, h("h2", { class: "sec" }, "太阳的结构"),
     h("div", { class: "sp-sun-row" }, svg, h("div", {}, list, info)),
-    h("div", { class: "sp-grid sp-sunstats" }, ...S.sun.stats.map(([k, v]) => h("div", { class: "sp-card" }, h("span", { class: "muted small" }, k), user(v, "b")))));
+    h("div", { class: "sp-grid sp-sunstats" }, ...S.sun.stats.map(([k, v]) => h("div", { class: "sp-card" }, h("span", { class: "muted small" }, k), con(v, "b")))));
 }
 function lifeSection(S: Space): HTMLElement {
-  const card = (l: Space["life"][0]) => h("div", { class: `sp-life sp-life-${l.id}`, "data-id": l.id }, h("b", {}, l.zh), l.id === "main" ? h("em", {}, tr("太阳在这里")) : null, user(l.text, "p"));
+  const card = (l: Space["life"][0]) => h("div", { class: `sp-life sp-life-${l.id}`, "data-id": l.id }, h("b", {}, l.zh), l.id === "main" ? h("em", {}, tr("太阳在这里")) : null, con(l.text, "p"));
   const common = S.life.filter((l) => l.path === "both"), small = S.life.filter((l) => l.path === "small"), big = S.life.filter((l) => l.path === "big");
   return h("section", { class: "sp-sec", id: "sp-life" }, h("h2", { class: "sec" }, "恒星的一生"),
     h("p", { class: "muted" }, "恒星也有出生、成长和结局，质量不同，结局就不同。"),
@@ -40,7 +40,7 @@ function constSection(S: Space): HTMLElement {
   const grid = h("div", { class: "sp-consts", id: "sp-consts" });
   for (const c of S.constellations) {
     const fig = svgEl(constSvg(c));
-    const more = h("div", { class: "sp-const-more" }, h("p", { class: "muted small" }, h("b", {}, tr("最佳观测：")), user(c.season)), user(c.story, "p"), h("p", { class: "sp-tip" }, h("b", {}, tr("怎样找到：")), user(c.tip)));
+    const more = h("div", { class: "sp-const-more" }, h("p", { class: "muted small" }, h("b", {}, tr("最佳观测：")), con(c.season)), con(c.story, "p"), h("p", { class: "sp-tip" }, h("b", {}, tr("怎样找到：")), con(c.tip)));
     const card = h("button", { class: "sp-const", "data-id": c.id, "aria-expanded": "false", onclick: () => {
       const open = card.classList.toggle("open"); card.setAttribute("aria-expanded", String(open));
       fig.replaceChildren(svgEl(constSvg(c, open)).firstElementChild!);
@@ -61,12 +61,12 @@ function ladderSection(S: Space): HTMLElement {
     h("div", { class: "sp-lad" }, ...S.ladder.map((l, i) => h("div", { class: "sp-rung", "data-id": l.id },
       h("div", { class: "sp-rung-head" }, h("i", {}, String(i + 1)), h("b", {}, l.zh)),
       h("div", { class: "sp-bar" }, h("span", { style: `width:${Math.max(3, ((Math.log10(l.m) - lo) / (hi - lo)) * 100).toFixed(1)}%` })),
-      user(l.text, "p"), l.light ? user(l.light, "p", "muted small") : null))));
+      con(l.text, "p"), l.light ? con(l.light, "p", "muted small") : null))));
 }
 function timelineSection(S: Space): HTMLElement {
   let only = false;
   const list = h("div", { class: "sp-time-list", id: "sp-timeline" });
-  const draw = () => list.replaceChildren(...S.timeline.filter((t) => !only || t.cn).slice().sort((a, b) => (a.date < b.date ? -1 : 1)).map((t) => h("div", { class: "sp-tl" + (t.cn ? " cn" : ""), "data-date": t.date }, h("time", {}, t.date.slice(0, 4), h("small", {}, t.date.slice(5))), h("div", {}, user(t.zh, "b"), user(t.text, "p")))));
+  const draw = () => list.replaceChildren(...S.timeline.filter((t) => !only || t.cn).slice().sort((a, b) => (a.date < b.date ? -1 : 1)).map((t) => h("div", { class: "sp-tl" + (t.cn ? " cn" : ""), "data-date": t.date }, h("time", {}, t.date.slice(0, 4), h("small", {}, t.date.slice(5))), h("div", {}, con(t.zh, "b"), con(t.text, "p")))));
   const c = chips([{ id: "sp-tl-all", label: "全部", on: true, click: () => { only = false; c.set("sp-tl-all"); draw(); } }, { id: "sp-tl-cn", label: "中国航天", on: false, click: () => { only = true; c.set("sp-tl-cn"); draw(); } }]);
   draw();
   return h("section", { class: "sp-sec", id: "sp-explore" }, h("h2", { class: "sec" }, "宇宙探索"), c.el, list);

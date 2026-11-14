@@ -45,6 +45,8 @@ export function fmt(tpl: string, args: string[]): (Node | string)[] {
   return out.filter((x) => x !== "");
 }
 export const user = (text: string, tag: "span" | "p" | "div" | "b" = "span", cls = ""): HTMLElement => h(tag, { class: ("user " + cls).trim() }, text);
+/** a text of the course content (rule 66): translated into the screen language like the UI, not a `user` text */
+export const con = (text: string, tag: "span" | "p" | "div" | "b" = "span", cls = ""): HTMLElement => h(tag, cls ? { class: cls } : {}, tr(text));
 /** the position of a body for a tap test: the nearest of `list` (each with x, y, r) within r + slack */
 export function nearest<T extends { x: number; y: number; r: number }>(list: T[], x: number, y: number, slack = 12): T | null {
   let best: T | null = null, bd = Infinity;

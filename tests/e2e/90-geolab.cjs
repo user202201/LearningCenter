@@ -14,7 +14,7 @@ const OUT = process.env.D || 'tests/out/geolab/';
 fs.mkdirSync(OUT, { recursive: true });
 
 const IDS = ['seasons', 'terrain', 'watercycle', 'weather', 'plates', 'chinabasic', 'globe', 'timezone', 'scale', 'contour', 'continents', 'rocks', 'climate', 'population', 'development', 'regions', 'chinaterrain', 'chinanature', 'chinaecon', 'sustain', 'chinaregions'];
-const extra = Object.assign({}, ...['geolab.json', 'geocontent.json'].map((f) => JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/' + f), 'utf8'))));   // (geocontent.json: the lessons, rule 66; the quiz banks / facts are not translated yet)
+const extra = Object.assign({}, ...['geolab.json', 'geocontent.json'].map((f) => JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/i18n-extra/' + f), 'utf8'))));   // (geocontent.json: lessons, banks, facts, question templates: rule 66)
 const withExtra = async (t) => {
   const add = 'Object.assign(EN, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[0]]))) + ');\nObject.assign(FR, ' + JSON.stringify(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, v[1]]))) + ');\n';
   await t.ctx.route('**/src/i18n-data.ts*', async (route) => { const r = await route.fetch(); await route.fulfill({ response: r, body: (await r.text()) + '\n' + add }); });
@@ -431,7 +431,7 @@ const SOLVE = () => ({
     const tl = await start(new Map(), { local: true, locale: loc, viewport: { width: 1180, height: 820 } });
     await withExtra(tl);
     const p = tl.page; const left = [];
-    const scan = async (where) => { const a = await p.evaluate(() => { const out = []; const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) { if (n.parentElement.closest('.user, canvas, svg, script, style')) continue; if (/[一-鿿]/.test(n.nodeValue)) out.push(n.nodeValue.trim()); } document.querySelectorAll('[title],[aria-label],[placeholder]').forEach((e) => { for (const k of ['title', 'aria-label', 'placeholder']) { const s = e.getAttribute(k); if (s && /[一-鿿]/.test(s) && !e.closest('.user')) out.push(s); } }); return out; }); for (const s of a) left.push(`${where}: ${s}`); };
+    const scan = async (where) => { const a = await p.evaluate(() => { const out = []; const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) { if (n.parentElement.closest('.user, canvas, svg, script, style')) continue; if (/[一-鿿]/.test(n.nodeValue.replace(/\([^()]*\)/g, ''))) out.push(n.nodeValue.trim()); } document.querySelectorAll('[title],[aria-label],[placeholder]').forEach((e) => { for (const k of ['title', 'aria-label', 'placeholder']) { const s = e.getAttribute(k); if (s && /[一-鿿]/.test(s.replace(/\([^()]*\)/g, '')) && !e.closest('.user')) out.push(s); } }); return out; }); for (const s of a) left.push(`${where}: ${s}`); };
     await p.evaluate(() => (location.hash = '#/subject/science')); await p.waitForSelector('#open-geo'); await p.waitForTimeout(200);
     ok(!/[一-鿿]/.test(await p.textContent('#open-geo')), `F ${label}: the science card is translated (${(await p.textContent('#open-geo')).trim()})`);
     await p.evaluate(() => (location.hash = '#/science/geo')); await p.waitForSelector('#gl-home'); await p.waitForTimeout(200); await scan('home');
@@ -446,10 +446,29 @@ const SOLVE = () => ({
       await p.evaluate(() => window.__geo.reset());
       await p.click('#quiz-start'); await p.waitForTimeout(40); await scan(id + ' quiz'); await p.click('.pl-qopt >> nth=0'); await scan(id + ' quiz answered'); await p.click('#quiz-next');
     }
+    // rule 66: every quiz question (21 modules x 40 seeds x 5 = 200 per module), every bank question, every fact (entity names, fields, card texts) is translated
+    {
+      const bad = await p.evaluate(async (ids) => {
+        const { tr } = await import('/src/i18n.ts'); const MM = await import('/src/geolab-model.ts');
+        const cjk0 = /[一-鿿]/; const cjk = { test: (t) => cjk0.test(String(t).replace(/\([^()]*\)/g, '')) };   // (a proper name in brackets, e.g. a province abbreviation "Jing (京)", may keep its characters)
+        const out = []; const norm = (t) => t.replace(/-?[0-9.]+/g, 'N').slice(0, 70);
+        const rng = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+        for (const id of ids) {
+          location.hash = '#/science/geo/' + id; await new Promise((r) => setTimeout(r, 100));
+          const def = window.__geo.def;
+          for (let sd = 1; sd <= 40; sd++) for (const q of def.quiz(rng(sd * 7919))) for (const t of [q.q, q.why ?? '', ...q.choices]) if (cjk.test(tr(t))) out.push(id + ': ' + norm(t));
+        }
+        const D = await MM.loadGeo();
+        const walk = (v, where) => { if (typeof v === 'string') { if (cjk.test(v) && cjk.test(tr(v))) out.push(where + ': ' + norm(v)); } else if (Array.isArray(v)) v.forEach((x) => walk(x, where)); else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) if (!['box', 'g'].includes(k)) walk(x, where); };
+        for (const k of ['banks', 'facts', 'development']) walk(D[k], k);
+        return [...new Set(out)];
+      }, IDS);
+      ok(bad.length === 0, `F ${label}: 21 modules x 200 generated questions, every bank question and every fact: no Chinese left (${bad.length})${bad.length ? '\n   ' + bad.slice(0, 30).join('\n   ') : ''}`);
+    }
     const uniq = [...new Set(left)];
     ok(uniq.length === 0, `F ${label}: no Chinese left outside content boxes (${uniq.length})${uniq.length ? '\n   ' + uniq.slice(0, 30).join('\n   ') : ''}`);
     await p.evaluate(() => (location.hash = '#/science/geo/globe')); await p.waitForSelector('.pl-sim');
-    ok(!/[一-鿿]/.test(await p.textContent('#pl-lesson')) && (await p.evaluate(() => !document.querySelector('#pl-lesson.user'))), `F ${label}: the lesson text is translated (rule 66); the quiz banks / facts are still content in user boxes (not translated yet)`);
+    ok(!/[一-鿿]/.test(await p.textContent('#pl-lesson')) && (await p.evaluate(() => !document.querySelector('#pl-lesson.user'))), `F ${label}: the lesson text is translated (rule 66)`);
     let probs = [];
     for (const [w, hh] of [[390, 844], [320, 568], [820, 1180]]) { await p.setViewportSize({ width: w, height: hh }); for (const id of IDS) { await p.evaluate((id) => (location.hash = '#/science/geo/' + id), id); await p.waitForSelector('.pl-sim'); await p.waitForTimeout(40); const m = await p.evaluate(() => { const vis = (e) => !e.closest('[hidden]') && e.offsetParent !== null; return { over: document.documentElement.scrollWidth - innerWidth, clip: [...document.querySelectorAll('.pl-rl, .pl-lab, .pl-tt, .pl-opt, .pl-btn, .pl-card h3')].filter((e) => vis(e) && e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent.slice(0, 20)) }; }); if (m.over > 0 || m.clip.length) probs.push(`${id}@${w}: ${m.over} ${m.clip.join(',')}`); } }
     ok(probs.length === 0, `F ${label}: 21 modules on 390 / 320 / 820 px wide: no overflow, no clipped label${probs.length ? ' ' + probs.slice(0, 6).join('; ') : ''}`);

@@ -458,7 +458,7 @@
 "用 50 牛的力推箱子前进 4 米：$W=50\\times4=200$ 焦": "Pushing a box forward 4 m with a force of 50 N: $W=50\\times4=200$ J",
 "功率 $P$ 表示做功的快慢：功 $W$ 除以时间 $t$；物体匀速运动时也等于力乘速度。": "The power $P$ shows how fast work is done: the work $W$ divided by the time $t$; for an object moving at constant speed it also equals force times speed.",
 "做功 600 焦、用时 20 秒：$P=\\dfrac{600}{20}=30$ 瓦": "Work 600 J done in 20 s: $P=\\dfrac{600}{20}=30$ W",
-"机械效率 $\\eta$ 是有用功占总功的百分比，永远小于 100%。": "The mechanical efficiency $\\eta$ is the percentage of the total work that is useful work; it is always less than 100%.",
+"机械效率 $\\eta$ 是有用功占总功的百分比，总小于 100%。": "The mechanical efficiency $\\eta$ is the percentage of the total work that is useful work; it is always less than 100%.",
 "有用功 80 焦、总功 100 焦：$\\eta=\\dfrac{80}{100}\\times100\\%=80\\%$": "Useful work 80 J, total work 100 J: $\\eta=\\dfrac{80}{100}\\times100\\%=80\\%$",
 "不计绳重和摩擦时，拉力等于物重加动滑轮重，再除以承担重物的绳子段数 $n$。": "Ignoring the weight of the rope and friction, the pull equals the weight of the load plus the weight of the movable pulley, divided by the number of rope segments $n$ supporting the load.",
 "物重 90 牛、动滑轮重 10 牛、$n=2$：$F=\\dfrac{100}{2}=50$ 牛": "Load 90 N, movable pulley 10 N, $n=2$: $F=\\dfrac{100}{2}=50$ N",

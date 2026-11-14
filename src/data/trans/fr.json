@@ -9713,7 +9713,7 @@
 "用 50 牛的力推箱子前进 4 米：$W=50\\times4=200$ 焦": "On pousse une caisse de 4 m avec une force de 50 N : $W=50\\times4=200$ J",
 "功率 $P$ 表示做功的快慢：功 $W$ 除以时间 $t$；物体匀速运动时也等于力乘速度。": "La puissance $P$ indique la rapidité avec laquelle un travail est effectué : le travail $W$ divisé par la durée $t$ ; pour un objet en mouvement uniforme, elle est aussi égale à la force multipliée par la vitesse.",
 "做功 600 焦、用时 20 秒：$P=\\dfrac{600}{20}=30$ 瓦": "Travail de 600 J effectué en 20 s : $P=\\dfrac{600}{20}=30$ W",
-"机械效率 $\\eta$ 是有用功占总功的百分比，永远小于 100%。": "Le rendement mécanique $\\eta$ est le pourcentage du travail total qui est du travail utile ; il est toujours inférieur à 100 %.",
+"机械效率 $\\eta$ 是有用功占总功的百分比，总小于 100%。": "Le rendement mécanique $\\eta$ est le pourcentage du travail total qui est du travail utile ; il est toujours inférieur à 100 %.",
 "有用功 80 焦、总功 100 焦：$\\eta=\\dfrac{80}{100}\\times100\\%=80\\%$": "Travail utile 80 J, travail total 100 J : $\\eta=\\dfrac{80}{100}\\times100\\%=80\\%$",
 "不计绳重和摩擦时，拉力等于物重加动滑轮重，再除以承担重物的绳子段数 $n$。": "En négligeant le poids de la corde et les frottements, la force de traction est égale au poids de la charge plus le poids de la poulie mobile, divisé par le nombre $n$ de brins de corde qui supportent la charge.",
 "物重 90 牛、动滑轮重 10 牛、$n=2$：$F=\\dfrac{100}{2}=50$ 牛": "Charge 90 N, poulie mobile 10 N, $n=2$ : $F=\\dfrac{100}{2}=50$ N",

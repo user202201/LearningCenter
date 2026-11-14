@@ -6,7 +6,7 @@
 import { h } from "./ui";
 import { subjectArt } from "./hub";
 import type { Ctx } from "./english";
-import { chips, user } from "./spaceui";
+import { chips, con } from "./spaceui";
 import { sprite } from "./spaceart";
 import { mountOrrery } from "./spaceorrery";
 import * as SM from "./spacemodel";
@@ -38,7 +38,7 @@ export async function renderSpace(X: Ctx): Promise<void> {
   const solar = (): HTMLElement => {
     const o = mountOrrery(S, (id) => (location.hash = `#/science/space/${id}`)); orrery = o;
     const fact = h("div", { class: "sp-didyou", id: "sp-didyou" });
-    const roll = () => { const all = SM.allBodies(S), b = all[Math.floor(Math.random() * all.length)], f = b.facts[Math.floor(Math.random() * b.facts.length)]; fact.replaceChildren(h("b", {}, "你知道吗？"), user(f, "p"), h("button", { class: "mopt", id: "sp-didyou-next", onclick: roll }, "换一条")); };
+    const roll = () => { const all = SM.allBodies(S), b = all[Math.floor(Math.random() * all.length)], f = b.facts[Math.floor(Math.random() * b.facts.length)]; fact.replaceChildren(h("b", {}, "你知道吗？"), con(f, "p"), h("button", { class: "mopt", id: "sp-didyou-next", onclick: roll }, "换一条")); };
     roll();
     const cards = h("div", { class: "sp-bodies", id: "sp-bodies" }, ...SM.allBodies(S).map((b) => {
       const cv = h("canvas", { width: 96, height: 96, class: "sp-body-cv" }); cv.getContext("2d")!.drawImage(sprite(b.id, 96), 0, 0);

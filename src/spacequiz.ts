@@ -2,7 +2,7 @@
 import { h, confirmDlg } from "./ui";
 import * as G from "./game";
 import { todayLocal } from "./model";
-import { fmt, user } from "./spaceui";
+import { fmt, con } from "./spaceui";
 import { sprite, drawPhase, constSvg } from "./spaceart";
 import * as SM from "./spacemodel";
 
@@ -43,7 +43,7 @@ export function openQuiz(S: SM.Space, done: () => void): void {
     const last = idx + 1 >= qs.length;
     const ex = q.explain;
     fb.replaceChildren(h("div", { class: "mexplain", id: "math-explain" }, h("b", { class: right ? "yes" : "no" }, right ? "回答正确。" : "回答有误。"),
-      ex.text ? user(ex.text, "p") : h("p", {}, ...fmt(ex.tpl!, ex.args ?? [])),
+      ex.text ? con(ex.text, "p") : h("p", {}, ...fmt(ex.tpl!, ex.args ?? [])),
       h("button", { class: "primary", id: "math-next", onclick: () => { if (phase !== "feedback") return; idx++; ask(); } }, last ? "完成" : "下一题")));
     fb.querySelector<HTMLElement>("#math-next")?.focus({ preventScroll: true });
   };
@@ -53,11 +53,11 @@ export function openQuiz(S: SM.Space, done: () => void): void {
     const q = qs[idx];
     progress.textContent = `${idx + 1} / ${qs.length}`; root.dataset.qkey = q.key; fb.replaceChildren();
     kindEl.textContent = SM.kindName(q.kind);
-    promptEl.replaceChildren(...(q.user && q.kind === "mq" ? [user(q.stem.args[0])] : fmt(q.stem.tpl, q.stem.args)));
+    promptEl.replaceChildren(...fmt(q.stem.tpl, q.stem.args));
     const f = figure(q); figEl.replaceChildren(...(f ? [f] : [])); figEl.style.display = f ? "" : "none";
     const longest = Math.max(...q.choices.map((c) => [...c.t].length));
     grid.classList.toggle("long", longest > 14);
-    grid.replaceChildren(...q.choices.map((c) => h("button", { class: "mchoice user", "data-v": c.k, onclick: () => choose(c.k) }, c.t)));
+    grid.replaceChildren(...q.choices.map((c) => h("button", { class: "mchoice", "data-v": c.k, onclick: () => choose(c.k) }, c.t)));
   }
   const persist = (summary: boolean) => { doc = SM.applyAnswers(SM.loadDoc(), answers.map((a) => ({ key: a.key, right: a.right })), todayLocal(), summary ? { score, total: qs.length } : undefined); SM.saveDoc(doc); };
   function finish() {
@@ -69,7 +69,7 @@ export function openQuiz(S: SM.Space, done: () => void): void {
       h("h2", {}, score === qs.length ? "全部正确。" : "练习完成。"),
       h("div", { class: "gstars", "data-stars": String(stars) }, ...[1, 2, 3].map((n) => starSvg(n <= stars))),
       h("div", { class: "gresult" }, h("strong", { id: "game-final" }, String(score)), ` / ${qs.length}`),
-      wrong.length ? h("div", { class: "mrows", id: "sp-wrong" }, h("p", { class: "muted small" }, "需要复习："), ...wrong.map((a) => h("div", { class: "mrow", "data-key": a.key }, user(a.q.explain.text ?? a.q.stem.args.join(" "))))) : null,
+      wrong.length ? h("div", { class: "mrows", id: "sp-wrong" }, h("p", { class: "muted small" }, "需要复习："), ...wrong.map((a) => h("div", { class: "mrow", "data-key": a.key }, con(a.q.explain.text ?? a.q.stem.args.join(" "))))) : null,
       h("div", { class: "row end" },
         h("button", { id: "game-done", onclick: () => { root.remove(); done(); } }, "完成"),
         h("button", { class: "primary", id: "game-again", onclick: () => { root.remove(); openQuiz(S, done); } }, "再玩一次"))));

@@ -44,7 +44,7 @@ export function partsEl(parts: C.Part[]): HTMLElement {
   const box = h("div", { class: "chem-parts" });
   for (const p of parts) {
     if (typeof p === "string") box.append(h("span", { class: "chem-t" }, p));
-    else if ("u" in p) box.append(h("span", { class: "user chem-u" }, p.u));
+    else if ("u" in p) box.append(h("span", { class: "chem-u" + (/[\u3000-\u303f\u4e00-\u9fff\uff00-\uffef]/.test(p.u) ? "" : " user") }, C.uText(p.u)));
     else if ("f" in p) box.append(formulaEl(p.f));
     else if ("eq" in p) box.append(h("div", { class: "chem-eqline" }, eqEl(C.rxById(p.eq)!)));
     else { const d = h("div", { class: "chem-crossbox" }); d.innerHTML = FG.crossSvg(p.cross.cat, p.cross.cc, p.cross.an, p.cross.ac); box.append(d); }
@@ -150,7 +150,7 @@ function play(mode: string): void {
     specEl(q.spec);
     if (q.fig) { const f = h("div", { class: "chem-fig", id: "chem-fig" }); f.innerHTML = FG.apparatusRow(q.fig); body.append(f); }
     if (q.tbl) {
-      body.append(h("div", { class: "chem-tblwrap" }, h("table", { class: "chem-tbl", id: "chem-tbl" }, h("thead", {}, h("tr", {}, ...q.tbl.head.map((x) => h("th", { class: "user" }, x)))), h("tbody", {}, ...q.tbl.rows.map((r) => h("tr", {}, ...r.map((x, i) => (i ? h("td", { class: "user" }, x) : h("th", { class: "user" }, formulaEl(x))))))))));
+      body.append(h("div", { class: "chem-tblwrap" }, h("table", { class: "chem-tbl", id: "chem-tbl" }, h("thead", {}, h("tr", {}, ...q.tbl.head.map((x) => h("th", {}, C.uText(x))))), h("tbody", {}, ...q.tbl.rows.map((r) => h("tr", {}, ...r.map((x, i) => (i ? h("td", {}, C.uText(x)) : h("th", { class: "user" }, formulaEl(x))))))))));
     }
     const btns = q.choices.map((c, i) => h("button", { class: "mopt chem-ch", "data-i": String(i), onclick: () => pick(i) }, h("span", { class: "chem-key user" }, String(i + 1)), partsEl(c)));
     body.append(h("div", { class: "chem-choices" + (q.fig ? " compact" : ""), id: "chem-choices" }, ...btns));
@@ -239,7 +239,7 @@ function play(mode: string): void {
         const first = attempts === 0 && !hinted;
         locked = true; refresh();
         msg.textContent = "已配平。"; msg.className = "chem-msg ok";
-        const ex = h("div", { class: "chem-expl", id: "chem-expl" }, partsEl(q.expl), h("p", { class: "small" }, h("span", {}, "条件："), condEl(rx.cond)), h("p", { class: "small user" }, rx.ph));
+        const ex = h("div", { class: "chem-expl", id: "chem-expl" }, partsEl(q.expl), h("p", { class: "small" }, h("span", {}, "条件："), condEl(rx.cond)), h("p", { class: "small" }, C.uText(rx.ph)));
         finish(q, first, ex);
       } else if (C.isBalanced(l, r)) {
         attempts++; msg.textContent = "已配平，但系数不是最简整数比。"; msg.className = "chem-msg bad";
@@ -283,7 +283,7 @@ function play(mode: string): void {
       if (j.ok) {
         const first = attempts === 0;
         locked = true; msg.textContent = "方程式正确。"; msg.className = "chem-msg ok";
-        finish(q, first, h("div", { class: "chem-expl", id: "chem-expl" }, partsEl(q.expl), h("p", { class: "small" }, h("span", {}, "条件："), condEl(rx.cond)), h("p", { class: "small user" }, rx.ph)));
+        finish(q, first, h("div", { class: "chem-expl", id: "chem-expl" }, partsEl(q.expl), h("p", { class: "small" }, h("span", {}, "条件："), condEl(rx.cond)), h("p", { class: "small" }, C.uText(rx.ph))));
         return;
       }
       attempts++; msg.className = "chem-msg bad";
@@ -292,7 +292,7 @@ function play(mode: string): void {
       else if (j.problems.includes("balance")) msg.textContent = `还没有配平。不相等的元素：${C.balanceRows(sides[0], sides[1]).filter((x) => x.l !== x.r).map((x) => x.e).join(" ")}`;
       else msg.textContent = "已配平，但系数不是最简整数比。";
     } }, "检查");
-    body.append(h("div", { class: "chem-desc user", id: "chem-desc" }, q.desc), h("div", { class: "chem-sides" }, zones[0], h("span", { class: "chem-arrow big user" }, "→"), zones[1]), h("div", { class: "chem-tiles", id: "chem-tiles" }, ...tiles), scales, msg, h("div", { class: "chem-actions" }, clear, check));
+    body.append(h("div", { class: "chem-desc", id: "chem-desc" }, q.desc), h("div", { class: "chem-sides" }, zones[0], h("span", { class: "chem-arrow big user" }, "→"), zones[1]), h("div", { class: "chem-tiles", id: "chem-tiles" }, ...tiles), scales, msg, h("div", { class: "chem-actions" }, clear, check));
     paint();
     (window as Win).__chem = { add, sides, setActive: (s: number) => { active = s; paint(); } };
   }
@@ -301,7 +301,7 @@ function play(mode: string): void {
   function drawOrd(q: C.OrdQ) {
     const seq: number[] = [];
     const msg = h("p", { class: "chem-msg", id: "chem-msg", "aria-live": "polite" });
-    const btns = q.shown.map((t, i) => h("button", { class: "chem-ordb", "data-i": String(i), type: "button", onclick: () => tap(i) }, h("b", { class: "chem-ordn user" }, ""), h("span", { class: "user chem-ordt" }, t)));
+    const btns = q.shown.map((t, i) => h("button", { class: "chem-ordb", "data-i": String(i), type: "button", onclick: () => tap(i) }, h("b", { class: "chem-ordn user" }, ""), h("span", { class: "chem-ordt" }, C.uText(t))));
     const check = h("button", { class: "primary chem-check", id: "chem-check", disabled: true, onclick: () => grade() }, "检查");
     const clear = h("button", { class: "mopt", id: "chem-clear", onclick: () => { if (locked) return; seq.length = 0; paint(); } }, "清除");
     const paint = () => {
@@ -332,7 +332,7 @@ function play(mode: string): void {
     const msg = h("p", { class: "chem-msg", id: "chem-msg", "aria-live": "polite" });
     const check = h("button", { class: "primary chem-check", id: "chem-check", disabled: true, onclick: () => grade() }, "检查");
     for (const it of q.items) {
-      const chip = h("button", { class: "chem-item", "data-id": it.id, "data-cat": it.cat, style: "touch-action:none" }, it.f ? formulaEl(it.f) : null, h("span", { class: "chem-iname user" }, it.n));
+      const chip = h("button", { class: "chem-item", "data-id": it.id, "data-cat": it.cat, style: "touch-action:none" }, it.f ? formulaEl(it.f) : null, h("span", { class: "chem-iname" }, C.uText(it.n)));
       chips.set(it.id, chip);
       chip.addEventListener("pointerdown", (e) => dragStart(e, it.id, chip));
       chip.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectItem(it.id); } });
@@ -430,19 +430,19 @@ function renderRef(): void {
       body.push(h("p", { class: "chem-actlab small" }, "金属活动性由强到弱"), h("div", { class: "chem-actrow", id: "chem-act" }, ...D.activity.map((e) => h("span", { class: "chem-actchip user" + (e === "H" ? " h" : ""), "data-e": e }, e))),
         h("ul", { class: "chem-rules small" }, h("li", {}, "排在氢前面的金属，能与稀盐酸、稀硫酸反应放出氢气（钾、钙、钠与水反应，不在此列）。"), h("li", {}, "排在前面的金属，能把排在后面的金属从它的盐溶液中置换出来（钾、钙、钠除外）。"), h("li", {}, "铁与酸或盐溶液发生置换反应时，生成的是亚铁盐（+2 价）。")));
     } else if (tab === "val") {
-      body.push(h("table", { class: "chem-tbl chem-valtbl" }, h("thead", {}, h("tr", {}, h("th", {}, "元素"), h("th", {}, "常见化合价"))), h("tbody", {}, ...D.elements.map((e) => h("tr", {}, h("th", { class: "user" }, `${e.s} `, h("small", {}, e.n)), h("td", { class: "user" }, e.v.map((v) => (v > 0 ? `+${v}` : `${v}`)).join("  ")))))),
-        h("h3", {}, "常见原子团"), h("table", { class: "chem-tbl" }, h("thead", {}, h("tr", {}, h("th", {}, "原子团"), h("th", {}, "化合价"))), h("tbody", {}, ...D.groups.map((g) => h("tr", {}, h("th", { class: "user" }, formulaEl(g.f), h("small", {}, ` ${g.n}`)), h("td", { class: "user" }, g.c > 0 ? `+${g.c}` : `${g.c}`))))));
+      body.push(h("table", { class: "chem-tbl chem-valtbl" }, h("thead", {}, h("tr", {}, h("th", {}, "元素"), h("th", {}, "常见化合价"))), h("tbody", {}, ...D.elements.map((e) => h("tr", {}, h("th", { class: "user" }, `${e.s} `, h("small", {}, C.tn(e.n))), h("td", { class: "user" }, e.v.map((v) => (v > 0 ? `+${v}` : `${v}`)).join("  ")))))),
+        h("h3", {}, "常见原子团"), h("table", { class: "chem-tbl" }, h("thead", {}, h("tr", {}, h("th", {}, "原子团"), h("th", {}, "化合价"))), h("tbody", {}, ...D.groups.map((g) => h("tr", {}, h("th", { class: "user" }, formulaEl(g.f), h("small", {}, ` ${C.tn(g.n)}`)), h("td", { class: "user" }, g.c > 0 ? `+${g.c}` : `${g.c}`))))));
     } else if (tab === "subs") {
       const cats: [string, string][] = [["", "全部"], ["elem", "单质"], ["oxide", "氧化物"], ["acid", "酸类"], ["base", "碱类"], ["salt", "盐类"], ["org", "有机物"]];
-      body.push(chips(cats, () => cat, (v) => (cat = v), "rc"), h("table", { class: "chem-tbl chem-subtbl", id: "chem-subtbl" }, h("tbody", {}, ...D.subs.filter((s) => s.c !== "other" && (!cat || s.c === cat)).map((s) => h("tr", { "data-f": s.f }, h("th", { class: "user" }, s.n), h("td", {}, formulaEl(s.f)), h("td", { class: "user small" }, s.a))))));
+      body.push(chips(cats, () => cat, (v) => (cat = v), "rc"), h("table", { class: "chem-tbl chem-subtbl", id: "chem-subtbl" }, h("tbody", {}, ...D.subs.filter((s) => s.c !== "other" && (!cat || s.c === cat)).map((s) => h("tr", { "data-f": s.f }, h("th", {}, C.tn(s.n)), h("td", {}, formulaEl(s.f)), h("td", { class: "small" }, C.uText(s.a)))))));
     } else if (tab === "ind") {
-      body.push(h("table", { class: "chem-tbl" }, h("thead", {}, h("tr", {}, h("th", {}, "指示剂"), h("th", {}, "酸性"), h("th", {}, "中性"), h("th", {}, "碱性"))), h("tbody", {}, ...D.indicators.map((i) => h("tr", {}, h("th", { class: "user" }, i.n), h("td", { class: "user" }, i.acid), h("td", { class: "user" }, i.neutral), h("td", { class: "user" }, i.base))))),
-        h("h3", {}, "常见物质的 pH"), h("div", { class: "chem-ph", id: "chem-ph" }, ...D.ph.map((p) => h("div", { class: "chem-phrow", "data-ph": String(p.v) }, h("span", { class: "user chem-phn" }, p.n), h("span", { class: "chem-phbar" }, h("i", { style: `width:${(p.v / 14) * 100}%;background:hsl(${Math.round((p.v / 14) * 240)} 70% 50%)` })), h("b", { class: "user" }, String(p.v))))));
+      body.push(h("table", { class: "chem-tbl" }, h("thead", {}, h("tr", {}, h("th", {}, "指示剂"), h("th", {}, "酸性"), h("th", {}, "中性"), h("th", {}, "碱性"))), h("tbody", {}, ...D.indicators.map((i) => h("tr", {}, h("th", {}, C.tn(i.n)), h("td", {}, C.tn(i.acid)), h("td", {}, C.tn(i.neutral)), h("td", {}, C.tn(i.base)))))),
+        h("h3", {}, "常见物质的 pH"), h("div", { class: "chem-ph", id: "chem-ph" }, ...D.ph.map((p) => h("div", { class: "chem-phrow", "data-ph": String(p.v) }, h("span", { class: "chem-phn" }, C.tn(p.n)), h("span", { class: "chem-phbar" }, h("i", { style: `width:${(p.v / 14) * 100}%;background:hsl(${Math.round((p.v / 14) * 240)} 70% 50%)` })), h("b", { class: "user" }, String(p.v))))));
     } else if (tab === "at") {
-      body.push(h("table", { class: "chem-tbl chem-attbl", id: "chem-attbl" }, h("thead", {}, h("tr", {}, h("th", {}, "序号"), h("th", {}, "符号"), h("th", {}, "名称"), h("th", {}, "相对原子质量"), h("th", {}, "电子层排布"))), h("tbody", {}, ...D.more.atoms.map((a) => h("tr", { "data-z": String(a[0]) }, h("th", { class: "user" }, String(a[0])), h("td", { class: "user" }, String(a[1])), h("td", { class: "user" }, String(a[2])), h("td", { class: "user" }, String(a[3])), h("td", { class: "user" }, shellsText(a[0] as number)))))));
+      body.push(h("table", { class: "chem-tbl chem-attbl", id: "chem-attbl" }, h("thead", {}, h("tr", {}, h("th", {}, "序号"), h("th", {}, "符号"), h("th", {}, "名称"), h("th", {}, "相对原子质量"), h("th", {}, "电子层排布"))), h("tbody", {}, ...D.more.atoms.map((a) => h("tr", { "data-z": String(a[0]) }, h("th", { class: "user" }, String(a[0])), h("td", { class: "user" }, String(a[1])), h("td", {}, C.tn(String(a[2]))), h("td", { class: "user" }, String(a[3])), h("td", { class: "user" }, shellsText(a[0] as number)))))));
     } else {
       const chaps = [["", "全部"], ...Object.entries(CHAPTER_NAMES)] as [string, string][];
-      body.push(chips(chaps, () => chap, (v) => (chap = v), "rr"), h("div", { class: "chem-rxlist", id: "chem-rxlist" }, ...D.reactions.filter((r) => !chap || r.ch === chap).map((r) => h("div", { class: "chem-rxrow", "data-rx": r.id }, h("div", { class: "chem-eqline" }, eqEl(r)), h("div", { class: "small" }, h("span", { class: "chem-tag" }, C.TYPE_NAME[r.type]), " ", h("span", { class: "user muted" }, r.ph))))));
+      body.push(chips(chaps, () => chap, (v) => (chap = v), "rr"), h("div", { class: "chem-rxlist", id: "chem-rxlist" }, ...D.reactions.filter((r) => !chap || r.ch === chap).map((r) => h("div", { class: "chem-rxrow", "data-rx": r.id }, h("div", { class: "chem-eqline" }, eqEl(r)), h("div", { class: "small" }, h("span", { class: "chem-tag" }, C.TYPE_NAME[r.type]), " ", h("span", { class: "muted" }, C.uText(r.ph)))))));
     }
     out.replaceChildren(...body);
   };
